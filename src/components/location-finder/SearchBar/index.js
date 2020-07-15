@@ -7,7 +7,12 @@ import { LocationsQuery as LOCATIONS_QUERY } from './SearchAutoSuggest.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Redux
 import { useDispatch } from 'react-redux';
-import { setSearchGeo } from './../../../redux/actions';
+import { setSearchQuery, setSearchQueryGeo } from './../../../redux/actions';
+// Geocode
+import Geocode from 'react-geocode';
+const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
+
+Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API);
 
 function SearchBar() {
   const [value, setValue] = useState('');
@@ -55,8 +60,20 @@ function SearchBar() {
     console.log('handleSubmit value: ' + value);
 
     // Call geocode service and get geocordinates for search term.
-    // Dispatch the setSearchGeo action
-    dispatch(setSearchGeo(value));
+    // Dispatch the setSearchQuery action
+    dispatch(setSearchQuery(value));
+
+    // Get latitude & longitude from address.
+    Geocode.fromAddress(value).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        dispatch(setSearchQueryGeo(response.results[0].geometry.location));
+        console.log(lat, lng);
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
   function onSuggestionSelected() {

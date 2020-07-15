@@ -1,30 +1,18 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import SearchBar from './../SearchBar';
 import Location from './../Location';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 import styles from './Locations.module.css';
-
 // Redux
 import { useSelector } from 'react-redux';
 
 function Locations() {
   const { loading, error, data, networkStatus } = useQuery(
-    LOCATIONS_QUERY,
-    {
-      //notifyOnNetworkStatusChange: false,
-      //fetchPolicy: 'no-cache',
-    }
+    LOCATIONS_QUERY, {}
   );
-
-  const searchGeo = useSelector(state => state.search.searchGeo);
-  console.log('searchGeo state: ' + searchGeo);
-
-  /*console.log('loading: ' + loading);
-  console.log('error: ' + error);
-  console.log('data: ' + data);
-  */
+  // Redux
+  const { searchQuery, searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
 
   if (loading || !data) {
     return (
@@ -40,10 +28,12 @@ function Locations() {
 
   return (
     <div>
-      <SearchBar />
-      {searchGeo ? (
+      {searchQuery ? (
         <div>
-          Showing 10 locations near <strong>{searchGeo}</strong>
+          Showing all locations near <strong>{searchQuery}</strong>
+          <br />
+          <div>searchQueryGeoLat: {searchQueryGeoLat}</div>
+          <div>searchQueryGeoLng: {searchQueryGeoLng}</div>
         </div>
       ) : (
         null

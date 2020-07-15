@@ -67,3 +67,18 @@ main {
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
 }
+
+//
+.location-finder-wrapper .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.location-finder-wrapper .column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
