@@ -1,4 +1,3 @@
-//import Header from './../Header/Header';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
 
