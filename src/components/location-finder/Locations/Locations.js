@@ -18,8 +18,16 @@ function Locations() {
     }
   );
 
-  const searchGeo = useSelector(state => state.search.searchGeo);
-  console.log('searchGeo state: ' + searchGeo);
+  const searchQuery = useSelector(state => state.search.searchQuery);
+  console.log('searchQuery state: ' + searchQuery);
+
+  const searchQueryGeoLat = useSelector(state => state.search.searchQueryGeoLat);
+  console.log('searchQueryGeoLat state: ' + searchQueryGeoLat);
+
+  const searchQueryGeoLng = useSelector(state => state.search.searchQueryGeoLng);
+  console.log('searchQueryGeoLng state: ' + searchQueryGeoLng);
+
+
 
   /*console.log('loading: ' + loading);
   console.log('error: ' + error);
@@ -41,9 +49,12 @@ function Locations() {
   return (
     <div>
       <SearchBar />
-      {searchGeo ? (
+      {searchQuery ? (
         <div>
-          Showing 10 locations near <strong>{searchGeo}</strong>
+          Showing 10 locations near <strong>{searchQuery}</strong>
+          <br />
+          <div>searchQueryGeoLat: {searchQueryGeoLat}</div>
+          <div>searchQueryGeoLng: {searchQueryGeoLng}</div>
         </div>
       ) : (
         null
