@@ -1,17 +1,9 @@
-import { SET_TEST, SET_SEARCH_QUERY, SET_SEARCH_QUERY_GEO } from './../actions';
+import { SET_SEARCH_QUERY, SET_SEARCH_QUERY_GEO } from './../actions';
 
-const initialState = {
-  test: 'we have the test.',
-};
+const initialState = {};
 
 export default function search(state = initialState, action) {
   switch(action.type) {
-    case SET_TEST:
-      return {
-        ...state,
-        test: action.payload
-      };
-
     case SET_SEARCH_QUERY:
       console.log('SET_SEARCH_QUERY action payload: ' + action.payload);
       return {
