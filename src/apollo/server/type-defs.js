@@ -1,12 +1,6 @@
 import gql from 'graphql-tag';
 
 export const typeDefs = gql`
-  type User {
-    id: ID!
-    name: String!
-    status: String!
-  }
-
   type Location {
     id: ID!
     name: String!
@@ -20,7 +14,6 @@ export const typeDefs = gql`
   }
 
   type Query {
-    viewer: User
     allLocations(filter: String): [Location]!
   }
-`
+`;
