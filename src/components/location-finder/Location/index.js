@@ -4,6 +4,19 @@ import * as DS from '@nypl/design-system-react-components';
 function Location({ location }) {
   const formattedAddress = `${location.address_line1} ${location.locality}, ${location.administrative_area} ${location.postal_code}`;
 
+  let wheelchairAccess;
+  switch(location.wheelchairAccess) {
+    case 'full':
+      wheelchairAccess = 'Fully Accessible'
+      break;
+    case 'partial':
+      wheelchairAccess = 'Partially Accessible'
+      break;
+    case 'none':
+      wheelchairAccess = 'Not Accessible'
+      break;
+  }
+
   return (
     <div className='location'>
       <DS.Heading
@@ -16,6 +29,9 @@ function Location({ location }) {
       </div>
       <div className='phone'>
         {location.phone}
+      </div>
+      <div className='accessibility-status'>
+        {wheelchairAccess}
       </div>
     </div>
   );

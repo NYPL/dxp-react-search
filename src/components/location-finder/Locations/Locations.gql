@@ -9,5 +9,6 @@ query LocationsQuery {
     administrative_area
     postal_code
     phone
+    wheelchairAccess
   }
 }

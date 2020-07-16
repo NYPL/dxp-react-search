@@ -11,6 +11,7 @@ export const typeDefs = gql`
     administrative_area: String
     postal_code: String
     phone: String
+    wheelchairAccess: String
   }
 
   type Query {

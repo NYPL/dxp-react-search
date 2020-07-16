@@ -9,6 +9,19 @@ class RefineryApi extends RESTDataSource {
 
   // Tidy up the response from Refinery.
   locationReducer(location) {
+    let wheelchairAccess;
+    switch(location.access) {
+      case 'Fully Accessible':
+        wheelchairAccess = 'full'
+        break;
+      case 'Partially Accessible':
+        wheelchairAccess = 'partial'
+        break;
+      case 'Not Accessible':
+        wheelchairAccess = 'none'
+        break;
+    }
+
     return {
       id: location.slug,
       name: location.name,
@@ -19,6 +32,7 @@ class RefineryApi extends RESTDataSource {
       administrative_area: location.region,
       postal_code: location.postal_code,
       phone: location.contacts.phone,
+      wheelchairAccess: wheelchairAccess,
     }
   }
 

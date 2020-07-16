@@ -28,6 +28,7 @@ class DrupalApi extends RESTDataSource {
       administrative_area: location.attributes.field_as_address.administrative_area,
       postal_code: location.attributes.field_as_address.postal_code,
       phone: location.attributes.field_tels_phone,
+      wheelchairAccess: location.attributes.field_lts_wheelchair_access,
     };
   }
 
