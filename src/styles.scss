@@ -20,7 +20,7 @@ main h1 {
 }
 
 .react-autosuggest__input {
-  width: 600px;
+  width: 618px;
   height: 34px;
   padding: 10px;
   font-size: 16px;
@@ -62,7 +62,7 @@ main h1 {
 
 .react-autosuggest__suggestion {
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 10px;
 }
 
 .react-autosuggest__suggestion--highlighted {
@@ -80,6 +80,10 @@ main h1 {
 .location-finder-wrapper .locations-list {
   max-height: 500px;
   overflow: scroll;
+}
+
+.location-finder-wrapper .locations-list .location {
+  padding: .75em 0;
 }
 
 .location-finder-wrapper .row {
