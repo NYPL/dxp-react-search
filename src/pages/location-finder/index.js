@@ -17,14 +17,14 @@ function LocationFinder() {
       <SearchBar />
       <div className='location-finder-wrapper'>
         <div className='row'>
-          <div className='column'>
+          <div className='column locations-list'>
             <Locations />
           </div>
           <div className='column'>
             <Map
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
               loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `400px` }} />}
+              containerElement={<div style={{ height: `500px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
             />
           </div>

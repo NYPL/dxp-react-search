@@ -3,13 +3,14 @@
 @import "~@nypl/dgx-react-footer/dist/styles/styles.scss";
 
 main {
-  max-width: 1300px;
+  /*max-width: 1300px;
   padding: 1em;
+  */
   margin: 0 auto;
 }
 
-.SearchBar {
-  padding:3em 0;
+main h1 {
+  display:none;
 }
 
 // React Autosuggest
@@ -69,6 +70,18 @@ main {
 }
 
 //
+.location-finder-wrapper {
+  margin: 0 auto;
+  max-width:1300px;
+  padding:2em;
+  margin-bottom:20em;
+}
+
+.location-finder-wrapper .locations-list {
+  max-height: 500px;
+  overflow: scroll;
+}
+
 .location-finder-wrapper .row {
   display: flex;
   flex-direction: row;
@@ -81,4 +94,26 @@ main {
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+}
+
+// SearchBar
+.SearchBar {
+  padding: 2em 0;
+  background: #F5F5F5;
+}
+
+.SearchBar .SearchBarInner {
+  margin: 0 auto;
+  max-width:1300px;
+  padding:2em;
+}
+
+// Open now
+.checkbox {
+  display: inline;
+  padding: 0 1em;
+}
+
+.checkbox input {
+  margin-right: .5rem;
 }

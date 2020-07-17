@@ -21,7 +21,7 @@ function Location({ location }) {
     <div className='location'>
       <DS.Heading
         id={location.id}
-        level={2}
+        level={3}
         text={location.name}
       />
       <div className='address'>

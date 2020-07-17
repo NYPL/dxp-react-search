@@ -32,8 +32,6 @@ function Locations() {
         <div>
           Showing all locations near <strong>{searchQuery}</strong>
           <br />
-          <div>searchQueryGeoLat: {searchQueryGeoLat}</div>
-          <div>searchQueryGeoLng: {searchQueryGeoLng}</div>
         </div>
       ) : (
         null

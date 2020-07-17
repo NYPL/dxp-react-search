@@ -82,40 +82,52 @@ function SearchBar() {
 
   return (
     <div className='SearchBar'>
-      <form onSubmit={handleSubmit}>
-        <AutoSuggest
-          suggestions={suggestions}
-          onSuggestionSelected={onSuggestionSelected}
-          onSuggestionsClearRequested={() => setSuggestions([])}
-          onSuggestionsFetchRequested={({ value }) => {
-            // Run the lazy gql query to get location suggestions
-            getLocations();
-            setValue(value);
-            setSuggestions(getSuggestions(data, value));
-          }}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={{
-            placeholder: '',
-            value: value,
-            onChange: (_, { newValue, method }) => {
-              setValue(newValue);
-            },
-          }}
-          highlightFirstSuggestion={true}
-        />
-        <DS.Button
-          buttonType="filled"
-          iconDecorative
-          iconName="search_small"
-          iconPosition="icon-left"
-          id="button"
-          mouseDown={false}
-          type="submit"
-        >
-          Search
-        </DS.Button>
-      </form>
+      <div className='SearchBarInner'>
+        <h2>Find Your Library</h2>
+        <div>Enter an address or landmark to search nearby or type in a Library name.</div>
+        <form onSubmit={handleSubmit}>
+          <AutoSuggest
+            suggestions={suggestions}
+            onSuggestionSelected={onSuggestionSelected}
+            onSuggestionsClearRequested={() => setSuggestions([])}
+            onSuggestionsFetchRequested={({ value }) => {
+              // Run the lazy gql query to get location suggestions
+              getLocations();
+              setValue(value);
+              setSuggestions(getSuggestions(data, value));
+            }}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={{
+              placeholder: '',
+              value: value,
+              onChange: (_, { newValue, method }) => {
+                setValue(newValue);
+              },
+            }}
+            highlightFirstSuggestion={true}
+          />
+          <DS.Button
+            buttonType="filled"
+            iconDecorative
+            iconName="search_small"
+            iconPosition="icon-left"
+            id="button"
+            mouseDown={false}
+            type="submit"
+          >
+            Search
+          </DS.Button>
+          <DS.Checkbox
+            checkboxId="checkbox"
+            labelOptions={{
+              id: 'label',
+              labelContent: 'Open now'
+            }}
+            onChange={function noRefCheck(){}}
+          />
+        </form>
+      </div>
     </div>
   );
 };
