@@ -1,0 +1,61 @@
+// NYPL Node Packages
+@import '~@nypl/design-system-react-components/dist/styles.css';
+@import '~@nypl/dgx-header-component/dist/styles/main';
+@import "~@nypl/dgx-react-footer/dist/styles/styles.scss";
+
+main {
+  /*max-width: 1300px;
+  padding: 1em;
+  */
+  margin: 0 auto;
+}
+
+main h1 {
+  display:none;
+}
+
+@import './space/_space.scss';
+@import './../components/location-finder/SearchBar/SearchAutoSuggest.scss';
+@import './../components/location-finder/SearchBar/SearchBar.scss';
+
+//
+.location-finder-wrapper {
+  @include space-stack-xxl;
+  margin: 0 auto;
+  max-width:1300px;
+  padding:2em;
+  //margin-bottom:20em;
+}
+
+.location-finder-wrapper .locations-list {
+  max-height: 500px;
+  overflow: scroll;
+}
+
+.location-finder-wrapper .locations-list .location {
+  padding: .75em 0;
+}
+
+.location-finder-wrapper .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.location-finder-wrapper .column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+// Open now
+.checkbox {
+  display: inline;
+  padding: 0 1em;
+}
+
+.checkbox input {
+  margin-right: .5rem;
+}
