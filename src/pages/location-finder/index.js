@@ -11,10 +11,17 @@ import Locations from './../../components/location-finder/Locations/Locations';
 function LocationFinder() {
   return (
     <Layout>
-      <SearchBar />
-      <Locations />
+      <div className="content-header">
+        <SearchBar />
+      </div>
+      <div className="content-primary">
+        <Locations />
+      </div>
+      <div className="content-bottom">
+        Content Bottom
+      </div>
     </Layout>
   );
 }
 
-export default compose(withApollo, withRedux)(LocationFinder)
+export default compose(withApollo, withRedux)(LocationFinder);

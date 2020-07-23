@@ -30,9 +30,9 @@ function Locations() {
   }
 
   return (
-    <div className='location-finder-wrapper'>
+    <div className='locations'>
       <div className='row'>
-        <div className='column locations-list'>
+        <div className='column locations__list'>
           {searchQuery ? (
             <div>
               Showing all locations near <strong>{searchQuery}</strong>

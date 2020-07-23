@@ -8,15 +8,12 @@ import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Redux
 import { useDispatch } from 'react-redux';
 import { setSearchQuery, setSearchQueryGeo } from './../../../redux/actions';
-// Content
-import SearchHeaderContent from './content';
 // Geocode
 import Geocode from 'react-geocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
-
 Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API);
 
-function SearchBar() {
+function SearchForm() {
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const search_string = value;
@@ -82,59 +79,52 @@ function SearchBar() {
     console.log('onSuggestionSelected!');
   }
 
-  // Content
-  const { title, description } = SearchHeaderContent;
-
   return (
-    <div className='search-header'>
-      <div className='search-header__inner'>
-        <h2>{title}</h2>
-        <div>{description}</div>
-        <form onSubmit={handleSubmit}>
-          <AutoSuggest
-            suggestions={suggestions}
-            onSuggestionSelected={onSuggestionSelected}
-            onSuggestionsClearRequested={() => setSuggestions([])}
-            onSuggestionsFetchRequested={({ value }) => {
-              // Run the lazy gql query to get location suggestions
-              getLocations();
-              setValue(value);
-              setSuggestions(getSuggestions(data, value));
-            }}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={{
-              placeholder: '',
-              value: value,
-              onChange: (_, { newValue, method }) => {
-                setValue(newValue);
-              },
-            }}
-            highlightFirstSuggestion={true}
-          />
-          <DS.Button
-            buttonType="filled"
-            iconDecorative
-            iconName="search_small"
-            iconPosition="icon-left"
-            id="button"
-            mouseDown={false}
-            type="submit"
-          >
-            Search
-          </DS.Button>
-          <DS.Checkbox
-            checkboxId="checkbox"
-            labelOptions={{
-              id: 'label',
-              labelContent: 'Open now'
-            }}
-            onChange={function noRefCheck(){}}
-          />
-        </form>
-      </div>
+    <div className='search__form'>
+      <form onSubmit={handleSubmit}>
+        <AutoSuggest
+          suggestions={suggestions}
+          onSuggestionSelected={onSuggestionSelected}
+          onSuggestionsClearRequested={() => setSuggestions([])}
+          onSuggestionsFetchRequested={({ value }) => {
+            // Run the lazy gql query to get location suggestions
+            getLocations();
+            setValue(value);
+            setSuggestions(getSuggestions(data, value));
+          }}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={{
+            placeholder: '',
+            value: value,
+            onChange: (_, { newValue, method }) => {
+              setValue(newValue);
+            },
+          }}
+          highlightFirstSuggestion={true}
+        />
+        <DS.Button
+          buttonType="filled"
+          iconDecorative
+          iconName="search_small"
+          iconPosition="icon-left"
+          id="button"
+          mouseDown={false}
+          type="submit"
+        >
+          Search
+        </DS.Button>
+        <DS.Checkbox
+          checkboxId="checkbox"
+          labelOptions={{
+            id: 'label',
+            labelContent: 'Open now'
+          }}
+          onChange={function noRefCheck(){}}
+        />
+      </form>
     </div>
   );
 };
 
-export default SearchBar;
+export default SearchForm;

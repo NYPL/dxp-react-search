@@ -1,20 +1,20 @@
-.SearchBar {
+.search-header {
   padding: 2em 0;
   background: #F5F5F5;
 
-  .SearchBarInner {
+  .search-header__inner {
     margin: 0 auto;
     max-width:1300px;
     padding:2em;
   }
-}
 
-// Open now
-.checkbox {
-  display: inline;
-  padding: 0 1em;
-}
+  // Open now
+  .checkbox {
+    display: inline;
+    padding: 0 1em;
+  }
 
-.checkbox input {
-  margin-right: .5rem;
+  .checkbox input {
+    margin-right: .5rem;
+  }
 }
