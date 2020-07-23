@@ -14,7 +14,7 @@
   padding: .75em 0;
 }
 
-.locations .row {
+/*.locations .row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -26,4 +26,22 @@
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+}
+*/
+
+.locations .column {
+  float: left;
+  width: 50%;
+}
+
+.locations .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .locations .column {
+    width: 100%;
+  }
 }
