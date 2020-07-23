@@ -5,6 +5,7 @@
 
 // Internal app styles
 @import './space/_space.scss';
-@import './../components/location-finder/SearchBar/SearchAutoSuggest.scss';
-@import './../components/location-finder/SearchBar/SearchBar.scss';
+@import './../components/location-finder/SearchForm/SearchForm.scss';
+@import './../components/location-finder/SearchForm/SearchAutoSuggest.scss';
+@import './../components/location-finder/SearchHeader/SearchHeader.scss';
 @import './../components/location-finder/Locations/Locations.scss';

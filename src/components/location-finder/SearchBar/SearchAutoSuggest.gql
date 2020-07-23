@@ -1,5 +1,0 @@
-query LocationsQuery {
-  allLocations @client {
-    name
-  }
-}
