@@ -1,0 +1,31 @@
+//
+.location-finder-wrapper {
+  @include space-stack-xxl;
+  margin: 0 auto;
+  max-width:1300px;
+  padding:2em;
+  //margin-bottom:20em;
+}
+
+.location-finder-wrapper .locations-list {
+  max-height: 500px;
+  overflow: scroll;
+}
+
+.location-finder-wrapper .locations-list .location {
+  padding: .75em 0;
+}
+
+.location-finder-wrapper .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.location-finder-wrapper .column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
