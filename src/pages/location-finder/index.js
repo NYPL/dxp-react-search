@@ -7,10 +7,15 @@ import { compose } from 'redux';
 import Layout from './../../components/shared/layouts/Main';
 import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
+import Head from 'next/head';
 
 function LocationFinder() {
   return (
     <Layout>
+      <Head>
+        <title>Location Finder</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <div className="content-header">
         <SearchHeader />
       </div>
