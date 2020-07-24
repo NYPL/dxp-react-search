@@ -1,0 +1,29 @@
+.locations {
+  @include space-stack-xxl;
+
+  padding:2em 0;
+
+  .locations__list {
+    max-height: 500px;
+    overflow: scroll;
+  }
+
+  .locations__list .location {
+    padding: .75em 0;
+  }
+
+  .column {
+    float: left;
+    width: 50%;
+
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

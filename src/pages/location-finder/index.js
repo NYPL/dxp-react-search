@@ -5,33 +5,28 @@ import { withRedux } from './../../redux/withRedux';
 import { compose } from 'redux';
 // Components
 import Layout from './../../components/shared/layouts/Main';
+import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
-import Map from './../../components/location-finder/Map';
-import SearchBar from './../../components/location-finder/SearchBar';
-const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
+import Head from 'next/head';
 
 function LocationFinder() {
   return (
     <Layout>
-      <h1>Location Finder</h1>
-      <SearchBar />
-      <div className='location-finder-wrapper'>
-        <div className='row'>
-          <div className='column locations-list'>
-            <Locations />
-          </div>
-          <div className='column'>
-            <Map
-              googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `500px` }} />}
-              mapElement={<div style={{ height: `100%` }} />}
-            />
-          </div>
-        </div>
+      <Head>
+        <title>Location Finder</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      <div className="content-header">
+        <SearchHeader />
+      </div>
+      <div className="content-primary">
+        <Locations />
+      </div>
+      <div className="content-bottom">
+        Content Bottom
       </div>
     </Layout>
   );
 }
 
-export default compose(withApollo, withRedux)(LocationFinder)
+export default compose(withApollo, withRedux)(LocationFinder);

@@ -1,6 +1,6 @@
-import './../styles.scss';
+import './../styles/main.scss';
 
-function SearchApp({ Component, pageProps }) {  
+function SearchApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 

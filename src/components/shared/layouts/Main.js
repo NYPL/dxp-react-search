@@ -2,12 +2,12 @@ import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
 
 export default ({ children }) => (
-  <div>
+  <div className="layout-container">
     <Header
       skipNav={{ target: 'main-content' }}
       navData={navConfig.current}
     />
-    <main>
+    <main className="main">
       {children}
     </main>
     <Footer
