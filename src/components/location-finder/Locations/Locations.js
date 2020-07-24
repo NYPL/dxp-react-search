@@ -6,7 +6,6 @@ import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Map
 import Map from './../Map';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
-//import styles from './Locations.module.scss';
 // Redux
 import { useSelector } from 'react-redux';
 

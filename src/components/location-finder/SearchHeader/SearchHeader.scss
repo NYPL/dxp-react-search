@@ -1,10 +1,10 @@
 .search-header {
   padding: 2em 0;
-  background: #F5F5F5;
+  background: $gray-xlight;
 
   .search-header__inner {
     margin: 0 auto;
-    max-width:1300px;
-    padding:2em;
+    max-width: 1300px;
+    padding: 2em;
   }
 }
