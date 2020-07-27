@@ -12,6 +12,12 @@ export const typeDefs = gql`
     postal_code: String
     phone: String
     wheelchairAccess: String
+    geoLocation: GeoLocation
+  }
+
+  type GeoLocation {
+    lat: Float
+    lng: Float
   }
 
   type Query {
