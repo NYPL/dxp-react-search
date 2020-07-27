@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
   const { searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
+  const { mapCenter } = useSelector(state => state.map);
+  console.log(mapCenter);
 
   // @TODO move this to redux state as default, then you can update
   // the state when user clicks "View on Map" link in Location comp?
@@ -20,14 +22,16 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   return (
     <GoogleMap
       defaultZoom={12}
-      defaultCenter={defaultCenter}
+      center={mapCenter}
     >
-      <Marker
-        position={{
-          lat: searchQueryGeoLat,
-          lng: searchQueryGeoLng
-        }}
-      />
+      {searchQueryGeoLat && searchQueryGeoLng &&
+        <Marker
+          position={{
+            lat: searchQueryGeoLat,
+            lng: searchQueryGeoLng
+          }}
+        />
+      }
       {props.locations.map(location => {
         const onClick = props.onClick.bind(this, location);
 
@@ -40,7 +44,8 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
               lng: location.geoLocation.lng
             }}
           >
-            {props.selectedMarker === location &&
+            {/* Show info window if selected marker = location OR if map center = location geocords. */}
+            {props.selectedMarker === location || mapCenter === location.geoLocation &&
               <InfoWindow>
                 <div>
                   <div>{location.name}</div>
