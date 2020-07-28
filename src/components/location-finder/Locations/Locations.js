@@ -3,10 +3,12 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Location from './../Location';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+import * as DS from '@nypl/design-system-react-components';
 // Map
 import Map from './../Map';
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchQuery, setSearchQueryGeo, setMapCenter, setMapZoom } from './../../../redux/actions';
 
 function Locations() {
   const { loading, error, data, networkStatus } = useQuery(
@@ -14,6 +16,8 @@ function Locations() {
   );
   // Redux
   const { searchQuery, searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
+  // Redux dispatch
+  const dispatch = useDispatch();
 
   if (loading || !data) {
     return (
@@ -27,6 +31,19 @@ function Locations() {
     );
   }
 
+  function onClearSearchTerms(e) {
+    e.preventDefault();
+    console.log('Clear all search terms!');
+
+    const defaultCenter = {
+      lat: 40.7532,
+      lng: -73.9822
+    };
+    dispatch(setSearchQuery(''));
+    dispatch(setMapZoom(12));
+    dispatch(setMapCenter(defaultCenter));
+  }
+
   return (
     <div className='locations'>
       <div className='row'>
@@ -36,6 +53,12 @@ function Locations() {
             <div>
               Showing all locations near <strong>{searchQuery}</strong>
               <br />
+              <DS.Link
+                href="#"
+                onClick={onClearSearchTerms}
+              >
+                Clear all search terms
+              </DS.Link>
             </div>
           ) : (
             null

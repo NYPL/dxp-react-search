@@ -33,6 +33,8 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
 
         // Show info window if selected marker = location
         // OR if map center = location geocords.
+        //console.log('mapCenter: ' + mapCenter);
+        //console.log('location.geoLocation: ' + location.geoLocation);
         let showInfoWindow = false;
         if (props.selectedMarker === location
         || mapCenter === location.geoLocation) {
