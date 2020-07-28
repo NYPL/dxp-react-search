@@ -2,7 +2,7 @@ import { SET_MAP_CENTER } from './../actions';
 
 const initialState = {
   mapCenter: {
-    lat: 40.7532,
+    lat: 40.7632,
     lng: -73.9822
   }
 };

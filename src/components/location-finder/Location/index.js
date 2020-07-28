@@ -47,7 +47,18 @@ function Location({ location }) {
         {wheelchairAccess}
       </div>
       <div className='location__links'>
-        <button onClick={onClick}>View on Map</button>
+        <DS.Link
+          href="#"
+          onClick={onClick}
+        >
+          View on Map
+        </DS.Link>
+        |
+        <DS.Link
+          href="#"
+        >
+          Get Directions
+        </DS.Link>
       </div>
     </div>
   );

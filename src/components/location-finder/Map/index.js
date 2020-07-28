@@ -10,14 +10,15 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
   const { searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
   const { mapCenter } = useSelector(state => state.map);
-  console.log(mapCenter);
+  //console.log(mapCenter);
 
   // @TODO move this to redux state as default, then you can update
   // the state when user clicks "View on Map" link in Location comp?
-  const defaultCenter = {
+  /*const defaultCenter = {
     lat: 40.7532,
     lng: -73.9822
   };
+  */
 
   return (
     <GoogleMap
