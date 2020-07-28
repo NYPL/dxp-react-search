@@ -1,10 +1,11 @@
-import { SET_MAP_CENTER } from './../actions';
+import { SET_MAP_CENTER, SET_MAP_ZOOM } from './../actions';
 
 const initialState = {
   mapCenter: {
     lat: 40.7632,
     lng: -73.9822
-  }
+  },
+  mapZoom: 12
 };
 
 export default function search(state = initialState, action) {
@@ -13,6 +14,12 @@ export default function search(state = initialState, action) {
       return {
         ...state,
         mapCenter: action.payload
+      };
+
+    case SET_MAP_ZOOM:
+      return {
+        ...state,
+        mapZoom: action.payload
       };
 
     default:

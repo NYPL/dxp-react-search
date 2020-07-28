@@ -2,7 +2,7 @@ import React from 'react';
 import * as DS from '@nypl/design-system-react-components';
 // Redux
 import { useDispatch } from 'react-redux';
-import { setMapCenter } from './../../../redux/actions';
+import { setMapCenter, setMapZoom } from './../../../redux/actions';
 
 function Location({ location }) {
   // Redux dispatch
@@ -25,8 +25,8 @@ function Location({ location }) {
 
   function onClick(e) {
     e.preventDefault();
-    console.log('view on map!');
-
+    // Redux dispatches
+    dispatch(setMapZoom(14));
     dispatch(setMapCenter(location.geoLocation));
   }
 

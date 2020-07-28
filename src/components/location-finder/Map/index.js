@@ -9,20 +9,11 @@ import { useSelector } from 'react-redux';
 const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
   const { searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
-  const { mapCenter } = useSelector(state => state.map);
-  //console.log(mapCenter);
-
-  // @TODO move this to redux state as default, then you can update
-  // the state when user clicks "View on Map" link in Location comp?
-  /*const defaultCenter = {
-    lat: 40.7532,
-    lng: -73.9822
-  };
-  */
+  const { mapCenter, mapZoom } = useSelector(state => state.map);
 
   return (
     <GoogleMap
-      defaultZoom={12}
+      zoom={mapZoom}
       center={mapCenter}
     >
       {searchQueryGeoLat && searchQueryGeoLng &&
