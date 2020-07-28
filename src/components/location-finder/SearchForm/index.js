@@ -7,7 +7,7 @@ import { LocationsQuery as LOCATIONS_QUERY } from './SearchAutoSuggest.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Redux
 import { useDispatch } from 'react-redux';
-import { setSearchQuery, setSearchQueryGeo } from './../../../redux/actions';
+import { setSearchQuery, setSearchQueryGeo, setMapCenter, setMapZoom } from './../../../redux/actions';
 // Geocode
 import Geocode from 'react-geocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
@@ -67,7 +67,9 @@ function SearchForm() {
       response => {
         const { lat, lng } = response.results[0].geometry.location;
         dispatch(setSearchQueryGeo(response.results[0].geometry.location));
-        console.log(lat, lng);
+        // Dispatch for map zoom and center
+        dispatch(setMapZoom(14));
+        dispatch(setMapCenter(response.results[0].geometry.location));
       },
       error => {
         console.error(error);

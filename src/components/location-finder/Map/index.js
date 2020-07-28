@@ -18,6 +18,10 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
     >
       {searchQueryGeoLat && searchQueryGeoLng &&
         <Marker
+          icon={{
+            url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+            scaledSize: new google.maps.Size(32, 32)
+          }}
           position={{
             lat: searchQueryGeoLat,
             lng: searchQueryGeoLng
@@ -27,17 +31,28 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
       {props.locations.map(location => {
         const onClick = props.onClick.bind(this, location);
 
+        // Show info window if selected marker = location
+        // OR if map center = location geocords.
+        let showInfoWindow = false;
+        if (props.selectedMarker === location
+        || mapCenter === location.geoLocation) {
+          showInfoWindow = true;
+        }
+
         return (
           <Marker
             key={location.id}
             onClick={onClick}
+            icon={{
+              url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+              scaledSize: new google.maps.Size(32, 32)
+            }}
             position={{
               lat: location.geoLocation.lat,
               lng: location.geoLocation.lng
             }}
           >
-            {/* Show info window if selected marker = location OR if map center = location geocords. */}
-            {props.selectedMarker === location || mapCenter === location.geoLocation &&
+            {showInfoWindow &&
               <InfoWindow>
                 <div>
                   <div>{location.name}</div>
@@ -53,6 +68,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   );
 });
 
+// @TODO Change this to use hooks instead like rest of app?
 class Map extends Component {
   constructor(props) {
     super(props);
