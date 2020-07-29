@@ -85,7 +85,7 @@ function SearchForm() {
           mapZoom: 14
         }));
 
-        //Dispatch to set location id for info window.
+        // Dispatch to set location id for info window.
         dispatch(setLocationInfoWindowId(locationId));
       },
       error => {

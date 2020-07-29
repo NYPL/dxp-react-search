@@ -8,14 +8,19 @@ import * as DS from '@nypl/design-system-react-components';
 import Map from './../Map';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setMapPosition } from './../../../redux/actions';
+import { setSearchQuery, setMapPosition, setLocationInfoWindowId } from './../../../redux/actions';
 
 function Locations() {
   const { loading, error, data, networkStatus } = useQuery(
     LOCATIONS_QUERY, {}
   );
   // Redux
-  const { searchQuery, searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
+  const {
+    searchQuery,
+    searchQueryGeoLat,
+    searchQueryGeoLng,
+  } = useSelector(state => state.search);
+
   const dispatch = useDispatch();
 
   if (loading || !data) {
@@ -48,8 +53,13 @@ function Locations() {
 
     dispatch(setMapPosition({
       mapCenter: defaultCenter,
-      mapZoom: 14
+      mapZoom: 12
     }));
+
+    // Dispatch to reset the location id for info window.
+    dispatch(setLocationInfoWindowId(null));
+
+    // @TODO Need to also clear the autosuggest form input.
   }
 
   return (
