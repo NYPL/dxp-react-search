@@ -18,6 +18,13 @@ class DrupalApi extends RESTDataSource {
 
   // Tidy up the response from Drupal.
   locationReducer(location) {
+    // D8 doesn't have geo data yet, so just hardcode something
+    // so the map doesn't completely break.
+    const defaultGeoCords = {
+      lat: 40.7532,
+      lng: -73.9822
+    };
+
     return {
       id: location.id,
       name: location.attributes.title,
@@ -29,6 +36,10 @@ class DrupalApi extends RESTDataSource {
       postal_code: location.attributes.field_as_address.postal_code,
       phone: location.attributes.field_tels_phone,
       wheelchairAccess: location.attributes.field_lts_wheelchair_access,
+      geoLocation: {
+        lat: defaultGeoCords.lat,
+        lng: defaultGeoCords.lng,
+      },
     };
   }
 
