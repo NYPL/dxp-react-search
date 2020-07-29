@@ -53,6 +53,17 @@ function SearchForm() {
     );
   }
 
+  function renderSuggestionsContainer({ containerProps, children, query }) {
+    return (
+      <div {...containerProps}>
+        {children}
+        <div className='auto-suggest-bottom'>
+          Search for locations near: <strong>{query}</strong>
+        </div>
+      </div>
+    );
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -104,6 +115,7 @@ function SearchForm() {
           }}
           getSuggestionValue={getSuggestionValue}
           renderSuggestion={renderSuggestion}
+          renderSuggestionsContainer={renderSuggestionsContainer}
           inputProps={{
             placeholder: '',
             value: value,
