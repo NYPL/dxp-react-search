@@ -13,6 +13,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
 
   return (
     <GoogleMap
+      defaultOptions={{mapTypeControl: false}}
       zoom={mapZoom}
       center={mapCenter}
     >
