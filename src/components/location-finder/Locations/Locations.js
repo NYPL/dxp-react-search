@@ -8,7 +8,7 @@ import * as DS from '@nypl/design-system-react-components';
 import Map from './../Map';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setMapPosition, setLocationInfoWindowId } from './../../../redux/actions';
+import { setSearchQuery, setMapPosition, setLocationInfoWindowId, setAutoSuggestInputValue } from './../../../redux/actions';
 
 function Locations() {
   const { loading, error, data, networkStatus } = useQuery(
@@ -60,6 +60,7 @@ function Locations() {
     dispatch(setLocationInfoWindowId(null));
 
     // @TODO Need to also clear the autosuggest form input.
+    dispatch(setAutoSuggestInputValue(''));
   }
 
   return (

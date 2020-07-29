@@ -1,6 +1,8 @@
-import { SET_SEARCH_QUERY } from './../actions';
+import { SET_SEARCH_QUERY, SET_AUTO_SUGGEST_INPUT_VALUE } from './../actions';
 
-const initialState = {};
+const initialState = {
+  autoSuggestInputValue: '',
+};
 
 export default function search(state = initialState, action) {
   switch(action.type) {
@@ -10,6 +12,12 @@ export default function search(state = initialState, action) {
         searchQuery: action.payload.query,
         searchQueryGeoLat: action.payload.lat,
         searchQueryGeoLng: action.payload.lng
+      };
+
+    case SET_AUTO_SUGGEST_INPUT_VALUE:
+      return {
+        ...state,
+        autoSuggestInputValue: action.payload
       };
 
     default:

@@ -6,20 +6,21 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { LocationsQuery as LOCATIONS_QUERY } from './SearchAutoSuggest.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Redux
-import { useDispatch } from 'react-redux';
-import { setSearchQuery, setMapPosition, setLocationInfoWindowId } from './../../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchQuery, setMapPosition, setLocationInfoWindowId, setAutoSuggestInputValue } from './../../../redux/actions';
 // Geocode
 import Geocode from 'react-geocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API);
 
 function SearchForm() {
-  const [value, setValue] = useState('');
+  // Local state
   const [suggestions, setSuggestions] = useState([]);
-  const search_string = value;
-  // Redux
   const [locationId, setLocationId] = useState('');
+  // Redux
   const dispatch = useDispatch();
+  const { autoSuggestInputValue } = useSelector(state => state.search);
+  const search_string = autoSuggestInputValue;
 
   // Query the apollo cache for locations data.
   // useLazyQuery hook is used because the query doesn't happen until
@@ -68,13 +69,13 @@ function SearchForm() {
     event.preventDefault();
 
     // Get latitude & longitude from address.
-    Geocode.fromAddress(value).then(
+    Geocode.fromAddress(autoSuggestInputValue).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
 
         // Dispatch search query
         dispatch(setSearchQuery({
-          query: value,
+          query: autoSuggestInputValue,
           lat: response.results[0].geometry.location.lat,
           lng: response.results[0].geometry.location.lng
         }));
@@ -110,7 +111,7 @@ function SearchForm() {
           onSuggestionsFetchRequested={({ value }) => {
             // Run the lazy gql query to get location suggestions
             getLocations();
-            setValue(value);
+            dispatch(setAutoSuggestInputValue(value));
             setSuggestions(getSuggestions(data, value));
           }}
           getSuggestionValue={getSuggestionValue}
@@ -118,9 +119,9 @@ function SearchForm() {
           renderSuggestionsContainer={renderSuggestionsContainer}
           inputProps={{
             placeholder: '',
-            value: value,
+            value: autoSuggestInputValue,
             onChange: (_, { newValue, method }) => {
-              setValue(newValue);
+              dispatch(setAutoSuggestInputValue(newValue));
             },
           }}
           highlightFirstSuggestion={true}
