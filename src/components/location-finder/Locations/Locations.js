@@ -35,7 +35,6 @@ function Locations() {
     );
   }
 
-  // @TODO Need to finish this.
   function onClearSearchTerms(e) {
     e.preventDefault();
     console.log('Clear all search terms!');
@@ -59,7 +58,7 @@ function Locations() {
     // Dispatch to reset the location id for info window.
     dispatch(setLocationInfoWindowId(null));
 
-    // @TODO Need to also clear the autosuggest form input.
+    // Clear auto suggest input.
     dispatch(setAutoSuggestInputValue(''));
   }
 
