@@ -2,7 +2,7 @@ import React from 'react';
 import * as DS from '@nypl/design-system-react-components';
 // Redux
 import { useDispatch } from 'react-redux';
-import { setMapCenter, setMapZoom } from './../../../redux/actions';
+import { setLocationInfoWindowId, setMapPosition } from './../../../redux/actions';
 
 function Location({ location }) {
   // Redux dispatch
@@ -23,11 +23,15 @@ function Location({ location }) {
       break;
   }
 
-  function onClick(e) {
+  function onClickViewOnMap(e) {
     e.preventDefault();
-    // Redux dispatches
-    dispatch(setMapZoom(14));
-    dispatch(setMapCenter(location.geoLocation));
+
+    dispatch(setMapPosition({
+      mapCenter: location.geoLocation,
+      mapZoom: 14
+    }));
+
+    dispatch(setLocationInfoWindowId(location.id));
   }
 
   return (
@@ -49,7 +53,7 @@ function Location({ location }) {
       <div className='location__links'>
         <DS.Link
           href="#"
-          onClick={onClick}
+          onClick={onClickViewOnMap}
         >
           View on Map
         </DS.Link>

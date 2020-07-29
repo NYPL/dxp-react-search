@@ -8,7 +8,7 @@ import * as DS from '@nypl/design-system-react-components';
 import Map from './../Map';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setSearchQueryGeo, setMapCenter, setMapZoom } from './../../../redux/actions';
+import { setSearchQuery, setMapPosition } from './../../../redux/actions';
 
 function Locations() {
   const { loading, error, data, networkStatus } = useQuery(
@@ -16,7 +16,6 @@ function Locations() {
   );
   // Redux
   const { searchQuery, searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
-  // Redux dispatch
   const dispatch = useDispatch();
 
   if (loading || !data) {
@@ -31,17 +30,26 @@ function Locations() {
     );
   }
 
+  // @TODO Need to finish this.
   function onClearSearchTerms(e) {
     e.preventDefault();
     console.log('Clear all search terms!');
+
+    dispatch(setSearchQuery({
+      searchQuery: '',
+      searchQueryGeoLat: '',
+      searchQueryGeoLng: ''
+    }));
 
     const defaultCenter = {
       lat: 40.7532,
       lng: -73.9822
     };
-    dispatch(setSearchQuery(''));
-    dispatch(setMapZoom(12));
-    dispatch(setMapCenter(defaultCenter));
+
+    dispatch(setMapPosition({
+      mapCenter: defaultCenter,
+      mapZoom: 14
+    }));
   }
 
   return (

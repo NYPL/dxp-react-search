@@ -7,7 +7,7 @@ import { LocationsQuery as LOCATIONS_QUERY } from './SearchAutoSuggest.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Redux
 import { useDispatch } from 'react-redux';
-import { setSearchQuery, setSearchQueryGeo, setMapCenter, setMapZoom } from './../../../redux/actions';
+import { setSearchQuery, setMapPosition, setLocationInfoWindowId } from './../../../redux/actions';
 // Geocode
 import Geocode from 'react-geocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
@@ -17,8 +17,10 @@ function SearchForm() {
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const search_string = value;
-  // Redux dispatch
+  // Redux
+  const [locationId, setLocationId] = useState('');
   const dispatch = useDispatch();
+
   // Query the apollo cache for locations data.
   // useLazyQuery hook is used because the query doesn't happen until
   // the user starts typing in the search box.
@@ -51,25 +53,29 @@ function SearchForm() {
     );
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log('handleSubmit called!');
-    // Clear the suggestions
-    //setSuggestions([])
-    console.log('handleSubmit value: ' + value);
-
-    // Call geocode service and get geocordinates for search term.
-    // Dispatch the setSearchQuery action
-    dispatch(setSearchQuery(value));
+  function handleSubmit(event) {
+    event.preventDefault();
 
     // Get latitude & longitude from address.
     Geocode.fromAddress(value).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
-        dispatch(setSearchQueryGeo(response.results[0].geometry.location));
+
+        // Dispatch search query
+        dispatch(setSearchQuery({
+          query: value,
+          lat: response.results[0].geometry.location.lat,
+          lng: response.results[0].geometry.location.lng
+        }));
+
         // Dispatch for map zoom and center
-        dispatch(setMapZoom(14));
-        dispatch(setMapCenter(response.results[0].geometry.location));
+        dispatch(setMapPosition({
+          mapCenter: response.results[0].geometry.location,
+          mapZoom: 14
+        }));
+
+        //Dispatch to set location id for info window.
+        dispatch(setLocationInfoWindowId(locationId));
       },
       error => {
         console.error(error);
@@ -77,8 +83,10 @@ function SearchForm() {
     );
   }
 
-  function onSuggestionSelected() {
-    console.log('onSuggestionSelected!');
+  function onSuggestionSelected(event, { suggestion }) {
+    // Grab the location id and keep in local state
+    // for use in form submit to send to redux.
+    setLocationId(suggestion.id);
   }
 
   return (

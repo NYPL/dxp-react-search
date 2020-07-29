@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
   const { searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
-  const { mapCenter, mapZoom } = useSelector(state => state.map);
+  const { mapCenter, mapZoom, locationInfoWindowId } = useSelector(state => state.map);
 
   return (
     <GoogleMap
@@ -31,13 +31,13 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
       {props.locations.map(location => {
         const onClick = props.onClick.bind(this, location);
 
-        // Show info window if selected marker = location
-        // OR if map center = location geocords.
-        //console.log('mapCenter: ' + mapCenter);
-        //console.log('location.geoLocation: ' + location.geoLocation);
+        // Logic for info window
+        // @TODO Need to clean this up and probs just manage
+        // the location id in redux state, not a mix of local state
+        // and redux state like it is now.
         let showInfoWindow = false;
-        if (props.selectedMarker === location
-        || mapCenter === location.geoLocation) {
+        if (props.selectedMarker === location.id
+        || locationInfoWindowId === location.id) {
           showInfoWindow = true;
         }
 
@@ -81,7 +81,9 @@ class Map extends Component {
   }
 
   handleClick = (location, event) => {
-    this.setState({ selectedMarker: location })
+    // @TODO Change this Class component to functional, and
+    // dispatch redux action here.
+    this.setState({ selectedMarker: location.id })
   }
 
   render() {

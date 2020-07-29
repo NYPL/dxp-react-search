@@ -22,13 +22,6 @@ class RefineryApi extends RESTDataSource {
         break;
     }
 
-    // Test to see what happens if refinery matches google geocoder service.
-    /*if (location.slug === '125th-street') {
-      location.geolocation.coordinates[1] = 40.8030583;
-      location.geolocation.coordinates[0] = -73.9347641;
-    }
-    */
-
     return {
       id: location.slug,
       name: location.name,
