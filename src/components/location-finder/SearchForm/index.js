@@ -104,7 +104,7 @@ function SearchForm() {
     <div className='search__form'>
       <form onSubmit={handleSubmit}>
         <AutoSuggest
-          suggestions={suggestions}
+          suggestions={suggestions.slice(0, 5)}
           onSuggestionSelected={onSuggestionSelected}
           onSuggestionsClearRequested={() => setSuggestions([])}
           onSuggestionsFetchRequested={({ value }) => {
