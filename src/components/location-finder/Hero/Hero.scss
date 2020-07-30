@@ -1,0 +1,21 @@
+.hero {
+  background-color: #2D71B8;
+  display: flex;
+  align-items: center;
+}
+
+.hero__image {
+  background-image: url('banner_2x.png');
+  background-position: left center;
+  background-size: cover;
+  height: 150px;
+  flex: 0 0 50%;
+  //width: 75%;
+}
+
+.hero__content {
+  @include space-inset-s;
+  
+  color: $white;
+  flex: 0 0 45%;
+}
