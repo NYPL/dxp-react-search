@@ -4,7 +4,7 @@ GRAPHQL_API_URL=scout.nypl.org/api/graphql
 
 if [ "$TRAVIS_BRANCH" == "development" ]; then
   GRAPHQL_API_URL=dev-scout.nypl.org/api/graphql
-elsif [ "$TRAVIS_BRANCH" == "qa" ]; then
+elif [ "$TRAVIS_BRANCH" == "qa" ]; then
   GRAPHQL_API_URL=qa-scout.nypl.org/api/graphql
 fi
 
