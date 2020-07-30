@@ -1,0 +1,42 @@
+language: node_js
+dist: trusty
+
+node_js:
+  - 7
+
+services:
+  - docker
+
+cache:
+  directories:
+    - node_modules
+
+branches:
+  only:
+    - development
+    - qa
+    - production
+
+env:
+  global:
+  - NODE_ENV=14
+  - REMOTE_IMAGE_URL_NYPL_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/finder
+  - REMOTE_IMAGE_URL_NYPL=463786892988.dkr.ecr.us-east-1.amazonaws.com/finder
+  # All secure variables for scripts.
+  - secure: kOSEHTIfTm3w8lfSKNvAJN3fYDI15PEvMwsr67tAsAMA5JQoJJY6DS+XIS3nSrcPnxIr4Wk5k8+7nkycxrFIFVH1B41yrRJr7vRRcMfT3kmdK5pkSlJz3h+LN8RfeGkf8mzm9roPIXoIXzx90PF2zZgSy740QCbVEkpoJVnmifcdx3sQ+zayPqQOCDEVXK+IYPiW1F4HEFPMasOq+oaNOEQXd0Dqoug0+R+brq8Nj9kOwBl2lRV4VDyzpUmm57ZKEIwGJ5Ux4pFpLMXFRhB4s/PbxF7n9o/xf4EAKeYPprx+rbcrV20BQptGivwdgOV6vPJc2/iYEtgurEGa0Ol3Ezxs+F+rB+sAH1egJ056FxzIfewa4oJ2Zz0HnY0OdJnsravG0SejX+6+OnIY4ZFqFxs+uhPcB9ITnvc947LA4dUk3+gZj79eNuqFXtlUhscNJX+cVjf8H3angty9yg2rl/9a3LqnZqDshj/Sgt2v5GzrOteb7eChiT3kCQ8Oly1yaMB9UFxqTEMfzGUTtxd8zlQp1eABY81TAwtsDgUjQAAnKC4/fgC9NnW5Hwv1RnxC+aTxFlUuVCRjZL6+DdlCHt06p3D3dxevAbSTN+jMBFAEvqLxaMY6MIpVhrqJCM0shELNF7w1DET2tlgep/x/tC1xHDV9qAMqiSVYFh+zu4g=
+
+install: npm install
+
+before_script:
+  - cp .travis/.env .
+  - ./provisioning/set-env
+
+script: npm test
+
+before_deploy: echo 'All tests passed; Preparing to deploy'
+
+deploy:
+  provider: script
+  script: provisioning/deploy
+  on:
+    all_branches: true
