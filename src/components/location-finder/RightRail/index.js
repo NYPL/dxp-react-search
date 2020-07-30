@@ -56,7 +56,13 @@ function RightRail() {
           className="right-rail__heading"
         />
 
-        <ul className="right-rail__list">
+        <DS.List
+            className="right-rail__list"
+            modifiers={[
+              'no-list-styling'
+            ]}
+            type="ul"
+          >
           <li className="right-rail__item">
             <DS.Link className="right-rail__link">
               <a href="https://www.nypl.org/email-us">Email us your question</a>
@@ -79,7 +85,7 @@ function RightRail() {
           <li className="right-rail__item">
             <span className="right-rail__link right-rail__link--simple">TTY 212-930-0020</span>
           </li>
-        </ul>
+        </DS.List>
       </nav>
 
       <nav className="right-rail" aria-labelledby="right-rail--support-nypl">
@@ -90,7 +96,13 @@ function RightRail() {
           text="Support NYPL"
         />
         
-        <ul className="right-rail__list">      
+        <DS.List
+            className="right-rail__list"
+            modifiers={[
+              'no-list-styling'
+            ]}
+            type="ul"
+          >
           <li className="right-rail__item">
             <DS.Link className="right-rail__link">
               <a href="https://www.nypl.org/help/about-nypl/volunteer-nypl">Volunteer</a>
@@ -101,7 +113,7 @@ function RightRail() {
               <a href="https://secure.nypl.org/site/Donation2?7825_donation=form1&amp;df_id=7825&amp;mfc_pref=T&amp;set_custom_Donation_Direction=Mid-Manhattan%20at%2042nd%20Street%20Library&amp;s_src=FRQXXZZ_QWLPN">Support Your Library</a>
             </DS.Link>
           </li>
-        </ul>
+        </DS.List>
       </nav>
     </div>
   );
