@@ -16,14 +16,19 @@ function RightRail() {
           text="More at NYPL"
         />
 
-        <ul className="right-rail__list">   
+        <DS.List
+            className="right-rail__list"
+            modifiers={[
+              'no-list-styling'
+            ]}
+            type="ul"
+          >
           <li className="right-rail__item">
             <DS.Link linkType="default" className="right-rail__link">
               <a href="https://www.nypl.org/library-card">
                 Get a Library Card
               </a>
             </DS.Link>
-            <a href="https://www.nypl.org/library-card" className="right-rail__link right-rail__link--simple">Get a Library Card</a>
           </li>          
           <li className="right-rail__item">
             <DS.Link linkType="default" className="right-rail__link">
@@ -40,7 +45,7 @@ function RightRail() {
               <a href="https://www.nypl.org/help/computers-internet-and-wireless-access/reserving-computer">Reserve a Computer</a>
             </DS.Link>
           </li>
-        </ul>
+        </DS.List>
       </nav>
 
       <nav className="right-rail" aria-labelledby="right-rail--need-help?-ask-nypl">
