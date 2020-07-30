@@ -1,0 +1,44 @@
+#! /bin/bash
+
+case "$TRAVIS_BRANCH" in
+  production)
+    export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PRODUCTION
+    export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PRODUCTION
+    DOCKER_REPO_URL=$REMOTE_IMAGE_URL_NYPL
+    ;;
+  *)
+    export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEVELOPMENT
+    export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEVELOPMENT
+    DOCKER_REPO_URL=$REMOTE_IMAGE_URL_NYPL_DEV
+    ;;
+esac
+
+# This is needed to login on AWS and push the image on ECR
+# Change it accordingly to your docker repo
+pip install --user awscli
+export PATH=$PATH:$HOME/.local/bin
+eval $(aws ecr get-login --no-include-email --region us-east-1)
+
+# awscli v2 client uses new login routine
+# aws ecr get-login-password --region us-east-1 --profile nypl-dev \
+# | docker login \
+#     --password-stdin \
+#     --username AWS \
+#     $DOCKER_REPO_URL
+
+# Build and push to ECR.
+IMAGE_NAME=
+LOCAL_TAG_NAME=$IMAGE_NAME:$TRAVIS_BRANCH-latest
+REMOTE_FULL_URL=$DOCKER_REPO_URL:$TRAVIS_BRANCH-latest
+docker build --target production --tag $LOCAL_TAG_NAME .
+echo "Pushing $LOCAL_TAG_NAME"
+docker tag $LOCAL_TAG_NAME "$REMOTE_FULL_URL"
+docker push "$REMOTE_FULL_URL"
+echo "Pushed $LOCAL_TAG_NAME to $REMOTE_FULL_URL"
+
+# Restart ECS services.
+CLUSTER_NAME="finder-$TRAVIS_BRANCH"
+WEB_APP_SERVICE_NAME="finder-webapp-$TRAVIS_BRANCH"
+
+echo "Deploying $TRAVIS_BRANCH"
+AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION aws ecs update-service --cluster $CLUSTER_NAME --region us-east-1 --service $WEB_APP_SERVICE_NAME --force-new-deployment
