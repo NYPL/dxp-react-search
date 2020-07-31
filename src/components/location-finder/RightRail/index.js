@@ -1,8 +1,12 @@
 import React from 'react';
+// Content
+import RightRailContent from './content';
 // Components
 import * as DS from '@nypl/design-system-react-components';
 
 function RightRail() {
+  // Content
+  const { more_at_nypl, need_help, support_nypl } = RightRailContent;
 
   return (
 
@@ -15,7 +19,7 @@ function RightRail() {
           level={3}
           text="More at NYPL"
         />
-
+        
         <DS.List
             className="right-rail__list"
             modifiers={[
@@ -23,28 +27,9 @@ function RightRail() {
             ]}
             type="ul"
           >
-          <li className="right-rail__item">
-            <DS.Link className="right-rail__link">
-              <a href="https://www.nypl.org/library-card">
-                Get a Library Card
-              </a>
-            </DS.Link>
-          </li>          
-          <li className="right-rail__item">
-            <DS.Link className="right-rail__link">
-              <a href="https://www.nypl.org/books-more/recommendations/staff-picks/adults">Find Your Next Book</a>
-            </DS.Link>
-          </li>          
-          <li className="right-rail__item">
-            <DS.Link className="right-rail__link">
-              <a href="https://www.nypl.org/locations">Search Library Locations</a>
-            </DS.Link>
-          </li>     
-          <li className="right-rail__item">
-            <DS.Link className="right-rail__link">
-              <a href="https://www.nypl.org/help/computers-internet-and-wireless-access/reserving-computer">Reserve a Computer</a>
-            </DS.Link>
-          </li>
+          {more_at_nypl.map((value, index) => {
+            return <li className="right-rail__item"><DS.Link className="right-rail__link" href={value.link}>{value.title}</DS.Link></li>
+          })}
         </DS.List>
       </nav>
 
@@ -63,28 +48,13 @@ function RightRail() {
             ]}
             type="ul"
           >
-          <li className="right-rail__item">
-            <DS.Link className="right-rail__link">
-              <a href="https://www.nypl.org/email-us">Email us your question</a>
-            </DS.Link>
-          </li>          
-          <li className="right-rail__item">
-            <DS.Link className="right-rail__link">
-              <a href="https://www.nypl.org/get-help/contact-us/chat">Chat with a librarian</a>
-            </DS.Link>
-          </li>
-          <li className="right-rail__item">
-            <span className="right-rail__link">Text (917) 983-4584</span>
-          </li>
-          <li className="right-rail__item">
-            <span className="right-rail__link">Call (917) ASK-NYPL</span>
-          </li>          
-          <li className="right-rail__item">
-            <span className="right-rail__link">(917) 275-6975</span>
-          </li>
-          <li className="right-rail__item">
-            <span className="right-rail__link right-rail__link--simple">TTY 212-930-0020</span>
-          </li>
+          {need_help.map((value, index) => {
+            if(value.link ) {
+              return <li className="right-rail__item"><DS.Link className="right-rail__link" href={value.link}>{value.title}</DS.Link></li>
+            } else {
+              return <li className="right-rail__item"><span className="right-rail__link">{value.title}</span></li>
+            }
+          })}
         </DS.List>
       </nav>
 
@@ -103,16 +73,13 @@ function RightRail() {
             ]}
             type="ul"
           >
-          <li className="right-rail__item">
-            <DS.Link className="right-rail__link">
-              <a href="https://www.nypl.org/help/about-nypl/volunteer-nypl">Volunteer</a>
-            </DS.Link>
-          </li>                
-          <li className="right-rail__item right-rail__item--button">                       
-            <DS.Link className="action-link">
-              <a href="https://secure.nypl.org/site/Donation2?7825_donation=form1&amp;df_id=7825&amp;mfc_pref=T&amp;set_custom_Donation_Direction=Mid-Manhattan%20at%2042nd%20Street%20Library&amp;s_src=FRQXXZZ_QWLPN">Support Your Library</a>
-            </DS.Link>
-          </li>
+          {support_nypl.map((value, index) => {
+            if(value.type ) {
+              return <li className="right-rail__item"><DS.Link linkType="button" className="action-link" href={value.link}>{value.title}</DS.Link></li>
+            } else {
+              return <li className="right-rail__item"><span className="right-rail__link">{value.title}</span></li>
+            }
+          })}
         </DS.List>
       </nav>
     </div>
