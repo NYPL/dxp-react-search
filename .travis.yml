@@ -2,33 +2,31 @@ language: node_js
 dist: trusty
 
 node_js:
-  - 7
+- 7
 
 services:
-  - docker
+- docker
 
 cache:
   directories:
-    - node_modules
+  - node_modules
 
 branches:
   only:
-    - qa
-    - production
+  - qa
+  - production
 
 env:
   global:
-  - NODE_ENV=14
   - REMOTE_IMAGE_URL_NYPL_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
   - REMOTE_IMAGE_URL_NYPL=463786892988.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
-  # All secure variables for scripts.
-  - secure: nsKDFOzIqFgJO7slWE06UD6s+NkgcgG1tQ7hR/AvMnVF9fUGFQSAIXhsURZIpMWFCmtkNgPR//ySTWHvDsyMJzPkNFUZlwO9vniDxKZrlrHi534e9anEYfc/mnuxdnp4of2ox7SV3P5UjCwjfkh35pgKMzINFrEiEnv1a76f9CUWI4qcvSiCDpcWIWd9rVuWYaOny9SLZXwNqnKACGieQqAqdNRTcpd0RSvEnT+xjkW5VMlUxnnetvjgtzfxeG4nd/xcIuCrl/5RdejvV7j3WQM6DgSPAvQgCHqdyzHqFqKBe6eilnha9mZdzSLjX/MHL4jDsiCBeK2X1pbt2cff2yas6f7AbtUwoJsBFyuUhZA9S45mZR2JUPrRWTgV8ryweEeryEBZZab6mTPLIsAGmfAhzfKSYYlBr2kIbqhAizaJG3WQpKMuv9T83b+h4YNeW6AhS6zd1F+IKdzQyugQNs2YafX15XK2b+pwB1WWQkXuUj35EUOUJzhS3x99wrpO+C1bTKEu0o4DrP4km56khRsexRbC34BtFJKFil+8TD3VKsD4yoSQCFgi/fWrvkUkNufuq0uWzu5WqIOU87sOWA7eAh4zdKcdSgD1A7OmJ1IbeiCrJ62+l+xUppawc2mwai/l/5U3P3rfj2DeStFukDFKnZKJ3G7gVVgRk0mGBqU=
+  - secure: BpCzsw7HGhcWFQupoWp8svlrX4VWHle8eJ8coK0vGRxMINPxPNitatzXeAEmf/Qqp+vyGbEKN0j70LitQg7883UAHQLc3be9V71R1Oc4FjDeYh7vbLA7euxEOTzCoBFc9Gt7z0Yo9cSDoftVyuprjHILCUEYZDs/Itz1I42uKlM1mj3CgbFwP7/541AboNXEjPbHwGiuyiG6XgUzVRx9h/4IUBpqjWxSQdePXaNKiUNl8gkKIp1NZqsUpx9wUrme/55RBPN+VH1mMxn+4V0RBrWKEQhW65wziGt0UMs6d1fCzLlscLkBwvOHOEJnkq9RXax/rG8WUhzjNjupjyqx7Kq82cl7Vz1bzkUXoGy/YrPPFelCtH2/YLJ0ku6WpfbIyqNhjHiql3/GgQJjECesd812FjTfFi0HaADQpcBhm+b6G7QEB04iIpYVdP9hRfleheW0sKfXpTAMhsEEnGmUUZueURDURdgmjSKb0WFo0T+HjTxhhoTZ9NomgmofqEjx08pn3cj3jzGtTetwJdu3tMRpqARTB9DmpqpdWyOyhXTUW22XAKQwCKhtSu8cvcLjNgG3feARfNeZNMmhTKIagul88llthd7WTztqtjLFpxnNK1MEMwKutNCY2vlN0q7uvSgmUQtDnIMISWPsDrTMNMfctniKGgeLqvkqqtK0qlY=
 
 install: npm install
 
 before_script:
   - cp .travis/.env .
-  - ./provisioning/set-env
+  - "./provisioning/set-env"
 
 script: npm test
 
