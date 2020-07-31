@@ -1,5 +1,10 @@
-query LocationsQuery {
-  allLocations {
+query LocationsQuery($searchGeoLat: Float, $searchGeoLng: Float) {
+  allLocations(
+    sortByDistance: {
+      originLat: $searchGeoLat,
+      originLng: $searchGeoLng
+    }
+  ) {
     id
     name
     status

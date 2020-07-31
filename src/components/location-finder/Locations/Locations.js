@@ -10,10 +10,9 @@ import Map from './../Map';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchQuery, setMapPosition, setLocationInfoWindowId, setAutoSuggestInputValue } from './../../../redux/actions';
 
+import Skeleton from 'react-loading-skeleton';
+
 function Locations() {
-  const { loading, error, data, networkStatus } = useQuery(
-    LOCATIONS_QUERY, {}
-  );
   // Redux
   const {
     searchQuery,
@@ -23,9 +22,27 @@ function Locations() {
 
   const dispatch = useDispatch();
 
+  const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : 40.7532;
+  const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : -73.9822;
+
+  const { loading, error, data, networkStatus } = useQuery(
+    LOCATIONS_QUERY, {
+      variables: {
+        searchGeoLat,
+        searchGeoLng
+      }
+    }
+  );
+
   if (loading || !data) {
+    console.log(loading);
+
     return (
-      <div>Loading</div>
+      <Skeleton
+        height={75}
+        count={20}
+        duration={2}
+      />
     );
   }
 
