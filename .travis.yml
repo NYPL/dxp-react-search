@@ -13,7 +13,6 @@ cache:
 
 branches:
   only:
-    - development
     - qa
     - production
 
