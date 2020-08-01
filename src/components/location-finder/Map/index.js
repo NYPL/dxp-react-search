@@ -6,10 +6,31 @@ const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 // Redux
 import { useSelector } from 'react-redux';
 
+import { useQuery } from '@apollo/react-hooks';
+import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+
 const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
   const { searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
   const { mapCenter, mapZoom, locationInfoWindowId } = useSelector(state => state.map);
+
+  const { loading, error, data } = useQuery(
+    LOCATIONS_QUERY, {}
+  );
+
+  if (loading || !data) {
+    console.log(loading);
+
+    return (
+      <div>Loading</div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>'error while loading locations'</div>
+    );
+  }
 
   return (
     <GoogleMap
@@ -29,7 +50,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
           }}
         />
       }
-      {props.locations.map(location => {
+      {data.allLocations.map(location => {
         const onClick = props.onClick.bind(this, location);
 
         // Logic for info window
