@@ -1,0 +1,10 @@
+#! /bin/bash
+
+GRAPHQL_API_URL=scout.nypl.org/api/graphql
+
+if [ "$TRAVIS_BRANCH" == "qa" ]; then
+  GRAPHQL_API_URL=qa-scout.nypl.org/api/graphql
+fi
+
+echo -e "\nNEXT_PUBLIC_GRAPHQL_API=$GRAPHQL_API_URL" >> .env
+echo -e "\nNEXT_PUBLIC_GOOGLE_MAPS_API=$NEXT_PUBLIC_GOOGLE_MAPS_API" >> .env

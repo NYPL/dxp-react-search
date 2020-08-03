@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+import * as DS from '@nypl/design-system-react-components';
 // Map
 import Map from './../Map';
 // Redux
@@ -52,6 +53,33 @@ function Locations() {
     return (
       <div>'error while loading locations'</div>
     );
+  }
+
+  function onClearSearchTerms(e) {
+    e.preventDefault();
+    console.log('Clear all search terms!');
+
+    dispatch(setSearchQuery({
+      searchQuery: '',
+      searchQueryGeoLat: '',
+      searchQueryGeoLng: ''
+    }));
+
+    const defaultCenter = {
+      lat: 40.7532,
+      lng: -73.9822
+    };
+
+    dispatch(setMapPosition({
+      mapCenter: defaultCenter,
+      mapZoom: 12
+    }));
+
+    // Dispatch to reset the location id for info window.
+    dispatch(setLocationInfoWindowId(null));
+
+    // Clear auto suggest input.
+    dispatch(setAutoSuggestInputValue(''));
   }
 
   return (

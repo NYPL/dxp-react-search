@@ -20,7 +20,6 @@ export const typeDefs = gql`
     lng: Float
   }
 
-
   input SortByDistance {
     originLat: Float
     originLng: Float

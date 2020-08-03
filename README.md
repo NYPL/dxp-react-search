@@ -15,3 +15,7 @@ React app build for search interfaces on www.nypl.org.
 ```
 npm run dev
 ```
+
+## Deployment
+
+We use TravisCI for continuous integration and delivery. Builds are started on git push to a target branch per environment (`development`, `qa`, `production`). Deployment to AWS will occur on successful build to an Elastic Container Service cluster.
