@@ -3,18 +3,25 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Location from './../Location';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+import * as DS from '@nypl/design-system-react-components';
 // Map
 import Map from './../Map';
-const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchQuery, setMapPosition, setLocationInfoWindowId, setAutoSuggestInputValue } from './../../../redux/actions';
 
 function Locations() {
   const { loading, error, data, networkStatus } = useQuery(
     LOCATIONS_QUERY, {}
   );
   // Redux
-  const { searchQuery, searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
+  const {
+    searchQuery,
+    searchQueryGeoLat,
+    searchQueryGeoLng,
+  } = useSelector(state => state.search);
+
+  const dispatch = useDispatch();
 
   if (loading || !data) {
     return (
@@ -28,14 +35,48 @@ function Locations() {
     );
   }
 
+  function onClearSearchTerms(e) {
+    e.preventDefault();
+    console.log('Clear all search terms!');
+
+    dispatch(setSearchQuery({
+      searchQuery: '',
+      searchQueryGeoLat: '',
+      searchQueryGeoLng: ''
+    }));
+
+    const defaultCenter = {
+      lat: 40.7532,
+      lng: -73.9822
+    };
+
+    dispatch(setMapPosition({
+      mapCenter: defaultCenter,
+      mapZoom: 12
+    }));
+
+    // Dispatch to reset the location id for info window.
+    dispatch(setLocationInfoWindowId(null));
+
+    // Clear auto suggest input.
+    dispatch(setAutoSuggestInputValue(''));
+  }
+
   return (
     <div className='locations'>
       <div className='row'>
         <div className='column locations__list'>
+
           {searchQuery ? (
             <div>
               Showing all locations near <strong>{searchQuery}</strong>
               <br />
+              <DS.Link
+                href="#"
+                onClick={onClearSearchTerms}
+              >
+                Clear all search terms
+              </DS.Link>
             </div>
           ) : (
             null
@@ -43,17 +84,12 @@ function Locations() {
 
           <div>
             {data.allLocations.map((location) => (
-              <Location location={location} />
+              <Location key={location.id} location={location} />
             ))}
           </div>
         </div>
-        <div className='column'>
-          <Map
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `500px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-          />
+        <div className='column locations__map'>
+          <Map locations={data.allLocations} />
         </div>
       </div>
     </div>

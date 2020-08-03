@@ -10,5 +10,9 @@ query LocationsQuery {
     postal_code
     phone
     wheelchairAccess
+    geoLocation {
+      lat
+      lng
+    }
   }
 }
