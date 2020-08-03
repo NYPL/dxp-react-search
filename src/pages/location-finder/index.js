@@ -8,6 +8,7 @@ import Layout from './../../components/shared/layouts/Main';
 import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
 import Head from 'next/head';
+import RightRail from '../../components/location-finder/RightRail';
 
 function LocationFinder() {
   return (
@@ -23,7 +24,7 @@ function LocationFinder() {
         <Locations />
       </div>
       <div className="content-bottom">
-        Content Bottom
+        <RightRail />
       </div>
     </Layout>
   );
