@@ -3,7 +3,6 @@ import React, { Fragment } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
-import * as DS from '@nypl/design-system-react-components';
 // Map
 import Map from './../Map';
 // Redux
