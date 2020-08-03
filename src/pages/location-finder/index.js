@@ -8,6 +8,7 @@ import Layout from './../../components/shared/layouts/Main';
 import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
 import Head from 'next/head';
+import BottomPromo from '../../components/location-finder/BottomPromo';
 
 function LocationFinder() {
   return (
@@ -23,7 +24,7 @@ function LocationFinder() {
         <Locations />
       </div>
       <div className="content-bottom">
-        Content Bottom
+        <BottomPromo />
       </div>
     </Layout>
   );
