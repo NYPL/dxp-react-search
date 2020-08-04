@@ -13,4 +13,7 @@ COPY . .
 
 RUN npm run build
 
+# Explicitly set port 3000 as open to requests.
+EXPOSE 3000
+
 CMD [ "npm", "start" ]

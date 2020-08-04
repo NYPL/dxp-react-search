@@ -9,6 +9,7 @@ import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
 import Head from 'next/head';
 import BottomPromo from '../../components/location-finder/BottomPromo';
+import RightRail from '../../components/location-finder/RightRail';
 
 function LocationFinder() {
   return (
@@ -25,6 +26,7 @@ function LocationFinder() {
       </div>
       <div className="content-bottom">
         <BottomPromo />
+        <RightRail />
       </div>
     </Layout>
   );

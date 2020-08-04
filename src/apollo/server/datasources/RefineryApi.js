@@ -33,6 +33,10 @@ class RefineryApi extends RESTDataSource {
       postal_code: location.postal_code,
       phone: location.contacts.phone,
       wheelchairAccess: wheelchairAccess,
+      geoLocation: {
+        lat: location.geolocation.coordinates[1],
+        lng: location.geolocation.coordinates[0],
+      },
     }
   }
 

@@ -27,7 +27,7 @@ eval $(aws ecr get-login --no-include-email --region us-east-1)
 #     $DOCKER_REPO_URL
 
 # Build and push to ECR.
-IMAGE_NAME=
+IMAGE_NAME=nypldxpsearch
 LOCAL_TAG_NAME=$IMAGE_NAME:$TRAVIS_BRANCH-latest
 REMOTE_FULL_URL=$DOCKER_REPO_URL:$TRAVIS_BRANCH-latest
 docker build --target production --tag $LOCAL_TAG_NAME .
@@ -37,8 +37,8 @@ docker push "$REMOTE_FULL_URL"
 echo "Pushed $LOCAL_TAG_NAME to $REMOTE_FULL_URL"
 
 # Restart ECS services.
-CLUSTER_NAME="finder-$TRAVIS_BRANCH"
-WEB_APP_SERVICE_NAME="finder-webapp-$TRAVIS_BRANCH"
+CLUSTER_NAME="nyplorg-scout-$TRAVIS_BRANCH"
+WEB_APP_SERVICE_NAME="nyplorg-scout-$TRAVIS_BRANCH"
 
 echo "Deploying $TRAVIS_BRANCH"
 AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION aws ecs update-service --cluster $CLUSTER_NAME --region us-east-1 --service $WEB_APP_SERVICE_NAME --force-new-deployment

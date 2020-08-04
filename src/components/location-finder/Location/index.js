@@ -1,7 +1,13 @@
 import React from 'react';
 import * as DS from '@nypl/design-system-react-components';
+// Redux
+import { useDispatch } from 'react-redux';
+import { setLocationInfoWindowId, setMapPosition } from './../../../redux/actions';
 
 function Location({ location }) {
+  // Redux dispatch
+  const dispatch = useDispatch();
+
   const formattedAddress = `${location.address_line1} ${location.locality}, ${location.administrative_area} ${location.postal_code}`;
 
   let wheelchairAccess;
@@ -15,6 +21,17 @@ function Location({ location }) {
     case 'none':
       wheelchairAccess = 'Not Accessible'
       break;
+  }
+
+  function onClickViewOnMap(e) {
+    e.preventDefault();
+
+    dispatch(setMapPosition({
+      mapCenter: location.geoLocation,
+      mapZoom: 14
+    }));
+
+    dispatch(setLocationInfoWindowId(location.id));
   }
 
   return (
@@ -32,6 +49,20 @@ function Location({ location }) {
       </div>
       <div className='accessibility-status'>
         {wheelchairAccess}
+      </div>
+      <div className='location__links'>
+        <DS.Link
+          href="#"
+          onClick={onClickViewOnMap}
+        >
+          View on Map
+        </DS.Link>
+        |
+        <DS.Link
+          href="#"
+        >
+          Get Directions
+        </DS.Link>
       </div>
     </div>
   );
