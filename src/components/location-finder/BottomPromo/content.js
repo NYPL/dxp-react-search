@@ -5,10 +5,12 @@ const BottomPromoContent = {
       {
         'url' : 'https://placeimg.com/200/100/arch',
         'name' : 'Stephen A. Schwarzman Building',
+        'link' : 'https://www.nypl.org/locations/schwarzman',
       },
       {
         'url' : 'https://placeimg.com/200/100/arch',
         'name' : 'Stavros Niarchos Foundation Library',
+        'link' : 'https://www.nypl.org/locations/snfl',
       },
     ],
   },
@@ -18,11 +20,13 @@ const BottomPromoContent = {
     'image' : [
       {
         'url' : 'https://placeimg.com/200/100/arch',
-        'name' : 'Stephen A. Schwarzman Building',
+        'name' : '',
+        'link' : 'https://www.bklynlibrary.org/',
       },
       {
         'url' : 'https://placeimg.com/200/100/arch',
-        'name' : 'Stavros Niarchos Foundation Library',
+        'name' : '',
+        'link' : 'https://www.queenslibrary.org/',
       },
     ],
   }

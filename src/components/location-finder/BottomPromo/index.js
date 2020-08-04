@@ -18,14 +18,21 @@ function BottomPromo() {
           />
           {promo_left.image.map((value, index) => {
             return (
-              <DS.Image
-              altText={value.name}
-              imageCaption={value.name}
-              imageCredit={null}
-              isDecorative
-              modifiers={null}
-              src={value.url}
-              />
+              <div className="promo-card">
+                <DS.Link
+                href={value.link}
+                className="promo-link"
+                >
+                  <DS.Image
+                  altText={value.name}
+                  imageCaption={value.name}
+                  imageCredit={null}
+                  isDecorative
+                  modifiers={null}
+                  src={value.url}
+                  />
+                </DS.Link>
+              </div>
             );
           })}
         </div>
@@ -37,14 +44,21 @@ function BottomPromo() {
           <p className="promo-description">{promo_right.description}</p>
           {promo_right.image.map((value, index) => {
             return (
-              <DS.Image
-              altText={value.name}
-              imageCaption={value.name}
-              imageCredit={null}
-              isDecorative
-              modifiers={null}
-              src={value.url}
-              />
+              <div className="promo-card">
+                <DS.Link
+                href={value.link}
+                className="promo-link"
+                >
+                  <DS.Image
+                  altText={value.name}
+                  imageCaption={value.name}
+                  imageCredit={null}
+                  isDecorative
+                  modifiers={null}
+                  src={value.url}
+                  />
+                </DS.Link>
+              </div>
             );
           })}
         </div>
