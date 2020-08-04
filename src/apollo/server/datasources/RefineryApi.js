@@ -43,7 +43,7 @@ class RefineryApi extends RESTDataSource {
   }
 
   async getAllLocations(args) {
-    const response = await this.get('/locations/v1.0/locations?page[size]=75');
+    const response = await this.get('/locations/v1.0/locations?page[size]=300');
 
     if (Array.isArray(response.locations)) {
       if (args.sortByDistance) {
