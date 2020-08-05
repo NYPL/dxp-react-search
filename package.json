@@ -10,7 +10,7 @@
     "@apollo/react-common": "^3.1.4",
     "@apollo/react-hooks": "^3.1.5",
     "@apollo/react-ssr": "^3.1.5",
-    "@nypl/design-system-react-components": "^0.7.2",
+    "@nypl/design-system-react-components": "^0.9.1",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component.git#reactupdate",
     "@nypl/dgx-react-footer": "^0.5.7",
     "apollo-cache-inmemory": "^1.6.6",
