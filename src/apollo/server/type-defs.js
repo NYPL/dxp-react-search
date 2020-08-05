@@ -20,7 +20,12 @@ export const typeDefs = gql`
     lng: Float
   }
 
+  input SortByDistance {
+    originLat: Float
+    originLng: Float
+  }
+
   type Query {
-    allLocations(filter: String): [Location]!
+    allLocations(sortByDistance: SortByDistance): [Location]!
   }
 `;
