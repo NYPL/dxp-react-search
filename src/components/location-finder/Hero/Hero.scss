@@ -1,21 +1,33 @@
 .hero {
-  background-color: #2D71B8;
+  background-color: #E41C23;
   display: flex;
+  flex-flow: column nowrap;
   align-items: center;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+
+  @include breakpoint($large) {
+    flex-flow: row nowrap;
+  }
+  
 }
 
 .hero__image {
-  background-image: url('banner_2x.png');
-  background-position: left center;
-  background-size: cover;
-  height: 150px;
-  flex: 0 0 50%;
-  //width: 75%;
+  background-image: url('https://cdn-d8.nypl.org/s3fs-public/2020-08/location-finder-hero.png');
+  background-position: bottom center;
+  background-size: 130%;
+  width: 100%;
+  min-height: 100px;
+  
+  @include breakpoint($large) {
+    flex: 0 0 50%;
+    min-height: 150px;
+  }
 }
 
 .hero__content {
-  @include space-inset-s;
+  @include space-inset-m;
   
   color: $white;
-  flex: 0 0 45%;
+  flex: 0 0 50%;
 }
