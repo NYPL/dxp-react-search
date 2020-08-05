@@ -10,24 +10,6 @@
 
   .locations__list .location {
     padding: .75em 0;
-
-    .phone {
-      margin-bottom: 0.5rem;
-    }
-
-    .accessibility-status {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      margin-bottom: 0.5rem;
-
-      .icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 0.5rem;
-        float: left;
-      }
-    }
   }
 
   .column {
