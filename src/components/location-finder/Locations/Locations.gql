@@ -15,6 +15,7 @@ query LocationsQuery($searchGeoLat: Float, $searchGeoLng: Float) {
     postal_code
     phone
     wheelchairAccess
+    accessibilityNote
     geoLocation {
       lat
       lng

@@ -12,6 +12,7 @@ export const typeDefs = gql`
     postal_code: String
     phone: String
     wheelchairAccess: String
+    accessibilityNote: String
     geoLocation: GeoLocation
     todayHours: TodayHours
     open: Boolean

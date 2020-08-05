@@ -67,6 +67,10 @@ function Location({ location }) {
         {wheelchairAccessIcon}
         {wheelchairAccess}
       </div>
+      <div>
+        <strong>Accessibility Note Placeholder:</strong>
+        {location.accessibilityNote}
+      </div>
       {location.open ? (
         <div className='location__hours'>
           <DS.Icon
