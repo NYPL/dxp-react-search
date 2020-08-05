@@ -1,11 +1,14 @@
 // NYPL node package styles
 @import '~@nypl/design-system-react-components/dist/styles.css';
 @import '~@nypl/dgx-header-component/dist/styles/main';
-@import "~@nypl/dgx-react-footer/dist/styles/styles.scss";
+@import '~@nypl/dgx-react-footer/dist/styles/styles.scss';
+@import '~breakpoint-sass/stylesheets/breakpoint';
 
 // Internal app styles
+@import './breakpoints/_breakpoints.scss';
 @import './space/_space.scss';
 @import './colors/_color-vars.scss';
+@import './../components/location-finder/Hero/Hero.scss';
 @import './../components/location-finder/SearchForm/SearchForm.scss';
 @import './../components/location-finder/SearchForm/SearchAutoSuggest.scss';
 @import './../components/location-finder/SearchHeader/SearchHeader.scss';

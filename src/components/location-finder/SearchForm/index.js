@@ -22,6 +22,9 @@ function SearchForm() {
   const { autoSuggestInputValue } = useSelector(state => state.search);
   const search_string = autoSuggestInputValue;
 
+  const searchGeoLat = 40.7532;
+  const searchGeoLng = -73.9822;
+
   // Query the apollo cache for locations data.
   // useLazyQuery hook is used because the query doesn't happen until
   // the user starts typing in the search box.
@@ -29,7 +32,11 @@ function SearchForm() {
     getLocations,
     { loading, data }
   ] = useLazyQuery(LOCATIONS_QUERY, {
-    variables: { search_string },
+    //variables: { search_string },
+    variables: {
+      searchGeoLat,
+      searchGeoLng
+    }
   });
 
   function getSuggestions(data, value) {
