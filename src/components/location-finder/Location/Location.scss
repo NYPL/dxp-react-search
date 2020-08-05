@@ -1,5 +1,4 @@
 .location {
-
   .phone {
     margin-bottom: 0.5rem;
   }
@@ -18,4 +17,22 @@
     }
   }
 
+  .location__hours {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+      float: left;
+    }
+
+    .location__hours-hours {
+      font-weight: 700;
+      margin-left: .25rem;
+    }
+  }
 }

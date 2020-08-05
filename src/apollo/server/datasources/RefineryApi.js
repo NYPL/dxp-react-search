@@ -1,6 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
-
 import sortByDistance from './../../../utils/sortByDistance';
 
 class RefineryApi extends RESTDataSource {
@@ -10,7 +9,7 @@ class RefineryApi extends RESTDataSource {
   }
 
   // Tidy up the response from Refinery.
-  locationReducer(location) {
+  locationNormalizer(location) {
     let wheelchairAccess;
     switch(location.access) {
       case 'Fully Accessible':
@@ -23,6 +22,20 @@ class RefineryApi extends RESTDataSource {
         wheelchairAccess = 'none'
         break;
     }
+
+    // Today hours
+    const currentDate = new Date();
+    const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
+
+    let todayHoursStart;
+    let todayHoursEnd;
+
+    location.hours.regular.map(item => {
+      if (weekDayKeys[currentDate.getDay()] === item.day) {
+        todayHoursStart = item.open;
+        todayHoursEnd = item.close;
+      }
+    });
 
     return {
       id: location.slug,
@@ -39,6 +52,10 @@ class RefineryApi extends RESTDataSource {
         lat: location.geolocation.coordinates[1],
         lng: location.geolocation.coordinates[0],
       },
+      todayHours: {
+        start: todayHoursStart,
+        end: todayHoursEnd
+      },
     }
   }
 
@@ -49,10 +66,10 @@ class RefineryApi extends RESTDataSource {
       if (args.sortByDistance) {
         console.log('sort by distance');
         const sortedLocations = sortByDistance(args.sortByDistance, response.locations);
-        return sortedLocations.map(location => this.locationReducer(location));
+        return sortedLocations.map(location => this.locationNormalizer(location));
       } else {
         console.log('no sort');
-        return response.locations.map(location => this.locationReducer(location));
+        return response.locations.map(location => this.locationNormalizer(location));
       }
     } else {
       return [];
