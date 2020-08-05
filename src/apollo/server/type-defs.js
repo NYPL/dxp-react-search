@@ -14,6 +14,7 @@ export const typeDefs = gql`
     wheelchairAccess: String
     geoLocation: GeoLocation
     todayHours: TodayHours
+    open: Boolean
   }
 
   type GeoLocation {

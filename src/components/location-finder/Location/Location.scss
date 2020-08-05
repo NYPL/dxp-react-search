@@ -35,4 +35,16 @@
       margin-left: .25rem;
     }
   }
+
+  // @TODO this will probs become a DS component?
+  .location__hours-status {
+    width: fit-content;
+    border-radius: 4px;
+    background-color: $nypl-yellow-light;
+    padding: $space-xs $space-s;
+    margin-bottom: $space-s;
+    color: $black;
+    font-weight: 300;
+    font-style: italic;
+  }
 }

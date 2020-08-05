@@ -56,6 +56,7 @@ class RefineryApi extends RESTDataSource {
         start: todayHoursStart,
         end: todayHoursEnd
       },
+      open: location.open,
     }
   }
 

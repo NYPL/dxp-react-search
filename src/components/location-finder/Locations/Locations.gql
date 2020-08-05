@@ -23,5 +23,6 @@ query LocationsQuery($searchGeoLat: Float, $searchGeoLng: Float) {
       start
       end
     }
+    open
   }
 }

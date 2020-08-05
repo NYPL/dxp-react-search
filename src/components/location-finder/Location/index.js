@@ -66,16 +66,22 @@ function Location({ location }) {
         {wheelchairAccessIcon}
         {wheelchairAccess}
       </div>
-      <div className='location__hours'>
-        <DS.Icon
-          decorative
-          name="clock"
-        />
-        Today's Hours:
-        <div className='location__hours-hours'>
-          { formatTime(location.todayHours.start, location.todayHours.end) }
+      {location.open ? (
+        <div className='location__hours'>
+          <DS.Icon
+            decorative
+            name="clock"
+          />
+          Today's Hours:
+          <div className='location__hours-hours'>
+            { formatTime(location.todayHours.start, location.todayHours.end) }
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className='location__hours-status'>
+          Location is temporarily closed
+        </div>
+      )}
       <div className='location__links'>
         <DS.Link
           href="#"
