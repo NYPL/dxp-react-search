@@ -5,6 +5,7 @@ import { withRedux } from './../../redux/withRedux';
 import { compose } from 'redux';
 // Components
 import Layout from './../../components/shared/layouts/Main';
+import Hero from './../../components/location-finder/Hero';
 import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
 import SearchResultsDetails from './../../components/location-finder/SearchResultsDetails';
@@ -21,6 +22,7 @@ function LocationFinder() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div className="content-header">
+        <Hero />
         <SearchHeader />
       </div>
       <div className="content-primary">
