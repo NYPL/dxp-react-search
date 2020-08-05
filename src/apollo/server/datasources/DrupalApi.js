@@ -17,7 +17,7 @@ class DrupalApi extends RESTDataSource {
   }
 
   // Tidy up the response from Drupal.
-  locationReducer(location) {
+  locationNormalizer(location) {
     // D8 doesn't have geo data yet, so just hardcode something
     // so the map doesn't completely break.
     const defaultGeoCords = {
@@ -40,6 +40,11 @@ class DrupalApi extends RESTDataSource {
         lat: defaultGeoCords.lat,
         lng: defaultGeoCords.lng,
       },
+      open: true,
+      todayHours: {
+        start: '11:00',
+        end: '21:00'
+      },
     };
   }
 
@@ -55,7 +60,7 @@ class DrupalApi extends RESTDataSource {
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.data)) {
-      return response.data.map(location => this.locationReducer(location));
+      return response.data.map(location => this.locationNormalizer(location));
     } else {
       return [];
     }

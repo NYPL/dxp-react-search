@@ -1,5 +1,4 @@
 .location {
-
   .phone {
     margin-bottom: 0.5rem;
   }
@@ -18,4 +17,34 @@
     }
   }
 
+  .location__hours {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+      float: left;
+    }
+
+    .location__hours-hours {
+      font-weight: 700;
+      margin-left: .25rem;
+    }
+  }
+
+  // @TODO this will probs become a DS component?
+  .location__hours-status {
+    width: fit-content;
+    border-radius: 4px;
+    background-color: $nypl-yellow-light;
+    padding: $space-xs $space-s;
+    margin-bottom: $space-s;
+    color: $black;
+    font-weight: 300;
+    font-style: italic;
+  }
 }

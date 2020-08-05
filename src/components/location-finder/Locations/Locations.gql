@@ -19,5 +19,10 @@ query LocationsQuery($searchGeoLat: Float, $searchGeoLng: Float) {
       lat
       lng
     }
+    todayHours {
+      start
+      end
+    }
+    open
   }
 }

@@ -36,6 +36,20 @@ function Location({ location }) {
     dispatch(setLocationInfoWindowId(location.id));
   }
 
+  // Convert hours to 12 hour time format
+  function formatHours(start, end) {
+    // Start hour
+    const startHoursOnly = +start.substr(0, 2);
+    const startHours = (startHoursOnly % 12) || 12;
+    const startMeridiem = (startHoursOnly < 12 || startHoursOnly === 24) ? "AM" : "PM";
+    // End hour
+    const endHoursOnly = +end.substr(0, 2);
+    const endHours = (endHoursOnly % 12) || 12;
+    const endMeridiem = (endHoursOnly < 12 || endHoursOnly === 24) ? "AM" : "PM";
+
+    return `${startHours}${startMeridiem}–${endHours}${endMeridiem}`;
+  }
+
   return (
     <div className='location'>
       <DS.Heading
@@ -53,6 +67,22 @@ function Location({ location }) {
         {wheelchairAccessIcon}
         {wheelchairAccess}
       </div>
+      {location.open ? (
+        <div className='location__hours'>
+          <DS.Icon
+            decorative
+            name="clock"
+          />
+          Today's Hours:
+          <div className='location__hours-hours'>
+            { formatHours(location.todayHours.start, location.todayHours.end) }
+          </div>
+        </div>
+      ) : (
+        <div className='location__hours-status'>
+          Location is temporarily closed
+        </div>
+      )}
       <div className='location__links'>
         <DS.Link
           href="#"

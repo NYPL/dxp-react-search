@@ -13,11 +13,18 @@ export const typeDefs = gql`
     phone: String
     wheelchairAccess: String
     geoLocation: GeoLocation
+    todayHours: TodayHours
+    open: Boolean
   }
 
   type GeoLocation {
     lat: Float
     lng: Float
+  }
+
+  type TodayHours {
+    start: String
+    end: String
   }
 
   input SortByDistance {
