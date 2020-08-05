@@ -1,6 +1,8 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
 
+import sortByDistance from './../../../utils/sortByDistance';
+
 class RefineryApi extends RESTDataSource {
   constructor() {
     super();
@@ -40,11 +42,18 @@ class RefineryApi extends RESTDataSource {
     }
   }
 
-  async getAllLocations() {
-    const response = await this.get('/locations/v1.0/locations?page[size]=75');
+  async getAllLocations(args) {
+    const response = await this.get('/locations/v1.0/locations?page[size]=300');
 
     if (Array.isArray(response.locations)) {
-      return response.locations.map(location => this.locationReducer(location));
+      if (args.sortByDistance) {
+        console.log('sort by distance');
+        const sortedLocations = sortByDistance(args.sortByDistance, response.locations);
+        return sortedLocations.map(location => this.locationReducer(location));
+      } else {
+        console.log('no sort');
+        return response.locations.map(location => this.locationReducer(location));
+      }
     } else {
       return [];
     }
