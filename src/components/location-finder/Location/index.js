@@ -68,7 +68,6 @@ function Location({ location }) {
         {wheelchairAccess}
       </div>
       <div>
-        <strong>Accessibility Note Placeholder:</strong>
         {location.accessibilityNote}
       </div>
       {location.open ? (
