@@ -26,6 +26,14 @@
         float: left;
       }
 
+      &.promo-card-with-icon {
+        @media screen and (max-width: 600px) {
+          width: 50%;
+          float: left;
+          margin: 0;
+        }
+      }
+
       @media screen and (max-width: 599px) {
         margin-bottom: 2rem;
       }
@@ -54,7 +62,8 @@
       }
 
       .icon {
-        width: 150px;
+        width: 100%;
+        max-width: 150px;
         height: 80px;
       }
 
@@ -70,6 +79,12 @@
 
     .promo-description {
       font-size: 0.875rem;
+    }
+
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
     }
   }
 
