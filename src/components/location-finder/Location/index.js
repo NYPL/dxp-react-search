@@ -10,19 +10,23 @@ function Location({ location }) {
 
   const formattedAddress = `${location.address_line1} ${location.locality}, ${location.administrative_area} ${location.postal_code}`;
 
-  let wheelchairAccess, wheelchairAccessIcon;
+  let wheelchairAccess, wheelchairAccessIcon, accessibilityNote;
   switch(location.wheelchairAccess) {
     case 'full':
       wheelchairAccess = 'Fully Accessible'
-      wheelchairAccessIcon = <DS.Icon decorative name="accessibility_full" />
+      wheelchairAccessIcon = <div><DS.Icon decorative name="accessibility_full" /></div>
       break;
     case 'partial':
       wheelchairAccess = 'Partially Accessible'
-      wheelchairAccessIcon = <DS.Icon decorative name="accessibility_partial" />
+      wheelchairAccessIcon = <div><DS.Icon decorative name="accessibility_partial" /></div>
       break;
     case 'none':
       wheelchairAccess = 'Not Accessible'
       break;
+  }
+
+  if(location.accessibilityNote !== null && location.accessibilityNote !== '') {
+    accessibilityNote = ': ' + location.accessibilityNote;
   }
 
   function onClickViewOnMap(e) {
@@ -71,6 +75,7 @@ function Location({ location }) {
       <div className='accessibility-status'>
         {wheelchairAccessIcon}
         {wheelchairAccess}
+        {accessibilityNote}
       </div>
       <div>
         {location.accessibilityNote}
