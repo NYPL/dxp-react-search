@@ -38,6 +38,11 @@ function Location({ location }) {
 
   // Convert hours to 12 hour time format
   function formatHours(start, end) {
+    // Sometimes refinery will return null for start and end times.
+    if (start === null || end === null) {
+      return 'No hours available.';
+    }
+
     // Start hour
     const startHoursOnly = +start.substr(0, 2);
     const startHours = (startHoursOnly % 12) || 12;
