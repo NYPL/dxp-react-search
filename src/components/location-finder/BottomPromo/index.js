@@ -50,14 +50,7 @@ function BottomPromo() {
                   href={value.link}
                   className="promo-link"
                 >
-                  <DS.Image
-                    altText={value.name}
-                    imageCaption={value.name}
-                    imageCredit={null}
-                    isDecorative
-                    modifiers={null}
-                    src={value.url}
-                  />
+                  <DS.Icon decorative name={value.url} />
                 </DS.Link>
               </div>
             );

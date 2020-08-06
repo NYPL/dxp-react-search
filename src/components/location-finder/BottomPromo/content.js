@@ -19,12 +19,12 @@ const BottomPromoContent = {
     'description' : 'The boroughs of Brooklyn and Queens are each served be their own library systems',
     'image' : [
       {
-        'url' : 'https://placeimg.com/200/100/arch',
+        'url' : 'logo_brooklyn',
         'name' : '',
         'link' : 'https://www.bklynlibrary.org/',
       },
       {
-        'url' : 'https://placeimg.com/200/100/arch',
+        'url' : 'logo_queens',
         'name' : '',
         'link' : 'https://www.queenslibrary.org/',
       },
