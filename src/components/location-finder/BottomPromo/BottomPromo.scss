@@ -21,42 +21,56 @@
     }
 
     .promo-card {
-        @media screen and (min-width: 600px) {
-          width: 40%;
+      @media screen and (min-width: 600px) {
+        width: 40%;
+        float: left;
+      }
+
+      &.promo-card-with-icon {
+        @media screen and (max-width: 600px) {
+          width: 50%;
           float: left;
-        }
-
-        @media screen and (max-width: 599px) {
-          margin-bottom: 2rem;
-        }
-
-        margin: 0 20% 0 0;
-
-        &:last-child {
-          @media screen and (min-width: 600px) {
-            margin: 0;
-          }
-        }
-        
-        .figure {
           margin: 0;
-          
-          img {
-            @media screen and (min-width: 600px) {
-              width: 100%;
-            }
+        }
+      }
+
+      @media screen and (max-width: 599px) {
+        margin-bottom: 2rem;
+      }
+
+      margin: 0 20% 0 0;
+
+      &:last-child {
+        @media screen and (min-width: 600px) {
+          margin: 0;
+        }
+      }
+        
+      .figure {
+        margin: 0;
+        
+        img {
+          @media screen and (min-width: 600px) {
+            width: 100%;
           }
         }
+      }
 
-        .promo-link {
-          text-decoration: none;
-          color: $black;
-        }
+      .promo-link {
+        text-decoration: none;
+        color: $black;
+      }
 
-        .figure__figcaption {
-          font-style: normal;
-          font-weight: 500;
-        }
+      .icon {
+        width: 100%;
+        max-width: 150px;
+        height: 80px;
+      }
+
+      .figure__figcaption {
+        font-style: normal;
+        font-weight: 500;
+      }
 
       @media screen and (max-width: 600px) {
         width: 100%;
@@ -65,6 +79,12 @@
 
     .promo-description {
       font-size: 0.875rem;
+    }
+
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
     }
   }
 
