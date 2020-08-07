@@ -8,25 +8,29 @@ function Location({ location }) {
   // Redux dispatch
   const dispatch = useDispatch();
 
+  // Address
   const formattedAddress = `${location.address_line1} ${location.locality}, ${location.administrative_area} ${location.postal_code}`;
 
-  let wheelchairAccess, wheelchairAccessIcon, accessibilityNote;
+  // Wheelchair access and icon.
+  let wheelchairAccess, wheelchairAccessIcon;
   switch(location.wheelchairAccess) {
     case 'full':
       wheelchairAccess = 'Fully Accessible'
-      wheelchairAccessIcon = <div><DS.Icon decorative name="accessibility_full" /></div>
+      wheelchairAccessIcon = <DS.Icon decorative name="accessibility_full" />
       break;
     case 'partial':
       wheelchairAccess = 'Partially Accessible'
-      wheelchairAccessIcon = <div><DS.Icon decorative name="accessibility_partial" /></div>
+      wheelchairAccessIcon = <DS.Icon decorative name="accessibility_partial" />
       break;
     case 'none':
       wheelchairAccess = 'Not Accessible'
       break;
   }
 
-  if(location.accessibilityNote !== null && location.accessibilityNote !== '') {
-    accessibilityNote = ': ' + location.accessibilityNote;
+  // Accessbiility note.
+  let accessibilityNote;
+  if (location.accessibilityNote !== null && location.accessibilityNote !== '') {
+    accessibilityNote = `: ${location.accessibilityNote}`;
   }
 
   function onClickViewOnMap(e) {
@@ -73,7 +77,7 @@ function Location({ location }) {
         {location.phone}
       </div>
       <div className='accessibility-status'>
-        {wheelchairAccessIcon}
+        <div>{wheelchairAccessIcon}</div>
         {wheelchairAccess}
         {accessibilityNote}
       </div>
