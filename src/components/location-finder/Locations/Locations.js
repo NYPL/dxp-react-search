@@ -11,7 +11,7 @@ import { setSearchQuery, setMapPosition, setLocationInfoWindowId, setAutoSuggest
 // Components
 import * as DS from '@nypl/design-system-react-components';
 import Location from './../Location';
-import Skeleton from 'react-loading-skeleton';
+import LoadingSkeleton from './../../shared/LoadingSkeleton';
 
 function Locations() {
   // Redux
@@ -40,11 +40,7 @@ function Locations() {
     console.log(loading);
 
     return (
-      <Skeleton
-        height={20}
-        count={20}
-        duration={1.2}
-      />
+      <LoadingSkeleton />
     );
   }
 
