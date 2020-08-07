@@ -11,6 +11,8 @@ describe('BottomPromo', () => {
   });
 });
 
+// @TODO This test will fail right now, b/c of bug in design system Link component:
+// https://github.com/NYPL/nypl-design-system/issues/309
 /*
 it('should not have basic accessibility issues', async () => {
   const { container } = render(<BottomPromo />);
