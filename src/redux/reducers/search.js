@@ -1,7 +1,12 @@
-import { SET_SEARCH_QUERY, SET_AUTO_SUGGEST_INPUT_VALUE } from './../actions';
+import {
+  SET_SEARCH_QUERY,
+  SET_AUTO_SUGGEST_INPUT_VALUE,
+  SET_OPEN_NOW
+} from './../actions';
 
 const initialState = {
   autoSuggestInputValue: '',
+  openNow: true,
 };
 
 export default function search(state = initialState, action) {
@@ -18,6 +23,12 @@ export default function search(state = initialState, action) {
       return {
         ...state,
         autoSuggestInputValue: action.payload
+      };
+
+    case SET_OPEN_NOW:
+      return {
+        ...state,
+        openNow: action.payload
       };
 
     default:

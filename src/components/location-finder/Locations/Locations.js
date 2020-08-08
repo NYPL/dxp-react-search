@@ -19,6 +19,7 @@ function Locations() {
     searchQuery,
     searchQueryGeoLat,
     searchQueryGeoLng,
+    openNow,
   } = useSelector(state => state.search);
 
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ function Locations() {
     LOCATIONS_QUERY, {
       variables: {
         searchGeoLat,
-        searchGeoLng
+        searchGeoLng,
+        openNow
       }
     }
   );

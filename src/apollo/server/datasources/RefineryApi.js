@@ -1,6 +1,7 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
 import sortByDistance from './../../../utils/sortByDistance';
+import filterByOpenNow from './../../../utils/filterByOpenNow';
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -66,9 +67,23 @@ class RefineryApi extends RESTDataSource {
 
     if (Array.isArray(response.locations)) {
       if (args.sortByDistance) {
-        console.log('sort by distance');
         const sortedLocations = sortByDistance(args.sortByDistance, response.locations);
-        return sortedLocations.map(location => this.locationNormalizer(location));
+
+        // Check for filter in args
+        if (args.filter) {
+          // Check if open now is set for query
+          if (args.filter.openNow) {
+            console.log('open now checked');
+            // Filter only open now locations
+            const openNowLocations = sortedLocations.filter(filterByOpenNow);
+            console.log('sort by distance');
+            return openNowLocations.map(location => this.locationNormalizer(location));
+          } else {
+            console.log('open now not checked');
+            console.log('sort by distance');
+            return sortedLocations.map(location => this.locationNormalizer(location));
+          }
+        }
       } else {
         console.log('no sort');
         return response.locations.map(location => this.locationNormalizer(location));
