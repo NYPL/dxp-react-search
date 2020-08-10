@@ -11,6 +11,9 @@ function Location({ location }) {
   // Address
   const formattedAddress = `${location.address_line1} ${location.locality}, ${location.administrative_area} ${location.postal_code}`;
 
+  const encodedAddress = encodeURIComponent(formattedAddress);
+  const getDirectionsLink = 'http://maps.google.com/maps?f=q&hl=en&saddr=&daddr=' + encodedAddress;
+
   // Wheelchair access and icon.
   let wheelchairAccess, wheelchairAccessIcon;
   switch(location.wheelchairAccess) {
@@ -104,9 +107,9 @@ function Location({ location }) {
         >
           View on Map
         </DS.Link>
-        |
+        &nbsp;|&nbsp;
         <DS.Link
-          href="#"
+          href={ getDirectionsLink }
         >
           Get Directions
         </DS.Link>
