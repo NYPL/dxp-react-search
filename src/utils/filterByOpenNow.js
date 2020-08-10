@@ -1,58 +1,39 @@
-function filterByOpenNow(location) {
-  // Check for extended closing
-  /*if (location.open) {
-    return true;
-  }
-  */
-
+function filterByOpenNow(locations) {
   const today = new Date();
   const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
-  //const nowTime = today.getHours() + ':' + today.getMinutes();
-  //console.log(nowTime);
+  const todayMinutes = today.getMinutes() < 10 ? '00' : '' + today.getMinutes();
+  //const nowTime = today.getHours() + ':' + todayMinutes;
 
-  return true;
-   
-  // Check if location is currerntly open based on todays hours.
-  location.hours.regular.map(item => {
-    return true;
-    console.log('map!');
-    // Find today in weekly hours
-    if (weekDayKeys[today.getDay()] === item.day) {
-      if (item.open === null) {
-        console.log('null: ' + location.name);
-        return false;
+  // Test other current hours.
+  const nowTime = '18:00';
+
+  return locations.reduce((accumlator, location) => {
+    location.hours.regular.map(item => {
+      // Find today in weekly hours.
+      if (weekDayKeys[today.getDay()] === item.day) {
+        // Multiple checks to determine if the location is open now.
+        if (
+          // Check for not null.
+          item.open !== null && item.close !== null
+          // @TODO Check alerts: location._embedded.alerts for closings.
+          // Check for extended closing.
+          && location.open
+          // Check open/closed hours against now time.
+          && item.open <= nowTime && item.close >= nowTime
+        ) {
+          console.log(location.name);
+          //console.log(item.day);
+          console.log('location open hours: ' + item.open);
+          console.log('location close hours: ' + item.close);
+          console.log('now time: ' + nowTime);
+          console.log(typeof nowTime);
+          console.log(typeof item.close);
+          accumlator.push(location);
+        }
       }
-
-      if (location.open) {
-        return true;
-      }
-    }
-      /*
-      const startOpen = new Date();
-      const startRawHours = item.open.split(':');
-      startOpen.setHours(startRawHours[0],startRawHours[1],0);
-
-      const endOpen =  new Date();
-      const endRawHours = item.close.split(':');
-      endOpen.setHours(endRawHours[0],endRawHours[1],0);
-      */
-
-      /*console.log('today: ' + today);
-      console.log('startOpen: ' + startOpen);
-      console.log('endOpen: ' + endOpen);
-      */
-      // Check if location is open based on hours
-    /*
-    if (startOpen <= today && endOpen < today) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    */
-  });
-
-  // Check alerts: location._embedded.alerts for closings. 71 locations?
+    });
+    return accumlator;
+  }, []);
 }
 
 export default filterByOpenNow;
