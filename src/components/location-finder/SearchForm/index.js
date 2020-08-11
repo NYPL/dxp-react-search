@@ -164,14 +164,14 @@ function SearchForm() {
           Search
         </DS.Button>
         <label>
-         <input
-           name="isOpenNow"
-           type="checkbox"
-           checked={isOpenNow}
-           onChange={handleInputChange}
-         />
-         Open now
-       </label>
+          <input
+            name="isOpenNow"
+            type="checkbox"
+            checked={isOpenNow}
+            onChange={handleInputChange}
+          />
+          Open now
+        </label>
       </form>
     </div>
   );
