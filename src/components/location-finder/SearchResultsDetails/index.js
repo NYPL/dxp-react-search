@@ -2,12 +2,18 @@ import React from 'react';
 import * as DS from '@nypl/design-system-react-components';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setMapPosition, setLocationInfoWindowId, setAutoSuggestInputValue } from './../../../redux/actions';
+import {
+  setSearchQuery,
+  setMapPosition,
+  setLocationInfoWindowId,
+  setAutoSuggestInputValue
+ } from './../../../redux/actions';
 
 function SearchResultsDetails() {
   // Redux
   const {
-    searchQuery
+    searchQuery,
+    resultsCount
   } = useSelector(state => state.search);
 
   const dispatch = useDispatch();
@@ -42,7 +48,7 @@ function SearchResultsDetails() {
     <div className='locations__search-results-details'>
       {searchQuery ? (
         <div>
-          Showing all locations near <strong>{searchQuery}</strong>
+          Showing {resultsCount} locations near <strong>{searchQuery}</strong>
           <br />
           <DS.Link
             href="#"

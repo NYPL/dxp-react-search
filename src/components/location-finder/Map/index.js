@@ -11,11 +11,20 @@ import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 
 const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
-  const { searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
+  const { searchQueryGeoLat, searchQueryGeoLng, openNow } = useSelector(state => state.search);
   const { mapCenter, mapZoom, locationInfoWindowId } = useSelector(state => state.map);
 
+  const searchGeoLat = null;
+  const searchGeoLng = null;
+
   const { loading, error, data } = useQuery(
-    LOCATIONS_QUERY, {}
+    LOCATIONS_QUERY, {
+      variables: {
+        openNow,
+        searchGeoLat,
+        searchGeoLng
+      }
+    }
   );
 
   if (loading || !data) {
@@ -30,6 +39,10 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
     return (
       <div>'error while loading locations'</div>
     );
+  }
+
+  if (data) {
+    console.log(data);
   }
 
   return (

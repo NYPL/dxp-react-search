@@ -24,7 +24,7 @@ function SearchForm() {
   const [suggestions, setSuggestions] = useState([]);
   const [locationId, setLocationId] = useState('');
   // Open now checkbox local state
-  const [isOpenNow, setIsOpenNow] = useState(true);
+  const [isOpenNow, setIsOpenNow] = useState(false);
 
   // Redux
   const dispatch = useDispatch();

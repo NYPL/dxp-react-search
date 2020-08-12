@@ -2,10 +2,10 @@ function filterByOpenNow(locations) {
   const today = new Date();
   const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
   const todayMinutes = today.getMinutes() < 10 ? '00' : '' + today.getMinutes();
-  //const nowTime = today.getHours() + ':' + todayMinutes;
+  const nowTime = today.getHours() + ':' + todayMinutes;
 
   // Test other current hours.
-  const nowTime = '18:00';
+  //const nowTime = '21:00';
 
   return locations.reduce((accumlator, location) => {
     location.hours.regular.map(item => {
@@ -21,13 +21,15 @@ function filterByOpenNow(locations) {
           // Check open/closed hours against now time.
           && item.open <= nowTime && item.close >= nowTime
         ) {
+          // @TODO Remove debug code.
+          /*
           console.log(location.name);
-          //console.log(item.day);
           console.log('location open hours: ' + item.open);
           console.log('location close hours: ' + item.close);
           console.log('now time: ' + nowTime);
           console.log(typeof nowTime);
           console.log(typeof item.close);
+          */
           accumlator.push(location);
         }
       }

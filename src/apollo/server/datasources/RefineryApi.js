@@ -75,6 +75,7 @@ class RefineryApi extends RESTDataSource {
             console.log('open now checked');
             // Filter only open now locations
             const openNowLocations = filterByOpenNow(response.locations);
+            //console.log(openNowLocations);
             console.log('sort by distance');
             return openNowLocations.map(location => this.locationNormalizer(location));
           } else {

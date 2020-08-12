@@ -1,12 +1,14 @@
 import {
   SET_SEARCH_QUERY,
   SET_AUTO_SUGGEST_INPUT_VALUE,
-  SET_OPEN_NOW
+  SET_OPEN_NOW,
+  SET_SEARCH_RESULTS_COUNT
 } from './../actions';
 
 const initialState = {
   autoSuggestInputValue: '',
-  openNow: true,
+  openNow: false,
+  resultsCount: ''
 };
 
 export default function search(state = initialState, action) {
@@ -29,6 +31,13 @@ export default function search(state = initialState, action) {
       return {
         ...state,
         openNow: action.payload
+      };
+
+    case SET_SEARCH_RESULTS_COUNT:
+      return {
+        ...state,
+        // @TODO Why do we have to do this?
+        resultsCount: action.payload.resultsCount
       };
 
     default:

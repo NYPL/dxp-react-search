@@ -38,6 +38,6 @@ export const typeDefs = gql`
   }
 
   type Query {
-    allLocations(filter: Filter, sortByDistance: SortByDistance): [Location]!
+    allLocations(filter: Filter, sortByDistance: SortByDistance): [Location]
   }
 `;
