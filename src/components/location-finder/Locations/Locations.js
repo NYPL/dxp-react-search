@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 // Apollo
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -7,7 +7,13 @@ import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 import Map from './../Map';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setMapPosition, setLocationInfoWindowId, setAutoSuggestInputValue } from './../../../redux/actions';
+import {
+  setSearchQuery,
+  setMapPosition,
+  setLocationInfoWindowId,
+  setAutoSuggestInputValue,
+  setSearchResultsCount
+} from './../../../redux/actions';
 // Components
 import * as DS from '@nypl/design-system-react-components';
 import Location from './../Location';
@@ -19,26 +25,35 @@ function Locations() {
     searchQuery,
     searchQueryGeoLat,
     searchQueryGeoLng,
+    openNow,
   } = useSelector(state => state.search);
 
   const dispatch = useDispatch();
 
   // Apollo
-  const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : 40.7532;
-  const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : -73.9822;
-
+  const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
+  const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
   const { loading, error, data, networkStatus } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
         searchGeoLat,
-        searchGeoLng
+        searchGeoLng,
+        openNow
       }
     }
   );
 
-  if (loading || !data) {
-    console.log(loading);
+  // Side effect to dispatch redux action to set the locations count.
+  useEffect(() => {
+    if (data) {
+      dispatch(setSearchResultsCount({
+        resultsCount: data.allLocations.length
+      }));
+    }
+  }, [data])
 
+  // Loading state,
+  if (loading || !data) {
     return (
       <Skeleton
         height={20}
@@ -48,15 +63,23 @@ function Locations() {
     );
   }
 
+  // No results.
+  if (data.allLocations.length === 0) {
+    return (
+      <div className='no-results'>Try adjusting search terms or filters.</div>
+    );
+  }
+
+  // Error state.
   if (error) {
     return (
       <div>'error while loading locations'</div>
     );
   }
 
+  // Clear search terms.
   function onClearSearchTerms(e) {
     e.preventDefault();
-    console.log('Clear all search terms!');
 
     dispatch(setSearchQuery({
       searchQuery: '',
