@@ -1,6 +1,8 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
 import sortByDistance from './../../../utils/sortByDistance';
+import filterByOpenNow from './../../../utils/filterByOpenNow';
+import sortByName from './../../../utils/sortByName';
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -65,14 +67,55 @@ class RefineryApi extends RESTDataSource {
     const response = await this.get('/locations/v1.0/locations?page[size]=300');
 
     if (Array.isArray(response.locations)) {
-      if (args.sortByDistance) {
-        console.log('sort by distance');
-        const sortedLocations = sortByDistance(args.sortByDistance, response.locations);
-        return sortedLocations.map(location => this.locationNormalizer(location));
-      } else {
-        console.log('no sort');
-        return response.locations.map(location => this.locationNormalizer(location));
+      // Sort by distance only.
+      if (args.sortByDistance && !args.filter) {
+        console.log('sortByDistance only');
+        return sortByDistance(args.sortByDistance, response.locations).map(location =>
+          this.locationNormalizer(location)
+        );
       }
+
+      // Filter only.
+      if (args.filter && !args.sortByDistance) {
+        // Open now only.
+        if (args.filter.openNow) {
+          console.log('filter: open now only');
+          return filterByOpenNow(response.locations).map(location =>
+            this.locationNormalizer(location)
+          );
+        }
+      }
+
+      if (args.sortByDistance && args.filter) {
+        // Sort by distance && filter by open now.
+        if (
+          args.filter.openNow
+          && args.sortByDistance.originLat
+          && args.sortByDistance.originLng
+        ) {
+          console.log('both!');
+          const openNowLocations = filterByOpenNow(response.locations);
+          return sortByDistance(args.sortByDistance, openNowLocations).map(location =>
+            this.locationNormalizer(location)
+          );
+        }
+        // Sort by distance only.
+        else if (
+          args.sortByDistance.originLat
+          && args.sortByDistance.originLng
+        ) {
+          console.log('filter is false, sort by distance only.');
+          return sortByDistance(args.sortByDistance, response.locations).map(location =>
+            this.locationNormalizer(location)
+          );
+        }
+      }
+
+      // Default sort, alphabetical.
+      console.log('default sort!');
+      return response.locations.sort(sortByName).map(location =>
+        this.locationNormalizer(location)
+      );
     } else {
       return [];
     }

@@ -1,5 +1,9 @@
-query LocationsQuery {
-  allLocations {
+query LocationsQuery($openNow: Boolean) {
+  allLocations(
+    filter: {
+      openNow: $openNow
+    }
+  ) {
     id
     name
     status
