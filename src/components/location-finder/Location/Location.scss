@@ -1,4 +1,6 @@
 .location {
+  @include space-stack-l;
+  
   .phone {
     margin-bottom: 0.5rem;
   }

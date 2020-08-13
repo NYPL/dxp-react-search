@@ -5,7 +5,8 @@
 @import '~breakpoint-sass/stylesheets/breakpoint';
 
 // Internal app styles
-@import './breakpoints/_breakpoints.scss';
+@import './base/_breakpoints.scss';
+@import './base/_mixins.scss';
 @import './space/_space.scss';
 @import './colors/_color-vars.scss';
 @import './../components/location-finder/Hero/Hero.scss';

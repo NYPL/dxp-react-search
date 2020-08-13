@@ -1,36 +1,34 @@
 .locations {
-  @include space-stack-xxl;
+  @include clearfix;
+  @include space-inset-m;
+  
+  display: flex;
+  flex-flow: column nowrap;
 
-  padding:2em 0;
+  @include breakpoint($medium) {
+    flex-flow: row nowrap;
+  }
 
+  @include breakpoint($large) {
+    padding: $space-l $space-m;
+  }
+
+  .locations__list,
+  .locations__map {
+    @include breakpoint($medium) {
+      flex: 0 0 50%;
+    }
+  }
+  
   .locations__list {
     max-height: 500px;
     overflow: scroll;
   }
-
-  .locations__list .location {
-    padding: .75em 0;
-  }
-
-  .column {
-    float: left;
-    width: 50%;
-
-    @include breakpoint( max-width 600px ) {
-      width: 100%;
-    }
-  }
-
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
 }
 
-// @TODO move this somwhere better.
+// @TODO move this somewhere better.
 .no-results {
-  padding: 1em 0;
-  color: red;
+  padding: $space-s 0;
+  color: $nypl-red-regular;
   font-style: italic;
 }
