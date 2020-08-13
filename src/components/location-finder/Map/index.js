@@ -11,11 +11,16 @@ import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 
 const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
-  const { searchQueryGeoLat, searchQueryGeoLng } = useSelector(state => state.search);
+  const { searchQueryGeoLat, searchQueryGeoLng, openNow } = useSelector(state => state.search);
   const { mapCenter, mapZoom, locationInfoWindowId } = useSelector(state => state.map);
 
+  // Apollo
   const { loading, error, data } = useQuery(
-    LOCATIONS_QUERY, {}
+    LOCATIONS_QUERY, {
+      variables: {
+        openNow
+      }
+    }
   );
 
   if (loading || !data) {

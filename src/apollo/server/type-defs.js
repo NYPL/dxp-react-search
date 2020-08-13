@@ -33,7 +33,11 @@ export const typeDefs = gql`
     originLng: Float
   }
 
+  input Filter {
+    openNow: Boolean
+  }
+
   type Query {
-    allLocations(sortByDistance: SortByDistance): [Location]!
+    allLocations(filter: Filter, sortByDistance: SortByDistance): [Location]
   }
 `;

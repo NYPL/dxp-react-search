@@ -16,7 +16,7 @@
     float: left;
     width: 50%;
 
-    @media screen and (max-width: 600px) {
+    @include breakpoint( max-width 600px ) {
       width: 100%;
     }
   }
@@ -26,4 +26,11 @@
     display: table;
     clear: both;
   }
+}
+
+// @TODO move this somwhere better.
+.no-results {
+  padding: 1em 0;
+  color: red;
+  font-style: italic;
 }

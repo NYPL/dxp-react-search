@@ -7,7 +7,13 @@ import { LocationsQuery as LOCATIONS_QUERY } from './SearchAutoSuggest.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setMapPosition, setLocationInfoWindowId, setAutoSuggestInputValue } from './../../../redux/actions';
+import {
+  setSearchQuery,
+  setMapPosition,
+  setLocationInfoWindowId,
+  setAutoSuggestInputValue,
+  setOpenNow
+} from './../../../redux/actions';
 // Geocode
 import Geocode from 'react-geocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
@@ -17,6 +23,9 @@ function SearchForm() {
   // Local state
   const [suggestions, setSuggestions] = useState([]);
   const [locationId, setLocationId] = useState('');
+  // Open now checkbox local state
+  const [isOpenNow, setIsOpenNow] = useState(false);
+
   // Redux
   const dispatch = useDispatch();
   const { autoSuggestInputValue } = useSelector(state => state.search);
@@ -32,7 +41,6 @@ function SearchForm() {
     getLocations,
     { loading, data }
   ] = useLazyQuery(LOCATIONS_QUERY, {
-    //variables: { search_string },
     variables: {
       searchGeoLat,
       searchGeoLng
@@ -95,6 +103,9 @@ function SearchForm() {
 
         // Dispatch to set location id for info window.
         dispatch(setLocationInfoWindowId(locationId));
+
+        // Dispatch open now
+        dispatch(setOpenNow(isOpenNow));
       },
       error => {
         console.error(error);
@@ -106,6 +117,12 @@ function SearchForm() {
     // Grab the location id and keep in local state
     // for use in form submit to send to redux.
     setLocationId(suggestion.id);
+  }
+
+  function handleInputChange(event) {
+    const target = event.target;
+    const value = target.name === 'isOpenNow' ? target.checked : target.value;
+    setIsOpenNow(value);
   }
 
   return (
@@ -145,12 +162,14 @@ function SearchForm() {
           Search
         </DS.Button>
         <DS.Checkbox
+          name="isOpenNow"
           checkboxId="checkbox"
           labelOptions={{
             id: 'label',
             labelContent: 'Open now'
           }}
-          onChange={function noRefCheck(){}}
+          checked={isOpenNow}
+          onChange={handleInputChange}
         />
       </form>
     </div>
