@@ -163,15 +163,16 @@ function SearchForm() {
         >
           Search
         </DS.Button>
-        <label>
-          <input
-            name="isOpenNow"
-            type="checkbox"
-            checked={isOpenNow}
-            onChange={handleInputChange}
-          />
-          Open now
-        </label>
+        <DS.Checkbox
+          name="isOpenNow"
+          checkboxId="checkbox"
+          labelOptions={{
+            id: 'label',
+            labelContent: 'Open now'
+          }}
+          checked={isOpenNow}
+          onChange={handleInputChange}
+        />
       </form>
     </div>
   );
