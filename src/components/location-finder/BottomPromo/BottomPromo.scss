@@ -6,7 +6,7 @@
   .column {
     padding: 2rem 3.5rem;
 
-    @media screen and (min-width: 600px) {
+    @include breakpoint($medium) {
       flex: 1 0 auto;
       float: left;
       width: 50%;
@@ -21,27 +21,27 @@
     }
 
     .promo-card {
-      @media screen and (min-width: 600px) {
+      @include breakpoint($medium) {
         width: 40%;
         float: left;
       }
 
       &.promo-card-with-icon {
-        @media screen and (max-width: 600px) {
+        @include breakpoint( max-width 600px ) {
           width: 50%;
           float: left;
           margin: 0;
         }
       }
 
-      @media screen and (max-width: 599px) {
+      @include breakpoint( max-width 599px ) {
         margin-bottom: 2rem;
       }
 
       margin: 0 20% 0 0;
 
       &:last-child {
-        @media screen and (min-width: 600px) {
+        @include breakpoint($medium) {
           margin: 0;
         }
       }
@@ -50,7 +50,7 @@
         margin: 0;
         
         img {
-          @media screen and (min-width: 600px) {
+          @include breakpoint($medium) {
             width: 100%;
           }
         }
@@ -71,8 +71,8 @@
         font-style: normal;
         font-weight: 500;
       }
-
-      @media screen and (max-width: 600px) {
+      
+      @include breakpoint( max-width 600px ) {
         width: 100%;
       }
     }
@@ -89,7 +89,7 @@
   }
 
   .row {
-    @media screen and (min-width: 600px) {
+    @include breakpoint($medium) {
       display: flex;
     }
     &:after {
