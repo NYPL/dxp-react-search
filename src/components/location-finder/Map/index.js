@@ -17,6 +17,8 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   const searchGeoLat = null;
   const searchGeoLng = null;
 
+  // If no results, then update map state.
+
   const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
       variables: {

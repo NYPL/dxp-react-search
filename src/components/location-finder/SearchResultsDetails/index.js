@@ -18,6 +18,7 @@ function SearchResultsDetails() {
 
   const dispatch = useDispatch();
 
+  //
   function onClearSearchTerms(e) {
     e.preventDefault();
 
@@ -46,20 +47,37 @@ function SearchResultsDetails() {
 
   return (
     <div className='locations__search-results-details'>
-      {searchQuery ? (
-        <div>
-          Showing {resultsCount} locations near <strong>{searchQuery}</strong>
-          <br />
-          <DS.Link
-            href="#"
-            onClick={onClearSearchTerms}
-          >
-            Clear all search terms
-          </DS.Link>
-        </div>
-      ) : (
-        null
-      )}
+      {(() => {
+        if (searchQuery && resultsCount) {
+          return (
+            <div>
+              Showing {resultsCount} locations near <strong>{searchQuery}</strong>
+              &nbsp;&nbsp;
+              <DS.Link
+                href="#"
+                onClick={onClearSearchTerms}
+              >
+                Clear all search terms
+              </DS.Link>
+            </div>
+          );
+        } if (resultsCount === 0) {
+          return (
+            <div>
+              <strong>No results found.</strong>
+              &nbsp;&nbsp;
+              <DS.Link
+                href="#"
+                onClick={onClearSearchTerms}
+              >
+                Clear all search terms
+              </DS.Link>
+            </div>
+          )
+        } else {
+          return null;
+        }
+     })()}
     </div>
   );
 }
