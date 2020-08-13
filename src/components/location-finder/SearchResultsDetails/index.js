@@ -45,41 +45,36 @@ function SearchResultsDetails() {
     dispatch(setAutoSuggestInputValue(''));
   }
 
-  return (
-    <div className='locations__search-results-details'>
-      {(() => {
-        if (searchQuery && resultsCount) {
-          return (
-            <div>
-              Showing {resultsCount} locations near <strong>{searchQuery}</strong>
-              &nbsp;&nbsp;
-              <DS.Link
-                href="#"
-                onClick={onClearSearchTerms}
-              >
-                Clear all search terms
-              </DS.Link>
-            </div>
-          );
-        } if (resultsCount === 0) {
-          return (
-            <div>
-              <strong>No results found.</strong>
-              &nbsp;&nbsp;
-              <DS.Link
-                href="#"
-                onClick={onClearSearchTerms}
-              >
-                Clear all search terms
-              </DS.Link>
-            </div>
-          )
-        } else {
-          return null;
-        }
-     })()}
-    </div>
-  );
+
+  if (searchQuery && resultsCount) {
+    return (
+      <div className='locations__search-results-details'>
+        Showing {resultsCount} locations near <strong>{searchQuery}</strong>
+        &nbsp;&nbsp;
+        <DS.Link
+          href="#"
+          onClick={onClearSearchTerms}
+        >
+          Clear all search terms
+        </DS.Link>
+      </div>
+    );
+  } else if (resultsCount === 0) {
+    return (
+      <div className='locations__search-results-details'>
+        <strong>No results found.</strong>
+        &nbsp;&nbsp;
+        <DS.Link
+          href="#"
+          onClick={onClearSearchTerms}
+        >
+          Clear all search terms
+        </DS.Link>
+      </div>
+    )
+  } else {
+    return null;
+  }
 }
 
 export default SearchResultsDetails;
