@@ -31,8 +31,8 @@ function Locations() {
   const dispatch = useDispatch();
 
   // Apollo
-  const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : 40.7532;
-  const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : -73.9822;
+  const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
+  const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
   const { loading, error, data, networkStatus } = useQuery(
     LOCATIONS_QUERY, {
       variables: {

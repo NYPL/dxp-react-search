@@ -2,10 +2,10 @@ function filterByOpenNow(locations) {
   const today = new Date();
   const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
   const todayMinutes = today.getMinutes() < 10 ? '00' : '' + today.getMinutes();
-  //const nowTime = today.getHours() + ':' + todayMinutes;
+  const nowTime = today.getHours() + ':' + todayMinutes;
 
   // Test other current hours.
-  const nowTime = '21:00';
+  //const nowTime = '19:00';
 
   return locations.reduce((accumlator, location) => {
     location.hours.regular.map(item => {

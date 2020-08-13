@@ -22,9 +22,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
-        openNow,
-        searchGeoLat,
-        searchGeoLng
+        openNow
       }
     }
   );
@@ -43,9 +41,10 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
     );
   }
 
-  if (data) {
+  /*if (data) {
     console.log(data);
   }
+  */
 
   return (
     <GoogleMap

@@ -1,11 +1,7 @@
-query LocationsQuery($searchGeoLat: Float, $searchGeoLng: Float, $openNow: Boolean) {
+query LocationsQuery($openNow: Boolean) {
   allLocations(
     filter: {
       openNow: $openNow
-    },
-    sortByDistance: {
-      originLat: $searchGeoLat,
-      originLng: $searchGeoLng
     }
   ) {
     id
