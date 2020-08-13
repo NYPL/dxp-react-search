@@ -41,7 +41,6 @@ function SearchForm() {
     getLocations,
     { loading, data }
   ] = useLazyQuery(LOCATIONS_QUERY, {
-    //variables: { search_string },
     variables: {
       searchGeoLat,
       searchGeoLng
@@ -124,7 +123,6 @@ function SearchForm() {
     const target = event.target;
     const value = target.name === 'isOpenNow' ? target.checked : target.value;
     setIsOpenNow(value);
-    console.log('open now checkbox: ' + value);
   }
 
   return (
