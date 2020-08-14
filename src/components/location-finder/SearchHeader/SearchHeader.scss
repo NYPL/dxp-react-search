@@ -1,10 +1,15 @@
 .search-header {
-  padding: 2em 0;
+  @include space-inset-m;  
+  
   background: $gray-xlight;
 
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-xl;
+
+    padding: $space-l 0;
+  }
+
   .search-header__inner {
-    margin: 0 auto;
-    max-width: 1300px;
-    padding: 2em;
+    @include wrapper;
   }
 }

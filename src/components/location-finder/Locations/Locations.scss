@@ -1,21 +1,23 @@
 .locations {
-  @include clearfix;
   @include space-inset-m;
   
   display: flex;
   flex-flow: column nowrap;
+  
 
-  @include breakpoint($medium) {
+  @include breakpoint($breakpoint-medium) {
     flex-flow: row nowrap;
   }
 
-  @include breakpoint($large) {
-    padding: $space-l $space-m;
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-xl;
+    
+    padding: 0;
   }
 
   .locations__list,
   .locations__map {
-    @include breakpoint($medium) {
+    @include breakpoint($breakpoint-medium) {
       flex: 0 0 50%;
     }
   }

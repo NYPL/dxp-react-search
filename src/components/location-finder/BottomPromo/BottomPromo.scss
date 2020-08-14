@@ -1,15 +1,25 @@
 .bottom-promo {
-  @include space-stack-xxl;
-
-  padding:2em 0;
-
+  
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-xl;
+  }
+  
+  .row {
+    display: flex;
+    flex-flow: column nowrap;
+    
+    @include breakpoint($breakpoint-medium) {
+      flex-flow: row nowrap;
+    }
+  }
+  
   .column {
-    padding: 2rem 3.5rem;
+    @include clearfix;
+    padding: $space-l;
 
-    @include breakpoint($medium) {
-      flex: 1 0 auto;
-      float: left;
-      width: 50%;
+    @include breakpoint($breakpoint-medium) {
+      flex: 0 0 50%;
+      padding: $space-l $space-xxl;
     }
 
     &.left {
@@ -21,7 +31,7 @@
     }
 
     .promo-card {
-      @include breakpoint($medium) {
+      @include breakpoint($breakpoint-medium) {
         width: 40%;
         float: left;
       }
@@ -35,13 +45,13 @@
       }
 
       @include breakpoint( max-width 599px ) {
-        margin-bottom: 2rem;
+        margin-bottom: $space-l;
       }
 
       margin: 0 20% 0 0;
 
       &:last-child {
-        @include breakpoint($medium) {
+        @include breakpoint($breakpoint-medium) {
           margin: 0;
         }
       }
@@ -50,7 +60,7 @@
         margin: 0;
         
         img {
-          @include breakpoint($medium) {
+          @include breakpoint($breakpoint-medium) {
             width: 100%;
           }
         }
@@ -79,23 +89,6 @@
 
     .promo-description {
       font-size: 0.875rem;
-    }
-
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-  }
-
-  .row {
-    @include breakpoint($medium) {
-      display: flex;
-    }
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
     }
   }
 }
