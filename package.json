@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start"
   },
+  "browserslist": [ "defaults" ],
   "dependencies": {
     "@apollo/react-common": "^3.1.4",
     "@apollo/react-hooks": "^3.1.5",
