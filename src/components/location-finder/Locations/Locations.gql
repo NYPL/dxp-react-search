@@ -1,5 +1,14 @@
-query LocationsQuery($searchGeoLat: Float, $searchGeoLng: Float, $openNow: Boolean) {
+query LocationsQuery(
+  $searchGeoLat: Float,
+  $searchGeoLng: Float,
+  $openNow: Boolean,
+  $limit: Int,
+  $pageNumber: Int,
+  $offset: Int) {
   allLocations(
+    limit: $limit,
+    pageNumber: $pageNumber,
+    offset: $offset,
     filter: {
       openNow: $openNow
     },

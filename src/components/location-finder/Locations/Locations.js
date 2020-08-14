@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 // Apollo
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -30,16 +30,32 @@ function Locations() {
 
   const dispatch = useDispatch();
 
+  // Local state
+  const [pageNumber, setPageNumber] = useState(1);
+  const [offset, setoffset] = useState(0);
+  const [count, setCount] = useState(0);
+
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
-  const { loading, error, data, networkStatus } = useQuery(
+
+  const limit = 10;
+  const totalItems = 92;
+  const pageCount = Math.ceil(totalItems / limit);
+  console.log('pageCount: ' + pageCount);
+
+  const { loading, error, data, networkStatus, fetchMore } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
         searchGeoLat,
         searchGeoLng,
-        openNow
-      }
+        openNow,
+        limit,
+        offset,
+        pageNumber
+      },
+      fetchPolicy: "cache-and-network",
+      notifyOnNetworkStatusChange: true
     }
   );
 
@@ -49,6 +65,9 @@ function Locations() {
       dispatch(setSearchResultsCount({
         resultsCount: data.allLocations.length
       }));
+
+      // Set local state
+      setCount(data.allLocations.length);
     }
   }, [data])
 
@@ -104,11 +123,73 @@ function Locations() {
     dispatch(setAutoSuggestInputValue(''));
   }
 
+  // Pagination state.
+  //const test = data.allLocations.slice(0, 5);
+
+  function previousPageHandler(e) {
+    e.preventDefault();
+    setPageNumber(pageNumber - 1);
+    setoffset(offset - limit);
+
+    fetchMore({
+      variables: {
+        pageNumber: pageNumber
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) {
+          return prev;
+        }
+        return Object.assign({}, prev, {
+          allLocations: [...fetchMoreResult.allLocations]
+        });
+      }
+    });
+  }
+
+  function nextPageHandler(e) {
+    e.preventDefault();
+    setPageNumber(pageNumber + 1);
+    setoffset(offset + limit);
+
+    fetchMore({
+      variables: {
+        pageNumber: pageNumber
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) {
+          return prev;
+        }
+        return Object.assign({}, prev, {
+          allLocations: [...fetchMoreResult.allLocations]
+        });
+      }
+    });
+  }
+
+  function getPageList(pageCount) {
+    const pageList = [];
+    for (let i = 1; i <= pageCount; i += 1) {
+      const currentPage = `${i.toString()} of ${pageCount.toString()}`;
+      pageList.push(currentPage);
+    }
+    return pageList;
+  }
+
+  const paginationDropdownOptions = getPageList(pageCount);
+
   return (
     <Fragment>
       {data.allLocations.map((location) => (
         <Location key={location.id} location={location} />
       ))}
+      <DS.Pagination
+        currentValue={`${pageNumber} of ${pageCount}`}
+        previousPageHandler={previousPageHandler}
+        nextPageHandler={nextPageHandler}
+        onSelectBlur={function noRefCheck(){}}
+        onSelectChange={function noRefCheck(){}}
+        paginationDropdownOptions={paginationDropdownOptions}
+      />
     </Fragment>
   );
 }

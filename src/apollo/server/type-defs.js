@@ -38,6 +38,12 @@ export const typeDefs = gql`
   }
 
   type Query {
-    allLocations(filter: Filter, sortByDistance: SortByDistance): [Location]
+    allLocations(
+      limit: Int,
+      offset: Int,
+      pageNumber: Int,
+      filter: Filter,
+      sortByDistance: SortByDistance
+    ): [Location]
   }
 `;

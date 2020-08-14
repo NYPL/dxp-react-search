@@ -64,6 +64,17 @@ class RefineryApi extends RESTDataSource {
   }
 
   async getAllLocations(args) {
+    /*
+    let response;
+    console.table(args);
+    // Pagination
+    if (args.limit) {
+      response = await this.get(`/locations/v1.0/locations?page[size]=${args.limit}&page[number]=${args.pageNumber}`);
+    } else {
+      response = await this.get('/locations/v1.0/locations?page[size]=300');
+    }
+    */
+
     const response = await this.get('/locations/v1.0/locations?page[size]=300');
 
     if (Array.isArray(response.locations)) {
@@ -73,6 +84,7 @@ class RefineryApi extends RESTDataSource {
         return sortByDistance(args.sortByDistance, response.locations).map(location =>
           this.locationNormalizer(location)
         );
+
       }
 
       // Filter only.
@@ -105,17 +117,39 @@ class RefineryApi extends RESTDataSource {
           && args.sortByDistance.originLng
         ) {
           console.log('filter is false, sort by distance only.');
-          return sortByDistance(args.sortByDistance, response.locations).map(location =>
+          /*return sortByDistance(args.sortByDistance, response.locations).map(location =>
             this.locationNormalizer(location)
           );
+          */
+
+          const results = sortByDistance(args.sortByDistance, response.locations).map(location =>
+            this.locationNormalizer(location)
+          );
+
+          console.log('offset: ' + args.offset);
+
+          return results.slice(args.offset, args.limit + args.offset);
         }
       }
 
       // Default sort, alphabetical.
       console.log('default sort!');
-      return response.locations.sort(sortByName).map(location =>
+      /*return response.locations.sort(sortByName).map(location =>
         this.locationNormalizer(location)
       );
+      */
+
+      const results = response.locations.sort(sortByName).map(location =>
+        this.locationNormalizer(location)
+      );
+
+      if (args.limit) {
+        console.log('offset: ' + args.offset);
+        return results.slice(args.offset, args.limit + args.offset);
+      } else {
+        return results;
+      }
+
     } else {
       return [];
     }
