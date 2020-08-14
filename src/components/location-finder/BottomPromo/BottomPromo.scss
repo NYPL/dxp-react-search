@@ -19,6 +19,10 @@
 
     @include breakpoint($breakpoint-medium) {
       flex: 0 0 50%;
+    }
+
+    @include breakpoint($breakpoint-large) {
+      flex: 0 0 50%;
       padding: $space-l $space-xxl;
     }
 
