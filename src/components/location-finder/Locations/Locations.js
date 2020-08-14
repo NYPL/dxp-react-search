@@ -34,6 +34,7 @@ function Locations() {
   const [pageNumber, setPageNumber] = useState(1);
   const [offset, setoffset] = useState(0);
   const [count, setCount] = useState(0);
+  //const [pageCount, setpageCount] = useState(0);
 
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
@@ -42,7 +43,7 @@ function Locations() {
   const limit = 10;
   const totalItems = 92;
   const pageCount = Math.ceil(totalItems / limit);
-  console.log('pageCount: ' + pageCount);
+  //console.log('pageCount: ' + pageCount);
 
   const { loading, error, data, networkStatus, fetchMore } = useQuery(
     LOCATIONS_QUERY, {
@@ -68,6 +69,10 @@ function Locations() {
 
       // Set local state
       setCount(data.allLocations.length);
+      //setpageCount(Math.ceil(data.allLocations.length / limit));
+
+      //console.log('limit: ' + limit);
+      //console.log('pageCount: ' + pageCount);
     }
   }, [data])
 
@@ -167,6 +172,8 @@ function Locations() {
   }
 
   function getPageList(pageCount) {
+    console.log(pageCount);
+
     const pageList = [];
     for (let i = 1; i <= pageCount; i += 1) {
       const currentPage = `${i.toString()} of ${pageCount.toString()}`;
@@ -176,6 +183,34 @@ function Locations() {
   }
 
   const paginationDropdownOptions = getPageList(pageCount);
+
+  /*function onLoadMore() {
+    return fetchMore({
+      variables: {
+        pageNumber: 2
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) {
+          return prev;
+        }
+        return Object.assign({}, prev, {
+          allLocations: [...fetchMoreResult.allLocations]
+        });
+      }
+    });
+  }
+  */
+
+  /*function onScroll() {
+    console.log('onScroll');
+    onLoadMore();
+  }
+  */
+
+  /*const handleScroll = ({ currentTarget }, onLoadMore) => {
+    onLoadMore();
+  };
+  */
 
   return (
     <Fragment>
