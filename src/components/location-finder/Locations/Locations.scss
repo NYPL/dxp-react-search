@@ -6,19 +6,26 @@
   
 
   @include breakpoint($breakpoint-medium) {
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
   }
 
   @include breakpoint($breakpoint-large) {
-    @include space-stack-xl;
+    @include space-stack-l;
     
     padding: 0;
+  }
+
+  .locations__search-results-details {
+    @include space-stack-m;
+    @include breakpoint($breakpoint-medium) {
+      width: 100%;
+    }
   }
 
   .locations__list,
   .locations__map {
     @include breakpoint($breakpoint-medium) {
-      flex: 0 0 50%;
+      flex: 1 0 50%;
     }
   }
   

@@ -1,7 +1,7 @@
 .bottom-promo {
   
   @include breakpoint($breakpoint-large) {
-    @include space-stack-xl;
+    @include space-stack-l;
   }
   
   .row {

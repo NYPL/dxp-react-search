@@ -4,7 +4,7 @@
   background: $gray-xlight;
 
   @include breakpoint($breakpoint-large) {
-    @include space-stack-xl;
+    @include space-stack-l;
 
     padding: $space-l 0;
   }
