@@ -4,7 +4,7 @@
   padding:2em 0;
 
   .column {
-    padding: 2rem 3.5rem;
+    padding: 2rem 3rem;
 
     @include breakpoint($medium) {
       flex: 1 0 auto;
