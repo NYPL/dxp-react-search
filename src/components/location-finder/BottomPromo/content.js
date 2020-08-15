@@ -1,16 +1,16 @@
 const BottomPromoContent = {
   'promo_left' : {
-    'title' : 'Come visit our mid-town campus',
+    'title' : 'COVID-19: Updates & Remote Resources',
     'image' : [
       {
-        'url' : 'https://placeimg.com/200/100/arch',
-        'name' : 'Stephen A. Schwarzman Building',
-        'link' : 'https://www.nypl.org/locations/schwarzman',
+        'url' : 'https://cdn-d8.nypl.org/s3fs-public/styles/2_1_640/public/2020-07/SASB_06_29_2020_Lions_mask-00207%20copy_0.jpeg?h=c8e955ed&itok=Ofco90Kx',
+        'name' : 'Locations Now Open for Grab & Go Service',
+        'link' : 'https://www.nypl.org/locations/directory',
       },
       {
-        'url' : 'https://placeimg.com/200/100/arch',
-        'name' : 'Stavros Niarchos Foundation Library',
-        'link' : 'https://www.nypl.org/locations/snfl',
+        'url' : 'https://cdn-d8.nypl.org/s3fs-public/styles/2_1_640/public/2020-07/mml_2016_10_18_simply_e-07143a_0.jpg?h=be0fcb4e&itok=WW3bDQa6',
+        'name' : 'Remote Resources',
+        'link' : 'https://www.nypl.org/about/remote-resources',
       },
     ],
   },
