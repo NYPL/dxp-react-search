@@ -36,6 +36,9 @@ function Location({ location }) {
     accessibilityNote = `: ${location.accessibilityNote}`;
   }
 
+  // Location link
+  const locationLink = `https://www.nypl.org/locations/${location.id}`;
+
   function onClickViewOnMap(e) {
     e.preventDefault();
 
@@ -71,8 +74,12 @@ function Location({ location }) {
       <DS.Heading
         id={location.id}
         level={3}
-        text={location.name}
-      />
+        className='location__name'
+      >
+        <a href={locationLink}>
+          {location.name}
+        </a>
+      </DS.Heading>
       <div className='address'>
         {formattedAddress}
       </div>
