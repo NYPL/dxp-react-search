@@ -3,6 +3,8 @@ import * as DS from '@nypl/design-system-react-components';
 // Redux
 import { useDispatch } from 'react-redux';
 import { setLocationInfoWindowId, setMapPosition } from './../../../redux/actions';
+// Components
+import LocationDistance from './LocationDistance';
 
 function Location({ location }) {
   // Redux dispatch
@@ -107,6 +109,7 @@ function Location({ location }) {
           Location is temporarily closed
         </div>
       )}
+      <LocationDistance locationPoint={location.geoLocation} />
       <div className='location__links'>
         <DS.Link
           href="#"
