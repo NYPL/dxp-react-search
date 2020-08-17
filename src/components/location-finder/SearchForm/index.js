@@ -15,9 +15,12 @@ import {
   setOpenNow
 } from './../../../redux/actions';
 // Geocode
-import Geocode from 'react-geocode';
+import Geocode from './../../../utils/googleGeocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API);
+const southWestBound = '40.49, -74.26';
+const northEastBound = '40.91, -73.77';
+Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 
 function SearchForm() {
   // Local state
