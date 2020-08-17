@@ -3,6 +3,8 @@ import * as DS from '@nypl/design-system-react-components';
 // Redux
 import { useDispatch } from 'react-redux';
 import { setLocationInfoWindowId, setMapPosition } from './../../../redux/actions';
+// Components
+import LocationDistance from './LocationDistance';
 
 function Location({ location }) {
   // Redux dispatch
@@ -35,6 +37,9 @@ function Location({ location }) {
   if (location.accessibilityNote !== null && location.accessibilityNote !== '') {
     accessibilityNote = `: ${location.accessibilityNote}`;
   }
+
+  // Location link
+  const locationLink = `https://www.nypl.org/locations/${location.id}`;
 
   function onClickViewOnMap(e) {
     e.preventDefault();
@@ -71,8 +76,12 @@ function Location({ location }) {
       <DS.Heading
         id={location.id}
         level={3}
-        text={location.name}
-      />
+        className='location__name'
+      >
+        <a href={locationLink}>
+          {location.name}
+        </a>
+      </DS.Heading>
       <div className='address'>
         {formattedAddress}
       </div>
@@ -100,6 +109,7 @@ function Location({ location }) {
           Location is temporarily closed
         </div>
       )}
+      <LocationDistance locationPoint={location.geoLocation} />
       <div className='location__links'>
         <DS.Link
           href="#"

@@ -1,4 +1,12 @@
 .location {
+  @include space-stack-l;
+
+  .location__name {
+    a {
+      color: $black;
+    }
+  }
+
   .phone {
     margin-bottom: 0.5rem;
   }
