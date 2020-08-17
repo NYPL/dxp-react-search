@@ -28,13 +28,11 @@ function LocationFinder() {
       <div className="content-primary">
         <div className='locations'>
           <SearchResultsDetails />
-          <div className='row'>
-            <div className='column locations__list'>
-              <Locations />
-            </div>
-            <div className='column locations__map'>
-              <Map />
-            </div>
+          <div className='locations__list'>
+            <Locations />
+          </div>
+          <div className='locations__map'>
+            <Map />
           </div>
         </div>
       </div>

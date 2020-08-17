@@ -1,26 +1,23 @@
 .bottom-rails {
+  @include space-inset-m;
+  
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
 
-  @include space-stack-l;
-
-  @include breakpoint( $large ) {
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-l;
+    
     flex-flow: row nowrap;
-  }
-
-  .right-rail {
-    @include breakpoint( $large ) {
-      @include space-stack-none;
-    }
+    padding: 0;
   }
 }
 
 .right-rail {
   @include space-stack-s;
 
-  @include breakpoint( $large ) {
-    margin-bottom: 0;
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-none;
   }
 
   .heading {
@@ -39,7 +36,8 @@
   }
 
   .action-link {
-    padding: 1rem;
+    @include space-inset-xs;
+    
     font-size: .875rem;
     border-radius: 2px;
     cursor: pointer;

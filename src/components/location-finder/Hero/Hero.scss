@@ -3,13 +3,10 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
 
-  @include breakpoint($large) {
+  @include breakpoint($breakpoint-large) {
     flex-flow: row nowrap;
   }
-  
 }
 
 .hero__image {
@@ -19,7 +16,7 @@
   width: 100%;
   min-height: 100px;
   
-  @include breakpoint($large) {
+  @include breakpoint($breakpoint-large) {
     flex: 0 0 50%;
     min-height: 150px;
   }
@@ -30,4 +27,8 @@
   
   color: $white;
   flex: 0 0 50%;
+
+  a {
+    color: $white;
+  }
 }
