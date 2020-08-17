@@ -34,17 +34,14 @@ function Locations() {
   const [pageNumber, setPageNumber] = useState(1);
   const [offset, setoffset] = useState(0);
   const [count, setCount] = useState(0);
-  //const [pageCount, setpageCount] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
-
   const limit = 10;
-  const totalItems = 92;
-  const pageCount = Math.ceil(totalItems / limit);
-  //console.log('pageCount: ' + pageCount);
-
+  // Query for data.
   const { loading, error, data, networkStatus, fetchMore } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
@@ -63,16 +60,15 @@ function Locations() {
   // Side effect to dispatch redux action to set the locations count.
   useEffect(() => {
     if (data) {
+      // Set redux state.
       dispatch(setSearchResultsCount({
-        resultsCount: data.allLocations.length
+        resultsCount: data.allLocations.locations.length
       }));
 
-      // Set local state
+      // Set local state.
+      setTotalItems(data.allLocations.pageInfo.totalItems);
       setCount(data.allLocations.length);
-      //setpageCount(Math.ceil(data.allLocations.length / limit));
-
-      //console.log('limit: ' + limit);
-      //console.log('pageCount: ' + pageCount);
+      setPageCount(Math.ceil(totalItems / limit));
     }
   }, [data])
 
@@ -190,17 +186,19 @@ function Locations() {
 
   return (
     <Fragment>
-      {data.allLocations.map((location) => (
+      {data.allLocations.locations.map((location) => (
         <Location key={location.id} location={location} />
       ))}
-      <DS.Pagination
-        currentValue={`${pageNumber} of ${pageCount}`}
-        previousPageHandler={previousPageHandler}
-        nextPageHandler={nextPageHandler}
-        onSelectBlur={onPageChange}
-        onSelectChange={onPageChange}
-        paginationDropdownOptions={paginationDropdownOptions}
-      />
+      {totalItems > 10 &&
+        <DS.Pagination
+          currentValue={`${pageNumber} of ${pageCount}`}
+          previousPageHandler={previousPageHandler}
+          nextPageHandler={nextPageHandler}
+          onSelectBlur={onPageChange}
+          onSelectChange={onPageChange}
+          paginationDropdownOptions={paginationDropdownOptions}
+        />
+      }
     </Fragment>
   );
 }

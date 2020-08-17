@@ -90,6 +90,7 @@ class RefineryApi extends RESTDataSource {
 
     if (Array.isArray(response.locations)) {
       let results;
+      let totalResultsCount = Object.keys(response.locations).length;
 
       // Sort by distance only.
       if (args.sortByDistance && !args.filter) {
@@ -107,6 +108,8 @@ class RefineryApi extends RESTDataSource {
           results = filterByOpenNow(response.locations).map(location =>
             this.locationNormalizer(location)
           );
+          // We're removing locations from results, so set the new total results count.
+          totalResultsCount = results.length;
         }
       }
 
@@ -121,6 +124,8 @@ class RefineryApi extends RESTDataSource {
           results = sortByDistance(args.sortByDistance, filterByOpenNow(response.locations)).map(location =>
             this.locationNormalizer(location)
           );
+          // We're removing locations from results, so set the new total results count.
+          totalResultsCount = results.length;
         }
         // Sort by distance only.
         else if (
@@ -142,7 +147,12 @@ class RefineryApi extends RESTDataSource {
         );
       }
 
-      return this.processResults(results, args);
+      return {
+        locations: this.processResults(results, args),
+        pageInfo: {
+          totalItems: totalResultsCount
+        }
+      }
     } else {
       return [];
     }
