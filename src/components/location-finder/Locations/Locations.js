@@ -128,49 +128,45 @@ function Locations() {
     dispatch(setAutoSuggestInputValue(''));
   }
 
+  // Wrapper function to fetch more data.
+  function fetchMoreData(pageNumber) {
+    return fetchMore({
+      variables: {
+        pageNumber: pageNumber
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) {
+          return prev;
+        }
+        return Object.assign({}, prev, {
+          allLocations: [...fetchMoreResult.allLocations]
+        });
+      }
+    });
+  }
+
+  // Handles pagination previous pg button
   function previousPageHandler(e) {
     e.preventDefault();
+    // Update local state.
     setPageNumber(pageNumber - 1);
     setoffset(offset - limit);
-
-    fetchMore({
-      variables: {
-        pageNumber: pageNumber
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) {
-          return prev;
-        }
-        return Object.assign({}, prev, {
-          allLocations: [...fetchMoreResult.allLocations]
-        });
-      }
-    });
+    // Fetch more results.
+    fetchMoreData(pageNumber);
   }
 
+  // Handles pagination next pg button
   function nextPageHandler(e) {
     e.preventDefault();
+    // Update local state.
     setPageNumber(pageNumber + 1);
     setoffset(offset + limit);
-
-    fetchMore({
-      variables: {
-        pageNumber: pageNumber
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) {
-          return prev;
-        }
-        return Object.assign({}, prev, {
-          allLocations: [...fetchMoreResult.allLocations]
-        });
-      }
-    });
+    // Fetch more results.
+    fetchMoreData(pageNumber);
   }
 
+  // Helper function to build a page list for pagination dropdown.
   function getPageList(pageCount) {
-    console.log(pageCount);
-
     const pageList = [];
     for (let i = 1; i <= pageCount; i += 1) {
       const currentPage = `${i.toString()} of ${pageCount.toString()}`;
@@ -181,29 +177,15 @@ function Locations() {
 
   const paginationDropdownOptions = getPageList(pageCount);
 
+  // Handles pagination onSelectBlur and onSelectChange.
   function onPageChange(e) {
-    console.log('selected pg: ' + e.target.value);
-    console.log('pageNumber: ' + pageNumber);
-
+    // Get the selected page index.
     const pageIndex = paginationDropdownOptions.findIndex(pageValue => pageValue === e.target.value);
-    console.log(pageIndex);
-
+    // Update local state.
     setPageNumber(pageIndex + 1);
     setoffset(limit * pageIndex);
-
-    fetchMore({
-      variables: {
-        pageNumber: pageNumber
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) {
-          return prev;
-        }
-        return Object.assign({}, prev, {
-          allLocations: [...fetchMoreResult.allLocations]
-        });
-      }
-    });
+    // Fetch more results.
+    fetchMoreData(pageNumber);
   }
 
   return (
