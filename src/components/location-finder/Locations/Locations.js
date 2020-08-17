@@ -128,9 +128,6 @@ function Locations() {
     dispatch(setAutoSuggestInputValue(''));
   }
 
-  // Pagination state.
-  //const test = data.allLocations.slice(0, 5);
-
   function previousPageHandler(e) {
     e.preventDefault();
     setPageNumber(pageNumber - 1);
@@ -184,10 +181,19 @@ function Locations() {
 
   const paginationDropdownOptions = getPageList(pageCount);
 
-  /*function onLoadMore() {
-    return fetchMore({
+  function onPageChange(e) {
+    console.log('selected pg: ' + e.target.value);
+    console.log('pageNumber: ' + pageNumber);
+
+    const pageIndex = paginationDropdownOptions.findIndex(pageValue => pageValue === e.target.value);
+    console.log(pageIndex);
+
+    setPageNumber(pageIndex + 1);
+    setoffset(limit * pageIndex);
+
+    fetchMore({
       variables: {
-        pageNumber: 2
+        pageNumber: pageNumber
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
@@ -199,18 +205,6 @@ function Locations() {
       }
     });
   }
-  */
-
-  /*function onScroll() {
-    console.log('onScroll');
-    onLoadMore();
-  }
-  */
-
-  /*const handleScroll = ({ currentTarget }, onLoadMore) => {
-    onLoadMore();
-  };
-  */
 
   return (
     <Fragment>
@@ -221,8 +215,8 @@ function Locations() {
         currentValue={`${pageNumber} of ${pageCount}`}
         previousPageHandler={previousPageHandler}
         nextPageHandler={nextPageHandler}
-        onSelectBlur={function noRefCheck(){}}
-        onSelectChange={function noRefCheck(){}}
+        onSelectBlur={onPageChange}
+        onSelectChange={onPageChange}
         paginationDropdownOptions={paginationDropdownOptions}
       />
     </Fragment>
