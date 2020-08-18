@@ -1,5 +1,6 @@
 import React from 'react';
 // Content
+import HeroImage from '../HeroImage/HeroImage.js'
 import HeroContent from './content';
 
 function Hero() {
@@ -8,8 +9,12 @@ function Hero() {
 
   return (
     <div className='hero'>
-      <div className='hero__image'></div>
-      <div className='hero__content' dangerouslySetInnerHTML={{__html: text }} />
+      <div className="hero__inner">
+        <div className='hero__image'>
+          <HeroImage />
+        </div>
+        <div className='hero__content' dangerouslySetInnerHTML={{__html: text }} />
+      </div>
     </div>
   );
 };
