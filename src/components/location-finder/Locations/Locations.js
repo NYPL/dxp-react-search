@@ -66,7 +66,7 @@ function Locations() {
 
       // Set local state.
       setTotalItems(data.allLocations.pageInfo.totalItems);
-      setPageCount(Math.ceil(totalItems / limit));
+      setPageCount(Math.ceil(data.allLocations.pageInfo.totalItems / limit));
     }
   }, [data])
 
