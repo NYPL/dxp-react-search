@@ -5,6 +5,7 @@
 @import '~breakpoint-sass/stylesheets/breakpoint';
 
 // Internal app styles
+@import './base/_focus.scss';
 @import './base/_breakpoints.scss';
 @import './space/_space.scss';
 @import './colors/_color-vars.scss';
