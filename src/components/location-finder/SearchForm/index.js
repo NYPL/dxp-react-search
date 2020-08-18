@@ -74,7 +74,7 @@ function SearchForm() {
 
   function renderSuggestionsContainer({ containerProps, children, query }) {
     return (
-      <div {...containerProps}>
+      <div {...containerProps} aria-label="Filter search">
         {children}
         <div className='auto-suggest-bottom'>
           Search for locations near: <strong>{query}</strong>
@@ -130,7 +130,10 @@ function SearchForm() {
 
   return (
     <div className='search__form'>
-      <form onSubmit={handleSubmit}>
+      <form
+        role='search'
+        aria-labelledby='Find your library'
+        onSubmit={handleSubmit}>
         <AutoSuggest
           suggestions={suggestions.slice(0, 5)}
           onSuggestionSelected={onSuggestionSelected}
