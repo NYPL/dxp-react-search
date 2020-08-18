@@ -184,6 +184,12 @@ function Locations() {
 
   return (
     <Fragment>
+      <DS.Link
+        href="#locations-gmap"
+        className="locations-gmap-anchor"
+      >
+        Skip to map
+      </DS.Link>
       {data.allLocations.locations.map((location) => (
         <Location key={location.id} location={location} />
       ))}

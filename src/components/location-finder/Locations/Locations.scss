@@ -29,6 +29,16 @@
     }
   }
 
+  .locations-gmap-anchor {
+    display: block;
+    margin: $space-s 0;
+
+    @include breakpoint($breakpoint-medium) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
   @include breakpoint($breakpoint-medium) {
     .locations__list {
       max-height: 500px;
