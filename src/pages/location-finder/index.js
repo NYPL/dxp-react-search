@@ -32,6 +32,9 @@ function LocationFinder() {
             <Locations />
           </div>
           <div className='locations__map'>
+            <div className='locations__map-help-msg'>
+              Use two fingers to pan the map.
+            </div>
             <Map />
           </div>
         </div>
