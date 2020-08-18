@@ -47,9 +47,16 @@
   }
 }
 
-// @TODO move this somewhere better.
+// @TODO move these somewhere better.
 .no-results {
   padding: $space-s 0;
   color: $nypl-red-regular;
   font-style: italic;
+}
+
+.content-header {
+  @include breakpoint($breakpoint-small) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
