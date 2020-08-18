@@ -28,13 +28,14 @@ function LocationFinder() {
       <div className="content-primary">
         <div className='locations'>
           <SearchResultsDetails />
-          <div className='row'>
-            <div className='column locations__list'>
-              <Locations />
+          <div className='locations__list'>
+            <Locations />
+          </div>
+          <div id="locations-gmap" className='locations__map'>
+            <div className='locations__map-help-msg'>
+              Use two fingers to pan the map.
             </div>
-            <div className='column locations__map'>
-              <Map />
-            </div>
+            <Map />
           </div>
         </div>
       </div>

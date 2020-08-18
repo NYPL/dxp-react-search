@@ -55,7 +55,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
           }}
         />
       }
-      {data.allLocations.map(location => {
+      {data.allLocations.locations.map(location => {
         const onClick = props.onClick.bind(this, location);
 
         // Logic for info window
@@ -116,6 +116,7 @@ class Map extends Component {
   render() {
     return (
       <MapWrapper
+        aria-hidden="true"
         locations={this.props.locations}
         selectedMarker={this.state.selectedMarker}
         onClick={this.handleClick}

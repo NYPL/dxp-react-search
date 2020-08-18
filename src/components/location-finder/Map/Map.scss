@@ -1,0 +1,10 @@
+.locations__map {
+  .locations__map-help-msg {
+    padding-bottom: $space-xs;
+
+    @include breakpoint($breakpoint-medium) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}

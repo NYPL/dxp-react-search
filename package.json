@@ -4,7 +4,10 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "browserslist": [ "defaults" ],
   "dependencies": {
@@ -36,5 +39,13 @@
     "redux-devtools-extension": "^2.13.8",
     "sass": "^1.26.10"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.2",
+    "@testing-library/react": "^10.4.8",
+    "babel-register": "^6.26.0",
+    "jest": "^26.2.2",
+    "jest-axe": "^3.5.0",
+    "react-axe": "^3.5.3"
+  }
 }

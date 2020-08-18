@@ -1,36 +1,62 @@
 .locations {
-  @include space-stack-xxl;
+  @include space-inset-m;
 
-  padding:2em 0;
+  display: flex;
+  flex-flow: column nowrap;
 
-  .locations__list {
-    max-height: 500px;
-    overflow: scroll;
+
+  @include breakpoint($breakpoint-medium) {
+    flex-flow: row wrap;
   }
 
-  .locations__list .location {
-    padding: .75em 0;
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-l;
+
+    padding: 0;
   }
 
-  .column {
-    float: left;
-    width: 50%;
-
-    @include breakpoint( max-width 600px ) {
+  .locations__search-results-details {
+    @include space-stack-m;
+    @include breakpoint($breakpoint-medium) {
       width: 100%;
     }
   }
 
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
+  .locations__list,
+  .locations__map {
+    @include breakpoint($breakpoint-medium) {
+      flex: 1 0 50%;
+    }
+  }
+
+  .locations-gmap-anchor {
+    display: block;
+    margin: $space-s 0;
+
+    @include breakpoint($breakpoint-medium) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  @include breakpoint($breakpoint-medium) {
+    .locations__list {
+      max-height: 500px;
+      overflow: scroll;
+    }
   }
 }
 
-// @TODO move this somwhere better.
+// @TODO move these somewhere better.
 .no-results {
-  padding: 1em 0;
-  color: red;
+  padding: $space-s 0;
+  color: $nypl-red-regular;
   font-style: italic;
+}
+
+.content-header {
+  @include breakpoint($breakpoint-small) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

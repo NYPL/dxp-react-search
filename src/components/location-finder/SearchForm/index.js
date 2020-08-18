@@ -15,9 +15,12 @@ import {
   setOpenNow
 } from './../../../redux/actions';
 // Geocode
-import Geocode from 'react-geocode';
+import Geocode from './../../../utils/googleGeocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API);
+const southWestBound = '40.49, -74.26';
+const northEastBound = '40.91, -73.77';
+Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 
 function SearchForm() {
   // Local state
@@ -49,7 +52,7 @@ function SearchForm() {
 
   function getSuggestions(data, value) {
     if (data) {
-      return filterBySearchInput(data.allLocations, value);
+      return filterBySearchInput(data.allLocations.locations, value);
     }
     else {
       console.log('data is false');
@@ -71,7 +74,7 @@ function SearchForm() {
 
   function renderSuggestionsContainer({ containerProps, children, query }) {
     return (
-      <div {...containerProps}>
+      <div {...containerProps} aria-label="Filter search">
         {children}
         <div className='auto-suggest-bottom'>
           Search for locations near: <strong>{query}</strong>
@@ -127,7 +130,10 @@ function SearchForm() {
 
   return (
     <div className='search__form'>
-      <form onSubmit={handleSubmit}>
+      <form
+        role='search'
+        aria-labelledby='Find your library'
+        onSubmit={handleSubmit}>
         <AutoSuggest
           suggestions={suggestions.slice(0, 5)}
           onSuggestionSelected={onSuggestionSelected}

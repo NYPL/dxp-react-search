@@ -37,7 +37,22 @@ export const typeDefs = gql`
     openNow: Boolean
   }
 
+  type PageInfo {
+    totalItems: Int
+  }
+
+  type LocationsConnection {
+    locations: [Location]
+    pageInfo: PageInfo
+  }
+
   type Query {
-    allLocations(filter: Filter, sortByDistance: SortByDistance): [Location]
+    allLocations(
+      limit: Int,
+      offset: Int,
+      pageNumber: Int,
+      filter: Filter,
+      sortByDistance: SortByDistance
+    ): LocationsConnection
   }
 `;

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 // Apollo
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -30,25 +30,43 @@ function Locations() {
 
   const dispatch = useDispatch();
 
+  // Local state
+  const [pageNumber, setPageNumber] = useState(1);
+  const [offset, setoffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
-  const { loading, error, data, networkStatus } = useQuery(
+  const limit = 10;
+  // Query for data.
+  const { loading, error, data, networkStatus, fetchMore } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
         searchGeoLat,
         searchGeoLng,
-        openNow
-      }
+        openNow,
+        limit,
+        offset,
+        pageNumber
+      },
+      fetchPolicy: "cache-and-network",
+      notifyOnNetworkStatusChange: true
     }
   );
 
   // Side effect to dispatch redux action to set the locations count.
   useEffect(() => {
     if (data) {
+      // Set redux state.
       dispatch(setSearchResultsCount({
-        resultsCount: data.allLocations.length
+        resultsCount: data.allLocations.locations.length
       }));
+
+      // Set local state.
+      setTotalItems(data.allLocations.pageInfo.totalItems);
+      setPageCount(Math.ceil(data.allLocations.pageInfo.totalItems / limit));
     }
   }, [data])
 
@@ -104,11 +122,87 @@ function Locations() {
     dispatch(setAutoSuggestInputValue(''));
   }
 
+  // Wrapper function to fetch more data.
+  function fetchMoreData(pageNumber) {
+    return fetchMore({
+      variables: {
+        pageNumber: pageNumber
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) {
+          return prev;
+        }
+        return Object.assign({}, prev, {
+          allLocations: [...fetchMoreResult.allLocations]
+        });
+      }
+    });
+  }
+
+  // Handles pagination previous pg button
+  function previousPageHandler(e) {
+    e.preventDefault();
+    // Update local state.
+    setPageNumber(pageNumber - 1);
+    setoffset(offset - limit);
+    // Fetch more results.
+    fetchMoreData(pageNumber);
+  }
+
+  // Handles pagination next pg button
+  function nextPageHandler(e) {
+    e.preventDefault();
+    // Update local state.
+    setPageNumber(pageNumber + 1);
+    setoffset(offset + limit);
+    // Fetch more results.
+    fetchMoreData(pageNumber);
+  }
+
+  // Helper function to build a page list for pagination dropdown.
+  function getPageList(pageCount) {
+    const pageList = [];
+    for (let i = 1; i <= pageCount; i += 1) {
+      const currentPage = `${i.toString()} of ${pageCount.toString()}`;
+      pageList.push(currentPage);
+    }
+    return pageList;
+  }
+
+  const paginationDropdownOptions = getPageList(pageCount);
+
+  // Handles pagination onSelectBlur and onSelectChange.
+  function onPageChange(e) {
+    // Get the selected page index.
+    const pageIndex = paginationDropdownOptions.findIndex(pageValue => pageValue === e.target.value);
+    // Update local state.
+    setPageNumber(pageIndex + 1);
+    setoffset(limit * pageIndex);
+    // Fetch more results.
+    fetchMoreData(pageNumber);
+  }
+
   return (
     <Fragment>
-      {data.allLocations.map((location) => (
+      <DS.Link
+        href="#locations-gmap"
+        className="locations-gmap-anchor"
+      >
+        Skip to map
+      </DS.Link>
+      {data.allLocations.locations.map((location) => (
         <Location key={location.id} location={location} />
       ))}
+      {totalItems > 10 &&
+        <DS.Pagination
+          currentValue={`${pageNumber} of ${pageCount}`}
+          previousPageHandler={previousPageHandler}
+          nextPageHandler={nextPageHandler}
+          onSelectBlur={onPageChange}
+          onSelectChange={onPageChange}
+          paginationDropdownOptions={paginationDropdownOptions}
+        />
+      }
     </Fragment>
   );
 }
