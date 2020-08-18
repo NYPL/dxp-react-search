@@ -1,6 +1,15 @@
 .search-header {
-  @include space-inset-m;  
+  h1#location-finder__title {
+    color: inherit;
+    font-size: var(--font-size-3);
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0 0 0.5em;
+    width: auto;
+  }
   
+  @include space-inset-m;
+
   background: $gray-xlight;
 
   @include breakpoint($breakpoint-large) {
