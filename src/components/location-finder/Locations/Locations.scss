@@ -30,8 +30,13 @@
   }
   
   .locations__list {
+    @include space-stack-m;
     max-height: 500px;
     overflow: scroll;
+
+    @include breakpoint($breakpoint-medium) {
+      @include space-stack-none;
+    }
   }
 }
 
