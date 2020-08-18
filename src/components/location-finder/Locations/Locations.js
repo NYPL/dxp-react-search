@@ -33,7 +33,6 @@ function Locations() {
   // Local state
   const [pageNumber, setPageNumber] = useState(1);
   const [offset, setoffset] = useState(0);
-  const [count, setCount] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
 
@@ -67,7 +66,6 @@ function Locations() {
 
       // Set local state.
       setTotalItems(data.allLocations.pageInfo.totalItems);
-      setCount(data.allLocations.length);
       setPageCount(Math.ceil(totalItems / limit));
     }
   }, [data])
