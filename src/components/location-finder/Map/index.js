@@ -116,6 +116,7 @@ class Map extends Component {
   render() {
     return (
       <MapWrapper
+        aria-hidden="true"
         locations={this.props.locations}
         selectedMarker={this.state.selectedMarker}
         onClick={this.handleClick}
