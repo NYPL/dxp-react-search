@@ -63,14 +63,28 @@ class RefineryApi extends RESTDataSource {
     }
   }
 
+  // Determine if we return all results or paginate.
+  processResults(results, args) {
+    // Check for limit and offset, if so, paginate results.
+    if (args.limit) {
+      console.log('offset: ' + args.offset);
+      return results.slice(args.offset, args.limit + args.offset);
+    } else {
+      return results;
+    }
+  }
+
   async getAllLocations(args) {
     const response = await this.get('/locations/v1.0/locations?page[size]=300');
 
     if (Array.isArray(response.locations)) {
+      let results;
+      let totalResultsCount = Object.keys(response.locations).length;
+
       // Sort by distance only.
       if (args.sortByDistance && !args.filter) {
         console.log('sortByDistance only');
-        return sortByDistance(args.sortByDistance, response.locations).map(location =>
+        results = sortByDistance(args.sortByDistance, response.locations).map(location =>
           this.locationNormalizer(location)
         );
       }
@@ -80,9 +94,11 @@ class RefineryApi extends RESTDataSource {
         // Open now only.
         if (args.filter.openNow) {
           console.log('filter: open now only');
-          return filterByOpenNow(response.locations).map(location =>
+          results = filterByOpenNow(response.locations).map(location =>
             this.locationNormalizer(location)
           );
+          // We're removing locations from results, so set the new total results count.
+          totalResultsCount = results.length;
         }
       }
 
@@ -94,10 +110,11 @@ class RefineryApi extends RESTDataSource {
           && args.sortByDistance.originLng
         ) {
           console.log('both!');
-          const openNowLocations = filterByOpenNow(response.locations);
-          return sortByDistance(args.sortByDistance, openNowLocations).map(location =>
+          results = sortByDistance(args.sortByDistance, filterByOpenNow(response.locations)).map(location =>
             this.locationNormalizer(location)
           );
+          // We're removing locations from results, so set the new total results count.
+          totalResultsCount = results.length;
         }
         // Sort by distance only.
         else if (
@@ -105,17 +122,26 @@ class RefineryApi extends RESTDataSource {
           && args.sortByDistance.originLng
         ) {
           console.log('filter is false, sort by distance only.');
-          return sortByDistance(args.sortByDistance, response.locations).map(location =>
+          results = sortByDistance(args.sortByDistance, response.locations).map(location =>
             this.locationNormalizer(location)
           );
         }
       }
 
       // Default sort, alphabetical.
-      console.log('default sort!');
-      return response.locations.sort(sortByName).map(location =>
-        this.locationNormalizer(location)
-      );
+      if (!results) {
+        console.log('default sort!');
+        results = response.locations.sort(sortByName).map(location =>
+          this.locationNormalizer(location)
+        );
+      }
+
+      return {
+        locations: this.processResults(results, args),
+        pageInfo: {
+          totalItems: totalResultsCount
+        }
+      }
     } else {
       return [];
     }
