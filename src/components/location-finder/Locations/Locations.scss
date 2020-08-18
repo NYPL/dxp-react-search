@@ -1,9 +1,9 @@
 .locations {
   @include space-inset-m;
-  
+
   display: flex;
   flex-flow: column nowrap;
-  
+
 
   @include breakpoint($breakpoint-medium) {
     flex-flow: row wrap;
@@ -11,7 +11,7 @@
 
   @include breakpoint($breakpoint-large) {
     @include space-stack-l;
-    
+
     padding: 0;
   }
 
@@ -28,16 +28,35 @@
       flex: 1 0 50%;
     }
   }
-  
-  .locations__list {
-    max-height: 500px;
-    overflow: scroll;
+
+  .locations-gmap-anchor {
+    display: block;
+    margin: $space-s 0;
+
+    @include breakpoint($breakpoint-medium) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  @include breakpoint($breakpoint-medium) {
+    .locations__list {
+      max-height: 500px;
+      overflow: scroll;
+    }
   }
 }
 
-// @TODO move this somewhere better.
+// @TODO move these somewhere better.
 .no-results {
   padding: $space-s 0;
   color: $nypl-red-regular;
   font-style: italic;
+}
+
+.content-header {
+  @include breakpoint($breakpoint-small) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

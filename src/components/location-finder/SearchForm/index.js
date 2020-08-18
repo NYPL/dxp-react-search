@@ -52,7 +52,7 @@ function SearchForm() {
 
   function getSuggestions(data, value) {
     if (data) {
-      return filterBySearchInput(data.allLocations, value);
+      return filterBySearchInput(data.allLocations.locations, value);
     }
     else {
       console.log('data is false');
