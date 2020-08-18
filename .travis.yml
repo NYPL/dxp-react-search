@@ -2,7 +2,7 @@ language: node_js
 dist: trusty
 
 node_js:
-- 7
+- 14
 
 services:
 - docker
@@ -26,14 +26,10 @@ install: npm install
 
 before_script:
   - cp .travis/.env .
-  - "./provisioning/set-env"
+  - ./provisioning/set-env
 
-script: npm test
+# script: npm test
 
-before_deploy: echo 'All tests passed; Preparing to deploy'
-
-deploy:
-  provider: script
-  script: provisioning/deploy
-  on:
-    all_branches: true
+after_success:
+  - echo 'All tests passed; Preparing to deploy'
+  - ./provisioning/deploy
