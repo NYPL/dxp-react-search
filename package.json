@@ -9,11 +9,17 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "browserslist": [ "defaults" ],
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "ie 11"
+  ],
   "dependencies": {
     "@apollo/react-common": "^3.1.4",
     "@apollo/react-hooks": "^3.1.5",
     "@apollo/react-ssr": "^3.1.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-react-jsx": "^7.10.4",
     "@nypl/design-system-react-components": "^0.9.3",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component.git#reactupdate",
     "@nypl/dgx-react-footer": "^0.5.7",
@@ -26,7 +32,9 @@
     "breakpoint-sass": "2.7.0",
     "graphql": "^14.7.0",
     "graphql-tag": "2.10.3",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "latest",
+    "next-transpile-modules": "^4.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-autosuggest": "^10.0.2",

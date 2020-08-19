@@ -3,6 +3,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
+import 'isomorphic-unfetch';
 const { NEXT_PUBLIC_GRAPHQL_API } = process.env;
 
 let globalApolloClient = null;
@@ -125,6 +126,7 @@ function initApolloClient(initialState) {
 function createApolloClient(initialState = {}) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
+    fetchOptions: { fetch },
     link: new HttpLink({
       uri: NEXT_PUBLIC_GRAPHQL_API,
       credentials: 'same-origin',
