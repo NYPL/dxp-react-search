@@ -1,34 +1,44 @@
 function filterByOpenNow(locations) {
   const today = new Date();
-  const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
-  const todayMinutes = today.getMinutes() < 10 ? '00' : '' + today.getMinutes();
-  const nowTime = today.getHours() + ':' + todayMinutes;
-
-  // Test other current hours.
-  //const nowTime = '19:00';
+  // Get the current time, in format 13:56
+  // Force timezone to new york.
+  const nowTime = today.toLocaleTimeString('en-US', {
+    timeZone: 'America/New_York',
+    hour12: false,
+    hour: '2-digit',
+    minute:'2-digit'
+  });
+  //console.log('nowTime: ' + nowTime);
+  // Get the current day in format: Thu
+  // Force timezone to new york.
+  const weekday = today.toLocaleDateString('en-US', {
+    timeZone: 'America/New_York',
+    weekday: 'short'
+  });
+  //console.log('weekday: ' + weekday);
 
   return locations.reduce((accumlator, location) => {
-    location.hours.regular.map(item => {
+    location.hours.regular.map(hoursItem => {
       // Find today in weekly hours.
-      if (weekDayKeys[today.getDay()] === item.day) {
+      if (hoursItem.day.replace('.','') === weekday) {
         // Multiple checks to determine if the location is open now.
         if (
           // Check for not null.
-          item.open !== null && item.close !== null
+          hoursItem.open !== null && hoursItem.close !== null
           // @TODO Check alerts: location._embedded.alerts for closings.
           // Check for extended closing.
           && location.open
           // Check open/closed hours against now time.
-          && item.open <= nowTime && item.close >= nowTime
+          && hoursItem.open <= nowTime && hoursItem.close >= nowTime
         ) {
           // @TODO Remove debug code.
           /*
           console.log(location.name);
-          console.log('location open hours: ' + item.open);
-          console.log('location close hours: ' + item.close);
+          console.log('location open hours: ' + hoursItem.open);
+          console.log('location close hours: ' + hoursItem.close);
           console.log('now time: ' + nowTime);
           console.log(typeof nowTime);
-          console.log(typeof item.close);
+          console.log(typeof hoursItem.close);
           */
           accumlator.push(location);
         }
