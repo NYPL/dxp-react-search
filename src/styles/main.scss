@@ -20,3 +20,22 @@
 @import './../components/location-finder/Map/Map.scss';
 @import './../components/location-finder/BottomPromo/BottomPromo.scss';
 @import './../components/location-finder/RightRail/RightRail.scss';
+
+// shared/layouts > Main.js
+// This is a temporary style until the layout gets fixed upstream in the DS
+
+@mixin ds-layout-override {
+  padding-left: calc(var(--space) + calc(-50vw + 50%));
+  padding-right: calc(var(--space) + calc(-50vw + 50%));
+}
+
+.main {
+  @include breakpoint($breakpoint-large) {
+    @include ds-layout-override;
+  }
+  .content-header > div {
+    @include breakpoint($breakpoint-large) {
+      @include ds-layout-override;
+    }
+  }
+}
