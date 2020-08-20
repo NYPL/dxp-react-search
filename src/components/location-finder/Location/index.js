@@ -11,7 +11,7 @@ function Location({ location }) {
   const dispatch = useDispatch();
 
   // Address formatting.
-  const formattedAddress = `${location.address_line1} ${location.locality}, ${location.administrative_area} ${location.postal_code}`;
+  const formattedAddress = `${location.address_line1}\n${location.locality}, ${location.administrative_area} ${location.postal_code}`;
   // Get directions link.
   const encodedAddress = encodeURIComponent(formattedAddress);
   const getDirectionsLink = 'http://maps.google.com/maps?f=q&hl=en&saddr=&daddr=' + encodedAddress;

@@ -1,7 +1,9 @@
 .bottom-promo {
-  
+	@include space-stack-l;
+	
   @include breakpoint($breakpoint-large) {
-    @include space-stack-l;
+		margin-left: calc(-50vw + 50%);
+		margin-right: calc(-50vw + 50%);
   }
   
   .row {
@@ -35,6 +37,8 @@
     }
 
     .promo-card {
+			width: 65%;
+
       @include breakpoint($breakpoint-medium) {
         width: 40%;
         float: left;
@@ -82,10 +86,6 @@
       .figure__figcaption {
         font-style: normal;
         font-weight: 500;
-      }
-      
-      @include breakpoint( max-width 600px ) {
-        width: 100%;
       }
     }
 

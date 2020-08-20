@@ -5,18 +5,22 @@
   flex-flow: column nowrap;
   justify-content: space-between;
 
-  @include breakpoint($breakpoint-large) {
+  @include breakpoint($breakpoint-medium) {
     @include space-stack-l;
     
     flex-flow: row nowrap;
-    padding: 0;
-  }
+		padding: 0;
+	}
+	
+	@include breakpoint($breakpoint-large) {
+		width: 65%;
+	}
 }
 
 .right-rail {
   @include space-stack-s;
 
-  @include breakpoint($breakpoint-large) {
+  @include breakpoint($breakpoint-medium) {
     @include space-stack-none;
   }
 
