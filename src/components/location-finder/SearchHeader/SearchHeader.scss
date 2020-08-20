@@ -6,7 +6,11 @@
     line-height: 1.25;
     margin: 0 0 0.5em;
     width: auto;
-  }
+	}
+	
+	.location-finder__description {
+		padding-bottom: $space-xxs;
+	}
   
   @include space-inset-m;
 

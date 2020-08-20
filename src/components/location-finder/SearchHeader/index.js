@@ -13,7 +13,7 @@ function SearchHeader() {
     <div className='search-header'>
       <div className='search-header__inner'>
         <h1 id="location-finder__title">{title}</h1>
-        <div>{description}</div>
+        <div className="location-finder__description">{description}</div>
         <SearchForm />
       </div>
     </div>
