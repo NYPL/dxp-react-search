@@ -15,4 +15,19 @@
   .checkbox label {
     display: inline;
   }
+
+  // IE11 only
+  // DS uses CSS variables for color and space that won't work in ie11.
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .button {
+      padding: $space-xs;
+      border-radius: 2px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      background-color: $nypl-blue-dark;
+      border: none;
+      color: $white;
+    }
+  }
 }
