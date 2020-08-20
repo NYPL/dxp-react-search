@@ -1,4 +1,5 @@
 .location {
+  @include space-inline-l;
   @include space-stack-l;
 
   .location__name {
