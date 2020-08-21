@@ -41,8 +41,11 @@
 
   @include breakpoint($breakpoint-medium) {
     .locations__list {
+      @include scroll-style;
+      
       max-height: 500px;
-      overflow: scroll;
+      overflow-x: hidden;
+      overflow-y: scroll;
     }
   }
 }

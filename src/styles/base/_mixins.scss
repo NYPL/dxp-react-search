@@ -71,3 +71,22 @@
     width: 1px;
     word-wrap: normal;
 }
+
+@mixin scroll-style() {
+  scrollbar-width: thin;
+  scrollbar-color: $nypl-blue-regular $gray-warm-xlight;
+  
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $gray-warm-xlight;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: $nypl-blue-regular;
+    border-radius: 4px;
+    border: 2px solid #b1c9ea;
+  }
+}
