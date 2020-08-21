@@ -5,13 +5,13 @@
 }
 
 .react-autosuggest__input {
-	width: calc(100% - 68px);
+  width: calc(100% - 68px);
   height: 34px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #aaa;
 
-	@include breakpoint($breakpoint-large) {
+  @include breakpoint($breakpoint-large) {
     width: 618px;
   }
 }
