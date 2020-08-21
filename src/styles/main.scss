@@ -22,20 +22,19 @@
 @import './../components/location-finder/RightRail/RightRail.scss';
 
 // shared/layouts > Main.js
-// This is a temporary style until the layout gets fixed upstream in the DS
+// This is a temporary fix for issues with the edge spacing,
+// can remove when the layout gets fixed upstream in the DS.
+// https://github.com/NYPL/nypl-design-system/issues/342
 
-@mixin ds-layout-override {
-  padding-left: calc(var(--space) + calc(-50vw + 50%));
-  padding-right: calc(var(--space) + calc(-50vw + 50%));
+.main,
+.breadcrumbs__list {
+  @include ds-layout-override;
 }
 
-.main {
-  @include breakpoint($breakpoint-large) {
-    @include ds-layout-override;
-  }
-  .content-header > div {
-    @include breakpoint($breakpoint-large) {
-      @include ds-layout-override;
-    }
+.breadcrumbs__list {
+  @include breakpoint(max-width $breakpoint-large) {
+    padding: 0 1.5rem;
   }
 }
+
+

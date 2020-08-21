@@ -28,25 +28,38 @@
 /// Mixin - Wrapper
 /// Outer container mixin for large screens
 @mixin wrapper(
-    $container-max-width: $max-width,
-    $outer-container-break: $breakpoint-small,
-    $v-margin: 0,
-    $v-padding: 0,
-    $h-padding: var(--space)
+  $container-max-width: $max-width,
+  $outer-container-break: $small,
+  $v-margin: 0,
+  $v-padding: 0,
+  $h-padding: $space
 ) {
-    margin: #{$v-margin} auto;
-    max-width: #{$container-max-width};
-    padding: #{$v-padding} #{$h-padding};
-    width: 100%;
+  max-width: #{$container-max-width};
+  width: 100%;
+  margin: #{$v-margin} auto;
+  padding: #{$v-padding} #{$h-padding};
 
-    @include breakpoint(max-width $container-max-width) {
-        padding-left: calc(
-            #{$h-padding} + calc(50vw - calc(#{$container-max-width} / 2))
-        );
-        padding-right: calc(
-            #{$h-padding} + calc(50vw - calc(#{$container-max-width} / 2))
-        );
-    }
+  // This comes from the DS, but doesn't seem to work correctly.
+  @include breakpoint(max-width $container-max-width) {
+    padding-left:
+      calc(
+        #{$h-padding} + calc(-50vw + calc(#{$container-max-width} / 2))
+      );
+    padding-right:
+      calc(
+        #{$h-padding} + calc(-50vw + calc(#{$container-max-width} / 2))
+      );
+  }
+}
+
+// This is a temporary fix for issues with the edge spacing,
+// can remove when the layout gets fixed upstream in the DS.
+// https://github.com/NYPL/nypl-design-system/issues/342
+@mixin ds-layout-override {
+  @include breakpoint(max-width $max-width) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 .container {
@@ -55,7 +68,7 @@
 
 /// Use the breakout mixin for elements that should be edge-to-edge
 /// Even when a parent container uses the wrapper mixin
-@mixin breakout($v-padding: var(--space)) {
+@mixin breakout($v-padding: $space) {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     padding-left: calc(#{$v-padding} + calc(-50vw + 50%));
