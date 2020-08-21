@@ -1,19 +1,17 @@
 // React Autosuggest
 .react-autosuggest__container {
   position: relative;
-	display: inline-flex;
-	max-width: 618px;
-	width: calc(100vw - 116px);
+  display: inline;
 }
 
 .react-autosuggest__input {
-  width: 100%;
+	width: calc(100% - 68px);
   height: 34px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #aaa;
 
-  @media screen and (min-width: 600px) {
+	@include breakpoint($breakpoint-large) {
     width: 618px;
   }
 }
