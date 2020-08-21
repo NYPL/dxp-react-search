@@ -1,8 +1,29 @@
 .search__form {
+
+	// Search text
+	input[type="text"]:focus {
+		outline: 1px solid var(--ui-focus);
+		outline-offset: inherit;
+	}
+
+	.button {
+		.button__icon {
+			display: none;
+			@include breakpoint($breakpoint-large) {
+				display: inline-block;
+			}
+		}
+	}
+
   // Open now
   .checkbox {
-    display: inline;
-    padding: 0 1em;
+		display: block;
+		padding-top: $space-xs;
+
+		@include breakpoint($breakpoint-large) {
+			padding: 0 1em;
+			display: inline;
+		}
   }
 
   .checkbox input {

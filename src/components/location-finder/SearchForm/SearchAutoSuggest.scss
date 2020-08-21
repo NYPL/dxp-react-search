@@ -1,7 +1,9 @@
 // React Autosuggest
 .react-autosuggest__container {
   position: relative;
-  display: inline;
+	display: inline-flex;
+	max-width: 618px;
+	width: calc(100vw - 116px);
 }
 
 .react-autosuggest__input {
