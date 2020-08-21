@@ -1,4 +1,5 @@
 .location {
+  @include space-inline-l;
   @include space-stack-l;
 
   .location__name {
@@ -55,10 +56,12 @@
 
   // @TODO this will probs become a DS component?
   .location__hours-status {
+    @include type-scale(-1);
+    
     width: fit-content;
     border-radius: 4px;
     background-color: $nypl-yellow-light;
-    padding: $space-xs $space-s;
+    padding: $space-xxs $space*.75;
     margin-bottom: $space-s;
     color: $black;
     font-weight: 300;
