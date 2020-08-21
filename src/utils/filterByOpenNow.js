@@ -8,14 +8,12 @@ function filterByOpenNow(locations) {
     hour: '2-digit',
     minute:'2-digit'
   });
-  //console.log('nowTime: ' + nowTime);
   // Get the current day in format: Thu
   // Force timezone to new york.
   const weekday = today.toLocaleDateString('en-US', {
     timeZone: 'America/New_York',
     weekday: 'short'
   });
-  //console.log('weekday: ' + weekday);
 
   return locations.reduce((accumlator, location) => {
     location.hours.regular.map(hoursItem => {
