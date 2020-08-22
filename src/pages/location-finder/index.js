@@ -4,38 +4,20 @@ import { withApollo } from './../../apollo/client/withApollo';
 import { withRedux } from './../../redux/withRedux';
 import { compose } from 'redux';
 // Components
+import Meta from './../../components/location-finder/Meta';
 import Layout from './../../components/shared/layouts/Main';
 import Hero from './../../components/location-finder/Hero';
 import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
 import SearchResultsDetails from './../../components/location-finder/SearchResultsDetails';
 import Map from './../../components/location-finder/Map';
-import Head from 'next/head';
 import BottomPromo from '../../components/location-finder/BottomPromo';
 import RightRail from '../../components/location-finder/RightRail';
 
 function LocationFinder() {
   return (
     <Layout>
-      <Head>
-        <title>Location Finder</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="keywords" content="The New York Public Library (NYPL)" />
-        <meta name="description" content="The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island." />
-        <meta name="allow-search" content="yes" />
-        <meta property="og:title" content="NYPL Locations" />
-        <meta property="og:description" content="The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island." />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://d140u095r09w96.cloudfront.net/sites/default/files/SASBopeng.jpg" />
-        <meta property="og:site_name" content="The New York Public Library" />
-        <meta property="og:url" content="https://www.nypl.org/locations" />
-        <meta name="twitter:title" content="The New York Public Library" />
-        <meta name="twitter:description" content="The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island." />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@nypl" />
-        <meta name="twitter:creator" content="@nypl" />
-        <meta name="twitter:image" content="https://d140u095r09w96.cloudfront.net/sites/default/files/SASBopeng.jpg" />
-      </Head>
+      <Meta />
       <div className="content-header">
         <Hero />
         <SearchHeader />
