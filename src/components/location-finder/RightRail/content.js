@@ -30,10 +30,12 @@ const RightRailContent = {
       'title' : 'Text (917) 983-4584'
     },
     {
-      'title' : 'Call (917) ASK-NYPL'
+      'title' : 'Call (917) ASK-NYPL',
+      'link'  : 'tel:1-917-983-4584'
     },
     {
-      'title' : '(917) 275-6975'
+      'title' : '(917) 275-6975',
+      'link'  : 'tel:1-917-275-6975'
     },
     {
       'title' : 'TTY 212-930-0020'

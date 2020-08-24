@@ -188,7 +188,15 @@ function Locations() {
         href="#locations-gmap"
         className="locations-gmap-anchor"
       >
-        Skip to map
+        Skip to Map
+        <DS.Icon
+          blockName="more-link"
+          decorative
+          modifiers={[
+            'right'
+          ]}
+          name="arrow"
+        />
       </DS.Link>
       {data.allLocations.locations.map((location) => (
         <Location key={location.id} location={location} />

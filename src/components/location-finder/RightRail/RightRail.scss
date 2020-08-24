@@ -1,5 +1,5 @@
 .bottom-rails {
-  @include space-inset-m;
+  padding: $space-m $space-s;
   
   display: flex;
   flex-flow: column nowrap;
