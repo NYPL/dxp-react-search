@@ -1,15 +1,42 @@
 .search__form {
+
+  // Search text
+  input[type="text"]:focus {
+    outline: 1px solid var(--ui-focus);
+    outline-offset: inherit;
+  }
+
+  .button {
+    width: 68px;
+
+    @include breakpoint($breakpoint-large) {
+      width: auto;
+    }
+
+    .button__icon {
+      display: none;
+      @include breakpoint($breakpoint-large) {
+        display: inline-block;
+      }
+    }
+  }
+
   // Open now
   .checkbox {
-    display: inline;
-    padding: 0 1em;
+    display: block;
+    padding-top: $space-xs;
+
+    @include breakpoint($breakpoint-large) {
+      padding: 0 1em;
+      display: inline;
+    }
   }
 
   .checkbox input {
-		margin-right: .5rem;
-		width: 20px;
-		height: 20px;
-		vertical-align: middle;
+    margin-right: .5rem;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
   }
 
   .checkbox label {
