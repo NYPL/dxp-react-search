@@ -2,13 +2,17 @@ import {
   SET_SEARCH_QUERY,
   SET_AUTO_SUGGEST_INPUT_VALUE,
   SET_OPEN_NOW,
-  SET_SEARCH_RESULTS_COUNT
+  SET_SEARCH_RESULTS_COUNT,
+  SET_PAGINATION
 } from './../actions';
 
 const initialState = {
   autoSuggestInputValue: '',
   openNow: false,
-  resultsCount: ''
+  resultsCount: '',
+  offset: 0,
+  pageCount: 0,
+  pageNumber: 1,
 };
 
 export default function search(state = initialState, action) {
@@ -38,6 +42,14 @@ export default function search(state = initialState, action) {
         ...state,
         // @TODO Why do we have to do this?
         resultsCount: action.payload.resultsCount
+      };
+
+    case SET_PAGINATION:
+      return {
+        ...state,
+        offset: action.payload.offset,
+        pageCount: action.payload.pageCount,
+        pageNumber: action.payload.pageNumber
       };
 
     default:

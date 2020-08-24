@@ -6,18 +6,24 @@ import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Map
 import Map from './../Map';
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  batch,
+  useDispatch,
+  useSelector
+} from 'react-redux';
 import {
   setSearchQuery,
   setMapPosition,
   setLocationInfoWindowId,
   setAutoSuggestInputValue,
-  setSearchResultsCount
+  setSearchResultsCount,
+  setPagination
 } from './../../../redux/actions';
 // Components
 import * as DS from '@nypl/design-system-react-components';
 import Location from './../Location';
 import Skeleton from 'react-loading-skeleton';
+import LocationsPagination from './LocationsPagination';
 
 function Locations() {
   // Redux
@@ -26,14 +32,16 @@ function Locations() {
     searchQueryGeoLat,
     searchQueryGeoLng,
     openNow,
+    offset,
+    pageNumber
   } = useSelector(state => state.search);
 
   const dispatch = useDispatch();
 
   // Local state
-  const [pageNumber, setPageNumber] = useState(1);
-  const [offset, setoffset] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+  //const [pageNumber, setPageNumber] = useState(1);
+  //const [offset, setoffset] = useState(0);
+  //const [pageCount, setPageCount] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
 
   // Apollo
@@ -59,14 +67,34 @@ function Locations() {
   // Side effect to dispatch redux action to set the locations count.
   useEffect(() => {
     if (data) {
+      console.log('Locations useEffect');
+      
+      batch(() => {
+        dispatch(setSearchResultsCount({
+          resultsCount: data.allLocations.locations.length
+        }));
+
+        dispatch(setPagination({
+          pageNumber: pageNumber,
+          offset: offset,
+          pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
+        }));
+      });
       // Set redux state.
-      dispatch(setSearchResultsCount({
+      /*dispatch(setSearchResultsCount({
         resultsCount: data.allLocations.locations.length
       }));
 
+      dispatch(setPagination({
+        pageNumber: pageNumber,
+        offset: offset,
+        pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
+      }));
+      */
+
       // Set local state.
-      setTotalItems(data.allLocations.pageInfo.totalItems);
-      setPageCount(Math.ceil(data.allLocations.pageInfo.totalItems / limit));
+      //setTotalItems(data.allLocations.pageInfo.totalItems);
+      //setPageCount(Math.ceil(data.allLocations.pageInfo.totalItems / limit));
     }
   }, [data])
 
@@ -123,7 +151,7 @@ function Locations() {
   }
 
   // Wrapper function to fetch more data.
-  function fetchMoreData(pageNumber) {
+  /*function fetchMoreData(pageNumber) {
     return fetchMore({
       variables: {
         pageNumber: pageNumber
@@ -138,49 +166,7 @@ function Locations() {
       }
     });
   }
-
-  // Handles pagination previous pg button
-  function previousPageHandler(e) {
-    e.preventDefault();
-    // Update local state.
-    setPageNumber(pageNumber - 1);
-    setoffset(offset - limit);
-    // Fetch more results.
-    fetchMoreData(pageNumber);
-  }
-
-  // Handles pagination next pg button
-  function nextPageHandler(e) {
-    e.preventDefault();
-    // Update local state.
-    setPageNumber(pageNumber + 1);
-    setoffset(offset + limit);
-    // Fetch more results.
-    fetchMoreData(pageNumber);
-  }
-
-  // Helper function to build a page list for pagination dropdown.
-  function getPageList(pageCount) {
-    const pageList = [];
-    for (let i = 1; i <= pageCount; i += 1) {
-      const currentPage = `${i.toString()} of ${pageCount.toString()}`;
-      pageList.push(currentPage);
-    }
-    return pageList;
-  }
-
-  const paginationDropdownOptions = getPageList(pageCount);
-
-  // Handles pagination onSelectBlur and onSelectChange.
-  function onPageChange(e) {
-    // Get the selected page index.
-    const pageIndex = paginationDropdownOptions.findIndex(pageValue => pageValue === e.target.value);
-    // Update local state.
-    setPageNumber(pageIndex + 1);
-    setoffset(limit * pageIndex);
-    // Fetch more results.
-    fetchMoreData(pageNumber);
-  }
+  */
 
   return (
     <Fragment>
@@ -201,16 +187,7 @@ function Locations() {
       {data.allLocations.locations.map((location) => (
         <Location key={location.id} location={location} />
       ))}
-      {totalItems > 10 &&
-        <DS.Pagination
-          currentValue={`${pageNumber} of ${pageCount}`}
-          previousPageHandler={previousPageHandler}
-          nextPageHandler={nextPageHandler}
-          onSelectBlur={onPageChange}
-          onSelectChange={onPageChange}
-          paginationDropdownOptions={paginationDropdownOptions}
-        />
-      }
+      <LocationsPagination limit={limit} />
     </Fragment>
   );
 }
