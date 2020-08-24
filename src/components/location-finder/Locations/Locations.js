@@ -38,12 +38,6 @@ function Locations() {
 
   const dispatch = useDispatch();
 
-  // Local state
-  //const [pageNumber, setPageNumber] = useState(1);
-  //const [offset, setoffset] = useState(0);
-  //const [pageCount, setPageCount] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
-
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
@@ -68,7 +62,8 @@ function Locations() {
   useEffect(() => {
     if (data) {
       console.log('Locations useEffect');
-      
+
+      // Dispatch redux state.
       batch(() => {
         dispatch(setSearchResultsCount({
           resultsCount: data.allLocations.locations.length
@@ -80,21 +75,6 @@ function Locations() {
           pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
         }));
       });
-      // Set redux state.
-      /*dispatch(setSearchResultsCount({
-        resultsCount: data.allLocations.locations.length
-      }));
-
-      dispatch(setPagination({
-        pageNumber: pageNumber,
-        offset: offset,
-        pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
-      }));
-      */
-
-      // Set local state.
-      //setTotalItems(data.allLocations.pageInfo.totalItems);
-      //setPageCount(Math.ceil(data.allLocations.pageInfo.totalItems / limit));
     }
   }, [data])
 
@@ -149,24 +129,6 @@ function Locations() {
     // Clear auto suggest input.
     dispatch(setAutoSuggestInputValue(''));
   }
-
-  // Wrapper function to fetch more data.
-  /*function fetchMoreData(pageNumber) {
-    return fetchMore({
-      variables: {
-        pageNumber: pageNumber
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) {
-          return prev;
-        }
-        return Object.assign({}, prev, {
-          allLocations: [...fetchMoreResult.allLocations]
-        });
-      }
-    });
-  }
-  */
 
   return (
     <Fragment>
