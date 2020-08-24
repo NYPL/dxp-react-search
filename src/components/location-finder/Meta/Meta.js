@@ -2,6 +2,7 @@ import Head from 'next/head'
 const Meta = (props) => (
   <Head>
     <title>Location Finder | The New York Public Library</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="The New York Public Library (NYPL)" />
     <meta name="description" content="The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island." />
