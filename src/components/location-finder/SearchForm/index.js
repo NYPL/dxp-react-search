@@ -6,13 +6,18 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { LocationsQuery as LOCATIONS_QUERY } from './SearchAutoSuggest.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  batch,
+  useDispatch,
+  useSelector
+} from 'react-redux';
 import {
   setSearchQuery,
   setMapPosition,
   setLocationInfoWindowId,
   setAutoSuggestInputValue,
-  setOpenNow
+  setOpenNow,
+  setPagination
 } from './../../../redux/actions';
 // Geocode
 import Geocode from './../../../utils/googleGeocode';
@@ -91,24 +96,33 @@ function SearchForm() {
       response => {
         const { lat, lng } = response.results[0].geometry.location;
 
-        // Dispatch search query
-        dispatch(setSearchQuery({
-          query: autoSuggestInputValue,
-          lat: response.results[0].geometry.location.lat,
-          lng: response.results[0].geometry.location.lng
-        }));
+        batch(() => {
+          // Dispatch search query
+          dispatch(setSearchQuery({
+            query: autoSuggestInputValue,
+            lat: response.results[0].geometry.location.lat,
+            lng: response.results[0].geometry.location.lng
+          }));
 
-        // Dispatch for map zoom and center
-        dispatch(setMapPosition({
-          mapCenter: response.results[0].geometry.location,
-          mapZoom: 14
-        }));
+          // Dispatch for map zoom and center
+          dispatch(setMapPosition({
+            mapCenter: response.results[0].geometry.location,
+            mapZoom: 14
+          }));
 
-        // Dispatch to set location id for info window.
-        dispatch(setLocationInfoWindowId(locationId));
+          // Dispatch to set location id for info window.
+          dispatch(setLocationInfoWindowId(locationId));
 
-        // Dispatch open now
-        dispatch(setOpenNow(isOpenNow));
+          // Dispatch open now
+          dispatch(setOpenNow(isOpenNow));
+
+          // Reset pagination.
+          dispatch(setPagination({
+            offset: 0,
+            pageCount: 0,
+            pageNumber: 1
+          }));
+        });
       },
       error => {
         console.error(error);

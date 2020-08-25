@@ -103,33 +103,6 @@ function Locations() {
     );
   }
 
-  // Clear search terms.
-  function onClearSearchTerms(e) {
-    e.preventDefault();
-
-    dispatch(setSearchQuery({
-      searchQuery: '',
-      searchQueryGeoLat: '',
-      searchQueryGeoLng: ''
-    }));
-
-    const defaultCenter = {
-      lat: 40.7532,
-      lng: -73.9822
-    };
-
-    dispatch(setMapPosition({
-      mapCenter: defaultCenter,
-      mapZoom: 12
-    }));
-
-    // Dispatch to reset the location id for info window.
-    dispatch(setLocationInfoWindowId(null));
-
-    // Clear auto suggest input.
-    dispatch(setAutoSuggestInputValue(''));
-  }
-
   return (
     <Fragment>
       <DS.Link
