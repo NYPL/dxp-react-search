@@ -45,6 +45,18 @@
       overflow: scroll;
     }
   }
+
+  // @TODO Should we need to do this?
+  // DS now sets width to 100%
+  .select {
+    width: initial;
+  }
+
+  .pagination {
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 // @TODO move these somewhere better.
