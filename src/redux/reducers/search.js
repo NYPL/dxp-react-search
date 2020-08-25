@@ -2,7 +2,6 @@ import {
   SET_SEARCH_QUERY,
   SET_AUTO_SUGGEST_INPUT_VALUE,
   SET_OPEN_NOW,
-  //SET_SEARCH_RESULTS_COUNT,
   SET_PAGINATION,
   RESET_SEARCH
 } from './../actions';
@@ -37,14 +36,6 @@ export default function search(state = initialState, action) {
         ...state,
         openNow: action.payload
       };
-
-    /*case SET_SEARCH_RESULTS_COUNT:
-      return {
-        ...state,
-        // @TODO Why do we have to do this?
-        resultsCount: action.payload.resultsCount
-      };
-    */
 
     case SET_PAGINATION:
       return {
