@@ -132,7 +132,7 @@ function SearchForm() {
     <div className='search__form'>
       <form
         role='search'
-        aria-labelledby='Find your library'
+        aria-label='Find your library'
         onSubmit={handleSubmit}>
         <AutoSuggest
           suggestions={suggestions.slice(0, 5)}
@@ -172,7 +172,7 @@ function SearchForm() {
           checkboxId="checkbox"
           labelOptions={{
             id: 'label',
-            labelContent: 'Open now'
+            labelContent: 'Open Now'
           }}
           checked={isOpenNow}
           onChange={handleInputChange}

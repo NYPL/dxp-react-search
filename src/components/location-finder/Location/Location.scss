@@ -3,6 +3,8 @@
   @include space-stack-l;
 
   .location__name {
+		@include type-scale(2);
+		
     a {
       color: $black;
     }
@@ -62,7 +64,7 @@
     border-radius: 4px;
     background-color: $nypl-yellow-light;
     padding: $space-xxs $space*.75;
-    margin-bottom: $space-s;
+    @include space-stack-xxs;
     color: $black;
     font-weight: 300;
     font-style: italic;

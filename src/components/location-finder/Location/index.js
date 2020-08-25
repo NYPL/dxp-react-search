@@ -75,7 +75,7 @@ function Location({ location }) {
     <div className='location'>
       <DS.Heading
         id={location.id}
-        level={3}
+        level={2}
         className='location__name'
       >
         <a href={locationLink}>

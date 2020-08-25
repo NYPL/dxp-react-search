@@ -47,6 +47,7 @@ function BottomPromo() {
             return (
               <div key={value.link} className="promo-card promo-card-with-icon">
                 <DS.Link
+                  aria-label={value.logo_alt}
                   href={value.link}
                   className="promo-link"
                 >
