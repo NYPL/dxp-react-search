@@ -51,6 +51,12 @@
   .select {
     width: initial;
   }
+
+  .pagination {
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 // @TODO move these somewhere better.
