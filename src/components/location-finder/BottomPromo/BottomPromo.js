@@ -46,12 +46,14 @@ function BottomPromo() {
           {promo_right.image.map((value, index) => {
             return (
               <div key={value.link} className="promo-card promo-card-with-icon">
-                <DS.Link
-                  aria-label={value.logo_alt}
-                  href={value.link}
-                  className="promo-link"
-                >
-                  <DS.Icon decorative name={value.logo} />
+                <DS.Link type="default">
+                  <a
+                    aria-label={value.logo_alt}
+                    href={value.link}
+                    className="promo-link"
+                  >
+                    <DS.Icon decorative name={value.logo} />
+                  </a>
                 </DS.Link>
               </div>
             );
