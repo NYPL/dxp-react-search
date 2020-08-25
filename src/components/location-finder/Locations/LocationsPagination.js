@@ -105,34 +105,38 @@ function LocationsPagination({ limit }) {
     }));
   }
 
-  return (
-    <DS.Pagination
-      nextPage={NextButton(pageNumber, pageCount)}
-      previousPage={PrevButton(pageNumber)}
-    >
-      <DS.Label
-        htmlFor="paginationSelect"
-        id="paginationLabel"
+  if (pageCount) {
+    return (
+      <DS.Pagination
+        nextPage={NextButton(pageNumber, pageCount)}
+        previousPage={PrevButton(pageNumber)}
       >
-        Page{' '}
-      </DS.Label>
-      <DS.Select
-        ariaLabel="Pagination Label"
-        id="paginationSelect"
-        labelId="paginationLabel"
-        name="Pagination Select"
-        onBlur={onPageChange}
-        onChange={onPageChange}
-        selectedOption={`${pageNumber} of ${pageCount}`}
-      >
-        {paginationDropdownOptions.map((option) => (
-          <option>
-            {option}
-          </option>
-        ))}
-      </DS.Select>
-    </DS.Pagination>
-  );
+        <DS.Label
+          htmlFor="paginationSelect"
+          id="paginationLabel"
+        >
+          Page{' '}
+        </DS.Label>
+        <DS.Select
+          ariaLabel="Pagination Label"
+          id="paginationSelect"
+          labelId="paginationLabel"
+          name="Pagination Select"
+          onBlur={onPageChange}
+          onChange={onPageChange}
+          selectedOption={`${pageNumber} of ${pageCount}`}
+        >
+          {paginationDropdownOptions.map((option) => (
+            <option>
+              {option}
+            </option>
+          ))}
+        </DS.Select>
+      </DS.Pagination>
+    );
+  } else {
+    return (null);
+  }
 };
 
 export default LocationsPagination;
