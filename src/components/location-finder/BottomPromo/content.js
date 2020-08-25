@@ -16,14 +16,16 @@ const BottomPromoContent = {
   },
   'promo_right' : {
     'title' : 'What about Brooklyn and Queens?',
-    'description' : 'The boroughs of Brooklyn and Queens are each served be their own library systems',
+    'description' : 'The boroughs of Brooklyn and Queens are each served by their own library systems',
     'image' : [
       {
         'logo' : 'logo_brooklyn',
+        'logo_alt' : 'Brooklyn Public Library',
         'link' : 'https://www.bklynlibrary.org/',
       },
       {
         'logo' : 'logo_queens',
+        'logo_alt' : 'Queens Public Library',
         'link' : 'https://www.queenslibrary.org/',
       },
     ],
