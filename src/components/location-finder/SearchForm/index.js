@@ -141,16 +141,10 @@ function SearchForm() {
   }
 
   function handleInputChange(event) {
-    //console.log('handleInputChange from open now!');
-
     const target = event.target;
     const value = target.name === 'isOpenNow' ? target.checked : target.value;
     setIsOpenNow(value);
-    //dispatch(setOpenNow(value));
   }
-
-  console.log('isOpenNow: ' + isOpenNow);
-  console.log('openNow: ' + openNow);
 
   return (
     <div className='search__form'>

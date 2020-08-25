@@ -50,9 +50,6 @@ function LocationsPagination({ limit }) {
 
   // NextButton component.
   function NextButton(pageNumber, pageCount) {
-    console.log('pageNumber: ' + pageNumber);
-    console.log('pageCount: ' + pageCount);
-
     if (pageCount > pageNumber) {
       return (
         <DS.Button

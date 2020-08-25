@@ -60,8 +60,6 @@ function Locations() {
   // Side effect to dispatch redux action to set the locations count.
   useEffect(() => {
     if (data) {
-      console.log('Locations useEffect');
-
       // Dispatch redux action
       dispatch(setPagination({
         pageNumber: pageNumber,
