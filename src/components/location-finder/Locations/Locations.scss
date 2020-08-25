@@ -45,6 +45,12 @@
       overflow: scroll;
     }
   }
+
+  // @TODO Should we need to do this?
+  // DS now sets width to 100%
+  .select {
+    width: initial;
+  }
 }
 
 // @TODO move these somewhere better.
