@@ -2,8 +2,9 @@ import {
   SET_SEARCH_QUERY,
   SET_AUTO_SUGGEST_INPUT_VALUE,
   SET_OPEN_NOW,
-  SET_SEARCH_RESULTS_COUNT,
-  SET_PAGINATION
+  //SET_SEARCH_RESULTS_COUNT,
+  SET_PAGINATION,
+  RESET_SEARCH
 } from './../actions';
 
 const initialState = {
@@ -37,19 +38,35 @@ export default function search(state = initialState, action) {
         openNow: action.payload
       };
 
-    case SET_SEARCH_RESULTS_COUNT:
+    /*case SET_SEARCH_RESULTS_COUNT:
       return {
         ...state,
         // @TODO Why do we have to do this?
         resultsCount: action.payload.resultsCount
       };
+    */
 
     case SET_PAGINATION:
       return {
         ...state,
         offset: action.payload.offset,
         pageCount: action.payload.pageCount,
-        pageNumber: action.payload.pageNumber
+        pageNumber: action.payload.pageNumber,
+        resultsCount: action.payload.resultsCount
+      };
+
+    case RESET_SEARCH:
+      return {
+        ...state,
+        searchQuery: '',
+        searchQueryGeoLat: '',
+        searchQueryGeoLng: '',
+        autoSuggestInputValue: '',
+        offset: 0,
+        pageCount: 0,
+        pageNumber: 1,
+        resultsCount: '',
+        openNow: false
       };
 
     default:

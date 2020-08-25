@@ -10,7 +10,8 @@ function LocationsPagination({ limit }) {
   const {
     offset,
     pageCount,
-    pageNumber
+    pageNumber,
+    resultsCount
   } = useSelector(state => state.search);
   const dispatch = useDispatch();
 

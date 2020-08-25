@@ -36,7 +36,10 @@ function SearchForm() {
 
   // Redux
   const dispatch = useDispatch();
-  const { autoSuggestInputValue } = useSelector(state => state.search);
+  const {
+    autoSuggestInputValue,
+    openNow
+  } = useSelector(state => state.search);
   const search_string = autoSuggestInputValue;
 
   const searchGeoLat = 40.7532;
@@ -120,7 +123,8 @@ function SearchForm() {
           dispatch(setPagination({
             offset: 0,
             pageCount: 0,
-            pageNumber: 1
+            pageNumber: 1,
+            //resultsCount
           }));
         });
       },
@@ -137,10 +141,16 @@ function SearchForm() {
   }
 
   function handleInputChange(event) {
+    //console.log('handleInputChange from open now!');
+
     const target = event.target;
     const value = target.name === 'isOpenNow' ? target.checked : target.value;
     setIsOpenNow(value);
+    //dispatch(setOpenNow(value));
   }
+
+  console.log('isOpenNow: ' + isOpenNow);
+  console.log('openNow: ' + openNow);
 
   return (
     <div className='search__form'>
@@ -188,7 +198,7 @@ function SearchForm() {
             id: 'label',
             labelContent: 'Open now'
           }}
-          checked={isOpenNow}
+          checked={openNow}
           onChange={handleInputChange}
         />
       </form>

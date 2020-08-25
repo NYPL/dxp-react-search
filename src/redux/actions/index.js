@@ -5,6 +5,7 @@ export const SET_AUTO_SUGGEST_INPUT_VALUE = 'SET_AUTO_SUGGEST_INPUT_VALUE';
 export const SET_OPEN_NOW = 'SET_OPEN_NOW';
 export const SET_SEARCH_RESULTS_COUNT = 'SET_SEARCH_RESULTS_COUNT';
 export const SET_PAGINATION = 'SET_PAGINATION';
+export const RESET_SEARCH = 'RESET_SEARCH';
 
 export function setSearchQuery(payload) {
   return {
@@ -34,12 +35,13 @@ export function setAutoSuggestInputValue(payload) {
   };
 }
 
-export function setSearchResultsCount(payload) {
+/*export function setSearchResultsCount(payload) {
   return {
     type: SET_SEARCH_RESULTS_COUNT,
     payload: payload
   };
 }
+*/
 
 export function setOpenNow(payload) {
   return {
@@ -51,6 +53,13 @@ export function setOpenNow(payload) {
 export function setPagination(payload) {
   return {
     type: SET_PAGINATION,
+    payload: payload
+  };
+}
+
+export function resetSearch(payload) {
+  return {
+    type: RESET_SEARCH,
     payload: payload
   };
 }

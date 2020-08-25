@@ -16,7 +16,6 @@ import {
   setMapPosition,
   setLocationInfoWindowId,
   setAutoSuggestInputValue,
-  setSearchResultsCount,
   setPagination
 } from './../../../redux/actions';
 // Components
@@ -63,18 +62,13 @@ function Locations() {
     if (data) {
       console.log('Locations useEffect');
 
-      // Dispatch redux state.
-      batch(() => {
-        dispatch(setSearchResultsCount({
-          resultsCount: data.allLocations.locations.length
-        }));
-
-        dispatch(setPagination({
-          pageNumber: pageNumber,
-          offset: offset,
-          pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
-        }));
-      });
+      // Dispatch redux action
+      dispatch(setPagination({
+        pageNumber: pageNumber,
+        offset: offset,
+        pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
+        resultsCount: data.allLocations.locations.length
+      }));
     }
   }, [data])
 

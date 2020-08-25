@@ -11,7 +11,8 @@ import {
   setMapPosition,
   setLocationInfoWindowId,
   setAutoSuggestInputValue,
-  setPagination
+  setPagination,
+  resetSearch
  } from './../../../redux/actions';
 
 function SearchResultsDetails() {
@@ -28,34 +29,21 @@ function SearchResultsDetails() {
     e.preventDefault();
 
     batch(() => {
-      dispatch(setSearchQuery({
-        searchQuery: '',
-        searchQueryGeoLat: '',
-        searchQueryGeoLng: ''
-      }));
-
+      // Map
       const defaultCenter = {
         lat: 40.7532,
         lng: -73.9822
       };
-
+      // Reset map
       dispatch(setMapPosition({
         mapCenter: defaultCenter,
         mapZoom: 12
       }));
-
       // Dispatch to reset the location id for info window.
       dispatch(setLocationInfoWindowId(null));
 
-      // Clear auto suggest input.
-      dispatch(setAutoSuggestInputValue(''));
-
-      // Reset pagination.
-      dispatch(setPagination({
-        offset: 0,
-        pageCount: 0,
-        pageNumber: 1
-      }));
+      // Reset search
+      dispatch(resetSearch());
     });
   }
 
@@ -65,14 +53,17 @@ function SearchResultsDetails() {
       <div className='locations__search-results-details'>
         Showing {resultsCount} locations near <strong>{searchQuery}</strong>
         &nbsp;&nbsp;
-        <DS.Link type="default">
-          <a
-            href="#"
-            onClick={onClearSearchTerms}
-          >
+        <DS.Button
+          buttonType="link"
+          iconName={null}
+          iconPosition={null}
+          id="button"
+          mouseDown={false}
+          onClick={onClearSearchTerms}
+          type="submit"
+        >
           Clear all search terms
-          </a>
-        </DS.Link>
+        </DS.Button>
       </div>
     );
   } else if (resultsCount === 0) {
@@ -80,12 +71,17 @@ function SearchResultsDetails() {
       <div className='locations__search-results-details'>
         <strong>No results found.</strong>
         &nbsp;&nbsp;
-        <DS.Link
-          href="#"
+        <DS.Button
+          buttonType="link"
+          iconName={null}
+          iconPosition={null}
+          id="button"
+          mouseDown={false}
           onClick={onClearSearchTerms}
+          type="submit"
         >
           Clear all search terms
-        </DS.Link>
+        </DS.Button>
       </div>
     )
   } else {
