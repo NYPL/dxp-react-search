@@ -75,7 +75,7 @@ function Location({ location }) {
     <div className='location'>
       <DS.Heading
         id={location.id}
-        level={3}
+        level={2}
         className='location__name'
       >
         <a href={locationLink}>
@@ -111,11 +111,13 @@ function Location({ location }) {
       )}
       <LocationDistance locationPoint={location.geoLocation} />
       <div className='location__links'>
-        <DS.Link
-          href="#"
-          onClick={onClickViewOnMap}
-        >
-          View on Map
+        <DS.Link type="default">
+          <a
+            href="#"
+            onClick={onClickViewOnMap}
+          >
+            View on Map
+          </a>
         </DS.Link>
         &nbsp;|&nbsp;
         <DS.Link

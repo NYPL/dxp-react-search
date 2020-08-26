@@ -4,7 +4,8 @@
   display: inline;
 }
 
-.react-autosuggest__input {
+.react-autosuggest__input,
+.react-autosuggest__input[type=text] {
   width: calc(100% - 68px);
   height: 34px;
   padding: 10px;
