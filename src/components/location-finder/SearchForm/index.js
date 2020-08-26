@@ -91,6 +91,13 @@ function SearchForm() {
     );
   }
 
+  // Custom input component to add aria-label.
+  function renderInputComponent(inputProps) {
+    return (
+      <input aria-label="Search locations" {...inputProps} />
+    );
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -172,6 +179,7 @@ function SearchForm() {
               dispatch(setAutoSuggestInputValue(newValue));
             },
           }}
+          renderInputComponent={renderInputComponent}
           highlightFirstSuggestion={true}
         />
         <DS.Button
