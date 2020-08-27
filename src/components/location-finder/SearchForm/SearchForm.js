@@ -25,13 +25,9 @@ Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 
 function SearchForm() {
   // Redux
-  const dispatch = useDispatch();
-  const {
-    autoSuggestInputValue,
-    reset
-  } = useSelector(state => state.search);
-
+  const { autoSuggestInputValue } = useSelector(state => state.search);
   const { infoWindowId } = useSelector(state => state.map);
+  const dispatch = useDispatch();
 
   function handleSubmit(event) {
     event.preventDefault();
