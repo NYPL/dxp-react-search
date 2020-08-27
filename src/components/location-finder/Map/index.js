@@ -24,8 +24,6 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
     infoWindowIsVisible
   } = useSelector(state => state.map);
 
-  const dispatch = useDispatch();
-
   // Apollo
   const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
