@@ -13,6 +13,8 @@ const initialState = {
   offset: 0,
   pageCount: 0,
   pageNumber: 1,
+  reset: false,
+  isSubmitted: false,
 };
 
 export default function search(state = initialState, action) {
@@ -22,7 +24,8 @@ export default function search(state = initialState, action) {
         ...state,
         searchQuery: action.payload.query,
         searchQueryGeoLat: action.payload.lat,
-        searchQueryGeoLng: action.payload.lng
+        searchQueryGeoLng: action.payload.lng,
+        isSubmitted: action.payload.isSubmitted
       };
 
     case SET_AUTO_SUGGEST_INPUT_VALUE:
@@ -57,7 +60,9 @@ export default function search(state = initialState, action) {
         pageCount: 0,
         pageNumber: 1,
         resultsCount: '',
-        openNow: false
+        openNow: false,
+        reset: true,
+        isSubmitted: false
       };
 
     default:
