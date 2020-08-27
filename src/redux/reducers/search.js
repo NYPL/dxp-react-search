@@ -12,7 +12,7 @@ const initialState = {
   resultsCount: '',
   offset: 0,
   pageCount: 0,
-  pageNumber: 1,
+  pageNumber: 1
 };
 
 export default function search(state = initialState, action) {

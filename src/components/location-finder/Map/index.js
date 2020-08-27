@@ -1,18 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 // Google map
 import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { compose } from 'recompose';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 // Redux
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setMapInfoWindow } from './../../../redux/actions';
+// Apollo
 import { useQuery } from '@apollo/react-hooks';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 
 const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
-  const { searchQueryGeoLat, searchQueryGeoLng, openNow } = useSelector(state => state.search);
-  const { mapCenter, mapZoom, locationInfoWindowId } = useSelector(state => state.map);
+  const {
+    searchQueryGeoLat,
+    searchQueryGeoLng,
+    openNow
+  } = useSelector(state => state.search);
+  const {
+    mapCenter,
+    mapZoom,
+    infoWindowId,
+    infoWindowIsVisible
+  } = useSelector(state => state.map);
 
   // Apollo
   const { loading, error, data } = useQuery(
@@ -56,17 +66,8 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
         />
       }
       {data.allLocations.locations.map(location => {
+        // Binds onClick from Map prop
         const onClick = props.onClick.bind(this, location);
-
-        // Logic for info window
-        // @TODO Need to clean this up and probs just manage
-        // the location id in redux state, not a mix of local state
-        // and redux state like it is now.
-        let showInfoWindow = false;
-        if (props.selectedMarker === location.id
-        || locationInfoWindowId === location.id) {
-          showInfoWindow = true;
-        }
 
         return (
           <Marker
@@ -81,7 +82,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
               lng: location.geoLocation.lng
             }}
           >
-            {showInfoWindow &&
+            {infoWindowIsVisible && infoWindowId === location.id &&
               <InfoWindow>
                 <div>
                   <div>{location.name}</div>
@@ -97,36 +98,26 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   );
 });
 
-// @TODO Change this to use hooks instead like rest of app?
-class Map extends Component {
-  constructor(props) {
-    super(props);
+function Map() {
+  const dispatch = useDispatch();
 
-    this.state = {
-      selectedMarker: false
-    }
+  function handleClick(location, event) {
+    dispatch(setMapInfoWindow({
+      infoWindowId: location.id,
+      infoWindowIsVisible: true
+    }));
   }
 
-  handleClick = (location, event) => {
-    // @TODO Change this Class component to functional, and
-    // dispatch redux action here.
-    this.setState({ selectedMarker: location.id })
-  }
-
-  render() {
-    return (
-      <MapWrapper
-        aria-hidden="true"
-        locations={this.props.locations}
-        selectedMarker={this.state.selectedMarker}
-        onClick={this.handleClick}
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `500px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
-    );
-  }
+  return (
+    <MapWrapper
+      aria-hidden="true"
+      onClick={handleClick}
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
+      loadingElement={<div style={{ height: `100%` }} />}
+      containerElement={<div style={{ height: `500px` }} />}
+      mapElement={<div style={{ height: `100%` }} />}
+    />
+  );
 }
 
 export default Map;

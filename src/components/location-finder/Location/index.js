@@ -2,7 +2,7 @@ import React from 'react';
 import * as DS from '@nypl/design-system-react-components';
 // Redux
 import { useDispatch } from 'react-redux';
-import { setLocationInfoWindowId, setMapPosition } from './../../../redux/actions';
+import { setMapInfoWindow, setMapPosition } from './../../../redux/actions';
 // Components
 import LocationDistance from './LocationDistance';
 
@@ -49,7 +49,10 @@ function Location({ location }) {
       mapZoom: 14
     }));
 
-    dispatch(setLocationInfoWindowId(location.id));
+    dispatch(setMapInfoWindow({
+      infoWindowId: location.id,
+      infoWindowIsVisible: true
+    }));
   }
 
   // Convert hours to 12 hour time format

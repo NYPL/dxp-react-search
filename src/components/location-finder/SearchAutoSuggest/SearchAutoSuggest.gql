@@ -1,5 +1,8 @@
 query LocationsQuery {
-  allLocations @client {
-    name
+  allLocations {
+    locations {
+      id
+      name
+    }
   }
 }
