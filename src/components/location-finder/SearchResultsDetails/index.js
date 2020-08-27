@@ -48,6 +48,10 @@ function SearchResultsDetails() {
       // Reset search
       dispatch(resetSearch());
     });
+
+    // @TODO Remove this and do it better in V2.
+    const openNowCheckbox = document.getElementById('isOpenNow');
+    openNowCheckbox.checked = false;
   }
 
 

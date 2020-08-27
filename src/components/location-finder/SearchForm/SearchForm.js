@@ -24,34 +24,19 @@ const northEastBound = '40.91, -73.77';
 Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 
 function SearchForm() {
-  // Local state
-  const [isOpenNow, setIsOpenNow] = useState(false);
-
-  /*useEffect(() => {
-    //console.log('SearchForm useEffect!');
-
-    if (reset && openNow) {
-      console.log('useEffect Reset!');
-      setIsOpenNow(false);
-    }
-  });
-  */
-
   // Redux
   const dispatch = useDispatch();
   const {
     autoSuggestInputValue,
-    openNow,
     reset
   } = useSelector(state => state.search);
 
   const { infoWindowId } = useSelector(state => state.map);
 
-  //console.log('isOpenNow: ' + isOpenNow);
-  //console.log('openNow: ' + openNow);
-
   function handleSubmit(event) {
     event.preventDefault();
+    // Get isOpenNow checkbox checked
+    const isOpenNowChecked = event.target.isOpenNow.checked;
 
     // Get latitude & longitude from address.
     Geocode.fromAddress(autoSuggestInputValue).then(
@@ -79,7 +64,7 @@ function SearchForm() {
           }));
 
           // Dispatch open now
-          dispatch(setOpenNow(isOpenNow));
+          dispatch(setOpenNow(isOpenNowChecked));
 
           // Reset pagination.
           dispatch(setPagination({
@@ -94,18 +79,6 @@ function SearchForm() {
         console.error(error);
       }
     );
-  }
-
-  function handleInputChange(event) {
-    console.log('handleInputChange!');
-    const target = event.target;
-    const value = target.name === 'isOpenNow' ? target.checked : target.value;
-    setIsOpenNow(value);
-    //setIsOpenNow(!isOpenNow);
-    /*dispatch(setOpenNow({
-      openNow: value,
-    }));
-    */
   }
 
   return (
@@ -126,15 +99,14 @@ function SearchForm() {
         >
           Search
         </DS.Button>
-        <label>
-          Open now
-          <input
-            name="isOpenNow"
-            type="checkbox"
-            checked={isOpenNow}
-            onChange={handleInputChange}
-          />
-        </label>
+        <DS.Checkbox
+          name="isOpenNow"
+          checkboxId="isOpenNow"
+          labelOptions={{
+            id: 'label',
+            labelContent: 'Open Now'
+          }}
+        />
       </form>
     </div>
   );
