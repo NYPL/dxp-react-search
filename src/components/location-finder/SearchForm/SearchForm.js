@@ -27,7 +27,7 @@ function SearchForm() {
   // Local state
   const [isOpenNow, setIsOpenNow] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     //console.log('SearchForm useEffect!');
 
     if (reset && openNow) {
@@ -35,6 +35,7 @@ function SearchForm() {
       setIsOpenNow(false);
     }
   });
+  */
 
   // Redux
   const dispatch = useDispatch();
@@ -46,8 +47,8 @@ function SearchForm() {
 
   const { infoWindowId } = useSelector(state => state.map);
 
-  console.log('isOpenNow: ' + isOpenNow);
-  console.log('openNow: ' + openNow);
+  //console.log('isOpenNow: ' + isOpenNow);
+  //console.log('openNow: ' + openNow);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -62,8 +63,7 @@ function SearchForm() {
           dispatch(setSearchQuery({
             query: autoSuggestInputValue,
             lat: response.results[0].geometry.location.lat,
-            lng: response.results[0].geometry.location.lng,
-            isSubmitted: true
+            lng: response.results[0].geometry.location.lng
           }));
 
           // Dispatch for map zoom and center
@@ -102,6 +102,10 @@ function SearchForm() {
     const value = target.name === 'isOpenNow' ? target.checked : target.value;
     setIsOpenNow(value);
     //setIsOpenNow(!isOpenNow);
+    /*dispatch(setOpenNow({
+      openNow: value,
+    }));
+    */
   }
 
   return (

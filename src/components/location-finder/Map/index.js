@@ -15,8 +15,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   const {
     searchQueryGeoLat,
     searchQueryGeoLng,
-    openNow,
-    isSubmitted
+    openNow
   } = useSelector(state => state.search);
   const {
     mapCenter,
