@@ -1,4 +1,4 @@
-import { SET_MAP_POSITION, SET_LOCATION_INFO_WINDOW_ID } from './../actions';
+import { SET_MAP_POSITION, SET_MAP_INFO_WINDOW } from './../actions';
 
 const initialState = {
   mapCenter: {
@@ -6,7 +6,8 @@ const initialState = {
     lng: -73.9822
   },
   mapZoom: 12,
-  locationInfoWindowId: false
+  infoWindowId: false,
+  infoWindowIsVisible: false
 };
 
 export default function search(state = initialState, action) {
@@ -18,10 +19,11 @@ export default function search(state = initialState, action) {
         mapZoom: action.payload.mapZoom
       };
 
-    case SET_LOCATION_INFO_WINDOW_ID:
+    case SET_MAP_INFO_WINDOW:
       return {
         ...state,
-        locationInfoWindowId: action.payload
+        infoWindowId: action.payload.infoWindowId,
+        infoWindowIsVisible: action.payload.infoWindowIsVisible
       };
 
     default:

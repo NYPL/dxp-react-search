@@ -9,7 +9,7 @@ import {
   useSelector
 } from 'react-redux';
 import {
-  setLocationInfoWindowId,
+  setMapInfoWindow,
   setAutoSuggestInputValue
 } from './../../../redux/actions';
 // Utils
@@ -77,12 +77,10 @@ function SearchAutoSuggest() {
   }
 
   function onSuggestionSelected(event, { suggestion }) {
-    // Grab the location id and keep in local state
-    // for use in form submit to send to redux.
-    //setLocationId(suggestion.id);
-
-    // Dispatch to set location id for info window.
-    dispatch(setLocationInfoWindowId(suggestion.id));
+    dispatch(setMapInfoWindow({
+      infoWindowId: suggestion.id,
+      infoWindowIsVisible: false
+    }));
   }
 
   return (

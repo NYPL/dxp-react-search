@@ -8,7 +8,7 @@ import {
 import {
   setSearchQuery,
   setMapPosition,
-  setLocationInfoWindowId,
+  setMapInfoWindow,
   setOpenNow,
   setPagination
 } from './../../../redux/actions';
@@ -44,6 +44,8 @@ function SearchForm() {
     reset
   } = useSelector(state => state.search);
 
+  const { infoWindowId } = useSelector(state => state.map);
+
   console.log('isOpenNow: ' + isOpenNow);
   console.log('openNow: ' + openNow);
 
@@ -70,8 +72,11 @@ function SearchForm() {
             mapZoom: 14
           }));
 
-          // Dispatch to set location id for info window.
-          //dispatch(setLocationInfoWindowId(locationId));
+          // Dispatch for map info window.
+          dispatch(setMapInfoWindow({
+            infoWindowId,
+            infoWindowIsVisible: true
+          }));
 
           // Dispatch open now
           dispatch(setOpenNow(isOpenNow));

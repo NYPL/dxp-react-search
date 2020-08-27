@@ -9,7 +9,7 @@ import {
 import {
   setSearchQuery,
   setMapPosition,
-  setLocationInfoWindowId,
+  setMapInfoWindow,
   setAutoSuggestInputValue,
   setPagination,
   resetSearch
@@ -40,7 +40,10 @@ function SearchResultsDetails() {
         mapZoom: 12
       }));
       // Dispatch to reset the location id for info window.
-      dispatch(setLocationInfoWindowId(null));
+      dispatch(setMapInfoWindow({
+        infoWindowId: false,
+        infoWindowIsVisible: false
+      }));
 
       // Reset search
       dispatch(resetSearch());
