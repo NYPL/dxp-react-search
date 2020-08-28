@@ -13,7 +13,7 @@
 @import './base/_mixins.scss';
 @import './../components/location-finder/Hero/Hero.scss';
 @import './../components/location-finder/SearchForm/SearchForm.scss';
-@import './../components/location-finder/SearchForm/SearchAutoSuggest.scss';
+@import './../components/location-finder/SearchAutoSuggest/SearchAutoSuggest.scss';
 @import './../components/location-finder/SearchHeader/SearchHeader.scss';
 @import './../components/location-finder/Locations/Locations.scss';
 @import './../components/location-finder/Location/Location.scss';
@@ -72,5 +72,3 @@
     margin-right: calc(0.5rem + (-50vw + 50%));
   }
 }
-
-
