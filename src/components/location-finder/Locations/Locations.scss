@@ -25,7 +25,13 @@
   .locations__list,
   .locations__map {
     @include breakpoint($breakpoint-medium) {
-      flex: 1 0 50%;
+      flex: 1 0 49%;
+    }
+  }
+
+  .locations__list {
+    @include breakpoint($breakpoint-medium) {
+      @include space-inline-xs;
     }
   }
 
