@@ -23,7 +23,8 @@ function filterByOpenNow(locations) {
         if (
           // Check for not null.
           hoursItem.open !== null && hoursItem.close !== null
-          // @TODO Check alerts: location._embedded.alerts for closings.
+          // Check alerts: location._embedded.alerts for closings.
+          && location._embedded.alerts === undefined || location._embedded.alerts.length === 0
           // Check for extended closing.
           && location.open
           // Check open/closed hours against now time.

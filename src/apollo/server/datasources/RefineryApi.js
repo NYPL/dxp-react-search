@@ -39,6 +39,18 @@ class RefineryApi extends RESTDataSource {
       }
     });
 
+    // Open status
+    let open = false;
+    if (
+      // Extended closing
+      location.open
+      // Alert closing
+      && location._embedded.alerts === undefined
+      || location._embedded.alerts.length === 0
+    ) {
+      open = true;
+    }
+
     return {
       id: location.slug,
       name: location.name,
@@ -59,7 +71,7 @@ class RefineryApi extends RESTDataSource {
         start: todayHoursStart,
         end: todayHoursEnd
       },
-      open: location.open,
+      open: open,
     }
   }
 
