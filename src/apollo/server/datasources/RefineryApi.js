@@ -39,14 +39,34 @@ class RefineryApi extends RESTDataSource {
       }
     });
 
+    // Alerts
+    const alerts = location._embedded.alerts;
+    let alertsOpenStatus;
+    // Check for any alerts.
+    if (alerts === undefined || alerts.length === 0) {
+      // No alerts, so set this status to true.
+      // Other checks below will determine if the location is open.
+      alertsOpenStatus = true;
+    } else {
+      // We have alerts, so map over them.
+      alerts.map(alert => {
+        // Check if closed_for key exists
+        // If so, set the status to false.
+        if ('closed_for' in alert) {
+          alertsOpenStatus = false;
+        } else {
+          alertsOpenStatus = true;
+        }
+      });
+    }
+
     // Open status
     let open = false;
     if (
       // Extended closing
       location.open
       // Alert closing
-      && location._embedded.alerts === undefined
-      || location._embedded.alerts.length === 0
+      && alertsOpenStatus
     ) {
       open = true;
     }
@@ -87,7 +107,7 @@ class RefineryApi extends RESTDataSource {
   }
 
   async getAllLocations(args) {
-    const response = await this.get('/locations/v1.0/locations?page[size]=300');
+    const response = await this.get('/locations/v1.0/locations');
 
     if (Array.isArray(response.locations)) {
       let results;
