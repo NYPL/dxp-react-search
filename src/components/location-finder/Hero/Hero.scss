@@ -3,7 +3,7 @@
   .hero__inner {
     @include wrapper;
     @include ds-layout-override;
-    
+
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -22,30 +22,47 @@
     flex: 0 0 50%;
     padding: $space-l 0;
   }
-  
+
   svg {
     width: auto;
     height: 55px;
     fill: $white;
     @include breakpoint($breakpoint-large) {
-      height: 70px; 
+      height: 70px;
     }
   }
 }
 
 .hero__content {
+  width: 100%;
   padding: $space-m $space-s;
-  
+
   color: $white;
-  
+
   @include breakpoint($breakpoint-large) {
     flex: 0 0 50%;
   }
-  
+
   a {
     color: $white;
     &:hover {
       text-decoration: none;
+    }
+  }
+}
+
+// IE11 only
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .hero__image {
+    @include breakpoint($breakpoint-large) {
+      width: 50%;
+      flex: none;
+    }
+  }
+  .hero__content {
+    @include breakpoint($breakpoint-large) {
+      width: 50%;
+      flex: none;
     }
   }
 }
