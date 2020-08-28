@@ -16,6 +16,27 @@ function filterByOpenNow(locations) {
   });
 
   return locations.reduce((accumlator, location) => {
+    // Alerts
+    const alerts = location._embedded.alerts;
+    let alertsOpenStatus;
+    // Check for any alerts.
+    if (alerts === undefined || alerts.length === 0) {
+      // No alerts, so set this status to true.
+      // Other checks below will determine if the location is open.
+      alertsOpenStatus = true;
+    } else {
+      // We have alerts, so map over them.
+      alerts.map(alert => {
+        // Check if closed_for key exists
+        // If so, set the status to false.
+        if ('closed_for' in alert) {
+          alertsOpenStatus = false;
+        } else {
+          alertsOpenStatus = true;
+        }
+      });
+    }
+
     location.hours.regular.map(hoursItem => {
       // Find today in weekly hours.
       if (hoursItem.day.replace('.','') === weekday) {
@@ -23,22 +44,14 @@ function filterByOpenNow(locations) {
         if (
           // Check for not null.
           hoursItem.open !== null && hoursItem.close !== null
-          // Check alerts: location._embedded.alerts for closings.
-          && location._embedded.alerts === undefined || location._embedded.alerts.length === 0
+          // Check for alert closings.
+          && alertsOpenStatus
           // Check for extended closing.
           && location.open
           // Check open/closed hours against now time.
           && hoursItem.open <= nowTime && hoursItem.close >= nowTime
         ) {
-          // @TODO Remove debug code.
-          /*
-          console.log(location.name);
-          console.log('location open hours: ' + hoursItem.open);
-          console.log('location close hours: ' + hoursItem.close);
-          console.log('now time: ' + nowTime);
-          console.log(typeof nowTime);
-          console.log(typeof hoursItem.close);
-          */
+          // Add location as open to accumulator.
           accumlator.push(location);
         }
       }

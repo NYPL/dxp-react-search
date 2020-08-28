@@ -82,7 +82,7 @@ function Locations() {
   }
 
   // No results.
-  if (data.allLocations.length === 0) {
+  if (data.allLocations.locations.length === 0) {
     return (
       <div className='no-results'>Try adjusting search terms or filters.</div>
     );
