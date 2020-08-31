@@ -58,7 +58,7 @@ function SearchResultsDetails() {
   if (searchQuery && resultsCount) {
     return (
       <div className='locations__search-results-details'>
-        Showing {resultsCount} locations near <strong>{searchQuery}</strong>
+        Showing {resultsCount} results near <strong>{searchQuery}</strong>, by distance
         &nbsp;&nbsp;
         <DS.Button
           buttonType="link"
