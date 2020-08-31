@@ -1,39 +1,67 @@
 .bottom-promo {
-	@include space-stack-l;
-	
-  @include breakpoint($breakpoint-large) {
-		margin-left: calc(-50vw + 50%);
-		margin-right: calc(-50vw + 50%);
+  @include space-stack-l;
+
+  @include breakpoint($breakpoint-medium) {
+    background: linear-gradient(90deg, #FFFBF8 50%, $gray-xlight 50%);
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);    
   }
   
   .row {
     display: flex;
     flex-flow: column nowrap;
-    
+
     @include breakpoint($breakpoint-medium) {
+      @include wrapper;
+      @include ds-layout-override;
+      
       flex-flow: row nowrap;
     }
   }
-  
+
   .column {
     @include clearfix;
-    padding: $space-l;
+
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);    
 
     @include breakpoint($breakpoint-medium) {
       flex: 0 0 50%;
+      margin: 0;
     }
 
     @include breakpoint($breakpoint-large) {
       flex: 0 0 50%;
-      padding: $space-l $space-xl;
     }
 
     &.left {
+      @include space-inset-l;
+      
       background-color: #FFFBF8;
+      
+      @include breakpoint($breakpoint-medium) {
+        @include space-inset-s;
+        
+        background-color: none;
+      }
+      @include breakpoint($breakpoint-large) {
+        padding: $space-l $space-l $space-l 0;
+      }
     }
 
     &.right {
+      @include space-inset-l;
+      
       background-color: $gray-xlight;
+      
+      @include breakpoint($breakpoint-medium) {
+        @include space-inset-s;
+        
+        background-color: none;
+      }
+      @include breakpoint($breakpoint-large) {
+        padding: $space-l 0 $space-l $space-l;
+      }
     }
 
     .promo-card {
@@ -63,10 +91,10 @@
           margin: 0;
         }
       }
-        
+
       .figure {
         margin: 0;
-        
+
         img {
           width: 100%;
         }
@@ -91,6 +119,21 @@
 
     .promo-description {
       font-size: 0.875rem;
+    }
+  }
+}
+
+// IE11 only
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .bottom-promo {
+    margin-left: calc(0.5rem + (-50vw + 50%));
+    margin-right: calc(0.5rem + (-50vw + 50%));
+
+    .column {
+      @include breakpoint($breakpoint-medium) {
+        flex: none;
+        width: 50%;
+      }
     }
   }
 }
