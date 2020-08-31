@@ -2,6 +2,7 @@ import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
 import sortByDistance from './../../../utils/sortByDistance';
 import filterByOpenNow from './../../../utils/filterByOpenNow';
+import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
 import sortByName from './../../../utils/sortByName';
 
 class RefineryApi extends RESTDataSource {
@@ -40,25 +41,7 @@ class RefineryApi extends RESTDataSource {
     });
 
     // Alerts
-    const alerts = location._embedded.alerts;
-    let alertsOpenStatus;
-    // Check for any alerts.
-    if (alerts === undefined || alerts.length === 0) {
-      // No alerts, so set this status to true.
-      // Other checks below will determine if the location is open.
-      alertsOpenStatus = true;
-    } else {
-      // We have alerts, so map over them.
-      alerts.map(alert => {
-        // Check if closed_for key exists
-        // If so, set the status to false.
-        if ('closed_for' in alert) {
-          alertsOpenStatus = false;
-        } else {
-          alertsOpenStatus = true;
-        }
-      });
-    }
+    const alertsOpenStatus = checkAlertsOpenStatus(location);
 
     // Open status
     let open = false;
