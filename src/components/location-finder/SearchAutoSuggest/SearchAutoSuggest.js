@@ -106,7 +106,7 @@ function SearchAutoSuggest() {
           },
         }}
         renderInputComponent={renderInputComponent}
-        highlightFirstSuggestion={true}
+        highlightFirstSuggestion={false}
       />
     </Fragment>
   );
