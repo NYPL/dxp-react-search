@@ -8,6 +8,7 @@
 
   .button {
     width: 68px;
+    display: initial;
 
     @include breakpoint($breakpoint-large) {
       width: auto;
