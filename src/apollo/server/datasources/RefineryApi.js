@@ -2,6 +2,7 @@ import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
 import sortByDistance from './../../../utils/sortByDistance';
 import filterByOpenNow from './../../../utils/filterByOpenNow';
+import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
 import sortByName from './../../../utils/sortByName';
 
 class RefineryApi extends RESTDataSource {
@@ -39,6 +40,20 @@ class RefineryApi extends RESTDataSource {
       }
     });
 
+    // Alerts
+    const alertsOpenStatus = checkAlertsOpenStatus(location);
+
+    // Open status
+    let open = false;
+    if (
+      // Extended closing
+      location.open
+      // Alert closing
+      && alertsOpenStatus
+    ) {
+      open = true;
+    }
+
     return {
       id: location.slug,
       name: location.name,
@@ -59,7 +74,7 @@ class RefineryApi extends RESTDataSource {
         start: todayHoursStart,
         end: todayHoursEnd
       },
-      open: location.open,
+      open: open,
     }
   }
 
@@ -75,7 +90,7 @@ class RefineryApi extends RESTDataSource {
   }
 
   async getAllLocations(args) {
-    const response = await this.get('/locations/v1.0/locations?page[size]=300');
+    const response = await this.get('/locations/v1.0/locations');
 
     if (Array.isArray(response.locations)) {
       let results;

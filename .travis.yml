@@ -1,5 +1,4 @@
 language: node_js
-dist: trusty
 
 node_js:
 - 14
@@ -20,15 +19,13 @@ env:
   global:
   - REMOTE_IMAGE_URL_NYPL_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
   - REMOTE_IMAGE_URL_NYPL=463786892988.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
-  - secure: qTAJ6ojzZpIVnywqBMOR9suy2aQa+XWIi/tmy1dhyI0uH07dTpFLMXPkoiyj6OykaPJU8blUFUXRHRtdnfspWGKaXAGdBOLvf1gdiRyRvW3MXPzQ03BhHrSM4D56ADq70FBtkscHuXYEu+edXQZL5Z2/LdrpXKIjzDjwx0xpr11z1B9peW0Ild1FS7NaD3gOCxDrOxREwGINbhhvquSycSiGWO87Huo2pUi45hCoiBPQJyHMxN6Xlwo+OTx36/EkQHTQ9Mdgwai81zZNFmc1DIhMBa/w99DC9jV3X//NyhQUWfxRlYRQ2FvuR1Dky4VfU5qwL+f8Gs2zgPRka5A/BQYPTtaX5IRUcAoAIrK2Z1bPjxJ7g3iqg07hM6KWXAVYJC0/v2zfFYcUfeKcEzyTIX6xJUw43ApOal5G9tFHjO/pvHFYHIlkG9zvqCnoUAvzYcE4hRyF9VeYygp7wlrT3D0yrvtGSyzigX7eq3LOoOCFAHFDtkMvxZUcmxwY7wqC1vJiJzW3OmNe139rnx9C5hEFdCWjduMieqI6f3QTI65Q0lhLk55W3zUrakS1LFq/vHEJ0yRN7f0kt+O15OZG/RnjrAC+O1eE0Cos9WFTlrhNbYTCgT58Vx/ept375TnnnEfBe07nF5VTl1ulKHZDmtIUuYSK/HOssv5m3mcZkhM=
+  - secure: XDvANpolEs/OcEBFESqyM5OCtjbGVfIrpYZbNquHFz0JzUHUMNbj5CHtKuhGGOex19B3XZeGnUGutLc/zZ9EH/q8gYKnksU1tUdLino7N7GR6JV7sbAiehsBsWIis3+4lS7Jf8LsuSr7tWf8HCMryUNuWXt3vVvq+cx+aQ5brCzdrW34uZJkp4arAEedkA6I/TDcwZpXxTJuU4/1qRad0A5jk3KZupBwZLzggZPA7oEGdpmZVfONBe4C3ZJ0BrrjFAoXhvIhPGkOOKKCn03pX28DnGHnDj79GbIXd6iZlLr701l4K31EmRvPBwRJ4npGRbIww36eeytNpaiOxzPKFA52GP8nv6mNOUJlcW5mayhTHAxgpvt4kRTF04MtN6NFahuFgyk0sNQiR+mctiejm7YsUQNjuTtxZ8DOUV7ZfUoH1Hw/0aHUYWdmtk38j2zXk7/Zdx9YyScc+om05pL3nqN69rgjnVhBQckOm0JHPWltaRidhEV5clv4Tx7DiQl0vH/tSkGE4K6xnzZxv0xEHZpg3xc1rVMHOb69SSkRqlMJn8KIkGVFO7Ic1hVpXyocM0Xa1eZDIZCLB3Oq6/F8OdUJZ37Ie8+pUZUhXcYTA+9gdm4w2TJnAEkhL4PhJYCUS+S1+IoU6TzuLIjATJrH0uhKoWvF6S7/MN9dD8lG+KU=
 
 install: npm install
 
 before_script:
   - cp .travis/.env .
   - ./provisioning/set-env
-
-# script: npm test
 
 after_success:
   - echo 'All tests passed; Preparing to deploy'
