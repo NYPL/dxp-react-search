@@ -28,7 +28,6 @@
     "graphql": "^14.7.0",
     "graphql-tag": "2.10.3",
     "micro-cors": "^0.1.1",
-    "micro-cors-multiple-allow-origin": "^1.0.1",
     "next": "latest",
     "next-transpile-modules": "^4.1.0",
     "prop-types": "^15.6.2",
