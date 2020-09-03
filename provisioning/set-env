@@ -3,7 +3,7 @@
 # Set production values
 GRAPHQL_API_URL=https://scout.nypl.org/api/graphql
 GA_TRACKING_ID=UA-1420324-3
-ALLOWED_ORIGIN=https://nypl.org
+ALLOWED_ORIGIN=https://www.nypl.org
 
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
