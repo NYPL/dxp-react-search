@@ -34,6 +34,11 @@
   // IE11 only
   // DS uses CSS variables for color and space that won't work in ie11.
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .react-autosuggest__input {
+      border: 1px solid $gray-medium;
+      padding: $space-xs;
+    }
+    
     .button {
       padding: $space-xs;
       border-radius: 2px;
@@ -46,6 +51,10 @@
     }
 
     .button__icon--icon-left {
+      margin-right: $space-xs;
+    }
+
+    .checkbox__input {
       margin-right: $space-xs;
     }
   }
