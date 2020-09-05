@@ -34,32 +34,24 @@
     }
 
     &.left {
-      @include space-inset-l;
+      @include space-inset-s;
       
       background-color: #FFFBF8;
       
       @include breakpoint($breakpoint-medium) {
-        @include space-inset-s;
-        
-        background-color: none;
-      }
-      @include breakpoint($breakpoint-large) {
-        padding: $space-l $space-l $space-l 0;
+        background-color: transparent;
+        padding: $space-s $space-s $space-s 0;
       }
     }
 
     &.right {
-      @include space-inset-l;
+      @include space-inset-s;
       
       background-color: $gray-xlight;
       
       @include breakpoint($breakpoint-medium) {
-        @include space-inset-s;
-        
-        background-color: none;
-      }
-      @include breakpoint($breakpoint-large) {
-        padding: $space-l 0 $space-l $space-l;
+        background-color: transparent;
+        padding: $space-s 0 $space-s $space-s;
       }
     }
 
