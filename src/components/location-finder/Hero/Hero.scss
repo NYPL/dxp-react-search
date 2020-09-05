@@ -20,6 +20,7 @@
   width: 100%;
 
   @include breakpoint($breakpoint-large) {
+    @include space-stack-none;
     flex: 0 0 50%;
   }
 
