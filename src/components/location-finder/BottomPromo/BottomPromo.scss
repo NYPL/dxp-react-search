@@ -13,7 +13,6 @@
 
     @include breakpoint($breakpoint-medium) {
       @include wrapper;
-      @include ds-layout-override;
       
       flex-flow: row nowrap;
     }

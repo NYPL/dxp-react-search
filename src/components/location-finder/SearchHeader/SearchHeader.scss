@@ -24,6 +24,5 @@
 
   .search-header__inner {
     @include wrapper;
-    @include ds-layout-override;
   }
 }

@@ -2,8 +2,7 @@
   background-color: $nypl-red-regular;
   .hero__inner {
     @include wrapper;
-    @include ds-layout-override;
-
+    
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
