@@ -39,8 +39,7 @@
   margin: #{$v-margin} auto;
   padding: #{$v-padding} #{$h-padding};
 
-  // This comes from the DS, but doesn't seem to work correctly.
-  @include breakpoint(max-width $container-max-width) {
+  @include breakpoint($container-max-width) {
     padding-left:
       calc(
         #{$h-padding} + calc(-50vw + calc(#{$container-max-width} / 2))
