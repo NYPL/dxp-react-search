@@ -4,10 +4,9 @@
 function filterBySearchInput(data, searchTerm) {
   return data.filter(function (elem) {
     if (elem.name) {
-      return cleanText(elem.name)
-        .indexOf(
-          cleanText(searchTerm)
-        ) >= 0;
+      return (cleanText(elem.name).indexOf(cleanText(searchTerm)) >= 0 ||
+        cleanText(elem.locality).indexOf(cleanText(searchTerm)) >= 0 ||
+        cleanText(elem.postal_code).indexOf(cleanText(searchTerm)) >= 0 );
     }
   });
 }
