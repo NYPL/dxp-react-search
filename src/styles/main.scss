@@ -32,12 +32,6 @@
   @include ds-layout-override;
 }
 
-.breadcrumbs__list {
-  @include breakpoint(max-width $breakpoint-large) {
-    padding: 0 1.5rem;
-  }
-}
-
 // @TODO Remove this after updating to DS 0.12.0
 .nypl--locations .footer {
   box-sizing: content-box;
