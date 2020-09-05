@@ -1,5 +1,10 @@
 .search__form {
 
+  form {
+    display: flex;
+    flex-flow: wrap;
+  }
+  
   // Search text
   input[type="text"]:focus {
     outline: 1px solid var(--ui-focus);
@@ -7,40 +12,23 @@
   }
 
   .button {
-    width: 68px;
-
-    @include breakpoint($breakpoint-large) {
-      width: auto;
-    }
-
-    .button__icon {
-      display: none;
-      @include breakpoint($breakpoint-large) {
-        display: inline-block;
-      }
+    @include breakpoint($breakpoint-medium) {
+      @include space-inline-s;
     }
   }
 
   // Open now
   .checkbox {
-    display: block;
-    padding-top: $space-xs;
+    width: 100%;
+    margin-top: $space-s;
 
     @include breakpoint($breakpoint-large) {
-      padding: 0 1em;
-      display: inline;
+      width: auto;
+      margin-top: 0;
     }
-  }
-
-  .checkbox input {
-    margin-right: .5rem;
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-  }
-
-  .checkbox label {
-    display: inline;
+    label {
+      white-space: nowrap;
+    }
   }
 
   // IE11 only

@@ -1,19 +1,8 @@
 // React Autosuggest
 .react-autosuggest__container {
-  position: relative;
-  display: inline;
-}
-
-.react-autosuggest__input,
-.react-autosuggest__input[type=text] {
-  width: calc(100% - 68px);
-  height: 34px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #aaa;
-
+  flex: 0 2 70%;
   @include breakpoint($breakpoint-large) {
-    width: 618px;
+    flex: 0 0 50%;
   }
 }
 
