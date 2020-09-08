@@ -20,6 +20,7 @@
   // Open now
   .checkbox {
     width: 100%;
+    align-items: center;
     margin-top: $space-s;
 
     @include breakpoint($breakpoint-large) {
@@ -28,6 +29,11 @@
     }
     label {
       white-space: nowrap;
+      margin-bottom: 0;
+    }
+    input {
+      width: 20px;
+      height: 20px;
     }
   }
 
