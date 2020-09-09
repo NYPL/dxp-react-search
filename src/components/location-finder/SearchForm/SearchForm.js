@@ -86,13 +86,18 @@ function SearchForm() {
         <SearchAutoSuggest />
         <DS.Button
           buttonType="filled"
-          iconDecorative
-          iconName="search_small"
-          iconPosition="icon-left"
           id="button"
           mouseDown={false}
           type="submit"
         >
+          <DS.Icon
+            decorative
+            modifiers={[
+              'small',
+              'icon-left'
+            ]}
+            name="search_small"
+          />
           Search
         </DS.Button>
         <DS.Checkbox

@@ -23,7 +23,7 @@ function BottomPromo() {
                   className="promo-link"
                 >
                   <DS.Image
-                    altText={value.name}
+                    alt={value.name}
                     imageCaption={value.name}
                     imageCredit={null}
                     isDecorative

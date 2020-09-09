@@ -12,7 +12,7 @@
 		padding-bottom: $space-xxs;
 	}
   
-  padding: $space-m $space-s;
+  padding: $space-m 0;
 
   background: $gray-xlight;
 
@@ -24,6 +24,5 @@
 
   .search-header__inner {
     @include wrapper;
-    @include ds-layout-override;
   }
 }

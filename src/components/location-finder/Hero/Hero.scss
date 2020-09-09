@@ -1,8 +1,9 @@
 .hero {
   background-color: $nypl-red-regular;
+  padding: $space-l 0;
+  
   .hero__inner {
     @include wrapper;
-    @include ds-layout-override;
 
     display: flex;
     flex-flow: column nowrap;
@@ -15,12 +16,12 @@
 }
 
 .hero__image {
+  @include space-stack-m;
   width: 100%;
-  padding: $space-m $space-s 0;
 
   @include breakpoint($breakpoint-large) {
+    @include space-stack-none;
     flex: 0 0 50%;
-    padding: $space-l 0;
   }
 
   svg {
@@ -35,7 +36,6 @@
 
 .hero__content {
   width: 100%;
-  padding: $space-m $space-s;
 
   color: $white;
 

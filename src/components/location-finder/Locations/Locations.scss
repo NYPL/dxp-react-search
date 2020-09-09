@@ -1,5 +1,5 @@
 .locations {
-  padding: $space-l $space-s;
+  padding: $space-l 0;
 
   display: flex;
   flex-flow: column nowrap;
@@ -36,8 +36,8 @@
   }
 
   .locations-gmap-anchor {
+    @include space-stack-m;
     display: block;
-    margin: $space-s 0;
 
     @include breakpoint($breakpoint-medium) {
       display: none;

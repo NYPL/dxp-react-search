@@ -5,6 +5,7 @@
 @import '~breakpoint-sass/stylesheets/breakpoint';
 
 // Internal app styles
+@import './base/_base.scss';
 @import './base/_focus.scss';
 @import './base/_breakpoints.scss';
 @import './space/_space.scss';
@@ -29,12 +30,6 @@
 .main,
 .breadcrumbs__list {
   @include ds-layout-override;
-}
-
-.breadcrumbs__list {
-  @include breakpoint(max-width $breakpoint-large) {
-    padding: 0 1.5rem;
-  }
 }
 
 // @TODO Remove this after updating to DS 0.12.0
