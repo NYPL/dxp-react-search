@@ -20,6 +20,10 @@
     @include breakpoint($breakpoint-medium) {
       width: 100%;
     }
+
+    button {
+      display: initial;
+    }
   }
 
   .locations__list,
