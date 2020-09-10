@@ -75,15 +75,15 @@
 @mixin scroll-style() {
   scrollbar-width: auto;
   scrollbar-color: #888 $gray-warm-xlight;
-  
+
   &::-webkit-scrollbar {
     width: 0.5rem;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: $gray-warm-xlight;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 10px;
