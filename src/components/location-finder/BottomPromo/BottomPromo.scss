@@ -117,9 +117,6 @@
 // IE11 only
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   .bottom-promo {
-    margin-left: calc(0.5rem + (-50vw + 50%));
-    margin-right: calc(0.5rem + (-50vw + 50%));
-
     .column {
       @include breakpoint($breakpoint-medium) {
         flex: none;

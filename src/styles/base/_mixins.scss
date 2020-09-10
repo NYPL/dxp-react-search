@@ -38,17 +38,6 @@
   width: 100%;
   margin: #{$v-margin} auto;
   padding: #{$v-padding} #{$h-padding};
-
-  @include breakpoint($container-max-width) {
-    padding-left:
-      calc(
-        #{$h-padding} + calc(-50vw + calc(#{$container-max-width} / 2))
-      );
-    padding-right:
-      calc(
-        #{$h-padding} + calc(-50vw + calc(#{$container-max-width} / 2))
-      );
-  }
 }
 
 // This is a temporary fix for issues with the edge spacing,
@@ -71,8 +60,6 @@
 @mixin breakout($v-padding: $space) {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    padding-left: calc(#{$v-padding} + calc(-50vw + 50%));
-    padding-right: calc(#{$v-padding} + calc(-50vw + 50%));
 }
 
 // Use the screenreader-only mixin for elements that you want to be visually hidden, but still want screenreaders to read out
@@ -88,15 +75,15 @@
 @mixin scroll-style() {
   scrollbar-width: auto;
   scrollbar-color: #888 $gray-warm-xlight;
-  
+
   &::-webkit-scrollbar {
     width: 0.5rem;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: $gray-warm-xlight;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 10px;
