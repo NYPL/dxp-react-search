@@ -90,10 +90,8 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
               <InfoWindow>
                 <div>
                   <div>
-                    <DS.Link
-                      href={locationLink}
-                    >
-                    {location.name}
+                    <DS.Link href={locationLink}>
+                      {location.name}
                     </DS.Link>
                   </div>
                   <div>{location.address_line1}</div>
