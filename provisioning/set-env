@@ -3,12 +3,15 @@
 # Set production values
 GRAPHQL_API_URL=https://scout.nypl.org/api/graphql
 GA_TRACKING_ID=UA-1420324-3
+ALLOWED_ORIGIN=https://www.nypl.org
 
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
+  ALLOWED_ORIGIN=https://qa-www.nypl.org
 fi
 
 echo -e "\nNEXT_PUBLIC_GRAPHQL_API=$GRAPHQL_API_URL" >> .env
 echo -e "\nNEXT_PUBLIC_GOOGLE_MAPS_API=$NEXT_PUBLIC_GOOGLE_MAPS_API" >> .env
 echo -e "\nNEXT_PUBLIC_GA_TRACKING_ID=$GA_TRACKING_ID" >> .env
+echo -e "\nNEXT_PUBLIC_ALLOWED_ORIGIN=$ALLOWED_ORIGIN" >> .env
