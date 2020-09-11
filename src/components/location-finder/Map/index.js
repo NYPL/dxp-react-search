@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import * as DS from '@nypl/design-system-react-components';
 // Google map
 import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { compose } from 'recompose';
@@ -69,6 +70,9 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
         // Binds onClick from Map prop
         const onClick = props.onClick.bind(this, location);
 
+        // Location link
+        const locationLink = `https://www.nypl.org/locations/${location.id}`;
+
         return (
           <Marker
             key={location.id}
@@ -85,7 +89,11 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
             {infoWindowIsVisible && infoWindowId === location.id &&
               <InfoWindow>
                 <div>
-                  <div>{location.name}</div>
+                  <div>
+                    <DS.Link href={locationLink}>
+                      {location.name}
+                    </DS.Link>
+                  </div>
                   <div>{location.address_line1}</div>
                   <div>{location.locality}, {location.administrative_area}, {location.postal_code}</div>
                 </div>
