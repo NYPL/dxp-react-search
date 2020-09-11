@@ -3,6 +3,8 @@ query LocationsQuery {
     locations {
       id
       name
+      locality
+      postal_code
     }
   }
 }
