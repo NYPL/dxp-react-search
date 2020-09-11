@@ -5,15 +5,72 @@
 @import '~breakpoint-sass/stylesheets/breakpoint';
 
 // Internal app styles
-@import './breakpoints/_breakpoints.scss';
+@import './base/_base.scss';
+@import './base/_focus.scss';
+@import './base/_breakpoints.scss';
 @import './space/_space.scss';
+@import './typography/_typography.scss';
 @import './colors/_color-vars.scss';
+@import './base/_mixins.scss';
 @import './../components/location-finder/Hero/Hero.scss';
 @import './../components/location-finder/SearchForm/SearchForm.scss';
-@import './../components/location-finder/SearchForm/SearchAutoSuggest.scss';
+@import './../components/location-finder/SearchAutoSuggest/SearchAutoSuggest.scss';
 @import './../components/location-finder/SearchHeader/SearchHeader.scss';
 @import './../components/location-finder/Locations/Locations.scss';
 @import './../components/location-finder/Location/Location.scss';
+@import './../components/location-finder/Map/Map.scss';
 @import './../components/location-finder/BottomPromo/BottomPromo.scss';
 @import './../components/location-finder/RightRail/RightRail.scss';
 @import './../components/shared/LoadingSkeleton/LoadingSkeleton.scss';
+
+
+// shared/layouts > Main.js
+// This is a temporary fix for issues with the edge spacing,
+// can remove when the layout gets fixed upstream in the DS.
+// https://github.com/NYPL/nypl-design-system/issues/342
+
+.main,
+.breadcrumbs__list {
+  @include ds-layout-override;
+}
+
+// @TODO Remove this after updating to DS 0.12.0
+.nypl--locations .footer {
+  box-sizing: content-box;
+}
+
+// IE11 only
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  // Add your CSS here
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+
+  .main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .breadcrumbs {
+    background-color: $nypl-red-muted-regular;
+    padding-bottom: $space-xs;
+    padding-top: $space-xs;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .breadcrumbs__list {
+    color: $white;
+    padding: 0 1rem;
+    @include breakpoint(max-width $max-width) {
+      padding: 0 1rem;
+    }
+    @include breakpoint(max-width $breakpoint-large) {
+      padding: 0 1.5rem;
+    }
+  }
+
+  .content-header {
+    margin-left: calc(0.5rem + (-50vw + 50%));
+    margin-right: calc(0.5rem + (-50vw + 50%));
+  }
+}

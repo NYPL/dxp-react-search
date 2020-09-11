@@ -1,6 +1,9 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
 import sortByDistance from './../../../utils/sortByDistance';
+import filterByOpenNow from './../../../utils/filterByOpenNow';
+import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
+import sortByName from './../../../utils/sortByName';
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -37,6 +40,20 @@ class RefineryApi extends RESTDataSource {
       }
     });
 
+    // Alerts
+    const alertsOpenStatus = checkAlertsOpenStatus(location);
+
+    // Open status
+    let open = false;
+    if (
+      // Extended closing
+      location.open
+      // Alert closing
+      && alertsOpenStatus
+    ) {
+      open = true;
+    }
+
     return {
       id: location.slug,
       name: location.name,
@@ -57,21 +74,88 @@ class RefineryApi extends RESTDataSource {
         start: todayHoursStart,
         end: todayHoursEnd
       },
-      open: location.open,
+      open: open,
+    }
+  }
+
+  // Determine if we return all results or paginate.
+  processResults(results, args) {
+    // Check for limit and offset, if so, paginate results.
+    if (args.limit) {
+      console.log('offset: ' + args.offset);
+      return results.slice(args.offset, args.limit + args.offset);
+    } else {
+      return results;
     }
   }
 
   async getAllLocations(args) {
-    const response = await this.get('/locations/v1.0/locations?page[size]=300');
+    const response = await this.get('/locations/v1.0/locations');
 
     if (Array.isArray(response.locations)) {
-      if (args.sortByDistance) {
-        console.log('sort by distance');
-        const sortedLocations = sortByDistance(args.sortByDistance, response.locations);
-        return sortedLocations.map(location => this.locationNormalizer(location));
-      } else {
-        console.log('no sort');
-        return response.locations.map(location => this.locationNormalizer(location));
+      let results;
+      let totalResultsCount = Object.keys(response.locations).length;
+
+      // Sort by distance only.
+      if (args.sortByDistance && !args.filter) {
+        console.log('sortByDistance only');
+        results = sortByDistance(args.sortByDistance, response.locations).map(location =>
+          this.locationNormalizer(location)
+        );
+      }
+
+      // Filter only.
+      if (args.filter && !args.sortByDistance) {
+        // Open now only.
+        if (args.filter.openNow) {
+          console.log('filter: open now only');
+          results = filterByOpenNow(response.locations).map(location =>
+            this.locationNormalizer(location)
+          );
+          // We're removing locations from results, so set the new total results count.
+          totalResultsCount = results.length;
+        }
+      }
+
+      if (args.sortByDistance && args.filter) {
+        // Sort by distance && filter by open now.
+        if (
+          args.filter.openNow
+          && args.sortByDistance.originLat
+          && args.sortByDistance.originLng
+        ) {
+          console.log('both!');
+          results = sortByDistance(args.sortByDistance, filterByOpenNow(response.locations)).map(location =>
+            this.locationNormalizer(location)
+          );
+          // We're removing locations from results, so set the new total results count.
+          totalResultsCount = results.length;
+        }
+        // Sort by distance only.
+        else if (
+          args.sortByDistance.originLat
+          && args.sortByDistance.originLng
+        ) {
+          console.log('filter is false, sort by distance only.');
+          results = sortByDistance(args.sortByDistance, response.locations).map(location =>
+            this.locationNormalizer(location)
+          );
+        }
+      }
+
+      // Default sort, alphabetical.
+      if (!results) {
+        console.log('default sort!');
+        results = response.locations.sort(sortByName).map(location =>
+          this.locationNormalizer(location)
+        );
+      }
+
+      return {
+        locations: this.processResults(results, args),
+        pageInfo: {
+          totalItems: totalResultsCount
+        }
       }
     } else {
       return [];

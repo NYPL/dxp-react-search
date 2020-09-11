@@ -1,6 +1,0 @@
-query LocationsQuery {
-  allLocations {
-    id
-    name
-  }
-}

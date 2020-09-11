@@ -33,7 +33,26 @@ export const typeDefs = gql`
     originLng: Float
   }
 
+  input Filter {
+    openNow: Boolean
+  }
+
+  type PageInfo {
+    totalItems: Int
+  }
+
+  type LocationsConnection {
+    locations: [Location]
+    pageInfo: PageInfo
+  }
+
   type Query {
-    allLocations(sortByDistance: SortByDistance): [Location]!
+    allLocations(
+      limit: Int,
+      offset: Int,
+      pageNumber: Int,
+      filter: Filter,
+      sortByDistance: SortByDistance
+    ): LocationsConnection
   }
 `;

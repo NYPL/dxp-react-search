@@ -1,10 +1,28 @@
 .search-header {
-  padding: 2em 0;
+  h1#location-finder__title {
+    color: inherit;
+    font-size: var(--font-size-3);
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0 0 0.5em;
+    width: auto;
+	}
+	
+	.location-finder__description {
+		padding-bottom: $space-xxs;
+	}
+  
+  padding: $space-m 0;
+
   background: $gray-xlight;
 
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-l;
+
+    padding: $space-l 0;
+  }
+
   .search-header__inner {
-    margin: 0 auto;
-    max-width: 1300px;
-    padding: 2em;
+    @include wrapper;
   }
 }

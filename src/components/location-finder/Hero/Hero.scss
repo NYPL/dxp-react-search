@@ -1,33 +1,68 @@
 .hero {
-  background-color: #E41C23;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-
-  @include breakpoint($large) {
-    flex-flow: row nowrap;
-  }
+  background-color: $nypl-red-regular;
+  padding: $space-l 0;
   
+  .hero__inner {
+    @include wrapper;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    @include breakpoint($breakpoint-large) {
+      flex-flow: row nowrap;
+    }
+  }
 }
 
 .hero__image {
-  background-image: url('https://cdn-d8.nypl.org/s3fs-public/2020-08/location-finder-hero.png');
-  background-position: bottom center;
-  background-size: 130%;
+  @include space-stack-m;
   width: 100%;
-  min-height: 100px;
-  
-  @include breakpoint($large) {
+
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-none;
     flex: 0 0 50%;
-    min-height: 150px;
+  }
+
+  svg {
+    width: auto;
+    height: 55px;
+    fill: $white;
+    @include breakpoint($breakpoint-large) {
+      height: 70px;
+    }
   }
 }
 
 .hero__content {
-  @include space-inset-m;
-  
+  width: 100%;
+
   color: $white;
-  flex: 0 0 50%;
+
+  @include breakpoint($breakpoint-large) {
+    flex: 0 0 50%;
+  }
+
+  a {
+    color: $white;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+// IE11 only
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .hero__image {
+    @include breakpoint($breakpoint-large) {
+      width: 50%;
+      flex: none;
+    }
+  }
+  .hero__content {
+    @include breakpoint($breakpoint-large) {
+      width: 50%;
+      flex: none;
+    }
+  }
 }

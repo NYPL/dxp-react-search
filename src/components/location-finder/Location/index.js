@@ -2,14 +2,19 @@ import React from 'react';
 import * as DS from '@nypl/design-system-react-components';
 // Redux
 import { useDispatch } from 'react-redux';
-import { setLocationInfoWindowId, setMapPosition } from './../../../redux/actions';
+import { setMapInfoWindow, setMapPosition } from './../../../redux/actions';
+// Components
+import LocationDistance from './LocationDistance';
 
 function Location({ location }) {
   // Redux dispatch
   const dispatch = useDispatch();
 
-  // Address
-  const formattedAddress = `${location.address_line1} ${location.locality}, ${location.administrative_area} ${location.postal_code}`;
+  // Address formatting.
+  const formattedAddress = `${location.address_line1}\n${location.locality}, ${location.administrative_area} ${location.postal_code}`;
+  // Get directions link.
+  const encodedAddress = encodeURIComponent(formattedAddress);
+  const getDirectionsLink = 'http://maps.google.com/maps?f=q&hl=en&saddr=&daddr=' + encodedAddress;
 
   // Wheelchair access and icon.
   let wheelchairAccess, wheelchairAccessIcon;
@@ -33,6 +38,9 @@ function Location({ location }) {
     accessibilityNote = `: ${location.accessibilityNote}`;
   }
 
+  // Location link
+  const locationLink = `https://www.nypl.org/locations/${location.id}`;
+
   function onClickViewOnMap(e) {
     e.preventDefault();
 
@@ -41,7 +49,10 @@ function Location({ location }) {
       mapZoom: 14
     }));
 
-    dispatch(setLocationInfoWindowId(location.id));
+    dispatch(setMapInfoWindow({
+      infoWindowId: location.id,
+      infoWindowIsVisible: true
+    }));
   }
 
   // Convert hours to 12 hour time format
@@ -67,9 +78,13 @@ function Location({ location }) {
     <div className='location'>
       <DS.Heading
         id={location.id}
-        level={3}
-        text={location.name}
-      />
+        level={2}
+        className='location__name'
+      >
+        <a href={locationLink}>
+          {location.name}
+        </a>
+      </DS.Heading>
       <div className='address'>
         {formattedAddress}
       </div>
@@ -97,16 +112,19 @@ function Location({ location }) {
           Location is temporarily closed
         </div>
       )}
+      <LocationDistance locationPoint={location.geoLocation} />
       <div className='location__links'>
-        <DS.Link
-          href="#"
-          onClick={onClickViewOnMap}
-        >
-          View on Map
+        <DS.Link type="default">
+          <a
+            href="#"
+            onClick={onClickViewOnMap}
+          >
+            View on Map
+          </a>
         </DS.Link>
-        |
+        &nbsp;|&nbsp;
         <DS.Link
-          href="#"
+          href={ getDirectionsLink }
         >
           Get Directions
         </DS.Link>

@@ -1,12 +1,28 @@
 .location {
+  @include space-inline-l;
+  @include space-stack-l;
+
+  .location__name {
+    @include type-scale(2);
+
+    a {
+      color: $black;
+    }
+  }
+
+  .address {
+    @include space-stack-xxs;
+    white-space: pre-wrap;
+  }
+
   .phone {
-    margin-bottom: 0.5rem;
+    @include space-stack-xxs;
   }
 
   .accessibility-status {
     display: flex;
     flex-flow: row nowrap;
-    margin-bottom: 0.5rem;
+    @include space-stack-xxs;
 
     .icon {
       width: 20px;
@@ -21,7 +37,7 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    margin-bottom: 0.5rem;
+    @include space-stack-xxs;
 
     .icon {
       width: 20px;
@@ -36,13 +52,19 @@
     }
   }
 
+  .location__distance {
+    @include space-stack-xxs;
+  }
+
   // @TODO this will probs become a DS component?
   .location__hours-status {
+    @include type-scale(-1);
+
     width: fit-content;
     border-radius: 4px;
     background-color: $nypl-yellow-light;
-    padding: $space-xs $space-s;
-    margin-bottom: $space-s;
+    padding: $space-xxs $space*.625;
+    @include space-stack-xxs;
     color: $black;
     font-weight: 300;
     font-style: italic;

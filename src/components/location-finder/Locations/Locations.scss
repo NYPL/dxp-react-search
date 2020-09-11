@@ -1,29 +1,87 @@
 .locations {
-  @include space-stack-xxl;
+  padding: $space-l 0;
 
-  padding:2em 0;
+  display: flex;
+  flex-flow: column nowrap;
 
-  .locations__list {
-    max-height: 500px;
-    overflow: scroll;
+
+  @include breakpoint($breakpoint-medium) {
+    flex-flow: row wrap;
   }
 
-  .locations__list .location {
-    padding: .75em 0;
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-xl;
+
+    padding: 0;
   }
 
-  .column {
-    float: left;
-    width: 50%;
-
-    @media screen and (max-width: 600px) {
+  .locations__search-results-details {
+    @include space-stack-m;
+    @include breakpoint($breakpoint-medium) {
       width: 100%;
+    }
+
+    button {
+      display: initial;
     }
   }
 
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
+  .locations__list,
+  .locations__map {
+    @include breakpoint($breakpoint-medium) {
+      flex: 1 0 49%;
+    }
+  }
+
+  .locations__list {
+    @include breakpoint($breakpoint-medium) {
+      @include space-inline-xs;
+    }
+  }
+
+  .locations-gmap-anchor {
+    @include space-stack-m;
+    display: block;
+
+    @include breakpoint($breakpoint-medium) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  @include breakpoint($breakpoint-medium) {
+    .locations__list {
+      @include scroll-style;
+
+      max-height: 500px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+  }
+
+  // @TODO Should we need to do this?
+  // DS now sets width to 100%
+  .select {
+    width: initial;
+  }
+
+  .pagination {
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+// @TODO move these somewhere better.
+.no-results {
+  padding: $space-s 0;
+  color: $nypl-red-regular;
+  font-style: italic;
+}
+
+.content-header {
+  @include breakpoint($breakpoint-small) {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
