@@ -6,26 +6,35 @@
 
 	background-image:
 		linear-gradient( 100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80% ),
-		linear-gradient( lightgray 20px, transparent 0 ),
-		linear-gradient( lightgray 20px, transparent 0 ),
-		linear-gradient( lightgray 20px, transparent 0 ),
-		linear-gradient( lightgray 20px, transparent 0 );
+		linear-gradient( $gray-warm-light 33px, transparent 0 ),
+		linear-gradient( $gray-warm-light 20px, transparent 0 ),
+		linear-gradient( $gray-warm-light 20px, transparent 0 ),
+		linear-gradient( $gray-warm-light 20px, transparent 0 ),
+		linear-gradient( $gray-warm-light 20px, transparent 0 ),
+		linear-gradient( $gray-warm-light 20px, transparent 0 ),
+		linear-gradient( $gray-warm-light 20px, transparent 0 );
 
 	background-repeat: repeat-y;
 
 	background-size:
-		50px 180px, /* highlight */
-		150px 180px,
-		350px 180px,
-		300px 180px,
-		250px 180px;
+		50px 230px, /* highlight */
+		300px 230px,
+		250px 230px,
+		250px 230px,
+		250px 230px,
+		200px 230px,
+		200px 230px,
+		200px 230px;
 
 	background-position:
 		0 0, /* highlight */
 		0px 0,
-		0px 30px,
-		0px 60px,
-		0px 90px;
+		0px 40px,
+		0px 67px,
+		0px 94px,
+		0px 121px,
+		0px 148px,
+		0px 175px;
 
 	animation: shine 1s infinite;
 }
@@ -34,6 +43,6 @@
   to {
     background-position:100% 0,
     /* move highlight to right */
-    0px 0, 0px 30px, 0px 60px, 0px 90px;
+    0px 0, 0px 40px, 0px 67px, 0px 94px, 0px 121px, 0px 148px, 0px 175px;
   }
 }
