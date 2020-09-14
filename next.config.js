@@ -1,8 +1,8 @@
-const isProd = process.env.NODE_ENV === 'production';
+const { ASSET_PREFIX } = process.env;
 
 module.exports = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
-    assetPrefix: isProd ? '/scout' : '',
+    assetPrefix: ASSET_PREFIX,
     webpack(config, options) {
       const { dir } = options
 
