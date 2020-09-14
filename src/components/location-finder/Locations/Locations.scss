@@ -26,6 +26,10 @@
     }
   }
 
+  .locations__list {
+    margin-left: -4px;
+  }
+
   .locations__list,
   .locations__map {
     @include breakpoint($breakpoint-medium) {
