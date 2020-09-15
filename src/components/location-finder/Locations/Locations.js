@@ -21,7 +21,7 @@ import {
 // Components
 import * as DS from '@nypl/design-system-react-components';
 import Location from './../Location';
-import Skeleton from 'react-loading-skeleton';
+import LoadingSkeleton from './../../shared/LoadingSkeleton';
 import LocationsPagination from './LocationsPagination';
 
 function Locations() {
@@ -73,11 +73,7 @@ function Locations() {
   // Loading state,
   if (loading || !data) {
     return (
-      <Skeleton
-        height={20}
-        count={20}
-        duration={1.2}
-      />
+      <LoadingSkeleton />
     );
   }
 
