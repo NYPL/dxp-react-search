@@ -50,10 +50,18 @@
   }
 
   @include breakpoint($breakpoint-medium) {
-    .locations__list {
+    .locations__list-inner {
       @include scroll-style;
 
       max-height: 500px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    .locations__list-inner-with-details {
+      @include scroll-style;
+
+      max-height: 442px;
       overflow-x: hidden;
       overflow-y: scroll;
     }
