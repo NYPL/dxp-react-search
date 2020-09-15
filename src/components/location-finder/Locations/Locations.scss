@@ -1,6 +1,9 @@
 .locations {
   padding: $space-l 0;
 
+  margin-top: -5px;
+  margin-left: -5px;
+
   display: flex;
   flex-flow: column nowrap;
 
@@ -24,10 +27,6 @@
     button {
       display: initial;
     }
-  }
-
-  .locations__list {
-    margin-left: -4px;
   }
 
   .locations__list,

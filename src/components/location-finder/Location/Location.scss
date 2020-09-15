@@ -1,7 +1,9 @@
 .location {
   @include space-inline-l;
   @include space-stack-l;
-  margin-left: 4px;
+
+  margin-top: 5px;
+  margin-left: 5px;
 
   .location__name {
     @include type-scale(2);
