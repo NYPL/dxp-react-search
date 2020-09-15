@@ -10,7 +10,6 @@ if [ "$TRAVIS_BRANCH" == "qa" ]; then
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
-  ASSET_PREFIX=''
 fi
 
 echo -e "\nNEXT_PUBLIC_GRAPHQL_API=$GRAPHQL_API_URL" >> .env
