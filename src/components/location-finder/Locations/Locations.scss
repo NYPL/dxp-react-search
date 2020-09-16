@@ -1,9 +1,7 @@
 .locations {
   padding: $space-l 0;
-
   display: flex;
   flex-flow: column nowrap;
-
 
   @include breakpoint($breakpoint-medium) {
     flex-flow: row wrap;
@@ -36,6 +34,10 @@
   .locations__list {
     @include breakpoint($breakpoint-medium) {
       @include space-inline-xs;
+
+      max-height: 500px;
+      display: flex;
+      flex-flow: column nowrap;
     }
   }
 
@@ -50,10 +52,9 @@
   }
 
   @include breakpoint($breakpoint-medium) {
-    .locations__list {
+    .locations__list-inner {
       @include scroll-style;
 
-      max-height: 500px;
       overflow-x: hidden;
       overflow-y: scroll;
     }

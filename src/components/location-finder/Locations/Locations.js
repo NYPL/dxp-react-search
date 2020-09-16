@@ -101,7 +101,7 @@ function Locations() {
   }
 
   return (
-    <Fragment>
+    <div className="locations__list-inner">
       <DS.Link
         href="#locations-gmap"
         className="locations-gmap-anchor"
@@ -120,7 +120,7 @@ function Locations() {
         <Location key={location.id} location={location} />
       ))}
       <LocationsPagination limit={limit} />
-    </Fragment>
+    </div>
   );
 }
 
