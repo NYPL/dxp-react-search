@@ -24,8 +24,8 @@ function LocationFinder() {
       </div>
       <div className="content-primary">
         <div className='locations'>
-          <SearchResultsDetails />
           <div className='locations__list'>
+            <SearchResultsDetails />
             <Locations />
           </div>
           <div id="locations-gmap" className='locations__map'>
