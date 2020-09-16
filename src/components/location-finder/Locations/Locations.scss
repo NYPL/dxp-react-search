@@ -1,9 +1,11 @@
 .locations {
   padding: $space-l 0;
 
+  margin-top: -5px;
+  margin-left: -5px;
+
   display: flex;
   flex-flow: column nowrap;
-
 
   @include breakpoint($breakpoint-medium) {
     flex-flow: row wrap;
@@ -21,6 +23,8 @@
       width: 100%;
     }
 
+    margin-left: 5px;
+
     button {
       display: initial;
     }
@@ -36,12 +40,18 @@
   .locations__list {
     @include breakpoint($breakpoint-medium) {
       @include space-inline-xs;
+
+      max-height: 500px;
+      display: flex;
+      flex-flow: column nowrap;
     }
   }
 
   .locations-gmap-anchor {
     @include space-stack-m;
+
     display: block;
+    margin-left: 5px;
 
     @include breakpoint($breakpoint-medium) {
       display: none;
@@ -50,10 +60,9 @@
   }
 
   @include breakpoint($breakpoint-medium) {
-    .locations__list {
+    .locations__list-inner {
       @include scroll-style;
 
-      max-height: 500px;
       overflow-x: hidden;
       overflow-y: scroll;
     }
