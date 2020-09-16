@@ -92,7 +92,7 @@ function Locations() {
   }
 
   return (
-    <div className={`locations__list-inner${searchQuery ? "-with-details" : ""}`}>
+    <div className="locations__list-inner">
       <DS.Link
         href="#locations-gmap"
         className="locations-gmap-anchor"
