@@ -23,6 +23,8 @@
       width: 100%;
     }
 
+    margin-left: 5px;
+
     button {
       display: initial;
     }
@@ -47,7 +49,9 @@
 
   .locations-gmap-anchor {
     @include space-stack-m;
+
     display: block;
+    margin-left: 5px;
 
     @include breakpoint($breakpoint-medium) {
       display: none;
