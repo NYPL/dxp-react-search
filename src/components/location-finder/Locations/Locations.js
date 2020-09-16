@@ -23,8 +23,18 @@ import * as DS from '@nypl/design-system-react-components';
 import Location from './../Location';
 import LoadingSkeleton from './../../shared/LoadingSkeleton';
 import LocationsPagination from './LocationsPagination';
+// Hooks
+import useWindowSize from './../../../hooks/useWindowSize';
 
 function Locations() {
+  // Special handling for pagination on desktop
+  const windowSize = useWindowSize();
+  // Set limit based on window size, to disable pagination for desktop only.
+  let limit = 300;
+  if (windowSize < 600) {
+    limit = 10;
+  }
+
   // Redux
   const {
     searchQuery,
@@ -40,7 +50,6 @@ function Locations() {
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
-  const limit = 10;
   // Query for data.
   const { loading, error, data, networkStatus, fetchMore } = useQuery(
     LOCATIONS_QUERY, {
@@ -57,7 +66,7 @@ function Locations() {
     }
   );
 
-  // Side effect to dispatch redux action to set the locations count.
+  // Side effect to dispatch redux action to set pagination redux state.
   useEffect(() => {
     if (data) {
       // Dispatch redux action

@@ -102,7 +102,7 @@ function LocationsPagination({ limit }) {
     }));
   }
 
-  if (pageCount) {
+  if (pageCount > 1) {
     return (
       <DS.Pagination
         nextPage={NextButton(pageNumber, pageCount)}
