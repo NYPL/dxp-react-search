@@ -25,7 +25,11 @@ Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 
 function SearchForm() {
   // Redux
-  const { autoSuggestInputValue } = useSelector(state => state.search);
+  const {
+    autoSuggestInputValue,
+    searchQuery,
+    openNow
+  } = useSelector(state => state.search);
   const { infoWindowId } = useSelector(state => state.map);
   const dispatch = useDispatch();
 
@@ -60,7 +64,7 @@ function SearchForm() {
           }));
 
           // Dispatch open now
-          dispatch(setOpenNow(isOpenNowChecked));
+          //dispatch(setOpenNow(openNow));
 
           // Reset pagination.
           dispatch(setPagination({
@@ -76,6 +80,18 @@ function SearchForm() {
       }
     );
   }
+
+  function openNowChange(event) {
+    //console.log(event.target);
+    //console.log('openNow: ' + openNow);
+
+    dispatch(setOpenNow({
+      searchQuery,
+      openNow: !openNow
+    }));
+  }
+
+  //console.log('openNow: ' + openNow);
 
   return (
     <div className='search__form'>
@@ -100,13 +116,12 @@ function SearchForm() {
           />
           Search
         </DS.Button>
-        <DS.Checkbox
+        <input
+          class="checkbox__input"
+          type="checkbox"
           name="isOpenNow"
-          checkboxId="isOpenNow"
-          labelOptions={{
-            id: 'label',
-            labelContent: 'Open Now'
-          }}
+          defaultChecked={openNow}
+          onChange={openNowChange}
         />
       </form>
     </div>

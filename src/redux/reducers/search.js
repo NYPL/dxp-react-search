@@ -34,7 +34,8 @@ export default function search(state = initialState, action) {
     case SET_OPEN_NOW:
       return {
         ...state,
-        openNow: action.payload
+        searchQuery: action.payload.searchQuery,
+        openNow: action.payload.openNow
       };
 
     case SET_PAGINATION:
