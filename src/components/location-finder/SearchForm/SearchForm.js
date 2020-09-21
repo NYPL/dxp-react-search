@@ -82,12 +82,12 @@ function SearchForm() {
   }
 
   function openNowChange(event) {
-    //console.log(event.target);
+    console.log(event.target.checked);
     //console.log('openNow: ' + openNow);
 
     dispatch(setOpenNow({
       searchQuery,
-      openNow: !openNow
+      openNow: event.target.checked
     }));
   }
 
@@ -120,7 +120,7 @@ function SearchForm() {
           class="checkbox__input"
           type="checkbox"
           name="isOpenNow"
-          defaultChecked={openNow}
+          checked={openNow}
           onChange={openNowChange}
         />
       </form>

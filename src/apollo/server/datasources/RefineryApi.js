@@ -112,6 +112,8 @@ class RefineryApi extends RESTDataSource {
           results = filterByOpenNow(response.locations).map(location =>
             this.locationNormalizer(location)
           );
+
+          console.log(results.length);
           // We're removing locations from results, so set the new total results count.
           totalResultsCount = results.length;
         }
