@@ -10,6 +10,7 @@
 * Fix for keyboard focus box getting cutoff on Location component
 * Search results details component should align with top of map
 * Clear all search terms action link should goto new line on mobile
+* Move Refinery endpoint definition to set-env script
 
 ### v0.1.0 [2020-09-14] Initial Release
 ---------------------------------------
