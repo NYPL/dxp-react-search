@@ -95,8 +95,6 @@ class RefineryApi extends RESTDataSource {
     if (Array.isArray(response.locations)) {
       let results;
       let totalResultsCount = Object.keys(response.locations).length;
-      //console.log('no conditons: ' + args.sortByDistance);
-
 
       // Sort by distance only.
       if (args.sortByDistance && !args.filter) {
@@ -107,22 +105,15 @@ class RefineryApi extends RESTDataSource {
       }
 
       // Filter only.
-      // @TODO !args.sortByDistance does not work properly for open now auto submit.
-      //if (args.filter && !args.sortByDistance) {
-      if (args.filter /*&& !args.hasOwnProperty('sortByDistance')*/) {
+      if (args.filter) {
         // Open now only.
         if (
           args.filter.openNow
-          //&& args.sortByDistance.originLat == null
-          //&& args.sortByDistance.originLng == null
         ) {
           console.log('filter: open now only');
-          //console.log(args);
           results = filterByOpenNow(response.locations).map(location =>
             this.locationNormalizer(location)
           );
-
-          console.log(results.length);
           // We're removing locations from results, so set the new total results count.
           totalResultsCount = results.length;
         }
@@ -157,10 +148,6 @@ class RefineryApi extends RESTDataSource {
       // Default sort, alphabetical.
       if (!results) {
         console.log('default sort!');
-        //console.log('openNow: ' + args.filter.openNow);
-        //console.log('args.sortByDistance.originLat: ' + args.sortByDistance.originLat);
-        //console.log('args.sortByDistance.originLng: ' + args.sortByDistance.originLng);
-
         results = response.locations.sort(sortByName).map(location =>
           this.locationNormalizer(location)
         );
