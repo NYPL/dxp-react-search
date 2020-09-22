@@ -107,9 +107,7 @@ class RefineryApi extends RESTDataSource {
       // Filter only.
       if (args.filter) {
         // Open now only.
-        if (
-          args.filter.openNow
-        ) {
+        if (args.filter.openNow) {
           console.log('filter: open now only');
           results = filterByOpenNow(response.locations).map(location =>
             this.locationNormalizer(location)
