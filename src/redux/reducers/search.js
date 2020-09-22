@@ -36,7 +36,6 @@ export default function search(state = initialState, action) {
         ...state,
         openNow: action.payload.openNow,
         searchQuery: action.payload.searchQuery,
-        //resultsCount: action.payload.resultsCount
       };
 
     case SET_PAGINATION:

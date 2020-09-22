@@ -82,16 +82,11 @@ function SearchForm() {
   }
 
   function openNowChange(event) {
-    console.log(event.target.checked);
-    //console.log('openNow: ' + openNow);
-
     dispatch(setOpenNow({
-      searchQuery,
+      searchQuery: '',
       openNow: event.target.checked
     }));
   }
-
-  //console.log('openNow: ' + openNow);
 
   return (
     <div className='search__form'>
@@ -116,13 +111,22 @@ function SearchForm() {
           />
           Search
         </DS.Button>
-        <input
-          class="checkbox__input"
-          type="checkbox"
-          name="isOpenNow"
-          checked={openNow}
-          onChange={openNowChange}
-        />
+        <div className="checkbox">
+          <input
+            id="isOpenNow"
+            class="checkbox__input"
+            type="checkbox"
+            name="isOpenNow"
+            checked={openNow}
+            onChange={openNowChange}
+          />
+          <label
+            id="label"
+            htmlFor="isOpenNow"
+            className="label">
+            Open Now
+          </label>
+        </div>
       </form>
     </div>
   );
