@@ -94,7 +94,10 @@ function SearchResultsDetails() {
 
   if (renderMessage()) {
     return (
-      <div className='locations__search-results-details'>
+      <div
+        className='locations__search-results-details'
+        role='alert'
+      >
         { renderMessage() }
         &nbsp;
         <DS.Button
