@@ -8,11 +8,10 @@ import {
 } from 'react-redux';
 import {
   setSearchQuery,
-  setMapPosition,
-  setMapInfoWindow,
   setAutoSuggestInputValue,
   setPagination,
-  resetSearch
+  resetSearch,
+  resetMap
  } from './../../../redux/actions';
 
 function SearchResultsDetails() {
@@ -30,30 +29,21 @@ function SearchResultsDetails() {
     e.preventDefault();
 
     batch(() => {
-      // Map
+      // Reset map
       const defaultCenter = {
         lat: 40.7532,
         lng: -73.9822
       };
-      // @TODO Consolidate this to a 'reset map' action.
-      // Reset map
-      dispatch(setMapPosition({
+      dispatch(resetMap({
         mapCenter: defaultCenter,
-        mapZoom: 12
-      }));
-      // Dispatch to reset the location id for info window.
-      dispatch(setMapInfoWindow({
+        mapZoom: 12,
         infoWindowId: false,
         infoWindowIsVisible: false
-      }));
+      }))
 
       // Reset search
       dispatch(resetSearch());
     });
-
-    // @TODO Remove this and do it better in V2.
-    //const openNowCheckbox = document.getElementById('isOpenNow');
-    //openNowCheckbox.checked = false;
   }
 
   //
