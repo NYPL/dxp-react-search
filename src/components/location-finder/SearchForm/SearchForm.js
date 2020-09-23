@@ -75,7 +75,7 @@ function SearchForm() {
     );
   }
 
-  function openNowChange(event) {
+  function onChangeOpenNow(event) {
     dispatch(setOpenNow({
       searchQuery: '',
       openNow: event.target.checked
@@ -112,7 +112,7 @@ function SearchForm() {
             type="checkbox"
             name="isOpenNow"
             checked={openNow}
-            onChange={openNowChange}
+            onChange={onChangeOpenNow}
           />
           <label
             id="label"
