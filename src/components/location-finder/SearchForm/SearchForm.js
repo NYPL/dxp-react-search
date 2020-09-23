@@ -35,8 +35,6 @@ function SearchForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Get isOpenNow checkbox checked
-    const isOpenNowChecked = event.target.isOpenNow.checked;
 
     // Get latitude & longitude from address.
     Geocode.fromAddress(autoSuggestInputValue).then(
@@ -63,15 +61,11 @@ function SearchForm() {
             infoWindowIsVisible: true
           }));
 
-          // Dispatch open now
-          //dispatch(setOpenNow(openNow));
-
           // Reset pagination.
           dispatch(setPagination({
             offset: 0,
             pageCount: 0,
-            pageNumber: 1,
-            //resultsCount
+            pageNumber: 1
           }));
         });
       },
