@@ -30,4 +30,4 @@ This will prefix all Next JS assets for this app with `/scout` so the RP rules c
 
 Other Next JS apps will use a different prefix.
 
-For local development, `ASSET_PREFIX` can just be set to a blank string, like in the `.env.example` file.
+For local development, `ASSET_PREFIX` should just be set to a blank string, like in the `.env.example` file.
