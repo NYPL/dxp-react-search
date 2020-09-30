@@ -64,6 +64,16 @@
     }
   }
 
+  .locations-list-anchor {
+    margin-top: 1rem;
+    display: block;
+
+    @include breakpoint($breakpoint-medium) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
   @include breakpoint($breakpoint-medium) {
     .locations__list-inner {
       @include scroll-style;

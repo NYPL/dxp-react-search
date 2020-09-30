@@ -53,6 +53,10 @@ function Location({ location }) {
       infoWindowId: location.id,
       infoWindowIsVisible: true
     }));
+
+    if (window.innerWidth < 600) {
+      document.getElementById("locations-gmap").scrollIntoView();
+    }
   }
 
   // Convert hours to 12 hour time format
