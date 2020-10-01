@@ -12,6 +12,11 @@ import {
   setOpenNow,
   setPagination
 } from './../../../redux/actions';
+// Apollo
+import { useApolloClient } from '@apollo/react-hooks';
+import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
+// Utils
+import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components
 import SearchAutoSuggest from './../SearchAutoSuggest';
 import * as DS from '@nypl/design-system-react-components';
@@ -29,47 +34,67 @@ function SearchForm() {
   const { infoWindowId } = useSelector(state => state.map);
   const dispatch = useDispatch();
 
+  // Apollo
+  const client = useApolloClient();
+
   function handleSubmit(event) {
     event.preventDefault();
+
     // Get isOpenNow checkbox checked
     const isOpenNowChecked = event.target.isOpenNow.checked;
 
-    // Get latitude & longitude from address.
-    Geocode.fromAddress(autoSuggestInputValue).then(
+    // Query to get the list of locations
+    client.query({ query: LOCATIONS_QUERY }).then(
       response => {
-        const { lat, lng } = response.results[0].geometry.location;
+        let searchValue = autoSuggestInputValue;
+        // Try to find a location match.
+        const matchLocation = filterBySearchInput(response.data.allLocations.locations, autoSuggestInputValue);
+        if (matchLocation[0]) {
+          const location = matchLocation[0];
+          searchValue = matchLocation[0].name
+        }
 
-        batch(() => {
-          // Dispatch search query
-          dispatch(setSearchQuery({
-            query: autoSuggestInputValue,
-            lat: response.results[0].geometry.location.lat,
-            lng: response.results[0].geometry.location.lng
-          }));
+        // Get latitude & longitude from search value.
+        Geocode.fromAddress(searchValue).then(
+          response => {
+            const { lat, lng } = response.results[0].geometry.location;
 
-          // Dispatch for map zoom and center
-          dispatch(setMapPosition({
-            mapCenter: response.results[0].geometry.location,
-            mapZoom: 14
-          }));
+            batch(() => {
+              // Dispatch search query
+              dispatch(setSearchQuery({
+                query: autoSuggestInputValue,
+                lat: response.results[0].geometry.location.lat,
+                lng: response.results[0].geometry.location.lng
+              }));
 
-          // Dispatch for map info window.
-          dispatch(setMapInfoWindow({
-            infoWindowId,
-            infoWindowIsVisible: true
-          }));
+              // Dispatch for map zoom and center
+              dispatch(setMapPosition({
+                mapCenter: response.results[0].geometry.location,
+                mapZoom: 14
+              }));
 
-          // Dispatch open now
-          dispatch(setOpenNow(isOpenNowChecked));
+              // Dispatch for map info window.
+              dispatch(setMapInfoWindow({
+                infoWindowId,
+                infoWindowIsVisible: true
+              }));
 
-          // Reset pagination.
-          dispatch(setPagination({
-            offset: 0,
-            pageCount: 0,
-            pageNumber: 1,
-            //resultsCount
-          }));
-        });
+              // Dispatch open now
+              dispatch(setOpenNow(isOpenNowChecked));
+
+              // Reset pagination.
+              dispatch(setPagination({
+                offset: 0,
+                pageCount: 0,
+                pageNumber: 1,
+                //resultsCount
+              }));
+            });
+          },
+          error => {
+            console.error(error);
+          }
+        );
       },
       error => {
         console.error(error);
