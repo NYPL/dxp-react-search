@@ -31,6 +31,7 @@ class ScoutDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script src="https://assets.nypl.org/js/advocacy_v2.js"></script>
         </body>
       </Html>
     );
