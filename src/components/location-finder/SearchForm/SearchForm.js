@@ -50,14 +50,17 @@ function SearchForm() {
         // Try to find a location match.
         const matchLocation = filterBySearchInput(response.data.allLocations.locations, autoSuggestInputValue);
         if (matchLocation[0]) {
-          const location = matchLocation[0];
           // @TODO Searching directly for "Business Center at SNFL" or "snfl" returns a location in Spain
           // This is what google returns for this text:
           // https://www.google.com/maps/search/Business+Center+at+SNFL/@38.020501,-1.1476233,13z/data=!3m1!4b1
+          //
+          //searchValue = matchLocation[0].name;
+
           // Using a name + address, might work, but returns
           // "Stavros Niarchos Foundation Library (SNFL)" before "Business Center at SNFL" when searching for
           // the latter.....
-          searchValue = matchLocation[0].name
+          const location = matchLocation[0];
+          searchValue = `${location.address_line1} ${location.locality} ${location.administrative_area} ${location.postal_code}`;
         }
 
         // Get latitude & longitude from search value.
