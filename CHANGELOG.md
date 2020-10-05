@@ -11,6 +11,8 @@
 * Search results details component should align with top of map
 * Clear all search terms action link should goto new line on mobile
 * Adds role alert to search-results-details div for screen readers
+* Adds period after clear all search terms button
+* Adds better geocode matching for library first name
 
 ### v0.1.0 [2020-09-14] Initial Release
 ---------------------------------------
