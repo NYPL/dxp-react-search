@@ -1,7 +1,7 @@
 ## CHANGES
 -----------
 
-### v0.1.1 [ ] Location Finder Improvements
+### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------
 * Adds custom skeleton loader
 * Adds link to google maps info window bubble
