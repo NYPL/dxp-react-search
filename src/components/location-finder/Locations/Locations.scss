@@ -72,6 +72,10 @@
       display: none;
       visibility: hidden;
     }
+
+    .more-link__icon {
+      line-height: 1;
+    }
   }
 
   @include breakpoint($breakpoint-medium) {
