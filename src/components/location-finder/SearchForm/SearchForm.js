@@ -146,6 +146,7 @@ function SearchForm() {
             name="isOpenNow"
             checked={openNow}
             onChange={onChangeOpenNow}
+            aria-label="Checking this box will update the results"
           />
           <label
             id="label"
