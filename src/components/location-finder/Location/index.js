@@ -5,10 +5,14 @@ import { useDispatch } from 'react-redux';
 import { setMapInfoWindow, setMapPosition } from './../../../redux/actions';
 // Components
 import LocationDistance from './LocationDistance';
+// Hooks
+import useWindowSize from './../../../hooks/useWindowSize';
 
 function Location({ location }) {
   // Redux dispatch
   const dispatch = useDispatch();
+  
+  const windowSize = useWindowSize();
 
   // Address formatting.
   const formattedAddress = `${location.address_line1}\n${location.locality}, ${location.administrative_area} ${location.postal_code}`;
@@ -54,8 +58,8 @@ function Location({ location }) {
       infoWindowIsVisible: true
     }));
 
-    if (window.innerWidth < 600) {
-      document.getElementById("locations-gmap").scrollIntoView();
+    if (windowSize < 600) {
+      document.getElementById('locations-gmap').scrollIntoView();
     }
   }
 
