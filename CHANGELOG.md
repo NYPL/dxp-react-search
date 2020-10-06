@@ -1,7 +1,11 @@
 ## CHANGES
 -----------
 
-### v0.1.1 [ ] Location Finder Improvements
+### v0.1.2 [ ] Location Finder Improvements
+-------------------------------------------
+* Changes the closed message from "no hours available" to "closed"
+
+### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------
 * Adds custom skeleton loader
 * Adds link to google maps info window bubble
@@ -11,6 +15,8 @@
 * Search results details component should align with top of map
 * Clear all search terms action link should goto new line on mobile
 * Adds role alert to search-results-details div for screen readers
+* Adds period after clear all search terms button
+* Adds better geocode matching for library first name
 
 ### v0.1.0 [2020-09-14] Initial Release
 ---------------------------------------
