@@ -89,13 +89,18 @@ function SearchForm() {
                 infoWindowIsVisible: true
               }));
 
-          // Reset pagination.
-          dispatch(setPagination({
-            offset: 0,
-            pageCount: 0,
-            pageNumber: 1
-          }));
-        });
+              // Reset pagination.
+              dispatch(setPagination({
+                offset: 0,
+                pageCount: 0,
+                pageNumber: 1
+              }));
+            });
+          },
+          error => {
+            console.error(error);
+          }
+        );
       },
       error => {
         console.error(error);
