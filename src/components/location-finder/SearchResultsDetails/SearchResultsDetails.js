@@ -99,7 +99,7 @@ function SearchResultsDetails() {
           onClick={onClearSearchTerms}
           type="submit"
         >
-          Clear all search terms
+          Clear all search terms.
         </DS.Button>
       </div>
     );
