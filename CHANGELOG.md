@@ -6,6 +6,7 @@
 * Changes the closed message from "no hours available" to "closed"
 * Improves "View on Map" functionality for mobile.
 * Removed horizontal scroll bar on layout
+* Open Now Checkbox Should Automatically Submit
 
 ### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------
