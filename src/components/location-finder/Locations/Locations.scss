@@ -64,6 +64,20 @@
     }
   }
 
+  .locations-list-anchor {
+    margin-top: 1rem;
+    display: block;
+
+    @include breakpoint($breakpoint-medium) {
+      display: none;
+      visibility: hidden;
+    }
+
+    .more-link__icon {
+      line-height: 1;
+    }
+  }
+
   @include breakpoint($breakpoint-medium) {
     .locations__list-inner {
       @include scroll-style;

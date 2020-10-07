@@ -24,7 +24,7 @@ function LocationFinder() {
       </div>
       <div className="content-primary">
         <div className='locations'>
-          <div className='locations__list'>
+          <div className='locations__list' id="locations-list">
             <SearchResultsDetails />
             <Locations />
           </div>
