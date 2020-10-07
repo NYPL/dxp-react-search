@@ -4,6 +4,7 @@
 ### v0.1.2 [ ] Location Finder Improvements
 -------------------------------------------
 * Changes the closed message from "no hours available" to "closed"
+* Improves "View on Map" functionality for mobile.
 
 ### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------

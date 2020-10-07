@@ -117,14 +117,32 @@ function Map() {
   }
 
   return (
-    <MapWrapper
-      aria-hidden="true"
-      onClick={handleClick}
-      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
-      loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `500px` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-    />
+    <>
+      <MapWrapper
+        aria-hidden="true"
+        onClick={handleClick}
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `500px` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
+
+      <DS.Link
+        href="#locations-list"
+        className="locations-list-anchor"
+      >
+        Back to List
+        <DS.Icon
+          blockName="more-link"
+          iconRotation="rotate-180"
+          decorative
+          modifiers={[
+            'right'
+          ]}
+          name="arrow"
+        />
+      </DS.Link>
+    </>
   );
 }
 
