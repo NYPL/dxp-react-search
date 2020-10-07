@@ -30,7 +30,11 @@ Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 
 function SearchForm() {
   // Redux
-  const { autoSuggestInputValue } = useSelector(state => state.search);
+  const {
+    autoSuggestInputValue,
+    searchQuery,
+    openNow
+  } = useSelector(state => state.search);
   const { infoWindowId } = useSelector(state => state.map);
   const dispatch = useDispatch();
 
@@ -39,9 +43,6 @@ function SearchForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    // Get isOpenNow checkbox checked
-    const isOpenNowChecked = event.target.isOpenNow.checked;
 
     // Query to get the list of locations
     client.query({ query: LOCATIONS_QUERY }).then(
@@ -88,15 +89,11 @@ function SearchForm() {
                 infoWindowIsVisible: true
               }));
 
-              // Dispatch open now
-              dispatch(setOpenNow(isOpenNowChecked));
-
               // Reset pagination.
               dispatch(setPagination({
                 offset: 0,
                 pageCount: 0,
-                pageNumber: 1,
-                //resultsCount
+                pageNumber: 1
               }));
             });
           },
@@ -109,6 +106,13 @@ function SearchForm() {
         console.error(error);
       }
     );
+  }
+
+  function onChangeOpenNow(event) {
+    dispatch(setOpenNow({
+      searchQuery: '',
+      openNow: event.target.checked
+    }));
   }
 
   return (
@@ -134,14 +138,23 @@ function SearchForm() {
           />
           Search
         </DS.Button>
-        <DS.Checkbox
-          name="isOpenNow"
-          checkboxId="isOpenNow"
-          labelOptions={{
-            id: 'label',
-            labelContent: 'Open Now'
-          }}
-        />
+        <div className="checkbox">
+          <input
+            id="isOpenNow"
+            class="checkbox__input"
+            type="checkbox"
+            name="isOpenNow"
+            checked={openNow}
+            onChange={onChangeOpenNow}
+            aria-label="Checking this box will update the results"
+          />
+          <label
+            id="label"
+            htmlFor="isOpenNow"
+            className="label">
+            Open Now
+          </label>
+        </div>
       </form>
     </div>
   );
