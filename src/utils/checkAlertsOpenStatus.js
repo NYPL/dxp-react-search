@@ -27,17 +27,17 @@ function checkAlertsOpenStatus(location) {
           // Get today date only
           const utcToday = utcToZonedTime(new Date(), tz);
           const today = format(utcToday, 'yyyy-MM-dd', { timeZone: tz });
-          console.log('today: ' + today);
+          //console.log('today: ' + today);
 
           // Get start day
           // We strip off incorrect offset added.
           const startDay = format(parseISO(alert.applies.start.replace('-04:00', '')), 'yyyy-MM-dd', { timeZone: tz });
-          console.log('startDay: ' + startDay);
+          //console.log('startDay: ' + startDay);
 
           // Get end day
           // We strip off incorrect offset added.
           const endDay = format(parseISO(alert.applies.end.replace('-04:00', '')), 'yyyy-MM-dd', { timeZone: tz });
-          console.log('endDay: ' + endDay);
+          //console.log('endDay: ' + endDay);
 
           // Compare startDay, endDay against today
           if (today != startDay && today <= endDay) {
