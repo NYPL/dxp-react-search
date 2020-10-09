@@ -121,7 +121,7 @@ function Map() {
     }));
 
     // Scroll to location on list when map marker is clicked for desktop only.
-    if (windowSize > 600) {
+    if (windowSize >= 600) {
       document.getElementById(location.id).scrollIntoView({
         alignToTop: false,
         behavior: 'smooth'
