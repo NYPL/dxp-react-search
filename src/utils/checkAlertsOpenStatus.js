@@ -40,7 +40,7 @@ function checkAlertsOpenStatus(location) {
           //console.log('endDay: ' + endDay);
 
           // Compare startDay, endDay against today
-          if (today >= startDay && today <= endDay) {
+          if (today >= startDay && today < endDay) {
             alertsOpenStatus = false;
           } else {
             alertsOpenStatus = true;
