@@ -5,7 +5,7 @@ function checkAlertsOpenStatus(location) {
   const alerts = location._embedded.alerts;
   const tz = 'America/New_York';
 
-  let alertsOpenStatus;
+  let alertsOpenStatus = true;
   // Check for any alerts.
   if (alerts === undefined || alerts.length === 0) {
     // No alerts, so set this status to true.
@@ -41,9 +41,8 @@ function checkAlertsOpenStatus(location) {
 
           // Compare startDay, endDay against today
           if (today >= startDay && today < endDay) {
+            // Set temporary closed status.
             alertsOpenStatus = false;
-          } else {
-            alertsOpenStatus = true;
           }
         }
       } else {
