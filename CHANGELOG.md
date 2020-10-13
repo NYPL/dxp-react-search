@@ -8,6 +8,8 @@
 * Removed horizontal scroll bar on layout
 * Open Now Checkbox Should Automatically Submit
 * As a patron, when I click on a map pinpoint it should scroll the list of search results to the location clicked.
+* Updates the Google Analytics config code to support Google Optimize account
+* Adds v2 of the NYPL advocacy.js (which removes the jQuery dependency) to support OptinMonster campaigns 
 
 ### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------
