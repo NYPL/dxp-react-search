@@ -1,7 +1,19 @@
 ## CHANGES
 -----------
 
-### v0.1.1 [ ] Location Finder Improvements
+### v0.1.2 [ ] Location Finder Improvements
+-------------------------------------------
+* Changes the closed message from "no hours available" to "closed"
+* Improves "View on Map" functionality for mobile.
+* Removed horizontal scroll bar on layout
+* Open Now Checkbox Should Automatically Submit
+* As a patron, when I click on a map pinpoint it should scroll the list of search results to the location clicked.
+* Updates the Google Analytics config code to support Google Optimize account
+* Adds v2 of the NYPL advocacy.js (which removes the jQuery dependency) to support OptinMonster campaigns
+* Fix for Future Closings Incorrectly Displayed As Current Closings
+* Move Refinery endpoint definition to set-env script
+
+### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------
 * Adds custom skeleton loader
 * Adds link to google maps info window bubble
@@ -10,7 +22,9 @@
 * Fix for keyboard focus box getting cutoff on Location component
 * Search results details component should align with top of map
 * Clear all search terms action link should goto new line on mobile
-* Move Refinery endpoint definition to set-env script
+* Adds role alert to search-results-details div for screen readers
+* Adds period after clear all search terms button
+* Adds better geocode matching for library first name
 
 ### v0.1.0 [2020-09-14] Initial Release
 ---------------------------------------

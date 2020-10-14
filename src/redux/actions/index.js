@@ -1,6 +1,7 @@
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY';
 export const SET_MAP_POSITION = 'SET_MAP_POSITION';
 export const SET_MAP_INFO_WINDOW = 'SET_MAP_INFO_WINDOW';
+export const RESET_MAP = 'RESET_MAP';
 export const SET_AUTO_SUGGEST_INPUT_VALUE = 'SET_AUTO_SUGGEST_INPUT_VALUE';
 export const SET_OPEN_NOW = 'SET_OPEN_NOW';
 export const SET_PAGINATION = 'SET_PAGINATION';
@@ -23,6 +24,13 @@ export function setMapPosition(payload) {
 export function setMapInfoWindow(payload) {
   return {
     type: SET_MAP_INFO_WINDOW,
+    payload: payload
+  };
+}
+
+export function resetMap(payload) {
+  return {
+    type: RESET_MAP,
     payload: payload
   };
 }

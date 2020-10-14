@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import * as DS from '@nypl/design-system-react-components';
 // Google map
 import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
@@ -10,6 +10,8 @@ import { setMapInfoWindow } from './../../../redux/actions';
 // Apollo
 import { useQuery } from '@apollo/react-hooks';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+// Hooks
+import useWindowSize from './../../../hooks/useWindowSize';
 
 const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   // Redux
@@ -107,24 +109,53 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
 });
 
 function Map() {
+  // Redux
   const dispatch = useDispatch();
+
+  const windowSize = useWindowSize();
 
   function handleClick(location, event) {
     dispatch(setMapInfoWindow({
       infoWindowId: location.id,
       infoWindowIsVisible: true
     }));
+
+    // Scroll to location on list when map marker is clicked for desktop only.
+    if (windowSize >= 600) {
+      document.getElementById(location.id).scrollIntoView({
+        alignToTop: false,
+        behavior: 'smooth'
+      });
+    }
   }
 
   return (
-    <MapWrapper
-      aria-hidden="true"
-      onClick={handleClick}
-      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
-      loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `500px` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-    />
+    <Fragment>
+      <MapWrapper
+        aria-hidden="true"
+        onClick={handleClick}
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `500px` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
+
+      <DS.Link
+        href="#locations-list"
+        className="locations-list-anchor"
+      >
+        Back to List
+        <DS.Icon
+          blockName="more-link"
+          iconRotation="rotate-180"
+          decorative
+          modifiers={[
+            'right'
+          ]}
+          name="arrow"
+        />
+      </DS.Link>
+    </Fragment>
   );
 }
 
