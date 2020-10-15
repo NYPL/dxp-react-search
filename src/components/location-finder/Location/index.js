@@ -11,7 +11,7 @@ import useWindowSize from './../../../hooks/useWindowSize';
 function Location({ location }) {
   // Redux dispatch
   const dispatch = useDispatch();
-  
+
   const windowSize = useWindowSize();
 
   // Address formatting.
@@ -85,7 +85,7 @@ function Location({ location }) {
   return (
     <div className='location'>
       <DS.Heading
-        id={location.id}
+        id={ `lid-${location.id}` }
         level={2}
         className='location__name'
       >
