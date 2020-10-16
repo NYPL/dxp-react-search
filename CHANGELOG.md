@@ -11,6 +11,7 @@
 * Updates the Google Analytics config code to support Google Optimize account
 * Adds v2 of the NYPL advocacy.js (which removes the jQuery dependency) to support OptinMonster campaigns
 * Fix for Future Closings Incorrectly Displayed As Current Closings
+* Move Refinery endpoint definition to set-env script
 
 ### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------
