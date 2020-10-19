@@ -11,7 +11,7 @@ import useWindowSize from './../../../hooks/useWindowSize';
 function Location({ location }) {
   // Redux dispatch
   const dispatch = useDispatch();
-  
+
   const windowSize = useWindowSize();
 
   // Address formatting.
@@ -74,12 +74,17 @@ function Location({ location }) {
     const startHoursOnly = +start.substr(0, 2);
     const startHours = (startHoursOnly % 12) || 12;
     const startMeridiem = (startHoursOnly < 12 || startHoursOnly === 24) ? "AM" : "PM";
+    const startMinutesOnly = start.substr(3, 2);
+    const startHoursFinal = (startMinutesOnly != 0) ? (startHours + ':' + startMinutesOnly) : startHours;
+
     // End hour
     const endHoursOnly = +end.substr(0, 2);
     const endHours = (endHoursOnly % 12) || 12;
     const endMeridiem = (endHoursOnly < 12 || endHoursOnly === 24) ? "AM" : "PM";
+    const endMinutesOnly = end.substr(3, 2);
+    const endHoursFinal = (endMinutesOnly != 0) ? (endHours + ':' + endMinutesOnly) : endHours;
 
-    return `${startHours}${startMeridiem}–${endHours}${endMeridiem}`;
+    return `${startHoursFinal}${startMeridiem}–${endHoursFinal}${endMeridiem}`;
   }
 
   return (
