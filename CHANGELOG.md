@@ -3,6 +3,7 @@
 
 ### v0.1.2 [ ] Location Finder Improvements
 -------------------------------------------
+* Fix for Today's Hours display stripping out minutes
 * Changes the closed message from "no hours available" to "closed"
 * Improves "View on Map" functionality for mobile.
 * Removed horizontal scroll bar on layout
