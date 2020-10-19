@@ -90,7 +90,7 @@ function Location({ location }) {
   return (
     <div className='location'>
       <DS.Heading
-        id={location.id}
+        id={ `lid-${location.id}` }
         level={2}
         className='location__name'
       >
