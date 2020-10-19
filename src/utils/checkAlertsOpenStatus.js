@@ -5,7 +5,7 @@ function checkAlertsOpenStatus(location) {
   const alerts = location._embedded.alerts;
   const tz = 'America/New_York';
 
-  let alertsOpenStatus;
+  let alertsOpenStatus = true;
   // Check for any alerts.
   if (alerts === undefined || alerts.length === 0) {
     // No alerts, so set this status to true.
@@ -27,23 +27,22 @@ function checkAlertsOpenStatus(location) {
           // Get today date only
           const utcToday = utcToZonedTime(new Date(), tz);
           const today = format(utcToday, 'yyyy-MM-dd', { timeZone: tz });
-          console.log('today: ' + today);
+          //console.log('today: ' + today);
 
           // Get start day
           // We strip off incorrect offset added.
           const startDay = format(parseISO(alert.applies.start.replace('-04:00', '')), 'yyyy-MM-dd', { timeZone: tz });
-          console.log('startDay: ' + startDay);
+          //console.log('startDay: ' + startDay);
 
           // Get end day
           // We strip off incorrect offset added.
           const endDay = format(parseISO(alert.applies.end.replace('-04:00', '')), 'yyyy-MM-dd', { timeZone: tz });
-          console.log('endDay: ' + endDay);
+          //console.log('endDay: ' + endDay);
 
           // Compare startDay, endDay against today
-          if (today != startDay && today <= endDay) {
+          if (today >= startDay && today < endDay) {
+            // Set temporary closed status.
             alertsOpenStatus = false;
-          } else {
-            alertsOpenStatus = true;
           }
         }
       } else {

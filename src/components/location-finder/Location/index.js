@@ -5,10 +5,14 @@ import { useDispatch } from 'react-redux';
 import { setMapInfoWindow, setMapPosition } from './../../../redux/actions';
 // Components
 import LocationDistance from './LocationDistance';
+// Hooks
+import useWindowSize from './../../../hooks/useWindowSize';
 
 function Location({ location }) {
   // Redux dispatch
   const dispatch = useDispatch();
+
+  const windowSize = useWindowSize();
 
   // Address formatting.
   const formattedAddress = `${location.address_line1}\n${location.locality}, ${location.administrative_area} ${location.postal_code}`;
@@ -53,31 +57,40 @@ function Location({ location }) {
       infoWindowId: location.id,
       infoWindowIsVisible: true
     }));
+
+    if (windowSize < 600) {
+      document.getElementById('locations-gmap').scrollIntoView();
+    }
   }
 
   // Convert hours to 12 hour time format
   function formatHours(start, end) {
     // Sometimes refinery will return null for start and end times.
     if (start === null || end === null) {
-      return 'No hours available.';
+      return 'Closed.';
     }
 
     // Start hour
     const startHoursOnly = +start.substr(0, 2);
     const startHours = (startHoursOnly % 12) || 12;
     const startMeridiem = (startHoursOnly < 12 || startHoursOnly === 24) ? "AM" : "PM";
+    const startMinutesOnly = start.substr(3, 2);
+    const startHoursFinal = (startMinutesOnly != 0) ? (startHours + ':' + startMinutesOnly) : startHours;
+
     // End hour
     const endHoursOnly = +end.substr(0, 2);
     const endHours = (endHoursOnly % 12) || 12;
     const endMeridiem = (endHoursOnly < 12 || endHoursOnly === 24) ? "AM" : "PM";
+    const endMinutesOnly = end.substr(3, 2);
+    const endHoursFinal = (endMinutesOnly != 0) ? (endHours + ':' + endMinutesOnly) : endHours;
 
-    return `${startHours}${startMeridiem}–${endHours}${endMeridiem}`;
+    return `${startHoursFinal}${startMeridiem}–${endHoursFinal}${endMeridiem}`;
   }
 
   return (
     <div className='location'>
       <DS.Heading
-        id={location.id}
+        id={ `lid-${location.id}` }
         level={2}
         className='location__name'
       >
