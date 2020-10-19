@@ -14,6 +14,7 @@
 * Fix for Future Closings Incorrectly Displayed As Current Closings
 * Move Refinery endpoint definition to set-env script
 * Add Focus to Location Anchor When Map Marker is Clicked
+* Sets unique assetPrefix "scout" for reverse proxy rules.
 
 ### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------
