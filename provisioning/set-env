@@ -6,6 +6,7 @@ GRAPHQL_API_URL=https://scout.nypl.org/api/graphql
 GA_TRACKING_ID=UA-1420324-3
 GTM_TRACKING_ID=GTM-537Q6Q4
 ALLOWED_ORIGIN=https://www.nypl.org
+ASSET_PREFIX=/scout
 
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
@@ -20,3 +21,4 @@ echo -e "\nNEXT_PUBLIC_GOOGLE_MAPS_API=$NEXT_PUBLIC_GOOGLE_MAPS_API" >> .env
 echo -e "\nNEXT_PUBLIC_GA_TRACKING_ID=$GA_TRACKING_ID" >> .env
 echo -e "\nNEXT_PUBLIC_GTM_TRACKING_ID=$GTM_TRACKING_ID" >> .env
 echo -e "\nNEXT_PUBLIC_ALLOWED_ORIGIN=$ALLOWED_ORIGIN" >> .env
+echo -e "\nASSET_PREFIX=$ASSET_PREFIX" >> .env
