@@ -3,11 +3,18 @@
 
 ### v0.1.2 [ ] Location Finder Improvements
 -------------------------------------------
+* Fix for Today's Hours display stripping out minutes
 * Changes the closed message from "no hours available" to "closed"
 * Improves "View on Map" functionality for mobile.
 * Removed horizontal scroll bar on layout
 * Open Now Checkbox Should Automatically Submit
 * As a patron, when I click on a map pinpoint it should scroll the list of search results to the location clicked.
+* Updates the Google Analytics config code to support Google Optimize account
+* Adds v2 of the NYPL advocacy.js (which removes the jQuery dependency) to support OptinMonster campaigns
+* Fix for Future Closings Incorrectly Displayed As Current Closings
+* Move Refinery endpoint definition to set-env script
+* Add Focus to Location Anchor When Map Marker is Clicked
+* Sets unique assetPrefix "scout" for reverse proxy rules.
 
 ### v0.1.1 [2020-10-06] Location Finder Improvements
 -------------------------------------------
