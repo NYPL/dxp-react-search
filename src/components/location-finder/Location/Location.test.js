@@ -2,18 +2,10 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import '@testing-library/jest-dom/extend-expect';
-// Redux
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-// Component
+import TestProvider from './../../../../testHelper/TestProvider';
 import Location from './Location';
 
 expect.extend(toHaveNoViolations);
-
-// Mock redux
-const initialState = {};
-const mockStore = configureStore();
-const store = mockStore(initialState);
 
 // Mock location prop
 const location = {
@@ -44,17 +36,17 @@ jest.mock('./LocationDistance', () => () => <div>LocationDistance</div>);
 describe('Location', () => {
   test('renders Location component', () => {
     render(
-      <Provider store={store}>
+      <TestProvider>
         <Location location={location} />
-      </Provider>
+      </TestProvider>
     );
   });
 
   test('it renders a location anchor with a link', () => {
     const { getByText } = render(
-      <Provider store={store}>
+      <TestProvider>
         <Location location={location} />
-      </Provider>
+      </TestProvider>
     );
 
     screen.debug();
@@ -67,9 +59,9 @@ describe('Location', () => {
 // Accessbiility tests.
 it('should not have basic accessibility issues', async () => {
   const { container } = render(
-    <Provider store={store}>
+    <TestProvider>
       <Location location={location} />
-    </Provider>
+    </TestProvider>
   );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
