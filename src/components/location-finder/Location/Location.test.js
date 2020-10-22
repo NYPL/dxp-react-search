@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import '@testing-library/jest-dom/extend-expect';
-import TestProvider from './../../../../testHelper/TestProvider';
+import { render } from './../../../../testHelper/customRtlRender';
 import Location from './Location';
 
 expect.extend(toHaveNoViolations);
@@ -36,20 +36,16 @@ jest.mock('./LocationDistance', () => () => <div>LocationDistance</div>);
 describe('Location', () => {
   test('renders Location component', () => {
     render(
-      <TestProvider>
-        <Location location={location} />
-      </TestProvider>
+      <Location location={location} />
     );
   });
 
   test('it renders a location anchor with a link', () => {
     const { getByText } = render(
-      <TestProvider>
-        <Location location={location} />
-      </TestProvider>
+      <Location location={location} />
     );
 
-    screen.debug();
+    //screen.debug();
 
     expect(getByText('57th Street').closest('a'))
       .toHaveAttribute('href', 'https://www.nypl.org/locations/57th-street')
@@ -59,9 +55,7 @@ describe('Location', () => {
 // Accessbiility tests.
 it('should not have basic accessibility issues', async () => {
   const { container } = render(
-    <TestProvider>
-      <Location location={location} />
-    </TestProvider>
+    <Location location={location} />
   );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
