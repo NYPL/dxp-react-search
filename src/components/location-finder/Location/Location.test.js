@@ -9,19 +9,19 @@ expect.extend(toHaveNoViolations);
 
 // Mock location prop
 const location = {
-  id: '57th-street',
-  name: '57th Street',
-  address_line1: 'address line 1',
-  address_line2: 'address line 2',
-  locality: 'brooklyn',
+  id: 'schwarzman',
+  name: 'Stephen A. Schwarzman Building',
+  address_line1: '476 Fifth Avenue (42nd St and Fifth Ave)',
+  address_line2: '476 Fifth Avenue (42nd St and Fifth Ave)',
+  locality: 'New York',
   administrative_area: 'NY',
-  postal_code: '90210',
+  postal_code: '10018',
   phone: '867-5309',
-  wheelchairAccess: 'partial',
-  accessibilityNote: 'test',
+  wheelchairAccess: 'full',
+  accessibilityNote: '',
   geoLocation: {
-    lat: 42.56,
-    lng: -75.50,
+    lat: 40.7532,
+    lng: -73.9822,
   },
   todayHours: {
     start: '11:00',
@@ -45,10 +45,8 @@ describe('Location', () => {
       <Location location={location} />
     );
 
-    //screen.debug();
-
-    expect(getByText('57th Street').closest('a'))
-      .toHaveAttribute('href', 'https://www.nypl.org/locations/57th-street')
+    expect(getByText('Stephen A. Schwarzman Building').closest('a'))
+      .toHaveAttribute('href', 'https://www.nypl.org/locations/schwarzman')
   });
 });
 
