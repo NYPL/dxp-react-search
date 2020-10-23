@@ -23,10 +23,9 @@ function BottomPromo() {
                   className="promo-link"
                 >
                   <DS.Image
-                    alt={value.name}
+                    alt=""
                     imageCaption={value.name}
                     imageCredit={null}
-                    isDecorative
                     modifiers={null}
                     src={value.url}
                   />

@@ -1,7 +1,11 @@
 ## CHANGES
 -----------
 
-### v0.1.2 [ ] Location Finder Improvements
+### v0.1.3 [ ??? ] Location Finder Improvements
+-------------------------------------------
+* Light refactor of location components and basic tests for Location components
+
+### v0.1.2 [2020-10-27] Location Finder Improvements
 -------------------------------------------
 * Fix for Today's Hours display stripping out minutes
 * Changes the closed message from "no hours available" to "closed"

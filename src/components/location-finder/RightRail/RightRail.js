@@ -26,7 +26,7 @@ function RightRail() {
           >
           {more_at_nypl.map((value, index) => {
             return (
-              <li className="right-rail__item">
+              <li key={value.title} className="right-rail__item">
                 <DS.Link
                   className="right-rail__link"
                   href={value.link}>{value.title}
@@ -53,13 +53,13 @@ function RightRail() {
           {need_help.map((value, index) => {
             if(value.link ) {
               return (
-                <li className="right-rail__item">
+                <li key={value.title} className="right-rail__item">
                   <DS.Link className="right-rail__link" href={value.link}>{value.title}</DS.Link>
                 </li>
               );
             } else {
               return (
-                <li className="right-rail__item">
+                <li key={value.title} className="right-rail__item">
                   <span className="right-rail__link">{value.title}</span>
                 </li>
               );
@@ -84,13 +84,13 @@ function RightRail() {
           {support_nypl.map((value, index) => {
             if(value.type ) {
               return (
-                <li className="right-rail__item">
+                <li key={value.title} className="right-rail__item">
                   <DS.Link linkType="button" className="action-link" href={value.link}>{value.title}</DS.Link>
                 </li>
               );
             } else {
               return (
-                <li className="right-rail__item">
+                <li key={value.title} className="right-rail__item">
                   <span className="right-rail__link">{value.title}</span>
                 </li>
               );
