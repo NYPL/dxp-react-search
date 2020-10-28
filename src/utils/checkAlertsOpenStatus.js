@@ -1,9 +1,21 @@
-const { zonedTimeToUtc, utcToZonedTime, format } = require('date-fns-tz');
-var parseISO = require('date-fns/parseISO');
+const dayjs = require('dayjs');
+var isBetween = require('dayjs/plugin/isBetween');
+dayjs.extend(isBetween);
+// Timezone
+/*var utc = require('dayjs/plugin/utc');
+var timezone = require('dayjs/plugin/timezone');
+dayjs.extend(utc)
+dayjs.extend(timezone)
+*/
 
-function checkAlertsOpenStatus(location) {
+function checkAlertsOpenStatus(today, location) {
+  /*const timeZone = 'America/New_York';
+  let now = dayjs().tz(timeZone);
+  const today = now.format();
+  */
+  //console.log('today: ' + today);
   const alerts = location._embedded.alerts;
-  const tz = 'America/New_York';
+  //console.log(alerts);
 
   let alertsOpenStatus = true;
   // Check for any alerts.
@@ -24,24 +36,8 @@ function checkAlertsOpenStatus(location) {
         // @SEE https://github.com/NYPL/locations-app/search?q=applies.start&unscoped_q=applies.start
         //
         if (alert.applies.start && alert.applies.end) {
-          // Get today date only
-          const utcToday = utcToZonedTime(new Date(), tz);
-          const today = format(utcToday, 'yyyy-MM-dd', { timeZone: tz });
-          //console.log('today: ' + today);
-
-          // Get start day
-          // We strip off incorrect offset added.
-          const startDay = format(parseISO(alert.applies.start.replace('-04:00', '')), 'yyyy-MM-dd', { timeZone: tz });
-          //console.log('startDay: ' + startDay);
-
-          // Get end day
-          // We strip off incorrect offset added.
-          const endDay = format(parseISO(alert.applies.end.replace('-04:00', '')), 'yyyy-MM-dd', { timeZone: tz });
-          //console.log('endDay: ' + endDay);
-
-          // Compare startDay, endDay against today
-          if (today >= startDay && today < endDay) {
-            // Set temporary closed status.
+          // Dayjs version
+          if (dayjs(today).isBetween(alert.applies.start, alert.applies.end)) {
             alertsOpenStatus = false;
           }
         }

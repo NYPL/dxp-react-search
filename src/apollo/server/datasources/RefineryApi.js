@@ -4,6 +4,13 @@ import sortByDistance from './../../../utils/sortByDistance';
 import filterByOpenNow from './../../../utils/filterByOpenNow';
 import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
 import sortByName from './../../../utils/sortByName';
+// Dayjs
+const dayjs = require('dayjs');
+// Timezone
+var utc = require('dayjs/plugin/utc');
+var timezone = require('dayjs/plugin/timezone');
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -41,7 +48,11 @@ class RefineryApi extends RESTDataSource {
     });
 
     // Alerts
-    const alertsOpenStatus = checkAlertsOpenStatus(location);
+    const timeZone = 'America/New_York';
+    let now = dayjs().tz(timeZone);
+    const today = now.format();
+
+    const alertsOpenStatus = checkAlertsOpenStatus(today, location);
 
     // Open status
     let open = false;

@@ -1,5 +1,13 @@
 import checkAlertsOpenStatus from './checkAlertsOpenStatus';
 
+// Dayjs
+const dayjs = require('dayjs');
+// Timezone
+var utc = require('dayjs/plugin/utc');
+var timezone = require('dayjs/plugin/timezone');
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 function filterByOpenNow(locations) {
   const tz = 'America/New_York';
   const today = new Date();
@@ -19,9 +27,20 @@ function filterByOpenNow(locations) {
     weekday: 'short'
   });
 
+  // Dayjs version
+  /*const timeZone = 'America/New_York';
+  let now = dayjs().tz(timeZone);
+  const todayJS = now.format('HH:mm');
+  console.log(todayJS);
+  */
+
+  const timeZone = 'America/New_York';
+  let now = dayjs().tz(timeZone);
+  const todayIso8601 = now.format();
+
   return locations.reduce((accumlator, location) => {
     // Alerts
-    const alertsOpenStatus = checkAlertsOpenStatus(location);
+    const alertsOpenStatus = checkAlertsOpenStatus(todayIso8601, location);
 
     location.hours.regular.map(hoursItem => {
       // Find today in weekly hours.
