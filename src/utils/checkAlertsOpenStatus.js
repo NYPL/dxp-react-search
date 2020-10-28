@@ -40,7 +40,7 @@ function checkAlertsOpenStatus(location) {
           //console.log('endDay: ' + endDay);
 
           // Compare startDay, endDay against today
-          if (today >= startDay && today < endDay) {
+          if (today >= startDay && today <= endDay) {
             // Set temporary closed status.
             alertsOpenStatus = false;
           }
