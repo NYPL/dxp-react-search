@@ -1,6 +1,10 @@
 ## CHANGES
 -----------
 
+### v0.1.3 Hotfix alert status logic
+----------
+* Fix removes an extra conditional which resets the alertOpenStatus flag when multiple alerts are processed creating a false positive.
+
 ### v0.1.2 [ ] Location Finder Improvements
 -------------------------------------------
 * Fix for Today's Hours display stripping out minutes

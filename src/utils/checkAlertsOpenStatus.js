@@ -45,8 +45,6 @@ function checkAlertsOpenStatus(location) {
             alertsOpenStatus = false;
           }
         }
-      } else {
-        alertsOpenStatus = true;
       }
     });
   }
