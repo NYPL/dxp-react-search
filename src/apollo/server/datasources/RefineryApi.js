@@ -4,9 +4,9 @@ import sortByDistance from './../../../utils/sortByDistance';
 import filterByOpenNow from './../../../utils/filterByOpenNow';
 import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
 import sortByName from './../../../utils/sortByName';
-// Dayjs
+// DayJS
 const dayjs = require('dayjs');
-// Timezone
+// DayJS timezone
 var utc = require('dayjs/plugin/utc');
 var timezone = require('dayjs/plugin/timezone');
 dayjs.extend(utc);
@@ -51,8 +51,8 @@ class RefineryApi extends RESTDataSource {
     const timeZone = 'America/New_York';
     let now = dayjs().tz(timeZone);
     const today = now.format();
-
-    const alertsOpenStatus = checkAlertsOpenStatus(today, location);
+    // Check open status based on alerts.
+    const alertsOpenStatus = checkAlertsOpenStatus(today, location._embedded.alerts);
 
     // Open status
     let open = false;
@@ -103,6 +103,10 @@ class RefineryApi extends RESTDataSource {
   async getAllLocations(args) {
     const response = await this.get('/locations/v1.0/locations');
 
+    //
+    const timeZone = 'America/New_York';
+    let now = dayjs().tz(timeZone);
+
     if (Array.isArray(response.locations)) {
       let results;
       let totalResultsCount = Object.keys(response.locations).length;
@@ -120,7 +124,7 @@ class RefineryApi extends RESTDataSource {
         // Open now only.
         if (args.filter.openNow) {
           console.log('filter: open now only');
-          results = filterByOpenNow(response.locations).sort(sortByName).map(location =>
+          results = filterByOpenNow(now, response.locations).sort(sortByName).map(location =>
             this.locationNormalizer(location)
           );
           // We're removing locations from results, so set the new total results count.
@@ -136,7 +140,7 @@ class RefineryApi extends RESTDataSource {
           && args.sortByDistance.originLng
         ) {
           console.log('both!');
-          results = sortByDistance(args.sortByDistance, filterByOpenNow(response.locations)).map(location =>
+          results = sortByDistance(args.sortByDistance, filterByOpenNow(now, response.locations)).map(location =>
             this.locationNormalizer(location)
           );
           // We're removing locations from results, so set the new total results count.

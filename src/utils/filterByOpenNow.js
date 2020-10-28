@@ -1,46 +1,21 @@
 import checkAlertsOpenStatus from './checkAlertsOpenStatus';
 
-// Dayjs
-const dayjs = require('dayjs');
-// Timezone
-var utc = require('dayjs/plugin/utc');
-var timezone = require('dayjs/plugin/timezone');
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
-function filterByOpenNow(locations) {
-  const tz = 'America/New_York';
-  const today = new Date();
-
-  // Get the current time, in format 13:56
-  // Force timezone to new york.
-  const nowTime = today.toLocaleTimeString('en-US', {
-    timeZone: 'America/New_York',
-    hour12: false,
-    hour: '2-digit',
-    minute:'2-digit'
-  });
-  // Get the current day in format: Thu
-  // Force timezone to new york.
-  const weekday = today.toLocaleDateString('en-US', {
-    timeZone: 'America/New_York',
-    weekday: 'short'
-  });
-
-  // Dayjs version
-  /*const timeZone = 'America/New_York';
-  let now = dayjs().tz(timeZone);
-  const todayJS = now.format('HH:mm');
-  console.log(todayJS);
-  */
-
-  const timeZone = 'America/New_York';
-  let now = dayjs().tz(timeZone);
-  const todayIso8601 = now.format();
+/**
+ * Takes an array of locations and reduces the array to only open now Locations.
+ *
+ * @param {object} now - current date object, unformatted.
+ * @param {array} locations - an array of Locations
+ * @return {array} a reduced array of locations that are open now.
+ */
+function filterByOpenNow(now, locations) {
+  // Format the now date object in the various formats we need.
+  const nowTime = now.format('HH:mm');
+  const weekday = now.format('ddd');
+  const today = now.format();
 
   return locations.reduce((accumlator, location) => {
     // Alerts
-    const alertsOpenStatus = checkAlertsOpenStatus(todayIso8601, location);
+    const alertsOpenStatus = checkAlertsOpenStatus(today, location._embedded.alerts);
 
     location.hours.regular.map(hoursItem => {
       // Find today in weekly hours.
