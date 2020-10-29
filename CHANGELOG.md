@@ -11,7 +11,7 @@
 * adjust endDate conditional for closing date test
 
 ### v0.1.2 [2020-10-27] Location Finder Improvements
--------------------------------------------
+----------------------------------------------------
 * Fix for Today's Hours display stripping out minutes
 * Changes the closed message from "no hours available" to "closed"
 * Improves "View on Map" functionality for mobile.
@@ -26,7 +26,7 @@
 * Sets unique assetPrefix "scout" for reverse proxy rules.
 
 ### v0.1.1 [2020-10-06] Location Finder Improvements
--------------------------------------------
+----------------------------------------------------
 * Adds custom skeleton loader
 * Adds link to google maps info window bubble
 * Additional filter capabilities for autosuggest including zipcode + locality
