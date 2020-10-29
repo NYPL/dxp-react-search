@@ -20,6 +20,10 @@ class RefineryApi extends RESTDataSource {
 
   // Tidy up the response from Refinery.
   locationNormalizer(location) {
+    // Create a dayJS date object.
+    const timeZone = 'America/New_York';
+    let now = dayjs().tz(timeZone);
+
     let wheelchairAccess;
     switch(location.access) {
       case 'Fully Accessible':
@@ -34,22 +38,19 @@ class RefineryApi extends RESTDataSource {
     }
 
     // Today hours
-    const currentDate = new Date();
     const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
 
     let todayHoursStart;
     let todayHoursEnd;
 
     location.hours.regular.map(item => {
-      if (weekDayKeys[currentDate.getDay()] === item.day) {
+      if (weekDayKeys[now.day()] === item.day) {
         todayHoursStart = item.open;
         todayHoursEnd = item.close;
       }
     });
 
-    // Alerts
-    const timeZone = 'America/New_York';
-    let now = dayjs().tz(timeZone);
+    // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
     const today = now.format();
     // Check open status based on alerts.
     const alertsOpenStatus = checkAlertsOpenStatus(today, location._embedded.alerts);
@@ -103,7 +104,7 @@ class RefineryApi extends RESTDataSource {
   async getAllLocations(args) {
     const response = await this.get('/locations/v1.0/locations');
 
-    //
+    // Create a dayJS date object.
     const timeZone = 'America/New_York';
     let now = dayjs().tz(timeZone);
 
