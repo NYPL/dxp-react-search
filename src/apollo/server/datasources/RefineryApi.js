@@ -4,6 +4,13 @@ import sortByDistance from './../../../utils/sortByDistance';
 import filterByOpenNow from './../../../utils/filterByOpenNow';
 import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
 import sortByName from './../../../utils/sortByName';
+// DayJS
+const dayjs = require('dayjs');
+// DayJS timezone
+var utc = require('dayjs/plugin/utc');
+var timezone = require('dayjs/plugin/timezone');
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -13,6 +20,10 @@ class RefineryApi extends RESTDataSource {
 
   // Tidy up the response from Refinery.
   locationNormalizer(location) {
+    // Create a dayJS date object.
+    const timeZone = 'America/New_York';
+    let now = dayjs().tz(timeZone);
+
     let wheelchairAccess;
     switch(location.access) {
       case 'Fully Accessible':
@@ -27,21 +38,22 @@ class RefineryApi extends RESTDataSource {
     }
 
     // Today hours
-    const currentDate = new Date();
     const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
 
     let todayHoursStart;
     let todayHoursEnd;
 
     location.hours.regular.map(item => {
-      if (weekDayKeys[currentDate.getDay()] === item.day) {
+      if (weekDayKeys[now.day()] === item.day) {
         todayHoursStart = item.open;
         todayHoursEnd = item.close;
       }
     });
 
-    // Alerts
-    const alertsOpenStatus = checkAlertsOpenStatus(location);
+    // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
+    const today = now.format();
+    // Check open status based on alerts.
+    const alertsOpenStatus = checkAlertsOpenStatus(today, location._embedded.alerts);
 
     // Open status
     let open = false;
@@ -92,6 +104,10 @@ class RefineryApi extends RESTDataSource {
   async getAllLocations(args) {
     const response = await this.get('/locations/v1.0/locations');
 
+    // Create a dayJS date object.
+    const timeZone = 'America/New_York';
+    let now = dayjs().tz(timeZone);
+
     if (Array.isArray(response.locations)) {
       let results;
       let totalResultsCount = Object.keys(response.locations).length;
@@ -109,7 +125,7 @@ class RefineryApi extends RESTDataSource {
         // Open now only.
         if (args.filter.openNow) {
           console.log('filter: open now only');
-          results = filterByOpenNow(response.locations).sort(sortByName).map(location =>
+          results = filterByOpenNow(now, response.locations).sort(sortByName).map(location =>
             this.locationNormalizer(location)
           );
           // We're removing locations from results, so set the new total results count.
@@ -125,7 +141,7 @@ class RefineryApi extends RESTDataSource {
           && args.sortByDistance.originLng
         ) {
           console.log('both!');
-          results = sortByDistance(args.sortByDistance, filterByOpenNow(response.locations)).map(location =>
+          results = sortByDistance(args.sortByDistance, filterByOpenNow(now, response.locations)).map(location =>
             this.locationNormalizer(location)
           );
           // We're removing locations from results, so set the new total results count.
