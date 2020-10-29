@@ -5,8 +5,8 @@ dayjs.extend(isBetween);
 /**
  * Determines if a location is open by comparing today to alerts & closings data.
  *
- * @param {date} today - current datetime in ISO8601: 2020-10-27T12:00:00-04:00.
- * @param {object} alerts - an object of alerts & closings.
+ * @param {date} today - current datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
+ * @param {object} alerts - an object of alerts & closings data.
  * @return {boolean} alertsOpenStatus - true = open | false = closed
  */
 function checkAlertsOpenStatus(today, alerts) {
@@ -22,9 +22,9 @@ function checkAlertsOpenStatus(today, alerts) {
     alerts.map(alert => {
       // Check if closed_for key exists
       if ('closed_for' in alert) {
-        // Compare alert.applies.start + alert.applies.end to today.
+        // Check for start and end values
         if (alert.applies.start && alert.applies.end) {
-          // Dayjs version
+          // Compare alert.applies.start + alert.applies.end to today.
           if (dayjs(today).isBetween(alert.applies.start, alert.applies.end)) {
             alertsOpenStatus = false;
           }
