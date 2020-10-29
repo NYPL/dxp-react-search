@@ -2,8 +2,11 @@
 -----------
 
 ### v0.1.4 [ ??? ] Location Finder Improvements
--------------------------------------------
-* Light refactor of location components and basic tests for Location components
+-----------------------------------------------
+* Light refactor of location components and basic tests for Location components.
+* Code improvements for handling of all day closings to accommodate hours, minutes.
+* Added unit tests for checkAlertsOpenStatus.
+* Replaced date-fns and date-fns-tz with DayJS for handling + comparing dates.
 
 ### v0.1.3 [2020-10-28] Hotfixes alert status logic
 ---------------------------------------------------
