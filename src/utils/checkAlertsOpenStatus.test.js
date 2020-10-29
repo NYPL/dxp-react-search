@@ -87,8 +87,8 @@ describe('checkAlertsOpenStatus', () => {
    * Test that hours and mins in alert are accounted for, inactive.
    *
    * today: October 27, 12:00pm
-   * closing start: October 27, 2020 12:00pm
-   * closing end: October 28, 2020, 12:15pm
+   * closing start: October 27, 2020 12:01pm
+   * closing end: October 28, 2021, 12:01pm
    *
    * Expected: Open (true). Closing does not start until 12:01pm
    */
@@ -119,8 +119,8 @@ describe('checkAlertsOpenStatus', () => {
    * Test that hours and mins in alert is accounted for, active.
    *
    * today: October 27, 12:05pm
-   * closing start: October 27, 2020 12:00pm
-   * closing end: October 28, 2021, 12:15pm
+   * closing start: October 27, 2020 12:01pm
+   * closing end: October 28, 2021, 12:01pm
    *
    * Expected: Closed (false). 12:05pm and the location is closed.
    */
