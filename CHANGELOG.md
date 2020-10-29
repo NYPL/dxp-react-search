@@ -1,9 +1,14 @@
 ## CHANGES
 -----------
 
-### v0.1.3 [ ??? ] Location Finder Improvements
+### v0.1.4 [ ??? ] Location Finder Improvements
 -------------------------------------------
 * Light refactor of location components and basic tests for Location components
+
+### v0.1.3 [2020-10-28] Hotfixes alert status logic
+---------------------------------------------------
+* Fix removes an extra conditional which resets the alertOpenStatus flag when multiple alerts are processed creating a false positive.
+* adjust endDate conditional for closing date test
 
 ### v0.1.2 [2020-10-27] Location Finder Improvements
 -------------------------------------------
