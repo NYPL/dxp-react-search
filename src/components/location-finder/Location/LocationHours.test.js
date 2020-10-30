@@ -19,8 +19,6 @@ describe('LocationHours Component', () => {
 
     expect(screen.getByText("Today's Hours:")).toBeInTheDocument();
     expect(screen.getByText('11AM–12PM')).toBeInTheDocument();
-
-    //screen.debug();
   });
 
   test('location should be open with regular hours that include start mins', () => {
@@ -107,6 +105,7 @@ describe('LocationHours Component', () => {
         todayHoursEnd={'18:00'}
       />
     );
+    
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
