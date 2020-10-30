@@ -20,7 +20,46 @@ describe('LocationHours Component', () => {
     expect(screen.getByText("Today's Hours:")).toBeInTheDocument();
     expect(screen.getByText('11AM–12PM')).toBeInTheDocument();
 
-    screen.debug();
+    //screen.debug();
+  });
+
+  test('location should be open with regular hours that include start mins', () => {
+    render(
+      <LocationHours
+        open={true}
+        todayHoursStart={'11:19'}
+        todayHoursEnd={'12:00'}
+      />
+    );
+
+    expect(screen.getByText("Today's Hours:")).toBeInTheDocument();
+    expect(screen.getByText('11:19AM–12PM')).toBeInTheDocument();
+  });
+
+  test('location should be open with regular hours that include end mins', () => {
+    render(
+      <LocationHours
+        open={true}
+        todayHoursStart={'11:00'}
+        todayHoursEnd={'12:57'}
+      />
+    );
+
+    expect(screen.getByText("Today's Hours:")).toBeInTheDocument();
+    expect(screen.getByText('11AM–12:57PM')).toBeInTheDocument();
+  });
+
+  test('location should be open with regular hours that include start and end mins', () => {
+    render(
+      <LocationHours
+        open={true}
+        todayHoursStart={'10:08'}
+        todayHoursEnd={'17:57'}
+      />
+    );
+
+    expect(screen.getByText("Today's Hours:")).toBeInTheDocument();
+    expect(screen.getByText('10:08AM–5:57PM')).toBeInTheDocument();
   });
 
   test('location shoule be closed due to regular hours', () => {
@@ -35,7 +74,7 @@ describe('LocationHours Component', () => {
     expect(screen.getByText('Closed.')).toBeInTheDocument();
   });
 
-  test('location should be temporarily closed due to extended closing or alert closing.', () => {
+  test('location with regular hours should be temporarily closed due to extended closing or alert closing.', () => {
     render(
       <LocationHours
         open={false}
@@ -47,8 +86,7 @@ describe('LocationHours Component', () => {
     expect(screen.getByText('Location is temporarily closed')).toBeInTheDocument();
   });
 
-  // @TODO Need to figure this one out.
-  test('location shoule be ?', () => {
+  test('location without regular hours should be temporarily closed due to extended closing or alert closing. ', () => {
     render(
       <LocationHours
         open={false}
@@ -56,6 +94,8 @@ describe('LocationHours Component', () => {
         todayHoursEnd={null}
       />
     );
+
+    expect(screen.getByText('Location is temporarily closed')).toBeInTheDocument();
   });
 
   // Accessbiility tests.
