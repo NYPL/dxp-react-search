@@ -7,6 +7,7 @@
 * Code improvements for handling of all day closings to accommodate hours, minutes.
 * Added unit tests for checkAlertsOpenStatus.
 * Replaced date-fns and date-fns-tz with DayJS for handling + comparing dates.
+* Added tests for LocationHours component.
 
 ### v0.1.3 [2020-10-28] Hotfixes alert status logic
 ---------------------------------------------------
