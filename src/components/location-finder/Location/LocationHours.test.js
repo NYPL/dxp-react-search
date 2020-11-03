@@ -60,7 +60,7 @@ describe('LocationHours Component', () => {
     expect(screen.getByText('10:08AM–5:57PM')).toBeInTheDocument();
   });
 
-  test('location shoule be closed due to regular hours', () => {
+  test('location should be closed due to regular hours', () => {
     render(
       <LocationHours
         open={true}
@@ -96,6 +96,30 @@ describe('LocationHours Component', () => {
     expect(screen.getByText('Location is temporarily closed')).toBeInTheDocument();
   });
 
+  test('location with null for start hours only should be closed due to regular hours', () => {
+    render(
+      <LocationHours
+        open={true}
+        todayHoursStart={null}
+        todayHoursEnd={'12:00'}
+      />
+    );
+
+    expect(screen.getByText('Closed.')).toBeInTheDocument();
+  });
+
+  test('location with null for end hours only should be closed due to regular hours', () => {
+    render(
+      <LocationHours
+        open={true}
+        todayHoursStart={'11:15'}
+        todayHoursEnd={null}
+      />
+    );
+
+    expect(screen.getByText('Closed.')).toBeInTheDocument();
+  });
+
   // Accessbiility tests.
   it('should not have basic accessibility issues', async () => {
     const { container } = render(
@@ -105,7 +129,7 @@ describe('LocationHours Component', () => {
         todayHoursEnd={'18:00'}
       />
     );
-    
+
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
