@@ -45,7 +45,8 @@ describe('LocationAccessibility', () => {
       <LocationAccessibility access={access_partial} note={note_partial} />
     );
 
-    expect(screen.getByText('Partially Accessible')).toBeInTheDocument();
+    expect(screen.getByText(/Partially Accessible/)).toBeInTheDocument();
+
   });
 });
 
