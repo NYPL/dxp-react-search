@@ -18,29 +18,24 @@ describe('LocationAccessibility', () => {
       <LocationAccessibility access={access_full} note={note} />
     );
   });
-});
 
-// Test accessibility access 1
-// Access: Fully Accessible
-
-describe('LocationAccessibility', () => {
-  test('access should be fully accessible', () => {
+  // Test accessibility access 1
+  // Access: Fully Accessible
+  test('Location should be fully accessible', () => {
     render(
       <LocationAccessibility access={access_full} note={note} />
     );
 
     expect(screen.getByText('Fully Accessible')).toBeInTheDocument();
   });
-});
 
-// Test accessibility access 2
-// Access: Partially Accessible
+  // Test accessibility access 2
+  // Access: Partially Accessible
 
-const access_partial = 'partial';
-const note_partial = 'All parts of the library, with the exception of the computer classroom and community room, are wheelchair accessible';
+  const access_partial = 'partial';
+  const note_partial = 'All parts of the library, with the exception of the computer classroom and community room, are wheelchair accessible';
 
-describe('LocationAccessibility', () => {
-  test('access should be partially accessible', () => {
+  test('Location should be partially accessible', () => {
     render(
       <LocationAccessibility access={access_partial} note={note_partial} />
     );
@@ -48,22 +43,22 @@ describe('LocationAccessibility', () => {
     expect(screen.getByText(/Partially Accessible/)).toBeInTheDocument();
 
   });
-});
 
-// Test accessibility access 3
-// Access: Not Accessible
+  // Test accessibility access 3
+  // Access: Not Accessible
 
-const access_none = 'none';
+  const access_none = 'none';
 
-describe('LocationAccessibility', () => {
-  test('access should be not accessible', () => {
+  test('Location should be not accessible', () => {
     render(
       <LocationAccessibility access={access_none} note={note} />
     );
 
     expect(screen.getByText('Not Accessible')).toBeInTheDocument();
   });
+
 });
+
 
 // Accessbiility tests.
 it('should not have basic accessibility issues', async () => {
