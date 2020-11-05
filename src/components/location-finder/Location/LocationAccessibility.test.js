@@ -57,6 +57,18 @@ describe('LocationAccessibility', () => {
     expect(screen.getByText('Not Accessible')).toBeInTheDocument();
   });
 
+  // Test accessibility access 4
+  // Access: Fullt Accessible
+  // Note: none
+
+  test('Location should be fully accessible and has no notes', () => {
+    render(
+      <LocationAccessibility access={access_full} note={note} />
+    );
+
+    expect(screen.getByText('Fully Accessible')).toBeInTheDocument();
+  });
+
 });
 
 
