@@ -1,9 +1,11 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
+// Utils
 import sortByDistance from './../../../utils/sortByDistance';
 import filterByOpenNow from './../../../utils/filterByOpenNow';
 import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
 import sortByName from './../../../utils/sortByName';
+import setTodaysHours from './../../../utils/setTodaysHours';
 // DayJS
 const dayjs = require('dayjs');
 // DayJS timezone
@@ -37,25 +39,16 @@ class RefineryApi extends RESTDataSource {
         break;
     }
 
-    // Today hours
-    const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
-
-    let todayHoursStart;
-    let todayHoursEnd;
-
-    location.hours.regular.map(item => {
-      if (weekDayKeys[now.day()] === item.day) {
-        todayHoursStart = item.open;
-        todayHoursEnd = item.close;
-      }
-    });
-
     // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
     const today = now.format();
     // Check open status based on alerts.
     const alertsOpenStatus = checkAlertsOpenStatus(today, location._embedded.alerts);
 
+    // Today hours
+    const todayHours = setTodaysHours(now, location.hours.regular, location._embedded.alerts, alertsOpenStatus);
+
     // Open status
+    // @TODO Update these comment sot better reflect how this works.
     let open = false;
     if (
       // Extended closing
@@ -82,10 +75,7 @@ class RefineryApi extends RESTDataSource {
         lat: location.geolocation.coordinates[1],
         lng: location.geolocation.coordinates[0],
       },
-      todayHours: {
-        start: todayHoursStart,
-        end: todayHoursEnd
-      },
+      todayHours: todayHours,
       open: open,
     }
   }

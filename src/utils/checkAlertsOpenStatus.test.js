@@ -146,4 +146,31 @@ describe('checkAlertsOpenStatus', () => {
       checkAlertsOpenStatus('2020-10-27T12:05:00-04:00', alertsHoursMinsActive)
     ).toBe(false);
   });
+
+  // @TODO Will fail!
+  /**
+   * Test that early closing is not considered an all day closing.
+   *
+   * today: October 27, 2:05pm
+   * closing start: October 27, 2020 2:00pm
+   * closing end: October 27, 2020, 10:00pm
+   *
+   * Expected: Open (true). Regular Hours will be adjusted.
+   */
+  /*const alertsEarlyClosing = [
+    {
+      closed_for: 'Early closing',
+      applies: {
+        start: '2020-10-27T14:00:00-04:00',
+        end: '2020-10-27T22:00:00-04:00'
+      }
+    }
+  ];
+
+  test('Early closing should be open and not processed as an all day closing.', () => {
+    expect(
+      checkAlertsOpenStatus('2020-10-27T14:05:00-04:00', alertsEarlyClosing)
+    ).toBe(true);
+  });
+  */
 });
