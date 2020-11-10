@@ -3,7 +3,7 @@ const { REFINERY_API } = process.env;
 // Utils
 import sortByDistance from './../../../utils/sortByDistance';
 import filterByOpenNow from './../../../utils/filterByOpenNow';
-import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
+import hasActiveClosing from './../../../utils/hasActiveClosing';
 import sortByName from './../../../utils/sortByName';
 import setTodaysHours from './../../../utils/setTodaysHours';
 // DayJS
@@ -42,21 +42,13 @@ class RefineryApi extends RESTDataSource {
     // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
     const today = now.format();
     // Check open status based on alerts.
-    const alertsOpenStatus = checkAlertsOpenStatus(today, location._embedded.alerts);
-
+    const isActiveClosing = hasActiveClosing(today, location._embedded.alerts, location.open);
     // Today hours
-    const todayHours = setTodaysHours(now, location.hours.regular, location._embedded.alerts, alertsOpenStatus);
-
+    const todayHours = setTodaysHours(now, location.hours.regular, location._embedded.alerts, isActiveClosing);
     // Open status
-    // @TODO Update these comment sot better reflect how this works.
-    let open = false;
-    if (
-      // Extended closing
-      location.open
-      // Alert closing
-      && alertsOpenStatus
-    ) {
-      open = true;
+    let open = true;
+    if (isActiveClosing) {
+      open = false;
     }
 
     return {

@@ -47,7 +47,7 @@ describe('setTodaysHours', () => {
   };
 
   test('Late Opening', () => {
-    const todayHours = setTodaysHours(now, regularHours, lateOpeningAlerts, false);
+    const todayHours = setTodaysHours(now, regularHours, lateOpeningAlerts, true);
     expect(todayHours).toMatchObject(lateOpeningExpectedHours);
   });
 
@@ -77,18 +77,28 @@ describe('setTodaysHours', () => {
     end: '16:00'
   };
 
-  test('Early Closing', () => {
-    const todayHours = setTodaysHours(now, regularHours, earlyClosingAlerts, false);
+  test('Early Closing Active', () => {
+    const todayHours = setTodaysHours(now, regularHours, earlyClosingAlerts, true);
     expect(todayHours).toMatchObject(earlyClosingExpectedHours);
   });
 
 
 
-
-  /*test('Future Early Closing', () => {
+  // Early Closing Inactive Via Date Range
+  /*test('Early Closing Inactive', () => {
     const todayHours = setTodaysHours(now, regularHours, earlyClosingAlerts, false);
     expect(todayHours).toMatchObject(earlyClosingExpectedHours);
   });
   */
+
+  // Late Closing Inactive Via Date Range
+
+  // Early Opening Without Extended Closing Flag
+
+  // Late Closing Without Extended Closing Flag
+
+  // startTimes and endTimes sort works properly (natsort?)
+
+
 
 });

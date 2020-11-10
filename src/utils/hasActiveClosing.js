@@ -3,21 +3,22 @@ var isBetween = require('dayjs/plugin/isBetween');
 dayjs.extend(isBetween);
 
 /**
- * Determines if a location is open by comparing today to alerts & closings data.
+ * Determines if a location has an active closing.
  *
  * @param {date} today - current datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
  * @param {object} alerts - an object of alerts & closings data.
- * @return {boolean} alertsOpenStatus - true = open | false = closed
+ * @param {boolean} isExtendedClosing - whether or not the alert is extended closing.
+ * @return {boolean} activeClosing - true = active | false = inactive
  */
-function checkAlertsOpenStatus(today, alerts) {
-  let alertsOpenStatus = true;
+function hasActiveClosing(today, alerts, isExtendedClosing) {
+  let activeClosing = false;
 
   // Check for any alerts.
   if (alerts === undefined || alerts.length === 0) {
     // No alerts, so set this status to true.
     // Other checks below will determine if the location is open.
-    alertsOpenStatus = true;
-  } else {
+    activeClosing = false;
+  } else if (isExtendedClosing) {
     // We have alerts, so map over them.
     alerts.map(alert => {
       // Check if closed_for key exists
@@ -26,14 +27,14 @@ function checkAlertsOpenStatus(today, alerts) {
         if (alert.applies.start && alert.applies.end) {
           // Compare alert.applies.start + alert.applies.end to today.
           if (dayjs(today).isBetween(alert.applies.start, alert.applies.end)) {
-            alertsOpenStatus = false;
+            activeClosing = true;
           }
         }
       }
     });
   }
 
-  return alertsOpenStatus;
+  return activeClosing;
 }
 
-export default checkAlertsOpenStatus;
+export default hasActiveClosing;

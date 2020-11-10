@@ -1,6 +1,6 @@
-import checkAlertsOpenStatus from './checkAlertsOpenStatus';
+import hasActiveClosing from './hasActiveClosing';
 
-describe('checkAlertsOpenStatus', () => {
+describe('hasActiveClosing', () => {
   /**
    * Temporary closing, one.
    *
@@ -8,7 +8,7 @@ describe('checkAlertsOpenStatus', () => {
    * closing start: October 27, 2020 10:15am
    * closing end: October 27, 2021, 10:15am
    *
-   * Expected: Closed (false)
+   * Expected: Active closing (true)
    */
   const alertsTempClosingOne = [
     {
@@ -27,10 +27,10 @@ describe('checkAlertsOpenStatus', () => {
     }
   ];
 
-  test('One active temporary closing should return false.', () => {
+  test('One active temporary closing should return true.', () => {
     expect(
-      checkAlertsOpenStatus('2020-10-27T12:00:00-04:00', alertsTempClosingOne)
-    ).toBe(false);
+      hasActiveClosing('2020-10-27T12:00:00-04:00', alertsTempClosingOne, true)
+    ).toBe(true);
   });
 
   /**
@@ -44,7 +44,7 @@ describe('checkAlertsOpenStatus', () => {
    * closing 2 start: October 28, 2020, 12:00pm
    * closing 2 end: October 29, 2020, 11:59pm
    *
-   * Expected: Closed (false)
+   * Expected: Active closing (true)
    */
   const alertsTempClosingMany = [
     {
@@ -76,10 +76,10 @@ describe('checkAlertsOpenStatus', () => {
     }
   ];
 
-  test('Many temporary closings, only 1 active, should return false.', () => {
+  test('Many temporary closings, only 1 active, should return true.', () => {
     expect(
-      checkAlertsOpenStatus('2020-10-27T12:00:00-04:00', alertsTempClosingMany)
-    ).toBe(false);
+      hasActiveClosing('2020-10-27T12:00:00-04:00', alertsTempClosingMany, true)
+    ).toBe(true);
   });
 
 
@@ -90,7 +90,7 @@ describe('checkAlertsOpenStatus', () => {
    * closing start: October 27, 2020 12:01pm
    * closing end: October 28, 2021, 12:01pm
    *
-   * Expected: Open (true). Closing does not start until 12:01pm
+   * Expected: Inactive (false). Closing does not start until 12:01pm
    */
   const alertsHoursMins = [
     {
@@ -109,10 +109,10 @@ describe('checkAlertsOpenStatus', () => {
     }
   ];
 
-  test('A single temporary closing with inactive hours should return true.', () => {
+  test('A single temporary closing with inactive hours should return false.', () => {
     expect(
-      checkAlertsOpenStatus('2020-10-27T12:00:00-04:00', alertsHoursMins)
-    ).toBe(true);
+      hasActiveClosing('2020-10-27T12:00:00-04:00', alertsHoursMins, true)
+    ).toBe(false);
   });
 
   /**
@@ -122,7 +122,7 @@ describe('checkAlertsOpenStatus', () => {
    * closing start: October 27, 2020 12:01pm
    * closing end: October 28, 2021, 12:01pm
    *
-   * Expected: Closed (false). 12:05pm and the location is closed.
+   * Expected: Active closing (true). 12:05pm and the location is closed.
    */
   const alertsHoursMinsActive = [
     {
@@ -141,10 +141,10 @@ describe('checkAlertsOpenStatus', () => {
     }
   ];
 
-  test('A single temporary closing with active hours should return false.', () => {
+  test('A single temporary closing with active hours should return true.', () => {
     expect(
-      checkAlertsOpenStatus('2020-10-27T12:05:00-04:00', alertsHoursMinsActive)
-    ).toBe(false);
+      hasActiveClosing('2020-10-27T12:05:00-04:00', alertsHoursMinsActive, true)
+    ).toBe(true);
   });
 
   // @TODO Will fail!
@@ -169,7 +169,7 @@ describe('checkAlertsOpenStatus', () => {
 
   test('Early closing should be open and not processed as an all day closing.', () => {
     expect(
-      checkAlertsOpenStatus('2020-10-27T14:05:00-04:00', alertsEarlyClosing)
+      hasActiveClosing('2020-10-27T14:05:00-04:00', alertsEarlyClosing)
     ).toBe(true);
   });
   */

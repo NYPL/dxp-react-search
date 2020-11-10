@@ -1,4 +1,4 @@
-import checkAlertsOpenStatus from './checkAlertsOpenStatus';
+import hasActiveClosing from './hasActiveClosing';
 
 /**
  * Takes an array of locations and reduces the array to only open now Locations.
@@ -15,7 +15,7 @@ function filterByOpenNow(now, locations) {
 
   return locations.reduce((accumlator, location) => {
     // Alerts
-    const alertsOpenStatus = checkAlertsOpenStatus(today, location._embedded.alerts);
+    const isActiveClosing = hasActiveClosing(today, location._embedded.alerts, location.open);
 
     location.hours.regular.map(hoursItem => {
       // Find today in weekly hours.
@@ -24,10 +24,8 @@ function filterByOpenNow(now, locations) {
         if (
           // Check for not null.
           hoursItem.open !== null && hoursItem.close !== null
-          // Check for alert closings.
-          && alertsOpenStatus
-          // Check for extended closing.
-          && location.open
+          // Check for active closing.
+          && !isActiveClosing
           // Check open/closed hours against now time.
           && hoursItem.open <= nowTime && hoursItem.close >= nowTime
         ) {

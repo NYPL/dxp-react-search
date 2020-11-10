@@ -8,9 +8,10 @@ dayjs.extend(isBetween);
  * @param {object} now - current date object, unformatted.
  * @param {object} regularHours - an object of regular hours data.
  * @param {object} alerts - an object of alerts & closings data.
+ * @param {boolean} isActiveClosing - whether or not the closing is active.
  * @return {object} todaysHours - an object of start and end hours for today.
  */
-function setTodaysHours(now, regularHours, alerts, alertsOpenStatus) {
+function setTodaysHours(now, regularHours, alerts, isActiveClosing) {
   // Today hours
   const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
 
@@ -28,11 +29,7 @@ function setTodaysHours(now, regularHours, alerts, alertsOpenStatus) {
   const startTimes = [todayHoursStart];
   const endTimes = [todayHoursEnd];
 
-  const hasActiveClosing = alertsOpenStatus;
-
-  if (!hasActiveClosing) {
-    //console.log(hasActiveClosing);
-
+  if (isActiveClosing) {
     // We have alerts, so map over them.
     alerts.map(alert => {
       // Check if closed_for key exists
@@ -55,23 +52,23 @@ function setTodaysHours(now, regularHours, alerts, alertsOpenStatus) {
     });
 
     // Sort the start and end times lowest to highest.
-    //natsort(startTimes);
-    //natsort(endTimes);
     startTimes.sort();
     endTimes.sort();
 
-    console.log('sorted start and end times');
+    /*console.log('sorted start and end times');
     console.log(startTimes);
     console.log(endTimes);
+    */
 
     // Use the latest start time and the earliest end time.
     const startTime = startTimes.slice(-1).pop();
     const endTime = endTimes[0];
 
-    console.log('latest start time and the earliest end time');
+    /*console.log('latest start time and the earliest end time');
     console.log(startTime);
     console.log(endTime);
-
+    */
+    
     if (startTime < endTime) {
       todayHoursStart = startTime;
       todayHoursEnd = endTime;
