@@ -41,13 +41,21 @@ class RefineryApi extends RESTDataSource {
 
     // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
     const today = now.format();
-    // Check open status based on alerts.
-    const isActiveClosing = hasActiveClosing(today, location._embedded.alerts, location.open);
+
+    // Check if location has active closings within a date range.
+    const hasActiveClosing2 = hasActiveClosing(today, location._embedded.alerts);
+
+    // Set isExtendedClosing.
+    let isExtendedClosing = false;
+    if (hasActiveClosing2 && !location.open) {
+      isExtendedClosing = true;
+    }
+
     // Today hours
-    const todayHours = setTodaysHours(now, location.hours.regular, location._embedded.alerts, isActiveClosing);
+    const todayHours = setTodaysHours(now, location.hours.regular, location._embedded.alerts, hasActiveClosing2, isExtendedClosing);
     // Open status
     let open = true;
-    if (isActiveClosing) {
+    if (isExtendedClosing) {
       open = false;
     }
 

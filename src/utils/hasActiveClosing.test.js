@@ -82,7 +82,6 @@ describe('hasActiveClosing', () => {
     ).toBe(true);
   });
 
-
   /**
    * Test that hours and mins in alert are accounted for, inactive.
    *
@@ -147,7 +146,24 @@ describe('hasActiveClosing', () => {
     ).toBe(true);
   });
 
-  // @TODO Will fail!
+  // Late opening
+  /*const lateOpeningAlerts = [
+    {
+      closed_for: 'Late Opening',
+      applies: {
+        start: '2020-10-28T10:00:00-04:00',
+        end: '2020-10-28T12:00:00-04:00'
+      }
+    }
+  ];
+
+  test('A late opening should be considered an active closing.', () => {
+    expect(
+      hasActiveClosing('2020-10-28T12:00:00-04:00', lateOpeningAlerts)
+    ).toBe(true);
+  });
+  */
+
   /**
    * Test that early closing is not considered an all day closing.
    *
@@ -155,7 +171,7 @@ describe('hasActiveClosing', () => {
    * closing start: October 27, 2020 2:00pm
    * closing end: October 27, 2020, 10:00pm
    *
-   * Expected: Open (true). Regular Hours will be adjusted.
+   * Expected: Inactive extended closing (false) Location should close early at 2pm
    */
   /*const alertsEarlyClosing = [
     {
@@ -170,7 +186,7 @@ describe('hasActiveClosing', () => {
   test('Early closing should be open and not processed as an all day closing.', () => {
     expect(
       hasActiveClosing('2020-10-27T14:05:00-04:00', alertsEarlyClosing)
-    ).toBe(true);
+    ).toBe(false);
   });
   */
 });

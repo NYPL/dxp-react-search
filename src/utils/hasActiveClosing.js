@@ -7,10 +7,9 @@ dayjs.extend(isBetween);
  *
  * @param {date} today - current datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
  * @param {object} alerts - an object of alerts & closings data.
- * @param {boolean} isExtendedClosing - whether or not the alert is extended closing.
  * @return {boolean} activeClosing - true = active | false = inactive
  */
-function hasActiveClosing(today, alerts, isExtendedClosing) {
+function hasActiveClosing(today, alerts) {
   let activeClosing = false;
 
   // Check for any alerts.
@@ -18,7 +17,7 @@ function hasActiveClosing(today, alerts, isExtendedClosing) {
     // No alerts, so set this status to true.
     // Other checks below will determine if the location is open.
     activeClosing = false;
-  } else if (isExtendedClosing) {
+  } else {
     // We have alerts, so map over them.
     alerts.map(alert => {
       // Check if closed_for key exists
