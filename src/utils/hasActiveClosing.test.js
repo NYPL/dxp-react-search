@@ -146,8 +146,9 @@ describe('hasActiveClosing', () => {
     ).toBe(true);
   });
 
+  // @TODO Do we need this?
   // Late opening
-  /*const lateOpeningAlerts = [
+  const lateOpeningAlerts = [
     {
       closed_for: 'Late Opening',
       applies: {
@@ -162,18 +163,9 @@ describe('hasActiveClosing', () => {
       hasActiveClosing('2020-10-28T12:00:00-04:00', lateOpeningAlerts)
     ).toBe(true);
   });
-  */
 
-  /**
-   * Test that early closing is not considered an all day closing.
-   *
-   * today: October 27, 2:05pm
-   * closing start: October 27, 2020 2:00pm
-   * closing end: October 27, 2020, 10:00pm
-   *
-   * Expected: Inactive extended closing (false) Location should close early at 2pm
-   */
-  /*const alertsEarlyClosing = [
+  // Early closing.
+  const alertsEarlyClosing = [
     {
       closed_for: 'Early closing',
       applies: {
@@ -183,10 +175,9 @@ describe('hasActiveClosing', () => {
     }
   ];
 
-  test('Early closing should be open and not processed as an all day closing.', () => {
+  test('A early closing should be considered an active closing..', () => {
     expect(
       hasActiveClosing('2020-10-27T14:05:00-04:00', alertsEarlyClosing)
-    ).toBe(false);
+    ).toBe(true);
   });
-  */
 });

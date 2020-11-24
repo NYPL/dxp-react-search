@@ -25,7 +25,10 @@ function hasActiveClosing(today, alerts) {
         // Check for start and end values
         if (alert.applies.start && alert.applies.end) {
           // Compare alert.applies.start + alert.applies.end to today.
-          if (dayjs(today).isBetween(alert.applies.start, alert.applies.end)) {
+          // 4th parameter: '[]' includes start and end date in comparison.
+          // By default, this paramer is '()' which excludes.
+          // @see https://day.js.org/docs/en/plugin/is-between
+          if (dayjs(today).isBetween(alert.applies.start, alert.applies.end, null, '[]')) {
             activeClosing = true;
           }
         }
