@@ -1,6 +1,9 @@
+// DayJS
 const dayjs = require('dayjs');
 var isBetween = require('dayjs/plugin/isBetween');
 dayjs.extend(isBetween);
+// Utils
+import naturalSort from './naturalSort';
 
 /**
  * Set today's hours using regular hours or modified hours using alerts closings.
@@ -80,8 +83,11 @@ function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedC
             }
 
             // Sort the start and end times lowest to highest.
-            startTimes.sort();
-            endTimes.sort();
+            startTimes.sort(naturalSort);
+            endTimes.sort(naturalSort);
+
+            console.log('startTimes');
+            console.log(startTimes);
 
             // Use the latest start time and the earliest end time.
             const startTime = startTimes.slice(-1).pop();

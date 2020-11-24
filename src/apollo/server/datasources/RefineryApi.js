@@ -43,16 +43,16 @@ class RefineryApi extends RESTDataSource {
     const today = now.format();
 
     // Check if location has active closings within a date range.
-    const hasActiveClosing2 = hasActiveClosing(today, location._embedded.alerts);
+    const locationHasActiveClosing = hasActiveClosing(today, location._embedded.alerts);
 
     // Set isExtendedClosing.
     let isExtendedClosing = false;
-    if (hasActiveClosing2 && !location.open) {
+    if (locationHasActiveClosing && !location.open) {
       isExtendedClosing = true;
     }
 
     // Today hours
-    const todayHours = setTodaysHours(now, location.hours.regular, location._embedded.alerts, hasActiveClosing2, isExtendedClosing);
+    const todayHours = setTodaysHours(now, location.hours.regular, location._embedded.alerts, locationHasActiveClosing, isExtendedClosing);
     // Open status
     let open = true;
     if (isExtendedClosing) {
