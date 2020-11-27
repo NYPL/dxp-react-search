@@ -67,7 +67,6 @@ function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedC
             // Closing spans regular hours, so return NULL for closed.
             || closingStartHours <= todayHoursStart && closingEndHours >= todayHoursEnd
           ) {
-            console.log('closed!');
             todaysHours = {
               start: null,
               end: null
@@ -86,15 +85,11 @@ function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedC
             startTimes.sort(naturalSort);
             endTimes.sort(naturalSort);
 
-            console.log('startTimes');
-            console.log(startTimes);
-
             // Use the latest start time and the earliest end time.
             const startTime = startTimes.slice(-1).pop();
             const endTime = endTimes[0];
 
             if (startTime < endTime) {
-              console.log('modified hours!');
               todaysHours = {
                 start: startTime,
                 end: endTime

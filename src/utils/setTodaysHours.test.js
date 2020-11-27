@@ -114,8 +114,6 @@ describe('setTodaysHours', () => {
 
   test('Holiday Closing', () => {
     const todayHours = setTodaysHours(nowHoliday, regularHours, holidayClosingAlerts, true, false);
-    console.log(todayHours);
-
     expect(todayHours).toMatchObject(holidayClosingExpectedHours);
   });
 

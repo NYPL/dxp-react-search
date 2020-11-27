@@ -146,8 +146,7 @@ describe('hasActiveClosing', () => {
     ).toBe(true);
   });
 
-  // @TODO Do we need this?
-  // Late opening
+  // Late opening.
   const lateOpeningAlerts = [
     {
       closed_for: 'Late Opening',
@@ -175,7 +174,7 @@ describe('hasActiveClosing', () => {
     }
   ];
 
-  test('A early closing should be considered an active closing..', () => {
+  test('A early closing should be considered an active closing.', () => {
     expect(
       hasActiveClosing('2020-10-27T14:05:00-04:00', alertsEarlyClosing)
     ).toBe(true);
