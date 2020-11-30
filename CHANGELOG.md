@@ -1,6 +1,10 @@
 ## CHANGES
 -----------
 
+### v0.1.5 [?] Location Finder Improvements
+-----------------------------------------------
+* Added tests for LocationAccessibility component.
+
 ### v0.1.4 [2020-11-10] Location Finder Improvements
 -----------------------------------------------
 * Light refactor of location components and basic tests for Location components.
