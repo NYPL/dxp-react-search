@@ -138,23 +138,19 @@ function SearchForm() {
           />
           Search
         </DS.Button>
-        <div className="checkbox">
-          <input
-            id="isOpenNow"
-            class="checkbox__input"
-            type="checkbox"
-            name="isOpenNow"
-            checked={openNow}
-            onChange={onChangeOpenNow}
-            aria-label="Checking this box will update the results"
-          />
-          <label
-            id="label"
-            htmlFor="isOpenNow"
-            className="label">
-            Open Now
-          </label>
-        </div>
+        <DS.Checkbox
+          name="isOpenNow"
+          checkboxId="checkbox"
+          labelOptions={{
+            id: 'label',
+            labelContent: 'Open Now'
+          }}
+          attributes={{
+            'aria-label': "Checking this box will update the results"
+          }}
+          checked={openNow}
+          onChange={onChangeOpenNow}
+        />
       </form>
     </div>
   );
