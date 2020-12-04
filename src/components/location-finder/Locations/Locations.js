@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 // Apollo
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Map
 import Map from './../Map';
@@ -69,6 +69,7 @@ function Locations() {
   // Side effect to dispatch redux action to set pagination redux state.
   useEffect(() => {
     if (data) {
+      console.log('useEffect!');
       // Dispatch redux action
       dispatch(setPagination({
         pageNumber: pageNumber,
