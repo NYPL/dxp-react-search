@@ -3,8 +3,8 @@ import { cleanup, screen, waitFor } from "@testing-library/react";
 import { render } from './../../../../testHelper/customRtlRender';
 import '@testing-library/jest-dom/extend-expect';
 import { GraphQLError } from 'graphql';
-import LocationsEasy from './LocationsEasy';
-import { LocationsQuery as LOCATIONS_QUERY } from './LocationsEasy.gql';
+import Locations from './Locations';
+import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Mock data
 import allLocationsMocks from './../../../../testHelper/__mocks/allLocationsMocks';
 
@@ -12,29 +12,46 @@ const mocks = [
   {
     request: {
       query: LOCATIONS_QUERY,
-      /*variables: {
-        name: 'Buck',
+      variables: {
+        searchGeoLat: null,
+        searchGeoLng: null,
+        openNow: true,
+        limit: 100,
+        offset: 0,
+        pageNumber: 1
       },
-      */
     },
     result: allLocationsMocks
   },
 ];
 
+const search = {
+  searchQuery: '',
+  searchQueryGeoLat: null,
+  searchQueryGeoLng: null,
+  openNow: true,
+  limit: 100,
+  offset: 0,
+  pageNumber: 1
+}
+
 afterEach(cleanup);
+
+// Mock the LocationsPagination sub component, as it will be tested on its own.
+jest.mock('./LocationsPagination', () => () => <div>LocationsPagination</div>);
 
 describe('Apollo states test', () => {
   // Test loading
-  it('renders loading state without error', () => {
+  /*it('renders loading state without error', () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <LocationsEasy />
+        <Locations />
       </MockedProvider>
     );
 
     // Check for loading skeleton class
     expect(container.getElementsByClassName('loading-skeleton').length).toBe(1);
-    //screen.debug(container);
+    screen.debug(container);
   });
 
   // Error state
@@ -52,7 +69,7 @@ describe('Apollo states test', () => {
 
     const { container } = render(
       <MockedProvider mocks={errorMocks} addTypename={false}>
-        <LocationsEasy />
+        <Locations />
       </MockedProvider>
     );
 
@@ -60,23 +77,34 @@ describe('Apollo states test', () => {
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
     // Check for error message
     expect(screen.getByText(/error while loading locations/)).toBeInTheDocument();
-    //screen.debug(container);
+    screen.debug(container);
   });
+  */
 
   // Final state
   it('renders final state without errors', async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <LocationsEasy />
-      </MockedProvider>
+        <Locations />
+      </MockedProvider>,
+      { initialState: { search } }
     );
 
     // Wait for content
-    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 5)));
     // Check for data
     expect(screen.getByText(/125th Street Library/)).toBeInTheDocument();
     expect(screen.getByText(/53rd Street Library/)).toBeInTheDocument();
-    //screen.debug(container);
+
+    /*await waitFor(() => {
+      //container.update();
+      //expect(wrapper.find('HeroDiv').exists()).toBeTruthy();
+      // Check for data
+      expect(screen.getByText(/125th Street Library/)).toBeInTheDocument();
+      expect(screen.getByText(/53rd Street Library/)).toBeInTheDocument();
+    });
+    */
+    screen.debug(container);
   });
 
 });

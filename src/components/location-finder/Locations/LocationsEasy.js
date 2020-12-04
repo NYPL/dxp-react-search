@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 // Apollo
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './LocationsEasy.gql';
 
 // Components
@@ -16,8 +16,15 @@ function LocationsEasy() {
     LOCATIONS_QUERY, {}
   );
 
+  // Error state.
+  if (error) {
+    return (
+      <div>'error while loading locations'</div>
+    );
+  }
+
   // Loading state,
-  if (loading || !data) {
+  if (/*!error &&*/ loading || !data) {
     return (
       <LoadingSkeleton />
     );
@@ -30,17 +37,12 @@ function LocationsEasy() {
     );
   }
 
-  // Error state.
-  if (error) {
-    return (
-      <div>'error while loading locations'</div>
-    );
-  }
-
   return (
     <div className="locations__list-inner">
       {data.allLocations.locations.map((location) => (
-        <h1>{location.id}</h1>
+        <div key={location.slug}>
+          <h1>{location.name}</h1>
+        </div>
       ))}
     </div>
   );
