@@ -18,6 +18,7 @@ function LocationFinder() {
   return (
     <Layout>
       <Meta />
+      <a id="main-content" tabindex="-1"></a>
       <div className="content-header">
         <Hero />
         <SearchHeader />
