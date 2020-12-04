@@ -60,16 +60,13 @@ function Locations() {
         limit,
         offset,
         pageNumber
-      },
-      fetchPolicy: "cache-and-network",
-      notifyOnNetworkStatusChange: true
+      }
     }
   );
 
   // Side effect to dispatch redux action to set pagination redux state.
   useEffect(() => {
     if (data) {
-      console.log('useEffect!');
       // Dispatch redux action
       dispatch(setPagination({
         pageNumber: pageNumber,
