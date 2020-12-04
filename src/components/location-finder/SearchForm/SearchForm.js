@@ -13,7 +13,7 @@ import {
   setPagination
 } from './../../../redux/actions';
 // Apollo
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
 // Utils
 import filterBySearchInput from './../../../utils/filterBySearchInput';

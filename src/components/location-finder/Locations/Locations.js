@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 // Apollo
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Map
 import Map from './../Map';
@@ -60,9 +60,7 @@ function Locations() {
         limit,
         offset,
         pageNumber
-      },
-      fetchPolicy: "cache-and-network",
-      notifyOnNetworkStatusChange: true
+      }
     }
   );
 
