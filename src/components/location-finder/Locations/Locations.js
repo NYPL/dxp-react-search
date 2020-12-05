@@ -3,8 +3,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
-// Map
-import Map from './../Map';
 // Redux
 import {
   batch,
@@ -97,7 +95,7 @@ function Locations() {
       <div>'error while loading locations'</div>
     );
   }
-
+  
   return (
     <div className="locations__list-inner">
       <DS.Link

@@ -4,6 +4,7 @@ export const resolvers = {
       const query = args.filter;
       //const allLocations = await dataSources.drupalApi.getAllLocations(query);
       const allLocations = await dataSources.refineryApi.getAllLocations(args);
+      console.log(allLocations);
       return allLocations;
     },
   },

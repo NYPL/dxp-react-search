@@ -13,7 +13,16 @@ import LocationsPagination from './LocationsPagination';
 function LocationsEasy() {
   // Query for data.
   const { loading, error, data } = useQuery(
-    LOCATIONS_QUERY, {}
+    LOCATIONS_QUERY, {
+      variables: {
+        searchGeoLat: null,
+        searchGeoLng: null,
+        openNow: true,
+        limit: 10,
+        offset: 0,
+        pageNumber: 1,
+      }
+    }
   );
 
   // Error state.

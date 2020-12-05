@@ -1,5 +1,22 @@
-query LocationsQuery {
-  allLocations {
+query LocationsQuery(
+  $searchGeoLat: Float,
+  $searchGeoLng: Float,
+  $openNow: Boolean,
+  $limit: Int,
+  $pageNumber: Int,
+  $offset: Int) {
+  allLocations(
+    limit: $limit,
+    pageNumber: $pageNumber,
+    offset: $offset,
+    filter: {
+      openNow: $openNow
+    },
+    sortByDistance: {
+      originLat: $searchGeoLat,
+      originLng: $searchGeoLng
+    }
+  ) {
     locations {
       id
       name
@@ -11,10 +28,19 @@ query LocationsQuery {
       postal_code
       phone
       wheelchairAccess
+      accessibilityNote
       geoLocation {
         lat
         lng
       }
+      todayHours {
+        start
+        end
+      }
+      open
+    }
+    pageInfo {
+      totalItems
     }
   }
 }

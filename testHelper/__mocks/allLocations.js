@@ -13,6 +13,12 @@ const allLocationsMocks = {
           "postal_code": "10035",
           "phone": "(212) 534-5050",
           "wheelchairAccess": "partial",
+          accessibilityNote: '',
+          todayHours: {
+            start: '11:00',
+            end: '18:00'
+          },
+          open: true,
           "geoLocation": {
             "lat": 40.8034,
             "lng": -73.9354
@@ -29,12 +35,21 @@ const allLocationsMocks = {
           "postal_code": "10019",
           "phone": "(212) 714-8400",
           "wheelchairAccess": "full",
+          accessibilityNote: '',
+          todayHours: {
+            start: '11:00',
+            end: '18:00'
+          },
+          open: true,
           "geoLocation": {
             "lat": 40.7608,
             "lng": -73.9773
           }
         },
       ],
+      pageInfo: {
+        totalItems: 100
+      }
     },
   }
 };

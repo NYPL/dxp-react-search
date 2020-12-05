@@ -4,20 +4,25 @@ import { render } from './../../../../testHelper/customRtlRender';
 import '@testing-library/jest-dom/extend-expect';
 import { GraphQLError } from 'graphql';
 import LocationsEasy from './LocationsEasy';
-import { LocationsQuery as LOCATIONS_QUERY } from './LocationsEasy.gql';
+//import { LocationsQuery as LOCATIONS_QUERY } from './LocationsEasy.gql';
+import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Mock data
-import allLocationsMocks from './../../../../testHelper/__mocks/allLocationsMocks';
+import allLocations from './../../../../testHelper/__mocks/allLocations';
 
 const mocks = [
   {
     request: {
       query: LOCATIONS_QUERY,
-      /*variables: {
-        name: 'Buck',
+      variables: {
+        searchGeoLat: null,
+        searchGeoLng: null,
+        openNow: true,
+        limit: 10,
+        offset: 0,
+        pageNumber: 1,
       },
-      */
     },
-    result: allLocationsMocks
+    result: allLocations
   },
 ];
 

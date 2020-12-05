@@ -1,4 +1,4 @@
-import { getDataFromTree } from '@apollo/react-ssr';
+import { getDataFromTree } from '@apollo/client/react/ssr';
 import { withApollo } from './../../apollo/client/withApollo';
 // Redux
 import { withRedux } from './../../redux/withRedux';
