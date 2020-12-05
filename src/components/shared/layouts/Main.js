@@ -3,7 +3,7 @@ import * as DS from '@nypl/design-system-react-components';
 import Footer from '@nypl/dgx-react-footer';
 
 export default ({ children }) => (
-  <div className="layout-container nypl--locations">
+  <div className="layout-container nypl--locations nypl-ds">
     <Header
       skipNav={{ target: 'main-content' }}
       navData={navConfig.current}
