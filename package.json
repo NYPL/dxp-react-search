@@ -38,7 +38,6 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@apollo/react-testing": "^4.0.0",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.8",
     "babel-register": "^6.26.0",
