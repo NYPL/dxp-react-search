@@ -66,8 +66,7 @@ describe('Apollo states test', () => {
   });
 
   // Error state
-  // @TODO not working for some reason?
-  /*it('renders error state', async () => {
+  it('renders error state', async () => {
     const errorMocks = [
       {
         request: {
@@ -100,7 +99,6 @@ describe('Apollo states test', () => {
     expect(screen.getByText(/error while loading locations/)).toBeInTheDocument();
     screen.debug(container);
   });
-  */
 
   // Final state
   it('renders final state without errors', async () => {
@@ -129,7 +127,7 @@ describe('Apollo states test', () => {
     );
     // Wait for content
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
-    
+
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

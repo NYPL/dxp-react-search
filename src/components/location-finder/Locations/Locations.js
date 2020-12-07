@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 // Apollo
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Redux
@@ -9,13 +8,7 @@ import {
   useDispatch,
   useSelector
 } from 'react-redux';
-import {
-  setSearchQuery,
-  setMapPosition,
-  setLocationInfoWindowId,
-  setAutoSuggestInputValue,
-  setPagination
-} from './../../../redux/actions';
+import { setPagination } from './../../../redux/actions';
 // Components
 import * as DS from '@nypl/design-system-react-components';
 import Location from './../Location';
@@ -49,7 +42,7 @@ function Locations() {
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
   // Query for data.
-  const { loading, error, data, networkStatus, fetchMore } = useQuery(
+  const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
         searchGeoLat,
@@ -73,7 +66,14 @@ function Locations() {
         resultsCount: data.allLocations.locations.length
       }));
     }
-  }, [data])
+  }, [data]);
+
+  // Error state.
+  if (error) {
+    return (
+      <div>'error while loading locations'</div>
+    );
+  }
 
   // Loading state,
   if (loading || !data) {
@@ -89,13 +89,6 @@ function Locations() {
     );
   }
 
-  // Error state.
-  if (error) {
-    return (
-      <div>'error while loading locations'</div>
-    );
-  }
-  
   return (
     <div className="locations__list-inner">
       <DS.Link

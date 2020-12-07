@@ -65,7 +65,7 @@ describe('Apollo states test', () => {
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
     // Check for error message
     expect(screen.getByText(/error while loading locations/)).toBeInTheDocument();
-    //screen.debug(container);
+    screen.debug(container);
   });
 
   // Final state
