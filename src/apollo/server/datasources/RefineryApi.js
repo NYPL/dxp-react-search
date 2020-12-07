@@ -13,6 +13,8 @@ var utc = require('dayjs/plugin/utc');
 var timezone = require('dayjs/plugin/timezone');
 dayjs.extend(utc);
 dayjs.extend(timezone);
+// Set default timezone.
+dayjs.tz.setDefault('America/New_York');
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -22,9 +24,9 @@ class RefineryApi extends RESTDataSource {
 
   // Tidy up the response from Refinery.
   locationNormalizer(location) {
-    // Create a dayJS date object.
-    const timeZone = 'America/New_York';
-    let now = dayjs().tz(timeZone);
+    // Create a dayjs date object, using default timezone.
+    // @see https://github.com/iamkun/dayjs/issues/1227
+    let now = dayjs.tz();
 
     let wheelchairAccess;
     switch(location.access) {
@@ -95,8 +97,8 @@ class RefineryApi extends RESTDataSource {
     const response = await this.get('/locations/v1.0/locations');
 
     // Create a dayJS date object.
-    const timeZone = 'America/New_York';
-    let now = dayjs().tz(timeZone);
+    // @see https://github.com/iamkun/dayjs/issues/1227
+    let now = dayjs.tz();
 
     if (Array.isArray(response.locations)) {
       let results;

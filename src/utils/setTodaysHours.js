@@ -1,5 +1,11 @@
 // DayJS
 const dayjs = require('dayjs');
+// DayJS timezone
+var utc = require('dayjs/plugin/utc');
+var timezone = require('dayjs/plugin/timezone');
+dayjs.extend(utc);
+dayjs.extend(timezone);
+// isBetween
 var isBetween = require('dayjs/plugin/isBetween');
 dayjs.extend(isBetween);
 // Utils
@@ -49,12 +55,12 @@ function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedC
         // Check for start and end values
         if (alert.applies.start && alert.applies.end) {
           // Closing hours
-          const closingStartHours = dayjs(alert.applies.start).format('HH:mm');
-          const closingEndHours = dayjs(alert.applies.end).format('HH:mm');
+          const closingStartHours = dayjs(alert.applies.start).tz('America/New_York').format('HH:mm');
+          const closingEndHours = dayjs(alert.applies.end).tz('America/New_York').format('HH:mm');
 
           const today = now.format('YYYY-MM-DD');
-          const closingStartsThisDay = dayjs(alert.applies.start).format('YYYY-MM-DD') === today;
-          const closingEndsThisDay = dayjs(alert.applies.end).format('YYYY-MM-DD') === today;
+          const closingStartsThisDay = dayjs(alert.applies.start).tz('America/New_York').format('YYYY-MM-DD') === today;
+          const closingEndsThisDay = dayjs(alert.applies.end).tz('America/New_York').format('YYYY-MM-DD') === today;
 
           // Return as "Closed"
           if (
