@@ -4,6 +4,7 @@
 ### v0.1.5 [?] Location Finder Improvements
 -----------------------------------------------
 * Added tests for LocationAccessibility component.
+* Updated dgx-react-footer to v.0.5.8.
 
 ### v0.1.4 [2020-11-10] Location Finder Improvements
 -----------------------------------------------
