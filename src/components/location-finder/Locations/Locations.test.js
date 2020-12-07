@@ -30,12 +30,6 @@ const mocks = [
   },
 ];
 
-// @TODO Do we need this?
-/*
-jest.mock('./../../../hooks/useWindowSize');
-useWindowSize.mockReturnValue(800);
-*/
-
 const search = {
   searchQuery: '',
   searchQueryGeoLat: null,
@@ -62,7 +56,6 @@ describe('Apollo states test', () => {
 
     // Check for loading skeleton class
     expect(container.getElementsByClassName('loading-skeleton').length).toBe(1);
-    //screen.debug(container);
   });
 
   // Error state
@@ -97,7 +90,6 @@ describe('Apollo states test', () => {
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
     // Check for error message
     expect(screen.getByText(/error while loading locations/)).toBeInTheDocument();
-    screen.debug(container);
   });
 
   // Final state
@@ -114,7 +106,6 @@ describe('Apollo states test', () => {
     // Check for data
     expect(screen.getByText(/125th Street Library/)).toBeInTheDocument();
     expect(screen.getByText(/53rd Street Library/)).toBeInTheDocument();
-    //screen.debug(container);
   });
 
   // Accessbiility tests.
