@@ -1,5 +1,4 @@
 import setTodaysHours from './setTodaysHours';
-
 // DayJS
 const dayjs = require('dayjs');
 // DayJS timezone
@@ -20,136 +19,186 @@ describe('setTodaysHours', () => {
     }
   ];
 
-  /**
-   * Late Opening
-   *
-   * today: October 28, 12:00pm
-   * regular hours start: 10:00am
-   * regular hours end: 6:00pm
-   * closing start: October 28, 2020 10:00am
-   * closing end: October 28, 2020, 12:00pm
-   *
-   * Expected: Location opens at 12:00pm, instead of 10:00am. Todays Hour's: 12pm-6pm
-   */
-  const lateOpeningAlerts = [
-    {
-      closed_for: 'Late Opening',
-      applies: {
-        start: '2020-10-28T10:00:00-04:00',
-        end: '2020-10-28T12:00:00-04:00'
+  test('Closing (non-extended) starts yesterday and ends tomorrow should return closed.', () => {
+    const alerts = [
+      {
+        closed_for: 'Computer repairs',
+        applies: {
+          start: '2020-10-27T10:00:00-04:00',
+          end: '2020-10-29T12:00:00-04:00'
+        }
       }
-    }
-  ];
+    ];
 
-  const lateOpeningExpectedHours = {
-    start: '12:00',
-    end: '18:00'
-  };
+    const expectedHours = {
+      start: null,
+      end: null
+    };
 
-  test('Late Opening', () => {
-    const todayHours = setTodaysHours(now, regularHours, lateOpeningAlerts, true, false);
-    expect(todayHours).toMatchObject(lateOpeningExpectedHours);
+    const todayHours = setTodaysHours(now, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
   });
 
-  /**
-   * Early Closing
-   *
-   * today: October 28, 12:00pm
-   * regular hours start: 10:00am
-   * regular hours end: 6:00pm
-   * closing start: October 28, 2020 16:00am
-   * closing end: October 28, 2020, 20:00pm
-   *
-   * Expected: Location closes early at 4:00pm, instead of 6:00pm. Todays Hour's: 10am-4pm
-   */
-  const earlyClosingAlerts = [
-    {
-      closed_for: 'Early Closing.',
-      applies: {
-        start: '2020-10-28T16:00:00-04:00',
-        end: '2020-10-28T20:00:00-04:00'
+  test('Closing (non-extended) starts yesterday and ends today after regular hours should return closed.', () => {
+    const alerts = [
+      {
+        closed_for: 'Computer repairs',
+        applies: {
+          start: '2020-10-27T10:00:00-04:00',
+          end: '2020-10-28T19:00:00-04:00'
+        }
       }
-    }
-  ];
+    ];
 
-  const earlyClosingExpectedHours = {
-    start: '10:00',
-    end: '16:00'
-  };
+    const expectedHours = {
+      start: null,
+      end: null
+    };
 
-  test('Early Closing Active', () => {
-    const todayHours = setTodaysHours(now, regularHours, earlyClosingAlerts, true, false);
-    expect(todayHours).toMatchObject(earlyClosingExpectedHours);
+    const todayHours = setTodaysHours(now, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
   });
 
-  /**
-   * Holiday Closing
-   *
-   * today: November 11, 12:00pm
-   * regular hours start: 10:00am
-   * regular hours end: 6:00pm
-   * closing start: November 11, 2020 00:00am
-   * closing end: November 11, 2020, 23:59pm
-   *
-   * Expected: Location is closed.
-   */
-
-  // Create a dayJS date object for now.
-  let nowHoliday = dayjs('2020-11-11T12:00:00').tz('America/New_York');
-
-  const holidayClosingAlerts = [
-    {
-      closed_for: 'Closed for Veterans Day.',
-      applies: {
-        start: '2020-11-11T00:00:00-04:00',
-        end: '2020-11-11T23:59:00-04:00'
+  test('Late opening should return modified hours.', () => {
+    const alerts = [
+      {
+        closed_for: 'Late Opening',
+        applies: {
+          start: '2020-10-28T10:00:00-04:00',
+          end: '2020-10-28T12:00:00-04:00'
+        }
       }
-    }
-  ];
+    ];
 
-  const holidayClosingExpectedHours = {
-    start: null,
-    end: null
-  };
+    const expectedHours = {
+      start: '12:00',
+      end: '18:00'
+    };
 
-  test('Holiday Closing', () => {
-    const todayHours = setTodaysHours(nowHoliday, regularHours, holidayClosingAlerts, true, false);
-    expect(todayHours).toMatchObject(holidayClosingExpectedHours);
+    const todayHours = setTodaysHours(now, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
   });
 
-  /**
-   * Inactive Early Closing Via Date Range
-   *
-   * today: October 28, 12:00pm
-   * regular hours start: 10:00am
-   * regular hours end: 6:00pm
-   * closing start: October 29, 2020 4:00pm
-   * closing end: October 30, 2020, 2:00pm
-   *
-   * Expected: Location has normal regular hours, 10-6pm
-   */
-  const earlyClosingInactiveClosingAlerts = [
-    {
-      closed_for: 'Early Closing Inactive Via Date Range',
-      applies: {
-        start: '2020-10-29T16:00:00-04:00',
-        end: '2020-10-30T14:00:00-04:00'
+  test('Early closing should return modified hours.', () => {
+    const alerts = [
+      {
+        closed_for: 'Early Closing.',
+        applies: {
+          start: '2020-10-28T16:00:00-04:00',
+          end: '2020-10-28T20:00:00-04:00'
+        }
       }
-    }
-  ];
+    ];
 
-  const earlyClosingInactiveClosingExpectedHours = {
-    start: '10:00',
-    end: '18:00'
-  };
+    const expectedHours = {
+      start: '10:00',
+      end: '16:00'
+    };
 
-  test('Early Closing Inactive Via Date Range', () => {
-    const todayHours = setTodaysHours(now, regularHours, earlyClosingInactiveClosingAlerts, false, false);
-    expect(todayHours).toMatchObject(earlyClosingInactiveClosingExpectedHours);
+    const todayHours = setTodaysHours(now, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
   });
 
-  // @TODO Additional tests
-  // Inactive Late Opening Via Date Range
-  // Active Early Closing Without Extended Closing Flag (Content entry issue)
-  // Active Late Opening Without Extended Closing Flag (Content entry issue)
+  test('Holiday or all day closing should return closed.', () => {
+    // Create a dayJS date object for now.
+    let nowHoliday = dayjs('2020-11-11T12:00:00').tz('America/New_York');
+
+    const alerts = [
+      {
+        closed_for: 'Closed for Veterans Day.',
+        applies: {
+          start: '2020-11-11T00:00:00-04:00',
+          end: '2020-11-11T23:59:00-04:00'
+        }
+      }
+    ];
+
+    const expectedHours = {
+      start: null,
+      end: null
+    };
+
+    const todayHours = setTodaysHours(nowHoliday, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
+  });
+
+  test('Early closing (inactive) should return regular hours.', () => {
+    const alerts = [
+      {
+        closed_for: 'Future early closing!',
+        applies: {
+          start: '2020-10-29T16:00:00-04:00',
+          end: '2020-10-30T14:00:00-04:00'
+        }
+      }
+    ];
+
+    const expectedHours = {
+      start: '10:00',
+      end: '18:00'
+    };
+
+    const todayHours = setTodaysHours(now, regularHours, alerts, false, false);
+    expect(todayHours).toMatchObject(expectedHours);
+  });
+
+  test('Closing (non-extended) starts today before opening and ends tomorrow should return closed.', () => {
+    const alerts = [
+      {
+        closed_for: 'Computer repairs',
+        applies: {
+          start: '2020-10-28T10:00:00-04:00',
+          end: '2020-10-29T12:00:00-04:00'
+        }
+      }
+    ];
+
+    const expectedHours = {
+      start: null,
+      end: null
+    };
+
+    const todayHours = setTodaysHours(now, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
+  });
+
+  test('Late opening that starts before today should return modified hours.', () => {
+    const alerts = [
+      {
+        closed_for: 'Computer repairs',
+        applies: {
+          start: '2020-10-27T10:00:00-04:00',
+          end: '2020-10-28T15:00:00-04:00'
+        }
+      }
+    ];
+
+    const expectedHours = {
+      start: '15:00',
+      end: '18:00'
+    };
+
+    const todayHours = setTodaysHours(now, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
+  });
+
+  test('Early closing starts after opening and ends after closing.', () => {
+    const alerts = [
+      {
+        closed_for: 'Computer repairs',
+        applies: {
+          start: '2020-10-28T15:03:00-04:00',
+          end: '2020-10-28T23:00:00-04:00'
+        }
+      }
+    ];
+
+    const expectedHours = {
+      start: '10:00',
+      end: '15:03'
+    };
+
+    const todayHours = setTodaysHours(now, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
+  });
 });

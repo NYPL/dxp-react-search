@@ -16,14 +16,14 @@ import naturalSort from './naturalSort';
  *
  * @param {object} now - current date object, unformatted.
  * @param {object} regularHours - an object of regular hours data.
- * @param {object} alerts - an object of alerts & closings data.
+ * @param {array} alerts - an array of alert objects containing alert info & closings data.
  * @param {boolean} hasActiveClosing - whether the closing is active.
  * @param {boolean} isExtendedClosing - whether or not its an extended closing.
  * @return {object} todaysHours - an object of start and end hours for today.
  */
 function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedClosing) {
   // Today hours
-  const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
+  const weekDayKeys = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
 
   let todayHoursStart;
   let todayHoursEnd;
@@ -49,7 +49,7 @@ function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedC
     const endTimes = [todayHoursEnd];
 
     // We have alerts, so map over them.
-    alerts.some(alert => {
+    alerts.forEach(alert => {
       // Check if closed_for key exists
       if ('closed_for' in alert) {
         // Check for start and end values

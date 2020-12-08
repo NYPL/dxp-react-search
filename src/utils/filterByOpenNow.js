@@ -13,9 +13,9 @@ function filterByOpenNow(now, locations) {
   const weekday = now.format('ddd');
   const today = now.format();
 
-  return locations.reduce((accumlator, location) => {
+  return locations.reduce((accumulator, location) => {
     // Alerts
-    const isActiveClosing = hasActiveClosing(today, location._embedded.alerts, location.open);
+    const isActiveClosing = hasActiveClosing(today, location._embedded.alerts);
 
     location.hours.regular.map(hoursItem => {
       // Find today in weekly hours.
@@ -30,11 +30,11 @@ function filterByOpenNow(now, locations) {
           && hoursItem.open <= nowTime && hoursItem.close >= nowTime
         ) {
           // Add location as open to accumulator.
-          accumlator.push(location);
+          accumulator.push(location);
         }
       }
     });
-    return accumlator;
+    return accumulator;
   }, []);
 }
 

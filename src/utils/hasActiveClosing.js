@@ -13,11 +13,7 @@ function hasActiveClosing(today, alerts) {
   let activeClosing = false;
 
   // Check for any alerts.
-  if (alerts === undefined || alerts.length === 0) {
-    // No alerts, so set this status to true.
-    // Other checks below will determine if the location is open.
-    activeClosing = false;
-  } else {
+  if (alerts !== undefined && alerts.length > 0) {
     // We have alerts, so map over them.
     alerts.map(alert => {
       // Check if closed_for key exists
