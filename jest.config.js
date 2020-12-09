@@ -7,6 +7,8 @@ module.exports = {
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   transform: {
     "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+    "\\.(gql|graphql)$": "jest-transform-graphql",
+    ".*": "babel-jest"
   },
   transformIgnorePatterns: [
     "<rootDir>/node_modules/",
