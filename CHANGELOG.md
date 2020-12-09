@@ -9,6 +9,7 @@
 * Upgrades to Apollo Client v3 and removes older apollo client packages.
 * Fixes duplicate render issue causes by older apollo client bugs.
 * Locks NextJS to 9.5.5 instead of latest.
+* Adds basic test coverage for locations component and mock apollo data.
 
 ### v0.1.4 [2020-11-10] Location Finder Improvements
 -----------------------------------------------
