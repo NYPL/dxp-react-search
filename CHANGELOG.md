@@ -4,6 +4,8 @@
 ### v0.1.5 [?] Location Finder Improvements
 -----------------------------------------------
 * Added tests for LocationAccessibility component.
+* Handle late openings and early closings.
+* Code refactoring and test coverage for closings and regular hours.
 
 ### v0.1.4 [2020-11-10] Location Finder Improvements
 -----------------------------------------------
