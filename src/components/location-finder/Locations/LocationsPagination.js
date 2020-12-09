@@ -114,21 +114,22 @@ function LocationsPagination({ limit }) {
         >
           Page{' '}
         </DS.Label>
-        <DS.Select
-          ariaLabel="Pagination Label"
-          id="paginationSelect"
-          labelId="paginationLabel"
+        <select
           name="Pagination Select"
+          aria-label="Pagination Label"
+          id="paginationSelect"
+          className="select"
+          aria-labelledby="paginationLabel"
           onBlur={onPageChange}
           onChange={onPageChange}
-          selectedOption={`${pageNumber} of ${pageCount}`}
+          value={`${pageNumber} of ${pageCount}`}
         >
           {paginationDropdownOptions.map((option) => (
             <option>
               {option}
             </option>
           ))}
-        </DS.Select>
+        </select>
       </DS.Pagination>
     );
   } else {
