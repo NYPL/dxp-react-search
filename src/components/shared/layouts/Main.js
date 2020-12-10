@@ -16,7 +16,7 @@ export default ({ children }) => (
         }
       ]}
     />
-    <main className="main">
+    <main id="main-content" className="main">
       {children}
     </main>
     <Footer

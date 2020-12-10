@@ -15,7 +15,7 @@ function LocationsPagination({ limit }) {
   } = useSelector(state => state.search);
   const dispatch = useDispatch();
 
-  function onPageChange(pageIndex) {    
+  function onPageChange(pageIndex) {
     // Redux
     dispatch(setPagination({
       pageNumber: pageIndex,
