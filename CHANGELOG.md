@@ -10,6 +10,7 @@
 * Fixes duplicate render issue causes by older apollo client bugs.
 * Locks NextJS to 9.5.5 instead of latest.
 * Adds basic test coverage for locations component and mock apollo data.
+* Upgraded DGX React Footer 0.5.7 -> 0.5.8 to fix accessibility issue.
 
 ### v0.1.4 [2020-11-10] Location Finder Improvements
 -----------------------------------------------
