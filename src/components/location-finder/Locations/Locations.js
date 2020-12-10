@@ -1,23 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 // Apollo
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
-// Map
-import Map from './../Map';
 // Redux
 import {
   batch,
   useDispatch,
   useSelector
 } from 'react-redux';
-import {
-  setSearchQuery,
-  setMapPosition,
-  setLocationInfoWindowId,
-  setAutoSuggestInputValue,
-  setPagination
-} from './../../../redux/actions';
+import { setPagination } from './../../../redux/actions';
 // Components
 import * as DS from '@nypl/design-system-react-components';
 import Location from './../Location';
@@ -51,7 +42,7 @@ function Locations() {
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
   // Query for data.
-  const { loading, error, data, networkStatus, fetchMore } = useQuery(
+  const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
         searchGeoLat,
@@ -60,9 +51,7 @@ function Locations() {
         limit,
         offset,
         pageNumber
-      },
-      fetchPolicy: "cache-and-network",
-      notifyOnNetworkStatusChange: true
+      }
     }
   );
 
@@ -77,7 +66,14 @@ function Locations() {
         resultsCount: data.allLocations.locations.length
       }));
     }
-  }, [data])
+  }, [data]);
+
+  // Error state.
+  if (error) {
+    return (
+      <div>'error while loading locations'</div>
+    );
+  }
 
   // Loading state,
   if (loading || !data) {
@@ -90,13 +86,6 @@ function Locations() {
   if (data.allLocations.locations.length === 0) {
     return (
       <div className='no-results'>Try adjusting search terms or filters.</div>
-    );
-  }
-
-  // Error state.
-  if (error) {
-    return (
-      <div>'error while loading locations'</div>
     );
   }
 
