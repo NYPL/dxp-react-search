@@ -137,4 +137,22 @@ describe('hasActiveClosing', () => {
       hasActiveClosing('2020-10-27T14:05:00-04:00', alerts)
     ).toBe(true);
   });
+
+  // 125th st test
+  // This is not an active closing, technically...
+  test('125th st late opening.', () => {
+    const alerts = [
+      {
+        closed_for: 'late opening',
+        applies: {
+          start: '2020-12-10T11:00:00-05:00',
+          end: '2020-12-10T14:00:00-05:00'
+        }
+      }
+    ];
+
+    expect(
+      hasActiveClosing('2020-12-10T15:43:00-05:00', alerts, 'days')
+    ).toBe(true);
+  });
 });
