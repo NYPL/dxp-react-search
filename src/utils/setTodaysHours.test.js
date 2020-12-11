@@ -202,7 +202,6 @@ describe('setTodaysHours', () => {
     expect(todayHours).toMatchObject(expectedHours);
   });
 
-  // Late opening that starts and ends on the same day as today, but before the current time.
   test('Late opening that starts and ends before the current time should return modified hours.', () => {
     const testNow = dayjs('2020-12-10T15:43:00').tz('America/New_York');
 
