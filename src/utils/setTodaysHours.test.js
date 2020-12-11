@@ -122,7 +122,6 @@ describe('setTodaysHours', () => {
     expect(todayHours).toMatchObject(expectedHours);
   });
 
-  // today: 2020-10-28T12:00
   test('Early closing in the future should return regular hours.', () => {
     const alerts = [
       {
@@ -140,7 +139,6 @@ describe('setTodaysHours', () => {
     };
 
     const todayHours = setTodaysHours(now, regularHours, alerts, false, false);
-    console.log(todayHours);
     expect(todayHours).toMatchObject(expectedHours);
   });
 
@@ -205,10 +203,8 @@ describe('setTodaysHours', () => {
   });
 
   // Late opening that starts and ends on the same day as today, but before the current time.
-  test('125th street late opening.', () => {
-    //const testNow = '2020-12-10T15:43:00-05:00';
+  test('Late opening that starts and ends before the current time should return modified hours.', () => {
     const testNow = dayjs('2020-12-10T15:43:00').tz('America/New_York');
-    //console.log(testNow.format());
 
     const regularHoursNow = [
       {
