@@ -20,7 +20,7 @@ describe('hasActiveClosing', () => {
     ];
 
     expect(
-      hasActiveClosing('2020-10-27T12:00:00-04:00', alerts)
+      hasActiveClosing('2020-10-27T12:00:00-04:00', alerts, null)
     ).toBe(true);
   });
 
@@ -56,7 +56,7 @@ describe('hasActiveClosing', () => {
     ];
 
     expect(
-      hasActiveClosing('2020-10-27T12:00:00-04:00', alerts)
+      hasActiveClosing('2020-10-27T12:00:00-04:00', alerts, null)
     ).toBe(true);
   });
 
@@ -79,7 +79,7 @@ describe('hasActiveClosing', () => {
     ];
 
     expect(
-      hasActiveClosing('2020-10-27T12:00:00-04:00', alerts)
+      hasActiveClosing('2020-10-27T12:00:00-04:00', alerts, null)
     ).toBe(false);
   });
 
@@ -102,7 +102,7 @@ describe('hasActiveClosing', () => {
     ];
 
     expect(
-      hasActiveClosing('2020-10-27T12:05:00-04:00', alerts)
+      hasActiveClosing('2020-10-27T12:05:00-04:00', alerts, null)
     ).toBe(true);
   });
 
@@ -118,7 +118,7 @@ describe('hasActiveClosing', () => {
     ];
 
     expect(
-      hasActiveClosing('2020-10-28T12:00:00-04:00', alerts)
+      hasActiveClosing('2020-10-28T12:00:00-04:00', alerts, 'days')
     ).toBe(true);
   });
 
@@ -134,7 +134,23 @@ describe('hasActiveClosing', () => {
     ];
 
     expect(
-      hasActiveClosing('2020-10-27T14:05:00-04:00', alerts)
+      hasActiveClosing('2020-10-27T14:05:00-04:00', alerts, 'days')
+    ).toBe(true);
+  });
+
+  test('A late opening that starts and ends before the current time should be active closing.', () => {
+    const alerts = [
+      {
+        closed_for: 'A late opening that starts and ends before the current time',
+        applies: {
+          start: '2020-12-10T11:00:00-05:00',
+          end: '2020-12-10T14:00:00-05:00'
+        }
+      }
+    ];
+
+    expect(
+      hasActiveClosing('2020-12-10T15:43:00-05:00', alerts, 'days')
     ).toBe(true);
   });
 });

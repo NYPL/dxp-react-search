@@ -7,9 +7,10 @@ dayjs.extend(isBetween);
  *
  * @param {date} today - current datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
  * @param {array} alerts - an array of objects containing alert info & closings data.
+ * @param {string} unit - limit granularity of date comparison to a unit. Use 'days' or null.
  * @return {boolean} activeClosing - true = active | false = inactive.
  */
-function hasActiveClosing(today, alerts) {
+function hasActiveClosing(today, alerts, unit) {
   let activeClosing = false;
 
   // Check for any alerts.
@@ -24,7 +25,7 @@ function hasActiveClosing(today, alerts) {
           // 4th parameter: '[]' includes start and end date in comparison.
           // By default, this paramer is '()' which excludes.
           // @see https://day.js.org/docs/en/plugin/is-between
-          if (dayjs(today).isBetween(alert.applies.start, alert.applies.end, null, '[]')) {
+          if (dayjs(today).isBetween(alert.applies.start, alert.applies.end, unit, '[]')) {
             activeClosing = true;
           }
         }
