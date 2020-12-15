@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/client/testing';
-import { cleanup, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import { render } from './../../../../testHelper/customRtlRender';
 import '@testing-library/jest-dom/extend-expect';
 // Gql
@@ -46,7 +46,7 @@ afterEach(cleanup);
 
 
 describe('Search Form', () => {
-  it('renders form without error', async () => {
+  it('renders form with input, submit button, and open now checkbox', async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchForm />
@@ -55,47 +55,46 @@ describe('Search Form', () => {
 
     // Wait for content
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
-    // Check for data
-    //expect(screen.findAllByText(/Search/)).toBeInTheDocument();
-    //expect(screen.getByText(/Open Now/)).toBeInTheDocument();
-
+    
+    // Search input
     const searchInput = container.querySelector('input[name="search-locations"]');
-    screen.debug(searchInput);
+    expect(searchInput).toBeInTheDocument();
 
+    // Form submit button
     const searchSubmit = container.querySelector('button[type="submit"]');
-    screen.debug(searchSubmit);
+    expect(searchSubmit).toBeInTheDocument();
 
-    expect(getByTestId('premiumFeatures')).toBeTruthy();
+    // Open now checkbox
+    const openNowCheckbox = container.querySelector('input[name="isOpenNow"]');
+    expect(openNowCheckbox).toBeInTheDocument();
+    expect(screen.getByLabelText('Open Now')).toBeInTheDocument();
   });
-
-  /*it('autosuggest works correctly', () => {
-
-  });
-
-  it('basic search and submit of form updates redux state', () => {
-
-  });
-
-  it('open now checkbox updates redux state', () => {
-
-  });
-  */
-
-  // Test loading
-  /*it('renders loading state without error', () => {
+   
+  it('open now checkbox can be toggled checked/unchecked', async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <Locations />
+        <SearchForm />
       </MockedProvider>
     );
 
-    // Check for loading skeleton class
-    expect(container.getElementsByClassName('loading-skeleton').length).toBe(1);
+    // Wait for content
+    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
+
+    const openNowCheckbox = container.querySelector('input[name="isOpenNow"]');
+    // Check
+    await waitFor(() => {
+      fireEvent.click(openNowCheckbox);
+    });
+    expect(openNowCheckbox.checked).toEqual(true);
+    // Uncheck
+    await waitFor(() => {
+      fireEvent.click(openNowCheckbox);
+    });
+    expect(openNowCheckbox.checked).toEqual(false);
   });
-  */
 
   // Accessbiility tests.
-  /*it('should not have basic accessibility issues', async () => {
+  it('should not have basic accessibility issues', async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchForm />
@@ -109,5 +108,4 @@ describe('Search Form', () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
-  */
 });
