@@ -21,6 +21,8 @@ describe('SearchResultsDetails', () => {
       }
     );
     expect(container).toHaveTextContent('Showing 92 results near 125th Library, by distance and open now. Clear all search terms.');
+    // console.log() equiv, will show output of component.
+    screen.debug(container);
   });
   
   // @TODO: Change state values based on logic in SearchResultsDetails > renderMessage() function.
@@ -50,7 +52,6 @@ describe('SearchResultsDetails', () => {
         } 
       }
     );
-    screen.debug(container);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
