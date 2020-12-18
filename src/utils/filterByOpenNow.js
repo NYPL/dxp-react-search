@@ -15,7 +15,7 @@ function filterByOpenNow(now, locations) {
 
   return locations.reduce((accumulator, location) => {
     // Alerts
-    const isActiveClosing = hasActiveClosing(today, location._embedded.alerts);
+    const isActiveClosing = hasActiveClosing(today, location._embedded.alerts, null);
 
     location.hours.regular.map(hoursItem => {
       // Find today in weekly hours.

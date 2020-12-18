@@ -1,7 +1,7 @@
 ## CHANGES
 -----------
 
-### v0.1.5 [?] Location Finder Improvements
+### v0.1.5 [2020-12-15] Location Finder Late Opening & Early Closing Logic
 -----------------------------------------------
 * Added tests for LocationAccessibility component.
 * Handle late openings and early closings.

@@ -82,7 +82,7 @@ describe('setTodaysHours', () => {
   test('Early closing should return modified hours.', () => {
     const alerts = [
       {
-        closed_for: 'Early Closing.',
+        closed_for: 'Early closing should return modified hours.',
         applies: {
           start: '2020-10-28T16:00:00-04:00',
           end: '2020-10-28T20:00:00-04:00'
@@ -122,10 +122,10 @@ describe('setTodaysHours', () => {
     expect(todayHours).toMatchObject(expectedHours);
   });
 
-  test('Early closing (inactive) should return regular hours.', () => {
+  test('Early closing in the future should return regular hours.', () => {
     const alerts = [
       {
-        closed_for: 'Future early closing!',
+        closed_for: 'Early closing in the future should return regular hours.',
         applies: {
           start: '2020-10-29T16:00:00-04:00',
           end: '2020-10-30T14:00:00-04:00'
@@ -199,6 +199,36 @@ describe('setTodaysHours', () => {
     };
 
     const todayHours = setTodaysHours(now, regularHours, alerts, true, false);
+    expect(todayHours).toMatchObject(expectedHours);
+  });
+
+  test('Late opening that starts and ends before the current time should return modified hours.', () => {
+    const testNow = dayjs('2020-12-10T15:43:00').tz('America/New_York');
+
+    const regularHoursNow = [
+      {
+        day: 'Thu.',
+        open: '11:00',
+        close: '18:00'
+      }
+    ];
+
+    const alerts = [
+      {
+        closed_for: '125th street late opening',
+        applies: {
+          start: '2020-12-10T11:00:00-05:00',
+          end: '2020-12-10T14:00:00-05:00'
+        }
+      }
+    ];
+
+    const expectedHours = {
+      start: '14:00',
+      end: '18:00'
+    };
+
+    const todayHours = setTodaysHours(testNow, regularHoursNow, alerts, true, false);
     expect(todayHours).toMatchObject(expectedHours);
   });
 });
