@@ -8,9 +8,8 @@ class RefineryApi extends RESTDataSource {
   }
 
   async getAllLocations() {
+    // @see https://refinery.nypl.org/api/nypl/locations/v1.0/locations
     const response = await this.get('/locations/v1.0/locations');
-    
-    // @TODO add try/catch and error handling.
     if (Array.isArray(response.locations)) {
       return response.locations;
     } else {

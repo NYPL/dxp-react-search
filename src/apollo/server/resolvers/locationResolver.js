@@ -25,7 +25,6 @@ const locationResolver = {
   Query: {
     allLocations: async (parent, args, { dataSources }) => {
       const allLocations = await dataSources.refineryApi.getAllLocations();
-      
       let results;
       let totalResultsCount = Object.keys(allLocations).length;
       // Sort by distance only.
