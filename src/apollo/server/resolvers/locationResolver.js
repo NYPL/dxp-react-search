@@ -34,6 +34,8 @@ const locationResolver = {
       }
       // Filter only.
       if (args.filter) {
+        console.log(args.filter.termIds);
+
         // Open now only.
         if (args.filter.openNow) {
           console.log('filter: open now only');
@@ -131,6 +133,27 @@ const locationResolver = {
       } else {
         return true;
       }
+    },
+    terms: location => {    
+      /*let tids = [];
+      const vocabs = location.terms.map(vocab => vocab.terms);
+
+      vocabs.map(vocab => {
+        vocab.map(term => {
+          tids.push(term.id);
+        })
+      });
+
+      return tids;
+      */
+
+      let tids = [];
+      location.terms.map(vocab => vocab.terms)
+        .map(vocab => vocab.map(term => {
+          tids.push(term.id);
+        }
+      ));
+      return tids;
     },
   },
 }

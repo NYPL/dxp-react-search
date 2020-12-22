@@ -9,9 +9,18 @@ class RefineryApi extends RESTDataSource {
 
   async getAllLocations() {
     // @see https://refinery.nypl.org/api/nypl/locations/v1.0/locations
-    const response = await this.get('/locations/v1.0/locations');
-    if (Array.isArray(response.locations)) {
-      return response.locations;
+    //const librariesResponse = await this.get('/locations/v1.0/locations');
+    // @see https://refinery.nypl.org/api/nypl/locations/v1.0/divisions
+    //const divisionsResponse = await this.get('/locations/v1.0/divisions');
+    
+    // Promise approach.
+    const [librariesResponse, divisionsResponse] = await Promise.all([
+      this.get('/locations/v1.0/locations'),
+      this.get('/locations/v1.0/divisions'),
+    ]);
+
+    if (Array.isArray(librariesResponse.locations) && Array.isArray(divisionsResponse.divisions)) {
+      return [...divisionsResponse.divisions, ...librariesResponse.locations];
     } else {
       return [];
     }

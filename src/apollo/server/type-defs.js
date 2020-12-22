@@ -16,6 +16,7 @@ export const typeDefs = gql`
     geoLocation: GeoLocation
     todayHours: TodayHours
     open: Boolean
+    terms: [String]
   }
 
   type GeoLocation {
@@ -35,6 +36,7 @@ export const typeDefs = gql`
 
   input Filter {
     openNow: Boolean
+    termIds: [String]
   }
 
   type PageInfo {
