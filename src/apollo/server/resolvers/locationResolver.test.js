@@ -1,6 +1,4 @@
-import { graphql } from 'graphql';
-import { schema } from './../schema';
-import locations from './../../../../testHelper/__mocks/refineryLocationsMock';
+import resolvers from './';
 
 describe('location resolver', () => {
   // allLocations no args
@@ -8,87 +6,8 @@ describe('location resolver', () => {
   // allLocations sortByDistance only
   // allLocations filter: openNow and sortByDistance
 
-  test('allLocations no args', async () => {
-    /*const query = `
-      query {
-        allLocations {
-          locations {
-            id
-            name
-            status
-            address_line1
-            address_line2
-            locality
-            administrative_area
-            postal_code
-            phone
-            wheelchairAccess
-            geoLocation {
-              lat
-              lng
-            }
-          }
-        }
-      }
-    `;
-    */
-
-    const query = `
-      query($openNow: Boolean) {
-        allLocations(
-          filter: {
-            openNow: $openNow
-          }
-        ) {
-          locations {
-            id
-            name
-            status
-            address_line1
-            address_line2
-            locality
-            administrative_area
-            postal_code
-            phone
-            wheelchairAccess
-            geoLocation {
-              lat
-              lng
-            }
-          }
-        }
-      }
-    `;
-
-    const mockContext = { 
-      dataSources: { 
-        refineryApi: {
-          getAllLocations: () => locations
-        }
-      } 
-    };
-
-    /*const variables = {
-      filter: {
-        openNow: true,
-      },
-    };
-    */
-
-    const params = { openNow: false };
-
-    const result = await graphql(
-      schema, 
-      query, 
-      undefined,
-      mockContext,
-      params
+  test('yo', async () => {
+    const result = resolvers.locationResolver.Query.allLocations(
     );
-    
-    console.log(result);
-    console.log(result.data.allLocations);
-    
   });
-
-
 });
