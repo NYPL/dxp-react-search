@@ -1,5 +1,4 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from './../../../../testHelper/customRtlRender';
@@ -21,11 +20,8 @@ describe('SearchResultsDetails', () => {
       }
     );
     expect(container).toHaveTextContent('Showing 92 results near 125th Library, by distance and open now. Clear all search terms.');
-    // console.log() equiv, will show output of component.
-    //screen.debug(container);
   });
   
-  // Test state values based on logic in SearchResultsDetails > renderMessage() function.
   test('renders SearchResultsDetails open now only', () => {
     const { container } = render(
       <SearchResultsDetails />, { 

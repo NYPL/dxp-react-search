@@ -26,7 +26,6 @@ describe('SearchHeader', () => {
       </MockedProvider>
     );
     expect(container.querySelector('#location-finder__title')).toBeInTheDocument();
-    screen.debug(container);
   });
 
   test('SearchHeader component should have description', () => {
@@ -48,6 +47,7 @@ describe('SearchHeader', () => {
   });
 
   // Accessbiility tests.
+  // @TODO
   // Currently Fails on autocomplete listbox form item
   // Required ARIA child role not present: option
   /* test('should not have basic accessibility issues', async () => {

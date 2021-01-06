@@ -2,14 +2,11 @@ import { MockedProvider } from '@apollo/client/testing';
 import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import { render } from './../../../../testHelper/customRtlRender';
 import '@testing-library/jest-dom/extend-expect';
-// Gql
-import { GraphQLError } from 'graphql';
 import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
 // Mock data
 import allLocations from './../../../../testHelper/__mocks/allLocations';
 // Component
 import SearchForm from './SearchForm';
-
 // Axe
 import { axe, toHaveNoViolations } from 'jest-axe';
 expect.extend(toHaveNoViolations);
@@ -31,19 +28,7 @@ const mocks = [
   },
 ];
 
-const search = {
-  searchQuery: '',
-  searchQueryGeoLat: null,
-  searchQueryGeoLng: null,
-  openNow: true,
-  limit: 300,
-  offset: 0,
-  pageNumber: 1
-}
-
 afterEach(cleanup);
-
-
 
 describe('Search Form', () => {
   it('renders form with input, submit button, and open now checkbox', async () => {
@@ -94,7 +79,9 @@ describe('Search Form', () => {
   });
 
   // Accessbiility tests.
-  // @TODO Not working!
+  // @TODO
+  // Currently Fails on autocomplete listbox form item
+  // Required ARIA child role not present: option
   /*
   it('should not have basic accessibility issues', async () => {
     const { container } = render(
