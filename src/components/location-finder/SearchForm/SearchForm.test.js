@@ -57,7 +57,7 @@ describe('Search Form', () => {
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
     
     // Search input
-    const searchInput = container.querySelector('input[name="search-locations"]');
+    const searchInput = container.querySelector('input[name="search"]');
     expect(searchInput).toBeInTheDocument();
 
     // Form submit button
