@@ -27,45 +27,49 @@ const locationResolver = {
       const allLocations = await dataSources.refineryApi.getAllLocations();
       let results;
       let totalResultsCount = Object.keys(allLocations).length;
-      // Sort by distance only.
-      if (args.sortByDistance && !args.filter) {
-        console.log('sortByDistance only');
-        results = sortByDistance(args.sortByDistance, allLocations);
+      
+      // Filter by openNow
+      if (
+        args.filter
+        && 'openNow' in args.filter
+        // openNow is set to true.
+        && args.filter.openNow
+      ) {
+        console.log('openNow!');
+        console.log(args.filter.openNow);        
+        // Check if we've prev modified the results.
+        if (typeof results !== "undefined") {
+          results = filterByOpenNow(now, results).sort(sortByName);
+        } else {
+          results = filterByOpenNow(now, allLocations).sort(sortByName); 
+        }
+        // We're removing locations from results, so set the new total results count.
+        totalResultsCount = results.length;
       }
-      // Filter only.
-      if (args.filter) {
+      
+      // Filter by term ids.
+      if (args.filter && 'termIds' in args.filter) {
+        console.log('termIds!');
         console.log(args.filter.termIds);
-
-        // Open now only.
-        if (args.filter.openNow) {
-          console.log('filter: open now only');
-          results = filterByOpenNow(now, allLocations).sort(sortByName);
-          // We're removing locations from results, so set the new total results count.
-          totalResultsCount = results.length;
-        }
+        // .find()
       }
-      // Sort by distance and filter.
-      if (args.sortByDistance && args.filter) {
-        // Sort by distance && filter by open now.
-        if (
-          args.filter.openNow
-          && args.sortByDistance.originLat
-          && args.sortByDistance.originLng
-        ) {
-          console.log('both!');
-          results = sortByDistance(args.sortByDistance, filterByOpenNow(now, allLocations));
-          // We're removing locations from results, so set the new total results count.
-          totalResultsCount = results.length;
-        }
-        // Sort by distance only.
-        else if (
-          args.sortByDistance.originLat
-          && args.sortByDistance.originLng
-        ) {
-          console.log('filter is false, sort by distance only.');
+
+      // Sort by distance.
+      // @TODO add proper check.
+      // @FIX this always runs on the intial load of locations.
+      if (
+        args.sortByDistance 
+        && args.sortByDistance.originLat 
+        && args.sortByDistance.originLng
+      ) {
+        console.log('sortByDistance');
+        if (typeof results !== "undefined") {
+          results = sortByDistance(args.sortByDistance, results);
+        } else {
           results = sortByDistance(args.sortByDistance, allLocations);
         }
       }
+
       // Default sort, alphabetical.
       if (!results) {
         console.log('default sort!');
