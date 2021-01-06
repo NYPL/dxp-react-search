@@ -141,7 +141,7 @@ function SearchForm() {
         <div className="checkbox">
           <input
             id="isOpenNow"
-            class="checkbox__input"
+            className="checkbox__input"
             type="checkbox"
             name="isOpenNow"
             checked={openNow}

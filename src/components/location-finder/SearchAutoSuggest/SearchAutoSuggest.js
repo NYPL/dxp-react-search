@@ -72,7 +72,7 @@ function SearchAutoSuggest() {
   // Custom input component to add aria-label.
   function renderInputComponent(inputProps) {
     return (
-      <input aria-label="Search locations" {...inputProps} />
+      <input name="search" aria-label="Search locations" {...inputProps} />
     );
   }
 
