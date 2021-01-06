@@ -33,8 +33,6 @@ function SearchForm() {
   const {
     autoSuggestInputValue,
     searchQuery,
-    searchQueryGeoLat,
-    searchQueryGeoLng,
     openNow
   } = useSelector(state => state.search);
   const { infoWindowId } = useSelector(state => state.map);
@@ -71,10 +69,6 @@ function SearchForm() {
           response => {
             const { lat, lng } = response.results[0].geometry.location;
 
-            if (searchQueryGeoLat !== undefined && searchQueryGeoLat === response.results[0].geometry.location.lat) {
-              return;
-            }
-
             batch(() => {
               // Dispatch search query
               dispatch(setSearchQuery({
@@ -93,13 +87,6 @@ function SearchForm() {
               dispatch(setMapInfoWindow({
                 infoWindowId,
                 infoWindowIsVisible: true
-              }));
-
-              // Reset pagination.
-              dispatch(setPagination({
-                offset: 0,
-                pageCount: 0,
-                pageNumber: 1
               }));
             });
           },
