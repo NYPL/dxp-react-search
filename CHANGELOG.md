@@ -1,6 +1,11 @@
 ## CHANGES
 -----------
 
+### v0.1.6 [?] Location Finder Improvements
+-----------------------------------------------
+* Added tests for Search related components.
+* Bug fix for clicking search twice clearing results count.
+
 ### v0.1.5 [2020-12-15] Location Finder Late Opening & Early Closing Logic
 -----------------------------------------------
 * Added tests for LocationAccessibility component.
