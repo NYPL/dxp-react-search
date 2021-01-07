@@ -20,6 +20,7 @@ import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components
 import SearchAutoSuggest from './../SearchAutoSuggest';
 import * as DS from '@nypl/design-system-react-components';
+import SearchFilters from './SearchFilters';
 // Geocode
 import Geocode from './../../../utils/googleGeocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
@@ -155,6 +156,7 @@ function SearchForm() {
             Open Now
           </label>
         </div>
+        <SearchFilters />
       </form>
     </div>
   );

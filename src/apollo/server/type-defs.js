@@ -48,6 +48,17 @@ export const typeDefs = gql`
     pageInfo: PageInfo
   }
 
+  type Vocab {
+    id: ID!
+    name: String!
+    terms: [Term]
+  }
+
+  type Term {
+    id: ID!
+    name: String!
+  }
+
   type Query {
     allLocations(
       limit: Int,
@@ -56,5 +67,6 @@ export const typeDefs = gql`
       filter: Filter,
       sortByDistance: SortByDistance
     ): LocationsConnection
+    allTerms(filter: String): [Vocab]!
   }
 `;

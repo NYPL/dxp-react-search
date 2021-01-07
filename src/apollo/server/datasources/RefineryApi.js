@@ -1,5 +1,7 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
+// Mock data for terms
+import filters from './../../../../testHelper/__mocks/refineryFiltersMock';
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -24,6 +26,11 @@ class RefineryApi extends RESTDataSource {
     } else {
       return [];
     }
+  }
+
+  getAllTerms() {
+    console.log(filters.data);
+    return filters.data.filters;
   }
 }
 

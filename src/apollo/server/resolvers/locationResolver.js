@@ -14,6 +14,7 @@ import hasActiveClosing from './../../../utils/hasActiveClosing';
 import sortByName from './../../../utils/sortByName';
 import setTodaysHours from './../../../utils/setTodaysHours';
 import paginateResults from './../../../utils/paginateResults';
+import filterByTerms from './../../../utils/filterByTerms';
 
 // Create a dayjs date object, using default timezone.
 // @see https://github.com/iamkun/dayjs/issues/1227
@@ -27,6 +28,97 @@ const locationResolver = {
       const allLocations = await dataSources.refineryApi.getAllLocations();
       let results;
       let totalResultsCount = Object.keys(allLocations).length;
+
+      // Add in hardcoded taxonomy data to each location.
+      // @TODO See if greg can just add this to the refinery output for each location.
+      // if not, move this to a utils function.
+      allLocations.map(location => {
+        // Boroughs.
+        switch (location.locality) {
+          case 'New York':
+            const boroughsManhattan = {
+              id: 'filter-boroughs',
+              name: 'Borough',
+              terms: [
+                {
+                  id: 'manhattan',
+                  name: 'New York'
+                }
+              ]
+            };
+            location.terms.push(boroughsManhattan);
+            break;
+          case 'Bronx':
+            const boroughsBronx = {
+              id: 'filter-boroughs',
+              name: 'Borough',
+              terms: [
+                {
+                  id: 'bronx',
+                  name: 'Bronx',
+                }
+              ]
+            };
+            location.terms.push(boroughsBronx);
+            break;
+          case 'Staten Island':
+            const boroughsStatenIsland = {
+              id: 'filter-boroughs',
+              name: 'Borough',
+              terms: [
+                {
+                  id: 'statenisland',
+                  name: 'Staten Island'
+                }
+              ]
+            };
+            location.terms.push(boroughsStatenIsland);
+            break;
+        }
+
+        // Accessibility
+        switch (location.access) {
+          case 'Fully Accessible':
+            const accessibilityFull = {
+              id: 'filter-accessibility',
+              name: 'Accessibility',
+              terms: [
+                {
+                  id: 'fullaccess',
+                  name: 'Fully accessible'
+                },
+              ]
+            };
+            location.terms.push(accessibilityFull);
+            break;
+          case 'Partially Accessible':
+            const accessibilityPartial = {
+              id: 'filter-accessibility',
+              name: 'Accessibility',
+              terms: [
+                {
+                  id: 'partialaccess',
+                  name: 'Partially accessible'
+                },
+              ]
+            };
+            location.terms.push(accessibilityPartial);
+            break;
+          case 'Not Accessible':
+            const accessibilityNone = {
+              id: 'filter-accessibility',
+              name: 'Accessibility',
+              terms: [
+                {
+                  id: 'noaccess',
+                  name: 'Not accessible'
+                },
+              ]
+            };
+            location.terms.push(accessibilityNone);
+            break;
+        }
+      });
       
       // Filter by openNow
       if (
@@ -51,7 +143,15 @@ const locationResolver = {
       if (args.filter && 'termIds' in args.filter) {
         console.log('termIds!');
         console.log(args.filter.termIds);
-        // .find()
+
+        // Check if we've prev modified the results.
+        if (typeof results !== "undefined") {
+          results = filterByTerms(results, args.filter.termIds).sort(sortByName);
+        } else {
+          results = filterByTerms(allLocations, args.filter.termIds).sort(sortByName);
+        }
+        // We're removing locations from results, so set the new total results count.
+        totalResultsCount = results.length;
       }
 
       // Sort by distance.
@@ -139,19 +239,8 @@ const locationResolver = {
       }
     },
     terms: location => {    
-      /*let tids = [];
-      const vocabs = location.terms.map(vocab => vocab.terms);
-
-      vocabs.map(vocab => {
-        vocab.map(term => {
-          tids.push(term.id);
-        })
-      });
-
-      return tids;
-      */
-
       let tids = [];
+      // Set the tids from the refinery data.
       location.terms.map(vocab => vocab.terms)
         .map(vocab => vocab.map(term => {
           tids.push(term.id);
