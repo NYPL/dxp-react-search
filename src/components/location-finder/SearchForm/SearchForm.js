@@ -12,7 +12,7 @@ import {
   setOpenNow
 } from './../../../redux/actions';
 // Apollo
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
 // Utils
 import filterBySearchInput from './../../../utils/filterBySearchInput';
@@ -133,7 +133,7 @@ function SearchForm() {
         <div className="checkbox">
           <input
             id="isOpenNow"
-            class="checkbox__input"
+            className="checkbox__input"
             type="checkbox"
             name="isOpenNow"
             checked={openNow}

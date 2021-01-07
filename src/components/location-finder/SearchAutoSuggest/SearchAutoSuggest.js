@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 // Apollo
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './SearchAutoSuggest.gql';
 // Redux
 import {
@@ -72,7 +72,7 @@ function SearchAutoSuggest() {
   // Custom input component to add aria-label.
   function renderInputComponent(inputProps) {
     return (
-      <input aria-label="Search locations" {...inputProps} />
+      <input name="search" aria-label="Search locations" {...inputProps} />
     );
   }
 

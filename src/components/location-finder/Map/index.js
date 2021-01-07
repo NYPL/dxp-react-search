@@ -8,7 +8,7 @@ const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 import { useDispatch, useSelector } from 'react-redux';
 import { setMapInfoWindow } from './../../../redux/actions';
 // Apollo
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Hooks
 import useWindowSize from './../../../hooks/useWindowSize';

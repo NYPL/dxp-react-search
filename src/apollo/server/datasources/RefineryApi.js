@@ -1,9 +1,11 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
+// Utils
 import sortByDistance from './../../../utils/sortByDistance';
 import filterByOpenNow from './../../../utils/filterByOpenNow';
-import checkAlertsOpenStatus from './../../../utils/checkAlertsOpenStatus';
+import hasActiveClosing from './../../../utils/hasActiveClosing';
 import sortByName from './../../../utils/sortByName';
+import setTodaysHours from './../../../utils/setTodaysHours';
 // DayJS
 const dayjs = require('dayjs');
 // DayJS timezone
@@ -11,6 +13,8 @@ var utc = require('dayjs/plugin/utc');
 var timezone = require('dayjs/plugin/timezone');
 dayjs.extend(utc);
 dayjs.extend(timezone);
+// Set default timezone.
+dayjs.tz.setDefault('America/New_York');
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -20,9 +24,9 @@ class RefineryApi extends RESTDataSource {
 
   // Tidy up the response from Refinery.
   locationNormalizer(location) {
-    // Create a dayJS date object.
-    const timeZone = 'America/New_York';
-    let now = dayjs().tz(timeZone);
+    // Create a dayjs date object, using default timezone.
+    // @see https://github.com/iamkun/dayjs/issues/1227
+    let now = dayjs.tz();
 
     let wheelchairAccess;
     switch(location.access) {
@@ -37,33 +41,26 @@ class RefineryApi extends RESTDataSource {
         break;
     }
 
-    // Today hours
-    const weekDayKeys = new Array('Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.');
-
-    let todayHoursStart;
-    let todayHoursEnd;
-
-    location.hours.regular.map(item => {
-      if (weekDayKeys[now.day()] === item.day) {
-        todayHoursStart = item.open;
-        todayHoursEnd = item.close;
-      }
-    });
-
     // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
     const today = now.format();
-    // Check open status based on alerts.
-    const alertsOpenStatus = checkAlertsOpenStatus(today, location._embedded.alerts);
 
+    // Check if location has active closings within a date range.
+    const locationHasActiveClosing = hasActiveClosing(today, location._embedded.alerts, null);
+
+    // Set isExtendedClosing.
+    let isExtendedClosing = false;
+    if (locationHasActiveClosing && !location.open) {
+      isExtendedClosing = true;
+    }
+
+    // Today hours
+    // Check if a location has active closing related to setting todays hours.
+    const locationHasActiveClosingByDays = hasActiveClosing(today, location._embedded.alerts, 'days');
+    const todayHours = setTodaysHours(now, location.hours.regular, location._embedded.alerts, locationHasActiveClosingByDays, isExtendedClosing);
     // Open status
-    let open = false;
-    if (
-      // Extended closing
-      location.open
-      // Alert closing
-      && alertsOpenStatus
-    ) {
-      open = true;
+    let open = true;
+    if (isExtendedClosing) {
+      open = false;
     }
 
     return {
@@ -82,10 +79,7 @@ class RefineryApi extends RESTDataSource {
         lat: location.geolocation.coordinates[1],
         lng: location.geolocation.coordinates[0],
       },
-      todayHours: {
-        start: todayHoursStart,
-        end: todayHoursEnd
-      },
+      todayHours: todayHours,
       open: open,
     }
   }
@@ -105,8 +99,8 @@ class RefineryApi extends RESTDataSource {
     const response = await this.get('/locations/v1.0/locations');
 
     // Create a dayJS date object.
-    const timeZone = 'America/New_York';
-    let now = dayjs().tz(timeZone);
+    // @see https://github.com/iamkun/dayjs/issues/1227
+    let now = dayjs.tz();
 
     if (Array.isArray(response.locations)) {
       let results;
