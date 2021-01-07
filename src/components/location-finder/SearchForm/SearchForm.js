@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React from 'react';
 // Redux
 import {
   batch,
@@ -9,8 +9,7 @@ import {
   setSearchQuery,
   setMapPosition,
   setMapInfoWindow,
-  setOpenNow,
-  setPagination
+  setOpenNow
 } from './../../../redux/actions';
 // Apollo
 import { useApolloClient } from '@apollo/react-hooks';
