@@ -3,7 +3,8 @@ import {
   SET_AUTO_SUGGEST_INPUT_VALUE,
   SET_OPEN_NOW,
   SET_PAGINATION,
-  RESET_SEARCH
+  RESET_SEARCH,
+  SET_FILTERS
 } from './../actions';
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   resultsCount: '',
   offset: 0,
   pageCount: 0,
-  pageNumber: 1
+  pageNumber: 1,
+  searchFilters: []
 };
 
 export default function search(state = initialState, action) {
@@ -63,6 +65,23 @@ export default function search(state = initialState, action) {
         resultsCount: '',
         openNow: false
       };
+    
+    case SET_FILTERS:
+      // Logic for checking if we should add or remove a tid from the state.
+      let termIdExists = state.searchFilters.indexOf(action.payload.searchFilters) > -1;
+      // Make a copy of the existing array
+      let termIds = state.searchFilters.slice();
+      if (termIdExists) {
+        termIds = termIds.filter(id => id != action.payload.searchFilters);                
+      } else {
+        // Modify the copy, not the original
+        termIds.push(action.payload.searchFilters);            
+      }
+
+      return {
+        ...state,
+        searchFilters: termIds
+      }
 
     default:
       return {

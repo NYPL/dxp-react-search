@@ -2,8 +2,19 @@ import React from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+// Redux
+import {
+  batch,
+  useDispatch,
+  useSelector
+} from 'react-redux';
+import { setFilters } from './../../../redux/actions';
 
 function SearchFilters() {
+  // Redux
+  const dispatch = useDispatch();
+  const { searchFilters } = useSelector(state => state.search);
+
   const FILTERS_QUERY = gql`
     query {
       allTerms {
@@ -36,6 +47,12 @@ function SearchFilters() {
     );
   }
 
+  function onChangeFilters(event) {
+    dispatch(setFilters({
+      searchFilters: event.target.id
+    }));
+  }
+
   return (
     <div className='search-filters' style={{display: "flex"}}>
       {data.allTerms.map((vocab) => (
@@ -50,6 +67,8 @@ function SearchFilters() {
                     className="checkbox__input"
                     type="checkbox"
                     name={term.name}
+                    checked={searchFilters.find(filter => filter === term.id)}
+                    onChange={onChangeFilters}
                     aria-label="Checking this box will update the results"
                   />
                   <label

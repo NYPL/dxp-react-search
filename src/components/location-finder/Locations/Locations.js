@@ -32,6 +32,7 @@ function Locations() {
     searchQueryGeoLat,
     searchQueryGeoLng,
     openNow,
+    searchFilters, 
     offset,
     pageNumber
   } = useSelector(state => state.search);
@@ -41,6 +42,7 @@ function Locations() {
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
+  const termIds = searchFilters;
   // Query for data.
   const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
@@ -48,6 +50,7 @@ function Locations() {
         searchGeoLat,
         searchGeoLng,
         openNow,
+        termIds,
         limit,
         offset,
         pageNumber
