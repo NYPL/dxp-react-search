@@ -9,8 +9,6 @@ import {
   useSelector
 } from 'react-redux';
 import { setFilters } from './../../../redux/actions';
-// Components
-import Dropdown from './../../shared/Dropdown';
 
 function SearchFilters() {
   // Redux
@@ -58,11 +56,9 @@ function SearchFilters() {
   return (
     <div className='search-filters' style={{display: "flex"}}>
       {data.allTerms.slice(0, 10).map((vocab) => (
-        <Dropdown
-          id={vocab.id}
-          label={vocab.name}
-        >
-          {vocab.terms.slice(0, 300).map((term) => {
+        <div key={vocab.id} className="vocab" style={{padding: "2em"}}>
+          <h3>{vocab.name}</h3>
+          {vocab.terms.slice(0, 10).map((term) => {
             return (
               <div key={term.id} className="term">
                 <div className="checkbox">
@@ -85,8 +81,8 @@ function SearchFilters() {
               </div>
             );
           })}
-        </Dropdown>
-      ))};
+        </div>
+      ))}
     </div>
   );
 };
