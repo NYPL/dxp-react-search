@@ -1,7 +1,7 @@
 ## CHANGES
 -----------
 
-### v0.1.6 [?] Location Finder Improvements
+### v0.1.6 [2021-01-12] Location Finder Improvements
 -----------------------------------------------
 * Added tests for Search related components.
 * Bug fix for clicking search twice clearing results count.
