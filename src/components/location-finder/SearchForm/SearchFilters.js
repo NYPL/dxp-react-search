@@ -10,6 +10,7 @@ import {
 } from 'react-redux';
 import { setFilters } from './../../../redux/actions';
 // Components
+import { Button, Link } from '@nypl/design-system-react-components';
 import Dropdown from './../../shared/Dropdown';
 
 function SearchFilters() {
@@ -55,8 +56,12 @@ function SearchFilters() {
     }));
   }
 
+  function onClickCancel(event) {
+
+  }
+
   return (
-    <div className='search-filters' style={{display: "flex"}}>
+    <div className='search-filters' style={{display: "flex", width: "975px", marginTop: "1em"}}>
       {data.allTerms.slice(0, 10).map((vocab) => (
         <Dropdown
           id={vocab.id}
@@ -78,13 +83,29 @@ function SearchFilters() {
                   <label
                     id="label"
                     htmlFor={term.name}
-                    className="label">
+                    className="label"
+                  >
                     {term.name}
                   </label>
                 </div>
               </div>
             );
           })}
+          <div className="dropdown__content-buttons">
+            <Link
+              href={onClickCancel}
+            >
+              Cancel
+            </Link>
+            <Button
+              buttonType="filled"
+              id="button"
+              mouseDown={false}
+              type="submit"
+            >
+              Save
+            </Button>
+          </div>
         </Dropdown>
       ))};
     </div>

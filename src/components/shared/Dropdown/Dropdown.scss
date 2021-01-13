@@ -1,11 +1,12 @@
 .dropdown {
-  border: 1px solid whitesmoke;
+  border: 1px solid gainsboro;
   color: inherit;
   width: 100%;
+  margin-right: .5em;
 
   &__content {
     display: none;
-    padding: 2em;
+    padding: 1em;
     transition: all 0.35s;
   }
 
@@ -17,13 +18,13 @@
     font-weight: 500;
     justify-content: space-between;
     */
-    padding: 1em;
+    padding: .5em;
     border-radius: 2px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     text-decoration: none;
-    background-color: whitesmoke;
+    background-color: white;
     border: 1px solid gainsboro;
     color: inherit;
     align-items: center;
@@ -56,7 +57,11 @@
       }
 
       ~ .dropdown__content {
+        position: absolute;
         display: inline-block;
+        z-index: 1;
+        background: white;
+        border: 1px solid black;
       }
     }
   }
