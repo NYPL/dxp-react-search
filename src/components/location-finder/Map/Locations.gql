@@ -1,7 +1,8 @@
-query LocationsQuery($openNow: Boolean) {
+query LocationsQuery($openNow: Boolean, $termIds: [TermsFilter]) {
   allLocations(
     filter: {
-      openNow: $openNow
+      openNow: $openNow,
+      termIds: $termIds
     }
   ) {
     locations {

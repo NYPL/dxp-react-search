@@ -4,7 +4,8 @@ import {
   SET_OPEN_NOW,
   SET_PAGINATION,
   RESET_SEARCH,
-  SET_FILTERS
+  SET_FILTERS,
+  SET_DROPDOWN_CHECKED
 } from './../actions';
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   offset: 0,
   pageCount: 0,
   pageNumber: 1,
-  searchFilters: []
+  searchFilters: [],
+  dropdownId: false
 };
 
 export default function search(state = initialState, action) {
@@ -63,12 +65,13 @@ export default function search(state = initialState, action) {
         pageCount: 0,
         pageNumber: 1,
         resultsCount: '',
-        openNow: false
+        openNow: false,
+        searchFilters: []
       };
     
     case SET_FILTERS:
       // Logic for checking if we should add or remove a tid from the state.
-      let termIdExists = state.searchFilters.indexOf(action.payload.searchFilters) > -1;
+      /*let termIdExists = state.searchFilters.indexOf(action.payload.searchFilters) > -1;
       // Make a copy of the existing array
       let termIds = state.searchFilters.slice();
       if (termIdExists) {
@@ -77,10 +80,19 @@ export default function search(state = initialState, action) {
         // Modify the copy, not the original
         termIds.push(action.payload.searchFilters);            
       }
+      */
 
       return {
         ...state,
-        searchFilters: termIds
+        //searchFilters: termIds
+        searchFilters: action.payload.searchFilters,
+        dropdownId: false
+      }
+    
+    case SET_DROPDOWN_CHECKED:
+      return {
+        ...state,
+        dropdownId: action.payload.dropdownId
       }
 
     default:

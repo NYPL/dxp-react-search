@@ -2,7 +2,7 @@ query LocationsQuery(
   $searchGeoLat: Float,
   $searchGeoLng: Float,
   $openNow: Boolean,
-  $termIds: [String],
+  $termIds: [TermsFilter],
   $limit: Int,
   $pageNumber: Int,
   $offset: Int) {

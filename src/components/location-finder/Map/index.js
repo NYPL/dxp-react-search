@@ -18,7 +18,8 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   const {
     searchQueryGeoLat,
     searchQueryGeoLng,
-    openNow
+    openNow,
+    searchFilters
   } = useSelector(state => state.search);
   const {
     mapCenter,
@@ -26,12 +27,24 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
     infoWindowId,
     infoWindowIsVisible
   } = useSelector(state => state.map);
+  
+  // Create the termIds array of objects from the redux state.
+  // @TODO check if we should make a copy of the state object first?
+  const termIds = [];
+  for (let [key, value] of Object.entries(searchFilters)) {
+    const filter = {
+      id: key,
+      terms: value.terms
+    };
+    termIds.push(filter);
+  }
 
   // Apollo
   const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
-        openNow
+        openNow,
+        termIds
       }
     }
   );

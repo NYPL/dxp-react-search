@@ -128,7 +128,7 @@ const locationResolver = {
         && args.filter.openNow
       ) {
         console.log('openNow!');
-        console.log(args.filter.openNow);        
+        //console.log(args.filter.openNow);        
         // Check if we've prev modified the results.
         if (typeof results !== "undefined") {
           results = filterByOpenNow(now, results).sort(sortByName);
@@ -142,7 +142,7 @@ const locationResolver = {
       // Filter by term ids.
       if (args.filter && 'termIds' in args.filter) {
         console.log('termIds!');
-        console.log(args.filter.termIds);
+        //console.log(args.filter.termIds);
 
         // Check if we've prev modified the results.
         if (typeof results !== "undefined") {

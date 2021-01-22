@@ -28,7 +28,7 @@ function Locations() {
 
   // Redux
   const {
-    searchQuery,
+    //searchQuery,
     searchQueryGeoLat,
     searchQueryGeoLng,
     openNow,
@@ -42,7 +42,23 @@ function Locations() {
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
-  const termIds = searchFilters;
+
+  // Create the termIds array of objects from the redux state.
+  // @TODO check if we should make a copy of the state object first?
+  const termIds = [];
+  for (let [key, value] of Object.entries(searchFilters)) {
+    /*switch (key) {
+      case 'filter-boroughs':
+
+    }
+    */
+    const filter = {
+      id: key,
+      terms: value.terms
+    };
+    termIds.push(filter);
+  }
+
   // Query for data.
   const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
@@ -61,6 +77,7 @@ function Locations() {
   // Side effect to dispatch redux action to set pagination redux state.
   useEffect(() => {
     if (data) {
+      console.log('yo');
       // Dispatch redux action
       dispatch(setPagination({
         pageNumber: pageNumber,

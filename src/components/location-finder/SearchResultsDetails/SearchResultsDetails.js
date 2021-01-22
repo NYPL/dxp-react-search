@@ -7,9 +7,6 @@ import {
   useSelector
 } from 'react-redux';
 import {
-  setSearchQuery,
-  setAutoSuggestInputValue,
-  setPagination,
   resetSearch,
   resetMap
  } from './../../../redux/actions';
@@ -19,7 +16,8 @@ function SearchResultsDetails() {
   const {
     searchQuery,
     resultsCount,
-    openNow
+    openNow,
+    searchFilters
   } = useSelector(state => state.search);
 
   const dispatch = useDispatch();
@@ -48,8 +46,20 @@ function SearchResultsDetails() {
 
   //
   function renderMessage() {
+    if (
+      !searchQuery
+      && !openNow
+      && Object.keys(searchFilters).length > 0
+      && resultsCount
+    ) {
+      return (
+        <Fragment>
+          Showing {resultsCount} results.
+        </Fragment>
+      );
+    }
     // Open now only
-    if (!searchQuery && openNow && resultsCount) {
+    else if (!searchQuery && openNow && resultsCount) {
       return (
         <Fragment>
           Showing {resultsCount} results open now.
@@ -76,8 +86,9 @@ function SearchResultsDetails() {
           <strong>No results found.</strong>
         </Fragment>
       )
+    } 
     // Default.
-    } else {
+    else {
       return null;
     }
   }

@@ -36,7 +36,7 @@ export const typeDefs = gql`
 
   input Filter {
     openNow: Boolean
-    termIds: [String]
+    termIds: [TermsFilter]
   }
 
   type PageInfo {
@@ -59,6 +59,11 @@ export const typeDefs = gql`
     name: String!
   }
 
+  input TermsFilter {
+    id: String!
+    terms: [String]!
+  }
+
   type Query {
     allLocations(
       limit: Int,
@@ -67,6 +72,6 @@ export const typeDefs = gql`
       filter: Filter,
       sortByDistance: SortByDistance
     ): LocationsConnection
-    allTerms(filter: String): [Vocab]!
+    allTerms(filter: TermsFilter): [Vocab]!
   }
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Icon } from '@nypl/design-system-react-components';
 
 /*
@@ -9,19 +9,14 @@ import { Icon } from '@nypl/design-system-react-components';
   children
 */
 function Dropdown(props) {
-  /*function onChangeFilters(event) {
-    dispatch(setFilters({
-      searchFilters: event.target.id
-    }));
-  }
-  */
-
   return (
     <div className="dropdown">
       <input
         id={`dropdown-${props.id}`}
         type="checkbox"
         className="dropdown__input"
+        checked={props.checked}
+        onChange={props.onChange}
       />
       <label
         htmlFor={`dropdown-${props.id}`}

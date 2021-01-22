@@ -1,62 +1,50 @@
-/*function filterByTerms(locations, terms) {  
-  return locations.filter((location) => {    
-    let locationTids = [];
-    location.terms.map(vocab => vocab.terms)
-      .map(vocab => vocab.map(term => {
-        locationTids.push(term.id);
-      }
-    ));
-    console.log(locationTids);
-    //return terms.every(tid => locationTids.includes(tid));
-    return terms.some(tid => locationTids.includes(tid));
-  });  
-}
-*/
-
-function filterByTerms(locations, terms) {  
-  return locations.filter((location) => {
-    let locationTidsSome = [];
-    let locationTidsEvery = [];
-    //console.log(location.terms);
-    /*location.terms.map(vocab => vocab.terms)
-      .map(vocab => vocab.map(term => {
-        if (
-          vocab.id === 'filter-boroughs'
-          || vocab.id === 'filter-accessibility'
-        ) {
-          locationTidsSome.push(term.id);
-        } else {
-          locationTidsEvery.push(term.id);
-        }
-      }
-    ));
-    */
-    location.terms.map(vocab => {
-      //console.log(vocab.terms);
+function filterByTerms(locations, filterGroups) {
+  return locations.reduce((accumulator, location) => {
+    // 
+    let locationTerms = {};
+    // Iterate over each vocab
+    location.terms.forEach((vocab) => {
+      let locationTerm = [];
       // Iterate over each vocabulary's terms
-      vocab.terms.map(term => {
-        if (
-          vocab.id === 'filter-boroughs'
-          //|| vocab.id === 'filter-accessibility'
-        ) {
-          //console.log(vocab.id);
-          locationTidsSome.push(term.id);
-        } else {
-          locationTidsEvery.push(term.id);
-        }
-      })
+      vocab.terms.forEach((term) => {
+        locationTerm.push(term.id);
+      });
+      // Build the locationTerms object.
+      locationTerms[vocab.id] = {
+        terms: locationTerm
+      };
     });
 
-    console.log(locationTidsSome);
+    //
+    let conditions = [];
+    filterGroups.forEach((filterGroup) => {
+      let groupStatus = true;
+      //switch (filterGroup.operator) {
+        //case "OR":
+          if (
+            locationTerms[filterGroup.id] 
+            && locationTerms[filterGroup.id].terms.length 
+            && filterGroup 
+            && filterGroup.terms.length
+          ) {
+            groupStatus = filterGroup.terms.some((tid) =>
+              locationTerms[filterGroup.id].terms.includes(tid)
+            );
+            conditions.push(groupStatus);
+          }
+          //break;
+      //}
+    });
 
-
-    if (
-      terms.every(tid => locationTidsEvery.includes(tid))
-      || terms.some(tid => locationTidsSome.includes(tid))
-    ) {
-      return true;
+    //console.log(conditions);
+    
+    // Check if all conditions return true.
+    if (conditions.every(Boolean)) {
+      accumulator.push(location);
     }
-  });  
+
+    return accumulator;
+  }, []);
 }
 
 export default filterByTerms;

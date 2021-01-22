@@ -32,7 +32,6 @@ function SearchForm() {
   // Redux
   const {
     autoSuggestInputValue,
-    searchQuery,
     openNow
   } = useSelector(state => state.search);
   const { infoWindowId } = useSelector(state => state.map);
@@ -148,6 +147,7 @@ function SearchForm() {
             Open Now
           </label>
         </div>
+        <h3 style={{display: "flex", width: "975px", marginTop: "1em"}}>Filters</h3>
         <SearchFilters />
       </form>
     </div>
