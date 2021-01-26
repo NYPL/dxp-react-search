@@ -11,9 +11,10 @@ function BottomPromo() {
     <div className='bottom-promo'>
       <div className='row'>
         <div className='column left'>
-          <DS.SectionTitle
-            headingText={promo_left.title}
+          <DS.Heading
             id="promo-left-section-title"
+            level={2}
+            text={promo_left.title}
           />
           {promo_left.image.map((value, index) => {
             return (
@@ -35,9 +36,10 @@ function BottomPromo() {
           })}
         </div>
         <div className='column right'>
-          <DS.SectionTitle
-            headingText={promo_right.title}
+          <DS.Heading
             id="promo-right-section-title"
+            level={2}
+            text={promo_right.title}
           />
           <p className="promo-description">
             {promo_right.description}

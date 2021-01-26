@@ -126,7 +126,7 @@ function SearchForm() {
               'small',
               'icon-left'
             ]}
-            name="search_small"
+            name="search"
           />
           Search
         </DS.Button>
