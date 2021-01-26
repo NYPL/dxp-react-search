@@ -46,15 +46,24 @@ function Locations() {
   // Create the termIds array of objects from the redux state.
   // @TODO check if we should make a copy of the state object first?
   const termIds = [];
+  let operator;
   for (let [key, value] of Object.entries(searchFilters)) {
-    /*switch (key) {
+    switch (key) {
       case 'filter-boroughs':
-
+      case 'filter-accessibility':
+        operator = 'OR';
+        break;
+      case 'filter-amenities':
+      case 'filter-subjects':
+      case 'filter-media':
+        operator = 'AND';
+        break;
     }
-    */
+  
     const filter = {
       id: key,
-      terms: value.terms
+      terms: value.terms,
+      operator: operator
     };
     termIds.push(filter);
   }

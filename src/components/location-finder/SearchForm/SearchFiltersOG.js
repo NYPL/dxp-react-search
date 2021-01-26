@@ -8,12 +8,9 @@ import {
   useDispatch,
   useSelector
 } from 'react-redux';
-import produce from 'immer';
-import { useImmer } from 'use-immer';
 import { 
   setDropdownChecked,
-  setFilters,
-  deleteFilter
+  setFilters
 } from './../../../redux/actions';
 // Components
 import { Button, Link } from '@nypl/design-system-react-components';
@@ -24,7 +21,7 @@ function SearchFilters() {
   const dispatch = useDispatch();
   const { dropdownId, searchFilters } = useSelector(state => state.search);
   // Local state
-  const [checkedTerms, setCheckedTerms] = useState({});
+  const [checkedTerms, setCheckedTerms] = useState(false);
   // Query for data.
   const { loading, error, data } = useQuery(
     FILTERS_QUERY, {}
@@ -78,21 +75,23 @@ function SearchFilters() {
   // Clear the dropdown
   function onClickClear(vocabId, event) {
     // Clear local state for dropdown only.
-    const nextLocalState = produce(checkedTerms, draft => {
-      delete draft[vocabId];
+    setCheckedTerms({
+      ...checkedTerms,
+      [vocabId]: {
+        terms: []
+      }
     });
-    setCheckedTerms(nextLocalState);
-    
-    // Redux
-    batch(() => {
-      dispatch(deleteFilter({
-        searchFilters: vocabId
-      }));
-      // Close the dropdown.
-      dispatch(setDropdownChecked({
-        dropdownId: false
-      }));
-    });
+    // Clear the redux state for dropdown only, or just set redux to match local state?
+    dispatch(setFilters({
+      searchFilters: {
+        ...searchFilters,
+        [vocabId]: {
+          terms: []
+        }
+      },
+      // Close the dropdown
+      dropdownId: false
+    }));
   }
   
   // Saves the local state into Redux state.
@@ -124,21 +123,19 @@ function SearchFilters() {
       checkedTerms[vocabId] !== undefined
       && searchFilters[vocabId] !== undefined
     ) {
-      /*setCheckedTerms({
+      setCheckedTerms({
         ...checkedTerms,
         [vocabId]: {
           terms: searchFilters[vocabId].terms
         }
       });
-      */
     } else {
-      /*setCheckedTerms({
+      setCheckedTerms({
         ...checkedTerms,
         [vocabId]: {
           terms: []
         }
       });
-      */
     }
   }
   
@@ -153,8 +150,6 @@ function SearchFilters() {
     }
     return `${vocab.name} ${filterCount}`;
   }
-
-  console.log(checkedTerms);
 
   return (
     <div className='search-filters' style={{display: "flex", width: "975px", marginTop: "1em"}}>

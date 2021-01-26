@@ -62,6 +62,7 @@ export const typeDefs = gql`
   input TermsFilter {
     id: String!
     terms: [String]!
+    operator: String!
   }
 
   type Query {

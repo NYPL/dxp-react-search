@@ -17,29 +17,86 @@ function filterByTerms(locations, filterGroups) {
 
     //
     let conditions = [];
+    let orGroupStatus = false;
+    let andGroupStatus = false;
     filterGroups.forEach((filterGroup) => {
-      let groupStatus = true;
-      //switch (filterGroup.operator) {
-        //case "OR":
+      if (filterGroup.operator === 'OR') {
+        //console.log('OR!');
+
+        if (
+          locationTerms[filterGroup.id] 
+          && locationTerms[filterGroup.id].terms.length 
+          && filterGroup 
+          && filterGroup.terms.length
+        ) {
+          orGroupStatus = filterGroup.terms.some((tid) =>
+            locationTerms[filterGroup.id].terms.includes(tid)
+          );
+          conditions.push(orGroupStatus);
+        } else {
+          //orGroupStatus = true;
+          //conditions.push(orGroupStatus);
+        }
+      } 
+      if (filterGroup.operator === 'AND') {
+        //console.log('AND!');
+
+        if (
+          locationTerms[filterGroup.id] 
+          && locationTerms[filterGroup.id].terms.length 
+          && filterGroup 
+          && filterGroup.terms.length
+        ) {
+          andGroupStatus = filterGroup.terms.every((tid) =>
+            locationTerms[filterGroup.id].terms.includes(tid)
+          );
+          conditions.push(andGroupStatus);
+        } else {
+          console.log(filterGroup.id);
+          // Add a false condition. there's a filter group with terms that returns no location.
+          conditions.push(false);
+        }
+      }
+      
+      //conditions.push(orGroupStatus);
+      //conditions.push(andGroupStatus);
+      /*switch (filterGroup.operator) {
+        case 'OR':
           if (
             locationTerms[filterGroup.id] 
             && locationTerms[filterGroup.id].terms.length 
             && filterGroup 
             && filterGroup.terms.length
           ) {
-            groupStatus = filterGroup.terms.some((tid) =>
+            orGroupStatus = filterGroup.terms.some((tid) =>
               locationTerms[filterGroup.id].terms.includes(tid)
             );
-            conditions.push(groupStatus);
+            conditions.push(orGroupStatus);
           }
-          //break;
-      //}
+        case 'AND':
+          if (
+            locationTerms[filterGroup.id] 
+            && locationTerms[filterGroup.id].terms.length 
+            && filterGroup 
+            && filterGroup.terms.length
+          ) {
+            andGroupStatus = filterGroup.terms.every((tid) =>
+              locationTerms[filterGroup.id].terms.includes(tid)
+            );
+            conditions.push(andGroupStatus);
+          }
+          break;
+      }
+      */
     });
 
-    //console.log(conditions);
+    //conditions.push(orGroupStatus);
+    //conditions.push(andGroupStatus);
+
+    console.log(conditions);
     
     // Check if all conditions return true.
-    if (conditions.every(Boolean)) {
+    if (conditions.length && conditions.every(Boolean)) {
       accumulator.push(location);
     }
 

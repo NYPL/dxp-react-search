@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 import {
   SET_SEARCH_QUERY,
   SET_AUTO_SUGGEST_INPUT_VALUE,
@@ -5,6 +7,7 @@ import {
   SET_PAGINATION,
   RESET_SEARCH,
   SET_FILTERS,
+  DELETE_FILTER,
   SET_DROPDOWN_CHECKED
 } from './../actions';
 
@@ -87,6 +90,18 @@ export default function search(state = initialState, action) {
         //searchFilters: termIds
         searchFilters: action.payload.searchFilters,
         dropdownId: false
+      }
+    
+    case DELETE_FILTER:
+      // @TODO This works, but is wrong way to use immer.
+      const vocabId = action.payload.searchFilters;
+      const nextState = produce(state.searchFilters, draft => {
+        delete draft[vocabId];
+      });
+
+      return {
+        ...state,
+        searchFilters: nextState,
       }
     
     case SET_DROPDOWN_CHECKED:

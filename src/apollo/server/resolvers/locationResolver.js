@@ -140,7 +140,7 @@ const locationResolver = {
       }
       
       // Filter by term ids.
-      if (args.filter && 'termIds' in args.filter) {
+      if (args.filter && 'termIds' in args.filter && args.filter.termIds.length) {
         console.log('termIds!');
         //console.log(args.filter.termIds);
 
