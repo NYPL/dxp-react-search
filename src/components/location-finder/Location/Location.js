@@ -46,7 +46,7 @@ function Location({ location }) {
   return (
     <div className='location'>
       <DS.Heading
-        id={ `lid-${location.id}` }
+        id={ `lid-${location.id.replace('/', '-')}` }
         level={2}
         className='location__name'
       >

@@ -123,9 +123,9 @@ function Map() {
     // Scroll to location on list when map marker is clicked for desktop only.
     if (windowSize >= 600) {
       // Set focus
-      document.querySelector(`#lid-${location.id} a`).focus();
+      document.querySelector(`#lid-${location.id.replace('/', '-')} a`).focus();
       // Scroll into view.
-      document.getElementById(`lid-${location.id}`).scrollIntoView({
+      document.getElementById(`lid-${location.id.replace('/', '-')}`).scrollIntoView({
         alignToTop: false,
         behavior: 'smooth'
       });
