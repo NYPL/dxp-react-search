@@ -57,12 +57,16 @@
       }
 
       ~ .dropdown__content {
-        position: absolute;
-        display: inline-block;
-        z-index: 1;
-        min-width: 275px;
+        display: block;
+        min-width: 100%;
         background: white;
         border: 1px solid black;
+        @include breakpoint($breakpoint-medium) {
+          position: absolute;
+          display: inline-block;
+          z-index: 1;
+          min-width: 275px;
+        }
       }
     }
   }

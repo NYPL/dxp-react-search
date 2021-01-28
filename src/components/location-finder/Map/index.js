@@ -51,14 +51,6 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
       operator: operator
     };
     termIds.push(filter);
-
-    /*const filter = {
-      id: key,
-      terms: value.terms,
-      operator: 'OR'
-    };
-    termIds.push(filter);
-    */
   }
 
   // Apollo
@@ -72,8 +64,6 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   );
 
   if (loading || !data) {
-    console.log(loading);
-
     return (
       <div>Loading</div>
     );

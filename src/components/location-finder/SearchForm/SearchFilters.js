@@ -4,27 +4,29 @@ import { useQuery } from '@apollo/client';
 import { FiltersQuery as FILTERS_QUERY } from './SearchFilters.gql';
 // Redux
 import {
-  batch,
   useDispatch,
   useSelector
 } from 'react-redux';
-import produce from 'immer';
-import { useImmer } from 'use-immer';
 import { 
-  setDropdownChecked,
   setFilters,
   deleteFilter
 } from './../../../redux/actions';
 // Components
-import { Button, Link } from '@nypl/design-system-react-components';
+import { Button, Link, Modal } from '@nypl/design-system-react-components';
 import Dropdown from './../../shared/Dropdown';
+import Checkbox from './../../shared/Checkbox';
+// Hooks
+import useWindowSize from './../../../hooks/useWindowSize';
 
 function SearchFilters() {
+  // Hooks
+  const windowSize = useWindowSize();
   // Redux
   const dispatch = useDispatch();
-  const { dropdownId, searchFilters } = useSelector(state => state.search);
+  const { searchFilters } = useSelector(state => state.search);
   // Local state
   const [checkedTerms, setCheckedTerms] = useState({});
+  const [dropdownIds, setDropdownIds] = useState();
   // Query for data.
   const { loading, error, data } = useQuery(
     FILTERS_QUERY, {}
@@ -44,12 +46,17 @@ function SearchFilters() {
     );
   }
   
+  // Helper function to generate a new state with a property removed immutably.
+  function newState(object, property) {
+    let {[property]: omit, ...rest} = object;
+    return rest;
+  };
+  
   // onChange handler for filter checkboxes.
   // Tracks checked items in local state.
   function onChangeFilters(vocabId, event) {
     const termId = event.target.id;
     let termIds;
-
      // Check if the tid already exists in the state
     if (checkedTerms[vocabId] !== undefined) {
       let termIdExists = checkedTerms[vocabId].terms.indexOf(termId) > -1;
@@ -66,7 +73,7 @@ function SearchFilters() {
       termIds = [];
       termIds.push(termId);
     }
-
+    // Update local state.
     setCheckedTerms({
       ...checkedTerms,
       [vocabId]: {
@@ -76,23 +83,19 @@ function SearchFilters() {
   }
   
   // Clear the dropdown
-  function onClickClear(vocabId, event) {
-    // Clear local state for dropdown only.
-    const nextLocalState = produce(checkedTerms, draft => {
-      delete draft[vocabId];
-    });
-    setCheckedTerms(nextLocalState);
-    
+  function onClickClear(vocabId, event) {    
+    // Clear local state for dropdown only by vocabId.
+    setCheckedTerms(
+      newState(checkedTerms, vocabId)
+    );
+
     // Redux
-    batch(() => {
-      dispatch(deleteFilter({
-        searchFilters: vocabId
-      }));
-      // Close the dropdown.
-      dispatch(setDropdownChecked({
-        dropdownId: false
-      }));
-    });
+    dispatch(deleteFilter({
+      searchFilters: vocabId
+    }));
+
+    // Close the dropdown.
+    setDropdownIds(undefined);
   }
   
   // Saves the local state into Redux state.
@@ -105,40 +108,57 @@ function SearchFilters() {
         }
       }
     }));
+    // Close the dropdown.
+    setDropdownIds(undefined);
   }
   
   // 
   function onChangeDropdown(vocabId, event) {
+    // Dropdown local state.
     let dropdownIdChecked = event.target.id;
-    // User closed a dropdown from dropdown, so id will be the same.
-    if (dropdownId === event.target.id) {
-      dropdownIdChecked = false;
-    }
-
-    dispatch(setDropdownChecked({
-      dropdownId: dropdownIdChecked
-    }));
-
-    // Reset the checkedTerms to saved redux state.
-    if (
-      checkedTerms[vocabId] !== undefined
-      && searchFilters[vocabId] !== undefined
-    ) {
-      /*setCheckedTerms({
-        ...checkedTerms,
-        [vocabId]: {
-          terms: searchFilters[vocabId].terms
+    let dropdownIdsCopy;
+    if (dropdownIds !== undefined) {
+      let dropdownIdExists = dropdownIds.indexOf(dropdownIdChecked) > -1;
+      // Make a copy of the existing array.
+      dropdownIdsCopy = dropdownIds.slice();
+      // If dropdownIdExists exists, remove it from the array.
+      if (dropdownIdExists) {
+        dropdownIdsCopy = dropdownIdsCopy.filter((id) => id != dropdownIdChecked);
+      } else {
+        // Desktop
+        if (windowSize >= 600) {
+          // Desktop: only allow 1 item in the array.
+          dropdownIdsCopy = [dropdownIdChecked];
+        } else {
+          // Mobile: allow multiple items in the array.
+          dropdownIdsCopy.push(dropdownIdChecked);
         }
-      });
-      */
+      }
     } else {
-      /*setCheckedTerms({
-        ...checkedTerms,
-        [vocabId]: {
-          terms: []
-        }
-      });
-      */
+      // No dropdowns open, so add the checked dropdown to the array.
+      dropdownIdsCopy = [dropdownIdChecked];
+    }
+    // Set the local state
+    setDropdownIds(dropdownIdsCopy);
+    
+    // Desktop only
+    if (windowSize >= 600) {
+      // Reset the checkedTerms to saved redux state
+      if (
+        checkedTerms[vocabId] !== undefined
+        && searchFilters[vocabId] !== undefined
+      ) {
+        setCheckedTerms({
+          ...checkedTerms,
+          [vocabId]: {
+            terms: searchFilters[vocabId].terms
+          }
+        });
+      } else {
+        setCheckedTerms(
+          newState(checkedTerms, vocabId)
+        );
+      }
     }
   }
   
@@ -153,59 +173,54 @@ function SearchFilters() {
     }
     return `${vocab.name} ${filterCount}`;
   }
+  
+  //
+  function setFilterCheckedProp(vocabId, termId) {
+    let filterChecked = false;
+    if (checkedTerms[vocabId] !== undefined) {
+      filterChecked = checkedTerms[vocabId].terms.find((filter) => filter === termId) 
+    }
+    return filterChecked;
+  }
 
-  console.log(checkedTerms);
+  function setDropdownCheckedProp(vocabId) {
+    let dropdownChecked = false;
+    if (dropdownIds !== undefined && dropdownIds.indexOf(`dropdown-${vocabId}`) > -1) {
+      dropdownChecked = true;
+    }
+    return dropdownChecked;
+  }
 
   return (
-    <div className='search-filters' style={{display: "flex", width: "975px", marginTop: "1em"}}>
+    <div className='search-filters'>
       {data.allTerms.slice(0, 10).map((vocab) => {
         return (
           <Dropdown
             key={vocab.id}
             id={vocab.id}
             label={setDropdownLabel(vocab, searchFilters)}
-            checked={dropdownId === `dropdown-${vocab.id}`}
+            checked={setDropdownCheckedProp(vocab.id)}
             onChange={(e) => onChangeDropdown(vocab.id, e)}
           >
             {vocab.terms.slice(0, 300).map((term) => {
               return (
                 <div key={term.id} className="term">
-                  <div className="checkbox">
-                    <input
-                      id={term.id}
-                      className="checkbox__input"
-                      type="checkbox"
-                      name={term.name}
-                      checked={checkedTerms[vocab.id] !== undefined ? 
-                        checkedTerms[vocab.id].terms.find((filter) => filter === term.id) 
-                        : false
-                      }
-                      onChange={(e) => onChangeFilters(vocab.id, e)}
-                      aria-label="Checking this box will update the results"
-                    />
-                    <label
-                      id="label"
-                      htmlFor={term.name}
-                      className="label"
-                    >
-                      {term.name}
-                    </label>
-                  </div>
+                  <Checkbox
+                    id={term.id}
+                    name={term.name}
+                    checked={setFilterCheckedProp(vocab.id, term.id) || false}
+                    onChange={(e) => onChangeFilters(vocab.id, e)}
+                  />
                 </div>
               );
             })}
             <div 
               className="dropdown__content-buttons"
               id={vocab.id}
-              style={{
-                display: 'flex',
-                float: 'right',
-                padding: '.25em 0'
-              }
-            }>
+            >
               <Button
                 buttonType="link"
-                id="button-cancel"
+                id={`button-clear-${vocab.id}`}
                 mouseDown={false}
                 type="button"
                 onClick={(e) => onClickClear(vocab.id, e)}
@@ -214,7 +229,7 @@ function SearchFilters() {
               </Button>
               <Button
                 buttonType="filled"
-                id="dropdown-button"
+                id={`button-save-${vocab.id}`}
                 mouseDown={false}
                 type="button"
                 onClick={(e) => onSaveFilters(vocab.id, e)}

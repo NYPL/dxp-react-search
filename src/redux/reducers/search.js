@@ -1,5 +1,3 @@
-import produce from 'immer';
-
 import {
   SET_SEARCH_QUERY,
   SET_AUTO_SUGGEST_INPUT_VALUE,
@@ -7,8 +5,7 @@ import {
   SET_PAGINATION,
   RESET_SEARCH,
   SET_FILTERS,
-  DELETE_FILTER,
-  SET_DROPDOWN_CHECKED
+  DELETE_FILTER
 } from './../actions';
 
 const initialState = {
@@ -18,8 +15,7 @@ const initialState = {
   offset: 0,
   pageCount: 0,
   pageNumber: 1,
-  searchFilters: [],
-  dropdownId: false
+  searchFilters: []
 };
 
 export default function search(state = initialState, action) {
@@ -73,41 +69,21 @@ export default function search(state = initialState, action) {
       };
     
     case SET_FILTERS:
-      // Logic for checking if we should add or remove a tid from the state.
-      /*let termIdExists = state.searchFilters.indexOf(action.payload.searchFilters) > -1;
-      // Make a copy of the existing array
-      let termIds = state.searchFilters.slice();
-      if (termIdExists) {
-        termIds = termIds.filter(id => id != action.payload.searchFilters);                
-      } else {
-        // Modify the copy, not the original
-        termIds.push(action.payload.searchFilters);            
-      }
-      */
-
       return {
         ...state,
-        //searchFilters: termIds
         searchFilters: action.payload.searchFilters,
-        dropdownId: false
       }
     
     case DELETE_FILTER:
-      // @TODO This works, but is wrong way to use immer.
       const vocabId = action.payload.searchFilters;
-      const nextState = produce(state.searchFilters, draft => {
-        delete draft[vocabId];
-      });
+      const nextSearchFiltersState = (object, property) => {
+        let {[property]: omit, ...rest} = object
+        return rest;
+      }
 
       return {
         ...state,
-        searchFilters: nextState,
-      }
-    
-    case SET_DROPDOWN_CHECKED:
-      return {
-        ...state,
-        dropdownId: action.payload.dropdownId
+        searchFilters: nextSearchFiltersState(state.searchFilters, vocabId),
       }
 
     default:

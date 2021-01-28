@@ -86,7 +86,6 @@ function Locations() {
   // Side effect to dispatch redux action to set pagination redux state.
   useEffect(() => {
     if (data) {
-      console.log('yo');
       // Dispatch redux action
       dispatch(setPagination({
         pageNumber: pageNumber,
