@@ -22,7 +22,8 @@ const allLocations = {
           geoLocation: {
             lat: 40.8034,
             lng: -73.9354
-          }
+          },
+          terms: []
         },
         {
           id: '53rd-street',
@@ -44,11 +45,12 @@ const allLocations = {
           geoLocation: {
             lat: 40.7608,
             lng: -73.9773
-          }
+          },
+          terms: []
         },
       ],
       pageInfo: {
-        totalItems: 100
+        totalItems: 2
       }
     },
   }

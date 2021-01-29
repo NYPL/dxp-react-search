@@ -24,6 +24,7 @@ const mocks = [
         limit: 300,
         offset: 0,
         pageNumber: 1,
+        termIds: []
       },
     },
     result: allLocations
@@ -37,7 +38,8 @@ const search = {
   openNow: true,
   limit: 300,
   offset: 0,
-  pageNumber: 1
+  pageNumber: 1,
+  searchFilters: []
 }
 
 afterEach(cleanup);
@@ -71,6 +73,7 @@ describe('Apollo states test', () => {
             limit: 300,
             offset: 0,
             pageNumber: 1,
+            termIds: []
           },
         },
         result: {
