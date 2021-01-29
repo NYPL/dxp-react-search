@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
 import { FiltersQuery as FILTERS_QUERY } from './SearchFilters.gql';
@@ -12,7 +12,7 @@ import {
   deleteFilter
 } from './../../../redux/actions';
 // Components
-import { Button, Link, Modal } from '@nypl/design-system-react-components';
+import { Button, Heading, Link, Modal } from '@nypl/design-system-react-components';
 import Dropdown from './../../shared/Dropdown';
 import Checkbox from './../../shared/Checkbox';
 // Hooks
@@ -27,6 +27,21 @@ function SearchFilters() {
   // Local state
   const [checkedTerms, setCheckedTerms] = useState({});
   const [dropdownIds, setDropdownIds] = useState();
+  // Local state: mobile, modal.
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState();
+	const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  
+  // Set the isMobile state based on screen width.
+  useEffect(() => {
+    if (windowSize >= 600) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
+    }
+  }, [windowSize]);
+
   // Query for data.
   const { loading, error, data } = useQuery(
     FILTERS_QUERY, {}
@@ -46,7 +61,7 @@ function SearchFilters() {
     );
   }
   
-  // Helper function to generate a new state with a property removed immutably.
+  // Generate the next state by removing an object property immutably.
   function newState(object, property) {
     let {[property]: omit, ...rest} = object;
     return rest;
@@ -191,56 +206,176 @@ function SearchFilters() {
     return dropdownChecked;
   }
 
-  return (
-    <div className='search-filters'>
-      {data.allTerms.slice(0, 10).map((vocab) => {
-        return (
-          <Dropdown
-            key={vocab.id}
-            id={vocab.id}
-            label={setDropdownLabel(vocab, searchFilters)}
-            checked={setDropdownCheckedProp(vocab.id)}
-            onChange={(e) => onChangeDropdown(vocab.id, e)}
-          >
-            {vocab.terms.slice(0, 300).map((term) => {
-              return (
-                <div key={term.id} className="term">
-                  <Checkbox
-                    id={term.id}
-                    name={term.name}
-                    checked={setFilterCheckedProp(vocab.id, term.id) || false}
-                    onChange={(e) => onChangeFilters(vocab.id, e)}
-                  />
-                </div>
-              );
-            })}
-            <div 
-              className="dropdown__content-buttons"
-              id={vocab.id}
-            >
-              <Button
-                buttonType="link"
-                id={`button-clear-${vocab.id}`}
-                mouseDown={false}
-                type="button"
-                onClick={(e) => onClickClear(vocab.id, e)}
-              >
-                Clear
-              </Button>
-              <Button
-                buttonType="filled"
-                id={`button-save-${vocab.id}`}
-                mouseDown={false}
-                type="button"
-                onClick={(e) => onSaveFilters(vocab.id, e)}
-              >
-                Apply Filters
-              </Button>
+  function onClearAllFilters(event) {
+    // Clear the redux state.
+    dispatch(setFilters({
+      searchFilters: []
+    }));
+    // Close modal
+    setIsModalOpen(false);
+  }
+
+  function onSaveAllFilters(event) {
+    // Save the local state into redux.
+    dispatch(setFilters({
+      searchFilters: {
+        ...searchFilters,
+        ...checkedTerms
+      }
+    }));
+    // Close modal
+    setIsModalOpen(false);
+  }
+
+  function DropdownMobile(props) {
+    const { vocab } = props;
+    return (
+      <Dropdown
+        key={vocab.id}
+        id={vocab.id}
+        label={setDropdownLabel(vocab, searchFilters)}
+        checked={setDropdownCheckedProp(vocab.id)}
+        onChange={(e) => onChangeDropdown(vocab.id, e)}
+      >
+        {vocab.terms.map((term) => {
+          return (
+            <div key={term.id} className="term">
+              <Checkbox
+                id={term.id}
+                name={term.name}
+                checked={setFilterCheckedProp(vocab.id, term.id) || false}
+                onChange={(e) => onChangeFilters(vocab.id, e)}
+              />
             </div>
-          </Dropdown>
-        )
-      })}
-    </div>
+          );
+        })}
+      </Dropdown>
+    );
+  }
+
+  function DropdownDesktop(props) {
+    const { vocab } = props;
+    return (
+      <Dropdown
+        key={vocab.id}
+        id={vocab.id}
+        label={setDropdownLabel(vocab, searchFilters)}
+        checked={setDropdownCheckedProp(vocab.id)}
+        onChange={(e) => onChangeDropdown(vocab.id, e)}
+      >
+        {vocab.terms.map((term) => {
+          return (
+            <div key={term.id} className="term">
+              <Checkbox
+                id={term.id}
+                name={term.name}
+                checked={setFilterCheckedProp(vocab.id, term.id) || false}
+                onChange={(e) => onChangeFilters(vocab.id, e)}
+              />
+            </div>
+          );
+        })}
+        <div 
+          className="dropdown__content-buttons"
+          id={vocab.id}
+        >
+          <Button
+            buttonType="link"
+            id={`button-clear-${vocab.id}`}
+            mouseDown={false}
+            type="button"
+            onClick={(e) => onClickClear(vocab.id, e)}
+          >
+            Clear
+          </Button>
+          <Button
+            buttonType="filled"
+            id={`button-save-${vocab.id}`}
+            mouseDown={false}
+            type="button"
+            onClick={(e) => onSaveFilters(vocab.id, e)}
+          >
+            Apply Filters
+          </Button>
+        </div>
+      </Dropdown>
+    );
+  }
+
+  return (
+    <Fragment>
+      {isMobile ? (
+        <div className='search-filters'>
+          <Button id="1" onClick={openModal}>
+            Filters
+          </Button>
+          {isModalOpen && (
+            <Modal>
+              <div 
+                className="dropdown__content-mobile-buttons"
+              >
+                <Button
+                  buttonType="link"
+                  id={'button-clear-mobile'}
+                  mouseDown={false}
+                  type="button"
+                  onClick={(e) => onClearAllFilters(e)}
+                >
+                  Go Back
+                </Button>
+                <Button
+                  buttonType="filled"
+                  id={'button-save-mobile'}
+                  mouseDown={false}
+                  type="button"
+                  onClick={(e) => onSaveAllFilters(e)}
+                >
+                  Show Results
+                </Button>
+              </div>
+              {data.allTerms.map((vocab) => {
+                return (
+                  <DropdownMobile vocab={vocab} />
+                )
+              })}
+            </Modal>
+          )}
+        </div>
+      ) : (
+        <div className='search-filters'>
+          <div className='search-filters__group1'>
+            <Heading
+              className="search-filters-group__heading"
+              id="search-filters-group1__heading"
+              level={3}
+              text="Filters"
+            />
+            <div className='search-filters__dropdowns'>
+              {data.allTerms.slice(0, 3).map((vocab) => {
+                return (
+                  <DropdownDesktop vocab={vocab} />
+                )
+              })}
+            </div>
+          </div>
+          <div className='search-filters__group2'>
+            <Heading
+              className="search-filters-group__heading"
+              id="search-filters-group2__heading"
+              level={3}
+              text="Research Filters"
+            />
+            <div className='search-filters__dropdowns'>
+              {data.allTerms.slice(3, 5).map((vocab) => {
+                return (
+                  <DropdownDesktop vocab={vocab} />
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+    </Fragment>
   );
 };
 

@@ -67,30 +67,20 @@
 
   // Search filters
   .search-filters {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    background: white;
-    padding: 1em;
-    @include breakpoint($breakpoint-medium) {
-      position: initial;
-      display: flex; 
-      width: 975px; 
-      margin-top: 1em;
-      background: none;
-      padding: 0;
+    display: flex;
+
+    .search-filters__dropdowns {
+      display: flex;
     }
+
+    h3 {
+      padding-top: 1em;
+    }
+
     .dropdown__content-buttons {
-      display: none;
-      @include breakpoint($breakpoint-medium) {
-        display: flex;
-        float: right;
-        padding: .25em 0;
-      }
+      display: flex;
+      float: right;
+      padding: .25em 0;
     }
   }
 }

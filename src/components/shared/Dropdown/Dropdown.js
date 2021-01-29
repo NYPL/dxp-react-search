@@ -22,7 +22,7 @@ function Dropdown(props) {
         htmlFor={`dropdown-${props.id}`}
         className="dropdown__label"
       >
-        {props.label}
+        <span className="dropdown-label">{props.label}</span>
         <Icon
           decorative={true}
           name="minus"

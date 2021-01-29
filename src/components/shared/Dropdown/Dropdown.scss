@@ -2,7 +2,11 @@
   border: 1px solid gainsboro;
   color: inherit;
   width: 100%;
-  margin-right: .5em;
+  @include breakpoint($breakpoint-medium) {
+    width: fit-content;
+    min-width: 175px;
+    margin-right: 2em;
+  }
 
   &__content {
     display: none;
@@ -32,6 +36,10 @@
     cursor: pointer;
     font-weight: 500;
     justify-content: space-between;
+
+    span.dropdown-label {
+      margin-right: 1em;
+    }
 
     .icon--minus {
       display: none;

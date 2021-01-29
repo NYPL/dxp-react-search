@@ -147,7 +147,6 @@ function SearchForm() {
             Open Now
           </label>
         </div>
-        <h3 style={{display: "flex", width: "975px", marginTop: "1em"}}>Filters</h3>
         <SearchFilters />
       </form>
     </div>
