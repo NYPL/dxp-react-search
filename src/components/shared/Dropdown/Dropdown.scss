@@ -1,5 +1,5 @@
 .dropdown {
-  border: 1px solid gainsboro;
+  border: 1px solid $gray-light;
   color: inherit;
   width: 100%;
   @include breakpoint($breakpoint-medium) {
@@ -16,26 +16,18 @@
 
   &__label {
     /*@include button--outline;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-    justify-content: space-between;
     */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: .5em;
     border-radius: 2px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    text-decoration: none;
-    background-color: white;
-    border: 1px solid gainsboro;
-    color: inherit;
-    align-items: center;
     border: none;
+    background-color: $white;
+    color: inherit;
     cursor: pointer;
     font-weight: 500;
-    justify-content: space-between;
+    text-decoration: none;
 
     span.dropdown-label {
       margin-right: 1em;
@@ -46,7 +38,7 @@
     }
 
     &:hover {
-      background-color: whitesmoke;
+      background-color: $gray-light;
     }
   }
 
@@ -67,8 +59,8 @@
       ~ .dropdown__content {
         display: block;
         min-width: 100%;
-        background: white;
-        border: 1px solid black;
+        background: $white;
+        border: 1px solid $black;
         @include breakpoint($breakpoint-medium) {
           position: absolute;
           display: inline-block;
