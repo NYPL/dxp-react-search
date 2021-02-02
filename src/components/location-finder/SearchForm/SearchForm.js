@@ -18,7 +18,7 @@ import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components
 import SearchAutoSuggest from './../SearchAutoSuggest';
-import * as DS from '@nypl/design-system-react-components';
+import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
 import SearchFilters from './SearchFilters';
 // Geocode
 import Geocode from './../../../utils/googleGeocode';
@@ -114,13 +114,13 @@ function SearchForm() {
         aria-label='Find your library'
         onSubmit={handleSubmit}>
         <SearchAutoSuggest />
-        <DS.Button
+        <Button
           buttonType="filled"
           id="button"
           mouseDown={false}
           type="submit"
         >
-          <DS.Icon
+          <Icon
             decorative
             modifiers={[
               'small',
@@ -129,8 +129,8 @@ function SearchForm() {
             name="search"
           />
           Search
-        </DS.Button>
-        <DS.Checkbox
+        </Button>
+        <Checkbox
           name="isOpenNow"
           checkboxId="checkbox"
           labelOptions={{
