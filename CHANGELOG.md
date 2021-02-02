@@ -5,6 +5,7 @@
 -----------------------------------------------
 * Updated to latest nypl design system.
 * Updated to new pagination component.
+* SearchForm now uses DS Checkbox component, instead of custom checkbox.
 
 ### v0.1.6 [2021-01-12] Location Finder Improvements
 -----------------------------------------------
