@@ -17,7 +17,7 @@
 	}
 }
 
-.right-rail {
+.nypl-ds .right-rail {
   @include space-stack-s;
 
   @include breakpoint($breakpoint-medium) {

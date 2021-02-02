@@ -1,6 +1,11 @@
 ## CHANGES
 -----------
 
+### v0.2.0 [?] Location Finder Filters
+-----------------------------------------------
+* Updated to latest nypl design system.
+* Updated to new pagination component.
+
 ### v0.1.6 [2021-01-12] Location Finder Improvements
 -----------------------------------------------
 * Added tests for Search related components.
