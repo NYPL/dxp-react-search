@@ -12,9 +12,16 @@ import {
   deleteFilter
 } from './../../../redux/actions';
 // Components
-import { Button, Heading, Link, Modal } from '@nypl/design-system-react-components';
+import { 
+  Button, 
+  Checkbox, 
+  Heading, 
+  Icon, 
+  Modal, 
+  SkeletonLoader 
+} from '@nypl/design-system-react-components';
 import Dropdown from './../../shared/Dropdown';
-import Checkbox from './../../shared/Checkbox';
+//import Checkbox from './../../shared/Checkbox';
 // Hooks
 import useWindowSize from './../../../hooks/useWindowSize';
 
@@ -57,7 +64,7 @@ function SearchFilters() {
   // Loading state,
   if (loading || !data) {
     return (
-      <div>Loading filters!</div>
+      <SkeletonLoader />
     );
   }
   
@@ -225,6 +232,8 @@ function SearchFilters() {
     }));
     // Close modal
     setIsModalOpen(false);
+    
+    // @TODO Scroll to locations results.
   }
 
   function DropdownMobile(props) {
@@ -241,7 +250,10 @@ function SearchFilters() {
           return (
             <div key={term.id} className="term">
               <Checkbox
-                id={term.id}
+                checkboxId={term.id}
+                labelOptions={{
+                  labelContent: <>{term.name}</>
+                }}
                 name={term.name}
                 checked={setFilterCheckedProp(vocab.id, term.id) || false}
                 onChange={(e) => onChangeFilters(vocab.id, e)}
@@ -267,7 +279,10 @@ function SearchFilters() {
           return (
             <div key={term.id} className="term">
               <Checkbox
-                id={term.id}
+                checkboxId={term.id}
+                labelOptions={{
+                  labelContent: <>{term.name}</>
+                }}
                 name={term.name}
                 checked={setFilterCheckedProp(vocab.id, term.id) || false}
                 onChange={(e) => onChangeFilters(vocab.id, e)}
@@ -305,27 +320,39 @@ function SearchFilters() {
   return (
     <Fragment>
       {isMobile ? (
-        <div className='search-filters'>
-          <Button id="1" onClick={openModal}>
+        <div className='search-filters__mobile'>
+          <Button 
+            id="1" 
+            onClick={openModal}
+            buttonType='outline'
+          >
             Filters
           </Button>
           {isModalOpen && (
             <Modal>
               <div 
-                className="dropdown__content-mobile-buttons"
+                className="dropdown__content-buttons"
               >
                 <Button
                   buttonType="link"
-                  id={'button-clear-mobile'}
+                  id={'button-clear-all'}
                   mouseDown={false}
                   type="button"
                   onClick={(e) => onClearAllFilters(e)}
                 >
+                  <Icon
+                    decorative
+                    iconRotation="rotate-90"
+                    modifiers={[
+                      'small'
+                    ]}
+                    name="arrow"
+                  />
                   Go Back
                 </Button>
                 <Button
                   buttonType="filled"
-                  id={'button-save-mobile'}
+                  id={'button-save-all'}
                   mouseDown={false}
                   type="button"
                   onClick={(e) => onSaveAllFilters(e)}
@@ -333,6 +360,11 @@ function SearchFilters() {
                   Show Results
                 </Button>
               </div>
+              <Heading
+                id="search-filters__mobile-heading"
+                level={3}
+                text="Filters"
+              />
               {data.allTerms.map((vocab) => {
                 return (
                   <DropdownMobile vocab={vocab} />

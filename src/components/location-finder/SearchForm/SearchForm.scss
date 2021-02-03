@@ -83,4 +83,19 @@
       padding: .25em 0;
     }
   }
+
+  // Search filters mobile
+  .search-filters__mobile {
+    .dropdown {
+      margin: .5em 0;
+    }
+    .dropdown__content-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      #button-clear-all {
+        margin-left: -10px;
+      }
+    }
+  }
 }

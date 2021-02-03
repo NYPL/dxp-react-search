@@ -27,6 +27,7 @@
     color: inherit;
     cursor: pointer;
     font-weight: 500;
+    font-size: 14px;
     text-decoration: none;
 
     span.dropdown-label {
@@ -60,7 +61,9 @@
         display: block;
         min-width: 100%;
         background: $white;
-        border: 1px solid $black;
+        @include breakpoint($breakpoint-medium) {
+          border: 1px solid $black;
+        }
         @include breakpoint($breakpoint-medium) {
           position: absolute;
           display: inline-block;
