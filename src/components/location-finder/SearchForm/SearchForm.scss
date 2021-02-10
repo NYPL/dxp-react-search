@@ -21,7 +21,7 @@
   .checkbox {
     width: 100%;
     align-items: center;
-    margin-top: $space-s;
+    //margin-top: $space-s;
 
     @include breakpoint($breakpoint-large) {
       width: auto;
@@ -66,6 +66,22 @@
   }
 
   // Search filters
+
+  .checkbox label {
+    font-weight: 300;
+  }
+
+  .dropdown__content {
+    padding: 0 1em 1em 1em;
+    @include breakpoint($breakpoint-medium) {
+      padding: 1em;
+    }
+
+    .checkbox {
+      padding: $space-xxs 0;
+    }
+  }
+
   .search-filters {
     display: flex;
 
@@ -84,8 +100,27 @@
     }
   }
 
+  .search__form-filters {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 1.5em 0 0 0;
+    //
+    .open-now {
+      margin: 0 4.5em;
+    }
+    @include breakpoint($breakpoint-medium) {
+      display: contents;
+      .open-now {
+        margin: initial;
+      }
+    }
+  }
+
   // Search filters mobile
   .search-filters__mobile {
+    #search-filters__mobile-filters-button {
+      min-width: 140px;
+    }
     .dropdown {
       margin: .5em 0;
     }

@@ -130,20 +130,23 @@ function SearchForm() {
           />
           Search
         </Button>
-        <Checkbox
-          name="isOpenNow"
-          checkboxId="checkbox"
-          labelOptions={{
-            id: 'label',
-            labelContent: 'Open Now'
-          }}
-          attributes={{
-            'aria-label': "Checking this box will update the results"
-          }}
-          checked={openNow}
-          onChange={onChangeOpenNow}
-        />
-        <SearchFilters />
+        <div className="search__form-filters">
+          <Checkbox
+            name="isOpenNow"
+            checkboxId="checkbox-open-now"
+            className="open-now"
+            labelOptions={{
+              id: 'label',
+              labelContent: 'Open Now'
+            }}
+            attributes={{
+              'aria-label': "Checking this box will update the results"
+            }}
+            checked={openNow}
+            onChange={onChangeOpenNow}
+          />
+          <SearchFilters />
+        </div>
       </form>
     </div>
   );

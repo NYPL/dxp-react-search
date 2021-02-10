@@ -32,6 +32,7 @@
 
     span.dropdown-label {
       margin-right: 1em;
+      padding-left: .5em;
     }
 
     .icon--minus {
@@ -69,6 +70,11 @@
           display: inline-block;
           z-index: 1;
           min-width: 275px;
+          
+          // Move items to columns if more than x items.
+          display: grid;
+          grid-template-rows: repeat(30, min-content);
+          grid-auto-flow: column;
         }
       }
     }

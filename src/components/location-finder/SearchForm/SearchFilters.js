@@ -322,7 +322,7 @@ function SearchFilters() {
       {isMobile ? (
         <div className='search-filters__mobile'>
           <Button 
-            id="1" 
+            id='search-filters__mobile-filters-button' 
             onClick={openModal}
             buttonType='outline'
           >
