@@ -36,14 +36,12 @@ function LocationHours({ open, todayHoursStart, todayHoursEnd }) {
           />
           Today's Hours:
           <div className='location__hours-hours'>
-            { formatHours(todayHoursStart, todayHoursEnd) }
+            {formatHours(todayHoursStart, todayHoursEnd)}
           </div>
         </div>
       ) : (
-        <div className='location__hours-status'>
-          Location is temporarily closed
-        </div>
-      )}
+          <DS.StatusBadge level={"medium"} statusBadgeText={"Location is temporarily closed"} />
+        )}
     </Fragment>
   );
 }
