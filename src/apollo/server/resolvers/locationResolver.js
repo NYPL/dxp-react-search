@@ -184,7 +184,7 @@ const locationResolver = {
     },
   },
   Location: {
-    id: location => location.slug,
+    id: location => location.slug.replace('/', '-'),
     name: location => location.name,
     status: location => location.slug,
     address_line1: location => location.street_address,
