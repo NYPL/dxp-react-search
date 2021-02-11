@@ -10,7 +10,7 @@ import {
 import { 
   setFilters,
   deleteFilter
-} from './../../../redux/actions';
+} from '../../../redux/actions';
 // Components
 import { 
   Button, 
@@ -20,10 +20,10 @@ import {
   Modal, 
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
-import Dropdown from './../../shared/Dropdown';
+import Dropdown from '../../shared/Dropdown';
 //import Checkbox from './../../shared/Checkbox';
 // Hooks
-import useWindowSize from './../../../hooks/useWindowSize';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 function SearchFilters() {
   // Hooks

@@ -19,7 +19,7 @@ import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components
 import SearchAutoSuggest from './../SearchAutoSuggest';
 import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
-import SearchFilters from './SearchFilters';
+import SearchFilters from './../SearchFilters';
 // Geocode
 import Geocode from './../../../utils/googleGeocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
