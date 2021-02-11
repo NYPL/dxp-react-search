@@ -59,17 +59,10 @@
     @include space-stack-xxs;
   }
 
-  // @TODO this will probs become a DS component?
+  // Status badge.
   .location__hours-status {
-    @include type-scale(-1);
-
     width: fit-content;
-    border-radius: 4px;
-    background-color: $nypl-yellow-light;
     padding: $space-xxs $space*.625;
     @include space-stack-xxs;
-    color: $black;
-    font-weight: 300;
-    font-style: italic;
   }
 }

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import * as DS from '@nypl/design-system-react-components';
+import { Icon, StatusBadge } from '@nypl/design-system-react-components';
 
 function LocationHours({ open, todayHoursStart, todayHoursEnd }) {
   // Convert hours to 12 hour time format
@@ -30,7 +30,7 @@ function LocationHours({ open, todayHoursStart, todayHoursEnd }) {
     <Fragment>
       {open ? (
         <div className='location__hours'>
-          <DS.Icon
+          <Icon
             decorative
             name="clock"
           />
@@ -40,7 +40,11 @@ function LocationHours({ open, todayHoursStart, todayHoursEnd }) {
           </div>
         </div>
       ) : (
-          <DS.StatusBadge level={"medium"} statusBadgeText={"Location is temporarily closed"} />
+          <StatusBadge 
+            level={"medium"} 
+            statusBadgeText={"Location is temporarily closed"}
+            className={'location__hours-status'}
+          />
         )}
     </Fragment>
   );
