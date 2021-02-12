@@ -6,6 +6,7 @@ import { Icon } from '@nypl/design-system-react-components';
   -----
   id
   label
+  openDirection
   children
 */
 function Dropdown(props) {

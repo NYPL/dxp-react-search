@@ -10,11 +10,18 @@
     }
   }
 
+  .dropdown__content-inner {
+    max-height: 300px;
+    overflow: scroll;
+  }
+
   .search-filters {
     display: flex;
 
     .search-filters__dropdowns {
       display: flex;
+
+
     }
 
     h3 {
@@ -41,6 +48,12 @@
       .open-now {
         margin: initial;
       }
+    }
+  }
+
+  .search-filters__group2 .search-filters__dropdowns .dropdown:last-child {
+    .dropdown__content {
+      right: 0;
     }
   }
 

@@ -275,21 +275,23 @@ function SearchFilters() {
         checked={setDropdownCheckedProp(vocab.id)}
         onChange={(e) => onChangeDropdown(vocab.id, e)}
       >
-        {vocab.terms.map((term) => {
-          return (
-            <div key={term.id} className="term">
-              <Checkbox
-                checkboxId={term.id}
-                labelOptions={{
-                  labelContent: <>{term.name}</>
-                }}
-                name={term.name}
-                checked={setFilterCheckedProp(vocab.id, term.id) || false}
-                onChange={(e) => onChangeFilters(vocab.id, e)}
-              />
-            </div>
-          );
-        })}
+        <div className="dropdown__content-inner">
+          {vocab.terms.map((term) => {
+            return (
+              <div key={term.id} className="term">
+                <Checkbox
+                  checkboxId={term.id}
+                  labelOptions={{
+                    labelContent: <>{term.name}</>
+                  }}
+                  name={term.name}
+                  checked={setFilterCheckedProp(vocab.id, term.id) || false}
+                  onChange={(e) => onChangeFilters(vocab.id, e)}
+                />
+              </div>
+            );
+          })}
+        </div>
         <div 
           className="dropdown__content-buttons"
           id={vocab.id}
