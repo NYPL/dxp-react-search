@@ -15,6 +15,7 @@ import sortByName from './../../../utils/sortByName';
 import setTodaysHours from './../../../utils/setTodaysHours';
 import paginateResults from './../../../utils/paginateResults';
 import filterByTerms from './../../../utils/filterByTerms';
+import addLocationTerms from './../../../utils/addLocationTerms';
 
 // Create a dayjs date object, using default timezone.
 // @see https://github.com/iamkun/dayjs/issues/1227
@@ -31,94 +32,7 @@ const locationResolver = {
 
       // Add in hardcoded taxonomy data to each location.
       // @TODO See if greg can just add this to the refinery output for each location.
-      // if not, move this to a utils function.
-      allLocations.map(location => {
-        // Boroughs.
-        switch (location.locality) {
-          case 'New York':
-            const boroughsManhattan = {
-              id: 'filter-boroughs',
-              name: 'Borough',
-              terms: [
-                {
-                  id: 'manhattan',
-                  name: 'New York'
-                }
-              ]
-            };
-            location.terms.push(boroughsManhattan);
-            break;
-          case 'Bronx':
-            const boroughsBronx = {
-              id: 'filter-boroughs',
-              name: 'Borough',
-              terms: [
-                {
-                  id: 'bronx',
-                  name: 'Bronx',
-                }
-              ]
-            };
-            location.terms.push(boroughsBronx);
-            break;
-          case 'Staten Island':
-            const boroughsStatenIsland = {
-              id: 'filter-boroughs',
-              name: 'Borough',
-              terms: [
-                {
-                  id: 'statenisland',
-                  name: 'Staten Island'
-                }
-              ]
-            };
-            location.terms.push(boroughsStatenIsland);
-            break;
-        }
-
-        // Accessibility
-        switch (location.access) {
-          case 'Fully Accessible':
-            const accessibilityFull = {
-              id: 'filter-accessibility',
-              name: 'Accessibility',
-              terms: [
-                {
-                  id: 'fullaccess',
-                  name: 'Fully accessible'
-                },
-              ]
-            };
-            location.terms.push(accessibilityFull);
-            break;
-          case 'Partially Accessible':
-            const accessibilityPartial = {
-              id: 'filter-accessibility',
-              name: 'Accessibility',
-              terms: [
-                {
-                  id: 'partialaccess',
-                  name: 'Partially accessible'
-                },
-              ]
-            };
-            location.terms.push(accessibilityPartial);
-            break;
-          case 'Not Accessible':
-            const accessibilityNone = {
-              id: 'filter-accessibility',
-              name: 'Accessibility',
-              terms: [
-                {
-                  id: 'noaccess',
-                  name: 'Not accessible'
-                },
-              ]
-            };
-            location.terms.push(accessibilityNone);
-            break;
-        }
-      });
+      addLocationTerms(allLocations);
       
       // Filter by openNow
       if (
