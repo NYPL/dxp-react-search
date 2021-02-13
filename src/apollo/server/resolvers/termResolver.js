@@ -6,12 +6,20 @@ const termResolver = {
   },
   Vocab: {
     id: vocab => {
-      return vocab.id;
+      return vocab.uuid;
     },
     name: vocab => {
       return vocab.name;
     },
   },
+  Term: {
+    id: term => {
+      return term.uuid;
+    },
+    name: term => {
+      return term.name;
+    }
+  }
 }
 
 export default termResolver;

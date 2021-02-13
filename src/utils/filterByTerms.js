@@ -6,7 +6,6 @@
  * @return {array} a reduced array of locations that are open now.
  */
 function filterByTerms(locations, filterGroups) {
-  console.log(filterGroups);
   return locations.reduce((accumulator, location) => {
     // 
     let locationTerms = {};
@@ -15,10 +14,10 @@ function filterByTerms(locations, filterGroups) {
       let locationTerm = [];
       // Iterate over each vocabulary's terms
       vocab.terms.forEach((term) => {
-        locationTerm.push(term.id);
+        locationTerm.push(term.uuid);
       });
       // Build the locationTerms object.
-      locationTerms[vocab.id] = {
+      locationTerms[vocab.uuid] = {
         terms: locationTerm
       };
     });
@@ -53,7 +52,7 @@ function filterByTerms(locations, filterGroups) {
           );
           conditions.push(andGroupStatus);
         } else {
-          //console.log(filterGroup.id);
+          //console.log(filterGroup.uuid);
           // @TODO not sure if we need this or if it should be done differently,
           // will have to test more after we have real data.
           // Add a false condition. there's a filter group with terms that returns no location.

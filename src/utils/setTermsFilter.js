@@ -1,5 +1,5 @@
 //
-export const BOROUGHS_UUID = 'filter-boroughs';
+export const BOROUGHS_UUID = 'filter-borough';
 export const ACCESSIBILITY_UUID = 'filter-accessibility';
 export const AMENITIES_UUID = 'filter-amenities';
 export const SUBJECTS_UUID = 'filter-subjects';
@@ -16,6 +16,7 @@ function setTermsFilter(stateObject) {
   // Add the operator
   let operator;
   for (let [key, value] of Object.entries(stateObject)) {
+    console.log(key);
     switch (key) {
       case BOROUGHS_UUID:
       case ACCESSIBILITY_UUID:
