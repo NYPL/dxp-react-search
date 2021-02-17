@@ -23,7 +23,7 @@ function Location({ location }) {
   const getDirectionsLink = 'http://maps.google.com/maps?f=q&hl=en&saddr=&daddr=' + encodedAddress;
 
   // Location link
-  const locationLink = `https://www.nypl.org/locations/${location.id}`;
+  //const locationLink = `https://www.nypl.org/locations/${location.id}`;
 
   function onClickViewOnMap(e) {
     e.preventDefault();
@@ -43,6 +43,29 @@ function Location({ location }) {
     }
   }
 
+  function locationLink(location) {
+    let locationUrl;
+    switch(location.contentType) {
+      // Library
+      case 'hub':
+      case 'neighborhood':
+      case 'research':
+        locationUrl = `https://www.nypl.org/locations/${location.slug}`;
+        break;
+      // Center
+      // Pattern: /locations/<parent_slug>/<slug>
+      case 'center':
+        locationUrl = `https://www.nypl.org/locations/${location.slug}`;
+        break;
+      // Division
+      // Pattern: /locations/divisions/<slug>
+      case 'division':
+        locationUrl = `https://www.nypl.org/locations/divisions/${location.slug}`;
+
+    }
+    return locationUrl;
+  }
+
   return (
     <div className='location'>
       <DS.Heading
@@ -50,7 +73,7 @@ function Location({ location }) {
         level={2}
         className='location__name'
       >
-        <a href={locationLink}>
+        <a href={locationLink(location)}>
           {location.name}
         </a>
       </DS.Heading>

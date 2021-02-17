@@ -22,6 +22,8 @@ query LocationsQuery(
     locations {
       id
       name
+      contentType
+      slug
       status
       address_line1
       address_line2
