@@ -24,6 +24,7 @@ query LocationsQuery(
       name
       contentType
       slug
+      url
       status
       address_line1
       address_line2

@@ -6,6 +6,7 @@ export const typeDefs = gql`
     name: String!
     contentType: String!
     slug: String!
+    url: String!
     status: String!
     address_line1: String
     address_line2: String

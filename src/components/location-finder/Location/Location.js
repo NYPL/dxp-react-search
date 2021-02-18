@@ -43,29 +43,6 @@ function Location({ location }) {
     }
   }
 
-  function locationLink(location) {
-    let locationUrl;
-    switch(location.contentType) {
-      // Library
-      case 'hub':
-      case 'neighborhood':
-      case 'research':
-        locationUrl = `https://www.nypl.org/locations/${location.slug}`;
-        break;
-      // Center
-      // Pattern: /locations/<parent_slug>/<slug>
-      case 'center':
-        locationUrl = `https://www.nypl.org/locations/${location.slug}`;
-        break;
-      // Division
-      // Pattern: /locations/divisions/<slug>
-      case 'division':
-        locationUrl = `https://www.nypl.org/locations/divisions/${location.slug}`;
-
-    }
-    return locationUrl;
-  }
-
   return (
     <div className='location'>
       <DS.Heading
@@ -73,7 +50,7 @@ function Location({ location }) {
         level={2}
         className='location__name'
       >
-        <a href={locationLink(location)}>
+        <a href={location.url}>
           {location.name}
         </a>
       </DS.Heading>

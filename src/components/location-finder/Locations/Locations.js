@@ -46,7 +46,6 @@ function Locations() {
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
   // Convert the searchFilters to the object format needed by gql.
   const termIds = setTermsFilter(searchFilters);
-  console.log(termIds);
 
   // Query for data.
   const { loading, error, data } = useQuery(

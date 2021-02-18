@@ -41,7 +41,6 @@ const locationResolver = {
         && args.filter.openNow
       ) {
         console.log('openNow!');
-        //console.log(args.filter.openNow);        
         // Check if we've prev modified the results.
         if (typeof results !== "undefined") {
           results = filterByOpenNow(now, results).sort(sortByName);
@@ -76,6 +75,7 @@ const locationResolver = {
         && args.sortByDistance.originLng
       ) {
         console.log('sortByDistance');
+
         if (typeof results !== "undefined") {
           results = sortByDistance(args.sortByDistance, results);
         } else {
@@ -99,8 +99,45 @@ const locationResolver = {
   Location: {
     id: location => location.slug.replace('/', '-'),
     name: location => location.name,
-    contentType: location => location.type,
+    contentType: location => {
+      let contentType;
+      switch (location.type) {
+        // Library
+        case 'hub':
+        case 'neighborhood':
+        case 'research':
+          contentType = 'library';
+          break;
+        // Center, Division
+        case 'center':
+        case 'division':
+          contentType = location.type;
+          break;
+      }
+      return contentType;
+    },
     slug: location => location.slug,
+    url: location => {
+      let url;
+      switch (location.type) {
+        // Library
+        case 'hub':
+        case 'neighborhood':
+        case 'research':
+          url = `https://www.nypl.org/locations/${location.slug}`
+          break;
+        case 'center':
+          // Pattern: /locations/<parent_slug>/<slug>
+          // @TODO Needs work: https://jira.nypl.org/browse/RENO-2065
+          url = `https://www.nypl.org/locations/${location.slug}`;
+          break;
+        case 'division':
+          // Pattern: /locations/divisions/<slug>
+          url = `https://www.nypl.org/locations/divisions/${location.slug}`;
+          break;
+      }
+      return url;
+    },
     status: location => location.slug,
     address_line1: location => location.street_address,
     address_line2: location => location.street_address,
