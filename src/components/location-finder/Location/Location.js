@@ -23,7 +23,7 @@ function Location({ location }) {
   const getDirectionsLink = 'http://maps.google.com/maps?f=q&hl=en&saddr=&daddr=' + encodedAddress;
 
   // Location link
-  const locationLink = `https://www.nypl.org/locations/${location.id}`;
+  //const locationLink = `https://www.nypl.org/locations/${location.id}`;
 
   function onClickViewOnMap(e) {
     e.preventDefault();
@@ -50,7 +50,7 @@ function Location({ location }) {
         level={2}
         className='location__name'
       >
-        <a href={locationLink}>
+        <a href={location.url}>
           {location.name}
         </a>
       </DS.Heading>

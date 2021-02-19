@@ -4,6 +4,9 @@ export const typeDefs = gql`
   type Location {
     id: ID!
     name: String!
+    contentType: String!
+    slug: String!
+    url: String!
     status: String!
     address_line1: String
     address_line2: String

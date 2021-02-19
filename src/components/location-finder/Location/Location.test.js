@@ -11,6 +11,7 @@ expect.extend(toHaveNoViolations);
 const location = {
   id: 'schwarzman',
   name: 'Stephen A. Schwarzman Building',
+  url: 'https://www.nypl.org/locations/schwarzman',
   address_line1: '476 Fifth Avenue (42nd St and Fifth Ave)',
   address_line2: '476 Fifth Avenue (42nd St and Fifth Ave)',
   locality: 'New York',

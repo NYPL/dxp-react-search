@@ -16,20 +16,30 @@ class RefineryApi extends RESTDataSource {
     //const divisionsResponse = await this.get('/locations/v1.0/divisions');
     
     // Promise approach.
-    const [librariesResponse, divisionsResponse] = await Promise.all([
+    const [librariesResponse, divisionsResponse, centersResponse] = await Promise.all([
       this.get('/locations/v1.0/locations'),
       this.get('/locations/v1.0/divisions'),
+      this.get('/locations/v1.0/centers'),
     ]);
 
-    if (Array.isArray(librariesResponse.locations) && Array.isArray(divisionsResponse.divisions)) {
-      return [...divisionsResponse.divisions, ...librariesResponse.locations];
+    if (
+      Array.isArray(librariesResponse.locations) 
+      && Array.isArray(divisionsResponse.divisions)
+      && Array.isArray(centersResponse.centers)
+    ) {
+      return [
+        ...librariesResponse.locations, 
+        ...divisionsResponse.divisions, 
+        ...centersResponse.centers
+      ];
     } else {
       return [];
     }
   }
 
-  getAllTerms() {
-    console.log(filters.data);
+  async getAllTerms() {
+    const filters = await this.get('/locations/v1.0/searchfilters');
+    //console.log(filtersTest.data);
     return filters.data.filters;
   }
 }

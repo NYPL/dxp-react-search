@@ -39,6 +39,7 @@ const search = {
   limit: 300,
   offset: 0,
   pageNumber: 1,
+  pageCount: 1,
   searchFilters: []
 }
 
@@ -105,7 +106,7 @@ describe('Apollo states test', () => {
     );
 
     // Wait for content
-    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 4)));    
     // Check for data
     expect(screen.getByText(/125th Street Library/)).toBeInTheDocument();
     expect(screen.getByText(/53rd Street Library/)).toBeInTheDocument();
@@ -121,7 +122,6 @@ describe('Apollo states test', () => {
     );
     // Wait for content
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
-
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

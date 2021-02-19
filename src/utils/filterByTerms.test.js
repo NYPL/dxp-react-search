@@ -2,7 +2,7 @@ import filterByTerms from './filterByTerms';
 
 const filterGroupsMock = [
   {
-    id: "filter-boroughs",
+    id: "filter-borough",
     terms: ["bronx", "statenisland"],
     operator: "OR"
   },
@@ -23,21 +23,21 @@ const locationsMock = [
     name: "Library 1",
     terms: [
       {
-        id: "filter-boroughs",
+        uuid: "filter-borough",
         name: "Borough",
         terms: [
           {
-            id: "statenisland",
+            uuid: "statenisland",
             name: "Staten Island"
           }
         ]
       },
       {
-        id: "filter-accessibility",
+        uuid: "filter-accessibility",
         name: "Accessibility",
         terms: [
           {
-            id: "partialaccess",
+            uuid: "partialaccess",
             name: "Partial Access"
           }
         ]
@@ -48,35 +48,35 @@ const locationsMock = [
     name: "Library 2",
     terms: [
       {
-        id: "filter-boroughs",
+        uuid: "filter-borough",
         name: "Borough",
         terms: [
           {
-            id: "bronx",
+            uuid: "bronx",
             name: "Bronx"
           }
         ]
       },
       {
-        id: "filter-accessibility",
+        uuid: "filter-accessibility",
         name: "Accessibility",
         terms: [
           {
-            id: "partialaccess",
+            uuid: "partialaccess",
             name: "Partial Access"
           }
         ]
       },
       {
-        id: "filter-amenities",
+        uuid: "filter-amenities",
         name: "Amenities",
         terms: [
           {
-            id: "abcd",
+            uuid: "abcd",
             name: "abcd"
           },
           {
-            id: "1234",
+            uuid: "1234",
             name: "1234"
           }
         ]
