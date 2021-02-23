@@ -60,6 +60,7 @@ export const typeDefs = gql`
   type Term {
     id: ID!
     name: String!
+    children: [Term]
   }
 
   input TermsFilter {

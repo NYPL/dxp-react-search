@@ -38,8 +38,8 @@ class RefineryApi extends RESTDataSource {
   }
 
   async getAllTerms() {
-    const filters = await this.get('/locations/v1.0/searchfilters');
-    //console.log(filtersTest.data);
+    // @Note uncomment this to use refinery data.
+    //const filters = await this.get('/locations/v1.0/searchfilters');
     return filters.data.filters;
   }
 }

@@ -1,7 +1,12 @@
+// Utils
+import setNestedTerms from './../../../utils/setNestedTerms';
+
 const termResolver = {
   Query: {
-    allTerms: (parent, args, { dataSources }) => {
-      return dataSources.refineryApi.getAllTerms();
+    allTerms: async (parent, args, { dataSources }) => {
+      const allTerms = dataSources.refineryApi.getAllTerms();
+      //const allTerms = await dataSources.refineryApi.getAllTerms();
+      return allTerms;
     },
   },
   Vocab: {
@@ -11,6 +16,9 @@ const termResolver = {
     name: vocab => {
       return vocab.name;
     },
+    terms: vocab => {
+      return setNestedTerms(vocab.terms);
+    }
   },
   Term: {
     id: term => {
@@ -18,6 +26,9 @@ const termResolver = {
     },
     name: term => {
       return term.name;
+    },
+    children: term => {
+      return term.children;
     }
   }
 }
