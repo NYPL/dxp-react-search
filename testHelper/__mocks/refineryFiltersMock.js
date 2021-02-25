@@ -466,6 +466,12 @@ const filters = {
             "parent_uuid": "6255cc85-9d24-4c05-bbd6-36542ac8b9d1"
           },
           {
+            "id": 790020202,
+            "uuid": "abcd-12345",
+            "name": "Test Child of Business",
+            "parent_uuid": "018979c6-d57f-42b6-b6a3-f8f4d919f5e8"
+          },
+          {
             "id": 75,
             "uuid": "a3e1aa96-5852-46ff-928e-8e06bb48a142",
             "name": "Brooklyn",

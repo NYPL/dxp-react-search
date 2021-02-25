@@ -5,6 +5,10 @@ query FiltersQuery {
     terms {
       id
       name
+      children {
+        id
+        name
+      }
     }
   }
 }

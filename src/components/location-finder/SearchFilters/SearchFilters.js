@@ -16,7 +16,8 @@ import {
   Button, 
   Checkbox, 
   Heading, 
-  Icon, 
+  Icon,
+  List,
   Modal, 
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
@@ -76,32 +77,39 @@ function SearchFilters() {
   
   // onChange handler for filter checkboxes.
   // Tracks checked items in local state.
-  function onChangeFilters(vocabId, event) {
-    const termId = event.target.id;
-    let termIds;
-     // Check if the tid already exists in the state
-    if (checkedTerms[vocabId] !== undefined) {
-      let termIdExists = checkedTerms[vocabId].terms.indexOf(termId) > -1;
-      // Make a copy of the existing array.
-      termIds = checkedTerms[vocabId].terms.slice();
-      // If termId exists, remove it from the array.
-      if (termIdExists) {
-        termIds = termIds.filter((id) => id != termId);
+  function onChangeFilters(vocabId, event, hasChildren) {
+    if (hasChildren) {
+      console.log('parent term!');
+      console.log(hasChildren)
+      // Don't store in state.
+      // Function to check or uncheck all boxes.
+    } /*else {*/
+      const termId = event.target.id;
+      let termIds;
+      // Check if the tid already exists in the state
+      if (checkedTerms[vocabId] !== undefined) {
+        let termIdExists = checkedTerms[vocabId].terms.indexOf(termId) > -1;
+        // Make a copy of the existing array.
+        termIds = checkedTerms[vocabId].terms.slice();
+        // If termId exists, remove it from the array.
+        if (termIdExists) {
+          termIds = termIds.filter((id) => id != termId);
+        } else {
+          // Add it to the array, but modify the copy, not the original.
+          termIds.push(termId);
+        }
       } else {
-        // Add it to the array, but modify the copy, not the original.
+        termIds = [];
         termIds.push(termId);
       }
-    } else {
-      termIds = [];
-      termIds.push(termId);
-    }
-    // Update local state.
-    setCheckedTerms({
-      ...checkedTerms,
-      [vocabId]: {
-        terms: termIds
-      }
-    });
+      // Update local state.
+      setCheckedTerms({
+        ...checkedTerms,
+        [vocabId]: {
+          terms: termIds
+        }
+      });
+    //}
   }
   
   // Clear the dropdown
@@ -236,6 +244,54 @@ function SearchFilters() {
     // @TODO Scroll to locations results.
   }
 
+  function CheckboxList(props) {
+    const { vocab } = props;
+    return (
+      <List 
+        type='ul' 
+        modifiers={['no-list-styling']}
+      >
+        {vocab.terms.map((term) => {
+          return (
+            <li key={term.id} className="term">
+              <Checkbox
+                checkboxId={term.id}
+                labelOptions={{
+                  labelContent: <>{term.name}</>
+                }}
+                name={term.name}
+                checked={setFilterCheckedProp(vocab.id, term.id) || false}
+                onChange={(e) => onChangeFilters(vocab.id, e, term.children)}
+              />
+                {term.children &&
+                  <List 
+                    type='ul' 
+                    modifiers={['no-list-styling']}
+                  >
+                    {term.children.map((childTerm) => {
+                      return (
+                        <li key={childTerm.id} className="term-child">
+                          <Checkbox
+                            checkboxId={childTerm.id}
+                            labelOptions={{
+                              labelContent: <>{childTerm.name}</>
+                            }}
+                            name={childTerm.name}
+                            checked={setFilterCheckedProp(vocab.id, childTerm.id) || false}
+                            onChange={(e) => onChangeFilters(vocab.id, e)}
+                          />
+                        </li>
+                      )
+                    })}
+                  </List>
+                }
+            </li>
+          );
+        })}
+      </List>
+    )
+  }
+
   function DropdownMobile(props) {
     const { vocab } = props;
     return (
@@ -246,21 +302,7 @@ function SearchFilters() {
         checked={setDropdownCheckedProp(vocab.id)}
         onChange={(e) => onChangeDropdown(vocab.id, e)}
       >
-        {vocab.terms.map((term) => {
-          return (
-            <div key={term.id} className="term">
-              <Checkbox
-                checkboxId={term.id}
-                labelOptions={{
-                  labelContent: <>{term.name}</>
-                }}
-                name={term.name}
-                checked={setFilterCheckedProp(vocab.id, term.id) || false}
-                onChange={(e) => onChangeFilters(vocab.id, e)}
-              />
-            </div>
-          );
-        })}
+        <CheckboxList vocab={vocab} />
       </Dropdown>
     );
   }
@@ -276,21 +318,7 @@ function SearchFilters() {
         onChange={(e) => onChangeDropdown(vocab.id, e)}
       >
         <div className="dropdown__content-inner">
-          {vocab.terms.map((term) => {
-            return (
-              <div key={term.id} className="term">
-                <Checkbox
-                  checkboxId={term.id}
-                  labelOptions={{
-                    labelContent: <>{term.name}</>
-                  }}
-                  name={term.name}
-                  checked={setFilterCheckedProp(vocab.id, term.id) || false}
-                  onChange={(e) => onChangeFilters(vocab.id, e)}
-                />
-              </div>
-            );
-          })}
+          <CheckboxList vocab={vocab} />
         </div>
         <div 
           className="dropdown__content-buttons"
