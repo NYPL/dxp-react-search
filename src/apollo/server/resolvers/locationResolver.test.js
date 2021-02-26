@@ -5,7 +5,7 @@ jest.mock('./../../../utils/filterByTerms', () => jest.fn());
 // Mock filterByOpenNow
 import filterByOpenNow from './../../../utils/filterByOpenNow';
 jest.mock('./../../../utils/filterByOpenNow', () => jest.fn());
-//
+
 import locationResolver from './locationResolver';
 
 describe('locationResolver', () => {
@@ -22,7 +22,7 @@ describe('locationResolver', () => {
     } 
   };
 
-  test('Location resolver runs default', async () => {
+  test('Location resolver calls default', async () => {
     const result = await locationResolver.Query.allLocations(
       null, 
       {
@@ -37,7 +37,7 @@ describe('locationResolver', () => {
     expect(filterByTerms.mock.calls.length).toBe(0);
   });
 
-  test('Location resolver runs openNow if args are provided.', async () => {
+  test('Location resolver calls openNow if args are provided.', async () => {
     filterByOpenNow.mockReturnValue(locations);
 
     const result = await locationResolver.Query.allLocations(
@@ -55,7 +55,7 @@ describe('locationResolver', () => {
     expect(filterByTerms.mock.calls.length).toBe(0);
   });
 
-  test('Location resolver runs filterByTerms only.', async () => {
+  test('Location resolver calls filterByTerms only.', async () => {
     // Set return value to be all locations in mock, since we're only testing
     // the logic of whether the filters are called or not.
     filterByTerms.mockReturnValue(locations);
