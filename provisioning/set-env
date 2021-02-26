@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # Set production values
+NEXT_PUBLIC_NYPL_DOMAIN=https://www.nypl.org
 REFINERY_API=https://refinery.nypl.org/api/nypl
 GRAPHQL_API_URL=https://scout.nypl.org/api/graphql
 GA_TRACKING_ID=UA-1420324-3
@@ -9,12 +10,14 @@ ALLOWED_ORIGIN=https://www.nypl.org
 ASSET_PREFIX=/scout
 
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
+  NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
 fi
 
+echo -e "\nNEXT_PUBLIC_NYPL_DOMAIN=$NEXT_PUBLIC_NYPL_DOMAIN" >> .env
 echo -e "\nREFINERY_API=$REFINERY_API" >> .env
 echo -e "\nNEXT_PUBLIC_GRAPHQL_API=$GRAPHQL_API_URL" >> .env
 echo -e "\nNEXT_PUBLIC_GOOGLE_MAPS_API=$NEXT_PUBLIC_GOOGLE_MAPS_API" >> .env

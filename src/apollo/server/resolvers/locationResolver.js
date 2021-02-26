@@ -16,6 +16,8 @@ import setTodaysHours from './../../../utils/setTodaysHours';
 import paginateResults from './../../../utils/paginateResults';
 import filterByTerms from './../../../utils/filterByTerms';
 import addLocationTerms from './../../../utils/addLocationTerms';
+// Env vars
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 // Create a dayjs date object, using default timezone.
 // @see https://github.com/iamkun/dayjs/issues/1227
@@ -124,16 +126,16 @@ const locationResolver = {
         case 'hub':
         case 'neighborhood':
         case 'research':
-          url = `https://www.nypl.org/locations/${location.slug}`
+          url = `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/${location.slug}`
           break;
         case 'center':
           // Pattern: /locations/<parent_slug>/<slug>
           // @TODO Needs work: https://jira.nypl.org/browse/RENO-2065
-          url = `https://www.nypl.org/locations/${location.slug}`;
+          url = `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/${location.slug}`;
           break;
         case 'division':
           // Pattern: /locations/divisions/<slug>
-          url = `https://www.nypl.org/locations/divisions/${location.slug}`;
+          url = `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/divisions/${location.slug}`;
           break;
       }
       return url;

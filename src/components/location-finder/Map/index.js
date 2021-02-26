@@ -77,9 +77,6 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
         // Binds onClick from Map prop
         const onClick = props.onClick.bind(this, location);
 
-        // Location link
-        const locationLink = `https://www.nypl.org/locations/${location.id}`;
-
         return (
           <Marker
             key={location.id}
@@ -97,7 +94,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
               <InfoWindow>
                 <div>
                   <div>
-                    <DS.Link href={locationLink}>
+                    <DS.Link href={location.url}>
                       {location.name}
                     </DS.Link>
                   </div>
