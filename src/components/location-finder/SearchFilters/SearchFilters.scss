@@ -62,8 +62,14 @@
     #search-filters__mobile-filters-button {
       min-width: 140px;
     }
+    .dropdown__label {
+      border-bottom: 0;
+    }
     .dropdown {
-      margin: .5em 0;
+      margin: $space-xs 0;
+    }
+    .heading {
+      padding: $space-xs 0;
     }
     .dropdown__content-buttons {
       display: flex;
@@ -74,7 +80,7 @@
       }
     }
   }
-
+  //
   .term-child {
     padding-left: 1em;
   }
