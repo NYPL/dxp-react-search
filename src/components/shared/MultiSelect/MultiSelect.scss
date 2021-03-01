@@ -1,0 +1,65 @@
+.multiselect {
+  position: relative;
+  color: inherit;
+  width: 100%;
+  @include breakpoint($breakpoint-medium) {
+    width: fit-content;
+    min-width: 175px;
+    margin-right: 2em;
+  }
+
+  button {
+    border: 1px solid $gray-light;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5em;
+    border-radius: 2px;
+    background-color: $white;
+    color: inherit;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+
+    span.multiselect__label {
+      margin-right: .5em;
+      padding-left: .5em;
+    }
+
+    .icon--minus {
+      display: none;
+    }
+  }
+
+  button[aria-expanded="true"] {
+    .icon--minus {
+      display: inline;
+    }
+
+    .icon--plus {
+      display: none;
+    }
+  }
+
+  .multiselect__items-expanded {
+    padding: 0;
+    margin: 0;
+
+    max-height: 300px;
+    overflow: scroll;
+
+    display: block;
+    min-width: 100%;
+    background: $white;
+    @include breakpoint($breakpoint-medium) {
+      border: 1px solid $black;
+    }
+    @include breakpoint($breakpoint-medium) {
+      position: absolute;
+      display: inline-block;
+      z-index: 1;
+      min-width: 275px;
+    }
+  }
+}
