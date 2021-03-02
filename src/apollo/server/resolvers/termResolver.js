@@ -4,8 +4,7 @@ import setNestedTerms from './../../../utils/setNestedTerms';
 const termResolver = {
   Query: {
     allTerms: async (parent, args, { dataSources }) => {
-      const allTerms = dataSources.refineryApi.getAllTerms();
-      //const allTerms = await dataSources.refineryApi.getAllTerms();
+      const allTerms = await dataSources.refineryApi.getAllTerms();
       return allTerms;
     },
   },

@@ -130,8 +130,7 @@ const locationResolver = {
           break;
         case 'center':
           // Pattern: /locations/<parent_slug>/<slug>
-          // @TODO Needs work: https://jira.nypl.org/browse/RENO-2065
-          url = `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/${location.slug}`;
+          url = `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/${location.parent_library_slug}/${location.slug}`;
           break;
         case 'division':
           // Pattern: /locations/divisions/<slug>
