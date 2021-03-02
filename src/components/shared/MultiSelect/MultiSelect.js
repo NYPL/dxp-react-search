@@ -23,12 +23,21 @@ function stateReducer(state, actionAndChanges) {
 
 function MultiSelect(props) {
   // Props
-  const { items, id, label, onClickClear, onClickSave } = props;
+  const { 
+    id, 
+    label, 
+    items,
+    // Submit buttons controlled by parent/consuming component.
+    onClickClear, 
+    onClickSave,
+    customStateReducer
+  } = props;
 
   // Downshift
   const [selectedItems, setSelectedItems] = useState([]);
 
   const {
+    closeMenu,
     isOpen,
     getToggleButtonProps,
     getLabelProps,
@@ -213,6 +222,35 @@ function MultiSelect(props) {
             </li>
           ))
         }
+        <div 
+          className="multiselect__items-buttons"
+          id={label}
+        >
+          <Button
+            buttonType="link"
+            id={`button-clear-${label}`}
+            mouseDown={false}
+            type="button"
+            onClick={() => {
+              closeMenu()
+              onClickClear(id, selectedItems)
+            }}
+          >
+            Clear
+          </Button>
+          <Button
+            buttonType="filled"
+            id={`button-save-${label}`}
+            mouseDown={false}
+            type="button"
+            onClick={() => {
+              closeMenu()
+              onClickSave(id, selectedItems)
+            }}
+          >
+            Apply Filters
+          </Button>
+        </div>
       </ul>
     </div>
   );

@@ -1,6 +1,8 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
 
+//import filters from './../../../../testHelper/__mocks/refineryFiltersMock';
+
 class RefineryApi extends RESTDataSource {
   constructor() {
     super();

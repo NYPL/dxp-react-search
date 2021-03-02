@@ -70,6 +70,42 @@ function SearchFilters() {
       <SkeletonLoader />
     );
   }
+
+  /*function MultiSelectsDesktop(props) {
+    return (
+
+    );
+  }
+  */
+
+  function stateReducer(state, actionAndChanges) {
+    const { changes, type } = actionAndChanges;
+
+    switch (type) {
+      case useSelect.stateChangeTypes.MenuKeyDownEnter:
+      case useSelect.stateChangeTypes.MenuKeyDownSpaceButton:
+      case useSelect.stateChangeTypes.ItemClick:
+        return {
+          ...changes,
+          isOpen: true, // Keep menu open after selection.
+          highlightedIndex: state.highlightedIndex,
+        }
+      default:
+        return changes;
+    }
+  }
+  
+  // @TODO these would have handle both desktop & mobile...
+  function onClickSave(id, selectedItems) {
+    console.log('onClickSave!');
+    console.log(selectedItems);
+  }
+
+  function onClickClear(id, selectedItems) {
+    console.log('onClickClear!');
+    console.log(id);
+    console.log(selectedItems);
+  }
   
   return (
     <div className='search-filters'>
@@ -86,7 +122,10 @@ function SearchFilters() {
               <MultiSelect
                 id={vocab.id}
                 label={vocab.name}
-                items={vocab.terms} 
+                items={vocab.terms}
+                onClickSave={onClickSave}
+                onClickClear={onClickClear}
+                customStateReducer={stateReducer}
               />
             )
           })}
@@ -105,7 +144,10 @@ function SearchFilters() {
               <MultiSelect 
                 id={vocab.id}
                 label={vocab.name}
-                items={vocab.terms} 
+                items={vocab.terms}
+                onClickSave={onClickSave}
+                onClickClear={onClickClear}
+                customStateReducer={stateReducer}
               />
             )
           })}

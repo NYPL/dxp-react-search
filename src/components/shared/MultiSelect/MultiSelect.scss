@@ -9,6 +9,7 @@
   }
 
   button {
+    width: 100%;
     border: 1px solid $gray-light;
     display: flex;
     justify-content: space-between;
@@ -42,8 +43,13 @@
     }
   }
 
+  // @TODO Fix this, hacky
+  .multiselect__items-buttons {
+    display: none;
+  }
+
   .multiselect__items-expanded {
-    padding: 0;
+    padding: 1em;
     margin: 0;
 
     max-height: 300px;
@@ -60,6 +66,11 @@
       display: inline-block;
       z-index: 1;
       min-width: 275px;
+    }
+    
+    // @TODO Fix this, hacky
+    .multiselect__items-buttons {
+      display: block;
     }
   }
 }
