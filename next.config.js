@@ -5,9 +5,12 @@ module.exports = (nextConfig = {}) => {
     // Test
     assetPrefix: ASSET_PREFIX,
     async rewrites() {
-      return [
-        { source: `${ASSET_PREFIX}/_next/:path*`, destination: '/_next/:path*' }
-      ]
+      if (process.env.NODE_ENV === 'production') {
+        return [
+          { source: `${ASSET_PREFIX}/_next/:path*`, destination: '/_next/:path*' }
+        ];
+      }
+      return [];
     },
     webpack(config, options) {
       const { dir } = options
