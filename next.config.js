@@ -6,7 +6,7 @@ module.exports = (nextConfig = {}) => {
     assetPrefix: ASSET_PREFIX,
     async rewrites() {
       console.log(process.env.NODE_ENV)
-      if (process.env.NODE_ENV === 'production') {
+      if (ASSET_PREFIX) {
         return [
           { 
             source: `${ASSET_PREFIX}/_next/:path*`, 
