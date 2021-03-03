@@ -4,7 +4,7 @@ module.exports = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
     // Test
     assetPrefix: ASSET_PREFIX,
-    rewrites() {
+    async rewrites() {
       return [
         { source: `${ASSET_PREFIX}/_next/:path*`, destination: '/_next/:path*' }
       ]
