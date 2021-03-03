@@ -2,10 +2,8 @@ const { ASSET_PREFIX } = process.env;
 
 module.exports = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
-    // Test
     assetPrefix: ASSET_PREFIX,
     async rewrites() {
-      console.log(process.env.NODE_ENV)
       if (ASSET_PREFIX) {
         return [
           { 
