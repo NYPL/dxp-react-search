@@ -5,9 +5,13 @@ module.exports = (nextConfig = {}) => {
     // Test
     assetPrefix: ASSET_PREFIX,
     async rewrites() {
+      console.log(process.env.NODE_ENV)
       if (process.env.NODE_ENV === 'production') {
         return [
-          { source: `${ASSET_PREFIX}/_next/:path*`, destination: '/_next/:path*' }
+          { 
+            source: `${ASSET_PREFIX}/_next/:path*`, 
+            destination: '/_next/:path*' 
+          }
         ];
       }
       return [];
