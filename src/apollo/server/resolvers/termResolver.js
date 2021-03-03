@@ -24,10 +24,11 @@ const termResolver = {
       return term.uuid;
     },
     name: term => {
-      if (term.name.length > 30) {
+      /*if (term.name.length > 30) {
         console.log('too long!');
         console.log(term.name);
       }
+      */
       return term.name;
     },
     children: term => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelect } from 'downshift';
+import { useMultipleSelection, useSelect } from 'downshift';
 import { Button, Icon, /*Checkbox,*/ List } from '@nypl/design-system-react-components';
 import Checkbox from './../Checkbox';
 
@@ -11,6 +11,8 @@ function stateReducer(state, actionAndChanges) {
     case useSelect.stateChangeTypes.MenuKeyDownEnter:
     case useSelect.stateChangeTypes.MenuKeyDownSpaceButton:
     case useSelect.stateChangeTypes.ItemClick:
+      console.log(state);
+
       return {
         ...changes,
         isOpen: true, // Keep menu open after selection.
@@ -30,11 +32,34 @@ function MultiSelect(props) {
     // Submit buttons controlled by parent/consuming component.
     onClickClear, 
     onClickSave,
+    handleSelectedItemChange,
+    controlledSelectedItems,
     customStateReducer
   } = props;
 
   // Downshift
-  const [selectedItems, setSelectedItems] = useState([]);
+  //const [selectedItems, setSelectedItems] = useState([]);
+
+  /*function onSelectedItemChange({ selectedItem }) {
+    console.log('onSelectedItemChange!');
+
+    if (!selectedItem) {
+      return
+    }
+    const index = selectedItems.indexOf(selectedItem)
+    if (index > 0) {
+      setSelectedItems([
+        ...selectedItems.slice(0, index),
+        ...selectedItems.slice(index + 1),
+      ])
+    } else if (index === 0) {
+      setSelectedItems([...selectedItems.slice(1)])
+    } else {
+      setSelectedItems([...selectedItems, selectedItem])
+    }
+  }
+  */
+  //let selectedItems = controlledSelectedItems;
 
   const {
     closeMenu,
@@ -47,30 +72,14 @@ function MultiSelect(props) {
   } = useSelect({
     items,
     stateReducer,
-    selectedItem: null,
-    // Item/checkbox checked 
-    onSelectedItemChange: ({ selectedItem }) => {
-      console.log('onSelectedItemChange!');
-
-      if (!selectedItem) {
-        return
-      }
-      const index = selectedItems.indexOf(selectedItem)
-      if (index > 0) {
-        setSelectedItems([
-          ...selectedItems.slice(0, index),
-          ...selectedItems.slice(index + 1),
-        ])
-      } else if (index === 0) {
-        setSelectedItems([...selectedItems.slice(1)])
-      } else {
-        setSelectedItems([...selectedItems, selectedItem])
-      }
-    },
+    //stateReducer: customStateReducer,
+    selectedItem: controlledSelectedItems,
+    onSelectedItemChange: handleSelectedItemChange,
+    //initialSelectedItems: savedItems
   });
 
-  const buttonText = selectedItems.length
-    ? `${label} (${selectedItems.length})`
+  const buttonText = controlledSelectedItems.length
+    ? `${label} (${controlledSelectedItems.length})`
     : `${label}`;
   
   function CheckboxList(props) {
@@ -99,7 +108,7 @@ function MultiSelect(props) {
               }
             >
               <Checkbox
-                checked={selectedItems.includes(item)}
+                checked={controlledSelectedItems.includes(item)}
                 value={item.id}
                 onChange={() => null}
                 checkboxId={item.id}
@@ -122,7 +131,7 @@ function MultiSelect(props) {
                         })}
                       >
                         <Checkbox
-                          checked={selectedItems.includes(childItem)}
+                          checked={controlledSelectedItems.includes(childItem)}
                           value={childItem.id}
                           onChange={() => null}
                           checkboxId={childItem.id}
@@ -182,7 +191,7 @@ function MultiSelect(props) {
               }
             >
               <Checkbox
-                checked={selectedItems.includes(item)}
+                checked={controlledSelectedItems.includes(item)}
                 value={item.id}
                 onChange={() => null}
                 checkboxId={item.id}
@@ -205,7 +214,7 @@ function MultiSelect(props) {
                         })}
                       >
                         <Checkbox
-                          checked={selectedItems.includes(childItem)}
+                          checked={controlledSelectedItems.includes(childItem)}
                           value={childItem.id}
                           onChange={() => null}
                           checkboxId={childItem.id}
@@ -233,7 +242,7 @@ function MultiSelect(props) {
             type="button"
             onClick={() => {
               closeMenu()
-              onClickClear(id, selectedItems)
+              onClickClear(id, controlledSelectedItems)
             }}
           >
             Clear
@@ -244,8 +253,9 @@ function MultiSelect(props) {
             mouseDown={false}
             type="button"
             onClick={() => {
+              //onSave(id, selectedItems)
               closeMenu()
-              onClickSave(id, selectedItems)
+              
             }}
           >
             Apply Filters
