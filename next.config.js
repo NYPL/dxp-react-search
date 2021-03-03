@@ -2,6 +2,7 @@ const { ASSET_PREFIX } = process.env;
 
 module.exports = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
+    // Test
     assetPrefix: ASSET_PREFIX,
     rewrites() {
       return [
