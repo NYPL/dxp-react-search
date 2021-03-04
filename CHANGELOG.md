@@ -6,6 +6,8 @@
 * Updated to latest nypl design system.
 * Updated to new pagination component.
 * Update to use new StatusBadge component.
+* Small fix for next.config.js rewrites().
+* Added vercel.sh to skip builds on qa and production branches.
 * SearchForm now uses DS Checkbox component, instead of custom checkbox.
 
 ### v0.1.6 [2021-01-12] Location Finder Improvements
