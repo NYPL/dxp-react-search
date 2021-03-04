@@ -1,12 +1,13 @@
 ## CHANGES
 -----------
 
-### v0.2.0 [?] Location Finder Filters
+### v0.2.0 [2021-03-?] Location Finder Filters
 -----------------------------------------------
 * Updated to latest nypl design system.
 * Updated to new pagination component.
 * Update to use new StatusBadge component.
-* SearchForm now uses DS Checkbox component, instead of custom checkbox.
+* Small fix for next.config.js rewrites().
+* Added vercel.sh to skip builds on qa and production branches
 
 ### v0.1.6 [2021-01-12] Location Finder Improvements
 -----------------------------------------------
