@@ -1,7 +1,7 @@
 .hero {
   background-color: $nypl-red-regular;
   padding: $space-l 0;
-  
+
   .hero__inner {
     @include wrapper;
 
@@ -47,22 +47,6 @@
     color: $white;
     &:hover {
       text-decoration: none;
-    }
-  }
-}
-
-// IE11 only
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  .hero__image {
-    @include breakpoint($breakpoint-large) {
-      width: 50%;
-      flex: none;
-    }
-  }
-  .hero__content {
-    @include breakpoint($breakpoint-large) {
-      width: 50%;
-      flex: none;
     }
   }
 }
