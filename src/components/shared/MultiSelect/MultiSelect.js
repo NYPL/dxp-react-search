@@ -3,7 +3,6 @@ import { useMultipleSelection, useSelect } from 'downshift';
 import { Button, Icon, /*Checkbox,*/ List } from '@nypl/design-system-react-components';
 import Checkbox from './../Checkbox';
 
-// Reducers stuff
 function stateReducer(state, actionAndChanges) {
   const { changes, type } = actionAndChanges;
 
@@ -11,13 +10,16 @@ function stateReducer(state, actionAndChanges) {
     case useSelect.stateChangeTypes.MenuKeyDownEnter:
     case useSelect.stateChangeTypes.MenuKeyDownSpaceButton:
     case useSelect.stateChangeTypes.ItemClick:
-      console.log(state);
-
       return {
         ...changes,
         isOpen: true, // Keep menu open after selection.
         highlightedIndex: state.highlightedIndex,
       }
+    
+    case useSelect.stateChangeTypes.ToggleButtonClick:
+      //console.log('ToggleButtonClick');
+      //console.log(changes);
+
     default:
       return changes;
   }
@@ -32,34 +34,10 @@ function MultiSelect(props) {
     // Submit buttons controlled by parent/consuming component.
     onClickClear, 
     onClickSave,
-    handleSelectedItemChange,
-    controlledSelectedItems,
-    customStateReducer
+    handleOnStateChange,
+    handleOnChecked,
+    selectedItems: controlledSelectedItems
   } = props;
-
-  // Downshift
-  //const [selectedItems, setSelectedItems] = useState([]);
-
-  /*function onSelectedItemChange({ selectedItem }) {
-    console.log('onSelectedItemChange!');
-
-    if (!selectedItem) {
-      return
-    }
-    const index = selectedItems.indexOf(selectedItem)
-    if (index > 0) {
-      setSelectedItems([
-        ...selectedItems.slice(0, index),
-        ...selectedItems.slice(index + 1),
-      ])
-    } else if (index === 0) {
-      setSelectedItems([...selectedItems.slice(1)])
-    } else {
-      setSelectedItems([...selectedItems, selectedItem])
-    }
-  }
-  */
-  //let selectedItems = controlledSelectedItems;
 
   const {
     closeMenu,
@@ -69,87 +47,25 @@ function MultiSelect(props) {
     getMenuProps,
     highlightedIndex,
     getItemProps,
+    //selectedItem: selectedItems
   } = useSelect({
     items,
     stateReducer,
-    //stateReducer: customStateReducer,
-    selectedItem: controlledSelectedItems,
-    onSelectedItemChange: handleSelectedItemChange,
-    //initialSelectedItems: savedItems
+    onStateChange: handleOnStateChange
   });
 
-  const buttonText = controlledSelectedItems.length
+  /*const buttonText = controlledSelectedItems.length
     ? `${label} (${controlledSelectedItems.length})`
     : `${label}`;
-  
-  function CheckboxList(props) {
-    const { items } = props;
+  */
+  const buttonText = label;
 
-    return (
-      <ul
-        className={isOpen ? 'multiselect__items-expanded' : 'multiselect__items'}
-        style={{'list-style-type': 'none'}}
-        {...getMenuProps()}
-      >
-        {isOpen &&
-          items.map((item, index) => (
-            <li
-              key={`${item}${index}`}
-              {
-                ...getItemProps({
-                  item,
-                  index,
-                })
-              }
-              style={
-                highlightedIndex === index
-                  ? { backgroundColor: '#bde4ff' }
-                  : {}
-              }
-            >
-              <Checkbox
-                checked={controlledSelectedItems.includes(item)}
-                value={item.id}
-                onChange={() => null}
-                checkboxId={item.id}
-                labelOptions={{
-                  labelContent: <>{item.name}</>
-                }}
-                name={item.name}
-              />
-              {item.children &&
-                <ul
-                  style={{'list-style-type': 'none'}}
-                >
-                  {item.children.map((childItem) => {
-                    return (
-                      <li
-                        key={`${childItem}${index}`}
-                        {...getItemProps({
-                          childItem,
-                          index,
-                        })}
-                      >
-                        <Checkbox
-                          checked={controlledSelectedItems.includes(childItem)}
-                          value={childItem.id}
-                          onChange={() => null}
-                          checkboxId={childItem.id}
-                          labelOptions={{
-                            labelContent: <>{childItem.name}</>
-                          }}
-                          name={childItem.name}
-                        />
-                      </li>
-                    )
-                  })}
-                </ul>
-              }
-            </li>
-          ))
-        }
-      </ul>
-    );
+  function testOnChange(e, id, itemId) {
+    console.log('testOnChange!');
+    console.log(itemId);
+    
+    console.log('vocab id?!');
+    console.log(id);
   }
   
   return (
@@ -178,12 +94,12 @@ function MultiSelect(props) {
           items.map((item, index) => (
             <li
               key={`${item}${index}`}
-              {
-                ...getItemProps({
+              {...getItemProps(
+                {
                   item,
                   index,
-                })
-              }
+                }
+              )}
               style={
                 highlightedIndex === index
                   ? { backgroundColor: '#bde4ff' }
@@ -191,43 +107,15 @@ function MultiSelect(props) {
               }
             >
               <Checkbox
-                checked={controlledSelectedItems.includes(item)}
+                checked={handleOnChecked(item.vocabId, item.id) || false}
                 value={item.id}
-                onChange={() => null}
+                onChange={(e) => testOnChange(e, id, item.id)}
                 checkboxId={item.id}
                 labelOptions={{
                   labelContent: <>{item.name}</>
                 }}
                 name={item.name}
               />
-              {item.children &&
-                <ul
-                  style={{'list-style-type': 'none'}}
-                >
-                  {item.children.map((childItem) => {
-                    return (
-                      <li
-                        key={`${childItem}${index}`}
-                        {...getItemProps({
-                          childItem,
-                          index,
-                        })}
-                      >
-                        <Checkbox
-                          checked={controlledSelectedItems.includes(childItem)}
-                          value={childItem.id}
-                          onChange={() => null}
-                          checkboxId={childItem.id}
-                          labelOptions={{
-                            labelContent: <>{childItem.name}</>
-                          }}
-                          name={childItem.name}
-                        />
-                      </li>
-                    )
-                  })}
-                </ul>
-              }
             </li>
           ))
         }
@@ -242,7 +130,7 @@ function MultiSelect(props) {
             type="button"
             onClick={() => {
               closeMenu()
-              onClickClear(id, controlledSelectedItems)
+              onClickClear(id, selectedItems)
             }}
           >
             Clear

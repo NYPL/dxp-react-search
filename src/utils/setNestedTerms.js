@@ -13,7 +13,8 @@ function setNestedTerms(terms) {
         [item.uuid]: {
           uuid: item.uuid,
           name: item.name,
-          children: []
+          children: [],
+          vocabId: item.uuid
         }
       };
     }

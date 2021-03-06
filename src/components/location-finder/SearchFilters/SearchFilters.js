@@ -35,9 +35,6 @@ function SearchFilters() {
   const dispatch = useDispatch();
   const { searchFilters } = useSelector(state => state.search);
   // Local state
-  const [checkedTerms, setCheckedTerms] = useState({});
-  const [dropdownIds, setDropdownIds] = useState();
-
   const [selectedItems, setSelectedItems] = useState([]);
 
   // Local state: mobile, modal.
@@ -74,71 +71,51 @@ function SearchFilters() {
     );
   }
 
-  function stateReducer(state, actionAndChanges) {
-    const { changes, type } = actionAndChanges;
-  
+  function handleOnStateChange(changes) {
+    const { type } = changes;    
     switch (type) {
-      case useSelect.stateChangeTypes.MenuKeyDownEnter:
-      case useSelect.stateChangeTypes.MenuKeyDownSpaceButton:
-      case useSelect.stateChangeTypes.ItemClick:
-        console.log(changes);
-  
-        return {
-          ...changes,
-          isOpen: true, // Keep menu open after selection.
-          highlightedIndex: state.highlightedIndex,
-        }
-      default:
-        return changes;
+      case '__item_click__':
+      case '__menu_keydown_enter__':
+      case '__menu_keydown_space_button__':
+        onItemChange(changes.selectedItem);
+        break;
     }
   }
 
-  function handleSelectedItemChange({ selectedItem }) {
-    console.log('handleSelectedItemChange!');
-    console.log(selectedItem);
-
-    if (!selectedItem) {
-      return
-    }
-    const index = selectedItems.indexOf(selectedItem)
-    if (index > 0) {
-      setSelectedItems([
-        ...selectedItems.slice(0, index),
-        ...selectedItems.slice(index + 1),
-      ])
-    } else if (index === 0) {
-      setSelectedItems([...selectedItems.slice(1)])
-    } else {
-      setSelectedItems([...selectedItems, selectedItem])
-    }
-    
-    /*const selectedItemId = selectedItem.id;
-    const vocabId = ''
-    let termIds;
+  function onItemChange(item) {
+    const itemId = item.id;
+    let itemIds;
     // Check if the tid already exists in the state
-    if (selectedItems[vocabId] !== undefined) {
-      let exists = selectedItems[vocabId].terms.indexOf(selectedItemId) > -1;
+    if (selectedItems[item.vocabId] !== undefined) {
+      let itemIdExists = selectedItems[item.vocabId].terms.indexOf(itemId) > -1;
       // Make a copy of the existing array.
-      termIds = selectedItems[vocabId].terms.slice();
-      // If termId exists, remove it from the array.
-      if (termIdExists) {
-        termIds = termIds.filter((id) => id != selectedItemId);
+      itemIds = selectedItems[item.vocabId].terms.slice();
+      // If itemId exists, remove it from the array.
+      if (itemIdExists) {
+        itemIds = itemIds.filter((id) => id != itemId);
       } else {
         // Add it to the array, but modify the copy, not the original.
-        termIds.push(termId);
+        itemIds.push(itemId);
       }
     } else {
-      termIds = [];
-      termIds.push(termId);
+      itemIds = [];
+      itemIds.push(itemId);
     }
     // Update local state.
-    setCheckedTerms({
-      ...checkedTerms,
-      [vocabId]: {
-        terms: termIds
+    setSelectedItems({
+      ...selectedItems,
+      [item.vocabId]: {
+        terms: itemIds
       }
     });
-    */
+  }
+
+  function handleOnChecked(id, selectedItemId) {
+    let filterChecked = false;
+    if (selectedItems[id] !== undefined) {
+      filterChecked = selectedItems[id].terms.find((filter) => filter === selectedItemId) 
+    }
+    return filterChecked;
   }
 
   // @TODO these would have handle both desktop & mobile...
@@ -187,11 +164,9 @@ function SearchFilters() {
                   id={vocab.id}
                   label={vocab.name}
                   items={vocab.terms}
-                  onClickSave={onClickSave}
-                  onClickClear={onClickClear}
-                  handleSelectedItemChange={handleSelectedItemChange}
                   controlledSelectedItems={selectedItems}
-                  customStateReducer={stateReducer}
+                  handleOnStateChange={handleOnStateChange}
+                  handleOnChecked={handleOnChecked}
                 />
               )
             })}
@@ -211,11 +186,9 @@ function SearchFilters() {
                   id={vocab.id}
                   label={vocab.name}
                   items={vocab.terms}
-                  onClickSave={onClickSave}
-                  onClickClear={onClickClear}
-                  handleSelectedItemChange={handleSelectedItemChange}
                   controlledSelectedItems={selectedItems}
-                  customStateReducer={stateReducer}
+                  handleOnStateChange={handleOnStateChange}
+                  handleOnChecked={handleOnChecked}
                 />
               )
             })}

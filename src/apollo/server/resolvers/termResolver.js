@@ -33,7 +33,11 @@ const termResolver = {
     },
     children: term => {
       return term.children;
+    },
+    vocabId: term => {
+      return term.vocabId
     }
+    
   }
 }
 

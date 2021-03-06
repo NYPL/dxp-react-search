@@ -1,7 +1,7 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { REFINERY_API } = process.env;
 
-//import filters from './../../../../testHelper/__mocks/refineryFiltersMock';
+import filters from './../../../../testHelper/__mocks/refineryFiltersMock';
 
 class RefineryApi extends RESTDataSource {
   constructor() {
@@ -38,7 +38,7 @@ class RefineryApi extends RESTDataSource {
   }
 
   async getAllTerms() {
-    const filters = await this.get('/locations/v1.0/searchfilters');
+    //const filters = await this.get('/locations/v1.0/searchfilters');
     return filters.data.filters;
   }
 }

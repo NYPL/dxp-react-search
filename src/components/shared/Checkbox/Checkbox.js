@@ -15,8 +15,9 @@ function Checkbox(props) {
       />
       <label
         id={`label-${checkboxId}`}
-        htmlFor={name}
+        htmlFor={checkboxId}
         className="label"
+        onClick={(e) => e.preventDefault()}
       >
         {name}
       </label>

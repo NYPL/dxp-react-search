@@ -9,6 +9,7 @@ query FiltersQuery {
         id
         name
       }
+      vocabId
     }
   }
 }
