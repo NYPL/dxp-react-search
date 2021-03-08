@@ -1,5 +1,5 @@
 const SearchHeaderContent = {
-  'title': 'Find Your Library',
+  'title': 'Find Your Location. Hello, DXP team!',
   'description': 'Enter an address or landmark to search nearby or type in a Library name.',
 };
 
