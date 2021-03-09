@@ -244,6 +244,18 @@ function SearchFilters() {
     // @TODO Scroll to locations results.
   }
 
+  // Returns true or false whether a dropdown has selectedItems.
+  function hasSelectedItems(vocab, searchFilters) {
+    let hasSelectedItems = false;
+    if (
+      searchFilters[vocab.id] !== undefined 
+      && searchFilters[vocab.id].terms.length > 0
+    ) {
+      hasSelectedItems = true;
+    }
+    return hasSelectedItems;
+  }
+
   function CheckboxList(props) {
     const { vocab } = props;
     return (
@@ -301,6 +313,7 @@ function SearchFilters() {
         label={setDropdownLabel(vocab, searchFilters)}
         checked={setDropdownCheckedProp(vocab.id)}
         onChange={(e) => onChangeDropdown(vocab.id, e)}
+        hasSelectedItems={hasSelectedItems(vocab, searchFilters)}
       >
         <CheckboxList vocab={vocab} />
       </Dropdown>
@@ -316,6 +329,7 @@ function SearchFilters() {
         label={setDropdownLabel(vocab, searchFilters)}
         checked={setDropdownCheckedProp(vocab.id)}
         onChange={(e) => onChangeDropdown(vocab.id, e)}
+        hasSelectedItems={hasSelectedItems(vocab, searchFilters)}
       >
         <div className="dropdown__content-inner">
           <CheckboxList vocab={vocab} />

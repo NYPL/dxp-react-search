@@ -2,37 +2,41 @@ import React, { useState } from 'react';
 import { Icon } from '@nypl/design-system-react-components';
 import FocusTrap from 'focus-trap-react';
 
-/*
-  props
-  -----
-  id
-  label
-  openDirection
-  children
-*/
 function Dropdown(props) {
+  const {
+    id,
+    label,
+    children,
+    checked,
+    onChange,
+    hasSelectedItems
+  } = props;
+
   return (
-    <div className="dropdown">
+    <div className={hasSelectedItems 
+      ? `dropdown hasSelectedItems` 
+      : `dropdown`}
+    >
       <FocusTrap
         focusTrapOptions={{
           clickOutsideDeactivates: true,
           returnFocusOnDeactivate: false,
         }}
-        active={props.checked}
+        active={checked}
       >
         <div>
           <input
-            id={`dropdown-${props.id}`}
+            id={`dropdown-${id}`}
             type="checkbox"
             className="dropdown__input"
-            checked={props.checked}
-            onChange={props.onChange}
+            checked={checked}
+            onChange={onChange}
           />
           <label
-            htmlFor={`dropdown-${props.id}`}
+            htmlFor={`dropdown-${id}`}
             className="dropdown__label"
           >
-            <span className="dropdown-label">{props.label}</span>
+            <span className="dropdown-label">{label}</span>
             <Icon
               decorative={true}
               name="minus"
@@ -45,7 +49,7 @@ function Dropdown(props) {
             />
           </label>
           <div className="dropdown__content">
-            {props.children}
+            {children}
           </div>
         </div>
       </FocusTrap>

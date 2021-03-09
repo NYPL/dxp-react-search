@@ -1,4 +1,10 @@
 .dropdown {
+  &.hasSelectedItems {
+    .dropdown__label {  
+      background-color: $gray-light;
+    }
+  }
+
   &:focus-within {
     outline: 2px solid $form-focus;
   }
