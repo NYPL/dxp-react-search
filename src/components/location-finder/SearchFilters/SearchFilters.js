@@ -70,7 +70,7 @@ function SearchFilters() {
   }
   
   // Generate the next state by removing an object property immutably.
-  function newState(object, property) {
+  function nextState(object, property) {
     let {[property]: omit, ...rest} = object;
     return rest;
   };
@@ -78,30 +78,31 @@ function SearchFilters() {
   // onChange handler for filter checkboxes.
   // Tracks checked items in local state.
   function onChangeFilters(vocabId, event, hasChildren) {
-    if (hasChildren) {
-      console.log('parent term!');
-      console.log(hasChildren)
-      // Don't store in state.
-      // Function to check or uncheck all boxes.
-    } /*else {*/
-      const termId = event.target.id;
-      let termIds;
-      // Check if the tid already exists in the state
-      if (checkedTerms[vocabId] !== undefined) {
-        let termIdExists = checkedTerms[vocabId].terms.indexOf(termId) > -1;
-        // Make a copy of the existing array.
-        termIds = checkedTerms[vocabId].terms.slice();
-        // If termId exists, remove it from the array.
-        if (termIdExists) {
-          termIds = termIds.filter((id) => id != termId);
-        } else {
-          // Add it to the array, but modify the copy, not the original.
-          termIds.push(termId);
-        }
+    const termId = event.target.id;
+    let termIds;
+    // Check if the tid already exists in the state
+    if (checkedTerms[vocabId] !== undefined) {
+      let termIdExists = checkedTerms[vocabId].terms.indexOf(termId) > -1;
+      // Make a copy of the existing array.
+      termIds = checkedTerms[vocabId].terms.slice();
+      // If termId exists, remove it from the array.
+      if (termIdExists) {
+        termIds = termIds.filter((id) => id != termId);
       } else {
-        termIds = [];
+        // Add it to the array, but modify the copy, not the original.
         termIds.push(termId);
       }
+    } else {
+      termIds = [];
+      termIds.push(termId);
+    }
+
+    // Check if there are no terms to save, and clear the state if so.
+    if (termIds.length == 0) {
+      setCheckedTerms(
+        nextState(checkedTerms, vocabId)
+      );
+    } else {
       // Update local state.
       setCheckedTerms({
         ...checkedTerms,
@@ -109,14 +110,14 @@ function SearchFilters() {
           terms: termIds
         }
       });
-    //}
+    }
   }
   
   // Clear the dropdown
   function onClickClear(vocabId, event) {    
     // Clear local state for dropdown only by vocabId.
     setCheckedTerms(
-      newState(checkedTerms, vocabId)
+      nextState(checkedTerms, vocabId)
     );
 
     // Redux
@@ -130,14 +131,25 @@ function SearchFilters() {
   
   // Saves the local state into Redux state.
   function onSaveFilters(vocabId, event) {
-    dispatch(setFilters({
-      searchFilters: {
-        ...searchFilters,
-        [vocabId]: {
-          terms: checkedTerms[vocabId].terms
+    // Check if there are no terms to save, and clear the state if so.
+    if (
+      checkedTerms[vocabId] !== undefined 
+      && checkedTerms[vocabId].terms.length > 0
+    ) {
+      dispatch(setFilters({
+        searchFilters: {
+          ...searchFilters,
+          [vocabId]: {
+            terms: checkedTerms[vocabId].terms
+          }
         }
-      }
-    }));
+      }));
+    } else {
+      dispatch(deleteFilter({
+        searchFilters: vocabId
+      }));
+    }
+
     // Close the dropdown.
     setDropdownIds(undefined);
   }
@@ -186,7 +198,7 @@ function SearchFilters() {
         });
       } else {
         setCheckedTerms(
-          newState(checkedTerms, vocabId)
+          nextState(checkedTerms, vocabId)
         );
       }
     }
@@ -232,12 +244,14 @@ function SearchFilters() {
 
   function onSaveAllFilters(event) {
     // Save the local state into redux.
+    // @TODO this works without the searchFilters spread, but are we mutating?
     dispatch(setFilters({
       searchFilters: {
-        ...searchFilters,
+        //...searchFilters,
         ...checkedTerms
       }
     }));
+
     // Close modal
     setIsModalOpen(false);
     
