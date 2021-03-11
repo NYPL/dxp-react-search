@@ -4,13 +4,12 @@ import { useQuery } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 // Redux
 import {
-  batch,
   useDispatch,
   useSelector
 } from 'react-redux';
 import { setPagination } from './../../../redux/actions';
 // Components
-import * as DS from '@nypl/design-system-react-components';
+import { Icon, Link } from '@nypl/design-system-react-components';
 import Location from './../Location';
 import LoadingSkeleton from './../../shared/LoadingSkeleton';
 import LocationsPagination from './LocationsPagination';
@@ -30,7 +29,6 @@ function Locations() {
 
   // Redux
   const {
-    //searchQuery,
     searchQueryGeoLat,
     searchQueryGeoLng,
     openNow,
@@ -98,12 +96,12 @@ function Locations() {
 
   return (
     <div className="locations__list-inner">
-      <DS.Link
+      <Link
         href="#locations-gmap"
         className="locations-gmap-anchor"
       >
         Skip to Map
-        <DS.Icon
+        <Icon
           blockName="more-link"
           decorative
           modifiers={[
@@ -111,7 +109,7 @@ function Locations() {
           ]}
           name="arrow"
         />
-      </DS.Link>
+      </Link>
       {data.allLocations.locations.map((location) => (
         <Location key={location.id} location={location} />
       ))}

@@ -7,7 +7,7 @@
  */
 function filterByTerms(locations, filterGroups) {
   return locations.reduce((accumulator, location) => {
-    // 
+    // Handle the terms attached to a location.
     let locationTerms = {};
     // Iterate over each vocab
     location.terms.forEach((vocab) => {
@@ -21,11 +21,12 @@ function filterByTerms(locations, filterGroups) {
         terms: locationTerm
       };
     });
-
-    //
-    let conditions = [];
+    
+    // Handle the filters selected on the search form.
+    let allGroupsStatuses = [];
     let orGroupStatus = false;
     let andGroupStatus = false;
+    
     filterGroups.forEach((filterGroup) => {
       if (filterGroup.operator === 'OR') {
         if (
@@ -37,7 +38,7 @@ function filterByTerms(locations, filterGroups) {
           orGroupStatus = filterGroup.terms.some((tid) =>
             locationTerms[filterGroup.id].terms.includes(tid)
           );
-          conditions.push(orGroupStatus);
+          allGroupsStatuses.push(orGroupStatus);
         } 
       } 
       if (filterGroup.operator === 'AND') {
@@ -50,20 +51,16 @@ function filterByTerms(locations, filterGroups) {
           andGroupStatus = filterGroup.terms.every((tid) =>
             locationTerms[filterGroup.id].terms.includes(tid)
           );
-          conditions.push(andGroupStatus);
+          allGroupsStatuses.push(andGroupStatus);
         } else {
-          //console.log(filterGroup.uuid);
-          // @TODO not sure if we need this or if it should be done differently,
-          // will have to test more after we have real data.
           // Add a false condition. there's a filter group with terms that returns no location.
-          conditions.push(false);
+          allGroupsStatuses.push(false);
         }
       }
     });
-    //console.log(conditions);
     
-    // Check if all conditions return true.
-    if (conditions.length && conditions.every(Boolean)) {
+    // Check if all allGroupsStatuses return true.
+    if (allGroupsStatuses.length && allGroupsStatuses.every(Boolean)) {
       accumulator.push(location);
     }
 

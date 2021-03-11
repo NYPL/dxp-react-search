@@ -15,7 +15,6 @@ import sortByName from './../../../utils/sortByName';
 import setTodaysHours from './../../../utils/setTodaysHours';
 import paginateResults from './../../../utils/paginateResults';
 import filterByTerms from './../../../utils/filterByTerms';
-import addLocationTerms from './../../../utils/addLocationTerms';
 // Env vars
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -29,11 +28,9 @@ const locationResolver = {
   Query: {
     allLocations: async (parent, args, { dataSources }) => {
       const allLocations = await dataSources.refineryApi.getAllLocations();
+      
       let results;
       let totalResultsCount = Object.keys(allLocations).length;
-      
-      // Temp workaround to get location terms data.
-      addLocationTerms(allLocations);
       
       // Filter by openNow
       if (
