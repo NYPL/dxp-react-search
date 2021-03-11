@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import * as DS from '@nypl/design-system-react-components';
+import { Button } from '@nypl/design-system-react-components';
 // Redux
 import {
   batch,
@@ -101,7 +101,7 @@ function SearchResultsDetails() {
       >
         { renderMessage() }
         &nbsp;
-        <DS.Button
+        <Button
           buttonType="link"
           iconName={null}
           iconPosition={null}
@@ -111,7 +111,7 @@ function SearchResultsDetails() {
           type="submit"
         >
           Clear all search terms.
-        </DS.Button>
+        </Button>
       </div>
     );
   } else {
