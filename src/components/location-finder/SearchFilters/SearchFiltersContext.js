@@ -1,11 +1,8 @@
 import React, { 
   createContext, 
   useContext, 
-  useMemo,
-  useReducer,
-  useState 
+  useReducer
 } from 'react';
-
 import isEqual from 'lodash.isequal';
 
 const initialState = {

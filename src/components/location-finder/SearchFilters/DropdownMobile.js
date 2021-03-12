@@ -1,31 +1,11 @@
 import React, { useContext } from 'react';
 // Components
-import { 
-  Button, 
-  Checkbox, 
-  Heading, 
-  Icon,
-  List,
-  Modal, 
-  SkeletonLoader 
-} from '@nypl/design-system-react-components';
 import Dropdown from '../../shared/Dropdown';
 import CheckboxList from './CheckboxList';
-
-// Hooks
+// Context
 import { SearchFiltersContext, useSearchFilters } from './SearchFiltersContext';
-import useWindowSize from '../../../hooks/useWindowSize';
-
 // Redux
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import { 
-  setFilters,
-  deleteFilter
-} from '../../../redux/actions';
-
+import { useSelector } from 'react-redux';
 // Utils
 import { 
   setDropdownLabel, 
@@ -34,17 +14,16 @@ import {
 } from './SearchFiltersUtils';
 
 function DropdownMobile(props) {
+  // Context
   const [state, dispatch] = useContext(SearchFiltersContext);
   const { dropdownIds } = state;
-  //
+  // Props
   const { vocab } = props;
-
   // Redux
-  const reduxDispatch = useDispatch();
   const { searchFilters } = useSelector(state => state.search);
 
   function onChangeDropdown(vocabId, event) {
-    let dropdownIdChecked = event.target.id;
+    const dropdownIdChecked = event.target.id;
 
     dispatch({
       type: 'SET_SELECTED_DROPDOWNS',

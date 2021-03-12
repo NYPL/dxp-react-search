@@ -2,13 +2,8 @@ import React, { useContext } from 'react';
 // Context
 import { SearchFiltersContext } from './SearchFiltersContext';
 // Redux
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import { 
-  setFilters
-} from '../../../redux/actions';
+import { useDispatch } from 'react-redux';
+import { setFilters } from '../../../redux/actions';
 // Components
 import { 
   Button,
@@ -23,7 +18,6 @@ function DropdownMobileButtons(props) {
   const { setIsModalOpen } = props;
   // Redux
   const reduxDispatch = useDispatch();
-  const { searchFilters } = useSelector(state => state.search);
 
   function onClearAllFilters(event) {
     // Clear the redux state.

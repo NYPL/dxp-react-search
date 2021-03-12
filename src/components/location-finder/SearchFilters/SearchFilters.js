@@ -14,6 +14,7 @@ import DropdownMobile from './DropdownMobile';
 import DropdownMobileButtons from './DropdownMobileButtons';
 // Hooks
 import useWindowSize from '../../../hooks/useWindowSize';
+// Context
 import { 
   SearchFiltersProvider 
 } from './SearchFiltersContext';

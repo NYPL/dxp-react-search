@@ -1,19 +1,16 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
-
+import React, { useContext } from 'react';
 // Components
 import { Checkbox, List } from '@nypl/design-system-react-components';
-//import Checkbox from './../../shared/Checkbox';
-
-import { SearchFiltersContext, useSearchFilters } from './SearchFiltersContext';
+// Context
+import { SearchFiltersContext } from './SearchFiltersContext';
 
 function CheckboxList(props) {
   const [state, dispatch] = useContext(SearchFiltersContext);
-
   const { vocab } = props;
   const { checkedTerms } = state;
 
   function onChangeFilters(vocabId, event) {
-    let selectedItemId = event.target.id;
+    const selectedItemId = event.target.id;
     dispatch({
       type: 'SET_SELECTED_ITEMS',
       payload: { 

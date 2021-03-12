@@ -1,10 +1,10 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 // Components
 import { Button } from '@nypl/design-system-react-components';
 import Dropdown from '../../shared/Dropdown';
 import CheckboxList from './CheckboxList';
 // Context
-import { SearchFiltersContext, useSearchFilters } from './SearchFiltersContext';
+import { SearchFiltersContext } from './SearchFiltersContext';
 // Redux
 import {
   useDispatch,
@@ -39,7 +39,6 @@ function DropdownDesktop(props) {
         dropdownIdChecked: dropdownIdChecked,
         vocabId: vocabId,
         savedItems: searchFilters,
-        //checkedTerms: checkedTerms,
         mode: 'desktop'
       }
     });
