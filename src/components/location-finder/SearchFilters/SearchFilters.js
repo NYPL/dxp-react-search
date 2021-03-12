@@ -50,7 +50,7 @@ function SearchFilters() {
   // Loading state,
   if (loading || !data) {
     return (
-      <SkeletonLoader />
+      <div></div>
     );
   }
 
