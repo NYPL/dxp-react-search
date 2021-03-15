@@ -1,18 +1,20 @@
 import locations from './../../../../testHelper/__mocks/refineryLocationsMock';
-// Mock filterByTerms
-import filterByTerms from './../../../utils/filterByTerms';
-jest.mock('./../../../utils/filterByTerms', () => jest.fn());
 // Mock filterByOpenNow
 import filterByOpenNow from './../../../utils/filterByOpenNow';
 jest.mock('./../../../utils/filterByOpenNow', () => jest.fn());
-
+// Mock filterByTerms
+import filterByTerms from './../../../utils/filterByTerms';
+jest.mock('./../../../utils/filterByTerms', () => jest.fn());
+// Mock sortByDistance
+import sortByDistance from './../../../utils/sortByDistance';
+jest.mock('./../../../utils/sortByDistance', () => jest.fn());
+// Resolver 
 import locationResolver from './locationResolver';
 
 describe('locationResolver', () => {
-  // allLocations no args
-  // allLocations filter openNow only
-  // allLocations sortByDistance only
-  // allLocations filter: openNow and sortByDistance
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   const mockContext = { 
     dataSources: { 
@@ -22,30 +24,41 @@ describe('locationResolver', () => {
     } 
   };
 
-  test('Location resolver calls default', async () => {
+  test('Location resolver calls default only.', async () => {
     const result = await locationResolver.Query.allLocations(
-      null, 
+      parent = null,
+      // args
       {
         filter: {
           openNow: false,
           termIds: []
+        },
+        sortByDistance: {
+          originLat: null,
+          originLng: null
         }
       }, 
       mockContext
     );
     expect(filterByOpenNow.mock.calls.length).toBe(0);
     expect(filterByTerms.mock.calls.length).toBe(0);
+    expect(sortByDistance.mock.calls.length).toBe(0);
   });
 
-  test('Location resolver calls openNow if args are provided.', async () => {
+  test('Location resolver calls openNow only.', async () => {
     filterByOpenNow.mockReturnValue(locations);
 
     const result = await locationResolver.Query.allLocations(
-      null, 
+      parent = null,
+      // args
       {
         filter: {
           openNow: true,
           termIds: []
+        },
+        sortByDistance: {
+          originLat: null,
+          originLng: null
         }
       }, 
       mockContext
@@ -53,6 +66,7 @@ describe('locationResolver', () => {
 
     expect(filterByOpenNow.mock.calls.length).toBe(1);
     expect(filterByTerms.mock.calls.length).toBe(0);
+    expect(sortByDistance.mock.calls.length).toBe(0);
   });
 
   test('Location resolver calls filterByTerms only.', async () => {
@@ -73,12 +87,160 @@ describe('locationResolver', () => {
               operator: "OR"
             }
           ]
+        },
+        sortByDistance: {
+          originLat: null,
+          originLng: null
         }
       }, 
       mockContext
     );
 
     expect(filterByTerms.mock.calls.length).toBe(1);
-    //expect(filterByOpenNow.mock.calls.length).toBe(0);
+    expect(filterByOpenNow.mock.calls.length).toBe(0);
+    expect(sortByDistance.mock.calls.length).toBe(0);
+  });
+
+  test('Location resolver calls sortByDistance only.', async () => {
+    sortByDistance.mockReturnValue(locations);
+
+    const result = await locationResolver.Query.allLocations(
+      parent = null,
+      // args
+      {
+        filter: {
+          openNow: false,
+          termIds: [],
+        },
+        sortByDistance: {
+          originLat: 40.45,
+          originLng: -50.56
+        }
+      }, 
+      mockContext
+    );
+    
+    expect(sortByDistance.mock.calls.length).toBe(1);
+    expect(filterByOpenNow.mock.calls.length).toBe(0);
+    expect(filterByTerms.mock.calls.length).toBe(0);
+  });
+
+  test('Location resolver calls openNow and filterByTerms only.', async () => {
+    filterByOpenNow.mockReturnValue(locations);
+    filterByTerms.mockReturnValue(locations);
+
+    const result = await locationResolver.Query.allLocations(
+      parent = null,
+      // args
+      {
+        filter: {
+          openNow: true,
+          termIds: [
+            {
+              id: "filter-borough",
+              terms: ["bronx", "statenisland"],
+              operator: "OR"
+            }
+          ]
+        },
+        sortByDistance: {
+          originLat: null,
+          originLng: null
+        }
+      }, 
+      mockContext
+    );
+    
+    expect(filterByOpenNow.mock.calls.length).toBe(1);
+    expect(filterByTerms.mock.calls.length).toBe(1);
+    expect(sortByDistance.mock.calls.length).toBe(0);
+  });
+
+  test('Location resolver calls openNow and sortByDistance only.', async () => {
+    filterByOpenNow.mockReturnValue(locations);
+    sortByDistance.mockReturnValue(locations);
+
+    const result = await locationResolver.Query.allLocations(
+      parent = null,
+      // args
+      {
+        filter: {
+          openNow: true,
+          termIds: []
+        },
+        sortByDistance: {
+          originLat: 40.45454,
+          originLng: -79.99999
+        }
+      }, 
+      mockContext
+    );
+    
+    expect(filterByOpenNow.mock.calls.length).toBe(1);
+    expect(filterByTerms.mock.calls.length).toBe(0);
+    expect(sortByDistance.mock.calls.length).toBe(1);
+  });
+
+  test('Location resolver calls filterByTerms and sortByDistance only.', async () => {
+    filterByTerms.mockReturnValue(locations);
+    sortByDistance.mockReturnValue(locations);
+
+    const result = await locationResolver.Query.allLocations(
+      parent = null,
+      // args
+      {
+        filter: {
+          openNow: false,
+          termIds: [
+            {
+              id: "filter-borough",
+              terms: ["bronx", "statenisland"],
+              operator: "OR"
+            }
+          ]
+        },
+        sortByDistance: {
+          originLat: 40.45454,
+          originLng: -79.99999
+        }
+      }, 
+      mockContext
+    );
+    
+    expect(filterByTerms.mock.calls.length).toBe(1);
+    expect(sortByDistance.mock.calls.length).toBe(1);
+    expect(filterByOpenNow.mock.calls.length).toBe(0);
+  });
+
+  test('Location resolver calls all: openNow, filterByTerms, sortByDistance.', async () => {
+    filterByOpenNow.mockReturnValue(locations);
+    filterByTerms.mockReturnValue(locations);
+    sortByDistance.mockReturnValue(locations);
+
+    const result = await locationResolver.Query.allLocations(
+      parent = null,
+      // args 
+      {
+        filter: {
+          openNow: true,
+          termIds: [
+            {
+              id: "filter-borough",
+              terms: ["bronx", "statenisland"],
+              operator: "OR"
+            }
+          ]
+        },
+        sortByDistance: {
+          originLat: 40.45,
+          originLng: -50.56
+        }
+      }, 
+      mockContext
+    );
+    
+    expect(filterByOpenNow.mock.calls.length).toBe(1);
+    expect(filterByTerms.mock.calls.length).toBe(1);
+    expect(sortByDistance.mock.calls.length).toBe(1);
   });
 });

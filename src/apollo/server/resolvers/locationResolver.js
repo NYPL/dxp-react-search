@@ -39,7 +39,6 @@ const locationResolver = {
         // openNow is set to true.
         && args.filter.openNow
       ) {
-        console.log('openNow!');
         // Check if we've prev modified the results.
         if (typeof results !== "undefined") {
           results = filterByOpenNow(now, results).sort(sortByName);
@@ -51,10 +50,10 @@ const locationResolver = {
       }
       
       // Filter by term ids.
-      if (args.filter && 'termIds' in args.filter && args.filter.termIds.length) {
-        console.log('termIds!');
-        //console.log(args.filter.termIds);
-
+      if (args.filter 
+        && 'termIds' in args.filter 
+        && args.filter.termIds.length
+      ) {
         // Check if we've prev modified the results.
         if (typeof results !== "undefined") {
           results = filterByTerms(results, args.filter.termIds).sort(sortByName);
@@ -66,15 +65,13 @@ const locationResolver = {
       }
 
       // Sort by distance.
-      // @TODO add proper check.
-      // @FIX this always runs on the intial load of locations.
       if (
-        args.sortByDistance 
-        && args.sortByDistance.originLat 
+        args.sortByDistance
+        && 'originLat' in args.sortByDistance
+        && 'originLng' in args.sortByDistance
+        && args.sortByDistance.originLat
         && args.sortByDistance.originLng
       ) {
-        console.log('sortByDistance');
-
         if (typeof results !== "undefined") {
           results = sortByDistance(args.sortByDistance, results);
         } else {
@@ -84,9 +81,9 @@ const locationResolver = {
 
       // Default sort, alphabetical.
       if (!results) {
-        console.log('default sort!');
         results = allLocations.sort(sortByName);
-      }      
+      }
+      
       return {
         locations: paginateResults(results, args),
         pageInfo: {
