@@ -1,8 +1,12 @@
 services:
-  node:
-    image: tugboatqa/node:15
+  nginx:
+    image: tugboatqa/nginx:1
     default: true
     commands:
+      init:
+        # Adding the NodeSource APT repository AND the PGP key for verifying packages
+        - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+        - apt-get install -y nodejs
       build: 
         - pwd
         - ls -la
