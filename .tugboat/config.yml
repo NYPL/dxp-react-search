@@ -4,6 +4,8 @@ services:
     default: true
     commands:
       build: 
-        - npm install
-        - npm run build
-        - npm start
+        - pwd
+        - ls -la
+        #- npm install
+        #- npm run build
+        #- npm start
