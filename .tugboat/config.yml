@@ -1,0 +1,9 @@
+services:
+  node:
+    image: tugboatqa/node:15
+    default: true
+    commands:
+      build: 
+        - npm install
+        - npm run build
+        - npm start
