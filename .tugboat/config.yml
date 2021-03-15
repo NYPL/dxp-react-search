@@ -12,6 +12,6 @@ services:
       build: 
         - pwd
         - ls -la
-        #- npm install
-        #- npm run build
-        #- npm start
+        - npm install
+        - npm run build
+        - npm start
