@@ -14,19 +14,19 @@ import DropdownMobile from './DropdownMobile';
 import DropdownMobileButtons from './DropdownMobileButtons';
 // Hooks
 import useWindowSize from '../../../hooks/useWindowSize';
+import usePrevious from '../../../hooks/usePrevious';
 // Context
 import { 
   SearchFiltersProvider 
 } from './SearchFiltersContext';
 
 function SearchFilters() {
-  // Hooks
-  const windowSize = useWindowSize();
   // Local state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState();
   
   // Set the isMobile state based on screen width.
+  const windowSize = useWindowSize();
   useEffect(() => {
     if (windowSize >= 600) {
       setIsMobile(false);
@@ -34,6 +34,14 @@ function SearchFilters() {
       setIsMobile(true);
     }
   }, [windowSize]);
+  
+  // Handle the scroll after modal closes.
+  const prevModalState = usePrevious(isModalOpen);
+  useEffect(() => {
+    if (isMobile && prevModalState !== isModalOpen) {
+      document.getElementById('locations-list').scrollIntoView();
+    } 
+  }, [isModalOpen]);
 
   // Query for data.
   const { loading, error, data } = useQuery(
