@@ -8,9 +8,11 @@ services:
         - npm install
         # Run the NextJS production build.
         - npm run build
+        # Run the tests
+        - npm test
         # This is what we do to run `npm start`, it's using something called
-        # `runinit` which is part of the node image. This basically prevents
-        # Tugboat from hanging.
+        # `runit` which is part of the node image. This basically prevents
+        # Tugboat from hanging, if you try to run `npm start` as usual.
         # @see https://docs.tugboat.qa/setting-up-services/how-to-set-up-services/running-a-background-process/
         - mkdir -p /etc/service/node
         - echo "#!/bin/sh" > /etc/service/node/run
