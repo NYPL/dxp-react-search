@@ -1,13 +1,13 @@
 services:
   node:
     image: tugboatqa/node:14
-      commands:
-        init:
-          - npm install
-          - npm run build
-          - mkdir -p /etc/service/node
-          - echo "#!/bin/sh" > /etc/service/node/run
-          - echo "npm start --prefix ${TUGBOAT_ROOT}" >> /etc/service/node/run
-          - chmod +x /etc/service/node/run
-        start:
-          - npm start --prefix ${TUGBOAT_ROOT} &
+    commands:
+      init:
+        - npm install
+        - npm run build
+        - mkdir -p /etc/service/node
+        - echo "#!/bin/sh" > /etc/service/node/run
+        - echo "npm start --prefix ${TUGBOAT_ROOT}" >> /etc/service/node/run
+        - chmod +x /etc/service/node/run
+      start:
+        - npm start --prefix ${TUGBOAT_ROOT} &
