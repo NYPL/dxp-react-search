@@ -9,7 +9,7 @@ services:
         # Run the NextJS production build.
         - npm run build
         # Run the tests
-        - npm test
+        #- npm test
         # This is what we do to run `npm start`, it's using something called
         # `runit` which is part of the node image. This basically prevents
         # Tugboat from hanging, if you try to run `npm start` as usual.
