@@ -1,0 +1,14 @@
+query FiltersQuery {
+  allTerms {
+    id
+    name
+    terms {
+      id
+      name
+      children {
+        id
+        name
+      }
+    }
+  }
+}

@@ -21,7 +21,7 @@
   .checkbox {
     width: 100%;
     align-items: center;
-    margin-top: $space-s;
+    //margin-top: $space-s;
 
     @include breakpoint($breakpoint-large) {
       width: auto;
@@ -30,6 +30,7 @@
     label {
       white-space: nowrap;
       margin-bottom: 0;
+      font-weight: 300;
     }
     input {
       width: 20px;

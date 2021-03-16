@@ -18,7 +18,8 @@ import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components
 import SearchAutoSuggest from './../SearchAutoSuggest';
-import * as DS from '@nypl/design-system-react-components';
+import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
+import SearchFilters from './../SearchFilters';
 // Geocode
 import Geocode from './../../../utils/googleGeocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
@@ -31,7 +32,6 @@ function SearchForm() {
   // Redux
   const {
     autoSuggestInputValue,
-    searchQuery,
     openNow
   } = useSelector(state => state.search);
   const { infoWindowId } = useSelector(state => state.map);
@@ -114,13 +114,13 @@ function SearchForm() {
         aria-label='Find your library'
         onSubmit={handleSubmit}>
         <SearchAutoSuggest />
-        <DS.Button
+        <Button
           buttonType="filled"
           id="button"
           mouseDown={false}
           type="submit"
         >
-          <DS.Icon
+          <Icon
             decorative
             modifiers={[
               'small',
@@ -129,23 +129,23 @@ function SearchForm() {
             name="search"
           />
           Search
-        </DS.Button>
-        <div className="checkbox">
-          <input
-            id="isOpenNow"
-            className="checkbox__input"
-            type="checkbox"
+        </Button>
+        <div className="search__form-filters">
+          <Checkbox
             name="isOpenNow"
+            checkboxId="checkbox-open-now"
+            className="open-now"
+            labelOptions={{
+              id: 'label',
+              labelContent: 'Open Now'
+            }}
+            attributes={{
+              'aria-label': "Checking this box will update the results"
+            }}
             checked={openNow}
             onChange={onChangeOpenNow}
-            aria-label="Checking this box will update the results"
           />
-          <label
-            id="label"
-            htmlFor="isOpenNow"
-            className="label">
-            Open Now
-          </label>
+          <SearchFilters />
         </div>
       </form>
     </div>

@@ -2,6 +2,7 @@ query LocationsQuery(
   $searchGeoLat: Float,
   $searchGeoLng: Float,
   $openNow: Boolean,
+  $termIds: [TermsFilter],
   $limit: Int,
   $pageNumber: Int,
   $offset: Int) {
@@ -10,7 +11,8 @@ query LocationsQuery(
     pageNumber: $pageNumber,
     offset: $offset,
     filter: {
-      openNow: $openNow
+      openNow: $openNow,
+      termIds: $termIds
     },
     sortByDistance: {
       originLat: $searchGeoLat,
@@ -20,6 +22,9 @@ query LocationsQuery(
     locations {
       id
       name
+      contentType
+      slug
+      url
       status
       address_line1
       address_line2

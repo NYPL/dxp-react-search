@@ -14,6 +14,7 @@
 @import './base/_mixins.scss';
 @import './../components/location-finder/Hero/Hero.scss';
 @import './../components/location-finder/SearchForm/SearchForm.scss';
+@import './../components/location-finder/SearchFilters/SearchFilters.scss';
 @import './../components/location-finder/SearchAutoSuggest/SearchAutoSuggest.scss';
 @import './../components/location-finder/SearchHeader/SearchHeader.scss';
 @import './../components/location-finder/Locations/Locations.scss';
@@ -22,6 +23,7 @@
 @import './../components/location-finder/BottomPromo/BottomPromo.scss';
 @import './../components/location-finder/RightRail/RightRail.scss';
 @import './../components/shared/LoadingSkeleton/LoadingSkeleton.scss';
+@import './../components/shared/Dropdown/Dropdown.scss';
 
 
 // shared/layouts > Main.js

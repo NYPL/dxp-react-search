@@ -4,6 +4,9 @@ export const typeDefs = gql`
   type Location {
     id: ID!
     name: String!
+    contentType: String!
+    slug: String!
+    url: String!
     status: String!
     address_line1: String
     address_line2: String
@@ -16,6 +19,7 @@ export const typeDefs = gql`
     geoLocation: GeoLocation
     todayHours: TodayHours
     open: Boolean
+    terms: [String]
   }
 
   type GeoLocation {
@@ -35,6 +39,7 @@ export const typeDefs = gql`
 
   input Filter {
     openNow: Boolean
+    termIds: [TermsFilter]
   }
 
   type PageInfo {
@@ -46,6 +51,24 @@ export const typeDefs = gql`
     pageInfo: PageInfo
   }
 
+  type Vocab {
+    id: ID!
+    name: String!
+    terms: [Term]
+  }
+
+  type Term {
+    id: ID!
+    name: String!
+    children: [Term]
+  }
+
+  input TermsFilter {
+    id: String!
+    terms: [String]!
+    operator: String!
+  }
+
   type Query {
     allLocations(
       limit: Int,
@@ -54,5 +77,6 @@ export const typeDefs = gql`
       filter: Filter,
       sortByDistance: SortByDistance
     ): LocationsConnection
+    allTerms(filter: TermsFilter): [Vocab]!
   }
 `;
