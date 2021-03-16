@@ -1,18 +1,13 @@
 services:
-  nginx:
-    image: tugboatqa/nginx:1
-    default: true
-    commands:
-      init:
-        # Adding the NodeSource APT repository AND the PGP key for verifying packages
-        - curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-        - apt-get install -y nodejs
-        - node --version
-        - npm --version
-      build: 
-        - pwd
-        - ls -la
-        - npm install
-        - npm run build
-      start:
-        - npm start
+  node:
+    image: tugboatqa/node:14
+      commands:
+        init:
+          - npm install
+          - npm run build
+          - mkdir -p /etc/service/node
+          - echo "#!/bin/sh" > /etc/service/node/run
+          - echo "npm start --prefix ${TUGBOAT_ROOT}" >> /etc/service/node/run
+          - chmod +x /etc/service/node/run
+        start:
+          - npm start --prefix ${TUGBOAT_ROOT} &
