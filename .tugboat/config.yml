@@ -9,5 +9,5 @@ services:
         - echo "#!/bin/sh" > /etc/service/node/run
         - echo "npm start --prefix ${TUGBOAT_ROOT}" >> /etc/service/node/run
         - chmod +x /etc/service/node/run
-      start:
-        - npm start --prefix ${TUGBOAT_ROOT} &
+      #start:
+      #  - npm start --prefix ${TUGBOAT_ROOT} &
