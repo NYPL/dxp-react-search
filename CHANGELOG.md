@@ -8,6 +8,9 @@
 * Update to use new StatusBadge component.
 * Small fix for next.config.js rewrites().
 * Added vercel.sh to skip builds on qa and production branches
+* Adds Search Filters for Location Finder.
+* Adds Division and Center data to locations list.
+* Adds NEXT_PUBLIC_NYPL_DOMAIN env variable, so QA links can point to QA.
 
 ### v0.1.6 [2021-01-12] Location Finder Improvements
 -----------------------------------------------
