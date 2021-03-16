@@ -4,11 +4,15 @@ services:
     expose: 3000
     commands:
       init:
+        # We're already in the correct directory, so we can run npm install.
         - npm install
+        # Run the NextJS production build.
         - npm run build
+        # This is what we do to run `npm start`, it's using something called
+        # `runinit` which is part of the node image. This basically prevents
+        # Tugboat from hanging.
+        # @see https://docs.tugboat.qa/setting-up-services/how-to-set-up-services/running-a-background-process/
         - mkdir -p /etc/service/node
         - echo "#!/bin/sh" > /etc/service/node/run
         - echo "npm start --prefix ${TUGBOAT_ROOT}" >> /etc/service/node/run
         - chmod +x /etc/service/node/run
-      #start:
-      #  - npm start --prefix ${TUGBOAT_ROOT} &
