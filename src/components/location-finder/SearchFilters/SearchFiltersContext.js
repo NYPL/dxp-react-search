@@ -1,6 +1,7 @@
 import React, { 
   createContext, 
-  useContext, 
+  useContext,
+  useMemo,
   useReducer
 } from 'react';
 import isEqual from 'lodash.isequal';
@@ -181,9 +182,13 @@ function useSearchFilters() {
 
 function SearchFiltersProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const contextValue = useMemo(() => {
+    return [state, dispatch];
+  }, [state, dispatch]);
   
   return (
-    <SearchFiltersContext.Provider value={[state, dispatch]}>
+    <SearchFiltersContext.Provider value={contextValue}>
       {props.children}
     </SearchFiltersContext.Provider>
   );
