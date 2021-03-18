@@ -12,7 +12,9 @@
 
   .dropdown__content-inner {
     max-height: 300px;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: $space-s;
   }
 
   .search-filters {
