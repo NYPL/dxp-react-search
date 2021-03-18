@@ -6,7 +6,7 @@ function LocationHours({ open, todayHoursStart, todayHoursEnd }) {
   function formatHours(start, end) {
     // Sometimes refinery will return null for start and end times.
     if (start === null || end === null) {
-      return 'Closed.';
+      return 'Closed';
     }
 
     // Start hour
