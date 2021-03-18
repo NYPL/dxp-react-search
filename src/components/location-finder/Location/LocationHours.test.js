@@ -69,7 +69,7 @@ describe('LocationHours Component', () => {
       />
     );
 
-    expect(screen.getByText('Closed.')).toBeInTheDocument();
+    expect(screen.getByText('Closed')).toBeInTheDocument();
   });
 
   test('location with regular hours should be temporarily closed due to extended closing or alert closing.', () => {
@@ -105,7 +105,7 @@ describe('LocationHours Component', () => {
       />
     );
 
-    expect(screen.getByText('Closed.')).toBeInTheDocument();
+    expect(screen.getByText('Closed')).toBeInTheDocument();
   });
 
   test('location with null for end hours only should be closed due to regular hours', () => {
@@ -117,7 +117,7 @@ describe('LocationHours Component', () => {
       />
     );
 
-    expect(screen.getByText('Closed.')).toBeInTheDocument();
+    expect(screen.getByText('Closed')).toBeInTheDocument();
   });
 
   // Accessbiility tests.
