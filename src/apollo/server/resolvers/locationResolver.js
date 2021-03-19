@@ -87,7 +87,8 @@ const locationResolver = {
       return {
         locations: paginateResults(results, args),
         pageInfo: {
-          totalItems: totalResultsCount
+          totalItems: totalResultsCount,
+          serverNowTime: today
         }
       }
     },

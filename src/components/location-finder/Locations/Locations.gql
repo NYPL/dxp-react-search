@@ -45,7 +45,8 @@ query LocationsQuery(
       open
     }
     pageInfo {
-      totalItems
+      totalItems,
+      serverNowTime
     }
   }
 }
