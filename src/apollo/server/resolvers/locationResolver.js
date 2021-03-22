@@ -18,15 +18,13 @@ import filterByTerms from './../../../utils/filterByTerms';
 // Env vars
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
-// Create a dayjs date object, using default timezone.
-// @see https://github.com/iamkun/dayjs/issues/1227
-const now = dayjs.tz();
-// Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
-const today = now.format();
-
 const locationResolver = {
   Query: {
     allLocations: async (parent, args, { dataSources }) => {
+      // Create a dayjs date object, using default timezone.
+      // @see https://github.com/iamkun/dayjs/issues/1227
+      const now = dayjs.tz();
+
       const allLocations = await dataSources.refineryApi.getAllLocations();
       
       let results;
@@ -87,7 +85,9 @@ const locationResolver = {
       return {
         locations: paginateResults(results, args),
         pageInfo: {
-          totalItems: totalResultsCount
+          totalItems: totalResultsCount,
+          // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
+          timestamp: now.format()
         }
       }
     },
@@ -163,6 +163,12 @@ const locationResolver = {
       };
     },
     todayHours: location => {
+      // Create a dayjs date object, using default timezone.
+      // @see https://github.com/iamkun/dayjs/issues/1227
+      const now = dayjs.tz();
+      // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
+      const today = now.format();
+
       return setTodaysHours(
         now, 
         location.hours.regular, 
@@ -174,6 +180,10 @@ const locationResolver = {
       );
     },
     open: location => {
+      // Create a dayjs date object, using default timezone.
+      // @see https://github.com/iamkun/dayjs/issues/1227
+      // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
+      const today = dayjs.tz().format();
       if (
         // Location has active closing.
         hasActiveClosing(today, location._embedded.alerts, null)

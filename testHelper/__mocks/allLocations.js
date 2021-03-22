@@ -56,7 +56,8 @@ const allLocations = {
         },
       ],
       pageInfo: {
-        totalItems: 2
+        totalItems: 2,
+        timestamp: '12345'
       }
     },
   }
