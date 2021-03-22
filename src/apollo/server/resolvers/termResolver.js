@@ -9,11 +9,14 @@ const termResolver = {
       const allTerms = await dataSources.refineryApi.getAllTerms();
       // Get the terms tree from all Divisions.
       const subjectsAllowList = getSubjectsAllowList(allTerms.divisions);
-
       // Replace subject terms with the allow list terms.
       allTerms.searchFilters.map(filterGroup => {
         if (filterGroup.uuid === SUBJECTS_UUID) {
-          return filterGroup.terms = subjectsAllowList;
+          return filterGroup.terms.splice(
+            0, 
+            filterGroup.terms.length, 
+            ...subjectsAllowList
+          );
         } else {
           return filterGroup.terms
         }
