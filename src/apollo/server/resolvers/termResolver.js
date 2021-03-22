@@ -1,11 +1,28 @@
 // Utils
 import setNestedTerms from './../../../utils/setNestedTerms';
+import getSubjectsAllowList from './../../../utils/getSubjectsAllowList';
+import { SUBJECTS_UUID } from './../../../utils/setTermsFilter';
 
 const termResolver = {
   Query: {
     allTerms: async (parent, args, { dataSources }) => {
       const allTerms = await dataSources.refineryApi.getAllTerms();
-      return allTerms;
+      // Get the terms tree from all Divisions.
+      const subjectsAllowList = getSubjectsAllowList(allTerms.divisions);
+      // Replace subject terms with the allow list terms.
+      allTerms.searchFilters.map(filterGroup => {
+        if (filterGroup.uuid === SUBJECTS_UUID) {
+          return filterGroup.terms.splice(
+            0, 
+            filterGroup.terms.length, 
+            ...subjectsAllowList
+          );
+        } else {
+          return filterGroup.terms
+        }
+      });
+
+      return allTerms.searchFilters;
     },
   },
   Vocab: {

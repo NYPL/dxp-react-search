@@ -9,11 +9,10 @@ class RefineryApi extends RESTDataSource {
 
   async getAllLocations() {
     // @see https://refinery.nypl.org/api/nypl/locations/v1.0/locations
-    //const librariesResponse = await this.get('/locations/v1.0/locations');
     // @see https://refinery.nypl.org/api/nypl/locations/v1.0/divisions
-    //const divisionsResponse = await this.get('/locations/v1.0/divisions');
+    // @see https://refinery.nypl.org/api/nypl/locations/v1.0/centers
     
-    // Promise approach.
+    // Promise await all.
     const [librariesResponse, divisionsResponse, centersResponse] = await Promise.all([
       this.get('/locations/v1.0/locations'),
       this.get('/locations/v1.0/divisions'),
@@ -36,8 +35,27 @@ class RefineryApi extends RESTDataSource {
   }
 
   async getAllTerms() {
-    const filters = await this.get('/locations/v1.0/searchfilters');
-    return filters.data.filters;
+    // @see https://refinery.nypl.org/api/nypl/locations/v1.0/searchfilters
+    // @see https://refinery.nypl.org/api/nypl/locations/v1.0/divisions
+    
+    // @TODO We include the divisions here to control what subject terms
+    // are included for locations. This should be removed in the future.
+    const [filtersResponse, divisionsResponse] = await Promise.all([
+      this.get('/locations/v1.0/searchfilters'),
+      this.get('/locations/v1.0/divisions'),
+    ]);
+
+    if (
+      Array.isArray(filtersResponse.data.filters)
+      && Array.isArray(divisionsResponse.divisions)
+    ) {
+      return {
+        searchFilters: filtersResponse.data.filters, 
+        divisions: divisionsResponse.divisions
+      };
+    } else {
+      return [];
+    }
   }
 }
 
