@@ -42,6 +42,7 @@ query LocationsQuery(
         start
         end
       }
+      appointmentOnly
       open
     }
     pageInfo {

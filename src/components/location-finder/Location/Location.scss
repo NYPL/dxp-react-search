@@ -55,6 +55,12 @@
     }
   }
 
+  .location__hours-appointment {
+    padding-left: $space-m;
+    margin: -5px 0 5px 0;
+    font-weight: 700;
+  }
+
   .location__distance {
     @include space-stack-xxs;
   }
