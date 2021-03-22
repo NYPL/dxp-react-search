@@ -57,7 +57,7 @@ const allLocations = {
       ],
       pageInfo: {
         totalItems: 2,
-        serverNowTime: '12345'
+        timestamp: '12345'
       }
     },
   }

@@ -46,7 +46,7 @@ query LocationsQuery(
     }
     pageInfo {
       totalItems,
-      serverNowTime
+      timestamp
     }
   }
 }

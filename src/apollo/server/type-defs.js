@@ -44,7 +44,7 @@ export const typeDefs = gql`
 
   type PageInfo {
     totalItems: Int,
-    serverNowTime: String
+    timestamp: String
   }
 
   type LocationsConnection {
