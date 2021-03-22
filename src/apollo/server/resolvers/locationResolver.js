@@ -180,7 +180,7 @@ const locationResolver = {
       );
     },
     appointmentOnly: location => {
-      if (location.by_appointment_only && location.by_appointment_only !== 'null') {
+      if (location.by_appointment_only) {
         return true;
       } else {
         return false;
