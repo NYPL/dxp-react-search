@@ -21,6 +21,7 @@ const allLocations = {
             start: '11:00',
             end: '18:00'
           },
+          appointmentOnly: false,
           open: true,
           geoLocation: {
             lat: 40.8034,
@@ -47,6 +48,7 @@ const allLocations = {
             start: '11:00',
             end: '19:00'
           },
+          appointmentOnly: false,
           open: true,
           geoLocation: {
             lat: 40.7608,

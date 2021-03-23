@@ -120,6 +120,36 @@ describe('LocationHours Component', () => {
     expect(screen.getByText('Closed')).toBeInTheDocument();
   });
 
+  test('Location with regular hours and by appointment only should render hours notice.', () => {
+    render(
+      <LocationHours
+        open={true}
+        todayHoursStart={'11:15'}
+        todayHoursEnd={'14:01'}
+        appointmentOnly={true}
+      />
+    );
+
+    expect(screen.getByText('* Division is by appointment only.')).toBeInTheDocument();
+    expect(screen.getByText("Today's Hours:")).toBeInTheDocument();
+    expect(screen.getByText('11:15AM–2:01PM*')).toBeInTheDocument();
+  });
+
+  test('Location with regular hours, but not by appointment only should not render hours notice.', () => {
+    render(
+      <LocationHours
+        open={true}
+        todayHoursStart={'11:15'}
+        todayHoursEnd={'14:00'}
+        appointmentOnly={false}
+      />
+    );
+
+    expect(screen.queryByText('* Division is by appointment only.')).not.toBeInTheDocument();
+    expect(screen.getByText("Today's Hours:")).toBeInTheDocument();
+    expect(screen.getByText('11:15AM–2PM')).toBeInTheDocument();
+  });
+
   // Accessbiility tests.
   it('should not have basic accessibility issues', async () => {
     const { container } = render(
