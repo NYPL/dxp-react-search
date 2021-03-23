@@ -124,7 +124,7 @@ const locationResolver = {
           break;
         case 'center':
           // Pattern: /locations/<parent_slug>/<slug>
-          url = `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/${location.parent_library_slug}/${location.slug}`;
+          url = `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/${location.parents.library.slug}/${location.slug}`;
           break;
         case 'division':
           // Pattern: /locations/divisions/<slug>
@@ -134,6 +134,11 @@ const locationResolver = {
       return url;
     },
     status: location => location.slug,
+    parentLibraryName: location => {
+      if (location.type === 'center' || location.type === 'division') {
+        return location.parents.library.name;
+      }
+    },
     address_line1: location => location.street_address,
     address_line2: location => location.street_address,
     locality: location => location.locality,

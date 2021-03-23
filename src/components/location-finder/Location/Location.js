@@ -51,6 +51,9 @@ function Location({ location }) {
           {location.name}
         </a>
       </DS.Heading>
+      {location.parentLibraryName &&
+        <div className='location__parent'>{location.parentLibraryName}</div>
+      }
       <div className='address'>
         {formattedAddress}
       </div>

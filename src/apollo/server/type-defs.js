@@ -8,6 +8,7 @@ export const typeDefs = gql`
     slug: String!
     url: String!
     status: String!
+    parentLibraryName: String
     address_line1: String
     address_line2: String
     locality: String
