@@ -135,7 +135,7 @@ const locationResolver = {
     },
     status: location => location.slug,
     parentLibraryName: location => {
-      if (location.type === 'center' || location.type === 'division') {
+      if (location.type === 'division') {
         return location.parents.library.name;
       }
     },
