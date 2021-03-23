@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 // Context
 import { SearchFiltersContext } from './SearchFiltersContext';
 // Redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from '../../../redux/actions';
 // Components
 import { 
@@ -17,13 +17,22 @@ function FiltersButton(props) {
   // Props
   const { setIsModalOpen } = props;
   // Redux
-  const reduxDispatch = useDispatch();
+  //const reduxDispatch = useDispatch();
+  const { searchFilters } = useSelector(state => state.search);
 
   function onClick(event) {
     // Clear the context state for selectedItems.
     // @TODO You'd need a sync all context state from redux state?
-    dispatch({
+    /*dispatch({
       type: 'RESET_SELECTED_ITEMS'
+    });
+    */
+
+    dispatch({
+      type: 'SYNC_SELECTED_ITEMS_FROM_SAVED',
+      payload: { 
+        savedItems: searchFilters,
+      }
     });
     
     // Close modal

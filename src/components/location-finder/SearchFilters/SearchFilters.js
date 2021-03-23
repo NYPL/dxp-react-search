@@ -13,6 +13,7 @@ import DropdownDesktop from './DropdownDesktop';
 import DropdownMobile from './DropdownMobile';
 import DropdownMobileButtons from './DropdownMobileButtons';
 import FiltersButton from './FiltersButton';
+import DropdownMobileClear from './DropdownMobileClear';
 // Hooks
 import useWindowSize from '../../../hooks/useWindowSize';
 import usePrevious from '../../../hooks/usePrevious';
@@ -63,6 +64,10 @@ function SearchFilters() {
     );
   }
 
+  function onClear() {
+    console.log('clear mobile!');
+  }
+
   return (
     <SearchFiltersProvider>
       {isMobile ? (
@@ -83,6 +88,7 @@ function SearchFilters() {
                   <DropdownMobile vocab={vocab} />
                 )
               })}
+              <DropdownMobileClear />
             </Modal>
           )}
         </div>

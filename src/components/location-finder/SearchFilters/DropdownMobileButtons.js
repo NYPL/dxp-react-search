@@ -21,7 +21,7 @@ function DropdownMobileButtons(props) {
 
   function onClearAllFilters(event) {
     // Clear the redux state.
-    reduxDispatch(setFilters({
+    /*reduxDispatch(setFilters({
       searchFilters: []
     }));
 
@@ -29,6 +29,7 @@ function DropdownMobileButtons(props) {
     dispatch({
       type: 'RESET_SELECTED_ITEMS'
     });
+    */
     
     // Close modal
     setIsModalOpen(false);
