@@ -7,6 +7,7 @@ const allLocations = {
           name: '125th Street Library',
           contentType: 'library',
           status: '125th-street',
+          parentLibraryName: null,
           slug: '125th-street',
           url: 'https://www.nypl.org/locations/125th-street',
           address_line1: '224 East 125th Street',
@@ -21,6 +22,7 @@ const allLocations = {
             start: '11:00',
             end: '18:00'
           },
+          appointmentOnly: false,
           open: true,
           geoLocation: {
             lat: 40.8034,
@@ -32,6 +34,7 @@ const allLocations = {
           id: '53rd-street',
           name: '53rd Street Library',
           status: '53rd-street',
+          parentLibraryName: null,
           slug: '53rd-street',
           contentType: 'library',
           url: 'https://www.nypl.org/locations/53rd-street',
@@ -47,6 +50,7 @@ const allLocations = {
             start: '11:00',
             end: '19:00'
           },
+          appointmentOnly: false,
           open: true,
           geoLocation: {
             lat: 40.7608,

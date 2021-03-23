@@ -8,6 +8,7 @@ export const typeDefs = gql`
     slug: String!
     url: String!
     status: String!
+    parentLibraryName: String
     address_line1: String
     address_line2: String
     locality: String
@@ -18,6 +19,7 @@ export const typeDefs = gql`
     accessibilityNote: String
     geoLocation: GeoLocation
     todayHours: TodayHours
+    appointmentOnly: Boolean
     open: Boolean
     terms: [String]
   }

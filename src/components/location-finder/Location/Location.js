@@ -51,6 +51,9 @@ function Location({ location }) {
           {location.name}
         </a>
       </DS.Heading>
+      {location.parentLibraryName &&
+        <div className='location__parent'>{location.parentLibraryName}</div>
+      }
       <div className='address'>
         {formattedAddress}
       </div>
@@ -65,6 +68,7 @@ function Location({ location }) {
         open={location.open}
         todayHoursStart={location.todayHours.start}
         todayHoursEnd={location.todayHours.end}
+        appointmentOnly={location.appointmentOnly}
       />
       <LocationDistance locationPoint={location.geoLocation} />
       <div className='location__links'>

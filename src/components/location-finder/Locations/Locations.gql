@@ -26,6 +26,7 @@ query LocationsQuery(
       slug
       url
       status
+      parentLibraryName
       address_line1
       address_line2
       locality
@@ -42,6 +43,7 @@ query LocationsQuery(
         start
         end
       }
+      appointmentOnly
       open
     }
     pageInfo {
