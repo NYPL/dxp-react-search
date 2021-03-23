@@ -16,7 +16,7 @@ import {
 function DropdownMobile(props) {
   // Context
   const [state, dispatch] = useContext(SearchFiltersContext);
-  const { dropdownIds } = state;
+  const { checkedTerms, dropdownIds } = state;
   // Props
   const { vocab } = props;
   // Redux

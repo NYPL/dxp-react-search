@@ -12,6 +12,7 @@ import {
 import DropdownDesktop from './DropdownDesktop';
 import DropdownMobile from './DropdownMobile';
 import DropdownMobileButtons from './DropdownMobileButtons';
+import FiltersButton from './FiltersButton';
 // Hooks
 import useWindowSize from '../../../hooks/useWindowSize';
 import usePrevious from '../../../hooks/usePrevious';
@@ -66,13 +67,7 @@ function SearchFilters() {
     <SearchFiltersProvider>
       {isMobile ? (
         <div className='search-filters__mobile'>
-          <Button 
-            id='search-filters__mobile-filters-button' 
-            onClick={() => setIsModalOpen(true)}
-            buttonType='outline'
-          >
-            Filters
-          </Button>
+          <FiltersButton setIsModalOpen={setIsModalOpen} />
           {isModalOpen && (
             <Modal>
               <DropdownMobileButtons
