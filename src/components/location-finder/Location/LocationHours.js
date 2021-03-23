@@ -22,16 +22,9 @@ function LocationHours({ open, todayHoursStart, todayHoursEnd, appointmentOnly }
     const endMeridiem = (endHoursOnly < 12 || endHoursOnly === 24) ? "AM" : "PM";
     const endMinutesOnly = end.substr(3, 2);
     const endHoursFinal = (endMinutesOnly != 0) ? (endHours + ':' + endMinutesOnly) : endHours;
-    
-    let formattedHours;
-    formattedHours = `${startHoursFinal}${startMeridiem}–${endHoursFinal}${endMeridiem}`;
-    
-    // Append asterisk for by appointment only.
-    if (appointment) {
-      formattedHours = `${formattedHours}*`
-    }
 
-    return formattedHours;
+    // Append asterisk if location hours are by appointment only.
+    return `${startHoursFinal}${startMeridiem}–${endHoursFinal}${endMeridiem}${appointment ? `*` : ``}`;
   }
 
   return (
