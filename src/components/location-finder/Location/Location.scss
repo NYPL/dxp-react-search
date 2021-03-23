@@ -13,6 +13,10 @@
     }
   }
 
+  .location__parent {
+    font-style: italic;
+  }
+
   .address {
     @include space-stack-xxs;
     white-space: pre-wrap;
