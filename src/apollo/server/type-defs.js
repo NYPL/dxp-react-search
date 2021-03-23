@@ -18,6 +18,7 @@ export const typeDefs = gql`
     accessibilityNote: String
     geoLocation: GeoLocation
     todayHours: TodayHours
+    appointmentOnly: Boolean
     open: Boolean
     terms: [String]
   }

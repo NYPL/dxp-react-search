@@ -65,6 +65,7 @@ function Location({ location }) {
         open={location.open}
         todayHoursStart={location.todayHours.start}
         todayHoursEnd={location.todayHours.end}
+        appointmentOnly={location.appointmentOnly}
       />
       <LocationDistance locationPoint={location.geoLocation} />
       <div className='location__links'>

@@ -179,6 +179,13 @@ const locationResolver = {
         hasActiveClosing(today, location._embedded.alerts, null) && !location.open
       );
     },
+    appointmentOnly: location => {
+      if (location.by_appointment_only) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     open: location => {
       // Create a dayjs date object, using default timezone.
       // @see https://github.com/iamkun/dayjs/issues/1227
