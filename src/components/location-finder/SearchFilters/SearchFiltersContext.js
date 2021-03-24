@@ -161,6 +161,28 @@ function reducer(state, action) {
       };
     }
 
+    case 'SYNC_SELECTED_ITEMS_FROM_SAVED': {
+      const savedItems = action.payload.savedItems;
+      // Restore context state to redux state.
+      if (
+        // Check if the two state objects are not equal.
+        !isEqual(state.checkedTerms, savedItems)
+      ) {
+        return {
+          ...state,
+          checkedTerms: {
+            ...savedItems
+          },
+          dropdownIds: undefined
+        };
+      }
+
+      return {
+        ...state,
+        dropdownIds: undefined
+      }
+    }
+
     default: {
       throw new Error(`Unsupported action type: ${action.type}`)
     }

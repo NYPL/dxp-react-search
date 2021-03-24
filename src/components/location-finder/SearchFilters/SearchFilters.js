@@ -12,6 +12,8 @@ import {
 import DropdownDesktop from './DropdownDesktop';
 import DropdownMobile from './DropdownMobile';
 import DropdownMobileButtons from './DropdownMobileButtons';
+import FiltersButton from './FiltersButton';
+import DropdownMobileClear from './DropdownMobileClear';
 // Hooks
 import useWindowSize from '../../../hooks/useWindowSize';
 import usePrevious from '../../../hooks/usePrevious';
@@ -66,13 +68,7 @@ function SearchFilters() {
     <SearchFiltersProvider>
       {isMobile ? (
         <div className='search-filters__mobile'>
-          <Button 
-            id='search-filters__mobile-filters-button' 
-            onClick={() => setIsModalOpen(true)}
-            buttonType='outline'
-          >
-            Filters
-          </Button>
+          <FiltersButton setIsModalOpen={setIsModalOpen} />
           {isModalOpen && (
             <Modal>
               <DropdownMobileButtons
@@ -85,9 +81,10 @@ function SearchFilters() {
               />
               {data.allTerms.map((vocab) => {
                 return (
-                  <DropdownMobile vocab={vocab} />
+                  <DropdownMobile key={vocab.id} vocab={vocab} />
                 )
               })}
+              <DropdownMobileClear />
             </Modal>
           )}
         </div>
@@ -103,7 +100,7 @@ function SearchFilters() {
             <div className='search-filters__dropdowns'>
               {data.allTerms.slice(0, 3).map((vocab) => {
                 return (
-                  <DropdownDesktop vocab={vocab} />
+                  <DropdownDesktop key={vocab.id} vocab={vocab} />
                 )
               })}
             </div>
@@ -118,7 +115,7 @@ function SearchFilters() {
             <div className='search-filters__dropdowns'>
               {data.allTerms.slice(3, 5).map((vocab) => {
                 return (
-                  <DropdownDesktop vocab={vocab} />
+                  <DropdownDesktop key={vocab.id} vocab={vocab} />
                 )
               })}
             </div>

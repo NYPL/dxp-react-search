@@ -64,14 +64,36 @@
     #search-filters__mobile-filters-button {
       min-width: 140px;
     }
-    .dropdown__label {
-      border-bottom: 0;
+
+    .dropdown-mobile-clear-wrapper button {
+      margin: 0 auto;
     }
+
     .dropdown {
-      margin: $space-xs 0;
+      &__input {
+        &:checked {
+          + .dropdown__label {
+            border-bottom: 0;
+          }
+        }
+      }
+
+      &.hasSelectedItems {
+        .dropdown__label {  
+          background-color: $gray-light;
+        }
+      }
+    }
+
+    .dropdown__label {
+      padding: .65rem .5rem;
+    }
+
+    .dropdown {
+      margin: .75rem 0;
     }
     .heading {
-      padding: $space-xs 0;
+      padding: $space-m 0 $space-xs 0;
     }
     .dropdown__content-buttons {
       display: flex;

@@ -16,7 +16,7 @@ import {
 function DropdownMobile(props) {
   // Context
   const [state, dispatch] = useContext(SearchFiltersContext);
-  const { dropdownIds } = state;
+  const { checkedTerms, dropdownIds } = state;
   // Props
   const { vocab } = props;
   // Redux
@@ -38,8 +38,8 @@ function DropdownMobile(props) {
     <Dropdown
       key={vocab.id}
       id={vocab.id}
-      label={setDropdownLabel(vocab, searchFilters)}
-      hasSelectedItems={hasSelectedItems(vocab, searchFilters)}
+      label={setDropdownLabel(vocab, checkedTerms)}
+      hasSelectedItems={hasSelectedItems(vocab, checkedTerms)}
       checked={setDropdownCheckedProp(vocab.id, dropdownIds)}
       onChange={(e) => onChangeDropdown(vocab.id, e)}
     >
