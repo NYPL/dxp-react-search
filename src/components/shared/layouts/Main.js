@@ -4,7 +4,10 @@ import Footer from '@nypl/dgx-react-footer';
 
 export default ({ children }) => (
   <div className="layout-container nypl--locations nypl-ds">
-
+    <Header
+      skipNav={{ target: 'main-content' }}
+      navData={navConfig.current}
+    />
     <DS.Breadcrumbs
       breadcrumbs={[
         {
