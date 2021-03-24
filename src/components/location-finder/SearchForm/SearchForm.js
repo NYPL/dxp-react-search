@@ -50,7 +50,7 @@ function SearchForm() {
         setAutoSuggestItems(response.data.allLocations.locations);
       },
       error => {
-        console.error(error);
+        //console.error(error);
       }
     );
   },[autoSuggestItems]);
