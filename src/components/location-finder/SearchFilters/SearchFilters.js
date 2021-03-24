@@ -64,10 +64,6 @@ function SearchFilters() {
     );
   }
 
-  function onClear() {
-    console.log('clear mobile!');
-  }
-
   return (
     <SearchFiltersProvider>
       {isMobile ? (

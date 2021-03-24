@@ -163,7 +163,6 @@ function reducer(state, action) {
 
     case 'SYNC_SELECTED_ITEMS_FROM_SAVED': {
       const savedItems = action.payload.savedItems;
-
       // Restore context state to redux state.
       if (
         // Check if the two state objects are not equal.

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 // Context
 import { SearchFiltersContext } from './SearchFiltersContext';
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setFilters } from '../../../redux/actions';
 // Components
 import { 
@@ -28,14 +28,10 @@ function DropdownMobileClear() {
     dispatch({
       type: 'RESET_SELECTED_ITEMS'
     });
-    
-    
-    // Close modal
-    //setIsModalOpen(true);
   }
 
   return (
-    <div>
+    <div className="dropdown-mobile-clear-wrapper">
       {Object.keys(checkedTerms).length > 0 &&
         <Button
           buttonType="link"

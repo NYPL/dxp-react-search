@@ -12,25 +12,14 @@ import {
 
 function DropdownMobileButtons(props) {
   // Context state.
-  const [state, dispatch] = useContext(SearchFiltersContext);
+  const [state] = useContext(SearchFiltersContext);
   const { checkedTerms } = state;
   // Props
   const { setIsModalOpen } = props;
   // Redux
   const reduxDispatch = useDispatch();
 
-  function onClearAllFilters(event) {
-    // Clear the redux state.
-    /*reduxDispatch(setFilters({
-      searchFilters: []
-    }));
-
-    // Clear the context state for selectedItems.
-    dispatch({
-      type: 'RESET_SELECTED_ITEMS'
-    });
-    */
-    
+  function onClearAllFilters(event) {    
     // Close modal
     setIsModalOpen(false);
   }
@@ -47,8 +36,6 @@ function DropdownMobileButtons(props) {
     
     // Close modal
     setIsModalOpen(false);
-    
-    // @TODO Scroll to locations results.
   }
 
   return (

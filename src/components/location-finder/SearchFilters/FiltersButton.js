@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 // Context
 import { SearchFiltersContext } from './SearchFiltersContext';
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../../../redux/actions';
+import { useSelector } from 'react-redux';
 // Components
 import { 
   Button,
@@ -13,21 +12,13 @@ import {
 function FiltersButton(props) {
   // Context state.
   const [state, dispatch] = useContext(SearchFiltersContext);
-  const { checkedTerms } = state;
   // Props
   const { setIsModalOpen } = props;
   // Redux
-  //const reduxDispatch = useDispatch();
   const { searchFilters } = useSelector(state => state.search);
 
   function onClick(event) {
     // Clear the context state for selectedItems.
-    // @TODO You'd need a sync all context state from redux state?
-    /*dispatch({
-      type: 'RESET_SELECTED_ITEMS'
-    });
-    */
-
     dispatch({
       type: 'SYNC_SELECTED_ITEMS_FROM_SAVED',
       payload: { 
