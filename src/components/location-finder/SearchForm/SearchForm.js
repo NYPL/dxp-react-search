@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Redux
 import {
   batch,
@@ -29,6 +29,9 @@ const northEastBound = '40.91, -73.77';
 Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 
 function SearchForm() {
+  // Local state.
+  const [autoSuggestItems, setAutoSuggestItems] = useState();
+
   // Redux
   const {
     autoSuggestInputValue,
@@ -39,6 +42,19 @@ function SearchForm() {
 
   // Apollo
   const client = useApolloClient();
+  
+  // When component mounts, prefetch the items for autosuggest.
+  useEffect(() => {
+    client.query({ query: LOCATIONS_QUERY }).then(
+      response => {
+        setAutoSuggestItems(response.data.allLocations.locations);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+    console.log('SearchForm!');
+  },[autoSuggestItems]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -113,7 +129,7 @@ function SearchForm() {
         role='search'
         aria-label='Find your library'
         onSubmit={handleSubmit}>
-        <SearchAutoSuggest />
+        <SearchAutoSuggest autoSuggestItems={autoSuggestItems} />
         <Button
           buttonType="filled"
           id="button"
