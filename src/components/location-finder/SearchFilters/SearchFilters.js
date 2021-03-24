@@ -81,7 +81,7 @@ function SearchFilters() {
               />
               {data.allTerms.map((vocab) => {
                 return (
-                  <DropdownMobile vocab={vocab} />
+                  <DropdownMobile key={vocab.id} vocab={vocab} />
                 )
               })}
               <DropdownMobileClear />
@@ -100,7 +100,7 @@ function SearchFilters() {
             <div className='search-filters__dropdowns'>
               {data.allTerms.slice(0, 3).map((vocab) => {
                 return (
-                  <DropdownDesktop vocab={vocab} />
+                  <DropdownDesktop key={vocab.id} vocab={vocab} />
                 )
               })}
             </div>
@@ -115,7 +115,7 @@ function SearchFilters() {
             <div className='search-filters__dropdowns'>
               {data.allTerms.slice(3, 5).map((vocab) => {
                 return (
-                  <DropdownDesktop vocab={vocab} />
+                  <DropdownDesktop key={vocab.id} vocab={vocab} />
                 )
               })}
             </div>
