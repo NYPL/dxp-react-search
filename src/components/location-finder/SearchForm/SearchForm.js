@@ -53,7 +53,6 @@ function SearchForm() {
         console.error(error);
       }
     );
-    console.log('SearchForm!');
   },[autoSuggestItems]);
 
   function handleSubmit(event) {

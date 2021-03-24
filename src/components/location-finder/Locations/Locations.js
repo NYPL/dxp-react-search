@@ -1,7 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
-import { LocationsQuery as LOCATIONS_QUERY } from './../../../apollo/client/queries/Locations.gql';
+import { 
+  LocationsQuery as LOCATIONS_QUERY 
+} from './../../../apollo/client/queries/Locations.gql';
 // Redux
 import {
   useDispatch,

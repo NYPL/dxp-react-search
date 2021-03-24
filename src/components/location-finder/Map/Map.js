@@ -15,9 +15,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setMapInfoWindow } from './../../../redux/actions';
 // Apollo
 import { useQuery } from '@apollo/client';
-//import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
-import { LocationsQuery as LOCATIONS_QUERY } from './../../../apollo/client/queries/Locations.gql';
-
+import { 
+  LocationsQuery as LOCATIONS_QUERY 
+} from './../../../apollo/client/queries/Locations.gql';
 // Hooks
 import useWindowSize from './../../../hooks/useWindowSize';
 // Utils
