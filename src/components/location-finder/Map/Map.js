@@ -15,7 +15,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setMapInfoWindow } from './../../../redux/actions';
 // Apollo
 import { useQuery } from '@apollo/client';
-import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+//import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+import { LocationsQuery as LOCATIONS_QUERY } from './../../../apollo/client/queries/Locations.gql';
+
 // Hooks
 import useWindowSize from './../../../hooks/useWindowSize';
 // Utils
@@ -27,6 +29,8 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
     searchQueryGeoLat,
     searchQueryGeoLng,
     openNow,
+    offset,
+    pageNumber,
     searchFilters
   } = useSelector(state => state.search);
   const {
@@ -35,16 +39,31 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
     infoWindowId,
     infoWindowIsVisible
   } = useSelector(state => state.map);
+
+  // Special handling for pagination on desktop
+  const windowSize = useWindowSize();
+  // Set limit based on window size, to disable pagination for desktop only.
+  let limit = 300;
+  if (windowSize < 600) {
+    limit = 10;
+  }
   
+  // Apollo
+  const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
+  const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
   // Convert the searchFilters to the object format needed by gql.
   const termIds = setTermsFilter(searchFilters);
 
-  // Apollo
   const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
       variables: {
+        searchGeoLat,
+        searchGeoLng,
         openNow,
-        termIds
+        termIds,
+        limit,
+        offset,
+        pageNumber
       }
     }
   );
