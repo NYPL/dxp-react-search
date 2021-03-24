@@ -1,10 +1,6 @@
 import React, { Fragment, useState } from 'react';
-// Apollo
-import { useLazyQuery } from '@apollo/client';
-import { LocationsQuery as LOCATIONS_QUERY } from './SearchAutoSuggest.gql';
 // Redux
 import {
-  batch,
   useDispatch,
   useSelector
 } from 'react-redux';
@@ -17,10 +13,9 @@ import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components
 import AutoSuggest from 'react-autosuggest';
 
-function SearchAutoSuggest() {
+function SearchAutoSuggest({ autoSuggestItems }) {
   // Local state
   const [suggestions, setSuggestions] = useState([]);
-  const [locationId, setLocationId] = useState('');
 
   // Redux
   const dispatch = useDispatch();
@@ -28,17 +23,9 @@ function SearchAutoSuggest() {
     autoSuggestInputValue
   } = useSelector(state => state.search);
 
-  // Query the apollo cache for locations data.
-  // useLazyQuery hook is used because the query doesn't happen until
-  // the user starts typing in the search box.
-  const [
-    getLocations,
-    { loading, data }
-  ] = useLazyQuery(LOCATIONS_QUERY, {});
-
-  function getSuggestions(data, value) {
-    if (data) {
-      return filterBySearchInput(data.allLocations.locations, value);
+  function getSuggestions(autoSuggestItems, value) {
+    if (autoSuggestItems) {
+      return filterBySearchInput(autoSuggestItems, value);
     }
     else {
       console.log('data is false');
@@ -90,10 +77,8 @@ function SearchAutoSuggest() {
         onSuggestionSelected={onSuggestionSelected}
         onSuggestionsClearRequested={() => setSuggestions([])}
         onSuggestionsFetchRequested={({ value }) => {
-          // Run the lazy gql query to get location suggestions
-          getLocations();
           dispatch(setAutoSuggestInputValue(value));
-          setSuggestions(getSuggestions(data, value));
+          setSuggestions(getSuggestions(autoSuggestItems, value));
         }}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
