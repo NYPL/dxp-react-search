@@ -40,6 +40,12 @@
   color: $white;
 }
 
+// @TODO Remove this. Temporary fix for DS changes other colors, but really
+// its an issue with the order nextJS complies the scss files on AWS.
+.nypl-ds .header-globalAlerts-box-item a {
+  color: #333;
+}
+
 // @TODO Remove this after updating to DS 0.12.0
 .nypl--locations .footer {
   box-sizing: content-box;
