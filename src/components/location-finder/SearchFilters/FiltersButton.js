@@ -30,14 +30,37 @@ function FiltersButton(props) {
     setIsModalOpen(true);
   }
 
+  function setFiltersLabel(searchFilters) {    
+    let allItems = [];
+    for (let [key, value] of Object.entries(searchFilters)) {
+      value.terms.map(term => {
+        allItems.push(term);
+      })
+    }
+    return `Filters ${allItems.length ? `(${allItems.length})` : ``}`;
+  }
+
+  function hasSelectedItems(searchFilters) {
+    if (Object.keys(searchFilters).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return (
-    <Button 
-      id='search-filters__mobile-filters-button' 
-      onClick={() => onClick()}
-      buttonType='outline'
+    <div className={hasSelectedItems(searchFilters)
+      ? `mobile-filters-button hasSelectedItems` 
+      : `mobile-filters-button`}
     >
-      Filters
-    </Button>
+      <Button 
+        id='search-filters__mobile-filters-button' 
+        onClick={() => onClick()}
+        buttonType='outline'
+      >
+        {setFiltersLabel(searchFilters)}
+      </Button>
+    </div>
   );
 }
 
