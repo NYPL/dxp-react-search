@@ -19,11 +19,14 @@
 
   .search-filters {
     display: flex;
+    flex-direction: row;
+    // @TODO Temp fix for iPad
+    @media only screen and (min-width: 601px) and (max-width: 1000px) {
+      flex-direction: column;
+    }
 
     .search-filters__dropdowns {
       display: flex;
-
-
     }
 
     h3 {
