@@ -43,9 +43,10 @@ function LocationHours({ open, todayHoursStart, todayHoursEnd, appointmentOnly }
       ) : (
         <StatusBadge 
           level={"medium"} 
-          statusBadgeText={"Location is temporarily closed"}
           className={'location__hours-status'}
-        />
+        >
+          Location is temporarily closed
+        </StatusBadge>
       )}
       {appointmentOnly && todayHoursStart && todayHoursEnd &&
         <div className='location__hours-appointment'>
