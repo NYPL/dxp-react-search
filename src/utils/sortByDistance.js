@@ -1,7 +1,36 @@
-function distance(lat1, lon1, lat2, lon2) {
-  var radlat1 = Math.PI * lat1 / 180;
-  var radlat2 = Math.PI * lat2 / 180;
-  var theta = lon1 - lon2;
+/**
+ * Sorts an array of locations by distance from an origin geocordinate pair.
+ *
+ * @param {object} origin - origin geocordinate pair.
+ * @param {array} locations - array of location objects.
+ * @return {sort} Return array of location objects, sorted by distance.
+ */
+function sortByDistance(origin, locations) {
+  return locations.sort((a, b) => {
+    // Origin
+    const originGeo = {
+      lat: origin.originLat,
+      lng: origin.originLng
+    };
+
+    const aGeo = {
+      lat: a.geolocation.coordinates[1],
+      lng: a.geolocation.coordinates[0]
+    };
+
+    const bGeo = {
+      lat: b.geolocation.coordinates[1],
+      lng: b.geolocation.coordinates[0]
+    }
+
+    return distance(originGeo, aGeo) - distance(originGeo, bGeo);
+  });
+}
+
+function distance(aGeo, bGeo) {
+  var radlat1 = Math.PI * aGeo['lat'] / 180;
+  var radlat2 = Math.PI * bGeo['lat'] / 180;
+  var theta = aGeo['lng'] - bGeo['lng'];
   var radtheta = Math.PI * theta / 180;
   var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
   dist = Math.acos(dist);
@@ -11,28 +40,5 @@ function distance(lat1, lon1, lat2, lon2) {
 
   return dist;
 };
-
-function sortByDistance(origin, locations) {
-  console.log('originLat: ' + origin.originLat);
-  console.log('originLng: ' + origin.originLng);
-
-  //console.log(locations);
-
-  return locations.sort(function (a, b) {
-    const origLat = origin.originLat;
-    const origLng = origin.originLng;
-
-    const aGeoLat = a.geolocation.coordinates[1];
-    const aGeoLng = a.geolocation.coordinates[0];
-    const bGeoLat = b.geolocation.coordinates[1];
-    const bGeoLng = b.geolocation.coordinates[0];
-
-    if (aGeoLat === bGeoLat && aGeoLng === bGeoLng) {
-      //console.log(b.name)
-    }
-
-    return distance(origLat, origLng, aGeoLat, aGeoLng) - distance(origLat, origLng, bGeoLat, bGeoLng);
-  });
-}
 
 export default sortByDistance;
