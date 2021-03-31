@@ -1,6 +1,6 @@
 # DXP React Search
 
-React app build for search interfaces on www.nypl.org.
+React app build for search interfaces on www.nypl.org. TEST
 
 ## Installation (Local)
 
