@@ -1,11 +1,20 @@
+import { matchSorter } from 'match-sorter';
+
 /**
  * Sorts an array of locations by distance from an origin geocordinate pair.
  *
  * @param {object} origin - origin geocordinate pair.
  * @param {array} locations - array of location objects.
+ * @param {string} searchQuery - search query submitted by user.
  * @return {sort} Return array of location objects, sorted by distance.
  */
-function sortByDistance(origin, locations) {
+function sortByDistance(origin, locations, searchQuery) {
+  // Pre-sort the locations based on match of searchQuery.
+  locations = matchSorter(locations, searchQuery, {
+    keys: ['name'],
+    threshold: matchSorter.rankings.NO_MATCH
+  });
+
   return locations.sort((a, b) => {
     // Origin
     const originGeo = {

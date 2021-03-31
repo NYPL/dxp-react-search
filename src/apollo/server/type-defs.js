@@ -37,6 +37,7 @@ export const typeDefs = gql`
   input SortByDistance {
     originLat: Float
     originLng: Float
+    searchQuery: String
   }
 
   input Filter {
