@@ -16,6 +16,8 @@ function sortByDistance(origin, locations) {
   console.log('originLat: ' + origin.originLat);
   console.log('originLng: ' + origin.originLng);
 
+  //console.log(locations);
+
   return locations.sort(function (a, b) {
     const origLat = origin.originLat;
     const origLng = origin.originLng;
@@ -24,6 +26,10 @@ function sortByDistance(origin, locations) {
     const aGeoLng = a.geolocation.coordinates[0];
     const bGeoLat = b.geolocation.coordinates[1];
     const bGeoLng = b.geolocation.coordinates[0];
+
+    if (aGeoLat === bGeoLat && aGeoLng === bGeoLng) {
+      //console.log(b.name)
+    }
 
     return distance(origLat, origLng, aGeoLat, aGeoLng) - distance(origLat, origLng, bGeoLat, bGeoLng);
   });

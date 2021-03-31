@@ -70,6 +70,8 @@ const locationResolver = {
         && args.sortByDistance.originLat
         && args.sortByDistance.originLng
       ) {
+        console.log('sort by dist!')
+        
         if (typeof results !== "undefined") {
           results = sortByDistance(args.sortByDistance, results);
         } else {
