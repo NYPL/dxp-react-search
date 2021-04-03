@@ -36,6 +36,13 @@ function sortByDistance(origin, locations, searchQuery) {
   });
 }
 
+/**
+ * Compared two geocordinate pairs and determines distance.
+ *
+ * @param {object} aGeo - geocordinate pair a.
+ * @param {object} bGeo - geocordinate pair b.
+ * @return {float} Distance between 2 geocordinate points.
+ */
 function distance(aGeo, bGeo) {
   var radlat1 = Math.PI * aGeo['lat'] / 180;
   var radlat2 = Math.PI * bGeo['lat'] / 180;

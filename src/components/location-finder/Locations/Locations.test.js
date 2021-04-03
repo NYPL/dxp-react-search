@@ -4,7 +4,10 @@ import { render } from './../../../../testHelper/customRtlRender';
 import '@testing-library/jest-dom/extend-expect';
 import { GraphQLError } from 'graphql';
 import Locations from './Locations';
-import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+//import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+import { 
+  LocationsQuery as LOCATIONS_QUERY 
+} from './../../../apollo/client/queries/Locations.gql';
 // Mock data
 import allLocations from './../../../../testHelper/__mocks/allLocations';
 // Hooks
@@ -20,6 +23,7 @@ const mocks = [
       variables: {
         searchGeoLat: null,
         searchGeoLng: null,
+        searchQuery: '',
         openNow: true,
         limit: 300,
         offset: 0,
@@ -70,6 +74,7 @@ describe('Apollo states test', () => {
           variables: {
             searchGeoLat: null,
             searchGeoLng: null,
+            searchQuery: '',
             openNow: true,
             limit: 300,
             offset: 0,
@@ -125,5 +130,4 @@ describe('Apollo states test', () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
-
 });
