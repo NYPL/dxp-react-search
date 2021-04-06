@@ -90,3 +90,14 @@
 .layout-container {
   overflow-x: hidden;
 }
+
+
+.featured-cards {
+  display: flex;
+  flex-flow: row wrap;
+  padding: .75rem 0;
+
+  .resource-topics__heading-item {
+    padding-top: 1rem;
+  }
+}

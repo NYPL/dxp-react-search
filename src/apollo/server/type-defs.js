@@ -72,6 +72,18 @@ export const typeDefs = gql`
     operator: String!
   }
 
+  type ResourceTopic {
+    id: ID!
+    name: String!
+    description: String
+    imageUrl: String
+  }
+
+  input ResourceTopicFilter {
+    featured: Boolean
+    mostPopular: Boolean
+  }
+
   type Query {
     allLocations(
       limit: Int,
@@ -81,5 +93,6 @@ export const typeDefs = gql`
       sortByDistance: SortByDistance
     ): LocationsConnection
     allTerms(filter: TermsFilter): [Vocab]!
+    allResourceTopics(filter: ResourceTopicFilter): [ResourceTopic]!
   }
 `;

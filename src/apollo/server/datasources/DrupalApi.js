@@ -17,7 +17,7 @@ class DrupalApi extends RESTDataSource {
   }
 
   // Tidy up the response from Drupal.
-  locationNormalizer(location) {
+  /*locationNormalizer(location) {
     // D8 doesn't have geo data yet, so just hardcode something
     // so the map doesn't completely break.
     const defaultGeoCords = {
@@ -47,8 +47,9 @@ class DrupalApi extends RESTDataSource {
       },
     };
   }
+  */
 
-  async getAllLocations(query) {
+  /*async getAllLocations(query) {
     // Rough draft of filtering json api by title field if query string/filter is included.
     //console.log('query: ' + query);
     let apiPath;
@@ -64,6 +65,42 @@ class DrupalApi extends RESTDataSource {
     } else {
       return [];
     }
+  }
+  */
+
+  async getAllResourceTopics(args) {
+    //console.log(args);
+    
+    let queryString = '';
+
+    // Featured
+    if (
+      args.filter
+      && 'featured' in args.filter
+      && args.filter.featured
+    ) {
+      queryString = 'filter[field_featured]=1';
+    }
+    
+    // Most popular.
+    if (
+      args.filter
+      && 'mostPopular' in args.filter
+      && args.filter.mostPopular
+    ) {
+      queryString = 'filter[field_most_popular]=1';
+    }
+
+
+    const apiPath = `/taxonomy_term/resource_topic?sort=weight&include=field_ers_image&${queryString}`;
+    const response = await this.get(apiPath);
+
+    if (Array.isArray(response.data)) {
+      return response.data;
+    } else {
+      return [];
+    }
+    
   }
 }
 
