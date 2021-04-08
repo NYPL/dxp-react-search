@@ -92,11 +92,11 @@ class DrupalApi extends RESTDataSource {
     }
 
 
-    const apiPath = `/taxonomy_term/resource_topic?sort=weight&include=field_ers_image&${queryString}`;
+    const apiPath = `/taxonomy_term/resource_topic?sort=weight&include=field_ers_image.field_media_image&${queryString}`;
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.data)) {
-      return response.data;
+      return response;
     } else {
       return [];
     }

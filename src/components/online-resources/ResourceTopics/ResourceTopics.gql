@@ -11,5 +11,6 @@ query ResourceTopicsQuery(
     id
     name
     description
+    imageUrl
   }
 }

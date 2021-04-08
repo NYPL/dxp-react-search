@@ -57,6 +57,7 @@ function ResourceTopics(props) {
 
   return (
     <div>
+      <br />
       <Heading
         id="resource-topics__heading"
         level={2}
@@ -77,14 +78,15 @@ function ResourceTopics(props) {
               style={{
                 'margin-bottom': '2rem',
                 'flex': '1 0 calc(33% - 2rem)',
-                'margin-right': '2rem'
+                'margin-right': '2rem',
+                'max-width': '384px'
               }}
             >
               <Image
                 alt=""
                 imageCredit={null}
                 modifiers={null}
-                src="https://cdn-d8.nypl.org/s3fs-public/styles/2_1_640/public/2020-07/SASB_06_29_2020_Lions_mask-00207%20copy_0.jpeg?h=c8e955ed&itok=Ofco90Kx"
+                src={resourceTopic.imageUrl}
               />
               <Heading
                 className="resource-topics__heading-item"

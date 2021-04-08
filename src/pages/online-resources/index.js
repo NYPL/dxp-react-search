@@ -8,8 +8,6 @@ import Meta from './../../components/location-finder/Meta';
 import Layout from './../../components/shared/layouts/Main';
 
 import ResourceTopics from './../../components/online-resources/ResourceTopics';
-
-import BottomPromo from '../../components/location-finder/BottomPromo';
 import RightRail from '../../components/location-finder/RightRail';
 
 function OnlineResources() {
@@ -25,7 +23,6 @@ function OnlineResources() {
         <ResourceTopics type="mostPopular" />
       </div>
       <div className="content-bottom">
-        <BottomPromo />
         <RightRail />
       </div>
     </Layout>

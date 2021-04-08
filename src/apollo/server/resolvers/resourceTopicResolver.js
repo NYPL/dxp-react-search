@@ -1,7 +1,15 @@
+// Env vars
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+
+let responseIncluded;
+
 const resourceTopicResolver = {
   Query: {
     allResourceTopics: async (parent, args, { dataSources }) => {
-      return await dataSources.drupalApi.getAllResourceTopics(args);
+      const response = await dataSources.drupalApi.getAllResourceTopics(args);
+      responseIncluded = response.included;
+
+      return response.data;
     },
   },
   ResourceTopic: {
@@ -21,8 +29,24 @@ const resourceTopicResolver = {
         mediaEntityId = resourceTopic.relationships.field_ers_image.data.id;
       }
 
-      //console.log(mediaEntityId);
-      return false;
+      // Find the included media entity item, to find the file entity id.
+      let fileEntityId;
+      responseIncluded.forEach(includedItem => {
+        // Find the included media entity item.
+        if (mediaEntityId === includedItem.id) {
+          fileEntityId = includedItem.relationships.field_media_image.data.id
+        }
+      });
+
+      // Find the included file entity item using the file entity id.
+      let imageUrl;
+      responseIncluded.forEach(includedItem => {
+        if (fileEntityId === includedItem.id) {
+          imageUrl = includedItem.attributes.uri.url;
+        }
+      });
+
+      return `http://localhost:8080${imageUrl}`;
     }
   }
 }
