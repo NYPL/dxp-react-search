@@ -1,6 +1,7 @@
 .dropdown {
   &.hasSelectedItems {
-    .dropdown__label {  
+    .dropdown__label {
+      border-color: $black;
       background-color: $gray-light;
     }
   }
@@ -24,7 +25,7 @@
     transition: all 0.35s;
   }
 
-  &__label {    
+  &__label {
     border: 1px solid $gray-light;
     display: flex;
     justify-content: space-between;
@@ -84,7 +85,7 @@
           display: inline-block;
           z-index: 1;
           min-width: 275px;
-          
+
           // Move items to columns if more than x items.
           /*display: grid;
           grid-template-rows: repeat(30, min-content);
