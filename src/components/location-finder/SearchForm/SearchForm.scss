@@ -4,7 +4,7 @@
     display: flex;
     flex-flow: wrap;
   }
-  
+
   // Search text
   input[type="text"]:focus {
     outline: 1px solid var(--ui-focus);
@@ -38,6 +38,30 @@
     }
   }
 
+  .search-filters__group2 {
+    .dropdown:first-child {
+      .term {
+        .checkbox {
+          label {
+            font-weight: 500;
+          }
+        }
+
+        ul {
+          padding-bottom: 4px;
+
+          .term-child {
+            .checkbox {
+              label {
+                font-weight: 300;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   // IE11 only
   // DS uses CSS variables for color and space that won't work in ie11.
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -45,7 +69,7 @@
       border: 1px solid $gray-medium;
       padding: $space-xs;
     }
-    
+
     .button {
       padding: $space-xs;
       border-radius: 2px;
