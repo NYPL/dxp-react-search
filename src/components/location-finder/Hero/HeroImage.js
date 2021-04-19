@@ -1,7 +1,6 @@
 import React from 'react';
 
 function HeroImage() {
-
   return (
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="41.68000793457031 55.540000915527344 508.6500244140625 100.0400161743164">
       <g>
