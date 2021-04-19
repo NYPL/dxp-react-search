@@ -13,6 +13,10 @@
     }
   }
 
+  .location__parent {
+    font-style: italic;
+  }
+
   .address {
     @include space-stack-xxs;
     white-space: pre-wrap;
@@ -53,6 +57,12 @@
       font-weight: 700;
       margin-left: .25rem;
     }
+  }
+
+  .location__hours-appointment {
+    padding-left: $space-m;
+    margin: -5px 0 5px 0;
+    font-weight: 700;
   }
 
   .location__distance {

@@ -24,6 +24,7 @@ const mocks = [
         limit: 300,
         offset: 0,
         pageNumber: 1,
+        termIds: []
       },
     },
     result: allLocations
@@ -37,7 +38,9 @@ const search = {
   openNow: true,
   limit: 300,
   offset: 0,
-  pageNumber: 1
+  pageNumber: 1,
+  pageCount: 1,
+  searchFilters: []
 }
 
 afterEach(cleanup);
@@ -71,6 +74,7 @@ describe('Apollo states test', () => {
             limit: 300,
             offset: 0,
             pageNumber: 1,
+            termIds: []
           },
         },
         result: {
@@ -102,7 +106,7 @@ describe('Apollo states test', () => {
     );
 
     // Wait for content
-    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 4)));    
     // Check for data
     expect(screen.getByText(/125th Street Library/)).toBeInTheDocument();
     expect(screen.getByText(/53rd Street Library/)).toBeInTheDocument();
@@ -118,7 +122,6 @@ describe('Apollo states test', () => {
     );
     // Wait for content
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
-
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

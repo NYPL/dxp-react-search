@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Redux
 import {
   batch,
@@ -18,7 +18,8 @@ import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components
 import SearchAutoSuggest from './../SearchAutoSuggest';
-import * as DS from '@nypl/design-system-react-components';
+import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
+import SearchFilters from './../SearchFilters';
 // Geocode
 import Geocode from './../../../utils/googleGeocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
@@ -28,10 +29,12 @@ const northEastBound = '40.91, -73.77';
 Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 
 function SearchForm() {
+  // Local state.
+  const [autoSuggestItems, setAutoSuggestItems] = useState();
+
   // Redux
   const {
     autoSuggestInputValue,
-    searchQuery,
     openNow
   } = useSelector(state => state.search);
   const { infoWindowId } = useSelector(state => state.map);
@@ -39,6 +42,18 @@ function SearchForm() {
 
   // Apollo
   const client = useApolloClient();
+  
+  // When component mounts, prefetch the items for autosuggest.
+  useEffect(() => {
+    client.query({ query: LOCATIONS_QUERY }).then(
+      response => {
+        setAutoSuggestItems(response.data.allLocations.locations);
+      },
+      error => {
+        //console.error(error);
+      }
+    );
+  },[autoSuggestItems]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -113,14 +128,14 @@ function SearchForm() {
         role='search'
         aria-label='Find your library'
         onSubmit={handleSubmit}>
-        <SearchAutoSuggest />
-        <DS.Button
+        <SearchAutoSuggest autoSuggestItems={autoSuggestItems} />
+        <Button
           buttonType="filled"
           id="button"
           mouseDown={false}
           type="submit"
         >
-          <DS.Icon
+          <Icon
             decorative
             modifiers={[
               'small',
@@ -129,23 +144,23 @@ function SearchForm() {
             name="search"
           />
           Search
-        </DS.Button>
-        <div className="checkbox">
-          <input
-            id="isOpenNow"
-            className="checkbox__input"
-            type="checkbox"
+        </Button>
+        <div className="search__form-filters">
+          <Checkbox
             name="isOpenNow"
+            checkboxId="checkbox-open-now"
+            className="open-now"
+            labelOptions={{
+              id: 'label',
+              labelContent: 'Open Now'
+            }}
+            attributes={{
+              'aria-label': "Checking this box will update the results"
+            }}
             checked={openNow}
             onChange={onChangeOpenNow}
-            aria-label="Checking this box will update the results"
           />
-          <label
-            id="label"
-            htmlFor="isOpenNow"
-            className="label">
-            Open Now
-          </label>
+          <SearchFilters />
         </div>
       </form>
     </div>

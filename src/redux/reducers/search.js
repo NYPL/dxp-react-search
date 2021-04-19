@@ -3,7 +3,9 @@ import {
   SET_AUTO_SUGGEST_INPUT_VALUE,
   SET_OPEN_NOW,
   SET_PAGINATION,
-  RESET_SEARCH
+  RESET_SEARCH,
+  SET_FILTERS,
+  DELETE_FILTER
 } from './../actions';
 
 const initialState = {
@@ -12,7 +14,8 @@ const initialState = {
   resultsCount: '',
   offset: 0,
   pageCount: 0,
-  pageNumber: 1
+  pageNumber: 1,
+  searchFilters: []
 };
 
 export default function search(state = initialState, action) {
@@ -61,8 +64,27 @@ export default function search(state = initialState, action) {
         pageCount: 0,
         pageNumber: 1,
         resultsCount: '',
-        openNow: false
+        openNow: false,
+        searchFilters: []
       };
+    
+    case SET_FILTERS:
+      return {
+        ...state,
+        searchFilters: action.payload.searchFilters,
+      }
+    
+    case DELETE_FILTER:
+      const vocabId = action.payload.searchFilters;
+      const nextSearchFiltersState = (object, property) => {
+        let {[property]: omit, ...rest} = object
+        return rest;
+      }
+
+      return {
+        ...state,
+        searchFilters: nextSearchFiltersState(state.searchFilters, vocabId),
+      }
 
     default:
       return {

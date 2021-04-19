@@ -1,13 +1,15 @@
-query LocationsQuery($openNow: Boolean) {
+query LocationsQuery($openNow: Boolean, $termIds: [TermsFilter]) {
   allLocations(
     filter: {
-      openNow: $openNow
+      openNow: $openNow,
+      termIds: $termIds
     }
   ) {
     locations {
       id
       name
       status
+      url
       address_line1
       address_line2
       locality

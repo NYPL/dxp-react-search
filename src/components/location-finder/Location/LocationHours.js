@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { Icon, StatusBadge } from '@nypl/design-system-react-components';
 
-function LocationHours({ open, todayHoursStart, todayHoursEnd }) {
+function LocationHours({ open, todayHoursStart, todayHoursEnd, appointmentOnly }) {
   // Convert hours to 12 hour time format
-  function formatHours(start, end) {
+  function formatHours(start, end, appointment) {
     // Sometimes refinery will return null for start and end times.
     if (start === null || end === null) {
-      return 'Closed.';
+      return 'Closed';
     }
 
     // Start hour
@@ -23,7 +23,8 @@ function LocationHours({ open, todayHoursStart, todayHoursEnd }) {
     const endMinutesOnly = end.substr(3, 2);
     const endHoursFinal = (endMinutesOnly != 0) ? (endHours + ':' + endMinutesOnly) : endHours;
 
-    return `${startHoursFinal}${startMeridiem}–${endHoursFinal}${endMeridiem}`;
+    // Append asterisk if location hours are by appointment only.
+    return `${startHoursFinal}${startMeridiem}–${endHoursFinal}${endMeridiem}${appointment ? `*` : ``}`;
   }
 
   return (
@@ -36,16 +37,22 @@ function LocationHours({ open, todayHoursStart, todayHoursEnd }) {
           />
           Today's Hours:
           <div className='location__hours-hours'>
-            {formatHours(todayHoursStart, todayHoursEnd)}
+            {formatHours(todayHoursStart, todayHoursEnd, appointmentOnly)}
           </div>
         </div>
       ) : (
-          <StatusBadge 
-            level={"medium"} 
-            statusBadgeText={"Location is temporarily closed"}
-            className={'location__hours-status'}
-          />
-        )}
+        <StatusBadge 
+          level={"medium"} 
+          className={'location__hours-status'}
+        >
+          Location is temporarily closed
+        </StatusBadge>
+      )}
+      {appointmentOnly && todayHoursStart && todayHoursEnd &&
+        <div className='location__hours-appointment'>
+          * Division is by appointment only.
+        </div>
+      }
     </Fragment>
   );
 }

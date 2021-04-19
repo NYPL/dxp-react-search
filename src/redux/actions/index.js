@@ -6,6 +6,8 @@ export const SET_AUTO_SUGGEST_INPUT_VALUE = 'SET_AUTO_SUGGEST_INPUT_VALUE';
 export const SET_OPEN_NOW = 'SET_OPEN_NOW';
 export const SET_PAGINATION = 'SET_PAGINATION';
 export const RESET_SEARCH = 'RESET_SEARCH';
+export const SET_FILTERS = 'SET_FILTERS';
+export const DELETE_FILTER = 'DELETE_FILTER';
 
 export function setSearchQuery(payload) {
   return {
@@ -59,6 +61,20 @@ export function setPagination(payload) {
 export function resetSearch(payload) {
   return {
     type: RESET_SEARCH,
+    payload: payload
+  };
+}
+
+export function setFilters(payload) {
+  return {
+    type: SET_FILTERS,
+    payload: payload
+  };
+}
+
+export function deleteFilter(payload) {
+  return {
+    type: DELETE_FILTER,
     payload: payload
   };
 }

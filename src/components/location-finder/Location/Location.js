@@ -22,9 +22,6 @@ function Location({ location }) {
   const encodedAddress = encodeURIComponent(formattedAddress);
   const getDirectionsLink = 'http://maps.google.com/maps?f=q&hl=en&saddr=&daddr=' + encodedAddress;
 
-  // Location link
-  const locationLink = `https://www.nypl.org/locations/${location.id}`;
-
   function onClickViewOnMap(e) {
     e.preventDefault();
 
@@ -50,10 +47,13 @@ function Location({ location }) {
         level={2}
         className='location__name'
       >
-        <a href={locationLink}>
+        <a href={location.url}>
           {location.name}
         </a>
       </DS.Heading>
+      {location.parentLibraryName &&
+        <div className='location__parent'>{location.parentLibraryName}</div>
+      }
       <div className='address'>
         {formattedAddress}
       </div>
@@ -68,6 +68,7 @@ function Location({ location }) {
         open={location.open}
         todayHoursStart={location.todayHours.start}
         todayHoursEnd={location.todayHours.end}
+        appointmentOnly={location.appointmentOnly}
       />
       <LocationDistance locationPoint={location.geoLocation} />
       <div className='location__links'>

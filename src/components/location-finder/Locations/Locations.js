@@ -1,21 +1,24 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
-import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+import { 
+  LocationsQuery as LOCATIONS_QUERY 
+} from './../../../apollo/client/queries/Locations.gql';
 // Redux
 import {
-  batch,
   useDispatch,
   useSelector
 } from 'react-redux';
 import { setPagination } from './../../../redux/actions';
 // Components
-import * as DS from '@nypl/design-system-react-components';
+import { Icon, Link } from '@nypl/design-system-react-components';
 import Location from './../Location';
 import LoadingSkeleton from './../../shared/LoadingSkeleton';
 import LocationsPagination from './LocationsPagination';
 // Hooks
 import useWindowSize from './../../../hooks/useWindowSize';
+// Utils
+import setTermsFilter from './../../../utils/setTermsFilter';
 
 function Locations() {
   // Special handling for pagination on desktop
@@ -28,10 +31,10 @@ function Locations() {
 
   // Redux
   const {
-    searchQuery,
     searchQueryGeoLat,
     searchQueryGeoLng,
     openNow,
+    searchFilters, 
     offset,
     pageNumber
   } = useSelector(state => state.search);
@@ -41,6 +44,9 @@ function Locations() {
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
   const searchGeoLng = searchQueryGeoLng ? searchQueryGeoLng : null;
+  // Convert the searchFilters to the object format needed by gql.
+  const termIds = setTermsFilter(searchFilters);
+
   // Query for data.
   const { loading, error, data } = useQuery(
     LOCATIONS_QUERY, {
@@ -48,6 +54,7 @@ function Locations() {
         searchGeoLat,
         searchGeoLng,
         openNow,
+        termIds,
         limit,
         offset,
         pageNumber
@@ -91,12 +98,12 @@ function Locations() {
 
   return (
     <div className="locations__list-inner">
-      <DS.Link
+      <Link
         href="#locations-gmap"
         className="locations-gmap-anchor"
       >
         Skip to Map
-        <DS.Icon
+        <Icon
           blockName="more-link"
           decorative
           modifiers={[
@@ -104,7 +111,7 @@ function Locations() {
           ]}
           name="arrow"
         />
-      </DS.Link>
+      </Link>
       {data.allLocations.locations.map((location) => (
         <Location key={location.id} location={location} />
       ))}

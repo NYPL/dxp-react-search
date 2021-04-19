@@ -1,13 +1,21 @@
 ## CHANGES
 -----------
 
-### v0.2.0 [2021-03-?] Location Finder Filters
+### v0.2.1 [2021-04-26] Misc Bugs Fixes & Improvements
+------------------------------------------------------
+* Fix Border color for Selected Filters
+
+
+### v0.2.0 [2021-04-01] Location Finder Filters
 -----------------------------------------------
 * Updated to latest nypl design system.
 * Updated to new pagination component.
 * Update to use new StatusBadge component.
 * Small fix for next.config.js rewrites().
 * Added vercel.sh to skip builds on qa and production branches
+* Adds Search Filters for Location Finder.
+* Adds Division and Center data to locations list.
+* Adds NEXT_PUBLIC_NYPL_DOMAIN env variable, so QA links can point to QA.
 
 ### v0.1.6 [2021-01-12] Location Finder Improvements
 -----------------------------------------------
