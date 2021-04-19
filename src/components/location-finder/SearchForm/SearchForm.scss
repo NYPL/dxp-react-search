@@ -1,5 +1,4 @@
 .search__form {
-
   form {
     display: flex;
     flex-flow: wrap;
@@ -35,30 +34,6 @@
     input {
       width: 20px;
       height: 20px;
-    }
-  }
-
-  .search-filters__group2 {
-    .dropdown:first-child {
-      .term {
-        .checkbox {
-          label {
-            font-weight: 500;
-          }
-        }
-
-        ul {
-          padding-bottom: 4px;
-
-          .term-child {
-            .checkbox {
-              label {
-                font-weight: 300;
-              }
-            }
-          }
-        }
-      }
     }
   }
 
