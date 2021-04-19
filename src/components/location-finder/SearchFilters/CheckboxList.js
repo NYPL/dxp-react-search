@@ -28,6 +28,14 @@ function CheckboxList(props) {
     return filterChecked;
   }
 
+  function setParentClassName(children) {
+    let className = 'term';
+    if (children) {
+      className = 'term hasChildren';
+    }
+    return className;
+  }
+
   return (
     <List 
       type='ul' 
@@ -35,7 +43,7 @@ function CheckboxList(props) {
     >
       {vocab.terms.map((term) => {
         return (
-          <li key={term.id} className="term">
+          <li key={term.id} className={setParentClassName(term.children)}>
             <Checkbox
               checkboxId={term.id}
               labelOptions={{

@@ -1,10 +1,9 @@
 .search__form {
-
   form {
     display: flex;
     flex-flow: wrap;
   }
-  
+
   // Search text
   input[type="text"]:focus {
     outline: 1px solid var(--ui-focus);
@@ -45,7 +44,7 @@
       border: 1px solid $gray-medium;
       padding: $space-xs;
     }
-    
+
     .button {
       padding: $space-xs;
       border-radius: 2px;
