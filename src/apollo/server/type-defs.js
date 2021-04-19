@@ -79,9 +79,10 @@ export const typeDefs = gql`
     imageUrl: String
   }
 
-  input ResourceTopicFilter {
-    featured: Boolean
-    mostPopular: Boolean
+  type OnlineResource {
+    id: ID!
+    name: String!
+    description: String
   }
 
   type Query {
@@ -93,6 +94,7 @@ export const typeDefs = gql`
       sortByDistance: SortByDistance
     ): LocationsConnection
     allTerms(filter: TermsFilter): [Vocab]!
-    allResourceTopics(filter: ResourceTopicFilter): [ResourceTopic]!
+    allResourceTopics: [ResourceTopic]!
+    allOnlineResources: [OnlineResource]!
   }
 `;

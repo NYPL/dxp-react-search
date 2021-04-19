@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
 import { 
@@ -12,33 +12,13 @@ import {
   List,
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
+//import Card from './../../shared/Card';
+import CardGrid from './../../shared/CardGrid';
 
-/*function PromoCard(props) {
-  return (
-    <div className="promo-card">
-      <Link
-        href={props.link}
-        className="promo-link"
-      >
-      </Link>
-    </div>
-  );
-}
-*/
-
-function ResourceTopics(props) {
-  const { type } = props;
-
-  const title = type === 'featured' ? 'Featured Resources' : "Most Popular";
-
+function ResourceTopics() {
   // Query for data.
   const { loading, error, data } = useQuery(
-    RESOURCE_TOPICS_QUERY, {
-      variables: {
-        featured: type === 'featured' ? true : false,
-        mostPopular: type === 'mostPopular' ? true : false
-      }
-    }
+    RESOURCE_TOPICS_QUERY, {}
   );
 
   // Error state.
@@ -56,52 +36,12 @@ function ResourceTopics(props) {
   }
 
   return (
-    <div>
-      <br />
-      <Heading
-        id="resource-topics__heading"
-        level={2}
-        text={title}
+    <Fragment>
+      <CardGrid
+        title="Featured Resources"
+        items={data.allResourceTopics}
       />
-      <List
-        className="featured-cards"
-        modifiers={[
-          'no-list-styling'
-        ]}
-        type="ul"
-      >
-        {data.allResourceTopics.map((resourceTopic) => {
-          return (
-            <li 
-              key={resourceTopic.id} 
-              className="featured-card"
-              style={{
-                'margin-bottom': '2rem',
-                'flex': '1 0 calc(33% - 2rem)',
-                'margin-right': '2rem',
-                'max-width': '384px'
-              }}
-            >
-              <Image
-                alt=""
-                imageCredit={null}
-                modifiers={null}
-                src={resourceTopic.imageUrl}
-              />
-              <Heading
-                className="resource-topics__heading-item"
-                level={3}
-                text={resourceTopic.name}
-              />
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: resourceTopic.description 
-                }}></div>
-            </li>
-          )
-        })}
-      </List>
-    </div>
+    </Fragment>
   );
 };
 

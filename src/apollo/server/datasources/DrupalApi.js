@@ -68,31 +68,8 @@ class DrupalApi extends RESTDataSource {
   }
   */
 
-  async getAllResourceTopics(args) {
-    //console.log(args);
-    
-    let queryString = '';
-
-    // Featured
-    if (
-      args.filter
-      && 'featured' in args.filter
-      && args.filter.featured
-    ) {
-      queryString = 'filter[field_featured]=1';
-    }
-    
-    // Most popular.
-    if (
-      args.filter
-      && 'mostPopular' in args.filter
-      && args.filter.mostPopular
-    ) {
-      queryString = 'filter[field_most_popular]=1';
-    }
-
-
-    const apiPath = `/taxonomy_term/resource_topic?sort=weight&include=field_ers_image.field_media_image&${queryString}`;
+  async getAllResourceTopics() {
+    const apiPath = `/taxonomy_term/resource_topic?sort=weight&include=field_ers_image.field_media_image`;
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.data)) {
@@ -100,7 +77,22 @@ class DrupalApi extends RESTDataSource {
     } else {
       return [];
     }
-    
+  }
+
+  async getAllOnlineResources() {
+    // Get 'Online Resource' nodes.
+    // Remove node if field_is_most_popular is NULL
+    // Sort by field_is_most_popular ASC
+    // Return only 3 nodes.
+    // @TODO Figure out clean way to make this work w/ indentation.
+    const apiPath = `/node/online_resource?filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular&page[limit]=3`;
+
+    const response = await this.get(apiPath);
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
   }
 }
 

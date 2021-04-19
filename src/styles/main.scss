@@ -24,6 +24,7 @@
 @import './../components/location-finder/RightRail/RightRail.scss';
 @import './../components/shared/LoadingSkeleton/LoadingSkeleton.scss';
 @import './../components/shared/Dropdown/Dropdown.scss';
+@import './../components/shared/CardGrid/CardGrid.scss';
 
 
 // shared/layouts > Main.js
@@ -92,7 +93,7 @@
 }
 
 
-.featured-cards {
+/*.featured-cards {
   display: flex;
   flex-flow: row wrap;
   padding: .75rem 0;
@@ -106,3 +107,4 @@
     height: 256px;
   }
 }
+*/

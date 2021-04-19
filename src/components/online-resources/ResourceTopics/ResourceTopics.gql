@@ -1,13 +1,5 @@
-query ResourceTopicsQuery(
-  $featured: Boolean, 
-  $mostPopular: Boolean
-) {
-  allResourceTopics(
-    filter: {
-      featured: $featured,
-      mostPopular: $mostPopular
-    }
-  ) {
+query ResourceTopicsQuery {
+  allResourceTopics {
     id
     name
     description

@@ -6,7 +6,7 @@ let responseIncluded;
 const resourceTopicResolver = {
   Query: {
     allResourceTopics: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getAllResourceTopics(args);
+      const response = await dataSources.drupalApi.getAllResourceTopics();
       responseIncluded = response.included;
 
       return response.data;
@@ -28,7 +28,6 @@ const resourceTopicResolver = {
       if (resourceTopic.relationships.field_ers_image.data !== null) {
         mediaEntityId = resourceTopic.relationships.field_ers_image.data.id;
       }
-
       // Find the included media entity item, to find the file entity id.
       let fileEntityId;
       responseIncluded.forEach(includedItem => {
@@ -37,7 +36,6 @@ const resourceTopicResolver = {
           fileEntityId = includedItem.relationships.field_media_image.data.id
         }
       });
-
       // Find the included file entity item using the file entity id.
       let imageUrl;
       responseIncluded.forEach(includedItem => {

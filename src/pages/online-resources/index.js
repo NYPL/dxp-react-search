@@ -18,9 +18,7 @@ function OnlineResources() {
         
       </div>
       <div className="content-primary">
-        <ResourceTopics type="featured" />
-
-        <ResourceTopics type="mostPopular" />
+        <ResourceTopics />
       </div>
       <div className="content-bottom">
         <RightRail />

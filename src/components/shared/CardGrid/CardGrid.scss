@@ -1,0 +1,16 @@
+.card-grid {
+  .card-grid__list {
+    display: flex;
+    flex-flow: row wrap;
+    padding: .75rem 0;
+
+    .heading {
+      padding-top: 1rem;
+    }
+
+    .image {
+      width: 384px;
+      height: 256px;
+    }
+  }
+}
