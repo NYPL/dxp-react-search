@@ -1,6 +1,7 @@
 query LocationsQuery(
   $searchGeoLat: Float,
   $searchGeoLng: Float,
+  $searchQuery: String,
   $openNow: Boolean,
   $termIds: [TermsFilter],
   $limit: Int,
@@ -17,7 +18,8 @@ query LocationsQuery(
     },
     sortByDistance: {
       originLat: $searchGeoLat,
-      originLng: $searchGeoLng
+      originLng: $searchGeoLng,
+      searchQuery: $searchQuery
     }
   ) {
     locations {

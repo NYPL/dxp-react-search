@@ -33,6 +33,7 @@ function Locations() {
   const {
     searchQueryGeoLat,
     searchQueryGeoLng,
+    searchQuery,
     openNow,
     searchFilters, 
     offset,
@@ -53,6 +54,7 @@ function Locations() {
       variables: {
         searchGeoLat,
         searchGeoLng,
+        searchQuery,
         openNow,
         termIds,
         limit,

@@ -28,6 +28,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
   const {
     searchQueryGeoLat,
     searchQueryGeoLng,
+    searchQuery,
     openNow,
     offset,
     pageNumber,
@@ -59,6 +60,7 @@ const MapWrapper = compose(withScriptjs, withGoogleMap)(props => {
       variables: {
         searchGeoLat,
         searchGeoLng,
+        searchQuery,
         openNow,
         termIds,
         limit,

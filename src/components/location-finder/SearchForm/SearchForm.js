@@ -62,6 +62,7 @@ function SearchForm() {
     client.query({ query: LOCATIONS_QUERY }).then(
       response => {
         let searchValue = autoSuggestInputValue;
+        // @TODO see if you actually still need this.
         // Try to find a location match.
         const matchLocation = filterBySearchInput(response.data.allLocations.locations, autoSuggestInputValue);
         if (matchLocation[0]) {
