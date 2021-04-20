@@ -10,7 +10,6 @@
 * Removes local LoadingSkeleton component in favor of DS SkeletonLoader component.
 * Updates metatag image url to point to updated CDN location.
 
-
 ### v0.2.0 [2021-04-01] Location Finder Filters
 -----------------------------------------------
 * Updated to latest nypl design system.
