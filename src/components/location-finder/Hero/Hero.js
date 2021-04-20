@@ -1,6 +1,6 @@
 import React from 'react';
 // Content
-import HeroImage from '../HeroImage/HeroImage.js'
+import HeroImage from './HeroImage';
 import HeroContent from './content';
 
 function Hero() {
