@@ -4,14 +4,11 @@ import { render } from './../../../../testHelper/customRtlRender';
 import '@testing-library/jest-dom/extend-expect';
 import { GraphQLError } from 'graphql';
 import Locations from './Locations';
-//import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
 import { 
   LocationsQuery as LOCATIONS_QUERY 
 } from './../../../apollo/client/queries/Locations.gql';
 // Mock data
 import allLocations from './../../../../testHelper/__mocks/allLocations';
-// Hooks
-import useWindowSize from './../../../hooks/useWindowSize';
 // Axe
 import { axe, toHaveNoViolations } from 'jest-axe';
 expect.extend(toHaveNoViolations);
