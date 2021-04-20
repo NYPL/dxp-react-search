@@ -22,7 +22,6 @@
 @import './../components/location-finder/Map/Map.scss';
 @import './../components/location-finder/BottomPromo/BottomPromo.scss';
 @import './../components/location-finder/RightRail/RightRail.scss';
-@import './../components/shared/LoadingSkeleton/LoadingSkeleton.scss';
 @import './../components/shared/Dropdown/Dropdown.scss';
 @import './../components/shared/CardGrid/CardGrid.scss';
 
@@ -50,42 +49,6 @@
 // @TODO Remove this after updating to DS 0.12.0
 .nypl--locations .footer {
   box-sizing: content-box;
-}
-
-// IE11 only
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  // Add your CSS here
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  }
-
-  .main {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .breadcrumbs {
-    background-color: $nypl-red-muted-regular;
-    padding-bottom: $space-xs;
-    padding-top: $space-xs;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .breadcrumbs__list {
-    color: $white;
-    padding: 0 1rem;
-    @include breakpoint(max-width $max-width) {
-      padding: 0 1rem;
-    }
-    @include breakpoint(max-width $breakpoint-large) {
-      padding: 0 1.5rem;
-    }
-  }
-
-  .content-header {
-    margin-left: calc(0.5rem + (-50vw + 50%));
-    margin-right: calc(0.5rem + (-50vw + 50%));
-  }
 }
 
 .layout-container {

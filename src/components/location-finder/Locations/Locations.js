@@ -11,9 +11,12 @@ import {
 } from 'react-redux';
 import { setPagination } from './../../../redux/actions';
 // Components
-import { Icon, Link } from '@nypl/design-system-react-components';
+import { 
+  Icon, 
+  Link, 
+  SkeletonLoader 
+} from '@nypl/design-system-react-components';
 import Location from './../Location';
-import LoadingSkeleton from './../../shared/LoadingSkeleton';
 import LocationsPagination from './LocationsPagination';
 // Hooks
 import useWindowSize from './../../../hooks/useWindowSize';
@@ -33,6 +36,7 @@ function Locations() {
   const {
     searchQueryGeoLat,
     searchQueryGeoLng,
+    searchQuery,
     openNow,
     searchFilters, 
     offset,
@@ -53,6 +57,7 @@ function Locations() {
       variables: {
         searchGeoLat,
         searchGeoLng,
+        searchQuery,
         openNow,
         termIds,
         limit,
@@ -85,7 +90,7 @@ function Locations() {
   // Loading state,
   if (loading || !data) {
     return (
-      <LoadingSkeleton />
+      <SkeletonLoader />
     );
   }
 

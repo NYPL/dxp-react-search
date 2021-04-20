@@ -4,11 +4,11 @@ import { render } from './../../../../testHelper/customRtlRender';
 import '@testing-library/jest-dom/extend-expect';
 import { GraphQLError } from 'graphql';
 import Locations from './Locations';
-import { LocationsQuery as LOCATIONS_QUERY } from './Locations.gql';
+import { 
+  LocationsQuery as LOCATIONS_QUERY 
+} from './../../../apollo/client/queries/Locations.gql';
 // Mock data
 import allLocations from './../../../../testHelper/__mocks/allLocations';
-// Hooks
-import useWindowSize from './../../../hooks/useWindowSize';
 // Axe
 import { axe, toHaveNoViolations } from 'jest-axe';
 expect.extend(toHaveNoViolations);
@@ -20,6 +20,7 @@ const mocks = [
       variables: {
         searchGeoLat: null,
         searchGeoLng: null,
+        searchQuery: '',
         openNow: true,
         limit: 300,
         offset: 0,
@@ -58,7 +59,7 @@ describe('Apollo states test', () => {
     );
 
     // Check for loading skeleton class
-    expect(container.getElementsByClassName('loading-skeleton').length).toBe(1);
+    expect(container.getElementsByClassName('skeleton-loader').length).toBe(1);
   });
 
   // Error state
@@ -70,6 +71,7 @@ describe('Apollo states test', () => {
           variables: {
             searchGeoLat: null,
             searchGeoLng: null,
+            searchQuery: '',
             openNow: true,
             limit: 300,
             offset: 0,
@@ -125,5 +127,4 @@ describe('Apollo states test', () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
-
 });

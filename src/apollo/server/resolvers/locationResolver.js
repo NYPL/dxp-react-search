@@ -69,11 +69,11 @@ const locationResolver = {
         && 'originLng' in args.sortByDistance
         && args.sortByDistance.originLat
         && args.sortByDistance.originLng
-      ) {
+      ) {        
         if (typeof results !== "undefined") {
-          results = sortByDistance(args.sortByDistance, results);
+          results = sortByDistance(args.sortByDistance, results, args.sortByDistance.searchQuery);
         } else {
-          results = sortByDistance(args.sortByDistance, allLocations);
+          results = sortByDistance(args.sortByDistance, allLocations, args.sortByDistance.searchQuery);
         }
       }
 

@@ -1,7 +1,16 @@
 ## CHANGES
 -----------
 
-### v0.2.0 [2021-03-?] Location Finder Filters
+### v0.2.1 [2021-04-26] Misc Bugs Fixes & Improvements
+------------------------------------------------------
+* Fix Border color for Selected Filters
+* For nested checkboxes, adds bold to Parent checkbox.
+* Removes IE11 specific CSS code
+* SortByDistance now firsts sorts by Location Name, for better Division and Center matching.
+* Removes local LoadingSkeleton component in favor of DS SkeletonLoader component.
+* Updates metatag image url to point to updated CDN location.
+
+### v0.2.0 [2021-04-01] Location Finder Filters
 -----------------------------------------------
 * Updated to latest nypl design system.
 * Updated to new pagination component.

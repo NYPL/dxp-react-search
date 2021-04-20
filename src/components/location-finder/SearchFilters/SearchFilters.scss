@@ -66,6 +66,15 @@
     }
   }
 
+  // Adds additional styling for dropdowns with nested checkboxes.
+  .term.hasChildren > .checkbox > label {
+    font-weight: 500;
+  }
+
+  .dropdown ul .term.hasChildren:not(:first-child) {
+    padding-top: $space-xxs;
+  }
+
   // Search filters mobile
   .search-filters__mobile {
     #search-filters__mobile-filters-button {
