@@ -1,10 +1,10 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
-const { D8_JSON_API } = process.env;
+const { DRUPAL_API } = process.env;
 
 class DrupalApi extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = D8_JSON_API;
+    this.baseURL = DRUPAL_API;
   }
 
   // D8 api is a json api, which datasource-rest does not handle by default.
@@ -16,60 +16,8 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  // Tidy up the response from Drupal.
-  /*locationNormalizer(location) {
-    // D8 doesn't have geo data yet, so just hardcode something
-    // so the map doesn't completely break.
-    const defaultGeoCords = {
-      lat: 40.7532,
-      lng: -73.9822
-    };
-
-    return {
-      id: location.id,
-      name: location.attributes.title,
-      status: location.attributes.status,
-      address_line1: location.attributes.field_as_address.address_line1,
-      address_line2: location.attributes.field_as_address.address_line2,
-      locality: location.attributes.field_as_address.locality,
-      administrative_area: location.attributes.field_as_address.administrative_area,
-      postal_code: location.attributes.field_as_address.postal_code,
-      phone: location.attributes.field_tels_phone,
-      wheelchairAccess: location.attributes.field_lts_wheelchair_access,
-      geoLocation: {
-        lat: defaultGeoCords.lat,
-        lng: defaultGeoCords.lng,
-      },
-      open: true,
-      todayHours: {
-        start: '11:00',
-        end: '21:00'
-      },
-    };
-  }
-  */
-
-  /*async getAllLocations(query) {
-    // Rough draft of filtering json api by title field if query string/filter is included.
-    //console.log('query: ' + query);
-    let apiPath;
-    if (query === undefined) {
-      apiPath = '/node/library';
-    } else {
-      apiPath = '/node/library?filter[title][operator]=CONTAINS&filter[title][value]=' + query;
-    }
-    const response = await this.get(apiPath);
-
-    if (Array.isArray(response.data)) {
-      return response.data.map(location => this.locationNormalizer(location));
-    } else {
-      return [];
-    }
-  }
-  */
-
   async getAllResourceTopics() {
-    const apiPath = `/taxonomy_term/resource_topic?sort=weight&include=field_ers_image.field_media_image`;
+    const apiPath = `/jsonapi/taxonomy_term/resource_topic?sort=weight&include=field_ers_image.field_media_image`;
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.data)) {
@@ -85,10 +33,31 @@ class DrupalApi extends RESTDataSource {
     // Sort by field_is_most_popular ASC
     // Return only 3 nodes.
     // @TODO Figure out clean way to make this work w/ indentation.
-    const apiPath = `/node/online_resource?filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular&page[limit]=3`;
+    const apiPath = `/jsonapi/node/online_resource?filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular&page[limit]=3`;
 
     const response = await this.get(apiPath);
     if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  async getAllOnlineResourcesSolr(args) {
+    let apiPath = '/api/search-online-resources';
+
+    // Filter by q.
+    // /api/search-online-resources?sq=jstor
+    if (
+      args.filter
+      && 'q' in args.filter
+    ) {
+      apiPath = `${apiPath}?sq=${args.filter.q}`;
+    }
+    
+    const response = await this.get(apiPath);
+
+    if (Array.isArray(response.results)) {
       return response;
     } else {
       return [];

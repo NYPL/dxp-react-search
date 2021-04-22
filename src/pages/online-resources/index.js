@@ -8,7 +8,11 @@ import Meta from './../../components/location-finder/Meta';
 import Layout from './../../components/shared/layouts/Main';
 
 import ResourceTopics from './../../components/online-resources/ResourceTopics';
+import SearchResults from './../../components/online-resources/SearchResults';
+
 import RightRail from '../../components/location-finder/RightRail';
+
+import SearchForm from './../../components/online-resources/SearchForm';
 
 function OnlineResources() {
   return (
@@ -16,8 +20,15 @@ function OnlineResources() {
       <Meta />
       <div className="content-header">
         
+        <div className='search-header'>
+          <div className='search-header__inner'>
+            <SearchForm />
+          </div>
+        </div>
+
       </div>
       <div className="content-primary">
+        <SearchResults />
         <ResourceTopics />
       </div>
       <div className="content-bottom">

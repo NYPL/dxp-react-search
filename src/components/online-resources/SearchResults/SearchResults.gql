@@ -1,0 +1,13 @@
+query SearchResultsQuery($q: String) {
+  allOnlineResourcesSolr(
+    filter: {
+      q: $q
+    }
+  ) {
+    items {
+      id
+      name
+      description
+    }
+  }
+}

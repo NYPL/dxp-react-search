@@ -1,0 +1,8 @@
+query ResourceTopicsQuery {
+  allResourceTopics {
+    id
+    name
+    description
+    imageUrl
+  }
+}

@@ -86,6 +86,21 @@ export const typeDefs = gql`
     description: String
   }
 
+  type OnlineResourceSolr {
+    id: ID!
+    name: String!
+    description: String
+  }
+
+  type OnlineResourcesSolrConnection {
+    items: [OnlineResourceSolr]
+    pageInfo: PageInfo
+  }
+
+  input SearchFilter {
+    q: String
+  }
+
   type Query {
     allLocations(
       limit: Int,
@@ -97,5 +112,11 @@ export const typeDefs = gql`
     allTerms(filter: TermsFilter): [Vocab]!
     allResourceTopics: [ResourceTopic]!
     allOnlineResources: [OnlineResource]!
+    allOnlineResourcesSolr(
+      limit: Int,
+      offset: Int,
+      pageNumber: Int,
+      filter: SearchFilter
+    ): OnlineResourcesSolrConnection
   }
 `;

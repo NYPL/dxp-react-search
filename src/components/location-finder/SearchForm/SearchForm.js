@@ -11,15 +11,12 @@ import {
   setMapInfoWindow,
   setOpenNow
 } from './../../../redux/actions';
+import { setAutoSuggestInputValue } from './../../../redux/actions';
 // Apollo
 import { useApolloClient } from '@apollo/client';
 import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
 // Utils
 import filterBySearchInput from './../../../utils/filterBySearchInput';
-// Components
-import SearchAutoSuggest from './../SearchAutoSuggest';
-import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
-import SearchFilters from './../SearchFilters';
 // Geocode
 import Geocode from './../../../utils/googleGeocode';
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
@@ -27,9 +24,16 @@ Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API);
 const southWestBound = '40.49, -74.26';
 const northEastBound = '40.91, -73.77';
 Geocode.setBounds(`${southWestBound}|${northEastBound}`);
+// Components
+import { Checkbox } from '@nypl/design-system-react-components';
+import { default as SharedSearchForm } from './../../shared/SearchForm';
+import SearchFilters from './../SearchFilters';
 
 function SearchForm() {
-  // Local state.
+  // Local state
+  // Filtered items based on search input.
+  const [suggestions, setSuggestions] = useState([]);
+  // All possible items from datasource.
   const [autoSuggestItems, setAutoSuggestItems] = useState();
 
   // Redux
@@ -39,6 +43,7 @@ function SearchForm() {
   } = useSelector(state => state.search);
   const { infoWindowId } = useSelector(state => state.map);
   const dispatch = useDispatch();
+  
 
   // Apollo
   const client = useApolloClient();
@@ -55,6 +60,37 @@ function SearchForm() {
     );
   },[autoSuggestItems]);
 
+  function getSuggestions(autoSuggestItems, value) {
+    if (autoSuggestItems) {
+      return filterBySearchInput(autoSuggestItems, value);
+    }
+    else {
+      console.log('data is false');
+      return [];
+    }
+  }
+
+  function onSuggestionsFetchRequested(value) {
+    dispatch(setAutoSuggestInputValue(value));
+    setSuggestions(getSuggestions(autoSuggestItems, value));
+  }
+
+  function onSuggestionSelected(event, { suggestion }) {
+    dispatch(setMapInfoWindow({
+      infoWindowId: suggestion.id,
+      infoWindowIsVisible: false
+    }));
+  }
+
+  function inputOnChange(newValue) {
+    dispatch(setAutoSuggestInputValue(newValue));
+  }
+
+  function onSuggestionsClearRequested() {
+    setSuggestions([]);
+  }
+
+  // FORM SUBMIT
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -124,47 +160,35 @@ function SearchForm() {
   }
 
   return (
-    <div className='search__form'>
-      <form
-        role='search'
-        aria-label='Find your library'
-        onSubmit={handleSubmit}>
-        <SearchAutoSuggest autoSuggestItems={autoSuggestItems} />
-        <Button
-          buttonType="filled"
-          id="button"
-          mouseDown={false}
-          type="submit"
-        >
-          <Icon
-            decorative
-            modifiers={[
-              'small',
-              'icon-left'
-            ]}
-            name="search"
-          />
-          Search
-        </Button>
-        <div className="search__form-filters">
-          <Checkbox
-            name="isOpenNow"
-            checkboxId="checkbox-open-now"
-            className="open-now"
-            labelOptions={{
-              id: 'label',
-              labelContent: 'Open Now'
-            }}
-            attributes={{
-              'aria-label': "Checking this box will update the results"
-            }}
-            checked={openNow}
-            onChange={onChangeOpenNow}
-          />
-          <SearchFilters />
-        </div>
-      </form>
-    </div>
+    <SharedSearchForm
+      id='online-resources-form'
+      label={'Enter an address or landmark to search nearby or type in a Library name.'}
+      onSubmit={handleSubmit}
+      suggestions={suggestions}
+      onSuggestionSelected={onSuggestionSelected}
+      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+      onSuggestionsClearRequested={onSuggestionsClearRequested}
+      autoSuggestInputValue={autoSuggestInputValue}
+      inputOnChange={inputOnChange}
+    >
+      <div className="search__form-filters">
+        <Checkbox
+          name="isOpenNow"
+          checkboxId="checkbox-open-now"
+          className="open-now"
+          labelOptions={{
+            id: 'label',
+            labelContent: 'Open Now'
+          }}
+          attributes={{
+            'aria-label': "Checking this box will update the results"
+          }}
+          checked={openNow}
+          onChange={onChangeOpenNow}
+        />
+        <SearchFilters />
+      </div>
+    </SharedSearchForm>
   );
 };
 

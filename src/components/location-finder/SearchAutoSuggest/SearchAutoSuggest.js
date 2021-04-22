@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 // Redux
 import {
   useDispatch,
@@ -11,11 +11,35 @@ import {
 // Utils
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components
-import AutoSuggest from 'react-autosuggest';
+import AutoSuggest from './../../shared/AutoSuggest/AutoSuggest';
 
-function SearchAutoSuggest({ autoSuggestItems }) {
+// Apollo
+import { useApolloClient } from '@apollo/client';
+import { LocationsQuery as LOCATIONS_QUERY } from './../SearchForm/SearchForm.gql';
+
+function SearchAutoSuggest() {
   // Local state
+  // Filtered items based on search input.
   const [suggestions, setSuggestions] = useState([]);
+  // All possible items from datasource.
+  const [autoSuggestItems, setAutoSuggestItems] = useState();
+
+  // Apollo
+  const client = useApolloClient();
+  
+  // When component mounts, prefetch the items for autosuggest.
+  useEffect(() => {
+    console.log('userEffect!')
+
+    client.query({ query: LOCATIONS_QUERY }).then(
+      response => {
+        setAutoSuggestItems(response.data.allLocations.locations);
+      },
+      error => {
+        //console.error(error);
+      }
+    );
+  },[autoSuggestItems]);
 
   // Redux
   const dispatch = useDispatch();
@@ -33,36 +57,6 @@ function SearchAutoSuggest({ autoSuggestItems }) {
     }
   }
 
-  function getSuggestionValue(suggestion) {
-    return suggestion.name;
-  }
-
-  function renderSuggestion(suggestion) {
-    return (
-      <span>
-        {suggestion.name}
-      </span>
-    );
-  }
-
-  function renderSuggestionsContainer({ containerProps, children, query }) {
-    return (
-      <div {...containerProps} aria-label="Filter search">
-        {children}
-        <div className='auto-suggest-bottom'>
-          Search for locations near: <strong>{query}</strong>
-        </div>
-      </div>
-    );
-  }
-
-  // Custom input component to add aria-label.
-  function renderInputComponent(inputProps) {
-    return (
-      <input name="search" aria-label="Search locations" {...inputProps} />
-    );
-  }
-
   function onSuggestionSelected(event, { suggestion }) {
     dispatch(setMapInfoWindow({
       infoWindowId: suggestion.id,
@@ -70,30 +64,30 @@ function SearchAutoSuggest({ autoSuggestItems }) {
     }));
   }
 
+  function onSuggestionsFetchRequested(value) {
+    dispatch(setAutoSuggestInputValue(value));
+    setSuggestions(getSuggestions(autoSuggestItems, value));
+  }
+
+  function inputOnChange(newValue) {
+    dispatch(setAutoSuggestInputValue(newValue));
+  }
+
+  function onSuggestionsClearRequested() {
+    setSuggestions([]);
+  }
+
   return (
-    <Fragment>
-      <AutoSuggest
-        suggestions={suggestions.slice(0, 5)}
-        onSuggestionSelected={onSuggestionSelected}
-        onSuggestionsClearRequested={() => setSuggestions([])}
-        onSuggestionsFetchRequested={({ value }) => {
-          dispatch(setAutoSuggestInputValue(value));
-          setSuggestions(getSuggestions(autoSuggestItems, value));
-        }}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        renderSuggestionsContainer={renderSuggestionsContainer}
-        inputProps={{
-          placeholder: '',
-          value: autoSuggestInputValue,
-          onChange: (_, { newValue, method }) => {
-            dispatch(setAutoSuggestInputValue(newValue));
-          },
-        }}
-        renderInputComponent={renderInputComponent}
-        highlightFirstSuggestion={false}
-      />
-    </Fragment>
+    <AutoSuggest
+      id='12'
+      label='Location Finder'
+      inputOnChange={inputOnChange}
+      suggestions={suggestions}
+      autoSuggestInputValue={autoSuggestInputValue}
+      onSuggestionSelected={onSuggestionSelected}
+      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+      onSuggestionsClearRequested={onSuggestionsClearRequested}
+    />
   );
 };
 
