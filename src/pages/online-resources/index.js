@@ -5,14 +5,15 @@ import { withRedux } from './../../redux/withRedux';
 import { compose } from 'redux';
 // Components
 import Meta from './../../components/location-finder/Meta';
+import RightRail from '../../components/location-finder/RightRail';
 import Layout from './../../components/shared/layouts/Main';
-
+//
+import SearchForm from './../../components/online-resources/SearchForm';
 import ResourceTopics from './../../components/online-resources/ResourceTopics';
 import SearchResults from './../../components/online-resources/SearchResults';
 
-import RightRail from '../../components/location-finder/RightRail';
 
-import SearchForm from './../../components/online-resources/SearchForm';
+
 
 function OnlineResources() {
   return (

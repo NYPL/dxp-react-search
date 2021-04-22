@@ -47,6 +47,9 @@ export const typeDefs = gql`
 
   type PageInfo {
     totalItems: Int,
+    limit: Int,
+    pageNumber: Int,
+    pageCount: Int,
     timestamp: String
   }
 
@@ -86,14 +89,8 @@ export const typeDefs = gql`
     description: String
   }
 
-  type OnlineResourceSolr {
-    id: ID!
-    name: String!
-    description: String
-  }
-
-  type OnlineResourcesSolrConnection {
-    items: [OnlineResourceSolr]
+  type SearchConnection {
+    items: [OnlineResource]
     pageInfo: PageInfo
   }
 
@@ -112,11 +109,11 @@ export const typeDefs = gql`
     allTerms(filter: TermsFilter): [Vocab]!
     allResourceTopics: [ResourceTopic]!
     allOnlineResources: [OnlineResource]!
-    allOnlineResourcesSolr(
+    allOnlineResourcesSearch(
       limit: Int,
       offset: Int,
       pageNumber: Int,
       filter: SearchFilter
-    ): OnlineResourcesSolrConnection
+    ): SearchConnection
   }
 `;

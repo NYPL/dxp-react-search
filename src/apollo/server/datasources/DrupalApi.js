@@ -43,7 +43,7 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getAllOnlineResourcesSolr(args) {
+  async getAllOnlineResourcesSearch(args) {
     let apiPath = '/api/search-online-resources';
 
     // Filter by q.
@@ -53,6 +53,14 @@ class DrupalApi extends RESTDataSource {
       && 'q' in args.filter
     ) {
       apiPath = `${apiPath}?sq=${args.filter.q}`;
+    }
+
+    // Pagination
+    // &items_per_page=5&page=1
+    console.log('args!')
+    console.log(args)
+    if (args.limit && args.pageNumber) {
+      apiPath = `${apiPath}&items_per_page=${args.limit}&page=${args.pageNumber}`;
     }
     
     const response = await this.get(apiPath);

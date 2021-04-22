@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-
 // Apollo
 import { useQuery } from '@apollo/client';
 import { 
@@ -17,27 +16,28 @@ import {
 } from './../../../redux/actions';
 // Components
 import { SkeletonLoader } from '@nypl/design-system-react-components';
+import Pagination from './../../shared/Pagination';
 
-
-// Hooks
-import useWindowSize from './../../../hooks/useWindowSize';
-
+const SEARCH_RESULTS_LIMIT = 5;
 
 function SearchResults() {
   const router = useRouter();
   // Redux
   const {
-    searchQuery
+    searchQuery,
+    offset,
+    pageNumber
   } = useSelector(state => state.search);
   const dispatch = useDispatch();
-
-  console.log(router.query)
 
   // Query for data.
   const { loading, error, data } = useQuery(
     SEARCH_RESULTS_QUERY, {
       variables: {
-        q: router.query.q
+        q: router.query.q,
+        limit: SEARCH_RESULTS_LIMIT,
+        pageNumber: pageNumber ? pageNumber : 0,
+        offset: offset ? offset: 0
       }
     }
   );
@@ -47,11 +47,20 @@ function SearchResults() {
     if (data) {
       // Dispatch redux action
       dispatch(setPagination({
-        pageNumber: 1,
-        offset: 1,
-        pageCount: 0,
-        resultsCount: 20
+        pageNumber: pageNumber,
+        offset: offset,
+        pageCount: data.allOnlineResourcesSearch.pageInfo.pageCount,
+        //resultsCount: 20
       }));
+
+      console.log(data.allOnlineResourcesSearch.pageInfo)
+
+      router.push({
+        query: {
+          q: router.query.q,
+          page: pageNumber 
+        }
+      })
     }
   }, [data]);
 
@@ -84,12 +93,13 @@ function SearchResults() {
 
   return (
     <div>
-      {data.allOnlineResourcesSolr.items.map((item) => (
-        <div>
+      {data.allOnlineResourcesSearch.items.map((item) => (
+        <div key={item.id}>
           <h3>{item.name}</h3>
           <div>{item.description}</div>
         </div>
       ))}
+      <Pagination limit={SEARCH_RESULTS_LIMIT} />
     </div>
   );
 }

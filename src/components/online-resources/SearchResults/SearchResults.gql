@@ -1,5 +1,13 @@
-query SearchResultsQuery($q: String) {
-  allOnlineResourcesSolr(
+query SearchResultsQuery(
+  $q: String,
+  $limit: Int,
+  $pageNumber: Int,
+  $offset: Int
+) {
+  allOnlineResourcesSearch(
+    limit: $limit,
+    pageNumber: $pageNumber,
+    offset: $offset,
     filter: {
       q: $q
     }
@@ -8,6 +16,13 @@ query SearchResultsQuery($q: String) {
       id
       name
       description
+    }
+    pageInfo {
+      totalItems,
+      limit,
+      pageNumber,
+      pageCount,
+      timestamp
     }
   }
 }
