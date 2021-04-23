@@ -57,8 +57,6 @@ class DrupalApi extends RESTDataSource {
 
     // Pagination
     // &items_per_page=5&page=1
-    console.log('args!')
-    console.log(args)
     if (args.limit && args.pageNumber) {
       apiPath = `${apiPath}&items_per_page=${args.limit}&page=${args.pageNumber}`;
     }
