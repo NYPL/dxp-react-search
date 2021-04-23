@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // Components
 import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
-import AutoSuggest from './../AutoSuggest';
+import AutoSuggest from './../../ds-prototypes/AutoSuggest';
 
 /*
   PROPS:

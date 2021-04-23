@@ -7,7 +7,7 @@ import {
   List,
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
-import Card from './../Card';
+import Card from '../Card';
 
 function CardGrid(props) {
   const { title, items } = props;

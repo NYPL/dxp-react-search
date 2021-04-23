@@ -6,14 +6,9 @@ import {
 } from './ResourceTopics.gql';
 // Components
 import { 
-  Heading,
-  Image,
-  Link,
-  List,
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
-//import Card from './../../shared/Card';
-import CardGrid from './../../shared/CardGrid';
+import CardGrid from './../../ds-prototypes/CardGrid';
 
 function ResourceTopics() {
   // Query for data.
