@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearchQuery, setAutoSuggestInputValue } from './../../../redux/actions';
 // Apollo
 import { useApolloClient } from '@apollo/client';
-import { ResourceTopicsQuery as AUTO_SUGGEST_QUERY } from './AutoSuggest.gql';
+import { AutoSuggestQuery as AUTO_SUGGEST_QUERY } from './AutoSuggest.gql';
 // Utils
 import filterBySearchInput from './../../../utils/filterBySearchInput';
 // Components

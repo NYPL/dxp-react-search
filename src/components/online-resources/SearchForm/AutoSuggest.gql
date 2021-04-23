@@ -1,4 +1,4 @@
-query ResourceTopicsQuery {
+query AutoSuggestQuery {
   allResourceTopics {
     id
     name
