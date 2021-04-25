@@ -30,31 +30,40 @@ function SearchForm(props) {
         aria-label={label}
         onSubmit={onSubmit}
       >
-        <AutoSuggest
-          label={label}
-          suggestions={suggestions}
-          onSuggestionSelected={onSuggestionSelected}
-          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={onSuggestionsClearRequested}
-          autoSuggestInputValue={autoSuggestInputValue}
-          inputOnChange={inputOnChange}
-        />
-        <Button
-          buttonType="filled"
-          id="button"
-          mouseDown={false}
-          type="submit"
-        >
-          <Icon
-            decorative
-            modifiers={[
-              'small',
-              'icon-left'
-            ]}
-            name="search"
+        <div style={{
+          'display': 'flex'
+        }}>
+          {/*<div>
+            <label style={{'display': 'block'}}>
+              Enter an address or landmark to search nearby or type in a Library name.
+            </label>
+            <input style={{'width': '100%'}} />
+          </div>
+          */}
+          <AutoSuggest
+            label={label}
+            suggestions={suggestions}
+            onSuggestionSelected={onSuggestionSelected}
+            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={onSuggestionsClearRequested}
+            autoSuggestInputValue={autoSuggestInputValue}
+            inputOnChange={inputOnChange}
           />
-          Search
-        </Button>
+          <button style={{
+            'align-self': 'flex-end'
+          }}>
+            Search
+          </button>
+
+          <div style={{
+            'align-self': 'flex-end'
+          }}>
+            <input type="checkbox"/>
+            <label>Open Now</label>
+          </div>
+
+        </div>
+
         {children}
       </form>
     </div>
