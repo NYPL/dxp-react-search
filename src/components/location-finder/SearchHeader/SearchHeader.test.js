@@ -28,15 +28,6 @@ describe('SearchHeader', () => {
     expect(container.querySelector('#location-finder__title')).toBeInTheDocument();
   });
 
-  test('SearchHeader component should have description', () => {
-    const { container } = render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <SearchHeader />
-      </MockedProvider>
-    );
-    expect(container.querySelector('.location-finder__description')).toBeInTheDocument();
-  });
-
   test('SearchHeader component should have a search form', () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>

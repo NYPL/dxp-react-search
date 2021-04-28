@@ -46,9 +46,6 @@ const search = {
 
 afterEach(cleanup);
 
-// Mock the LocationsPagination sub component, as it will be tested on its own.
-jest.mock('./LocationsPagination', () => () => <div>LocationsPagination</div>);
-
 describe('Apollo states test', () => {
   // Test loading
   it('renders loading state without error', () => {
