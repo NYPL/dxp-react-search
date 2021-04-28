@@ -94,15 +94,19 @@ function SearchForm() {
 
   return (
     <SharedSearchForm
-      id='online-resources-form'
-      label={''}
+      id='search-form'
+      label={'Search for broad subject terms or database by name.'}
+      ariaLabel={'Find your online resource'}
       onSubmit={handleSubmit}
+      autoSuggestInputId={'search-form__search-input'}
+      autoSuggestAriaLabel={'Search online resources'}
       suggestions={suggestions}
       onSuggestionSelected={onSuggestionSelected}
       onSuggestionsFetchRequested={onSuggestionsFetchRequested}
       onSuggestionsClearRequested={onSuggestionsClearRequested}
       autoSuggestInputValue={autoSuggestInputValue}
       inputOnChange={inputOnChange}
+      searchButtonId={'search-form__submit'}
     >
       <div>children prop!</div>
     </SharedSearchForm>

@@ -1,69 +1,46 @@
 import React, { useEffect, useState } from 'react';
 // Components
-import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
 import AutoSuggest from './../../ds-prototypes/AutoSuggest';
+import SearchButton from  './SearchButton';
 
-/*
-  PROPS:
-  id
-  label
-  onSubmit
-*/
 function SearchForm(props) {
   const {
     id,
     label,
+    ariaLabel,
     onSubmit,
+    autoSuggestInputId,
+    autoSuggestAriaLabel,
     suggestions,
     onSuggestionSelected,
     onSuggestionsFetchRequested,
     onSuggestionsClearRequested,
     autoSuggestInputValue,
     inputOnChange,
+    searchButtonId,
     children
   } = props;
 
   return (
     <div className='search__form'>
       <form
+        id={id}
         role='search'
-        aria-label={label}
+        aria-label={ariaLabel}
         onSubmit={onSubmit}
       >
-        <div style={{
-          'display': 'flex'
-        }}>
-          {/*<div>
-            <label style={{'display': 'block'}}>
-              Enter an address or landmark to search nearby or type in a Library name.
-            </label>
-            <input style={{'width': '100%'}} />
-          </div>
-          */}
-          <AutoSuggest
-            label={label}
-            suggestions={suggestions}
-            onSuggestionSelected={onSuggestionSelected}
-            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            autoSuggestInputValue={autoSuggestInputValue}
-            inputOnChange={inputOnChange}
-          />
-          <button style={{
-            'align-self': 'flex-end'
-          }}>
-            Search
-          </button>
-
-          <div style={{
-            'align-self': 'flex-end'
-          }}>
-            <input type="checkbox"/>
-            <label>Open Now</label>
-          </div>
-
-        </div>
-
+        <AutoSuggest
+          id={autoSuggestInputId}
+          label={label}
+          autoSuggestAriaLabel={autoSuggestAriaLabel}
+          suggestions={suggestions}
+          onSuggestionSelected={onSuggestionSelected}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          autoSuggestInputValue={autoSuggestInputValue}
+          inputOnChange={inputOnChange}
+        />
+        <SearchButton id={searchButtonId} />
         {children}
       </form>
     </div>

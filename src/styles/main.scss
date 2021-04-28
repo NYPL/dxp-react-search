@@ -3,7 +3,6 @@
 @import '~@nypl/dgx-header-component/dist/styles/main';
 @import '~@nypl/dgx-react-footer/dist/styles/styles.scss';
 @import '~breakpoint-sass/stylesheets/breakpoint';
-
 // Internal app styles
 @import './base/_base.scss';
 @import './base/_focus.scss';
@@ -12,18 +11,23 @@
 @import './typography/_typography.scss';
 @import './colors/_color-vars.scss';
 @import './base/_mixins.scss';
+// Shared
+@import './../components/shared/SearchForm/SearchForm.scss';
+@import './../components/shared/Dropdown/Dropdown.scss';
+// DS Prototypes
+@import './../components/ds-prototypes/AutoSuggest/AutoSuggest.scss';
+@import './../components/ds-prototypes/CardGrid/CardGrid.scss';
+// Location Finder
 @import './../components/location-finder/Hero/Hero.scss';
 @import './../components/location-finder/SearchForm/SearchForm.scss';
 @import './../components/location-finder/SearchFilters/SearchFilters.scss';
-@import './../components/ds-prototypes/AutoSuggest/AutoSuggest.scss';
 @import './../components/location-finder/SearchHeader/SearchHeader.scss';
 @import './../components/location-finder/Locations/Locations.scss';
 @import './../components/location-finder/Location/Location.scss';
 @import './../components/location-finder/Map/Map.scss';
 @import './../components/location-finder/BottomPromo/BottomPromo.scss';
 @import './../components/location-finder/RightRail/RightRail.scss';
-@import './../components/shared/Dropdown/Dropdown.scss';
-@import './../components/ds-prototypes/CardGrid/CardGrid.scss';
+
 
 
 // shared/layouts > Main.js
@@ -54,20 +58,3 @@
 .layout-container {
   overflow-x: hidden;
 }
-
-
-/*.featured-cards {
-  display: flex;
-  flex-flow: row wrap;
-  padding: .75rem 0;
-
-  .resource-topics__heading-item {
-    padding-top: 1rem;
-  }
-
-  .image {
-    width: 384px;
-    height: 256px;
-  }
-}
-*/

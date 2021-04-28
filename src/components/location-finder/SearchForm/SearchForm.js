@@ -161,15 +161,19 @@ function SearchForm() {
 
   return (
     <SharedSearchForm
-      id='online-resources-form'
+      id='search-form'
       label={'Enter an address or landmark to search nearby or type in a Library name.'}
+      ariaLabel={'Find your library'}
       onSubmit={handleSubmit}
+      autoSuggestInputId={'search-form__search-input'}
+      autoSuggestAriaLabel={'Search locations'}
       suggestions={suggestions}
       onSuggestionSelected={onSuggestionSelected}
       onSuggestionsFetchRequested={onSuggestionsFetchRequested}
       onSuggestionsClearRequested={onSuggestionsClearRequested}
       autoSuggestInputValue={autoSuggestInputValue}
       inputOnChange={inputOnChange}
+      searchButtonId={'search-form__submit'}
     >
       <div className="search__form-filters">
         <Checkbox

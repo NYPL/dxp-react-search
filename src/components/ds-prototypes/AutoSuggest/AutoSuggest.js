@@ -6,6 +6,7 @@ function AutoSuggest(props) {
   const {
     id,
     label,
+    autoSuggestAriaLabel,
     suggestions,
     onSuggestionSelected,
     onSuggestionsFetchRequested,
@@ -40,10 +41,14 @@ function AutoSuggest(props) {
   // Custom input component to add aria-label.
   function renderInputComponent(inputProps) {
     return (
-      <div>
-        <label>{label}</label>
-        <input name="search" aria-label="Search locations" {...inputProps} />
-      </div>
+      <Fragment>
+        <label htmlFor={id}>{label}</label>
+        <input 
+          id={id} 
+          name="search" 
+          aria-label={autoSuggestAriaLabel} {...inputProps} 
+        />
+      </Fragment>
     );
   }
   

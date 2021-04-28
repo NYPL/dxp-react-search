@@ -1,39 +1,7 @@
 .search__form {
-  form {
-    display: flex;
-    flex-flow: wrap;
-  }
-
-  // Search text
-  input[type="text"]:focus {
-    outline: 1px solid var(--ui-focus);
-    outline-offset: inherit;
-  }
-
-  .button {
-    @include breakpoint($breakpoint-medium) {
-      @include space-inline-s;
-    }
-  }
-
-  // Open now
-  .checkbox {
-    width: 100%;
-    align-items: center;
-
-    @include breakpoint($breakpoint-large) {
-      width: auto;
-      margin-top: 0;
-    }
-    label {
-      white-space: nowrap;
-      margin-bottom: 0;
-      font-weight: 300;
-    }
-    input {
-      width: 20px;
-      height: 20px;
-    }
+  // Open now checkbox.
+  .open-now {
+    align-self: flex-end;
   }
 
   @media only screen and (min-width: 601px) and (max-width: 1000px) {
