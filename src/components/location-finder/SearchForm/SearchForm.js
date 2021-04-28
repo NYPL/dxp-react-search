@@ -173,6 +173,7 @@ function SearchForm() {
       onSuggestionsClearRequested={onSuggestionsClearRequested}
       autoSuggestInputValue={autoSuggestInputValue}
       inputOnChange={inputOnChange}
+      suggestionContainerMsg={'Search for locations near:'}
       searchButtonId={'search-form__submit'}
     >
       <div className="search__form-filters">

@@ -16,6 +16,7 @@ function SearchForm(props) {
     onSuggestionsFetchRequested,
     onSuggestionsClearRequested,
     autoSuggestInputValue,
+    suggestionContainerMsg,
     inputOnChange,
     searchButtonId,
     children
@@ -39,6 +40,7 @@ function SearchForm(props) {
           onSuggestionsClearRequested={onSuggestionsClearRequested}
           autoSuggestInputValue={autoSuggestInputValue}
           inputOnChange={inputOnChange}
+          suggestionContainerMsg={suggestionContainerMsg}
         />
         <SearchButton id={searchButtonId} />
         {children}

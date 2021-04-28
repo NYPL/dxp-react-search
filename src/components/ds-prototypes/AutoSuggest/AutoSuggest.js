@@ -12,7 +12,8 @@ function AutoSuggest(props) {
     onSuggestionsFetchRequested,
     onSuggestionsClearRequested,
     autoSuggestInputValue,
-    inputOnChange
+    inputOnChange,
+    suggestionContainerMsg
   } = props;
 
   function getSuggestionValue(suggestion) {
@@ -32,7 +33,7 @@ function AutoSuggest(props) {
       <div {...containerProps} aria-label="Filter search">
         {children}
         <div className='auto-suggest-bottom'>
-          Search for locations near: <strong>{query}</strong>
+          {suggestionContainerMsg} <strong>{query}</strong>
         </div>
       </div>
     );

@@ -106,6 +106,7 @@ function SearchForm() {
       onSuggestionsClearRequested={onSuggestionsClearRequested}
       autoSuggestInputValue={autoSuggestInputValue}
       inputOnChange={inputOnChange}
+      suggestionContainerMsg={'You searched for:'}
       searchButtonId={'search-form__submit'}
     >
       <div>children prop!</div>
