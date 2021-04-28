@@ -44,7 +44,6 @@ function SearchForm() {
   const { infoWindowId } = useSelector(state => state.map);
   const dispatch = useDispatch();
   
-
   // Apollo
   const client = useApolloClient();
   
