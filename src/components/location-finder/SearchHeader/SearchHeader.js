@@ -2,12 +2,11 @@ import React from 'react';
 // Content
 import SearchHeaderContent from './content';
 // Components
-import * as DS from '@nypl/design-system-react-components';
 import SearchForm from './../SearchForm';
 
 function SearchHeader() {
   // Content
-  const { title, description } = SearchHeaderContent;
+  const { title } = SearchHeaderContent;
 
   return (
     <div className='search-header'>

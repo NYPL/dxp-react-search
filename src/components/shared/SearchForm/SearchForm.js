@@ -1,60 +1,48 @@
 import React, { useEffect, useState } from 'react';
 // Components
-import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
 import AutoSuggest from './../../ds-prototypes/AutoSuggest';
+import SearchButton from  './SearchButton';
 
-/*
-  PROPS:
-  id
-  label
-  onSubmit
-*/
 function SearchForm(props) {
   const {
     id,
     label,
+    ariaLabel,
     onSubmit,
+    autoSuggestInputId,
+    autoSuggestAriaLabel,
     suggestions,
     onSuggestionSelected,
     onSuggestionsFetchRequested,
     onSuggestionsClearRequested,
     autoSuggestInputValue,
+    suggestionContainerMsg,
     inputOnChange,
+    searchButtonId,
     children
   } = props;
 
   return (
     <div className='search__form'>
       <form
+        id={id}
         role='search'
-        aria-label={label}
+        aria-label={ariaLabel}
         onSubmit={onSubmit}
       >
         <AutoSuggest
+          id={autoSuggestInputId}
           label={label}
+          autoSuggestAriaLabel={autoSuggestAriaLabel}
           suggestions={suggestions}
           onSuggestionSelected={onSuggestionSelected}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
           autoSuggestInputValue={autoSuggestInputValue}
           inputOnChange={inputOnChange}
+          suggestionContainerMsg={suggestionContainerMsg}
         />
-        <Button
-          buttonType="filled"
-          id="button"
-          mouseDown={false}
-          type="submit"
-        >
-          <Icon
-            decorative
-            modifiers={[
-              'small',
-              'icon-left'
-            ]}
-            name="search"
-          />
-          Search
-        </Button>
+        <SearchButton id={searchButtonId} />
         {children}
       </form>
     </div>
