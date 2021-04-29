@@ -4,8 +4,12 @@ const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 const onlineResourceResolver = {
   Query: {
     allOnlineResources: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getAllOnlineResources();
+      const response = await dataSources.drupalApi.getAllOnlineResources(args);
       return response.data;
+    },
+    onlineResource: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getOnlineResource(args);
+      return response;
     },
   },
   OnlineResource: {

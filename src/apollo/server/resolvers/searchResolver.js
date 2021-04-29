@@ -10,10 +10,10 @@ dayjs.extend(timezone);
 // Set default timezone.
 dayjs.tz.setDefault('America/New_York');
 
-const onlineResourcesSearchResolver = {
+const searchResolver = {
   Query: {
-    allOnlineResourcesSearch: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getAllOnlineResourcesSearch(args);
+    allSearchDocuments: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getAllSearchDocuments(args);
 
       // Create a dayjs date object, using default timezone.
       // @see https://github.com/iamkun/dayjs/issues/1227
@@ -34,17 +34,24 @@ const onlineResourcesSearchResolver = {
       }
     },
   },
-  OnlineResource: {
-    id: onlineResource => {
-      return onlineResource.uuid;
+  SearchDocument: {
+    __resolveType(document, context, info) {
+      // @TODO
+      // For now, just return the single search document type we have.
+      return 'OnlineResourceDocument';
+    }
+  },
+  OnlineResourceDocument: {
+    id: document => document.uuid,
+    name: document => document.title,
+    description: document => document.summary,    
+    slug: document => {
+      return document.url;
     },
-    name: onlineResource => {
-      return onlineResource.title;
-    },
-    description: onlineResource => {
-      return onlineResource.summary;
+    mostPopular: document => {
+      return document['most-popular']
     }
   }
 }
 
-export default onlineResourcesSearchResolver;
+export default searchResolver;

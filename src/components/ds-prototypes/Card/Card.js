@@ -13,12 +13,14 @@ function Card(props) {
 
   return (
     <Fragment>
-      <Image
-        alt=""
-        imageCredit={null}
-        modifiers={null}
-        src={imageUrl}
-      />
+      {imageUrl &&
+        <Image
+          alt=""
+          imageCredit={null}
+          modifiers={null}
+          src={imageUrl}
+        />
+      }
       <Heading
         level={3}
         text={name}

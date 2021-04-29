@@ -1,0 +1,11 @@
+query MostPopularResourcesQuery($mostPopular: Boolean) {
+  allOnlineResources(
+    filter: {
+      mostPopular: $mostPopular
+    }
+  ) {
+    id
+    name
+    description
+  }
+}

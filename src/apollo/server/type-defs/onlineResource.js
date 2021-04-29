@@ -12,14 +12,10 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     description: String
+    slug: String
   }
 
-  type SearchConnection {
-    items: [OnlineResource]
-    pageInfo: PageInfo
-  }
-
-  input SearchFilter {
-    q: String
+  input OnlineResourceFilter {
+    mostPopular: Boolean
   }
 `;

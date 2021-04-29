@@ -27,13 +27,18 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getAllOnlineResources() {
-    // Get 'Online Resource' nodes.
-    // Remove node if field_is_most_popular is NULL
-    // Sort by field_is_most_popular ASC
-    // Return only 3 nodes.
-    // @TODO Figure out clean way to make this work w/ indentation.
-    const apiPath = `/jsonapi/node/online_resource?filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular&page[limit]=3`;
+  async getAllOnlineResources(args) {
+    let apiPath = `/jsonapi/node/online_resource`;
+    
+    // Most popular filter.
+    if (
+      args.filter
+      && 'mostPopular' in args.filter
+    ) {
+      apiPath = `${apiPath}?filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular&page[limit]=3`;
+    }
+    
+    // @TODO Add Limit?
 
     const response = await this.get(apiPath);
     if (Array.isArray(response.data)) {
@@ -43,7 +48,7 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getAllOnlineResourcesSearch(args) {
+  async getAllSearchDocuments(args) {
     let apiPath = '/api/search-online-resources';
 
     // Filter by q.
@@ -67,6 +72,17 @@ class DrupalApi extends RESTDataSource {
       return response;
     } else {
       return [];
+    }
+  }
+
+  async getOnlineResource(args) {
+    // Get resource url from path.
+    let routerPath = `/router/translate-path?path=${args.slug}`;
+    const routerResponse = await this.get(routerPath);
+    // Get resource.
+    if (routerResponse) {
+      const response = await this.get(routerResponse.jsonapi.individual);
+      return response.data;
     }
   }
 }

@@ -4,14 +4,16 @@ import { resolvers } from './resolvers';
 import { typeDefs as LocationTypes } from './type-defs/location.js';
 import { typeDefs as OnlineResourceTypes } from './type-defs/onlineResource.js';
 import { typeDefs as TaxonomyTypes } from './type-defs/taxonomy.js';
+import { typeDefs as SearchTypes } from './type-defs/search.js';
 import { typeDefs as SharedTypes } from './type-defs/shared.js';
 
 export const schema = makeExecutableSchema({
-  typeDefs: [ 
+  typeDefs: [
+    SearchTypes,
     SharedTypes,
     LocationTypes, 
     OnlineResourceTypes, 
-    TaxonomyTypes,
+    TaxonomyTypes
   ],
   resolvers,
 })

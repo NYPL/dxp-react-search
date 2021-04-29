@@ -1,10 +1,10 @@
-query SearchResultsQuery(
+query SearchDocumentQuery(
   $q: String,
   $limit: Int,
   $pageNumber: Int,
   $offset: Int
 ) {
-  allOnlineResourcesSearch(
+  allSearchDocuments(
     limit: $limit,
     pageNumber: $pageNumber,
     offset: $offset,
