@@ -1,15 +1,14 @@
 import { Header, navConfig } from '@nypl/dgx-header-component';
-import * as DS from '@nypl/design-system-react-components';
+import { Breadcrumbs } from '@nypl/design-system-react-components';
 import Footer from '@nypl/dgx-react-footer';
 
 export default ({ children }) => (
   <div className="layout-container nypl--locations nypl-ds">
-    {/*<Header
+    <Header
       skipNav={{ target: 'main-content' }}
       navData={navConfig.current}
     />
-    */}
-    <DS.Breadcrumbs
+    <Breadcrumbs
       breadcrumbs={[
         {
           text: 'Home',
