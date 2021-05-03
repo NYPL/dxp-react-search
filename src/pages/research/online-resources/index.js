@@ -12,6 +12,7 @@ import SearchForm from './../../../components/online-resources/SearchForm';
 import SearchResults from './../../../components/online-resources/SearchResults';
 import ResourceTopics from './../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../components/online-resources/MostPopularResources';
+import SidebarMenus from './../../../components/online-resources/SidebarMenus';
 
 function OnlineResources() {
   return (
@@ -39,7 +40,7 @@ function OnlineResources() {
       showSidebar={true}
       sidebarSide='right'
       contentSecondary={
-        <div>Content Secondary!</div>
+        <SidebarMenus />
       }
       contentBottom={
         <RightRail />
