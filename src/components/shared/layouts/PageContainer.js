@@ -9,9 +9,29 @@ function PageContainer(props) {
     contentHeader,
     contentPrimary,
     contentBottom,
+    contentSecondary,
     sidebarSide,
     showSidebar
   } = props;
+
+  let contentPrimaryClass = 'content-primary';
+  if (showSidebar) {
+    if (sidebarSide === 'right') {
+      contentPrimaryClass = `${contentPrimaryClass} content-primary--with-sidebar-right`;
+    } else if (sidebarSide === 'left') {
+      contentPrimaryClass = `${contentPrimaryClass} content-primary--with-sidebar-left`;
+    }
+  }
+  
+  // @TODO Not using this currently, should we?
+  let hasSidebar = false;
+  if (
+    showSidebar
+    && sidebarSide === 'right'
+    || sidebarSide === 'left'
+  ) {
+    hasSidebar = true;
+  }
 
   return (
     <Fragment>
@@ -30,21 +50,33 @@ function PageContainer(props) {
             }
           ]}
         />
-        <main id="main-content" className="main">
+        <main 
+          id="main-content" 
+          className={showSidebar ? 'main main--with-sidebar' : 'main'}
+        >
           {contentHeader &&
             <div className="content-header">
               {contentHeader}
             </div>
           }
-          {contentPrimary &&
-            <div className="content-primary">
-              {contentPrimary}
+          {contentSecondary && showSidebar && sidebarSide === "left" && 
+            <div className='content-secondary content-secondary--with-sidebar-left'>
+              {contentSecondary}
             </div>
           }
-          
-          {contentBottom &&
-            <div className="content-bottom">
-              {contentBottom}
+          {contentPrimary &&
+            <div className={contentPrimaryClass}>
+              {contentPrimary}
+              {contentBottom &&
+                <div className="content-bottom">
+                  {contentBottom}
+                </div>
+              }
+            </div>
+          }
+          {contentSecondary && showSidebar && sidebarSide === "right" && 
+            <div className='content-secondary content-secondary--with-sidebar-right'>
+              {contentSecondary}
             </div>
           }
         </main>

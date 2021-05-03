@@ -93,6 +93,11 @@ function OnlineResourceSlug() {
           </div>
         </Fragment>
       }
+      showSidebar={true}
+      sidebarSide='right'
+      contentSecondary={
+        <div>Content Secondary!</div>
+      }
       contentBottom={
         <RightRail />
       }
