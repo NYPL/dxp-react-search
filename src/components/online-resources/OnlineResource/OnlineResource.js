@@ -1,4 +1,5 @@
 import React from 'react';
+import Meta from './../../shared/Meta';
 // Components
 import { 
   SkeletonLoader 
@@ -22,7 +23,7 @@ function OnlineResource({ slug }) {
   const { loading, error, data } = useQuery(
     ONLINE_RESOURCE_QUERY, {
       variables: {
-        slug: `/online-resource/${slug}`
+        slug: `/research/online-resources/${slug}`
       }
     }
   );
@@ -43,6 +44,9 @@ function OnlineResource({ slug }) {
 
   return (
     <div>
+      <Meta
+        title={data.onlineResource.name}
+      />
       <h1>{data.onlineResource.name}</h1>
       <p>{data.onlineResource.id}</p>
     </div>

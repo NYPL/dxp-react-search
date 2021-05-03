@@ -96,7 +96,7 @@ function SearchResultsInner() {
     <div>
       {data.allSearchDocuments.items.map((item) => (
         <div key={item.id}>
-          <Link href="/online-resource/time-magazine-archive">
+          <Link href="/research/online-resources/time-magazine-archive">
             <a><h3>{item.name}</h3></a>
           </Link>
           <div>{item.description}</div>
