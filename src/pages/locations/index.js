@@ -1,11 +1,12 @@
+import React, { Fragment } from 'react';
+// Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
 import { withApollo } from './../../apollo/client/withApollo';
 // Redux
 import { withRedux } from './../../redux/withRedux';
 import { compose } from 'redux';
 // Components
-import Meta from './../../components/location-finder/Meta';
-import Layout from './../../components/shared/layouts/Main';
+import PageContainer from './../../components/shared/layouts/PageContainer';
 import Hero from './../../components/location-finder/Hero';
 import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
@@ -16,13 +17,20 @@ import RightRail from '../../components/location-finder/RightRail';
 
 function LocationFinder() {
   return (
-    <Layout>
-      <Meta />
-      <div className="content-header">
-        <Hero />
-        <SearchHeader />
-      </div>
-      <div className="content-primary">
+    <PageContainer
+      metaTags={{
+        title: 'Location Finder',
+        description: 'The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island.',
+        url: 'https://www.nypl.org/locations'
+      }}
+      wrapperClass='nypl--locations'
+      contentHeader={
+        <Fragment>
+          <Hero />
+          <SearchHeader />
+        </Fragment>
+      }
+      contentPrimary={
         <div className='locations'>
           <div className='locations__list' id="locations-list">
             <SearchResultsDetails />
@@ -35,12 +43,14 @@ function LocationFinder() {
             <Map />
           </div>
         </div>
-      </div>
-      <div className="content-bottom">
-        <BottomPromo />
-        <RightRail />
-      </div>
-    </Layout>
+      }
+      contentBottom={
+        <Fragment>
+          <BottomPromo />
+          <RightRail />
+        </Fragment>
+      }
+    />
   );
 }
 
