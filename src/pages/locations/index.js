@@ -20,7 +20,8 @@ function LocationFinder() {
     <PageContainer
       metaTags={{
         title: 'Location Finder',
-        description: 'The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island.'
+        description: 'The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island.',
+        url: 'https://www.nypl.org/locations'
       }}
       wrapperClass='nypl--locations'
       contentHeader={

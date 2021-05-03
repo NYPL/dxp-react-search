@@ -13,13 +13,13 @@ import SearchResults from './../../../components/online-resources/SearchResults'
 import ResourceTopics from './../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../components/online-resources/MostPopularResources';
 
-
 function OnlineResources() {
   return (
     <PageContainer
       metaTags={{
         title: 'Online Resources',
-        description: 'Hello welcome to the NYPL!'
+        description: 'Hello welcome to the NYPL!',
+        url: 'https://www.nypl.org/research/online-resources'
       }}
       wrapperClass='nypl--research'
       contentHeader={

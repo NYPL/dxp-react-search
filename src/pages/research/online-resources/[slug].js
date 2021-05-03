@@ -71,7 +71,9 @@ function OnlineResourceSlug() {
   return (
     <PageContainer
       metaTags={{
-        title: `${data.onlineResource.name}`
+        title: `${data.onlineResource.name}`,
+        description: `${data.onlineResource.name}`,
+        url: `https://www.nypl.org/research/online-resources/${slug}`
       }}
       wrapperClass='nypl--research'
       contentHeader={
