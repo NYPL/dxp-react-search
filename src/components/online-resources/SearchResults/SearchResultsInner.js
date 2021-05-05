@@ -18,6 +18,7 @@ import {
 } from './../../../redux/actions';
 // Components
 import { SkeletonLoader } from '@nypl/design-system-react-components';
+import OnlineResourceCard from './../OnlineResourceCard';
 
 const SEARCH_RESULTS_LIMIT = 50;
 
@@ -96,10 +97,9 @@ function SearchResultsInner() {
     <div>
       {data.allSearchDocuments.items.map((item) => (
         <div key={item.id}>
-          <Link href="/research/online-resources/time-magazine-archive">
-            <a><h3>{item.name}</h3></a>
-          </Link>
-          <div>{item.description}</div>
+          <OnlineResourceCard
+            item={item}
+          />
         </div>
       ))}
     </div>

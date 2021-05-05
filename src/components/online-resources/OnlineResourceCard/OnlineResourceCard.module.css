@@ -1,0 +1,29 @@
+.card {
+  margin: var(--space-m) 0;
+}
+
+.heading {
+  display: inline-block;
+  padding: var(--space-xs) 0;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 0 var(--space-xs);
+}
+
+.labelItem {
+  padding: var(--space-xxs) 0;
+}
+
+.labelItem label {
+  font-weight: bold;
+}
+
+.resourceType {
+  font-size: 12px;
+  font-weight: 700;
+  /*color: #00838A;*/
+  color: var(--section-research-primary);
+  text-transform: uppercase;
+}

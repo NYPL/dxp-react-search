@@ -50,7 +50,21 @@ const searchResolver = {
     },
     mostPopular: document => {
       return document['most-popular']
-    }
+    },
+    accessibilityLink: document => 'https//www.nypl.org',
+    termsConditionsLink: document => 'https://about.jstor.org/terms/',
+    privacyPolicyLink: document => 'https://about.jstor.org/privacy/',
+    notes: document => 'Subject coverage includes Asian studies, ecology, economics, education, finance, history, literature, mathematics, philosophy, political science, population studies, science, and sociology.',
+    updateFrequency: document => 'Periodically',
+    printEquivalent: document => 'Many of the journals included in JSTOR are available in traditional print or microform formats at The New York Public Library. Check the Library Catalog for holdings.',
+    format: document => 'Web',
+    language: document => 'English',
+    outputType: document => 'Print, Download'
+    /*
+    @TODO
+    subjects
+    accessLocations
+    */
   }
 }
 

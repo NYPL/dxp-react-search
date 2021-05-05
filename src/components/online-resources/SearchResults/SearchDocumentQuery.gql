@@ -16,6 +16,17 @@ query SearchDocumentQuery(
       id
       name
       description
+      ... on OnlineResourceDocument {
+        accessibilityLink
+        termsConditionsLink
+        privacyPolicyLink
+        notes
+        updateFrequency
+        printEquivalent
+        format
+        language
+        outputType
+      }
     }
     pageInfo {
       totalItems,

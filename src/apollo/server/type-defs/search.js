@@ -14,6 +14,29 @@ export const typeDefs = gql`
     name: String!
     description: String
     mostPopular: String
+    accessibilityLink: String
+    termsConditionsLink: String
+    privacyPolicyLink: String
+    notes: String
+    updateFrequency: String
+    printEquivalent: String
+    format: String
+    language: String
+    outputType: String
+    accessLocations: [AccessLocation]
+    subjects: [Subject]
+  }
+
+  type AccessLocation {
+    id: ID!
+    name: String
+    slug: String
+    url: String
+  }
+
+  type Subject {
+    id: ID!
+    name: String
   }
 
   type SearchConnection {
