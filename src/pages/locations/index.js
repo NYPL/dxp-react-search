@@ -7,19 +7,30 @@ import { compose } from 'redux';
 import Meta from './../../components/location-finder/Meta';
 import Layout from './../../components/shared/layouts/Main';
 import Hero from './../../components/location-finder/Hero';
+import HeroImage from './../../components/location-finder/Hero/HeroImage';
+import HeroContent from './../../components/location-finder/Hero/content';
 import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
 import SearchResultsDetails from './../../components/location-finder/SearchResultsDetails';
 import Map from './../../components/location-finder/Map';
 import BottomPromo from '../../components/location-finder/BottomPromo';
 import RightRail from '../../components/location-finder/RightRail';
+import * as DS from '@nypl/design-system-react-components';
 
 function LocationFinder() {
+  // Content
+  const { text } = HeroContent;
+
   return (
     <Layout>
       <Meta />
       <div className="content-header">
-        <Hero />
+        <DS.Hero
+          heroType={DS.HeroTypes.FiftyFifty}
+          subHeaderText={<span dangerouslySetInnerHTML={{ __html: text }} />}
+          image={<div class="hero__image"><HeroImage /></div>}
+        >
+        </DS.Hero>
         <SearchHeader />
       </div>
       <div className="content-primary">

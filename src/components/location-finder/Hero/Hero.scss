@@ -38,6 +38,7 @@
   width: 100%;
 
   color: $white;
+  padding: 0 $space;
 
   @include breakpoint($breakpoint-large) {
     flex: 0 0 50%;
