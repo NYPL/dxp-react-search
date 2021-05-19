@@ -8,7 +8,9 @@ services:
         - npm install
         # Run the NextJS production build.
         - npm run build
-        # Run the tests
-        #- npm test
       start:
+        # Need to add the & at the end, to prevent tugboat qa from hanging
         - npm start &
+        # @TODO figure out if we actually need to use the below command.
+        # Wait until the app is responding before Tugboat posts a link to the preview
+        #- wget -O /dev/null -o /dev/null -t 240 --retry-connrefused localhost:3000
