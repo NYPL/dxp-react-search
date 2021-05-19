@@ -29,6 +29,8 @@ function LocationFinder() {
           heroType={DS.HeroTypes.FiftyFifty}
           subHeaderText={<span dangerouslySetInnerHTML={{ __html: text }} />}
           image={<div class="hero__image"><HeroImage /></div>}
+          backgroundColor="#d0343a"
+          foregroundColor="#ffffff"
         >
         </DS.Hero>
         <SearchHeader />

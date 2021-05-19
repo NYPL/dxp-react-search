@@ -16,13 +16,6 @@
 }
 
 .hero__image {
-  @include space-stack-m;
-  width: 100%;
-
-  @include breakpoint($breakpoint-large) {
-    @include space-stack-none;
-    flex: 0 0 50%;
-  }
 
   svg {
     width: auto;
@@ -35,14 +28,7 @@
 }
 
 .nypl-ds .hero__content {
-  width: 100%;
-
-  color: $white;
   padding: 0 $space;
-
-  @include breakpoint($breakpoint-large) {
-    flex: 0 0 50%;
-  }
 
   a {
     color: $white;
