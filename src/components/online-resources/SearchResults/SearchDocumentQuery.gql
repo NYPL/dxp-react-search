@@ -13,9 +13,21 @@ query SearchDocumentQuery(
     }
   ) {
     items {
-      id
-      name
-      description
+      ... on OnlineResourceDocument {
+        id
+        slug
+        name
+        description
+        accessibilityLink
+        termsConditionsLink
+        privacyPolicyLink
+        notes
+        updateFrequency
+        printEquivalent
+        format
+        language
+        outputType
+      }
     }
     pageInfo {
       totalItems,

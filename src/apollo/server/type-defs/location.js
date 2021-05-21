@@ -49,4 +49,14 @@ export const typeDefs = gql`
     locations: [Location]
     pageInfo: PageInfo
   }
+
+  extend type Query {
+    allLocations(
+      limit: Int,
+      offset: Int,
+      pageNumber: Int,
+      filter: Filter,
+      sortByDistance: SortByDistance
+    ): LocationsConnection
+  }
 `;

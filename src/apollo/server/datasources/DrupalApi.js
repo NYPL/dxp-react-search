@@ -75,6 +75,24 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
+  async getSearchDocument(args) {
+    // Get resource url from path.
+    /*let routerPath = `/router/translate-path?path=${args.slug}`;
+    const routerResponse = await this.get(routerPath);
+    // Get resource.
+    if (routerResponse) {
+      const uuid = routerResponse.entity.uuid;
+      //const apiPath = `/api/search-online-resources?uuid=${uuid}`;
+      //console.log(apiPath)
+      const response = await this.get(`/api/search-online-resources?uuid=${uuid}`);
+      return response.results;
+    }
+    */
+    
+    const response = await this.get(`/api/search-online-resources?uuid=${args.id}`);
+    return response.results;
+  }
+
   async getOnlineResource(args) {
     // Get resource url from path.
     let routerPath = `/router/translate-path?path=${args.slug}`;
@@ -84,6 +102,13 @@ class DrupalApi extends RESTDataSource {
       const response = await this.get(routerResponse.jsonapi.individual);
       return response.data;
     }
+  }
+
+  async getDecoupledRouter(args) {
+    // Get resource url from path.
+    let apiPath = `/router/translate-path?path=${args.path}`;
+    const response = await this.get(apiPath);
+    return response;
   }
 }
 

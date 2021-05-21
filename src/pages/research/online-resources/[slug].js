@@ -1,40 +1,47 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 // Next
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 // Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
 import { withApollo } from './../../../apollo/client/withApollo';
 import { useQuery } from '@apollo/client';
-import gql from 'graphql-tag';
+import { 
+  DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY 
+} from './../../../apollo/client/queries/DecoupledRouter.gql';
+import {
+  OnlineResourceByIdQuery as ONLINE_RESOURCE_BY_ID_QUERY
+} from './../../../apollo/client/queries/OnlineResourceById.gql';
 // Redux
 import { withRedux } from './../../../redux/withRedux';
-import { compose } from 'redux';
 // Components
+import { SkeletonLoader } from '@nypl/design-system-react-components';
 import PageContainer from './../../../components/shared/layouts/PageContainer';
 import RightRail from './../../../components/location-finder/RightRail';
 import SearchForm from './../../../components/online-resources/SearchForm';
-import { SkeletonLoader } from '@nypl/design-system-react-components';
-
-const ONLINE_RESOURCE_QUERY = gql`
-  query($slug: String) {
-    onlineResource(slug: $slug) {
-      id
-      name
-      description
-    }
-  }
-`;
+import OnlineResourceCard from './../../../components/online-resources/OnlineResourceCard';
 
 function OnlineResourceSlug() {
   const router = useRouter();
   const { slug } = router.query;
 
+  // Run decoupled router query to get uuid.
+  const { data: decoupledRouterData } = useQuery(
+    DECOUPLED_ROUTER_QUERY, {
+      variables: {
+        path: `/research/online-resources/${slug}`
+      }
+    }
+  );
+  
+  const uuid = decoupledRouterData?.decoupledRouter?.id;
+
   // Query for data.
   const { loading, error, data } = useQuery(
-    ONLINE_RESOURCE_QUERY, {
+    ONLINE_RESOURCE_BY_ID_QUERY, {
+      skip: !uuid,
       variables: {
-        slug: `/research/online-resources/${slug}`
+        id: uuid
       }
     }
   );
@@ -71,8 +78,8 @@ function OnlineResourceSlug() {
   return (
     <PageContainer
       metaTags={{
-        title: `${data.onlineResource.name}`,
-        description: `${data.onlineResource.name}`,
+        title: `${data.searchDocument.name}`,
+        description: `${data.searchDocument.name}`,
         url: `https://www.nypl.org/research/online-resources/${slug}`
       }}
       wrapperClass='nypl--research'
@@ -88,11 +95,7 @@ function OnlineResourceSlug() {
           <Link href="/research/online-resources">
             <a><h3>Online Resources</h3></a>
           </Link>
-
-          <div>
-            <h1>{data.onlineResource.name}</h1>
-            <p>{data.onlineResource.id}</p>
-          </div>
+          <OnlineResourceCard item={data.searchDocument} />
         </Fragment>
       }
       showSidebar={true}
@@ -107,4 +110,8 @@ function OnlineResourceSlug() {
   );
 }
 
-export default compose(withApollo, withRedux)(OnlineResourceSlug);
+export default withApollo(
+  withRedux((OnlineResourceSlug)), { 
+    ssr: true, 
+    redirects: true 
+  });

@@ -33,6 +33,10 @@ const searchResolver = {
         }
       }
     },
+    searchDocument: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getSearchDocument(args);
+      return response[0];
+    },
   },
   SearchDocument: {
     __resolveType(document, context, info) {
@@ -44,13 +48,32 @@ const searchResolver = {
   OnlineResourceDocument: {
     id: document => document.uuid,
     name: document => document.title,
-    description: document => document.summary,    
+    description: document => document.summary,
+    // @TODO Need to remove this have Drupal output the slug/url path only.
     slug: document => {
-      return document.url;
+      if (document.url.includes('localhost')) {
+        return document.url.replace('http://localhost:8080', '');
+      } else {
+        return document.url.replace('http://sandbox-d8.nypl.org', '');
+      }
     },
     mostPopular: document => {
       return document['most-popular']
-    }
+    },
+    accessibilityLink: document => 'https//www.nypl.org',
+    termsConditionsLink: document => 'https://about.jstor.org/terms/',
+    privacyPolicyLink: document => 'https://about.jstor.org/privacy/',
+    notes: document => 'Subject coverage includes Asian studies, ecology, economics, education, finance, history, literature, mathematics, philosophy, political science, population studies, science, and sociology.',
+    updateFrequency: document => 'Periodically',
+    printEquivalent: document => 'Many of the journals included in JSTOR are available in traditional print or microform formats at The New York Public Library. Check the Library Catalog for holdings.',
+    format: document => 'Web',
+    language: document => 'English',
+    outputType: document => 'Print, Download'
+    /*
+    @TODO
+    subjects
+    accessLocations
+    */
   }
 }
 
