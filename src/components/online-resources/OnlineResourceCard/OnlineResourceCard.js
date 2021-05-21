@@ -8,7 +8,8 @@ import s from './OnlineResourceCard.module.css'
 
 function OnlineResourceCard({ item }) {
   const { 
-    id, 
+    id,
+    slug,
     name, 
     description, 
     updateFrequency, 
@@ -19,6 +20,8 @@ function OnlineResourceCard({ item }) {
     outputType
   } = item;
 
+  //console.log(slug)
+
   function LabelItem({ label, name }) {
     return (
       <div className={s.labelItem}>
@@ -27,11 +30,12 @@ function OnlineResourceCard({ item }) {
     );
   }
 
-  return (
-    <div className={s.card}>
-      <div className={s.resourceType}>Core Resource</div>
-      <div className={s.heading}>
-        <Link href="/research/online-resources/time-magazine-archive">
+  function CardHeading(props) {
+    const { id, name, slug } = props;
+
+    if (slug) {
+      return (
+        <Link href={slug}>
           <a>
             <Heading
               id={id}
@@ -40,6 +44,23 @@ function OnlineResourceCard({ item }) {
             />
           </a>
         </Link>
+      )
+    } else {
+      return (
+        <Heading
+          id={id}
+          level={3}
+          text={name}
+        />
+      )
+    }
+  }
+
+  return (
+    <div className={s.card}>
+      <div className={s.resourceType}>Core Resource</div>
+      <div className={s.heading}>
+        <CardHeading id={id} slug={slug} name={name} />
       </div>
       <div className={s.statusBadge}>
         <StatusBadge 

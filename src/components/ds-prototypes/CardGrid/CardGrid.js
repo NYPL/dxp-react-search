@@ -33,10 +33,10 @@ function CardGrid(props) {
               key={item.id} 
               className="card-grid__list-item"
               style={{
-                'margin-bottom': '2rem',
+                'marginBottom': '2rem',
                 'flex': '1 0 calc(33% - 2rem)',
-                'margin-right': '2rem',
-                'max-width': '384px'
+                'marginRight': '2rem',
+                'maxWidth': '384px'
               }}
             >
               <Card

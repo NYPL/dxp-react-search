@@ -43,8 +43,13 @@ const resourceTopicResolver = {
           imageUrl = includedItem.attributes.uri.url;
         }
       });
-
-      return `http://localhost:8080${imageUrl}`;
+      
+      // @TODO Clean this up, temporary fix for local url in diff format than aws.
+      if (imageUrl && imageUrl.includes('sites/default')) {
+        return `http://localhost:8080${imageUrl}`;
+      } else {
+        return imageUrl;
+      }
     }
   }
 }

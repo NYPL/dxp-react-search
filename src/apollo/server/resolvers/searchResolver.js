@@ -33,6 +33,10 @@ const searchResolver = {
         }
       }
     },
+    searchDocument: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getSearchDocument(args);
+      return response[0];
+    },
   },
   SearchDocument: {
     __resolveType(document, context, info) {
@@ -44,9 +48,14 @@ const searchResolver = {
   OnlineResourceDocument: {
     id: document => document.uuid,
     name: document => document.title,
-    description: document => document.summary,    
+    description: document => document.summary,
+    // @TODO Need to remove this have Drupal output the slug/url path only.
     slug: document => {
-      return document.url;
+      if (document.url.includes('localhost')) {
+        return document.url.replace('http://localhost:8080', '');
+      } else {
+        return document.url.replace('http://sandbox-d8.nypl.org', '');
+      }
     },
     mostPopular: document => {
       return document['most-popular']

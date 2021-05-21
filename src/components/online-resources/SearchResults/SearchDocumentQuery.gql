@@ -13,10 +13,11 @@ query SearchDocumentQuery(
     }
   ) {
     items {
-      id
-      name
-      description
       ... on OnlineResourceDocument {
+        id
+        slug
+        name
+        description
         accessibilityLink
         termsConditionsLink
         privacyPolicyLink

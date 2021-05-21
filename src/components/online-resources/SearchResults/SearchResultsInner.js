@@ -54,8 +54,6 @@ function SearchResultsInner() {
         pageCount: data.allSearchDocuments.pageInfo.pageCount,
       }));
 
-      console.log(data.allSearchDocuments.pageInfo)
-
       router.push({
         query: {
           q: router.query.q,

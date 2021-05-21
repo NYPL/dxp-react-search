@@ -4,7 +4,6 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import { withApollo } from './../../apollo/client/withApollo';
 // Redux
 import { withRedux } from './../../redux/withRedux';
-import { compose } from 'redux';
 // Components
 import PageContainer from './../../components/shared/layouts/PageContainer';
 import Hero from './../../components/location-finder/Hero';
@@ -54,4 +53,8 @@ function LocationFinder() {
   );
 }
 
-export default compose(withApollo, withRedux)(LocationFinder);
+export default withApollo(
+  withRedux((LocationFinder)), { 
+    ssr: true, 
+    redirects: false 
+  });

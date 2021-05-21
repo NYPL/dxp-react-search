@@ -47,4 +47,14 @@ export const typeDefs = gql`
   input SearchDocumentFilter {
     q: String
   }
+
+  extend type Query {
+    allSearchDocuments(
+      limit: Int,
+      offset: Int,
+      pageNumber: Int,
+      filter: SearchDocumentFilter
+    ): SearchConnection
+    searchDocument(id: String): SearchDocument
+  }  
 `;
