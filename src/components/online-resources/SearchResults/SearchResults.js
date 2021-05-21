@@ -5,6 +5,13 @@ import Pagination from './../../shared/Pagination';
 
 const SEARCH_RESULTS_LIMIT = 50;
 
+/*
+@TODO
+
+SearchResultsContainer
+SearchResultsItem
+
+*/
 function SearchResults() {
   return (
     <div>

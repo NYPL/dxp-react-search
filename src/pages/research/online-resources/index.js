@@ -4,7 +4,6 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import { withApollo } from './../../../apollo/client/withApollo';
 // Redux
 import { withRedux } from './../../../redux/withRedux';
-import { compose } from 'redux';
 // Components
 import PageContainer from './../../../components/shared/layouts/PageContainer';
 import RightRail from './../../../components/location-finder/RightRail';
@@ -48,4 +47,8 @@ function OnlineResources() {
   );
 }
 
-export default compose(withApollo, withRedux)(OnlineResources);
+export default withApollo(
+  withRedux((OnlineResources)), { 
+    ssr: true, 
+    redirects: false 
+  });

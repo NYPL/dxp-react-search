@@ -18,4 +18,13 @@ export const typeDefs = gql`
   input OnlineResourceFilter {
     mostPopular: Boolean
   }
+
+  extend type Query {
+    allResourceTopics: [ResourceTopic]!
+    allOnlineResources(
+      limit: Int,
+      filter: OnlineResourceFilter
+    ): [OnlineResource]!
+    onlineResource(slug: String): OnlineResource
+  }
 `;

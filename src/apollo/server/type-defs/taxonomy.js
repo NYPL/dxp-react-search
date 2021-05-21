@@ -18,4 +18,8 @@ export const typeDefs = gql`
     terms: [String]!
     operator: String!
   }
+
+  extend type Query {
+    allTerms(filter: TermsFilter): [Vocab]!
+  }
 `;

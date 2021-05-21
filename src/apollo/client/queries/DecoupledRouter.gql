@@ -1,0 +1,10 @@
+query DecoupledRouterQuery($path: String) {
+  decoupledRouter(path: $path) {
+    id
+    redirect {
+      from
+      to
+      status
+    }
+  }
+}

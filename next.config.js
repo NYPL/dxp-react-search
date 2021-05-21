@@ -14,6 +14,16 @@ module.exports = (nextConfig = {}) => {
       }
       return [];
     },
+    // @TODO Not sure we need this.
+    async redirects() {
+      return [
+        {
+          source: '/collections/articles-databases/:slug',
+          destination: '/research/online-resources/:slug',
+          permanent: true,
+        },
+      ]
+    },
     webpack(config, options) {
       const { dir } = options
 
