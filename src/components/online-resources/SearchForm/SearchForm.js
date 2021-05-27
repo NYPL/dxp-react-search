@@ -103,7 +103,7 @@ function SearchForm() {
       suggestionContainerMsg={'You searched for:'}
       searchButtonId={'search-form__submit'}
     >
-      <div>children prop!</div>
+      <div id="placeholder-children-prop-filters"></div>
     </SharedSearchForm>
   );
 };
