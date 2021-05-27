@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Next
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 // Apollo
 import { useQuery } from '@apollo/client';
 import { 
@@ -13,10 +14,10 @@ import SearchResultsDetails from './SearchResultsDetails';
 
 const SEARCH_RESULTS_LIMIT = 10;
 
-function SearchResults() {
+function SearchResultsItems() {
   const router = useRouter();
-  // @TODO do you actually need parseInt here?
-  const currentPage = router.query.page ? parseInt(router.query.page) : 1;
+  //
+  const currentPage = router.query.page ? parseInt(router.query.page) - 1 : null;
 
   // Query for data.
   const { loading, error, data } = useQuery(
@@ -24,7 +25,7 @@ function SearchResults() {
       variables: {
         q: router.query.q ? router.query.q : '',
         limit: SEARCH_RESULTS_LIMIT,
-        pageNumber: currentPage
+        pageNumber: currentPage ? currentPage : 0,
       }
     }
   );
@@ -39,10 +40,10 @@ function SearchResults() {
   // Loading state,
   if (loading || !data) {
     return (
-      <div id="search-results">
+      <div>
         <SkeletonLoader />
         <Pagination
-          currentPage={currentPage}
+          currentPage={currentPage + 1}
           pageCount={10}
           onPageChange={onPageChange}
         />
@@ -59,10 +60,9 @@ function SearchResults() {
   */
   
   // Don't show search results if no search.
-  /*if (!router.query.q) {
+  if (!router.query.q) {
     return null;
   }
-  */
 
   function onPageChange(pageIndex) {
     router.push({
@@ -76,28 +76,19 @@ function SearchResults() {
   }
 
   return (
-    <div id="search-results__container">
-      <SearchResultsDetails 
-        details={{
-          currentPage: currentPage,
-          itemsOnPage: data.allSearchDocuments.items.length,
-          pageInfo: data.allSearchDocuments.pageInfo
-        }}
+    <div id="search-results__items">
+      {data.allSearchDocuments.items.map((item) => (
+        <div key={item.id}>
+          <OnlineResourceCard item={item} />
+        </div>
+      ))}
+      <Pagination
+        currentPage={currentPage + 1}
+        pageCount={data.allSearchDocuments.pageInfo.pageCount}
+        onPageChange={onPageChange}
       />
-      <div id="search-results">
-        {data.allSearchDocuments.items.map((item) => (
-          <div key={item.id}>
-            <OnlineResourceCard item={item} />
-          </div>
-        ))}
-        <Pagination
-          currentPage={currentPage}
-          pageCount={data.allSearchDocuments.pageInfo.pageCount}
-          onPageChange={onPageChange}
-        />
-      </div>
     </div>
   );
 }
 
-export default SearchResults;
+export default SearchResultsItems;

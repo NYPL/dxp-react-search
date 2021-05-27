@@ -77,18 +77,19 @@ function SearchForm() {
   // FORM SUBMIT
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('handleSubmit!')
-    console.log(autoSuggestInputValue)
 
-    //dispatch(setAutoSuggestInputValue(newValue));
     // Dispatch search query
-    dispatch(setSearchQuery({
+    /*dispatch(setSearchQuery({
       query: autoSuggestInputValue
     }));
-    
-    // Add query string to url
+    */ 
+    // Push form state into url.
     router.push({
-      query: { q: autoSuggestInputValue }
+      pathname: '/research/online-resources/search',
+      query: { 
+        q: autoSuggestInputValue,
+        page: 1 
+      }
     })
   }
 

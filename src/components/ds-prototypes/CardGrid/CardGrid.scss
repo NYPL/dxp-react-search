@@ -1,16 +1,17 @@
 .card-grid {
   .card-grid__list {
-    display: flex;
-    flex-flow: row wrap;
-    padding: .75rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1.25rem;
 
     .heading {
       padding-top: 1rem;
     }
 
     .image {
-      width: 384px;
-      height: 256px;
+      width: 100%;
+      min-height: 206px;
+      height: auto;
     }
   }
 }

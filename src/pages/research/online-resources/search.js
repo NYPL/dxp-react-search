@@ -12,7 +12,7 @@ import SearchResults from './../../../components/online-resources/SearchResults'
 import ResourceTopics from './../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../components/online-resources/MostPopularResources';
 
-function OnlineResources() {
+function OnlineResourcesSearchPage() {
   return (
     <PageContainer
       metaTags={{
@@ -30,8 +30,7 @@ function OnlineResources() {
       }
       contentPrimary={
         <Fragment>
-          <ResourceTopics />
-          <MostPopularResources />
+          <SearchResults />
         </Fragment>
       }
       showSidebar={true}
@@ -47,7 +46,7 @@ function OnlineResources() {
 }
 
 export default withApollo(
-  withRedux((OnlineResources)), { 
+  withRedux((OnlineResourcesSearchPage)), { 
     ssr: true, 
     redirects: false 
   });
