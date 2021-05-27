@@ -36,7 +36,7 @@ function OnlineResourcesSearchPage() {
       showSidebar={true}
       sidebarSide='right'
       contentSecondary={
-        <div>Content Secondary!</div>
+        <div id="placeholder-content-secondary"></div>
       }
       contentBottom={
         <RightRail />
