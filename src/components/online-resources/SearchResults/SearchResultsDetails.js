@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 // Next
 import { useRouter } from 'next/router';
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { setAutoSuggestInputValue } from './../../../redux/actions';
 // Components
 import { default as SharedSearchResultsDetails } from './../../shared/SearchResultsDetails';
 
@@ -8,9 +11,17 @@ function SearchResultsDetails({ details }) {
   // Next router
   const router = useRouter();
 
+  // Redux
+  const {
+    autoSuggestInputValue,
+  } = useSelector(state => state.search);
+  const dispatch = useDispatch();
+
   function onClearSearchTerms() {
     // @TODO is this what we want?
     router.replace('/research/online-resources/search', undefined, { shallow: true });
+
+    dispatch(setAutoSuggestInputValue(''));
   }
 
   function renderMessage(details) {

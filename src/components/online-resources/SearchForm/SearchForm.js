@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setAutoSuggestInputValue } from './../../../redux/actions';
+import { setAutoSuggestInputValue } from './../../../redux/actions';
 // Apollo
 import { useApolloClient } from '@apollo/client';
 import { AutoSuggestQuery as AUTO_SUGGEST_QUERY } from './AutoSuggest.gql';
@@ -14,20 +14,16 @@ import { default as SharedSearchForm } from './../../shared/SearchForm';
 
 function SearchForm() {
   const router = useRouter();
-
   // Local state
   // Filtered items based on search input.
   const [suggestions, setSuggestions] = useState([]);
   // All possible items from datasource.
   const [autoSuggestItems, setAutoSuggestItems] = useState();
-
   // Redux
   const {
     autoSuggestInputValue,
   } = useSelector(state => state.search);
   const dispatch = useDispatch();
-  
-
   // Apollo
   const client = useApolloClient();
   
@@ -42,6 +38,13 @@ function SearchForm() {
       }
     );
   },[autoSuggestItems]);
+  
+  // @TODO Bad idea? sync the router state to redux?
+  useEffect(() => {
+    if (router.query.q) {
+      dispatch(setAutoSuggestInputValue(router.query.q));
+    }
+  },[router.query.q]);
 
   function getSuggestions(autoSuggestItems, value) {
     if (autoSuggestItems) {
@@ -59,11 +62,7 @@ function SearchForm() {
   }
 
   function onSuggestionSelected(event, { suggestion }) {
-    /*dispatch(setMapInfoWindow({
-      infoWindowId: suggestion.id,
-      infoWindowIsVisible: false
-    }));
-    */
+    return null;
   }
 
   function inputOnChange(newValue) {
@@ -74,15 +73,9 @@ function SearchForm() {
     setSuggestions([]);
   }
 
-  // FORM SUBMIT
   function handleSubmit(event) {
     event.preventDefault();
 
-    // Dispatch search query
-    /*dispatch(setSearchQuery({
-      query: autoSuggestInputValue
-    }));
-    */ 
     // Push form state into url.
     router.push({
       pathname: '/research/online-resources/search',
@@ -90,7 +83,7 @@ function SearchForm() {
         q: autoSuggestInputValue,
         page: 1 
       }
-    })
+    });
   }
 
   return (
