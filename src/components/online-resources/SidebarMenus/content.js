@@ -4,20 +4,21 @@ const SidebarMenusContent = [
     title: 'More Research Tools',
     items: [
       {
-        'title' : 'Get a Library Card',
-        'link' : 'https://www.nypl.org/library-card'
+        'title': 'Get a Library Card',
+        'link': 'https://www.nypl.org/library-card',
+        'description': 'Search within articles across our databases.'
       },
       {
-        'title' : 'Find Your Next Book',
-        'link' : 'https://www.nypl.org/books-more/recommendations/staff-picks/adults'
+        'title': 'Find Your Next Book',
+        'link': 'https://www.nypl.org/books-more/recommendations/staff-picks/adults'
       },
       {
-        'title' : 'Search Library Locations',
-        'link' : 'https://www.nypl.org/locations'
+        'title': 'Search Library Locations',
+        'link': 'https://www.nypl.org/locations'
       },
       {
-        'title' : 'Reserve a Computer',
-        'link' : 'https://www.nypl.org/help/computers-internet-and-wireless-access/reserving-computer'
+        'title': 'Reserve a Computer',
+        'link': 'https://www.nypl.org/help/computers-internet-and-wireless-access/reserving-computer'
       }
     ]
   },
@@ -26,20 +27,20 @@ const SidebarMenusContent = [
     title: 'Research Help',
     items: [
       {
-        'title' : 'Get a Library Card',
-        'link' : 'https://www.nypl.org/library-card'
+        'title': 'Get a Library Card',
+        'link': 'https://www.nypl.org/library-card'
       },
       {
-        'title' : 'Find Your Next Book',
-        'link' : 'https://www.nypl.org/books-more/recommendations/staff-picks/adults'
+        'title': 'Find Your Next Book',
+        'link': 'https://www.nypl.org/books-more/recommendations/staff-picks/adults'
       },
       {
-        'title' : 'Search Library Locations',
-        'link' : 'https://www.nypl.org/locations'
+        'title': 'Search Library Locations',
+        'link': 'https://www.nypl.org/locations'
       },
       {
-        'title' : 'Reserve a Computer',
-        'link' : 'https://www.nypl.org/help/computers-internet-and-wireless-access/reserving-computer'
+        'title': 'Reserve a Computer',
+        'link': 'https://www.nypl.org/help/computers-internet-and-wireless-access/reserving-computer'
       }
     ]
   }

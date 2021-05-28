@@ -1,0 +1,44 @@
+.menu-group {
+  @include space-stack-m;
+
+  .heading {
+    border-bottom: 1px solid;
+    padding-bottom: $space-xs;
+  }
+
+  .list {
+    li {
+      a {
+        color: $black;
+        font-weight: 400;
+
+        &:hover {
+          color: inherit;
+        }
+      }
+
+      a.action-link {
+        @include space-inset-xs;
+
+        font-size: .875rem;
+        border-radius: 2px;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        background-color: $nypl-red-regular;
+        border: none;
+        color: #fff;
+        line-height: 1.2;
+        display: inline-block;
+
+        &:hover {
+          background-color: $nypl-red-dark;
+        }
+      }
+
+      .description {
+        @include space-stack-s;
+      }
+    }
+  }
+}
