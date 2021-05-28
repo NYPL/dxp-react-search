@@ -8,6 +8,7 @@ import {
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
 
+
 function Card(props) {
   const { name, imageUrl, description } = props;
 
@@ -16,8 +17,6 @@ function Card(props) {
       {imageUrl &&
         <Image
           alt=""
-          imageCredit={null}
-          modifiers={null}
           src={imageUrl}
         />
       }

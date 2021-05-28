@@ -32,12 +32,6 @@ function CardGrid(props) {
             <li 
               key={item.id} 
               className="card-grid__list-item"
-              style={{
-                'marginBottom': '2rem',
-                'flex': '1 0 calc(33% - 2rem)',
-                'marginRight': '2rem',
-                'maxWidth': '384px'
-              }}
             >
               <Card
                 name={item.name}

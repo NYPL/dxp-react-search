@@ -62,8 +62,13 @@ class DrupalApi extends RESTDataSource {
 
     // Pagination
     // &items_per_page=5&page=1
-    if (args.limit && args.pageNumber) {
-      apiPath = `${apiPath}&items_per_page=${args.limit}&page=${args.pageNumber}`;
+    if (args.limit && args.pageNumber !== null) {
+      // Drupal solr wrapper uses 0 as page 1, so we adjust that here.
+      const pageNumber = args.pageNumber - 1;
+      
+      apiPath = `${apiPath}&items_per_page=${args.limit}&page=${pageNumber}`;
+    } else {
+      apiPath = `${apiPath}&items_per_page=10&page=0`;
     }
     
     const response = await this.get(apiPath);
@@ -75,20 +80,7 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getSearchDocument(args) {
-    // Get resource url from path.
-    /*let routerPath = `/router/translate-path?path=${args.slug}`;
-    const routerResponse = await this.get(routerPath);
-    // Get resource.
-    if (routerResponse) {
-      const uuid = routerResponse.entity.uuid;
-      //const apiPath = `/api/search-online-resources?uuid=${uuid}`;
-      //console.log(apiPath)
-      const response = await this.get(`/api/search-online-resources?uuid=${uuid}`);
-      return response.results;
-    }
-    */
-    
+  async getSearchDocument(args) {    
     const response = await this.get(`/api/search-online-resources?uuid=${args.id}`);
     return response.results;
   }

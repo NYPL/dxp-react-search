@@ -11,9 +11,8 @@ import SearchForm from './../../../components/online-resources/SearchForm';
 import SearchResults from './../../../components/online-resources/SearchResults';
 import ResourceTopics from './../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../components/online-resources/MostPopularResources';
-import SidebarMenus from './../../../components/online-resources/SidebarMenus';
 
-function OnlineResources() {
+function OnlineResourcesSearchPage() {
   return (
     <PageContainer
       metaTags={{
@@ -31,14 +30,13 @@ function OnlineResources() {
       }
       contentPrimary={
         <Fragment>
-          <ResourceTopics />
-          <MostPopularResources />
+          <SearchResults />
         </Fragment>
       }
       showSidebar={true}
       sidebarSide='right'
       contentSecondary={
-        <SidebarMenus />
+        <div id="placeholder-content-secondary"></div>
       }
       contentBottom={
         <RightRail />
@@ -48,7 +46,7 @@ function OnlineResources() {
 }
 
 export default withApollo(
-  withRedux((OnlineResources)), { 
+  withRedux((OnlineResourcesSearchPage)), { 
     ssr: true, 
     redirects: false 
   });
