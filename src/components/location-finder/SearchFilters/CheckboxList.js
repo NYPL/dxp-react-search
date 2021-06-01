@@ -46,9 +46,7 @@ function CheckboxList(props) {
           <li key={term.id} className={setParentClassName(term.children)}>
             <Checkbox
               checkboxId={term.id}
-              labelOptions={{
-                labelContent: <>{term.name}</>
-              }}
+              labelText={<>{term.name}</>}
               name={term.name}
               checked={setFilterCheckedProp(vocab.id, term.id) || false}
               onChange={(e) => onChangeFilters(vocab.id, e)}
