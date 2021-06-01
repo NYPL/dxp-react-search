@@ -1,17 +1,17 @@
 .bottom-rails {
   padding: $space-m $space-s;
-  
+
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
 
   @include breakpoint($breakpoint-medium) {
     @include space-stack-l;
-    
+
     flex-flow: row nowrap;
 		padding: 0;
 	}
-	
+
 	@include breakpoint($breakpoint-large) {
 		width: 65%;
 	}
@@ -33,7 +33,7 @@
       color: $black;
       text-decoration: none;
       font-weight: 400;
-  
+
       &:hover {
         color: inherit;
         text-decoration: underline;
@@ -42,7 +42,7 @@
 
     a.action-link {
       @include space-inset-xs;
-      
+
       font-size: .875rem;
       border-radius: 2px;
       cursor: pointer;
@@ -53,7 +53,7 @@
       color: #fff;
       line-height: 1.2;
       display: inline-block;
-  
+
       &:hover {
         background-color: $nypl-red-dark;
       }

@@ -14,6 +14,7 @@ function SidebarMenus() {
             headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
             title={menu.title}
             items={menu.items}
+            orientation="vertical"
           />
         )
       })}

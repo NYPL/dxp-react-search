@@ -54,7 +54,7 @@ function LocationFinder() {
 }
 
 export default withApollo(
-  withRedux((LocationFinder)), { 
-    ssr: true, 
-    redirects: false 
-  });
+  withRedux((LocationFinder)), {
+  ssr: true,
+  redirects: false
+});

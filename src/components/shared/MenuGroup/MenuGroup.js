@@ -2,7 +2,12 @@ import React from 'react';
 import { Heading, List, Link } from '@nypl/design-system-react-components';
 
 function MenuGroup(props) {
-  const { id, headingId, title, items } = props;
+  const { id, headingId, orientation, title, items } = props;
+
+  let headingLevel = 3;
+  if (orientation == 'vertical') {
+    headingLevel = 2;
+  }
 
   function MenuLink({ item }) {
     if (item.type === 'button') {
@@ -39,10 +44,10 @@ function MenuGroup(props) {
   }
 
   return (
-    <nav id={id} className="menu-group" aria-labelledby={headingId}>
+    <nav id={id} className={"menu-group " + orientation} aria-labelledby={headingId}>
       <Heading
         id={headingId}
-        level={3}
+        level={headingLevel}
         text={title}
       />
       <List

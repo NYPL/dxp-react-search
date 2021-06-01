@@ -1,11 +1,6 @@
 .menu-group {
   @include space-stack-m;
 
-  .heading {
-    border-bottom: 1px solid;
-    padding-bottom: $space-xs;
-  }
-
   .list {
     li {
       a {
@@ -38,6 +33,30 @@
 
       .description {
         @include space-stack-s;
+      }
+    }
+  }
+
+  &.vertical {
+    .heading {
+      color: #00838a;
+      border-bottom: 1px solid;
+      padding-bottom: $space-xs;
+    }
+  }
+
+  &.horizontal {
+    .heading {
+      border: none;
+      padding-bottom: 0;
+      color: $nypl-blue-regular;
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
