@@ -1,3 +1,22 @@
+.menu-group-horizontal {
+  padding: $space-m $space-s;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+
+  @include breakpoint($breakpoint-medium) {
+    @include space-stack-l;
+
+    flex-flow: row nowrap;
+		padding: 0;
+	}
+
+	@include breakpoint($breakpoint-large) {
+		width: 65%;
+	}
+}
+
 .menu-group {
   @include space-stack-m;
 

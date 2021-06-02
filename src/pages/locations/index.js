@@ -12,7 +12,8 @@ import Locations from './../../components/location-finder/Locations/Locations';
 import SearchResultsDetails from './../../components/location-finder/SearchResultsDetails';
 import Map from './../../components/location-finder/Map';
 import BottomPromo from '../../components/location-finder/BottomPromo';
-import RightRail from '../../components/location-finder/RightRail';
+import RightRailContent from '../../components/location-finder/RightRail/content';
+import MenuGroup from './../../components/shared/MenuGroup';
 
 function LocationFinder() {
   return (
@@ -46,7 +47,21 @@ function LocationFinder() {
       contentBottom={
         <Fragment>
           <BottomPromo />
-          <RightRail />
+          <div className="menu-group-horizontal">
+            <Fragment>
+              {RightRailContent.map((menu) => {
+                return (
+                  <MenuGroup
+                    id={menu.id}
+                    headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
+                    title={menu.title}
+                    items={menu.items}
+                    orientation="horizontal"
+                  />
+                )
+              })}
+            </Fragment>
+          </div>
         </Fragment>
       }
     />
