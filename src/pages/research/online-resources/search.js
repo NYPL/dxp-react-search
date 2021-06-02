@@ -9,8 +9,7 @@ import PageContainer from './../../../components/shared/layouts/PageContainer';
 import RightRail from './../../../components/location-finder/RightRail';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import SearchResults from './../../../components/online-resources/SearchResults';
-import ResourceTopics from './../../../components/online-resources/ResourceTopics';
-import MostPopularResources from './../../../components/online-resources/MostPopularResources';
+import SearchHeader from './../../../components/shared/SearchHeader';
 
 function OnlineResourcesSearchPage() {
   return (
@@ -22,11 +21,9 @@ function OnlineResourcesSearchPage() {
       }}
       wrapperClass='nypl--research'
       contentHeader={
-        <div className='search-header'>
-          <div className='search-header__inner'>
-            <SearchForm />
-          </div>
-        </div>
+        <SearchHeader>
+          <SearchForm />
+        </SearchHeader>
       }
       contentPrimary={
         <Fragment>
