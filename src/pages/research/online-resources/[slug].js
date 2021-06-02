@@ -20,6 +20,7 @@ import PageContainer from './../../../components/shared/layouts/PageContainer';
 import RightRail from './../../../components/location-finder/RightRail';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import OnlineResourceCard from './../../../components/online-resources/OnlineResourceCard';
+import SearchHeader from './../../../components/shared/SearchHeader';
 
 function OnlineResourceSlug() {
   const router = useRouter();
@@ -59,11 +60,9 @@ function OnlineResourceSlug() {
       <PageContainer
         wrapperClass='nypl--research'
         contentHeader={
-          <div className='search-header'>
-            <div className='search-header__inner'>
-              <SearchForm />
-            </div>
-          </div>
+          <SearchHeader>
+            <SearchForm />
+          </SearchHeader>
         }
         contentPrimary={
           <SkeletonLoader />
@@ -84,11 +83,9 @@ function OnlineResourceSlug() {
       }}
       wrapperClass='nypl--research'
       contentHeader={
-        <div className='search-header'>
-          <div className='search-header__inner'>
-            <SearchForm />
-          </div>
-        </div>
+        <SearchHeader>
+          <SearchForm />
+        </SearchHeader>
       }
       contentPrimary={
         <Fragment>
