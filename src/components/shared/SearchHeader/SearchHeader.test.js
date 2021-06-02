@@ -22,7 +22,11 @@ describe('SearchHeader', () => {
   test('SearchHeader component should have title', () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <SearchHeader />
+        <SearchHeader title="Location Finder" titleId={'location-finder__title'}>
+          <form role="search">
+            <input type="text" name="search" />
+          </form>
+        </SearchHeader>
       </MockedProvider>
     );
     expect(container.querySelector('#location-finder__title')).toBeInTheDocument();
@@ -31,23 +35,24 @@ describe('SearchHeader', () => {
   test('SearchHeader component should have a search form', () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <SearchHeader />
+        <SearchHeader>
+          <form role="search">
+            <input type="text" name="search" />
+          </form>
+        </SearchHeader>
       </MockedProvider>
     );
     expect(screen.getByRole('search')).toBeInTheDocument();
   });
 
   // Accessbiility tests.
-  // @TODO
-  // Currently Fails on autocomplete listbox form item
-  // Required ARIA child role not present: option
-  /* test('should not have basic accessibility issues', async () => {
+  test('should not have basic accessibility issues', async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <SearchHeader />
+        <SearchHeader title="Location Finder" titleId={'location-finder__title'} />
       </MockedProvider>
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
-  }); */
+  });
 });
