@@ -6,11 +6,12 @@ import { withApollo } from './../../../apollo/client/withApollo';
 import { withRedux } from './../../../redux/withRedux';
 // Components
 import PageContainer from './../../../components/shared/layouts/PageContainer';
-import RightRail from './../../../components/location-finder/RightRail';
+import RightRail from './../../../components/shared/RightRail';
+import SearchHeader from './../../../components/shared/SearchHeader';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import ResourceTopics from './../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../components/online-resources/MostPopularResources';
-import SearchHeader from './../../../components/shared/SearchHeader';
+import SidebarMenus from './../../../components/online-resources/SidebarMenus';
 
 function OnlineResources() {
   return (
@@ -35,7 +36,7 @@ function OnlineResources() {
       showSidebar={true}
       sidebarSide='right'
       contentSecondary={
-        <div id="placeholder-content-secondary"></div>
+        <SidebarMenus />
       }
       contentBottom={
         <RightRail />
@@ -45,7 +46,7 @@ function OnlineResources() {
 }
 
 export default withApollo(
-  withRedux((OnlineResources)), { 
-    ssr: true, 
-    redirects: false 
-  });
+  withRedux((OnlineResources)), {
+  ssr: true,
+  redirects: false
+});

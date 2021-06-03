@@ -6,15 +6,14 @@ import { withApollo } from './../../apollo/client/withApollo';
 import { withRedux } from './../../redux/withRedux';
 // Components
 import PageContainer from './../../components/shared/layouts/PageContainer';
+import SearchHeader from './../../components/shared/SearchHeader';
+import RightRail from '../../components/shared/RightRail';
 import Hero from './../../components/location-finder/Hero';
-//import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
 import SearchResultsDetails from './../../components/location-finder/SearchResultsDetails';
 import Map from './../../components/location-finder/Map';
 import BottomPromo from '../../components/location-finder/BottomPromo';
-import RightRail from '../../components/location-finder/RightRail';
 import SearchForm from '../../components/location-finder/SearchForm';
-import SearchHeader from './../../components/shared/SearchHeader';
 
 function LocationFinder() {
   return (
@@ -28,7 +27,7 @@ function LocationFinder() {
       contentHeader={
         <Fragment>
           <Hero />
-          <SearchHeader 
+          <SearchHeader
             titleId={'location-finder__title'}
             title={'Find Your Library'}
           >
@@ -61,7 +60,7 @@ function LocationFinder() {
 }
 
 export default withApollo(
-  withRedux((LocationFinder)), { 
-    ssr: true, 
-    redirects: false 
-  });
+  withRedux((LocationFinder)), {
+  ssr: true,
+  redirects: false
+});

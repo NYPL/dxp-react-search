@@ -17,10 +17,11 @@ import { withRedux } from './../../../redux/withRedux';
 // Components
 import { SkeletonLoader } from '@nypl/design-system-react-components';
 import PageContainer from './../../../components/shared/layouts/PageContainer';
-import RightRail from './../../../components/location-finder/RightRail';
+import RightRail from './../../../components/shared/RightRail';
+import SearchHeader from './../../../components/shared/SearchHeader';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import OnlineResourceCard from './../../../components/online-resources/OnlineResourceCard';
-import SearchHeader from './../../../components/shared/SearchHeader';
+import SidebarMenus from './../../../components/online-resources/SidebarMenus';
 
 function OnlineResourceSlug() {
   const router = useRouter();
@@ -98,7 +99,7 @@ function OnlineResourceSlug() {
       showSidebar={true}
       sidebarSide='right'
       contentSecondary={
-        <div>Content Secondary!</div>
+        <SidebarMenus />
       }
       contentBottom={
         <RightRail />

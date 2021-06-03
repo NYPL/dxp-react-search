@@ -13,6 +13,7 @@
 @import './base/_mixins.scss';
 // Shared
 @import './../components/shared/Dropdown/Dropdown.scss';
+@import './../components/shared/MenuGroup/MenuGroup.scss';
 @import './../components/shared/SearchHeader/SearchHeader.scss';
 // DS Prototypes
 @import './../components/ds-prototypes/AutoSuggest/AutoSuggest.scss';
@@ -24,6 +25,5 @@
 @import './../components/location-finder/Location/Location.scss';
 @import './../components/location-finder/Map/Map.scss';
 @import './../components/location-finder/BottomPromo/BottomPromo.scss';
-@import './../components/location-finder/RightRail/RightRail.scss';
 // DS Overrides
 @import './ds-overrides.scss';
