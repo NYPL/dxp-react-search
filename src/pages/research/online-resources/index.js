@@ -6,7 +6,7 @@ import { withApollo } from './../../../apollo/client/withApollo';
 import { withRedux } from './../../../redux/withRedux';
 // Components
 import PageContainer from './../../../components/shared/layouts/PageContainer';
-import RightRailContent from './../../../components/location-finder/RightRail/content';
+import RightRail from './../../../components/shared/RightRail';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import ResourceTopics from './../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../components/online-resources/MostPopularResources';
@@ -40,19 +40,7 @@ function OnlineResources() {
         <SidebarMenus />
       }
       contentBottom={
-        <Fragment>
-          {RightRailContent.map((menu) => {
-            return (
-              <MenuGroup
-                id={menu.id}
-                headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
-                title={menu.title}
-                items={menu.items}
-                orientation="horizontal"
-              />
-            )
-          })}
-        </Fragment>
+        <RightRail />
       }
     />
   );

@@ -6,7 +6,7 @@ import { withApollo } from './../../../apollo/client/withApollo';
 import { withRedux } from './../../../redux/withRedux';
 // Components
 import PageContainer from './../../../components/shared/layouts/PageContainer';
-import RightRail from './../../../components/location-finder/RightRail';
+import RightRail from './../../../components/shared/RightRail';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import SearchResults from './../../../components/online-resources/SearchResults';
 import SearchHeader from './../../../components/shared/SearchHeader';

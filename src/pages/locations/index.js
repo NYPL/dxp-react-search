@@ -7,14 +7,13 @@ import { withRedux } from './../../redux/withRedux';
 // Components
 import PageContainer from './../../components/shared/layouts/PageContainer';
 import Hero from './../../components/location-finder/Hero';
-//import SearchHeader from './../../components/location-finder/SearchHeader';
 import Locations from './../../components/location-finder/Locations/Locations';
 import SearchResultsDetails from './../../components/location-finder/SearchResultsDetails';
 import Map from './../../components/location-finder/Map';
 import BottomPromo from '../../components/location-finder/BottomPromo';
 import SearchForm from '../../components/location-finder/SearchForm';
 import SearchHeader from './../../components/shared/SearchHeader';
-import RightRailContent from '../../components/location-finder/RightRail/content';
+import RightRail from '../../components/shared/RightRail';
 import MenuGroup from './../../components/shared/MenuGroup';
 
 function LocationFinder() {
@@ -54,19 +53,7 @@ function LocationFinder() {
       contentBottom={
         <Fragment>
           <BottomPromo />
-          <Fragment>
-            {RightRailContent.map((menu) => {
-              return (
-                <MenuGroup
-                  id={menu.id}
-                  headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
-                  title={menu.title}
-                  items={menu.items}
-                  orientation="horizontal"
-                />
-              )
-            })}
-          </Fragment>
+          <RightRail />
         </Fragment>
       }
     />
