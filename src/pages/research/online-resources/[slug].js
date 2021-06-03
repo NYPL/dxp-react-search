@@ -18,9 +18,9 @@ import { withRedux } from './../../../redux/withRedux';
 import { SkeletonLoader } from '@nypl/design-system-react-components';
 import PageContainer from './../../../components/shared/layouts/PageContainer';
 import RightRail from './../../../components/shared/RightRail';
+import SearchHeader from './../../../components/shared/SearchHeader';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import OnlineResourceCard from './../../../components/online-resources/OnlineResourceCard';
-import SearchHeader from './../../../components/shared/SearchHeader';
 import SidebarMenus from './../../../components/online-resources/SidebarMenus';
 
 function OnlineResourceSlug() {

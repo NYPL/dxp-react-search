@@ -7,9 +7,9 @@ import { withRedux } from './../../../redux/withRedux';
 // Components
 import PageContainer from './../../../components/shared/layouts/PageContainer';
 import RightRail from './../../../components/shared/RightRail';
+import SearchHeader from './../../../components/shared/SearchHeader';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import SearchResults from './../../../components/online-resources/SearchResults';
-import SearchHeader from './../../../components/shared/SearchHeader';
 import SidebarMenus from './../../../components/online-resources/SidebarMenus';
 
 function OnlineResourcesSearchPage() {
