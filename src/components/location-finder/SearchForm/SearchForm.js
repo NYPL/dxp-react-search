@@ -176,20 +176,20 @@ function SearchForm() {
       searchButtonId={'search-form__submit'}
     >
       <div className="search__form-filters">
-        <Checkbox
-          name="isOpenNow"
-          checkboxId="checkbox-open-now"
-          className="open-now"
-          labelOptions={{
-            id: 'label',
-            labelContent: 'Open Now'
-          }}
-          attributes={{
-            'aria-label': "Checking this box will update the results"
-          }}
-          checked={openNow}
-          onChange={onChangeOpenNow}
-        />
+        <div className="checkbox">
+          <Checkbox
+            name="isOpenNow"
+            checkboxId="checkbox-open-now"
+            className="open-now"
+            labelText="Open now"
+            showLabel={true}
+            attributes={{
+              'aria-label': "Checking this box will update the results"
+            }}
+            checked={openNow}
+            onChange={onChangeOpenNow}
+          />
+        </div>
         <SearchFilters />
       </div>
     </SharedSearchForm>
