@@ -11,6 +11,7 @@ import SearchHeader from './../../../components/shared/SearchHeader';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import SearchResults from './../../../components/online-resources/SearchResults';
 import SidebarMenus from './../../../components/online-resources/SidebarMenus';
+import Hero from './../../../components/online-resources/Hero';
 
 function OnlineResourcesSearchPage() {
   return (
@@ -22,9 +23,12 @@ function OnlineResourcesSearchPage() {
       }}
       wrapperClass='nypl--research'
       contentHeader={
-        <SearchHeader>
-          <SearchForm />
-        </SearchHeader>
+        <Fragment>
+          <Hero />
+          <SearchHeader>
+            <SearchForm />
+          </SearchHeader>
+        </Fragment>
       }
       contentPrimary={
         <Fragment>

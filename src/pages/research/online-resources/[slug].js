@@ -22,6 +22,7 @@ import SearchHeader from './../../../components/shared/SearchHeader';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import OnlineResourceCard from './../../../components/online-resources/OnlineResourceCard';
 import SidebarMenus from './../../../components/online-resources/SidebarMenus';
+import Hero from './../../../components/online-resources/Hero';
 
 function OnlineResourceSlug() {
   const router = useRouter();
@@ -61,9 +62,12 @@ function OnlineResourceSlug() {
       <PageContainer
         wrapperClass='nypl--research'
         contentHeader={
-          <SearchHeader>
-            <SearchForm />
-          </SearchHeader>
+          <Fragment>
+            <Hero />
+            <SearchHeader>
+              <SearchForm />
+            </SearchHeader>
+          </Fragment>
         }
         contentPrimary={
           <SkeletonLoader />
@@ -84,9 +88,12 @@ function OnlineResourceSlug() {
       }}
       wrapperClass='nypl--research'
       contentHeader={
-        <SearchHeader>
-          <SearchForm />
-        </SearchHeader>
+        <Fragment>
+          <Hero />
+          <SearchHeader>
+            <SearchForm />
+          </SearchHeader>
+        </Fragment>
       }
       contentPrimary={
         <Fragment>

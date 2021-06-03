@@ -12,6 +12,7 @@ import SearchForm from './../../../components/online-resources/SearchForm';
 import ResourceTopics from './../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../components/online-resources/MostPopularResources';
 import SidebarMenus from './../../../components/online-resources/SidebarMenus';
+import Hero from './../../../components/online-resources/Hero';
 
 function OnlineResources() {
   return (
@@ -23,9 +24,12 @@ function OnlineResources() {
       }}
       wrapperClass='nypl--research'
       contentHeader={
-        <SearchHeader>
-          <SearchForm />
-        </SearchHeader>
+        <Fragment>
+          <Hero />
+          <SearchHeader>
+            <SearchForm />
+          </SearchHeader>
+        </Fragment>
       }
       contentPrimary={
         <Fragment>
