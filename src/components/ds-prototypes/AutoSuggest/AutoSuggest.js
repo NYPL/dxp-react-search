@@ -46,7 +46,8 @@ function AutoSuggest(props) {
         <label htmlFor={id}>{label}</label>
         <input 
           id={id} 
-          name="search" 
+          name="search"
+          className="input"
           aria-label={autoSuggestAriaLabel} {...inputProps} 
         />
       </Fragment>
