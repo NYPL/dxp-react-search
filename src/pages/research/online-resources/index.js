@@ -6,12 +6,13 @@ import { withApollo } from './../../../apollo/client/withApollo';
 import { withRedux } from './../../../redux/withRedux';
 // Components
 import PageContainer from './../../../components/shared/layouts/PageContainer';
-import RightRail from './../../../components/location-finder/RightRail';
+import RightRailContent from './../../../components/location-finder/RightRail/content';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import ResourceTopics from './../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../components/online-resources/MostPopularResources';
 import SidebarMenus from './../../../components/online-resources/SidebarMenus';
 import SearchHeader from './../../../components/shared/SearchHeader';
+import MenuGroup from './../../../components/shared/MenuGroup';
 
 function OnlineResources() {
   return (
@@ -39,14 +40,26 @@ function OnlineResources() {
         <SidebarMenus />
       }
       contentBottom={
-        <RightRail />
+        <Fragment>
+          {RightRailContent.map((menu) => {
+            return (
+              <MenuGroup
+                id={menu.id}
+                headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
+                title={menu.title}
+                items={menu.items}
+                orientation="horizontal"
+              />
+            )
+          })}
+        </Fragment>
       }
     />
   );
 }
 
 export default withApollo(
-  withRedux((OnlineResources)), { 
-    ssr: true, 
-    redirects: false 
-  });
+  withRedux((OnlineResources)), {
+  ssr: true,
+  redirects: false
+});

@@ -65,6 +65,12 @@
   }
 
   &.horizontal {
+
+    @include breakpoint($breakpoint-medium) {
+      width: 30%;
+      float: left;
+    }
+
     .heading {
       border: none;
       padding-bottom: 0;

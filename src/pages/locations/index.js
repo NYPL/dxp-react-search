@@ -29,7 +29,7 @@ function LocationFinder() {
       contentHeader={
         <Fragment>
           <Hero />
-          <SearchHeader 
+          <SearchHeader
             titleId={'location-finder__title'}
             title={'Find Your Library'}
           >
@@ -54,21 +54,19 @@ function LocationFinder() {
       contentBottom={
         <Fragment>
           <BottomPromo />
-          <div className="menu-group-horizontal">
-            <Fragment>
-              {RightRailContent.map((menu) => {
-                return (
-                  <MenuGroup
-                    id={menu.id}
-                    headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
-                    title={menu.title}
-                    items={menu.items}
-                    orientation="horizontal"
-                  />
-                )
-              })}
-            </Fragment>
-          </div>
+          <Fragment>
+            {RightRailContent.map((menu) => {
+              return (
+                <MenuGroup
+                  id={menu.id}
+                  headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
+                  title={menu.title}
+                  items={menu.items}
+                  orientation="horizontal"
+                />
+              )
+            })}
+          </Fragment>
         </Fragment>
       }
     />
