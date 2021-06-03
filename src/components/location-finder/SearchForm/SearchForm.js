@@ -176,7 +176,7 @@ function SearchForm() {
       searchButtonId={'search-form__submit'}
     >
       <div className="search__form-filters">
-        <div>
+        <div className="checkbox">
           <Checkbox
             name="isOpenNow"
             checkboxId="checkbox-open-now"

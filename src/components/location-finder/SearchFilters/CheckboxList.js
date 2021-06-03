@@ -45,8 +45,9 @@ function CheckboxList(props) {
         return (
           <li key={term.id} className={setParentClassName(term.children)}>
             <Checkbox
-              checkboxId={term.id}
+              id={term.id}
               labelText={<>{term.name}</>}
+              showLabel={true}
               name={term.name}
               checked={setFilterCheckedProp(vocab.id, term.id) || false}
               onChange={(e) => onChangeFilters(vocab.id, e)}
@@ -60,10 +61,9 @@ function CheckboxList(props) {
                     return (
                       <li key={childTerm.id} className="term-child">
                         <Checkbox
-                          checkboxId={childTerm.id}
-                          labelOptions={{
-                            labelContent: <>{childTerm.name}</>
-                          }}
+                          id={childTerm.id}
+                          labelText={<>{childTerm.name}</>}
+                          showLabel={true}
                           name={childTerm.name}
                           checked={setFilterCheckedProp(vocab.id, childTerm.id) || false}
                           onChange={(e) => onChangeFilters(vocab.id, e)}

@@ -1,0 +1,74 @@
+// Search Form
+.search__form {
+  form {
+    display: flex;
+    flex-flow: wrap;
+  }
+  
+  // @TODO DS overide
+  input[type="text"] {
+    margin-bottom: 0;
+  }
+
+  // Search text
+  // @TODO version of this seems wrong and looks weird.
+  input[type="text"]:focus {
+    outline: 1px solid var(--ui-focus);
+    outline-offset: inherit;
+  }
+
+  .search__form-button {
+    align-self: flex-end;
+    // @TODO change to use space var
+    padding: 9px;
+
+    @include breakpoint($breakpoint-medium) {
+      @include space-inline-s;
+    }
+  }
+
+  // DS Checkbox overides
+  // @TODO Remove this when new DS checkbox is avail.
+  .checkbox {
+    align-self: flex-end;
+
+    .open-now {
+      margin-left: 1em;
+    }
+    
+    @include breakpoint($breakpoint-medium) {
+      .open-now {
+        margin: initial;
+      }
+    }
+  }
+}
+
+// shared/layouts > Main.js
+// This is a temporary fix for issues with the edge spacing,
+// can remove when the layout gets fixed upstream in the DS.
+// https://github.com/NYPL/nypl-design-system/issues/342
+
+.main,
+.breadcrumbs__list {
+  @include ds-layout-override;
+}
+
+.nypl-ds .footer a {
+  color: $white;
+}
+
+// @TODO Remove this. Temporary fix for DS changes other colors, but really
+// its an issue with the order nextJS complies the scss files on AWS.
+.nypl-ds .header-globalAlerts-box-item a {
+  color: #333;
+}
+
+// @TODO Remove this after updating to DS 0.12.0
+.nypl--locations .footer {
+  box-sizing: content-box;
+}
+
+.layout-container {
+  overflow-x: hidden;
+}
