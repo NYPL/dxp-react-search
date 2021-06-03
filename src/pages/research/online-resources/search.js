@@ -10,6 +10,7 @@ import RightRail from './../../../components/location-finder/RightRail';
 import SearchForm from './../../../components/online-resources/SearchForm';
 import SearchResults from './../../../components/online-resources/SearchResults';
 import SearchHeader from './../../../components/shared/SearchHeader';
+import SidebarMenus from './../../../components/online-resources/SidebarMenus';
 
 function OnlineResourcesSearchPage() {
   return (
@@ -33,7 +34,7 @@ function OnlineResourcesSearchPage() {
       showSidebar={true}
       sidebarSide='right'
       contentSecondary={
-        <div id="placeholder-content-secondary"></div>
+        <SidebarMenus />
       }
       contentBottom={
         <RightRail />
