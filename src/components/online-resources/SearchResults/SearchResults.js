@@ -6,9 +6,6 @@ import { useQuery } from '@apollo/client';
 import { 
   SearchDocumentQuery as SEARCH_RESULTS_QUERY 
 } from './SearchDocumentQuery.gql';
-import { 
-  ResourceTopicBySlugQuery as RESOURCE_TOPIC_BY_SLUG_QUERY 
-} from './ResourceTopicBySlug.gql';
 // Components
 import { Pagination, SkeletonLoader } from '@nypl/design-system-react-components';
 import OnlineResourceCard from './../OnlineResourceCard';
@@ -22,28 +19,12 @@ function SearchResults(props) {
   const router = useRouter();
   // @TODO do you actually need parseInt here?
   const currentPage = router.query.page ? parseInt(router.query.page) : 1;
-  //const resourceTopicId = router.query['resource_topic[]'] ? router.query['resource_topic[]'] : '';
-  
-  //console.log(resourceTopicId)
-  // Resource topic by slug.
-  /*const { data: resourceTopicBySlugData } = useQuery(
-    RESOURCE_TOPIC_BY_SLUG_QUERY, {
-      skip: !resourceTopicId,
-      variables: {
-        slug: resourceTopicId
-      }
-    }
-  );
-  */
-  //console.log(resourceTopicBySlugData.resourceTopic.name)
-  //const resourceTopicTitle = resourceTopicBySlugData?.resourceTopic.name;
 
   // Query for data.
   const { loading, error, data } = useQuery(
     SEARCH_RESULTS_QUERY, {
       variables: {
         q: router.query.q ? router.query.q : '',
-        //tid: router.query['resource_topic[]'] ? router.query['resource_topic[]'] : null,
         tid: resourceTopicId ? resourceTopicId : null,
         limit: SEARCH_RESULTS_LIMIT,
         pageNumber: currentPage
@@ -77,12 +58,6 @@ function SearchResults(props) {
     return (
       <div className='no-results'>Try adjusting search terms or filters.</div>
     );
-  }
-  */
-  
-  // Don't show search results if no search.
-  /*if (!router.query.q) {
-    return null;
   }
   */
 
