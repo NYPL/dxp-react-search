@@ -141,13 +141,13 @@ function createApolloClient(initialState = {}) {
             });
           },
           // @TODO you'd have to use the uuid not tid
-          /*resourceTopic(_, { args, toReference }) {
+          resourceTopic(_, { args, toReference }) {
+            console.log(args.slug)
             return toReference({
               __typename: 'ResourceTopic',
-              slug: args.slug,
+              id: args.slug,
             });
           }
-          */
         }
       }
     }

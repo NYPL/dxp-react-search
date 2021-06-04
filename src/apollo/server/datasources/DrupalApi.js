@@ -28,8 +28,10 @@ class DrupalApi extends RESTDataSource {
   }
 
   async getResourceTopic(args) {    
-    const response = await this.get(`/jsonapi/taxonomy_term/resource_topic?filter[drupal_internal__tid]=${args.slug}`);
-    return response.data[0];
+    console.log(args.slug)
+    //const response = await this.get(`/jsonapi/taxonomy_term/resource_topic?filter[drupal_internal__tid]=${args.slug}`);
+    const response = await this.get(`/jsonapi/taxonomy_term/resource_topic/${args.slug}`);
+    return response.data;
   }
 
   async getAllOnlineResources(args) {

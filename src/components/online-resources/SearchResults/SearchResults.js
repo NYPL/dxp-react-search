@@ -16,15 +16,17 @@ import SearchResultsDetails from './SearchResultsDetails';
 
 const SEARCH_RESULTS_LIMIT = 10;
 
-function SearchResults() {
+function SearchResults(props) {
+  const { resourceTopicTitle, resourceTopicId } = props;
+
   const router = useRouter();
   // @TODO do you actually need parseInt here?
   const currentPage = router.query.page ? parseInt(router.query.page) : 1;
-  const resourceTopicId = router.query['resource_topic[]'] ? router.query['resource_topic[]'] : '';
+  //const resourceTopicId = router.query['resource_topic[]'] ? router.query['resource_topic[]'] : '';
   
-  console.log(resourceTopicId)
+  //console.log(resourceTopicId)
   // Resource topic by slug.
-  const { data: resourceTopicBySlugData } = useQuery(
+  /*const { data: resourceTopicBySlugData } = useQuery(
     RESOURCE_TOPIC_BY_SLUG_QUERY, {
       skip: !resourceTopicId,
       variables: {
@@ -32,15 +34,17 @@ function SearchResults() {
       }
     }
   );
+  */
   //console.log(resourceTopicBySlugData.resourceTopic.name)
-  const resourceTopicTitle = resourceTopicBySlugData?.resourceTopic.name;
+  //const resourceTopicTitle = resourceTopicBySlugData?.resourceTopic.name;
 
   // Query for data.
   const { loading, error, data } = useQuery(
     SEARCH_RESULTS_QUERY, {
       variables: {
         q: router.query.q ? router.query.q : '',
-        tid: router.query['resource_topic[]'] ? router.query['resource_topic[]'] : null,
+        //tid: router.query['resource_topic[]'] ? router.query['resource_topic[]'] : null,
+        tid: resourceTopicId ? resourceTopicId : null,
         limit: SEARCH_RESULTS_LIMIT,
         pageNumber: currentPage
       }
