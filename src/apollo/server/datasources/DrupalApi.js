@@ -27,8 +27,8 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getResourceTopic(args) {    
-    console.log(args.slug)
+  async getResourceTopic(args) {   
+    // @TODO this is the older way based on tid 
     //const response = await this.get(`/jsonapi/taxonomy_term/resource_topic?filter[drupal_internal__tid]=${args.slug}`);
     const response = await this.get(`/jsonapi/taxonomy_term/resource_topic/${args.slug}`);
     return response.data;
@@ -85,9 +85,7 @@ class DrupalApi extends RESTDataSource {
       && 'tid' in args.filter
       && args.filter.tid
     ) {
-      apiPath = '/api/search-online-resources';
-
-      apiPath = `${apiPath}?resource_topics[]=${args.filter.tid}`;
+      apiPath = `/api/search-online-resources?resource_topics[]=${args.filter.tid}`;
     }
     
     const response = await this.get(apiPath);

@@ -140,9 +140,8 @@ function createApolloClient(initialState = {}) {
               id: args.id,
             });
           },
-          // @TODO you'd have to use the uuid not tid
+          // @TODO Confirm this is working properly.
           resourceTopic(_, { args, toReference }) {
-            console.log(args.slug)
             return toReference({
               __typename: 'ResourceTopic',
               id: args.slug,
@@ -152,8 +151,6 @@ function createApolloClient(initialState = {}) {
       }
     }
   }).restore(initialState);
-
-  console.log(cache.data.data)
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',

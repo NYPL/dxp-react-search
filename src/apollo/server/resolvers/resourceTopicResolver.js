@@ -59,6 +59,7 @@ const resourceTopicResolver = {
       }
     },
     url: resourceTopic => {
+      // @TODO this is the old tid path pattern.
       //return `/research/online-resources/search?resource_topic[]=${resourceTopic.attributes.drupal_internal__tid}`
       return resourceTopic.attributes.path.alias;
     }

@@ -2,9 +2,7 @@ import React, { Fragment } from 'react';
 // Components
 import { 
   Heading,
-  Image,
-  List,
-  SkeletonLoader 
+  Image
 } from '@nypl/design-system-react-components';
 import Link from 'next/link';
 
