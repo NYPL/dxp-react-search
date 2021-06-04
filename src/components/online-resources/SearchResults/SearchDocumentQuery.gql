@@ -1,5 +1,6 @@
 query SearchDocumentQuery(
   $q: String,
+  $tid: String,
   $limit: Int,
   $pageNumber: Int,
   $offset: Int
@@ -9,7 +10,8 @@ query SearchDocumentQuery(
     pageNumber: $pageNumber,
     offset: $offset,
     filter: {
-      q: $q
+      q: $q,
+      tid: $tid
     }
   ) {
     items {

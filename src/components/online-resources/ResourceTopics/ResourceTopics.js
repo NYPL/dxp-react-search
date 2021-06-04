@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
 import { 
@@ -9,6 +9,7 @@ import {
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
 import CardGrid from './../../ds-prototypes/CardGrid';
+import Card from './../../ds-prototypes/Card';
 
 function ResourceTopics() {
   // Query for data.
@@ -31,12 +32,23 @@ function ResourceTopics() {
   }
 
   return (
-    <Fragment>
-      <CardGrid
-        title="Featured Resources"
-        items={data.allResourceTopics}
-      />
-    </Fragment>
+    <CardGrid title="Featured Resources">
+      {data.allResourceTopics.map((item) => {
+        return (
+          <li 
+            key={item.id} 
+            className="card-grid__list-item"
+          >
+            <Card
+              name={item.name}
+              imageUrl={item.imageUrl}
+              description={item.description} 
+              url={item.url}
+            />
+          </li>
+        )
+      })}
+    </CardGrid>
   );
 };
 

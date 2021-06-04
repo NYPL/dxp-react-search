@@ -3,14 +3,14 @@ import React, { Fragment } from 'react';
 import { 
   Heading,
   Image,
-  Link,
   List,
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
+import Link from 'next/link';
 
 
 function Card(props) {
-  const { name, imageUrl, description } = props;
+  const { name, imageUrl, description, url } = props;
 
   return (
     <Fragment>
@@ -20,10 +20,16 @@ function Card(props) {
           src={imageUrl}
         />
       }
-      <Heading
-        level={3}
-        text={name}
-      />
+      {url &&
+        <Link href={url}>
+          <a>
+            <Heading
+              level={3}
+              text={name}
+            />
+          </a>
+        </Link>
+      }
       <div dangerouslySetInnerHTML={{
           __html: description 
         }}>

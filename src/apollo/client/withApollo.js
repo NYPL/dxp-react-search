@@ -139,13 +139,21 @@ function createApolloClient(initialState = {}) {
               __typename: 'OnlineResourceDocument',
               id: args.id,
             });
+          },
+          // @TODO you'd have to use the uuid not tid
+          /*resourceTopic(_, { args, toReference }) {
+            return toReference({
+              __typename: 'ResourceTopic',
+              slug: args.slug,
+            });
           }
+          */
         }
       }
     }
   }).restore(initialState);
 
-  //console.log(cache.data.data)
+  console.log(cache.data.data)
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',

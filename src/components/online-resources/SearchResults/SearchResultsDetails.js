@@ -7,7 +7,7 @@ import { setAutoSuggestInputValue } from './../../../redux/actions';
 // Components
 import { default as SharedSearchResultsDetails } from './../../shared/SearchResultsDetails';
 
-function SearchResultsDetails({ details }) {
+function SearchResultsDetails({ label, details }) {
   // Next router
   const router = useRouter();
 
@@ -59,7 +59,7 @@ function SearchResultsDetails({ details }) {
 
   return (
     <SharedSearchResultsDetails
-      label={'Search Results'}
+      label={label}
       onClick={onClearSearchTerms}
       message={renderMessage(details)}
       clearMessage={'Clear all search terms.'}

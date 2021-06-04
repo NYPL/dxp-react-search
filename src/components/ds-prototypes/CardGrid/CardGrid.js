@@ -2,16 +2,11 @@ import React, { Fragment } from 'react';
 // Components
 import { 
   Heading,
-  Image,
-  Link,
-  List,
-  SkeletonLoader 
+  List
 } from '@nypl/design-system-react-components';
-import Card from '../Card';
 
 function CardGrid(props) {
-  const { title, items } = props;
-  // items have id, title, description, imageUrl props
+  const { title, children } = props;
 
   return (
     <div className="card-grid">
@@ -27,20 +22,7 @@ function CardGrid(props) {
         ]}
         type="ul"
       >
-        {items.map((item) => {
-          return (
-            <li 
-              key={item.id} 
-              className="card-grid__list-item"
-            >
-              <Card
-                name={item.name}
-                imageUrl={item.imageUrl}
-                description={item.description} 
-              />
-            </li>
-          )
-        })}
+        {children}
       </List>
     </div>
   );
