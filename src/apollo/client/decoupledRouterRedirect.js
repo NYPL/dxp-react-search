@@ -26,6 +26,8 @@ async function decoupledRouterRedirect(ctx) {
         ctx.res.writeHead(redirect.status, {
           Location: redirect.to,
         });
+
+        console.log(redirect)
         ctx.res.end();
       }
     })
