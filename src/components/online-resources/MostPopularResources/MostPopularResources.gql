@@ -7,5 +7,6 @@ query MostPopularResourcesQuery($mostPopular: Boolean) {
     id
     name
     description
+    slug
   }
 }
