@@ -11,10 +11,17 @@ const resourceTopicResolver = {
 
       return response.data;
     },
+    resourceTopic: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getResourceTopic(args);
+      return response;
+    }
   },
   ResourceTopic: {
     id: resourceTopic => {
       return resourceTopic.id;
+    },
+    tid: resourceTopic => {
+      return resourceTopic.attributes.drupal_internal__tid;
     },
     name: resourceTopic => {
       return resourceTopic.attributes.name;
@@ -50,6 +57,11 @@ const resourceTopicResolver = {
       } else {
         return imageUrl;
       }
+    },
+    url: resourceTopic => {
+      // @TODO this is the old tid path pattern.
+      //return `/research/online-resources/search?resource_topic[]=${resourceTopic.attributes.drupal_internal__tid}`
+      return resourceTopic.attributes.path.alias;
     }
   }
 }

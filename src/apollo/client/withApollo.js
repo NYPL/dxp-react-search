@@ -139,13 +139,18 @@ function createApolloClient(initialState = {}) {
               __typename: 'OnlineResourceDocument',
               id: args.id,
             });
+          },
+          // @TODO Confirm this is working properly.
+          resourceTopic(_, { args, toReference }) {
+            return toReference({
+              __typename: 'ResourceTopic',
+              id: args.slug,
+            });
           }
         }
       }
     }
   }).restore(initialState);
-
-  //console.log(cache.data.data)
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',

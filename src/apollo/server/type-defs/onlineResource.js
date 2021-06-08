@@ -3,9 +3,11 @@ import gql from 'graphql-tag';
 export const typeDefs = gql`
   type ResourceTopic {
     id: ID!
+    tid: String
     name: String!
     description: String
     imageUrl: String
+    url: String
   }
 
   type OnlineResource {
@@ -21,6 +23,7 @@ export const typeDefs = gql`
 
   extend type Query {
     allResourceTopics: [ResourceTopic]!
+    resourceTopic(slug: String): ResourceTopic
     allOnlineResources(
       limit: Int,
       filter: OnlineResourceFilter

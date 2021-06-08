@@ -1,0 +1,7 @@
+query ResourceTopicBySlugQuery($slug: String) {
+  resourceTopic(slug: $slug) {
+    id
+    tid
+    name
+  }
+}

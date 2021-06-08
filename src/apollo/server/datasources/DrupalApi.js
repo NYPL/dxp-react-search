@@ -27,6 +27,13 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
+  async getResourceTopic(args) {   
+    // @TODO this is the older way based on tid 
+    //const response = await this.get(`/jsonapi/taxonomy_term/resource_topic?filter[drupal_internal__tid]=${args.slug}`);
+    const response = await this.get(`/jsonapi/taxonomy_term/resource_topic/${args.slug}`);
+    return response.data;
+  }
+
   async getAllOnlineResources(args) {
     let apiPath = `/jsonapi/node/online_resource`;
     
@@ -69,6 +76,16 @@ class DrupalApi extends RESTDataSource {
       apiPath = `${apiPath}&items_per_page=${args.limit}&page=${pageNumber}`;
     } else {
       apiPath = `${apiPath}&items_per_page=10&page=0`;
+    }
+
+    // Resource topic filter
+    // /api/search-online-resources?resource_topics[]=522
+    if (
+      args.filter
+      && 'tid' in args.filter
+      && args.filter.tid
+    ) {
+      apiPath = `/api/search-online-resources?resource_topics[]=${args.filter.tid}`;
     }
     
     const response = await this.get(apiPath);

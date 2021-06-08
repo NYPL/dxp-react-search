@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
 import { 
@@ -9,6 +9,7 @@ import {
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
 import CardGrid from './../../ds-prototypes/CardGrid';
+import Card from './../../ds-prototypes/Card';
 
 function MostPopularResources() {
   // Query for data.
@@ -35,12 +36,23 @@ function MostPopularResources() {
   }
 
   return (
-    <Fragment>
-      <CardGrid
-        title="Most Popular"
-        items={data.allOnlineResources}
-      />
-    </Fragment>
+    <CardGrid title="Most Popular">
+      {data.allOnlineResources.map((item) => {
+        return (
+          <li 
+            key={item.id} 
+            className="card-grid__list-item"
+          >
+            <Card
+              name={item.name}
+              imageUrl={item.imageUrl}
+              description={item.description} 
+              url={item.slug}
+            />
+          </li>
+        )
+      })}
+    </CardGrid>
   );
 };
 

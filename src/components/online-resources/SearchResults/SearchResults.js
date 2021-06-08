@@ -13,7 +13,9 @@ import SearchResultsDetails from './SearchResultsDetails';
 
 const SEARCH_RESULTS_LIMIT = 10;
 
-function SearchResults() {
+function SearchResults(props) {
+  const { resourceTopicTitle, resourceTopicId } = props;
+
   const router = useRouter();
   // @TODO do you actually need parseInt here?
   const currentPage = router.query.page ? parseInt(router.query.page) : 1;
@@ -23,6 +25,7 @@ function SearchResults() {
     SEARCH_RESULTS_QUERY, {
       variables: {
         q: router.query.q ? router.query.q : '',
+        tid: resourceTopicId ? resourceTopicId : null,
         limit: SEARCH_RESULTS_LIMIT,
         pageNumber: currentPage
       }
@@ -57,12 +60,6 @@ function SearchResults() {
     );
   }
   */
-  
-  // Don't show search results if no search.
-  /*if (!router.query.q) {
-    return null;
-  }
-  */
 
   function onPageChange(pageIndex) {
     router.push({
@@ -77,7 +74,8 @@ function SearchResults() {
 
   return (
     <div id="search-results__container">
-      <SearchResultsDetails 
+      <SearchResultsDetails
+        label={resourceTopicTitle ? resourceTopicTitle : 'Search Results'}
         details={{
           currentPage: currentPage,
           itemsOnPage: data.allSearchDocuments.items.length,

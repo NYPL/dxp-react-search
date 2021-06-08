@@ -21,6 +21,9 @@ const onlineResourceResolver = {
     },
     description: onlineResource => {
       return onlineResource.attributes.field_tfls_summary_description.processed;
+    },
+    slug: onlineResource => {
+      return '/add-path-field-here';
     }
   }
 }
