@@ -4,25 +4,22 @@ import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 // Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
-import { withApollo } from './../../../apollo/client/withApollo';
 import { useQuery } from '@apollo/client';
+import { withApollo } from './../../../../apollo/client/withApollo';
 import { 
   DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY 
-} from './../../../apollo/client/queries/DecoupledRouter.gql';
+} from './../../../../apollo/client/queries/DecoupledRouter.gql';
 import {
   OnlineResourceByIdQuery as ONLINE_RESOURCE_BY_ID_QUERY
-} from './../../../apollo/client/queries/OnlineResourceById.gql';
+} from './../../../../apollo/client/queries/OnlineResourceById.gql';
 // Redux
-import { withRedux } from './../../../redux/withRedux';
+import { withRedux } from './../../../../redux/withRedux';
 // Components
 import { SkeletonLoader } from '@nypl/design-system-react-components';
-import PageContainer from './../../../components/shared/layouts/PageContainer';
-import RightRail from './../../../components/shared/RightRail';
-import SearchHeader from './../../../components/shared/SearchHeader';
-import SearchForm from './../../../components/online-resources/SearchForm';
-import OnlineResourceCard from './../../../components/online-resources/OnlineResourceCard';
-import SidebarMenus from './../../../components/online-resources/SidebarMenus';
-import Hero from './../../../components/online-resources/Hero';
+import PageContainer from './../../../../components/online-resources/layouts/PageContainer';
+import OnlineResourceCard from './../../../../components/online-resources/OnlineResourceCard';
+// Utils
+import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
 
 function OnlineResourceSlug() {
   const router = useRouter();
@@ -32,7 +29,7 @@ function OnlineResourceSlug() {
   const { data: decoupledRouterData } = useQuery(
     DECOUPLED_ROUTER_QUERY, {
       variables: {
-        path: `/research/online-resources/${slug}`
+        path: router.asPath
       }
     }
   );
@@ -60,20 +57,8 @@ function OnlineResourceSlug() {
   if (loading || !data) {
     return (
       <PageContainer
-        wrapperClass='nypl--research'
-        contentHeader={
-          <Fragment>
-            <Hero />
-            <SearchHeader>
-              <SearchForm />
-            </SearchHeader>
-          </Fragment>
-        }
         contentPrimary={
           <SkeletonLoader />
-        }
-        contentBottom={
-          <RightRail />
         }
       />
     );
@@ -84,32 +69,15 @@ function OnlineResourceSlug() {
       metaTags={{
         title: `${data.searchDocument.name}`,
         description: `${data.searchDocument.name}`,
-        url: `https://www.nypl.org/research/online-resources/${slug}`
+        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
-      wrapperClass='nypl--research'
-      contentHeader={
-        <Fragment>
-          <Hero />
-          <SearchHeader>
-            <SearchForm />
-          </SearchHeader>
-        </Fragment>
-      }
       contentPrimary={
         <Fragment>
-          <Link href="/research/online-resources">
+          <Link href={`${ONLINE_RESOURCES_BASE_PATH}`}>
             <a><h3>Online Resources</h3></a>
           </Link>
           <OnlineResourceCard item={data.searchDocument} />
         </Fragment>
-      }
-      showSidebar={true}
-      sidebarSide='right'
-      contentSecondary={
-        <SidebarMenus />
-      }
-      contentBottom={
-        <RightRail />
       }
     />
   );

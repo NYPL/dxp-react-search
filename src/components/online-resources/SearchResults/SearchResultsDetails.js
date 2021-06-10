@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAutoSuggestInputValue } from './../../../redux/actions';
 // Components
 import { default as SharedSearchResultsDetails } from './../../shared/SearchResultsDetails';
+// Utils
+import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 
 function SearchResultsDetails({ label, details }) {
   // Next router
@@ -19,7 +21,7 @@ function SearchResultsDetails({ label, details }) {
 
   function onClearSearchTerms() {
     // @TODO is this what we want?
-    router.replace('/research/online-resources/search', undefined, { shallow: true });
+    router.replace(`${ONLINE_RESOURCES_BASE_PATH}/search`, undefined, { shallow: true });
 
     dispatch(setAutoSuggestInputValue(''));
   }

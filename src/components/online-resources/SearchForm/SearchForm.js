@@ -9,6 +9,7 @@ import { useApolloClient } from '@apollo/client';
 import { AutoSuggestQuery as AUTO_SUGGEST_QUERY } from './AutoSuggest.gql';
 // Utils
 import filterBySearchInput from './../../../utils/filterBySearchInput';
+import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 // Components
 import { default as SharedSearchForm } from './../../shared/SearchForm';
 
@@ -78,7 +79,7 @@ function SearchForm() {
 
     // Push form state into url.
     router.push({
-      pathname: '/research/online-resources/search',
+      pathname: `${ONLINE_RESOURCES_BASE_PATH}/search`,
       query: { 
         q: autoSuggestInputValue,
         page: 1 
