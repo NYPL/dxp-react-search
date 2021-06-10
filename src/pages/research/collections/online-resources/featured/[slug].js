@@ -4,27 +4,29 @@ import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 // Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
-import { withApollo } from './../../../apollo/client/withApollo';
 import { useQuery } from '@apollo/client';
+import { withApollo } from './../../../../../apollo/client/withApollo';
 import { 
   DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY 
-} from './../../../apollo/client/queries/DecoupledRouter.gql';
+} from './../../../../../apollo/client/queries/DecoupledRouter.gql';
 import {
-  OnlineResourceByIdQuery as ONLINE_RESOURCE_BY_ID_QUERY
-} from './../../../apollo/client/queries/OnlineResourceById.gql';
+  ResourceTopicBySlugQuery as RESOURCE_TOPIC_BY_SLUG_QUERY
+} from './../../../../../apollo/client/queries/ResourceTopicBySlug.gql';
 // Redux
-import { withRedux } from './../../../redux/withRedux';
+import { withRedux } from './../../../../../redux/withRedux';
 // Components
 import { SkeletonLoader } from '@nypl/design-system-react-components';
-import PageContainer from './../../../components/shared/layouts/PageContainer';
-import RightRail from './../../../components/shared/RightRail';
-import SearchHeader from './../../../components/shared/SearchHeader';
-import SearchForm from './../../../components/online-resources/SearchForm';
-import OnlineResourceCard from './../../../components/online-resources/OnlineResourceCard';
-import SidebarMenus from './../../../components/online-resources/SidebarMenus';
-import Hero from './../../../components/online-resources/Hero';
+import PageContainer from './../../../../../components/shared/layouts/PageContainer';
+import RightRail from './../../../../../components/shared/RightRail';
+import SearchHeader from './../../../../../components/shared/SearchHeader';
+import SearchForm from './../../../../../components/online-resources/SearchForm';
+import SidebarMenus from './../../../../../components/online-resources/SidebarMenus';
+import Hero from './../../../../../components/online-resources/Hero';
+import SearchResults from './../../../../../components/online-resources/SearchResults';
+// Utils
+import { ONLINE_RESOURCES_BASE_PATH } from './../../../../../utils/config';
 
-function OnlineResourceSlug() {
+function FeaturedResourceTopicSlug() {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -32,19 +34,18 @@ function OnlineResourceSlug() {
   const { data: decoupledRouterData } = useQuery(
     DECOUPLED_ROUTER_QUERY, {
       variables: {
-        path: `/research/online-resources/${slug}`
+        path: router.asPath
       }
     }
   );
-  
   const uuid = decoupledRouterData?.decoupledRouter?.id;
-
-  // Query for data.
+  
+  // Get resource topic by id.
   const { loading, error, data } = useQuery(
-    ONLINE_RESOURCE_BY_ID_QUERY, {
+    RESOURCE_TOPIC_BY_SLUG_QUERY, {
       skip: !uuid,
       variables: {
-        id: uuid
+        slug: uuid
       }
     }
   );
@@ -82,9 +83,9 @@ function OnlineResourceSlug() {
   return (
     <PageContainer
       metaTags={{
-        title: `${data.searchDocument.name}`,
-        description: `${data.searchDocument.name}`,
-        url: `https://www.nypl.org/research/online-resources/${slug}`
+        title: `${data.resourceTopic.name}`,
+        description: `${data.resourceTopic.name}`,
+        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
       wrapperClass='nypl--research'
       contentHeader={
@@ -97,10 +98,10 @@ function OnlineResourceSlug() {
       }
       contentPrimary={
         <Fragment>
-          <Link href="/research/online-resources">
-            <a><h3>Online Resources</h3></a>
-          </Link>
-          <OnlineResourceCard item={data.searchDocument} />
+          <SearchResults
+            resourceTopicId={data.resourceTopic.tid}
+            resourceTopicTitle={data.resourceTopic.name}
+          />
         </Fragment>
       }
       showSidebar={true}
@@ -116,7 +117,7 @@ function OnlineResourceSlug() {
 }
 
 export default withApollo(
-  withRedux((OnlineResourceSlug)), { 
+  withRedux((FeaturedResourceTopicSlug)), { 
     ssr: true, 
     redirects: true 
   });

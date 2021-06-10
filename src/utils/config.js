@@ -1,0 +1,1 @@
+export const ONLINE_RESOURCES_BASE_PATH = '/research/collections/online-resources';

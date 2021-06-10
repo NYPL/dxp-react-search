@@ -4,14 +4,14 @@ import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 // Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
-import { withApollo } from './../../../../apollo/client/withApollo';
 import { useQuery } from '@apollo/client';
+import { withApollo } from './../../../../apollo/client/withApollo';
 import { 
   DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY 
 } from './../../../../apollo/client/queries/DecoupledRouter.gql';
 import {
-  ResourceTopicBySlugQuery as RESOURCE_TOPIC_BY_SLUG_QUERY
-} from './../../../../apollo/client/queries/ResourceTopicBySlug.gql';
+  OnlineResourceByIdQuery as ONLINE_RESOURCE_BY_ID_QUERY
+} from './../../../../apollo/client/queries/OnlineResourceById.gql';
 // Redux
 import { withRedux } from './../../../../redux/withRedux';
 // Components
@@ -20,11 +20,13 @@ import PageContainer from './../../../../components/shared/layouts/PageContainer
 import RightRail from './../../../../components/shared/RightRail';
 import SearchHeader from './../../../../components/shared/SearchHeader';
 import SearchForm from './../../../../components/online-resources/SearchForm';
+import OnlineResourceCard from './../../../../components/online-resources/OnlineResourceCard';
 import SidebarMenus from './../../../../components/online-resources/SidebarMenus';
 import Hero from './../../../../components/online-resources/Hero';
-import SearchResults from './../../../../components/online-resources/SearchResults';
+// Utils
+import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
 
-function FeaturedResourceTopicSlug() {
+function OnlineResourceSlug() {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -32,18 +34,19 @@ function FeaturedResourceTopicSlug() {
   const { data: decoupledRouterData } = useQuery(
     DECOUPLED_ROUTER_QUERY, {
       variables: {
-        path: `/research/online-resources/featured/${slug}`
+        path: router.asPath
       }
     }
   );
-  const uuid = decoupledRouterData?.decoupledRouter?.id;
   
-  // Get resource topic by id.
+  const uuid = decoupledRouterData?.decoupledRouter?.id;
+
+  // Query for data.
   const { loading, error, data } = useQuery(
-    RESOURCE_TOPIC_BY_SLUG_QUERY, {
+    ONLINE_RESOURCE_BY_ID_QUERY, {
       skip: !uuid,
       variables: {
-        slug: uuid
+        id: uuid
       }
     }
   );
@@ -81,9 +84,9 @@ function FeaturedResourceTopicSlug() {
   return (
     <PageContainer
       metaTags={{
-        title: `${data.resourceTopic.name}`,
-        description: `${data.resourceTopic.name}`,
-        url: `https://www.nypl.org/research/online-resources/featured/${slug}`
+        title: `${data.searchDocument.name}`,
+        description: `${data.searchDocument.name}`,
+        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
       wrapperClass='nypl--research'
       contentHeader={
@@ -96,10 +99,10 @@ function FeaturedResourceTopicSlug() {
       }
       contentPrimary={
         <Fragment>
-          <SearchResults
-            resourceTopicId={data.resourceTopic.tid}
-            resourceTopicTitle={data.resourceTopic.name}
-          />
+          <Link href={`${ONLINE_RESOURCES_BASE_PATH}`}>
+            <a><h3>Online Resources</h3></a>
+          </Link>
+          <OnlineResourceCard item={data.searchDocument} />
         </Fragment>
       }
       showSidebar={true}
@@ -115,7 +118,7 @@ function FeaturedResourceTopicSlug() {
 }
 
 export default withApollo(
-  withRedux((FeaturedResourceTopicSlug)), { 
+  withRedux((OnlineResourceSlug)), { 
     ssr: true, 
     redirects: true 
   });
