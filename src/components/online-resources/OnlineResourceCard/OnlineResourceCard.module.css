@@ -27,3 +27,10 @@
   color: var(--section-research-primary);
   text-transform: uppercase;
 }
+
+.links {
+  padding: 2em 0;
+}
+.links a {
+  padding-right: 20px;
+}

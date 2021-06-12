@@ -3,7 +3,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 //
-import { Heading, StatusBadge } from '@nypl/design-system-react-components';
+import { Heading, Link as DsLink, StatusBadge } from '@nypl/design-system-react-components';
 import s from './OnlineResourceCard.module.css' 
 
 function OnlineResourceCard({ item }) {
@@ -15,12 +15,11 @@ function OnlineResourceCard({ item }) {
     updateFrequency, 
     printEquivalent,
     notes,
+    subjects,
     format,
     language,
     outputType
   } = item;
-
-  //console.log(slug)
 
   function LabelItem({ label, name }) {
     return (
@@ -56,6 +55,13 @@ function OnlineResourceCard({ item }) {
     }
   }
 
+  // Subjects list.
+  // @TODO make sure this works if no subjects
+  let subjectsList = [];
+  subjects.map(subject => {
+    subjectsList.push(subject.name);
+  });
+
   return (
     <div className={s.card}>
       <div className={s.resourceType}>Core Resource</div>
@@ -70,16 +76,24 @@ function OnlineResourceCard({ item }) {
           Library Card Required
         </StatusBadge>
       </div>
-
       <div>{description}</div>
 
-      <LabelItem label="Notes:" name={notes} />
-      <LabelItem label="Update Frequency:" name={updateFrequency} />
-      <LabelItem label="Print Equivalent:" name={printEquivalent} />
+      <div className={s.links}>
+        <DsLink
+          href={'http://'}
+        >
+          Accessibility Details
+        </DsLink>
+        <DsLink
+          href={'http://'}
+        >
+          Terms & Conditions
+        </DsLink>
+      </div>
 
-      <LabelItem label="Format:" name={format} />
+      <LabelItem label="Notes:" name={notes} />
       <LabelItem label="Language:" name={language} />
-      <LabelItem label="Output Type:" name={outputType} />
+      <LabelItem label="Subjects:" name={subjectsList.join(', ')} />
     </div>
   );
 }
