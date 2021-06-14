@@ -1,0 +1,35 @@
+.title {
+  font-weight: bold;
+}
+
+.description {
+  margin: 0 0 var(--space-s);
+}
+
+.letters {
+  margin: 0 0 var(--space-s);
+  padding: 0 0 var(--space-s);
+  border-bottom: 1px solid #00838a;
+}
+
+.letters button {
+  font-size: var(--font-size-1);
+  font-weight: bold;
+  color: var(--ui-link-primary);
+  background-color: transparent;
+  border: none;
+}
+
+.letters button.active {
+  text-decoration: underline;
+}
+
+.letters button.inactive {
+  color: #979797;
+}
+
+.letters button.all {
+  padding: 0 0 0 var(--space-s);
+}
+
+
