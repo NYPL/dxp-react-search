@@ -119,6 +119,11 @@ class DrupalApi extends RESTDataSource {
     const response = await this.get(apiPath);
     return response;
   }
+
+  async getAutoSuggestions(args) {   
+    const response = await this.get(`/api/search-online-resources-autosuggest`);
+    return response.results;
+  }
 }
 
 export default DrupalApi;
