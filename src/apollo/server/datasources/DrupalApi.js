@@ -95,11 +95,10 @@ class DrupalApi extends RESTDataSource {
       && 'alpha' in args.filter
       && args.filter.alpha
     ) {
-      if (args.filter.alpha === 'all') {
-        apiPath = apiPath;
-      } else {
+      // Only add query params if a letter, not all.
+      if (args.filter.alpha !== 'all') {
         apiPath = `${apiPath}&alpha=${args.filter.alpha}`;
-      }
+      } 
     }
 
     const response = await this.get(apiPath);

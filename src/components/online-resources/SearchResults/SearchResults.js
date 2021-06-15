@@ -61,8 +61,7 @@ function SearchResults(props) {
     );
   }
 
-  // set label
-  // Special label if alpha mode
+  // Handle the label for search results details.
   let label = 'Search Results';
   if (router.query.alpha) {
     if (router.query.alpha === 'all') {
