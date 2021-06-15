@@ -87,7 +87,21 @@ class DrupalApi extends RESTDataSource {
     ) {
       apiPath = `/api/search-online-resources?resource_topics[]=${args.filter.tid}`;
     }
-    
+
+    // Alpha filter
+    // /api/search-online-resources?alpha=M
+    if (
+      args.filter
+      && 'alpha' in args.filter
+      && args.filter.alpha
+    ) {
+      if (args.filter.alpha === 'all') {
+        apiPath = apiPath;
+      } else {
+        apiPath = `${apiPath}&alpha=${args.filter.alpha}`;
+      }
+    }
+
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.results)) {

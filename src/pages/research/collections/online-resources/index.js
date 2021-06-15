@@ -12,22 +12,7 @@ import MostPopularResources from './../../../../components/online-resources/Most
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
 
-function OnlineResources() {
-  
-  // Placeholder sample data for AlphabetNav
-  const activeLetters = [
-    'A','C','D','E','H','L','M','N','P','R','S','T','V','W'
-  ]
-
-  // Placeholder callback function for AlphabetNav
-  const onPageChange = (letter) => {
-    if (letter) {
-      console.log("Filtered Resources by the letter " + letter);
-    } else {
-      console.log("Showing all - no filtering by letter");
-    }
-  }
-  
+function OnlineResources() {  
   return (
     <PageContainer
       metaTags={{
@@ -42,8 +27,6 @@ function OnlineResources() {
           <AlphabetNav 
             title={'A-Z Online Resources'}
             description={'Browse resources and databases alphabetically by name'}
-            activeLetters={activeLetters}
-            onPageChange={onPageChange}
           />
         </Fragment>
       }
