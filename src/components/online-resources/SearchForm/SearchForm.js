@@ -32,7 +32,7 @@ function SearchForm() {
   useEffect(() => {
     client.query({ query: AUTO_SUGGEST_QUERY }).then(
       response => {
-        setAutoSuggestItems(response.data.allResourceTopics);
+        setAutoSuggestItems(response.data.allAutoSuggestions);
       },
       error => {
         //console.error(error);

@@ -1,8 +1,5 @@
 query AutoSuggestQuery {
-  allResourceTopics {
-    id
+  allAutoSuggestions {
     name
-    description
-    imageUrl
   }
 }
