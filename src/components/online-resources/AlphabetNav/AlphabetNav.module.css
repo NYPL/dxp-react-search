@@ -24,6 +24,7 @@
 
 .letters button.inactive {
   color: #979797;
+  cursor: initial;
 }
 
 .letters button.all {

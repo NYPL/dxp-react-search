@@ -39,15 +39,24 @@ function AlphabetNav({ title, description }) {
             const inactiveClass = activeLetters.includes(letter) ? '' : s.inactive;
             const activeClass = (selectedLetter === letter)  ? s.active : '';
             const buttonClasses = inactiveClass + activeClass;
-            return (
-              <Link href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${letter}`}>
-                <a>
-                  <button key={letter} className={buttonClasses}>
-                    {letter}
-                  </button>
-                </a>
-              </Link>
-            );
+
+            if (activeLetters.includes(letter)) {
+              return (
+                <Link href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${letter}`}>
+                  <a>
+                    <button key={letter} className={buttonClasses}>
+                      {letter}
+                    </button>
+                  </a>
+                </Link>
+              );
+            } else {
+              return (
+                <button key={letter} className={buttonClasses}>
+                  {letter}
+                </button>
+              );
+            }
           })}
           <Link href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`}>
             <a>
