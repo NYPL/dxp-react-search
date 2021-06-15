@@ -7,9 +7,7 @@
 }
 
 .letters {
-  margin: 0 0 var(--space-s);
-  padding: 0 0 var(--space-s);
-  border-bottom: 1px solid #00838a;
+  margin: 0 0 var(--space-xl);
 }
 
 .letters button {

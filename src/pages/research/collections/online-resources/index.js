@@ -37,14 +37,14 @@ function OnlineResources() {
       }}
       contentPrimary={
         <Fragment>
+          <ResourceTopics />
+          <MostPopularResources />
           <AlphabetNav 
             title={'A-Z Online Resources'}
             description={'Browse resources and databases alphabetically by name'}
             activeLetters={activeLetters}
             onPageChange={onPageChange}
           />
-          <ResourceTopics />
-          <MostPopularResources />
         </Fragment>
       }
     />
