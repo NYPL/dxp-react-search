@@ -5,12 +5,12 @@ import {
 } from '@nypl/design-system-react-components';
 import s from './AlphabetNav.module.css' 
 
-const AlphabetNav = ({
+function AlphabetNav({
   title,
   description,
   activeLetters,
   onPageChange
-}) => {
+}) {
   // State for selected letter
   const [selectedLetter, setSelectedLetter] = useState("");
 
