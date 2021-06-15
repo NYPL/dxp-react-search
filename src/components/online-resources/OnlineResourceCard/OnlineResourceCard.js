@@ -12,13 +12,12 @@ function OnlineResourceCard({ item }) {
     slug,
     name, 
     description, 
-    updateFrequency, 
-    printEquivalent,
     notes,
     subjects,
-    format,
     language,
-    outputType
+    accessibilityLink,
+    termsConditionsLink,
+    privacyPolicyLink
   } = item;
 
   function LabelItem({ label, name }) {
@@ -80,14 +79,19 @@ function OnlineResourceCard({ item }) {
 
       <div className={s.links}>
         <DsLink
-          href={'http://'}
+          href={accessibilityLink}
         >
           Accessibility Details
         </DsLink>
         <DsLink
-          href={'http://'}
+          href={termsConditionsLink}
         >
           Terms & Conditions
+        </DsLink>
+        <DsLink
+          href={privacyPolicyLink}
+        >
+          Privacy Policy
         </DsLink>
       </div>
 
