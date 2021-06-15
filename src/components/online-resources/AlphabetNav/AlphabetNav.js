@@ -23,7 +23,7 @@ function AlphabetNav({ title, description }) {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('').map((c) => c.toUpperCase());
   // Get the active letters from existing auto suggestion cache.
   const { data: activeLettersData } = useQuery(AUTO_SUGGEST_QUERY, {});
-  const activeLetters = getActiveLetters(activeLettersData?.allAutoSuggestions);
+  const activeLetters = getActiveLetters(activeLettersData?.allAutoSuggestions, 'name');
 
   return (
     <>
