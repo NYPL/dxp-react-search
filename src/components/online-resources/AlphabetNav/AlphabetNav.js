@@ -42,9 +42,9 @@ function AlphabetNav({ title, description }) {
 
             if (activeLetters.includes(letter)) {
               return (
-                <Link href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${letter}`}>
+                <Link key={letter} href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${letter}`}>
                   <a>
-                    <button key={letter} className={buttonClasses}>
+                    <button className={buttonClasses}>
                       {letter}
                     </button>
                   </a>
@@ -58,10 +58,9 @@ function AlphabetNav({ title, description }) {
               );
             }
           })}
-          <Link href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`}>
+          <Link key={"All"} href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`}>
             <a>
               <button 
-                key={"All"} 
                 className={`${s.all} ${selectedLetter === 'all'  ? s.active : ''}`}
               >
                 {"Show All"}
