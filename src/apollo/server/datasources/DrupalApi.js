@@ -87,7 +87,20 @@ class DrupalApi extends RESTDataSource {
     ) {
       apiPath = `/api/search-online-resources?resource_topics[]=${args.filter.tid}`;
     }
-    
+
+    // Alpha filter
+    // /api/search-online-resources?alpha=M
+    if (
+      args.filter
+      && 'alpha' in args.filter
+      && args.filter.alpha
+    ) {
+      // Only add query params if a letter, not all.
+      if (args.filter.alpha !== 'all') {
+        apiPath = `${apiPath}&alpha=${args.filter.alpha}`;
+      } 
+    }
+
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.results)) {
@@ -118,6 +131,11 @@ class DrupalApi extends RESTDataSource {
     let apiPath = `/router/translate-path?path=${args.path}`;
     const response = await this.get(apiPath);
     return response;
+  }
+
+  async getAutoSuggestions(args) {   
+    const response = await this.get(`/api/search-online-resources-autosuggest`);
+    return response.results;
   }
 }
 

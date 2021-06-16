@@ -46,7 +46,8 @@ export const typeDefs = gql`
 
   input SearchDocumentFilter {
     q: String,
-    tid: String
+    tid: String,
+    alpha: String
   }
 
   extend type Query {

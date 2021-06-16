@@ -5,6 +5,7 @@ import resourceTopicResolver from './resourceTopicResolver';
 import onlineResourceResolver from './onlineResourceResolver';
 import searchResolver from './searchResolver';
 import decoupledRouterResolver from './decoupledRouterResolver';
+import autoSuggestionsResolver from './autoSuggestionsResolver';
 
 export const resolvers = mergeResolvers([
   locationResolver,
@@ -12,5 +13,6 @@ export const resolvers = mergeResolvers([
   resourceTopicResolver,
   onlineResourceResolver,
   searchResolver,
-  decoupledRouterResolver
+  decoupledRouterResolver,
+  autoSuggestionsResolver
 ]);

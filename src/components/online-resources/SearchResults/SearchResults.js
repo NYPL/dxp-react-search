@@ -9,6 +9,7 @@ import {
 // Components
 import { Pagination, SkeletonLoader } from '@nypl/design-system-react-components';
 import OnlineResourceCard from './../OnlineResourceCard';
+import AlphabetNav from './../AlphabetNav';
 import SearchResultsDetails from './SearchResultsDetails';
 
 const SEARCH_RESULTS_LIMIT = 10;
@@ -26,6 +27,7 @@ function SearchResults(props) {
       variables: {
         q: router.query.q ? router.query.q : '',
         tid: resourceTopicId ? resourceTopicId : null,
+        alpha: router.query.alpha ? router.query.alpha : null,
         limit: SEARCH_RESULTS_LIMIT,
         pageNumber: currentPage
       }
@@ -43,6 +45,12 @@ function SearchResults(props) {
   if (loading || !data) {
     return (
       <div id="search-results">
+        {router.query.alpha &&
+          <AlphabetNav 
+            title={'A-Z Online Resources'}
+            description={'Browse resources and databases alphabetically by name'}
+          />
+        }
         <SkeletonLoader />
         <Pagination
           currentPage={currentPage}
@@ -51,6 +59,18 @@ function SearchResults(props) {
         />
       </div>
     );
+  }
+
+  // Handle the label for search results details.
+  let label = 'Search Results';
+  if (router.query.alpha) {
+    if (router.query.alpha === 'all') {
+      label = 'All Results';
+    } else {
+      label = router.query.alpha;
+    }
+  } else if (resourceTopicTitle) {
+    label = resourceTopicTitle;
   }
 
   // No results.
@@ -65,7 +85,8 @@ function SearchResults(props) {
     router.push({
       query: {
         q: router.query.q,
-        page: pageIndex
+        page: pageIndex,
+        alpha: router.query.alpha ? router.query.alpha : null
       }
     });
 
@@ -74,8 +95,14 @@ function SearchResults(props) {
 
   return (
     <div id="search-results__container">
+      {router.query.alpha &&
+        <AlphabetNav 
+          title={'A-Z Online Resources'}
+          description={'Browse resources and databases alphabetically by name'}
+        />
+      }
       <SearchResultsDetails
-        label={resourceTopicTitle ? resourceTopicTitle : 'Search Results'}
+        label={label}
         details={{
           currentPage: currentPage,
           itemsOnPage: data.allSearchDocuments.items.length,

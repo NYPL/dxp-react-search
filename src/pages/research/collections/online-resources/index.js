@@ -6,12 +6,13 @@ import { withApollo } from './../../../../apollo/client/withApollo';
 import { withRedux } from './../../../../redux/withRedux';
 // Components
 import PageContainer from './../../../../components/online-resources/layouts/PageContainer';
+import AlphabetNav from './../../../../components/online-resources/AlphabetNav';
 import ResourceTopics from './../../../../components/online-resources/ResourceTopics';
 import MostPopularResources from './../../../../components/online-resources/MostPopularResources';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
 
-function OnlineResources() {
+function OnlineResources() {  
   return (
     <PageContainer
       metaTags={{
@@ -23,6 +24,10 @@ function OnlineResources() {
         <Fragment>
           <ResourceTopics />
           <MostPopularResources />
+          <AlphabetNav 
+            title={'A-Z Online Resources'}
+            description={'Browse resources and databases alphabetically by name'}
+          />
         </Fragment>
       }
     />
