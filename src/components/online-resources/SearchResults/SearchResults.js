@@ -112,7 +112,7 @@ function SearchResults(props) {
       <div id="search-results">
         {data.allSearchDocuments.items.map((item) => (
           <div key={item.id}>
-            <OnlineResourceCard item={item} />
+            <OnlineResourceCard item={item} collapsible={true} />
           </div>
         ))}
         <Pagination

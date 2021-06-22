@@ -25,6 +25,10 @@ query SearchDocumentQuery(
         accessibilityLink
         termsConditionsLink
         privacyPolicyLink
+        subjects {
+          id
+          name
+        }
         notes
         updateFrequency
         printEquivalent
