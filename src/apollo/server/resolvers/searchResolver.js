@@ -69,7 +69,8 @@ const searchResolver = {
     format: document => 'Web',
     language: document => 'English',
     outputType: document => 'Print, Download',
-    subjects: document => document.subjects
+    subjects: document => document.subjects,
+    accessLocations: document => document['access-locations']
     /*
     @TODO
     accessLocations
@@ -81,6 +82,14 @@ const searchResolver = {
     },
     name: subject => {
       return subject.title;
+    },
+  },
+  AccessLocation: {
+    id: accessLocation => {
+      return accessLocation.uuid;
+    },
+    name: accessLocation => {
+      return accessLocation.title;
     },
   }
 }

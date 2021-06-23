@@ -137,6 +137,29 @@ class DrupalApi extends RESTDataSource {
     const response = await this.get(`/api/search-online-resources-autosuggest`);
     return response.results;
   }
+
+  async getIpAccessCheck(args, clientIp) {
+    // Disable api call
+    return [];
+    const ipAddress = clientIp;
+    const response = await this.get(`/api/ip?testMode=true&ip=${ipAddress}`);
+    
+    let itemsArray = [];
+    let matches = [];
+    if (response) {
+      // Create an array of objects.
+      for (let [key, locationItem] of Object.entries(response.locations)) {
+        itemsArray.push(locationItem);
+      }
+      // Check for matches.
+      itemsArray.map(item => {
+        if (item.match) {
+          matches.push(item)
+        }
+      });
+      return matches;
+    }
+  }
 }
 
 export default DrupalApi;

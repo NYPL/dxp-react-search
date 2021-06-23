@@ -12,6 +12,10 @@ query OnlineResourceByIdQuery($id: String) {
         id
         name
       }
+      accessLocations {
+        id
+        name
+      }
       notes
       updateFrequency
       printEquivalent

@@ -29,6 +29,10 @@ query SearchDocumentQuery(
           id
           name
         }
+        accessLocations {
+          id
+          name
+        }
         notes
         updateFrequency
         printEquivalent
