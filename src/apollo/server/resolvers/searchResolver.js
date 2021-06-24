@@ -9,11 +9,14 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 // Set default timezone.
 dayjs.tz.setDefault('America/New_York');
+//
+import requestIp from "request-ip";
 
 const searchResolver = {
   Query: {
     allSearchDocuments: async (parent, args, { dataSources }) => {
       const response = await dataSources.drupalApi.getAllSearchDocuments(args);
+      const clientIp = await requestIp.getClientIp(dataSources.drupalApi.context.req);
 
       // Create a dayjs date object, using default timezone.
       // @see https://github.com/iamkun/dayjs/issues/1227
@@ -29,7 +32,8 @@ const searchResolver = {
           // for the the first page?
           pageNumber: response.pager.current_page + 1,
           pageCount: response.pager.pages,
-          timestamp: now
+          timestamp: now,
+          clientIp: clientIp
         }
       }
     },

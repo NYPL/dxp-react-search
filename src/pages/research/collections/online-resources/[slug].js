@@ -12,11 +12,6 @@ import {
 import {
   OnlineResourceByIdQuery as ONLINE_RESOURCE_BY_ID_QUERY
 } from './../../../../apollo/client/queries/OnlineResourceById.gql';
-
-import {
-  LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY
-} from './../../../../apollo/client/queries/LocationMatchesByIp.gql';
-
 // Redux
 import { withRedux } from './../../../../redux/withRedux';
 // Components
@@ -69,17 +64,6 @@ function OnlineResourceSlug() {
     );
   }
 
-  // Run decoupled router query to get uuid.
-  const { data: ipCheckTest } = useQuery(
-    LOCATION_MATCHES_BY_IP_QUERY, {
-      variables: {
-        ip: 'test'
-      }
-    }
-  );
-  
-  const clientIpAddress = ipCheckTest?.allLocationMatches?.pageInfo.clientIp;
-
   return (
     <PageContainer
       metaTags={{
@@ -89,7 +73,6 @@ function OnlineResourceSlug() {
       }}
       contentPrimary={
         <Fragment>
-          <p>Your IP address is: {clientIpAddress}</p>
           <Link href={`${ONLINE_RESOURCES_BASE_PATH}`}>
             <a><h3>Online Resources</h3></a>
           </Link>

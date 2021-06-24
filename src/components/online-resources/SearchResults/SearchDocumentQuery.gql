@@ -46,7 +46,8 @@ query SearchDocumentQuery(
       limit,
       pageNumber,
       pageCount,
-      timestamp
+      timestamp,
+      clientIp
     }
   }
 }

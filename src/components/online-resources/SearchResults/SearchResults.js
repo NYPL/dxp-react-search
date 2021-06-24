@@ -6,6 +6,9 @@ import { useQuery } from '@apollo/client';
 import { 
   SearchDocumentQuery as SEARCH_RESULTS_QUERY 
 } from './SearchDocumentQuery.gql';
+import {
+  LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY
+} from './LocationMatchesByIp.gql';
 // Components
 import { Pagination, SkeletonLoader } from '@nypl/design-system-react-components';
 import OnlineResourceCard from './../OnlineResourceCard';
@@ -20,6 +23,16 @@ function SearchResults(props) {
   const router = useRouter();
   // @TODO do you actually need parseInt here?
   const currentPage = router.query.page ? parseInt(router.query.page) : 1;
+
+  // Query to get array of location ip matches
+  const { data: ipCheckTest } = useQuery(
+    LOCATION_MATCHES_BY_IP_QUERY, {
+      variables: {
+        ip: 'test'
+      }
+    }
+  );
+  const clientIpAddress = ipCheckTest?.allLocationMatches?.pageInfo.clientIp;
 
   // Query for data.
   const { loading, error, data } = useQuery(
@@ -95,6 +108,7 @@ function SearchResults(props) {
 
   return (
     <div id="search-results__container">
+      <p>Your IP address is: {clientIpAddress}</p>
       {router.query.alpha &&
         <AlphabetNav 
           title={'A-Z Online Resources'}
