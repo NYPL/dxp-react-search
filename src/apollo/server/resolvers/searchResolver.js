@@ -1,5 +1,3 @@
-// Env vars
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 // DayJS
 const dayjs = require('dayjs');
 // DayJS timezone
@@ -9,8 +7,13 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 // Set default timezone.
 dayjs.tz.setDefault('America/New_York');
-//
+// Ip checking
 import requestIp from "request-ip";
+// Utils
+import { 
+  ONLINE_RESOURCES_ALL_BRANCH_UUID,
+  ONLINE_RESOURCES_OFFSITE_UUID
+} from './../../../utils/config';
 
 const searchResolver = {
   Query: {
@@ -61,9 +64,7 @@ const searchResolver = {
         return document.url.replace('http://sandbox-d8.nypl.org', '');
       }
     },
-    mostPopular: document => {
-      return document['most-popular']
-    },
+    mostPopular: document => document['most-popular'],
     accessibilityLink: document => 'https://www.nypl.org',
     termsConditionsLink: document => 'https://about.jstor.org/terms/',
     privacyPolicyLink: document => 'https://about.jstor.org/privacy/',
@@ -74,11 +75,51 @@ const searchResolver = {
     language: document => 'English',
     outputType: document => 'Print, Download',
     subjects: document => document.subjects,
-    accessLocations: document => document['access-locations']
-    /*
-    @TODO
-    accessLocations
-    */
+    accessibleFrom: document => document['accessible-from'],
+    accessLocations: document => {
+      const accessLocations = document['access-locations'];
+      // Add offsite and onsite items to accessLocations based on accessibleFrom.
+      // @TODO test if this works for ones with both offsite and onsite?
+      if (document['accessible-from'] === 'offsite') {
+        accessLocations.push({
+          uuid: ONLINE_RESOURCES_OFFSITE_UUID,
+          title: "Outside the Library",
+          url: null,
+          drupalInternalValue: document['accessible-from']
+        });
+      } else if (document['accessible-from'] === 'onsite') {
+        accessLocations.push({
+          uuid: ONLINE_RESOURCES_ALL_BRANCH_UUID,
+          title: "All Branch Libraries",
+          url: null,
+          drupalInternalValue: document['accessible-from']
+        });
+      }
+      return accessLocations;
+    },
+    resourceUrl: document => {
+      let resourceUrl;
+      switch (document['accessible-from']) {
+        case 'offsite':
+          if (document['offsite-url'] !== null) {
+            resourceUrl = document['offsite-url'].url;
+          } else if (document['main-url'] !== null) {
+            resourceUrl = document['main-url'].url;
+          }
+          break;
+        case 'onsite':
+          if (document['onsite-branch-url'] !== null) {
+            resourceUrl = document['onsite-branch-url'].url;
+          } else if (document['main-url'] !== null) {
+            resourceUrl = document['main-url'].url;
+          }
+          break;
+        /*default:
+          resourceUrl = document['main-url'] !== null ? document['main-url'].url : null;
+        */       
+      }
+      return resourceUrl;
+    }
   },
   Subject: {
     id: subject => {
@@ -94,6 +135,9 @@ const searchResolver = {
     },
     name: accessLocation => {
       return accessLocation.title;
+    },
+    url: accessLocation => {
+      return accessLocation.url;
     },
   }
 }

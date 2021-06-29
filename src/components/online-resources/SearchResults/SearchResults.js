@@ -25,14 +25,15 @@ function SearchResults(props) {
   const currentPage = router.query.page ? parseInt(router.query.page) : 1;
 
   // Query to get array of location ip matches
-  const { data: ipCheckTest } = useQuery(
+  const { data: ipMatchesData } = useQuery(
     LOCATION_MATCHES_BY_IP_QUERY, {
       variables: {
-        ip: 'test'
+        ip: router.query.test_ip ? router.query.test_ip : null
       }
     }
   );
-  const clientIpAddress = ipCheckTest?.allLocationMatches?.pageInfo.clientIp;
+  const ipInfo = ipMatchesData ? ipMatchesData : null;
+  const clientIpAddress = ipMatchesData?.allLocationMatches?.pageInfo.clientIp;
 
   // Query for data.
   const { loading, error, data } = useQuery(
@@ -74,18 +75,6 @@ function SearchResults(props) {
     );
   }
 
-  // Handle the label for search results details.
-  let label = 'Search Results';
-  if (router.query.alpha) {
-    if (router.query.alpha === 'all') {
-      label = 'All Results';
-    } else {
-      label = router.query.alpha;
-    }
-  } else if (resourceTopicTitle) {
-    label = resourceTopicTitle;
-  }
-
   // No results.
   /*if (data.allLocations.locations.length === 0) {
     return (
@@ -94,12 +83,29 @@ function SearchResults(props) {
   }
   */
 
+  function getSearchResultsDetailsLabel() {
+    // Handle the label for search results details.
+    let label = 'Search Results';
+    if (router.query.alpha) {
+      if (router.query.alpha === 'all') {
+        label = 'All Results';
+      } else {
+        label = router.query.alpha;
+      }
+    } else if (resourceTopicTitle) {
+      label = resourceTopicTitle;
+    }
+    return label;
+  }
+
   function onPageChange(pageIndex) {
     router.push({
       query: {
         q: router.query.q,
         page: pageIndex,
-        alpha: router.query.alpha ? router.query.alpha : null
+        ...(router.query.alpha && {
+          alpha: router.query.alpha
+        })
       }
     });
 
@@ -108,7 +114,9 @@ function SearchResults(props) {
 
   return (
     <div id="search-results__container">
-      <p>Your IP address is: {clientIpAddress}</p>
+      {router.query.test_ip &&
+        <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
+      }
       {router.query.alpha &&
         <AlphabetNav 
           title={'A-Z Online Resources'}
@@ -116,7 +124,7 @@ function SearchResults(props) {
         />
       }
       <SearchResultsDetails
-        label={label}
+        label={getSearchResultsDetailsLabel()}
         details={{
           currentPage: currentPage,
           itemsOnPage: data.allSearchDocuments.items.length,
@@ -126,7 +134,11 @@ function SearchResults(props) {
       <div id="search-results">
         {data.allSearchDocuments.items.map((item) => (
           <div key={item.id}>
-            <OnlineResourceCard item={item} collapsible={true} />
+            <OnlineResourceCard 
+              item={item} 
+              collapsible={true}
+              ipInfo={ipInfo}
+            />
           </div>
         ))}
         <Pagination

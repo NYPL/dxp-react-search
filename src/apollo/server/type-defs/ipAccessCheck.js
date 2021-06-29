@@ -4,6 +4,7 @@ export const typeDefs = gql`
   type LocationMatch {
     id: ID!
     name: String
+    locationId: String
   }
 
   type LocationMatchConnection {
