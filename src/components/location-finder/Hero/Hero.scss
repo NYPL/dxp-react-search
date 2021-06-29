@@ -1,7 +1,10 @@
 .content-header .hero {
   background-color: $nypl-red-regular;
+
+  padding-bottom: $space-l;
   @include breakpoint($breakpoint-large) {
     max-height: 140px;
+    padding-bottom: 0px;
   }
 
   .hero__inner {
