@@ -1,0 +1,52 @@
+.content-header .hero {
+  background-color: $nypl-red-regular;
+  padding: $space-l 0;
+
+  .hero__inner {
+    @include wrapper;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    @include breakpoint($breakpoint-large) {
+      flex-flow: row nowrap;
+    }
+  }
+}
+
+.hero__image {
+  @include space-stack-m;
+  width: 100%;
+
+  @include breakpoint($breakpoint-large) {
+    @include space-stack-none;
+    flex: 0 0 50%;
+  }
+
+  svg {
+    width: auto;
+    height: 55px;
+    fill: $white;
+    @include breakpoint($breakpoint-large) {
+      height: 70px;
+    }
+  }
+}
+
+.nypl-ds .hero__content {
+  width: 100%;
+
+  color: $white;
+
+  @include breakpoint($breakpoint-large) {
+    flex: 0 0 50%;
+  }
+
+  a {
+    color: $white;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
