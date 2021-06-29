@@ -1,6 +1,8 @@
 .content-header .hero {
   background-color: $nypl-red-regular;
-  padding: $space-l 0;
+  @include breakpoint($breakpoint-large) {
+    max-height: 140px;
+  }
 
   .hero__inner {
     @include wrapper;
@@ -26,11 +28,12 @@
 
   svg {
     width: auto;
-    height: 55px;
+    height: 140px;
     fill: $white;
-    @include breakpoint($breakpoint-large) {
+    /*@include breakpoint($breakpoint-large) {
       height: 70px;
     }
+    */
   }
 }
 
