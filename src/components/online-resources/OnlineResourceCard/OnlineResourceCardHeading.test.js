@@ -89,6 +89,10 @@ describe('OnlineResourceCardHeading Component', () => {
   });
 });
 
+/*test('As an offsite patron, I should have access to a resource link that is both onsite and offsite', () => {
+});
+*/
+
 // Accessbiility tests.
 it('should not have basic accessibility issues', async () => {
   const { container } = render(
