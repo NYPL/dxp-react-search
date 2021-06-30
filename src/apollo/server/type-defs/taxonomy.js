@@ -19,7 +19,20 @@ export const typeDefs = gql`
     operator: String!
   }
 
+  type FilterGroup {
+    id: ID!
+    name: String!
+    items: [FilterItem]
+  }
+
+  type FilterItem {
+    id: ID!
+    name: String!
+    children: [FilterItem]
+  }
+
   extend type Query {
     allTerms(filter: TermsFilter): [Vocab]!
+    filterGroupById(id: String): [FilterGroup]
   }
 `;

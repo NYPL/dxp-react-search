@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useMultipleSelection, useSelect } from 'downshift';
-import { Button, Icon, Checkbox, List } from '@nypl/design-system-react-components';
-//import Checkbox from './../Checkbox';
-//import CheckboxList from './CheckboxList';
+import { Button, Icon, /*Checkbox,*/ List } from '@nypl/design-system-react-components';
+import Checkbox from './../../shared/Checkbox';
 
+import s from './MultiSelect.module.css';
 
 function stateReducer(state, actionAndChanges) {
   const { changes, type } = actionAndChanges;
@@ -70,17 +70,23 @@ function MultiSelect(props) {
   }
 
   //console.log(highlightedIndex)
+  const iconType = isOpen ? 'minus' : 'plus';
   
   return (
-    <div className={'multiselect'}>
-      <button type="button" {...getToggleButtonProps()}>
-        <span className={'multiselect__label'}>
+    <div className={s.multiselect}>
+      <button className={s.button} type="button" {...getToggleButtonProps()}>
+        <span className={s.button__label}>
           {getButtonLabel(id)}
         </span>
+        
+        <Icon
+          decorative={true}
+          name={iconType}
+          modifiers={["small", {iconType}]}
+        />
       </button>
       <ul
-        className={isOpen ? 'multiselect__items-expanded' : 'multiselect__items'}
-        style={{'listStyleType': 'none'}}
+        className={`${s.menu} ${isOpen && s.active}`}
         {...getMenuProps()}
       >
         {isOpen &&
@@ -98,24 +104,12 @@ function MultiSelect(props) {
               }
               */
             >
-              
-              <input
+              <Checkbox
                 id={item.id}
-                type="checkbox"
+                name={item.name}
                 checked={setFilterCheckedProp(id, item.id) || false}
-                value={item.id}
-                //onChange={() => null}
-                /*onChange={() => {
-                  selectItem(item);
-                }}
-                */
+                onChange={(e) => null}
               />
-              <label 
-                htmlFor={item.id}
-                onClick={(e) => e.preventDefault()}
-              >
-                {item.name}
-              </label>
           
               {item.children &&
                 <ul>

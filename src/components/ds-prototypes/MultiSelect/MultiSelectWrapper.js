@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import MultiSelect from './MultiSelect';
+import { Button } from '@nypl/design-system-react-components';
 
 const groups = [
   {
     id: 'group_1',
-    label: 'Group 1',
+    label: 'Subjects',
     items: [
       {
         id: 'florida',
@@ -32,7 +33,7 @@ const groups = [
   },
   {
     id: 'group_2',
-    label: 'Bands',
+    label: 'Audience',
     items: [
       {
         id: 'radiohead',
@@ -41,6 +42,20 @@ const groups = [
       {
         id: 'pj_harvey',
         name: 'PJ Harvey'
+      },
+    ]
+  },
+  {
+    id: 'group_3',
+    label: 'Availability',
+    items: [
+      {
+        id: 'no',
+        name: 'Not available'
+      },
+      {
+        id: 'yes',
+        name: 'Available'
       },
     ]
   }
@@ -88,8 +103,22 @@ function MultiSelectWrapper() {
     });
   }
 
+  function onSaveMultiSelects() {
+    console.log('onSaveMultiSelects')
+    console.log(selectedItems)
+  }
+
+  function onClearMultiSelects(e) {
+    console.log('onClearMultiSelects')
+    setSelectedItems({})
+  }
+
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'row',
+      padding: '3em 0'
+    }}>
       {groups.map(group => {
         return (
           <MultiSelect
@@ -101,6 +130,24 @@ function MultiSelectWrapper() {
           />
         )
       })}
+      <Button
+        buttonType="link"
+        id={'multi-select-button-clear'}
+        mouseDown={false}
+        type="button"
+        onClick={(e) => onClearMultiSelects(e)}
+      >
+        Clear
+      </Button>
+      <Button
+        buttonType="filled"
+        id={`multi-select-button-save`}
+        mouseDown={false}
+        type="button"
+        onClick={(e) => onSaveMultiSelects(e)}
+      >
+        Apply Filters
+      </Button>
     </div>
   )
 }

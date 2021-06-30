@@ -137,6 +137,20 @@ class DrupalApi extends RESTDataSource {
     const response = await this.get(`/api/search-online-resources-autosuggest`);
     return response.results;
   }
+
+
+  async getFilterGroupById(id) {
+    const apiPath = `/jsonapi/taxonomy_term/${id}`;
+    const response = await this.get(apiPath);
+
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  
 }
 
 export default DrupalApi;
