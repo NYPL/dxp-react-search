@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Next
 import Link from 'next/link';
 //
@@ -25,10 +25,12 @@ function OnlineResourceCardHeading(props) {
     allLocationMatches?.items.map(locationMatch => 
       locationMatchesArray.push(locationMatch.locationId)
     */
+    
     let locationMatchesArray = [];
     allLocationMatches?.items.map(locationMatch => {
       locationMatchesArray.push(locationMatch.locationId);
     });
+
     let accessLocationsArray = [];
     accessLocations?.map(accessLocation => {
       accessLocationsArray.push(accessLocation.id);
@@ -40,7 +42,7 @@ function OnlineResourceCardHeading(props) {
     return linkAccess.length;
   }
 
-  if (linkAccessCheck() || accessibleFrom === 'offsite') {
+  if (linkAccessCheck() || accessibleFrom?.includes('offsite')) {
     if (resourceUrl) {
       return (
         <h3 id={id}>

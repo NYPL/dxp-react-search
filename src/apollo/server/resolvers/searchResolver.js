@@ -75,23 +75,28 @@ const searchResolver = {
     language: document => 'English',
     outputType: document => 'Print, Download',
     subjects: document => document.subjects,
-    accessibleFrom: document => document['accessible-from'],
+    accessibleFrom: document => {
+      return document['accessible-from'].length ? 
+        document['accessible-from'] : null
+    },
     accessLocations: document => {
       const accessLocations = document['access-locations'];
       // Add offsite and onsite items to accessLocations based on accessibleFrom.
       // @TODO test if this works for ones with both offsite and onsite?
-      if (document['accessible-from'] === 'offsite') {
+      if (document['accessible-from'].includes('offsite')) {
         accessLocations.push({
           uuid: ONLINE_RESOURCES_OFFSITE_UUID,
           title: "Outside the Library",
           url: null,
+          // @TODO do you use this?
           drupalInternalValue: document['accessible-from']
         });
-      } else if (document['accessible-from'] === 'onsite') {
+      } else if (document['accessible-from'].includes('onsite')) {
         accessLocations.push({
           uuid: ONLINE_RESOURCES_ALL_BRANCH_UUID,
           title: "All Branch Libraries",
           url: null,
+          // @TODO do you use this?
           drupalInternalValue: document['accessible-from']
         });
       }
@@ -99,24 +104,24 @@ const searchResolver = {
     },
     resourceUrl: document => {
       let resourceUrl;
-      switch (document['accessible-from']) {
-        case 'offsite':
-          if (document['offsite-url'] !== null) {
-            resourceUrl = document['offsite-url'].url;
-          } else if (document['main-url'] !== null) {
-            resourceUrl = document['main-url'].url;
-          }
-          break;
-        case 'onsite':
-          if (document['onsite-branch-url'] !== null) {
-            resourceUrl = document['onsite-branch-url'].url;
-          } else if (document['main-url'] !== null) {
-            resourceUrl = document['main-url'].url;
-          }
-          break;
-        /*default:
-          resourceUrl = document['main-url'] !== null ? document['main-url'].url : null;
-        */       
+      // @TODO resource could contain both 'onsite' and 'offsite' what value gets used?
+      // @TODO Clean this up!
+      if (document['accessible-from'].includes('onsite')) {
+        if (document['onsite-branch-url'] !== null) {
+          resourceUrl = document['onsite-branch-url'].url;
+        } /*else if (document['main-url'] !== null) {
+          resourceUrl = document['main-url'].url;
+        }
+        */
+      } else if (document['accessible-from'].includes('offsite')) {
+        if (document['offsite-url'] !== null) {
+          resourceUrl = document['offsite-url'].url;
+        } /*else if (document['main-url'] !== null) {
+          resourceUrl = document['main-url'].url;
+        }
+        */
+      } else {
+        resourceUrl = document['main-url']?.url
       }
       return resourceUrl;
     }

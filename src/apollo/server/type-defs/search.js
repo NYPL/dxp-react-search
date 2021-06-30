@@ -23,7 +23,7 @@ export const typeDefs = gql`
     format: String
     language: String
     outputType: String
-    accessibleFrom: String
+    accessibleFrom: [String]
     resourceUrl: String
     accessLocations: [AccessLocation]
     subjects: [Subject]
