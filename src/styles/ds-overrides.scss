@@ -72,3 +72,9 @@
 .layout-container {
   overflow-x: hidden;
 }
+
+// @TODO Possibly have DS account for adding top padding to 'main' element
+// when no content-header is part of the layout?
+.main--no-content-header {
+  padding: var(--space-l) 0 0;
+}
