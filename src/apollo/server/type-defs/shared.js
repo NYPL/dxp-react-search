@@ -6,7 +6,8 @@ export const typeDefs = gql`
     limit: Int,
     pageNumber: Int,
     pageCount: Int,
-    timestamp: String
+    timestamp: String,
+    clientIp: String
   }
 
   type Query {

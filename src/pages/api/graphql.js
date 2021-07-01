@@ -13,6 +13,9 @@ const apolloServer = new ApolloServer({
       drupalApi: new DrupalApi()
     }
   },
+  context: ({ req }) => ({
+    req,
+  })
 });
 
 export const config = {

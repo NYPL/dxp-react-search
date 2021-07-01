@@ -137,6 +137,13 @@ class DrupalApi extends RESTDataSource {
     const response = await this.get(`/api/search-online-resources-autosuggest`);
     return response.results;
   }
+
+  async getIpAccessCheck(clientIp) {
+    const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
+    if (response) {
+      return response;
+    }
+  }
 }
 
 export default DrupalApi;
