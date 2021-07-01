@@ -1,10 +1,6 @@
 import React from 'react';
 // Next
 import Link from 'next/link';
-//
-import { 
-  Heading,
-} from '@nypl/design-system-react-components';
 
 function OnlineResourceCardHeading(props) {
   const { 
@@ -17,15 +13,7 @@ function OnlineResourceCardHeading(props) {
     allLocationMatches
   } = props;
 
-  function linkAccessCheck() {
-    /*
-    @TODO
-    // Better
-    let locationMatchesArray = [];
-    allLocationMatches?.items.map(locationMatch => 
-      locationMatchesArray.push(locationMatch.locationId)
-    */
-    
+  function linkAccessCheck() {    
     let locationMatchesArray = [];
     allLocationMatches?.items.map(locationMatch => {
       locationMatchesArray.push(locationMatch.locationId);

@@ -2,6 +2,7 @@ import requestIp from 'request-ip';
 // Utils
 import { 
   ONLINE_RESOURCES_ALL_BRANCH_UUID,
+  ONLINE_RESOURCES_ALL_RESEARCH_UUID,
   ONLINE_RESOURCES_OFFSITE_UUID,
   ONLINE_RESOURCES_ONSITE_UUID
 } from './../../../utils/config';
@@ -42,7 +43,6 @@ const ipAccessCheckResolver = {
       })
       */
 
-      // @TODO Fix this
       if (response.isOnsite) {
         matches.push({
           uuid: ONLINE_RESOURCES_ONSITE_UUID,
@@ -50,7 +50,6 @@ const ipAccessCheckResolver = {
           mapping_uuid: 'generic-onsite-mapping-id'
         })
       }
-
       if (response.isBranch) {
         matches.push({
           uuid: ONLINE_RESOURCES_ALL_BRANCH_UUID,
@@ -58,10 +57,9 @@ const ipAccessCheckResolver = {
           mapping_uuid: 'all-branch-libs-mapping-id'
         })
       }
-
       if (response.isResearch) {
         matches.push({
-          uuid: 'fdgdfgdfgdfgdfgdf',
+          uuid: ONLINE_RESOURCES_ALL_RESEARCH_UUID,
           name: 'All Research Libraries',
           mapping_uuid: 'all-research-libs-mapping-id'
         })

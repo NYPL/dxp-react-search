@@ -31,8 +31,6 @@ const searchResolver = {
         pageInfo: {
           totalItems: response.pager.count,
           limit: response.pager.items_per_page,
-          // @TODO Check with Matt/DS team, but DS Pagination uses 1 not 0
-          // for the the first page?
           pageNumber: response.pager.current_page + 1,
           pageCount: response.pager.pages,
           timestamp: now,
@@ -103,26 +101,20 @@ const searchResolver = {
       return accessLocations;
     },
     resourceUrl: document => {
-      let resourceUrl;
-      // @TODO resource could contain both 'onsite' and 'offsite' what value gets used?
-      // @TODO Clean this up!
-      if (document['accessible-from'].includes('onsite')) {
-        if (document['onsite-branch-url'] !== null) {
-          resourceUrl = document['onsite-branch-url'].url;
-        } /*else if (document['main-url'] !== null) {
-          resourceUrl = document['main-url'].url;
-        }
-        */
-      } else if (document['accessible-from'].includes('offsite')) {
-        if (document['offsite-url'] !== null) {
-          resourceUrl = document['offsite-url'].url;
-        } /*else if (document['main-url'] !== null) {
-          resourceUrl = document['main-url'].url;
-        }
-        */
-      } else {
-        resourceUrl = document['main-url']?.url
+      // Defaults to main url.
+      let resourceUrl = document['main-url']?.url;
+      if (
+        document['accessible-from'].includes('onsite')
+        && document['onsite-branch-url'] !== null
+      ) {
+        resourceUrl = document['onsite-branch-url'].url;
+      } else if (
+        document['accessible-from'].includes('offsite')
+        && document['offsite-url'] !== null
+      ) {
+        resourceUrl = document['offsite-url'].url;
       }
+      
       return resourceUrl;
     }
   },
