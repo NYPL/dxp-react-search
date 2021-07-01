@@ -23,6 +23,8 @@ export const typeDefs = gql`
     format: String
     language: String
     outputType: String
+    accessibleFrom: [String]
+    resourceUrl: String
     accessLocations: [AccessLocation]
     subjects: [Subject]
   }
@@ -32,6 +34,7 @@ export const typeDefs = gql`
     name: String
     slug: String
     url: String
+    drupalInternalValue: String
   }
 
   type Subject {

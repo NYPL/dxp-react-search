@@ -8,6 +8,7 @@ import { typeDefs as SearchTypes } from './type-defs/search.js';
 import { typeDefs as SharedTypes } from './type-defs/shared.js';
 import { typeDefs as DecoupledRouterTypes } from './type-defs/decoupledRouter.js';
 import { typeDefs as AutoSuggestionsTypes } from './type-defs/autoSuggestions.js';
+import { typeDefs as IpAccessCheckTypes } from './type-defs/ipAccessCheck';
 
 export const schema = makeExecutableSchema({
   typeDefs: [
@@ -17,7 +18,8 @@ export const schema = makeExecutableSchema({
     OnlineResourceTypes, 
     TaxonomyTypes,
     DecoupledRouterTypes,
-    AutoSuggestionsTypes
+    AutoSuggestionsTypes,
+    IpAccessCheckTypes
   ],
   resolvers,
 })

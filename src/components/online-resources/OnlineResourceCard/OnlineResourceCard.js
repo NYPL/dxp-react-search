@@ -13,9 +13,11 @@ import {
   IconNames,
   IconRotationTypes 
 } from '@nypl/design-system-react-components';
-import s from './OnlineResourceCard.module.css' 
+import OnlineResourceCardHeading from './OnlineResourceCardHeading';
+import s from './OnlineResourceCard.module.css';
 
-function OnlineResourceCard({ item, collapsible }) {
+
+function OnlineResourceCard({ item, collapsible, ipInfo }) {
   const { 
     id,
     slug,
@@ -35,32 +37,6 @@ function OnlineResourceCard({ item, collapsible }) {
         <label>{label}</label> {name}
       </div>
     );
-  }
-
-  function CardHeading(props) {
-    const { id, name, slug } = props;
-
-    if (slug) {
-      return (
-        <Link href={slug}>
-          <a>
-            <Heading
-              id={id}
-              level={3}
-              text={name}
-            />
-          </a>
-        </Link>
-      )
-    } else {
-      return (
-        <Heading
-          id={id}
-          level={3}
-          text={name}
-        />
-      )
-    }
   }
 
   // Subjects list.
@@ -86,10 +62,10 @@ function OnlineResourceCard({ item, collapsible }) {
   }
 
   return (
-    <div className={s.card}>
+    <div id={id} className={s.card}>
       <div className={s.resourceType}>Core Resource</div>
       <div className={s.heading}>
-        <CardHeading id={id} slug={slug} name={name} />
+        <OnlineResourceCardHeading {...item} {...ipInfo} />
       </div>
       <div className={s.statusBadge}>
         <StatusBadge 
