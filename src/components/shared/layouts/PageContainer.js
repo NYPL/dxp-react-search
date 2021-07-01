@@ -33,6 +33,11 @@ function PageContainer(props) {
     hasSidebar = true;
   }
 
+  // ClassName logic for 'main' element
+  let mainClassName = 'main';
+  if (showSidebar) mainClassName += ' main--with-sidebar';
+  if (!contentHeader) mainClassName += ' main--no-content-header';
+
   return (
     <Fragment>
       {metaTags &&
@@ -53,7 +58,7 @@ function PageContainer(props) {
         />
         <main 
           id="main-content" 
-          className={showSidebar ? 'main main--with-sidebar' : 'main'}
+          className={mainClassName}
         >
           {contentHeader &&
             <div className="content-header">
