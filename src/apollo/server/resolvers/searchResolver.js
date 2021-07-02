@@ -116,6 +116,13 @@ const searchResolver = {
       }
       
       return resourceUrl;
+    },
+    authenticationType: document => {
+      if (document['authentication-type'] === "None") {
+        return null;
+      } else {
+        return document['authentication-type'].replace(/\s+/g, '_').toLowerCase();
+      }
     }
   },
   Subject: {

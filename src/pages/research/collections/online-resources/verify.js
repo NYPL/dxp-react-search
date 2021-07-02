@@ -4,7 +4,7 @@ import { withApollo } from '../../../../apollo/client/withApollo';
 // Redux
 import { withRedux } from '../../../../redux/withRedux';
 // Components
-import PageContainer from '../../../../components/online-resources/layouts/PageContainerNoContentHeader';
+import PageContainer from '../../../../components/online-resources/layouts/PageContainer';
 import VerifyForm from '../../../../components/online-resources/VerifyForm';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
@@ -17,6 +17,7 @@ function OnlineResourcesVerifyPage() {
         description: 'Enter library card number to access database',
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/verify`
       }}
+      showContentHeader={false}
       contentPrimary={
         <VerifyForm />
       }

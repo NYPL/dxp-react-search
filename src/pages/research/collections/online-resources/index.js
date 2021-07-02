@@ -20,6 +20,7 @@ function OnlineResources() {
         description: 'Hello welcome to the NYPL!',
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}`
       }}
+      showContentHeader={true}
       contentPrimary={
         <Fragment>
           <ResourceTopics />
