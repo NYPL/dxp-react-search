@@ -7,6 +7,7 @@ import searchResolver from './searchResolver';
 import decoupledRouterResolver from './decoupledRouterResolver';
 import autoSuggestionsResolver from './autoSuggestionsResolver';
 import filterGroupResolver from './filterGroupResolver';
+import ipAccessCheckResolver from './ipAccessCheckResolver';
 
 export const resolvers = mergeResolvers([
   locationResolver,
@@ -16,5 +17,6 @@ export const resolvers = mergeResolvers([
   searchResolver,
   decoupledRouterResolver,
   autoSuggestionsResolver,
-  filterGroupResolver
+  filterGroupResolver,
+  ipAccessCheckResolver
 ]);

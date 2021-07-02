@@ -1,5 +1,3 @@
-// Env vars
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 // DayJS
 const dayjs = require('dayjs');
 // DayJS timezone
@@ -9,11 +7,19 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 // Set default timezone.
 dayjs.tz.setDefault('America/New_York');
+// Ip checking
+import requestIp from "request-ip";
+// Utils
+import { 
+  ONLINE_RESOURCES_ALL_BRANCH_UUID,
+  ONLINE_RESOURCES_OFFSITE_UUID
+} from './../../../utils/config';
 
 const searchResolver = {
   Query: {
     allSearchDocuments: async (parent, args, { dataSources }) => {
       const response = await dataSources.drupalApi.getAllSearchDocuments(args);
+      const clientIp = await requestIp.getClientIp(dataSources.drupalApi.context.req);
 
       // Create a dayjs date object, using default timezone.
       // @see https://github.com/iamkun/dayjs/issues/1227
@@ -25,11 +31,10 @@ const searchResolver = {
         pageInfo: {
           totalItems: response.pager.count,
           limit: response.pager.items_per_page,
-          // @TODO Check with Matt/DS team, but DS Pagination uses 1 not 0
-          // for the the first page?
           pageNumber: response.pager.current_page + 1,
           pageCount: response.pager.pages,
-          timestamp: now
+          timestamp: now,
+          clientIp: clientIp
         }
       }
     },
@@ -57,10 +62,8 @@ const searchResolver = {
         return document.url.replace('http://sandbox-d8.nypl.org', '');
       }
     },
-    mostPopular: document => {
-      return document['most-popular']
-    },
-    accessibilityLink: document => 'https//www.nypl.org',
+    mostPopular: document => document['most-popular'],
+    accessibilityLink: document => 'https://www.nypl.org',
     termsConditionsLink: document => 'https://about.jstor.org/terms/',
     privacyPolicyLink: document => 'https://about.jstor.org/privacy/',
     notes: document => 'Subject coverage includes Asian studies, ecology, economics, education, finance, history, literature, mathematics, philosophy, political science, population studies, science, and sociology.',
@@ -68,12 +71,71 @@ const searchResolver = {
     printEquivalent: document => 'Many of the journals included in JSTOR are available in traditional print or microform formats at The New York Public Library. Check the Library Catalog for holdings.',
     format: document => 'Web',
     language: document => 'English',
-    outputType: document => 'Print, Download'
-    /*
-    @TODO
-    subjects
-    accessLocations
-    */
+    outputType: document => 'Print, Download',
+    subjects: document => document.subjects,
+    accessibleFrom: document => {
+      return document['accessible-from'].length ? 
+        document['accessible-from'] : null
+    },
+    accessLocations: document => {
+      const accessLocations = document['access-locations'];
+      // Add offsite and onsite items to accessLocations based on accessibleFrom.
+      // @TODO test if this works for ones with both offsite and onsite?
+      if (document['accessible-from'].includes('offsite')) {
+        accessLocations.push({
+          uuid: ONLINE_RESOURCES_OFFSITE_UUID,
+          title: "Outside the Library",
+          url: null,
+          // @TODO do you use this?
+          drupalInternalValue: document['accessible-from']
+        });
+      } else if (document['accessible-from'].includes('onsite')) {
+        accessLocations.push({
+          uuid: ONLINE_RESOURCES_ALL_BRANCH_UUID,
+          title: "All Branch Libraries",
+          url: null,
+          // @TODO do you use this?
+          drupalInternalValue: document['accessible-from']
+        });
+      }
+      return accessLocations;
+    },
+    resourceUrl: document => {
+      // Defaults to main url.
+      let resourceUrl = document['main-url']?.url;
+      if (
+        document['accessible-from'].includes('onsite')
+        && document['onsite-branch-url'] !== null
+      ) {
+        resourceUrl = document['onsite-branch-url'].url;
+      } else if (
+        document['accessible-from'].includes('offsite')
+        && document['offsite-url'] !== null
+      ) {
+        resourceUrl = document['offsite-url'].url;
+      }
+      
+      return resourceUrl;
+    }
+  },
+  Subject: {
+    id: subject => {
+      return subject.uuid;
+    },
+    name: subject => {
+      return subject.title;
+    },
+  },
+  AccessLocation: {
+    id: accessLocation => {
+      return accessLocation.uuid;
+    },
+    name: accessLocation => {
+      return accessLocation.title;
+    },
+    url: accessLocation => {
+      return accessLocation.url;
+    },
   }
 }
 

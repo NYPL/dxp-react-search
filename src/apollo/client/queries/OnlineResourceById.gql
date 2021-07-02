@@ -8,6 +8,17 @@ query OnlineResourceByIdQuery($id: String) {
       accessibilityLink
       termsConditionsLink
       privacyPolicyLink
+      subjects {
+        id
+        name
+      }
+      accessLocations {
+        id
+        name
+        url
+      }
+      accessibleFrom
+      resourceUrl
       notes
       updateFrequency
       printEquivalent

@@ -8,8 +8,16 @@
 }
 
 .statusBadge {
-  display: inline-block;
-  padding: 0 var(--space-xs);
+  display: block;
+  margin: 0 0 var(--space-s);
+}
+
+@media (min-width: 1024px) {
+  .statusBadge {
+    display: inline-block;
+    padding: 0 var(--space-xs);
+    margin: 0;
+  }
 }
 
 .labelItem {
@@ -26,4 +34,34 @@
   /*color: #00838A;*/
   color: var(--section-research-primary);
   text-transform: uppercase;
+}
+
+.links {
+  padding: 2em 0;
+}
+
+.links a {
+  display: block;
+  margin: 0 0 var(--space-xs);
+}
+
+@media (min-width: 1024px) {
+  .links a {
+    display: inline-block;
+    margin: 0;
+    padding-right: 20px;
+  }
+}
+
+.readmore {
+  width: 100%;
+}
+
+.collapsed {
+  display: none;
+}
+
+.collapsible {
+  display: block;
+  margin: 0 0 var(--space-m);
 }

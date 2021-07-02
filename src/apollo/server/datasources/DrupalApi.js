@@ -138,7 +138,6 @@ class DrupalApi extends RESTDataSource {
     return response.results;
   }
 
-
   async getFilterGroupById(id) {
     const apiPath = `/jsonapi/taxonomy_term/${id}`;
     const response = await this.get(apiPath);
@@ -149,8 +148,13 @@ class DrupalApi extends RESTDataSource {
       return [];
     }
   }
-
   
+  async getIpAccessCheck(clientIp) {
+    const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
+    if (response) {
+      return response;
+    }
+  }
 }
 
 export default DrupalApi;
