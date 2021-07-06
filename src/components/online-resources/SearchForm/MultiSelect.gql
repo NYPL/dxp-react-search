@@ -1,0 +1,7 @@
+query MultiSelectQuery($id: String) {
+  allFiltersByGroupId(id: $id) {
+    id
+    name
+    drupalInternalId
+  }
+}

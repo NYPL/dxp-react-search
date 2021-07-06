@@ -48,6 +48,7 @@ function MultiSelect(props) {
     stateReducer,
     selectedItem: selectedItems,
     onSelectedItemChange: ({ selectedItem }) => handleOnSelectedItemChange(selectedItem, id),
+    //initialSelectedItem: { 'subject': {}}
   });
 
   function getButtonLabel(id) {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
+// Next
+import { useRouter } from 'next/router';
 // Components
 import { 
   Button, 
@@ -7,14 +8,14 @@ import {
   Modal, 
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
-import MultiSelect from './../../ds-prototypes/MultiSelect/MultiSelect';
-
-
+import MultiSelect from './MultiSelect';
 // Hooks
 import useWindowSize from '../../../hooks/useWindowSize';
 import usePrevious from '../../../hooks/usePrevious';
+// Config
+import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 
-const groups = [
+/*const groups = [
   {
     id: 'subjects',
     label: 'Subjects',
@@ -30,7 +31,7 @@ const groups = [
       {
         id: '174',
         name: 'Photography',
-        /*children: [
+        children: [
           {
             id: 'jersey_city',
             name: 'Jersey City'
@@ -40,7 +41,6 @@ const groups = [
             name: 'Trenton'
           }
         ]
-        */
       }
     ]
   },
@@ -73,12 +73,25 @@ const groups = [
     ]
   }
 ];
+*/
+
+const groups = [
+  {
+    id: 'subject',
+    label: 'Subjects',
+  },
+  {
+    id: 'audience_by_age',
+    label: 'Audience',
+  }
+];
 
 function SearchFilters() {
   // Local state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState();
   // MultiSelect state
+  // @TODO default should not be empty object!
   const [selectedItems, setSelectedItems] = useState({});
   
   // Set the isMobile state based on screen width.
@@ -90,19 +103,35 @@ function SearchFilters() {
       setIsMobile(true);
     }
   }, [windowSize]);
+
+  // Next router
+  const router = useRouter();
   
   // Handle the scroll after modal closes.
-  /*const prevModalState = usePrevious(isModalOpen);
+  const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
     if (isMobile && prevModalState !== isModalOpen) {
-      document.getElementById('locations-list').scrollIntoView();
+      document.getElementById('search-results__container').scrollIntoView();
     } 
   }, [isModalOpen]);
-  */
+  
+  // Set default values on intial render only, i.e, page load with query params.
+  // This works b/c passing [] as second arg, magically does this w/ hooks. :/
+  useEffect(() => {
+    if (Object.keys(selectedItems).length === 0) {
+      let defaultItems = {};
+      groups.forEach(group => {
+        if (router.query[group.id]) {
+          defaultItems[group.id] = {
+            items: router.query[group.id].split(' ')
+          }
+        }
+      });
+      setSelectedItems(defaultItems);
+    }
+  }, []);
 
   function onSelectedItemChange(selectedItem, groupId) {
-    console.log('selectedItem')
-    console.log(selectedItem)
     const itemId = selectedItem.id;
 
     const nextState = (object, property) => {
@@ -127,9 +156,6 @@ function SearchFilters() {
       itemIds = [];
       itemIds.push(itemId);
     }
-    
-    //console.log('ITEM IDS!')
-    //console.log(itemIds)
 
     setSelectedItems({
       ...selectedItems,
@@ -140,15 +166,47 @@ function SearchFilters() {
   }
 
   function onSaveMultiSelects() {
-    console.log('onSaveMultiSelects')
-    console.log(selectedItems)
-    setIsModalOpen(false)
+    setIsModalOpen(false);
+
+    // Update url params
+    router.push({
+      pathname: `${ONLINE_RESOURCES_BASE_PATH}/search`,
+      query: { 
+        ...(router.query.q && {
+          q: router.query.q
+        }),
+        ...(router.query.page && {
+          page: router.query.page
+        }),
+        ...(selectedItems['subject'] && {
+          subject: selectedItems['subject'].items.join(' ')
+        }),
+        ...(selectedItems['audience_by_age'] && {
+          audience_by_age: selectedItems['audience_by_age'].items.join(' ')
+        }),
+      }
+    });
   }
 
   function onClearMultiSelects(e) {
-    console.log('onClearMultiSelects')
-    setSelectedItems({})
     setIsModalOpen(false)
+
+    // Clear url params for multiselects.
+    router.push({
+      pathname: `${ONLINE_RESOURCES_BASE_PATH}/search`,
+      // @TODO find better way to do this that doesn't involve specific
+      // query params...
+      query: { 
+        ...(router.query.q && {
+          q: router.query.q
+        }),
+        ...(router.query.page && {
+          page: router.query.page
+        })
+      }
+    });
+
+    setSelectedItems({})
   }
 
   function onClick() {
@@ -198,9 +256,8 @@ function SearchFilters() {
                   <MultiSelect
                     id={group.id}
                     label={group.label}
-                    items={group.items}
-                    handleOnSelectedItemChange={onSelectedItemChange}
-                    selectedItems={selectedItems}
+                    onSelectedItemChange={onSelectedItemChange}
+                    selectedItems={selectedItems}      
                   />
                 )
               })}
@@ -224,9 +281,8 @@ function SearchFilters() {
                 <MultiSelect
                   id={group.id}
                   label={group.label}
-                  items={group.items}
-                  handleOnSelectedItemChange={onSelectedItemChange}
-                  selectedItems={selectedItems}
+                  onSelectedItemChange={onSelectedItemChange}
+                  selectedItems={selectedItems}      
                 />
               )
             })}

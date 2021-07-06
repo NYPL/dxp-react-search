@@ -2,6 +2,7 @@ query SearchDocumentQuery(
   $q: String,
   $tid: String,
   $alpha: String,
+  $subjects: [String]
   $limit: Int,
   $pageNumber: Int,
   $offset: Int
@@ -14,6 +15,7 @@ query SearchDocumentQuery(
       q: $q,
       tid: $tid,
       alpha: $alpha
+      subjects: $subjects
     }
   ) {
     items {

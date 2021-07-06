@@ -41,10 +41,16 @@
   margin: 0;
 }
 
+/* MultiSelect menu when it's open */
 .menu.active {
   background: white;
   border: 1px solid #000;
   padding: 1em;
+
+  max-height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 1rem;
 }
 
 @media (min-width: 1024px) {

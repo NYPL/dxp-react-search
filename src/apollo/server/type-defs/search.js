@@ -51,6 +51,7 @@ export const typeDefs = gql`
     q: String,
     tid: String,
     alpha: String
+    subjects: [String]
   }
 
   extend type Query {

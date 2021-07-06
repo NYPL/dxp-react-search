@@ -101,6 +101,18 @@ class DrupalApi extends RESTDataSource {
       } 
     }
 
+    // Subjects
+    // subjects[]=123&subjects[]=556
+    if (
+      args.filter
+      && 'subjects' in args.filter
+      && args.filter.subjects
+    ) {
+      args.filter.subjects.map(subject => {
+        apiPath = `${apiPath}&subjects[]=${subject}`;
+      });
+    }
+
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.results)) {
@@ -138,10 +150,10 @@ class DrupalApi extends RESTDataSource {
     return response.results;
   }
 
-  async getFilterGroupById(id) {
+  async getAllFiltersByGroupId(id) {
     const apiPath = `/jsonapi/taxonomy_term/${id}`;
     const response = await this.get(apiPath);
-
+  
     if (Array.isArray(response.data)) {
       return response;
     } else {

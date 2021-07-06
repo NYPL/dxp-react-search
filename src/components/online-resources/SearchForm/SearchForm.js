@@ -84,7 +84,10 @@ function SearchForm() {
       pathname: `${ONLINE_RESOURCES_BASE_PATH}/search`,
       query: { 
         q: autoSuggestInputValue,
-        page: 1 
+        page: 1,
+        ...(router.query.subject && {
+          subject: router.query.subject
+        })
       }
     });
   }
