@@ -79,10 +79,12 @@ const groups = [
   {
     id: 'subject',
     label: 'Subjects',
+    limiter: 'online_resource'
   },
   {
     id: 'audience_by_age',
     label: 'Audience',
+    //limiter: null
   }
 ];
 
@@ -255,6 +257,7 @@ function SearchFilters() {
                 return (
                   <MultiSelect
                     id={group.id}
+                    limiter={group.limiter}
                     label={group.label}
                     onSelectedItemChange={onSelectedItemChange}
                     selectedItems={selectedItems}      
@@ -280,6 +283,7 @@ function SearchFilters() {
               return (
                 <MultiSelect
                   id={group.id}
+                  limiter={group.limiter}
                   label={group.label}
                   onSelectedItemChange={onSelectedItemChange}
                   selectedItems={selectedItems}      

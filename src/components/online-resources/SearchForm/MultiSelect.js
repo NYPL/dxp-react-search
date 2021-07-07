@@ -10,6 +10,7 @@ function MultiSelect(props) {
   const { 
     id,
     label,
+    limiter,
     //items,
     onSelectedItemChange,
     selectedItems
@@ -20,7 +21,8 @@ function MultiSelect(props) {
   const { loading, error, data } = useQuery(
     MULTI_SELECT_QUERY, {
       variables: {
-        id: id
+        id: id,
+        limiter: limiter
       }
     }
   );

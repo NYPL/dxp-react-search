@@ -1,5 +1,5 @@
-query MultiSelectQuery($id: String) {
-  allFiltersByGroupId(id: $id) {
+query MultiSelectQuery($id: String, $limiter: String) {
+  allFiltersByGroupId(id: $id, limiter: $limiter) {
     id
     name
     drupalInternalId

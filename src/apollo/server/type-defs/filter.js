@@ -9,6 +9,6 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    allFiltersByGroupId(id: String): [FilterItem]
+    allFiltersByGroupId(id: String, limiter: String): [FilterItem]
   }
 `;
