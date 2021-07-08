@@ -10,6 +10,7 @@ import {
 } from '@nypl/design-system-react-components';
 import CardGrid from './../../ds-prototypes/CardGrid';
 import Card from './../../ds-prototypes/Card';
+import CardGridSkeleton from './../../ds-prototypes/CardGrid/CardGridSkeleton';
 
 function MostPopularResources() {
   // Query for data.
