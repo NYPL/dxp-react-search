@@ -1,0 +1,29 @@
+.card-grid-skeleton-loader:empty {
+  animation: shine-card 1s infinite;
+  background-image: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    linear-gradient(var(--ui-gray-warm-light) 205px, transparent 0),
+    linear-gradient(var(--ui-gray-warm-light) 40px, transparent 0),
+    linear-gradient(var(--ui-gray-warm-light) 20px, transparent 0),
+    linear-gradient(var(--ui-gray-warm-light) 20px, transparent 0),
+    linear-gradient(var(--ui-gray-warm-light) 20px, transparent 0);
+  background-position: 0 0, /* highlight */ 0px 0, 0px 215px, 0px 265px, 0px 295px,
+    0px 325px;
+  background-repeat: repeat-y;
+  background-size: 50px 420px, /* highlight */ 310px 420px, 220px 420px,
+    310px 420px, 310px 420px, 310px 420px;
+  height: 840px; /* change height to see repeat-y behavior */
+  margin: auto;
+  width: 100%;
+}
+
+@keyframes shine-card {
+  to {
+    background-position: 200% 0, /* move highlight to right */ 0px 0, 0px 215px,
+      0px 265px, 0px 295px, 0px 325px;
+  }
+}
