@@ -2,5 +2,9 @@ query MultiSelectQuery($id: String, $limiter: String) {
   allFiltersByGroupId(id: $id, limiter: $limiter) {
     id
     name
+    children {
+      id
+      name
+    }
   }
 }

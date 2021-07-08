@@ -46,7 +46,11 @@ function MultiSelect(props) {
     items,
     stateReducer,
     selectedItem: selectedItems,
-    onSelectedItemChange: ({ selectedItem }) => handleOnSelectedItemChange(selectedItem, id)
+    onSelectedItemChange: ({ selectedItem }) => handleOnSelectedItemChange(selectedItem, id),
+    /*onHighlightedIndexChange: ({ highlightedIndex }) => {
+      console.log(highlightedIndex)
+    }
+    */
   });
 
   function getButtonLabel(id) {
@@ -116,8 +120,8 @@ function MultiSelect(props) {
                         {...getItemProps({
                           key: childItem.id,
                           item: childItem,
-                          index: childItem.id,
-                          //index
+                          //index: childItem.id,
+                          index
                         })}
                         className="item-child"
                         /*style={
@@ -134,7 +138,7 @@ function MultiSelect(props) {
                         }}
                         */
                       >
-                        <input
+                        {/*<input
                           id={childItem.id}
                           type="checkbox"
                           checked={setFilterCheckedProp(id, childItem.id) || false}
@@ -156,6 +160,14 @@ function MultiSelect(props) {
                         >
                           {childItem.name}
                         </label>
+                        */}
+
+                        <Checkbox
+                          id={childItem.id}
+                          name={childItem.name}
+                          checked={setFilterCheckedProp(id, childItem.id) || false}
+                          onChange={(e) => null}
+                        />
                       </li>
                     )
                   })}
