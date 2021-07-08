@@ -16,10 +16,10 @@ function MostPopularResources() {
   // Query for data.
   const { loading, error, data } = useQuery(
     MOST_POPULAR_RESOURCES_QUERY, {
-    variables: {
-      mostPopular: true
+      variables: {
+        mostPopular: true
+      }
     }
-  }
   );
 
   // Error state.

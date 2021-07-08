@@ -28,10 +28,10 @@ function SearchResults(props) {
   // Query to get array of location ip matches
   const { data: ipMatchesData } = useQuery(
     LOCATION_MATCHES_BY_IP_QUERY, {
-    variables: {
-      ip: router.query.test_ip ? router.query.test_ip : null
+      variables: {
+        ip: router.query.test_ip ? router.query.test_ip : null
+      }
     }
-  }
   );
   const ipInfo = ipMatchesData ? ipMatchesData : null;
   const clientIpAddress = ipMatchesData?.allLocationMatches?.pageInfo.clientIp;
@@ -39,14 +39,14 @@ function SearchResults(props) {
   // Query for data.
   const { loading, error, data } = useQuery(
     SEARCH_RESULTS_QUERY, {
-    variables: {
-      q: router.query.q ? router.query.q : '',
-      tid: resourceTopicId ? resourceTopicId : null,
-      alpha: router.query.alpha ? router.query.alpha : null,
-      limit: SEARCH_RESULTS_LIMIT,
-      pageNumber: currentPage
+      variables: {
+        q: router.query.q ? router.query.q : '',
+        tid: resourceTopicId ? resourceTopicId : null,
+        alpha: router.query.alpha ? router.query.alpha : null,
+        limit: SEARCH_RESULTS_LIMIT,
+        pageNumber: currentPage
+      }
     }
-  }
   );
 
   // Error state.
