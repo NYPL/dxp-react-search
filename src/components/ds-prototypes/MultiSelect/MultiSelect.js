@@ -87,10 +87,10 @@ function MultiSelect(props) {
           modifiers={["small", {iconType}]}
         />
       </button>
-      <ul
+      <div
         className={`${s.menu} ${isOpen && s.active}`}
-        {...getMenuProps()}
       >
+        <ul className={s.menu_inner} {...getMenuProps()}>
         {isOpen &&
           items.map((item, index) => (
             <li 
@@ -176,7 +176,8 @@ function MultiSelect(props) {
             </li>
           ))
         }
-      </ul>
+        </ul>
+      </div>
     </div>
   );
 }

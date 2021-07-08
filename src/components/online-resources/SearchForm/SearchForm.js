@@ -87,6 +87,9 @@ function SearchForm() {
         page: 1,
         ...(router.query.subject && {
           subject: router.query.subject
+        }),
+        ...(router.query.audience_by_age && {
+          audience_by_age: router.query.audience_by_age
         })
       }
     });

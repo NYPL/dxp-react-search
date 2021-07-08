@@ -14,6 +14,8 @@ import useWindowSize from '../../../hooks/useWindowSize';
 import usePrevious from '../../../hooks/usePrevious';
 // Config
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
+// Styles
+import s from './SearchFilters.module.css';
 
 /*const groups = [
   {
@@ -268,7 +270,7 @@ function SearchFilters() {
           )}
         </div>
       ) : (
-        <div>
+        <div className={s.desktop_container}>
           <Heading
             id="search-filters--heading"
             level={3}

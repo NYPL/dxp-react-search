@@ -1,5 +1,9 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { DRUPAL_API } = process.env;
+// Mocks for now
+//import allLocations from './../../../../testHelper/__mocks/allLocations';
+import audienceFilterMocks from './../../../../testHelper/__mocks/audienceFilterMocks';
+import subjectFilterMock from './../../../../testHelper/__mocks/subjectFilterMock';
 
 class DrupalApi extends RESTDataSource {
   constructor() {
@@ -113,6 +117,20 @@ class DrupalApi extends RESTDataSource {
       });
     }
 
+    // Audience
+    // audience_age[]=123
+    if (
+      args.filter
+      && 'audience_by_age' in args.filter
+      && args.filter.audience_by_age
+    ) {
+      args.filter.audience_by_age.map(audienceItem => {
+        apiPath = `${apiPath}&audience_age[]=${audienceItem}`;
+      });
+    }
+
+
+
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.results)) {
@@ -154,7 +172,14 @@ class DrupalApi extends RESTDataSource {
   // /api/taxonomy-filters?vocab=audience_by_age
   // /api/taxonomy-filters?vocab=subject&content_type=online_resource
   async getAllFiltersByGroupId(args) {
-    let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+    // Mocks
+    if (args.id === 'audience_by_age') {
+      return audienceFilterMocks;
+    } else if (args.id === 'subject') {
+      return subjectFilterMock;
+    }
+
+    /*let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
 
     if (args.limiter) {
       apiPath = `${apiPath}&content_type=${args.limiter}`;
@@ -167,6 +192,7 @@ class DrupalApi extends RESTDataSource {
     } else {
       return [];
     }
+    */
   }
   
   async getIpAccessCheck(clientIp) {
