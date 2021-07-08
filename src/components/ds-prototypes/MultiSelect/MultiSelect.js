@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useMultipleSelection, useSelect } from 'downshift';
-import { Button, Icon, /*Checkbox,*/ List } from '@nypl/design-system-react-components';
+import { useSelect } from 'downshift';
+// Components
+import { Icon } from '@nypl/design-system-react-components';
 import Checkbox from './../../shared/Checkbox';
-
+// Styles
 import s from './MultiSelect.module.css';
 
 function stateReducer(state, actionAndChanges) {
@@ -12,12 +13,10 @@ function stateReducer(state, actionAndChanges) {
     case useSelect.stateChangeTypes.MenuKeyDownEnter:
     case useSelect.stateChangeTypes.MenuKeyDownSpaceButton:
     case useSelect.stateChangeTypes.ItemClick:
-      //console.log(changes)
       return {
         ...changes,
         isOpen: true, // Keep menu open after selection.
         highlightedIndex: state.highlightedIndex,
-        //selectedItem: 'jersey_city'
       }
     default:
       return changes;
@@ -40,15 +39,14 @@ function MultiSelect(props) {
     getToggleButtonProps,
     getLabelProps,
     getMenuProps,
-    //highlightedIndex,
+    highlightedIndex,
     getItemProps,
     selectItem
   } = useSelect({
     items,
     stateReducer,
     selectedItem: selectedItems,
-    onSelectedItemChange: ({ selectedItem }) => handleOnSelectedItemChange(selectedItem, id),
-    //initialSelectedItem: { 'subject': {}}
+    onSelectedItemChange: ({ selectedItem }) => handleOnSelectedItemChange(selectedItem, id)
   });
 
   function getButtonLabel(id) {
@@ -70,7 +68,6 @@ function MultiSelect(props) {
     return checked;
   }
 
-  //console.log(highlightedIndex)
   const iconType = isOpen ? 'minus' : 'plus';
   
   return (
@@ -98,12 +95,11 @@ function MultiSelect(props) {
                 item,
                 index,
               })}
-              /*style={
+              style={
                 highlightedIndex === index
                   ? { backgroundColor: '#bde4ff' }
                   : {}
               }
-              */
             >
               <Checkbox
                 id={item.id}
