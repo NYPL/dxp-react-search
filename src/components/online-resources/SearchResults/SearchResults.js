@@ -3,8 +3,8 @@ import React from 'react';
 import { useRouter } from 'next/router';
 // Apollo
 import { useQuery } from '@apollo/client';
-import { 
-  SearchDocumentQuery as SEARCH_RESULTS_QUERY 
+import {
+  SearchDocumentQuery as SEARCH_RESULTS_QUERY
 } from './SearchDocumentQuery.gql';
 import {
   LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY
@@ -14,6 +14,7 @@ import { Pagination, SkeletonLoader } from '@nypl/design-system-react-components
 import OnlineResourceCard from './../OnlineResourceCard';
 import AlphabetNav from './../AlphabetNav';
 import SearchResultsDetails from './SearchResultsDetails';
+import SearchResultsSkeleton from './SearchResultsSkeleton';
 
 const SEARCH_RESULTS_LIMIT = 10;
 
@@ -62,12 +63,12 @@ function SearchResults(props) {
     return (
       <div id="search-results">
         {router.query.alpha &&
-          <AlphabetNav 
+          <AlphabetNav
             title={'A-Z Online Resources'}
             description={'Browse resources and databases alphabetically by name'}
           />
         }
-        <SkeletonLoader />
+        <SearchResultsSkeleton />
         <Pagination
           currentPage={currentPage}
           pageCount={10}
@@ -120,7 +121,7 @@ function SearchResults(props) {
         <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
       }
       {router.query.alpha &&
-        <AlphabetNav 
+        <AlphabetNav
           title={'A-Z Online Resources'}
           description={'Browse resources and databases alphabetically by name'}
         />
@@ -136,8 +137,8 @@ function SearchResults(props) {
       <div id="search-results">
         {data.allSearchDocuments.items.map((item) => (
           <div key={item.id}>
-            <OnlineResourceCard 
-              item={item} 
+            <OnlineResourceCard
+              item={item}
               collapsible={true}
               ipInfo={ipInfo}
             />
