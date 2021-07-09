@@ -6,8 +6,10 @@ const filterResolver = {
       // Sort alpha.
       terms.sort((a, b) => a.name.localeCompare(b.name));
 
-      const nestedItems = setNestedFilterItems(terms);
+      /*const nestedItems = setNestedFilterItems(terms);
       return nestedItems;
+      */
+      return terms;
     },
   },
   FilterItem: {

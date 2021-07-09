@@ -17,66 +17,6 @@ import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 // Styles
 import s from './SearchFilters.module.css';
 
-/*const groups = [
-  {
-    id: 'subjects',
-    label: 'Subjects',
-    items: [
-      {
-        id: '164',
-        name: 'New York City History'
-      },
-      {
-        id: '209',
-        name: 'U.S. Newspapers'
-      },
-      {
-        id: '174',
-        name: 'Photography',
-        children: [
-          {
-            id: 'jersey_city',
-            name: 'Jersey City'
-          },
-          {
-            id: 'trenton',
-            name: 'Trenton'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'audience',
-    label: 'Audience',
-    items: [
-      {
-        id: '216',
-        name: 'Adults'
-      },
-      {
-        id: '222',
-        name: 'Teens'
-      },
-    ]
-  },
-  {
-    id: 'availability',
-    label: 'Availability',
-    items: [
-      {
-        id: 'no',
-        name: 'Not available'
-      },
-      {
-        id: 'yes',
-        name: 'Available'
-      },
-    ]
-  }
-];
-*/
-
 const groups = [
   {
     id: 'subject',
@@ -85,8 +25,11 @@ const groups = [
   },
   {
     id: 'audience_by_age',
-    label: 'Audience',
-    //limiter: null
+    label: 'Audience'
+  },
+  {
+    id: 'availability',
+    label: 'Availability'
   }
 ];
 
@@ -230,10 +173,10 @@ function SearchFilters() {
           </Button>
           {isModalOpen && (
             <Modal>
-              <div>
+              <div className={s.filter_bar__button}>
                 <Button
                   buttonType="link"
-                  id={'multi-select-button-clear'}
+                  id={'multiselect-button-clear'}
                   mouseDown={false}
                   type="button"
                   onClick={(e) => onClearMultiSelects(e)}
@@ -242,7 +185,7 @@ function SearchFilters() {
                 </Button>
                 <Button
                   buttonType="filled"
-                  id={`multi-select-button-save`}
+                  id={`multiselect-button-save`}
                   mouseDown={false}
                   type="button"
                   onClick={(e) => onSaveMultiSelects(e)}
@@ -293,22 +236,22 @@ function SearchFilters() {
               )
             })}
             <Button
-              buttonType="link"
-              id={'multi-select-button-clear'}
-              mouseDown={false}
-              type="button"
-              onClick={(e) => onClearMultiSelects(e)}
-            >
-              Clear
-            </Button>
-            <Button
               buttonType="filled"
-              id={`multi-select-button-save`}
+              id={`multiselect-button-save`}
               mouseDown={false}
               type="button"
               onClick={(e) => onSaveMultiSelects(e)}
             >
               Apply Filters
+            </Button>
+            <Button
+              buttonType="link"
+              id={'multiselect-button-clear'}
+              mouseDown={false}
+              type="button"
+              onClick={(e) => onClearMultiSelects(e)}
+            >
+              Clear
             </Button>
           </div>
         </div>

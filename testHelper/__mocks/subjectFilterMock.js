@@ -868,7 +868,7 @@ const subjectFilterMock = {
     },
     {
     "uuid": "5a340786-6947-48f5-804b-12bf6c3c0ca8",
-    "tid": "579",
+    "tid": "655",
     "name": "1961-1975",
     "vid": "subject",
     "parent_tid": "virtual",
@@ -924,7 +924,7 @@ const subjectFilterMock = {
     },
     {
     "uuid": "9ce47a7c-a03b-490a-b0ba-4803b611bd6a",
-    "tid": "584",
+    "tid": "660",
     "name": "African Literature",
     "vid": "subject",
     "parent_tid": "virtual",

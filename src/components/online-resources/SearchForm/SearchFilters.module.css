@@ -1,3 +1,9 @@
 .desktop_container {
   padding: var(--space-m) 0;
 }
+
+/* Mobile */
+.filter_bar__button {
+  display: flex;
+  justify-content: space-between;
+}

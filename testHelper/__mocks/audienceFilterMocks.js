@@ -5,7 +5,7 @@ const audienceFilterMocks = {
       {
         "uuid": "817ebfc3-4438-4c37-9507-25d4b9b29dd0",
         "tid": "216",
-        "name": "Adults TEST",
+        "name": "Adults",
         "vid": "audience_by_age",
         "parent_tid": "virtual",
         "parent_uuid": "virtual"

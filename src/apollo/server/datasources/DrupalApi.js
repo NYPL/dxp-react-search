@@ -1,9 +1,9 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { DRUPAL_API } = process.env;
 // Mocks for now
-//import allLocations from './../../../../testHelper/__mocks/allLocations';
 import audienceFilterMocks from './../../../../testHelper/__mocks/audienceFilterMocks';
 import subjectFilterMock from './../../../../testHelper/__mocks/subjectFilterMock';
+import availabilityFilterMock from './../../../../testHelper/__mocks/availabilityFilterMock';
 
 class DrupalApi extends RESTDataSource {
   constructor() {
@@ -177,6 +177,8 @@ class DrupalApi extends RESTDataSource {
       return audienceFilterMocks;
     } else if (args.id === 'subject') {
       return subjectFilterMock;
+    } else if (args.id === 'availability') {
+      return availabilityFilterMock;
     }
 
     /*let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
