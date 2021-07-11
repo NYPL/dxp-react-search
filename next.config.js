@@ -27,6 +27,7 @@ module.exports = (nextConfig = {}) => {
           destination: '/research/collections/online-resources',
           permanent: true,
         },
+        
       ]
     },
     */

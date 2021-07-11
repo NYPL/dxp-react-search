@@ -40,6 +40,8 @@ function SearchFilters() {
   // MultiSelect state
   // @TODO default should not be empty object!
   const [selectedItems, setSelectedItems] = useState({});
+  // Menu state
+  const [selectedGroupIds, setSelectedGroupIds] = useState([]);
   
   // Set the isMobile state based on screen width.
   const windowSize = useWindowSize();
@@ -62,10 +64,12 @@ function SearchFilters() {
     } 
   }, [isModalOpen]);
   
+  // @TODO not used anymore.
   // Set default values on intial render only, i.e, page load with query params.
   // This works b/c passing [] as second arg, magically does this w/ hooks. :/
-  useEffect(() => {
+  /*useEffect(() => {
     if (Object.keys(selectedItems).length === 0) {
+      console.log('reset state to match query params')
       let defaultItems = {};
       groups.forEach(group => {
         if (router.query[group.id]) {
@@ -75,11 +79,28 @@ function SearchFilters() {
         }
       });
       setSelectedItems(defaultItems);
-    }
+    } 
   }, []);
-
-  function onSelectedItemChange(selectedItem, groupId) {
-    const itemId = selectedItem.id;
+  */
+  
+  // Sync the url state with the local react state when query params change.
+  useEffect(() => {
+    let urlState = {};
+    for (let [groupId, value] of Object.entries(router.query)) {
+      urlState = {
+        ...urlState,
+        [groupId]: {
+          items: router.query[groupId].split(' ')
+        }
+      }
+    }
+    setSelectedItems(urlState);
+  }, [router.query]);
+  
+  // @TODO Need to move this state to redux, so SearchResultsDetails can clear
+  // the state in onClearSearchTerms().
+  function onSelectedItemChange(event, groupId) {
+    const itemId = event.target.id;
 
     const nextState = (object, property) => {
       let {[property]: omit, ...rest} = object
@@ -112,7 +133,7 @@ function SearchFilters() {
     });
   }
 
-  function onSaveMultiSelects() {
+  function onSaveMultiSelect() {
     setIsModalOpen(false);
 
     // Update url params
@@ -133,10 +154,21 @@ function SearchFilters() {
         }),
       }
     });
+
+    // Reset any open multiselect menus.
+    setSelectedGroupIds([])
   }
 
-  function onClearMultiSelects(e) {
-    setIsModalOpen(false)
+  function onClearMultiSelect(groupId) {
+    setIsModalOpen(false);
+
+    // Run through query param state and remove
+    let queryStateToKeep = {};
+    for (let [key, value] of Object.entries(router.query)) {
+      if (groupId !== key) {
+        queryStateToKeep[key] = router.query[key];
+      }
+    }
 
     // Clear url params for multiselects.
     router.push({
@@ -149,15 +181,54 @@ function SearchFilters() {
         }),
         ...(router.query.page && {
           page: router.query.page
-        })
+        }),
+        ...queryStateToKeep
       }
     });
 
     setSelectedItems({})
+    // Reset any open multiselect menus.
+    setSelectedGroupIds([])
   }
 
   function onClick() {
     setIsModalOpen(true)
+  }
+
+  function onMenuClick(groupId) {
+    //const savedItems = action.payload.savedItems;
+    //const vocabId = action.payload.vocabId;
+    const mode = 'desktop';
+    let selectedGroupIdsCopy;
+    
+    const nextState = (object, property) => {
+      let {[property]: omit, ...rest} = object
+      return rest;
+    }
+
+    if (selectedGroupIds !== undefined) {
+      let groupIdExists = selectedGroupIds.indexOf(groupId) > -1;
+      // Make a copy of the existing array.
+      selectedGroupIdsCopy = selectedGroupIds.slice();
+      // If groupIdExists exists, remove it from the array.
+      if (groupIdExists) {
+        selectedGroupIdsCopy = selectedGroupIdsCopy.filter((id) => id != groupId);
+      } else {
+        // Desktop
+        if (mode === 'desktop') {
+          // Desktop: only allow 1 item in the array.
+          selectedGroupIdsCopy = [groupId];
+        } else {
+          // Mobile: allow multiple items in the array.
+          selectedGroupIdsCopy.push(groupId);
+        }
+      }
+    } else {
+      // No dropdowns open, so add the checked dropdown to the array.
+      selectedGroupIdsCopy = [groupId];
+    }
+
+    setSelectedGroupIds(selectedGroupIdsCopy);
   }
 
   return (
@@ -179,7 +250,7 @@ function SearchFilters() {
                   id={'multiselect-button-clear'}
                   mouseDown={false}
                   type="button"
-                  onClick={(e) => onClearMultiSelects(e)}
+                  onClick={(e) => onClearMultiSelect(e)}
                 >
                   Clear
                 </Button>
@@ -188,7 +259,7 @@ function SearchFilters() {
                   id={`multiselect-button-save`}
                   mouseDown={false}
                   type="button"
-                  onClick={(e) => onSaveMultiSelects(e)}
+                  onClick={(e) => onSaveMultiSelect(e)}
                 >
                   Apply Filters
                 </Button>
@@ -204,8 +275,12 @@ function SearchFilters() {
                     id={group.id}
                     limiter={group.limiter}
                     label={group.label}
-                    onSelectedItemChange={onSelectedItemChange}
-                    selectedItems={selectedItems}      
+                    onSelectedItemChange={(e) => onSelectedItemChange(e, group.id)}
+                    selectedItems={selectedItems}
+                    onClearMultiSelect={() => onClearMultiSelect(group.id)}    
+                    onSaveMultiSelect={onSaveMultiSelect}
+                    onMenuClick={() => onMenuClick(group.id)}
+                    selectedGroupIds={selectedGroupIds}
                   />
                 )
               })}
@@ -230,29 +305,15 @@ function SearchFilters() {
                   id={group.id}
                   limiter={group.limiter}
                   label={group.label}
-                  onSelectedItemChange={onSelectedItemChange}
-                  selectedItems={selectedItems}      
+                  onSelectedItemChange={(e) => onSelectedItemChange(e, group.id)}
+                  selectedItems={selectedItems}
+                  onClearMultiSelect={() => onClearMultiSelect(group.id)}    
+                  onSaveMultiSelect={onSaveMultiSelect}
+                  onMenuClick={() => onMenuClick(group.id)}
+                  selectedGroupIds={selectedGroupIds}
                 />
               )
             })}
-            <Button
-              buttonType="filled"
-              id={`multiselect-button-save`}
-              mouseDown={false}
-              type="button"
-              onClick={(e) => onSaveMultiSelects(e)}
-            >
-              Apply Filters
-            </Button>
-            <Button
-              buttonType="link"
-              id={'multiselect-button-clear'}
-              mouseDown={false}
-              type="button"
-              onClick={(e) => onClearMultiSelects(e)}
-            >
-              Clear
-            </Button>
           </div>
         </div>
       )}

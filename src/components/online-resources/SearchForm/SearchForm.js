@@ -12,7 +12,6 @@ import filterBySearchInput from './../../../utils/filterBySearchInput';
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 // Components
 import { default as SharedSearchForm } from './../../shared/SearchForm';
-//import MultiSelectWrapper from './../../ds-prototypes/MultiSelect/MultiSelectWrapper';
 import SearchFilters from './SearchFilters';
 
 function SearchForm() {

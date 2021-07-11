@@ -17,7 +17,7 @@
   }
 }
 
-.button {
+.menuButton {
   width: 100%;
   border: 1px solid #e0e0e0;
   display: flex;
@@ -31,6 +31,10 @@
   font-weight: 500;
   font-size: 14px;
   text-decoration: none;
+}
+
+.menuButton:hover {
+  background: #e0e0e0;
 }
 
 .button__label {
@@ -53,8 +57,14 @@
   }
 }
 
-.menu_inner:focus {
+/*.menu_inner:focus {
   outline: 0px !important;
+}
+*/
+
+.menu_item {
+  margin-left: 4px;
+  padding: .25em 0;
 }
 
 /* MultiSelect menu when it's open */
@@ -73,3 +83,12 @@
   }
 }
 
+.cta_buttons_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.child_item {
+  margin-left: 4px;
+  padding: .25em 0 .25em 1em;
+}

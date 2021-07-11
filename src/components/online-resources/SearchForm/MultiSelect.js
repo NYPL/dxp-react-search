@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useApolloClient, useQuery } from '@apollo/client';
 import { MultiSelectQuery as MULTI_SELECT_QUERY } from './MultiSelect.gql';
 // Components
-import { default as DsMultiSelect } from './../../ds-prototypes/MultiSelect/MultiSelect';
+import { default as DsMultiSelect } from '../../ds-prototypes/MultiSelect/MultiSelect';
 
 
 function MultiSelect(props) {
@@ -13,7 +13,11 @@ function MultiSelect(props) {
     limiter,
     //items,
     onSelectedItemChange,
-    selectedItems
+    selectedItems,
+    onClearMultiSelect,
+    onSaveMultiSelect,
+    onMenuClick,
+    selectedGroupIds
   } = props;
 
   // Apollo
@@ -47,6 +51,10 @@ function MultiSelect(props) {
       items={data.allFiltersByGroupId}
       handleOnSelectedItemChange={onSelectedItemChange}
       selectedItems={selectedItems}
+      onClearMultiSelect={onClearMultiSelect}
+      onSaveMultiSelect={onSaveMultiSelect}
+      onMenuClick={onMenuClick}
+      selectedGroupIds={selectedGroupIds} 
     />
   );
 }
