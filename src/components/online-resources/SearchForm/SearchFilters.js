@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 // Components
 import { 
   Button, 
-  Heading, 
+  Heading,
+  Icon,
   Modal, 
   SkeletonLoader 
 } from '@nypl/design-system-react-components';
@@ -57,6 +58,7 @@ function SearchFilters() {
   const router = useRouter();
   
   // Handle the scroll after modal closes.
+  // @TODO fix this, only works on search pg, div not on main pg!
   const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
     if (isMobile && prevModalState !== isModalOpen) {
@@ -234,9 +236,10 @@ function SearchFilters() {
   return (
     <div>
       {isMobile ? (
-        <div>
+        <div className={s.mobileContainer}>
           <Button 
-            id='search-filters__mobile-filters-button' 
+            id='search-filters__mobile-filters-button'
+            className={s.filterBarButtonMobile}
             onClick={() => onClick()}
             buttonType='outline'
           >
@@ -244,15 +247,24 @@ function SearchFilters() {
           </Button>
           {isModalOpen && (
             <Modal>
-              <div className={s.filter_bar__button}>
+              <div className={s.ctaButtonsContainerMobile}>
                 <Button
                   buttonType="link"
+                  className={s.ctaClearButtonMobile}
                   id={'multiselect-button-clear'}
                   mouseDown={false}
                   type="button"
                   onClick={(e) => onClearMultiSelect(e)}
                 >
-                  Clear
+                  <Icon
+                    decorative
+                    iconRotation="rotate-90"
+                    modifiers={[
+                      'small'
+                    ]}
+                    name="arrow"
+                  />
+                  Go Back
                 </Button>
                 <Button
                   buttonType="filled"
@@ -261,44 +273,43 @@ function SearchFilters() {
                   type="button"
                   onClick={(e) => onSaveMultiSelect(e)}
                 >
-                  Apply Filters
+                  Show Results
                 </Button>
               </div>
-              <Heading
-                id="search-filters__mobile-heading"
-                level={3}
-                text="Filters"
-              />
-              {groups.map(group => {
-                return (
-                  <MultiSelect
-                    id={group.id}
-                    limiter={group.limiter}
-                    label={group.label}
-                    onSelectedItemChange={(e) => onSelectedItemChange(e, group.id)}
-                    selectedItems={selectedItems}
-                    onClearMultiSelect={() => onClearMultiSelect(group.id)}    
-                    onSaveMultiSelect={onSaveMultiSelect}
-                    onMenuClick={() => onMenuClick(group.id)}
-                    selectedGroupIds={selectedGroupIds}
-                  />
-                )
-              })}
+              <div className={s.multiSelectsContainerMobile}>
+                <Heading
+                  id="search-filters__mobile-heading"
+                  level={3}
+                  text="Filters"
+                />
+                {groups.map(group => {
+                  return (
+                    <MultiSelect
+                      id={group.id}
+                      limiter={group.limiter}
+                      label={group.label}
+                      onSelectedItemChange={(e) => onSelectedItemChange(e, group.id)}
+                      selectedItems={selectedItems}
+                      onClearMultiSelect={() => onClearMultiSelect(group.id)}    
+                      onSaveMultiSelect={onSaveMultiSelect}
+                      onMenuClick={() => onMenuClick(group.id)}
+                      selectedGroupIds={selectedGroupIds}
+                      showCtaButtons={false}
+                    />
+                  )
+                })}
+              </div>
             </Modal>
           )}
         </div>
       ) : (
-        <div className={s.desktop_container}>
+        <div className={s.desktopContainer}>
           <Heading
             id="search-filters--heading"
             level={3}
             text="Filter By"
           />
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            padding: '1em 0'
-          }}>
+          <div className={s.multiSelectsContainerDesktop}>
             {groups.map(group => {
               return (
                 <MultiSelect
@@ -311,6 +322,7 @@ function SearchFilters() {
                   onSaveMultiSelect={onSaveMultiSelect}
                   onMenuClick={() => onMenuClick(group.id)}
                   selectedGroupIds={selectedGroupIds}
+                  showCtaButtons={true}
                 />
               )
             })}

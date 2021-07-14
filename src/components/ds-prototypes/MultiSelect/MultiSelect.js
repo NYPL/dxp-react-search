@@ -16,7 +16,8 @@ function MultiSelect(props) {
     onSaveMultiSelect,
     onClearMultiSelect,
     onMenuClick,
-    selectedGroupIds
+    selectedGroupIds,
+    showCtaButtons
   } = props;
 
   const isOpen = selectedGroupIds.includes(id);
@@ -49,13 +50,13 @@ function MultiSelect(props) {
       }}
       active={isOpen}
     >
-      <div className={s.multiselect}>
+      <div className={s.multiSelect}>
         <button  
           className={s.menuButton} 
           type="button"
           onClick={onMenuClick}
         >
-          <span className={s.button__label}>
+          <span>
             {getButtonLabel(id)}
           </span>
           <Icon
@@ -67,10 +68,10 @@ function MultiSelect(props) {
         <div
           className={`${s.menu} ${isOpen && s.active}`}
         >
-          <ul className={s.menu_inner}>
+          <ul className={s.menuInner}>
             {isOpen &&
               items.map((item) => (
-                <li key={item.id} className={s.menu_item}>
+                <li key={item.id} className={s.menuItem}>
                   <Checkbox
                     id={item.id}
                     labelText={<>{item.name}</>}
@@ -83,7 +84,7 @@ function MultiSelect(props) {
                     <ul>
                       {item.children.map((childItem) => {
                         return (
-                          <li key={childItem.id} className={s.child_item}>
+                          <li key={childItem.id} className={s.childMenuItem}>
                             <Checkbox
                               id={childItem.id}
                               labelText={<>{childItem.name}</>}
@@ -101,8 +102,8 @@ function MultiSelect(props) {
               ))
             }
           </ul>
-          {isOpen &&
-            <div className={s.cta_buttons_wrapper}>
+          {isOpen && showCtaButtons &&
+            <div className={s.ctaButtonsContainer}>
               <Button
                 buttonType="link"
                 id={`multiselect-button-clear-${id}`}

@@ -1,22 +1,16 @@
-/*.multiselect {
-  width: fit-content;
-  min-width: 175px;
-  margin-right: 2em;
-}
-*/
-
-.multiselect {
+.multiSelect {
   margin: .75rem 0;
 }
 
 @media (min-width: 767px) {
-  .multiselect {
+  .multiSelect {
     width: fit-content;
     min-width: 175px;
     margin: 0 2em 0 0;
   }
 }
 
+/* Menu Button */
 .menuButton {
   width: 100%;
   border: 1px solid #e0e0e0;
@@ -37,12 +31,7 @@
   background: #e0e0e0;
 }
 
-.button__label {
-  font-weight: 500;
-  font-size: 14px;
-}
-
-
+/* Multiselect menu */
 .menu ul {
   list-style-type: none;
   padding: 0;
@@ -50,21 +39,11 @@
 }
 
 @media (min-width: 767px) {
-  .menu_inner {
+  .menuInner {
     max-height: 285px;
     overflow-x: hidden;
     overflow-y: auto;
   }
-}
-
-/*.menu_inner:focus {
-  outline: 0px !important;
-}
-*/
-
-.menu_item {
-  margin-left: 4px;
-  padding: .25em 0;
 }
 
 /* MultiSelect menu when it's open */
@@ -83,12 +62,17 @@
   }
 }
 
-.cta_buttons_wrapper {
-  display: flex;
-  justify-content: space-between;
+.menuItem {
+  margin-left: 4px;
+  padding: .25em 0;
 }
 
-.child_item {
+.childMenuItem {
   margin-left: 4px;
   padding: .25em 0 .25em 1em;
+}
+
+.ctaButtonsContainer {
+  display: flex;
+  justify-content: space-between;
 }

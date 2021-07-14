@@ -17,7 +17,8 @@ function MultiSelect(props) {
     onClearMultiSelect,
     onSaveMultiSelect,
     onMenuClick,
-    selectedGroupIds
+    selectedGroupIds,
+    showCtaButtons
   } = props;
 
   // Apollo
@@ -54,7 +55,8 @@ function MultiSelect(props) {
       onClearMultiSelect={onClearMultiSelect}
       onSaveMultiSelect={onSaveMultiSelect}
       onMenuClick={onMenuClick}
-      selectedGroupIds={selectedGroupIds} 
+      selectedGroupIds={selectedGroupIds}
+      showCtaButtons={showCtaButtons}
     />
   );
 }

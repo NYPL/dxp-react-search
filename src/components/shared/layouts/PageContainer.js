@@ -66,7 +66,7 @@ function PageContainer(props) {
             </div>
           }
           {contentPrimary &&
-            <div className={contentPrimaryClass}>
+            <div id="page-container--content-primary" className={contentPrimaryClass}>
               {contentPrimary}
               {contentBottom &&
                 <div className="content-bottom">

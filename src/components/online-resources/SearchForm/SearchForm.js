@@ -111,7 +111,7 @@ function SearchForm() {
       suggestionContainerMsg={'You searched for:'}
       searchButtonId={'search-form__submit'}
     >
-      <div id="placeholder-children-prop-filters"><SearchFilters /></div>
+      <SearchFilters />
     </SharedSearchForm>
   );
 };
