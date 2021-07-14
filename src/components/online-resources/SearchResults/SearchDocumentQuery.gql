@@ -46,6 +46,7 @@ query SearchDocumentQuery(
         format
         language
         outputType
+        isCoreResource
       }
     }
     pageInfo {

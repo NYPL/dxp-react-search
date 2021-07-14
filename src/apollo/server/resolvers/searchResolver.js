@@ -124,6 +124,28 @@ const searchResolver = {
       }
       
       return resourceUrl;
+    },
+    isCoreResource: (parent, args, context, info) => {
+      const subjectsFromQueryParams = info.variableValues.subjects;
+      const recommendedSubjects = parent['recommended-subjects'];
+      let isCoreResource = false;
+      // No query params for subjects, so return false.
+      if (subjectsFromQueryParams === null) {
+        return isCoreResource;
+      }
+      // Build an array of recommended subject ids.
+      let recommendedSubjectsArray = [];
+      recommendedSubjects?.map(recommendedSubject => {
+        recommendedSubjectsArray.push(recommendedSubject.id);
+      });
+      // Check for any matches.
+      const coreResourceMatch = subjectsFromQueryParams
+        .filter(e => recommendedSubjectsArray.includes(e));
+      
+      if (coreResourceMatch.length) {
+        isCoreResource = true;
+      }
+      return isCoreResource;
     }
   },
   Subject: {

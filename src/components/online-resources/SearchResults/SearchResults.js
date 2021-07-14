@@ -108,6 +108,12 @@ function SearchResults(props) {
         page: pageIndex,
         ...(router.query.alpha && {
           alpha: router.query.alpha
+        }),
+        ...(router.query.subject && {
+          subject: router.query.subject
+        }),
+        ...(router.query.audience_by_age && {
+          audience_by_age: router.query.audience_by_age
         })
       }
     });

@@ -29,6 +29,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     accessibilityLink,
     termsConditionsLink,
     privacyPolicyLink,
+    isCoreResource
   } = item;
 
   function LabelItem({ label, name }) {
@@ -63,7 +64,9 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
 
   return (
     <div id={id} className={s.card}>
-      <div className={s.resourceType}>Core Resource</div>
+      {isCoreResource &&
+        <div className={s.resourceType}>Core Resource</div>
+      }
       <div className={s.heading}>
         <OnlineResourceCardHeading {...item} {...ipInfo} />
       </div>
