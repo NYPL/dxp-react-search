@@ -18,11 +18,7 @@ export const typeDefs = gql`
     termsConditionsLink: String
     privacyPolicyLink: String
     notes: String
-    updateFrequency: String
-    printEquivalent: String
-    format: String
     language: String
-    outputType: String
     accessibleFrom: [String]
     resourceUrl: String
     accessLocations: [AccessLocation]

@@ -26,14 +26,6 @@ const searchResolver = {
       // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
       const now = dayjs.tz();
 
-      /*let totalItems;
-      if (response.pager.count === undefined) {
-        totalItems = 0;
-      } else {
-        totalItems = response.pager.count;
-      }
-      */
-
       return {
         items: response.results,
         pageInfo: {
@@ -62,24 +54,14 @@ const searchResolver = {
     id: document => document.uuid,
     name: document => document.title,
     description: document => document.summary,
-    // @TODO Need to remove this have Drupal output the slug/url path only.
-    slug: document => {
-      if (document.url.includes('localhost')) {
-        return document.url.replace('http://localhost:8080', '');
-      } else {
-        return document.url.replace('http://sandbox-d8.nypl.org', '');
-      }
-    },
+    slug: document => document.path,
     mostPopular: document => document['most-popular'],
+    // @TODO I dont know where this is supposed to go?
     accessibilityLink: document => 'https://www.nypl.org',
-    termsConditionsLink: document => 'https://about.jstor.org/terms/',
-    privacyPolicyLink: document => 'https://about.jstor.org/privacy/',
-    notes: document => 'Subject coverage includes Asian studies, ecology, economics, education, finance, history, literature, mathematics, philosophy, political science, population studies, science, and sociology.',
-    updateFrequency: document => 'Periodically',
-    printEquivalent: document => 'Many of the journals included in JSTOR are available in traditional print or microform formats at The New York Public Library. Check the Library Catalog for holdings.',
-    format: document => 'Web',
-    language: document => 'English',
-    outputType: document => 'Print, Download',
+    termsConditionsLink: document => document['terms-link']?.url,
+    privacyPolicyLink: document => document['privacy-link']?.url,
+    notes: document => document['comments-public'],
+    language: document => document['resource-language'],
     subjects: document => document.subjects,
     accessibleFrom: document => {
       return document['accessible-from'].length ? 
@@ -122,7 +104,6 @@ const searchResolver = {
       ) {
         resourceUrl = document['offsite-url'].url;
       }
-      
       return resourceUrl;
     },
     isCoreResource: (parent, args, context, info) => {
@@ -149,23 +130,13 @@ const searchResolver = {
     }
   },
   Subject: {
-    id: subject => {
-      return subject.uuid;
-    },
-    name: subject => {
-      return subject.title;
-    },
+    id: subject => subject.uuid,
+    name: subject => subject.title
   },
   AccessLocation: {
-    id: accessLocation => {
-      return accessLocation.uuid;
-    },
-    name: accessLocation => {
-      return accessLocation.title;
-    },
-    url: accessLocation => {
-      return accessLocation.url;
-    },
+    id: accessLocation => accessLocation.uuid,
+    name: accessLocation => accessLocation.title,
+    url: accessLocation => accessLocation.url
   }
 }
 
