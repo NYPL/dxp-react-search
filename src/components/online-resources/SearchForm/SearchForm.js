@@ -76,6 +76,7 @@ function SearchForm() {
   }
 
   function handleSubmit(event) {
+    console.log('Search Form handleSubmit!')
     event.preventDefault();
 
     // Push form state into url.

@@ -62,7 +62,7 @@ function SearchFilters() {
   const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
     if (isMobile && prevModalState !== isModalOpen) {
-      document.getElementById('search-results__container').scrollIntoView();
+      document.getElementById('page-container--content-primary').scrollIntoView();
     } 
   }, [isModalOpen]);
   
@@ -136,18 +136,19 @@ function SearchFilters() {
   }
 
   function onSaveMultiSelect() {
-    setIsModalOpen(false);
-
     // Update url params
     router.push({
       pathname: `${ONLINE_RESOURCES_BASE_PATH}/search`,
       query: { 
-        ...(router.query.q && {
+        /*...(router.query.q && {
           q: router.query.q
         }),
         ...(router.query.page && {
           page: router.query.page
         }),
+        */
+        q: router.query.q,
+        page: router.query.page ? router.query.page : 1,
         ...(selectedItems['subject'] && {
           subject: selectedItems['subject'].items.join(' ')
         }),
@@ -155,10 +156,11 @@ function SearchFilters() {
           audience_by_age: selectedItems['audience_by_age'].items.join(' ')
         }),
       }
+    }).then(() => {
+      setIsModalOpen(false);
+      // Reset any open multiselect menus.
+      setSelectedGroupIds([])
     });
-
-    // Reset any open multiselect menus.
-    setSelectedGroupIds([])
   }
 
   function onClearMultiSelect(groupId) {
@@ -242,9 +244,19 @@ function SearchFilters() {
             className={s.filterBarButtonMobile}
             onClick={() => onClick()}
             buttonType='outline'
+            type='button'
           >
             Filters
           </Button>
+          {/*<button
+            id='search-filters__mobile-filters-button'
+            type="button"
+            onClick={() => onClick()}
+            className={`button button--outline ${s.filterBarButtonMobile}`}
+          >
+            Filters
+          </button>
+          */}
           {isModalOpen && (
             <Modal>
               <div className={s.ctaButtonsContainerMobile}>

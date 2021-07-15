@@ -129,8 +129,6 @@ class DrupalApi extends RESTDataSource {
       });
     }
 
-
-
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.results)) {
@@ -173,15 +171,16 @@ class DrupalApi extends RESTDataSource {
   // /api/taxonomy-filters?vocab=subject&content_type=online_resource
   async getAllFiltersByGroupId(args) {
     // Mocks
-    if (args.id === 'audience_by_age') {
+    /*if (args.id === 'audience_by_age') {
       return audienceFilterMocks;
     } else if (args.id === 'subject') {
       return subjectFilterMock;
     } else if (args.id === 'availability') {
       return availabilityFilterMock;
     }
+    */
 
-    /*let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+    let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
 
     if (args.limiter) {
       apiPath = `${apiPath}&content_type=${args.limiter}`;
@@ -194,7 +193,6 @@ class DrupalApi extends RESTDataSource {
     } else {
       return [];
     }
-    */
   }
   
   async getIpAccessCheck(clientIp) {
