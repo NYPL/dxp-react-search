@@ -26,13 +26,21 @@ const searchResolver = {
       // Format datetime in ISO8601, i.e, 2020-10-27T12:00:00-04:00.
       const now = dayjs.tz();
 
+      /*let totalItems;
+      if (response.pager.count === undefined) {
+        totalItems = 0;
+      } else {
+        totalItems = response.pager.count;
+      }
+      */
+
       return {
         items: response.results,
         pageInfo: {
-          totalItems: response.pager.count,
-          limit: response.pager.items_per_page,
-          pageNumber: response.pager.current_page + 1,
-          pageCount: response.pager.pages,
+          totalItems: response.results.length ? response.pager.count : 0,
+          limit: response.results.length ? response.pager.items_per_page: 0,
+          pageNumber: response.results.length ? response.pager.current_page + 1 : 0,
+          pageCount: response.results.length ? response.pager.pages : 0,
           timestamp: now,
           clientIp: clientIp
         }

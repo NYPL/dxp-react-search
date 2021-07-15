@@ -35,7 +35,7 @@ function SearchResults(props) {
   );
   const ipInfo = ipMatchesData ? ipMatchesData : null;
   const clientIpAddress = ipMatchesData?.allLocationMatches?.pageInfo.clientIp;
-
+  
   // Query for data.
   const { loading, error, data } = useQuery(
     SEARCH_RESULTS_QUERY, {
@@ -43,6 +43,8 @@ function SearchResults(props) {
         q: router.query.q ? router.query.q : '',
         tid: resourceTopicId ? resourceTopicId : null,
         alpha: router.query.alpha ? router.query.alpha : null,
+        subjects: router.query.subject ? router.query.subject.split(' ') : null,
+        audience_by_age: router.query.audience_by_age ? router.query.audience_by_age.split(' ') : null,
         limit: SEARCH_RESULTS_LIMIT,
         pageNumber: currentPage
       }

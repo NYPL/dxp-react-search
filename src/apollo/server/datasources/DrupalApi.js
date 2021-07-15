@@ -1,5 +1,9 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { DRUPAL_API } = process.env;
+// Mocks for now
+import audienceFilterMocks from './../../../../testHelper/__mocks/audienceFilterMocks';
+import subjectFilterMock from './../../../../testHelper/__mocks/subjectFilterMock';
+import availabilityFilterMock from './../../../../testHelper/__mocks/availabilityFilterMock';
 
 class DrupalApi extends RESTDataSource {
   constructor() {
@@ -101,6 +105,32 @@ class DrupalApi extends RESTDataSource {
       } 
     }
 
+    // Subjects
+    // subjects[]=123&subjects[]=556
+    if (
+      args.filter
+      && 'subjects' in args.filter
+      && args.filter.subjects
+    ) {
+      args.filter.subjects.map(subject => {
+        apiPath = `${apiPath}&subjects[]=${subject}`;
+      });
+    }
+
+    // Audience
+    // audience_age[]=123
+    if (
+      args.filter
+      && 'audience_by_age' in args.filter
+      && args.filter.audience_by_age
+    ) {
+      args.filter.audience_by_age.map(audienceItem => {
+        apiPath = `${apiPath}&audience_age[]=${audienceItem}`;
+      });
+    }
+
+
+
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.results)) {
@@ -137,7 +167,36 @@ class DrupalApi extends RESTDataSource {
     const response = await this.get(`/api/search-online-resources-autosuggest`);
     return response.results;
   }
+  
+  //
+  // /api/taxonomy-filters?vocab=audience_by_age
+  // /api/taxonomy-filters?vocab=subject&content_type=online_resource
+  async getAllFiltersByGroupId(args) {
+    // Mocks
+    if (args.id === 'audience_by_age') {
+      return audienceFilterMocks;
+    } else if (args.id === 'subject') {
+      return subjectFilterMock;
+    } else if (args.id === 'availability') {
+      return availabilityFilterMock;
+    }
 
+    /*let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+
+    if (args.limiter) {
+      apiPath = `${apiPath}&content_type=${args.limiter}`;
+    }
+    
+    const response = await this.get(apiPath);
+  
+    if (Array.isArray(response.data.terms)) {
+      return response;
+    } else {
+      return [];
+    }
+    */
+  }
+  
   async getIpAccessCheck(clientIp) {
     const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
     if (response) {

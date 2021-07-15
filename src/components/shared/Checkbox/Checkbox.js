@@ -1,12 +1,12 @@
 import React from 'react';
 
 function Checkbox(props) {
-  const { checkboxId, name, checked, children, onChange } = props;
+  const { id, name, checked, children, onChange } = props;
   return (
     <div className="checkbox">
       <input
-        id={checkboxId}
-        className="checkbox__input"
+        id={id}
+        className="input__checkbox"
         type="checkbox"
         name={name}
         checked={checked}
@@ -14,7 +14,7 @@ function Checkbox(props) {
         aria-label="Checking this box will update the results"
       />
       <label
-        id={`label-${checkboxId}`}
+        id={`label-${id}`}
         htmlFor={name}
         className="label"
       >

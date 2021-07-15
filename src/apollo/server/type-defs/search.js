@@ -51,6 +51,8 @@ export const typeDefs = gql`
     q: String,
     tid: String,
     alpha: String
+    subjects: [String]
+    audience_by_age: [String]
   }
 
   extend type Query {
