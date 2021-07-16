@@ -40,7 +40,7 @@ function MultiSelect(props) {
   // Loading state,
   if (loading || !data) {
     return (
-      <div>Loading ...</div>
+      <div></div>
     );
   }
 
