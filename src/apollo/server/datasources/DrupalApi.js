@@ -83,13 +83,13 @@ class DrupalApi extends RESTDataSource {
     }
 
     // Resource topic filter
-    // /api/search-online-resources?resource_topics[]=522
+    // /api/search-online-resources?resource-topics[]=522
     if (
       args.filter
       && 'tid' in args.filter
       && args.filter.tid
     ) {
-      apiPath = `/api/search-online-resources?resource_topics[]=${args.filter.tid}`;
+      apiPath = `/api/search-online-resources?resource-topics[]=${args.filter.tid}`;
     }
 
     // Alpha filter
@@ -125,7 +125,31 @@ class DrupalApi extends RESTDataSource {
       && args.filter.audience_by_age
     ) {
       args.filter.audience_by_age.map(audienceItem => {
-        apiPath = `${apiPath}&audience_age[]=${audienceItem}`;
+        apiPath = `${apiPath}&audience[]=${audienceItem}`;
+      });
+    }
+
+    // Availability
+    if (
+      args.filter
+      && 'availability' in args.filter
+      && args.filter.availability
+    ) {
+      args.filter.availability.map(availabilityOption => {
+        switch (availabilityOption) {
+          // api/search-online-resources?is-free-resource=1
+          case 'no-restrictions':
+            apiPath = `${apiPath}&is-free-resource=1`;
+            break;
+          // api/search-online-resources?accessible-from[]=offsite
+          case 'card-required':
+            apiPath = `${apiPath}&accessible-from[]=offsite`;
+            break;
+          //
+          case 'on-site-only':
+            apiPath = `${apiPath}&accessible-from[]=onsite`;
+            break;
+        }
       });
     }
 
@@ -171,16 +195,15 @@ class DrupalApi extends RESTDataSource {
   // /api/taxonomy-filters?vocab=subject&content_type=online_resource
   async getAllFiltersByGroupId(args) {
     // Mocks
-    /*if (args.id === 'audience_by_age') {
+    if (args.id === 'audience_by_age') {
       return audienceFilterMocks;
     } else if (args.id === 'subject') {
       return subjectFilterMock;
     } else if (args.id === 'availability') {
       return availabilityFilterMock;
     }
-    */
 
-    let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+    /*let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
 
     if (args.limiter) {
       apiPath = `${apiPath}&content_type=${args.limiter}`;
@@ -193,6 +216,7 @@ class DrupalApi extends RESTDataSource {
     } else {
       return [];
     }
+    */
   }
   
   async getIpAccessCheck(clientIp) {

@@ -45,6 +45,7 @@ function SearchResults(props) {
         alpha: router.query.alpha ? router.query.alpha : null,
         subjects: router.query.subject ? router.query.subject.split(' ') : null,
         audience_by_age: router.query.audience_by_age ? router.query.audience_by_age.split(' ') : null,
+        availability: router.query.availability ? router.query.availability.split(' ') : null,
         limit: SEARCH_RESULTS_LIMIT,
         pageNumber: currentPage
       }

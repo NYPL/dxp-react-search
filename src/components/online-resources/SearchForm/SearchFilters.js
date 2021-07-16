@@ -155,6 +155,9 @@ function SearchFilters() {
         ...(selectedItems['audience_by_age'] && {
           audience_by_age: selectedItems['audience_by_age'].items.join(' ')
         }),
+        ...(selectedItems['availability'] && {
+          availability: selectedItems['availability'].items.join(' ')
+        }),
       }
     }).then(() => {
       setIsModalOpen(false);

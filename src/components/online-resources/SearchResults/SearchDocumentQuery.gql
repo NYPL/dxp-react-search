@@ -4,6 +4,7 @@ query SearchDocumentQuery(
   $alpha: String,
   $subjects: [String]
   $audience_by_age: [String]
+  $availability: [String]
   $limit: Int,
   $pageNumber: Int,
   $offset: Int
@@ -18,6 +19,7 @@ query SearchDocumentQuery(
       alpha: $alpha
       subjects: $subjects
       audience_by_age: $audience_by_age
+      availability: $availability
     }
   ) {
     items {

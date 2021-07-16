@@ -4,7 +4,7 @@ const availabilityFilterMock = {
     "terms": [
       {
         "uuid": "9507-25d4b9b29dd0",
-        "tid": "3000000",
+        "tid": "no-restrictions",
         "name": "Available without restrictions",
         "vid": "20000000",
         "parent_tid": "virtual",
@@ -12,7 +12,7 @@ const availabilityFilterMock = {
       },
       {
         "uuid": "-c760d4f5041e",
-        "tid": "30000001",
+        "tid": "card-required",
         "name": "Library Card Required",
         "vid": "200000000",
         "parent_tid": "virtual",
@@ -20,7 +20,7 @@ const availabilityFilterMock = {
       },
       {
         "uuid": "41c7-9eef-b5c529340d5e",
-        "tid": "3000003",
+        "tid": "on-site-only",
         "name": "On Site Access Only",
         "vid": "200000000",
         "parent_tid": "virtual",
