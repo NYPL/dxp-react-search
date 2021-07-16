@@ -5,8 +5,7 @@ import {
   SET_PAGINATION,
   RESET_SEARCH,
   SET_FILTERS,
-  DELETE_FILTER,
-  SET_SELECTED_ITEMS
+  DELETE_FILTER
 } from './../actions';
 
 const initialState = {
@@ -85,40 +84,6 @@ export default function search(state = initialState, action) {
       return {
         ...state,
         searchFilters: nextSearchFiltersState(state.searchFilters, vocabId),
-      }
-    
-    case SET_SELECTED_ITEMS:
-      const itemId = action.payload.selectedItemId;
-      const groupId = action.payload.groupId;
-
-      const nextState = (object, property) => {
-        let {[property]: omit, ...rest} = object
-        return rest;
-      }
-  
-      let itemIds;
-      // Check if the tid already exists in the state
-      if (state.selectedItems[groupId] !== undefined) {
-        let itemIdExists = state.selectedItems[groupId].items.indexOf(itemId) > -1;
-        // Make a copy of the existing array.
-        itemIds = state.selectedItems[groupId].items.slice();
-        // If termId exists, remove it from the array.
-        if (itemIdExists) {
-          itemIds = itemIds.filter((id) => id != itemId);
-        } else {
-          // Add it to the array, but modify the copy, not the original.
-          itemIds.push(itemId);
-        }
-      } else {
-        itemIds = [];
-        itemIds.push(itemId);
-      }
-
-      return {
-        ...state,
-        [groupId]: {
-          items: itemIds
-        }
       }
 
     default:

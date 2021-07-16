@@ -1,8 +1,6 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { DRUPAL_API } = process.env;
 // Mocks for now
-import audienceFilterMocks from './../../../../testHelper/__mocks/audienceFilterMocks';
-import subjectFilterMock from './../../../../testHelper/__mocks/subjectFilterMock';
 import availabilityFilterMock from './../../../../testHelper/__mocks/availabilityFilterMock';
 
 class DrupalApi extends RESTDataSource {
@@ -145,7 +143,7 @@ class DrupalApi extends RESTDataSource {
           case 'card-required':
             apiPath = `${apiPath}&accessible-from[]=offsite`;
             break;
-          //
+          // api/search-online-resources?accessible-from[]=onsite
           case 'on-site-only':
             apiPath = `${apiPath}&accessible-from[]=onsite`;
             break;
@@ -193,17 +191,13 @@ class DrupalApi extends RESTDataSource {
   //
   // /api/taxonomy-filters?vocab=audience_by_age
   // /api/taxonomy-filters?vocab=subject&content_type=online_resource
-  async getAllFiltersByGroupId(args) {
-    // Mocks
-    if (args.id === 'audience_by_age') {
-      return audienceFilterMocks;
-    } else if (args.id === 'subject') {
-      return subjectFilterMock;
-    } else if (args.id === 'availability') {
+  async getAllFiltersByGroupId(args) {    
+    // Special handling for availability.
+    if (args.id === 'availability') {
       return availabilityFilterMock;
     }
 
-    /*let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+    let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
 
     if (args.limiter) {
       apiPath = `${apiPath}&content_type=${args.limiter}`;
@@ -216,7 +210,6 @@ class DrupalApi extends RESTDataSource {
     } else {
       return [];
     }
-    */
   }
   
   async getIpAccessCheck(clientIp) {

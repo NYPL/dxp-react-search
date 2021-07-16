@@ -5,18 +5,13 @@ const filterResolver = {
       const terms = response.data.terms;
       // Sort alpha.
       terms.sort((a, b) => a.name.localeCompare(b.name));
-
+      // Set the item nesting.
       const nestedItems = setNestedFilterItems(terms);
       return nestedItems;
-      
-      //return terms;
     },
   },
   FilterItem: {
     id: filterItem => {
-      //return filterItem.id;
-      //return String(filterItem.attributes.drupal_internal__tid);
-      //return filterItem.uuid;
       return String(filterItem.tid);
     },
     name: filterItem => {
@@ -33,6 +28,7 @@ const filterResolver = {
   }
 }
 
+// @TODO Move to utils.
 function setNestedFilterItems(items) {
   // Build an object of objects keyed by parent id.
   const parentsOnly = items.reduce((accumulator, item) => {

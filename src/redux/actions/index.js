@@ -8,8 +8,6 @@ export const SET_PAGINATION = 'SET_PAGINATION';
 export const RESET_SEARCH = 'RESET_SEARCH';
 export const SET_FILTERS = 'SET_FILTERS';
 export const DELETE_FILTER = 'DELETE_FILTER';
-//
-export const SET_SELECTED_ITEMS = 'SET_SELECTED_ITEMS';
 
 export function setSearchQuery(payload) {
   return {
@@ -77,13 +75,6 @@ export function setFilters(payload) {
 export function deleteFilter(payload) {
   return {
     type: DELETE_FILTER,
-    payload: payload
-  };
-}
-
-export function setSelectedItems(payload) {
-  return {
-    type: SET_SELECTED_ITEMS,
     payload: payload
   };
 }
