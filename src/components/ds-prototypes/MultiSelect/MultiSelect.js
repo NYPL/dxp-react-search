@@ -11,7 +11,6 @@ function MultiSelect(props) {
     label, 
     items,
     handleOnSelectedItemChange,
-    //onSelectedItemChange,
     selectedItems,
     onSaveMultiSelect,
     onClearMultiSelect,

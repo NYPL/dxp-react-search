@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 // Apollo
-import { useApolloClient, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { MultiSelectQuery as MULTI_SELECT_QUERY } from './MultiSelect.gql';
 // Components
 import { default as DsMultiSelect } from '../../ds-prototypes/MultiSelect/MultiSelect';
@@ -11,7 +11,6 @@ function MultiSelect(props) {
     id,
     label,
     limiter,
-    //items,
     onSelectedItemChange,
     selectedItems,
     onClearMultiSelect,

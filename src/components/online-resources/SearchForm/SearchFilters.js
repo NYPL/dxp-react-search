@@ -6,8 +6,7 @@ import {
   Button, 
   Heading,
   Icon,
-  Modal, 
-  SkeletonLoader 
+  Modal
 } from '@nypl/design-system-react-components';
 import MultiSelect from './MultiSelect';
 // Hooks
@@ -140,13 +139,6 @@ function SearchFilters() {
     router.push({
       pathname: `${ONLINE_RESOURCES_BASE_PATH}/search`,
       query: { 
-        /*...(router.query.q && {
-          q: router.query.q
-        }),
-        ...(router.query.page && {
-          page: router.query.page
-        }),
-        */
         q: router.query.q,
         page: router.query.page ? router.query.page : 1,
         ...(selectedItems['subject'] && {
@@ -203,8 +195,6 @@ function SearchFilters() {
   }
 
   function onMenuClick(groupId) {
-    //const savedItems = action.payload.savedItems;
-    //const vocabId = action.payload.vocabId;
     const mode = 'desktop';
     let selectedGroupIdsCopy;
     
@@ -251,15 +241,6 @@ function SearchFilters() {
           >
             Filters
           </Button>
-          {/*<button
-            id='search-filters__mobile-filters-button'
-            type="button"
-            onClick={() => onClick()}
-            className={`button button--outline ${s.filterBarButtonMobile}`}
-          >
-            Filters
-          </button>
-          */}
           {isModalOpen && (
             <Modal>
               <div className={s.ctaButtonsContainerMobile}>

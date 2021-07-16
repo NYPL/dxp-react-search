@@ -10,7 +10,7 @@ import {
   LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY
 } from './LocationMatchesByIp.gql';
 // Components
-import { Pagination, SkeletonLoader } from '@nypl/design-system-react-components';
+import { Pagination } from '@nypl/design-system-react-components';
 import OnlineResourceCard from './../OnlineResourceCard';
 import AlphabetNav from './../AlphabetNav';
 import SearchResultsDetails from './SearchResultsDetails';
