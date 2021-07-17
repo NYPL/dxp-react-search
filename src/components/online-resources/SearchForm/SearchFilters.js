@@ -229,7 +229,7 @@ function SearchFilters() {
   }
 
   return (
-    <div>
+    <div className={s.container}>
       {isMobile ? (
         <div className={s.mobileContainer}>
           <Button 
