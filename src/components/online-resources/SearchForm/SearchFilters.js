@@ -88,10 +88,12 @@ function SearchFilters() {
   useEffect(() => {
     let urlState = {};
     for (let [groupId, value] of Object.entries(router.query)) {
-      urlState = {
-        ...urlState,
-        [groupId]: {
-          items: router.query[groupId].split(' ')
+      if (groupId !== 'page' && groupId !== 'q') {
+        urlState = {
+          ...urlState,
+          [groupId]: {
+            items: router.query[groupId].split(' ')
+          }
         }
       }
     }
@@ -228,6 +230,16 @@ function SearchFilters() {
     setSelectedGroupIds(selectedGroupIdsCopy);
   }
 
+  function setFilterButtonLabel(selectedItems) {    
+    let allItems = [];
+    for (let [key, value] of Object.entries(selectedItems)) {
+      value.items.map(item => {
+        allItems.push(item);
+      })
+    }
+    return `Filters ${allItems.length ? `(${allItems.length})` : ``}`;
+  }
+
   return (
     <div className={s.container}>
       {isMobile ? (
@@ -239,7 +251,7 @@ function SearchFilters() {
             buttonType='outline'
             type='button'
           >
-            Filters
+            {setFilterButtonLabel(selectedItems)}
           </Button>
           {isModalOpen && (
             <Modal>
@@ -294,6 +306,19 @@ function SearchFilters() {
                     />
                   )
                 })}
+                {Object.keys(selectedItems).length > 0 &&
+                  <Button
+                    buttonType="link"
+                    iconName={null}
+                    iconPosition={null}
+                    id="mobile-clear-all-button"
+                    mouseDown={false}
+                    onClick={(e) => setSelectedItems({})}
+                    type="submit"
+                  >
+                    Clear all filters
+                  </Button>
+                }
               </div>
             </Modal>
           )}

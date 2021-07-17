@@ -1,3 +1,6 @@
+// Utils
+import setNestedFilterItems from './../../../utils/setNestedFilterItems';
+
 const filterResolver = {
   Query: {
     allFiltersByGroupId: async (parent, args, { dataSources }) => {
@@ -10,60 +13,13 @@ const filterResolver = {
       return nestedItems;
     },
   },
+  // @TODO move these to single line!
   FilterItem: {
-    id: filterItem => {
-      return String(filterItem.tid);
-    },
-    name: filterItem => {
-      //return filterItem.attributes.name;
-      return filterItem.name;
-    },
-    drupalInternalId: filterItem => {
-      //return filterItem.attributes.drupal_internal__tid;
-      return filterItem.tid;
-    },
-    children: filterItem => {
-      return filterItem.children;
-    }
+    id: filterItem => String(filterItem.tid),
+    name: filterItem => filterItem.name,
+    drupalInternalId: filterItem => filterItem.tid,
+    children: filterItem => filterItem.children,
   }
-}
-
-// @TODO Move to utils.
-function setNestedFilterItems(items) {
-  // Build an object of objects keyed by parent id.
-  const parentsOnly = items.reduce((accumulator, item) => {
-    if (item.parent_tid === 'virtual') {
-      return {
-        ...accumulator,
-        [item.tid]: {
-          tid: item.tid,
-          name: item.name,
-          children: []
-        }
-      };
-    }
-    return accumulator;
-  }, {});
-
-  // Build the children keyed by parent id.
-  const childrenOnly = items.reduce((accumulator, item) => {
-    const value = item['parent_tid'];
-    accumulator[value] = (accumulator[value] || []).concat(item);
-    return accumulator;
-  }, {});
-
-  // Build the final nested filters structure.
-  let nestedFilterItems = [];
-  items.map((item) => {
-    if (item.parent_tid === 'virtual') {
-      nestedFilterItems.push({
-        ...parentsOnly[item.tid],
-        children: childrenOnly[item.tid] ? childrenOnly[item.tid] : null
-      });
-    }
-  });
-
-  return nestedFilterItems;
 }
 
 export default filterResolver;
