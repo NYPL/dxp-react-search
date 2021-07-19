@@ -1,113 +1,117 @@
-import React, { useEffect, useState } from 'react';
-// Next
-import { useRouter } from 'next/router';
+import React from 'react';
 // Components
 import { 
   Button, 
-  Heading, 
+  Heading,
+  Icon,
   Modal
 } from '@nypl/design-system-react-components';
-import MultiSelect from './MultiSelect';
-// Hooks
-import useWindowSize from '../../../hooks/useWindowSize';
-import usePrevious from '../../../hooks/usePrevious';
+// Styles
+import s from './FilterBar.module.css';
 
 function FilterBar(props) {
   const {
-    
+    id,
+    label,
+    isModalOpen,
+    onClickMobileFiltersButton,
+    onClickGoBack,
+    isMobile,
+    selectedItems,
+    onClearSelectedItems,
+    onSaveSelectedItems,
+    children
   } = props;
-
-  /*
-  label
-  onClearMultiSelects
-  onSaveMultiSelects
-
-  onClickMobileFiltersButton
-
-  isMobile
-
-  */
-
-  // Local state
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  function onClick() {
-    setIsModalOpen(true)
+  
+  // Sets the label of the filters button.
+  function setFilterButtonLabel(selectedItems) {    
+    let allItems = [];
+    for (let [key, value] of Object.entries(selectedItems)) {
+      value.items.map(item => {
+        allItems.push(item);
+      })
+    }
+    return `Filters ${allItems.length ? `(${allItems.length})` : ``}`;
   }
 
   return (
-    <div>
+    <div id={id} className={s.container}>
       {isMobile ? (
-        <div>
+        <div className={s.mobileContainer}>
           <Button 
-            id='search-filters__mobile-filters-button' 
-            onClick={() => onClick()}
+            id='search-filters__mobile-filters-button'
+            className={s.filterBarButtonMobile}
+            onClick={onClickMobileFiltersButton}
             buttonType='outline'
+            type='button'
           >
-            Filters
+            {setFilterButtonLabel(selectedItems)}
           </Button>
           {isModalOpen && (
             <Modal>
-              <div>
+              <div className={s.ctaButtonsContainerMobile}>
                 <Button
                   buttonType="link"
-                  id={'multi-select-button-clear'}
+                  className={s.ctaClearButtonMobile}
+                  id={'multiselect-button-goback'}
                   mouseDown={false}
                   type="button"
-                  onClick={(e) => onClearMultiSelects(e)}
+                  onClick={onClickGoBack}
                 >
-                  Clear
+                  <Icon
+                    decorative
+                    iconRotation="rotate-90"
+                    modifiers={[
+                      'small'
+                    ]}
+                    name="arrow"
+                  />
+                  Go Back
                 </Button>
                 <Button
                   buttonType="filled"
-                  id={`multi-select-button-save`}
+                  id={`multiselect-button-save`}
                   mouseDown={false}
                   type="button"
-                  onClick={(e) => onSaveMultiSelects(e)}
+                  onClick={onSaveSelectedItems}
                 >
-                  Apply Filters
+                  Show Results
                 </Button>
               </div>
-              <Heading
-                id="search-filters__mobile-heading"
-                level={3}
-                text="Filters"
-              />
-              {children}
+              <div className={s.multiSelectsContainerMobile}>
+                <Heading
+                  id="search-filters__mobile-heading"
+                  level={3}
+                  text="Filters"
+                />
+                {children}
+                {Object.keys(selectedItems).length > 0 &&
+                  <Button
+                    buttonType="link"
+                    iconName={null}
+                    iconPosition={null}
+                    id="mobile-clear-all-button"
+                    className={s.clearAllFiltersButton}
+                    mouseDown={false}
+                    onClick={onClearSelectedItems}
+                    type="submit"
+                  >
+                    Clear all filters
+                  </Button>
+                }
+              </div>
             </Modal>
           )}
         </div>
       ) : (
-        <div>
+        <div className={s.desktopContainer}>
           <Heading
             id="search-filters--heading"
             level={3}
-            text="Filter By"
+            text={label}
           />
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            padding: '1em 0'
-          }}>
+          <div className={s.multiSelectsContainerDesktop}>
             {children}
-            <Button
-              buttonType="link"
-              id={'multi-select-button-clear'}
-              mouseDown={false}
-              type="button"
-              onClick={(e) => onClearMultiSelects(e)}
-            >
-              Clear
-            </Button>
-            <Button
-              buttonType="filled"
-              id={`multi-select-button-save`}
-              mouseDown={false}
-              type="button"
-              onClick={(e) => onSaveMultiSelects(e)}
-            >
-              Apply Filters
-            </Button>
           </div>
         </div>
       )}
@@ -115,4 +119,4 @@ function FilterBar(props) {
   );
 };
 
-export default SearchFilters;
+export default FilterBar;

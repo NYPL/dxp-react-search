@@ -34,3 +34,7 @@
 .ctaClearButtonMobile {
   margin-left: -10px;
 }
+
+.clearAllFiltersButton {
+  margin: 0 auto;
+}
