@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-// Next
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-//
-import { 
-  Heading,
+// Components
+import {
   Link as DsLink,
   StatusBadge,
   Button,
@@ -16,12 +12,9 @@ import {
 import OnlineResourceCardHeading from './OnlineResourceCardHeading';
 import s from './OnlineResourceCard.module.css';
 
-
 function OnlineResourceCard({ item, collapsible, ipInfo }) {
   const { 
     id,
-    slug,
-    name, 
     description, 
     notes,
     subjects,
@@ -29,6 +22,8 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     accessibilityLink,
     termsConditionsLink,
     privacyPolicyLink,
+    isCoreResource,
+    isFreeResource
   } = item;
 
   function LabelItem({ label, name }) {
@@ -63,44 +58,49 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
 
   return (
     <div id={id} className={s.card}>
-      <div className={s.resourceType}>Core Resource</div>
+      {isCoreResource &&
+        <div className={s.resourceType}>Core Resource</div>
+      }
       <div className={s.heading}>
         <OnlineResourceCardHeading {...item} {...ipInfo} />
       </div>
-      <div className={s.statusBadge}>
-        <StatusBadge 
-          level={"low"} 
-          className={'location__hours-status'}
-        >
-          Library Card Required
-        </StatusBadge>
-      </div>
+      {!isFreeResource &&
+        <div className={s.statusBadge}>
+          <StatusBadge 
+            level={"low"} 
+            className={'location__hours-status'}
+          >
+            Library Card Required
+          </StatusBadge>
+        </div>
+      }
       <div>{description}</div>
-
       <div className={s.links}>
         <DsLink
           href={accessibilityLink}
         >
           Accessibility Details
         </DsLink>
-        <DsLink
-          href={termsConditionsLink}
-        >
-          Terms & Conditions
-        </DsLink>
-        <DsLink
-          href={privacyPolicyLink}
-        >
-          Privacy Policy
-        </DsLink>
+        {termsConditionsLink &&
+          <DsLink
+            href={termsConditionsLink}
+          >
+            Terms & Conditions
+          </DsLink>
+        }
+        {privacyPolicyLink &&
+          <DsLink
+            href={privacyPolicyLink}
+          >
+            Privacy Policy
+          </DsLink>
+        }
       </div>
-
       <div className={detailsClassName}>
         <LabelItem label="Notes:" name={notes} />
         <LabelItem label="Language:" name={language} />
         <LabelItem label="Subjects:" name={subjectsList.join(', ')} />
       </div>
-
       {collapsible &&
         <Button
           className={s.readmore}

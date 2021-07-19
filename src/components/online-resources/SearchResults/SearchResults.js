@@ -10,7 +10,7 @@ import {
   LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY
 } from './LocationMatchesByIp.gql';
 // Components
-import { Pagination, SkeletonLoader } from '@nypl/design-system-react-components';
+import { Pagination } from '@nypl/design-system-react-components';
 import OnlineResourceCard from './../OnlineResourceCard';
 import AlphabetNav from './../AlphabetNav';
 import SearchResultsDetails from './SearchResultsDetails';
@@ -35,7 +35,7 @@ function SearchResults(props) {
   );
   const ipInfo = ipMatchesData ? ipMatchesData : null;
   const clientIpAddress = ipMatchesData?.allLocationMatches?.pageInfo.clientIp;
-
+  
   // Query for data.
   const { loading, error, data } = useQuery(
     SEARCH_RESULTS_QUERY, {
@@ -43,6 +43,9 @@ function SearchResults(props) {
         q: router.query.q ? router.query.q : '',
         tid: resourceTopicId ? resourceTopicId : null,
         alpha: router.query.alpha ? router.query.alpha : null,
+        subjects: router.query.subject ? router.query.subject.split(' ') : null,
+        audience_by_age: router.query.audience_by_age ? router.query.audience_by_age.split(' ') : null,
+        availability: router.query.availability ? router.query.availability.split(' ') : null,
         limit: SEARCH_RESULTS_LIMIT,
         pageNumber: currentPage
       }
@@ -106,6 +109,15 @@ function SearchResults(props) {
         page: pageIndex,
         ...(router.query.alpha && {
           alpha: router.query.alpha
+        }),
+        ...(router.query.subject && {
+          subject: router.query.subject
+        }),
+        ...(router.query.audience_by_age && {
+          audience_by_age: router.query.audience_by_age
+        }),
+        ...(router.query.availability && {
+          availability: router.query.availability
         })
       }
     });

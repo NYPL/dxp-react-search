@@ -12,6 +12,7 @@ import filterBySearchInput from './../../../utils/filterBySearchInput';
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 // Components
 import { default as SharedSearchForm } from './../../shared/SearchForm';
+import SearchFilters from './SearchFilters';
 
 function SearchForm() {
   const router = useRouter();
@@ -82,7 +83,16 @@ function SearchForm() {
       pathname: `${ONLINE_RESOURCES_BASE_PATH}/search`,
       query: { 
         q: autoSuggestInputValue,
-        page: 1 
+        page: 1,
+        ...(router.query.subject && {
+          subject: router.query.subject
+        }),
+        ...(router.query.audience_by_age && {
+          audience_by_age: router.query.audience_by_age
+        }),
+        ...(router.query.availability && {
+          availability: router.query.availability
+        })
       }
     });
   }
@@ -104,7 +114,7 @@ function SearchForm() {
       suggestionContainerMsg={'You searched for:'}
       searchButtonId={'search-form__submit'}
     >
-      <div id="placeholder-children-prop-filters"></div>
+      <SearchFilters />
     </SharedSearchForm>
   );
 };

@@ -2,6 +2,9 @@ query SearchDocumentQuery(
   $q: String,
   $tid: String,
   $alpha: String,
+  $subjects: [String]
+  $audience_by_age: [String]
+  $availability: [String]
   $limit: Int,
   $pageNumber: Int,
   $offset: Int
@@ -14,6 +17,9 @@ query SearchDocumentQuery(
       q: $q,
       tid: $tid,
       alpha: $alpha
+      subjects: $subjects
+      audience_by_age: $audience_by_age
+      availability: $availability
     }
   ) {
     items {
@@ -37,11 +43,9 @@ query SearchDocumentQuery(
         accessibleFrom
         resourceUrl
         notes
-        updateFrequency
-        printEquivalent
-        format
         language
-        outputType
+        isCoreResource
+        isFreeResource
       }
     }
     pageInfo {

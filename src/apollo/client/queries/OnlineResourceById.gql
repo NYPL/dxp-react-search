@@ -20,11 +20,7 @@ query OnlineResourceByIdQuery($id: String) {
       accessibleFrom
       resourceUrl
       notes
-      updateFrequency
-      printEquivalent
-      format
       language
-      outputType
     }
   }
 }
