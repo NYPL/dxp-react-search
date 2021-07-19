@@ -22,7 +22,8 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     accessibilityLink,
     termsConditionsLink,
     privacyPolicyLink,
-    isCoreResource
+    isCoreResource,
+    isFreeResource
   } = item;
 
   function LabelItem({ label, name }) {
@@ -63,14 +64,16 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       <div className={s.heading}>
         <OnlineResourceCardHeading {...item} {...ipInfo} />
       </div>
-      <div className={s.statusBadge}>
-        <StatusBadge 
-          level={"low"} 
-          className={'location__hours-status'}
-        >
-          Library Card Required
-        </StatusBadge>
-      </div>
+      {!isFreeResource &&
+        <div className={s.statusBadge}>
+          <StatusBadge 
+            level={"low"} 
+            className={'location__hours-status'}
+          >
+            Library Card Required
+          </StatusBadge>
+        </div>
+      }
       <div>{description}</div>
       <div className={s.links}>
         <DsLink

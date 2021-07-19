@@ -45,6 +45,7 @@ query SearchDocumentQuery(
         notes
         language
         isCoreResource
+        isFreeResource
       }
     }
     pageInfo {

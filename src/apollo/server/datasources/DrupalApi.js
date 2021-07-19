@@ -137,7 +137,7 @@ class DrupalApi extends RESTDataSource {
         switch (availabilityOption) {
           // api/search-online-resources?is-free-resource=1
           case 'no-restrictions':
-            apiPath = `${apiPath}&is-free-resource=1`;
+            apiPath = `${apiPath}&is-free-resource=1&authentication-type=none`;
             break;
           // api/search-online-resources?accessible-from[]=offsite
           case 'card-required':

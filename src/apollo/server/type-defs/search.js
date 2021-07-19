@@ -24,6 +24,7 @@ export const typeDefs = gql`
     accessLocations: [AccessLocation]
     subjects: [Subject]
     isCoreResource: Boolean
+    isFreeResource: Boolean
   }
 
   type AccessLocation {

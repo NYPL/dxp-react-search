@@ -127,7 +127,8 @@ const searchResolver = {
         isCoreResource = true;
       }
       return isCoreResource;
-    }
+    },
+    isFreeResource: document => document['is-free-resource'],
   },
   Subject: {
     id: subject => subject.uuid,

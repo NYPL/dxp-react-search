@@ -115,6 +115,9 @@ function SearchResults(props) {
         }),
         ...(router.query.audience_by_age && {
           audience_by_age: router.query.audience_by_age
+        }),
+        ...(router.query.availability && {
+          availability: router.query.availability
         })
       }
     });
