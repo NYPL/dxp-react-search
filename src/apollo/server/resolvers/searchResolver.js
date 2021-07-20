@@ -106,18 +106,6 @@ const searchResolver = {
       }
       return resourceUrl;
     },
-    authenticationType: document => {
-      if (document['authentication-type'] === "None") {
-        return null;
-      } else {
-        return document['authentication-type'].replace(/\s+/g, '_').toLowerCase();
-      }
-    }
-  },
-  Subject: {
-    id: subject => {
-      return subject.uuid;
-    },
     isCoreResource: (parent, args, context, info) => {
       const subjectsFromQueryParams = info.variableValues.subjects;
       const recommendedSubjects = parent['recommended-subjects'];
@@ -141,6 +129,13 @@ const searchResolver = {
       return isCoreResource;
     },
     isFreeResource: document => document['is-free-resource'],
+    authenticationType: document => {
+      if (document['authentication-type'] === "None") {
+        return null;
+      } else {
+        return document['authentication-type'].replace(/\s+/g, '_').toLowerCase();
+      }
+    }
   },
   Subject: {
     id: subject => subject.uuid,
