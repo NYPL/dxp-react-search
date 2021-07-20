@@ -1,0 +1,8 @@
+.verify {
+  margin: 0 0 var(--space-xl);
+}
+
+.verify button {
+  width: 140px;
+  margin: var(--space-m) 0;
+}

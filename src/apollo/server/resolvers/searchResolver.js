@@ -129,6 +129,13 @@ const searchResolver = {
       return isCoreResource;
     },
     isFreeResource: document => document['is-free-resource'],
+    authenticationType: document => {
+      if (document['authentication-type'] === "None") {
+        return null;
+      } else {
+        return document['authentication-type'].replace(/\s+/g, '_').toLowerCase();
+      }
+    }
   },
   Subject: {
     id: subject => subject.uuid,
