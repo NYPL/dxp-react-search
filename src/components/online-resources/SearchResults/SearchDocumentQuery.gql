@@ -1,0 +1,61 @@
+query SearchDocumentQuery(
+  $q: String,
+  $tid: String,
+  $alpha: String,
+  $subjects: [String]
+  $audience_by_age: [String]
+  $availability: [String]
+  $limit: Int,
+  $pageNumber: Int,
+  $offset: Int
+) {
+  allSearchDocuments(
+    limit: $limit,
+    pageNumber: $pageNumber,
+    offset: $offset,
+    filter: {
+      q: $q,
+      tid: $tid,
+      alpha: $alpha
+      subjects: $subjects
+      audience_by_age: $audience_by_age
+      availability: $availability
+    }
+  ) {
+    items {
+      ... on OnlineResourceDocument {
+        id
+        slug
+        name
+        description
+        accessibilityLink
+        termsConditionsLink
+        privacyPolicyLink
+        subjects {
+          id
+          name
+        }
+        accessLocations {
+          id
+          name
+          url
+        }
+        accessibleFrom
+        resourceUrl
+        notes
+        language
+        authenticationType
+        isCoreResource
+        isFreeResource
+      }
+    }
+    pageInfo {
+      totalItems,
+      limit,
+      pageNumber,
+      pageCount,
+      timestamp,
+      clientIp
+    }
+  }
+}

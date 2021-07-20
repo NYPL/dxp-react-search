@@ -1,0 +1,78 @@
+.multiSelect {
+  margin: .75rem 0;
+}
+
+@media (min-width: 767px) {
+  .multiSelect {
+    width: fit-content;
+    min-width: 175px;
+    margin: 0 2em 0 0;
+  }
+}
+
+/* Menu Button */
+.menuButton {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .65em .85em;
+  border-radius: 2px;
+  background-color: white;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.menuButton:hover {
+  background: #e0e0e0;
+}
+
+/* Multiselect menu */
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 767px) {
+  .menuInner {
+    max-height: 285px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+/* MultiSelect menu when it's open */
+.menu.active {
+  box-sizing: border-box;
+  background: white;
+  border: 1px solid #000;
+  padding: 1rem 1rem 1.5rem 1rem;
+}
+
+@media (min-width: 767px) {
+  .menu.active {
+    z-index: 1;
+    min-width: 275px;
+    position: absolute;
+  }
+}
+
+.menuItem {
+  margin-left: 4px;
+  padding: .25em 0;
+}
+
+.childMenuItem {
+  margin-left: 4px;
+  padding: .25em 0 .25em 1em;
+}
+
+.ctaButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,10 +1,12 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
-const { D8_JSON_API } = process.env;
+const { DRUPAL_API } = process.env;
+// Mocks for now
+import availabilityFilterMock from './../../../../testHelper/__mocks/availabilityFilterMock';
 
 class DrupalApi extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = D8_JSON_API;
+    this.baseURL = DRUPAL_API;
   }
 
   // D8 api is a json api, which datasource-rest does not handle by default.
@@ -16,53 +18,204 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  // Tidy up the response from Drupal.
-  locationNormalizer(location) {
-    // D8 doesn't have geo data yet, so just hardcode something
-    // so the map doesn't completely break.
-    const defaultGeoCords = {
-      lat: 40.7532,
-      lng: -73.9822
-    };
-
-    return {
-      id: location.id,
-      name: location.attributes.title,
-      status: location.attributes.status,
-      address_line1: location.attributes.field_as_address.address_line1,
-      address_line2: location.attributes.field_as_address.address_line2,
-      locality: location.attributes.field_as_address.locality,
-      administrative_area: location.attributes.field_as_address.administrative_area,
-      postal_code: location.attributes.field_as_address.postal_code,
-      phone: location.attributes.field_tels_phone,
-      wheelchairAccess: location.attributes.field_lts_wheelchair_access,
-      geoLocation: {
-        lat: defaultGeoCords.lat,
-        lng: defaultGeoCords.lng,
-      },
-      open: true,
-      todayHours: {
-        start: '11:00',
-        end: '21:00'
-      },
-    };
-  }
-
-  async getAllLocations(query) {
-    // Rough draft of filtering json api by title field if query string/filter is included.
-    //console.log('query: ' + query);
-    let apiPath;
-    if (query === undefined) {
-      apiPath = '/node/library';
-    } else {
-      apiPath = '/node/library?filter[title][operator]=CONTAINS&filter[title][value]=' + query;
-    }
+  async getAllResourceTopics() {
+    const apiPath = `/jsonapi/taxonomy_term/resource_topic?sort=weight&include=field_ers_image.field_media_image`;
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.data)) {
-      return response.data.map(location => this.locationNormalizer(location));
+      return response;
     } else {
       return [];
+    }
+  }
+
+  async getResourceTopic(args) {   
+    // @TODO this is the older way based on tid 
+    //const response = await this.get(`/jsonapi/taxonomy_term/resource_topic?filter[drupal_internal__tid]=${args.slug}`);
+    const response = await this.get(`/jsonapi/taxonomy_term/resource_topic/${args.slug}`);
+    return response.data;
+  }
+
+  async getAllOnlineResources(args) {
+    let apiPath = `/jsonapi/node/online_resource`;
+    
+    // Most popular filter.
+    if (
+      args.filter
+      && 'mostPopular' in args.filter
+    ) {
+      apiPath = `${apiPath}?filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular&page[limit]=3`;
+    }
+    
+    // @TODO Add Limit?
+
+    const response = await this.get(apiPath);
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  async getAllSearchDocuments(args) {
+    let apiPath = '/api/search-online-resources';
+
+    // Filter by q.
+    // /api/search-online-resources?sq=jstor
+    if (
+      args.filter
+      && 'q' in args.filter
+    ) {
+      apiPath = `${apiPath}?sq=${args.filter.q}`;
+    }
+
+    // Pagination
+    // &items_per_page=5&page=1
+    if (args.limit && args.pageNumber !== null) {
+      // Drupal solr wrapper uses 0 as page 1, so we adjust that here.
+      const pageNumber = args.pageNumber - 1;
+      
+      apiPath = `${apiPath}&items_per_page=${args.limit}&page=${pageNumber}`;
+    } else {
+      apiPath = `${apiPath}&items_per_page=10&page=0`;
+    }
+
+    // Resource topic filter
+    // /api/search-online-resources?resource-topics[]=522
+    if (
+      args.filter
+      && 'tid' in args.filter
+      && args.filter.tid
+    ) {
+      apiPath = `/api/search-online-resources?resource-topics[]=${args.filter.tid}`;
+    }
+
+    // Alpha filter
+    // /api/search-online-resources?alpha=M
+    if (
+      args.filter
+      && 'alpha' in args.filter
+      && args.filter.alpha
+    ) {
+      // Only add query params if a letter, not all.
+      if (args.filter.alpha !== 'all') {
+        apiPath = `${apiPath}&alpha=${args.filter.alpha}`;
+      } 
+    }
+
+    // Subjects
+    // subjects[]=123&subjects[]=556
+    if (
+      args.filter
+      && 'subjects' in args.filter
+      && args.filter.subjects
+    ) {
+      args.filter.subjects.map(subject => {
+        apiPath = `${apiPath}&subjects[]=${subject}`;
+      });
+    }
+
+    // Audience
+    // audience_age[]=123
+    if (
+      args.filter
+      && 'audience_by_age' in args.filter
+      && args.filter.audience_by_age
+    ) {
+      args.filter.audience_by_age.map(audienceItem => {
+        apiPath = `${apiPath}&audience[]=${audienceItem}`;
+      });
+    }
+
+    // Availability
+    if (
+      args.filter
+      && 'availability' in args.filter
+      && args.filter.availability
+    ) {
+      args.filter.availability.map(availabilityOption => {
+        switch (availabilityOption) {
+          // api/search-online-resources?is-free-resource=1
+          case 'no-restrictions':
+            apiPath = `${apiPath}&is-free-resource=1&authentication-type=none`;
+            break;
+          // api/search-online-resources?accessible-from[]=offsite
+          case 'card-required':
+            apiPath = `${apiPath}&accessible-from[]=offsite`;
+            break;
+          // api/search-online-resources?accessible-from[]=onsite
+          case 'on-site-only':
+            apiPath = `${apiPath}&accessible-from[]=onsite`;
+            break;
+        }
+      });
+    }
+
+    const response = await this.get(apiPath);
+
+    if (Array.isArray(response.results)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  async getSearchDocument(args) {    
+    const response = await this.get(`/api/search-online-resources?uuid=${args.id}`);
+    return response.results;
+  }
+
+  async getOnlineResource(args) {
+    // Get resource url from path.
+    let routerPath = `/router/translate-path?path=${args.slug}`;
+    const routerResponse = await this.get(routerPath);
+    // Get resource.
+    if (routerResponse) {
+      const response = await this.get(routerResponse.jsonapi.individual);
+      return response.data;
+    }
+  }
+
+  async getDecoupledRouter(args) {
+    // Get resource url from path.
+    let apiPath = `/router/translate-path?path=${args.path}`;
+    const response = await this.get(apiPath);
+    return response;
+  }
+
+  async getAutoSuggestions(args) {   
+    const response = await this.get(`/api/search-online-resources-autosuggest`);
+    return response.results;
+  }
+  
+  //
+  // /api/taxonomy-filters?vocab=audience_by_age
+  // /api/taxonomy-filters?vocab=subject&content_type=online_resource
+  async getAllFiltersByGroupId(args) {    
+    // Special handling for availability.
+    if (args.id === 'availability') {
+      return availabilityFilterMock;
+    }
+
+    let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+
+    if (args.limiter) {
+      apiPath = `${apiPath}&content_type=${args.limiter}`;
+    }
+    
+    const response = await this.get(apiPath);
+  
+    if (Array.isArray(response.data.terms)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+  
+  async getIpAccessCheck(clientIp) {
+    const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
+    if (response) {
+      return response;
     }
   }
 }

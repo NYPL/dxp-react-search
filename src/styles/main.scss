@@ -3,7 +3,6 @@
 @import '~@nypl/dgx-header-component/dist/styles/main';
 @import '~@nypl/dgx-react-footer/dist/styles/styles.scss';
 @import '~breakpoint-sass/stylesheets/breakpoint';
-
 // Internal app styles
 @import './base/_base.scss';
 @import './base/_focus.scss';
@@ -12,44 +11,22 @@
 @import './typography/_typography.scss';
 @import './colors/_color-vars.scss';
 @import './base/_mixins.scss';
+// Shared
+@import './../components/shared/Dropdown/Dropdown.scss';
+@import './../components/shared/MenuGroup/MenuGroup.scss';
+@import './../components/shared/SearchHeader/SearchHeader.scss';
+// DS Prototypes
+@import './../components/ds-prototypes/AutoSuggest/AutoSuggest.scss';
+@import './../components/ds-prototypes/CardGrid/CardGrid.scss';
+@import './../components/ds-prototypes/CardGrid/CardGridSkeleton.scss';
+// Online Resources
+@import './../components/online-resources/SearchResults/SearchResultsSkeleton.scss';
+// Location Finder
 @import './../components/location-finder/Hero/Hero.scss';
-@import './../components/location-finder/SearchForm/SearchForm.scss';
 @import './../components/location-finder/SearchFilters/SearchFilters.scss';
-@import './../components/location-finder/SearchAutoSuggest/SearchAutoSuggest.scss';
-@import './../components/location-finder/SearchHeader/SearchHeader.scss';
 @import './../components/location-finder/Locations/Locations.scss';
 @import './../components/location-finder/Location/Location.scss';
 @import './../components/location-finder/Map/Map.scss';
 @import './../components/location-finder/BottomPromo/BottomPromo.scss';
-@import './../components/location-finder/RightRail/RightRail.scss';
-@import './../components/shared/Dropdown/Dropdown.scss';
-
-
-// shared/layouts > Main.js
-// This is a temporary fix for issues with the edge spacing,
-// can remove when the layout gets fixed upstream in the DS.
-// https://github.com/NYPL/nypl-design-system/issues/342
-
-.main,
-.breadcrumbs__list {
-  @include ds-layout-override;
-}
-
-.nypl-ds .footer a {
-  color: $white;
-}
-
-// @TODO Remove this. Temporary fix for DS changes other colors, but really
-// its an issue with the order nextJS complies the scss files on AWS.
-.nypl-ds .header-globalAlerts-box-item a {
-  color: #333;
-}
-
-// @TODO Remove this after updating to DS 0.12.0
-.nypl--locations .footer {
-  box-sizing: content-box;
-}
-
-.layout-container {
-  overflow-x: hidden;
-}
+// DS Overrides
+@import './ds-overrides.scss';

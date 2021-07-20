@@ -1,0 +1,11 @@
+query LocationMatchesByIpQuery($ip: String) {
+  allLocationMatches(ip: $ip) {
+    items {
+      id
+      name
+    }
+    pageInfo {
+      clientIp
+    }
+  }
+}

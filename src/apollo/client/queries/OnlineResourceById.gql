@@ -1,0 +1,26 @@
+query OnlineResourceByIdQuery($id: String) {
+  searchDocument(id: $id) {
+    ... on OnlineResourceDocument {
+      id
+      slug
+      name
+      description
+      accessibilityLink
+      termsConditionsLink
+      privacyPolicyLink
+      subjects {
+        id
+        name
+      }
+      accessLocations {
+        id
+        name
+        url
+      }
+      accessibleFrom
+      resourceUrl
+      notes
+      language
+    }
+  }
+}
