@@ -16,9 +16,9 @@ class PlatformApi extends RESTDataSource {
       request.headers = {};
     }
     request.headers = {
-      Authorization: `Basic ${process.env.BRAINTREE_API_KEY}`,
+      Authorization: `Basic ${process.env.EXAMPLE_API_KEY}`,
       "Content-Type": "application/json",
-      "Braintree-Version": "2021-03-14",
+      "API-Version": "2021-03-14",
     };
   }
   */
