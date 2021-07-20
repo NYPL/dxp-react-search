@@ -13,7 +13,7 @@ ASSET_PREFIX=/scout
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
   NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
-  DRUPAL_API=https://sandbox-d8.nypl.org
+  DRUPAL_API=https://qa-d8.nypl.org
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
