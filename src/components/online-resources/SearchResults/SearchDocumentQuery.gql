@@ -44,7 +44,6 @@ query SearchDocumentQuery(
         resourceUrl
         notes
         language
-        outputType
         authenticationType
         isCoreResource
         isFreeResource
