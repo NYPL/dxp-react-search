@@ -1,6 +1,11 @@
 ## CHANGES
 -----------
 
+### v0.2.2 [2021-07-01] Locations Service Restoration
+------------------------------------------------------
+* Updates hero svg to post-covid image and copy
+* Updates bottom promo with post-covid cards for locations
+
 ### v0.2.1 [2021-04-26] Misc Bugs Fixes & Improvements
 ------------------------------------------------------
 * Fix Border color for Selected Filters
