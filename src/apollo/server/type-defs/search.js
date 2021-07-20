@@ -18,16 +18,14 @@ export const typeDefs = gql`
     termsConditionsLink: String
     privacyPolicyLink: String
     notes: String
-    updateFrequency: String
-    printEquivalent: String
-    format: String
     language: String
-    outputType: String
     accessibleFrom: [String]
     resourceUrl: String
     accessLocations: [AccessLocation]
     subjects: [Subject]
     authenticationType: String
+    isCoreResource: Boolean
+    isFreeResource: Boolean
   }
 
   type AccessLocation {
@@ -52,6 +50,9 @@ export const typeDefs = gql`
     q: String,
     tid: String,
     alpha: String
+    subjects: [String]
+    audience_by_age: [String]
+    availability: [String]
   }
 
   extend type Query {

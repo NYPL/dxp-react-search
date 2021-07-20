@@ -1,11 +1,6 @@
-.content-header .location-finder__hero {
+.content-header .hero {
   background-color: $nypl-red-regular;
-
-  padding-bottom: $space-l;
-  @include breakpoint($breakpoint-large) {
-    max-height: 140px;
-    padding-bottom: 0px;
-  }
+  padding: $space-l 0;
 
   .hero__inner {
     @include wrapper;
@@ -31,12 +26,11 @@
 
   svg {
     width: auto;
-    height: 140px;
+    height: 55px;
     fill: $white;
-    /*@include breakpoint($breakpoint-large) {
+    @include breakpoint($breakpoint-large) {
       height: 70px;
     }
-    */
   }
 }
 

@@ -22,6 +22,12 @@ module.exports = (nextConfig = {}) => {
           destination: '/research/collections/online-resources/:slug',
           permanent: true,
         },
+        {
+          source: '/collections/articles-databases',
+          destination: '/research/collections/online-resources',
+          permanent: true,
+        },
+        
       ]
     },
     */

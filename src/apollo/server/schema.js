@@ -10,6 +10,7 @@ import { typeDefs as DecoupledRouterTypes } from './type-defs/decoupledRouter.js
 import { typeDefs as AutoSuggestionsTypes } from './type-defs/autoSuggestions.js';
 import { typeDefs as IpAccessCheckTypes } from './type-defs/ipAccessCheck';
 import { typeDefs as ValidatePatronCardTypes } from './type-defs/validatePatronCard';
+import { typeDefs as FilterTypes } from './type-defs/filter';
 
 export const schema = makeExecutableSchema({
   typeDefs: [
@@ -21,7 +22,8 @@ export const schema = makeExecutableSchema({
     DecoupledRouterTypes,
     AutoSuggestionsTypes,
     IpAccessCheckTypes,
-    ValidatePatronCardTypes
+    ValidatePatronCardTypes,
+    FilterTypes
   ],
   resolvers,
 })

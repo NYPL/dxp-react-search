@@ -1,5 +1,7 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { DRUPAL_API } = process.env;
+// Mocks for now
+import availabilityFilterMock from './../../../../testHelper/__mocks/availabilityFilterMock';
 
 class DrupalApi extends RESTDataSource {
   constructor() {
@@ -79,13 +81,13 @@ class DrupalApi extends RESTDataSource {
     }
 
     // Resource topic filter
-    // /api/search-online-resources?resource_topics[]=522
+    // /api/search-online-resources?resource-topics[]=522
     if (
       args.filter
       && 'tid' in args.filter
       && args.filter.tid
     ) {
-      apiPath = `/api/search-online-resources?resource_topics[]=${args.filter.tid}`;
+      apiPath = `/api/search-online-resources?resource-topics[]=${args.filter.tid}`;
     }
 
     // Alpha filter
@@ -99,6 +101,54 @@ class DrupalApi extends RESTDataSource {
       if (args.filter.alpha !== 'all') {
         apiPath = `${apiPath}&alpha=${args.filter.alpha}`;
       } 
+    }
+
+    // Subjects
+    // subjects[]=123&subjects[]=556
+    if (
+      args.filter
+      && 'subjects' in args.filter
+      && args.filter.subjects
+    ) {
+      args.filter.subjects.map(subject => {
+        apiPath = `${apiPath}&subjects[]=${subject}`;
+      });
+    }
+
+    // Audience
+    // audience_age[]=123
+    if (
+      args.filter
+      && 'audience_by_age' in args.filter
+      && args.filter.audience_by_age
+    ) {
+      args.filter.audience_by_age.map(audienceItem => {
+        apiPath = `${apiPath}&audience[]=${audienceItem}`;
+      });
+    }
+
+    // Availability
+    if (
+      args.filter
+      && 'availability' in args.filter
+      && args.filter.availability
+    ) {
+      args.filter.availability.map(availabilityOption => {
+        switch (availabilityOption) {
+          // api/search-online-resources?is-free-resource=1
+          case 'no-restrictions':
+            apiPath = `${apiPath}&is-free-resource=1&authentication-type=none`;
+            break;
+          // api/search-online-resources?accessible-from[]=offsite
+          case 'card-required':
+            apiPath = `${apiPath}&accessible-from[]=offsite`;
+            break;
+          // api/search-online-resources?accessible-from[]=onsite
+          case 'on-site-only':
+            apiPath = `${apiPath}&accessible-from[]=onsite`;
+            break;
+        }
+      });
     }
 
     const response = await this.get(apiPath);
@@ -137,7 +187,31 @@ class DrupalApi extends RESTDataSource {
     const response = await this.get(`/api/search-online-resources-autosuggest`);
     return response.results;
   }
+  
+  //
+  // /api/taxonomy-filters?vocab=audience_by_age
+  // /api/taxonomy-filters?vocab=subject&content_type=online_resource
+  async getAllFiltersByGroupId(args) {    
+    // Special handling for availability.
+    if (args.id === 'availability') {
+      return availabilityFilterMock;
+    }
 
+    let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+
+    if (args.limiter) {
+      apiPath = `${apiPath}&content_type=${args.limiter}`;
+    }
+    
+    const response = await this.get(apiPath);
+  
+    if (Array.isArray(response.data.terms)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+  
   async getIpAccessCheck(clientIp) {
     const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
     if (response) {

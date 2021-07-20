@@ -6,6 +6,7 @@ import onlineResourceResolver from './onlineResourceResolver';
 import searchResolver from './searchResolver';
 import decoupledRouterResolver from './decoupledRouterResolver';
 import autoSuggestionsResolver from './autoSuggestionsResolver';
+import filterResolver from './filterResolver';
 import ipAccessCheckResolver from './ipAccessCheckResolver';
 import validatePatronCardResolver from './validatePatronCardResolver';
 
@@ -18,5 +19,7 @@ export const resolvers = mergeResolvers([
   decoupledRouterResolver,
   autoSuggestionsResolver,
   ipAccessCheckResolver,
-  validatePatronCardResolver
+  validatePatronCardResolver,
+  filterResolver,
+  ipAccessCheckResolver
 ]);
