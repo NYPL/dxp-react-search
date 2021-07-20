@@ -8,7 +8,7 @@ function Hero() {
   const { text } = HeroContent;
 
   return (
-    <div className='hero'>
+    <div className='location-finder__hero'>
       <div className="hero__inner">
         <div className='hero__image'>
           <HeroImage />
