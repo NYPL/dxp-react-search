@@ -8,20 +8,23 @@ import SidebarMenus from './../SidebarMenus';
 import RightRail from './../../shared/RightRail';
 
 function PageContainer(props) {
-  const { metaTags, contentPrimary } = props;
+  const { metaTags, contentPrimary, showContentHeader } = props;
+  
+  const ContentHeader =
+    <Fragment>
+      <Hero />
+      <SearchHeader>
+        <SearchForm />
+      </SearchHeader>
+    </Fragment>
 
   return (
     <SharedPageContainer
       wrapperClass='nypl--research'
       metaTags={metaTags}
-      contentHeader={
-        <Fragment>
-          <Hero />
-          <SearchHeader>
-            <SearchForm />
-          </SearchHeader>
-        </Fragment>
-      }
+      {...(showContentHeader && { 
+        contentHeader: ContentHeader 
+      })}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide='right'

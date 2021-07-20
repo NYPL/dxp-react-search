@@ -71,6 +71,7 @@ function OnlineResourceSlug() {
         description: `${data.searchDocument.name}`,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
+      showContentHeader={true}
       contentPrimary={
         <Fragment>
           <Link href={`${ONLINE_RESOURCES_BASE_PATH}`}>

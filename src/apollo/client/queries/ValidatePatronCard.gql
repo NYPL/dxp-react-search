@@ -1,0 +1,10 @@
+query ValidatePatronCardQuery($barcode: String, $pin: String) {
+  validatePatronCard(
+    barcode: $barcode,
+    pin: $pin
+  ) {
+    id
+    valid
+    message
+  }
+}

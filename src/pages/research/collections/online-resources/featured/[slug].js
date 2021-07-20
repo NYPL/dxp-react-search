@@ -69,6 +69,7 @@ function FeaturedResourceTopicSlug() {
         description: `${data.resourceTopic.name}`,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
+      showContentHeader={true}
       contentPrimary={
         <SearchResults
           resourceTopicId={data.resourceTopic.tid}

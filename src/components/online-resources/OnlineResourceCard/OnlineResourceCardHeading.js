@@ -1,6 +1,8 @@
 import React from 'react';
 // Next
 import Link from 'next/link';
+// Utils
+import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 
 function OnlineResourceCardHeading(props) {
   const { 
@@ -10,7 +12,8 @@ function OnlineResourceCardHeading(props) {
     accessLocations, 
     resourceUrl, 
     slug,
-    allLocationMatches
+    allLocationMatches,
+    authenticationType
   } = props;
 
   function linkAccessCheck() {    
@@ -31,6 +34,15 @@ function OnlineResourceCardHeading(props) {
   }
 
   if (linkAccessCheck() || accessibleFrom?.includes('offsite')) {
+    if (authenticationType === 'nypl_authentication') {
+      return (
+        <h3 id={id}>
+          <Link href={`${ONLINE_RESOURCES_BASE_PATH}/verify?uuid=${id}`}>
+            <a>{name}</a>
+          </Link>
+        </h3>
+      )
+    }
     if (resourceUrl) {
       return (
         <h3 id={id}>
