@@ -1,0 +1,17 @@
+.card-grid {
+  .card-grid__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1.25rem;
+
+    .heading {
+      padding-top: 1rem;
+    }
+
+    .image {
+      width: 100%;
+      min-height: 206px;
+      height: auto;
+    }
+  }
+}

@@ -31,9 +31,6 @@ const location = {
   open: true,
 }
 
-// Mock the LocationDistance sub component, as it will be tested on its own.
-jest.mock('./LocationDistance', () => () => <div>LocationDistance</div>);
-
 describe('Location', () => {
   test('renders Location component', () => {
     render(

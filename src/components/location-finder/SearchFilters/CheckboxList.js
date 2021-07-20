@@ -44,15 +44,16 @@ function CheckboxList(props) {
       {vocab.terms.map((term) => {
         return (
           <li key={term.id} className={setParentClassName(term.children)}>
-            <Checkbox
-              checkboxId={term.id}
-              labelOptions={{
-                labelContent: <>{term.name}</>
-              }}
-              name={term.name}
-              checked={setFilterCheckedProp(vocab.id, term.id) || false}
-              onChange={(e) => onChangeFilters(vocab.id, e)}
-            />
+            <div className="checkbox">
+              <Checkbox
+                id={term.id}
+                labelText={<>{term.name}</>}
+                showLabel={true}
+                name={term.name}
+                checked={setFilterCheckedProp(vocab.id, term.id) || false}
+                onChange={(e) => onChangeFilters(vocab.id, e)}
+              />
+            </div>
               {term.children &&
                 <List 
                   type='ul' 
@@ -61,15 +62,16 @@ function CheckboxList(props) {
                   {term.children.map((childTerm) => {
                     return (
                       <li key={childTerm.id} className="term-child">
-                        <Checkbox
-                          checkboxId={childTerm.id}
-                          labelOptions={{
-                            labelContent: <>{childTerm.name}</>
-                          }}
-                          name={childTerm.name}
-                          checked={setFilterCheckedProp(vocab.id, childTerm.id) || false}
-                          onChange={(e) => onChangeFilters(vocab.id, e)}
-                        />
+                        <div className="checkbox">
+                          <Checkbox
+                            id={childTerm.id}
+                            labelText={<>{childTerm.name}</>}
+                            showLabel={true}
+                            name={childTerm.name}
+                            checked={setFilterCheckedProp(vocab.id, childTerm.id) || false}
+                            onChange={(e) => onChangeFilters(vocab.id, e)}
+                          />
+                        </div>
                       </li>
                     )
                   })}

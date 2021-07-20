@@ -41,7 +41,7 @@ export default function search(state = initialState, action) {
         searchQuery: action.payload.searchQuery,
         offset: 0,
         pageCount: 0,
-        pageNumber: 1
+        pageNumber: initialState.pageNumber
       };
 
     case SET_PAGINATION:
@@ -62,7 +62,7 @@ export default function search(state = initialState, action) {
         autoSuggestInputValue: '',
         offset: 0,
         pageCount: 0,
-        pageNumber: 1,
+        pageNumber: initialState.pageNumber,
         resultsCount: '',
         openNow: false,
         searchFilters: []

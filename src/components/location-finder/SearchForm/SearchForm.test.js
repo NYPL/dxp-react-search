@@ -52,7 +52,7 @@ describe('Search Form', () => {
     // Open now checkbox
     const openNowCheckbox = container.querySelector('input[name="isOpenNow"]');
     expect(openNowCheckbox).toBeInTheDocument();
-    expect(screen.getByLabelText('Open Now')).toBeInTheDocument();
+    expect(screen.getByLabelText('Open now')).toBeInTheDocument();
   });
    
   it('open now checkbox can be toggled checked/unchecked', async () => {

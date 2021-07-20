@@ -69,10 +69,7 @@
     @include space-stack-xxs;
   }
 
-  // Status badge.
-  .location__hours-status {
-    width: fit-content;
-    padding: $space-xxs $space*.625;
-    @include space-stack-xxs;
+  .location__links {
+    margin-top: .25rem;
   }
 }

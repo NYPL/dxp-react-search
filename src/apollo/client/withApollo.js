@@ -2,6 +2,8 @@ import Head from 'next/head';
 import { ApolloClient, ApolloProvider, HttpLink } from '@apollo/client';
 import { InMemoryCache } from '@apollo/client/cache';
 const { NEXT_PUBLIC_GRAPHQL_API } = process.env;
+// Middleware
+import decoupledRouterRedirect from './decoupledRouterRedirect';
 
 let globalApolloClient = null;
 
@@ -11,9 +13,10 @@ let globalApolloClient = null;
  * your PageComponent via HOC pattern.
  * @param {Function|Class} PageComponent
  * @param {Object} [config]
- * @param {Boolean} [config.ssr=true]
  */
-export function withApollo(PageComponent, { ssr = true } = {}) {
+export function withApollo(PageComponent, config) {
+  const { ssr, redirects } = config;
+
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState);
     return (
@@ -21,7 +24,7 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
         <PageComponent {...pageProps} />
       </ApolloProvider>
     )
-  }
+  }  
 
   // Set the correct displayName in development
   if (process.env.NODE_ENV !== 'production') {
@@ -47,6 +50,11 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
       let pageProps = {}
       if (PageComponent.getInitialProps) {
         pageProps = await PageComponent.getInitialProps(ctx);
+      }
+
+      // Check if redirects middleware should run.
+      if (redirects) {
+        const runRedirects = await decoupledRouterRedirect(ctx);
       }
 
       // Only on the server:
@@ -121,12 +129,35 @@ function initApolloClient(initialState) {
  * @param  {Object} [initialState={}]
  */
 function createApolloClient(initialState = {}) {
+  // @TODO Move this to seperate file?
+  const cache = new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          searchDocument(_, { args, toReference }) {
+            return toReference({
+              __typename: 'OnlineResourceDocument',
+              id: args.id,
+            });
+          },
+          // @TODO Confirm this is working properly.
+          resourceTopic(_, { args, toReference }) {
+            return toReference({
+              __typename: 'ResourceTopic',
+              id: args.slug,
+            });
+          }
+        }
+      }
+    }
+  }).restore(initialState);
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
       uri: NEXT_PUBLIC_GRAPHQL_API,
       credentials: 'same-origin',
     }),
-    cache: new InMemoryCache().restore(initialState),
+    cache: cache
   });
 }

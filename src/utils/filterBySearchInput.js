@@ -6,8 +6,10 @@ function filterBySearchInput(data, searchTerm) {
     if (elem.name) {
       return (
         cleanText(elem.name).indexOf(cleanText(searchTerm)) >= 0
-        || cleanText(elem.locality).indexOf(cleanText(searchTerm)) >= 0
+        // @TODO add this back in for location finder!
+        /*|| cleanText(elem.locality).indexOf(cleanText(searchTerm)) >= 0
         || cleanText(elem.postal_code).indexOf(cleanText(searchTerm)) >= 0
+        */
       );
     }
   });

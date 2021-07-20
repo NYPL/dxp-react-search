@@ -1,0 +1,24 @@
+.search-header {
+  h1.search-header__title {
+    color: inherit;
+    font-size: var(--font-size-3);
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0 0 0.5em;
+    width: auto;
+	}
+	
+  padding: $space-m 0;
+  //padding: $space-l 0 $space-xs 0;
+  background: $gray-xlight;
+
+  @include breakpoint($breakpoint-medium) {
+    @include space-stack-l;
+
+    padding: $space-l 0 $space-xs 0;
+  }
+
+  .search-header__inner {
+    @include wrapper;
+  }
+}
