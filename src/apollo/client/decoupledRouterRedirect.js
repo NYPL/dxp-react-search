@@ -26,8 +26,8 @@ async function decoupledRouterRedirect(ctx) {
       if (ctx.res) {
         ctx.res.writeHead(redirect.status, {
           Location: redirect.to,
-        });
-        ctx.res.end();
+        }).end();
+        //ctx.res.end();
       } else {
         // On the client, we'll use the Router-object
         // from the 'next/router' module.
