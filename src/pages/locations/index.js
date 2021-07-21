@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 // Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
-import { withApollo } from './../../apollo/client/withApollo';
+import { withApollo } from './../../apollo/client/withApolloOld';
 // Redux
 import { withRedux } from './../../redux/withRedux';
+import { compose } from 'redux';
 // Components
 import PageContainer from './../../components/shared/layouts/PageContainer';
 import SearchHeader from './../../components/shared/SearchHeader';
@@ -59,8 +60,4 @@ function LocationFinder() {
   );
 }
 
-export default withApollo(
-  withRedux((LocationFinder)), {
-  ssr: true,
-  redirects: false
-});
+export default compose(withApollo, withRedux)(LocationFinder);
