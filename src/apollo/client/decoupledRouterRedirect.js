@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { 
   DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY 
 } from './queries/DecoupledRouter.gql';
@@ -27,6 +28,10 @@ async function decoupledRouterRedirect(ctx) {
           Location: redirect.to,
         });
         ctx.res.end();
+      } else {
+        // On the client, we'll use the Router-object
+        // from the 'next/router' module.
+        Router.replace(redirect.to)
       }
     })
     .catch(() => {
