@@ -130,7 +130,7 @@ function initApolloClient(initialState) {
  */
 function createApolloClient(initialState = {}) {
   // @TODO Move this to seperate file?
-  const cache = new InMemoryCache({
+  /*const cache = new InMemoryCache({
     typePolicies: {
       Query: {
         fields: {
@@ -151,6 +151,7 @@ function createApolloClient(initialState = {}) {
       }
     }
   }).restore(initialState);
+  */
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
@@ -158,6 +159,6 @@ function createApolloClient(initialState = {}) {
       uri: NEXT_PUBLIC_GRAPHQL_API,
       credentials: 'same-origin',
     }),
-    cache: cache
+    cache: new InMemoryCache().restore(initialState)
   });
 }
