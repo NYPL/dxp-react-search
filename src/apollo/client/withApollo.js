@@ -59,6 +59,7 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
 
         // Only if ssr is enabled
         if (ssr) {
+          console.log('SSR! getDataFromTree!')
           try {
             // Run all GraphQL queries
             const { getDataFromTree } = await import('@apollo/client/react/ssr')
