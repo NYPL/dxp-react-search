@@ -19,14 +19,11 @@ function Card(props) {
         />
       }
       {url &&
-        <Link href={url}>
-          <a>
-            <Heading
-              level={3}
-              text={name}
-            />
-          </a>
-        </Link>
+        <h3 className={'heading'}>
+          <Link href={url}>
+            <a>{name}</a>
+          </Link>
+        </h3>
       }
       <div dangerouslySetInnerHTML={{
           __html: description 
