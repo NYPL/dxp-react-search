@@ -121,12 +121,21 @@ function initApolloClient(initialState) {
  * @param  {Object} [initialState={}]
  */
 function createApolloClient(initialState = {}) {
+  console.log('-----initialState-----');
+  console.log(initialState);
+
+  const cache = new InMemoryCache().restore(initialState);
+
+  //console.log('-----cache-----');
+  //console.log(cache);
+  
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
       uri: NEXT_PUBLIC_GRAPHQL_API,
       credentials: 'same-origin',
     }),
-    cache: new InMemoryCache().restore(initialState),
+    cache: cache,
   });
 }
