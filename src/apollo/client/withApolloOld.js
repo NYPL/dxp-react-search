@@ -15,6 +15,8 @@ let globalApolloClient = null;
  */
 export function withApollo(PageComponent, { ssr = true } = {}) {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
+    console.log('apolloState');
+    console.log(apolloState)
     const client = apolloClient || initApolloClient(apolloState);
     return (
       <ApolloProvider client={client}>
@@ -121,8 +123,13 @@ function initApolloClient(initialState) {
  * @param  {Object} [initialState={}]
  */
 function createApolloClient(initialState = {}) {
-  console.log('-----initialState-----');
-  console.log(initialState);
+  if (typeof window === 'undefined') {
+    console.log('-----SERVER: initialState-----');
+    console.log(initialState);
+  } else {
+    console.log('-----CLIENT: initialState-----');
+    console.log(initialState);
+  }
 
   const cache = new InMemoryCache().restore(initialState);
 
