@@ -80,7 +80,9 @@
   padding-top: var(--space-xl);
 }
 
-/*#page-container--content-primary {
+#page-container--content-primary {
   padding-top: var(--space-m);
+  @include breakpoint($breakpoint-medium) {
+    padding-top: inherit;
+  }
 }
-*/
