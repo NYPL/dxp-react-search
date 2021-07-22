@@ -43,9 +43,7 @@ function VerifyForm() {
         } else {
           setFormError(false);
           // Redirect to the external url
-          // @TODO uncomment this line to use the actual url from the D8 system.
-          //window.location.href = redirectUrl;
-          window.location.href = 'https://google.com';
+          window.location.href = redirectUrl;
         }
       },
       error => {
