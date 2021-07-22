@@ -52,7 +52,7 @@ const searchResolver = {
   },
   OnlineResourceDocument: {
     id: document => document.uuid,
-    name: document => document.title,
+    name: document => document.title.replace("&#039;", "'"),
     description: document => document.summary,
     slug: document => document.path,
     mostPopular: document => document['most-popular'],

@@ -6,7 +6,7 @@ const autoSuggestionsResolver = {
     },
   },
   AutoSuggestion: {
-    name: autoSuggestion => autoSuggestion.title
+    name: autoSuggestion => autoSuggestion.title.replace("&#039;", "'")
   }
 }
 

@@ -74,7 +74,9 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
           </StatusBadge>
         </div>
       }
-      <div>{description}</div>
+      <div dangerouslySetInnerHTML={{
+        __html: description 
+      }}></div>
       <div className={s.links}>
         <DsLink
           href={accessibilityLink}
