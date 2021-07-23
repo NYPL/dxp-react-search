@@ -15,6 +15,8 @@ import OnlineResourceCard from './../OnlineResourceCard';
 import AlphabetNav from './../AlphabetNav';
 import SearchResultsDetails from './SearchResultsDetails';
 import SearchResultsSkeleton from './SearchResultsSkeleton';
+//
+import s from './SearchResults.module.css';
 
 const SEARCH_RESULTS_LIMIT = 10;
 
@@ -70,11 +72,14 @@ function SearchResults(props) {
           />
         }
         <SearchResultsSkeleton />
-        <Pagination
-          currentPage={currentPage}
-          pageCount={10}
-          onPageChange={onPageChange}
-        />
+        <div className={s.paginationContainer}>
+          <Pagination
+            className={s.pagination}
+            currentPage={currentPage}
+            pageCount={10}
+            onPageChange={onPageChange}
+          />
+        </div>
       </div>
     );
   }
@@ -126,7 +131,7 @@ function SearchResults(props) {
   }
 
   return (
-    <div id="search-results__container">
+    <div id="search-results__container" className={s.container}>
       {router.query.test_ip &&
         <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
       }
@@ -154,11 +159,14 @@ function SearchResults(props) {
             />
           </div>
         ))}
-        <Pagination
-          currentPage={currentPage}
-          pageCount={data.allSearchDocuments.pageInfo.pageCount}
-          onPageChange={onPageChange}
-        />
+        <div className={s.paginationContainer}>
+          <Pagination
+            className={s.pagination}
+            currentPage={currentPage}
+            pageCount={data.allSearchDocuments.pageInfo.pageCount}
+            onPageChange={onPageChange}
+          />
+        </div>
       </div>
     </div>
   );

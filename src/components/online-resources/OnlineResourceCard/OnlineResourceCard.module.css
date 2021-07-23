@@ -1,10 +1,11 @@
 .card {
-  margin: var(--space-m) 0;
+  margin: var(--space-l) 0;
+  /*max-width: 760px;*/
 }
 
 .heading {
   display: inline-block;
-  padding: var(--space-xs) 0;
+  padding: var(--space-xs) 0 0 0;
 }
 
 .statusBadge {
@@ -37,7 +38,7 @@
 }
 
 .links {
-  padding: 2em 0;
+  padding: var(--space-s) 0;
 }
 
 .links a {

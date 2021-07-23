@@ -1,0 +1,14 @@
+@media (min-width: 1024px) {
+  .container {
+    max-width: 760px;
+  }
+}
+
+.paginationContainer {
+  display: block;
+  padding: var(--space-xs) 0 var(--space-m) 0;
+}
+
+.pagination {
+  justify-content: center;
+}

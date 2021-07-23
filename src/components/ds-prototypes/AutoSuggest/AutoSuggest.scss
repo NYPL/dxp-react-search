@@ -4,6 +4,11 @@
   @include breakpoint($breakpoint-large) {
     flex: 0 0 50%;
   }
+
+  label {
+    display: block;
+    margin-bottom: var(--space-xxs);
+  }
 }
 
 .react-autosuggest__input--focused {
