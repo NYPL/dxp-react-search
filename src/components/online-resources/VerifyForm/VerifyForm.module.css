@@ -6,5 +6,5 @@
 
 .verify button {
   width: 140px;
-  margin: var(--space-s) 0;
+  margin: var(--space-m) 0 var(--space-xs) 0;
 }
