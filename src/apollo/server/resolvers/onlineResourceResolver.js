@@ -13,18 +13,10 @@ const onlineResourceResolver = {
     },
   },
   OnlineResource: {
-    id: onlineResource => {
-      return onlineResource.id;
-    },
-    name: onlineResource => {
-      return onlineResource.attributes.title;
-    },
-    description: onlineResource => {
-      return onlineResource.attributes.field_tfls_summary_description.processed;
-    },
-    slug: onlineResource => {
-      return '/add-path-field-here';
-    }
+    id: onlineResource => onlineResource.id,
+    name: onlineResource => onlineResource.attributes.title,
+    description: onlineResource => onlineResource.attributes.field_tfls_summary_description.processed,
+    slug: onlineResource => onlineResource.attributes.path.alias
   }
 }
 
