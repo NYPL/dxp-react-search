@@ -18,6 +18,15 @@
   border: none;
 }
 
+@media (max-width: 960px) {
+  .letters button {
+    width: 10%;
+    margin: 0 0 10px 0;
+    padding: 0;
+    text-align: left;
+  }
+}
+
 .letters button.active {
   text-decoration: underline;
 }
@@ -29,4 +38,11 @@
 
 .letters button.all {
   padding: 0 0 0 var(--space-s);
+}
+
+@media (max-width: 960px) {
+  .letters button.all {
+    width: 100%;
+    padding: 0;
+  }
 }
