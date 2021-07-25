@@ -1,0 +1,18 @@
+.rail {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+
+  @include breakpoint($breakpoint-medium) {
+    @include space-stack-l;
+	}
+
+	@include breakpoint($breakpoint-large) {
+		max-width: 800px;
+	}
+  &--horizontal {
+    @include breakpoint($breakpoint-medium) {
+      flex-flow: row nowrap;
+    }
+  }
+}
