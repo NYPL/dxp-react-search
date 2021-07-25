@@ -1,13 +1,13 @@
+.AlphabetNav {
+  margin: 0 0 var(--space-xl);
+}
+
 .title {
   font-weight: bold;
 }
 
 .description {
   margin: 0 0 var(--space-s);
-}
-
-.letters {
-  margin: 0 0 var(--space-xl);
 }
 
 .letters button {
