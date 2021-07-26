@@ -9,13 +9,10 @@
 	}
 	
   padding: $space-m 0;
-  //padding: $space-l 0 $space-xs 0;
   background: $gray-xlight;
 
   @include breakpoint($breakpoint-medium) {
-    @include space-stack-l;
-
-    padding: $space-l 0 $space-xs 0;
+    padding: $space-l 0;
   }
 
   .search-header__inner {
