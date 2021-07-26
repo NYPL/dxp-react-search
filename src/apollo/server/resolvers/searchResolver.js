@@ -57,7 +57,7 @@ const searchResolver = {
     slug: document => document.path,
     mostPopular: document => document['most-popular'],
     // @TODO I dont know where this is supposed to go?
-    accessibilityLink: document => 'https://www.nypl.org',
+    accessibilityLink: document => document['accessibility-details']?.url,
     termsConditionsLink: document => document['terms-link']?.url,
     privacyPolicyLink: document => document['privacy-link']?.url,
     notes: document => document['comments-public'],
