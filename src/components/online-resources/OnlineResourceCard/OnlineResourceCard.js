@@ -23,7 +23,8 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     termsConditionsLink,
     privacyPolicyLink,
     isCoreResource,
-    isFreeResource
+    isFreeResource,
+    availabilityStatus
   } = item;
 
   function LabelItem({ label, name }) {
@@ -56,6 +57,26 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     buttonText = 'Close Details';
   }
 
+  function StatusBadgeComponent(availabilityStatus) {
+    if (availabilityStatus === 'card_required') {
+      return (
+        <div className={s.statusBadge}>
+          <StatusBadge level={"low"}>
+            Library Card Required
+          </StatusBadge>
+        </div>
+      )
+    } else if (availabilityStatus === 'onsite_only') {
+      return (
+        <div className={s.statusBadge}>
+          <StatusBadge level={"high"}>
+            On-site Access Only
+          </StatusBadge>
+        </div>
+      )
+    }
+  }
+
   return (
     <div id={id} className={s.card}>
       {isCoreResource &&
@@ -64,16 +85,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       <div className={s.heading}>
         <OnlineResourceCardHeading {...item} {...ipInfo} />
       </div>
-      {!isFreeResource &&
-        <div className={s.statusBadge}>
-          <StatusBadge 
-            level={"low"} 
-            className={'location__hours-status'}
-          >
-            Library Card Required
-          </StatusBadge>
-        </div>
-      }
+      {StatusBadgeComponent(availabilityStatus)}
       <div dangerouslySetInnerHTML={{
         __html: description 
       }}></div>

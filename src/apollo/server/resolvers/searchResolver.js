@@ -135,6 +135,20 @@ const searchResolver = {
       } else {
         return document['authentication-type'].replace(/\s+/g, '_').toLowerCase();
       }
+    },
+    availabilityStatus: document => {
+      let availabilityStatus;
+      if (
+        document['authentication-type'] === 'Vendor authentication'
+        || document['authentication-type'] === 'NYPL authentication'
+      ) {
+        availabilityStatus = 'card_required';
+      }
+      if (!document['accessible-from'].includes('offsite')) {
+        availabilityStatus = 'onsite_only';
+      }
+
+      return availabilityStatus;
     }
   },
   Subject: {
