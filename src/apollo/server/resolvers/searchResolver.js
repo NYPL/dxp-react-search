@@ -56,7 +56,6 @@ const searchResolver = {
     description: document => document.summary,
     slug: document => document.path,
     mostPopular: document => document['most-popular'],
-    // @TODO I dont know where this is supposed to go?
     accessibilityLink: document => document['accessibility-details']?.url,
     termsConditionsLink: document => document['terms-link']?.url,
     privacyPolicyLink: document => document['privacy-link']?.url,
