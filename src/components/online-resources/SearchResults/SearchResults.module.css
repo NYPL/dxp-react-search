@@ -4,6 +4,11 @@
   }
 }
 
+.alphabetNav {
+  border-bottom: 1px solid #00838a;
+  padding: 0 0 var(--space-m);
+}
+
 .paginationContainer {
   display: block;
   padding: var(--space-xs) 0 var(--space-m) 0;

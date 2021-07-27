@@ -90,22 +90,18 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
         __html: description 
       }}></div>
       <div className={s.links}>
-        <DsLink
-          href={accessibilityLink}
-        >
-          Accessibility Details
-        </DsLink>
+        {accessibilityLink &&
+          <DsLink href={accessibilityLink}>
+            Accessibility Details
+          </DsLink>
+        }
         {termsConditionsLink &&
-          <DsLink
-            href={termsConditionsLink}
-          >
+          <DsLink href={termsConditionsLink}>
             Terms & Conditions
           </DsLink>
         }
         {privacyPolicyLink &&
-          <DsLink
-            href={privacyPolicyLink}
-          >
+          <DsLink href={privacyPolicyLink}>
             Privacy Policy
           </DsLink>
         }

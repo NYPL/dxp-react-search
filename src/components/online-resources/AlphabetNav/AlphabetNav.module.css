@@ -1,3 +1,7 @@
+.AlphabetNav {
+  margin: 0 0 var(--space-xl);
+}
+
 .title {
   font-weight: bold;
 }
@@ -6,16 +10,21 @@
   margin: 0 0 var(--space-s);
 }
 
-.letters {
-  margin: 0 0 var(--space-xl);
-}
-
 .letters button {
   font-size: var(--font-size-1);
   font-weight: bold;
   color: var(--ui-link-primary);
   background-color: transparent;
   border: none;
+}
+
+@media (max-width: 960px) {
+  .letters button {
+    width: 10%;
+    margin: 0 0 10px 0;
+    padding: 0;
+    text-align: left;
+  }
 }
 
 .letters button.active {
@@ -29,4 +38,11 @@
 
 .letters button.all {
   padding: 0 0 0 var(--space-s);
+}
+
+@media (max-width: 960px) {
+  .letters button.all {
+    width: 100%;
+    padding: 0;
+  }
 }

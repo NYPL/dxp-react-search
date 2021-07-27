@@ -1,6 +1,6 @@
-const RightRailContent = [
+const BottomMenuContent = [
   {
-    id: 'menu-1',
+    id: 'more-at-nypl',
     title: 'More at NYPL',
     items: [
       {
@@ -22,7 +22,7 @@ const RightRailContent = [
     ]
   },
   {
-    id: 'menu-2',
+    id: 'ask-nypl',
     title: 'Need Help? Ask NYPL',
     items: [
       {
@@ -50,7 +50,7 @@ const RightRailContent = [
     ]
   },
   {
-    id: 'menu-3',
+    id: 'support-nypl',
     title: 'Support NYPL',
     items: [
       {
@@ -66,4 +66,4 @@ const RightRailContent = [
   }
 ];
 
-export default RightRailContent;
+export default BottomMenuContent;
