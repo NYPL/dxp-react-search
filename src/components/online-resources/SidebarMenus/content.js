@@ -10,12 +10,12 @@ const SidebarMenusContent = [
       },
       {
         'title': 'Search for Scholarly Journals',
-        'link': 'https://www.nypl.org',
+        'link': 'https://www.nypl.org/collections/articles-databases/find-journals-title-databases',
         'description': 'Search for full text or specific journals or magazines.'
       },
       {
         'title': 'Search for Periodicals',
-        'link': 'https://www.nypl.org',
+        'link': 'https://catalog.nypl.org/search/s',
         'description': 'Search within periodicals across 800 databases.'
       },
       {
