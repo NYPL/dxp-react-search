@@ -133,6 +133,19 @@ class DrupalApi extends RESTDataSource {
       && 'availability' in args.filter
       && args.filter.availability
     ) {
+      // Alt approach?
+      /*if (args.filter.availability.includes('no-restrictions')) {
+        apiPath = `${apiPath}&accessible-from[]=offsite&authentication-type[]=none`;
+      }
+      if (args.filter.availability.includes('card-required')) {
+        apiPath = `${apiPath}&authentication-type[]=nypl&authentication-type[]=vendor`;
+      }
+      if (args.filter.availability.includes('on-site-only')) {
+        apiPath = `${apiPath}&accessible-from-not[]=offsite`;
+      }
+      */
+     
+      // Original
       args.filter.availability.map(availabilityOption => {
         switch (availabilityOption) {
           // api/search-online-resources?is-free-resource=1
@@ -149,6 +162,33 @@ class DrupalApi extends RESTDataSource {
             break;
         }
       });
+
+      // Check if all options are selected.
+      /*if (
+        args.filter.availability.includes('no-restrictions')
+        && args.filter.availability.includes('card-required')
+        && args.filter.availability.includes('on-site-only')
+      ) {
+        apiPath = apiPath;
+      } else {
+        args.filter.availability.map(availabilityOption => {
+          switch (availabilityOption) {
+            // api/search-online-resources?is-free-resource=1
+            case 'no-restrictions':
+              apiPath = `${apiPath}&accessible-from[]=offsite&authentication-type[]=none`;
+              break;
+            // api/search-online-resources?accessible-from[]=offsite
+            case 'card-required':
+              apiPath = `${apiPath}&authentication-type[]=nypl&authentication-type[]=vendor`;
+              break;
+            // api/search-online-resources?accessible-from[]=onsite
+            case 'on-site-only':
+              apiPath = `${apiPath}&accessible-from-not[]=offsite`;
+              break;
+          }
+        });
+      }
+      */
     }
 
     const response = await this.get(apiPath);
