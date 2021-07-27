@@ -1,23 +1,24 @@
 import React, { Fragment } from 'react';
-// Content
-import RightRailContent from './content';
 // Components
 import MenuGroup from '../../shared/MenuGroup';
 
-function RightRail() {
+function RightRail({menuContent, orientation}) {
   return (
     <Fragment>
-      {RightRailContent.map((menu) => {
-        return (
-          <MenuGroup
-            id={menu.id}
-            headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
-            title={menu.title}
-            items={menu.items}
-            orientation="horizontal"
-          />
-        )
-      })}
+      <div className={"rail rail--"+ orientation}>
+        {menuContent.map((menu) => {
+          return (
+            <MenuGroup
+              id={menu.id}
+              key={menu.id}
+              headingId={menu.title.toLowerCase().replace(/\s/g, '-')}
+              title={menu.title}
+              items={menu.items}
+              orientation={orientation}
+            />
+          )
+        })}
+      </div>
     </Fragment>
   );
 };

@@ -44,7 +44,7 @@ function MenuGroup(props) {
   }
 
   return (
-    <nav id={id} className={"menu-group " + orientation} aria-labelledby={headingId}>
+    <nav id={id} className={"menu-group menu-group--"+ orientation} aria-labelledby={headingId}>
       <Heading
         id={headingId}
         level={headingLevel}

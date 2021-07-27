@@ -67,6 +67,7 @@ function SearchResults(props) {
       <div id="search-results">
         {router.query.alpha &&
           <AlphabetNav
+            className={s.alphabetNav}
             title={'A-Z Online Resources'}
             description={'Browse resources and databases alphabetically by name'}
           />
@@ -137,6 +138,7 @@ function SearchResults(props) {
       }
       {router.query.alpha &&
         <AlphabetNav
+          className={s.alphabetNav}
           title={'A-Z Online Resources'}
           description={'Browse resources and databases alphabetically by name'}
         />
