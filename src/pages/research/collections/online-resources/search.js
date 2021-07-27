@@ -9,6 +9,7 @@ import PageContainer from './../../../../components/online-resources/layouts/Pag
 import SearchResults from '../../../../components/online-resources/SearchResults';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function OnlineResourcesSearchPage() {
   return (
@@ -18,6 +19,12 @@ function OnlineResourcesSearchPage() {
         description: 'Hello welcome to the NYPL!',
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/search`
       }}
+      breadcrumbs={[
+        {
+          text: 'Online Resources',
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+        }
+      ]}
       showContentHeader={true}
       contentPrimary={
         <SearchResults />

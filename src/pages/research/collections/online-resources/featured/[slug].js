@@ -55,6 +55,12 @@ function FeaturedResourceTopicSlug() {
   if (loading || !data) {
     return (
       <PageContainer
+        breadcrumbs={[
+          {
+            text: 'Online Resources',
+            url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+          }
+        ]}
         contentPrimary={
           <SkeletonLoader />
         }
@@ -69,6 +75,12 @@ function FeaturedResourceTopicSlug() {
         description: `${data.resourceTopic.name}`,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
+      breadcrumbs={[
+        {
+          text: 'Online Resources',
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+        }
+      ]}
       showContentHeader={true}
       contentPrimary={
         <SearchResults

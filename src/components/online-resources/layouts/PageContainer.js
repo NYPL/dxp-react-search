@@ -7,9 +7,31 @@ import SearchForm from './../SearchForm';
 import SidebarMenusContent from '../SidebarMenus/content';
 import BottomMenuContent from '../../shared/BottomMenus/content';
 import RightRail from './../../shared/RightRail';
+//
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function PageContainer(props) {
-  const { metaTags, contentPrimary, showContentHeader } = props;
+  const { metaTags, breadcrumbs, contentPrimary, showContentHeader } = props;
+  
+  // Default breadcrumbs for all online resources pages.
+  const defaultBreadcrumbs = [
+    {
+      text: 'Home',
+      url: `${NEXT_PUBLIC_NYPL_DOMAIN}`
+    },
+    {
+      text: 'Research',
+      url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research`
+    },
+    {
+      text: 'Collections',
+      url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections`
+    }
+  ];
+
+  const newBreadcrumbs = breadcrumbs ? 
+    [...defaultBreadcrumbs, ...breadcrumbs]
+    : defaultBreadcrumbs;
   
   const ContentHeader =
     <Fragment>
@@ -26,6 +48,7 @@ function PageContainer(props) {
       {...(showContentHeader && { 
         contentHeader: ContentHeader 
       })}
+      breadcrumbs={newBreadcrumbs}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide='right'

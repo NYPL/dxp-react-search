@@ -20,6 +20,7 @@ import PageContainer from './../../../../components/online-resources/layouts/Pag
 import OnlineResourceCard from './../../../../components/online-resources/OnlineResourceCard';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function OnlineResourceSlug() {
   const router = useRouter();
@@ -57,6 +58,12 @@ function OnlineResourceSlug() {
   if (loading || !data) {
     return (
       <PageContainer
+        breadcrumbs={[
+          {
+            text: 'Online Resources',
+            url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+          }
+        ]}
         contentPrimary={
           <SkeletonLoader />
         }
@@ -71,12 +78,15 @@ function OnlineResourceSlug() {
         description: `${data.searchDocument.name}`,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
+      breadcrumbs={[
+        {
+          text: 'Online Resources',
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+        }
+      ]}
       showContentHeader={true}
       contentPrimary={
         <Fragment>
-          <Link href={`${ONLINE_RESOURCES_BASE_PATH}`}>
-            <a><h3>Online Resources</h3></a>
-          </Link>
           <OnlineResourceCard item={data.searchDocument} />
         </Fragment>
       }

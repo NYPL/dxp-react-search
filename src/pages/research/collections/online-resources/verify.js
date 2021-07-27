@@ -8,6 +8,7 @@ import PageContainer from '../../../../components/online-resources/layouts/PageC
 import VerifyForm from '../../../../components/online-resources/VerifyForm';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function OnlineResourcesVerifyPage() {
   return (
@@ -17,6 +18,12 @@ function OnlineResourcesVerifyPage() {
         description: 'Enter library card number to access database',
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/verify`
       }}
+      breadcrumbs={[
+        {
+          text: 'Online Resources',
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+        }
+      ]}
       showContentHeader={false}
       contentPrimary={
         <VerifyForm />
