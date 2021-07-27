@@ -15,7 +15,7 @@ import s from './AlphabetNav.module.css';
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 import getActiveLetters from './../../../utils/getActiveLetters';
 
-function AlphabetNav({ title, description }) {
+function AlphabetNav({ className, title, description}) {
   const router = useRouter();
   // State for selected letter.
   const selectedLetter = router.query.alpha ? router.query.alpha : null;
@@ -27,7 +27,7 @@ function AlphabetNav({ title, description }) {
 
   return (
     <>
-      <div className={"AlphabetNav"}>
+      <div className={`${s.AlphabetNav} ${className  ? className : ''}`}>
         <Heading id={title} level={2}>
           <>
           {title}

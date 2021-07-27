@@ -7,13 +7,15 @@ import { withRedux } from './../../redux/withRedux';
 // Components
 import PageContainer from './../../components/shared/layouts/PageContainer';
 import SearchHeader from './../../components/shared/SearchHeader';
-import RightRail from '../../components/shared/RightRail';
 import Hero from './../../components/location-finder/Hero';
+import SearchForm from '../../components/location-finder/SearchForm';
 import Locations from './../../components/location-finder/Locations/Locations';
 import SearchResultsDetails from './../../components/location-finder/SearchResultsDetails';
 import Map from './../../components/location-finder/Map';
 import BottomPromo from '../../components/location-finder/BottomPromo';
-import SearchForm from '../../components/location-finder/SearchForm';
+import BottomMenuContent from '../../components/shared/BottomMenus/content';
+import RightRail from '../../components/shared/RightRail';
+
 
 function LocationFinder() {
   return (
@@ -52,7 +54,7 @@ function LocationFinder() {
       contentBottom={
         <Fragment>
           <BottomPromo />
-          <RightRail />
+          <RightRail menuContent={BottomMenuContent} orientation="horizontal" />
         </Fragment>
       }
     />
