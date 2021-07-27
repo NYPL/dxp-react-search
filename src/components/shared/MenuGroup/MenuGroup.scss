@@ -39,7 +39,6 @@
 
   &--vertical {
     .heading {
-      color: $nypl-blue-regular;
       border-bottom: 1px solid;
       padding-bottom: $space-xs;
     }
@@ -51,7 +50,6 @@
     }
     
     .heading {
-      color: $nypl-blue-regular;
       border: none;
       padding-bottom: 0;
     }
@@ -63,13 +61,5 @@
         text-decoration: underline;
       }
     }
-  }
-}
-
-// Section Variations
-
-.nypl--research {
-  .heading {
-    color: #00838a;
   }
 }

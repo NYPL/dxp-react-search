@@ -15,4 +15,16 @@
       flex-flow: row nowrap;
     }
   }
+  .heading {
+    color: $nypl-blue-regular;
+  }
+}
+
+// Section Variations
+.nypl--research {
+  .rail {
+    .heading {
+      color: #00838a;
+    }
+  }
 }
