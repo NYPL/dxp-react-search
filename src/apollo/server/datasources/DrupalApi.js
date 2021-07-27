@@ -137,15 +137,15 @@ class DrupalApi extends RESTDataSource {
         switch (availabilityOption) {
           // api/search-online-resources?is-free-resource=1
           case 'no-restrictions':
-            apiPath = `${apiPath}&is-free-resource=1&authentication-type=none`;
+            apiPath = `${apiPath}&accessible-from[]=offsite&authentication-type[]=none`;
             break;
           // api/search-online-resources?accessible-from[]=offsite
           case 'card-required':
-            apiPath = `${apiPath}&accessible-from[]=offsite`;
+            apiPath = `${apiPath}&authentication-type[]=nypl&authentication-type[]=vendor`;
             break;
           // api/search-online-resources?accessible-from[]=onsite
           case 'on-site-only':
-            apiPath = `${apiPath}&accessible-from[]=onsite`;
+            apiPath = `${apiPath}&accessible-from-not[]=offsite`;
             break;
         }
       });
