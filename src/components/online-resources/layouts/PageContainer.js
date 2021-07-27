@@ -4,7 +4,8 @@ import { default as SharedPageContainer } from './../../shared/layouts/PageConta
 import Hero from './../Hero';
 import SearchHeader from './../../shared/SearchHeader';
 import SearchForm from './../SearchForm';
-import SidebarMenus from './../SidebarMenus';
+import SidebarMenusContent from '../SidebarMenus/content';
+import BottomMenuContent from '../../shared/BottomMenus/content';
 import RightRail from './../../shared/RightRail';
 
 function PageContainer(props) {
@@ -29,10 +30,10 @@ function PageContainer(props) {
       showSidebar={true}
       sidebarSide='right'
       contentSecondary={
-        <SidebarMenus />
+        <RightRail menuContent={SidebarMenusContent} orientation="vertical" />
       }
       contentBottom={
-        <RightRail />
+        <RightRail menuContent={BottomMenuContent} orientation="horizontal" />
       }
     />
   );

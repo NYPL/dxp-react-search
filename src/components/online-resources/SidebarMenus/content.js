@@ -1,6 +1,6 @@
 const SidebarMenusContent = [
   {
-    id: 'menu-1',
+    id: 'research-tools-menu',
     title: 'More Research Tools',
     items: [
       {
@@ -26,7 +26,7 @@ const SidebarMenusContent = [
     ]
   },
   {
-    id: 'menu-2',
+    id: 'research-help-menu',
     title: 'Research Help',
     items: [
       {
