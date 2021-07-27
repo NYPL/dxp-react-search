@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
-import Meta from './../../../components/shared/Meta';
+import Meta from '../Meta';
 import { Breadcrumbs } from '@nypl/design-system-react-components';
+import s from './PageContainer.module.css';
 
 function PageContainer(props) {
   const {
@@ -14,29 +15,14 @@ function PageContainer(props) {
     showSidebar
   } = props;
 
-  let contentPrimaryClass = 'content-primary';
+  let contentPrimaryClass = 'grid';
   if (showSidebar) {
     if (sidebarSide === 'right') {
-      contentPrimaryClass = `${contentPrimaryClass} content-primary--with-sidebar-right`;
+      contentPrimaryClass = 'gridWithRightSidebar';
     } else if (sidebarSide === 'left') {
-      contentPrimaryClass = `${contentPrimaryClass} content-primary--with-sidebar-left`;
+      contentPrimaryClass = 'gridWithLeftSidebar';
     }
   }
-  
-  // @TODO Not using this currently, should we?
-  let hasSidebar = false;
-  if (
-    showSidebar
-    && sidebarSide === 'right'
-    || sidebarSide === 'left'
-  ) {
-    hasSidebar = true;
-  }
-
-  // ClassName logic for 'main' element
-  let mainClassName = 'main';
-  if (showSidebar) mainClassName += ' main--with-sidebar';
-  if (!contentHeader) mainClassName += ' main--no-content-header';
 
   return (
     <Fragment>
@@ -56,38 +42,32 @@ function PageContainer(props) {
             }
           ]}
         />
-        <main 
-          id="main-content" 
-          className={mainClassName}
-        >
+        <main id="main-content">
           {contentHeader &&
-            <div className="content-header">
+            <div>
               {contentHeader}
             </div>
           }
-          {contentSecondary && showSidebar && sidebarSide === "left" && 
-            <div className='content-secondary content-secondary--with-sidebar-left'>
-              {contentSecondary}
-            </div>
-          }
-          {contentPrimary &&
-            <div id="page-container--content-primary" className={contentPrimaryClass}>
-              {contentPrimary}
-              {contentBottom &&
-                <div className="content-bottom">
-                  {contentBottom}
-                </div>
-              }
-            </div>
-          }
-          {contentSecondary && showSidebar && sidebarSide === "right" && 
-            <div 
-              id="page-container--content-secondary" 
-              className='content-secondary content-secondary--with-sidebar-right'
-            >
-              {contentSecondary}
-            </div>
-          }
+          <div className={s[contentPrimaryClass]}>
+            {contentPrimary &&
+              <div id="page-container--content-primary" className={s.contentPrimary}>
+                {contentPrimary}
+              </div>
+            }
+            {contentSecondary && showSidebar && sidebarSide === "right" && 
+              <div 
+                id="page-container--content-secondary" 
+                className={s.contentSecondary}
+              >
+                {contentSecondary}
+              </div>
+            }
+            {contentBottom &&
+              <div className={s.contentBottom}>
+                {contentBottom}
+              </div>
+            }
+          </div>
         </main>
       </div>
     </Fragment>

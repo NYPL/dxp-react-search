@@ -3,7 +3,7 @@
 }
 
 .desktopContainer {
-  padding: var(--space-m) 0;
+  padding: var(--space-m) 0 0 0;
 }
 
 .multiSelectsContainerDesktop {
@@ -15,7 +15,6 @@
 /* Mobile */
 .multiSelectsContainerMobile {
   padding: 1.5rem 0 .5rem;
-  /*padding: initial;*/
 }
 
 .mobileContainer {
