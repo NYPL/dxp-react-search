@@ -15,9 +15,12 @@ import {
 // Redux
 import { withRedux } from './../../../../redux/withRedux';
 // Components
-import { SkeletonLoader } from '@nypl/design-system-react-components';
+//import { SkeletonLoader } from '@nypl/design-system-react-components';
 import PageContainer from './../../../../components/online-resources/layouts/PageContainer';
 import OnlineResourceCard from './../../../../components/online-resources/OnlineResourceCard';
+import SearchResultsSkeleton from './../../../../components/online-resources/SearchResults/SearchResultsSkeleton';
+
+
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
@@ -65,7 +68,7 @@ function OnlineResourceSlug() {
           }
         ]}
         contentPrimary={
-          <SkeletonLoader />
+          <SearchResultsSkeleton />
         }
       />
     );
