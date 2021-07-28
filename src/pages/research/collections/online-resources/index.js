@@ -11,7 +11,6 @@ import ResourceTopics from './../../../../components/online-resources/ResourceTo
 import MostPopularResources from './../../../../components/online-resources/MostPopularResources';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function OnlineResources() {  
   return (

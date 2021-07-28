@@ -7,7 +7,6 @@ import SearchForm from './../SearchForm';
 import SidebarMenusContent from '../SidebarMenus/content';
 import BottomMenuContent from '../../shared/BottomMenus/content';
 import RightRail from './../../shared/RightRail';
-//
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function PageContainer(props) {
