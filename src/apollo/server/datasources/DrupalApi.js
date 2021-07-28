@@ -134,19 +134,18 @@ class DrupalApi extends RESTDataSource {
       && args.filter.availability
     ) {
       // Alt approach?
-      /*if (args.filter.availability.includes('no-restrictions')) {
+      if (args.filter.availability.includes('no-restrictions')) {
         apiPath = `${apiPath}&accessible-from[]=offsite&authentication-type[]=none`;
       }
       if (args.filter.availability.includes('card-required')) {
-        apiPath = `${apiPath}&authentication-type[]=nypl&authentication-type[]=vendor`;
+        apiPath = `${apiPath}&authentication-type[]=nypl&authentication-type[]=vendor&accessible-from[]=offsite`;
       }
       if (args.filter.availability.includes('on-site-only')) {
         apiPath = `${apiPath}&accessible-from-not[]=offsite`;
       }
-      */
      
       // Original
-      args.filter.availability.map(availabilityOption => {
+      /*args.filter.availability.map(availabilityOption => {
         switch (availabilityOption) {
           // api/search-online-resources?is-free-resource=1
           case 'no-restrictions':
@@ -162,6 +161,7 @@ class DrupalApi extends RESTDataSource {
             break;
         }
       });
+      */
 
       // Check if all options are selected.
       /*if (
