@@ -4,11 +4,6 @@ const SidebarMenusContent = [
     title: 'More Research Tools',
     items: [
       {
-        'title': 'Articles',
-        'link': 'https://www.nypl.org',
-        'description': 'Search within articles across our databases.'
-      },
-      {
         'title': 'Scholarly Journals',
         'link': '/research/collections/online-resources/find-journals-title-databases',
         'description': 'Search for full text or specific journals or magazines.'
