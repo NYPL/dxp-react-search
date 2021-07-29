@@ -6,6 +6,7 @@ import s from './PageContainer.module.css';
 function PageContainer(props) {
   const {
     metaTags,
+    breadcrumbs,
     wrapperClass,
     contentHeader,
     contentPrimary,
@@ -34,14 +35,7 @@ function PageContainer(props) {
         />
       }
       <div className={`${wrapperClass} nypl-ds`}>
-        <Breadcrumbs
-          breadcrumbs={[
-            {
-              text: 'Home',
-              url: 'https://www.nypl.org/'
-            }
-          ]}
-        />
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
         <main id="main-content">
           {contentHeader &&
             <div>

@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 // Next
 import Router, { useRouter } from 'next/router';
-import Link from 'next/link';
 // Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
 import { useQuery } from '@apollo/client';
@@ -15,11 +14,12 @@ import {
 // Redux
 import { withRedux } from './../../../../redux/withRedux';
 // Components
-import { SkeletonLoader } from '@nypl/design-system-react-components';
 import PageContainer from './../../../../components/online-resources/layouts/PageContainer';
 import OnlineResourceCard from './../../../../components/online-resources/OnlineResourceCard';
+import SearchResultsSkeleton from './../../../../components/online-resources/SearchResults/SearchResultsSkeleton';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function OnlineResourceSlug() {
   const router = useRouter();
@@ -57,8 +57,14 @@ function OnlineResourceSlug() {
   if (loading || !data) {
     return (
       <PageContainer
+        breadcrumbs={[
+          {
+            text: 'Online Resources',
+            url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+          }
+        ]}
         contentPrimary={
-          <SkeletonLoader />
+          <SearchResultsSkeleton />
         }
       />
     );
@@ -71,12 +77,15 @@ function OnlineResourceSlug() {
         description: `${data.searchDocument.name}`,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
+      breadcrumbs={[
+        {
+          text: 'Online Resources',
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+        }
+      ]}
       showContentHeader={true}
       contentPrimary={
         <Fragment>
-          <Link href={`${ONLINE_RESOURCES_BASE_PATH}`}>
-            <a><h3>Online Resources</h3></a>
-          </Link>
           <OnlineResourceCard item={data.searchDocument} />
         </Fragment>
       }

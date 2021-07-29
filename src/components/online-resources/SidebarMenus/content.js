@@ -10,7 +10,7 @@ const SidebarMenusContent = [
       },
       {
         'title': 'Search for Scholarly Journals',
-        'link': 'https://www.nypl.org/collections/articles-databases/find-journals-title-databases',
+        'link': '/research/collections/online-resources/find-journals-title-databases',
         'description': 'Search for full text or specific journals or magazines.'
       },
       {

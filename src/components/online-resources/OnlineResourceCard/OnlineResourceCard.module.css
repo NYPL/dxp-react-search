@@ -1,6 +1,9 @@
 .card {
   margin: var(--space-l) 0;
-  /*max-width: 760px;*/
+}
+
+.cardDetailPg {
+  max-width: 760px;
 }
 
 .heading {
