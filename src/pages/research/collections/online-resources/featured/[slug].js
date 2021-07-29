@@ -19,6 +19,7 @@ import PageContainer from './../../../../../components/online-resources/layouts/
 import SearchResults from './../../../../../components/online-resources/SearchResults';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../../utils/config';
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function FeaturedResourceTopicSlug() {
   const router = useRouter();
