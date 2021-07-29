@@ -36,12 +36,6 @@ function AlphabetNav({ className, title, description}) {
         <div className={s.description}>{description}</div>
         <div className='letters-wrapper'>
           {alphabet.map((letter) => {
-            /*const inactiveClass = activeLetters.includes(letter) ? '' : 'inactive';
-            const activeClass = (selectedLetter === letter)  ? 'active' : '';
-            const buttonClasses = inactiveClass + activeClass;
-            const isActive = (selectedLetter === letter);
-            */
-
             if (activeLetters.includes(letter)) {
               return (
                 <Link key={letter} href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${letter}`}>
