@@ -78,7 +78,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
   }
 
   return (
-    <div id={id} className={s.card}>
+    <div id={id} className={collapsible ? s.card : s.cardDetailPg}>
       {isCoreResource &&
         <div className={s.resourceType}>Core Resource</div>
       }

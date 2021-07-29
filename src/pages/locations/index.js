@@ -15,7 +15,7 @@ import Map from './../../components/location-finder/Map';
 import BottomPromo from '../../components/location-finder/BottomPromo';
 import BottomMenuContent from '../../components/shared/BottomMenus/content';
 import RightRail from '../../components/shared/RightRail';
-
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function LocationFinder() {
   return (
@@ -25,6 +25,12 @@ function LocationFinder() {
         description: 'The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island.',
         url: 'https://www.nypl.org/locations'
       }}
+      breadcrumbs={[
+        {
+          text: 'Home',
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}`
+        }
+      ]}
       wrapperClass='nypl--locations'
       contentHeader={
         <Fragment>
