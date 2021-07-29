@@ -5,7 +5,6 @@ import { MultiSelectQuery as MULTI_SELECT_QUERY } from './MultiSelect.gql';
 // Components
 import { default as DsMultiSelect } from '../../ds-prototypes/MultiSelect/MultiSelect';
 
-
 function MultiSelect(props) {
   const { 
     id,
@@ -17,7 +16,8 @@ function MultiSelect(props) {
     onSaveMultiSelect,
     onMenuClick,
     selectedGroupIds,
-    showCtaButtons
+    showCtaButtons,
+    handleChangeMixedStateCheckbox
   } = props;
 
   // Apollo
@@ -56,6 +56,7 @@ function MultiSelect(props) {
       onMenuClick={onMenuClick}
       selectedGroupIds={selectedGroupIds}
       showCtaButtons={showCtaButtons}
+      handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
     />
   );
 }
