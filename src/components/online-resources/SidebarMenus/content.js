@@ -4,17 +4,17 @@ const SidebarMenusContent = [
     title: 'More Research Tools',
     items: [
       {
-        'title': 'Search for Articles',
+        'title': 'Articles',
         'link': 'https://www.nypl.org',
         'description': 'Search within articles across our databases.'
       },
       {
-        'title': 'Search for Scholarly Journals',
+        'title': 'Scholarly Journals',
         'link': '/research/collections/online-resources/find-journals-title-databases',
         'description': 'Search for full text or specific journals or magazines.'
       },
       {
-        'title': 'Search for Periodicals',
+        'title': 'Periodicals',
         'link': 'https://catalog.nypl.org/search/s',
         'description': 'Search within periodicals across 800 databases.'
       },
@@ -32,17 +32,17 @@ const SidebarMenusContent = [
       {
         'title': 'Chat with a Librarian',
         'link': 'https://www.nypl.org/get-help/contact-us/chat',
-        'description': 'Realtime chat with a Librarian is available from 9-5pm, Monday through Friday'
+        'description': 'Chat with our expert staff in real-time, Monday through Friday, 10 AM to 6 PM'
       },
       {
-        'title': 'Research Guides to Online Resources',
+        'title': 'Research Guides',
         'link': 'https://libguides.nypl.org/?b=s',
-        'description': 'Find the best databases for your research. Specially currated by our librarians.'
+        'description': 'Explore dozens of subjects with databases specially curated by our librarians.'
       },
       {
         'title': 'Report a Problem',
         'link': 'https://www.nypl.org',
-        'description': 'Unable to connect to a database or issue with a database? Report your issue here.'
+        'description': 'Having issues connecting to or using these resources? Contact us'
       }
     ]
   }
