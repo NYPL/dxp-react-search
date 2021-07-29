@@ -34,7 +34,7 @@ function AlphabetNav({ className, title, description}) {
           </>
         </Heading>
         <div className={s.description}>{description}</div>
-        <div className={s.letters}>
+        <div className='letters-wrapper'>
           {alphabet.map((letter) => {
             /*const inactiveClass = activeLetters.includes(letter) ? '' : 'inactive';
             const activeClass = (selectedLetter === letter)  ? 'active' : '';
