@@ -133,22 +133,15 @@ class DrupalApi extends RESTDataSource {
       && 'availability' in args.filter
       && args.filter.availability
     ) {
-      args.filter.availability.map(availabilityOption => {
-        switch (availabilityOption) {
-          // api/search-online-resources?is-free-resource=1
-          case 'no-restrictions':
-            apiPath = `${apiPath}&is-free-resource=1&authentication-type=none`;
-            break;
-          // api/search-online-resources?accessible-from[]=offsite
-          case 'card-required':
-            apiPath = `${apiPath}&accessible-from[]=offsite`;
-            break;
-          // api/search-online-resources?accessible-from[]=onsite
-          case 'on-site-only':
-            apiPath = `${apiPath}&accessible-from[]=onsite`;
-            break;
-        }
-      });
+      if (args.filter.availability.includes('no-restrictions')) {
+        apiPath = `${apiPath}&accessible-from[]=offsite&authentication-type[]=none`;
+      }
+      if (args.filter.availability.includes('card-required')) {
+        apiPath = `${apiPath}&authentication-type[]=nypl&authentication-type[]=vendor&accessible-from[]=offsite`;
+      }
+      if (args.filter.availability.includes('on-site-only')) {
+        apiPath = `${apiPath}&accessible-from-not[]=offsite`;
+      }
     }
 
     const response = await this.get(apiPath);

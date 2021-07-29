@@ -26,6 +26,7 @@ export const typeDefs = gql`
     authenticationType: String
     isCoreResource: Boolean
     isFreeResource: Boolean
+    availabilityStatus: String
   }
 
   type AccessLocation {

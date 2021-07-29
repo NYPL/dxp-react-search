@@ -21,6 +21,7 @@ query OnlineResourceByIdQuery($id: String) {
       resourceUrl
       notes
       language
+      availabilityStatus
     }
   }
 }
