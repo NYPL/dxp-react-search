@@ -36,35 +36,31 @@ function AlphabetNav({ className, title, description}) {
         <div className={s.description}>{description}</div>
         <div className={s.letters}>
           {alphabet.map((letter) => {
-            const inactiveClass = activeLetters.includes(letter) ? '' : s.inactive;
-            const activeClass = (selectedLetter === letter)  ? s.active : '';
+            /*const inactiveClass = activeLetters.includes(letter) ? '' : 'inactive';
+            const activeClass = (selectedLetter === letter)  ? 'active' : '';
             const buttonClasses = inactiveClass + activeClass;
+            const isActive = (selectedLetter === letter);
+            */
 
             if (activeLetters.includes(letter)) {
               return (
                 <Link key={letter} href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${letter}`}>
-                  <a>
-                    <button className={buttonClasses}>
-                      {letter}
-                    </button>
+                  <a className={`${s.letters} ${selectedLetter === letter ? s.active : ''}`}>
+                    {letter}
                   </a>
                 </Link>
               );
             } else {
               return (
-                <button key={letter} className={buttonClasses}>
+                <a key={letter} ariaDisabled={true} tabIndex={-1} className={`${s.letters} ${s.inactive}`}>
                   {letter}
-                </button>
+                </a>
               );
             }
           })}
           <Link key={"All"} href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`}>
-            <a>
-              <button 
-                className={`${s.all} ${selectedLetter === 'all'  ? s.active : ''}`}
-              >
-                {"Show All"}
-              </button>
+            <a className={`${s.letters} ${s.all} ${selectedLetter === 'all'  ? s.active : ''}`}>
+              {"Show All"}
             </a>
           </Link>
         </div>
