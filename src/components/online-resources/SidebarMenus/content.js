@@ -21,7 +21,7 @@ const SidebarMenusContent = [
       {
         'title': 'Research Catalog',
         'link': 'https://www.nypl.org/research/research-catalog/',
-        'description': 'Search materials from NYPL, Columbia University and Princeton University'
+        'description': 'Search materials from NYPL, Columbia University and Princeton University.'
       }
     ]
   },
@@ -32,7 +32,7 @@ const SidebarMenusContent = [
       {
         'title': 'Chat with a Librarian',
         'link': 'https://www.nypl.org/get-help/contact-us/chat',
-        'description': 'Chat with our expert staff in real-time, Monday through Friday, 10 AM to 6 PM'
+        'description': 'Chat with our expert staff in real-time, Monday through Friday, 10 AM to 6 PM.'
       },
       {
         'title': 'Research Guides',
@@ -41,8 +41,8 @@ const SidebarMenusContent = [
       },
       {
         'title': 'Report a Problem',
-        'link': 'https://www.nypl.org',
-        'description': 'Having issues connecting to or using these resources? Contact us'
+        'link': 'https://www.nypl.org/collections/articles-databases/report-problem',
+        'description': 'Having issues connecting to or using these resources? Contact us!'
       }
     ]
   }
