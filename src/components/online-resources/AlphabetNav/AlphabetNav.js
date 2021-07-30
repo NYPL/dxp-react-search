@@ -46,7 +46,7 @@ function AlphabetNav({ className, title, description}) {
               );
             } else {
               return (
-                <a key={letter} ariaDisabled={true} tabIndex={-1} className={`${s.letters} ${s.inactive}`}>
+                <a key={letter} aria-disabled="true" tabIndex={-1} className={`${s.letters} ${s.inactive}`}>
                   {letter}
                 </a>
               );
