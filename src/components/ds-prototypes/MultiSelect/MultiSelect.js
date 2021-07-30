@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // Components
-import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
+import { Button, Checkbox, Icon, Radio } from '@nypl/design-system-react-components';
 import FocusTrap from 'focus-trap-react';
 // Styles
 import s from './MultiSelect.module.css';
@@ -75,6 +75,32 @@ function MultiSelect(props) {
     }
     return checked;
   }
+
+  function RadioOrCheckbbox(id, item) {
+    if (id === 'availability') {
+      return (
+        <Radio
+          id={item.id}
+          labelText={<>{item.name}</>}
+          showLabel={true}
+          name={item.name}
+          checked={setFilterCheckedProp(id, item.id) || false}
+          onChange={handleOnSelectedItemChange}
+        />
+      )
+    } else {
+      return (
+        <Checkbox
+          id={item.id}
+          labelText={<>{item.name}</>}
+          showLabel={true}
+          name={item.name}
+          checked={setFilterCheckedProp(id, item.id) || false}
+          onChange={handleOnSelectedItemChange}
+        />
+      )
+    }
+  }
   
   return (
     <FocusTrap
@@ -134,14 +160,7 @@ function MultiSelect(props) {
                       </ul>
                     </>
                   ) : (
-                    <Checkbox
-                      id={item.id}
-                      labelText={<>{item.name}</>}
-                      showLabel={true}
-                      name={item.name}
-                      checked={setFilterCheckedProp(id, item.id) || false}
-                      onChange={handleOnSelectedItemChange}
-                    />
+                    RadioOrCheckbbox(id, item)
                   )}
                 </li>
               ))

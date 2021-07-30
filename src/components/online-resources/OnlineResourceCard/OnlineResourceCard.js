@@ -70,7 +70,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       return (
         <div className={s.statusBadge}>
           <StatusBadge level={"high"}>
-            On-site Access Only
+            On-Site Access Only
           </StatusBadge>
         </div>
       )

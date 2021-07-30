@@ -120,7 +120,10 @@ function SearchFilters() {
 
     let itemIds;
     // Check if the tid already exists in the state
-    if (selectedItems[groupId] !== undefined) {
+    if (
+      selectedItems[groupId] !== undefined
+      && groupId !== 'availability'
+    ) {
       let itemIdExists = selectedItems[groupId].items.indexOf(itemId) > -1;
       // Make a copy of the existing array.
       itemIds = selectedItems[groupId].items.slice();
