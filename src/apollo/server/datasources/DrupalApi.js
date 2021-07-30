@@ -1,4 +1,4 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
+import { HTTPCache, RESTDataSource } from 'apollo-datasource-rest';
 const { DRUPAL_API } = process.env;
 // Mocks for now
 import availabilityFilterMock from './../../../../testHelper/__mocks/availabilityFilterMock';
@@ -7,6 +7,11 @@ class DrupalApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = DRUPAL_API;
+  }
+
+  initialize({ context }) {
+    this.context = context
+    this.httpCache = new HTTPCache()
   }
 
   // D8 api is a json api, which datasource-rest does not handle by default.
