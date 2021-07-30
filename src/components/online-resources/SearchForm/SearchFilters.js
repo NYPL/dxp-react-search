@@ -122,6 +122,7 @@ function SearchFilters() {
     // Check if the tid already exists in the state
     if (
       selectedItems[groupId] !== undefined
+      // @TODO Temporary hack to make availability multiselect use radios.
       && groupId !== 'availability'
     ) {
       let itemIdExists = selectedItems[groupId].items.indexOf(itemId) > -1;

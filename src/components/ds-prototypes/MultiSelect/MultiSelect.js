@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Components
 import { Button, Checkbox, Icon, Radio } from '@nypl/design-system-react-components';
 import FocusTrap from 'focus-trap-react';
@@ -53,8 +53,14 @@ function MultiSelect(props) {
     handleChangeMixedStateCheckbox(childIds);
   }
   
-  // @TODO setMixedStateCheckboxCheckedProp
-  function setParentFilterCheckedProp(groupdId, item) {
+  /**
+   * Determines the checked state of a mixed state checkbox (parent).
+   *
+   * @param {string} groupdId - groupId of the checkbox group.
+   * @param {array} item - an array of objects containing checkbox items.
+   * @return {boolean} checked - true or false.
+   */
+  function setMixedStateCheckboxCheckedProp(groupdId, item) {
     /*
       true -- all children checked
       false -- no children checked
@@ -75,8 +81,9 @@ function MultiSelect(props) {
     }
     return checked;
   }
-
-  function RadioOrCheckbbox(id, item) {
+  
+  // @TODO Temp workaround to render availability as radio not checkbox.
+  function RadioOrCheckbboxComponent(id, item) {
     if (id === 'availability') {
       return (
         <Radio
@@ -139,7 +146,7 @@ function MultiSelect(props) {
                         labelText={<>{item.name}</>}
                         showLabel={true}
                         name={item.name}
-                        checked={setParentFilterCheckedProp(id, item) || false}
+                        checked={setMixedStateCheckboxCheckedProp(id, item) || false}
                         onChange={() => onChangeMixedStateCheckbox(id, item)}
                       />
                       <ul>
@@ -160,7 +167,7 @@ function MultiSelect(props) {
                       </ul>
                     </>
                   ) : (
-                    RadioOrCheckbbox(id, item)
+                    RadioOrCheckbboxComponent(id, item)
                   )}
                 </li>
               ))
