@@ -83,7 +83,7 @@ function MultiSelect(props) {
   }
   
   // @TODO Temp workaround to render availability as radio not checkbox.
-  function RadioOrCheckbboxComponent(id, item) {
+  function RadioOrCheckboxComponent(id, item) {
     if (id === 'availability') {
       return (
         <Radio
@@ -167,7 +167,7 @@ function MultiSelect(props) {
                       </ul>
                     </>
                   ) : (
-                    RadioOrCheckbboxComponent(id, item)
+                    RadioOrCheckboxComponent(id, item)
                   )}
                 </li>
               ))
