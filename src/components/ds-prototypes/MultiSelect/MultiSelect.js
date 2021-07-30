@@ -152,6 +152,7 @@ function MultiSelect(props) {
               <Button
                 buttonType="link"
                 id={`multiselect-button-clear-${id}`}
+                className={s.ctaButtonsDesktopClear}
                 mouseDown={false}
                 type="button"
                 onClick={onClearMultiSelect}

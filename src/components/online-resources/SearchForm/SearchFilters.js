@@ -14,7 +14,7 @@ const groups = [
   {
     id: 'subject',
     label: 'Subjects',
-    //limiter: 'online_resource'
+    limiter: 'online_resource'
   },
   {
     id: 'audience_by_age',
