@@ -1,7 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 const { DRUPAL_API } = process.env;
-// Mocks for now
-import availabilityFilterMock from './../../../../testHelper/__mocks/availabilityFilterMock';
 
 class DrupalApi extends RESTDataSource {
   constructor() {
@@ -187,6 +185,38 @@ class DrupalApi extends RESTDataSource {
   async getAllFiltersByGroupId(args) {    
     // Special handling for availability.
     if (args.id === 'availability') {
+      const availabilityFilterMock = {
+        data: {
+          id: 'availability',
+          terms: [
+            {
+              uuid: 'aa50711e-ad06-4451-bc59-ae9821681ee2',
+              tid: 'no-restrictions',
+              name: 'Available everywhere',
+              vid: null,
+              parent_tid: 'virtual',
+              parent_uuid: 'virtual'
+            },
+            {
+              uuid: 'b820a733-80e8-462c-8922-1ddf99a4a5a0',
+              tid: 'card-required',
+              name: 'Offsite with Library Card',
+              vid: null,
+              parent_tid: 'virtual',
+              parent_uuid: 'virtual'
+            },
+            {
+              uuid: '3e7eba04-e788-4ad1-8380-392b6cf5ebe3',
+              tid: 'on-site-only',
+              name: 'On-Site Access Only',
+              vid: null,
+              parent_tid: 'virtual',
+              parent_uuid: 'virtual'
+            }
+          ],
+          total_items: 3
+        }
+      };
       return availabilityFilterMock;
     }
 
