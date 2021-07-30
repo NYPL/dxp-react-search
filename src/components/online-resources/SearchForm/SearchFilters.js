@@ -213,6 +213,36 @@ function SearchFilters() {
     });
   }
 
+  //
+  function handleChangeMixedStateCheckbox(groupId, childItems) {        
+    let newItems;
+    // Some selected items for group already exist in state.
+    if (selectedItems[groupId] !== undefined) {
+      //
+      if (childItems.every(childItem => selectedItems[groupId].items.includes(childItem))) {
+        newItems = selectedItems[groupId].items
+          .filter(stateItem => !childItems.includes(stateItem));
+      }
+      else {
+        // Merge all child items.
+        newItems = [
+          ...childItems,
+          ...selectedItems[groupId].items
+        ];
+      }
+    }
+    else {
+      newItems = childItems;
+    }
+
+    setSelectedItems({
+      ...selectedItems,
+      [groupId]: {
+        items: newItems
+      }
+    });
+  }
+
   return (
     <FilterBar
       id={'online-resources__search-filters'}
@@ -239,6 +269,9 @@ function SearchFilters() {
             onMenuClick={() => onMenuClick(group.id)}
             selectedGroupIds={selectedGroupIds}
             showCtaButtons={isMobile ? false : true}
+            handleChangeMixedStateCheckbox={(childItems) => {
+              handleChangeMixedStateCheckbox(group.id, childItems)
+            }}
           />
         )
       })}

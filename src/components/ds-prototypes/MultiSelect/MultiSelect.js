@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Components
 import { Button, Checkbox, Icon } from '@nypl/design-system-react-components';
 import FocusTrap from 'focus-trap-react';
@@ -16,7 +16,8 @@ function MultiSelect(props) {
     onClearMultiSelect,
     onMenuClick,
     selectedGroupIds,
-    showCtaButtons
+    showCtaButtons,
+    handleChangeMixedStateCheckbox
   } = props;
 
   const isOpen = selectedGroupIds.includes(id);
@@ -37,6 +38,40 @@ function MultiSelect(props) {
     let checked = false;
     if (selectedItems[groupdId] !== undefined) {
       checked = selectedItems[groupdId].items.find((filter) => filter === itemId) 
+    }
+    return checked;
+  }
+
+  function onChangeMixedStateCheckbox(groupId, item) {
+    // Build an array of child items.
+    let childIds = [];
+    item.children.map(childItem => {
+      childIds.push(childItem.id)
+    });
+    
+    // This is the prop passed into the component that returns the childIds.
+    handleChangeMixedStateCheckbox(childIds);
+  }
+  
+  // @TODO setMixedStateCheckboxCheckedProp
+  function setParentFilterCheckedProp(groupdId, item) {
+    /*
+      true -- all children checked
+      false -- no children checked
+      mixed -- some children checked
+    */
+
+    let childIds = [];
+    item.children.map(childItem => {
+      childIds.push(childItem.id)
+    });
+
+    let checked = false;
+    if (selectedItems[groupdId] !== undefined) {
+      //
+      if (childIds.every(childItem => selectedItems[groupdId].items.includes(childItem))) {
+        checked = true;
+      }
     }
     return checked;
   }
@@ -71,32 +106,43 @@ function MultiSelect(props) {
             {isOpen &&
               items.map((item) => (
                 <li key={item.id} className={s.menuItem}>
-                  <Checkbox
-                    id={item.id}
-                    labelText={<>{item.name}</>}
-                    showLabel={true}
-                    name={item.name}
-                    checked={setFilterCheckedProp(id, item.id) || false}
-                    onChange={handleOnSelectedItemChange}
-                  />
-                  {item.children &&
-                    <ul>
-                      {item.children.map((childItem) => {
-                        return (
-                          <li key={childItem.id} className={s.childMenuItem}>
-                            <Checkbox
-                              id={childItem.id}
-                              labelText={<>{childItem.name}</>}
-                              showLabel={true}
-                              name={childItem.name}
-                              checked={setFilterCheckedProp(id, childItem.id) || false}
-                              onChange={handleOnSelectedItemChange}
-                            />
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  }
+                  {item.children ? (
+                    <>
+                      <Checkbox
+                        id={item.id}
+                        labelText={<>{item.name}</>}
+                        showLabel={true}
+                        name={item.name}
+                        checked={setParentFilterCheckedProp(id, item) || false}
+                        onChange={() => onChangeMixedStateCheckbox(id, item)}
+                      />
+                      <ul>
+                        {item.children.map((childItem) => {
+                          return (
+                            <li key={childItem.id} className={s.childMenuItem}>
+                              <Checkbox
+                                id={childItem.id}
+                                labelText={<>{childItem.name}</>}
+                                showLabel={true}
+                                name={childItem.name}
+                                checked={setFilterCheckedProp(id, childItem.id) || false}
+                                onChange={handleOnSelectedItemChange}
+                              />
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </>
+                  ) : (
+                    <Checkbox
+                      id={item.id}
+                      labelText={<>{item.name}</>}
+                      showLabel={true}
+                      name={item.name}
+                      checked={setFilterCheckedProp(id, item.id) || false}
+                      onChange={handleOnSelectedItemChange}
+                    />
+                  )}
                 </li>
               ))
             }
