@@ -107,9 +107,15 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
         }
       </div>
       <div className={detailsClassName}>
-        <LabelItem label="Notes:" name={notes} />
-        <LabelItem label="Language:" name={language} />
-        <LabelItem label="Subjects:" name={subjectsList.join(', ')} />
+        {notes &&
+          <LabelItem label="Notes:" name={notes} />
+        }
+        {language &&
+          <LabelItem label="Language:" name={language} />
+        }
+        {subjectsList &&
+          <LabelItem label="Subjects:" name={subjectsList.join(', ')} />
+        }
       </div>
       {collapsible &&
         <Button
