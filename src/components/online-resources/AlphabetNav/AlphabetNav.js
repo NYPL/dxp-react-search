@@ -34,37 +34,27 @@ function AlphabetNav({ className, title, description}) {
           </>
         </Heading>
         <div className={s.description}>{description}</div>
-        <div className={s.letters}>
+        <div className='letters-wrapper'>
           {alphabet.map((letter) => {
-            const inactiveClass = activeLetters.includes(letter) ? '' : s.inactive;
-            const activeClass = (selectedLetter === letter)  ? s.active : '';
-            const buttonClasses = inactiveClass + activeClass;
-
             if (activeLetters.includes(letter)) {
               return (
                 <Link key={letter} href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${letter}`}>
-                  <a>
-                    <button className={buttonClasses}>
-                      {letter}
-                    </button>
+                  <a className={`${s.letters} ${selectedLetter === letter ? s.active : ''}`}>
+                    {letter}
                   </a>
                 </Link>
               );
             } else {
               return (
-                <button key={letter} className={buttonClasses}>
+                <a key={letter} aria-disabled="true" tabIndex={-1} className={`${s.letters} ${s.inactive}`}>
                   {letter}
-                </button>
+                </a>
               );
             }
           })}
           <Link key={"All"} href={`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`}>
-            <a>
-              <button 
-                className={`${s.all} ${selectedLetter === 'all'  ? s.active : ''}`}
-              >
-                {"Show All"}
-              </button>
+            <a className={`${s.letters} ${s.all} ${selectedLetter === 'all'  ? s.active : ''}`}>
+              {"Show All"}
             </a>
           </Link>
         </div>
