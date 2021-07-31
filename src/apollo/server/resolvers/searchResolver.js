@@ -61,7 +61,7 @@ const searchResolver = {
     privacyPolicyLink: document => document['privacy-link']?.url,
     notes: document => document['comments-public'],
     language: document => document['resource-language'],
-    subjects: document => document.subjects,
+    subjects: document => document.subjects.length ? document.subjects : null,
     accessibleFrom: document => {
       return document['accessible-from'].length ? 
         document['accessible-from'] : null
@@ -129,7 +129,7 @@ const searchResolver = {
     },
     isFreeResource: document => document['is-free-resource'],
     authenticationType: document => {
-      if (document['authentication-type'] === "None") {
+      if (document['authentication-type'] === 'None') {
         return null;
       } else {
         return document['authentication-type'].replace(/\s+/g, '_').toLowerCase();

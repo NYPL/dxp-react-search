@@ -36,27 +36,30 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     );
   }
 
-  function LabelItemWithLinks({ label, items }) {
-    return (
-      <div className={s.labelItem}>
-        <label>{label}&nbsp;</label>
-        {items.map(item => {
-          if (item.url) {
-            return (
-              <a className={s.accessLocation} href={item.url}>{item.name}</a>
-            )
-          }
-        })}
-      </div>
-    )
+  function AccessLocations({ items }) {
+    if (items.some(item => item.url !== null)) {
+      return (
+        <div className={s.labelItem}>
+          <label>Access Locations: &nbsp;</label>
+          {items.map(item => {
+            if (item.url) {
+              return (
+                <a 
+                  key={item.id} 
+                  className={s.accessLocation} 
+                  href={item.url}
+                >
+                  {item.name}
+                </a>
+              )
+            }
+          })}
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
-
-  // Subjects list.
-  // @TODO make sure this works if no subjects
-  let subjectsList = [];
-  subjects.map(subject => {
-    subjectsList.push(subject.name);
-  });
 
   // Toggle for show/hide details in Search Results
   const [isToggled, setToggled] = useState(false);
@@ -93,8 +96,12 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     }
   }
 
+  // Subjects
+  let subjectsList = [];
+  subjects?.map(subject => subjectsList.push(subject.name));
+
   return (
-    <div id={id} className={collapsible ? s.card : s.cardDetailPg}>
+    <div id={`heading-${id}`} className={collapsible ? s.card : s.cardDetailPg}>
       {isCoreResource &&
         <div className={s.resourceType}>Core Resource</div>
       }
@@ -123,11 +130,9 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
         }
       </div>
       <div className={detailsClassName}>
-        {accessLocations.length &&
-          <LabelItemWithLinks label="Access Locations:" items={accessLocations} />
-        }
-        {subjectsList &&
-          <LabelItem label="Subjects:" name={subjectsList.join(', ')} />
+        <AccessLocations items={accessLocations} />
+        {subjects &&
+          <LabelItem label="Subjects:" name={subjectsList.join(', ')}/>
         }
         {notes &&
           <LabelItem label="Notes:" name={notes} />
