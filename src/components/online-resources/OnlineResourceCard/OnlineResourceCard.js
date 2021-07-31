@@ -70,7 +70,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       return (
         <div className={s.statusBadge}>
           <StatusBadge level={"high"}>
-            On-site Access Only
+            On-Site Access Only
           </StatusBadge>
         </div>
       )
@@ -78,7 +78,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
   }
 
   return (
-    <div id={id} className={collapsible ? s.card : s.cardDetailPg}>
+    <div id={`heading-${id}`} className={collapsible ? s.card : s.cardDetailPg}>
       {isCoreResource &&
         <div className={s.resourceType}>Core Resource</div>
       }

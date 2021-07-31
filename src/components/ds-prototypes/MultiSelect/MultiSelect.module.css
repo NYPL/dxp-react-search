@@ -75,4 +75,10 @@
 .ctaButtonsContainer {
   display: flex;
   justify-content: space-between;
+  float: right;
+  padding-top: .5em;
+}
+
+.ctaButtonsDesktopClear {
+  margin-right: 1rem;
 }

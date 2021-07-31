@@ -107,7 +107,8 @@ function FilterBar(props) {
         <div className={s.desktopContainer}>
           <Heading
             id="search-filters--heading"
-            level={3}
+            className={s.filterBarHeading}
+            level={2}
             text={label}
           />
           <div className={s.multiSelectsContainerDesktop}>
