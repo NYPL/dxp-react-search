@@ -6,11 +6,13 @@ class DrupalApi extends RESTDataSource {
     super();
     this.baseURL = DRUPAL_API;
   }
-  
-  // Fixes 304 not modified issue when Drupal's page cache is enabled. 
-  // This essentially disables the RESTDataSource cacheing of remote
-  // api endpoints responses, which is not really necessary anyway, since
-  // Apollo client cache (in memory) is already doing the heavy lifting.
+
+  /**
+   * Fixes 304 not modified issue when Drupal's page cache is enabled. 
+   * This essentially disables the RESTDataSource cacheing of remote
+   * api endpoints responses, which is not really necessary anyway, since
+   * Apollo client cache (in memory) is already doing the heavy lifting.
+   */
   initialize({ context }) {
     this.context = context;
     this.httpCache = new HTTPCache();
