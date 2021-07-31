@@ -7,9 +7,11 @@ import {
   ButtonTypes,
   Icon,
   IconNames,
-  IconRotationTypes 
+  IconRotationTypes,
+  List
 } from '@nypl/design-system-react-components';
 import OnlineResourceCardHeading from './OnlineResourceCardHeading';
+//
 import s from './OnlineResourceCard.module.css';
 
 function OnlineResourceCard({ item, collapsible, ipInfo }) {
@@ -23,8 +25,8 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     termsConditionsLink,
     privacyPolicyLink,
     isCoreResource,
-    isFreeResource,
-    availabilityStatus
+    availabilityStatus,
+    accessLocations
   } = item;
 
   function LabelItem({ label, name }) {
@@ -33,6 +35,21 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
         <label>{label}</label> {name}
       </div>
     );
+  }
+
+  function LabelItemWithLinks({ label, items }) {
+    return (
+      <div className={s.labelItem}>
+        <label>{label}&nbsp;</label>
+        {items.map(item => {
+          if (item.url) {
+            return (
+              <a className={s.accessLocation} href={item.url}>{item.name}</a>
+            )
+          }
+        })}
+      </div>
+    )
   }
 
   // Subjects list.
@@ -107,14 +124,17 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
         }
       </div>
       <div className={detailsClassName}>
+        {accessLocations.length &&
+          <LabelItemWithLinks label="Access Locations:" items={accessLocations} />
+        }
+        {subjectsList &&
+          <LabelItem label="Subjects:" name={subjectsList.join(', ')} />
+        }
         {notes &&
           <LabelItem label="Notes:" name={notes} />
         }
         {language &&
           <LabelItem label="Language:" name={language} />
-        }
-        {subjectsList &&
-          <LabelItem label="Subjects:" name={subjectsList.join(', ')} />
         }
       </div>
       {collapsible &&

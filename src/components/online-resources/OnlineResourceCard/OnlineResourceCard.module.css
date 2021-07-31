@@ -69,3 +69,7 @@
   display: block;
   margin: 0 0 var(--space-m);
 }
+
+.accessLocation {
+  padding-right: var(--space-xs);
+}
