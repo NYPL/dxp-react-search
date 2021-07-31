@@ -7,8 +7,7 @@ import {
   ButtonTypes,
   Icon,
   IconNames,
-  IconRotationTypes,
-  List
+  IconRotationTypes
 } from '@nypl/design-system-react-components';
 import OnlineResourceCardHeading from './OnlineResourceCardHeading';
 //
