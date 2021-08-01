@@ -161,14 +161,16 @@ function SearchResults(props) {
             />
           </div>
         ))}
-        <div className={s.paginationContainer}>
-          <Pagination
-            className={s.pagination}
-            currentPage={currentPage}
-            pageCount={data.allSearchDocuments.pageInfo.pageCount}
-            onPageChange={onPageChange}
-          />
-        </div>
+        {data.allSearchDocuments.items.length !==0 &&
+          <div className={s.paginationContainer}>
+            <Pagination
+              className={s.pagination}
+              currentPage={currentPage}
+              pageCount={data.allSearchDocuments.pageInfo.pageCount}
+              onPageChange={onPageChange}
+            />
+          </div>
+        }
       </div>
     </div>
   );
