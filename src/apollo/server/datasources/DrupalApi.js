@@ -146,7 +146,7 @@ class DrupalApi extends RESTDataSource {
         apiPath = `${apiPath}&accessible-from[]=offsite&authentication-type[]=none`;
       }
       if (args.filter.availability.includes('card-required')) {
-        apiPath = `${apiPath}&authentication-type[]=nypl&authentication-type[]=vendor&accessible-from[]=offsite`;
+        apiPath = `${apiPath}&authentication-type[]=nypl&authentication-type[]=vendor&authentication-type[]=ezproxy`;
       }
       if (args.filter.availability.includes('on-site-only')) {
         apiPath = `${apiPath}&accessible-from-not[]=offsite`;
