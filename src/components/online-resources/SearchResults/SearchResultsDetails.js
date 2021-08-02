@@ -30,8 +30,6 @@ function SearchResultsDetails({ label, details }) {
     const { currentPage, itemsOnPage, pageInfo } = details;
     const { limit, totalItems } = pageInfo;
     const startIndex = 0;
-    let message = 'No results found.'
-    
     // Start item number.
     let startItem;
     if (currentPage > 1) {
@@ -44,13 +42,13 @@ function SearchResultsDetails({ label, details }) {
       // Page 1 start item is 1.
       startItem = startIndex + 1;
     }
-  
     // End item number.
     let endItem = ((startItem - 1) + itemsOnPage);
     if (endItem > totalItems) {
       endItem = totalItems;
     }
-
+    // Message.
+    let message = 'No results found.'
     if (itemsOnPage !== 0) {
       message = `${startItem}-${endItem} of ${totalItems} results.`;
     }
