@@ -86,12 +86,24 @@ function SearchResults(props) {
   }
 
   // No results.
-  /*if (data.allLocations.locations.length === 0) {
+  if (data.allSearchDocuments.items.length === 0) {
     return (
-      <div className='no-results'>Try adjusting search terms or filters.</div>
+      <>
+        <SearchResultsDetails
+          label={'Search Results'}
+          details={{
+            currentPage: 1,
+            itemsOnPage: 0,
+            pageInfo: {
+              limit: 0,
+              totalItems: 0
+            }
+          }}
+        />
+        <div className='no-results'>Try adjusting search terms or filters.</div>
+      </>
     );
   }
-  */
 
   function getSearchResultsDetailsLabel() {
     // Handle the label for search results details.

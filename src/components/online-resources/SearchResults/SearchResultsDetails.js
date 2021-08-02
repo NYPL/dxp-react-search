@@ -30,7 +30,7 @@ function SearchResultsDetails({ label, details }) {
     const { currentPage, itemsOnPage, pageInfo } = details;
     const { limit, totalItems } = pageInfo;
     const startIndex = 0;
-    let message = 'No Results.'
+    let message = 'No results found.'
     
     // Start item number.
     let startItem;
