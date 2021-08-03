@@ -162,11 +162,18 @@ const searchResolver = {
     url: accessLocation => {
       let accessLocationUrl = accessLocation.url;
       if (accessLocation?.url) {
-        if (accessLocation.url.includes('localhost')) {
-          accessLocationUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${accessLocation.url.replace('http://localhost:8080', '')}`;
-        } else if (accessLocation.url.includes('http://qa-d8.nypl.org')) {
-          accessLocationUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${accessLocation.url.replace('http://qa-d8.nypl.org', '')}`;
-        }
+        const baseDomains = [
+          'http://localhost:8080',
+          'http://sandbox-d8.nypl.org',
+          'http://qa-d8.nypl.org',
+          'http://d8.nypl.org'
+        ];
+        baseDomains.forEach(baseDomain => {
+          if (accessLocation.url.includes(baseDomain)) {
+            accessLocationUrl = accessLocation.url
+              .replace(baseDomain, NEXT_PUBLIC_NYPL_DOMAIN);
+          }
+        });
       }
       return accessLocationUrl;
     }
