@@ -140,6 +140,7 @@ const searchResolver = {
       if (
         document['authentication-type'] === 'Vendor authentication'
         || document['authentication-type'] === 'NYPL authentication'
+        || document['authentication-type'] === 'NYPL ezproxy authentication'
       ) {
         availabilityStatus = 'card_required';
       }
