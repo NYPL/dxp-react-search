@@ -7,9 +7,10 @@ import {
   ButtonTypes,
   Icon,
   IconNames,
-  IconRotationTypes 
+  IconRotationTypes
 } from '@nypl/design-system-react-components';
 import OnlineResourceCardHeading from './OnlineResourceCardHeading';
+//
 import s from './OnlineResourceCard.module.css';
 
 function OnlineResourceCard({ item, collapsible, ipInfo }) {
@@ -23,8 +24,8 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     termsConditionsLink,
     privacyPolicyLink,
     isCoreResource,
-    isFreeResource,
-    availabilityStatus
+    availabilityStatus,
+    accessLocations
   } = item;
 
   function LabelItem({ label, name }) {
@@ -35,12 +36,30 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     );
   }
 
-  // Subjects list.
-  // @TODO make sure this works if no subjects
-  let subjectsList = [];
-  subjects.map(subject => {
-    subjectsList.push(subject.name);
-  });
+  function AccessLocations({ items }) {
+    if (items.some(item => item.url !== null)) {
+      return (
+        <div className={s.labelItem}>
+          <label>Access Locations: &nbsp;</label>
+          {items.map(item => {
+            if (item.url) {
+              return (
+                <a 
+                  key={item.id} 
+                  className={s.accessLocation} 
+                  href={item.url}
+                >
+                  {item.name}
+                </a>
+              )
+            }
+          })}
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
 
   // Toggle for show/hide details in Search Results
   const [isToggled, setToggled] = useState(false);
@@ -77,6 +96,10 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     }
   }
 
+  // Subjects
+  let subjectsList = [];
+  subjects?.map(subject => subjectsList.push(subject.name));
+
   return (
     <div id={`heading-${id}`} className={collapsible ? s.card : s.cardDetailPg}>
       {isCoreResource &&
@@ -107,9 +130,16 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
         }
       </div>
       <div className={detailsClassName}>
-        <LabelItem label="Notes:" name={notes} />
-        <LabelItem label="Language:" name={language} />
-        <LabelItem label="Subjects:" name={subjectsList.join(', ')} />
+        <AccessLocations items={accessLocations} />
+        {subjects &&
+          <LabelItem label="Subjects:" name={subjectsList.join(', ')}/>
+        }
+        {notes &&
+          <LabelItem label="Notes:" name={notes} />
+        }
+        {language &&
+          <LabelItem label="Language:" name={language} />
+        }
       </div>
       {collapsible &&
         <Button

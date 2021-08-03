@@ -48,6 +48,7 @@
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.8",
     "babel-register": "^6.26.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.2.2",
     "jest-axe": "^3.5.0",
     "jest-transform-graphql": "^2.1.0",
