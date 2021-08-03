@@ -14,6 +14,8 @@ import {
   ONLINE_RESOURCES_ALL_BRANCH_UUID,
   ONLINE_RESOURCES_OFFSITE_UUID
 } from './../../../utils/config';
+// Env vars
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 const searchResolver = {
   Query: {
@@ -157,7 +159,17 @@ const searchResolver = {
   AccessLocation: {
     id: accessLocation => accessLocation.uuid,
     name: accessLocation => accessLocation.title,
-    url: accessLocation => accessLocation.url
+    url: accessLocation => {
+      let accessLocationUrl = accessLocation.url;
+      if (accessLocation?.url) {
+        if (accessLocation.url.includes('localhost')) {
+          accessLocationUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${accessLocation.url.replace('http://localhost:8080', '')}`;
+        } else if (accessLocation.url.includes('http://qa-d8.nypl.org')) {
+          accessLocationUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${accessLocation.url.replace('http://qa-d8.nypl.org', '')}`;
+        }
+      }
+      return accessLocationUrl;
+    }
   }
 }
 
