@@ -1,0 +1,12 @@
+query ChannelCardsQuery($type: String) {
+  allChannels(
+    type: $type
+  ) {
+    id
+    tid
+    name
+    description
+    imageUrl
+    url
+  }
+}

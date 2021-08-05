@@ -252,6 +252,20 @@ class DrupalApi extends RESTDataSource {
       return response;
     }
   }
+
+
+  async getAllTermsByVocabulary(vocab) {
+    const apiPath = `/jsonapi/taxonomy_term/${vocab}?sort=weight&include=field_ers_image.field_media_image`;
+    const response = await this.get(apiPath);
+
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  
 }
 
 export default DrupalApi;

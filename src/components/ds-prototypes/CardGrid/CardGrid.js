@@ -6,7 +6,7 @@ import {
 } from '@nypl/design-system-react-components';
 
 function CardGrid(props) {
-  const { title, children } = props;
+  const { title, description, children } = props;
 
   return (
     <div className="card-grid">
@@ -15,6 +15,9 @@ function CardGrid(props) {
         level={2}
         text={title}
       />
+      {description &&
+        <p>{description}</p>
+      }
       <List
         className="card-grid__list"
         modifiers={[

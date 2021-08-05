@@ -10,6 +10,9 @@ import filterResolver from './filterResolver';
 import ipAccessCheckResolver from './ipAccessCheckResolver';
 import validatePatronCardResolver from './validatePatronCardResolver';
 
+// TEST
+import channelResolver from './../channels/resolvers';
+
 export const resolvers = mergeResolvers([
   locationResolver,
   termResolver,
@@ -21,5 +24,6 @@ export const resolvers = mergeResolvers([
   ipAccessCheckResolver,
   validatePatronCardResolver,
   filterResolver,
-  ipAccessCheckResolver
+  ipAccessCheckResolver,
+  channelResolver
 ]);
