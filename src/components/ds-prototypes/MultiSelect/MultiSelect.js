@@ -119,7 +119,9 @@ function MultiSelect(props) {
     >
       <div className={s.multiSelect}>
         <button  
-          className={s.menuButton} 
+          className={`${s.menuButton} ${selectedItems[id] !== undefined 
+            && selectedItems[id].items.length && s.active}`
+          } 
           type="button"
           onClick={onMenuClick}
         >
