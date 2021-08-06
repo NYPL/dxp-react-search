@@ -165,9 +165,9 @@ function SearchResults(props) {
       />
       <div id="search-results">
         {clientIpAddress && 
-          <p>
+          <div>
             <h3>IP Address: {clientIpAddress}</h3>
-          </p>
+          </div>
         }
         {data.allSearchDocuments.items.map((item) => (
           <div key={item.id}>
