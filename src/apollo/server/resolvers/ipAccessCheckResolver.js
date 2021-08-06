@@ -12,7 +12,7 @@ const ipAccessCheckResolver = {
     allLocationMatches: async (parent, args, { dataSources }) => {
       // args.ip will be from query param for testing, otherwise use
       // the actual client ip from the request headers.
-      console.log(dataSources.drupalApi.context.req.headers)
+      /*console.log(dataSources.drupalApi.context.req.headers)
 
       let clientIp;
       if (args.ip) {
@@ -22,6 +22,23 @@ const ipAccessCheckResolver = {
       }
 
       const response = await dataSources.drupalApi.getIpAccessCheck(clientIp);
+      */
+
+      const contextRequest = dataSources.drupalApi.context.req;
+      let ipAddress = await requestIp.getClientIp(contextRequest);
+
+      // Check x-forwarded-for
+      // This will return multiple values, need to get the first one.
+      // Ex: '100.38.252.210, 10.255.0.25, 10.0.0.59,::ffff:10.0.0.187,::ffff:10.0.0.168'
+      if (contextRequest.headers['x-forwarded-for']) {
+        const addresses = contextRequest.headers['x-forwarded-for'].split(',');
+        ipAddress = addresses[0];
+      }
+
+      // Use the Imperva IP
+      if (contextRequest.headers['incap-client-ip']) {
+        ipAddress = contextRequest.headers['incap-client-ip'];
+      }
 
       // Manipulate data from api.
       let itemsArray = [];
@@ -70,7 +87,7 @@ const ipAccessCheckResolver = {
       return {
         items: matches,
         pageInfo: {
-          clientIp: clientIp
+          clientIp: ipAddress
         }
       }
     }
