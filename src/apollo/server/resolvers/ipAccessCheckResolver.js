@@ -26,6 +26,7 @@ const ipAccessCheckResolver = {
 
       const contextRequest = dataSources.drupalApi.context.req;
       let ipAddress = await requestIp.getClientIp(contextRequest);
+      console.log(ipAddress)
 
       // Check x-forwarded-for
       // This will return multiple values, need to get the first one.
@@ -39,6 +40,8 @@ const ipAccessCheckResolver = {
       if (contextRequest.headers['incap-client-ip']) {
         ipAddress = contextRequest.headers['incap-client-ip'];
       }
+
+      const response = await dataSources.drupalApi.getIpAccessCheck(ipAddress);
 
       // Manipulate data from api.
       let itemsArray = [];
