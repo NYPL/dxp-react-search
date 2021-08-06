@@ -12,6 +12,8 @@ const ipAccessCheckResolver = {
     allLocationMatches: async (parent, args, { dataSources }) => {
       // args.ip will be from query param for testing, otherwise use
       // the actual client ip from the request headers.
+      console.log(dataSources.drupalApi.context.req.headers)
+
       let clientIp;
       if (args.ip) {
         clientIp = args.ip;
