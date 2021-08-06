@@ -164,6 +164,11 @@ function SearchResults(props) {
         }}
       />
       <div id="search-results">
+        {clientIpAddress && 
+          <p>
+            <h3>IP Address: {clientIpAddress}</h3>
+          </p>
+        }
         {data.allSearchDocuments.items.map((item) => (
           <div key={item.id}>
             <OnlineResourceCard
