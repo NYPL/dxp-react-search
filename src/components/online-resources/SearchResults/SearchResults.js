@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Next
 import { useRouter } from 'next/router';
 // Apollo
-import { useQuery } from '@apollo/client';
+import { useQuery, useApolloClient  } from '@apollo/client';
 import {
   SearchDocumentQuery as SEARCH_RESULTS_QUERY
 } from './SearchDocumentQuery.gql';
@@ -22,21 +22,33 @@ const SEARCH_RESULTS_LIMIT = 10;
 
 function SearchResults(props) {
   const { resourceTopicTitle, resourceTopicId } = props;
-
   const router = useRouter();
   // @TODO do you actually need parseInt here?
   const currentPage = router.query.page ? parseInt(router.query.page) : 1;
-
-  // Query to get array of location ip matches
-  const { data: ipMatchesData } = useQuery(
-    LOCATION_MATCHES_BY_IP_QUERY, {
+  // Apollo.
+  const client = useApolloClient();
+  // Local state.
+  const [ipInfo, setIpInfo] = useState();
+  const [clientIpAddress, setClientIpAddress] = useState();
+  
+  // Run a client query after page renders to ensure that the ip address
+  // checking is not ssr, but from the client.
+  useEffect(() => {
+    client.query({ 
+      query: LOCATION_MATCHES_BY_IP_QUERY,
       variables: {
         ip: router.query.test_ip ? router.query.test_ip : null
       }
-    }
-  );
-  const ipInfo = ipMatchesData ? ipMatchesData : null;
-  const clientIpAddress = ipMatchesData?.allLocationMatches?.pageInfo.clientIp;
+    }).then(
+      response => {
+        setIpInfo(response.data ? response.data : null)
+        setClientIpAddress(response.data?.allLocationMatches?.pageInfo.clientIp);
+      },
+      error => {
+        //console.error(error);
+      }
+    );
+  }, []);
   
   // Query for data.
   const { loading, error, data } = useQuery(
@@ -145,7 +157,7 @@ function SearchResults(props) {
 
   return (
     <div id="search-results__container" className={s.container}>
-      {router.query.test_ip &&
+      {router.query.test_ip && clientIpAddress &&
         <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
       }
       {router.query.alpha &&
