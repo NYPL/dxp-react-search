@@ -60,6 +60,7 @@ function ChannelsCards() {
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam est, ac varius integer pharetra nulla pellentesque. Nunc neque enim metus ut volutpat turpis nascetur."
     >
       {data.allChannels.map((item) => {
+        console.log(item)
         return (
           <li
             key={item.id}
@@ -69,7 +70,7 @@ function ChannelsCards() {
               name={item.name}
               imageUrl={item.imageUrl}
               description={item.description}
-              url={item.slug}
+              url={item.url}
             />
           </li>
         )

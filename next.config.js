@@ -47,6 +47,12 @@ module.exports = (nextConfig = {}) => {
       })
 
       return config;
-    }
+    },
+    images: {
+      domains: [
+        'qa-cdn-d8-2.nypl.org',
+        'localhost'
+      ],
+    },
   })
 }

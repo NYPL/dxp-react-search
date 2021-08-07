@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 // Components
 import { 
   Heading,
-  Image
+  //Image
 } from '@nypl/design-system-react-components';
 import Link from 'next/link';
-
+import Image from 'next/image';
 
 function Card(props) {
   const { name, imageUrl, description, url } = props;
@@ -16,6 +16,9 @@ function Card(props) {
         <Image
           alt=""
           src={imageUrl}
+          width={308}
+          height={154}
+          quality={10}
         />
       }
       {url &&
