@@ -1,4 +1,3 @@
-import requestIp from 'request-ip';
 // Utils
 import { 
   ONLINE_RESOURCES_ALL_BRANCH_UUID,
@@ -6,31 +5,13 @@ import {
   ONLINE_RESOURCES_OFFSITE_UUID,
   ONLINE_RESOURCES_ONSITE_UUID
 } from './../../../utils/config';
+import getRequestIp from './../../../utils/getRequestIp';
 
 const ipAccessCheckResolver = {
   Query: {
     allLocationMatches: async (parent, args, { dataSources }) => {
-      // Get the context request.
-      const contextRequest = dataSources.drupalApi.context.req;
-      // Default to the request-ip value for the ip address.
-      let ipAddress = await requestIp.getClientIp(contextRequest);
-      // Check x-forwarded-for header.
-      // This will return multiple values, need to get the first one.
-      // Ex: '100.38.252.210, 10.255.0.25, 10.0.0.59,::ffff:10.0.0.187,::ffff:10.0.0.168'
-      if (contextRequest.headers['x-forwarded-for']) {
-        const addresses = contextRequest.headers['x-forwarded-for'].split(',');
-        ipAddress = addresses[0];
-      }
-      // Use the Imperva IP if headers are present.
-      if (contextRequest.headers['incap-client-ip']) {
-        ipAddress = contextRequest.headers['incap-client-ip'];
-      }
-      // Use test_ip value if it's set as a query param for debug mode.
-      if (args.ip) {
-        ipAddress = args.ip;
-      }
-
-      const response = await dataSources.drupalApi.getIpAccessCheck(ipAddress);
+      const clientIp = getRequestIp(dataSources.drupalApi.context.req, args.ip);
+      const response = await dataSources.drupalApi.getIpAccessCheck(clientIp);
 
       // Manipulate data from api.
       let itemsArray = [];
@@ -79,21 +60,15 @@ const ipAccessCheckResolver = {
       return {
         items: matches,
         pageInfo: {
-          clientIp: ipAddress
+          clientIp: clientIp
         }
       }
     }
   },
   LocationMatch: {
-    id: locationMatch => {
-      return locationMatch.mapping_uuid;
-    },
-    name: locationMatch => {
-      return locationMatch.name;
-    },
-    locationId: locationMatch => {
-      return locationMatch.uuid;
-    },
+    id: locationMatch => locationMatch.mapping_uuid,
+    name: locationMatch => locationMatch.name,
+    locationId: locationMatch => locationMatch.uuid,
   }
 }
 
