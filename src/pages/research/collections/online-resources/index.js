@@ -11,13 +11,16 @@ import ResourceTopics from './../../../../components/online-resources/ResourceTo
 import MostPopularResources from './../../../../components/online-resources/MostPopularResources';
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
+import onlineResourcesContent from './../../../../__content/onlineResources';
 
 function OnlineResources() {  
+  const { title, description } = onlineResourcesContent;
+
   return (
     <PageContainer
       metaTags={{
-        title: 'Online Resources',
-        description: 'Hello welcome to the NYPL!',
+        title: title,
+        description: description,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}`
       }}
       showContentHeader={true}

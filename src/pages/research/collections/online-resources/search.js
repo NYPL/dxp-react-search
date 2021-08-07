@@ -10,13 +10,16 @@ import SearchResults from '../../../../components/online-resources/SearchResults
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import onlineResourcesContent from './../../../../__content/onlineResources';
 
 function OnlineResourcesSearchPage() {
+  const { title, description } = onlineResourcesContent;
+
   return (
     <PageContainer
       metaTags={{
-        title: 'Online Resources Search',
-        description: 'Hello welcome to the NYPL!',
+        title: `${title} Search`,
+        description: description,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/search`
       }}
       breadcrumbs={[

@@ -74,7 +74,7 @@ function OnlineResourceSlug() {
     <PageContainer
       metaTags={{
         title: `${data.searchDocument.name}`,
-        description: `${data.searchDocument.name}`,
+        description: `${data.searchDocument.description}`,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
       }}
       breadcrumbs={[

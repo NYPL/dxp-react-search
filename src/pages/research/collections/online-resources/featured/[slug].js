@@ -73,8 +73,9 @@ function FeaturedResourceTopicSlug() {
     <PageContainer
       metaTags={{
         title: `${data.resourceTopic.name}`,
-        description: `${data.resourceTopic.name}`,
-        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
+        description: data.resourceTopic.description,
+        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`,
+        imageUrl: data.resourceTopic.imageUrl
       }}
       breadcrumbs={[
         {
