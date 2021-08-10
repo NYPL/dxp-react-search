@@ -5,7 +5,7 @@ const SidebarMenusContent = [
     items: [
       {
         'title': 'Scholarly Journals',
-        'link': '/research/collections/online-resources/find-journals-title-databases',
+        'link': '/research/collections/articles-databases/find-journals-title-databases',
         'description': 'Search for full text or specific journals or magazines.'
       },
       {
