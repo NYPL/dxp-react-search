@@ -3,5 +3,8 @@ query ResourceTopicBySlugQuery($slug: String) {
     id
     tid
     name
+    description
+    imageUrl
+    url
   }
 }

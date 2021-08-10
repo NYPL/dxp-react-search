@@ -104,7 +104,7 @@ function SearchForm() {
       ariaLabel={'Find your online resource'}
       onSubmit={handleSubmit}
       autoSuggestInputId={'search-form__search-input'}
-      autoSuggestAriaLabel={'Search online resources'}
+      autoSuggestAriaLabel={'Search articles and databases'}
       suggestions={suggestions}
       onSuggestionSelected={onSuggestionSelected}
       onSuggestionsFetchRequested={onSuggestionsFetchRequested}

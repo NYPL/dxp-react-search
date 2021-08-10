@@ -32,6 +32,7 @@ function PageContainer(props) {
           title={metaTags.title}
           description={metaTags.description}
           url={metaTags.url}
+          imageUrl={metaTags.imageUrl}
         />
       }
       <div className={`${wrapperClass} nypl-ds`}>

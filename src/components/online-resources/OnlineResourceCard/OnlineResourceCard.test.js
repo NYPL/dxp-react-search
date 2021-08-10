@@ -9,7 +9,7 @@ expect.extend(toHaveNoViolations);
 
 const mockDataItem = {
   id: '3250e780-db3b-4669-b920-06ab3316eba8',
-  slug: '/research/collections/online-resources/bookflix',
+  slug: '/research/collections/articles-databases/bookflix',
   name: 'BookFlix',
   description: 'BookFlix pairs classic fictional video storybooks from Weston Woods with nonfiction eBooks from Scholastic. (PreK - 3)  ',
   accessibilityLink: null,
@@ -74,7 +74,7 @@ describe('OnlineResourceCard Component', () => {
   test('If a resource has no subjects, then I should not see a Subjects label', () => {
     const mockData = {
       id: '3250e780-db3b-4669-b920-06ab3316eba8',
-      slug: '/research/collections/online-resources/bookflix',
+      slug: '/research/collections/articles-databases/bookflix',
       name: 'BookFlix',
       description: 'BookFlix pairs classic fictional video storybooks from Weston Woods with nonfiction eBooks from Scholastic. (PreK - 3)  ',
       accessibilityLink: null,
@@ -104,7 +104,7 @@ describe('OnlineResourceCard Component', () => {
   test('If a resource has no access locations, then I should not see an Access Locations label', () => {
     const mockData = {
       id: '3250e780-db3b-4669-b920-06ab3316eba8',
-      slug: '/research/collections/online-resources/bookflix',
+      slug: '/research/collections/articles-databases/bookflix',
       name: 'BookFlix',
       description: 'BookFlix pairs classic fictional video storybooks from Weston Woods with nonfiction eBooks from Scholastic. (PreK - 3)  ',
       accessibilityLink: null,

@@ -39,10 +39,12 @@ class DrupalApi extends RESTDataSource {
   }
 
   async getResourceTopic(args) {   
-    // @TODO this is the older way based on tid 
-    //const response = await this.get(`/jsonapi/taxonomy_term/resource_topic?filter[drupal_internal__tid]=${args.slug}`);
-    const response = await this.get(`/jsonapi/taxonomy_term/resource_topic/${args.slug}`);
-    return response.data;
+    const response = await this.get(`/jsonapi/taxonomy_term/resource_topic/${args.slug}?include=field_ers_image.field_media_image`);
+    if ('data' in response) {
+      return response;
+    } else {
+      return [];
+    }
   }
 
   async getAllOnlineResources(args) {

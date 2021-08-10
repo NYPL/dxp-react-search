@@ -20,6 +20,7 @@ import SearchResults from './../../../../../components/online-resources/SearchRe
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../../utils/config';
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import onlineResourcesContent from './../../../../../__content/onlineResources';
 
 function FeaturedResourceTopicSlug() {
   const router = useRouter();
@@ -58,8 +59,8 @@ function FeaturedResourceTopicSlug() {
       <PageContainer
         breadcrumbs={[
           {
-            text: 'Online Resources',
-            url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+            text: onlineResourcesContent.title,
+            url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`
           }
         ]}
         contentPrimary={
@@ -73,13 +74,14 @@ function FeaturedResourceTopicSlug() {
     <PageContainer
       metaTags={{
         title: `${data.resourceTopic.name}`,
-        description: `${data.resourceTopic.name}`,
-        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`
+        description: data.resourceTopic.description,
+        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`,
+        imageUrl: data.resourceTopic.imageUrl
       }}
       breadcrumbs={[
         {
-          text: 'Online Resources',
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+          text: onlineResourcesContent.title,
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`
         }
       ]}
       showContentHeader={true}
