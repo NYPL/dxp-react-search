@@ -20,7 +20,7 @@ function OnlineResourcesFindJournalsTitlePage() {
       breadcrumbs={[
         {
           text: 'Online Resources',
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/${ONLINE_RESOURCES_BASE_PATH}`
         }
       ]}
       showContentHeader={false}
