@@ -7,13 +7,12 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 // Set default timezone.
 dayjs.tz.setDefault('America/New_York');
-// Ip checking
-import requestIp from "request-ip";
 // Utils
 import { 
   ONLINE_RESOURCES_ALL_BRANCH_UUID,
   ONLINE_RESOURCES_OFFSITE_UUID
 } from './../../../utils/config';
+import getRequestIp from './../../../utils/getRequestIp';
 // Env vars
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -21,7 +20,7 @@ const searchResolver = {
   Query: {
     allSearchDocuments: async (parent, args, { dataSources }) => {
       const response = await dataSources.drupalApi.getAllSearchDocuments(args);
-      const clientIp = await requestIp.getClientIp(dataSources.drupalApi.context.req);
+      const clientIp = await getRequestIp(dataSources.drupalApi.context.req);
 
       // Create a dayjs date object, using default timezone.
       // @see https://github.com/iamkun/dayjs/issues/1227

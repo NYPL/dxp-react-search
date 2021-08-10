@@ -1,4 +1,3 @@
-import requestIp from 'request-ip';
 // Utils
 import { 
   ONLINE_RESOURCES_ALL_BRANCH_UUID,
@@ -6,19 +5,12 @@ import {
   ONLINE_RESOURCES_OFFSITE_UUID,
   ONLINE_RESOURCES_ONSITE_UUID
 } from './../../../utils/config';
+import getRequestIp from './../../../utils/getRequestIp';
 
 const ipAccessCheckResolver = {
   Query: {
     allLocationMatches: async (parent, args, { dataSources }) => {
-      // args.ip will be from query param for testing, otherwise use
-      // the actual client ip from the request headers.
-      let clientIp;
-      if (args.ip) {
-        clientIp = args.ip;
-      } else {
-        clientIp = await requestIp.getClientIp(dataSources.drupalApi.context.req);
-      }
-
+      const clientIp = getRequestIp(dataSources.drupalApi.context.req, args.ip);
       const response = await dataSources.drupalApi.getIpAccessCheck(clientIp);
 
       // Manipulate data from api.
@@ -74,15 +66,9 @@ const ipAccessCheckResolver = {
     }
   },
   LocationMatch: {
-    id: locationMatch => {
-      return locationMatch.mapping_uuid;
-    },
-    name: locationMatch => {
-      return locationMatch.name;
-    },
-    locationId: locationMatch => {
-      return locationMatch.uuid;
-    },
+    id: locationMatch => locationMatch.mapping_uuid,
+    name: locationMatch => locationMatch.name,
+    locationId: locationMatch => locationMatch.uuid,
   }
 }
 

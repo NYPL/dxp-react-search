@@ -8,12 +8,12 @@ const resourceTopicResolver = {
     allResourceTopics: async (parent, args, { dataSources }) => {
       const response = await dataSources.drupalApi.getAllResourceTopics();
       responseIncluded = response.included;
-
       return response.data;
     },
     resourceTopic: async (parent, args, { dataSources }) => {
       const response = await dataSources.drupalApi.getResourceTopic(args);
-      return response;
+      responseIncluded = response.included;
+      return response.data;
     }
   },
   ResourceTopic: {
