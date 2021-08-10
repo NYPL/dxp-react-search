@@ -20,6 +20,7 @@ import SearchResultsSkeleton from './../../../../components/online-resources/Sea
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import onlineResourcesContent from './../../../../__content/onlineResources';
 
 function OnlineResourceSlug() {
   const router = useRouter();
@@ -59,7 +60,7 @@ function OnlineResourceSlug() {
       <PageContainer
         breadcrumbs={[
           {
-            text: 'Online Resources',
+            text: onlineResourcesContent.title,
             url: `${NEXT_PUBLIC_NYPL_DOMAIN}/${ONLINE_RESOURCES_BASE_PATH}`
           }
         ]}
@@ -79,8 +80,8 @@ function OnlineResourceSlug() {
       }}
       breadcrumbs={[
         {
-          text: 'Online Resources',
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/${ONLINE_RESOURCES_BASE_PATH}`
+          text: onlineResourcesContent.title,
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`
         }
       ]}
       showContentHeader={true}
