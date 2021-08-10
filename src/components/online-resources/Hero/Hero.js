@@ -2,10 +2,10 @@ import React from 'react';
 // Components
 import { Hero as DsHero } from '@nypl/design-system-react-components';
 // Content
-import HeroContent from './content';
+import onlineResourcesContent from './../../../__content/onlineResources';
 
 function Hero() {
-  const { title, description } = HeroContent;
+  const { title, description } = onlineResourcesContent;
 
   return (
     <DsHero

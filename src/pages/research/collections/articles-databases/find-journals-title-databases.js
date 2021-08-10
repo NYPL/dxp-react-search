@@ -8,8 +8,11 @@ import PageContainer from '../../../../components/online-resources/layouts/PageC
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from '../../../../utils/config';
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import onlineResourcesContent from './../../../../__content/onlineResources';
 
 function OnlineResourcesFindJournalsTitlePage() {
+  const { title } = onlineResourcesContent;
+
   return (
     <PageContainer
       metaTags={{
@@ -19,8 +22,8 @@ function OnlineResourcesFindJournalsTitlePage() {
       }}
       breadcrumbs={[
         {
-          text: 'Online Resources',
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections/online-resources`
+          text: title,
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`
         }
       ]}
       showContentHeader={false}
