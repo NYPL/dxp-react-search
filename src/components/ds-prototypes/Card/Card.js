@@ -13,13 +13,18 @@ function Card(props) {
   return (
     <Fragment>
       {imageUrl &&
-        <Image
-          alt=""
-          src={imageUrl}
-          width={308}
-          height={154}
-          quality={10}
-        />
+        <div className='image-container'>
+          <Image
+            className="image"
+            alt=""
+            src={imageUrl}
+            /*width={308}
+            height={154}
+            */
+            layout="fill"
+            quality={10}
+          />
+        </div>
       }
       {url &&
         <h3 className={'heading'}>

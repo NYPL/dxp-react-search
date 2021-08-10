@@ -17,7 +17,7 @@ function ChannelsCards() {
   const { loading, error, data } = useQuery(
     CHANNELS_QUERY, {
       variables: {
-        type: 'resource_topic'
+        type: 'channel'
       }
     }
   );
@@ -25,7 +25,7 @@ function ChannelsCards() {
   // Error state.
   if (error) {
     return (
-      <div>Error while loading most popular.</div>
+      <div>Error while loading channels.</div>
     );
   }
 

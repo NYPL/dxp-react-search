@@ -72,3 +72,19 @@
 .layout-container {
   overflow-x: hidden;
 }
+
+/* TEST */
+.image-container {
+  width: 100%;
+
+  > div {
+    position: unset !important;
+  }
+
+  .image {
+    object-fit: scale-down;
+    position: relative !important;
+    width: 308px !important;
+    height: 154px !important;
+  }
+}

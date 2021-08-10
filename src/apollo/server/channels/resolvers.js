@@ -21,8 +21,15 @@ const channelResolver = {
     tid: channel => channel.attributes.drupal_internal__tid,
     name: channel => channel.attributes.name,
     description: channel => channel.attributes.description.processed,
-    imageUrl: channel => 
-      getImageUrlFromIncludedMedia(channel, responseIncluded, 'field_ers_image'),
+    imageUrl: channel => {
+      return getImageUrlFromIncludedMedia(channel, responseIncluded, 'field_ers_image');
+      /*if (responseIncluded !== 'undefined') {
+        getImageUrlFromIncludedMedia(channel, responseIncluded, 'field_ers_image');
+      } else {
+        return null;
+      }
+      */
+    },
     url: channel => channel.attributes.path.alias
   }
 }
