@@ -73,3 +73,7 @@
 .accessLocation {
   padding-right: var(--space-xs);
 }
+
+.shareDatabase {
+  padding-top: var(--space-s);
+}
