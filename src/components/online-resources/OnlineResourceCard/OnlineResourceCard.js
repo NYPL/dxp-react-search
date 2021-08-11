@@ -49,8 +49,13 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
               return (
                 <a 
                   key={item.id} 
-                  className={s.accessLocation} 
+                  className={`${s.accessLocation} ${
+                    item.id === 'all-branch-uuid' && s.disabled}`
+                  }
                   href={item.url}
+                  {...(item.id === 'all-branch-uuid' && { 
+                    'aria-disabled': true 
+                  })}
                 >
                   {item.name}
                 </a>

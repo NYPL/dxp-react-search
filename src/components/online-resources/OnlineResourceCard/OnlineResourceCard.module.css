@@ -35,7 +35,6 @@
 .resourceType {
   font-size: 12px;
   font-weight: 700;
-  /*color: #00838A;*/
   color: var(--section-research-primary);
   text-transform: uppercase;
 }
@@ -72,6 +71,12 @@
 
 .accessLocation {
   padding-right: var(--space-xs);
+}
+
+.accessLocation.disabled {
+  color: var(--ui-gray-dark);
+  pointer-events: none;
+  text-decoration: none;
 }
 
 .shareDatabase {
