@@ -118,11 +118,10 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       {slug && collapsible &&
         <div className={s.shareDatabase}>
           <Link href={slug}>
-            <a>Share this database</a>
+            <a>Share this Database</a>
           </Link>
         </div>
       }
-
       <div className={s.links}>
         {accessibilityLink &&
           <DsLink href={accessibilityLink}>
