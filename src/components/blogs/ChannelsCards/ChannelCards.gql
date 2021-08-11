@@ -7,6 +7,14 @@ query ChannelCardsQuery($type: String) {
     name
     description
     imageUrl
+    image {
+      id
+      alt
+      items {
+        label
+        uri
+      }
+    }
     url
   }
 }

@@ -82,9 +82,9 @@
   }
 
   .image {
-    object-fit: scale-down;
+    object-fit: contain;
     position: relative !important;
-    width: 308px !important;
-    height: 154px !important;
+    width: 100% !important;
+    height: unset !important;
   }
 }

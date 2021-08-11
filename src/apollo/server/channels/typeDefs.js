@@ -7,7 +7,19 @@ export const typeDefs = gql`
     name: String!
     description: String
     imageUrl: String
+    image: Image
     url: String
+  }
+
+  type Image {
+    id: ID!,
+    alt: String
+    items: [ImageStyle]
+  }
+
+  type ImageStyle {
+    label: String,
+    uri: String
   }
 
   extend type Query {

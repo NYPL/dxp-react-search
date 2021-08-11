@@ -23,14 +23,26 @@ const channelResolver = {
     description: channel => channel.attributes.description.processed,
     imageUrl: channel => {
       return getImageUrlFromIncludedMedia(channel, responseIncluded, 'field_ers_image');
-      /*if (responseIncluded !== 'undefined') {
-        getImageUrlFromIncludedMedia(channel, responseIncluded, 'field_ers_image');
-      } else {
-        return null;
-      }
-      */
     },
+    image: channel => channel,
     url: channel => channel.attributes.path.alias
+  },
+  Image: {
+    id: image => image.relationships['field_ers_image'].data?.id,
+    alt: image => 'test',
+    items: image => {
+      const test = []; 
+      const imageStyles = getImageUrlFromIncludedMedia(image, responseIncluded, 'field_ers_image');
+      imageStyles.forEach(imageStyle => {
+        for (const [key, value] of Object.entries(imageStyle)) {
+          test.push({
+            label: key,
+            uri: value
+          });
+        }
+      })
+      return test;
+    }
   }
 }
 
@@ -52,15 +64,22 @@ function getImageUrlFromIncludedMedia(item, responseIncluded, fieldName) {
   let imageUrl;
   responseIncluded.forEach(includedItem => {
     if (fileEntityId === includedItem.id) {
-      imageUrl = includedItem.attributes.uri.url;
+      //imageUrl = includedItem.attributes.uri.url;
+      //console.log(includedItem.attributes.image_style_uri)
+      //imageUrl = includedItem.attributes.image_style_uri[0]['medium'];
+      imageUrl = includedItem.attributes.image_style_uri;
     }
   });
+  //console.log(imageUrl)
+  return imageUrl;
+
   // @TODO Clean this up, temporary fix for local url in diff format than aws.
-  if (imageUrl && imageUrl.includes('sites/default')) {
+  /*if (imageUrl && imageUrl.includes('sites/default')) {
     return `http://localhost:8080${imageUrl}`;
   } else {
     return imageUrl;
   }
+  */
 }
 
 export default channelResolver;
