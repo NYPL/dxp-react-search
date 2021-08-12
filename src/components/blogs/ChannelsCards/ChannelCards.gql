@@ -6,11 +6,11 @@ query ChannelCardsQuery($type: String) {
     tid
     name
     description
-    imageUrl
     image {
       id
       alt
-      items {
+      transformations {
+        id
         label
         uri
       }

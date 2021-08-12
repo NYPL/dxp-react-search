@@ -12,13 +12,15 @@ export const typeDefs = gql`
   }
 
   type Image {
-    id: ID!,
+    id: ID!
     alt: String
-    items: [ImageStyle]
+    uri: String
+    transformations: [ImageTransformation]
   }
 
-  type ImageStyle {
-    label: String,
+  type ImageTransformation {
+    id: ID!
+    label: String
     uri: String
   }
 

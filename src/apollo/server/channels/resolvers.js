@@ -3,8 +3,6 @@ let responseIncluded;
 const channelResolver = {
   Query: {
     allChannels: async (parent, args, { dataSources }) => {
-      //const vocab = 'channel';
-      //const vocab = 'resource_topic';
       const response = await dataSources.drupalApi.getAllTermsByVocabulary(args.type);
       responseIncluded = response.included;
 
@@ -30,22 +28,35 @@ const channelResolver = {
   Image: {
     id: image => image.relationships['field_ers_image'].data?.id,
     alt: image => 'test',
-    items: image => {
-      const test = []; 
-      const imageStyles = getImageUrlFromIncludedMedia(image, responseIncluded, 'field_ers_image');
-      imageStyles.forEach(imageStyle => {
-        for (const [key, value] of Object.entries(imageStyle)) {
-          test.push({
-            label: key,
-            uri: value
-          });
+    uri: image => {
+      const images = getImageUrlFromIncludedMedia(image, responseIncluded, 'field_ers_image');
+      return images['uri']
+    },
+    transformations: image => {
+      const transformations = []; 
+      const images = getImageUrlFromIncludedMedia(image, responseIncluded, 'field_ers_image');
+      images['transformations'].forEach(imageStyle => {
+        for (const [label, uri] of Object.entries(imageStyle)) {
+          transformations.push({
+            id: `${image.relationships['field_ers_image'].data?.id}__${label}`,
+            label: label,
+            uri: uri
+          });  
         }
-      })
-      return test;
+      });
+      return transformations;
     }
   }
 }
 
+/**
+ * Gets an image url from a "included" media resource from the D9 json:api.
+ *
+ * @param {array} item - is this an object?
+ * @param {array} responseIncluded - the included array from json respond.
+ * @param {string} fieldName - name of the field for the image.
+ * @return {object} image - An object of uri and transformations.
+ */
 function getImageUrlFromIncludedMedia(item, responseIncluded, fieldName) {
   // Get the media entity id.
   let mediaEntityId = false;
@@ -61,17 +72,26 @@ function getImageUrlFromIncludedMedia(item, responseIncluded, fieldName) {
     }
   });
   // Find the included file entity item using the file entity id.
-  let imageUrl;
+  let image;
+  let imageUri;
   responseIncluded.forEach(includedItem => {
     if (fileEntityId === includedItem.id) {
-      //imageUrl = includedItem.attributes.uri.url;
-      //console.log(includedItem.attributes.image_style_uri)
-      //imageUrl = includedItem.attributes.image_style_uri[0]['medium'];
-      imageUrl = includedItem.attributes.image_style_uri;
+      const rawImageUri = includedItem.attributes.uri.url;
+      // @TODO Clean this up, temporary fix for local url in diff format than aws.
+      if (rawImageUri && rawImageUri.includes('sites/default')) {
+        imageUri = `http://localhost:8080${rawImageUri}`;
+      } else {
+        imageUri = rawImageUri;
+      }
+      //
+      image = {
+        uri: imageUri,
+        transformations: includedItem.attributes.image_style_uri
+      }
     }
   });
-  //console.log(imageUrl)
-  return imageUrl;
+  //console.log(image)
+  return image;
 
   // @TODO Clean this up, temporary fix for local url in diff format than aws.
   /*if (imageUrl && imageUrl.includes('sites/default')) {

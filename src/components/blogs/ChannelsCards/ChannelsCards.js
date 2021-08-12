@@ -54,13 +54,22 @@ function ChannelsCards() {
     );
   }
 
+  function getImageTransformation(id, image) {
+    let imageUri;
+    image.transformations.map(transformation => {
+      if (transformation.label === id) {
+        imageUri = transformation.uri;
+      }
+    });
+    return imageUri;
+  }
+
   return (
     <CardGrid 
       title="Explore by Channel"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam est, ac varius integer pharetra nulla pellentesque. Nunc neque enim metus ut volutpat turpis nascetur."
     >
       {data.allChannels.map((item) => {
-        console.log(item)
         return (
           <li
             key={item.id}
@@ -68,7 +77,7 @@ function ChannelsCards() {
           >
             <Card
               name={item.name}
-              imageUrl={item.imageUrl}
+              imageUrl={getImageTransformation('2_1_960', item.image)}
               description={item.description}
               url={item.url}
             />
