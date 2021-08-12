@@ -18,7 +18,8 @@ const groups = [
   },
   {
     id: 'audience_by_age',
-    label: 'Audience'
+    label: 'Audience',
+    limiter: 'online_resource'
   },
   {
     id: 'availability',
