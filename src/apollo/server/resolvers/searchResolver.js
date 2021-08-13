@@ -68,22 +68,12 @@ const searchResolver = {
         document['accessible-from'] : null
     },
     accessLocations: document => {
-      const accessLocations = document['access-locations'];
-      // Add offsite and onsite items to accessLocations based on accessibleFrom.
-      // @TODO test if this works for ones with both offsite and onsite?
-      if (document['accessible-from'].includes('offsite')) {
-        accessLocations.push({
-          uuid: ONLINE_RESOURCES_OFFSITE_UUID,
-          title: "Outside the Library",
-          url: null,
-          // @TODO do you use this?
-          drupalInternalValue: document['accessible-from']
-        });
-      } else if (document['accessible-from'].includes('onsite')) {
-        accessLocations.push({
+      const accessLocations = document['access-locations'];      
+      if (document['accessible-from'].includes('onsite')) {
+        accessLocations.unshift({
           uuid: ONLINE_RESOURCES_ALL_BRANCH_UUID,
           title: "All Branch Libraries",
-          url: null,
+          url: '#',
           // @TODO do you use this?
           drupalInternalValue: document['accessible-from']
         });
