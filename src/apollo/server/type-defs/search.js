@@ -47,10 +47,6 @@ export const typeDefs = gql`
     pageInfo: PageInfo
   }
 
-  type SearchDocumentConnect {
-    
-  }
-
   input SearchDocumentFilter {
     q: String,
     tid: String,
