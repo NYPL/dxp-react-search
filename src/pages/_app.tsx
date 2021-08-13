@@ -24,6 +24,8 @@ function SearchApp({ Component, pageProps }: AppProps) {
   return (
     <AppLayout>
       <Component {...pageProps} />
+
+      
     </AppLayout>
   );
 }
