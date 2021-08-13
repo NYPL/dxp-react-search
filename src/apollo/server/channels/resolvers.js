@@ -19,6 +19,7 @@ const channelResolver = {
     tid: channel => channel.attributes.drupal_internal__tid,
     name: channel => channel.attributes.name,
     description: channel => channel.attributes.description.processed,
+    // @TODO delete me.
     imageUrl: channel => {
       return getImageUrlFromIncludedMedia(channel, responseIncluded, 'field_ers_image');
     },

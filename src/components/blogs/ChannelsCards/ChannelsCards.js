@@ -9,8 +9,9 @@ import {
   List
 } from '@nypl/design-system-react-components';
 import CardGrid from './../../ds-prototypes/CardGrid';
-import Card from './../../ds-prototypes/Card';
 import CardGridSkeleton from './../../ds-prototypes/CardGrid/CardGridSkeleton';
+import Card from './../../shared/Card';
+
 
 function ChannelsCards() {
   // Query for data.
@@ -54,16 +55,6 @@ function ChannelsCards() {
     );
   }
 
-  function getImageTransformation(id, image) {
-    let imageUri;
-    image.transformations.map(transformation => {
-      if (transformation.label === id) {
-        imageUri = transformation.uri;
-      }
-    });
-    return imageUri;
-  }
-
   return (
     <CardGrid 
       title="Explore by Channel"
@@ -76,9 +67,10 @@ function ChannelsCards() {
             className="card-grid__list-item"
           >
             <Card
+              id={item.id}
               name={item.name}
-              imageUrl={getImageTransformation('2_1_960', item.image)}
               description={item.description}
+              image={item.image}
               url={item.url}
             />
           </li>

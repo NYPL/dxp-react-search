@@ -33,7 +33,7 @@ function PageContainer(props) {
 
   return (
     <SharedPageContainer
-      wrapperClass='nypl--blogs'
+      wrapperClass='nypl--articles'
       metaTags={metaTags}
       {...(showContentHeader && { 
         contentHeader: ContentHeader 
