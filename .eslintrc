@@ -4,7 +4,8 @@
     "plugin:import/warnings",
     "plugin:import/typescript",
     "prettier",
-    "plugin:prettier/recommended",
-    "next", "next/core-web-vitals"
-  ]
+    "plugin:prettier/recommended"
+    //"next", "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser"
 }
