@@ -9,6 +9,7 @@ function SearchApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   // When next js routes change, send data to GA.
   useEffect(() => {
+    // @ts-ignore
     const handleRouteChange = (url) => {
       // @ts-ignore
       window.gtag("config", NEXT_PUBLIC_GA_TRACKING_ID, {
