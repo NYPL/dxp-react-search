@@ -33,6 +33,7 @@ function OnlineResourceSlug() {
   const client = useApolloClient();
   // Local state.
   const [ipInfo, setIpInfo] = useState();
+  const [clientIpAddress, setClientIpAddress] = useState();
   // Run a client query after page renders to ensure that the ip address
   // checking is not ssr, but from the client.
   useEffect(() => {
@@ -43,7 +44,8 @@ function OnlineResourceSlug() {
       }
     }).then(
       response => {
-        setIpInfo(response.data ? response.data : null)
+        setIpInfo(response.data ? response.data : null);
+        setClientIpAddress(response.data?.allLocationMatches?.pageInfo.clientIp);
       },
       error => {
         //console.error(error);
@@ -112,6 +114,14 @@ function OnlineResourceSlug() {
       showContentHeader={true}
       contentPrimary={
         <Fragment>
+          {router.query.test_ip && clientIpAddress &&
+            <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
+          }
+          {clientIpAddress && 
+            <div>
+              <h3>IP Address: {clientIpAddress}</h3>
+            </div>
+          }
           <OnlineResourceCard item={data.searchDocument} ipInfo={ipInfo} />
         </Fragment>
       }
