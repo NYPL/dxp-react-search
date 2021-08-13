@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 // Next
 import Router, { useRouter } from 'next/router';
 // Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
-import { useQuery } from '@apollo/client';
+import { useQuery, useApolloClient } from '@apollo/client';
 import { withApollo } from './../../../../apollo/client/withApollo';
 import { 
   DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY 
@@ -11,6 +11,9 @@ import {
 import {
   OnlineResourceByIdQuery as ONLINE_RESOURCE_BY_ID_QUERY
 } from './../../../../apollo/client/queries/OnlineResourceById.gql';
+import {
+  LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY
+} from './../../../../apollo/client/queries/LocationMatchesByIp.gql';
 // Redux
 import { withRedux } from './../../../../redux/withRedux';
 // Components
@@ -25,6 +28,30 @@ import onlineResourcesContent from './../../../../__content/onlineResources';
 function OnlineResourceSlug() {
   const router = useRouter();
   const { slug } = router.query;
+  
+  // Apollo.
+  const client = useApolloClient();
+  // Local state.
+  const [ipInfo, setIpInfo] = useState();
+  const [clientIpAddress, setClientIpAddress] = useState();
+  // Run a client query after page renders to ensure that the ip address
+  // checking is not ssr, but from the client.
+  useEffect(() => {
+    client.query({ 
+      query: LOCATION_MATCHES_BY_IP_QUERY,
+      variables: {
+        ip: router.query.test_ip ? router.query.test_ip : null
+      }
+    }).then(
+      response => {
+        setIpInfo(response.data ? response.data : null);
+        setClientIpAddress(response.data?.allLocationMatches?.pageInfo.clientIp);
+      },
+      error => {
+        //console.error(error);
+      }
+    );
+  }, []);
 
   // Run decoupled router query to get uuid.
   const { data: decoupledRouterData } = useQuery(
@@ -87,7 +114,15 @@ function OnlineResourceSlug() {
       showContentHeader={true}
       contentPrimary={
         <Fragment>
-          <OnlineResourceCard item={data.searchDocument} />
+          {router.query.test_ip && clientIpAddress &&
+            <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
+          }
+          {clientIpAddress && 
+            <div>
+              <h3>IP Address: {clientIpAddress}</h3>
+            </div>
+          }
+          <OnlineResourceCard item={data.searchDocument} ipInfo={ipInfo} />
         </Fragment>
       }
     />

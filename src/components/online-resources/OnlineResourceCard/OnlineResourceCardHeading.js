@@ -29,7 +29,6 @@ function OnlineResourceCardHeading(props) {
   
     const linkAccess = locationMatchesArray
       .filter(e => accessLocationsArray.includes(e));
-        
     return linkAccess.length;
   }
 
