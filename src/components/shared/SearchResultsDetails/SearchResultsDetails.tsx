@@ -4,14 +4,14 @@ import { Button, Heading } from "@nypl/design-system-react-components";
 import s from "./SearchResultsDetails.module.css";
 
 interface SearchResultsDetailsProps {
-  /** */
+  /** The label used in the component's heading */
   label: string;
-  /** */
+  /** The search results details message. */
   message: string;
-  /** */
+  /** The text to display for the clear button. */
   clearMessage: string;
-  /** */
-  onClick: any;
+  /** The action to perform on the `<button>`'s onClick function */
+  onClick: (event: React.MouseEvent | React.KeyboardEvent) => void;
 }
 
 function SearchResultsDetails({
