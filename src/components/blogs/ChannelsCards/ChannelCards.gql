@@ -1,7 +1,5 @@
 query ChannelCardsQuery($type: String) {
-  allChannels(
-    type: $type
-  ) {
+  allChannels(type: $type) {
     id
     tid
     name
@@ -9,6 +7,7 @@ query ChannelCardsQuery($type: String) {
     image {
       id
       alt
+      uri
       transformations {
         id
         label

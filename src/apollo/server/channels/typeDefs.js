@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type Channel {
@@ -6,22 +6,8 @@ export const typeDefs = gql`
     tid: String
     name: String!
     description: String
-    imageUrl: String
     image: Image
     url: String
-  }
-
-  type Image {
-    id: ID!
-    alt: String
-    uri: String
-    transformations: [ImageTransformation]
-  }
-
-  type ImageTransformation {
-    id: ID!
-    label: String
-    uri: String
   }
 
   extend type Query {
