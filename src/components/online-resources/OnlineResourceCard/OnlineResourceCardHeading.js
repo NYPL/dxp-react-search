@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
 
 function OnlineResourceCardHeading(props) {
-  console.log(props)
   const { 
     id, 
     name, 
@@ -30,7 +29,6 @@ function OnlineResourceCardHeading(props) {
   
     const linkAccess = locationMatchesArray
       .filter(e => accessLocationsArray.includes(e));
-    
     return linkAccess.length;
   }
 
