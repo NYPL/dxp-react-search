@@ -10,6 +10,8 @@ import {
   IconRotationTypes
 } from '@nypl/design-system-react-components';
 import OnlineResourceCardHeading from './OnlineResourceCardHeading';
+// Next
+import Link from 'next/link';
 //
 import s from './OnlineResourceCard.module.css';
 
@@ -25,7 +27,8 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
     privacyPolicyLink,
     isCoreResource,
     availabilityStatus,
-    accessLocations
+    accessLocations,
+    slug
   } = item;
 
   function LabelItem({ label, name }) {
@@ -46,8 +49,13 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
               return (
                 <a 
                   key={item.id} 
-                  className={s.accessLocation} 
+                  className={`${s.accessLocation} ${
+                    item.id === 'all-branch-uuid' && s.disabled}`
+                  }
                   href={item.url}
+                  {...(item.id === 'all-branch-uuid' && { 
+                    'aria-disabled': true 
+                  })}
                 >
                   {item.name}
                 </a>
@@ -112,6 +120,13 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       <div dangerouslySetInnerHTML={{
         __html: description 
       }}></div>
+      {slug && collapsible &&
+        <div className={s.shareDatabase}>
+          <Link href={slug}>
+            <a>Share this Database</a>
+          </Link>
+        </div>
+      }
       <div className={s.links}>
         {accessibilityLink &&
           <DsLink href={accessibilityLink}>

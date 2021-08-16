@@ -158,8 +158,11 @@ function MultiSelect(props) {
                         labelText={<>{item.name}</>}
                         showLabel={true}
                         name={item.name}
-                        checked={setMixedStateCheckboxCheckedProp(id, item) || false}
+                        /*checked={setMixedStateCheckboxCheckedProp(id, item) || false}
                         onChange={() => onChangeMixedStateCheckbox(id, item)}
+                        */
+                        checked={setFilterCheckedProp(id, item.id) || false}
+                        onChange={handleOnSelectedItemChange}
                       />
                       <ul>
                         {item.children.map((childItem) => {
