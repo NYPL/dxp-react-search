@@ -31,6 +31,11 @@
   background: #e0e0e0;
 }
 
+.menuButton.active {
+  background: #e0e0e0;
+  border: 1px solid #000;
+}
+
 /* Multiselect menu */
 .menu ul {
   list-style-type: none;

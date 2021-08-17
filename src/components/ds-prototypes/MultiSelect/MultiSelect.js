@@ -108,6 +108,17 @@ function MultiSelect(props) {
       )
     }
   }
+
+  function hasSelectedItems() {
+    if (
+      selectedItems[id] !== undefined 
+      && selectedItems[id].items.length
+      || isOpen 
+    ) {
+      return true;
+    }
+    return false;
+  }
   
   return (
     <FocusTrap
@@ -119,7 +130,8 @@ function MultiSelect(props) {
     >
       <div className={s.multiSelect}>
         <button  
-          className={s.menuButton} 
+          className={`${s.menuButton} ${hasSelectedItems() && s.active}`
+          } 
           type="button"
           onClick={onMenuClick}
         >

@@ -72,3 +72,9 @@
 .layout-container {
   overflow-x: hidden;
 }
+
+// @TODO Hack to hide pagination prev or next if disabled.
+.nypl--research .pagination__item .pagination__link.disabled {
+  display: none;
+  visibility: hidden;
+}
