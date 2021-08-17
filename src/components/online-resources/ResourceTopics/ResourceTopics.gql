@@ -1,10 +1,14 @@
-query ResourceTopicsQuery {
-  allResourceTopics {
+query ResourceTopicsQuery($type: String) {
+  allResourceTopics(type: $type) {
     id
     tid
     name
     description
-    imageUrl
     url
+    image {
+      id
+      alt
+      uri
+    }
   }
 }

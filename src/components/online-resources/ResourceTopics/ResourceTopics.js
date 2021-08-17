@@ -64,8 +64,6 @@ function ResourceTopics() {
                   alt={item.image.alt}
                   uri={item.image.uri}
                   useTransformation={false}
-                  transformations={item.image.transformations}
-                  transformationLabel={"2_1_960"}
                   layout="responsive"
                   width={900}
                   height={450}
