@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, LinkTypes } from "@nypl/design-system-react-components";
+import { MenuItemType as MenuItemProps } from "./MenuTypes";
 import s from "./Menu.module.css";
 
-interface MenuItemProps {
-  /** The id for the menu item */
+/*interface MenuItemProps {
   id: string;
   title: string;
   description?: string;
@@ -11,6 +11,7 @@ interface MenuItemProps {
   linkType?: LinkTypes;
   menuItemDecoration: boolean;
 }
+*/
 
 function MenuItem({
   id,

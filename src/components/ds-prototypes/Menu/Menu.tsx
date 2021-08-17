@@ -1,6 +1,12 @@
 import React from "react";
-import { Heading, List, ListTypes } from "@nypl/design-system-react-components";
+import {
+  Heading,
+  List,
+  ListTypes,
+  LinkTypes,
+} from "@nypl/design-system-react-components";
 import MenuItem from "./MenuItem";
+import { MenuItemType } from "./MenuTypes";
 // Styles
 import s from "./Menu.module.css";
 
@@ -11,8 +17,7 @@ interface MenuProps {
   headingDecoration: string;
   headingColor?: string;
   title: string;
-  // @TODO fix
-  items: any;
+  items: MenuItemType[];
   menuItemDecoration: boolean;
   orientation: string;
 }
@@ -45,7 +50,7 @@ function Menu({
         />
       </span>
       <List modifiers={["no-list-styling"]} type={ListTypes.Unordered}>
-        {items.map((item: any, index: number) => {
+        {items.map((item: MenuItemType) => {
           return (
             <li key={item.title.toLowerCase().replace(/\s/g, "-")}>
               <MenuItem
@@ -53,7 +58,7 @@ function Menu({
                 title={item.title}
                 description={item.description}
                 link={item.link}
-                linkType={item.type}
+                linkType={item.linkType}
                 menuItemDecoration={menuItemDecoration}
               />
             </li>
