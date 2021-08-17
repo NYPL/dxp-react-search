@@ -77,7 +77,7 @@ class DrupalApi extends RESTDataSource {
       args.filter
       && 'q' in args.filter
     ) {
-      apiPath = `${apiPath}?sq=${args.filter.q}`;
+      apiPath = `${apiPath}?sq=${encodeURIComponent(args.filter.q)}`;
     }
 
     // Pagination
