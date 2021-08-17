@@ -3,6 +3,7 @@ query LocationMatchesByIpQuery($ip: String) {
     items {
       id
       name
+      locationId
     }
     pageInfo {
       clientIp

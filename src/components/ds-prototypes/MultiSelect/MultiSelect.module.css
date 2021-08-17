@@ -1,5 +1,5 @@
 .multiSelect {
-  margin: .75rem 0;
+  margin: 0.75rem 0;
 }
 
 @media (min-width: 767px) {
@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: .65em .85em;
+  padding: 0.65em 0.85em;
   border-radius: 2px;
   background-color: white;
   color: inherit;
@@ -29,6 +29,11 @@
 
 .menuButton:hover {
   background: #e0e0e0;
+}
+
+.menuButton.active {
+  background: #e0e0e0;
+  border: 1px solid #000;
 }
 
 /* Multiselect menu */
@@ -64,19 +69,19 @@
 
 .menuItem {
   margin-left: 4px;
-  padding: .25em 0;
+  padding: 0.25em 0;
 }
 
 .childMenuItem {
   margin-left: 4px;
-  padding: .25em 0 .25em 1em;
+  padding: 0.25em 0 0.25em 1em;
 }
 
 .ctaButtonsContainer {
   display: flex;
   justify-content: space-between;
   float: right;
-  padding-top: .5em;
+  padding-top: 0.5em;
 }
 
 .ctaButtonsDesktopClear {
