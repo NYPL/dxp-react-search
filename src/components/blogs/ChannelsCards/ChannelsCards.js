@@ -57,20 +57,22 @@ function ChannelsCards() {
               id={item.id}
               name={item.name}
               description={item.description}
-              image={
-                <Image
-                  id={item.image.id}
-                  alt={item.image.alt}
-                  uri={item.image.uri}
-                  useTransformation={true}
-                  transformations={item.image.transformations}
-                  transformationLabel={"2_1_960"}
-                  layout="responsive"
-                  width={900}
-                  height={450}
-                  quality={90}
-                />
-              }
+              {...(item.image && {
+                image: (
+                  <Image
+                    id={item.image.id}
+                    alt={item.image.alt}
+                    uri={item.image.uri}
+                    useTransformation={true}
+                    transformations={item.image.transformations}
+                    transformationLabel={"2_1_960"}
+                    layout="responsive"
+                    width={900}
+                    height={450}
+                    quality={90}
+                  />
+                ),
+              })}
               url={item.url}
             />
           </li>

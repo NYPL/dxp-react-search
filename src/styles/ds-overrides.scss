@@ -93,3 +93,15 @@
   display: none;
   visibility: hidden;
 }
+
+.nypl--articles .breadcrumbs {
+  background-color: #bdbdbd;
+
+  .breadcrumbs__link,
+  .breadcrumbs__link:link,
+  .breadcrumbs__link:visited,
+  .breadcrumbs__link:focus,
+  .breadcrumbs__item:not(:last-child)::after {
+    color: #000;
+  }
+}

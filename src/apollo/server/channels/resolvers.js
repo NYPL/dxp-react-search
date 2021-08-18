@@ -1,47 +1,35 @@
-// Utils.
-import getImageUrlFromIncludedMedia from "./../../../utils/getImageUrlFromIncludedMedia";
-let responseIncluded;
-
 const channelResolver = {
   Query: {
     allChannels: async (parent, args, { dataSources }) => {
       const response = await dataSources.drupalApi.getAllTermsByVocabulary(
         args.type
       );
-      responseIncluded = response.included;
       return response.data;
     },
   },
   Channel: {
     id: (channel) => channel.id,
-    tid: (channel) => channel.attributes.drupal_internal__tid,
-    name: (channel) => channel.attributes.name,
-    description: (channel) => channel.attributes.description.processed,
-    image: (channel) => channel,
-    url: (channel) => channel.attributes.path.alias,
+    tid: (channel) => channel.drupal_internal__tid,
+    name: (channel) => channel.name,
+    description: (channel) => channel.description.processed,
+    image: (channel) =>
+      channel.field_ers_image.data !== null
+        ? channel.field_ers_image.field_media_image
+        : null,
+    url: (channel) => channel.path.alias,
   },
+  // @TODO this should just use a util function that handles all images.
   Image: {
-    id: (image) => image.relationships["field_ers_image"].data?.id,
+    id: (image) => image.id,
     alt: (image) => "test",
-    uri: (image) => {
-      const images = getImageUrlFromIncludedMedia(
-        image,
-        responseIncluded,
-        "field_ers_image"
-      );
-      return images["uri"];
-    },
+    // @TODO Add code for including local host.
+    uri: (image) => image.uri.url,
     transformations: (image) => {
-      const transformations = [];
-      const images = getImageUrlFromIncludedMedia(
-        image,
-        responseIncluded,
-        "field_ers_image"
-      );
-      images["transformations"].forEach((imageStyle) => {
+      let transformations = [];
+      image.image_style_uri.forEach((imageStyle) => {
         for (const [label, uri] of Object.entries(imageStyle)) {
           transformations.push({
-            id: `${image.relationships["field_ers_image"].data?.id}__${label}`,
+            id: `${image.id}__${label}`,
             label: label,
             uri: uri,
           });
