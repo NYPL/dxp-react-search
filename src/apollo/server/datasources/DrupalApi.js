@@ -4,7 +4,8 @@ const { DRUPAL_API } = process.env;
 class DrupalApi extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = DRUPAL_API;
+    // Temporary hard-code d9 backend for tugboat.
+    this.baseURL = "https://sandbox-d8.nypl.org";
   }
 
   /**
