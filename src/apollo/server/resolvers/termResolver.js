@@ -1,52 +1,49 @@
-// Utils
-import setNestedTerms from './../../../utils/setNestedTerms';
-import getSubjectsAllowList from './../../../utils/getSubjectsAllowList';
-import { SUBJECTS_UUID } from './../../../utils/setTermsFilter';
-
 const termResolver = {
   Query: {
-    allTerms: async (parent, args, { dataSources }) => {
-      const allTerms = await dataSources.refineryApi.getAllTerms();
-      // Get the terms tree from all Divisions.
-      const subjectsAllowList = getSubjectsAllowList(allTerms.divisions);
-      // Replace subject terms with the allow list terms.
-      allTerms.searchFilters.map(filterGroup => {
-        if (filterGroup.uuid === SUBJECTS_UUID) {
-          return filterGroup.terms.splice(
-            0, 
-            filterGroup.terms.length, 
-            ...subjectsAllowList
-          );
-        } else {
-          return filterGroup.terms
-        }
-      });
-
-      return allTerms.searchFilters;
+    allTermsByVocab: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getAllTermsByVocabulary(
+        args.vocabulary
+      );
+      return response.data;
     },
-  },
-  Vocab: {
-    id: vocab => {
-      return vocab.uuid;
+    termBySlug: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getAllTermsByVocabulary(
+        args.vocabulary
+      );
+      return response.data;
     },
-    name: vocab => {
-      return vocab.name;
-    },
-    terms: vocab => {
-      return setNestedTerms(vocab.terms);
-    }
   },
   Term: {
-    id: term => {
-      return term.uuid;
+    id: (term) => term.id,
+    tid: (term) => term.drupal_internal__tid,
+    name: (term) => term.name,
+    description: (term) => term.description.processed,
+    image: (term) =>
+      term.field_ers_image.data !== null
+        ? term.field_ers_image.field_media_image
+        : null,
+    url: (term) => term.path.alias,
+  },
+  // @TODO this should just use a util function that handles all images.
+  Image: {
+    id: (image) => image.id,
+    alt: (image) => "test",
+    // @TODO Add code for including local host.
+    uri: (image) => image.uri.url,
+    transformations: (image) => {
+      let transformations = [];
+      image.image_style_uri.forEach((imageStyle) => {
+        for (const [label, uri] of Object.entries(imageStyle)) {
+          transformations.push({
+            id: `${image.id}__${label}`,
+            label: label,
+            uri: uri,
+          });
+        }
+      });
+      return transformations;
     },
-    name: term => {
-      return term.name;
-    },
-    children: term => {
-      return term.children;
-    }
-  }
-}
+  },
+};
 
 export default termResolver;

@@ -1,9 +1,10 @@
-query ChannelCardsQuery($type: String) {
-  allChannels(type: $type) {
+query TaxonomyTermsQuery($vocabulary: String) {
+  allTermsByVocab(vocabulary: $vocabulary) {
     id
     tid
     name
     description
+    url
     image {
       id
       alt
@@ -14,6 +15,5 @@ query ChannelCardsQuery($type: String) {
         uri
       }
     }
-    url
   }
 }

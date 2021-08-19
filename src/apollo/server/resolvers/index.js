@@ -1,5 +1,5 @@
 import { mergeResolvers } from "graphql-tools";
-import locationResolver from "./locationResolver";
+//import locationResolver from "./locationResolver";
 import termResolver from "./termResolver";
 import resourceTopicResolver from "./resourceTopicResolver";
 import onlineResourceResolver from "./onlineResourceResolver";
@@ -14,7 +14,7 @@ import validatePatronCardResolver from "./validatePatronCardResolver";
 import channelResolver from "./../channels/resolvers";
 
 export const resolvers = mergeResolvers([
-  locationResolver,
+  //locationResolver,
   termResolver,
   resourceTopicResolver,
   onlineResourceResolver,

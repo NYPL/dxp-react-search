@@ -1,5 +1,5 @@
-query ResourceTopicsQuery($type: String) {
-  allResourceTopics(type: $type) {
+query TaxonomyTermsQuery($vocabulary: String) {
+  allTermsByVocab(vocabulary: $vocabulary) {
     id
     tid
     name
@@ -9,6 +9,11 @@ query ResourceTopicsQuery($type: String) {
       id
       alt
       uri
+      transformations {
+        id
+        label
+        uri
+      }
     }
   }
 }

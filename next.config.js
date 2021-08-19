@@ -6,10 +6,10 @@ module.exports = (nextConfig = {}) => {
     async rewrites() {
       if (ASSET_PREFIX) {
         return [
-          { 
-            source: `${ASSET_PREFIX}/_next/:path*`, 
-            destination: '/_next/:path*' 
-          }
+          {
+            source: `${ASSET_PREFIX}/_next/:path*`,
+            destination: "/_next/:path*",
+          },
         ];
       }
       return [];
@@ -32,7 +32,7 @@ module.exports = (nextConfig = {}) => {
     },
     */
     webpack(config, options) {
-      const { dir } = options
+      const { dir } = options;
 
       // Allows import of .gql files inside components
       config.module.rules.push({
@@ -41,18 +41,20 @@ module.exports = (nextConfig = {}) => {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'graphql-tag/loader'
-          }
-        ]
-      })
+            loader: "graphql-tag/loader",
+          },
+        ],
+      });
 
       return config;
     },
     images: {
       domains: [
-        'qa-cdn-d8-2.nypl.org',
-        'localhost'
+        "qa-cdn-d8-2.nypl.org",
+        "sandbox-d8.nypl.org",
+        "nyplorg-sandbox.s3.amazonaws.com",
+        "localhost",
       ],
     },
-  })
-}
+  });
+};

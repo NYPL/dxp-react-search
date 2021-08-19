@@ -242,6 +242,7 @@ class DrupalApi extends RESTDataSource {
   }
 
   async getAllTermsByVocabulary(vocab) {
+    // @TODO add logic for different vocabs and how query params would change.
     const apiPath = `/jsonapi/taxonomy_term/${vocab}?sort=weight&include=field_ers_image.field_media_image&jsonapi_include=1`;
     const response = await this.get(apiPath);
 
