@@ -12,13 +12,10 @@ import { typeDefs as IpAccessCheckTypes } from "./type-defs/ipAccessCheck";
 import { typeDefs as ValidatePatronCardTypes } from "./type-defs/validatePatronCard";
 import { typeDefs as FilterTypes } from "./type-defs/filter";
 
-// TEST
-import { typeDefs as ChannelTypes } from "./channels/typeDefs";
-
 export const schema = makeExecutableSchema({
   typeDefs: [
-    SearchTypes,
     SharedTypes,
+    SearchTypes,
     //LocationTypes,
     OnlineResourceTypes,
     TaxonomyTypes,
@@ -27,7 +24,6 @@ export const schema = makeExecutableSchema({
     IpAccessCheckTypes,
     ValidatePatronCardTypes,
     FilterTypes,
-    ChannelTypes,
   ],
   resolvers,
 });

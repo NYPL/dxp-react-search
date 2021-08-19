@@ -12,6 +12,6 @@ export const typeDefs = gql`
 
   extend type Query {
     allTermsByVocab(vocabulary: String): [Term]!
-    termBySlug(slug: String): Term
+    termBySlug(slug: String, vocabulary: String): Term
   }
 `;

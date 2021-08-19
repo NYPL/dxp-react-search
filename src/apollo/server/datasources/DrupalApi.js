@@ -5,7 +5,8 @@ class DrupalApi extends RESTDataSource {
   constructor() {
     super();
     // Temporary hard-code d9 backend for tugboat.
-    this.baseURL = "https://sandbox-d8.nypl.org";
+    //this.baseURL = "https://sandbox-d8.nypl.org";
+    this.baseURL = DRUPAL_API;
   }
 
   /**
@@ -25,28 +26,6 @@ class DrupalApi extends RESTDataSource {
       return response.json();
     } else {
       return response.text();
-    }
-  }
-
-  async getAllResourceTopics() {
-    const apiPath = `/jsonapi/taxonomy_term/resource_topic?sort=weight&include=field_ers_image.field_media_image`;
-    const response = await this.get(apiPath);
-
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
-  async getResourceTopic(args) {
-    const response = await this.get(
-      `/jsonapi/taxonomy_term/resource_topic/${args.slug}?include=field_ers_image.field_media_image`
-    );
-    if ("data" in response) {
-      return response;
-    } else {
-      return [];
     }
   }
 
@@ -248,6 +227,18 @@ class DrupalApi extends RESTDataSource {
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  async getTermBySlug(slug, vocabulary) {
+    // @TODO this won't always have an image?
+    const response = await this.get(
+      `/jsonapi/taxonomy_term/${vocabulary}/${slug}?include=field_ers_image.field_media_image&jsonapi_include=1`
+    );
+    if ("data" in response) {
       return response;
     } else {
       return [];

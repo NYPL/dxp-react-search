@@ -7,7 +7,8 @@ const termResolver = {
       return response.data;
     },
     termBySlug: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getAllTermsByVocabulary(
+      const response = await dataSources.drupalApi.getTermBySlug(
+        args.slug,
         args.vocabulary
       );
       return response.data;

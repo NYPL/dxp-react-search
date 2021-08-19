@@ -1,13 +1,27 @@
 import React from "react";
 // Apollo
 import { useQuery } from "@apollo/client";
-import { TaxonomyTermsQuery as CHANNELS_QUERY } from "./ChannelCards.gql";
+import { gql } from "@apollo/client";
+import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image";
+import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
 import { List } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import CardGridSkeleton from "../../ds-prototypes/CardGrid/CardGridSkeleton";
 import Card from "../../shared/Card";
 import Image from "../../shared/Image";
+
+const CHANNELS_QUERY = gql`
+  ${TERM_BASE_FIELDS_FRAGMENT}
+  ${IMAGE_FIELDS_FRAGMENT}
+  query ChannelsQuery($vocabulary: String) {
+    allTermsByVocab(vocabulary: $vocabulary) {
+      ...TermBaseFields
+      ...ImageFields
+      url
+    }
+  }
+`;
 
 function ChannelsCards() {
   // Query for data.
@@ -45,12 +59,14 @@ function ChannelsCards() {
     );
   }
 
+  const channels = data.allTermsByVocab;
+
   return (
     <CardGrid
       title="Explore by Channel"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam est, ac varius integer pharetra nulla pellentesque. Nunc neque enim metus ut volutpat turpis nascetur."
     >
-      {data.allTermsByVocab.map((item) => {
+      {channels.map((item) => {
         return (
           <li key={item.id} className="card-grid__list-item">
             <Card

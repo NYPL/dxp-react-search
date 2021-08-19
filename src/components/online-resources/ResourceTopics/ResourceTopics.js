@@ -1,15 +1,27 @@
 import React from "react";
 // Apollo
 import { useQuery } from "@apollo/client";
-import { TaxonomyTermsQuery as RESOURCE_TOPICS_QUERY } from "./ResourceTopics.gql";
+import { gql } from "@apollo/client";
+import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image";
+import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
 import { List } from "@nypl/design-system-react-components";
 import CardGrid from "./../../ds-prototypes/CardGrid";
-//import Card from './../../ds-prototypes/Card';
 import CardGridSkeleton from "./../../ds-prototypes/CardGrid/CardGridSkeleton";
-
 import Card from "../../shared/Card";
 import Image from "../../shared/Image";
+
+const RESOURCE_TOPICS_QUERY = gql`
+  ${TERM_BASE_FIELDS_FRAGMENT}
+  ${IMAGE_FIELDS_FRAGMENT}
+  query ResourceTopicsQuery($vocabulary: String) {
+    allTermsByVocab(vocabulary: $vocabulary) {
+      ...TermBaseFields
+      ...ImageFields
+      url
+    }
+  }
+`;
 
 function ResourceTopics() {
   // Query for data.
@@ -47,9 +59,11 @@ function ResourceTopics() {
     );
   }
 
+  const resourceTopics = data.allTermsByVocab;
+
   return (
     <CardGrid title="Featured Resources">
-      {data.allTermsByVocab.map((item) => {
+      {resourceTopics.map((item) => {
         return (
           <li key={item.id} className="card-grid__list-item">
             <Card
