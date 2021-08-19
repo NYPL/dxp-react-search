@@ -73,7 +73,7 @@ class DrupalApi extends RESTDataSource {
     // Filter by q.
     // /api/search-online-resources?sq=jstor
     if (args.filter && "q" in args.filter) {
-      apiPath = `${apiPath}?sq=${args.filter.q}`;
+      apiPath = `${apiPath}?sq=${encodeURIComponent(args.filter.q)}`;
     }
 
     // Pagination
