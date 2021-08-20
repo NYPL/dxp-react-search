@@ -176,7 +176,7 @@ function SearchResults(props) {
         }}
       />
       <div id="search-results">
-        {clientIpAddress && 
+        {router.query.debug && clientIpAddress &&
           <div>
             <h3>IP Address: {clientIpAddress}</h3>
           </div>
