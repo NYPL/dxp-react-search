@@ -55,7 +55,7 @@ function MostPopularResources() {
   }
 
   return (
-    <CardGrid title="Most Popular">
+    <CardGrid title="Popular Resources">
       {data.allOnlineResources.map((item) => {
         return (
           <li
