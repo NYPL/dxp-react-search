@@ -1,6 +1,11 @@
 ## CHANGES
 -----------
 
+### v0.3 [2021-08-23] Online Resources Release
+----------------------------------------------
+* Initial build of Online Resources aka Articles & Databases.
+* General application refactoring and code cleanup.
+
 ### v0.2.2 [2021-07-01] Locations Service Restoration
 ------------------------------------------------------
 * Updates hero svg to post-covid image and copy
