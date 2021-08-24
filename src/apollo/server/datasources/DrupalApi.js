@@ -5,8 +5,8 @@ class DrupalApi extends RESTDataSource {
   constructor() {
     super();
     // Temporary hard-code d9 backend for tugboat.
-    this.baseURL = "https://sandbox-d8.nypl.org";
-    //this.baseURL = DRUPAL_API;
+    //this.baseURL = "https://sandbox-d8.nypl.org";
+    this.baseURL = DRUPAL_API;
   }
 
   /**
@@ -239,6 +239,31 @@ class DrupalApi extends RESTDataSource {
       `/jsonapi/taxonomy_term/${vocabulary}/${slug}?include=field_ers_image.field_media_image&jsonapi_include=1`
     );
     if ("data" in response) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  async getAllNodesByContentType(contentType, limit, pageNumber) {
+    let apiPath = `/jsonapi/node/${contentType}`;
+    // Pagination.
+    if (limit && pageNumber) {
+      // Calculate offset
+      let offset = 0;
+      if (pageNumber === 2) {
+        offset = limit;
+      } else {
+        offset = limit * (pageNumber - 1);
+      }
+      apiPath = `${apiPath}?page[offset]=${offset}&page[limit]=${limit}`;
+
+      console.log(pageNumber);
+      console.log(`offset: ${offset}`);
+    }
+
+    const response = await this.get(apiPath);
+    if (Array.isArray(response.data)) {
       return response;
     } else {
       return [];

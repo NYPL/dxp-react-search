@@ -8,9 +8,13 @@ import autoSuggestionsResolver from "./autoSuggestionsResolver";
 import filterResolver from "./filterResolver";
 import ipAccessCheckResolver from "./ipAccessCheckResolver";
 import validatePatronCardResolver from "./validatePatronCardResolver";
+// Content types
+import blogResolver from "./blogResolver";
 
 export const resolvers = mergeResolvers([
   //locationResolver,
+  //
+  blogResolver,
   termResolver,
   onlineResourceResolver,
   searchResolver,

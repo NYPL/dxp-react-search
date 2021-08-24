@@ -1,5 +1,6 @@
 import React from "react";
 // Apollo
+// Apollo
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
 import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image";
@@ -7,23 +8,25 @@ import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/te
 // Components
 import {
   Card,
-  CardHeading,
   CardContent,
+  CardHeading,
+  //CardImage,
   CardImageRatios,
+  CardImageSizes,
+  CardLayouts,
   Heading,
   List,
 } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import CardGridSkeleton from "../../ds-prototypes/CardGrid/CardGridSkeleton";
-//import Card from "../../shared/Card";
 import Image from "../../shared/Image";
 // Next components
 import Link from "next/link";
 
-const CHANNELS_QUERY = gql`
+const BOOK_LIST_QUERY = gql`
   ${TERM_BASE_FIELDS_FRAGMENT}
   ${IMAGE_FIELDS_FRAGMENT}
-  query ChannelsQuery($vocabulary: String) {
+  query BookListQuery($vocabulary: String) {
     allTermsByVocab(vocabulary: $vocabulary) {
       ...TermBaseFields
       ...ImageFields
@@ -32,9 +35,9 @@ const CHANNELS_QUERY = gql`
   }
 `;
 
-function ChannelsCards() {
+function BookList() {
   // Query for data.
-  const { loading, error, data } = useQuery(CHANNELS_QUERY, {
+  const { loading, error, data } = useQuery(BOOK_LIST_QUERY, {
     variables: {
       vocabulary: "channel",
     },
@@ -42,7 +45,7 @@ function ChannelsCards() {
 
   // Error state.
   if (error) {
-    return <div>Error while loading channels.</div>;
+    return <div>Error while loading book list.</div>;
   }
 
   // Loading state,
@@ -50,24 +53,23 @@ function ChannelsCards() {
     return <div>Loading</div>;
   }
 
-  const channels = data.allTermsByVocab;
+  const bookListItems = data.allTermsByVocab;
 
   return (
     <div style={{ marginBottom: "2rem" }}>
-      <Heading id="explore-by-channel" level={2} text="Explore by Channel" />
+      <Heading id="book-list" level={2} text="Book List" />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
         est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
         metus ut volutpat turpis nascetur.
       </p>
-      <CardGrid
-        templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap="1.25rem"
-      >
-        {channels.map((item) => {
+      <CardGrid gap="2rem" templateColumns="repeat(1, 1fr)">
+        {bookListItems.map((item) => {
           return (
             <li key={item.id}>
               <Card
+                layout={CardLayouts.Horizontal}
+                center
                 imageComponent={
                   <Image
                     id={item.image.id}
@@ -75,14 +77,15 @@ function ChannelsCards() {
                     uri={item.image.uri}
                     useTransformation={true}
                     transformations={item.image.transformations}
-                    transformationLabel={"2_1_960"}
+                    transformationLabel={"1_1_960"}
                     layout="responsive"
-                    width={900}
-                    height={450}
+                    width={960}
+                    height={960}
                     quality={90}
                   />
                 }
-                imageAspectRatio={CardImageRatios.TwoByOne}
+                imageAspectRatio={CardImageRatios.Sqaure}
+                imageSize={CardImageSizes.Small}
               >
                 <CardHeading level={3}>
                   {item.url && (
@@ -107,4 +110,4 @@ function ChannelsCards() {
   );
 }
 
-export default ChannelsCards;
+export default BookList;

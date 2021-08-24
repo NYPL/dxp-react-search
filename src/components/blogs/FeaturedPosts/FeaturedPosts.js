@@ -12,7 +12,7 @@ import {
   Card,
   CardContent,
   CardHeading,
-  CardImage,
+  //CardImage,
   CardImageRatios,
   CardImageSizes,
   CardLayouts,
@@ -25,6 +25,32 @@ import CardGridSkeleton from "../../ds-prototypes/CardGrid/CardGridSkeleton";
 import Image from "../../shared/Image";
 // Next components
 import Link from "next/link";
+
+/*const FEATURED_POSTS_QUERY = gql`
+  query FeaturedPostsQuery(
+    $contentType: String
+    $limit: Int
+    $pageNumber: Int
+  ) {
+    allBlogs(
+      contentType: $contentType
+      limit: $limit
+      pageNumber: $pageNumber
+    ) {
+      items {
+        id
+        title
+        slug
+      }
+      pageInfo {
+        totalItems
+        limit
+        pageCount
+      }
+    }
+  }
+`;
+*/
 
 const FEATURED_POSTS_QUERY = gql`
   ${TERM_BASE_FIELDS_FRAGMENT}
@@ -43,103 +69,77 @@ function FeaturedPosts() {
   const { loading, error, data } = useQuery(FEATURED_POSTS_QUERY, {
     variables: {
       vocabulary: "channel",
+      /*contentType: "library",
+      limit: 6,
+      pageNumber: 1,
+      */
     },
   });
 
   // Error state.
   if (error) {
-    return <div>Error while loading channels.</div>;
+    return <div>Error while loading featured posts.</div>;
   }
 
   // Loading state,
   if (loading || !data) {
-    return (
-      <div className="card-grid">
-        <List
-          className="card-grid__list"
-          modifiers={["no-list-styling"]}
-          type="ul"
-        >
-          <li className="card-grid__list-item">
-            <CardGridSkeleton />
-          </li>
-          <li className="card-grid__list-item">
-            <CardGridSkeleton />
-          </li>
-          <li className="card-grid__list-item">
-            <CardGridSkeleton />
-          </li>
-        </List>
-      </div>
-    );
+    return <div>Loading</div>;
   }
 
-  console.log(data);
-
+  //const featuredPosts = data.allBlogs.items;
   const featuredPosts = data.allTermsByVocab;
 
   return (
-    <div>
-      <Heading id="test-23232323" level={2} text={"Featured Posts"} />
+    <div style={{ marginBottom: "2rem" }}>
+      <Heading id="featured-posts" level={2} text="Featured Posts" />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
         est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
         metus ut volutpat turpis nascetur.
       </p>
-      <div
-        style={{
-          display: "grid",
-          "grid-gap": "3rem",
-          "grid-template-columns": "repeat(1, 1fr)",
-        }}
-      >
-        <List
-          className="card-grid__list"
-          modifiers={["no-list-styling"]}
-          type="ul"
-        >
-          {featuredPosts.map((item) => {
-            return (
-              <li key={item.id} className="card-grid__list-item">
-                <Card layout={CardLayouts.Horizontal} center>
-                  <CardImage
-                    component={
-                      <Image
-                        id={item.image.id}
-                        alt={item.image.alt}
-                        uri={item.image.uri}
-                        useTransformation={true}
-                        transformations={item.image.transformations}
-                        transformationLabel={"2_1_960"}
-                        layout="responsive"
-                        width={900}
-                        height={450}
-                        quality={90}
-                      />
-                    }
-                    imageAspectRatio={CardImageRatios.TwoByOne}
-                    imageSize={CardImageSizes.Large}
+      <CardGrid gap="2rem" templateColumns="repeat(1, 1fr)">
+        {featuredPosts.map((item) => {
+          return (
+            <li key={item.id}>
+              <Card
+                layout={CardLayouts.Horizontal}
+                center
+                imageComponent={
+                  <Image
+                    id={item.image.id}
+                    alt={item.image.alt}
+                    uri={item.image.uri}
+                    useTransformation={true}
+                    transformations={item.image.transformations}
+                    transformationLabel={"2_1_960"}
+                    layout="responsive"
+                    width={900}
+                    height={450}
+                    quality={90}
                   />
-                  <CardHeading level={3}>
-                    {item.url && (
-                      <Link href={item.url}>
-                        <a>{item.name}</a>
-                      </Link>
-                    )}
-                  </CardHeading>
-                  <CardContent>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.description,
-                      }}
-                    ></div>
-                  </CardContent>
-                </Card>
-              </li>
-            );
-          })}
-        </List>
-      </div>
+                }
+                imageAspectRatio={CardImageRatios.TwoByOne}
+                imageSize={CardImageSizes.Large}
+              >
+                <CardHeading level={3}>
+                  {item.url && (
+                    <Link href={item.url}>
+                      <a>{item.name}</a>
+                    </Link>
+                  )}
+                </CardHeading>
+                <CardContent>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: item.description,
+                    }}
+                  ></div>
+                </CardContent>
+              </Card>
+            </li>
+          );
+        })}
+      </CardGrid>
     </div>
   );
 }

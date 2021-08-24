@@ -11,6 +11,8 @@ import { typeDefs as AutoSuggestionsTypes } from "./type-defs/autoSuggestions.js
 import { typeDefs as IpAccessCheckTypes } from "./type-defs/ipAccessCheck";
 import { typeDefs as ValidatePatronCardTypes } from "./type-defs/validatePatronCard";
 import { typeDefs as FilterTypes } from "./type-defs/filter";
+// Content types
+import { typeDefs as BlogTypes } from "./type-defs/blog.js";
 
 export const schema = makeExecutableSchema({
   typeDefs: [
@@ -24,6 +26,8 @@ export const schema = makeExecutableSchema({
     IpAccessCheckTypes,
     ValidatePatronCardTypes,
     FilterTypes,
+    //
+    BlogTypes,
   ],
   resolvers,
 });

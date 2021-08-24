@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Heading,
-  List,
-  ListTypes,
-  LinkTypes,
-} from "@nypl/design-system-react-components";
+import { Heading, List, ListTypes } from "@nypl/design-system-react-components";
 import MenuItem from "./MenuItem";
 import { MenuItemType } from "./MenuTypes";
 // Styles

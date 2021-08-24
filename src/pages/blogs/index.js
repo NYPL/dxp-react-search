@@ -7,6 +7,7 @@ import { withRedux } from "./../../redux/withRedux";
 import PageContainer from "./../../components/blogs/layouts/PageContainer";
 import ChannelsCards from "./../../components/blogs/ChannelsCards";
 import FeaturedPosts from "../../components/blogs/FeaturedPosts";
+import BookList from "../../components/blogs/BookList";
 
 function BlogsMainPage() {
   return (
@@ -16,6 +17,7 @@ function BlogsMainPage() {
         <>
           <FeaturedPosts />
           <ChannelsCards />
+          <BookList />
         </>
       }
     />
