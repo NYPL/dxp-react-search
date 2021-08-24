@@ -12,7 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.3.3",
     "@apollo/react-common": "^3.1.4",
-    "@nypl/design-system-react-components": "0.22.1",
+    "@nypl/design-system-react-components": "git+https://git@github.com/NYPL/nypl-design-system.git#DSD-418/chakra-button",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component.git#reactupdate",
     "@nypl/dgx-react-footer": "^0.5.8",
     "apollo-datasource-rest": "^0.9.3",
@@ -35,6 +35,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-autosuggest": "^10.0.2",
+    "react-datepicker": "^4.2.1",
     "react-dom": "^16.7.0",
     "react-geocode": "^0.2.1",
     "react-google-maps": "^9.4.5",

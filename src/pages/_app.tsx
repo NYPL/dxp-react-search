@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 const { NEXT_PUBLIC_GA_TRACKING_ID } = process.env;
 import "./../styles/main.scss";
 import AppLayout from "./../components/shared/layouts/AppLayout";
+import { DSProvider } from "@nypl/design-system-react-components";
 
 function SearchApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
