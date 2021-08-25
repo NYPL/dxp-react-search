@@ -1,7 +1,11 @@
 ## CHANGES
 -----------
 
-### v0.3 [2021-08-23] Online Resources Release
+### v0.3.1 [2021-08-24] Online Resources Bug Fix
+------------------------------------------------
+* Quick bug fix for authentication type api change.
+
+### v0.3.0 [2021-08-23] Online Resources Release
 ----------------------------------------------
 * Initial build of Online Resources aka Articles & Databases.
 * General application refactoring and code cleanup.
