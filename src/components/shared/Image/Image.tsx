@@ -1,28 +1,7 @@
 import React from "react";
 // Next components
 import { default as NextImage } from "next/image";
-
-interface ImageProps {
-  id: string;
-  alt: string;
-  // @TODO add correct type.
-  layout: any;
-  // @TODO check if number is correct type.
-  width: number;
-  height: number;
-  quality: number;
-  uri: string;
-  useTransformation: boolean;
-  // @TODO add correct type.
-  transformations?: any;
-  transformationLabel: string;
-}
-
-interface Transformation {
-  id: string;
-  label: string;
-  uri: string;
-}
+import { ImageType as ImageProps, TransformationType } from "./ImageTypes";
 
 function Image({
   id,
@@ -39,11 +18,12 @@ function Image({
   // Get the image transformation value.
   function getImageTransformation(
     transformationLabel: string,
+    // @TODO fix this
     transformations: any
   ) {
     let imageUri;
 
-    transformations.map((transformation: Transformation) => {
+    transformations.map((transformation: TransformationType) => {
       if (transformation.label === transformationLabel) {
         imageUri = transformation.uri;
       }

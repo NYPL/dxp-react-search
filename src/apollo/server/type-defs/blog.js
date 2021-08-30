@@ -6,6 +6,7 @@ export const typeDefs = gql`
     title: String!
     description: String
     slug: String!
+    image: Image
   }
 
   type BlogConnection {

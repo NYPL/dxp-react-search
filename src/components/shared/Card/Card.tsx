@@ -1,41 +1,69 @@
 import React from "react";
 // Components
-import { default as DsCard } from "./../../ds-prototypes/Card";
-// Next components
+import {
+  Card as DsCard,
+  CardHeading,
+  CardContent,
+  CardImageRatios,
+  CardImageSizes,
+  CardLayouts,
+  Heading,
+  List,
+} from "@nypl/design-system-react-components";
 import Link from "next/link";
+import Image from "./../Image";
+import { CardType as CardProps } from "./CardTypes";
 
-interface CardProps {
-  /** The id for the card */
-  id: string;
-  /** The image for the card */
-  image?: JSX.Element;
-  /** The name for the card */
-  name: string;
-  /** The description for the card */
-  description: string;
-  /** The url for the card */
-  url: string;
-}
-
-function Card({ id, image, url, name, description }: CardProps) {
+function Card({
+  id,
+  image,
+  url,
+  title,
+  subHeading,
+  description,
+  imageAspectRatio,
+  center,
+  layout,
+  imageSize,
+}: CardProps) {
   return (
-    <>
-      <DsCard id={id}>
-        {image && <>{image}</>}
+    <DsCard
+      id={id}
+      {...(image && {
+        imageComponent: image,
+      })}
+      {...(image &&
+        imageAspectRatio && {
+          imageAspectRatio: imageAspectRatio,
+        })}
+      {...(center && {
+        center: true,
+      })}
+      {...(layout && {
+        layout: layout,
+      })}
+      {...(imageSize && {
+        imageSize: imageSize,
+      })}
+    >
+      <CardHeading level={3}>
         {url && (
-          <h3 className={"heading"}>
-            <Link href={url}>
-              <a>{name}</a>
-            </Link>
-          </h3>
+          <Link href={url}>
+            <a>{title}</a>
+          </Link>
         )}
-        <div
-          dangerouslySetInnerHTML={{
-            __html: description,
-          }}
-        ></div>
-      </DsCard>
-    </>
+      </CardHeading>
+      <CardContent>
+        {subHeading && subHeading}
+        {description && (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: description,
+            }}
+          ></div>
+        )}
+      </CardContent>
+    </DsCard>
   );
 }
 

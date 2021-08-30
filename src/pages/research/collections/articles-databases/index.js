@@ -1,19 +1,19 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 // Apollo
-import { getDataFromTree } from '@apollo/client/react/ssr';
-import { withApollo } from './../../../../apollo/client/withApollo';
+import { getDataFromTree } from "@apollo/client/react/ssr";
+import { withApollo } from "./../../../../apollo/client/withApollo";
 // Redux
-import { withRedux } from './../../../../redux/withRedux';
+import { withRedux } from "./../../../../redux/withRedux";
 // Components
-import PageContainer from './../../../../components/online-resources/layouts/PageContainer';
-import AlphabetNav from './../../../../components/online-resources/AlphabetNav';
-import ResourceTopics from './../../../../components/online-resources/ResourceTopics';
-import MostPopularResources from './../../../../components/online-resources/MostPopularResources';
+import PageContainer from "./../../../../components/online-resources/layouts/PageContainer";
+import AlphabetNav from "./../../../../components/online-resources/AlphabetNav";
+import ResourceTopics from "./../../../../components/online-resources/ResourceTopics";
+import MostPopularResources from "./../../../../components/online-resources/MostPopularResources";
 // Utils
-import { ONLINE_RESOURCES_BASE_PATH } from './../../../../utils/config';
-import onlineResourcesContent from './../../../../__content/onlineResources';
+import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../utils/config";
+import onlineResourcesContent from "./../../../../__content/onlineResources";
 
-function OnlineResources() {  
+function OnlineResources() {
   const { title, description } = onlineResourcesContent;
 
   return (
@@ -21,16 +21,18 @@ function OnlineResources() {
       metaTags={{
         title: title,
         description: description,
-        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}`
+        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}`,
       }}
       showContentHeader={true}
       contentPrimary={
         <Fragment>
-          <ResourceTopics />
+          <ResourceTopics sortBy="weight" limit={30} />
           <MostPopularResources />
-          <AlphabetNav 
-            title={'A-Z Articles & Databases'}
-            description={'Browse resources and databases alphabetically by name'}
+          <AlphabetNav
+            title={"A-Z Articles & Databases"}
+            description={
+              "Browse resources and databases alphabetically by name"
+            }
           />
         </Fragment>
       }
@@ -38,8 +40,7 @@ function OnlineResources() {
   );
 }
 
-export default withApollo(
-  withRedux((OnlineResources)), {
+export default withApollo(withRedux(OnlineResources), {
   ssr: true,
-  redirects: false
+  redirects: false,
 });

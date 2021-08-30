@@ -4,14 +4,19 @@ export const typeDefs = gql`
   type Term {
     id: ID!
     tid: String!
-    name: String!
+    title: String!
     description: String
     image: Image
-    url: String
+    slug: String
   }
 
   extend type Query {
-    allTermsByVocab(vocabulary: String): [Term]!
+    allTermsByVocab(
+      vocabulary: String
+      sortBy: String
+      limit: Int
+      featured: Boolean
+    ): [Term]!
     termBySlug(slug: String, vocabulary: String): Term
   }
 `;

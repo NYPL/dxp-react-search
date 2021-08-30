@@ -12,11 +12,16 @@ export const typeDefs = gql`
     mostPopular: Boolean
   }
 
+  type OnlineResourceConnection {
+    items: [OnlineResource]
+    pageInfo: PageInfo
+  }
+
   extend type Query {
     allOnlineResources(
       limit: Int
       filter: OnlineResourceFilter
-    ): [OnlineResource]!
+    ): OnlineResourceConnection
     onlineResource(slug: String): OnlineResource
   }
 `;

@@ -1,8 +1,14 @@
+const graphqlFields = require("graphql-fields");
+
 const termResolver = {
   Query: {
-    allTermsByVocab: async (parent, args, { dataSources }) => {
+    allTermsByVocab: async (parent, args, { dataSources }, info) => {
       const response = await dataSources.drupalApi.getAllTermsByVocabulary(
-        args.vocabulary
+        args.vocabulary,
+        args.sortBy,
+        args.limit,
+        args.featured,
+        graphqlFields(info)
       );
       return response.data;
     },
@@ -17,20 +23,25 @@ const termResolver = {
   Term: {
     id: (term) => term.id,
     tid: (term) => term.drupal_internal__tid,
-    name: (term) => term.name,
-    description: (term) => term.description.processed,
+    title: (term) => term.name,
+    description: (term) => term.description?.processed,
     image: (term) =>
       term.field_ers_image.data !== null
         ? term.field_ers_image.field_media_image
         : null,
-    url: (term) => term.path.alias,
+    slug: (term) => term.path.alias,
   },
   // @TODO this should just use a util function that handles all images.
   Image: {
     id: (image) => image.id,
     alt: (image) => "test",
-    // @TODO Add code for including local host.
-    uri: (image) => image.uri.url,
+    uri: (image) => {
+      if (image.uri.url && image.uri.url.includes("sites/default")) {
+        return `http://localhost:8080${image.uri.url}`;
+      } else {
+        return image.uri.url;
+      }
+    },
     transformations: (image) => {
       let transformations = [];
       image.image_style_uri.forEach((imageStyle) => {

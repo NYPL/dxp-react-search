@@ -64,50 +64,52 @@ function BookList() {
         metus ut volutpat turpis nascetur.
       </p>
       <CardGrid gap="2rem" templateColumns="repeat(1, 1fr)">
-        {bookListItems.map((item) => {
-          return (
-            <li key={item.id}>
-              <Card
-                layout={CardLayouts.Horizontal}
-                center
-                imageComponent={
-                  <Image
-                    id={item.image.id}
-                    alt={item.image.alt}
-                    uri={item.image.uri}
-                    useTransformation={true}
-                    transformations={item.image.transformations}
-                    transformationLabel={"1_1_960"}
-                    layout="responsive"
-                    width={960}
-                    height={960}
-                    quality={90}
-                  />
-                }
-                imageAspectRatio={CardImageRatios.Sqaure}
-                imageSize={CardImageSizes.Small}
-              >
-                <CardHeading level={3}>
-                  {item.url && (
-                    <Link href={item.url}>
-                      <a>{item.name}</a>
-                    </Link>
-                  )}
-                </CardHeading>
-                <CardContent>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: item.description,
-                    }}
-                  ></div>
-                </CardContent>
-              </Card>
-            </li>
-          );
-        })}
+        {bookListItems.map((item) => (
+          <li key={item.id}>
+            <Card
+              layout={CardLayouts.Horizontal}
+              center
+              imageComponent={
+                <Image
+                  id={item.image.id}
+                  alt={item.image.alt}
+                  uri={item.image.uri}
+                  useTransformation={true}
+                  transformations={item.image.transformations}
+                  transformationLabel={"1_1_960"}
+                  layout="responsive"
+                  width={960}
+                  height={960}
+                  quality={90}
+                />
+              }
+              imageAspectRatio={CardImageRatios.Sqaure}
+              imageSize={CardImageSizes.Small}
+            >
+              <CardHeading level={3}>
+                {item.url && (
+                  <Link href={item.url}>
+                    <a>{item.name}</a>
+                  </Link>
+                )}
+              </CardHeading>
+              <CardContent>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: item.description,
+                  }}
+                ></div>
+              </CardContent>
+            </Card>
+          </li>
+        ))}
       </CardGrid>
     </div>
   );
 }
 
 export default BookList;
+
+/*
+
+*/

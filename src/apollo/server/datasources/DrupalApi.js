@@ -29,24 +29,7 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getAllOnlineResources(args) {
-    let apiPath = `/jsonapi/node/online_resource`;
-
-    // Most popular filter.
-    if (args.filter && "mostPopular" in args.filter) {
-      apiPath = `${apiPath}?filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular&page[limit]=3`;
-    }
-
-    // @TODO Add Limit?
-
-    const response = await this.get(apiPath);
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
+  // Search/Solr.
   async getAllSearchDocuments(args) {
     let apiPath = "/api/search-online-resources";
 
@@ -221,9 +204,21 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getAllTermsByVocabulary(vocab) {
-    // @TODO add logic for different vocabs and how query params would change.
-    const apiPath = `/jsonapi/taxonomy_term/${vocab}?sort=weight&include=field_ers_image.field_media_image&jsonapi_include=1`;
+  async getAllTermsByVocabulary(vocab, sortBy, limit, featured, queryFields) {
+    let apiPath = `/jsonapi/taxonomy_term/${vocab}?jsonapi_include=1`;
+    // Temp workaround for only adding include if image is in gql query.
+    if ("image" in queryFields) {
+      apiPath = `${apiPath}&include=field_ers_image.field_media_image`;
+    }
+    if (featured) {
+      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    }
+    if (sortBy) {
+      apiPath = `${apiPath}&sort=${sortBy}`;
+    }
+    if (limit) {
+      apiPath = `${apiPath}&page[offset]=0&page[limit]=${limit}`;
+    }
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.data)) {
@@ -245,8 +240,21 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getAllNodesByContentType(contentType, limit, pageNumber) {
-    let apiPath = `/jsonapi/node/${contentType}`;
+  // @TODO add featured, and also pass query fields.
+  async getAllNodesByContentType(
+    contentType,
+    limit,
+    pageNumber,
+    filter,
+    queryFields
+  ) {
+    let apiPath = `/jsonapi/node/${contentType}?jsonapi_include=1`;
+
+    // Check if image field was requested in gql query.
+    if ("image" in queryFields.items) {
+      apiPath = `${apiPath}&include=field_ers_media_image.field_media_image`;
+    }
+
     // Pagination.
     if (limit && pageNumber) {
       // Calculate offset
@@ -256,11 +264,19 @@ class DrupalApi extends RESTDataSource {
       } else {
         offset = limit * (pageNumber - 1);
       }
-      apiPath = `${apiPath}?page[offset]=${offset}&page[limit]=${limit}`;
+      apiPath = `${apiPath}&page[offset]=${offset}&page[limit]=${limit}`;
 
       console.log(pageNumber);
       console.log(`offset: ${offset}`);
     }
+
+    // Most popular filter.
+    if (filter && "mostPopular" in filter) {
+      apiPath = `${apiPath}&filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular`;
+    }
+
+    // Conditional based on if featured is passed.
+    //apiPath = `${apiPath}&filter[field_bs_featured]=1`;
 
     const response = await this.get(apiPath);
     if (Array.isArray(response.data)) {
