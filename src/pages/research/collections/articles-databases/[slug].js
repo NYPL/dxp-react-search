@@ -107,7 +107,7 @@ function OnlineResourceSlug() {
           {router.query.test_ip && clientIpAddress && (
             <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
           )}
-          {clientIpAddress && (
+          {router.query.debug && clientIpAddress && (
             <div>
               <h3>IP Address: {clientIpAddress}</h3>
             </div>

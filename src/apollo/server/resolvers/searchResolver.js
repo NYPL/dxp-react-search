@@ -125,20 +125,18 @@ const searchResolver = {
     },
     isFreeResource: (document) => document["is-free-resource"],
     authenticationType: (document) => {
-      if (document["authentication-type"] === "None") {
+      if (document["authentication-type"] === "none") {
         return null;
       } else {
-        return document["authentication-type"]
-          .replace(/\s+/g, "_")
-          .toLowerCase();
+        return document["authentication-type"];
       }
     },
     availabilityStatus: (document) => {
       let availabilityStatus;
       if (
-        document["authentication-type"] === "Vendor authentication" ||
-        document["authentication-type"] === "NYPL authentication" ||
-        document["authentication-type"] === "NYPL ezproxy authentication"
+        document["authentication-type"] === "vendor" ||
+        document["authentication-type"] === "nypl" ||
+        document["authentication-type"] === "ezproxy"
       ) {
         availabilityStatus = "card_required";
       }

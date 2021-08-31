@@ -34,7 +34,7 @@ function OnlineResourceCardHeading(props) {
   }
 
   if (linkAccessCheck() || accessibleFrom?.includes("offsite")) {
-    if (authenticationType === "nypl_authentication") {
+    if (authenticationType === "nypl") {
       return (
         <h3 id={id}>
           <Link href={`${ONLINE_RESOURCES_BASE_PATH}/verify?uuid=${id}`}>
