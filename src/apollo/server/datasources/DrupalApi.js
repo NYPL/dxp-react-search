@@ -246,14 +246,20 @@ class DrupalApi extends RESTDataSource {
     limit,
     pageNumber,
     filter,
+    sortBy,
     queryFields
   ) {
     let apiPath = `/jsonapi/node/${contentType}?jsonapi_include=1`;
 
     // Check if image field was requested in gql query.
-    if ("image" in queryFields.items) {
-      apiPath = `${apiPath}&include=field_ers_media_image.field_media_image`;
+    if ("image" in queryFields.items && "locations" in queryFields.items) {
+      apiPath = `${apiPath}&include=field_ers_media_image.field_media_image,field_erm_location`;
     }
+
+    /*if ("locations" in queryFields.items) {
+      apiPath = `${apiPath}&include=field_erm_location`;
+    }
+    */
 
     // Pagination.
     if (limit && pageNumber) {
@@ -266,17 +272,22 @@ class DrupalApi extends RESTDataSource {
       }
       apiPath = `${apiPath}&page[offset]=${offset}&page[limit]=${limit}`;
 
-      console.log(pageNumber);
-      console.log(`offset: ${offset}`);
+      //console.log(pageNumber);
+      //console.log(`offset: ${offset}`);
     }
 
-    // Most popular filter.
+    console.log("FILTER");
+    console.log(filter);
+
     if (filter && "mostPopular" in filter) {
       apiPath = `${apiPath}&filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular`;
     }
-
-    // Conditional based on if featured is passed.
-    //apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    if (filter && "featured" in filter && filter.featured !== null) {
+      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    }
+    if (sortBy) {
+      apiPath = `${apiPath}&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`;
+    }
 
     const response = await this.get(apiPath);
     if (Array.isArray(response.data)) {

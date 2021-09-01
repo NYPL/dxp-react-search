@@ -6,12 +6,23 @@ export const typeDefs = gql`
     title: String!
     description: String
     slug: String!
+    date: String!
     image: Image
+    locations: [Location]
   }
 
   type BlogConnection {
     items: [Blog]
     pageInfo: PageInfo
+  }
+
+  type Location {
+    id: ID!
+    name: String!
+    contentType: String!
+    slug: String!
+    url: String!
+    status: String!
   }
 
   input BlogFilter {
@@ -24,6 +35,7 @@ export const typeDefs = gql`
       limit: Int
       pageNumber: Int
       filter: BlogFilter
+      sortBy: String
     ): BlogConnection
     blog(slug: String): Blog
   }

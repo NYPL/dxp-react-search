@@ -16,17 +16,26 @@ import Image from "../../shared/Image";
 import { ImageType } from "../../shared/Image/ImageTypes";
 
 const BLOGS_QUERY = gql`
-  query BlogsQuery($contentType: String, $limit: Int, $pageNumber: Int) {
+  query BlogsQuery(
+    $contentType: String
+    $limit: Int
+    $pageNumber: Int
+    $featured: Boolean
+    $sortBy: String
+  ) {
     allBlogs(
       contentType: $contentType
       limit: $limit
       pageNumber: $pageNumber
+      filter: { featured: $featured }
+      sortBy: $sortBy
     ) {
       items {
         id
         title
         description
         slug
+        date
         image {
           id
           uri
@@ -36,6 +45,11 @@ const BLOGS_QUERY = gql`
             label
             uri
           }
+        }
+        locations {
+          id
+          name
+          slug
         }
       }
       pageInfo {
@@ -63,7 +77,15 @@ interface CardItem {
   title: string;
   description: string;
   slug: string;
+  date: string;
+  locations: Location[];
   image: ImageType;
+}
+
+interface Location {
+  id: string;
+  name: string;
+  slug: string;
 }
 
 function BlogCards({
@@ -80,6 +102,7 @@ function BlogCards({
       limit: limit ? limit : null,
       pageNumber: pageNumber ? pageNumber : 1,
       featured: featured ? featured : null,
+      sortBy: sortBy ? sortBy : null,
     },
   });
 
@@ -101,7 +124,19 @@ function BlogCards({
             <Card
               id={item.id}
               title={item.title}
-              subHeading={<div>By NYPL Media | January 12, 2021</div>}
+              subHeading={
+                <div style={{ paddingBottom: ".5em" }}>
+                  <div>By NYPL Media | {item.date}</div>
+                  {item.locations.map((location: Location) => {
+                    return (
+                      <a style={{ paddingRight: "10px" }} href={location.slug}>
+                        {location.name}
+                      </a>
+                    );
+                  })}
+                  &nbsp;
+                </div>
+              }
               description={item.description}
               url={item.slug}
               layout={CardLayouts.Horizontal}

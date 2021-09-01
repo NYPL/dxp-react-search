@@ -23,6 +23,7 @@ function BlogsMainPage() {
         metus ut volutpat turpis nascetur."
             limit={6}
             featured={true}
+            sortBy={"created"}
           />
           <ChannelsCards limit={6} sortBy="weight" featured={true} />
           <SubjectsCards />

@@ -1,4 +1,6 @@
 const graphqlFields = require("graphql-fields");
+// Utils
+import formatDate from "../../../utils/formatDate";
 
 const blogResolver = {
   Query: {
@@ -7,7 +9,8 @@ const blogResolver = {
         args.contentType,
         args.limit,
         args.pageNumber,
-        null,
+        args.filter,
+        args.sortBy,
         graphqlFields(info)
       );
 
@@ -39,14 +42,18 @@ const blogResolver = {
     */
     id: (blog) => blog.id,
     title: (blog) => blog.title,
-    //description: (blog) => blog.field_tfls_summary_description.processed,
-    description: (blog) =>
+    description: (blog) => blog.field_tfls_summary_description.processed,
+    /*description: (blog) =>
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam est, ac varius integer pharetra nulla pellentesque. Nunc neque enim metus ut volutpat turpis nascetur.",
+    */
     slug: (blog) => blog.path.alias,
+    date: (blog) => formatDate(blog.created),
     image: (blog) =>
       blog.field_ers_media_image.data !== null
         ? blog.field_ers_media_image.field_media_image
         : null,
+    locations: (blog) =>
+      blog.field_erm_location !== null ? blog.field_erm_location : null,
   },
   Image: {
     id: (image) => image.id,
@@ -74,6 +81,14 @@ const blogResolver = {
       });
       return transformations;
     },
+  },
+  Location: {
+    id: (location) => location.id,
+    name: (location) => location.title,
+    contentType: (location) => location.type,
+    slug: (location) => "/slug/fix-me",
+    url: (location) => "/slug/fix-me",
+    status: (location) => "/slug/fix-me",
   },
 };
 
