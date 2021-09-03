@@ -7,10 +7,11 @@ import {
   CardImageRatios,
   CardImageSizes,
   CardLayouts,
-  Heading,
 } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
+import CardSet from "../../shared/Card/CardSet";
+import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import Image from "../../shared/Image";
 // Types
 import { ImageType } from "../../shared/Image/ImageTypes";
@@ -62,8 +63,10 @@ const BLOGS_QUERY = gql`
 `;
 
 interface BlogCardsProps {
+  id: string;
   title?: string;
   description?: string;
+  slug?: string;
   limit?: number;
   pageNumber?: number;
   sortBy?: string;
@@ -72,7 +75,7 @@ interface BlogCardsProps {
 
 // @TODO this should be a shared type,
 // You should also stop using slug and use url? or urlPath?
-interface CardItem {
+interface BlogCardItem {
   id: string;
   title: string;
   description: string;
@@ -89,8 +92,10 @@ interface Location {
 }
 
 function BlogCards({
-  title,
-  description,
+  id,
+  title = "",
+  description = "",
+  slug = "",
   limit,
   pageNumber,
   sortBy,
@@ -111,15 +116,21 @@ function BlogCards({
   }
 
   if (loading || !data) {
-    return <div>Loading</div>;
+    return (
+      <CardSet id={id} title={title} slug={slug} description={description}>
+        <CardSkeletonLoader
+          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+          gridGap="1.25rem"
+          itemsCount={6}
+        />
+      </CardSet>
+    );
   }
 
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      {title && <Heading id="featured-posts" level={2} text={title} />}
-      {description && <p>{description}</p>}
+    <CardSet id={id} title={title} slug={slug} description={description}>
       <CardGrid gap="2rem" templateColumns="repeat(1, 1fr)">
-        {data.allBlogs.items.map((item: CardItem) => (
+        {data.allBlogs.items.map((item: BlogCardItem) => (
           <li key={item.id}>
             <Card
               id={item.id}
@@ -148,9 +159,7 @@ function BlogCards({
                   uri={item.image.uri}
                   useTransformation={true}
                   transformations={item.image.transformations}
-                  transformationLabel={"medium"}
-                  // @TODO fix this, s3 bug? this image transformation doesnt work?
-                  //transformationLabel={"2_1_960"}
+                  transformationLabel={"2_1_960"}
                   layout="responsive"
                   width={900}
                   height={450}
@@ -163,7 +172,7 @@ function BlogCards({
           </li>
         ))}
       </CardGrid>
-    </div>
+    </CardSet>
   );
 }
 

@@ -8,9 +8,9 @@ const onlineResourceResolver = {
         3,
         1,
         args.filter,
+        null,
         graphqlFields(info)
       );
-      //return response.data;
 
       return {
         items: response.data,

@@ -15,7 +15,18 @@ function BlogsChannelsPage() {
         url: "https://www.nypl.org",
       }}
       showContentHeader={true}
-      contentPrimary={<ChannelsCards limit={30} sortBy="weight" />}
+      contentPrimary={
+        <ChannelsCards
+          id="explore-by-channel"
+          title="Explore by Channel"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
+  est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
+  metus ut volutpat turpis nascetur."
+          slug={null}
+          limit={30}
+          sortBy="weight"
+        />
+      }
     />
   );
 }

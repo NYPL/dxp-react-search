@@ -4,15 +4,33 @@ import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
 import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
-import { Heading } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
-import { CardType as CardItem } from "./../../shared/Card/CardTypes";
+import CardSet from "../../shared/Card/CardSet";
+import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
+
+interface SubjectCardItem {
+  id: string;
+  title: string;
+  description: string;
+  slug: string;
+  tid: string;
+}
 
 const SUBJECTS_QUERY = gql`
   ${TERM_BASE_FIELDS_FRAGMENT}
-  query ChannelsQuery($vocabulary: String, $sortBy: String, $limit: Int) {
-    allTermsByVocab(vocabulary: $vocabulary, sortBy: $sortBy, limit: $limit) {
+  query ChannelsQuery(
+    $vocabulary: String
+    $sortBy: String
+    $limit: Int
+    $featured: Boolean
+  ) {
+    allTermsByVocab(
+      vocabulary: $vocabulary
+      sortBy: $sortBy
+      limit: $limit
+      featured: $featured
+    ) {
       ...TermBaseFields
     }
   }
@@ -23,7 +41,7 @@ function SubjectsCards() {
   const { loading, error, data } = useQuery(SUBJECTS_QUERY, {
     variables: {
       vocabulary: "subject",
-      sortBy: "weight",
+      featured: true,
       limit: 6,
     },
   });
@@ -39,18 +57,18 @@ function SubjectsCards() {
   }
 
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      <Heading id="explore-by-subject" level={2} text="Explore by Subject" />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
+    <CardSet
+      id="explore-by-subject"
+      title="Explore by Subject"
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
         est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
-        metus ut volutpat turpis nascetur.
-      </p>
+        metus ut volutpat turpis nascetur."
+    >
       <CardGrid
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gap="1.25rem"
       >
-        {data.allTermsByVocab.map((item: any) => (
+        {data.allTermsByVocab.map((item: SubjectCardItem) => (
           <li key={item.id}>
             <Card
               id={item.id}
@@ -60,7 +78,7 @@ function SubjectsCards() {
           </li>
         ))}
       </CardGrid>
-    </div>
+    </CardSet>
   );
 }
 

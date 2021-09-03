@@ -33,13 +33,6 @@ const blogResolver = {
     */
   },
   Blog: {
-    /*id: (blog) => blog.id,
-    title: (blog) => blog.attributes.title,
-    description: (blog) =>
-      blog.attributes.field_tfls_summary_description.processed,
-    //slug: (blog) => blog.attributes.path.alias,
-    slug: (blog) => "/blog/fix-me",
-    */
     id: (blog) => blog.id,
     title: (blog) => blog.title,
     description: (blog) => blog.field_tfls_summary_description.processed,
@@ -58,8 +51,6 @@ const blogResolver = {
   Image: {
     id: (image) => image.id,
     alt: (image) => "test",
-    // @TODO Add code for including local host.
-    //uri: (image) => image.uri.url,
     uri: (image) => {
       if (image.uri.url && image.uri.url.includes("sites/default")) {
         return `http://localhost:8080${image.uri.url}`;

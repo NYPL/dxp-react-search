@@ -11,7 +11,7 @@ function BlogsAllPage() {
   return (
     <PageContainer
       showContentHeader={true}
-      contentPrimary={<BlogCards limit={10} />}
+      contentPrimary={<BlogCards id="featured-posts" limit={10} />}
     />
   );
 }

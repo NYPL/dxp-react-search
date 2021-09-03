@@ -18,7 +18,6 @@ import {
   List,
 } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
-import CardGridSkeleton from "../../ds-prototypes/CardGrid/CardGridSkeleton";
 import Image from "../../shared/Image";
 // Next components
 import Link from "next/link";

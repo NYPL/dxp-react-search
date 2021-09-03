@@ -21,11 +21,22 @@ function BlogsMainPage() {
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
         est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
         metus ut volutpat turpis nascetur."
+            slug="/blogs/all"
             limit={6}
             featured={true}
             sortBy={"created"}
           />
-          <ChannelsCards limit={6} sortBy="weight" featured={true} />
+          <ChannelsCards
+            id="explore-by-channel"
+            title="Explore by Channel"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
+        est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
+        metus ut volutpat turpis nascetur."
+            slug="/blogs/channels"
+            limit={6}
+            sortBy="weight"
+            featured={true}
+          />
           <SubjectsCards />
         </>
       }

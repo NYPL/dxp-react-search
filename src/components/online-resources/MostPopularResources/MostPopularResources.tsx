@@ -67,21 +67,3 @@ function MostPopularResources() {
 }
 
 export default MostPopularResources;
-
-/*
-    <CardGrid title="Most Popular">
-      {data.allOnlineResources.map((item) => {
-        return (
-          <li key={item.id} className="card-grid__list-item">
-            <Card
-              name={item.name}
-              imageUrl={item.imageUrl}
-              description={item.description}
-              url={item.slug}
-            />
-          </li>
-        );
-      })}
-    </CardGrid>
-
-*/
