@@ -5,12 +5,16 @@ import { gql } from "@apollo/client";
 import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image";
 import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
-import { CardImageRatios, Heading } from "@nypl/design-system-react-components";
+import { CardImageRatios } from "@nypl/design-system-react-components";
+import CardSet from "../../shared/Card/CardSet";
+import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 import Image from "../../shared/Image";
 
 interface ResourceTopicsProps {
+  id: string;
+  title: string;
   limit?: number;
   sortBy?: string;
   featured?: boolean;
@@ -28,7 +32,13 @@ const RESOURCE_TOPICS_QUERY = gql`
   }
 `;
 
-function ResourceTopics({ limit, sortBy, featured }: ResourceTopicsProps) {
+function ResourceTopics({
+  id,
+  title,
+  limit,
+  sortBy,
+  featured,
+}: ResourceTopicsProps) {
   // Query for data.
   const { loading, error, data } = useQuery(RESOURCE_TOPICS_QUERY, {
     variables: {
@@ -46,12 +56,19 @@ function ResourceTopics({ limit, sortBy, featured }: ResourceTopicsProps) {
 
   // Loading state,
   if (loading || !data) {
-    return <div>Loading</div>;
+    return (
+      <CardSet id={id} title={title}>
+        <CardSkeletonLoader
+          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+          gridGap="1.25rem"
+          itemsCount={6}
+        />
+      </CardSet>
+    );
   }
 
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      <Heading id="featured-resources" level={2} text="Featured Resources" />
+    <CardSet id={id} title={title}>
       <CardGrid
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gap="1.25rem"
@@ -82,7 +99,7 @@ function ResourceTopics({ limit, sortBy, featured }: ResourceTopicsProps) {
           </li>
         ))}
       </CardGrid>
-    </div>
+    </CardSet>
   );
 }
 

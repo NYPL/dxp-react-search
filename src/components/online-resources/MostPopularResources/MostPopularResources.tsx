@@ -2,9 +2,15 @@ import React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
-import { Heading } from "@nypl/design-system-react-components";
+import CardSet from "../../shared/Card/CardSet";
+import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
+
+interface MostPopularResourcesProps {
+  id: string;
+  title: string;
+}
 
 const MOST_POPULAR_RESOURCES_QUERY = gql`
   query MostPopularResourcesQuery($mostPopular: Boolean) {
@@ -19,7 +25,7 @@ const MOST_POPULAR_RESOURCES_QUERY = gql`
   }
 `;
 
-function MostPopularResources() {
+function MostPopularResources({ id, title }: MostPopularResourcesProps) {
   // Query for data.
   const { loading, error, data } = useQuery(MOST_POPULAR_RESOURCES_QUERY, {
     variables: {
@@ -34,12 +40,19 @@ function MostPopularResources() {
 
   // Loading state,
   if (loading || !data) {
-    return <div>Loading</div>;
+    return (
+      <CardSet id={id} title={title}>
+        <CardSkeletonLoader
+          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+          gridGap="1.25rem"
+          itemsCount={3}
+        />
+      </CardSet>
+    );
   }
 
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      <Heading id="most-popular" level={2} text={"Most Popular"} />
+    <CardSet id={id} title={title}>
       <CardGrid
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gap="1.25rem"
@@ -62,7 +75,7 @@ function MostPopularResources() {
           )
         )}
       </CardGrid>
-    </div>
+    </CardSet>
   );
 }
 

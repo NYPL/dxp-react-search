@@ -36,7 +36,7 @@ const blogResolver = {
     id: (blog) => blog.id,
     title: (blog) => blog.title,
     description: (blog) =>
-      blog.field_tfls_summary_description.processed.substring(0, 256),
+      blog.field_tfls_summary_description.processed.substring(0, 165),
     slug: (blog) => blog.path.alias,
     date: (blog) => formatDate(blog.created),
     image: (blog) =>

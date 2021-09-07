@@ -26,8 +26,13 @@ function OnlineResources() {
       showContentHeader={true}
       contentPrimary={
         <Fragment>
-          <ResourceTopics sortBy="weight" limit={30} />
-          <MostPopularResources />
+          <ResourceTopics
+            id="featured-resources"
+            title="Featured Resources"
+            sortBy="weight"
+            limit={30}
+          />
+          <MostPopularResources id="most-popular" title="Most Popular" />
           <AlphabetNav
             title={"A-Z Articles & Databases"}
             description={

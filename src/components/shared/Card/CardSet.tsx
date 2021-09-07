@@ -11,7 +11,7 @@ import Link from "next/link";
 interface CardSetProps {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   slug?: string;
   children: JSX.Element;
 }
@@ -78,44 +78,3 @@ function CardSet({ id, title, description, slug, children }: CardSetProps) {
 }
 
 export default CardSet;
-
-/*
-// Data Return
-<CardSet
-  id="featured-posts"
-  title={title}
-  description={description}
-  slug="/blogs/all"
->
-  <CardGrid
-    templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-    gap="1.25rem"
-  >
-    {data.allTermsByVocab.map((item: any) => (
-      <CardGridItem key={item.id}>
-        <Card
-          id={item.id}
-          title={item.title}
-          description={item.description}
-          url={item.slug}
-          image={
-            <Image
-              id={item.image.id}
-              alt={item.image.alt}
-              uri={item.image.uri}
-              useTransformation={true}
-              transformations={item.image.transformations}
-              transformationLabel={"2_1_960"}
-              layout="responsive"
-              width={900}
-              height={450}
-              quality={90}
-            />
-          }
-          imageAspectRatio={CardImageRatios.TwoByOne}
-        />
-      </CardGridItem>
-    ))}
-  </CardGrid>
-</CardSet>
-*/
