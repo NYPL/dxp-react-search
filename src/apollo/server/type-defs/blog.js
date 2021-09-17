@@ -8,7 +8,7 @@ export const typeDefs = gql`
     slug: String!
     date: String!
     image: Image
-    locations: [Location]
+    locations: [BlogLocation]
   }
 
   type BlogConnection {
@@ -16,7 +16,7 @@ export const typeDefs = gql`
     pageInfo: PageInfo
   }
 
-  type Location {
+  type BlogLocation {
     id: ID!
     name: String!
     contentType: String!

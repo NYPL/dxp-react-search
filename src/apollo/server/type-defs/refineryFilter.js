@@ -1,25 +1,25 @@
 import gql from "graphql-tag";
 
 export const typeDefs = gql`
-  type Vocab {
+  type RefineryVocab {
     id: ID!
     name: String!
-    terms: [Term]
+    terms: [RefineryTerm]
   }
 
-  type Term {
+  type RefineryTerm {
     id: ID!
     name: String!
-    children: [Term]
+    children: [RefineryTerm]
   }
 
-  input TermsFilter {
+  input RefineryTermsFilter {
     id: String!
     terms: [String]!
     operator: String!
   }
 
   extend type Query {
-    allTerms(filter: TermsFilter): [Vocab]!
+    refineryAllTerms(filter: RefineryTermsFilter): [RefineryVocab]!
   }
 `;

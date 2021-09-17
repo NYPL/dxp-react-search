@@ -5,12 +5,14 @@ import { SUBJECTS_UUID } from "../../../utils/setTermsFilter";
 
 const refineryTermResolver = {
   Query: {
-    allTerms: async (parent, args, { dataSources }) => {
-      const allTerms = await dataSources.refineryApi.getAllTerms();
+    refineryAllTerms: async (parent, args, { dataSources }) => {
+      const refineryAllTerms = await dataSources.refineryApi.getAllTerms();
       // Get the terms tree from all Divisions.
-      const subjectsAllowList = getSubjectsAllowList(allTerms.divisions);
+      const subjectsAllowList = getSubjectsAllowList(
+        refineryAllTerms.divisions
+      );
       // Replace subject terms with the allow list terms.
-      allTerms.searchFilters.map((filterGroup) => {
+      refineryAllTerms.searchFilters.map((filterGroup) => {
         if (filterGroup.uuid === SUBJECTS_UUID) {
           return filterGroup.terms.splice(
             0,
@@ -22,10 +24,10 @@ const refineryTermResolver = {
         }
       });
 
-      return allTerms.searchFilters;
+      return refineryAllTerms.searchFilters;
     },
   },
-  Vocab: {
+  RefineryVocab: {
     id: (vocab) => {
       return vocab.uuid;
     },
@@ -36,7 +38,7 @@ const refineryTermResolver = {
       return setNestedTerms(vocab.terms);
     },
   },
-  Term: {
+  RefineryTerm: {
     id: (term) => {
       return term.uuid;
     },

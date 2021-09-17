@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type Location {
@@ -24,6 +24,14 @@ export const typeDefs = gql`
     terms: [String]
   }
 
+  type Address {
+    address_line1: String
+    address_line2: String
+    locality: String
+    administrative_area: String
+    postal_code: String
+  }
+
   type GeoLocation {
     lat: Float
     lng: Float
@@ -42,7 +50,7 @@ export const typeDefs = gql`
 
   input Filter {
     openNow: Boolean
-    termIds: [TermsFilter]
+    termIds: [RefineryTermsFilter]
   }
 
   type LocationsConnection {
@@ -52,10 +60,10 @@ export const typeDefs = gql`
 
   extend type Query {
     allLocations(
-      limit: Int,
-      offset: Int,
-      pageNumber: Int,
-      filter: Filter,
+      limit: Int
+      offset: Int
+      pageNumber: Int
+      filter: Filter
       sortByDistance: SortByDistance
     ): LocationsConnection
   }

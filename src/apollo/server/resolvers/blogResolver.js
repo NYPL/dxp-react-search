@@ -71,7 +71,7 @@ const blogResolver = {
       return transformations;
     },
   },
-  Location: {
+  BlogLocation: {
     id: (location) => location.id,
     name: (location) => location.title,
     contentType: (location) => location.type,
