@@ -8,6 +8,7 @@ const termResolver = {
         args.sortBy,
         args.limit,
         args.featured,
+        args.limiter,
         graphqlFields(info)
       );
       return response.data;

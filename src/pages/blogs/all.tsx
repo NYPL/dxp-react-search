@@ -5,13 +5,14 @@ import { withApollo } from "./../../apollo/client/withApollo";
 import { withRedux } from "./../../redux/withRedux";
 // Components
 import PageContainer from "./../../components/blogs/layouts/PageContainer";
-import BlogCards from "../../components/blogs/BlogCards";
+import BlogsContainer from "../../components/blogs/BlogsContainer";
 
 function BlogsAllPage() {
   return (
     <PageContainer
       showContentHeader={true}
-      contentPrimary={<BlogCards id="featured-posts" limit={10} />}
+      showFilterBar={true}
+      contentPrimary={<BlogsContainer id="featured-posts" limit={10} />}
     />
   );
 }

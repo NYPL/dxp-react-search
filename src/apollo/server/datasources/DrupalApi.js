@@ -141,56 +141,75 @@ class DrupalApi extends RESTDataSource {
     return response.results;
   }
 
-  //
-  // /api/taxonomy-filters?vocab=audience_by_age
-  // /api/taxonomy-filters?vocab=subject&content_type=online_resource
-  async getAllFiltersByGroupId(args) {
+  // /jsonapi/taxonomy_term/subject?fields[taxonomy_term--subject]=name,drupal_internal__tid,vid,uuid,parent&page[limit]=200&jsonapi_include=1
+  async getAllFiltersByGroupId(id, type, limiter) {
     // Special handling for availability.
-    if (args.id === "availability") {
+    if (id === "availability") {
       const availabilityFilterMock = {
-        data: {
-          id: "availability",
-          terms: [
-            {
-              uuid: "aa50711e-ad06-4451-bc59-ae9821681ee2",
-              tid: "no-restrictions",
-              name: "Available everywhere",
-              vid: null,
-              parent_tid: "virtual",
-              parent_uuid: "virtual",
-            },
-            {
-              uuid: "b820a733-80e8-462c-8922-1ddf99a4a5a0",
-              tid: "card-required",
-              name: "Offsite with Library Card",
-              vid: null,
-              parent_tid: "virtual",
-              parent_uuid: "virtual",
-            },
-            {
-              uuid: "3e7eba04-e788-4ad1-8380-392b6cf5ebe3",
-              tid: "on-site-only",
-              name: "On-Site Access Only",
-              vid: null,
-              parent_tid: "virtual",
-              parent_uuid: "virtual",
-            },
-          ],
-          total_items: 3,
-        },
+        data: [
+          {
+            id: "aa50711e-ad06-4451-bc59-ae9821681ee2",
+            drupal_internal__tid: "no-restrictions",
+            name: "Available everywhere",
+            vid: null,
+            parent: [
+              {
+                id: "virtual",
+                meta: {
+                  drupal_internal__target_id: "virtual",
+                },
+              },
+            ],
+          },
+          {
+            id: "b820a733-80e8-462c-8922-1ddf99a4a5a0",
+            drupal_internal__tid: "card-required",
+            name: "Offsite with Library Card",
+            vid: null,
+            parent: [
+              {
+                id: "virtual",
+                meta: {
+                  drupal_internal__target_id: "virtual",
+                },
+              },
+            ],
+          },
+          {
+            id: "3e7eba04-e788-4ad1-8380-392b6cf5ebe3",
+            drupal_internal__tid: "on-site-only",
+            name: "On-Site Access Only",
+            vid: null,
+            parent: [
+              {
+                id: "virtual",
+                meta: {
+                  drupal_internal__target_id: "virtual",
+                },
+              },
+            ],
+          },
+        ],
       };
       return availabilityFilterMock;
     }
 
-    let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+    let apiPath;
+    if (type === "taxonomy") {
+      apiPath = `/jsonapi/taxonomy_term/${id}?jsonapi_include=1&fields[taxonomy_term--${id}]=name,drupal_internal__tid,vid,uuid,parent&page[limit]=200`;
 
-    if (args.limiter) {
-      apiPath = `${apiPath}&content_type=${args.limiter}`;
+      if (limiter) {
+        apiPath = `${apiPath}&filter[field_lts_content_type]=${limiter}`;
+      }
+    }
+
+    if (type === "content") {
+      apiPath = `jsonapi/node/${id}?jsonapi_include=1&fields[node--${id}]=title,drupal_internal__nid&page[limit]=200&&sort[sort-title][path]=title&sort[sort-title][direction]=ASC`;
     }
 
     const response = await this.get(apiPath);
 
-    if (Array.isArray(response.data.terms)) {
+    if (Array.isArray(response.data)) {
       return response;
     } else {
       return [];
@@ -204,7 +223,14 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getAllTermsByVocabulary(vocab, sortBy, limit, featured, queryFields) {
+  async getAllTermsByVocabulary(
+    vocab,
+    sortBy,
+    limit,
+    featured,
+    limiter,
+    queryFields
+  ) {
     let apiPath = `/jsonapi/taxonomy_term/${vocab}?jsonapi_include=1`;
     // Temp workaround for only adding include if image is in gql query.
     if ("image" in queryFields) {
@@ -219,6 +245,10 @@ class DrupalApi extends RESTDataSource {
     if (limit) {
       apiPath = `${apiPath}&page[offset]=0&page[limit]=${limit}`;
     }
+    if (limiter) {
+      apiPath = `${apiPath}&filter[field_lts_content_type]=${limiter}`;
+    }
+
     const response = await this.get(apiPath);
 
     if (Array.isArray(response.data)) {
@@ -284,6 +314,49 @@ class DrupalApi extends RESTDataSource {
     if (filter && "featured" in filter && filter.featured !== null) {
       apiPath = `${apiPath}&filter[field_bs_featured]=1`;
     }
+
+    // @TODO could convert this to reuseable function?
+    // Channels filter.
+    if (filter && "channels" in filter && filter.channels) {
+      filter.channels.map((channel) => {
+        const filters = this.filterMultiValueEntityRef(
+          channel,
+          "field_erm_channels"
+        );
+        apiPath = `${apiPath}&${filters}`;
+      });
+    }
+    // Subjects filter.
+    if (filter && "subjects" in filter && filter.subjects) {
+      filter.subjects.map((subject) => {
+        const filters = this.filterMultiValueEntityRef(
+          subject,
+          "field_erm_subjects"
+        );
+        apiPath = `${apiPath}&${filters}`;
+      });
+    }
+    // Libraries filter.
+    if (filter && "libraries" in filter && filter.libraries) {
+      filter.libraries.map((library) => {
+        const filters = this.filterMultiValueEntityRef(
+          library,
+          "field_erm_location"
+        );
+        apiPath = `${apiPath}&${filters}`;
+      });
+    }
+    // Divisions filter.
+    if (filter && "divisions" in filter && filter.divisions) {
+      filter.divisions.map((division) => {
+        const filters = this.filterMultiValueEntityRef(
+          division,
+          "field_erm_divisions"
+        );
+        apiPath = `${apiPath}&${filters}`;
+      });
+    }
+    //
     if (sortBy) {
       apiPath = `${apiPath}&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`;
     }
@@ -294,6 +367,24 @@ class DrupalApi extends RESTDataSource {
     } else {
       return [];
     }
+  }
+
+  // Helper methods.
+
+  /*
+    Build filters for multi value entity reference filters.
+    @see https://www.drupal.org/project/drupal/issues/3066202#comment-13181270
+  */
+  filterMultiValueEntityRef(item, fieldName) {
+    const groupName = `${fieldName}-${item}-and`;
+    const filterName = `${fieldName}-${item}`;
+    const conditionPath = `${fieldName}.meta.drupal_internal__target_id`;
+    // Query param parts.
+    const filterConjunction = `filter[${groupName}][group][conjunction]=AND`;
+    const filterConditionValue = `filter[${filterName}][condition][value]=${item}`;
+    const filterConditionPath = `filter[${filterName}][condition][path]=${conditionPath}`;
+    const filterConditionMemberOf = `filter[${filterName}][condition][memberOf]=${groupName}`;
+    return `${filterConjunction}&${filterConditionValue}&${filterConditionPath}&${filterConditionMemberOf}`;
   }
 }
 

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type FilterItem {
@@ -9,6 +9,6 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    allFiltersByGroupId(id: String, limiter: String): [FilterItem]
+    allFiltersByGroupId(id: String, type: String, limiter: String): [FilterItem]
   }
 `;

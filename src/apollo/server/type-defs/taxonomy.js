@@ -16,6 +16,7 @@ export const typeDefs = gql`
       sortBy: String
       limit: Int
       featured: Boolean
+      limiter: String
     ): [Term]!
     termBySlug(slug: String, vocabulary: String): Term
   }

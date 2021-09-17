@@ -95,7 +95,7 @@ function MultiSelect(props) {
     if (id === "availability") {
       return (
         <Radio
-          id={item.id}
+          id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${item.id}`}
           labelText={<>{item.name}</>}
           showLabel={true}
           name={item.name}
@@ -106,7 +106,7 @@ function MultiSelect(props) {
     } else {
       return (
         <Checkbox
-          id={item.id}
+          id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${item.id}`}
           labelText={<>{item.name}</>}
           showLabel={true}
           name={item.name}
@@ -126,6 +126,8 @@ function MultiSelect(props) {
     }
     return false;
   }
+
+  //console.log(items);
 
   return (
     <FocusTrap
@@ -152,11 +154,18 @@ function MultiSelect(props) {
           <ul className={s.menuInner}>
             {isOpen &&
               items.map((item) => (
-                <li key={item.id} className={s.menuItem}>
+                <li
+                  key={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${
+                    item.id
+                  }`}
+                  className={s.menuItem}
+                >
                   {item.children ? (
                     <>
                       <Checkbox
-                        id={item.id}
+                        id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${
+                          item.id
+                        }`}
                         labelText={<>{item.name}</>}
                         showLabel={true}
                         name={item.name}
@@ -169,9 +178,16 @@ function MultiSelect(props) {
                       <ul>
                         {item.children.map((childItem) => {
                           return (
-                            <li key={childItem.id} className={s.childMenuItem}>
+                            <li
+                              key={`${childItem.name
+                                .replace(/\s+/g, "-")
+                                .toLowerCase()}__${childItem.id}`}
+                              className={s.childMenuItem}
+                            >
                               <Checkbox
-                                id={childItem.id}
+                                id={`${childItem.name
+                                  .replace(/\s+/g, "-")
+                                  .toLowerCase()}__${childItem.id}`}
                                 labelText={<>{childItem.name}</>}
                                 showLabel={true}
                                 name={childItem.name}

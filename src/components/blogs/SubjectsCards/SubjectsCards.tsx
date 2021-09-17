@@ -24,12 +24,14 @@ const SUBJECTS_QUERY = gql`
     $sortBy: String
     $limit: Int
     $featured: Boolean
+    $limiter: String
   ) {
     allTermsByVocab(
       vocabulary: $vocabulary
       sortBy: $sortBy
       limit: $limit
       featured: $featured
+      limiter: $limiter
     ) {
       ...TermBaseFields
     }
@@ -43,6 +45,7 @@ function SubjectsCards() {
       vocabulary: "subject",
       featured: true,
       limit: 6,
+      limiter: "blog",
     },
   });
 

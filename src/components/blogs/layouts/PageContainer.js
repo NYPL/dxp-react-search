@@ -7,9 +7,17 @@ import { Hero } from "@nypl/design-system-react-components";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import blogsContent from "./../../../__content/blogs";
 import BottomMenuContent from "./../../shared/BottomMenus/content";
+import SearchHeader from "./../../shared/SearchHeader";
+import { default as SharedFilterBar } from "./../../shared/FilterBar";
 
 function PageContainer(props) {
-  const { metaTags, breadcrumbs, contentPrimary, showContentHeader } = props;
+  const {
+    metaTags,
+    breadcrumbs,
+    contentPrimary,
+    showFilterBar,
+    showContentHeader,
+  } = props;
   const { title, description } = blogsContent;
 
   // Default breadcrumbs for all online resources pages.
@@ -29,13 +37,47 @@ function PageContainer(props) {
     : defaultBreadcrumbs;
 
   const ContentHeader = (
-    <Hero
-      heroType={"TERTIARY"}
-      heading={<h1>{title}</h1>}
-      subHeaderText={description}
-      backgroundColor="#E0E0E0"
-      foregroundColor="#000000"
-    />
+    <>
+      <Hero
+        heroType={"TERTIARY"}
+        heading={<h1>{title}</h1>}
+        subHeaderText={description}
+        backgroundColor="#E0E0E0"
+        foregroundColor="#000000"
+      />
+      {showFilterBar && (
+        <SearchHeader>
+          <SharedFilterBar
+            id="blogs__filter-bar"
+            label="Explore By"
+            routerPathname="/blogs/all"
+            groups={[
+              {
+                id: "channel",
+                label: "Channels",
+                type: "taxonomy",
+              },
+              {
+                id: "subject",
+                label: "Subjects",
+                type: "taxonomy",
+                limiter: "blog",
+              },
+              {
+                id: "library",
+                label: "Libraries",
+                type: "content",
+              },
+              {
+                id: "division",
+                label: "Divisions",
+                type: "content",
+              },
+            ]}
+          />
+        </SearchHeader>
+      )}
+    </>
   );
 
   return (
