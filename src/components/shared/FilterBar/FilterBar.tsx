@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 // Hooks
 import useWindowSize from "../../../hooks/useWindowSize";
 import usePrevious from "../../../hooks/usePrevious";
+// Types
+import { FilterBarGroupItem, SelectedItems, SelectedItemsMap } from "./types";
 // Components
 import { default as DsFilterBar } from "./../../ds-prototypes/FilterBar/FilterBar";
 import MultiSelect from "./MultiSelect";
@@ -17,21 +19,6 @@ interface FilterBarProps {
   routerPathname: string;
   /** Optional boolean to control the q parameter, used for text search. */
   searchQuery?: boolean;
-}
-
-interface FilterBarGroupItem {
-  id: string;
-  label: string;
-  type: string;
-  limiter: string;
-}
-
-interface SelectedItemsMap {
-  [name: string]: SelectedItems;
-}
-
-interface SelectedItems {
-  items: string[];
 }
 
 function FilterBar({
@@ -84,8 +71,7 @@ function FilterBar({
         urlState = {
           ...urlState,
           [groupId]: {
-            // @ts-ignore
-            items: router.query[groupId].split(" "),
+            items: (router.query[groupId] as string).split(" "),
           },
         };
       }
@@ -131,8 +117,7 @@ function FilterBar({
   }
 
   //
-  function onSelectedItemChange(event: any, groupId: string) {
-    let itemId = event.target.id;
+  function onSelectedItemChange(itemId: string, groupId: string) {
     itemId = itemId.replace(/^[^__]*__/, "");
 
     const nextState = (object: SelectedItemsMap, property: string) => {
@@ -174,7 +159,7 @@ function FilterBar({
   function onSaveMultiSelect() {
     // Get the query params to add using the groups.
     let queryParamsToAdd = {};
-    groups.map((group: any) => {
+    groups.map((group: FilterBarGroupItem) => {
       if (selectedItems[group.id] && selectedItems[group.id].items.length > 0) {
         queryParamsToAdd = {
           ...queryParamsToAdd,
@@ -220,11 +205,9 @@ function FilterBar({
 
   function onClearMultiSelect(groupId: string) {
     // Run through query param state and remove
-
-    let queryStateToKeep = {};
+    let queryStateToKeep = {} as any;
     for (let [key, value] of Object.entries(router.query)) {
       if (groupId !== key) {
-        // @ts-ignore
         queryStateToKeep[key] = router.query[key];
       }
     }
@@ -292,7 +275,7 @@ function FilterBar({
       onClearSelectedItems={onClearAllMultiSelects}
       onSaveSelectedItems={onSaveMultiSelect}
     >
-      {groups.map((group: any) => {
+      {groups.map((group: FilterBarGroupItem) => {
         return (
           <MultiSelect
             key={group.id}
@@ -300,7 +283,9 @@ function FilterBar({
             type={group.type}
             limiter={group.limiter}
             label={group.label}
-            onSelectedItemChange={(e: any) => onSelectedItemChange(e, group.id)}
+            onSelectedItemChange={(e: React.MouseEvent<HTMLButtonElement>) =>
+              onSelectedItemChange(e.currentTarget.id, group.id)
+            }
             selectedItems={selectedItems}
             onClearMultiSelect={() => onClearMultiSelect(group.id)}
             onSaveMultiSelect={onSaveMultiSelect}

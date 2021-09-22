@@ -1,6 +1,8 @@
 import React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
+// Types
+import { SelectedItemsMap } from "./types";
 // Components
 import { default as DsMultiSelect } from "../../ds-prototypes/MultiSelect/MultiSelect";
 
@@ -22,11 +24,11 @@ interface MutliSelectProps {
   label: string;
   type: string;
   limiter?: string;
-  onSelectedItemChange: any;
-  selectedItems: any;
-  onClearMultiSelect: any;
-  onSaveMultiSelect: any;
-  onMenuClick: any;
+  onSelectedItemChange(event: React.MouseEvent<HTMLButtonElement>): void;
+  selectedItems: SelectedItemsMap;
+  onClearMultiSelect: () => void;
+  onSaveMultiSelect: () => void;
+  onMenuClick: () => void;
   selectedGroupIds: string[];
   showCtaButtons: boolean;
   handleChangeMixedStateCheckbox: any;

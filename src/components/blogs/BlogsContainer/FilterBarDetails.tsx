@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Next
 import { useRouter } from "next/router";
 // Redux
@@ -54,7 +54,7 @@ function FilterBarDetails({
 
     const message = `Showing ${startItem}-${endItem} of ${totalItems} results.`;
 
-    return <Fragment>{message}</Fragment>;
+    return <>{message}</>;
   }
 
   return (

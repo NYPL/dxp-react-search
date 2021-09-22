@@ -1,35 +1,52 @@
-import React from 'react';
+import React from "react";
 // Components
-import { 
-  Button, 
+import {
+  Button,
+  ButtonTypes,
   Heading,
   Icon,
-  Modal
-} from '@nypl/design-system-react-components';
+  IconRotationTypes,
+  Modal,
+} from "@nypl/design-system-react-components";
 // Styles
-import s from './FilterBar.module.css';
+import s from "./FilterBar.module.css";
 
-function FilterBar(props) {
-  const {
-    id,
-    label,
-    isModalOpen,
-    onClickMobileFiltersButton,
-    onClickGoBack,
-    isMobile,
-    selectedItems,
-    onClearSelectedItems,
-    onSaveSelectedItems,
-    children
-  } = props;
-  
+interface FilterBarProps {
+  id: string;
+  label: string;
+  isModalOpen: boolean;
+  onClickMobileFiltersButton: () => void;
+  onClickGoBack: () => void;
+  isMobile: boolean;
+  selectedItems: FbSelectedItems;
+  onClearSelectedItems: () => void;
+  onSaveSelectedItems: () => void;
+  children: React.ReactNode;
+}
+
+interface FbSelectedItems {
+  [name: string]: { items: string[] };
+}
+
+function FilterBar({
+  id,
+  label,
+  isModalOpen,
+  onClickMobileFiltersButton,
+  onClickGoBack,
+  isMobile,
+  selectedItems,
+  onClearSelectedItems,
+  onSaveSelectedItems,
+  children,
+}: FilterBarProps) {
   // Sets the label of the filters button.
-  function setFilterButtonLabel(selectedItems) {    
+  function setFilterButtonLabel(selectedItems: FbSelectedItems) {
     let allItems = [];
     for (let [key, value] of Object.entries(selectedItems)) {
-      value.items.map(item => {
+      value.items.map((item) => {
         allItems.push(item);
-      })
+      });
     }
     return `Filters ${allItems.length ? `(${allItems.length})` : ``}`;
   }
@@ -38,12 +55,12 @@ function FilterBar(props) {
     <div id={id} className={s.container}>
       {isMobile ? (
         <div className={s.mobileContainer}>
-          <Button 
-            id='search-filters__mobile-filters-button'
+          <Button
+            id="search-filters__mobile-filters-button"
             className={s.filterBarButtonMobile}
             onClick={onClickMobileFiltersButton}
-            buttonType='outline'
-            type='button'
+            buttonType={ButtonTypes.Secondary}
+            type="button"
           >
             {setFilterButtonLabel(selectedItems)}
           </Button>
@@ -51,25 +68,24 @@ function FilterBar(props) {
             <Modal>
               <div className={s.ctaButtonsContainerMobile}>
                 <Button
-                  buttonType="link"
+                  buttonType={ButtonTypes.Link}
                   className={s.ctaClearButtonMobile}
-                  id={'multiselect-button-goback'}
+                  id={"multiselect-button-goback"}
                   mouseDown={false}
                   type="button"
                   onClick={onClickGoBack}
                 >
                   <Icon
                     decorative
-                    iconRotation="rotate-90"
-                    modifiers={[
-                      'small'
-                    ]}
-                    name="arrow"
+                    iconRotation={IconRotationTypes.rotate90}
+                    modifiers={["small"]}
+                    //name="arrow"
                   />
                   Go Back
                 </Button>
                 <Button
-                  buttonType="filled"
+                  // filled
+                  buttonType={ButtonTypes.Primary}
                   id={`multiselect-button-save`}
                   mouseDown={false}
                   type="button"
@@ -85,11 +101,11 @@ function FilterBar(props) {
                   text="Filters"
                 />
                 {children}
-                {Object.keys(selectedItems).length > 0 &&
+                {Object.keys(selectedItems).length > 0 && (
                   <Button
-                    buttonType="link"
-                    iconName={null}
-                    iconPosition={null}
+                    buttonType={ButtonTypes.Link}
+                    //iconName={null}
+                    //iconPosition={null}
                     id="mobile-clear-all-button"
                     className={s.clearAllFiltersButton}
                     mouseDown={false}
@@ -98,7 +114,7 @@ function FilterBar(props) {
                   >
                     Clear all filters
                   </Button>
-                }
+                )}
               </div>
             </Modal>
           )}
@@ -111,13 +127,11 @@ function FilterBar(props) {
             level={2}
             text={label}
           />
-          <div className={s.multiSelectsContainerDesktop}>
-            {children}
-          </div>
+          <div className={s.multiSelectsContainerDesktop}>{children}</div>
         </div>
       )}
     </div>
   );
-};
+}
 
 export default FilterBar;
