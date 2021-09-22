@@ -5,7 +5,7 @@ import s from "./SearchResultsDetails.module.css";
 
 interface SearchResultsDetailsProps {
   /** The label used in the component's heading. */
-  label: string;
+  label?: string;
   /** The search results details message. */
   message: string;
   /** The text to display for the clear button. */
@@ -22,7 +22,13 @@ function SearchResultsDetails({
 }: SearchResultsDetailsProps) {
   return (
     <div id="search-results__details" role="alert">
-      <Heading id={"search-results__details-heading"} level={2} text={label} />
+      {label && (
+        <Heading
+          id={"search-results__details-heading"}
+          level={2}
+          text={label}
+        />
+      )}
       {message}
       <Button
         className={s.button}

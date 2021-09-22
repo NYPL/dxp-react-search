@@ -13,7 +13,6 @@ import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
 // Components
 import { default as SharedSearchForm } from "./../../shared/SearchForm";
 import { default as SharedFilterBar } from "./../../shared/FilterBar";
-//import SearchFilters from "./SearchFilters";
 
 function SearchForm() {
   const router = useRouter();
@@ -116,6 +115,7 @@ function SearchForm() {
         id="online-resources__search-filters"
         label="Filter By"
         routerPathname={`${ONLINE_RESOURCES_BASE_PATH}/search`}
+        searchQuery={true}
         groups={[
           {
             id: "subject",

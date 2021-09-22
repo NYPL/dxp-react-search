@@ -9,10 +9,21 @@ import MultiSelect from "./MultiSelect";
 import { useRouter } from "next/router";
 
 interface FilterBarProps {
+  /** The id of the filter bar instance. */
   id: string;
   label: string;
-  groups: any;
+  groups: FilterBarGroupItem[];
+  /** The path to use for clear and saving of multiselects. */
   routerPathname: string;
+  /** Optional boolean to control the q parameter, used for text search. */
+  searchQuery?: boolean;
+}
+
+interface FilterBarGroupItem {
+  id: string;
+  label: string;
+  type: string;
+  limiter: string;
 }
 
 interface SelectedItemsMap {
@@ -23,7 +34,13 @@ interface SelectedItems {
   items: string[];
 }
 
-function FilterBar({ id, label, groups, routerPathname }: FilterBarProps) {
+function FilterBar({
+  id,
+  label,
+  groups,
+  routerPathname,
+  searchQuery,
+}: FilterBarProps) {
   // Local state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>();
@@ -171,9 +188,11 @@ function FilterBar({ id, label, groups, routerPathname }: FilterBarProps) {
       .push({
         pathname: routerPathname,
         query: {
-          q: router.query.q,
-          page: router.query.page ? router.query.page : 1,
+          ...(searchQuery && {
+            q: router.query.q,
+          }),
           ...queryParamsToAdd,
+          page: router.query.page ? router.query.page : 1,
         },
       })
       .then(() => {

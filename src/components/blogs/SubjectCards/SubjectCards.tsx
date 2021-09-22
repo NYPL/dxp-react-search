@@ -2,12 +2,11 @@ import React from "react";
 // Apollo
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
-import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
+import { TERM_BASE_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/term";
 // Components
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 import CardSet from "../../shared/Card/CardSet";
-import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 
 interface SubjectCardItem {
   id: string;
@@ -38,14 +37,14 @@ const SUBJECTS_QUERY = gql`
   }
 `;
 
-function SubjectsCards() {
+function SubjectCards() {
   // Query for data.
   const { loading, error, data } = useQuery(SUBJECTS_QUERY, {
     variables: {
       vocabulary: "subject",
+      limiter: "blog",
       featured: true,
       limit: 6,
-      limiter: "blog",
     },
   });
 
@@ -76,7 +75,7 @@ function SubjectsCards() {
             <Card
               id={item.id}
               title={item.title}
-              url={`/someting-something?id=${item.tid}`}
+              url={`/blogs/all?subject=${item.tid}`}
             />
           </li>
         ))}
@@ -85,4 +84,4 @@ function SubjectsCards() {
   );
 }
 
-export default SubjectsCards;
+export default SubjectCards;

@@ -7,8 +7,7 @@ import { Hero } from "@nypl/design-system-react-components";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import blogsContent from "./../../../__content/blogs";
 import BottomMenuContent from "./../../shared/BottomMenus/content";
-import SearchHeader from "./../../shared/SearchHeader";
-import { default as SharedFilterBar } from "./../../shared/FilterBar";
+import FilterBar from "./../../shared/FilterBar";
 
 function PageContainer(props) {
   const {
@@ -28,7 +27,7 @@ function PageContainer(props) {
     },
     {
       text: "Blogs",
-      url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research`,
+      url: `${NEXT_PUBLIC_NYPL_DOMAIN}/blogs`,
     },
   ];
 
@@ -46,36 +45,40 @@ function PageContainer(props) {
         foregroundColor="#000000"
       />
       {showFilterBar && (
-        <SearchHeader>
-          <SharedFilterBar
-            id="blogs__filter-bar"
-            label="Explore By"
-            routerPathname="/blogs/all"
-            groups={[
-              {
-                id: "channel",
-                label: "Channels",
-                type: "taxonomy",
-              },
-              {
-                id: "subject",
-                label: "Subjects",
-                type: "taxonomy",
-                limiter: "blog",
-              },
-              {
-                id: "library",
-                label: "Libraries",
-                type: "content",
-              },
-              {
-                id: "division",
-                label: "Divisions",
-                type: "content",
-              },
-            ]}
-          />
-        </SearchHeader>
+        <div style={{ padding: "2rem 0" }}>
+          <div
+            style={{ maxWidth: "1280px", padding: "0 1rem", margin: "0 auto" }}
+          >
+            <FilterBar
+              id="blogs__filter-bar"
+              label="Explore By:"
+              routerPathname="/blogs/all"
+              groups={[
+                {
+                  id: "channel",
+                  label: "Channels",
+                  type: "taxonomy",
+                },
+                {
+                  id: "subject",
+                  label: "Subjects",
+                  type: "taxonomy",
+                  limiter: "blog",
+                },
+                {
+                  id: "library",
+                  label: "Libraries",
+                  type: "content",
+                },
+                {
+                  id: "division",
+                  label: "Divisions",
+                  type: "content",
+                },
+              ]}
+            />
+          </div>
+        </div>
       )}
     </>
   );

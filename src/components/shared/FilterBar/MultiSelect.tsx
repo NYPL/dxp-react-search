@@ -62,7 +62,21 @@ function MultiSelect({
 
   // Loading state,
   if (loading || !data) {
-    return <div>Loading</div>;
+    return (
+      <DsMultiSelect
+        id={id}
+        label={label}
+        items={null}
+        handleOnSelectedItemChange={onSelectedItemChange}
+        selectedItems={selectedItems}
+        onClearMultiSelect={onClearMultiSelect}
+        onSaveMultiSelect={onSaveMultiSelect}
+        onMenuClick={onMenuClick}
+        selectedGroupIds={selectedGroupIds}
+        showCtaButtons={showCtaButtons}
+        handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
+      />
+    );
   }
 
   return (

@@ -20,10 +20,7 @@ function CardSkeletonLoader({
   let skeletonLoaders = [];
   for (var i = 0; i < itemsCount; i++) {
     skeletonLoaders.push(
-      <SkeletonLoader
-        imageAspectRatio={SkeletonLoaderImageRatios.Landscape}
-        border
-      />
+      <SkeletonLoader imageAspectRatio={SkeletonLoaderImageRatios.Landscape} />
     );
   }
 

@@ -6,9 +6,8 @@ import { withRedux } from "./../../redux/withRedux";
 // Components
 import PageContainer from "./../../components/blogs/layouts/PageContainer";
 import ChannelsCards from "./../../components/blogs/ChannelsCards";
-import BlogCards from "../../components/blogs/BlogCards";
-import BookList from "../../components/blogs/BookList";
-import SubjectsCards from "../../components/blogs/SubjectsCards";
+import BlogsContainer from "../../components/blogs/BlogsContainer";
+import SubjectCards from "../../components/blogs/SubjectCards";
 
 function BlogsMainPage() {
   return (
@@ -16,7 +15,8 @@ function BlogsMainPage() {
       showContentHeader={true}
       contentPrimary={
         <>
-          <BlogCards
+          <BlogsContainer
+            id="featured-posts"
             title={"Featured Posts"}
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
         est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
@@ -37,7 +37,7 @@ function BlogsMainPage() {
             sortBy="weight"
             featured={true}
           />
-          <SubjectsCards />
+          <SubjectCards />
         </>
       }
     />
