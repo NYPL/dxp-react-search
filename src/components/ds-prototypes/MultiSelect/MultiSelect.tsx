@@ -2,6 +2,7 @@ import React from "react";
 // Components
 import {
   Button,
+  ButtonTypes,
   Checkbox,
   Icon,
   Radio,
@@ -10,25 +11,48 @@ import FocusTrap from "focus-trap-react";
 // Styles
 import s from "./MultiSelect.module.css";
 
-function MultiSelect(props) {
-  const {
-    id,
-    label,
-    items,
-    handleOnSelectedItemChange,
-    selectedItems,
-    onSaveMultiSelect,
-    onClearMultiSelect,
-    onMenuClick,
-    selectedGroupIds,
-    showCtaButtons,
-    handleChangeMixedStateCheckbox,
-  } = props;
+interface MultiSelectProps {
+  id: string;
+  label: string;
+  items: any;
+  handleOnSelectedItemChange: any;
+  selectedItems: any;
+  onSaveMultiSelect: () => void;
+  onClearMultiSelect: () => void;
+  onMenuClick: () => void;
+  selectedGroupIds: string[];
+  showCtaButtons: boolean;
+  handleChangeMixedStateCheckbox: any;
+}
 
+interface MsItem {
+  id: string;
+  name: string;
+  children: [
+    {
+      id: string;
+      name: string;
+    }
+  ];
+}
+
+function MultiSelect({
+  id,
+  label,
+  items,
+  handleOnSelectedItemChange,
+  selectedItems,
+  onSaveMultiSelect,
+  onClearMultiSelect,
+  onMenuClick,
+  selectedGroupIds,
+  showCtaButtons,
+  handleChangeMixedStateCheckbox,
+}: MultiSelectProps) {
   const isOpen = selectedGroupIds.includes(id);
   const iconType = isOpen ? "minus" : "plus";
 
-  function getButtonLabel(id) {
+  function getButtonLabel(id: string) {
     let buttonLabel = label;
     if (selectedItems[id] !== undefined && selectedItems[id].items.length > 0) {
       buttonLabel = `${label} (${selectedItems[id].items.length})`;
@@ -36,26 +60,30 @@ function MultiSelect(props) {
     return buttonLabel;
   }
 
-  function setFilterCheckedProp(groupdId, itemId) {
+  function setFilterCheckedProp(groupdId: string, itemId: string) {
     let checked = false;
     if (selectedItems[groupdId] !== undefined) {
       checked = selectedItems[groupdId].items.find(
-        (filter) => filter === itemId
+        (filter: string) => filter === itemId
       );
     }
     return checked;
   }
 
-  function onChangeMixedStateCheckbox(groupId, item) {
+  /*function onChangeMixedStateCheckbox(groupId: string, item: any) {
     // Build an array of child items.
+    // @ts-ignore
     let childIds = [];
+    // @ts-ignore
     item.children.map((childItem) => {
       childIds.push(childItem.id);
     });
 
     // This is the prop passed into the component that returns the childIds.
+    // @ts-ignore
     handleChangeMixedStateCheckbox(childIds);
   }
+  */
 
   /**
    * Determines the checked state of a mixed state checkbox (parent).
@@ -64,13 +92,10 @@ function MultiSelect(props) {
    * @param {array} item - an array of objects containing checkbox items.
    * @return {boolean} checked - true or false.
    */
-  function setMixedStateCheckboxCheckedProp(groupdId, item) {
-    /*
-      true -- all children checked
-      false -- no children checked
-      mixed -- some children checked
-    */
-
+  /*function setMixedStateCheckboxCheckedProp(
+    groupdId: string,
+    item: { id: string; name: string; children: string[] }
+  ) {
     let childIds = [];
     item.children.map((childItem) => {
       childIds.push(childItem.id);
@@ -89,13 +114,15 @@ function MultiSelect(props) {
     }
     return checked;
   }
+  */
 
   // @TODO Temp workaround to render availability as radio not checkbox.
-  function RadioOrCheckboxComponent(id, item) {
+  function RadioOrCheckboxComponent(id: string, item: MsItem) {
     if (id === "availability") {
       return (
         <Radio
           id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${item.id}`}
+          // @ts-ignore
           labelText={<>{item.name}</>}
           showLabel={true}
           name={item.name}
@@ -107,6 +134,7 @@ function MultiSelect(props) {
       return (
         <Checkbox
           id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${item.id}`}
+          // @ts-ignore
           labelText={<>{item.name}</>}
           showLabel={true}
           name={item.name}
@@ -146,14 +174,16 @@ function MultiSelect(props) {
           <span>{getButtonLabel(id)}</span>
           <Icon
             decorative={true}
+            // @ts-ignore
             name={iconType}
+            // @ts-ignore
             modifiers={["small", { iconType }]}
           />
         </button>
         <div className={`${s.menu} ${isOpen && s.active}`}>
           <ul className={s.menuInner}>
             {isOpen &&
-              items.map((item) => (
+              items.map((item: MsItem) => (
                 <li
                   key={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${
                     item.id
@@ -166,6 +196,7 @@ function MultiSelect(props) {
                         id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${
                           item.id
                         }`}
+                        // @ts-ignore
                         labelText={<>{item.name}</>}
                         showLabel={true}
                         name={item.name}
@@ -188,6 +219,7 @@ function MultiSelect(props) {
                                 id={`${childItem.name
                                   .replace(/\s+/g, "-")
                                   .toLowerCase()}__${childItem.id}`}
+                                // @ts-ignore
                                 labelText={<>{childItem.name}</>}
                                 showLabel={true}
                                 name={childItem.name}
@@ -211,7 +243,7 @@ function MultiSelect(props) {
           {isOpen && showCtaButtons && (
             <div className={s.ctaButtonsContainer}>
               <Button
-                buttonType="link"
+                buttonType={ButtonTypes.Link}
                 id={`multiselect-button-clear-${id}`}
                 className={s.ctaButtonsDesktopClear}
                 mouseDown={false}
@@ -221,7 +253,7 @@ function MultiSelect(props) {
                 Clear
               </Button>
               <Button
-                buttonType="filled"
+                buttonType={ButtonTypes.Primary}
                 id={`multiselect-button-save-${id}`}
                 mouseDown={false}
                 type="button"

@@ -26,6 +26,7 @@ interface ChannelsCardsProps {
 
 interface ChannelCardItem {
   id: string;
+  tid: string;
   title: string;
   description: string;
   slug: string;
@@ -93,7 +94,7 @@ function ChannelsCards({
               id={item.id}
               title={item.title}
               description={item.description}
-              url={item.slug}
+              url={`/blogs/all?channel=${item.tid}`}
               image={
                 <Image
                   id={item.image.id}
