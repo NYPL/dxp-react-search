@@ -270,7 +270,7 @@ function FilterBar({
       isModalOpen={isModalOpen}
       onClickMobileFiltersButton={() => setIsModalOpen(true)}
       onClickGoBack={() => setIsModalOpen(false)}
-      isMobile={isMobile}
+      isMobile={isMobile ? isMobile : false}
       selectedItems={selectedItems}
       onClearSelectedItems={onClearAllMultiSelects}
       onSaveSelectedItems={onSaveMultiSelect}
