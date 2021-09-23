@@ -55,7 +55,7 @@ function SubjectCards() {
 
   // Loading state,
   if (loading || !data) {
-    return <div>Loading</div>;
+    return <div>Loading...</div>;
   }
 
   return (
