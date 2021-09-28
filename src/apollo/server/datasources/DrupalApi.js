@@ -356,6 +356,17 @@ class DrupalApi extends RESTDataSource {
         apiPath = `${apiPath}&${filters}`;
       });
     }
+
+    // Location specific
+    if (filter && "libraryType" in filter && filter.libraryType) {
+      filter.libraryType.map((item) => {
+        apiPath = `${apiPath}&filter[field_ts_library_type]=${item}`;
+      });
+
+      // @TODO fix this to use better sortBy
+      apiPath = `${apiPath}&sort[sort-title][path]=title&sort[sort-title][direction]=ASC`;
+    }
+
     //
     if (sortBy) {
       apiPath = `${apiPath}&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`;
@@ -385,6 +396,23 @@ class DrupalApi extends RESTDataSource {
     const filterConditionPath = `filter[${filterName}][condition][path]=${conditionPath}`;
     const filterConditionMemberOf = `filter[${filterName}][condition][memberOf]=${groupName}`;
     return `${filterConjunction}&${filterConditionValue}&${filterConditionPath}&${filterConditionMemberOf}`;
+  }
+
+  // @TODO add this as a seperate method so it can be tested more easily.
+  buildJsonApiPath(
+    contentType,
+    limit,
+    pageNumber,
+    filter,
+    sortBy,
+    queryFields
+  ) {
+    let apiPath = `/jsonapi/node/${contentType}?jsonapi_include=1`;
+    // Featured
+    if (filter && "featured" in filter && filter.featured !== null) {
+      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    }
+    return apiPath;
   }
 }
 

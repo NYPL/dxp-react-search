@@ -14,6 +14,7 @@ import { typeDefs as ValidatePatronCardTypes } from "./type-defs/validatePatronC
 import { typeDefs as FilterTypes } from "./type-defs/filter";
 // Content types
 import { typeDefs as BlogTypes } from "./type-defs/blog.js";
+import { typeDefs as LocationTypes } from "./type-defs/location.js";
 
 export const schema = makeExecutableSchema({
   typeDefs: [
@@ -29,6 +30,7 @@ export const schema = makeExecutableSchema({
     ValidatePatronCardTypes,
     FilterTypes,
     BlogTypes,
+    LocationTypes,
   ],
   resolvers,
 });

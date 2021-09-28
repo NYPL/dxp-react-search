@@ -11,11 +11,13 @@ import ipAccessCheckResolver from "./ipAccessCheckResolver";
 import validatePatronCardResolver from "./validatePatronCardResolver";
 // Content types
 import blogResolver from "./blogResolver";
+import locationResolver from "./locationResolver";
 
 export const resolvers = mergeResolvers([
   refineryLocationResolver,
   refineryTermResolver,
   blogResolver,
+  locationResolver,
   termResolver,
   onlineResourceResolver,
   searchResolver,
