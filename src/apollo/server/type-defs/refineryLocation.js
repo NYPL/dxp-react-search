@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const typeDefs = gql`
-  type Location {
+  type RefineryLocation {
     id: ID!
     name: String!
     contentType: String!
@@ -17,14 +17,14 @@ export const typeDefs = gql`
     phone: String
     wheelchairAccess: String
     accessibilityNote: String
-    geoLocation: GeoLocation
-    todayHours: TodayHours
+    geoLocation: RefineryGeoLocation
+    todayHours: RefineryTodayHours
     appointmentOnly: Boolean
     open: Boolean
     terms: [String]
   }
 
-  type Address {
+  type RefineryAddress {
     address_line1: String
     address_line2: String
     locality: String
@@ -32,39 +32,39 @@ export const typeDefs = gql`
     postal_code: String
   }
 
-  type GeoLocation {
+  type RefineryGeoLocation {
     lat: Float
     lng: Float
   }
 
-  type TodayHours {
+  type RefineryTodayHours {
     start: String
     end: String
   }
 
-  input SortByDistance {
+  input RefinerySortByDistance {
     originLat: Float
     originLng: Float
     searchQuery: String
   }
 
-  input Filter {
+  input RefineryFilter {
     openNow: Boolean
     termIds: [RefineryTermsFilter]
   }
 
-  type LocationsConnection {
-    locations: [Location]
+  type RefineryLocationsConnection {
+    locations: [RefineryLocation]
     pageInfo: PageInfo
   }
 
   extend type Query {
-    allLocations(
+    refineryAllLocations(
       limit: Int
       offset: Int
       pageNumber: Int
-      filter: Filter
-      sortByDistance: SortByDistance
-    ): LocationsConnection
+      filter: RefineryFilter
+      sortByDistance: RefinerySortByDistance
+    ): RefineryLocationsConnection
   }
 `;

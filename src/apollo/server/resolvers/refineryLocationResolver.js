@@ -8,19 +8,19 @@ dayjs.extend(timezone);
 // Set default timezone.
 dayjs.tz.setDefault("America/New_York");
 // Utils
-import sortByDistance from "./../../../utils/sortByDistance";
-import filterByOpenNow from "./../../../utils/filterByOpenNow";
-import hasActiveClosing from "./../../../utils/hasActiveClosing";
-import sortByName from "./../../../utils/sortByName";
-import setTodaysHours from "./../../../utils/setTodaysHours";
-import paginateResults from "./../../../utils/paginateResults";
-import filterByTerms from "./../../../utils/filterByTerms";
+import sortByDistance from "../../../utils/sortByDistance";
+import filterByOpenNow from "../../../utils/filterByOpenNow";
+import hasActiveClosing from "../../../utils/hasActiveClosing";
+import sortByName from "../../../utils/sortByName";
+import setTodaysHours from "../../../utils/setTodaysHours";
+import paginateResults from "../../../utils/paginateResults";
+import filterByTerms from "../../../utils/filterByTerms";
 // Env vars
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
-const locationResolver = {
+const refineryLocationResolver = {
   Query: {
-    allLocations: async (parent, args, { dataSources }) => {
+    refineryAllLocations: async (parent, args, { dataSources }) => {
       // Create a dayjs date object, using default timezone.
       // @see https://github.com/iamkun/dayjs/issues/1227
       const now = dayjs.tz();
@@ -105,7 +105,7 @@ const locationResolver = {
       };
     },
   },
-  Location: {
+  RefineryLocation: {
     id: (location) => location.slug.replace("/", "-"),
     name: (location) => location.name,
     contentType: (location) => {
@@ -236,4 +236,4 @@ const locationResolver = {
   },
 };
 
-export default locationResolver;
+export default refineryLocationResolver;
