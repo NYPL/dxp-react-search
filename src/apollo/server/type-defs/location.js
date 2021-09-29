@@ -9,6 +9,17 @@ export const typeDefs = gql`
     internalSlug: String
     url: String!
     libraryType: String!
+    parentLibraryName: String
+    address: Address
+    phone: String
+  }
+
+  type Address {
+    addressLine1: String
+    addressLine2: String
+    locality: String
+    administrativeArea: String
+    postalCode: String
   }
 
   type LocationConnection {

@@ -32,6 +32,17 @@ const locationResolver = {
     url: (location) => location.path.alias,
     libraryType: (location) => location.field_ts_library_type,
     internalSlug: (location) => location.field_ts_slug,
+    contentType: (location) => location.type,
+    address: (location) => location.field_as_address,
+    phone: (location) => location.field_tels_phone,
+    //parentLibraryName: (location) =>
+  },
+  Address: {
+    addressLine1: (address) => address.address_line1,
+    addressLine2: (address) => address.address_line2,
+    locality: (address) => address.locality,
+    administrativeArea: (address) => address.administrative_area,
+    postalCode: (address) => address.postal_code,
   },
 };
 
