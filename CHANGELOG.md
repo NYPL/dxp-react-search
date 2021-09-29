@@ -1,6 +1,10 @@
 ## CHANGES
 -----------
 
+### v0.3.3 [2021-10-04] Online Resources Bug Fix
+------------------------------------------------
+* MultiSelect filter does not deselect after unchecking checkbox.
+
 ### v0.3.2 [2021-08-31] Online Resources Bug Fix
 ------------------------------------------------
 * Long term bug fix for authentication type api change.
