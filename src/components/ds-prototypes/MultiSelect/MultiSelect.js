@@ -36,7 +36,10 @@ function MultiSelect(props) {
 
   function setFilterCheckedProp(groupdId, itemId) {
     let checked = false;
-    if (selectedItems[groupdId] !== undefined) {
+    if (
+      selectedItems[groupdId] !== undefined 
+      && selectedItems[groupdId].items.length > 0
+    ) {
       checked = selectedItems[groupdId].items.find((filter) => filter === itemId) 
     }
     return checked;

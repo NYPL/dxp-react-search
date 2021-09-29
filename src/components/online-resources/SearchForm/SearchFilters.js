@@ -140,13 +140,22 @@ function SearchFilters() {
       itemIds = [];
       itemIds.push(itemId);
     }
-
-    setSelectedItems({
-      ...selectedItems,
-      [groupId]: {
-        items: itemIds
-      }
-    });
+    // Check if there are any selected items to save, if not, clear the state.
+    if (itemIds.length == 0) {
+      setSelectedItems({
+        ...selectedItems,
+        [groupId]: {
+          items: nextState(selectedItems[groupId].items, groupId)
+        }
+      });
+    } else {
+      setSelectedItems({
+        ...selectedItems,
+        [groupId]: {
+          items: itemIds
+        }
+      });
+    }
   }
   
   //
@@ -201,10 +210,11 @@ function SearchFilters() {
       query: { 
         q: router.query.q,
         page: router.query.page ? router.query.page : 1,
-        ...(selectedItems['subject'] && {
+        ...(
+          selectedItems['subject'] && selectedItems['subject'].items.length > 0 && {
           subject: selectedItems['subject'].items.join(' ')
         }),
-        ...(selectedItems['audience_by_age'] && {
+        ...(selectedItems['audience_by_age'] && selectedItems['audience_by_age'].items.length > 0 && {
           audience_by_age: selectedItems['audience_by_age'].items.join(' ')
         }),
         ...(selectedItems['availability'] && {
