@@ -38,6 +38,17 @@ const blogResolver = {
     description: (blog) =>
       blog.field_tfls_summary_description.processed.substring(0, 165),
     slug: (blog) => blog.path.alias,
+    byline: (blog) => {
+      if (blog.field_ts_byline !== null) {
+        return blog.field_ts_byline;
+      } else {
+        let byline = `${blog.author.first_name} ${blog.author.last_name}`;
+        if (blog.author.job_title !== null) {
+          byline = `${byline}, ${blog.author.job_title}`;
+        }
+        return byline;
+      }
+    },
     date: (blog) => formatDate(blog.created),
     image: (blog) =>
       blog.field_ers_media_image.data !== null

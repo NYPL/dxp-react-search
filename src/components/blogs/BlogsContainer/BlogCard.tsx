@@ -21,6 +21,7 @@ interface BlogCardItem {
   title: string;
   description: string;
   slug: string;
+  byline: string;
   date: string;
   locations: Location[];
   image: ImageType;
@@ -39,7 +40,9 @@ function BlogCard({ item }: BlogCardProps) {
       title={item.title}
       subHeading={
         <div style={{ paddingBottom: ".5em" }}>
-          <div>By NYPL Media | {item.date}</div>
+          <div>
+            By {item.byline} | {item.date}
+          </div>
           {item.locations.map((location: Location) => {
             return (
               <a style={{ paddingRight: "10px" }} href={location.slug}>

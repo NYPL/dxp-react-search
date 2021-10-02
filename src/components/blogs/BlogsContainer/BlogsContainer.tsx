@@ -45,6 +45,7 @@ const BLOGS_QUERY = gql`
         description
         slug
         date
+        byline
         image {
           id
           uri
@@ -88,6 +89,7 @@ interface BlogCardItem {
   title: string;
   description: string;
   slug: string;
+  byline: string;
   date: string;
   locations: Location[];
   image: ImageType;
