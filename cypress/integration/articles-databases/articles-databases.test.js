@@ -31,29 +31,47 @@ describe("Articles & Databases", () => {
   // Test advanced search with search query and mutliSelect filters
 
   // Test MultiSelects + FilterBar (complex components, worth testing in isoloation)
-  it("MultiSelect", () => {
+  it("Checking a single item in MultiSelect updates query params correctly.", () => {
+    const multiSelectContainer = cy
+      .get("form")
+      // Open multiselect.
+      .findByRole("button", { name: "Subjects" })
+      .closest("div");
+
     cy.get("form")
-      .findByRole("button", { name: /Subjects/i })
-      .should("exist")
-      .click();
-    // ul list should have length
-    // Click checkbox item
-    //.getByLabelText("Art")
-    /*  .within(getByRole("listbox"));
-    cy.findByLabelText("Art");
-    cy.click();
-    */
-    /*.within(() => {
-        cy.findByLabelText("Art");
-        cy.click();
+      // Open multiselect.
+      .findByRole("button", { name: "Subjects" })
+      .click()
+
+      // Back to parent multiselect.
+      .closest("div")
+
+      // Check the checkbox.
+      .findByRole("listbox")
+      .findByLabelText("Art")
+      .click()
+      .should("be.checked")
+
+      // Back to parent multiselect.
+      //.closest("div")
+      // Check counter is updated
+      //.findByRole("button", { name: /Subjects/ })
+      //.should("exist")
+
+      // Back to parent multiselect.
+      .closest("div")
+      // Submit multiselect.
+      .findByRole("button", { name: "Apply Filters" })
+      .click()
+
+      // Check that the url has been updated correctly.
+      .location()
+      .should((loc) => {
+        expect(loc.search).to.eq("?q=&subject=64&page=1");
+        expect(loc.pathname).to.eq(
+          "/research/collections/articles-databases/search"
+        );
       });
-      */
-
-    //.should("be.checked");
-
-    cy.findByRole("listbox").within(($listbox) => {
-      $listbox.findByLabelText("Art").click();
-    });
   });
 
   // Test AutoSuggest (complex component, worth testing in isolation)
