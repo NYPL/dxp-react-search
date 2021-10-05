@@ -6,29 +6,30 @@
 
 .requestAVisit h2 {
   border-bottom: 1px solid var(--ui-gray-medium);
-  padding-bottom: 12px;
+  padding-bottom: var(--space-s);
 }
 
 .requestAVisit select {
-  margin-bottom: 24px;
+  margin-bottom: var(--space-m);
 }
 
 .requestAVisit fieldset {
   border: none;
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-m);
   padding: 0;
 }
 
 .checkBox,
 .radio {
-  margin-bottom: 18px;
+  margin-bottom: var(--space-s);
 }
 
+.contactInfo,
 .schoolInfo {
-  margin-bottom: 24px;
+  margin-bottom: var(--space-m);
 }
 
 .other,
 .other ~ label {
-  margin-bottom: 18px;
+  margin-bottom: var(--space-s);
 }

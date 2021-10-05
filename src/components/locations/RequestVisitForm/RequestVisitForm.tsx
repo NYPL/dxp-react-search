@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 // Components
 import {
-  Heading,
-  Select,
-  Radio,
+  Button,
   Checkbox,
-  TextInput,
+  Heading,
   HeadingDisplaySizes,
+  Radio,
+  Select,
+  TextInput,
 } from "@nypl/design-system-react-components";
 // Next
 import { useRouter } from "next/router";
@@ -56,8 +57,6 @@ function RequestVisitForm() {
   }, []);
 
   function handleChange(event: any) {
-    console.clear();
-    console.log(event.currentTarget.checked);
     let value;
     if (event.currentTarget.checked) {
       value = event.currentTarget.checked;
@@ -257,7 +256,7 @@ function RequestVisitForm() {
           <Checkbox labelText="Adults (18+)" name="age-adults" showLabel />
         </div>
       </fieldset>
-      <div>
+      <div className={s.contactInfo}>
         <Heading
           id="contact-info"
           displaySize={HeadingDisplaySizes.Secondary}
@@ -275,6 +274,9 @@ function RequestVisitForm() {
           showOptReqLabel={false}
         />
       </div>
+      <Button type="submit" onClick={handleSubmit}>
+        Submit
+      </Button>
     </form>
   );
 }
