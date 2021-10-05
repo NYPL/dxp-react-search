@@ -114,11 +114,6 @@ function SearchFilters() {
   function onSelectedItemChange(event, groupId) {
     const itemId = event.target.id;
 
-    const nextState = (object, property) => {
-      let {[property]: omit, ...rest} = object
-      return rest;
-    }
-
     let itemIds;
     // Check if the tid already exists in the state
     if (
@@ -140,22 +135,12 @@ function SearchFilters() {
       itemIds = [];
       itemIds.push(itemId);
     }
-    // Check if there are any selected items to save, if not, clear the state.
-    if (itemIds.length == 0) {
-      setSelectedItems({
-        ...selectedItems,
-        [groupId]: {
-          items: nextState(selectedItems[groupId].items, groupId)
-        }
-      });
-    } else {
-      setSelectedItems({
-        ...selectedItems,
-        [groupId]: {
-          items: itemIds
-        }
-      });
-    }
+    setSelectedItems({
+      ...selectedItems,
+      [groupId]: {
+        items: itemIds
+      }
+    });
   }
   
   //
