@@ -8,7 +8,9 @@
     "test": "jest --verbose",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:mobile": "cypress run --browser chrome --config viewportWidth=375,viewportHeight=667"
   },
   "dependencies": {
     "@apollo/client": "^3.3.3",

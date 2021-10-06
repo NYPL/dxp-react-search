@@ -1,27 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 // Apollo
-import { useQuery } from '@apollo/client';
-import { 
-  LocationsQuery as LOCATIONS_QUERY 
-} from './../../../apollo/client/queries/Locations.gql';
+import { useQuery } from "@apollo/client";
+import { LocationsQuery as LOCATIONS_QUERY } from "./../../../apollo/client/queries/Locations.gql";
 // Redux
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import { setPagination } from './../../../redux/actions';
+import { useDispatch, useSelector } from "react-redux";
+import { setPagination } from "./../../../redux/actions";
 // Components
-import { 
-  Icon, 
-  Link, 
-  SkeletonLoader 
-} from '@nypl/design-system-react-components';
-import Location from './../Location';
-import LocationsPagination from './LocationsPagination';
+import {
+  Icon,
+  Link,
+  SkeletonLoader,
+} from "@nypl/design-system-react-components";
+import Location from "./../Location";
+import LocationsPagination from "./LocationsPagination";
 // Hooks
-import useWindowSize from './../../../hooks/useWindowSize';
+import useWindowSize from "./../../../hooks/useWindowSize";
 // Utils
-import setTermsFilter from './../../../utils/setTermsFilter';
+import setTermsFilter from "./../../../utils/setTermsFilter";
 
 function Locations() {
   // Special handling for pagination on desktop
@@ -38,10 +33,10 @@ function Locations() {
     searchQueryGeoLng,
     searchQuery,
     openNow,
-    searchFilters, 
+    searchFilters,
     offset,
-    pageNumber
-  } = useSelector(state => state.search);
+    pageNumber,
+  } = useSelector((state) => state.search);
 
   const dispatch = useDispatch();
 
@@ -52,74 +47,69 @@ function Locations() {
   const termIds = setTermsFilter(searchFilters);
 
   // Query for data.
-  const { loading, error, data } = useQuery(
-    LOCATIONS_QUERY, {
-      variables: {
-        searchGeoLat,
-        searchGeoLng,
-        searchQuery,
-        openNow,
-        termIds,
-        limit,
-        offset,
-        pageNumber
-      }
-    }
-  );
+  const { loading, error, data } = useQuery(LOCATIONS_QUERY, {
+    variables: {
+      searchGeoLat,
+      searchGeoLng,
+      searchQuery,
+      openNow,
+      termIds,
+      limit,
+      offset,
+      pageNumber,
+    },
+  });
 
   // Side effect to dispatch redux action to set pagination redux state.
   useEffect(() => {
     if (data) {
       // Dispatch redux action
-      dispatch(setPagination({
-        pageNumber: pageNumber,
-        offset: offset,
-        pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
-        resultsCount: data.allLocations.locations.length
-      }));
+      dispatch(
+        setPagination({
+          pageNumber: pageNumber,
+          offset: offset,
+          pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
+          resultsCount: data.allLocations.locations.length,
+        })
+      );
     }
   }, [data]);
 
   // Error state.
   if (error) {
-    return (
-      <div>'error while loading locations'</div>
-    );
+    return <div>'error while loading locations'</div>;
   }
 
   // Loading state,
   if (loading || !data) {
-    return (
-      <SkeletonLoader />
-    );
+    return <SkeletonLoader />;
   }
 
   // No results.
   if (data.allLocations.locations.length === 0) {
     return (
-      <div className='no-results'>Try adjusting search terms or filters.</div>
+      <div className="no-results">Try adjusting search terms or filters.</div>
     );
   }
 
   return (
     <div className="locations__list-inner">
-      <Link
-        href="#locations-gmap"
-        className="locations-gmap-anchor"
-      >
+      <Link href="#locations-gmap" className="locations-gmap-anchor">
         Skip to Map
         <Icon
           blockName="more-link"
           decorative
-          modifiers={[
-            'right'
-          ]}
+          modifiers={["right"]}
           name="arrow"
         />
       </Link>
-      {data.allLocations.locations.map((location) => (
-        <Location key={location.id} location={location} />
-      ))}
+      <ul style={{ listStyleType: "none", padding: "0" }}>
+        {data.allLocations.locations.map((location) => (
+          <li>
+            <Location key={location.id} location={location} />
+          </li>
+        ))}
+      </ul>
       <LocationsPagination limit={limit} />
     </div>
   );

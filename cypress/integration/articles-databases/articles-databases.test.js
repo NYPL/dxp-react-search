@@ -5,6 +5,8 @@
 
 describe("Articles & Databases", () => {
   beforeEach(() => {
+    cy.viewport(1024, 768);
+
     cy.visit(
       "http://localhost:3000/research/collections/articles-databases/search"
     );
@@ -32,12 +34,6 @@ describe("Articles & Databases", () => {
 
   // Test MultiSelects + FilterBar (complex components, worth testing in isoloation)
   it("Checking a single item in MultiSelect updates query params correctly.", () => {
-    const multiSelectContainer = cy
-      .get("form")
-      // Open multiselect.
-      .findByRole("button", { name: "Subjects" })
-      .closest("div");
-
     cy.get("form")
       // Open multiselect.
       .findByRole("button", { name: "Subjects" })
@@ -53,12 +49,6 @@ describe("Articles & Databases", () => {
       .should("be.checked")
 
       // Back to parent multiselect.
-      //.closest("div")
-      // Check counter is updated
-      //.findByRole("button", { name: /Subjects/ })
-      //.should("exist")
-
-      // Back to parent multiselect.
       .closest("div")
       // Submit multiselect.
       .findByRole("button", { name: "Apply Filters" })
@@ -72,6 +62,26 @@ describe("Articles & Databases", () => {
           "/research/collections/articles-databases/search"
         );
       });
+  });
+
+  it("Checking a single item updates selectedItems count to 1.", () => {
+    cy.get("form")
+      // Open multiselect.
+      .findByRole("button", { name: "Subjects" })
+      .click()
+      // Back to parent multiselect.
+      .closest("div")
+      // Check the checkbox.
+      .findByRole("listbox")
+      .findByLabelText("Art")
+      .click()
+      .should("be.checked")
+      // Back to parent multiselect.
+      .closest("div")
+      .parent()
+      // Check counter is updated
+      .findByRole("button", { name: "Subjects (1)" })
+      .should("exist");
   });
 
   // Test AutoSuggest (complex component, worth testing in isolation)
