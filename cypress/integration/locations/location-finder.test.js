@@ -37,7 +37,6 @@ describe("Location Finder", () => {
 
     cy.log("First search result should be Stephen A. Schwarzman Building.");
     cy.get("@locationList")
-      .debug()
       .findAllByRole("heading", { name: /Stephen A. Schwarzman Building/ })
       .should("exist");
   });
