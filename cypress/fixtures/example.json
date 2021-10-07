@@ -1,5 +1,439 @@
 {
-  "name": "Using fixtures to represent data",
-  "email": "hello@cypress.io",
-  "body": "Fixtures are a great way to mock data for responses to routes"
+  "data": [
+    {
+      "location_code": "ag",
+      "quarter": 1697,
+      "year": 2253
+    },
+    {
+      "location_code": "al",
+      "quarter": 1123,
+      "year": 1771
+    },
+    {
+      "location_code": "b1",
+      "quarter": 534,
+      "year": 623
+    },
+    {
+      "location_code": "ba",
+      "quarter": 1647,
+      "year": 2312
+    },
+    {
+      "location_code": "bc",
+      "quarter": 4656,
+      "year": 6878
+    },
+    {
+      "location_code": "be",
+      "quarter": 1016,
+      "year": 1603
+    },
+    {
+      "location_code": "bl",
+      "quarter": 5245,
+      "year": 5607
+    },
+    {
+      "location_code": "br",
+      "quarter": 1871,
+      "year": 3258
+    },
+    {
+      "location_code": "bt",
+      "quarter": 5218,
+      "year": 8297
+    },
+    {
+      "location_code": "ca",
+      "quarter": 144,
+      "year": 311
+    },
+    {
+      "location_code": "ch",
+      "quarter": 3286,
+      "year": 5013
+    },
+    {
+      "location_code": "ci",
+      "quarter": 476,
+      "year": 654
+    },
+    {
+      "location_code": "cl",
+      "quarter": 11155,
+      "year": 16818
+    },
+    {
+      "location_code": "cp",
+      "quarter": 778,
+      "year": 979
+    },
+    {
+      "location_code": "cs",
+      "quarter": 3943,
+      "year": 5867
+    },
+    {
+      "location_code": "ct",
+      "quarter": 684,
+      "year": 1157
+    },
+    {
+      "location_code": "dh",
+      "quarter": 922,
+      "year": 1194
+    },
+    {
+      "location_code": "dy",
+      "quarter": 4086,
+      "year": 5621
+    },
+    {
+      "location_code": "ea",
+      "quarter": 691,
+      "year": 895
+    },
+    {
+      "location_code": "ep",
+      "quarter": 6244,
+      "year": 9243
+    },
+    {
+      "location_code": "ew",
+      "quarter": 897,
+      "year": 1552
+    },
+    {
+      "location_code": "fe",
+      "quarter": 6126,
+      "year": 8706
+    },
+    {
+      "location_code": "ft",
+      "quarter": 6438,
+      "year": 10513
+    },
+    {
+      "location_code": "fw",
+      "quarter": 347,
+      "year": 643
+    },
+    {
+      "location_code": "fx",
+      "quarter": 673,
+      "year": 1162
+    },
+    {
+      "location_code": "gc",
+      "quarter": 741,
+      "year": 1244
+    },
+    {
+      "location_code": "gd",
+      "quarter": 512,
+      "year": 626
+    },
+    {
+      "location_code": "gk",
+      "quarter": 1417,
+      "year": 1790
+    },
+    {
+      "location_code": "hb",
+      "quarter": 818,
+      "year": 1332
+    },
+    {
+      "location_code": "hd",
+      "quarter": 790,
+      "year": 1491
+    },
+    {
+      "location_code": "hg",
+      "quarter": 2250,
+      "year": 3162
+    },
+    {
+      "location_code": "hk",
+      "quarter": 2457,
+      "year": 3421
+    },
+    {
+      "location_code": "hl",
+      "quarter": 1930,
+      "year": 2965
+    },
+    {
+      "location_code": "hp",
+      "quarter": 4535,
+      "year": 6720
+    },
+    {
+      "location_code": "ht",
+      "quarter": 1795,
+      "year": 2849
+    },
+    {
+      "location_code": "hu",
+      "quarter": 3255,
+      "year": 5058
+    },
+    {
+      "location_code": "in",
+      "quarter": 4239,
+      "year": 6019
+    },
+    {
+      "location_code": "jm",
+      "quarter": 1960,
+      "year": 3241
+    },
+    {
+      "location_code": "jp",
+      "quarter": 634,
+      "year": 921
+    },
+    {
+      "location_code": "kb",
+      "quarter": 3188,
+      "year": 4957
+    },
+    {
+      "location_code": "kp",
+      "quarter": 4819,
+      "year": 7453
+    },
+    {
+      "location_code": "lb",
+      "quarter": 578,
+      "year": 775
+    },
+    {
+      "location_code": "lm",
+      "quarter": 3365,
+      "year": 4263
+    },
+    {
+      "location_code": "mal",
+      "quarter": 1958,
+      "year": 2713
+    },
+    {
+      "location_code": "mb",
+      "quarter": 800,
+      "year": 924
+    },
+    {
+      "location_code": "me",
+      "quarter": 86,
+      "year": 185
+    },
+    {
+      "location_code": "mh",
+      "quarter": 67,
+      "year": 107
+    },
+    {
+      "location_code": "ml",
+      "quarter": 3955,
+      "year": 6219
+    },
+    {
+      "location_code": "mo",
+      "quarter": 1535,
+      "year": 2294
+    },
+    {
+      "location_code": "mp",
+      "quarter": 1620,
+      "year": 2023
+    },
+    {
+      "location_code": "mr",
+      "quarter": 45,
+      "year": 91
+    },
+    {
+      "location_code": "mu",
+      "quarter": 6159,
+      "year": 9681
+    },
+    {
+      "location_code": "nb",
+      "quarter": 955,
+      "year": 1138
+    },
+    {
+      "location_code": "nd",
+      "quarter": 2610,
+      "year": 3653
+    },
+    {
+      "location_code": "ns",
+      "quarter": 7608,
+      "year": 11696
+    },
+    {
+      "location_code": "ot",
+      "quarter": 2643,
+      "year": 3406
+    },
+    {
+      "location_code": "pk",
+      "quarter": 2958,
+      "year": 4367
+    },
+    {
+      "location_code": "pm",
+      "quarter": 1522,
+      "year": 2243
+    },
+    {
+      "location_code": "pr",
+      "quarter": 101,
+      "year": 175
+    },
+    {
+      "location_code": "rd",
+      "quarter": 1411,
+      "year": 1730
+    },
+    {
+      "location_code": "ri",
+      "quarter": 2468,
+      "year": 3500
+    },
+    {
+      "location_code": "rs",
+      "quarter": 10736,
+      "year": 15918
+    },
+    {
+      "location_code": "rt",
+      "quarter": 2892,
+      "year": 3974
+    },
+    {
+      "location_code": "sa",
+      "quarter": 8456,
+      "year": 10967
+    },
+    {
+      "location_code": "sb",
+      "quarter": 1108,
+      "year": 1373
+    },
+    {
+      "location_code": "sd",
+      "quarter": 595,
+      "year": 908
+    },
+    {
+      "location_code": "se",
+      "quarter": 5777,
+      "year": 8569
+    },
+    {
+      "location_code": "sg",
+      "quarter": 1574,
+      "year": 2353
+    },
+    {
+      "location_code": "sn",
+      "quarter": 39472,
+      "year": 58390
+    },
+    {
+      "location_code": "ss",
+      "quarter": 6891,
+      "year": 10894
+    },
+    {
+      "location_code": "st",
+      "quarter": 1150,
+      "year": 1873
+    },
+    {
+      "location_code": "sv",
+      "quarter": 771,
+      "year": 990
+    },
+    {
+      "location_code": "tg",
+      "quarter": 787,
+      "year": 942
+    },
+    {
+      "location_code": "th",
+      "quarter": 5685,
+      "year": 8404
+    },
+    {
+      "location_code": "tm",
+      "quarter": 451,
+      "year": 748
+    },
+    {
+      "location_code": "ts",
+      "quarter": 4469,
+      "year": 6589
+    },
+    {
+      "location_code": "tv",
+      "quarter": 717,
+      "year": 913
+    },
+    {
+      "location_code": "vc",
+      "quarter": 855,
+      "year": 1226
+    },
+    {
+      "location_code": "vn",
+      "quarter": 1041,
+      "year": 1725
+    },
+    {
+      "location_code": "wb",
+      "quarter": 7336,
+      "year": 10601
+    },
+    {
+      "location_code": "wf",
+      "quarter": 737,
+      "year": 1125
+    },
+    {
+      "location_code": "wh",
+      "quarter": 3887,
+      "year": 6789
+    },
+    {
+      "location_code": "wk",
+      "quarter": 737,
+      "year": 926
+    },
+    {
+      "location_code": "wl",
+      "quarter": 828,
+      "year": 1034
+    },
+    {
+      "location_code": "wo",
+      "quarter": 843,
+      "year": 1218
+    },
+    {
+      "location_code": "wt",
+      "quarter": 521,
+      "year": 744
+    },
+    {
+      "location_code": "yv",
+      "quarter": 5708,
+      "year": 7286
+    }
+  ]
 }

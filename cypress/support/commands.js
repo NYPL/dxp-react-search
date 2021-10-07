@@ -26,3 +26,23 @@
 
 import "@testing-library/cypress/add-commands";
 //import userEvent from '@testing-library/user-event';
+
+/*Cypress.Commands.add(
+  "openMultiSelect",
+  { prevSubject: "optional" },
+  (subject, name) => {
+    if (subject) {
+      // wrap the existing subject
+      // and do something with it
+      cy.findByRole("button", { name: name }).click().then(cy.wrap(subject));
+    }
+  }
+);
+*/
+
+Cypress.Commands.add("openMultiSelect", (name) => {
+  cy.findByRole("button", { name: name })
+    .click()
+    // Back to parent div of multiselect.
+    .closest("div");
+});
