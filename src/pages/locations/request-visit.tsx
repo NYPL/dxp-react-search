@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 // Apollo
-import { withApollo } from "./../../apollo/client/withApollo";
+import { withApollo } from "../../apollo/client/withApollo";
 // Redux
-import { withRedux } from "./../../redux/withRedux";
+import { withRedux } from "../../redux/withRedux";
 // Components
-import PageContainer from "./../../components/shared/layouts/PageContainer";
-import BottomMenuContent from "./../../components/shared/BottomMenus/content";
-import Menu from "./../../components/ds-prototypes/Menu";
-import { Hero, HeroTypes } from "@nypl/design-system-react-components";
-import RequestVisitForm from "./../../components/locations/RequestVisitForm";
+import PageContainer from "../../components/shared/layouts/PageContainer";
+import BottomMenuContent from "../../components/shared/BottomMenus/content";
+import Menu from "../../components/ds-prototypes/Menu";
+import { Heading } from "@nypl/design-system-react-components";
+import RequestVisitForm from "../../components/locations/RequestVisitForm/RequestVisitForm";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function LocationsRequestVisitPage() {
@@ -31,22 +31,21 @@ function LocationsRequestVisitPage() {
         },
       ]}
       wrapperClass="nypl--locations"
-      contentHeader={
-        <Hero
-          heroType={HeroTypes.Tertiary}
-          heading={<h2>Request a Group Visit</h2>}
-          subHeaderText={
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie
-              nam eu nunc vulputate suspendisse gravida. Orci dolor eu in quis
-              leo ipsum orci, quis.
-            </p>
-          }
-          backgroundColor="#FFFFFF"
-          foregroundColor="#000000"
-        />
+      contentPrimary={
+        <Fragment>
+          <Heading
+            className="request-visit__header"
+            level={1}
+            text="Request a Group Visit"
+          />
+          <p className="request-visit__description">
+            Volutpat tristique curabitur sapien non etiam fringilla magna luctus
+            eros, condimentum suscipit dictum nascetur ullamcorper purus nec
+            risus elit, eleifend mollis fames.
+          </p>
+          <RequestVisitForm />
+        </Fragment>
       }
-      contentPrimary={<RequestVisitForm />}
       showSidebar={true}
       sidebarSide="right"
       contentSecondary={
@@ -57,7 +56,7 @@ function LocationsRequestVisitPage() {
                 id={menu.id}
                 key={menu.id}
                 headingLevel={3}
-                headingColor={"#000"}
+                headingColor={"#700000"}
                 title={menu.title}
                 // @ts-ignore
                 items={menu.items}
