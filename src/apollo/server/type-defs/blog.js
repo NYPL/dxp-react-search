@@ -7,6 +7,7 @@ export const typeDefs = gql`
     description: String
     slug: String!
     date: String!
+    byline: String!
     image: Image
     locations: [BlogLocation]
   }

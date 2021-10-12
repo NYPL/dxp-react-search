@@ -13,7 +13,6 @@ import {
 } from "@nypl/design-system-react-components";
 import Location from "./../Location";
 import LocationsPagination from "./LocationsPagination";
-import LocationsSkeletonLoader from "./LocationsSkeletonLoader";
 // Hooks
 import useWindowSize from "./../../../hooks/useWindowSize";
 // Utils
@@ -69,10 +68,8 @@ function Locations() {
         setPagination({
           pageNumber: pageNumber,
           offset: offset,
-          pageCount: Math.ceil(
-            data.refineryAllLocations.pageInfo.totalItems / limit
-          ),
-          resultsCount: data.refineryAllLocations.locations.length,
+          pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
+          resultsCount: data.allLocations.locations.length,
         })
       );
     }
@@ -85,7 +82,7 @@ function Locations() {
 
   // Loading state,
   if (loading || !data) {
-    return <LocationsSkeletonLoader />;
+    return <SkeletonLoader />;
   }
 
   // No results.
@@ -108,9 +105,13 @@ function Locations() {
           name="arrow"
         />
       </Link>
-      {data.refineryAllLocations.locations.map((location) => (
-        <Location key={location.id} location={location} />
-      ))}
+      <ul style={{ listStyleType: "none", padding: "0" }}>
+        {data.allLocations.locations.map((location) => (
+          <li>
+            <Location key={location.id} location={location} />
+          </li>
+        ))}
+      </ul>
       <LocationsPagination limit={limit} />
     </div>
   );

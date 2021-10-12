@@ -7,7 +7,10 @@
     "start": "next start",
     "test": "jest --verbose",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "cypress": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:mobile": "cypress run --browser chrome --config viewportWidth=375,viewportHeight=667"
   },
   "dependencies": {
     "@apollo/client": "^3.3.3",
@@ -49,10 +52,13 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.1",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.8",
+    "@testing-library/user-event": "^13.2.1",
     "@types/react": "^17.0.17",
     "babel-register": "^6.26.0",
+    "cypress": "^8.5.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.0",
     "husky": "^4.3.8",
