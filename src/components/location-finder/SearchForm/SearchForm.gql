@@ -1,5 +1,5 @@
 query LocationsQuery {
-  allLocations {
+  refineryAllLocations {
     locations {
       id
       name

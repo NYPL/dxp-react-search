@@ -68,8 +68,10 @@ function Locations() {
         setPagination({
           pageNumber: pageNumber,
           offset: offset,
-          pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
-          resultsCount: data.allLocations.locations.length,
+          pageCount: Math.ceil(
+            data.refineryAllLocations.pageInfo.totalItems / limit
+          ),
+          resultsCount: data.refineryAllLocations.locations.length,
         })
       );
     }
@@ -86,11 +88,13 @@ function Locations() {
   }
 
   // No results.
-  if (data.allLocations.locations.length === 0) {
+  if (data.refineryAllLocations.locations.length === 0) {
     return (
       <div className="no-results">Try adjusting search terms or filters.</div>
     );
   }
+
+  //return <LocationsSkeletonLoader />;
 
   return (
     <div className="locations__list-inner">
@@ -104,7 +108,7 @@ function Locations() {
         />
       </Link>
       <ul style={{ listStyleType: "none", padding: "0" }}>
-        {data.allLocations.locations.map((location) => (
+        {data.refineryAllLocations.locations.map((location) => (
           <li>
             <Location key={location.id} location={location} />
           </li>

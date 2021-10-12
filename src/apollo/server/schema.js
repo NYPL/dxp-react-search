@@ -1,7 +1,7 @@
 import { makeExecutableSchema } from "graphql-tools";
 import { resolvers } from "./resolvers";
 // Types
-import { typeDefs as LocationTypes } from "./type-defs/location.js";
+import { typeDefs as RefineryLocationTypes } from "./type-defs/refineryLocation.js";
 import { typeDefs as RefineryFilterTypes } from "./type-defs/refineryFilter.js";
 import { typeDefs as OnlineResourceTypes } from "./type-defs/onlineResource.js";
 import { typeDefs as TaxonomyTypes } from "./type-defs/taxonomy.js";
@@ -14,12 +14,13 @@ import { typeDefs as ValidatePatronCardTypes } from "./type-defs/validatePatronC
 import { typeDefs as FilterTypes } from "./type-defs/filter";
 // Content types
 import { typeDefs as BlogTypes } from "./type-defs/blog.js";
+import { typeDefs as LocationTypes } from "./type-defs/location.js";
 
 export const schema = makeExecutableSchema({
   typeDefs: [
     SharedTypes,
     SearchTypes,
-    LocationTypes,
+    RefineryLocationTypes,
     RefineryFilterTypes,
     OnlineResourceTypes,
     TaxonomyTypes,
@@ -29,6 +30,7 @@ export const schema = makeExecutableSchema({
     ValidatePatronCardTypes,
     FilterTypes,
     BlogTypes,
+    LocationTypes,
   ],
   resolvers,
 });

@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // Redux
-import {
-  batch,
-  useDispatch,
-  useSelector
-} from 'react-redux';
+import { batch, useDispatch, useSelector } from "react-redux";
 import {
   setSearchQuery,
   setMapPosition,
   setMapInfoWindow,
-  setOpenNow
-} from './../../../redux/actions';
-import { setAutoSuggestInputValue } from './../../../redux/actions';
+  setOpenNow,
+  setAutoSuggestInputValue,
+} from "./../../../redux/actions";
 // Apollo
-import { useApolloClient } from '@apollo/client';
-import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
+import { useApolloClient } from "@apollo/client";
+import { LocationsQuery as LOCATIONS_QUERY } from "./SearchForm.gql";
 // Utils
-import filterBySearchInput from './../../../utils/filterBySearchInput';
+import filterBySearchInput from "./../../../utils/filterBySearchInput";
 // Geocode
-import Geocode from './../../../utils/googleGeocode';
+import Geocode from "./../../../utils/googleGeocode";
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API);
-const southWestBound = '40.49, -74.26';
-const northEastBound = '40.91, -73.77';
+const southWestBound = "40.49, -74.26";
+const northEastBound = "40.91, -73.77";
 Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 // Components
-import { Checkbox } from '@nypl/design-system-react-components';
-import { default as SharedSearchForm } from './../../shared/SearchForm';
-import SearchFilters from './../SearchFilters';
+import { Checkbox } from "@nypl/design-system-react-components";
+import { default as SharedSearchForm } from "./../../shared/SearchForm";
+import SearchFilters from "./../SearchFilters";
 
 function SearchForm() {
   // Local state
@@ -37,34 +33,32 @@ function SearchForm() {
   const [autoSuggestItems, setAutoSuggestItems] = useState();
 
   // Redux
-  const {
-    autoSuggestInputValue,
-    openNow
-  } = useSelector(state => state.search);
-  const { infoWindowId } = useSelector(state => state.map);
+  const { autoSuggestInputValue, openNow } = useSelector(
+    (state) => state.search
+  );
+  const { infoWindowId } = useSelector((state) => state.map);
   const dispatch = useDispatch();
-  
+
   // Apollo
   const client = useApolloClient();
-  
+
   // When component mounts, prefetch the items for autosuggest.
   useEffect(() => {
     client.query({ query: LOCATIONS_QUERY }).then(
-      response => {
-        setAutoSuggestItems(response.data.allLocations.locations);
+      (response) => {
+        setAutoSuggestItems(response.data.refineryAllLocations.locations);
       },
-      error => {
+      (error) => {
         //console.error(error);
       }
     );
-  },[autoSuggestItems]);
+  }, [autoSuggestItems]);
 
   function getSuggestions(autoSuggestItems, value) {
     if (autoSuggestItems) {
       return filterBySearchInput(autoSuggestItems, value);
-    }
-    else {
-      console.log('data is false');
+    } else {
+      console.log("data is false");
       return [];
     }
   }
@@ -75,10 +69,12 @@ function SearchForm() {
   }
 
   function onSuggestionSelected(event, { suggestion }) {
-    dispatch(setMapInfoWindow({
-      infoWindowId: suggestion.id,
-      infoWindowIsVisible: false
-    }));
+    dispatch(
+      setMapInfoWindow({
+        infoWindowId: suggestion.id,
+        infoWindowIsVisible: false,
+      })
+    );
   }
 
   function inputOnChange(newValue) {
@@ -95,11 +91,14 @@ function SearchForm() {
 
     // Query to get the list of locations
     client.query({ query: LOCATIONS_QUERY }).then(
-      response => {
+      (response) => {
         let searchValue = autoSuggestInputValue;
         // @TODO see if you actually still need this.
         // Try to find a location match.
-        const matchLocation = filterBySearchInput(response.data.allLocations.locations, autoSuggestInputValue);
+        const matchLocation = filterBySearchInput(
+          response.data.refineryAllLocations.locations,
+          autoSuggestInputValue
+        );
         if (matchLocation[0]) {
           // @TODO Searching directly for "Business Center at SNFL" or "snfl" returns a location in Spain
           // This is what google returns for this text:
@@ -116,64 +115,74 @@ function SearchForm() {
 
         // Get latitude & longitude from search value.
         Geocode.fromAddress(searchValue).then(
-          response => {
+          (response) => {
             const { lat, lng } = response.results[0].geometry.location;
 
             batch(() => {
               // Dispatch search query
-              dispatch(setSearchQuery({
-                query: autoSuggestInputValue,
-                lat: response.results[0].geometry.location.lat,
-                lng: response.results[0].geometry.location.lng
-              }));
+              dispatch(
+                setSearchQuery({
+                  query: autoSuggestInputValue,
+                  lat: response.results[0].geometry.location.lat,
+                  lng: response.results[0].geometry.location.lng,
+                })
+              );
 
               // Dispatch for map zoom and center
-              dispatch(setMapPosition({
-                mapCenter: response.results[0].geometry.location,
-                mapZoom: 14
-              }));
+              dispatch(
+                setMapPosition({
+                  mapCenter: response.results[0].geometry.location,
+                  mapZoom: 14,
+                })
+              );
 
               // Dispatch for map info window.
-              dispatch(setMapInfoWindow({
-                infoWindowId,
-                infoWindowIsVisible: true
-              }));
+              dispatch(
+                setMapInfoWindow({
+                  infoWindowId,
+                  infoWindowIsVisible: true,
+                })
+              );
             });
           },
-          error => {
+          (error) => {
             console.error(error);
           }
         );
       },
-      error => {
+      (error) => {
         console.error(error);
       }
     );
   }
 
   function onChangeOpenNow(event) {
-    dispatch(setOpenNow({
-      searchQuery: '',
-      openNow: event.target.checked
-    }));
+    dispatch(
+      setOpenNow({
+        searchQuery: "",
+        openNow: event.target.checked,
+      })
+    );
   }
 
   return (
     <SharedSearchForm
-      id='search-form'
-      label={'Enter an address or landmark to search nearby or type in a Library name.'}
-      ariaLabel={'Find your library'}
+      id="search-form"
+      label={
+        "Enter an address or landmark to search nearby or type in a Library name."
+      }
+      ariaLabel={"Find your library"}
       onSubmit={handleSubmit}
-      autoSuggestInputId={'search-form__search-input'}
-      autoSuggestAriaLabel={'Search locations'}
+      autoSuggestInputId={"search-form__search-input"}
+      autoSuggestAriaLabel={"Search locations"}
       suggestions={suggestions}
       onSuggestionSelected={onSuggestionSelected}
       onSuggestionsFetchRequested={onSuggestionsFetchRequested}
       onSuggestionsClearRequested={onSuggestionsClearRequested}
       autoSuggestInputValue={autoSuggestInputValue}
       inputOnChange={inputOnChange}
-      suggestionContainerMsg={'Search for locations near:'}
-      searchButtonId={'search-form__submit'}
+      suggestionContainerMsg={"Search for locations near:"}
+      searchButtonId={"search-form__submit"}
     >
       <div className="search__form-filters">
         <div className="checkbox">
@@ -184,7 +193,7 @@ function SearchForm() {
             labelText="Open now"
             showLabel={true}
             attributes={{
-              'aria-label': "Checking this box will update the results"
+              "aria-label": "Checking this box will update the results",
             }}
             checked={openNow}
             onChange={onChangeOpenNow}
@@ -194,6 +203,6 @@ function SearchForm() {
       </div>
     </SharedSearchForm>
   );
-};
+}
 
 export default SearchForm;

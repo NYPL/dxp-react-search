@@ -8,7 +8,7 @@ query LocationsQuery(
   $pageNumber: Int
   $offset: Int
 ) {
-  allLocations(
+  refineryAllLocations(
     limit: $limit
     pageNumber: $pageNumber
     offset: $offset
