@@ -68,8 +68,10 @@ function Locations() {
         setPagination({
           pageNumber: pageNumber,
           offset: offset,
-          pageCount: Math.ceil(data.allLocations.pageInfo.totalItems / limit),
-          resultsCount: data.allLocations.locations.length,
+          pageCount: Math.ceil(
+            data.refineryAllLocations.pageInfo.totalItems / limit
+          ),
+          resultsCount: data.refineryAllLocations.locations.length,
         })
       );
     }
@@ -106,7 +108,7 @@ function Locations() {
         />
       </Link>
       <ul style={{ listStyleType: "none", padding: "0" }}>
-        {data.allLocations.locations.map((location) => (
+        {data.refineryAllLocations.locations.map((location) => (
           <li>
             <Location key={location.id} location={location} />
           </li>
