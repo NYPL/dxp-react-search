@@ -18,10 +18,6 @@ describe("Articles & Databases pages with default query params", () => {
     cy.visit(`${url}${queryParams}`);
     cy.get("form")
       .findByLabelText("Search for broad subject terms or database by name.")
-      /*.findByRole("textbox", {
-        name: "Search for broad subject terms or database by name.",
-      })
-      */
       .should("have.value", "new");
   });
 

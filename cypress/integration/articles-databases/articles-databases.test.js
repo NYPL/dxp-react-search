@@ -21,14 +21,4 @@ describe("Articles & Databases", () => {
   // Test basic search
 
   // Test basic search with autosuggest
-  /*it("Autosuggest suggestions work", () => {
-    cy.get("input#search-form__search-input")
-      .type("Lib")
-      .type("{downarrow}")
-      .click()
-      .should("have.value", "125th Street Library");
-  });
-  */
-
-  // Test advanced search with search query and mutliSelect filters
 });
