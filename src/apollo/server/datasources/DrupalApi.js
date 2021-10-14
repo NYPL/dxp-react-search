@@ -359,8 +359,9 @@ class DrupalApi extends RESTDataSource {
 
     // Location specific
     if (filter && "libraryType" in filter && filter.libraryType) {
-      filter.libraryType.map((item) => {
-        apiPath = `${apiPath}&filter[field_ts_library_type]=${item}`;
+      apiPath = `${apiPath}&filter[libtype-filter][condition][path]=field_ts_library_type&filter[libtype-filter][condition][operator]=IN`;
+      filter.libraryType.map((item, index) => {
+        apiPath = `${apiPath}&filter[libtype-filter][condition][value][${index}]=${item}`;
       });
 
       // @TODO fix this to use better sortBy
