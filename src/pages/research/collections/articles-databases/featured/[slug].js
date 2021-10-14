@@ -64,7 +64,7 @@ function FeaturedResourceTopicSlug() {
   return (
     <PageContainer
       metaTags={{
-        title: `${resourceTopic.name}`,
+        title: `${resourceTopic.title}`,
         description: resourceTopic.description,
         url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`,
         imageUrl: resourceTopic.image.uri,
@@ -79,7 +79,7 @@ function FeaturedResourceTopicSlug() {
       contentPrimary={
         <SearchResults
           resourceTopicId={resourceTopic.tid}
-          resourceTopicTitle={resourceTopic.name}
+          resourceTopicTitle={resourceTopic.title}
         />
       }
     />

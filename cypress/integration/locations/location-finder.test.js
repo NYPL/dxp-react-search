@@ -1,7 +1,4 @@
-/* eslint-disable */
-// Disable ESLint to prevent failing linting inside the Next.js repo.
-// If you're using ESLint on your project, we recommend installing the ESLint Cypress plugin instead:
-// https://github.com/cypress-io/eslint-plugin-cypress
+import { basicSearch, advancedSearch } from "./../../support/utils";
 
 describe("Location Finder", () => {
   beforeEach(() => {
@@ -10,63 +7,31 @@ describe("Location Finder", () => {
     cy.visit("http://localhost:3000/locations");
   });
 
-  // Test basic page loading.
   it("Load the location finder page.", () => {
     cy.findAllByRole("heading", { level: 1, name: "Find Your Library" }).should(
       "exist"
     );
   });
 
-  // Test basic search
   it("Basic search without using autosuggest or filters.", () => {
-    cy.get("form")
-      .log("Enter search for location")
-      .findByLabelText(
-        "Enter an address or landmark to search nearby or type in a Library name."
-      )
-      .type("schwarzman");
-
-    cy.log("Submit the form");
-    cy.get("form")
-      .findByRole("button", { name: "Search" })
-      .click()
-      .wait(3000)
-      .get("#locations-list ul li")
+    basicSearch("schwarzman", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+    })
       .first()
-      .as("locationList");
-
-    cy.log("First search result should be Stephen A. Schwarzman Building.");
-    cy.get("@locationList")
-      .findAllByRole("heading", { name: /Stephen A. Schwarzman Building/ })
+      .findAllByRole("heading", { name: /Stephen A. Schwarzman Building/i })
       .should("exist");
   });
 
-  // Test basic search with autosuggest
-  it("Basic search using autosuggestion as search term.", () => {
-    cy.get("form")
-      .log("Enter search for location")
-      .findByLabelText(
-        "Enter an address or landmark to search nearby or type in a Library name."
-      )
-      .type("snfl")
-      .type("{downarrow}")
-      .click();
-
-    cy.log("Submit the form");
-    cy.get("form")
-      .findByRole("button", { name: "Search" })
-      .click()
-      .wait(3000)
-      .get("#locations-list ul li")
+  it("Advanced search using autosuggestion as search term.", () => {
+    advancedSearch("snfl", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+    })
+      // @TODO this fail for some reason?
       .first()
-      .as("locationList");
-
-    cy.log(
-      "First search result should be Stavros Niarchos Foundation Library (SNFL)."
-    );
-    cy.get("@locationList")
       .findAllByRole("heading", {
-        name: "Stavros Niarchos Foundation Library (SNFL)",
+        name: /Stavros Niarchos Foundation Library (SNFL)/i,
       })
       .should("exist");
   });
