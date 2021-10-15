@@ -3,10 +3,9 @@
 // If you're using ESLint on your project, we recommend installing the ESLint Cypress plugin instead:
 // https://github.com/cypress-io/eslint-plugin-cypress
 
-describe("Articles & Databases", () => {
+describe("Articles & Databases Filter Bar", () => {
   beforeEach(() => {
     cy.viewport(1024, 768);
-
     cy.visit(
       "http://localhost:3000/research/collections/articles-databases/search"
     );

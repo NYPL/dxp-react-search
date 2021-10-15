@@ -1,4 +1,4 @@
-import { basicSearch, advancedSearch } from "./../../support/utils";
+import { search } from "./../../support/utils";
 
 describe("Articles & Databases", () => {
   beforeEach(() => {
@@ -18,13 +18,17 @@ describe("Articles & Databases", () => {
     const queryParams = "?q=new+york+times&page=1";
     const pathName = "/research/collections/articles-databases/search";
 
-    basicSearch("new york times", {
+    search("new york times", {
       textboxName: /search articles and databases/i,
       resultsId: "#search-results",
     })
+      // Get the first result.
       .first()
-      .findAllByRole("heading", { name: /New York Times/i })
+      .findByRole("link", {
+        name: /new york times \(1980\-present\)/i,
+      })
       .should("exist")
+      // Check that the url has been updated correctly.
       .location()
       .should((loc) => {
         expect(loc.search).to.eq(queryParams);
@@ -36,13 +40,16 @@ describe("Articles & Databases", () => {
     const queryParams = "?q=Gale+Directory+Library&page=1";
     const pathName = "/research/collections/articles-databases/search";
 
-    advancedSearch("gale", {
+    search("gale", {
       textboxName: /search articles and databases/i,
       resultsId: "#search-results",
+      autoSuggest: true,
     })
+      // Get the first result.
       .first()
-      .findAllByRole("heading", { name: /gale directory/i })
+      .findByRole("link", { name: /gale directory library/i })
       .should("exist")
+      // Check that the url has been updated correctly.
       .location()
       .should((loc) => {
         expect(loc.search).to.eq(queryParams);
@@ -57,21 +64,21 @@ describe("Articles & Databases", () => {
     cy.log("Open multiselect");
     cy.findByRole("button", { name: /subjects/i }).click();
 
-    cy.log("Select option from mutliselect");
-    cy.get("#multiselect-subject")
-      .findByRole("listbox")
-      .findByLabelText("Art")
-      .click()
-      .should("be.checked");
+    cy.log("Check multiselect item");
+    cy.findByRole("checkbox", { name: "Art" }).click().should("be.checked");
 
-    advancedSearch("new york times", {
+    search("new york times", {
       textboxName: /search articles and databases/i,
       resultsId: "#search-results",
+      autoSuggest: true,
     })
       // Get the first result.
       .first()
-      .findAllByRole("heading", { name: /New York Times/i })
+      .findByRole("link", {
+        name: /new york times \(1980\-present\)/i,
+      })
       .should("exist")
+      // Check that the url has been updated correctly.
       .location()
       .should((loc) => {
         expect(loc.search).to.eq(queryParams);
@@ -93,7 +100,7 @@ describe("Articles & Databases", () => {
     cy.findByText("Homework Help").click();
 
     cy.log("Confirm featured resource topic page loads correctly.");
-    cy.findAllByRole("heading", {
+    cy.findByRole("heading", {
       level: 2,
       name: "Homework Help",
     })
@@ -129,5 +136,5 @@ describe("Articles & Databases", () => {
       });
   });
 
-  it("Alphabet navigation take user to correct page", () => {});
+  it("Alphabet navigation takes user to correct page", () => {});
 });

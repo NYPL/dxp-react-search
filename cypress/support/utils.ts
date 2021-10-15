@@ -1,17 +1,24 @@
 interface SearchOptions {
   textboxName: string;
   resultsId: string;
+  autoSuggest: boolean;
 }
 
-export function basicSearch(term: string, options: SearchOptions) {
-  const { textboxName, resultsId } = options;
+export function search(term: string, options: SearchOptions) {
+  const { textboxName, resultsId, autoSuggest } = options;
+
+  let typedString = term;
+  if (autoSuggest) {
+    typedString = `${term}{downarrow}{downarrow}`;
+  }
 
   return cy
     .log(`Searching for: ${term}`)
     .findByRole("textbox", {
       name: textboxName,
     })
-    .type(term)
+    .type(typedString)
+    .click()
     .log("Submit the form")
     .get("form")
     .findByRole("button", { name: "Search" })
@@ -19,28 +26,4 @@ export function basicSearch(term: string, options: SearchOptions) {
     .wait(3000)
     .get(resultsId)
     .as("getSearchResults");
-}
-
-export function advancedSearch(term: string, options: SearchOptions) {
-  const { textboxName, resultsId } = options;
-
-  return (
-    cy
-      .log(`Searching for: ${term}`)
-      .findByRole("textbox", {
-        name: textboxName,
-      })
-      .type(term)
-      // Autosuggest
-      .type("{downarrow}")
-      .type("{downarrow}")
-      .click()
-      .log("Submit the form")
-      .get("form")
-      .findByRole("button", { name: "Search" })
-      .click()
-      .wait(3000)
-      .get(resultsId)
-      .as("getSearchResults")
-  );
 }
