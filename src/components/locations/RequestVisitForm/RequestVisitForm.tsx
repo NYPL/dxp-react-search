@@ -16,6 +16,26 @@ import { useRouter } from "next/router";
 // CSS
 import s from "./RequestVisitForm.module.css";
 
+const virtualServicesItems = [
+  {
+    id: "services-introduction",
+    label: "Introduction to the Library",
+  },
+  {
+    id: "services-registration",
+    label: "Library Card Registration",
+  },
+  {
+    id: "services-resources",
+    label:
+      "Online Resource Instruction (Digital Collections, Research, Database, etc)",
+  },
+  {
+    id: "services-other",
+    label: "Other:",
+  },
+];
+
 const LOCATIONS_QUERY = gql`
   query LocationsQuery(
     $contentType: String
@@ -42,36 +62,127 @@ const LOCATIONS_QUERY = gql`
   }
 `;
 
+/*interface SelectedItems {
+  items: string[];
+}
+
+interface SelectedItemsMap {
+  [name: string]: SelectedItems;
+}
+*/
+
+interface FormState {
+  library: string;
+  visitType: string;
+  organization: string;
+  ageGroup: string;
+  contactName: string;
+  contactEmail: string;
+  virtualVisitServices: string[] | null;
+  virtualVisitServicesOther: string;
+}
+
 function RequestVisitForm() {
-  const [selectedLibrary, setSelectedLibrary] = useState<string>();
   const [selected, setSelected] = useState({
     visitType: "",
     noSchoolOrOrg: false,
   });
+
+  const [state, setState] = useState<FormState>({
+    library: "",
+    visitType: "",
+    organization: "",
+    ageGroup: "",
+    contactName: "",
+    contactEmail: "",
+    virtualVisitServices: [],
+    virtualVisitServicesOther: "",
+  });
+
+  const [formErrors, setFormErrors] = useState<any>(false);
+
   const router = useRouter();
   // Set the selected library to query param on initial render.
   useEffect(() => {
     if (router.query.id) {
-      setSelectedLibrary(router.query.id as string);
+      setState({
+        ...state,
+        library: router.query.id as string,
+      });
     }
   }, []);
 
   function handleChange(event: any) {
-    let value;
-    if (event.currentTarget.checked) {
-      value = event.currentTarget.checked;
+    const name = event.target.name;
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+
+    setState({
+      ...state,
+      [name]: value,
+    });
+  }
+
+  function handleCheckboxGroupChange(parentId: string, itemId: string) {
+    let items = [];
+    // @ts-ignore
+    let itemExists = state[parentId].includes(itemId);
+    // Make a copy of the existing array.
+    // @ts-ignore
+    items = state[parentId].slice();
+    // If item exists, remove it from the array.
+    if (itemExists) {
+      console.log("exists!");
+      console.log(items);
+      // @ts-ignore
+      items = items.filter((id) => id != itemId);
     } else {
-      value = event.currentTarget.value;
+      // Add it to the array, but modify the copy, not the original.
+      items.push(itemId);
     }
-    setSelected({
-      ...selected,
-      [event.currentTarget.name]: value,
+
+    setState({
+      ...state,
+      // @ts-ignore
+      ...state[parentId],
+      [parentId]: items,
     });
   }
 
   function handleSubmit(event: any) {
     event.preventDefault();
     console.log("handleSubmit!");
+    //console.log(state);
+
+    handleValidation();
+
+    const emailBody = `
+      Library: ${state.library}\n
+      Visit Type: ${state.visitType}
+    `;
+
+    console.log(emailBody);
+  }
+
+  function handleValidation() {
+    let errors = {};
+
+    if (!state.library) {
+      // @ts-ignore
+      errors.library = "Please select a library";
+    }
+    if (!state.contactName) {
+      // @ts-ignore
+      errors.contactName = "Please enter your full name.";
+    }
+    if (!state.visitType) {
+      // @ts-ignore
+      errors.visitType = "Please select your visit type.";
+    }
+
+    setFormErrors(errors);
   }
 
   const { loading, error, data } = useQuery(LOCATIONS_QUERY, {
@@ -94,6 +205,8 @@ function RequestVisitForm() {
 
   return (
     <form className={s.requestAVisit} onSubmit={handleSubmit}>
+      <pre>{JSON.stringify(state, null, 2)}</pre>
+      <pre>{JSON.stringify(formErrors, null, 2)}</pre>
       <Heading
         id="your-visit"
         displaySize={HeadingDisplaySizes.Secondary}
@@ -101,16 +214,17 @@ function RequestVisitForm() {
         text="Your Visit"
       />
       <Select
-        name="select-library"
-        errorText="Something went wrong."
+        name="library"
         id="request-visit-library-select"
         labelText="Please select a Library"
         // @ts-ignore
-        onChange={(e) => setSelectedLibrary(e.currentTarget.value)}
+        onChange={handleChange}
+        selectedOption={state.library}
         required
-        selectedOption={selectedLibrary}
         showLabel
         showOptReqLabel
+        errorText={formErrors.library}
+        errored={formErrors.library}
       >
         {data.allLocations.items.map((location: any) => (
           <option value={location.internalSlug}>{location.name}</option>
@@ -118,15 +232,14 @@ function RequestVisitForm() {
       </Select>
       <Select
         name="visitType"
-        errorText="Something went wrong."
         id="request-visit-select-type"
         labelText="Please select your visit type"
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
+        selectedOption={state.visitType}
         required
-        // @ts-ignore
-        selectedOption={selected.visitType}
         showLabel
-        showOptReqLabel
+        errorText={formErrors.visitType}
+        errored={formErrors.visitType}
       >
         <option value="" disabled selected>
           -- Select visit type --
@@ -134,47 +247,44 @@ function RequestVisitForm() {
         <option value="virtual">Virtual Visit</option>
         <option value="in-person">In-Person Visit</option>
       </Select>
-      {selected.visitType === "virtual" && (
+      {state.visitType === "virtual" && (
         <fieldset>
           <legend>
             What services would you like to include in your virtual visit?
           </legend>
-          <div className={s.checkBox}>
-            <Checkbox
-              labelText="Introduction to the Library"
-              name="services-introduction"
-              showLabel
-            />
-          </div>
-          <div className={s.checkBox}>
-            <Checkbox
-              labelText="Library Card Registration"
-              name="services-registration"
-              showLabel
-            />
-          </div>
-          <div className={s.checkBox}>
-            <Checkbox
-              labelText="Online Resource Instruction (Digital Collections, Research, Database, etc)"
-              name="services-resources"
-              showLabel
-            />
-          </div>
-          <div className={s.checkBox}>
-            <Checkbox
-              className={s.other}
-              labelText="Other:"
-              name="services-other"
-              showLabel
-            />
-            <TextInput
-              labelText="What other service would you like to receive?"
-              showLabel={false}
-            />
-          </div>
+          {virtualServicesItems.map((virtualServiceItem) => (
+            <div className={s.checkBox}>
+              <Checkbox
+                labelText={virtualServiceItem.label}
+                name={virtualServiceItem.id}
+                onChange={(e) =>
+                  handleCheckboxGroupChange(
+                    "virtualVisitServices",
+                    e.target.name
+                  )
+                }
+                // @ts-ignore
+                checked={state.virtualVisitServices.includes(
+                  virtualServiceItem.id
+                )}
+                showLabel
+              />
+              {virtualServiceItem.id === "services-other" && (
+                <TextInput
+                  attributes={{
+                    name: "virtualVisitServicesOther",
+                  }}
+                  labelText="What other service would you like to receive?"
+                  showLabel={false}
+                  onChange={handleChange}
+                  value={state.virtualVisitServicesOther}
+                />
+              )}
+            </div>
+          ))}
         </fieldset>
       )}
-      {selected.visitType === "in-person" && (
+      {state.visitType === "in-person" && (
         <fieldset>
           <legend>What would you like to request?</legend>
           <div className={s.checkBox}>
@@ -264,14 +374,26 @@ function RequestVisitForm() {
           text="Your Contact Information"
         />
         <TextInput
+          attributes={{
+            name: "contactName",
+          }}
           labelText="Name"
           placeholder="Enter your name"
-          showOptReqLabel={false}
+          required={true}
+          errorText={formErrors.contactName}
+          errored={formErrors.contactName}
+          onChange={handleChange}
+          value={state.contactName}
         />
         <TextInput
+          attributes={{
+            name: "contactEmail",
+          }}
           labelText="Email"
           placeholder="Enter your email"
           showOptReqLabel={false}
+          onChange={handleChange}
+          value={state.contactEmail}
         />
       </div>
       <Button type="submit" onClick={handleSubmit}>
@@ -282,3 +404,19 @@ function RequestVisitForm() {
 }
 
 export default RequestVisitForm;
+
+/*
+virtualVisitServices: [
+  "services-introduction",
+  "services-registration",
+  "services-other": [
+     "User entered value here"
+  ]
+]
+
+services-introduction
+services-registration
+services-resources
+services-other
+
+*/
