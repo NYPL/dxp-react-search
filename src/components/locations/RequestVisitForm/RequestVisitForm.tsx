@@ -1,105 +1,47 @@
 import React, { useEffect, useState } from "react";
-// Apollo
-import { useQuery, gql } from "@apollo/client";
 // Components
 import {
   Button,
   Checkbox,
   Heading,
   HeadingDisplaySizes,
-  Radio,
-  Select,
   TextInput,
 } from "@nypl/design-system-react-components";
+import LibraryFormField from "./LibraryFormField";
+import VisitTypeFormField from "./VisitTypeFormField";
+import AgeGroupFormField from "./AgeGroupFormFields";
+import { FormErrors } from "./types";
 // Next
 import { useRouter } from "next/router";
 // CSS
 import s from "./RequestVisitForm.module.css";
 
-const virtualServicesItems = [
-  {
-    id: "services-introduction",
-    label: "Introduction to the Library",
-  },
-  {
-    id: "services-registration",
-    label: "Library Card Registration",
-  },
-  {
-    id: "services-resources",
-    label:
-      "Online Resource Instruction (Digital Collections, Research, Database, etc)",
-  },
-  {
-    id: "services-other",
-    label: "Other:",
-  },
-];
-
-const LOCATIONS_QUERY = gql`
-  query LocationsQuery(
-    $contentType: String
-    $limit: Int
-    $pageNumber: Int
-    $libraryType: [String]
-  ) {
-    allLocations(
-      contentType: $contentType
-      limit: $limit
-      pageNumber: $pageNumber
-      filter: { libraryType: $libraryType }
-    ) {
-      items {
-        id
-        name
-        internalSlug
-      }
-      pageInfo {
-        limit
-        totalItems
-      }
-    }
-  }
-`;
-
-/*interface SelectedItems {
-  items: string[];
-}
-
-interface SelectedItemsMap {
-  [name: string]: SelectedItems;
-}
-*/
-
 interface FormState {
   library: string;
   visitType: string;
-  organization: string;
-  ageGroup: string;
+  organization: string | null;
+  noSchoolOrOrg: boolean;
+  ageGroup: string[] | null;
   contactName: string;
   contactEmail: string;
   virtualVisitServices: string[] | null;
-  virtualVisitServicesOther: string;
+  virtualVisitServicesOther: boolean | string;
 }
 
 function RequestVisitForm() {
-  const [selected, setSelected] = useState({
-    visitType: "",
-    noSchoolOrOrg: false,
-  });
-
   const [state, setState] = useState<FormState>({
     library: "",
     visitType: "",
     organization: "",
-    ageGroup: "",
+    noSchoolOrOrg: false,
+    ageGroup: [],
     contactName: "",
     contactEmail: "",
     virtualVisitServices: [],
-    virtualVisitServicesOther: "",
+    virtualVisitServicesOther: false,
   });
 
-  const [formErrors, setFormErrors] = useState<any>(false);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
 
   const router = useRouter();
   // Set the selected library to query param on initial render.
@@ -134,8 +76,6 @@ function RequestVisitForm() {
     items = state[parentId].slice();
     // If item exists, remove it from the array.
     if (itemExists) {
-      console.log("exists!");
-      console.log(items);
       // @ts-ignore
       items = items.filter((id) => id != itemId);
     } else {
@@ -151,56 +91,59 @@ function RequestVisitForm() {
     });
   }
 
-  function handleSubmit(event: any) {
-    event.preventDefault();
-    console.log("handleSubmit!");
-    //console.log(state);
-
-    handleValidation();
-
-    const emailBody = `
-      Library: ${state.library}\n
-      Visit Type: ${state.visitType}
-    `;
-
-    console.log(emailBody);
-  }
-
   function handleValidation() {
-    let errors = {};
+    let errors = {} as FormErrors;
 
     if (!state.library) {
-      // @ts-ignore
       errors.library = "Please select a library";
     }
     if (!state.contactName) {
-      // @ts-ignore
       errors.contactName = "Please enter your full name.";
     }
     if (!state.visitType) {
-      // @ts-ignore
       errors.visitType = "Please select your visit type.";
+    }
+    if (state.ageGroup !== null && !state.ageGroup.length) {
+      errors.ageGroup = "Please select your age group.";
     }
 
     setFormErrors(errors);
   }
 
-  const { loading, error, data } = useQuery(LOCATIONS_QUERY, {
-    variables: {
-      contentType: "library",
-      libraryType: ["hub", "neighborhood"],
-      limit: 125,
-      pageNumber: 1,
-      //sortBy: sortBy ? sortBy : null,
-    },
-  });
+  async function handleSubmit(event: any) {
+    event.preventDefault();
+    handleValidation();
 
-  if (error) {
-    return <div>Error while loading locations.</div>;
-  }
+    // Check for any validation errors in the form errors state.
+    if (Object.keys(formErrors).length > 0) {
+      const emailBody = `
+        Library: ${state.library}\n
+        Visit Type: ${state.visitType}
+      `;
 
-  if (loading || !data) {
-    return <div>Loading</div>;
+      // Send email.
+      const res = await fetch("/api/send-email", {
+        body: JSON.stringify({
+          // william.luisi2477@gmail.com
+          emailBody: emailBody,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+
+      const { error } = await res.json();
+
+      if (error) {
+        // If there was an error, update the message in state.
+        //setMessage(error);
+
+        return;
+      }
+
+      // Redirect to confirmation page.
+    }
   }
 
   return (
@@ -213,159 +156,38 @@ function RequestVisitForm() {
         level={2}
         text="Your Visit"
       />
-      <Select
-        name="library"
-        id="request-visit-library-select"
-        labelText="Please select a Library"
-        // @ts-ignore
-        onChange={handleChange}
-        selectedOption={state.library}
-        required
-        showLabel
-        showOptReqLabel
-        errorText={formErrors.library}
-        errored={formErrors.library}
-      >
-        {data.allLocations.items.map((location: any) => (
-          <option value={location.internalSlug}>{location.name}</option>
-        ))}
-      </Select>
-      <Select
-        name="visitType"
-        id="request-visit-select-type"
-        labelText="Please select your visit type"
-        onChange={handleChange}
-        selectedOption={state.visitType}
-        required
-        showLabel
-        errorText={formErrors.visitType}
-        errored={formErrors.visitType}
-      >
-        <option value="" disabled selected>
-          -- Select visit type --
-        </option>
-        <option value="virtual">Virtual Visit</option>
-        <option value="in-person">In-Person Visit</option>
-      </Select>
-      {state.visitType === "virtual" && (
-        <fieldset>
-          <legend>
-            What services would you like to include in your virtual visit?
-          </legend>
-          {virtualServicesItems.map((virtualServiceItem) => (
-            <div className={s.checkBox}>
-              <Checkbox
-                labelText={virtualServiceItem.label}
-                name={virtualServiceItem.id}
-                onChange={(e) =>
-                  handleCheckboxGroupChange(
-                    "virtualVisitServices",
-                    e.target.name
-                  )
-                }
-                // @ts-ignore
-                checked={state.virtualVisitServices.includes(
-                  virtualServiceItem.id
-                )}
-                showLabel
-              />
-              {virtualServiceItem.id === "services-other" && (
-                <TextInput
-                  attributes={{
-                    name: "virtualVisitServicesOther",
-                  }}
-                  labelText="What other service would you like to receive?"
-                  showLabel={false}
-                  onChange={handleChange}
-                  value={state.virtualVisitServicesOther}
-                />
-              )}
-            </div>
-          ))}
-        </fieldset>
-      )}
-      {state.visitType === "in-person" && (
-        <fieldset>
-          <legend>What would you like to request?</legend>
-          <div className={s.checkBox}>
-            <Radio
-              helperText="Aptent congue tellus tincidunt torquent"
-              labelText="Class Visit"
-              name="in-person-request"
-              showLabel
-            />
-          </div>
-          <div className={s.checkBox}>
-            <Radio
-              helperText="Adipiscing sit laoreet eros lorem enim aliquet"
-              labelText="Group Tour"
-              name="in-person-request"
-              showLabel
-            />
-          </div>
-          <div className={s.checkBox}>
-            <Radio
-              helperText="Inceptos hac hendrerit cubilia sapien interdum est"
-              labelText="Offsite Outreach"
-              name="in-person-request"
-              showLabel
-            />
-          </div>
-          <div className={s.checkBox}>
-            <Radio
-              helperText="Inceptos hac hendrerit cubilia sapien interdum est"
-              labelText="Opportunities for Community Partners"
-              name="in-person-request"
-              showLabel
-            />
-          </div>
-          <div className={s.checkBox}>
-            <Radio
-              className={s.other}
-              labelText="Other:"
-              name="in-person-request"
-              showLabel
-            />
-            <TextInput labelText="Other request." showLabel={false} />
-          </div>
-        </fieldset>
-      )}
+      <LibraryFormField
+        formState={state}
+        formErrors={formErrors}
+        handleChange={handleChange}
+      />
+      <VisitTypeFormField
+        formState={state}
+        formErrors={formErrors}
+        handleChange={handleChange}
+        handleCheckboxGroupChange={handleCheckboxGroupChange}
+      />
       <div className={s.schoolInfo}>
         <TextInput
-          disabled={selected.noSchoolOrOrg}
+          disabled={state.noSchoolOrOrg}
           labelText="What school or organization are you with?"
-          required={!selected.noSchoolOrOrg}
+          required={!state.noSchoolOrOrg}
           showLabel={true}
-          showOptReqLabel={!selected.noSchoolOrOrg}
+          showOptReqLabel={!state.noSchoolOrOrg}
         />
         <Checkbox
-          checked={selected.noSchoolOrOrg}
+          checked={state.noSchoolOrOrg}
           labelText="I’m not with a school or organization."
           name="noSchoolOrOrg"
           onChange={(e) => handleChange(e)}
           showLabel
         />
       </div>
-      <fieldset>
-        <legend>What age or grade is your group?</legend>
-        <div className={s.checkBox}>
-          <Checkbox
-            labelText="Children (Pre-K to 5th Grade)"
-            name="age-children"
-            showLabel
-          />
-        </div>
-        <div className={s.checkBox}>
-          <Checkbox
-            labelText="Teenagers (6th Grade to 12th Grade)"
-            name="age-teenagers"
-            showLabel
-          />
-        </div>
-        <div className={s.checkBox}>
-          <Checkbox labelText="Adults (18+)" name="age-adults" showLabel />
-        </div>
-      </fieldset>
+      <AgeGroupFormField
+        formState={state}
+        formErrors={formErrors}
+        handleCheckboxGroupChange={handleCheckboxGroupChange}
+      />
       <div className={s.contactInfo}>
         <Heading
           id="contact-info"
@@ -381,6 +203,7 @@ function RequestVisitForm() {
           placeholder="Enter your name"
           required={true}
           errorText={formErrors.contactName}
+          // @ts-ignore
           errored={formErrors.contactName}
           onChange={handleChange}
           value={state.contactName}

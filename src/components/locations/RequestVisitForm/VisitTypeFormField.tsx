@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/router";
 // CSS
 import s from "./RequestVisitForm.module.css";
+import { FormField as FormFieldProps } from "./types";
 
 const virtualServicesItems = [
   {
@@ -36,19 +37,12 @@ const virtualServicesItems = [
   },
 ];
 
-interface VisitTypeProps {
-  formState: any;
-  formErrors: any;
-  handleChange: () => void;
-  handleCheckboxGroupChange: any;
-}
-
-function VisitType({
+function VisitTypeFormField({
   formState,
   formErrors,
   handleChange,
   handleCheckboxGroupChange,
-}: VisitTypeProps) {
+}: FormFieldProps) {
   return (
     <>
       <Select
@@ -85,7 +79,7 @@ function VisitType({
                   )
                 }
                 // @ts-ignore
-                checked={state.virtualVisitServices.includes(
+                checked={formState.virtualVisitServices.includes(
                   virtualServiceItem.id
                 )}
                 showLabel
@@ -99,6 +93,7 @@ function VisitType({
                   showLabel={false}
                   onChange={handleChange}
                   value={formState.virtualVisitServicesOther}
+                  disabled={formState.virtualVisitServicesOther}
                 />
               )}
             </div>
@@ -155,4 +150,4 @@ function VisitType({
   );
 }
 
-export default VisitType;
+export default VisitTypeFormField;
