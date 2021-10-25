@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+// Apollo
+import { useApolloClient, gql } from "@apollo/client";
 // Components
 import {
   Button,
@@ -20,6 +22,33 @@ import formatRequestVisitEmail from "./../../../utils/formatRequestVisitEmail";
 import { useRouter } from "next/router";
 // CSS
 import s from "./RequestVisitForm.module.css";
+
+const LOCATION_EMAIL_QUERY = gql`
+  query LocationEmailQuery(
+    $internalSlug: [String]
+    $contentType: String
+    $limit: Int
+    $pageNumber: Int
+  ) {
+    allLocations(
+      contentType: $contentType
+      limit: $limit
+      pageNumber: $pageNumber
+      filter: { internalSlug: $internalSlug }
+    ) {
+      items {
+        id
+        name
+        internalSlug
+        email
+      }
+      pageInfo {
+        limit
+        totalItems
+      }
+    }
+  }
+`;
 
 function RequestVisitForm() {
   const [formValues, setFormValues] = useState<FormValuesType>({
@@ -49,11 +78,8 @@ function RequestVisitForm() {
     }
   }, []);
 
-  /*useEffect(() => {
-    if (Object.keys(formErrors).length > 0) {
-    }
-  }, []);
-  */
+  // Apollo.
+  const client = useApolloClient();
 
   function handleChange(event: any) {
     const name = event.target.name;
@@ -147,66 +173,88 @@ function RequestVisitForm() {
     return false;
   }
 
-  async function handleSubmit(event: any) {
+  function handleSubmit(event: any) {
     event.preventDefault();
-    // @TODO this is wrong, state is update
-    //console.log("yo");
-
     // Check for any validation errors in the form errors formValues.
     if (validate()) {
       // Form submit!
-      let emailTo = "william.luisi2477@gmail.com";
+      let emailToTest;
+      // Run query to get email for selected location.
+      let internalSlugArray = [];
+      internalSlugArray.push(formValues.library);
 
-      let emailCc;
-      // Use state values to determine the cc email recipient.
-      if (formValues.inPersonServices.length > 0) {
-        switch (formValues.inPersonServices) {
-          case "in-person-class-visit":
-            //emailCc = "schoolvisits@nypl.org";
-            emailCc = "williamluisi+school-visit@nypl.org";
-            break;
-          case "in-person-group-tour":
-            //emailCc = "outreach@nypl.org";
-            emailCc = "williamluisi+outeach@nypl.org";
-            break;
-          case "in-person-offsite":
-            //emailCc = "outreach@nypl.org";
-            emailCc = "williamluisi+outeach@nypl.org";
-            break;
-          case "in-person-community-partners":
-            //emailCc = "outreach@nypl.org";
-            emailCc = "williamluisi+outeach@nypl.org";
-            break;
-        }
-      }
-      // Send email.
-      const res = await fetch("/api/send-email", {
-        body: JSON.stringify({
-          emailTo: emailTo,
-          emailCc: emailCc,
-          emailBody: formatRequestVisitEmail(formValues),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
+      client
+        .query({
+          query: LOCATION_EMAIL_QUERY,
+          variables: {
+            contentType: "library",
+            limit: 1,
+            pageNumber: 1,
+            internalSlug: internalSlugArray,
+          },
+        })
+        .then(
+          (response) => {
+            const location = response.data?.allLocations?.items[0];
+            const emailTo = location.email;
 
-      const { error } = await res.json();
+            let emailCc;
+            // Use state values to determine the cc email recipient.
+            if (formValues.inPersonServices.length > 0) {
+              switch (formValues.inPersonServices) {
+                case "in-person-class-visit":
+                  //emailCc = "schoolvisits@nypl.org";
+                  emailCc = "williamluisi+school-visit@nypl.org";
+                  break;
+                case "in-person-group-tour":
+                  //emailCc = "outreach@nypl.org";
+                  emailCc = "williamluisi+outeach@nypl.org";
+                  break;
+                case "in-person-offsite":
+                  //emailCc = "outreach@nypl.org";
+                  emailCc = "williamluisi+outeach@nypl.org";
+                  break;
+                case "in-person-community-partners":
+                  //emailCc = "outreach@nypl.org";
+                  emailCc = "williamluisi+outeach@nypl.org";
+                  break;
+              }
+            }
+            // Send email.
+            fetch("/api/send-email", {
+              body: JSON.stringify({
+                emailTo: emailTo,
+                emailCc: emailCc,
+                emailBody: formatRequestVisitEmail(formValues),
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+              method: "POST",
+            }).then(
+              (response) => {
+                console.log(emailTo);
+                // Clear form state.
 
-      if (error) {
-        // If there was an error, update the message in formValues.
-        //setMessage(error);
-
-        return;
-      }
-
-      // Redirect to confirmation page.
-    } else {
-      // Form error!
-      alert("Form error!");
+                // Redirect to confirmation pg.
+                router.push({
+                  pathname: `/locations/request-visit`,
+                  query: {
+                    confirmation: 1,
+                  },
+                });
+              },
+              (error) => {
+                console.error(error);
+              }
+            );
+          },
+          (error) => {
+            //console.error(error);
+          }
+        );
     }
-
+    // Scroll back to top after form submit.
     window.scrollTo(0, 0);
   }
 

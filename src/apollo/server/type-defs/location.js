@@ -12,6 +12,7 @@ export const typeDefs = gql`
     parentLibraryName: String
     address: Address
     phone: String
+    email: String
   }
 
   type Address {
@@ -29,6 +30,7 @@ export const typeDefs = gql`
 
   input LocationFilter {
     libraryType: [String]
+    internalSlug: [String]
   }
 
   extend type Query {

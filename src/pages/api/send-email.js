@@ -11,7 +11,7 @@ export default async (req, res) => {
     return res.status(400).json({ error: "Email body is required." });
   }
   if (!emailTo) {
-    return res.status(400).json({ error: "To email is required." });
+    return res.status(400).json({ error: "Email to field is required." });
   }
 
   // Sendgrid
@@ -39,14 +39,24 @@ export default async (req, res) => {
       // Debug
       console.log(emailBody);
       await sendGridTransporter.sendMail(email);
-      // Why return empty error on success?
-      // @TODO this should return status: ok + response from sendgrid, and data sent?
-      return res.status(201).json({ error: "" });
+
+      return res.status(201).json({
+        status: "ok",
+        data: {
+          emailTo: emailTo,
+          //emailBody: emailBody,
+        },
+      });
     } catch (error) {
       return res.status(500).json({ error: error.message || error.toString() });
     }
   } else {
-    // Why return empty error on success?
-    return res.status(201).json({ error: "" });
+    return res.status(201).json({
+      status: "ok",
+      data: {
+        emailTo: emailTo,
+        //emailBody: emailBody,
+      },
+    });
   }
 };

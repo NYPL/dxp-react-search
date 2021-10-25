@@ -315,6 +315,14 @@ class DrupalApi extends RESTDataSource {
       apiPath = `${apiPath}&filter[field_bs_featured]=1`;
     }
 
+    // Internal slug
+    if (filter && "internalSlug" in filter && filter.internalSlug) {
+      apiPath = `${apiPath}&filter[internalSlug-filter][condition][path]=field_ts_slug&filter[internalSlug-filter][condition][operator]=IN`;
+      filter.internalSlug.map((item, index) => {
+        apiPath = `${apiPath}&filter[internalSlug-filter][condition][value][${index}]=${item}`;
+      });
+    }
+
     // @TODO could convert this to reuseable function?
     // Channels filter.
     if (filter && "channels" in filter && filter.channels) {
