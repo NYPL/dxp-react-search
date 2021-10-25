@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 // Apollo
-import { withApollo } from "../../apollo/client/withApollo";
+import { withApollo } from "../../../apollo/client/withApollo";
 // Redux
-import { withRedux } from "../../redux/withRedux";
+import { withRedux } from "../../../redux/withRedux";
 // Components
-import PageContainer from "../../components/shared/layouts/PageContainer";
-import BottomMenuContent from "../../components/shared/BottomMenus/content";
-import Menu from "../../components/ds-prototypes/Menu";
+import PageContainer from "../../../components/shared/layouts/PageContainer";
+import BottomMenuContent from "../../../components/shared/BottomMenus/content";
+import Menu from "../../../components/ds-prototypes/Menu";
 import { Heading } from "@nypl/design-system-react-components";
-import RequestVisitForm from "../../components/locations/RequestVisitForm/RequestVisitForm";
+import RequestVisitForm from "../../../components/locations/RequestVisitForm/RequestVisitForm";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function LocationsRequestVisitPage() {
@@ -32,7 +32,7 @@ function LocationsRequestVisitPage() {
       ]}
       wrapperClass="nypl--locations"
       contentPrimary={
-        <Fragment>
+        <>
           <Heading
             className="request-visit__header"
             level={1}
@@ -44,7 +44,7 @@ function LocationsRequestVisitPage() {
             risus elit, eleifend mollis fames.
           </p>
           <RequestVisitForm />
-        </Fragment>
+        </>
       }
       showSidebar={true}
       sidebarSide="right"

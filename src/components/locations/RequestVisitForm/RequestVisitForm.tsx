@@ -238,10 +238,7 @@ function RequestVisitForm() {
 
                 // Redirect to confirmation pg.
                 router.push({
-                  pathname: `/locations/request-visit`,
-                  query: {
-                    confirmation: 1,
-                  },
+                  pathname: `/locations/request-visit/confirmation`,
                 });
               },
               (error) => {
