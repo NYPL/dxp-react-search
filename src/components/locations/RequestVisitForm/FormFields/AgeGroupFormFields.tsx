@@ -2,8 +2,8 @@ import React from "react";
 // Components
 import { Checkbox } from "@nypl/design-system-react-components";
 // CSS
-import s from "./RequestVisitForm.module.css";
-import { FormField as FormFieldProps } from "./types";
+import s from "./../RequestVisitForm.module.css";
+import { FormField as FormFieldProps } from "../types";
 
 const ageGroupItems = [
   {
@@ -21,7 +21,7 @@ const ageGroupItems = [
 ];
 
 function AgeGroupFormField({
-  formState,
+  formValues,
   formErrors,
   handleCheckboxGroupChange,
 }: FormFieldProps) {
@@ -37,11 +37,21 @@ function AgeGroupFormField({
               handleCheckboxGroupChange("ageGroup", ageGroupItem.id)
             }
             // @ts-ignore
-            checked={formState.ageGroup.includes(ageGroupItem.id)}
+            checked={formValues.ageGroup.includes(ageGroupItem.id)}
             showLabel
+            errored={formErrors.ageGroup ? true : false}
           />
         </div>
       ))}
+      {formErrors.ageGroup && (
+        <div
+          className="helper-text helper-text--error"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {formErrors.ageGroup}
+        </div>
+      )}
     </fieldset>
   );
 }

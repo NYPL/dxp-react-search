@@ -1,41 +1,51 @@
+var nodemailer = require("nodemailer");
+var sgTransport = require("nodemailer-sendgrid-transport");
+const { SENDGRID_API_KEY } = process.env;
+
+const ENABLE_EMAIL = 0;
+
 export default async (req, res) => {
-  const { emailBody } = req.body;
+  const { emailBody, toEmail } = req.body;
 
   if (!emailBody) {
-    // Throw an error if an email wasn't provided.
-    return res.status(400).json({ error: "Email body is required" });
+    return res.status(400).json({ error: "Email body is required." });
+  }
+  if (!toEmail) {
+    return res.status(400).json({ error: "To email is required." });
   }
 
-  try {
-    // Load the environment variables.
+  // Sendgrid
+  const options = {
+    service: "SendGrid",
+    auth: {
+      api_key: SENDGRID_API_KEY,
+    },
+  };
+  const sendGridTransporter = nodemailer.createTransport(sgTransport(options));
 
-    // Debug
-    console.log(emailBody);
+  const email = {
+    from: "webfeedback@nypl.org",
+    to: toEmail,
+    subject: "Hello",
+    text: "Hello world",
+    html: emailBody,
+  };
 
-    // Send a POST request to Mailchimp.
-    /*const response = await fetch(
-      `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`,
-      {
-        body: JSON.stringify(data),
-        headers: {
-          Authorization: `apikey ${API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      }
-    );
+  if (ENABLE_EMAIL) {
+    try {
+      // Load the environment variables.
 
-    // Swallow any errors from Mailchimp and return a better error message.
-    if (response.status >= 400) {
-      return res.status(400).json({
-        error: `There was an error subscribing to the newsletter.`,
-      });
+      // Debug
+      console.log(emailBody);
+      await sendGridTransporter.sendMail(email);
+      // Why return empty error on success?
+      // @TODO this should return status: ok + response from sendgrid, and data sent?
+      return res.status(201).json({ error: "" });
+    } catch (error) {
+      return res.status(500).json({ error: error.message || error.toString() });
     }
-    */
-
-    // Why return empty error?
+  } else {
+    // Why return empty error on success?
     return res.status(201).json({ error: "" });
-  } catch (error) {
-    return res.status(500).json({ error: error.message || error.toString() });
   }
 };

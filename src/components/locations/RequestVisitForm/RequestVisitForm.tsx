@@ -7,29 +7,22 @@ import {
   HeadingDisplaySizes,
   TextInput,
 } from "@nypl/design-system-react-components";
-import LibraryFormField from "./LibraryFormField";
-import VisitTypeFormField from "./VisitTypeFormField";
-import AgeGroupFormField from "./AgeGroupFormFields";
-import { FormErrors } from "./types";
+import LibraryFormField from "./FormFields/LibraryFormField";
+import VisitTypeFormField from "./FormFields/VisitTypeFormField";
+import OrgFormFields from "./FormFields/OrgFormFields";
+import AgeGroupFormField from "./FormFields/AgeGroupFormFields";
+import {
+  FormErrors as FormErrorsType,
+  FormValues as FormValuesType,
+} from "./types";
+import formatRequestVisitEmail from "./../../../utils/formatRequestVisitEmail";
 // Next
 import { useRouter } from "next/router";
 // CSS
 import s from "./RequestVisitForm.module.css";
 
-interface FormState {
-  library: string;
-  visitType: string;
-  organization: string | null;
-  noSchoolOrOrg: boolean;
-  ageGroup: string[] | null;
-  contactName: string;
-  contactEmail: string;
-  virtualVisitServices: string[] | null;
-  virtualVisitServicesOther: boolean | string;
-}
-
 function RequestVisitForm() {
-  const [state, setState] = useState<FormState>({
+  const [formValues, setFormValues] = useState<FormValuesType>({
     library: "",
     visitType: "",
     organization: "",
@@ -38,42 +31,60 @@ function RequestVisitForm() {
     contactName: "",
     contactEmail: "",
     virtualVisitServices: [],
-    virtualVisitServicesOther: false,
+    virtualVisitServicesOther: "",
+    inPersonServices: "",
+    inPersonServicesOther: "",
   });
 
-  const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [formErrors, setFormErrors] = useState<FormErrorsType>({});
 
   const router = useRouter();
   // Set the selected library to query param on initial render.
   useEffect(() => {
     if (router.query.id) {
-      setState({
-        ...state,
+      setFormValues({
+        ...formValues,
         library: router.query.id as string,
       });
     }
   }, []);
 
+  /*useEffect(() => {
+    if (Object.keys(formErrors).length > 0) {
+    }
+  }, []);
+  */
+
   function handleChange(event: any) {
     const name = event.target.name;
-    const value =
+    let value =
       event.target.type === "checkbox"
         ? event.target.checked
         : event.target.value;
+    // Special handling for organization
+    if (name === "organization" && event.target.type === "checkbox") {
+      value = !event.target.checked;
+    }
 
-    setState({
-      ...state,
+    setFormValues({
+      ...formValues,
       [name]: value,
     });
+
+    /*setFormErrors({
+      ...formErrors,
+      //[name]: [],
+    });
+    */
   }
 
   function handleCheckboxGroupChange(parentId: string, itemId: string) {
     let items = [];
     // @ts-ignore
-    let itemExists = state[parentId].includes(itemId);
+    let itemExists = formValues[parentId].includes(itemId);
     // Make a copy of the existing array.
     // @ts-ignore
-    items = state[parentId].slice();
+    items = formValues[parentId].slice();
     // If item exists, remove it from the array.
     if (itemExists) {
       // @ts-ignore
@@ -83,49 +94,73 @@ function RequestVisitForm() {
       items.push(itemId);
     }
 
-    setState({
-      ...state,
+    setFormValues({
+      ...formValues,
       // @ts-ignore
-      ...state[parentId],
+      ...formValues[parentId],
       [parentId]: items,
     });
   }
 
-  function handleValidation() {
-    let errors = {} as FormErrors;
+  function validate() {
+    let errors = {} as FormErrorsType;
 
-    if (!state.library) {
-      errors.library = "Please select a library";
+    if (!formValues.library) {
+      errors.library = "Please select a library for your visit.";
     }
-    if (!state.contactName) {
+    if (!formValues.visitType) {
+      errors.visitType = "Visit type is required.";
+    }
+    if (
+      formValues.virtualVisitServices.length === 0 &&
+      !formValues.virtualVisitServicesOther &&
+      formValues.inPersonServices.length === 0 &&
+      !formValues.inPersonServicesOther
+    ) {
+      errors.virtualVisitServices =
+        "Please select what services you would like to request";
+      errors.inPersonServices =
+        "Please select what services you would like to request";
+    }
+    // Organization
+    if (!formValues.organization && !formValues.noSchoolOrOrg) {
+      errors.organization = "This field is required.";
+    }
+
+    if (formValues.ageGroup !== null && !formValues.ageGroup.length) {
+      errors.ageGroup = "Please select your age group.";
+    }
+    // Contact info
+    if (!formValues.contactName) {
       errors.contactName = "Please enter your full name.";
     }
-    if (!state.visitType) {
-      errors.visitType = "Please select your visit type.";
+    if (!formValues.contactEmail) {
+      errors.contactEmail = "Please enter your email address.";
     }
-    if (state.ageGroup !== null && !state.ageGroup.length) {
-      errors.ageGroup = "Please select your age group.";
+
+    if (Object.keys(errors).length === 0) {
+      return true;
     }
 
     setFormErrors(errors);
+
+    return false;
   }
 
   async function handleSubmit(event: any) {
     event.preventDefault();
-    handleValidation();
+    // @TODO this is wrong, state is update
+    //console.log("yo");
 
-    // Check for any validation errors in the form errors state.
-    if (Object.keys(formErrors).length > 0) {
-      const emailBody = `
-        Library: ${state.library}\n
-        Visit Type: ${state.visitType}
-      `;
+    // Check for any validation errors in the form errors formValues.
+    if (validate()) {
+      //alert("Form submit!");
 
       // Send email.
       const res = await fetch("/api/send-email", {
         body: JSON.stringify({
-          // william.luisi2477@gmail.com
-          emailBody: emailBody,
+          toEmail: "william.luisi2477@gmail.com",
+          emailBody: formatRequestVisitEmail(formValues),
         }),
         headers: {
           "Content-Type": "application/json",
@@ -136,20 +171,22 @@ function RequestVisitForm() {
       const { error } = await res.json();
 
       if (error) {
-        // If there was an error, update the message in state.
+        // If there was an error, update the message in formValues.
         //setMessage(error);
 
         return;
       }
 
       // Redirect to confirmation page.
+    } else {
+      alert("Form error!");
     }
+
+    window.scrollTo(0, 0);
   }
 
   return (
     <form className={s.requestAVisit} onSubmit={handleSubmit}>
-      <pre>{JSON.stringify(state, null, 2)}</pre>
-      <pre>{JSON.stringify(formErrors, null, 2)}</pre>
       <Heading
         id="your-visit"
         displaySize={HeadingDisplaySizes.Secondary}
@@ -157,44 +194,28 @@ function RequestVisitForm() {
         text="Your Visit"
       />
       <LibraryFormField
-        formState={state}
+        formValues={formValues}
         formErrors={formErrors}
         handleChange={handleChange}
       />
       <VisitTypeFormField
-        formState={state}
+        formValues={formValues}
         formErrors={formErrors}
         handleChange={handleChange}
         handleCheckboxGroupChange={handleCheckboxGroupChange}
       />
-      <div className={s.schoolInfo}>
-        <TextInput
-          disabled={state.noSchoolOrOrg}
-          labelText="What school or organization are you with?"
-          required={!state.noSchoolOrOrg}
-          showLabel={true}
-          showOptReqLabel={!state.noSchoolOrOrg}
-        />
-        <Checkbox
-          checked={state.noSchoolOrOrg}
-          labelText="I’m not with a school or organization."
-          name="noSchoolOrOrg"
-          onChange={(e) => handleChange(e)}
-          showLabel
-        />
-      </div>
+      <OrgFormFields
+        formValues={formValues}
+        formErrors={formErrors}
+        handleChange={handleChange}
+      />
       <AgeGroupFormField
-        formState={state}
+        formValues={formValues}
         formErrors={formErrors}
         handleCheckboxGroupChange={handleCheckboxGroupChange}
       />
       <div className={s.contactInfo}>
-        <Heading
-          id="contact-info"
-          displaySize={HeadingDisplaySizes.Secondary}
-          level={2}
-          text="Your Contact Information"
-        />
+        <Heading id="contact-info" level={2} text="Your Contact Information" />
         <TextInput
           attributes={{
             name: "contactName",
@@ -203,10 +224,9 @@ function RequestVisitForm() {
           placeholder="Enter your name"
           required={true}
           errorText={formErrors.contactName}
-          // @ts-ignore
-          errored={formErrors.contactName}
+          errored={formErrors.contactName ? true : false}
           onChange={handleChange}
-          value={state.contactName}
+          value={formValues.contactName}
         />
         <TextInput
           attributes={{
@@ -214,32 +234,22 @@ function RequestVisitForm() {
           }}
           labelText="Email"
           placeholder="Enter your email"
-          showOptReqLabel={false}
+          required={true}
+          errorText={formErrors.contactEmail}
+          errored={formErrors.contactEmail ? true : false}
           onChange={handleChange}
-          value={state.contactEmail}
+          value={formValues.contactEmail}
         />
       </div>
       <Button type="submit" onClick={handleSubmit}>
         Submit
       </Button>
+
+      <pre>{JSON.stringify(formValues, null, 2)}</pre>
+      <pre>FormErrors State: {JSON.stringify(formErrors, null, 2)}</pre>
+      <pre>Form Errors Length: {Object.keys(formErrors).length}</pre>
     </form>
   );
 }
 
 export default RequestVisitForm;
-
-/*
-virtualVisitServices: [
-  "services-introduction",
-  "services-registration",
-  "services-other": [
-     "User entered value here"
-  ]
-]
-
-services-introduction
-services-registration
-services-resources
-services-other
-
-*/

@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery, gql } from "@apollo/client";
 // Components
 import { Select } from "@nypl/design-system-react-components";
-import { FormField as FormFieldProps } from "./types";
+import { FormField as FormFieldProps } from "../types";
 
 const LOCATIONS_QUERY = gql`
   query LocationsQuery(
@@ -32,7 +32,7 @@ const LOCATIONS_QUERY = gql`
 `;
 
 function LibraryFormField({
-  formState,
+  formValues,
   formErrors,
   handleChange,
 }: FormFieldProps) {
@@ -59,14 +59,12 @@ function LibraryFormField({
       name="library"
       id="request-visit-library-select"
       labelText="Please select a Library"
-      // @ts-ignore
       onChange={handleChange}
-      selectedOption={formState.library}
+      selectedOption={formValues.library}
       required
       showLabel
-      showOptReqLabel
       errorText={formErrors.library}
-      errored={formErrors.library}
+      errored={formErrors.library ? true : false}
     >
       {data.allLocations.items.map((location: any) => (
         <option value={location.internalSlug}>{location.name}</option>
