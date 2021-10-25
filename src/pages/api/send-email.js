@@ -5,12 +5,12 @@ const { SENDGRID_API_KEY } = process.env;
 const ENABLE_EMAIL = 0;
 
 export default async (req, res) => {
-  const { emailBody, toEmail } = req.body;
+  const { emailBody, emailTo, emailCc } = req.body;
 
   if (!emailBody) {
     return res.status(400).json({ error: "Email body is required." });
   }
-  if (!toEmail) {
+  if (!emailTo) {
     return res.status(400).json({ error: "To email is required." });
   }
 
@@ -25,8 +25,9 @@ export default async (req, res) => {
 
   const email = {
     from: "webfeedback@nypl.org",
-    to: toEmail,
-    subject: "Hello",
+    to: emailTo,
+    cc: emailCc ? emailCc : null,
+    subject: "Location Request Visit",
     text: "Hello world",
     html: emailBody,
   };

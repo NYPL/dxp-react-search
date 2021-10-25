@@ -154,12 +154,36 @@ function RequestVisitForm() {
 
     // Check for any validation errors in the form errors formValues.
     if (validate()) {
-      //alert("Form submit!");
+      // Form submit!
+      let emailTo = "william.luisi2477@gmail.com";
 
+      let emailCc;
+      // Use state values to determine the cc email recipient.
+      if (formValues.inPersonServices.length > 0) {
+        switch (formValues.inPersonServices) {
+          case "in-person-class-visit":
+            //emailCc = "schoolvisits@nypl.org";
+            emailCc = "williamluisi+school-visit@nypl.org";
+            break;
+          case "in-person-group-tour":
+            //emailCc = "outreach@nypl.org";
+            emailCc = "williamluisi+outeach@nypl.org";
+            break;
+          case "in-person-offsite":
+            //emailCc = "outreach@nypl.org";
+            emailCc = "williamluisi+outeach@nypl.org";
+            break;
+          case "in-person-community-partners":
+            //emailCc = "outreach@nypl.org";
+            emailCc = "williamluisi+outeach@nypl.org";
+            break;
+        }
+      }
       // Send email.
       const res = await fetch("/api/send-email", {
         body: JSON.stringify({
-          toEmail: "william.luisi2477@gmail.com",
+          emailTo: emailTo,
+          emailCc: emailCc,
           emailBody: formatRequestVisitEmail(formValues),
         }),
         headers: {
@@ -179,6 +203,7 @@ function RequestVisitForm() {
 
       // Redirect to confirmation page.
     } else {
+      // Form error!
       alert("Form error!");
     }
 
