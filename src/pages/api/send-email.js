@@ -1,7 +1,7 @@
 var nodemailer = require("nodemailer");
 var sgTransport = require("nodemailer-sendgrid-transport");
 const { SENDGRID_API_KEY } = process.env;
-
+// @TODO move this to .env variable?
 const ENABLE_EMAIL = 0;
 
 export default async (req, res) => {
@@ -34,17 +34,12 @@ export default async (req, res) => {
 
   if (ENABLE_EMAIL) {
     try {
-      // Load the environment variables.
-
-      // Debug
-      console.log(emailBody);
       await sendGridTransporter.sendMail(email);
 
       return res.status(201).json({
         status: "ok",
         data: {
           emailTo: emailTo,
-          //emailBody: emailBody,
         },
       });
     } catch (error) {
@@ -55,7 +50,6 @@ export default async (req, res) => {
       status: "ok",
       data: {
         emailTo: emailTo,
-        //emailBody: emailBody,
       },
     });
   }
