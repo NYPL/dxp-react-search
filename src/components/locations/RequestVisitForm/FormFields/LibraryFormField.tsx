@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 // Apollo
 import { useQuery, gql } from "@apollo/client";
 // Components
 import { Select } from "@nypl/design-system-react-components";
-import { FormField as FormFieldProps } from "../types";
+import { FormFieldProps } from "../types";
+import { FormContext } from "./../../../../context/FormContext";
 
 const LOCATIONS_QUERY = gql`
   query LocationsQuery(
@@ -31,18 +32,17 @@ const LOCATIONS_QUERY = gql`
   }
 `;
 
-function LibraryFormField({
-  formValues,
-  formErrors,
-  handleChange,
-}: FormFieldProps) {
+function LibraryFormField({ handleChange }: FormFieldProps) {
+  // @ts-ignore
+  const [state] = useContext(FormContext);
+  const { values, errors, touched, isSubmitted } = state;
+
   const { loading, error, data } = useQuery(LOCATIONS_QUERY, {
     variables: {
       contentType: "library",
       libraryType: ["hub", "neighborhood"],
       limit: 125,
       pageNumber: 1,
-      //sortBy: sortBy ? sortBy : null,
     },
   });
 
@@ -60,11 +60,11 @@ function LibraryFormField({
       id="request-visit-library-select"
       labelText="Please select a Library"
       onChange={handleChange}
-      selectedOption={formValues.library}
+      selectedOption={values.library}
       required
       showLabel
-      errorText={formErrors.library}
-      errored={formErrors.library ? true : false}
+      errorText={errors.library}
+      errored={errors.library ? true : false}
     >
       {data.allLocations.items.map((location: any) => (
         <option value={location.internalSlug}>{location.name}</option>

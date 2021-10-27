@@ -1,28 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 // Apollo
-import { useApolloClient, gql } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
+// @ts-ignore
+import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
 // Components
 import {
   Button,
-  Checkbox,
   Heading,
   HeadingDisplaySizes,
-  TextInput,
 } from "@nypl/design-system-react-components";
 import LibraryFormField from "./FormFields/LibraryFormField";
 import VisitTypeFormField from "./FormFields/VisitTypeFormField";
-import OrgFormFields from "./FormFields/OrgFormFields";
-import AgeGroupFormField from "./FormFields/AgeGroupFormFields";
-import {
-  FormErrors as FormErrorsType,
-  FormValues as FormValuesType,
-} from "./types";
+import OrgFormField from "./FormFields/OrgFormField";
+import AgeGroupFormField from "./FormFields/AgeGroupFormField";
+import ContactInfoFormField from "./FormFields/ContactInfoFormField";
 import formatRequestVisitEmail from "./../../../utils/formatRequestVisitEmail";
-// Next
 import { useRouter } from "next/router";
-// CSS
-import s from "./RequestVisitForm.module.css";
-
 import { FormContext } from "./../../../context/FormContext";
 // Form validation
 import * as yup from "yup";
@@ -30,14 +23,39 @@ import {
   checkValidation,
   runValidation,
 } from "./../../../utils/formValidation";
+import s from "./RequestVisitForm.module.css";
 
+/*
+    if (
+      formValues.virtualVisitServices.length === 0 &&
+      !formValues.virtualVisitServicesOther &&
+      formValues.inPersonServices.length === 0 &&
+      !formValues.inPersonServicesOther
+    ) {
+      errors.virtualVisitServices =
+        "Please select what services you would like to request";
+      errors.inPersonServices =
+        "Please select what services you would like to request";
+    }
+
+*/
+
+// @TODO Move this to a seperate file?
 const schema = yup.object().shape({
   library: yup.string().required("Please select a library for your visit."),
-  contactName: yup.string().required("Please enter your full name."),
-  contactEmail: yup
-    .string()
-    .email()
-    .required("Please enter your email address."),
+  visitType: yup.string().required("Visit type is required."),
+  virtualVisitServicesOther: yup.string(),
+  // @TODO clean this up maybe, logic seems insane?
+  virtualVisitServices: yup
+    .array()
+    .min(1, "Please select what services you would like to request")
+    .when("virtualVisitServicesOther", {
+      is: "",
+      then: yup
+        .array()
+        .min(1, "Please select what services you would like to request")
+        .required(),
+    }),
   organization: yup.string().when("noSchoolOrOrg", {
     is: false,
     then: yup.string().required("This field is required."),
@@ -47,6 +65,11 @@ const schema = yup.object().shape({
     .array()
     .min(1, "Please select your age group.")
     .required("Please select your age group."),
+  contactName: yup.string().required("Please enter your full name."),
+  contactEmail: yup
+    .string()
+    .email()
+    .required("Please enter your email address."),
 });
 
 function RequestVisitForm() {
@@ -57,6 +80,18 @@ function RequestVisitForm() {
   // Apollo.
   const client = useApolloClient();
   const router = useRouter();
+
+  // Set the selected library to query param on initial render.
+  useEffect(() => {
+    if (router.query.id) {
+      dispatch({
+        type: "SET_FORM_STATE",
+        payload: {
+          values: { ...state.values, library: router.query.id as string },
+        },
+      });
+    }
+  }, []);
 
   async function handleChange(event: any) {
     const name = event.target.name;
@@ -69,18 +104,19 @@ function RequestVisitForm() {
       value = !event.target.checked;
     }
 
-    const schemaErrors = await runValidation(schema, {
+    /*const schemaErrors = await runValidation(schema, {
       ...state.values,
       [name]: value,
     });
+    */
 
     dispatch({
       type: "SET_FORM_STATE",
       payload: {
-        errors: schemaErrors,
+        //errors: schemaErrors,
         values: { ...state.values, [name]: value },
         touched: { ...state.touched, [name]: true },
-        isValid: checkValidation(schemaErrors),
+        //isValid: checkValidation(schemaErrors),
       },
     });
   }
@@ -133,13 +169,15 @@ function RequestVisitForm() {
       console.log("Submit form!");
       const response = await locationEmailDataRequest(client);
       const emailTo = response.data?.allLocations?.items[0]?.email;
+      const locationInternalSlug =
+        response.data?.allLocations?.items[0]?.internalSlug;
 
       const sendEmailResponse = await fetch("/api/send-email", {
         body: JSON.stringify({
           emailTo: emailTo,
           emailCc: null,
-          //emailBody: formatRequestVisitEmail(values),
-          emailBody: "<div>TEST!</div>",
+          emailBody: formatRequestVisitEmail(values),
+          //emailBody: "<div>TEST!</div>",
         }),
         headers: {
           "Content-Type": "application/json",
@@ -154,6 +192,9 @@ function RequestVisitForm() {
       // Redirect to confirmation pg.
       router.push({
         pathname: `/locations/request-visit/confirmation`,
+        query: {
+          id: locationInternalSlug,
+        },
       });
     } else {
       console.log("Form error");
@@ -163,37 +204,11 @@ function RequestVisitForm() {
   }
 
   function locationEmailDataRequest(apolloClient: any) {
-    const LOCATION_EMAIL_QUERY = gql`
-      query LocationEmailQuery(
-        $internalSlug: [String]
-        $contentType: String
-        $limit: Int
-        $pageNumber: Int
-      ) {
-        allLocations(
-          contentType: $contentType
-          limit: $limit
-          pageNumber: $pageNumber
-          filter: { internalSlug: $internalSlug }
-        ) {
-          items {
-            id
-            name
-            internalSlug
-            email
-          }
-          pageInfo {
-            limit
-            totalItems
-          }
-        }
-      }
-    `;
     let internalSlugArray = [];
     internalSlugArray.push(values.library);
 
     return apolloClient.query({
-      query: LOCATION_EMAIL_QUERY,
+      query: LOCATION_BY_INTERNAL_SLUG,
       variables: {
         contentType: "library",
         limit: 1,
@@ -204,77 +219,29 @@ function RequestVisitForm() {
   }
 
   return (
-    <>
-      {isSubmitted &&
-        !state.isValid &&
-        Object.keys(state.errors).length > 0 && (
-          <div>
-            There was a problem with your submissions. Errors have been
-            highlighted below.
-          </div>
-        )}
-      <form className={s.requestAVisit} onSubmit={handleSubmit}>
-        <Heading
-          id="your-visit"
-          displaySize={HeadingDisplaySizes.Secondary}
-          level={2}
-          text="Your Visit"
-        />
-        <LibraryFormField
-          formValues={values}
-          formErrors={errors}
-          handleChange={handleChange}
-        />
-        <OrgFormFields
-          formValues={values}
-          formErrors={errors}
-          handleChange={handleChange}
-        />
-        <AgeGroupFormField
-          formValues={values}
-          formErrors={errors}
-          handleChangeCheckboxGroup={handleChangeCheckboxGroup}
-        />
-        <div className={s.contactInfo}>
-          <Heading
-            id="contact-info"
-            level={2}
-            text="Your Contact Information"
-          />
-          <TextInput
-            attributes={{
-              name: "contactName",
-              onBlur: handleChange,
-            }}
-            labelText="Name"
-            placeholder="Enter your name"
-            required={true}
-            errorText={touched.contactName && errors?.contactName}
-            errored={touched.contactName && errors.contactName ? true : false}
-            onChange={handleChange}
-            value={values.contactName}
-          />
-          <TextInput
-            attributes={{
-              name: "contactEmail",
-              onBlur: handleChange,
-            }}
-            labelText="Email"
-            placeholder="Enter your email"
-            required={true}
-            errorText={touched.contactEmail && errors?.contactEmail}
-            errored={touched.contactEmail && errors.contactEmail ? true : false}
-            onChange={handleChange}
-            value={values.contactEmai}
-          />
-        </div>
-        <Button type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
+    <form className={s.requestAVisit}>
+      <Heading
+        id="your-visit"
+        displaySize={HeadingDisplaySizes.Secondary}
+        level={2}
+        text="Your Visit"
+      />
+      <LibraryFormField handleChange={handleChange} />
+      <VisitTypeFormField
+        handleChange={handleChange}
+        handleChangeCheckboxGroup={handleChangeCheckboxGroup}
+      />
+      <OrgFormField handleChange={handleChange} />
+      <AgeGroupFormField
+        handleChangeCheckboxGroup={handleChangeCheckboxGroup}
+      />
+      <ContactInfoFormField handleChange={handleChange} />
+      <Button type="submit" onClick={handleSubmit}>
+        Submit
+      </Button>
 
-        <pre>{JSON.stringify(state, null, 2)}</pre>
-      </form>
-    </>
+      <pre>{JSON.stringify(state, null, 2)}</pre>
+    </form>
   );
 }
 

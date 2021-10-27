@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 // Components
 import {
   Checkbox,
@@ -8,7 +8,8 @@ import {
 } from "@nypl/design-system-react-components";
 // CSS
 import s from "./../RequestVisitForm.module.css";
-import { FormField as FormFieldProps } from "../types";
+import { FormFieldProps } from "../types";
+import { FormContext } from "./../../../../context/FormContext";
 
 const virtualServicesItems = [
   {
@@ -58,11 +59,13 @@ const inPersonItems = [
 ];
 
 function VisitTypeFormField({
-  formValues,
-  formErrors,
   handleChange,
-  handleCheckboxGroupChange,
+  handleChangeCheckboxGroup,
 }: FormFieldProps) {
+  // @ts-ignore
+  const [state] = useContext(FormContext);
+  const { values, errors, touched, isSubmitted } = state;
+
   return (
     <>
       <Select
@@ -70,11 +73,11 @@ function VisitTypeFormField({
         id="request-visit-select-type"
         labelText="Please select your visit type"
         onChange={handleChange}
-        selectedOption={formValues.visitType}
+        selectedOption={values.visitType}
         required
         showLabel
-        errorText={formErrors.visitType}
-        errored={formErrors.visitType !== undefined}
+        errorText={errors.visitType}
+        errored={errors.visitType !== undefined}
       >
         <option value="" disabled selected>
           -- Select visit type --
@@ -82,7 +85,7 @@ function VisitTypeFormField({
         <option value="virtual">Virtual Visit</option>
         <option value="in-person">In-Person Visit</option>
       </Select>
-      {formValues.visitType === "virtual" && (
+      {values.visitType === "virtual" && (
         <fieldset>
           <legend>
             What services would you like to include in your virtual visit?
@@ -93,16 +96,16 @@ function VisitTypeFormField({
                 labelText={virtualServiceItem.label}
                 name={virtualServiceItem.id}
                 onChange={(e) =>
-                  handleCheckboxGroupChange(
+                  handleChangeCheckboxGroup(
                     "virtualVisitServices",
                     e.target.name
                   )
                 }
-                checked={formValues.virtualVisitServices.includes(
+                checked={values.virtualVisitServices.includes(
                   virtualServiceItem.id
                 )}
                 showLabel
-                errored={formErrors.virtualVisitServices ? true : false}
+                errored={errors.virtualVisitServices ? true : false}
               />
               {virtualServiceItem.id === "services-other" && (
                 <TextInput
@@ -112,19 +115,19 @@ function VisitTypeFormField({
                   labelText="What other service would you like to receive?"
                   showLabel={false}
                   onChange={handleChange}
-                  value={formValues.virtualVisitServicesOther}
+                  value={values.virtualVisitServicesOther}
                   disabled={
-                    !formValues.virtualVisitServices.includes("services-other")
+                    !values.virtualVisitServices.includes("services-other")
                   }
-                  errored={formErrors.virtualVisitServices ? true : false}
-                  errorText={formErrors.virtualVisitServices}
+                  errored={errors.virtualVisitServices ? true : false}
+                  errorText={errors.virtualVisitServices}
                 />
               )}
             </div>
           ))}
         </fieldset>
       )}
-      {formValues.visitType === "in-person" && (
+      {values.visitType === "in-person" && (
         <fieldset>
           <legend>What would you like to request?</legend>
           {inPersonItems.map((inPersonItem) => (
@@ -136,7 +139,7 @@ function VisitTypeFormField({
                 helperText={inPersonItem.helperText}
                 showLabel
                 onChange={(e) => handleChange(e)}
-                errored={formErrors.inPersonServices ? true : false}
+                errored={errors.inPersonServices ? true : false}
               />
               {inPersonItem.id === "in-person-other" && (
                 <TextInput
@@ -146,10 +149,10 @@ function VisitTypeFormField({
                   labelText="Other request."
                   showLabel={false}
                   onChange={handleChange}
-                  value={formValues.inPersonServicesOther}
-                  disabled={formValues.inPersonServices !== "in-person-other"}
-                  errored={formErrors.inPersonServices ? true : false}
-                  errorText={formErrors.inPersonServices}
+                  value={values.inPersonServicesOther}
+                  disabled={values.inPersonServices !== "in-person-other"}
+                  errored={errors.inPersonServices ? true : false}
+                  errorText={errors.inPersonServices}
                 />
               )}
             </div>

@@ -33,10 +33,15 @@ export interface FormErrors {
   inPersonServicesOther?: string;
 }
 
-export interface InitialStateType {
+export interface FormState {
   values: FormValues;
   errors: FormErrors;
   touched: { [key: string]: boolean };
   isValid: boolean;
   isSumitted: boolean;
+}
+
+export interface FormFieldProps {
+  handleChange?: any;
+  handleChangeCheckboxGroup?: any;
 }

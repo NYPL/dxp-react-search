@@ -1,0 +1,25 @@
+query LocationByInternalSlugQuery(
+  $internalSlug: [String]
+  $contentType: String
+  $limit: Int
+  $pageNumber: Int
+) {
+  allLocations(
+    contentType: $contentType
+    limit: $limit
+    pageNumber: $pageNumber
+    filter: { internalSlug: $internalSlug }
+  ) {
+    items {
+      id
+      name
+      internalSlug
+      email
+      url
+    }
+    pageInfo {
+      limit
+      totalItems
+    }
+  }
+}

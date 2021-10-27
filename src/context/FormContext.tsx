@@ -1,9 +1,14 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { InitialStateType } from "./../components/locations/RequestVisitForm/types";
+import { FormState as InitialStateType } from "./../components/locations/RequestVisitForm/types";
 
 const initialState = {
   values: {
     library: "",
+    visitType: "",
+    virtualVisitServices: [],
+    virtualVisitServicesOther: "",
+    inPersonServices: "",
+    inPersonServicesOther: "",
     contactName: "",
     contactEmail: "",
     organization: "",

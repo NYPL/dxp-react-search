@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 // Components
 import { Checkbox } from "@nypl/design-system-react-components";
 // CSS
 import s from "./../RequestVisitForm.module.css";
-import { FormField as FormFieldProps } from "../types";
+import { FormFieldProps } from "../types";
+import { FormContext } from "./../../../../context/FormContext";
 
 const ageGroupItems = [
   {
@@ -20,11 +21,11 @@ const ageGroupItems = [
   },
 ];
 
-function AgeGroupFormField({
-  formValues,
-  formErrors,
-  handleChangeCheckboxGroup,
-}: FormFieldProps) {
+function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
+  // @ts-ignore
+  const [state] = useContext(FormContext);
+  const { values, errors, touched, isSubmitted } = state;
+
   return (
     <fieldset>
       <legend>What age or grade is your group?</legend>
@@ -37,19 +38,19 @@ function AgeGroupFormField({
               handleChangeCheckboxGroup("ageGroup", ageGroupItem.id)
             }
             // @ts-ignore
-            checked={formValues.ageGroup.includes(ageGroupItem.id)}
+            checked={values.ageGroup.includes(ageGroupItem.id)}
             showLabel
-            errored={formErrors.ageGroup ? true : false}
+            errored={errors.ageGroup ? true : false}
           />
         </div>
       ))}
-      {formErrors.ageGroup && (
+      {errors.ageGroup && (
         <div
           className="helper-text helper-text--error"
           aria-live="polite"
           aria-atomic="true"
         >
-          {formErrors.ageGroup}
+          {errors.ageGroup}
         </div>
       )}
     </fieldset>
