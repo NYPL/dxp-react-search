@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // Apollo
 import { useApolloClient, gql } from "@apollo/client";
 // Components
@@ -23,65 +23,42 @@ import { useRouter } from "next/router";
 // CSS
 import s from "./RequestVisitForm.module.css";
 
-const LOCATION_EMAIL_QUERY = gql`
-  query LocationEmailQuery(
-    $internalSlug: [String]
-    $contentType: String
-    $limit: Int
-    $pageNumber: Int
-  ) {
-    allLocations(
-      contentType: $contentType
-      limit: $limit
-      pageNumber: $pageNumber
-      filter: { internalSlug: $internalSlug }
-    ) {
-      items {
-        id
-        name
-        internalSlug
-        email
-      }
-      pageInfo {
-        limit
-        totalItems
-      }
-    }
-  }
-`;
+import { FormContext } from "./../../../context/FormContext";
+// Form validation
+import * as yup from "yup";
+import {
+  checkValidation,
+  runValidation,
+} from "./../../../utils/formValidation";
+
+const schema = yup.object().shape({
+  library: yup.string().required("Please select a library for your visit."),
+  contactName: yup.string().required("Please enter your full name."),
+  contactEmail: yup
+    .string()
+    .email()
+    .required("Please enter your email address."),
+  organization: yup.string().when("noSchoolOrOrg", {
+    is: false,
+    then: yup.string().required("This field is required."),
+  }),
+  noSchoolOrOrg: yup.boolean(),
+  ageGroup: yup
+    .array()
+    .min(1, "Please select your age group.")
+    .required("Please select your age group."),
+});
 
 function RequestVisitForm() {
-  const [formValues, setFormValues] = useState<FormValuesType>({
-    library: "",
-    visitType: "",
-    organization: "",
-    noSchoolOrOrg: false,
-    ageGroup: [],
-    contactName: "",
-    contactEmail: "",
-    virtualVisitServices: [],
-    virtualVisitServicesOther: "",
-    inPersonServices: "",
-    inPersonServicesOther: "",
-  });
-
-  const [formErrors, setFormErrors] = useState<FormErrorsType>({});
-
-  const router = useRouter();
-  // Set the selected library to query param on initial render.
-  useEffect(() => {
-    if (router.query.id) {
-      setFormValues({
-        ...formValues,
-        library: router.query.id as string,
-      });
-    }
-  }, []);
+  // @ts-ignore
+  const [state, dispatch] = useContext(FormContext);
+  const { values, errors, touched, isSubmitted } = state;
 
   // Apollo.
   const client = useApolloClient();
+  const router = useRouter();
 
-  function handleChange(event: any) {
+  async function handleChange(event: any) {
     const name = event.target.name;
     let value =
       event.target.type === "checkbox"
@@ -92,25 +69,29 @@ function RequestVisitForm() {
       value = !event.target.checked;
     }
 
-    setFormValues({
-      ...formValues,
+    const schemaErrors = await runValidation(schema, {
+      ...state.values,
       [name]: value,
     });
 
-    /*setFormErrors({
-      ...formErrors,
-      //[name]: [],
+    dispatch({
+      type: "SET_FORM_STATE",
+      payload: {
+        errors: schemaErrors,
+        values: { ...state.values, [name]: value },
+        touched: { ...state.touched, [name]: true },
+        isValid: checkValidation(schemaErrors),
+      },
     });
-    */
   }
 
-  function handleCheckboxGroupChange(parentId: string, itemId: string) {
+  async function handleChangeCheckboxGroup(parentId: string, itemId: string) {
     let items = [];
     // @ts-ignore
-    let itemExists = formValues[parentId].includes(itemId);
+    let itemExists = values[parentId].includes(itemId);
     // Make a copy of the existing array.
     // @ts-ignore
-    items = formValues[parentId].slice();
+    items = values[parentId].slice();
     // If item exists, remove it from the array.
     if (itemExists) {
       // @ts-ignore
@@ -120,205 +101,180 @@ function RequestVisitForm() {
       items.push(itemId);
     }
 
-    setFormValues({
-      ...formValues,
-      // @ts-ignore
-      ...formValues[parentId],
-      [parentId]: items,
+    dispatch({
+      type: "SET_FORM_STATE",
+      payload: {
+        //errors: schemaErrors,
+        values: { ...state.values, [parentId]: items },
+        touched: { ...state.touched /*[name]: true*/ },
+        //isValid: checkValidation(schemaErrors),
+      },
     });
   }
 
-  function validate() {
-    let errors = {} as FormErrorsType;
-
-    if (!formValues.library) {
-      errors.library = "Please select a library for your visit.";
-    }
-    if (!formValues.visitType) {
-      errors.visitType = "Visit type is required.";
-    }
-    if (
-      formValues.virtualVisitServices.length === 0 &&
-      !formValues.virtualVisitServicesOther &&
-      formValues.inPersonServices.length === 0 &&
-      !formValues.inPersonServicesOther
-    ) {
-      errors.virtualVisitServices =
-        "Please select what services you would like to request";
-      errors.inPersonServices =
-        "Please select what services you would like to request";
-    }
-    // Organization
-    if (!formValues.organization && !formValues.noSchoolOrOrg) {
-      errors.organization = "This field is required.";
-    }
-
-    if (formValues.ageGroup !== null && !formValues.ageGroup.length) {
-      errors.ageGroup = "Please select your age group.";
-    }
-    // Contact info
-    if (!formValues.contactName) {
-      errors.contactName = "Please enter your full name.";
-    }
-    if (!formValues.contactEmail) {
-      errors.contactEmail = "Please enter your email address.";
-    }
-
-    if (Object.keys(errors).length === 0) {
-      return true;
-    }
-
-    setFormErrors(errors);
-
-    return false;
-  }
-
-  function handleSubmit(event: any) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
-    // Check for any validation errors in the form errors formValues.
-    if (validate()) {
-      // Form submit!
-      let emailToTest;
-      // Run query to get email for selected location.
-      let internalSlugArray = [];
-      internalSlugArray.push(formValues.library);
+    // Run the form validation.
+    const schemaErrors = await runValidation(schema, {
+      ...state.values,
+    });
+    dispatch({
+      type: "SET_FORM_STATE",
+      payload: {
+        errors: schemaErrors,
+        values: { ...state.values },
+        touched: { ...state.touched },
+        isValid: checkValidation(schemaErrors),
+        isSubmitted: true,
+      },
+    });
 
-      client
-        .query({
-          query: LOCATION_EMAIL_QUERY,
-          variables: {
-            contentType: "library",
-            limit: 1,
-            pageNumber: 1,
-            internalSlug: internalSlugArray,
-          },
-        })
-        .then(
-          (response) => {
-            const location = response.data?.allLocations?.items[0];
-            const emailTo = location.email;
+    if (state.isValid) {
+      console.log("Submit form!");
+      const response = await locationEmailDataRequest(client);
+      const emailTo = response.data?.allLocations?.items[0]?.email;
 
-            let emailCc;
-            // Use state values to determine the cc email recipient.
-            if (formValues.inPersonServices.length > 0) {
-              switch (formValues.inPersonServices) {
-                case "in-person-class-visit":
-                  //emailCc = "schoolvisits@nypl.org";
-                  emailCc = "williamluisi+school-visit@nypl.org";
-                  break;
-                case "in-person-group-tour":
-                  //emailCc = "outreach@nypl.org";
-                  emailCc = "williamluisi+outeach@nypl.org";
-                  break;
-                case "in-person-offsite":
-                  //emailCc = "outreach@nypl.org";
-                  emailCc = "williamluisi+outeach@nypl.org";
-                  break;
-                case "in-person-community-partners":
-                  //emailCc = "outreach@nypl.org";
-                  emailCc = "williamluisi+outeach@nypl.org";
-                  break;
-              }
-            }
-            // Send email.
-            fetch("/api/send-email", {
-              body: JSON.stringify({
-                emailTo: emailTo,
-                emailCc: emailCc,
-                emailBody: formatRequestVisitEmail(formValues),
-              }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-              method: "POST",
-            }).then(
-              (response) => {
-                console.log(emailTo);
-                // Clear form state.
+      const sendEmailResponse = await fetch("/api/send-email", {
+        body: JSON.stringify({
+          emailTo: emailTo,
+          emailCc: null,
+          //emailBody: formatRequestVisitEmail(values),
+          emailBody: "<div>TEST!</div>",
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
 
-                // Redirect to confirmation pg.
-                router.push({
-                  pathname: `/locations/request-visit/confirmation`,
-                });
-              },
-              (error) => {
-                console.error(error);
-              }
-            );
-          },
-          (error) => {
-            //console.error(error);
-          }
-        );
+      if (!sendEmailResponse.ok) {
+        const message = `An error has occured: ${response.status}`;
+        throw new Error(message);
+      }
+      // Redirect to confirmation pg.
+      router.push({
+        pathname: `/locations/request-visit/confirmation`,
+      });
+    } else {
+      console.log("Form error");
     }
     // Scroll back to top after form submit.
     window.scrollTo(0, 0);
   }
 
-  return (
-    <form className={s.requestAVisit} onSubmit={handleSubmit}>
-      <Heading
-        id="your-visit"
-        displaySize={HeadingDisplaySizes.Secondary}
-        level={2}
-        text="Your Visit"
-      />
-      <LibraryFormField
-        formValues={formValues}
-        formErrors={formErrors}
-        handleChange={handleChange}
-      />
-      <VisitTypeFormField
-        formValues={formValues}
-        formErrors={formErrors}
-        handleChange={handleChange}
-        handleCheckboxGroupChange={handleCheckboxGroupChange}
-      />
-      <OrgFormFields
-        formValues={formValues}
-        formErrors={formErrors}
-        handleChange={handleChange}
-      />
-      <AgeGroupFormField
-        formValues={formValues}
-        formErrors={formErrors}
-        handleCheckboxGroupChange={handleCheckboxGroupChange}
-      />
-      <div className={s.contactInfo}>
-        <Heading id="contact-info" level={2} text="Your Contact Information" />
-        <TextInput
-          attributes={{
-            name: "contactName",
-          }}
-          labelText="Name"
-          placeholder="Enter your name"
-          required={true}
-          errorText={formErrors.contactName}
-          errored={formErrors.contactName ? true : false}
-          onChange={handleChange}
-          value={formValues.contactName}
-        />
-        <TextInput
-          attributes={{
-            name: "contactEmail",
-          }}
-          labelText="Email"
-          placeholder="Enter your email"
-          required={true}
-          errorText={formErrors.contactEmail}
-          errored={formErrors.contactEmail ? true : false}
-          onChange={handleChange}
-          value={formValues.contactEmail}
-        />
-      </div>
-      <Button type="submit" onClick={handleSubmit}>
-        Submit
-      </Button>
+  function locationEmailDataRequest(apolloClient: any) {
+    const LOCATION_EMAIL_QUERY = gql`
+      query LocationEmailQuery(
+        $internalSlug: [String]
+        $contentType: String
+        $limit: Int
+        $pageNumber: Int
+      ) {
+        allLocations(
+          contentType: $contentType
+          limit: $limit
+          pageNumber: $pageNumber
+          filter: { internalSlug: $internalSlug }
+        ) {
+          items {
+            id
+            name
+            internalSlug
+            email
+          }
+          pageInfo {
+            limit
+            totalItems
+          }
+        }
+      }
+    `;
+    let internalSlugArray = [];
+    internalSlugArray.push(values.library);
 
-      <pre>{JSON.stringify(formValues, null, 2)}</pre>
-      <pre>FormErrors State: {JSON.stringify(formErrors, null, 2)}</pre>
-      <pre>Form Errors Length: {Object.keys(formErrors).length}</pre>
-    </form>
+    return apolloClient.query({
+      query: LOCATION_EMAIL_QUERY,
+      variables: {
+        contentType: "library",
+        limit: 1,
+        pageNumber: 1,
+        internalSlug: internalSlugArray,
+      },
+    });
+  }
+
+  return (
+    <>
+      {isSubmitted &&
+        !state.isValid &&
+        Object.keys(state.errors).length > 0 && (
+          <div>
+            There was a problem with your submissions. Errors have been
+            highlighted below.
+          </div>
+        )}
+      <form className={s.requestAVisit} onSubmit={handleSubmit}>
+        <Heading
+          id="your-visit"
+          displaySize={HeadingDisplaySizes.Secondary}
+          level={2}
+          text="Your Visit"
+        />
+        <LibraryFormField
+          formValues={values}
+          formErrors={errors}
+          handleChange={handleChange}
+        />
+        <OrgFormFields
+          formValues={values}
+          formErrors={errors}
+          handleChange={handleChange}
+        />
+        <AgeGroupFormField
+          formValues={values}
+          formErrors={errors}
+          handleChangeCheckboxGroup={handleChangeCheckboxGroup}
+        />
+        <div className={s.contactInfo}>
+          <Heading
+            id="contact-info"
+            level={2}
+            text="Your Contact Information"
+          />
+          <TextInput
+            attributes={{
+              name: "contactName",
+              onBlur: handleChange,
+            }}
+            labelText="Name"
+            placeholder="Enter your name"
+            required={true}
+            errorText={touched.contactName && errors?.contactName}
+            errored={touched.contactName && errors.contactName ? true : false}
+            onChange={handleChange}
+            value={values.contactName}
+          />
+          <TextInput
+            attributes={{
+              name: "contactEmail",
+              onBlur: handleChange,
+            }}
+            labelText="Email"
+            placeholder="Enter your email"
+            required={true}
+            errorText={touched.contactEmail && errors?.contactEmail}
+            errored={touched.contactEmail && errors.contactEmail ? true : false}
+            onChange={handleChange}
+            value={values.contactEmai}
+          />
+        </div>
+        <Button type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+
+        <pre>{JSON.stringify(state, null, 2)}</pre>
+      </form>
+    </>
   );
 }
 

@@ -2,7 +2,7 @@ export interface FormField {
   formValues: FormValues;
   formErrors: FormErrors;
   handleChange?: any;
-  handleCheckboxGroupChange?: any;
+  handleChangeCheckboxGroup?: any;
 }
 
 export interface FormValues {
@@ -31,4 +31,12 @@ export interface FormErrors {
   virtualVisitServicesOther?: string;
   inPersonServices?: string;
   inPersonServicesOther?: string;
+}
+
+export interface InitialStateType {
+  values: FormValues;
+  errors: FormErrors;
+  touched: { [key: string]: boolean };
+  isValid: boolean;
+  isSumitted: boolean;
 }

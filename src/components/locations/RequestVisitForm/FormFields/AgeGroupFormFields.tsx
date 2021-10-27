@@ -23,7 +23,7 @@ const ageGroupItems = [
 function AgeGroupFormField({
   formValues,
   formErrors,
-  handleCheckboxGroupChange,
+  handleChangeCheckboxGroup,
 }: FormFieldProps) {
   return (
     <fieldset>
@@ -34,7 +34,7 @@ function AgeGroupFormField({
             labelText={ageGroupItem.label}
             name={ageGroupItem.id}
             onChange={(e) =>
-              handleCheckboxGroupChange("ageGroup", ageGroupItem.id)
+              handleChangeCheckboxGroup("ageGroup", ageGroupItem.id)
             }
             // @ts-ignore
             checked={formValues.ageGroup.includes(ageGroupItem.id)}
