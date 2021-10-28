@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Apollo
 import { withApollo } from "../../../apollo/client/withApollo";
 // Redux

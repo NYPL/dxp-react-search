@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import {
-  Heading,
   Notification,
   NotificationContent,
   NotificationTypes,
@@ -37,15 +36,3 @@ function RequestVisitFormError() {
 }
 
 export default RequestVisitFormError;
-
-/*
-      {isSubmitted &&
-        !state.isValid &&
-        Object.keys(state.errors).length > 0 && (
-          <div>
-            There was a problem with your submissions. Errors have been
-            highlighted below.
-          </div>
-        )}
-
-*/

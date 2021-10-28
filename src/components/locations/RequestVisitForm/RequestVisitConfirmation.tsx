@@ -10,7 +10,6 @@ import {
   Heading,
   Icon,
   IconNames,
-  IconRotationTypes,
   IconSizes,
   Link,
   LinkTypes,

@@ -198,9 +198,9 @@ function RequestVisitForm() {
       });
     } else {
       console.log("Form error");
+      // Scroll back to top after form submit.
+      window.scrollTo(0, 0);
     }
-    // Scroll back to top after form submit.
-    window.scrollTo(0, 0);
   }
 
   function locationEmailDataRequest(apolloClient: any) {
@@ -219,7 +219,7 @@ function RequestVisitForm() {
   }
 
   return (
-    <form className={s.requestAVisit}>
+    <form className={s.requestAVisit} onSubmit={handleSubmit} noValidate>
       <Heading
         id="your-visit"
         displaySize={HeadingDisplaySizes.Secondary}
@@ -236,9 +236,7 @@ function RequestVisitForm() {
         handleChangeCheckboxGroup={handleChangeCheckboxGroup}
       />
       <ContactInfoFormField handleChange={handleChange} />
-      <Button type="submit" onClick={handleSubmit}>
-        Submit
-      </Button>
+      <Button type="submit">Submit</Button>
 
       <pre>{JSON.stringify(state, null, 2)}</pre>
     </form>
