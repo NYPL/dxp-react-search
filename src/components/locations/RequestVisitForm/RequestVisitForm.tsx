@@ -154,6 +154,7 @@ function RequestVisitForm() {
     const schemaErrors = await runValidation(schema, {
       ...state.values,
     });
+
     dispatch({
       type: "SET_FORM_STATE",
       payload: {
@@ -165,8 +166,9 @@ function RequestVisitForm() {
       },
     });
 
-    if (state.isValid) {
-      console.log("Submit form!");
+    if (checkValidation(schemaErrors)) {
+      console.log("Form submit!");
+
       const response = await locationEmailDataRequest(client);
       const emailTo = response.data?.allLocations?.items[0]?.email;
       const locationInternalSlug =
