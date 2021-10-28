@@ -25,37 +25,28 @@ import {
 } from "./../../../utils/formValidation";
 import s from "./RequestVisitForm.module.css";
 
-/*
-    if (
-      formValues.virtualVisitServices.length === 0 &&
-      !formValues.virtualVisitServicesOther &&
-      formValues.inPersonServices.length === 0 &&
-      !formValues.inPersonServicesOther
-    ) {
-      errors.virtualVisitServices =
-        "Please select what services you would like to request";
-      errors.inPersonServices =
-        "Please select what services you would like to request";
-    }
-
-*/
-
 // @TODO Move this to a seperate file?
 const schema = yup.object().shape({
   library: yup.string().required("Please select a library for your visit."),
   visitType: yup.string().required("Visit type is required."),
   virtualVisitServicesOther: yup.string(),
-  // @TODO clean this up maybe, logic seems insane?
-  virtualVisitServices: yup
-    .array()
-    .min(1, "Please select what services you would like to request")
-    .when("virtualVisitServicesOther", {
-      is: "",
-      then: yup
-        .array()
-        .min(1, "Please select what services you would like to request")
-        .required(),
-    }),
+  virtualVisitServices: yup.array().when(["inPersonServices"], {
+    is: (inPersonServices: string) => inPersonServices === "",
+    then: yup
+      .array()
+      .min(1, "Please select what virtual services you would like to request.")
+      .required(),
+  }),
+  inPersonServicesOther: yup.string(),
+  inPersonServices: yup.string().when(["visitType", "inPersonServicesOther"], {
+    is: (visitType: string, inPersonServicesOther: string) =>
+      visitType === "in-person" && inPersonServicesOther === "",
+    then: yup
+      .string()
+      .required(
+        "Please select what in person services you would like to request."
+      ),
+  }),
   organization: yup.string().when("noSchoolOrOrg", {
     is: false,
     then: yup.string().required("This field is required."),
@@ -104,19 +95,11 @@ function RequestVisitForm() {
       value = !event.target.checked;
     }
 
-    /*const schemaErrors = await runValidation(schema, {
-      ...state.values,
-      [name]: value,
-    });
-    */
-
     dispatch({
       type: "SET_FORM_STATE",
       payload: {
-        //errors: schemaErrors,
         values: { ...state.values, [name]: value },
         touched: { ...state.touched, [name]: true },
-        //isValid: checkValidation(schemaErrors),
       },
     });
   }
@@ -140,10 +123,8 @@ function RequestVisitForm() {
     dispatch({
       type: "SET_FORM_STATE",
       payload: {
-        //errors: schemaErrors,
         values: { ...state.values, [parentId]: items },
-        touched: { ...state.touched /*[name]: true*/ },
-        //isValid: checkValidation(schemaErrors),
+        touched: { ...state.touched },
       },
     });
   }
@@ -173,13 +154,36 @@ function RequestVisitForm() {
       const emailTo = response.data?.allLocations?.items[0]?.email;
       const locationInternalSlug =
         response.data?.allLocations?.items[0]?.internalSlug;
+      // Email CC based on in person service choice.
+      let emailCc;
+      // Use state values to determine the cc email recipient.
+      // @TODO need to update these to use the actual email addresses.
+      if (values.inPersonServices.length > 0) {
+        switch (values.inPersonServices) {
+          case "in-person-class-visit":
+            //emailCc = "schoolvisits@nypl.org";
+            emailCc = "williamluisi+school-visit@nypl.org";
+            break;
+          case "in-person-group-tour":
+            //emailCc = "outreach@nypl.org";
+            emailCc = "williamluisi+outeach@nypl.org";
+            break;
+          case "in-person-offsite":
+            //emailCc = "outreach@nypl.org";
+            emailCc = "williamluisi+outeach@nypl.org";
+            break;
+          case "in-person-community-partners":
+            //emailCc = "outreach@nypl.org";
+            emailCc = "williamluisi+outeach@nypl.org";
+            break;
+        }
+      }
 
       const sendEmailResponse = await fetch("/api/send-email", {
         body: JSON.stringify({
           emailTo: emailTo,
-          emailCc: null,
+          emailCc: emailCc,
           emailBody: formatRequestVisitEmail(values),
-          //emailBody: "<div>TEST!</div>",
         }),
         headers: {
           "Content-Type": "application/json",

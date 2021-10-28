@@ -130,4 +130,122 @@ describe("Locations Local: Request a Visit", () => {
       name: /what school or organization are you with\?/i,
     }).should("be.disabled");
   });
+
+  //
+  it("Succesful submission of in-person visit type redirects user to confirmation pg.", () => {
+    cy.log("Select a library");
+    cy.findByRole("combobox", {
+      name: /please select a library/i,
+    })
+      .select("Bronx Library Center")
+      .should("have.value", "bronx-library-center");
+
+    cy.log("Select a visit type");
+    cy.findByRole("combobox", {
+      name: /please select your visit type/i,
+    })
+      .select("In-Person Visit")
+      .should("have.value", "in-person");
+
+    cy.log("Select in-person visit services");
+    cy.findByRole("radio", {
+      name: /group tour/i,
+    })
+      .click()
+      .should("be.checked");
+
+    cy.log("Enter organizaton name");
+    cy.findByRole("textbox", {
+      name: /what school or organization are you with\? required/i,
+    }).type("Columbia University");
+
+    cy.log("Select age level");
+    cy.findByRole("checkbox", {
+      name: /adults \(18\+\)/i,
+    })
+      .click()
+      .should("be.checked");
+
+    cy.log("Enter contact info");
+    cy.findByRole("textbox", {
+      name: /name/i,
+    }).type("George Costanza");
+    cy.findByRole("textbox", {
+      name: /email/i,
+    }).type("george@seinfeld.com");
+
+    cy.findByRole("button", {
+      name: /submit/i,
+    }).click();
+
+    // Check page redirect happens
+    cy.log("Redirected to confirmation page");
+    cy.location().should((loc) => {
+      expect(loc.search).to.eq(`?id=bronx-library-center`);
+      expect(loc.pathname).to.eq("/locations/request-visit/confirmation");
+    });
+    // Check confirmation page copy is correct.
+  });
+
+  it("Succesful submission of virtual visit type redirects user to confirmation pg.", () => {
+    cy.log("Select a library");
+    cy.findByRole("combobox", {
+      name: /please select a library/i,
+    })
+      .select("Bronx Library Center")
+      .should("have.value", "bronx-library-center");
+
+    cy.log("Select a visit type");
+    cy.findByRole("combobox", {
+      name: /please select your visit type/i,
+    })
+      .select("Virtual Visit")
+      .should("have.value", "virtual");
+
+    cy.log("Select virtual visit services");
+    cy.findByRole("checkbox", {
+      name: /introduction to the library/i,
+    })
+      .click()
+      .should("be.checked");
+
+    cy.log("Enter organizaton name");
+    cy.findByRole("textbox", {
+      name: /what school or organization are you with\? required/i,
+    }).type("Columbia University");
+
+    cy.log("Select age level");
+    cy.findByRole("checkbox", {
+      name: /adults \(18\+\)/i,
+    })
+      .click()
+      .should("be.checked");
+
+    cy.log("Enter contact info");
+    cy.findByRole("textbox", {
+      name: /name/i,
+    }).type("George Costanza");
+    cy.findByRole("textbox", {
+      name: /email/i,
+    }).type("george@seinfeld.com");
+
+    cy.findByRole("button", {
+      name: /submit/i,
+    }).click();
+
+    // Check page redirect happens
+    cy.log("Redirected to confirmation page");
+    cy.location().should((loc) => {
+      expect(loc.search).to.eq(`?id=bronx-library-center`);
+      expect(loc.pathname).to.eq("/locations/request-visit/confirmation");
+    });
+    // Check confirmation page copy is correct.
+    cy.log("Confirmation page message displays correctly");
+    cy.findByRole("heading", {
+      name: /thank you!/i,
+    });
+    cy.findByRole("link", {
+      name: /back to bronx library center/i,
+    });
+  });
 });

@@ -54,7 +54,7 @@ describe("Apollo states test", () => {
     );
 
     // Check for loading skeleton class
-    expect(container.getElementsByClassName("skeleton-loader").length).toBe(3);
+    expect(container.getElementsByClassName("skeleton-loader").length).toBe(1);
   });
 
   // Error state
