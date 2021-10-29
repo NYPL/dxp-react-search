@@ -52,6 +52,7 @@ module.exports = (nextConfig = {}) => {
       domains: [
         "qa-cdn-d8-2.nypl.org",
         "sandbox-d8.nypl.org",
+        "treasures-d8.nypl.org",
         "nyplorg-sandbox.s3.amazonaws.com",
         "localhost",
       ],

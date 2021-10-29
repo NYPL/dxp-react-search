@@ -11,4 +11,5 @@ export interface FilterBarGroupItem {
   label: string;
   type: string;
   limiter: string;
+  legacy?: boolean;
 }

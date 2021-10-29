@@ -27,7 +27,7 @@ describe("Articles & Databases pages with default query params", () => {
       .findByRole("button", { name: "Subjects (1)" })
       .click()
       .parent()
-      .findByRole("listbox")
+      .findByRole("dialog")
       .findByLabelText("Art")
       .should("be.checked");
   });
@@ -38,7 +38,7 @@ describe("Articles & Databases pages with default query params", () => {
       .findByRole("button", { name: "Subjects (2)" })
       .click()
       .parent()
-      .findByRole("listbox")
+      .findByRole("dialog")
       .findByLabelText("Art")
       .should("be.checked")
       .parent()
@@ -55,7 +55,7 @@ describe("Articles & Databases pages with default query params", () => {
       .findByRole("button", { name: "Audience (2)" })
       .click()
       .parent()
-      .findByRole("listbox")
+      .findByRole("dialog")
       .findByLabelText("Adults")
       .should("be.checked")
       .parent()
@@ -70,7 +70,7 @@ describe("Articles & Databases pages with default query params", () => {
       .findByRole("button", { name: "Audience (1)" })
       .click()
       .parent()
-      .findByRole("listbox")
+      .findByRole("dialog")
       .findByLabelText("Adults")
       .should("be.checked");
   });
@@ -81,7 +81,7 @@ describe("Articles & Databases pages with default query params", () => {
       .findByRole("button", { name: "Audience (1)" })
       .click()
       .parent()
-      .findByRole("listbox")
+      .findByRole("dialog")
       .parent()
       .findByRole("button", { name: "Clear" })
       .click()
@@ -101,7 +101,7 @@ describe("Articles & Databases pages with default query params", () => {
       .findByRole("button", { name: "Subjects (1)" })
       .click()
       .parent()
-      .findByRole("listbox")
+      .findByRole("dialog")
       .parent()
       .findByRole("button", { name: "Clear" })
       .click()

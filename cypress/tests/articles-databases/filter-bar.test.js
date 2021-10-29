@@ -12,8 +12,8 @@ describe("Articles & Databases Filter Bar", () => {
   });
 
   it("Checking two multiselect items updates query params correctly.", () => {
-    const items = ["Art", "Crafts"];
-    const queryParams = "subject=64+89";
+    const items = ["Art", "Design"];
+    const queryParams = "subject=64+94";
 
     cy.log("Open multiselect menu");
     cy.get("form").findByRole("button", { name: "Subjects" }).click();
@@ -21,7 +21,7 @@ describe("Articles & Databases Filter Bar", () => {
     items.map((item) => {
       cy.log("Select item from multiselect");
       cy.get("#multiselect-subject")
-        .findByRole("listbox")
+        .findByRole("dialog")
         .findByLabelText(item)
         .click()
         .should("be.checked");
@@ -47,7 +47,7 @@ describe("Articles & Databases Filter Bar", () => {
 
     cy.log("Select item from multiselect");
     cy.get("#multiselect-subject")
-      .findByRole("listbox")
+      .findByRole("dialog")
       .findByLabelText("Art")
       .click()
       .should("be.checked");
