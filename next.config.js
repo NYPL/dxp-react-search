@@ -14,21 +14,21 @@ module.exports = (nextConfig = {}) => {
       }
       return [];
     },
-    // @TODO Not sure we need this.
+    // Redirect blogs paths for now.
+    // @TODO Uncomment this before deploying LL work.
     /*async redirects() {
       return [
         {
-          source: '/collections/articles-databases/:slug',
-          destination: '/research/collections/online-resources/:slug',
+          source: "/blogs",
+          destination: "/",
           permanent: true,
         },
         {
-          source: '/collections/articles-databases',
-          destination: '/research/collections/online-resources',
+          source: "/blogs/:path*",
+          destination: "/",
           permanent: true,
         },
-        
-      ]
+      ];
     },
     */
     webpack(config, options) {
