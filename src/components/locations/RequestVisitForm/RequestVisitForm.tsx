@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 // Apollo
 import { useApolloClient } from "@apollo/client";
 // @ts-ignore

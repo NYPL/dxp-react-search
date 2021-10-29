@@ -1,5 +1,14 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { FormState as InitialStateType } from "./../components/locations/RequestVisitForm/types";
+import { FormState } from "./../components/locations/RequestVisitForm/types";
+
+enum FormContextActionType {
+  SET_FORM_STATE = "SET_FORM_STATE",
+}
+
+export interface FormContextAction {
+  type: FormContextActionType;
+  payload: FormState;
+}
 
 const initialState = {
   values: {
@@ -21,7 +30,7 @@ const initialState = {
   isSubmitted: false,
 };
 
-function reducer(state: InitialStateType, action: any) {
+function reducer(state: FormState, action: FormContextAction) {
   switch (action.type) {
     case "SET_FORM_STATE": {
       return {
@@ -49,7 +58,7 @@ function useFormContext() {
   return context;
 }
 
-function FormContextProvider(props: any) {
+function FormContextProvider(props: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
