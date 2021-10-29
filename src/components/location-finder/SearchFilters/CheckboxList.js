@@ -39,7 +39,7 @@ function CheckboxList(props) {
   }
 
   return (
-    <ul className="list list--no-list-styling" role="listbox">
+    <ul className="list list--no-list-styling" role="dialog">
       {vocab.terms.map((term) => {
         return (
           <li key={term.id} className={setParentClassName(term.children)}>

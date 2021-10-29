@@ -52,7 +52,7 @@ describe("Location Finder", () => {
       .findByLabelText("Subject Specialties")
       .click({ force: true })
       .closest("div")
-      .findByRole("listbox")
+      .findByRole("dialog")
       .findByLabelText("Art")
       .click()
       .should("be.checked");
