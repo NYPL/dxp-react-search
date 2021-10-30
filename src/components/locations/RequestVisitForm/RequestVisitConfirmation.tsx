@@ -51,7 +51,7 @@ function RequestVisitConfirmation() {
     <div>
       <Heading className="request-visit__header" level={2} text="Thank You!" />
       <p>
-        We've recieved your request and will get back to you within 48 hours.
+        We've receieved your request and will get back to you within 48 hours.
       </p>
       <Link type={LinkTypes.Action} href={locationUrl}>
         Back to {locationName}

@@ -3,7 +3,7 @@ export interface FormState {
   errors: FormErrors;
   touched: { [key: string]: boolean };
   isValid: boolean;
-  isSumitted?: boolean;
+  isSubmitted?: boolean;
 }
 
 export interface FormFieldProps {
