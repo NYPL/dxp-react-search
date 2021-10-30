@@ -151,7 +151,10 @@ function RequestVisitForm() {
       console.log("Form submit!");
 
       const response = await locationEmailDataRequest(client);
-      const emailTo = response.data?.allLocations?.items[0]?.email;
+      const emailAddress = response.data?.allLocations?.items[0]?.email;
+      const emailTo = emailAddress
+        ? emailAddress
+        : `williamluisi+fallback@nypl.org`;
       const locationInternalSlug =
         response.data?.allLocations?.items[0]?.internalSlug;
       // Email CC based on in person service choice.
