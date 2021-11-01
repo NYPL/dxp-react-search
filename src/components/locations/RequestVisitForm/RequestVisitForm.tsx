@@ -153,9 +153,7 @@ function RequestVisitForm() {
       const response = await locationEmailDataRequest(client);
       const emailAddress = response.data?.allLocations?.items[0]?.email;
       // @TODO Add a fallback email in case there is no email data set in CMS?
-      const emailTo = emailAddress
-        ? emailAddress
-        : `williamluisi+fallback@nypl.org`;
+      const emailTo = emailAddress ? emailAddress : `gethelp+fallback@nypl.org`;
       const locationInternalSlug =
         response.data?.allLocations?.items[0]?.internalSlug;
       // Email CC based on in person service choice.
