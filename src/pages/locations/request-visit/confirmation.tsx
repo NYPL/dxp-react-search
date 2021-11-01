@@ -16,7 +16,7 @@ function LocationsRequestVisitConfirmationPage() {
           <Heading
             className="request-visit__header"
             level={1}
-            text="Request a Group Visit"
+            text="Request a Class Visit or Group Tour"
           />
           <RequestVisitConfirmation />
         </>

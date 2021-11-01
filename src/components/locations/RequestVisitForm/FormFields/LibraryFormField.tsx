@@ -58,7 +58,7 @@ function LibraryFormField({ handleChange }: FormFieldProps) {
     <Select
       name="library"
       id="request-visit-library-select"
-      labelText="Please select a Library"
+      labelText="Please select a library"
       onChange={handleChange}
       selectedOption={values.library}
       required

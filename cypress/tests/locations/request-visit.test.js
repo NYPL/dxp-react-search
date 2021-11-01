@@ -9,7 +9,7 @@ describe("Locations Local: Request a Visit", () => {
   it("Load the request visit page.", () => {
     cy.findByRole("heading", {
       level: 1,
-      name: /request a group visit/i,
+      name: /request a class visit or group tour/i,
     }).should("exist");
   });
 
@@ -68,7 +68,7 @@ describe("Locations Local: Request a Visit", () => {
 
     cy.log("Select age level");
     cy.findByRole("checkbox", {
-      name: /adults \(18\+\)/i,
+      name: /adults/i,
     })
       .click()
       .should("be.checked");
@@ -161,7 +161,7 @@ describe("Locations Local: Request a Visit", () => {
 
     cy.log("Select age level");
     cy.findByRole("checkbox", {
-      name: /adults \(18\+\)/i,
+      name: /adults/i,
     })
       .click()
       .should("be.checked");
@@ -216,7 +216,7 @@ describe("Locations Local: Request a Visit", () => {
 
     cy.log("Select age level");
     cy.findByRole("checkbox", {
-      name: /adults \(18\+\)/i,
+      name: /adults/i,
     })
       .click()
       .should("be.checked");

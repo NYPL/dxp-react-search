@@ -19,12 +19,12 @@ function LocationsRequestVisitPage() {
           <Heading
             className="request-visit__header"
             level={1}
-            text="Request a Group Visit"
+            text="Request a Class Visit or Group Tour"
           />
           <p className="request-visit__description">
-            Volutpat tristique curabitur sapien non etiam fringilla magna luctus
-            eros, condimentum suscipit dictum nascetur ullamcorper purus nec
-            risus elit, eleifend mollis fames.
+            We welcome the opportunity to meet with your class or
+            group—virtually or in-person—to share information about the library
+            and its wide range of resources.
           </p>
           <RequestVisitForm />
         </>

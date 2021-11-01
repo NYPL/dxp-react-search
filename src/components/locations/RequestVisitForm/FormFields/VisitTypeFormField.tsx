@@ -23,7 +23,7 @@ const virtualServicesItems = [
   {
     id: "services-resources",
     label:
-      "Online Resource Instruction (Digital Collections, Research, Database, etc)",
+      "Online Resource Instruction (Articles & Databases, Digital Collections, etc.)",
   },
   {
     id: "services-other",
@@ -35,23 +35,25 @@ const inPersonItems = [
   {
     id: "in-person-class-visit",
     label: "Class Visit",
-    helperText: "Aptent congue tellus tincidunt torquent",
+    helperText: "General library orientation or a customized research lesson",
   },
   {
     id: "in-person-group-tour",
     label: "Group Tour",
-    helperText: "Aptent congue tellus tincidunt torquent",
+    helperText: "Guided exploration of the library and its resources",
   },
   {
     id: "in-person-offsite",
-    label: "Offsite Outreach",
-    helperText: "Aptent congue tellus tincidunt torquent",
+    label: "Offsite Community Outreach",
+    helperText:
+      "Invite library staff to share resources at your community event",
   },
-  {
+  /*{
     id: "in-person-community-partners",
     label: "Opportunities for Community Partners",
     helperText: "Aptent congue tellus tincidunt torquent",
   },
+  */
   {
     id: "in-person-other",
     label: "Other",

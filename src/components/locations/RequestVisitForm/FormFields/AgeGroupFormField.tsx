@@ -9,15 +9,15 @@ import { FormContext } from "./../../../../context/FormContext";
 const ageGroupItems = [
   {
     id: "age-children",
-    label: "Children (Pre-K to 5th Grade)",
+    label: "Kids",
   },
   {
     id: "age-teenagers",
-    label: "Teenagers (6th Grade to 12th Grade)",
+    label: "Teens",
   },
   {
     id: "age-adults",
-    label: "Adults (18+)",
+    label: "Adults",
   },
 ];
 
@@ -28,7 +28,7 @@ function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
 
   return (
     <fieldset>
-      <legend>What age or grade is your group?</legend>
+      <legend>What age range is your group?</legend>
       {ageGroupItems.map((ageGroupItem) => (
         <div className={s.checkBox}>
           <Checkbox
