@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 // Apollo
-import { useApolloClient } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 // @ts-ignore
 import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
 // Components
@@ -24,6 +24,18 @@ import {
   runValidation,
 } from "./../../../utils/formValidation";
 import s from "./RequestVisitForm.module.css";
+
+const SEND_EMAIL_MUTATION = gql`
+  mutation ($emailTo: String!, $emailCc: String, $emailBody: String) {
+    sendEmail(
+      input: { emailTo: $emailTo, emailCc: $emailCc, emailBody: $emailBody }
+    ) {
+      status
+      emailTo
+      emailCc
+    }
+  }
+`;
 
 // @TODO Move this to a seperate file?
 const schema = yup.object().shape({
@@ -71,6 +83,8 @@ function RequestVisitForm() {
   // Apollo.
   const client = useApolloClient();
   const router = useRouter();
+  const [sendEmailSubmission, { data, loading, error }] =
+    useMutation(SEND_EMAIL_MUTATION);
 
   // Set the selected library to query param on initial render.
   useEffect(() => {
@@ -148,7 +162,7 @@ function RequestVisitForm() {
     });
 
     if (checkValidation(schemaErrors)) {
-      console.log("Form submit!");
+      /*console.log("Form submit!");
 
       const response = await locationEmailDataRequest(client);
       const emailAddress = response.data?.allLocations?.items[0]?.email;
@@ -204,6 +218,30 @@ function RequestVisitForm() {
           id: locationInternalSlug,
         },
       });
+      */
+
+      const response = await locationEmailDataRequest(client);
+      const emailAddress = response.data?.allLocations?.items[0]?.email;
+      // @TODO Add a fallback email in case there is no email data set in CMS?
+      const emailTo = emailAddress ? emailAddress : `gethelp+fallback@nypl.org`;
+      const locationInternalSlug =
+        response.data?.allLocations?.items[0]?.internalSlug;
+
+      sendEmailSubmission({
+        variables: {
+          emailTo: "william.luisi2477@gmail.com",
+          emailCc: null,
+          emailBody: formatRequestVisitEmail(values),
+        },
+      });
+
+      // Redirect to confirmation pg.
+      router.push({
+        pathname: `/locations/request-visit/confirmation`,
+        query: {
+          id: locationInternalSlug,
+        },
+      });
     } else {
       console.log("Form error");
       // Scroll back to top after form submit.
@@ -225,6 +263,8 @@ function RequestVisitForm() {
       },
     });
   }
+
+  //if (loading) return "Submitting Form....";
 
   return (
     <form className={s.requestAVisit} onSubmit={handleSubmit} noValidate>
