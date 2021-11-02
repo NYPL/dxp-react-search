@@ -216,6 +216,62 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
+  // @TODO This will be removed when subjects taxonomy backend work is complete.
+  // /api/taxonomy-filters?vocab=audience_by_age
+  // /api/taxonomy-filters?vocab=subject&content_type=online_resource
+  async getAllFiltersByGroupIdLegacy(id, limiter) {
+    // Special handling for availability.
+    if (id === "availability") {
+      const availabilityFilterMock = {
+        data: {
+          id: "availability",
+          terms: [
+            {
+              uuid: "aa50711e-ad06-4451-bc59-ae9821681ee2",
+              tid: "no-restrictions",
+              name: "Available everywhere",
+              vid: null,
+              parent_tid: "virtual",
+              parent_uuid: "virtual",
+            },
+            {
+              uuid: "b820a733-80e8-462c-8922-1ddf99a4a5a0",
+              tid: "card-required",
+              name: "Offsite with Library Card",
+              vid: null,
+              parent_tid: "virtual",
+              parent_uuid: "virtual",
+            },
+            {
+              uuid: "3e7eba04-e788-4ad1-8380-392b6cf5ebe3",
+              tid: "on-site-only",
+              name: "On-Site Access Only",
+              vid: null,
+              parent_tid: "virtual",
+              parent_uuid: "virtual",
+            },
+          ],
+          total_items: 3,
+        },
+      };
+      return availabilityFilterMock;
+    }
+
+    let apiPath = `/api/taxonomy-filters?vocab=${id}`;
+
+    if (limiter) {
+      apiPath = `${apiPath}&content_type=${limiter}`;
+    }
+
+    const response = await this.get(apiPath);
+
+    if (Array.isArray(response.data.terms)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
   async getIpAccessCheck(clientIp) {
     const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
     if (response) {
@@ -313,6 +369,14 @@ class DrupalApi extends RESTDataSource {
     }
     if (filter && "featured" in filter && filter.featured !== null) {
       apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    }
+
+    // Internal slug
+    if (filter && "internalSlug" in filter && filter.internalSlug) {
+      apiPath = `${apiPath}&filter[internalSlug-filter][condition][path]=field_ts_slug&filter[internalSlug-filter][condition][operator]=IN`;
+      filter.internalSlug.map((item, index) => {
+        apiPath = `${apiPath}&filter[internalSlug-filter][condition][value][${index}]=${item}`;
+      });
     }
 
     // @TODO could convert this to reuseable function?

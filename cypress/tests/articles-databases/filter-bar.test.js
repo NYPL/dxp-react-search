@@ -3,18 +3,17 @@
 // If you're using ESLint on your project, we recommend installing the ESLint Cypress plugin instead:
 // https://github.com/cypress-io/eslint-plugin-cypress
 
-describe("Articles & Databases", () => {
+describe("Articles & Databases Filter Bar", () => {
   beforeEach(() => {
     cy.viewport(1024, 768);
-
     cy.visit(
       "http://localhost:3000/research/collections/articles-databases/search"
     );
   });
 
   it("Checking two multiselect items updates query params correctly.", () => {
-    const items = ["Art", "Crafts"];
-    const queryParams = "subject=64+89";
+    const items = ["Art", "Design"];
+    const queryParams = "subject=64+94";
 
     cy.log("Open multiselect menu");
     cy.get("form").findByRole("button", { name: "Subjects" }).click();
@@ -22,7 +21,7 @@ describe("Articles & Databases", () => {
     items.map((item) => {
       cy.log("Select item from multiselect");
       cy.get("#multiselect-subject")
-        .findByRole("listbox")
+        .findByRole("dialog")
         .findByLabelText(item)
         .click()
         .should("be.checked");
@@ -48,7 +47,7 @@ describe("Articles & Databases", () => {
 
     cy.log("Select item from multiselect");
     cy.get("#multiselect-subject")
-      .findByRole("listbox")
+      .findByRole("dialog")
       .findByLabelText("Art")
       .click()
       .should("be.checked");

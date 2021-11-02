@@ -8,7 +8,19 @@ export const typeDefs = gql`
     drupalInternalId: String
   }
 
+  type FilterItemLegacy {
+    id: ID!
+    name: String!
+    children: [FilterItemLegacy]
+    drupalInternalId: String
+  }
+
   extend type Query {
     allFiltersByGroupId(id: String, type: String, limiter: String): [FilterItem]
+    allFiltersByGroupIdLegacy(
+      id: String
+      type: String
+      limiter: String
+    ): [FilterItemLegacy]
   }
 `;

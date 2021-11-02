@@ -6,12 +6,9 @@ import { LocationsQuery as LOCATIONS_QUERY } from "./../../../apollo/client/quer
 import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "./../../../redux/actions";
 // Components
-import {
-  Icon,
-  Link,
-  SkeletonLoader,
-} from "@nypl/design-system-react-components";
+import { Icon, Link } from "@nypl/design-system-react-components";
 import Location from "./../Location";
+import LocationsSkeletonLoader from "./LocationsSkeletonLoader";
 import LocationsPagination from "./LocationsPagination";
 // Hooks
 import useWindowSize from "./../../../hooks/useWindowSize";
@@ -84,7 +81,7 @@ function Locations() {
 
   // Loading state,
   if (loading || !data) {
-    return <SkeletonLoader />;
+    return <LocationsSkeletonLoader />;
   }
 
   // No results.
@@ -93,8 +90,6 @@ function Locations() {
       <div className="no-results">Try adjusting search terms or filters.</div>
     );
   }
-
-  //return <LocationsSkeletonLoader />;
 
   return (
     <div className="locations__list-inner">

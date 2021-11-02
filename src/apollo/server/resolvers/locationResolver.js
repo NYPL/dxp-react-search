@@ -35,6 +35,7 @@ const locationResolver = {
     contentType: (location) => location.type,
     address: (location) => location.field_as_address,
     phone: (location) => location.field_tels_phone,
+    email: (location) => location.field_es_email,
     //parentLibraryName: (location) =>
   },
   Address: {

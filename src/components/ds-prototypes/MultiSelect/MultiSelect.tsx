@@ -181,7 +181,7 @@ function MultiSelect({
           />
         </button>
         <div className={`${s.menu} ${isOpen && s.active}`}>
-          <ul className={s.menuInner} role="listbox">
+          <ul className={s.menuInner} role="dialog">
             {isOpen &&
               items.map((item: MsItem) => (
                 <li

@@ -19,6 +19,19 @@ const FILTERS_QUERY = gql`
   }
 `;
 
+const FILTERS_QUERY_LEGACY = gql`
+  query MultiSelectQuery($id: String, $limiter: String) {
+    allFiltersByGroupIdLegacy(id: $id, limiter: $limiter) {
+      id
+      name
+      children {
+        id
+        name
+      }
+    }
+  }
+`;
+
 interface MutliSelectProps {
   id: string;
   label: string;
@@ -32,6 +45,7 @@ interface MutliSelectProps {
   selectedGroupIds: string[];
   showCtaButtons: boolean;
   handleChangeMixedStateCheckbox: any;
+  legacy?: boolean;
 }
 
 function MultiSelect({
@@ -47,10 +61,14 @@ function MultiSelect({
   selectedGroupIds,
   showCtaButtons,
   handleChangeMixedStateCheckbox,
+  legacy,
 }: MutliSelectProps) {
-  // Apollo
-  // Query for multi select data.
-  const { loading, error, data } = useQuery(FILTERS_QUERY, {
+  let FiltersQueryAll = FILTERS_QUERY;
+  if (legacy) {
+    FiltersQueryAll = FILTERS_QUERY_LEGACY;
+  }
+
+  const { loading, error, data } = useQuery(FiltersQueryAll, {
     variables: {
       id: id,
       type: type,
@@ -81,11 +99,16 @@ function MultiSelect({
     );
   }
 
+  let filterItemsData = data.allFiltersByGroupId;
+  if (legacy) {
+    filterItemsData = data.allFiltersByGroupIdLegacy;
+  }
+
   return (
     <DsMultiSelect
       id={id}
       label={label}
-      items={data.allFiltersByGroupId}
+      items={filterItemsData}
       handleOnSelectedItemChange={onSelectedItemChange}
       selectedItems={selectedItems}
       onClearMultiSelect={onClearMultiSelect}
