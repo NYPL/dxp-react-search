@@ -18,7 +18,7 @@ const nextConfig = {
     return [];
   },
   // Redirect blogs paths to / for now.
-  async redirects() {
+  /*async redirects() {
     return [
       {
         source: "/blogs",
@@ -32,6 +32,7 @@ const nextConfig = {
       },
     ];
   },
+  */
   webpack(config, options) {
     const { dir } = options;
     // Allows import of .gql files inside components
