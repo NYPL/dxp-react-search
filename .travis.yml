@@ -1,32 +1,25 @@
 language: node_js
-
 node_js:
-- 14
-
+  - 14
 services:
-- docker
-
+  - docker
 cache:
   directories:
-  - node_modules
-
+    - node_modules
 branches:
   only:
-  - qa
-  - production
-
+    - qa
+    - production
 env:
   global:
-  - REMOTE_IMAGE_URL_NYPL_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
-  - REMOTE_IMAGE_URL_NYPL=463786892988.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
-  - secure: XDvANpolEs/OcEBFESqyM5OCtjbGVfIrpYZbNquHFz0JzUHUMNbj5CHtKuhGGOex19B3XZeGnUGutLc/zZ9EH/q8gYKnksU1tUdLino7N7GR6JV7sbAiehsBsWIis3+4lS7Jf8LsuSr7tWf8HCMryUNuWXt3vVvq+cx+aQ5brCzdrW34uZJkp4arAEedkA6I/TDcwZpXxTJuU4/1qRad0A5jk3KZupBwZLzggZPA7oEGdpmZVfONBe4C3ZJ0BrrjFAoXhvIhPGkOOKKCn03pX28DnGHnDj79GbIXd6iZlLr701l4K31EmRvPBwRJ4npGRbIww36eeytNpaiOxzPKFA52GP8nv6mNOUJlcW5mayhTHAxgpvt4kRTF04MtN6NFahuFgyk0sNQiR+mctiejm7YsUQNjuTtxZ8DOUV7ZfUoH1Hw/0aHUYWdmtk38j2zXk7/Zdx9YyScc+om05pL3nqN69rgjnVhBQckOm0JHPWltaRidhEV5clv4Tx7DiQl0vH/tSkGE4K6xnzZxv0xEHZpg3xc1rVMHOb69SSkRqlMJn8KIkGVFO7Ic1hVpXyocM0Xa1eZDIZCLB3Oq6/F8OdUJZ37Ie8+pUZUhXcYTA+9gdm4w2TJnAEkhL4PhJYCUS+S1+IoU6TzuLIjATJrH0uhKoWvF6S7/MN9dD8lG+KU=
-
+    - REMOTE_IMAGE_URL_NYPL_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
+    - REMOTE_IMAGE_URL_NYPL=463786892988.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
+    - secure: XDvANpolEs/OcEBFESqyM5OCtjbGVfIrpYZbNquHFz0JzUHUMNbj5CHtKuhGGOex19B3XZeGnUGutLc/zZ9EH/q8gYKnksU1tUdLino7N7GR6JV7sbAiehsBsWIis3+4lS7Jf8LsuSr7tWf8HCMryUNuWXt3vVvq+cx+aQ5brCzdrW34uZJkp4arAEedkA6I/TDcwZpXxTJuU4/1qRad0A5jk3KZupBwZLzggZPA7oEGdpmZVfONBe4C3ZJ0BrrjFAoXhvIhPGkOOKKCn03pX28DnGHnDj79GbIXd6iZlLr701l4K31EmRvPBwRJ4npGRbIww36eeytNpaiOxzPKFA52GP8nv6mNOUJlcW5mayhTHAxgpvt4kRTF04MtN6NFahuFgyk0sNQiR+mctiejm7YsUQNjuTtxZ8DOUV7ZfUoH1Hw/0aHUYWdmtk38j2zXk7/Zdx9YyScc+om05pL3nqN69rgjnVhBQckOm0JHPWltaRidhEV5clv4Tx7DiQl0vH/tSkGE4K6xnzZxv0xEHZpg3xc1rVMHOb69SSkRqlMJn8KIkGVFO7Ic1hVpXyocM0Xa1eZDIZCLB3Oq6/F8OdUJZ37Ie8+pUZUhXcYTA+9gdm4w2TJnAEkhL4PhJYCUS+S1+IoU6TzuLIjATJrH0uhKoWvF6S7/MN9dD8lG+KU=
+    - secure: erEVl5q7AWsuY/CYy1K3qksJWcwnMJJf6tq6oVKgpMU+Ga4qSeouqNPqphs7Rgvrs7yBteAkUKkXxzm+MMcAXpv1kt4rMQZAZEs1x7TyXkmK54+RHBMi51eDb8tN8OeAmSCusUXSUB5+tKBz3uZAtoBcXVd6sMfYgt5i9OocCD/dFbssdNRrprNgkomjt4ay0FFzM2F9T4G9hwPBj8lpAileC4D5aA6FiekBBGA97yodaNCCa+Bt+tGsB+C0B0rCqpBBnJdtLgQ/M0xhVVr8TybCSljPcd0/SeTDRQs3dv7BFNnzPU1f9YcMp0GSRqK0TNx1E2SBrbesQvD1xYaJl/SPHaZkluT16kHNP9e8Z4hLmFUUW6+Vqw2aqI+nTedbsSr0BbAqxOlobqtYLTznHwHtEN+5a1bGreenWZ/ZmugSGCbRL3EguL09l37sEN3t1RZW8f9yRoTD57fI04Uii7KJ0+cq8sQTPzpdFk+odHnmrq2wwprPmMq2SoBXd8objbwbYHuVgjJHtBw4h3Tiij8f3IqZ7MKpe/VGwDUEPai8OmlsdR2tYy1sLMrYOuIzM6vIiFRWIGntZJdGIqcGBiOVbuAWd+MZtcAgqHuT+Eisw7JJ2UNGZZJqe2dpGiWzs2ZvrcBzBIigY10e1aunrhXpi1Riz2Z+wgFZ2uVGjmI=
 install: npm install
-
 before_script:
   - cp .travis/.env .
-  - ./provisioning/set-env
-
+  - "./provisioning/set-env"
 after_success:
   - echo 'All tests passed; Preparing to deploy'
-  - ./provisioning/deploy
+  - "./provisioning/deploy"
