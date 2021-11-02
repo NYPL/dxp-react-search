@@ -1,0 +1,35 @@
+@media (min-width: 960px) {
+  .requestAVisit {
+    width: 66%;
+  }
+}
+
+.requestAVisit h2 {
+  border-bottom: 1px solid var(--ui-gray-medium);
+  padding-bottom: var(--space-s);
+}
+
+.requestAVisit select {
+  margin-bottom: var(--space-m);
+}
+
+.requestAVisit fieldset {
+  border: none;
+  margin: 0 0 var(--space-m);
+  padding: 0;
+}
+
+.checkBox,
+.radio {
+  margin-bottom: var(--space-s);
+}
+
+.contactInfo,
+.schoolInfo {
+  margin-bottom: var(--space-m);
+}
+
+.other,
+.other ~ label {
+  margin-bottom: var(--space-s);
+}

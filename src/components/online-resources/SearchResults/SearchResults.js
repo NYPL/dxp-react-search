@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // Next
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 // Apollo
-import { useQuery, useApolloClient  } from '@apollo/client';
-import {
-  SearchDocumentQuery as SEARCH_RESULTS_QUERY
-} from './SearchDocumentQuery.gql';
-import {
-  LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY
-} from './LocationMatchesByIp.gql';
+import { useQuery, useApolloClient } from "@apollo/client";
+import { SearchDocumentQuery as SEARCH_RESULTS_QUERY } from "./SearchDocumentQuery.gql";
+import { LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY } from "./LocationMatchesByIp.gql";
 // Components
-import { Pagination } from '@nypl/design-system-react-components';
-import OnlineResourceCard from './../OnlineResourceCard';
-import AlphabetNav from './../AlphabetNav';
-import SearchResultsDetails from './SearchResultsDetails';
-import SearchResultsSkeleton from './SearchResultsSkeleton';
+import { Pagination } from "@nypl/design-system-react-components";
+import OnlineResourceCard from "./../OnlineResourceCard";
+import AlphabetNav from "./../AlphabetNav";
+import SearchResultsDetails from "./SearchResultsDetails";
+import SearchResultsSkeleton from "./SearchResultsSkeleton";
 //
-import s from './SearchResults.module.css';
+import s from "./SearchResults.module.css";
 
 const SEARCH_RESULTS_LIMIT = 10;
 
@@ -30,60 +26,66 @@ function SearchResults(props) {
   // Local state.
   const [ipInfo, setIpInfo] = useState();
   const [clientIpAddress, setClientIpAddress] = useState();
-  
+
   // Run a client query after page renders to ensure that the ip address
   // checking is not ssr, but from the client.
   useEffect(() => {
-    client.query({ 
-      query: LOCATION_MATCHES_BY_IP_QUERY,
-      variables: {
-        ip: router.query.test_ip ? router.query.test_ip : null
-      }
-    }).then(
-      response => {
-        setIpInfo(response.data ? response.data : null)
-        setClientIpAddress(response.data?.allLocationMatches?.pageInfo.clientIp);
-      },
-      error => {
-        //console.error(error);
-      }
-    );
+    client
+      .query({
+        query: LOCATION_MATCHES_BY_IP_QUERY,
+        variables: {
+          ip: router.query.test_ip ? router.query.test_ip : null,
+        },
+      })
+      .then(
+        (response) => {
+          setIpInfo(response.data ? response.data : null);
+          setClientIpAddress(
+            response.data?.allLocationMatches?.pageInfo.clientIp
+          );
+        },
+        (error) => {
+          //console.error(error);
+        }
+      );
   }, []);
-  
+
   // Query for data.
-  const { loading, error, data } = useQuery(
-    SEARCH_RESULTS_QUERY, {
-      variables: {
-        q: router.query.q ? router.query.q : '',
-        tid: resourceTopicId ? resourceTopicId : null,
-        alpha: router.query.alpha ? router.query.alpha : null,
-        subjects: router.query.subject ? router.query.subject.split(' ') : null,
-        audience_by_age: router.query.audience_by_age ? router.query.audience_by_age.split(' ') : null,
-        availability: router.query.availability ? router.query.availability.split(' ') : null,
-        limit: SEARCH_RESULTS_LIMIT,
-        pageNumber: currentPage
-      }
-    }
-  );
+  const { loading, error, data } = useQuery(SEARCH_RESULTS_QUERY, {
+    variables: {
+      q: router.query.q ? router.query.q : "",
+      tid: resourceTopicId ? resourceTopicId : null,
+      alpha: router.query.alpha ? router.query.alpha : null,
+      subjects: router.query.subject ? router.query.subject.split(" ") : null,
+      audience_by_age: router.query.audience_by_age
+        ? router.query.audience_by_age.split(" ")
+        : null,
+      availability: router.query.availability
+        ? router.query.availability.split(" ")
+        : null,
+      limit: SEARCH_RESULTS_LIMIT,
+      pageNumber: currentPage,
+    },
+  });
 
   // Error state.
   if (error) {
-    return (
-      <div>'error while loading search'</div>
-    );
+    return <div>'error while loading search'</div>;
   }
 
   // Loading state,
   if (loading || !data) {
     return (
       <div id="search-results">
-        {router.query.alpha &&
+        {router.query.alpha && (
           <AlphabetNav
             className={s.alphabetNav}
-            title={'A-Z Articles & Databases'}
-            description={'Browse resources and databases alphabetically by name'}
+            title={"A-Z Articles & Databases"}
+            description={
+              "Browse resources and databases alphabetically by name"
+            }
           />
-        }
+        )}
         <SearchResultsSkeleton />
         <div className={s.paginationContainer}>
           <Pagination
@@ -102,27 +104,27 @@ function SearchResults(props) {
     return (
       <>
         <SearchResultsDetails
-          label={'Search Results'}
+          label={"Search Results"}
           details={{
             currentPage: 1,
             itemsOnPage: 0,
             pageInfo: {
               limit: 0,
-              totalItems: 0
-            }
+              totalItems: 0,
+            },
           }}
         />
-        <div className='no-results'>Try adjusting search terms or filters.</div>
+        <div className="no-results">Try adjusting search terms or filters.</div>
       </>
     );
   }
 
   function getSearchResultsDetailsLabel() {
     // Handle the label for search results details.
-    let label = 'Search Results';
+    let label = "Search Results";
     if (router.query.alpha) {
-      if (router.query.alpha === 'all') {
-        label = 'All Results';
+      if (router.query.alpha === "all") {
+        label = "All Results";
       } else {
         label = router.query.alpha;
       }
@@ -138,49 +140,49 @@ function SearchResults(props) {
         q: router.query.q,
         page: pageIndex,
         ...(router.query.alpha && {
-          alpha: router.query.alpha
+          alpha: router.query.alpha,
         }),
         ...(router.query.subject && {
-          subject: router.query.subject
+          subject: router.query.subject,
         }),
         ...(router.query.audience_by_age && {
-          audience_by_age: router.query.audience_by_age
+          audience_by_age: router.query.audience_by_age,
         }),
         ...(router.query.availability && {
-          availability: router.query.availability
-        })
-      }
+          availability: router.query.availability,
+        }),
+      },
     });
 
-    document.getElementById('main-content').scrollIntoView();
+    document.getElementById("main-content").scrollIntoView();
   }
 
   return (
     <div id="search-results__container" className={s.container}>
-      {router.query.test_ip && clientIpAddress &&
+      {router.query.test_ip && clientIpAddress && (
         <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
-      }
-      {router.query.alpha &&
+      )}
+      {router.query.alpha && (
         <AlphabetNav
           className={s.alphabetNav}
-          title={'A-Z Articles & Databases'}
-          description={'Browse resources and databases alphabetically by name'}
+          title={"A-Z Articles & Databases"}
+          description={"Browse resources and databases alphabetically by name"}
         />
-      }
+      )}
       <SearchResultsDetails
         label={getSearchResultsDetailsLabel()}
         details={{
           currentPage: currentPage,
           itemsOnPage: data.allSearchDocuments.items.length,
-          pageInfo: data.allSearchDocuments.pageInfo
+          pageInfo: data.allSearchDocuments.pageInfo,
         }}
       />
       <div id="search-results">
-        {router.query.debug && clientIpAddress &&
+        {router.query.debug && clientIpAddress && (
           <div>
             <h3>IP Address: {clientIpAddress}</h3>
           </div>
-        }
+        )}
         {data.allSearchDocuments.items.map((item) => (
           <div key={item.id}>
             <OnlineResourceCard

@@ -1,18 +1,18 @@
 // DayJS
-const dayjs = require('dayjs');
+const dayjs = require("dayjs");
 // DayJS timezone
-var utc = require('dayjs/plugin/utc');
-var timezone = require('dayjs/plugin/timezone');
+var utc = require("dayjs/plugin/utc");
+var timezone = require("dayjs/plugin/timezone");
 dayjs.extend(utc);
 dayjs.extend(timezone);
 // Set default timezone.
-dayjs.tz.setDefault('America/New_York');
+dayjs.tz.setDefault("America/New_York");
 // Utils
-import { 
+import {
   ONLINE_RESOURCES_ALL_BRANCH_UUID,
-  ONLINE_RESOURCES_OFFSITE_UUID
-} from './../../../utils/config';
-import getRequestIp from './../../../utils/getRequestIp';
+  ONLINE_RESOURCES_OFFSITE_UUID,
+} from "./../../../utils/config";
+import getRequestIp from "./../../../utils/getRequestIp";
 // Env vars
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -31,13 +31,15 @@ const searchResolver = {
         items: response.results,
         pageInfo: {
           totalItems: response.results.length ? response.pager.count : 0,
-          limit: response.results.length ? response.pager.items_per_page: 0,
-          pageNumber: response.results.length ? response.pager.current_page + 1 : 0,
+          limit: response.results.length ? response.pager.items_per_page : 0,
+          pageNumber: response.results.length
+            ? response.pager.current_page + 1
+            : 0,
           pageCount: response.results.length ? response.pager.pages : 0,
           timestamp: now,
-          clientIp: clientIp
-        }
-      }
+          clientIp: clientIp,
+        },
+      };
     },
     searchDocument: async (parent, args, { dataSources }) => {
       const response = await dataSources.drupalApi.getSearchDocument(args);
@@ -48,57 +50,59 @@ const searchResolver = {
     __resolveType(document, context, info) {
       // @TODO
       // For now, just return the single search document type we have.
-      return 'OnlineResourceDocument';
-    }
+      return "OnlineResourceDocument";
+    },
   },
   OnlineResourceDocument: {
-    id: document => document.uuid,
-    name: document => document.title.replace("&#039;", "'"),
-    description: document => document.summary,
-    slug: document => document.path,
-    mostPopular: document => document['most-popular'],
-    accessibilityLink: document => document['accessibility-details']?.url,
-    termsConditionsLink: document => document['terms-link']?.url,
-    privacyPolicyLink: document => document['privacy-link']?.url,
-    notes: document => document['comments-public'],
-    language: document => document['resource-language'],
-    subjects: document => document.subjects.length ? document.subjects : null,
-    accessibleFrom: document => {
-      return document['accessible-from'].length ? 
-        document['accessible-from'] : null
+    id: (document) => document.uuid,
+    name: (document) => document.title.replace("&#039;", "'"),
+    description: (document) => document.summary,
+    slug: (document) => document.path,
+    mostPopular: (document) => document["most-popular"],
+    accessibilityLink: (document) => document["accessibility-details"]?.url,
+    termsConditionsLink: (document) => document["terms-link"]?.url,
+    privacyPolicyLink: (document) => document["privacy-link"]?.url,
+    notes: (document) => document["comments-public"],
+    language: (document) => document["resource-language"],
+    subjects: (document) =>
+      document.subjects.length ? document.subjects : null,
+    accessibleFrom: (document) => {
+      return document["accessible-from"].length
+        ? document["accessible-from"]
+        : null;
     },
-    accessLocations: document => {
-      const accessLocations = document['access-locations'];      
-      if (document['accessible-from'].includes('onsite')) {
+    accessLocations: (document) => {
+      const accessLocations = document["access-locations"];
+      if (document["accessible-from"].includes("onsite")) {
         accessLocations.unshift({
           uuid: ONLINE_RESOURCES_ALL_BRANCH_UUID,
           title: "All Branch Libraries",
-          url: '#',
+          url: "#",
           // @TODO do you use this?
-          drupalInternalValue: document['accessible-from']
+          drupalInternalValue: document["accessible-from"],
         });
       }
       return accessLocations;
     },
-    resourceUrl: document => {
+    resourceUrl: (document) => {
       // Defaults to main url.
-      let resourceUrl = document['main-url']?.url;
+      let resourceUrl = document["main-url"]?.url;
       if (
-        document['accessible-from'].includes('onsite')
-        && document['onsite-branch-url'] !== null
+        document["accessible-from"].includes("onsite") &&
+        document["onsite-branch-url"] !== null
       ) {
-        resourceUrl = document['onsite-branch-url'].url;
+        resourceUrl = document["onsite-branch-url"].url;
       } else if (
-        document['accessible-from'].includes('offsite')
-        && document['offsite-url'] !== null
+        document["accessible-from"].includes("offsite") &&
+        document["offsite-url"] !== null
       ) {
-        resourceUrl = document['offsite-url'].url;
+        resourceUrl = document["offsite-url"].url;
       }
       return resourceUrl;
     },
     isCoreResource: (parent, args, context, info) => {
       const subjectsFromQueryParams = info.variableValues.subjects;
-      const recommendedSubjects = parent['recommended-subjects'];
+      const recommendedSubjects = parent["recommended-subjects"];
       let isCoreResource = false;
       // No query params for subjects, so return false.
       if (subjectsFromQueryParams === null) {
@@ -106,68 +110,71 @@ const searchResolver = {
       }
       // Build an array of recommended subject ids.
       let recommendedSubjectsArray = [];
-      recommendedSubjects?.map(recommendedSubject => {
+      recommendedSubjects?.map((recommendedSubject) => {
         recommendedSubjectsArray.push(recommendedSubject.id);
       });
       // Check for any matches.
-      const coreResourceMatch = subjectsFromQueryParams
-        .filter(e => recommendedSubjectsArray.includes(e));
-      
+      const coreResourceMatch = subjectsFromQueryParams.filter((e) =>
+        recommendedSubjectsArray.includes(e)
+      );
+
       if (coreResourceMatch.length) {
         isCoreResource = true;
       }
       return isCoreResource;
     },
-    isFreeResource: document => document['is-free-resource'],
-    authenticationType: document => {
-      if (document['authentication-type'] === 'none') {
+    isFreeResource: (document) => document["is-free-resource"],
+    authenticationType: (document) => {
+      if (document["authentication-type"] === "none") {
         return null;
       } else {
-        return document['authentication-type'];
+        return document["authentication-type"];
       }
     },
-    availabilityStatus: document => {
+    availabilityStatus: (document) => {
       let availabilityStatus;
       if (
-        document['authentication-type'] === 'vendor'
-        || document['authentication-type'] === "nypl"
-        || document['authentication-type'] === 'ezproxy'
+        document["authentication-type"] === "vendor" ||
+        document["authentication-type"] === "nypl" ||
+        document["authentication-type"] === "ezproxy"
       ) {
-        availabilityStatus = 'card_required';
+        availabilityStatus = "card_required";
       }
-      if (!document['accessible-from'].includes('offsite')) {
-        availabilityStatus = 'onsite_only';
+      if (!document["accessible-from"].includes("offsite")) {
+        availabilityStatus = "onsite_only";
       }
 
       return availabilityStatus;
-    }
+    },
   },
   Subject: {
-    id: subject => subject.uuid,
-    name: subject => subject.title
+    id: (subject) => subject.uuid,
+    name: (subject) => subject.title,
   },
   AccessLocation: {
-    id: accessLocation => accessLocation.uuid,
-    name: accessLocation => accessLocation.title,
-    url: accessLocation => {
+    id: (accessLocation) => accessLocation.uuid,
+    name: (accessLocation) => accessLocation.title,
+    url: (accessLocation) => {
       let accessLocationUrl = accessLocation.url;
       if (accessLocation?.url) {
         const baseDomains = [
-          'http://localhost:8080',
-          'http://sandbox-d8.nypl.org',
-          'http://qa-d8.nypl.org',
-          'http://d8.nypl.org'
+          "http://localhost:8080",
+          "http://sandbox-d8.nypl.org",
+          "http://qa-d8.nypl.org",
+          "http://d8.nypl.org",
         ];
-        baseDomains.forEach(baseDomain => {
+        baseDomains.forEach((baseDomain) => {
           if (accessLocation.url.includes(baseDomain)) {
-            accessLocationUrl = accessLocation.url
-              .replace(baseDomain, NEXT_PUBLIC_NYPL_DOMAIN);
+            accessLocationUrl = accessLocation.url.replace(
+              baseDomain,
+              NEXT_PUBLIC_NYPL_DOMAIN
+            );
           }
         });
       }
       return accessLocationUrl;
-    }
-  }
-}
+    },
+  },
+};
 
 export default searchResolver;

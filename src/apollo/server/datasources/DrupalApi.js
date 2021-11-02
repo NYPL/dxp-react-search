@@ -1,14 +1,16 @@
-import { HTTPCache, RESTDataSource } from 'apollo-datasource-rest';
+import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 const { DRUPAL_API } = process.env;
 
 class DrupalApi extends RESTDataSource {
   constructor() {
     super();
+    // Temporary hard-code d9 backend for tugboat.
+    //this.baseURL = "https://sandbox-d8.nypl.org";
     this.baseURL = DRUPAL_API;
   }
 
   /**
-   * Fixes 304 not modified issue when Drupal's page cache is enabled. 
+   * Fixes 304 not modified issue when Drupal's page cache is enabled.
    * This essentially disables the RESTDataSource cacheing of remote
    * api endpoints responses, which is not really necessary anyway, since
    * Apollo client cache (in memory) is already doing the heavy lifting.
@@ -20,63 +22,20 @@ class DrupalApi extends RESTDataSource {
 
   // D8 api is a json api, which datasource-rest does not handle by default.
   parseBody(response) {
-    if (response.headers.get('Content-Type').includes('json')) {
+    if (response.headers.get("Content-Type").includes("json")) {
       return response.json();
     } else {
       return response.text();
     }
   }
 
-  async getAllResourceTopics() {
-    const apiPath = `/jsonapi/taxonomy_term/resource_topic?sort=weight&include=field_ers_image.field_media_image`;
-    const response = await this.get(apiPath);
-
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
-  async getResourceTopic(args) {   
-    const response = await this.get(`/jsonapi/taxonomy_term/resource_topic/${args.slug}?include=field_ers_image.field_media_image`);
-    if ('data' in response) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
-  async getAllOnlineResources(args) {
-    let apiPath = `/jsonapi/node/online_resource`;
-    
-    // Most popular filter.
-    if (
-      args.filter
-      && 'mostPopular' in args.filter
-    ) {
-      apiPath = `${apiPath}?filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular&page[limit]=3`;
-    }
-    
-    // @TODO Add Limit?
-
-    const response = await this.get(apiPath);
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
+  // Search/Solr.
   async getAllSearchDocuments(args) {
-    let apiPath = '/api/search-online-resources';
+    let apiPath = "/api/search-online-resources";
 
     // Filter by q.
     // /api/search-online-resources?sq=jstor
-    if (
-      args.filter
-      && 'q' in args.filter
-    ) {
+    if (args.filter && "q" in args.filter) {
       apiPath = `${apiPath}?sq=${encodeURIComponent(args.filter.q)}`;
     }
 
@@ -85,7 +44,7 @@ class DrupalApi extends RESTDataSource {
     if (args.limit && args.pageNumber !== null) {
       // Drupal solr wrapper uses 0 as page 1, so we adjust that here.
       const pageNumber = args.pageNumber - 1;
-      
+
       apiPath = `${apiPath}&items_per_page=${args.limit}&page=${pageNumber}`;
     } else {
       apiPath = `${apiPath}&items_per_page=10&page=0`;
@@ -93,35 +52,23 @@ class DrupalApi extends RESTDataSource {
 
     // Resource topic filter
     // /api/search-online-resources?resource-topics[]=522
-    if (
-      args.filter
-      && 'tid' in args.filter
-      && args.filter.tid
-    ) {
+    if (args.filter && "tid" in args.filter && args.filter.tid) {
       apiPath = `/api/search-online-resources?resource-topics[]=${args.filter.tid}`;
     }
 
     // Alpha filter
     // /api/search-online-resources?alpha=M
-    if (
-      args.filter
-      && 'alpha' in args.filter
-      && args.filter.alpha
-    ) {
+    if (args.filter && "alpha" in args.filter && args.filter.alpha) {
       // Only add query params if a letter, not all.
-      if (args.filter.alpha !== 'all') {
+      if (args.filter.alpha !== "all") {
         apiPath = `${apiPath}&alpha=${args.filter.alpha}`;
-      } 
+      }
     }
 
     // Subjects
     // subjects[]=123&subjects[]=556
-    if (
-      args.filter
-      && 'subjects' in args.filter
-      && args.filter.subjects
-    ) {
-      args.filter.subjects.map(subject => {
+    if (args.filter && "subjects" in args.filter && args.filter.subjects) {
+      args.filter.subjects.map((subject) => {
         apiPath = `${apiPath}&subjects[]=${subject}`;
       });
     }
@@ -129,28 +76,28 @@ class DrupalApi extends RESTDataSource {
     // Audience
     // audience_age[]=123
     if (
-      args.filter
-      && 'audience_by_age' in args.filter
-      && args.filter.audience_by_age
+      args.filter &&
+      "audience_by_age" in args.filter &&
+      args.filter.audience_by_age
     ) {
-      args.filter.audience_by_age.map(audienceItem => {
+      args.filter.audience_by_age.map((audienceItem) => {
         apiPath = `${apiPath}&audience[]=${audienceItem}`;
       });
     }
 
     // Availability
     if (
-      args.filter
-      && 'availability' in args.filter
-      && args.filter.availability
+      args.filter &&
+      "availability" in args.filter &&
+      args.filter.availability
     ) {
-      if (args.filter.availability.includes('no-restrictions')) {
+      if (args.filter.availability.includes("no-restrictions")) {
         apiPath = `${apiPath}&accessible-from[]=offsite&authentication-type[]=none`;
       }
-      if (args.filter.availability.includes('card-required')) {
+      if (args.filter.availability.includes("card-required")) {
         apiPath = `${apiPath}&accessible-from[]=offsite&authentication-type[]=nypl&authentication-type[]=vendor&authentication-type[]=ezproxy`;
       }
-      if (args.filter.availability.includes('on-site-only')) {
+      if (args.filter.availability.includes("on-site-only")) {
         apiPath = `${apiPath}&accessible-from-not[]=offsite`;
       }
     }
@@ -164,8 +111,10 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getSearchDocument(args) {    
-    const response = await this.get(`/api/search-online-resources?uuid=${args.id}`);
+  async getSearchDocument(args) {
+    const response = await this.get(
+      `/api/search-online-resources?uuid=${args.id}`
+    );
     return response.results;
   }
 
@@ -187,72 +136,348 @@ class DrupalApi extends RESTDataSource {
     return response;
   }
 
-  async getAutoSuggestions(args) {   
+  async getAutoSuggestions(args) {
     const response = await this.get(`/api/search-online-resources-autosuggest`);
     return response.results;
   }
-  
-  //
-  // /api/taxonomy-filters?vocab=audience_by_age
-  // /api/taxonomy-filters?vocab=subject&content_type=online_resource
-  async getAllFiltersByGroupId(args) {    
+
+  // /jsonapi/taxonomy_term/subject?fields[taxonomy_term--subject]=name,drupal_internal__tid,vid,uuid,parent&page[limit]=200&jsonapi_include=1
+  async getAllFiltersByGroupId(id, type, limiter) {
     // Special handling for availability.
-    if (args.id === 'availability') {
+    if (id === "availability") {
       const availabilityFilterMock = {
-        data: {
-          id: 'availability',
-          terms: [
-            {
-              uuid: 'aa50711e-ad06-4451-bc59-ae9821681ee2',
-              tid: 'no-restrictions',
-              name: 'Available everywhere',
-              vid: null,
-              parent_tid: 'virtual',
-              parent_uuid: 'virtual'
-            },
-            {
-              uuid: 'b820a733-80e8-462c-8922-1ddf99a4a5a0',
-              tid: 'card-required',
-              name: 'Offsite with Library Card',
-              vid: null,
-              parent_tid: 'virtual',
-              parent_uuid: 'virtual'
-            },
-            {
-              uuid: '3e7eba04-e788-4ad1-8380-392b6cf5ebe3',
-              tid: 'on-site-only',
-              name: 'On-Site Access Only',
-              vid: null,
-              parent_tid: 'virtual',
-              parent_uuid: 'virtual'
-            }
-          ],
-          total_items: 3
-        }
+        data: [
+          {
+            id: "aa50711e-ad06-4451-bc59-ae9821681ee2",
+            drupal_internal__tid: "no-restrictions",
+            name: "Available everywhere",
+            vid: null,
+            parent: [
+              {
+                id: "virtual",
+                meta: {
+                  drupal_internal__target_id: "virtual",
+                },
+              },
+            ],
+          },
+          {
+            id: "b820a733-80e8-462c-8922-1ddf99a4a5a0",
+            drupal_internal__tid: "card-required",
+            name: "Offsite with Library Card",
+            vid: null,
+            parent: [
+              {
+                id: "virtual",
+                meta: {
+                  drupal_internal__target_id: "virtual",
+                },
+              },
+            ],
+          },
+          {
+            id: "3e7eba04-e788-4ad1-8380-392b6cf5ebe3",
+            drupal_internal__tid: "on-site-only",
+            name: "On-Site Access Only",
+            vid: null,
+            parent: [
+              {
+                id: "virtual",
+                meta: {
+                  drupal_internal__target_id: "virtual",
+                },
+              },
+            ],
+          },
+        ],
       };
       return availabilityFilterMock;
     }
 
-    let apiPath = `/api/taxonomy-filters?vocab=${args.id}`;
+    let apiPath;
+    if (type === "taxonomy") {
+      apiPath = `/jsonapi/taxonomy_term/${id}?jsonapi_include=1&fields[taxonomy_term--${id}]=name,drupal_internal__tid,vid,uuid,parent&page[limit]=200`;
 
-    if (args.limiter) {
-      apiPath = `${apiPath}&content_type=${args.limiter}`;
+      if (limiter) {
+        apiPath = `${apiPath}&filter[field_lts_content_type]=${limiter}`;
+      }
     }
-    
+
+    if (type === "content") {
+      apiPath = `jsonapi/node/${id}?jsonapi_include=1&fields[node--${id}]=title,drupal_internal__nid&page[limit]=200&&sort[sort-title][path]=title&sort[sort-title][direction]=ASC`;
+    }
+
     const response = await this.get(apiPath);
-  
+
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  // @TODO This will be removed when subjects taxonomy backend work is complete.
+  // /api/taxonomy-filters?vocab=audience_by_age
+  // /api/taxonomy-filters?vocab=subject&content_type=online_resource
+  async getAllFiltersByGroupIdLegacy(id, limiter) {
+    // Special handling for availability.
+    if (id === "availability") {
+      const availabilityFilterMock = {
+        data: {
+          id: "availability",
+          terms: [
+            {
+              uuid: "aa50711e-ad06-4451-bc59-ae9821681ee2",
+              tid: "no-restrictions",
+              name: "Available everywhere",
+              vid: null,
+              parent_tid: "virtual",
+              parent_uuid: "virtual",
+            },
+            {
+              uuid: "b820a733-80e8-462c-8922-1ddf99a4a5a0",
+              tid: "card-required",
+              name: "Offsite with Library Card",
+              vid: null,
+              parent_tid: "virtual",
+              parent_uuid: "virtual",
+            },
+            {
+              uuid: "3e7eba04-e788-4ad1-8380-392b6cf5ebe3",
+              tid: "on-site-only",
+              name: "On-Site Access Only",
+              vid: null,
+              parent_tid: "virtual",
+              parent_uuid: "virtual",
+            },
+          ],
+          total_items: 3,
+        },
+      };
+      return availabilityFilterMock;
+    }
+
+    let apiPath = `/api/taxonomy-filters?vocab=${id}`;
+
+    if (limiter) {
+      apiPath = `${apiPath}&content_type=${limiter}`;
+    }
+
+    const response = await this.get(apiPath);
+
     if (Array.isArray(response.data.terms)) {
       return response;
     } else {
       return [];
     }
   }
-  
+
   async getIpAccessCheck(clientIp) {
     const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
     if (response) {
       return response;
     }
+  }
+
+  async getAllTermsByVocabulary(
+    vocab,
+    sortBy,
+    limit,
+    featured,
+    limiter,
+    queryFields
+  ) {
+    let apiPath = `/jsonapi/taxonomy_term/${vocab}?jsonapi_include=1`;
+    // Temp workaround for only adding include if image is in gql query.
+    if ("image" in queryFields) {
+      apiPath = `${apiPath}&include=field_ers_image.field_media_image`;
+    }
+    if (featured) {
+      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    }
+    if (sortBy) {
+      apiPath = `${apiPath}&sort=${sortBy}`;
+    }
+    if (limit) {
+      apiPath = `${apiPath}&page[offset]=0&page[limit]=${limit}`;
+    }
+    if (limiter) {
+      apiPath = `${apiPath}&filter[field_lts_content_type]=${limiter}`;
+    }
+
+    const response = await this.get(apiPath);
+
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  async getTermBySlug(slug, vocabulary) {
+    // @TODO this won't always have an image?
+    const response = await this.get(
+      `/jsonapi/taxonomy_term/${vocabulary}/${slug}?include=field_ers_image.field_media_image&jsonapi_include=1`
+    );
+    if ("data" in response) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  // @TODO add featured, and also pass query fields.
+  async getAllNodesByContentType(
+    contentType,
+    limit,
+    pageNumber,
+    filter,
+    sortBy,
+    queryFields
+  ) {
+    let apiPath = `/jsonapi/node/${contentType}?jsonapi_include=1`;
+
+    // Check for fields to include.
+    let includeFields = [];
+    if ("image" in queryFields.items) {
+      includeFields.push("field_ers_media_image.field_media_image");
+    }
+    if ("locations" in queryFields.items) {
+      includeFields.push("field_erm_location");
+    }
+    if (includeFields.length) {
+      apiPath = `${apiPath}&include=${includeFields.join(",")}`;
+    }
+
+    // Pagination.
+    if (limit && pageNumber) {
+      // Calculate offset
+      let offset = 0;
+      if (pageNumber === 2) {
+        offset = limit;
+      } else {
+        offset = limit * (pageNumber - 1);
+      }
+      apiPath = `${apiPath}&page[offset]=${offset}&page[limit]=${limit}`;
+
+      //console.log(pageNumber);
+      //console.log(`offset: ${offset}`);
+    }
+
+    if (filter && "mostPopular" in filter) {
+      apiPath = `${apiPath}&filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular`;
+    }
+    if (filter && "featured" in filter && filter.featured !== null) {
+      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    }
+
+    // Internal slug
+    if (filter && "internalSlug" in filter && filter.internalSlug) {
+      apiPath = `${apiPath}&filter[internalSlug-filter][condition][path]=field_ts_slug&filter[internalSlug-filter][condition][operator]=IN`;
+      filter.internalSlug.map((item, index) => {
+        apiPath = `${apiPath}&filter[internalSlug-filter][condition][value][${index}]=${item}`;
+      });
+    }
+
+    // @TODO could convert this to reuseable function?
+    // Channels filter.
+    if (filter && "channels" in filter && filter.channels) {
+      filter.channels.map((channel) => {
+        const filters = this.filterMultiValueEntityRef(
+          channel,
+          "field_erm_channels"
+        );
+        apiPath = `${apiPath}&${filters}`;
+      });
+    }
+    // Subjects filter.
+    if (filter && "subjects" in filter && filter.subjects) {
+      filter.subjects.map((subject) => {
+        const filters = this.filterMultiValueEntityRef(
+          subject,
+          "field_erm_subjects"
+        );
+        apiPath = `${apiPath}&${filters}`;
+      });
+    }
+    // Libraries filter.
+    if (filter && "libraries" in filter && filter.libraries) {
+      filter.libraries.map((library) => {
+        const filters = this.filterMultiValueEntityRef(
+          library,
+          "field_erm_location"
+        );
+        apiPath = `${apiPath}&${filters}`;
+      });
+    }
+    // Divisions filter.
+    if (filter && "divisions" in filter && filter.divisions) {
+      filter.divisions.map((division) => {
+        const filters = this.filterMultiValueEntityRef(
+          division,
+          "field_erm_divisions"
+        );
+        apiPath = `${apiPath}&${filters}`;
+      });
+    }
+
+    // Location specific
+    if (filter && "libraryType" in filter && filter.libraryType) {
+      apiPath = `${apiPath}&filter[libtype-filter][condition][path]=field_ts_library_type&filter[libtype-filter][condition][operator]=IN`;
+      filter.libraryType.map((item, index) => {
+        apiPath = `${apiPath}&filter[libtype-filter][condition][value][${index}]=${item}`;
+      });
+
+      // @TODO fix this to use better sortBy
+      apiPath = `${apiPath}&sort[sort-title][path]=title&sort[sort-title][direction]=ASC`;
+    }
+
+    //
+    if (sortBy) {
+      apiPath = `${apiPath}&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`;
+    }
+
+    const response = await this.get(apiPath);
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  // Helper methods.
+
+  /*
+    Build filters for multi value entity reference filters.
+    @see https://www.drupal.org/project/drupal/issues/3066202#comment-13181270
+  */
+  filterMultiValueEntityRef(item, fieldName) {
+    const groupName = `${fieldName}-${item}-and`;
+    const filterName = `${fieldName}-${item}`;
+    const conditionPath = `${fieldName}.meta.drupal_internal__target_id`;
+    // Query param parts.
+    const filterConjunction = `filter[${groupName}][group][conjunction]=AND`;
+    const filterConditionValue = `filter[${filterName}][condition][value]=${item}`;
+    const filterConditionPath = `filter[${filterName}][condition][path]=${conditionPath}`;
+    const filterConditionMemberOf = `filter[${filterName}][condition][memberOf]=${groupName}`;
+    return `${filterConjunction}&${filterConditionValue}&${filterConditionPath}&${filterConditionMemberOf}`;
+  }
+
+  // @TODO add this as a seperate method so it can be tested more easily.
+  buildJsonApiPath(
+    contentType,
+    limit,
+    pageNumber,
+    filter,
+    sortBy,
+    queryFields
+  ) {
+    let apiPath = `/jsonapi/node/${contentType}?jsonapi_include=1`;
+    // Featured
+    if (filter && "featured" in filter && filter.featured !== null) {
+      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    }
+    return apiPath;
   }
 }
 

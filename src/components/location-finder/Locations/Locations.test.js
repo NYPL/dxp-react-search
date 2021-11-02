@@ -1,16 +1,14 @@
-import { MockedProvider } from '@apollo/client/testing';
+import { MockedProvider } from "@apollo/client/testing";
 import { cleanup, screen, waitFor } from "@testing-library/react";
-import { render } from './../../../../testHelper/customRtlRender';
-import '@testing-library/jest-dom/extend-expect';
-import { GraphQLError } from 'graphql';
-import Locations from './Locations';
-import { 
-  LocationsQuery as LOCATIONS_QUERY 
-} from './../../../apollo/client/queries/Locations.gql';
+import { render } from "./../../../../testHelper/customRtlRender";
+import "@testing-library/jest-dom/extend-expect";
+import { GraphQLError } from "graphql";
+import Locations from "./Locations";
+import { LocationsQuery as LOCATIONS_QUERY } from "./../../../apollo/client/queries/Locations.gql";
 // Mock data
-import allLocations from './../../../../testHelper/__mocks/allLocations';
+import allLocations from "./../../../../testHelper/__mocks/allLocations";
 // Axe
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe, toHaveNoViolations } from "jest-axe";
 expect.extend(toHaveNoViolations);
 
 const mocks = [
@@ -20,20 +18,20 @@ const mocks = [
       variables: {
         searchGeoLat: null,
         searchGeoLng: null,
-        searchQuery: '',
+        searchQuery: "",
         openNow: true,
         limit: 300,
         offset: 0,
         pageNumber: 1,
-        termIds: []
+        termIds: [],
       },
     },
-    result: allLocations
+    result: allLocations,
   },
 ];
 
 const search = {
-  searchQuery: '',
+  searchQuery: "",
   searchQueryGeoLat: null,
   searchQueryGeoLng: null,
   openNow: true,
@@ -41,14 +39,14 @@ const search = {
   offset: 0,
   pageNumber: 1,
   pageCount: 1,
-  searchFilters: []
-}
+  searchFilters: [],
+};
 
 afterEach(cleanup);
 
-describe('Apollo states test', () => {
+describe("Apollo states test", () => {
   // Test loading
-  it('renders loading state without error', () => {
+  it("renders loading state without error", () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <Locations />
@@ -56,11 +54,11 @@ describe('Apollo states test', () => {
     );
 
     // Check for loading skeleton class
-    expect(container.getElementsByClassName('skeleton-loader').length).toBe(1);
+    expect(container.getElementsByClassName("skeleton-loader").length).toBe(3);
   });
 
   // Error state
-  it('renders error state', async () => {
+  it("renders error state", async () => {
     const errorMocks = [
       {
         request: {
@@ -68,16 +66,16 @@ describe('Apollo states test', () => {
           variables: {
             searchGeoLat: null,
             searchGeoLng: null,
-            searchQuery: '',
+            searchQuery: "",
             openNow: true,
             limit: 300,
             offset: 0,
             pageNumber: 1,
-            termIds: []
+            termIds: [],
           },
         },
         result: {
-          errors: [new GraphQLError('Error!')],
+          errors: [new GraphQLError("Error!")],
         },
       },
     ];
@@ -92,11 +90,13 @@ describe('Apollo states test', () => {
     // Wait for content
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
     // Check for error message
-    expect(screen.getByText(/error while loading locations/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/error while loading locations/)
+    ).toBeInTheDocument();
   });
 
   // Final state
-  it('renders final state without errors', async () => {
+  it("renders final state without errors", async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <Locations />
@@ -105,14 +105,14 @@ describe('Apollo states test', () => {
     );
 
     // Wait for content
-    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 4)));    
+    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 4)));
     // Check for data
     expect(screen.getByText(/125th Street Library/)).toBeInTheDocument();
     expect(screen.getByText(/53rd Street Library/)).toBeInTheDocument();
   });
 
   // Accessbiility tests.
-  it('should not have basic accessibility issues', async () => {
+  it("should not have basic accessibility issues", async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <Locations />

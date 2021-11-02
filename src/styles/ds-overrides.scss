@@ -4,7 +4,7 @@
     display: flex;
     flex-flow: wrap;
   }
-  
+
   // @TODO DS overide
   input[type="text"] {
     margin-bottom: 0;
@@ -35,7 +35,7 @@
     .open-now {
       margin-left: 1em;
     }
-    
+
     @include breakpoint($breakpoint-medium) {
       .open-now {
         margin: initial;
@@ -73,8 +73,35 @@
   overflow-x: hidden;
 }
 
+/* TEST */
+.image-container {
+  width: 100%;
+
+  > div {
+    position: unset !important;
+  }
+
+  .image {
+    object-fit: contain;
+    position: relative !important;
+    width: 100% !important;
+    height: unset !important;
+  }
+}
 // @TODO Hack to hide pagination prev or next if disabled.
 .nypl--research .pagination__item .pagination__link.disabled {
   display: none;
   visibility: hidden;
+}
+
+.nypl--articles .breadcrumbs {
+  background-color: #bdbdbd;
+
+  .breadcrumbs__link,
+  .breadcrumbs__link:link,
+  .breadcrumbs__link:visited,
+  .breadcrumbs__link:focus,
+  .breadcrumbs__item:not(:last-child)::after {
+    color: #000;
+  }
 }

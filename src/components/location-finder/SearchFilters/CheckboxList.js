@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 // Components
-import { Checkbox, List } from '@nypl/design-system-react-components';
+import { Checkbox, List } from "@nypl/design-system-react-components";
 // Context
-import { SearchFiltersContext } from './SearchFiltersContext';
+import { SearchFiltersContext } from "./SearchFiltersContext";
 
 function CheckboxList(props) {
   const [state, dispatch] = useContext(SearchFiltersContext);
@@ -12,35 +12,34 @@ function CheckboxList(props) {
   function onChangeFilters(vocabId, event) {
     const selectedItemId = event.target.id;
     dispatch({
-      type: 'SET_SELECTED_ITEMS',
-      payload: { 
+      type: "SET_SELECTED_ITEMS",
+      payload: {
         selectedItemId: selectedItemId,
-        parentId: vocabId
-      }
+        parentId: vocabId,
+      },
     });
   }
 
   function setFilterCheckedProp(vocabId, termId) {
     let filterChecked = false;
     if (checkedTerms[vocabId] !== undefined) {
-      filterChecked = checkedTerms[vocabId].terms.find((filter) => filter === termId) 
+      filterChecked = checkedTerms[vocabId].terms.find(
+        (filter) => filter === termId
+      );
     }
     return filterChecked;
   }
 
   function setParentClassName(children) {
-    let className = 'term';
+    let className = "term";
     if (children) {
-      className = 'term hasChildren';
+      className = "term hasChildren";
     }
     return className;
   }
 
   return (
-    <List 
-      type='ul' 
-      modifiers={['no-list-styling']}
-    >
+    <ul className="list list--no-list-styling" role="dialog">
       {vocab.terms.map((term) => {
         return (
           <li key={term.id} className={setParentClassName(term.children)}>
@@ -54,34 +53,34 @@ function CheckboxList(props) {
                 onChange={(e) => onChangeFilters(vocab.id, e)}
               />
             </div>
-              {term.children &&
-                <List 
-                  type='ul' 
-                  modifiers={['no-list-styling']}
-                >
-                  {term.children.map((childTerm) => {
-                    return (
-                      <li key={childTerm.id} className="term-child">
-                        <div className="checkbox">
-                          <Checkbox
-                            id={childTerm.id}
-                            labelText={<>{childTerm.name}</>}
-                            showLabel={true}
-                            name={childTerm.name}
-                            checked={setFilterCheckedProp(vocab.id, childTerm.id) || false}
-                            onChange={(e) => onChangeFilters(vocab.id, e)}
-                          />
-                        </div>
-                      </li>
-                    )
-                  })}
-                </List>
-              }
+            {term.children && (
+              <List type="ul" modifiers={["no-list-styling"]}>
+                {term.children.map((childTerm) => {
+                  return (
+                    <li key={childTerm.id} className="term-child">
+                      <div className="checkbox">
+                        <Checkbox
+                          id={childTerm.id}
+                          labelText={<>{childTerm.name}</>}
+                          showLabel={true}
+                          name={childTerm.name}
+                          checked={
+                            setFilterCheckedProp(vocab.id, childTerm.id) ||
+                            false
+                          }
+                          onChange={(e) => onChangeFilters(vocab.id, e)}
+                        />
+                      </div>
+                    </li>
+                  );
+                })}
+              </List>
+            )}
           </li>
         );
       })}
-    </List>
-  )
+    </ul>
+  );
 }
 
 export default CheckboxList;

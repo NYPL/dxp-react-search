@@ -1,52 +1,62 @@
-// Utils
-import setNestedTerms from './../../../utils/setNestedTerms';
-import getSubjectsAllowList from './../../../utils/getSubjectsAllowList';
-import { SUBJECTS_UUID } from './../../../utils/setTermsFilter';
+const graphqlFields = require("graphql-fields");
 
 const termResolver = {
   Query: {
-    allTerms: async (parent, args, { dataSources }) => {
-      const allTerms = await dataSources.refineryApi.getAllTerms();
-      // Get the terms tree from all Divisions.
-      const subjectsAllowList = getSubjectsAllowList(allTerms.divisions);
-      // Replace subject terms with the allow list terms.
-      allTerms.searchFilters.map(filterGroup => {
-        if (filterGroup.uuid === SUBJECTS_UUID) {
-          return filterGroup.terms.splice(
-            0, 
-            filterGroup.terms.length, 
-            ...subjectsAllowList
-          );
-        } else {
-          return filterGroup.terms
-        }
-      });
-
-      return allTerms.searchFilters;
+    allTermsByVocab: async (parent, args, { dataSources }, info) => {
+      const response = await dataSources.drupalApi.getAllTermsByVocabulary(
+        args.vocabulary,
+        args.sortBy,
+        args.limit,
+        args.featured,
+        args.limiter,
+        graphqlFields(info)
+      );
+      return response.data;
     },
-  },
-  Vocab: {
-    id: vocab => {
-      return vocab.uuid;
+    termBySlug: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getTermBySlug(
+        args.slug,
+        args.vocabulary
+      );
+      return response.data;
     },
-    name: vocab => {
-      return vocab.name;
-    },
-    terms: vocab => {
-      return setNestedTerms(vocab.terms);
-    }
   },
   Term: {
-    id: term => {
-      return term.uuid;
+    id: (term) => term.id,
+    tid: (term) => term.drupal_internal__tid,
+    title: (term) => term.name,
+    description: (term) => term.description?.processed,
+    image: (term) =>
+      term.field_ers_image.data !== null
+        ? term.field_ers_image.field_media_image
+        : null,
+    slug: (term) => term.path.alias,
+  },
+  // @TODO this should just use a util function that handles all images.
+  Image: {
+    id: (image) => image.id,
+    alt: (image) => "test",
+    uri: (image) => {
+      if (image.uri.url && image.uri.url.includes("sites/default")) {
+        return `http://localhost:8080${image.uri.url}`;
+      } else {
+        return image.uri.url;
+      }
     },
-    name: term => {
-      return term.name;
+    transformations: (image) => {
+      let transformations = [];
+      image.image_style_uri.forEach((imageStyle) => {
+        for (const [label, uri] of Object.entries(imageStyle)) {
+          transformations.push({
+            id: `${image.id}__${label}`,
+            label: label,
+            uri: uri,
+          });
+        }
+      });
+      return transformations;
     },
-    children: term => {
-      return term.children;
-    }
-  }
-}
+  },
+};
 
 export default termResolver;

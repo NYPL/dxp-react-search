@@ -1,15 +1,6 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const typeDefs = gql`
-  type ResourceTopic {
-    id: ID!
-    tid: String
-    name: String!
-    description: String
-    imageUrl: String
-    url: String
-  }
-
   type OnlineResource {
     id: ID!
     name: String!
@@ -21,13 +12,16 @@ export const typeDefs = gql`
     mostPopular: Boolean
   }
 
+  type OnlineResourceConnection {
+    items: [OnlineResource]
+    pageInfo: PageInfo
+  }
+
   extend type Query {
-    allResourceTopics: [ResourceTopic]!
-    resourceTopic(slug: String): ResourceTopic
     allOnlineResources(
-      limit: Int,
+      limit: Int
       filter: OnlineResourceFilter
-    ): [OnlineResource]!
+    ): OnlineResourceConnection
     onlineResource(slug: String): OnlineResource
   }
 `;
