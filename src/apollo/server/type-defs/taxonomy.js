@@ -1,25 +1,23 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const typeDefs = gql`
-  type Vocab {
-    id: ID!
-    name: String!
-    terms: [Term]
-  }
-
   type Term {
     id: ID!
-    name: String!
-    children: [Term]
-  }
-
-  input TermsFilter {
-    id: String!
-    terms: [String]!
-    operator: String!
+    tid: String!
+    title: String!
+    description: String
+    image: Image
+    slug: String
   }
 
   extend type Query {
-    allTerms(filter: TermsFilter): [Vocab]!
+    allTermsByVocab(
+      vocabulary: String
+      sortBy: String
+      limit: Int
+      featured: Boolean
+      limiter: String
+    ): [Term]!
+    termBySlug(slug: String, vocabulary: String): Term
   }
 `;

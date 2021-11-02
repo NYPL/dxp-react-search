@@ -30,3 +30,10 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 !.travis/.env
+
+# eslint
+.eslintcache
+
+# cypress
+/cypress/videos
+/cypress/screenshots

@@ -1,38 +1,39 @@
-import React from 'react';
+import React from "react";
 // Next
-import Link from 'next/link';
+import Link from "next/link";
 // Utils
-import { ONLINE_RESOURCES_BASE_PATH } from './../../../utils/config';
+import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
 
 function OnlineResourceCardHeading(props) {
-  const { 
-    id, 
-    name, 
-    accessibleFrom, 
-    accessLocations, 
-    resourceUrl, 
+  const {
+    id,
+    name,
+    accessibleFrom,
+    accessLocations,
+    resourceUrl,
     slug,
     allLocationMatches,
-    authenticationType
+    authenticationType,
   } = props;
 
-  function linkAccessCheck() {    
+  function linkAccessCheck() {
     let locationMatchesArray = [];
-    allLocationMatches?.items.map(locationMatch => {
+    allLocationMatches?.items.map((locationMatch) => {
       locationMatchesArray.push(locationMatch.locationId);
     });
 
     let accessLocationsArray = [];
-    accessLocations?.map(accessLocation => {
+    accessLocations?.map((accessLocation) => {
       accessLocationsArray.push(accessLocation.id);
     });
-  
-    const linkAccess = locationMatchesArray
-      .filter(e => accessLocationsArray.includes(e));
+
+    const linkAccess = locationMatchesArray.filter((e) =>
+      accessLocationsArray.includes(e)
+    );
     return linkAccess.length;
   }
 
-  if (linkAccessCheck() || accessibleFrom?.includes('offsite')) {
+  if (linkAccessCheck() || accessibleFrom?.includes("offsite")) {
     if (authenticationType === "nypl") {
       return (
         <h3 id={id}>
@@ -40,7 +41,7 @@ function OnlineResourceCardHeading(props) {
             <a>{name}</a>
           </Link>
         </h3>
-      )
+      );
     }
     if (resourceUrl) {
       return (
@@ -58,9 +59,7 @@ function OnlineResourceCardHeading(props) {
       );
     }
   } else {
-    return (
-      <h3 id={id}>{name}</h3>
-    );
+    return <h3 id={id}>{name}</h3>;
   }
 }
 

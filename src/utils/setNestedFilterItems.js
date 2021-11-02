@@ -7,14 +7,19 @@
 function setNestedFilterItems(items) {
   // Build an object of objects keyed by parent id.
   const parentsOnly = items.reduce((accumulator, item) => {
-    if (item.parent_tid === 'virtual') {
+    let parent_tid = "virtual";
+    if (item.parent[0].meta.drupal_internal__target_id !== undefined) {
+      parent_tid = item.parent[0].meta.drupal_internal__target_id;
+    }
+    if (parent_tid === "virtual") {
       return {
         ...accumulator,
-        [item.tid]: {
-          tid: item.tid,
+        [item.drupal_internal__tid]: {
+          id: item.id,
+          drupal_internal__tid: item.drupal_internal__tid,
           name: item.name,
-          children: []
-        }
+          children: [],
+        },
       };
     }
     return accumulator;
@@ -22,18 +27,29 @@ function setNestedFilterItems(items) {
 
   // Build the children keyed by parent id.
   const childrenOnly = items.reduce((accumulator, item) => {
-    const value = item['parent_tid'];
-    accumulator[value] = (accumulator[value] || []).concat(item);
+    //const value = item['parent_tid'];
+    //const value = item.parent[0].meta.drupal_internal__target_id;
+    let parent_tid = "virtual";
+    if (item.parent[0].meta.drupal_internal__target_id !== undefined) {
+      parent_tid = item.parent[0].meta.drupal_internal__target_id;
+    }
+    accumulator[parent_tid] = (accumulator[parent_tid] || []).concat(item);
     return accumulator;
   }, {});
 
   // Build the final nested filters structure.
   let nestedFilterItems = [];
   items.map((item) => {
-    if (item.parent_tid === 'virtual') {
+    let parent_tid = "virtual";
+    if (item.parent[0].meta.drupal_internal__target_id !== undefined) {
+      parent_tid = item.parent[0].meta.drupal_internal__target_id;
+    }
+    if (parent_tid === "virtual") {
       nestedFilterItems.push({
-        ...parentsOnly[item.tid],
-        children: childrenOnly[item.tid] ? childrenOnly[item.tid] : null
+        ...parentsOnly[item.drupal_internal__tid],
+        children: childrenOnly[item.drupal_internal__tid]
+          ? childrenOnly[item.drupal_internal__tid]
+          : null,
       });
     }
   });

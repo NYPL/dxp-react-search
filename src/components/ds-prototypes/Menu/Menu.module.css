@@ -1,0 +1,33 @@
+.vertical {
+  margin-bottom: 2rem;
+}
+
+.actionLink {
+  display: inline-block;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  border-radius: 2px;
+  background-color: var(--brand-primary);
+  color: var(--ui-white) !important;
+}
+
+.actionLink:hover {
+  background-color: var(--ui-error);
+}
+
+.underline {
+  border-bottom: 1px solid;
+  padding-bottom: var(--space-xs);
+}
+
+.link {
+  color: var(--ui-black) !important;
+}
+
+.link.noDecoration {
+  text-decoration: none;
+}
+
+.description {
+  margin-bottom: 1rem;
+}

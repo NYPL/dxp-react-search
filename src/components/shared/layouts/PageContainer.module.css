@@ -15,7 +15,7 @@
   grid-gap: 2rem;
   grid-template-areas:
     "contentPrimary"
-    "contentBottom"
+    "contentBottom";
 }
 
 @media (min-width: 600px) {
@@ -35,7 +35,7 @@
   grid-template-areas:
     "contentPrimary"
     "contentSecondary"
-    "contentBottom"
+    "contentBottom";
 }
 
 @media (min-width: 600px) {

@@ -7,13 +7,10 @@
  */
 function getActiveLetters(items, fieldName) {
   let activeLetters = [];
-  items?.forEach(item => {    
+  items?.forEach((item) => {
     // Get first char, cast to uppercase, and trim white space.
-    const itemLetter = item[fieldName]
-      .trim()
-      .charAt(0)
-      .toUpperCase();
-    if (itemLetter && activeLetters.includes(itemLetter) === false) { 
+    const itemLetter = item[fieldName].trim().charAt(0).toUpperCase();
+    if (itemLetter && activeLetters.includes(itemLetter) === false) {
       activeLetters.push(itemLetter);
     }
   });
