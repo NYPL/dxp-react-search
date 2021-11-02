@@ -245,8 +245,6 @@ function RequestVisitForm() {
       />
       <ContactInfoFormField handleChange={handleChange} />
       <Button type="submit">Submit</Button>
-
-      <pre>{JSON.stringify(state, null, 2)}</pre>
     </form>
   );
 }

@@ -2,6 +2,13 @@
 
 ---
 
+### v0.4.0 Locations Local Pre-Release
+
+---
+
+- Added Locations Local Request visit form.
+- General code refactoring and improvements.
+
 ### v0.3.3 [2021-10-04] Online Resources Bug Fix
 
 ---
