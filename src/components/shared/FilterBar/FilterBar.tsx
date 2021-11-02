@@ -146,7 +146,6 @@ function FilterBar({
       itemIds = [];
       itemIds.push(itemId);
     }
-
     setSelectedItems({
       ...selectedItems,
       [groupId]: {

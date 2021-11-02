@@ -17,23 +17,21 @@ const nextConfig = {
     }
     return [];
   },
-  // Redirect blogs paths for now.
-  // @TODO Uncomment this before deploying LL work.
-  /*async redirects() {
-      return [
-        {
-          source: "/blogs",
-          destination: "/",
-          permanent: true,
-        },
-        {
-          source: "/blogs/:path*",
-          destination: "/",
-          permanent: true,
-        },
-      ];
-    },
-    */
+  // Redirect blogs paths to / for now.
+  async redirects() {
+    return [
+      {
+        source: "/blogs",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/blogs/:path*",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
   webpack(config, options) {
     const { dir } = options;
     // Allows import of .gql files inside components
@@ -53,6 +51,7 @@ const nextConfig = {
     domains: [
       "qa-cdn-d8-2.nypl.org",
       "sandbox-d8.nypl.org",
+      "qa-d8.nypl.org",
       "treasures-d8.nypl.org",
       "nyplorg-sandbox.s3.amazonaws.com",
       "localhost",
