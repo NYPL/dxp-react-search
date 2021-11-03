@@ -191,7 +191,7 @@ function RequestVisitForm() {
       // Run the mutation, to try sending the email.
       const mutationResponse = await runSendEmailMutation(
         client,
-        "william.luisi2477@gmail.com",
+        emailTo,
         emailCc
       );
       const mutationResponseStatusCode =
