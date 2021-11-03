@@ -8,11 +8,16 @@ export const typeDefs = gql`
   }
 
   type SendEmailPayload {
-    status: String
+    statusCode: Int
+    message: String
+    emailEnable: Boolean
+    formData: SendEmailPayloadFormData
+  }
+
+  type SendEmailPayloadFormData {
     emailTo: String
     emailCc: String
     emailBody: String
-    enableEmail: Boolean
   }
 
   type Mutation {

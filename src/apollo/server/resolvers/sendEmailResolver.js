@@ -1,7 +1,6 @@
 const sendEmailResolver = {
   Mutation: {
     sendEmail: async (parent, args, { dataSources }) => {
-      console.log(args.input.emailTo);
       const response = await dataSources.sendGridApi.sendEmail(
         args.input.emailTo,
         args.input.emailCc,
@@ -11,11 +10,15 @@ const sendEmailResolver = {
     },
   },
   SendEmailPayload: {
-    status: (payload) => payload.status,
-    emailTo: (payload) => payload.emailTo,
-    emailCc: (payload) => payload.emailCc,
-    emailBody: (payload) => payload.emailBody,
-    enableEmail: (payload) => payload.enableEmail,
+    statusCode: (payload) => payload.statusCode,
+    emailEnable: (payload) => {
+      let emailEnableBoolean = false;
+      if (payload.emailEnable === "true") {
+        emailEnableBoolean = true;
+      }
+      return emailEnableBoolean;
+    },
+    formData: (payload) => payload.formData,
   },
 };
 

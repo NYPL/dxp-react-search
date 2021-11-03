@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 // Apollo
-import { gql, useApolloClient, useMutation } from "@apollo/client";
+import { gql, useApolloClient } from "@apollo/client";
 // @ts-ignore
 import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
 // Components
@@ -30,9 +30,14 @@ const SEND_EMAIL_MUTATION = gql`
     sendEmail(
       input: { emailTo: $emailTo, emailCc: $emailCc, emailBody: $emailBody }
     ) {
-      status
-      emailTo
-      emailCc
+      statusCode
+      message
+      emailEnable
+      formData {
+        emailTo
+        emailCc
+        emailBody
+      }
     }
   }
 `;
@@ -79,12 +84,9 @@ function RequestVisitForm() {
   // @ts-ignore
   const [state, dispatch] = useContext(FormContext);
   const { values, errors, touched, isSubmitted } = state;
-
   // Apollo.
   const client = useApolloClient();
   const router = useRouter();
-  const [sendEmailSubmission, { data, loading, error }] =
-    useMutation(SEND_EMAIL_MUTATION);
 
   // Set the selected library to query param on initial render.
   useEffect(() => {
@@ -162,17 +164,14 @@ function RequestVisitForm() {
     });
 
     if (checkValidation(schemaErrors)) {
-      /*console.log("Form submit!");
-
       const response = await locationEmailDataRequest(client);
       const emailAddress = response.data?.allLocations?.items[0]?.email;
       // @TODO Add a fallback email in case there is no email data set in CMS?
       const emailTo = emailAddress ? emailAddress : `gethelp+fallback@nypl.org`;
       const locationInternalSlug =
         response.data?.allLocations?.items[0]?.internalSlug;
-      // Email CC based on in person service choice.
-      let emailCc;
-      // Use state values to determine the cc email recipient.
+      // Email CC based on in person service choice, stored in the form state.
+      let emailCc = "";
       // @TODO need to update these to use the actual email addresses.
       if (values.inPersonServices.length > 0) {
         switch (values.inPersonServices) {
@@ -181,13 +180,7 @@ function RequestVisitForm() {
             emailCc = "williamluisi+school-visit@nypl.org";
             break;
           case "in-person-group-tour":
-            //emailCc = "outreach@nypl.org";
-            emailCc = "williamluisi+outeach@nypl.org";
-            break;
           case "in-person-offsite":
-            //emailCc = "outreach@nypl.org";
-            emailCc = "williamluisi+outeach@nypl.org";
-            break;
           case "in-person-community-partners":
             //emailCc = "outreach@nypl.org";
             emailCc = "williamluisi+outeach@nypl.org";
@@ -195,60 +188,50 @@ function RequestVisitForm() {
         }
       }
 
-      const sendEmailResponse = await fetch("/api/send-email", {
-        body: JSON.stringify({
-          emailTo: emailTo,
-          emailCc: emailCc,
-          emailBody: formatRequestVisitEmail(values),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
-
-      if (!sendEmailResponse.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
+      // Run the mutation, to try sending the email.
+      const mutationResponse = await runSendEmailMutation(
+        client,
+        "william.luisi2477@gmail.com",
+        emailCc
+      );
+      const mutationResponseStatusCode =
+        mutationResponse.data?.sendEmail?.statusCode;
+      const mutationemailEnableStatus =
+        mutationResponse.data?.sendEmail?.emailEnable;
+      // Check if mutation was successful and email was sent.
+      // If email is disabled for debubgging, then just submit the form
+      // as sucesful, since it already password form validation.
+      if (mutationResponseStatusCode === 202 || !mutationemailEnableStatus) {
+        // Redirect to confirmation pg.
+        router.push({
+          pathname: `/locations/request-visit/confirmation`,
+          query: {
+            id: locationInternalSlug,
+          },
+        });
+      } else {
+        // Server error, so update the form state to show the server level errors in notification component.
+        dispatch({
+          type: "SET_FORM_STATE",
+          payload: {
+            errors: schemaErrors,
+            values: { ...state.values },
+            touched: { ...state.touched },
+            isValid: state.isValid,
+            isSubmitted: true,
+            serverError: true,
+          },
+        });
+        window.scrollTo(0, 0);
       }
-      // Redirect to confirmation pg.
-      router.push({
-        pathname: `/locations/request-visit/confirmation`,
-        query: {
-          id: locationInternalSlug,
-        },
-      });
-      */
-
-      const response = await locationEmailDataRequest(client);
-      const emailAddress = response.data?.allLocations?.items[0]?.email;
-      // @TODO Add a fallback email in case there is no email data set in CMS?
-      const emailTo = emailAddress ? emailAddress : `gethelp+fallback@nypl.org`;
-      const locationInternalSlug =
-        response.data?.allLocations?.items[0]?.internalSlug;
-
-      sendEmailSubmission({
-        variables: {
-          emailTo: "william.luisi2477@gmail.com",
-          emailCc: null,
-          emailBody: formatRequestVisitEmail(values),
-        },
-      });
-
-      // Redirect to confirmation pg.
-      router.push({
-        pathname: `/locations/request-visit/confirmation`,
-        query: {
-          id: locationInternalSlug,
-        },
-      });
     } else {
-      console.log("Form error");
-      // Scroll back to top after form submit.
+      // There are form validation errors, so scroll to top of page, and let
+      // context state handle it as normal.
       window.scrollTo(0, 0);
     }
   }
 
+  // Helper function to run the location email data request query.
   function locationEmailDataRequest(apolloClient: any) {
     let internalSlugArray = [];
     internalSlugArray.push(values.library);
@@ -264,7 +247,21 @@ function RequestVisitForm() {
     });
   }
 
-  //if (loading) return "Submitting Form....";
+  // Helper function to run the send email mutation request.
+  function runSendEmailMutation(
+    apolloClient: any,
+    emailTo: string,
+    emailCc: string
+  ) {
+    return apolloClient.mutate({
+      mutation: SEND_EMAIL_MUTATION,
+      variables: {
+        emailTo: emailTo,
+        emailCc: emailCc,
+        emailBody: formatRequestVisitEmail(values),
+      },
+    });
+  }
 
   return (
     <form className={s.requestAVisit} onSubmit={handleSubmit} noValidate>
@@ -285,8 +282,6 @@ function RequestVisitForm() {
       />
       <ContactInfoFormField handleChange={handleChange} />
       <Button type="submit">Submit</Button>
-
-      <pre>{JSON.stringify(state, null, 2)}</pre>
     </form>
   );
 }

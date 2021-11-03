@@ -1,7 +1,10 @@
 import { RESTDataSource } from "apollo-datasource-rest";
-var nodemailer = require("nodemailer");
-var sgTransport = require("nodemailer-sendgrid-transport");
 const { SENDGRID_API_KEY, SENDGRID_EMAIL_ENABLE } = process.env;
+const sgMail = require("@sendgrid/mail");
+
+// @SEE @sendgrid/mail
+// https://docs.sendgrid.com/for-developers/sending-email/quickstart-nodejs?utm_source=pocket_mylist
+// Status Codes: https://sendgrid.api-docs.io/v3.0/how-to-use-the-sendgrid-v3-api/api-responses
 
 class SendGridApi extends RESTDataSource {
   constructor() {
@@ -9,51 +12,44 @@ class SendGridApi extends RESTDataSource {
   }
 
   async sendEmail(emailTo, emailCc, emailBody) {
-    // Sendgrid options.
-    const options = {
-      service: "SendGrid",
-      auth: {
-        api_key: SENDGRID_API_KEY,
-      },
-    };
-    const sendGridTransporter = nodemailer.createTransport(
-      sgTransport(options)
-    );
-
-    const email = {
-      from: "webfeedback@nypl.org",
-      to: emailTo,
-      cc: emailCc ? emailCc : null,
-      subject: "Location Request Visit",
-      text: "Hello world",
-      html: emailBody,
-    };
+    let statusCode;
+    let responseMessage;
 
     if (SENDGRID_EMAIL_ENABLE === "true") {
+      sgMail.setApiKey(SENDGRID_API_KEY);
+
+      const message = {
+        from: "webfeedback@nypl.org",
+        to: emailTo,
+        cc: emailCc ? emailCc : null,
+        subject: "Location Request Visit",
+        //text: "Hello world",
+        html: emailBody,
+      };
+
       try {
-        await sendGridTransporter.sendMail(email);
-        let data = {
-          status: "ok",
-          emailTo: emailTo,
-          emailCc: emailCc,
-          enableEmail: true,
-        };
-        return data;
+        let response = await sgMail.send(message);
+        statusCode = response[0].statusCode;
+        responseMessage = "Email sent.";
       } catch (error) {
-        let data = {
-          status: error.toString(),
-        };
-        return data;
+        statusCode = error.code;
+        responseMessage = error.message;
       }
     } else {
-      let data = {
-        status: "ok",
+      statusCode = null;
+      responseMessage = "Debug mode.";
+    }
+
+    return {
+      statusCode: statusCode,
+      message: responseMessage,
+      formData: {
         emailTo: emailTo,
         emailCc: emailCc,
-        enableEmail: true,
-      };
-      return data;
-    }
+        emailBody: emailBody,
+      },
+      emailEnable: SENDGRID_EMAIL_ENABLE,
+    };
   }
 }
 
