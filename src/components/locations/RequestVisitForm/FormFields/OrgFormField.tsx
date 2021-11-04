@@ -21,6 +21,7 @@ function OrgFormField({ handleChange }: FormFieldProps) {
         disabled={values.noSchoolOrOrg}
         required={!values.noSchoolOrOrg}
         showLabel
+        placeholder="Enter school or organization name"
         showOptReqLabel={!values.noSchoolOrOrg}
         errorText={errors.organization}
         errored={errors.organization ? true : false}
