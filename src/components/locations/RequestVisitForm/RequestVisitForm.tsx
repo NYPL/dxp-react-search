@@ -83,7 +83,7 @@ const schema = yup.object().shape({
 function RequestVisitForm() {
   // @ts-ignore
   const [state, dispatch] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
+  const { values } = state;
   // Apollo.
   const client = useApolloClient();
   const router = useRouter();
@@ -151,7 +151,7 @@ function RequestVisitForm() {
     const schemaErrors = await runValidation(schema, {
       ...state.values,
     });
-
+    // Set the form state.
     dispatch({
       type: "SET_FORM_STATE",
       payload: {
@@ -162,14 +162,26 @@ function RequestVisitForm() {
         isSubmitted: true,
       },
     });
-
+    // Form submit handling.
     if (checkValidation(schemaErrors)) {
-      const response = await locationEmailDataRequest(client);
-      const emailAddress = response.data?.allLocations?.items[0]?.email;
-      // @TODO Add a fallback email in case there is no email data set in CMS?
+      // Run query to get the location's email address.
+      let internalSlugArray = [];
+      internalSlugArray.push(values.library);
+      const { data: locationEmailData } = await client.query({
+        query: LOCATION_BY_INTERNAL_SLUG,
+        variables: {
+          contentType: "library",
+          limit: 1,
+          pageNumber: 1,
+          internalSlug: internalSlugArray,
+        },
+      });
+      const emailAddress = locationEmailData?.allLocations?.items[0]?.email;
+      // Add a fallback email in case there is no email data set in CMS?
       const emailTo = emailAddress ? emailAddress : `gethelp+fallback@nypl.org`;
+      // Get the location internal slug value from query, for use in redirect.
       const locationInternalSlug =
-        response.data?.allLocations?.items[0]?.internalSlug;
+        locationEmailData?.allLocations?.items[0]?.internalSlug;
       // Email CC based on in person service choice, stored in the form state.
       let emailCc = "";
       // @TODO need to update these to use the actual email addresses.
@@ -187,21 +199,20 @@ function RequestVisitForm() {
             break;
         }
       }
-
       // Run the mutation, to try sending the email.
-      const mutationResponse = await runSendEmailMutation(
-        client,
-        emailTo,
-        emailCc
-      );
-      const mutationResponseStatusCode =
-        mutationResponse.data?.sendEmail?.statusCode;
-      const mutationemailEnableStatus =
-        mutationResponse.data?.sendEmail?.emailEnable;
+      const { data: sendEmailData } = await client.mutate({
+        mutation: SEND_EMAIL_MUTATION,
+        variables: {
+          emailTo: emailTo,
+          emailCc: emailCc,
+          emailBody: formatRequestVisitEmail(values),
+        },
+      });
+      const sendEmail = sendEmailData?.sendEmail;
       // Check if mutation was successful and email was sent.
       // If email is disabled for debubgging, then just submit the form
-      // as sucesful, since it already password form validation.
-      if (mutationResponseStatusCode === 202 || !mutationemailEnableStatus) {
+      // as successful, since it already passed form validation.
+      if (sendEmail.statusCode === 202 || !sendEmail.emailEnable) {
         // Redirect to confirmation pg.
         router.push({
           pathname: `/locations/request-visit/confirmation`,
@@ -229,38 +240,6 @@ function RequestVisitForm() {
       // context state handle it as normal.
       window.scrollTo(0, 0);
     }
-  }
-
-  // Helper function to run the location email data request query.
-  function locationEmailDataRequest(apolloClient: any) {
-    let internalSlugArray = [];
-    internalSlugArray.push(values.library);
-
-    return apolloClient.query({
-      query: LOCATION_BY_INTERNAL_SLUG,
-      variables: {
-        contentType: "library",
-        limit: 1,
-        pageNumber: 1,
-        internalSlug: internalSlugArray,
-      },
-    });
-  }
-
-  // Helper function to run the send email mutation request.
-  function runSendEmailMutation(
-    apolloClient: any,
-    emailTo: string,
-    emailCc: string
-  ) {
-    return apolloClient.mutate({
-      mutation: SEND_EMAIL_MUTATION,
-      variables: {
-        emailTo: emailTo,
-        emailCc: emailCc,
-        emailBody: formatRequestVisitEmail(values),
-      },
-    });
   }
 
   return (
