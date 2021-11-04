@@ -18,7 +18,7 @@ if [ "$TRAVIS_BRANCH" == "qa" ]; then
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
-  SENDGRID_EMAIL_ENABLE=false
+  SENDGRID_EMAIL_ENABLE=true
 fi
 
 echo -e "\nNEXT_PUBLIC_NYPL_DOMAIN=$NEXT_PUBLIC_NYPL_DOMAIN" >> .env

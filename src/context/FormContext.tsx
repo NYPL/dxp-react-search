@@ -28,6 +28,7 @@ const initialState = {
   touched: {},
   isValid: false,
   isSubmitted: false,
+  serverError: false,
 };
 
 function reducer(state: FormState, action: FormContextAction) {
