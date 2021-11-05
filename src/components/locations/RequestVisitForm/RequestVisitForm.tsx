@@ -73,11 +73,8 @@ const schema = yup.object().shape({
     .array()
     .min(1, "Please select your age group.")
     .required("Please select your age group."),
-  contactName: yup.string().required("Please enter your full name."),
-  contactEmail: yup
-    .string()
-    .email()
-    .required("Please enter your email address."),
+  contactName: yup.string().required("Your name is required."),
+  contactEmail: yup.string().email().required("Email is required."),
 });
 
 function RequestVisitForm() {

@@ -110,20 +110,22 @@ function VisitTypeFormField({
                 errored={errors.virtualVisitServices ? true : false}
               />
               {virtualServiceItem.id === "services-other" && (
-                <TextInput
-                  attributes={{
-                    name: "virtualVisitServicesOther",
-                  }}
-                  labelText="What other service would you like to receive?"
-                  showLabel={false}
-                  onChange={handleChange}
-                  value={values.virtualVisitServicesOther}
-                  disabled={
-                    !values.virtualVisitServices.includes("services-other")
-                  }
-                  errored={errors.virtualVisitServices ? true : false}
-                  errorText={errors.virtualVisitServices}
-                />
+                <div className={s.otherInput}>
+                  <TextInput
+                    attributes={{
+                      name: "virtualVisitServicesOther",
+                    }}
+                    labelText="What other service would you like to receive?"
+                    showLabel={false}
+                    onChange={handleChange}
+                    value={values.virtualVisitServicesOther}
+                    disabled={
+                      !values.virtualVisitServices.includes("services-other")
+                    }
+                    errored={errors.virtualVisitServices ? true : false}
+                    errorText={errors.virtualVisitServices}
+                  />
+                </div>
               )}
             </div>
           ))}
@@ -144,18 +146,20 @@ function VisitTypeFormField({
                 errored={errors.inPersonServices ? true : false}
               />
               {inPersonItem.id === "in-person-other" && (
-                <TextInput
-                  attributes={{
-                    name: "inPersonServicesOther",
-                  }}
-                  labelText="Other request."
-                  showLabel={false}
-                  onChange={handleChange}
-                  value={values.inPersonServicesOther}
-                  disabled={values.inPersonServices !== "in-person-other"}
-                  errored={errors.inPersonServices ? true : false}
-                  errorText={errors.inPersonServices}
-                />
+                <div className={s.otherInput}>
+                  <TextInput
+                    attributes={{
+                      name: "inPersonServicesOther",
+                    }}
+                    labelText="Other request."
+                    showLabel={false}
+                    onChange={handleChange}
+                    value={values.inPersonServicesOther}
+                    disabled={values.inPersonServices !== "in-person-other"}
+                    errored={errors.inPersonServices ? true : false}
+                    errorText={errors.inPersonServices}
+                  />
+                </div>
               )}
             </div>
           ))}

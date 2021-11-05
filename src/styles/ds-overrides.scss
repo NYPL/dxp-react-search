@@ -105,3 +105,13 @@
     color: #000;
   }
 }
+
+// Locations local overrides.
+.nypl--locations {
+  .request-visit__header {
+    font-weight: 500;
+  }
+  .request-visit__description {
+    max-width: 620px;
+  }
+}
