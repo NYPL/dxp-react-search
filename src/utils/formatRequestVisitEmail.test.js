@@ -112,4 +112,32 @@ describe("formatRequestVisitEmail", () => {
       })
     );
   });
+
+  test("Contact name input should be sanitized correctly.", () => {
+    formValues.contactName =
+      "Hello <a href='https://google.com'>World</a><script>alert('xss');</script>";
+    const emailBody = formatRequestVisitEmail(formValues);
+    const { getByTestId } = render(
+      <div dangerouslySetInnerHTML={{ __html: emailBody }} />
+    );
+    expect(getByTestId("contactName", { name: /hello world/ }));
+    // Check anchor link tag was removed.
+    expect(emailBody).not.toMatch(/<a href='https:\/\/google.com/);
+    // Check script tag was removed.
+    expect(emailBody).not.toMatch(/<script>alert('xss');<\/script>/);
+  });
+
+  test("Contact email input should be sanitized correctly.", () => {
+    formValues.contactEmail =
+      "test@email.org <a href='https://mozilla.org'>Mozilla</a><script>alert('test xss');</script>";
+    const emailBody = formatRequestVisitEmail(formValues);
+    const { getByTestId } = render(
+      <div dangerouslySetInnerHTML={{ __html: emailBody }} />
+    );
+    expect(getByTestId("contactEmail", { name: /test@email.org/ }));
+    // Check anchor link tag was removed.
+    expect(emailBody).not.toMatch(/<a href='https:\/\/mozilla.org/);
+    // Check script tag was removed.
+    expect(emailBody).not.toMatch(/<script>alert('test xss');<\/script>/);
+  });
 });
