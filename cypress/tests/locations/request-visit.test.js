@@ -34,8 +34,8 @@ describe("Locations Local: Request a Visit", () => {
     cy.findByText("Please select your age group.").should("exist");
 
     cy.log("Contact info fields should display error msg");
-    cy.findByText("Please enter your full name.").should("exist");
-    cy.findByText("Please enter your email address.").should("exist");
+    cy.findByText("Your name is required.").should("exist");
+    cy.findByText("Email is required.").should("exist");
   });
 
   // @TODO How in intercept the email api request?
