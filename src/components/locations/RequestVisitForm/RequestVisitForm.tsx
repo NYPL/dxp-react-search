@@ -14,6 +14,7 @@ import VisitTypeFormField from "./FormFields/VisitTypeFormField";
 import OrgFormField from "./FormFields/OrgFormField";
 import AgeGroupFormField from "./FormFields/AgeGroupFormField";
 import ContactInfoFormField from "./FormFields/ContactInfoFormField";
+import HoneypotFormField from "./FormFields/HoneypotFormField";
 import formatRequestVisitEmail from "./../../../utils/formatRequestVisitEmail";
 import { useRouter } from "next/router";
 import { FormContext } from "./../../../context/FormContext";
@@ -257,6 +258,7 @@ function RequestVisitForm() {
         handleChangeCheckboxGroup={handleChangeCheckboxGroup}
       />
       <ContactInfoFormField handleChange={handleChange} />
+      <HoneypotFormField />
       <Button type="submit">Submit</Button>
     </form>
   );
