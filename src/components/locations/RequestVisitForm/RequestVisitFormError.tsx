@@ -30,6 +30,7 @@ function RequestVisitFormError() {
           width: "100%",
           margin: "0 auto",
         }}
+        role="alert"
       >
         <Notification notificationType={NotificationTypes.Warning}>
           <NotificationContent>

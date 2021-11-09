@@ -76,6 +76,7 @@ const schema = yup.object().shape({
     .required("Please select your age group."),
   contactName: yup.string().required("Your name is required."),
   contactEmail: yup.string().email().required("Email is required."),
+  notHoom: yup.bool().oneOf([false], "This field must be left blank"),
 });
 
 function RequestVisitForm() {
@@ -260,6 +261,7 @@ function RequestVisitForm() {
       <ContactInfoFormField handleChange={handleChange} />
       <HoneypotFormField />
       <Button type="submit">Submit</Button>
+      <pre>{JSON.stringify(state, null, 2)}</pre>
     </form>
   );
 }

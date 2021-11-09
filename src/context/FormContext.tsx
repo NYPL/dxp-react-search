@@ -23,6 +23,7 @@ const initialState = {
     organization: "",
     noSchoolOrOrg: false,
     ageGroup: [],
+    notHoom: false,
   },
   errors: {},
   touched: {},
