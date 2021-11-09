@@ -37,12 +37,10 @@ function RequestVisitConfirmation() {
   const locationName = data?.allLocations?.items[0]?.name;
   const locationUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${data?.allLocations?.items[0]?.url}`;
 
-  // Error state.
   if (error) {
     return <div>'error while loading locations'</div>;
   }
 
-  // Loading state,
   if (loading || !data) {
     return <div>Loading</div>;
   }
@@ -51,13 +49,10 @@ function RequestVisitConfirmation() {
     <div>
       <Heading className="request-visit__header" level={2} text="Thank You!" />
       <p>
-        We've receieved your request and will get back to you within 48 hours.
+        We've received your request and will get back to you within 48 hours.
       </p>
       <Link type={LinkTypes.Action} href={locationUrl}>
         Back to {locationName}
-        <span style={{ marginLeft: "5px" }}>
-          <Icon name={IconNames.headset} size={IconSizes.medium} />
-        </span>
       </Link>
     </div>
   );
