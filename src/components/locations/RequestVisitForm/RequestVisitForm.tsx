@@ -14,6 +14,7 @@ import VisitTypeFormField from "./FormFields/VisitTypeFormField";
 import OrgFormField from "./FormFields/OrgFormField";
 import AgeGroupFormField from "./FormFields/AgeGroupFormField";
 import ContactInfoFormField from "./FormFields/ContactInfoFormField";
+import HoneypotFormField from "./FormFields/HoneypotFormField";
 import formatRequestVisitEmail from "./../../../utils/formatRequestVisitEmail";
 import { useRouter } from "next/router";
 import { FormContext } from "./../../../context/FormContext";
@@ -75,6 +76,7 @@ const schema = yup.object().shape({
     .required("Please select your age group."),
   contactName: yup.string().required("Your name is required."),
   contactEmail: yup.string().email().required("Email is required."),
+  notHoom: yup.bool().oneOf([false], "This field must be left blank"),
 });
 
 function RequestVisitForm() {
@@ -257,6 +259,7 @@ function RequestVisitForm() {
         handleChangeCheckboxGroup={handleChangeCheckboxGroup}
       />
       <ContactInfoFormField handleChange={handleChange} />
+      <HoneypotFormField />
       <Button type="submit">Submit</Button>
     </form>
   );
