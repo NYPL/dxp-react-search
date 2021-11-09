@@ -21,6 +21,7 @@
 
 .checkBox,
 .radio {
+  position: relative;
   margin-bottom: var(--space-s);
 }
 

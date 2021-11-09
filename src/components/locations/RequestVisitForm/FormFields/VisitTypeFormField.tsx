@@ -88,7 +88,7 @@ function VisitTypeFormField({
         <option value="in-person">In-Person Visit</option>
       </Select>
       {values.visitType === "virtual" && (
-        <fieldset>
+        <fieldset className="request-visit__visit-type">
           <legend>
             What services would you like to include in your virtual visit?
           </legend>

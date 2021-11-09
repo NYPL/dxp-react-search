@@ -114,4 +114,16 @@
   .request-visit__description {
     max-width: 620px;
   }
+
+  #request-visit-form {
+    .request-visit__visit-type {
+      .input__checkbox {
+        position: absolute;
+        top: 2px;
+      }
+      .input__checkbox + label {
+        margin-left: 1.875rem; // (width of checkbox + --space-xs)
+      }
+    }
+  }
 }
