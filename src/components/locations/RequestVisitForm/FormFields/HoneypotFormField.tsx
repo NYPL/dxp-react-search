@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { FormFieldProps } from "../types";
 import { FormContext } from "../../../../context/FormContext";
 
 function HoneypotFormField() {
@@ -7,19 +6,6 @@ function HoneypotFormField() {
   const [state, dispatch] = useContext(FormContext);
   const { values } = state;
   const id = "notHoom";
-
-  function handleChange(event: any) {
-    const name = event.target.name;
-    const value = event.target.checked;
-
-    dispatch({
-      type: "SET_FORM_STATE",
-      payload: {
-        values: { ...state.values, [name]: value },
-        touched: { ...state.touched, [name]: true },
-      },
-    });
-  }
 
   return (
     <div hidden>
@@ -32,7 +18,15 @@ function HoneypotFormField() {
           style={{
             display: "none",
           }}
-          onChange={handleChange}
+          onChange={(e) => {
+            dispatch({
+              type: "SET_FORM_STATE",
+              payload: {
+                values: { ...state.values, [e.target.name]: e.target.value },
+                touched: { ...state.touched, [e.target.name]: true },
+              },
+            });
+          }}
           checked={values[id]}
         />
       </label>
