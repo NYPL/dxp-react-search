@@ -242,7 +242,12 @@ function RequestVisitForm() {
   }
 
   return (
-    <form className={s.requestAVisit} onSubmit={handleSubmit} noValidate>
+    <form
+      id="request-visit-form"
+      className={s.requestAVisit}
+      onSubmit={handleSubmit}
+      noValidate
+    >
       <Heading
         id="your-visit"
         displaySize={HeadingDisplaySizes.Secondary}
