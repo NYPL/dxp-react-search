@@ -108,6 +108,9 @@
 
 // Locations local overrides.
 .nypl--locations {
+  .breadcrumbs {
+    background-color: #c60917 !important;
+  }
   .request-visit__header {
     font-weight: 500;
   }
