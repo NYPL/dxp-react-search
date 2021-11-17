@@ -23,11 +23,13 @@ const initialState = {
     organization: "",
     noSchoolOrOrg: false,
     ageGroup: [],
+    notHoom: false,
   },
   errors: {},
   touched: {},
   isValid: false,
   isSubmitted: false,
+  serverError: false,
 };
 
 function reducer(state: FormState, action: FormContextAction) {

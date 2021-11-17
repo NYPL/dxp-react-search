@@ -1,32 +1,24 @@
 language: node_js
-
 node_js:
-- 14
-
+  - 14
 services:
-- docker
-
+  - docker
 cache:
   directories:
-  - node_modules
-
+    - node_modules
 branches:
   only:
-  - qa
-  - production
-
+    - qa
+    - production
 env:
   global:
-  - REMOTE_IMAGE_URL_NYPL_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
-  - REMOTE_IMAGE_URL_NYPL=463786892988.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
-  - secure: XDvANpolEs/OcEBFESqyM5OCtjbGVfIrpYZbNquHFz0JzUHUMNbj5CHtKuhGGOex19B3XZeGnUGutLc/zZ9EH/q8gYKnksU1tUdLino7N7GR6JV7sbAiehsBsWIis3+4lS7Jf8LsuSr7tWf8HCMryUNuWXt3vVvq+cx+aQ5brCzdrW34uZJkp4arAEedkA6I/TDcwZpXxTJuU4/1qRad0A5jk3KZupBwZLzggZPA7oEGdpmZVfONBe4C3ZJ0BrrjFAoXhvIhPGkOOKKCn03pX28DnGHnDj79GbIXd6iZlLr701l4K31EmRvPBwRJ4npGRbIww36eeytNpaiOxzPKFA52GP8nv6mNOUJlcW5mayhTHAxgpvt4kRTF04MtN6NFahuFgyk0sNQiR+mctiejm7YsUQNjuTtxZ8DOUV7ZfUoH1Hw/0aHUYWdmtk38j2zXk7/Zdx9YyScc+om05pL3nqN69rgjnVhBQckOm0JHPWltaRidhEV5clv4Tx7DiQl0vH/tSkGE4K6xnzZxv0xEHZpg3xc1rVMHOb69SSkRqlMJn8KIkGVFO7Ic1hVpXyocM0Xa1eZDIZCLB3Oq6/F8OdUJZ37Ie8+pUZUhXcYTA+9gdm4w2TJnAEkhL4PhJYCUS+S1+IoU6TzuLIjATJrH0uhKoWvF6S7/MN9dD8lG+KU=
-
+    - REMOTE_IMAGE_URL_NYPL_DEV=491147561046.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
+    - REMOTE_IMAGE_URL_NYPL=463786892988.dkr.ecr.us-east-1.amazonaws.com/nypldxpsearch
+    - secure: XDvANpolEs/OcEBFESqyM5OCtjbGVfIrpYZbNquHFz0JzUHUMNbj5CHtKuhGGOex19B3XZeGnUGutLc/zZ9EH/q8gYKnksU1tUdLino7N7GR6JV7sbAiehsBsWIis3+4lS7Jf8LsuSr7tWf8HCMryUNuWXt3vVvq+cx+aQ5brCzdrW34uZJkp4arAEedkA6I/TDcwZpXxTJuU4/1qRad0A5jk3KZupBwZLzggZPA7oEGdpmZVfONBe4C3ZJ0BrrjFAoXhvIhPGkOOKKCn03pX28DnGHnDj79GbIXd6iZlLr701l4K31EmRvPBwRJ4npGRbIww36eeytNpaiOxzPKFA52GP8nv6mNOUJlcW5mayhTHAxgpvt4kRTF04MtN6NFahuFgyk0sNQiR+mctiejm7YsUQNjuTtxZ8DOUV7ZfUoH1Hw/0aHUYWdmtk38j2zXk7/Zdx9YyScc+om05pL3nqN69rgjnVhBQckOm0JHPWltaRidhEV5clv4Tx7DiQl0vH/tSkGE4K6xnzZxv0xEHZpg3xc1rVMHOb69SSkRqlMJn8KIkGVFO7Ic1hVpXyocM0Xa1eZDIZCLB3Oq6/F8OdUJZ37Ie8+pUZUhXcYTA+9gdm4w2TJnAEkhL4PhJYCUS+S1+IoU6TzuLIjATJrH0uhKoWvF6S7/MN9dD8lG+KU=
 install: npm install
-
 before_script:
   - cp .travis/.env .
-  - ./provisioning/set-env
-
+  - "./provisioning/set-env"
 after_success:
   - echo 'All tests passed; Preparing to deploy'
-  - ./provisioning/deploy
+  - "./provisioning/deploy"

@@ -9,6 +9,7 @@ GA_TRACKING_ID=UA-1420324-3
 GTM_TRACKING_ID=GTM-537Q6Q4
 ALLOWED_ORIGIN=https://www.nypl.org
 ASSET_PREFIX=/scout
+SENDGRID_EMAIL_ENABLE=true
 
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
   NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
@@ -17,6 +18,7 @@ if [ "$TRAVIS_BRANCH" == "qa" ]; then
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
+  SENDGRID_EMAIL_ENABLE=true
 fi
 
 echo -e "\nNEXT_PUBLIC_NYPL_DOMAIN=$NEXT_PUBLIC_NYPL_DOMAIN" >> .env
@@ -28,3 +30,5 @@ echo -e "\nNEXT_PUBLIC_GA_TRACKING_ID=$GA_TRACKING_ID" >> .env
 echo -e "\nNEXT_PUBLIC_GTM_TRACKING_ID=$GTM_TRACKING_ID" >> .env
 echo -e "\nNEXT_PUBLIC_ALLOWED_ORIGIN=$ALLOWED_ORIGIN" >> .env
 echo -e "\nASSET_PREFIX=$ASSET_PREFIX" >> .env
+echo -e "\nSENDGRID_API_KEY=$SENDGRID_API_KEY" >> .env
+echo -e "\nSENDGRID_EMAIL_ENABLE=$SENDGRID_EMAIL_ENABLE" >> .env

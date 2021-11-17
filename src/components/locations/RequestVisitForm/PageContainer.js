@@ -42,7 +42,7 @@ function PageContainer(props) {
                   id={menu.id}
                   key={menu.id}
                   headingLevel={3}
-                  headingColor={"#700000"}
+                  headingColor={"#c60917"}
                   title={menu.title}
                   // @ts-ignore
                   items={menu.items}

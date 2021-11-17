@@ -8,10 +8,21 @@ import { FormContext } from "./../../../context/FormContext";
 
 function RequestVisitFormError() {
   // @ts-ignore
-  const [state, dispatch] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
+  const [state] = useContext(FormContext);
+  const { values, errors, touched, isSubmitted, serverError } = state;
 
-  if (isSubmitted && !state.isValid && Object.keys(state.errors).length > 0) {
+  let message =
+    "There was a problem with your submissions. Errors have been highlighted below.";
+
+  if (serverError) {
+    message =
+      "There was a problem submitting the form. Please send your request to gethelp@nypl.org";
+  }
+
+  if (
+    serverError ||
+    (isSubmitted && !state.isValid && Object.keys(state.errors).length > 0)
+  ) {
     return (
       <div
         style={{
@@ -19,13 +30,11 @@ function RequestVisitFormError() {
           width: "100%",
           margin: "0 auto",
         }}
+        role="alert"
       >
         <Notification notificationType={NotificationTypes.Warning}>
           <NotificationContent>
-            <strong>
-              There was a problem with your submissions. Errors have been
-              highlighted below.
-            </strong>
+            <strong>{message}</strong>
           </NotificationContent>
         </Notification>
       </div>

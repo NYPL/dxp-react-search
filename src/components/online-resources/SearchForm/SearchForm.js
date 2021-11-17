@@ -128,6 +128,7 @@ function SearchForm() {
             id: "audience_by_age",
             label: "Audience",
             type: "taxonomy",
+            limiter: "online_resource",
             legacy: true,
           },
           {

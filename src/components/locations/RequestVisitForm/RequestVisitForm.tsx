@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 // Apollo
-import { useApolloClient } from "@apollo/client";
+import { gql, useApolloClient } from "@apollo/client";
 // @ts-ignore
 import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
 // Components
@@ -14,6 +14,7 @@ import VisitTypeFormField from "./FormFields/VisitTypeFormField";
 import OrgFormField from "./FormFields/OrgFormField";
 import AgeGroupFormField from "./FormFields/AgeGroupFormField";
 import ContactInfoFormField from "./FormFields/ContactInfoFormField";
+import HoneypotFormField from "./FormFields/HoneypotFormField";
 import formatRequestVisitEmail from "./../../../utils/formatRequestVisitEmail";
 import { useRouter } from "next/router";
 import { FormContext } from "./../../../context/FormContext";
@@ -24,6 +25,23 @@ import {
   runValidation,
 } from "./../../../utils/formValidation";
 import s from "./RequestVisitForm.module.css";
+
+const SEND_EMAIL_MUTATION = gql`
+  mutation ($emailTo: String!, $emailCc: String, $emailBody: String) {
+    sendEmail(
+      input: { emailTo: $emailTo, emailCc: $emailCc, emailBody: $emailBody }
+    ) {
+      statusCode
+      message
+      emailEnable
+      formData {
+        emailTo
+        emailCc
+        emailBody
+      }
+    }
+  }
+`;
 
 // @TODO Move this to a seperate file?
 const schema = yup.object().shape({
@@ -56,18 +74,15 @@ const schema = yup.object().shape({
     .array()
     .min(1, "Please select your age group.")
     .required("Please select your age group."),
-  contactName: yup.string().required("Please enter your full name."),
-  contactEmail: yup
-    .string()
-    .email()
-    .required("Please enter your email address."),
+  contactName: yup.string().required("Your name is required."),
+  contactEmail: yup.string().email().required("Email is required."),
+  notHoom: yup.bool().oneOf([false], "This field must be left blank"),
 });
 
 function RequestVisitForm() {
   // @ts-ignore
   const [state, dispatch] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
-
+  const { values } = state;
   // Apollo.
   const client = useApolloClient();
   const router = useRouter();
@@ -135,7 +150,7 @@ function RequestVisitForm() {
     const schemaErrors = await runValidation(schema, {
       ...state.values,
     });
-
+    // Set the form state.
     dispatch({
       type: "SET_FORM_STATE",
       payload: {
@@ -146,19 +161,28 @@ function RequestVisitForm() {
         isSubmitted: true,
       },
     });
-
+    // Form submit handling.
     if (checkValidation(schemaErrors)) {
-      console.log("Form submit!");
-
-      const response = await locationEmailDataRequest(client);
-      const emailAddress = response.data?.allLocations?.items[0]?.email;
-      // @TODO Add a fallback email in case there is no email data set in CMS?
+      // Run query to get the location's email address.
+      let internalSlugArray = [];
+      internalSlugArray.push(values.library);
+      const { data: locationEmailData } = await client.query({
+        query: LOCATION_BY_INTERNAL_SLUG,
+        variables: {
+          contentType: "library",
+          limit: 1,
+          pageNumber: 1,
+          internalSlug: internalSlugArray,
+        },
+      });
+      const emailAddress = locationEmailData?.allLocations?.items[0]?.email;
+      // Add a fallback email in case there is no email data set in CMS?
       const emailTo = emailAddress ? emailAddress : `gethelp+fallback@nypl.org`;
+      // Get the location internal slug value from query, for use in redirect.
       const locationInternalSlug =
-        response.data?.allLocations?.items[0]?.internalSlug;
-      // Email CC based on in person service choice.
-      let emailCc;
-      // Use state values to determine the cc email recipient.
+        locationEmailData?.allLocations?.items[0]?.internalSlug;
+      // Email CC based on in person service choice, stored in the form state.
+      let emailCc = "";
       // @TODO need to update these to use the actual email addresses.
       if (values.inPersonServices.length > 0) {
         switch (values.inPersonServices) {
@@ -167,67 +191,63 @@ function RequestVisitForm() {
             emailCc = "williamluisi+school-visit@nypl.org";
             break;
           case "in-person-group-tour":
-            //emailCc = "outreach@nypl.org";
-            emailCc = "williamluisi+outeach@nypl.org";
-            break;
           case "in-person-offsite":
-            //emailCc = "outreach@nypl.org";
-            emailCc = "williamluisi+outeach@nypl.org";
-            break;
           case "in-person-community-partners":
             //emailCc = "outreach@nypl.org";
             emailCc = "williamluisi+outeach@nypl.org";
             break;
         }
       }
-
-      const sendEmailResponse = await fetch("/api/send-email", {
-        body: JSON.stringify({
+      // Run the mutation, to try sending the email.
+      const { data: sendEmailData } = await client.mutate({
+        mutation: SEND_EMAIL_MUTATION,
+        variables: {
           emailTo: emailTo,
           emailCc: emailCc,
           emailBody: formatRequestVisitEmail(values),
-        }),
-        headers: {
-          "Content-Type": "application/json",
         },
-        method: "POST",
       });
-
-      if (!sendEmailResponse.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
+      const sendEmail = sendEmailData?.sendEmail;
+      // Check if mutation was successful and email was sent.
+      // If email is disabled for debubgging, then just submit the form
+      // as successful, since it already passed form validation.
+      if (sendEmail.statusCode === 202 || !sendEmail.emailEnable) {
+        // Redirect to confirmation pg.
+        router.push({
+          pathname: `/locations/request-visit/confirmation`,
+          query: {
+            id: locationInternalSlug,
+          },
+        });
+      } else {
+        // Server error, so update the form state to show the server level errors in notification component.
+        dispatch({
+          type: "SET_FORM_STATE",
+          payload: {
+            errors: schemaErrors,
+            values: { ...state.values },
+            touched: { ...state.touched },
+            isValid: state.isValid,
+            isSubmitted: true,
+            serverError: true,
+          },
+        });
+        window.scrollTo(0, 0);
       }
-      // Redirect to confirmation pg.
-      router.push({
-        pathname: `/locations/request-visit/confirmation`,
-        query: {
-          id: locationInternalSlug,
-        },
-      });
     } else {
-      console.log("Form error");
-      // Scroll back to top after form submit.
+      // There are form validation errors, so scroll to top of page, and let
+      // context state handle it as normal.
       window.scrollTo(0, 0);
     }
   }
 
-  function locationEmailDataRequest(apolloClient: any) {
-    let internalSlugArray = [];
-    internalSlugArray.push(values.library);
-
-    return apolloClient.query({
-      query: LOCATION_BY_INTERNAL_SLUG,
-      variables: {
-        contentType: "library",
-        limit: 1,
-        pageNumber: 1,
-        internalSlug: internalSlugArray,
-      },
-    });
-  }
-
   return (
-    <form className={s.requestAVisit} onSubmit={handleSubmit} noValidate>
+    <form
+      id="request-visit-form"
+      className={s.requestAVisit}
+      onSubmit={handleSubmit}
+      noValidate
+    >
       <Heading
         id="your-visit"
         displaySize={HeadingDisplaySizes.Secondary}
@@ -244,6 +264,7 @@ function RequestVisitForm() {
         handleChangeCheckboxGroup={handleChangeCheckboxGroup}
       />
       <ContactInfoFormField handleChange={handleChange} />
+      <HoneypotFormField />
       <Button type="submit">Submit</Button>
     </form>
   );

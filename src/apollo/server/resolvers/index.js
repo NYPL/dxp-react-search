@@ -12,6 +12,8 @@ import validatePatronCardResolver from "./validatePatronCardResolver";
 // Content types
 import blogResolver from "./blogResolver";
 import locationResolver from "./locationResolver";
+// Mutations
+import sendEmailResolver from "./sendEmailResolver";
 
 export const resolvers = mergeResolvers([
   refineryLocationResolver,
@@ -27,4 +29,5 @@ export const resolvers = mergeResolvers([
   validatePatronCardResolver,
   filterResolver,
   ipAccessCheckResolver,
+  sendEmailResolver,
 ]);

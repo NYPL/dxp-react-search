@@ -1,4 +1,4 @@
-import { search } from "./../../support/utils";
+import { fillRequestVisitForm } from "./../../support/utils";
 
 describe("Locations Local: Request a Visit", () => {
   beforeEach(() => {
@@ -19,7 +19,10 @@ describe("Locations Local: Request a Visit", () => {
       name: /submit/i,
     }).click();
 
-    //cy.log("Form validation should display main error msg");
+    cy.log("Form validation should display main error msg");
+    cy.findByText(
+      /there was a problem with your submissions\. errors have been highlighted below\./i
+    ).should("exist");
 
     cy.log("Select library field should display error msg");
     cy.findByText("Please select a library for your visit.").should("exist");
@@ -34,57 +37,8 @@ describe("Locations Local: Request a Visit", () => {
     cy.findByText("Please select your age group.").should("exist");
 
     cy.log("Contact info fields should display error msg");
-    cy.findByText("Please enter your full name.").should("exist");
-    cy.findByText("Please enter your email address.").should("exist");
-  });
-
-  // @TODO How in intercept the email api request?
-  it("Form submit sends user to confirmation page", () => {
-    cy.log("Select a library");
-    cy.findByRole("combobox", {
-      name: /please select a library/i,
-    })
-      .select("Allerton Library")
-      .should("have.value", "allerton");
-
-    cy.log("Select a visit type");
-    cy.findByRole("combobox", {
-      name: /please select your visit type/i,
-    })
-      .select("Virtual Visit")
-      .should("have.value", "virtual");
-
-    cy.log("Select virtual visit services");
-    cy.findByRole("checkbox", {
-      name: /introduction to the library/i,
-    })
-      .click()
-      .should("be.checked");
-
-    cy.log("Enter organizaton name");
-    cy.findByRole("textbox", {
-      name: /what school or organization are you with\? required/i,
-    }).type("Columbia University");
-
-    cy.log("Select age level");
-    cy.findByRole("checkbox", {
-      name: /adults/i,
-    })
-      .click()
-      .should("be.checked");
-
-    cy.log("Enter contact info");
-    cy.findByRole("textbox", {
-      name: /name/i,
-    }).type("George Constanza");
-    cy.findByRole("textbox", {
-      name: /email/i,
-    }).type("george@seinfeld.com");
-
-    // Submit
-    cy.findByRole("button", {
-      name: /submit/i,
-    }).click();
+    cy.findByText("Your name is required.").should("exist");
+    cy.findByText("Email is required.").should("exist");
   });
 
   // @TODO this seems more like a unit test
@@ -131,48 +85,8 @@ describe("Locations Local: Request a Visit", () => {
     }).should("be.disabled");
   });
 
-  //
   it("Succesful submission of in-person visit type redirects user to confirmation pg.", () => {
-    cy.log("Select a library");
-    cy.findByRole("combobox", {
-      name: /please select a library/i,
-    })
-      .select("Bronx Library Center")
-      .should("have.value", "bronx-library-center");
-
-    cy.log("Select a visit type");
-    cy.findByRole("combobox", {
-      name: /please select your visit type/i,
-    })
-      .select("In-Person Visit")
-      .should("have.value", "in-person");
-
-    cy.log("Select in-person visit services");
-    cy.findByRole("radio", {
-      name: /group tour/i,
-    })
-      .click()
-      .should("be.checked");
-
-    cy.log("Enter organizaton name");
-    cy.findByRole("textbox", {
-      name: /what school or organization are you with\? required/i,
-    }).type("Columbia University");
-
-    cy.log("Select age level");
-    cy.findByRole("checkbox", {
-      name: /adults/i,
-    })
-      .click()
-      .should("be.checked");
-
-    cy.log("Enter contact info");
-    cy.findByRole("textbox", {
-      name: /name/i,
-    }).type("George Costanza");
-    cy.findByRole("textbox", {
-      name: /email/i,
-    }).type("george@seinfeld.com");
+    fillRequestVisitForm({ visitType: "in-person" });
 
     cy.findByRole("button", {
       name: /submit/i,
@@ -184,50 +98,18 @@ describe("Locations Local: Request a Visit", () => {
       expect(loc.search).to.eq(`?id=bronx-library-center`);
       expect(loc.pathname).to.eq("/locations/request-visit/confirmation");
     });
-    // Check confirmation page copy is correct.
+
+    cy.log("Confirmation page message displays correctly");
+    cy.findByRole("heading", {
+      name: /thank you!/i,
+    });
+    cy.findByRole("link", {
+      name: /back to bronx library center/i,
+    });
   });
 
   it("Succesful submission of virtual visit type redirects user to confirmation pg.", () => {
-    cy.log("Select a library");
-    cy.findByRole("combobox", {
-      name: /please select a library/i,
-    })
-      .select("Bronx Library Center")
-      .should("have.value", "bronx-library-center");
-
-    cy.log("Select a visit type");
-    cy.findByRole("combobox", {
-      name: /please select your visit type/i,
-    })
-      .select("Virtual Visit")
-      .should("have.value", "virtual");
-
-    cy.log("Select virtual visit services");
-    cy.findByRole("checkbox", {
-      name: /introduction to the library/i,
-    })
-      .click()
-      .should("be.checked");
-
-    cy.log("Enter organizaton name");
-    cy.findByRole("textbox", {
-      name: /what school or organization are you with\? required/i,
-    }).type("Columbia University");
-
-    cy.log("Select age level");
-    cy.findByRole("checkbox", {
-      name: /adults/i,
-    })
-      .click()
-      .should("be.checked");
-
-    cy.log("Enter contact info");
-    cy.findByRole("textbox", {
-      name: /name/i,
-    }).type("George Costanza");
-    cy.findByRole("textbox", {
-      name: /email/i,
-    }).type("george@seinfeld.com");
+    fillRequestVisitForm({ visitType: "virtual" });
 
     cy.findByRole("button", {
       name: /submit/i,
@@ -247,5 +129,22 @@ describe("Locations Local: Request a Visit", () => {
     cy.findByRole("link", {
       name: /back to bronx library center/i,
     });
+  });
+
+  it("Honeypot catches bots and will block form submission.", () => {
+    fillRequestVisitForm({ visitType: "in-person" });
+
+    cy.log("Find and check the honeypot field.");
+    cy.get("#notHoom").click({ force: true }).should("be.checked");
+
+    cy.log("Submitting the form.");
+    cy.findByRole("button", {
+      name: /submit/i,
+    }).click();
+
+    cy.log("Check for form validation errors");
+    cy.findByText(
+      /there was a problem with your submissions\. errors have been highlighted below\./i
+    ).should("exist");
   });
 });

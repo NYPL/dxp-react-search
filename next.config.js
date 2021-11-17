@@ -49,6 +49,12 @@ const nextConfig = {
     return config;
   },
   images: {
+    // This is a hacky workaround to fix a nextjs bug where the asset prefix is
+    // not used by the default image loader. This is fixed in canary as of 11/8/2021.
+    // @see https://github.com/vercel/next.js/pull/29307
+    ...(ASSET_PREFIX && {
+      path: `${ASSET_PREFIX}/_next/image`,
+    }),
     domains: [
       "qa-cdn-d8-2.nypl.org",
       "sandbox-d8.nypl.org",

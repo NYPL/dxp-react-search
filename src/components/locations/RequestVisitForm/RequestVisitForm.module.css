@@ -21,7 +21,12 @@
 
 .checkBox,
 .radio {
+  position: relative;
   margin-bottom: var(--space-s);
+}
+
+.otherInput {
+  margin-top: var(--space-s);
 }
 
 .contactInfo,
