@@ -22,9 +22,10 @@ function LocationsRequestVisitPage() {
             text="Request a Class Visit or Group Tour"
           />
           <p className="request-visit__description">
-            We welcome the opportunity to meet with your class or
-            group—virtually or in-person—to share information about the library
-            and its wide range of resources.
+            Discover the Library’s wide array of free resources, classes,
+            events, and more! Join us at your local branch to learn more about
+            library cards, searching the catalog, and other NYPL services.
+            Request an in-person or virtual class visit or group tour now.
           </p>
           <RequestVisitForm />
         </>

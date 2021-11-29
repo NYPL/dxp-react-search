@@ -12,7 +12,7 @@ function OrgFormField({ handleChange }: FormFieldProps) {
   return (
     <div className={s.schoolInfo}>
       <TextInput
-        labelText="What school or organization are you with?"
+        labelText="Please tell us about your school or organization"
         attributes={{
           name: "organization",
         }}
