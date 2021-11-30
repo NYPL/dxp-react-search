@@ -38,7 +38,7 @@ export function fillRequestVisitForm(options: RequestVisitFormOptions) {
 
   cy.log("Select a library")
     .findByRole("combobox", {
-      name: /please select a library/i,
+      name: /please select a location/i,
     })
     .select("Bronx Library Center")
     .should("have.value", "bronx-library-center");
@@ -77,7 +77,7 @@ export function fillRequestVisitForm(options: RequestVisitFormOptions) {
 
   cy.log("Enter organizaton name")
     .findByRole("textbox", {
-      name: /what school or organization are you with\? required/i,
+      name: /please tell us about your school or organization/i,
     })
     .type("Columbia University");
 

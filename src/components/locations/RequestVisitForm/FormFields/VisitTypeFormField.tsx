@@ -21,6 +21,10 @@ const virtualServicesItems = [
     label: "Library Card Registration",
   },
   {
+    id: "reader-advisory",
+    label: "Reader Advisory",
+  },
+  {
     id: "services-resources",
     label:
       "Online Resource Instruction (Articles & Databases, Digital Collections, etc.)",

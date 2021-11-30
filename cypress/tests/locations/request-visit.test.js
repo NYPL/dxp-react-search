@@ -81,7 +81,7 @@ describe("Locations Local: Request a Visit", () => {
 
     cy.log("Assert that text input is now disabled");
     cy.findByRole("textbox", {
-      name: /what school or organization are you with\?/i,
+      name: /please tell us about your school or organization/i,
     }).should("be.disabled");
   });
 
