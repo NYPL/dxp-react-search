@@ -16,7 +16,6 @@ import { useRouter } from "next/router";
 
 const BLOGS_QUERY = gql`
   query BlogsQuery(
-    $contentType: String
     $limit: Int
     $pageNumber: Int
     $featured: Boolean
@@ -27,7 +26,6 @@ const BLOGS_QUERY = gql`
     $divisions: [String]
   ) {
     allBlogs(
-      contentType: $contentType
       limit: $limit
       pageNumber: $pageNumber
       filter: {
@@ -118,7 +116,6 @@ function BlogsContainer({
 
   const { loading, error, data } = useQuery(BLOGS_QUERY, {
     variables: {
-      contentType: "blog",
       limit: limit ? limit : null,
       pageNumber: currentPage ? currentPage : 1,
       featured: featured ? featured : null,

@@ -95,21 +95,24 @@ function ChannelsCards({
               title={item.title}
               description={item.description}
               url={`/blogs/all?channel=${item.tid}`}
-              image={
-                <Image
-                  id={item.image.id}
-                  alt={item.image.alt}
-                  uri={item.image.uri}
-                  useTransformation={true}
-                  transformations={item.image.transformations}
-                  transformationLabel={"2_1_960"}
-                  layout="responsive"
-                  width={900}
-                  height={450}
-                  quality={90}
-                />
-              }
-              imageAspectRatio={CardImageRatios.TwoByOne}
+              // @TODO Remove this after the channel term field for image is required.
+              {...(item.image && {
+                image: (
+                  <Image
+                    id={item.image.id}
+                    alt={item.image.alt}
+                    uri={item.image.uri}
+                    useTransformation={true}
+                    transformations={item.image.transformations}
+                    transformationLabel={"2_1_960"}
+                    layout="responsive"
+                    width={900}
+                    height={450}
+                    quality={90}
+                  />
+                ),
+                imageAspectRatio: CardImageRatios.TwoByOne,
+              })}
             />
           </li>
         ))}

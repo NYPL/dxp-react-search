@@ -1,12 +1,13 @@
 const graphqlFields = require("graphql-fields");
 // Utils
 import formatDate from "../../../utils/formatDate";
+import { drupalParagraphsResolver, imageResolver } from "./utils";
 
 const blogResolver = {
   Query: {
     allBlogs: async (parent, args, { dataSources }, info) => {
       const response = await dataSources.drupalApi.getAllNodesByContentType(
-        args.contentType,
+        "blog",
         args.limit,
         args.pageNumber,
         args.filter,
@@ -14,6 +15,7 @@ const blogResolver = {
         graphqlFields(info)
       );
 
+      // @TODO Move this to a utils function.
       return {
         items: response.data,
         pageInfo: {
@@ -26,11 +28,13 @@ const blogResolver = {
         },
       };
     },
-    /*blog: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getOnlineResource(args);
+    blog: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getNodeBySlug(
+        "blog",
+        args.slug
+      );
       return response;
     },
-    */
   },
   Blog: {
     id: (blog) => blog.id,
@@ -52,34 +56,29 @@ const blogResolver = {
     date: (blog) => formatDate(blog.created),
     image: (blog) =>
       blog.field_ers_media_image.data !== null
-        ? blog.field_ers_media_image.field_media_image
+        ? imageResolver(blog.field_ers_media_image.field_media_image)
         : null,
     locations: (blog) =>
       blog.field_erm_location !== null ? blog.field_erm_location : null,
+    mainContent: (blog) => drupalParagraphsResolver(blog.field_main_content),
   },
-  Image: {
-    id: (image) => image.id,
-    alt: (image) => "test",
-    uri: (image) => {
-      if (image.uri.url && image.uri.url.includes("sites/default")) {
-        return `http://localhost:8080${image.uri.url}`;
-      } else {
-        return image.uri.url;
+  BlogMainContent: {
+    __resolveType: (object, context, info) => {
+      // @TODO could be a util function, where object is passed, along with an
+      // array of allowed drupal paragraph types?
+      let objectType;
+      switch (object.type) {
+        case "text_with_image":
+          objectType = "TextWithImage";
+          break;
+        case "video":
+          objectType = "Video";
+          break;
+        case "slideshow":
+          objectType = "Slideshow";
+          break;
       }
-    },
-    transformations: (image) => {
-      console.log(image);
-      let transformations = [];
-      image.image_style_uri.forEach((imageStyle) => {
-        for (const [label, uri] of Object.entries(imageStyle)) {
-          transformations.push({
-            id: `${image.id}__${label}`,
-            label: label,
-            uri: uri,
-          });
-        }
-      });
-      return transformations;
+      return objectType;
     },
   },
   BlogLocation: {

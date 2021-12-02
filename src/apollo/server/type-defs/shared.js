@@ -23,6 +23,30 @@ export const typeDefs = gql`
     uri: String!
   }
 
+  type TextWithImage {
+    id: ID!
+    type: String!
+    heading: String
+    text: String!
+    image: Image
+  }
+
+  type Video {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    video: String!
+  }
+
+  type Slideshow {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    images: [Image]!
+  }
+
   type Query {
     _empty: String
   }

@@ -10,7 +10,10 @@ export const typeDefs = gql`
     byline: String!
     image: Image
     locations: [BlogLocation]
+    mainContent: [BlogMainContent]
   }
+
+  union BlogMainContent = TextWithImage | Video | Slideshow
 
   type BlogConnection {
     items: [Blog]
@@ -36,7 +39,6 @@ export const typeDefs = gql`
 
   extend type Query {
     allBlogs(
-      contentType: String
       limit: Int
       pageNumber: Int
       filter: BlogFilter

@@ -153,6 +153,23 @@ function createApolloClient(initialState = {}) {
               id: args.slug,
             });
           },
+          /*blog: {
+            read(_, { args, toReference }) {
+              return toReference({
+                __typename: "Blog",
+                id: args.id,
+              });
+            },
+          },
+          */
+          // @TODO Does this even work?
+          /*blog(_, { args, toReference }) {
+            return toReference({
+              __typename: "Blog",
+              id: args.id,
+            });
+          },
+          */
         },
       },
     },

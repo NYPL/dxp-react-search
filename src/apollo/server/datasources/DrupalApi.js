@@ -445,6 +445,33 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
+  async getNodeBySlug(contentType, slug) {
+    // Get resource url from path.
+    let routerPath = `/router/translate-path?path=${slug}`;
+    const routerResponse = await this.get(routerPath);
+    // Get resource.
+    if (routerResponse) {
+      let apiPath = `${routerResponse.jsonapi.individual}?jsonapi_include=1`;
+
+      if (contentType === "blog") {
+        // Add includeFields.
+        const includeFields = [
+          "field_ers_media_image.field_media_image",
+          "field_main_content.field_ers_media_item.field_media_image",
+          "field_main_content.field_erm_media_items.field_media_image",
+          "field_erm_location",
+        ];
+
+        if (includeFields.length) {
+          apiPath = `${apiPath}&include=${includeFields.join(",")}`;
+        }
+      }
+
+      const response = await this.get(apiPath);
+      return response.data;
+    }
+  }
+
   // Helper methods.
 
   /*
