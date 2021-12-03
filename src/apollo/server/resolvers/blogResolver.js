@@ -1,4 +1,5 @@
 const graphqlFields = require("graphql-fields");
+import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
 import { drupalParagraphsResolver, imageResolver } from "./utils";
@@ -60,7 +61,11 @@ const blogResolver = {
         : null,
     locations: (blog) =>
       blog.field_erm_location !== null ? blog.field_erm_location : null,
-    mainContent: (blog) => drupalParagraphsResolver(blog.field_main_content),
+    mainContent: (blog, args, context, info) => {
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      return drupalParagraphsResolver(blog.field_main_content, typesInQuery);
+    },
   },
   BlogMainContent: {
     __resolveType: (object, context, info) => {

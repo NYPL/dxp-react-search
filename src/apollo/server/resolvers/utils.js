@@ -1,32 +1,3 @@
-/*export const Image = {
-  Image: {
-    id: (image) => image.id,
-    alt: (image) => "test",
-    uri: (image) => {
-      if (image.uri.url && image.uri.url.includes("sites/default")) {
-        return `http://localhost:8080${image.uri.url}`;
-      } else {
-        return image.uri.url;
-      }
-    },
-    transformations: (image) => {
-      console.log(image);
-      let transformations = [];
-      image.image_style_uri.forEach((imageStyle) => {
-        for (const [label, uri] of Object.entries(imageStyle)) {
-          transformations.push({
-            id: `${image.id}__${label}`,
-            label: label,
-            uri: uri,
-          });
-        }
-      });
-      return transformations;
-    },
-  },
-};
-*/
-
 export function imageResolver(image) {
   return {
     id: image.id,
@@ -55,9 +26,34 @@ export function imageResolver(image) {
   };
 }
 
-export function drupalParagraphsResolver(field) {
-  const items = [];
-  field.map((item) => {
+export function drupalParagraphsResolver(field, typesInQuery) {
+  // Drupal json:api will return all paragraphs for the field.
+  // So we first reduce this array of objects only to those paragraphs
+  // that we're requested by the gql query.
+  const requestedParagraphs = field.reduce((accumulator, item) => {
+    if (
+      item.type === "paragraph--text_with_image" &&
+      typesInQuery.includes("TextWithImage")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (item.type === "paragraph--video" && typesInQuery.includes("Video")) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--slideshow" &&
+      typesInQuery.includes("Slideshow")
+    ) {
+      accumulator.push(item);
+    }
+    return accumulator;
+  }, []);
+
+  // Build an array of paragraph objects mapping to the specific components.
+  let items = [];
+  requestedParagraphs.map((item) => {
     let paragraphComponent;
     let paragraphTypeName = item.type.replace("paragraph--", "");
 
