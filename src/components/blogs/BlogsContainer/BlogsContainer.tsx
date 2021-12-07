@@ -217,7 +217,8 @@ function BlogsContainer({
         </CardGrid>
       </CardSet>
       <Pagination
-        currentPage={currentPage}
+        // @TODO Confirm that this is working.
+        initialPage={currentPage}
         pageCount={data.allBlogs.pageInfo.pageCount}
         onPageChange={onPageChange}
       />
