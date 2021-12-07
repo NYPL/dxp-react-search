@@ -187,14 +187,12 @@ function RequestVisitForm() {
       if (values.inPersonServices.length > 0) {
         switch (values.inPersonServices) {
           case "in-person-class-visit":
-            //emailCc = "schoolvisits@nypl.org";
-            emailCc = "williamluisi+school-visit@nypl.org";
+            emailCc = "schoolvisits@nypl.org";
             break;
           case "in-person-group-tour":
           case "in-person-offsite":
           case "in-person-community-partners":
-            //emailCc = "outreach@nypl.org";
-            emailCc = "williamluisi+outeach@nypl.org";
+            emailCc = "outreach@nypl.org";
             break;
         }
       }
