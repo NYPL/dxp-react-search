@@ -1,5 +1,6 @@
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 const { DRUPAL_API } = process.env;
+import buildJsonApiPath from "./buildJsonApiPath";
 
 class DrupalApi extends RESTDataSource {
   constructor() {
@@ -29,7 +30,7 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  // Search/Solr.
+  /* ---------- ONLINE RESOURCES ---------- */
   async getAllSearchDocuments(args) {
     let apiPath = "/api/search-online-resources";
 
@@ -118,17 +119,14 @@ class DrupalApi extends RESTDataSource {
     return response.results;
   }
 
-  async getOnlineResource(args) {
-    // Get resource url from path.
-    let routerPath = `/router/translate-path?path=${args.slug}`;
-    const routerResponse = await this.get(routerPath);
-    // Get resource.
-    if (routerResponse) {
-      const response = await this.get(routerResponse.jsonapi.individual);
-      return response.data;
+  async getIpAccessCheck(clientIp) {
+    const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
+    if (response) {
+      return response;
     }
   }
 
+  /* ---------- DECOUPLED DRUPAL ---------- */
   async getDecoupledRouter(args) {
     // Get resource url from path.
     let apiPath = `/router/translate-path?path=${args.path}`;
@@ -141,10 +139,62 @@ class DrupalApi extends RESTDataSource {
     return response.results;
   }
 
+  /* ---------- JSON:API ---------- */
+  // @TODO update to use apiPath / util func approach.
+  async getAllTermsByVocabulary(
+    vocab,
+    sortBy,
+    limit,
+    featured,
+    limiter,
+    queryFields
+  ) {
+    let apiPath = `/jsonapi/taxonomy_term/${vocab}?jsonapi_include=1`;
+    // Temp workaround for only adding include if image is in gql query.
+    if ("image" in queryFields) {
+      apiPath = `${apiPath}&include=field_ers_image.field_media_image`;
+    }
+    if (featured) {
+      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
+    }
+    if (sortBy) {
+      apiPath = `${apiPath}&sort=${sortBy}`;
+    }
+    if (limit) {
+      apiPath = `${apiPath}&page[offset]=0&page[limit]=${limit}`;
+    }
+    if (limiter) {
+      apiPath = `${apiPath}&filter[field_lts_content_type]=${limiter}`;
+    }
+
+    const response = await this.get(apiPath);
+
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  // @TODO update to use apiPath / util func approach.
+  async getTermById(id, vocabulary) {
+    // @TODO this won't always have an image?
+    const response = await this.get(
+      `/jsonapi/taxonomy_term/${vocabulary}/${id}?include=field_ers_image.field_media_image&jsonapi_include=1`
+    );
+    if ("data" in response) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  // Get a colletion of filters by group id (entity type): either node (content type) or taxonomy (vocab).
   // /jsonapi/taxonomy_term/subject?fields[taxonomy_term--subject]=name,drupal_internal__tid,vid,uuid,parent&page[limit]=200&jsonapi_include=1
-  async getAllFiltersByGroupId(id, type, limiter) {
+  // @TODO update to use apiPath / util func approach.
+  async getAllFiltersByGroupId(groupId, type, limiter) {
     // Special handling for availability.
-    if (id === "availability") {
+    if (groupId === "availability") {
       const availabilityFilterMock = {
         data: [
           {
@@ -196,7 +246,7 @@ class DrupalApi extends RESTDataSource {
 
     let apiPath;
     if (type === "taxonomy") {
-      apiPath = `/jsonapi/taxonomy_term/${id}?jsonapi_include=1&fields[taxonomy_term--${id}]=name,drupal_internal__tid,vid,uuid,parent&page[limit]=200`;
+      apiPath = `/jsonapi/taxonomy_term/${groupId}?jsonapi_include=1&fields[taxonomy_term--${groupId}]=name,drupal_internal__tid,vid,uuid,parent&page[limit]=200`;
 
       if (limiter) {
         apiPath = `${apiPath}&filter[field_lts_content_type]=${limiter}`;
@@ -204,7 +254,7 @@ class DrupalApi extends RESTDataSource {
     }
 
     if (type === "content") {
-      apiPath = `jsonapi/node/${id}?jsonapi_include=1&fields[node--${id}]=title,drupal_internal__nid&page[limit]=200&&sort[sort-title][path]=title&sort[sort-title][direction]=ASC`;
+      apiPath = `jsonapi/node/${groupId}?jsonapi_include=1&fields[node--${groupId}]=title,drupal_internal__nid&page[limit]=200&&sort[sort-title][path]=title&sort[sort-title][direction]=ASC`;
     }
 
     const response = await this.get(apiPath);
@@ -216,6 +266,22 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
+  async getAllNodesByContentType(apiPath) {
+    const response = await this.get(apiPath);
+    if (Array.isArray(response.data)) {
+      return response;
+    } else {
+      return [];
+    }
+  }
+
+  async getNodeById(apiPath) {
+    const response = await this.get(apiPath);
+    return response.data;
+  }
+
+  /* ---------- LEGACY CODE ---------- */
+  // Connects to legacy taxonomy-filters api.
   // @TODO This will be removed when subjects taxonomy backend work is complete.
   // /api/taxonomy-filters?vocab=audience_by_age
   // /api/taxonomy-filters?vocab=subject&content_type=online_resource
@@ -270,241 +336,6 @@ class DrupalApi extends RESTDataSource {
     } else {
       return [];
     }
-  }
-
-  async getIpAccessCheck(clientIp) {
-    const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
-    if (response) {
-      return response;
-    }
-  }
-
-  async getAllTermsByVocabulary(
-    vocab,
-    sortBy,
-    limit,
-    featured,
-    limiter,
-    queryFields
-  ) {
-    let apiPath = `/jsonapi/taxonomy_term/${vocab}?jsonapi_include=1`;
-    // Temp workaround for only adding include if image is in gql query.
-    if ("image" in queryFields) {
-      apiPath = `${apiPath}&include=field_ers_image.field_media_image`;
-    }
-    if (featured) {
-      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
-    }
-    if (sortBy) {
-      apiPath = `${apiPath}&sort=${sortBy}`;
-    }
-    if (limit) {
-      apiPath = `${apiPath}&page[offset]=0&page[limit]=${limit}`;
-    }
-    if (limiter) {
-      apiPath = `${apiPath}&filter[field_lts_content_type]=${limiter}`;
-    }
-
-    const response = await this.get(apiPath);
-
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
-  async getTermBySlug(slug, vocabulary) {
-    // @TODO this won't always have an image?
-    const response = await this.get(
-      `/jsonapi/taxonomy_term/${vocabulary}/${slug}?include=field_ers_image.field_media_image&jsonapi_include=1`
-    );
-    if ("data" in response) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
-  // @TODO add featured, and also pass query fields.
-  async getAllNodesByContentType(
-    contentType,
-    limit,
-    pageNumber,
-    filter,
-    sortBy,
-    queryFields
-  ) {
-    let apiPath = `/jsonapi/node/${contentType}?jsonapi_include=1`;
-
-    // Check for fields to include.
-    let includeFields = [];
-    if ("image" in queryFields.items) {
-      includeFields.push("field_ers_media_image.field_media_image");
-    }
-    if ("locations" in queryFields.items) {
-      includeFields.push("field_erm_location");
-    }
-    if (includeFields.length) {
-      apiPath = `${apiPath}&include=${includeFields.join(",")}`;
-    }
-
-    // Pagination.
-    if (limit && pageNumber) {
-      // Calculate offset
-      let offset = 0;
-      if (pageNumber === 2) {
-        offset = limit;
-      } else {
-        offset = limit * (pageNumber - 1);
-      }
-      apiPath = `${apiPath}&page[offset]=${offset}&page[limit]=${limit}`;
-
-      //console.log(pageNumber);
-      //console.log(`offset: ${offset}`);
-    }
-
-    if (filter && "mostPopular" in filter) {
-      apiPath = `${apiPath}&filter[mostPopular][condition][path]=field_is_most_popular&filter[mostPopular][condition][operator]=IS NOT NULL&sort=field_is_most_popular`;
-    }
-    if (filter && "featured" in filter && filter.featured !== null) {
-      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
-    }
-
-    // Internal slug
-    if (filter && "internalSlug" in filter && filter.internalSlug) {
-      apiPath = `${apiPath}&filter[internalSlug-filter][condition][path]=field_ts_slug&filter[internalSlug-filter][condition][operator]=IN`;
-      filter.internalSlug.map((item, index) => {
-        apiPath = `${apiPath}&filter[internalSlug-filter][condition][value][${index}]=${item}`;
-      });
-    }
-
-    // @TODO could convert this to reuseable function?
-    // Channels filter.
-    if (filter && "channels" in filter && filter.channels) {
-      filter.channels.map((channel) => {
-        const filters = this.filterMultiValueEntityRef(
-          channel,
-          "field_erm_channels"
-        );
-        apiPath = `${apiPath}&${filters}`;
-      });
-    }
-    // Subjects filter.
-    if (filter && "subjects" in filter && filter.subjects) {
-      filter.subjects.map((subject) => {
-        const filters = this.filterMultiValueEntityRef(
-          subject,
-          "field_erm_subjects"
-        );
-        apiPath = `${apiPath}&${filters}`;
-      });
-    }
-    // Libraries filter.
-    if (filter && "libraries" in filter && filter.libraries) {
-      filter.libraries.map((library) => {
-        const filters = this.filterMultiValueEntityRef(
-          library,
-          "field_erm_location"
-        );
-        apiPath = `${apiPath}&${filters}`;
-      });
-    }
-    // Divisions filter.
-    if (filter && "divisions" in filter && filter.divisions) {
-      filter.divisions.map((division) => {
-        const filters = this.filterMultiValueEntityRef(
-          division,
-          "field_erm_divisions"
-        );
-        apiPath = `${apiPath}&${filters}`;
-      });
-    }
-
-    // Location specific
-    if (filter && "libraryType" in filter && filter.libraryType) {
-      apiPath = `${apiPath}&filter[libtype-filter][condition][path]=field_ts_library_type&filter[libtype-filter][condition][operator]=IN`;
-      filter.libraryType.map((item, index) => {
-        apiPath = `${apiPath}&filter[libtype-filter][condition][value][${index}]=${item}`;
-      });
-
-      // @TODO fix this to use better sortBy
-      apiPath = `${apiPath}&sort[sort-title][path]=title&sort[sort-title][direction]=ASC`;
-    }
-
-    //
-    if (sortBy) {
-      apiPath = `${apiPath}&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`;
-    }
-
-    const response = await this.get(apiPath);
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
-  async getNodeBySlug(contentType, slug) {
-    // Get resource url from path.
-    let routerPath = `/router/translate-path?path=${slug}`;
-    const routerResponse = await this.get(routerPath);
-    // Get resource.
-    if (routerResponse) {
-      let apiPath = `${routerResponse.jsonapi.individual}?jsonapi_include=1`;
-
-      if (contentType === "blog") {
-        // Add includeFields.
-        const includeFields = [
-          "field_ers_media_image.field_media_image",
-          "field_main_content.field_ers_media_item.field_media_image",
-          "field_main_content.field_erm_media_items.field_media_image",
-          "field_erm_location",
-        ];
-
-        if (includeFields.length) {
-          apiPath = `${apiPath}&include=${includeFields.join(",")}`;
-        }
-      }
-
-      const response = await this.get(apiPath);
-      return response.data;
-    }
-  }
-
-  // Helper methods.
-
-  /*
-    Build filters for multi value entity reference filters.
-    @see https://www.drupal.org/project/drupal/issues/3066202#comment-13181270
-  */
-  filterMultiValueEntityRef(item, fieldName) {
-    const groupName = `${fieldName}-${item}-and`;
-    const filterName = `${fieldName}-${item}`;
-    const conditionPath = `${fieldName}.meta.drupal_internal__target_id`;
-    // Query param parts.
-    const filterConjunction = `filter[${groupName}][group][conjunction]=AND`;
-    const filterConditionValue = `filter[${filterName}][condition][value]=${item}`;
-    const filterConditionPath = `filter[${filterName}][condition][path]=${conditionPath}`;
-    const filterConditionMemberOf = `filter[${filterName}][condition][memberOf]=${groupName}`;
-    return `${filterConjunction}&${filterConditionValue}&${filterConditionPath}&${filterConditionMemberOf}`;
-  }
-
-  // @TODO add this as a seperate method so it can be tested more easily.
-  buildJsonApiPath(
-    contentType,
-    limit,
-    pageNumber,
-    filter,
-    sortBy,
-    queryFields
-  ) {
-    let apiPath = `/jsonapi/node/${contentType}?jsonapi_include=1`;
-    // Featured
-    if (filter && "featured" in filter && filter.featured !== null) {
-      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
-    }
-    return apiPath;
   }
 }
 

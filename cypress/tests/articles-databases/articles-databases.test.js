@@ -97,7 +97,9 @@ describe("Articles & Databases", () => {
     }).should("exist");
 
     cy.log("Click link to goto featured resource topic page");
-    cy.findByText("Homework Help").click();
+    cy.findByRole("link", {
+      name: /homework help/i,
+    }).click();
 
     cy.log("Confirm featured resource topic page loads correctly.");
     cy.findByRole("heading", {
@@ -122,7 +124,9 @@ describe("Articles & Databases", () => {
     }).should("exist");
 
     cy.log("Click link to goto resource detail page");
-    cy.findByText("Mango Languages").click();
+    cy.findByRole("link", {
+      name: /mango languages/i,
+    }).click();
 
     cy.log("Confirm resource page loads correctly.")
       .findByRole("link", {

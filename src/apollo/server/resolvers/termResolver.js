@@ -14,9 +14,9 @@ const termResolver = {
       );
       return response.data;
     },
-    termBySlug: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getTermBySlug(
-        args.slug,
+    term: async (parent, args, { dataSources }) => {
+      const response = await dataSources.drupalApi.getTermById(
+        args.id,
         args.vocabulary
       );
       return response.data;

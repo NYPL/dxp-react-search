@@ -59,6 +59,36 @@ const BLOGS_QUERY = gql`
           name
           slug
         }
+        mainContent {
+          __typename
+          ... on Slideshow {
+            id
+            type
+            heading
+          }
+          ... on TextWithImage {
+            id
+            type
+            heading
+            text
+            image {
+              id
+              alt
+              uri
+              transformations {
+                id
+                label
+                uri
+              }
+            }
+          }
+          ... on Video {
+            id
+            type
+            heading
+            video
+          }
+        }
       }
       pageInfo {
         totalItems

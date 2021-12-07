@@ -1,57 +1,5 @@
 import React from "react";
-// Next
-import Router, { useRouter } from "next/router";
-// Apollo
-import { gql, useQuery } from "@apollo/client";
-// Components
 import Components from "./../../shared/ContentComponents/getReactComponent";
-
-const BLOG_POST_QUERY = gql`
-  query BlogPostQuery($slug: String) {
-    blog(slug: $slug) {
-      id
-      title
-      description
-      byline
-      date
-      locations {
-        id
-        name
-        slug
-      }
-      mainContent {
-        __typename
-        ... on TextWithImage {
-          id
-          type
-          heading
-          text
-          image {
-            id
-            alt
-            uri
-            transformations {
-              id
-              label
-              uri
-            }
-          }
-        }
-        ... on Video {
-          id
-          type
-          heading
-          video
-        }
-        ... on Slideshow {
-          id
-          type
-          heading
-        }
-      }
-    }
-  }
-`;
 
 /*
 @TODO
@@ -69,28 +17,11 @@ for every content component.
 
 type ContentComponentObject = { [key: string]: any };
 
-function BlogPost() {
-  const router = useRouter();
-  const { slug } = router.query;
+interface BlogPostProps {
+  blog: any;
+}
 
-  const { loading, error, data } = useQuery(BLOG_POST_QUERY, {
-    variables: {
-      slug: `/blogs/${slug}`,
-    },
-  });
-
-  // Error state.
-  if (error) {
-    return <div>Error.</div>;
-  }
-
-  // Loading state,
-  if (loading || !data) {
-    return <div>Loading</div>;
-  }
-
-  const blog = data.blog;
-
+function BlogPost({ blog }: BlogPostProps) {
   return (
     <article>
       <header>

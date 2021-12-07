@@ -1,12 +1,10 @@
-import React, { Fragment, useEffect } from "react";
+import React from "react";
 // Next
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 // Apollo
-import { getDataFromTree } from "@apollo/client/react/ssr";
 import { useQuery } from "@apollo/client";
 import { withApollo } from "./../../../../../apollo/client/withApollo";
-import { DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY } from "./../../../../../apollo/client/queries/DecoupledRouter.gql";
-import { TermBySlugQuery as RESOURCE_TOPIC_BY_SLUG_QUERY } from "./../../../../../apollo/client/queries/TermBySlug.gql";
+import { TermByIdQuery as RESOURCE_TOPIC_BY_ID_QUERY } from "./../../../../../apollo/client/queries/TermById.gql";
 // Redux
 import { withRedux } from "./../../../../../redux/withRedux";
 // Components
@@ -17,24 +15,20 @@ import SearchResults from "./../../../../../components/online-resources/SearchRe
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import onlineResourcesContent from "./../../../../../__content/onlineResources";
+// Hooks
+import useDecoupledRouterQuery from "../../../../../hooks/useDecoupledRouterQuery";
 
 function FeaturedResourceTopicSlug() {
   const router = useRouter();
   const { slug } = router.query;
 
-  // Run decoupled router query to get uuid.
-  const { data: decoupledRouterData } = useQuery(DECOUPLED_ROUTER_QUERY, {
-    variables: {
-      path: router.asPath,
-    },
-  });
-  const uuid = decoupledRouterData?.decoupledRouter?.id;
+  const uuid = useDecoupledRouterQuery(router.asPath);
 
   // Get resource topic by id.
-  const { loading, error, data } = useQuery(RESOURCE_TOPIC_BY_SLUG_QUERY, {
+  const { loading, error, data } = useQuery(RESOURCE_TOPIC_BY_ID_QUERY, {
     skip: !uuid,
     variables: {
-      slug: uuid,
+      id: uuid,
       vocabulary: "resource_topic",
     },
   });
@@ -59,7 +53,7 @@ function FeaturedResourceTopicSlug() {
     );
   }
 
-  const resourceTopic = data.termBySlug;
+  const resourceTopic = data.term;
 
   return (
     <PageContainer

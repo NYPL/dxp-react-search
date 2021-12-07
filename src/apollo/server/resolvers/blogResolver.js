@@ -3,17 +3,25 @@ import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
 import { drupalParagraphsResolver, imageResolver } from "./utils";
+import {
+  buildAllNodesByContentTypeJsonApiPath,
+  buildNodeByIdJsonApiPath,
+} from "../datasources/buildJsonApiPath";
 
 const blogResolver = {
   Query: {
     allBlogs: async (parent, args, { dataSources }, info) => {
-      const response = await dataSources.drupalApi.getAllNodesByContentType(
+      const apiPath = buildAllNodesByContentTypeJsonApiPath(
         "blog",
         args.limit,
         args.pageNumber,
         args.filter,
         args.sortBy,
         graphqlFields(info)
+      );
+
+      const response = await dataSources.drupalApi.getAllNodesByContentType(
+        apiPath
       );
 
       // @TODO Move this to a utils function.
@@ -30,10 +38,8 @@ const blogResolver = {
       };
     },
     blog: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getNodeBySlug(
-        "blog",
-        args.slug
-      );
+      const apiPath = buildNodeByIdJsonApiPath("blog", args.id);
+      const response = await dataSources.drupalApi.getNodeById(apiPath);
       return response;
     },
   },

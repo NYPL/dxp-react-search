@@ -150,26 +150,15 @@ function createApolloClient(initialState = {}) {
           resourceTopic(_, { args, toReference }) {
             return toReference({
               __typename: "ResourceTopic",
-              id: args.slug,
+              id: args.id,
             });
           },
-          /*blog: {
-            read(_, { args, toReference }) {
-              return toReference({
-                __typename: "Blog",
-                id: args.id,
-              });
-            },
-          },
-          */
-          // @TODO Does this even work?
-          /*blog(_, { args, toReference }) {
+          blog(_, { args, toReference }) {
             return toReference({
               __typename: "Blog",
               id: args.id,
             });
           },
-          */
         },
       },
     },

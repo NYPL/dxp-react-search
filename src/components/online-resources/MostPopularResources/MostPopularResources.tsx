@@ -7,14 +7,19 @@ import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 
-interface MostPopularResourcesProps {
-  id: string;
-  title: string;
-}
-
 const MOST_POPULAR_RESOURCES_QUERY = gql`
-  query MostPopularResourcesQuery($mostPopular: Boolean) {
-    allOnlineResources(filter: { mostPopular: $mostPopular }) {
+  query MostPopularResourcesQuery(
+    $mostPopular: Boolean
+    $limit: Int
+    $pageNumber: Int
+    $sortBy: String
+  ) {
+    allOnlineResources(
+      limit: $limit
+      pageNumber: $pageNumber
+      sortBy: $sortBy
+      filter: { mostPopular: $mostPopular }
+    ) {
       items {
         id
         name
@@ -25,10 +30,18 @@ const MOST_POPULAR_RESOURCES_QUERY = gql`
   }
 `;
 
+interface MostPopularResourcesProps {
+  id: string;
+  title: string;
+}
+
 function MostPopularResources({ id, title }: MostPopularResourcesProps) {
   // Query for data.
   const { loading, error, data } = useQuery(MOST_POPULAR_RESOURCES_QUERY, {
     variables: {
+      limit: 3,
+      pageNumber: 1,
+      sortBy: null,
       mostPopular: true,
     },
   });
