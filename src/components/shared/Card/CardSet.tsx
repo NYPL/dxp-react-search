@@ -1,7 +1,11 @@
 import React from "react";
 // Components
 import {
+  Heading,
+  HeadingLevels,
+  HStack,
   Icon,
+  IconColors,
   IconNames,
   IconRotationTypes,
   IconSizes,
@@ -26,42 +30,43 @@ function CardSetHeading({ id, title, slug }: CardSetHeadingProps) {
   if (slug && title) {
     return (
       <div style={{ marginBottom: ".75em" }}>
-        <h2 className="heading" id={id} style={{ display: "inline" }}>
+        {/*<h2 className="heading" id={id} style={{ display: "inline" }}>
           {title}
         </h2>
-        <Link href={slug}>
-          <a
-            style={{
-              display: "inline-flex",
-              flexFlow: "row nowrap",
-              lineHeight: "1",
-              fontSize: ".875rem",
-              fontWeight: 600,
-              letterSpacing: ".04em",
-              color: "red",
-              marginLeft: "10px",
-              textDecoration: "none",
-            }}
-          >
-            See All
-            <span style={{ marginLeft: "5px" }}>
-              <Icon
-                size={IconSizes.small}
-                name={IconNames.arrow}
-                decorative={true}
-                iconRotation={IconRotationTypes.rotate270}
-              />
-            </span>
-          </a>
-        </Link>
+        */}
+        <HStack alignItems="baseline">
+          <Heading id={id} level={HeadingLevels.Two} text={title} />
+          <Link href={slug}>
+            <a
+              style={{
+                display: "inline-flex",
+                flexFlow: "row nowrap",
+                lineHeight: "1",
+                fontSize: ".875rem",
+                fontWeight: 600,
+                letterSpacing: ".04em",
+                color: "#c60917",
+                marginLeft: "10px",
+                textDecoration: "none",
+              }}
+            >
+              See All
+              <span style={{ marginLeft: "5px" }}>
+                <Icon
+                  size={IconSizes.Small}
+                  name={IconNames.Arrow}
+                  decorative={true}
+                  iconRotation={IconRotationTypes.Rotate270}
+                  color={IconColors.BrandPrimary}
+                />
+              </span>
+            </a>
+          </Link>
+        </HStack>
       </div>
     );
   } else if (title) {
-    return (
-      <h2 className="heading" id={id}>
-        {title}
-      </h2>
-    );
+    return <Heading id={id} level={HeadingLevels.Two} text={title} />;
   } else {
     return null;
   }

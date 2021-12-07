@@ -4,8 +4,8 @@ import {
   Card as DsCard,
   CardContent,
   CardHeading,
-  CardImageRatios,
-  CardImageSizes,
+  ImageRatios,
+  ImageSizes,
   CardLayouts,
 } from "@nypl/design-system-react-components";
 import Link from "next/link";
@@ -24,10 +24,10 @@ interface CardProps {
   // @TODO this should be the type for NextJS image.
   image?: JSX.Element;
   /** */
-  imageAspectRatio?: CardImageRatios;
+  imageAspectRatio?: ImageRatios;
   layout?: CardLayouts;
   center?: boolean;
-  imageSize?: CardImageSizes;
+  imageSize?: ImageSizes;
 }
 
 function Card({

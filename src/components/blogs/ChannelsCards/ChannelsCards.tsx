@@ -5,7 +5,7 @@ import { gql } from "@apollo/client";
 import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image";
 import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
-import { CardImageRatios } from "@nypl/design-system-react-components";
+import { ImageRatios } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 import CardSet from "../../shared/Card/CardSet";
@@ -111,7 +111,7 @@ function ChannelsCards({
                     quality={90}
                   />
                 ),
-                imageAspectRatio: CardImageRatios.TwoByOne,
+                imageAspectRatio: ImageRatios.TwoByOne,
               })}
             />
           </li>

@@ -1,8 +1,8 @@
 import React from "react";
 // Components
 import {
-  CardImageRatios,
-  CardImageSizes,
+  ImageRatios,
+  ImageSizes,
   CardLayouts,
 } from "@nypl/design-system-react-components";
 import Card from "../../shared/Card";
@@ -55,7 +55,7 @@ function BlogCard({ item }: BlogCardProps) {
       }
       description={item.description}
       url={item.slug}
-      layout={CardLayouts.Horizontal}
+      layout={CardLayouts.Row}
       center
       image={
         <Image
@@ -71,8 +71,8 @@ function BlogCard({ item }: BlogCardProps) {
           quality={90}
         />
       }
-      imageAspectRatio={CardImageRatios.TwoByOne}
-      imageSize={CardImageSizes.Large}
+      imageAspectRatio={ImageRatios.TwoByOne}
+      imageSize={ImageSizes.Large}
     />
   );
 }
