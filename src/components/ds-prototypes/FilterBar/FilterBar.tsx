@@ -6,6 +6,7 @@ import {
   Heading,
   Icon,
   IconRotationTypes,
+  IconSizes,
   Modal,
 } from "@nypl/design-system-react-components";
 // Styles
@@ -77,8 +78,8 @@ function FilterBar({
                 >
                   <Icon
                     decorative
-                    iconRotation={IconRotationTypes.rotate90}
-                    modifiers={["small"]}
+                    iconRotation={IconRotationTypes.Rotate90}
+                    size={IconSizes.Small}
                     //name="arrow"
                   />
                   Go Back

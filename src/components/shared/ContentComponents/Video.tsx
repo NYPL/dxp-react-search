@@ -11,7 +11,7 @@ interface VideoProps {
 
 function Video({ id, type, heading, description, video }: VideoProps) {
   return (
-    <div style={{ maxWidth: "700px" }}>
+    <div>
       <div key={id}>
         <h3>{type}</h3>
         {id}

@@ -18,21 +18,21 @@ function OrgFormField({ handleChange }: FormFieldProps) {
         }}
         onChange={handleChange}
         value={values.organization}
-        disabled={values.noSchoolOrOrg}
-        required={!values.noSchoolOrOrg}
+        isDisabled={values.noSchoolOrOrg}
+        isRequired={!values.noSchoolOrOrg}
         showLabel
         placeholder="Enter school or organization name"
         showOptReqLabel={!values.noSchoolOrOrg}
-        errorText={errors.organization}
-        errored={errors.organization ? true : false}
+        invalidText={errors.organization}
+        isInvalid={errors.organization ? true : false}
       />
       <Checkbox
-        checked={values.noSchoolOrOrg}
+        isChecked={values.noSchoolOrOrg}
         labelText="I’m not with a school or organization."
         name="noSchoolOrOrg"
         onChange={handleChange}
         showLabel
-        errored={errors.organization ? true : false}
+        isInvalid={errors.organization ? true : false}
       />
     </div>
   );

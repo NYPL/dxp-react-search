@@ -1,6 +1,10 @@
 import React from "react";
 import Components from "./../../shared/ContentComponents/getReactComponent";
-
+import {
+  Box,
+  Heading,
+  HeadingLevels,
+} from "@nypl/design-system-react-components";
 /*
 @TODO
 contentComponent will be an object from gql data, like this, but different
@@ -23,9 +27,9 @@ interface BlogPostProps {
 
 function BlogPost({ blog }: BlogPostProps) {
   return (
-    <article>
+    <Box as="article" w="100%" maxW="866px">
       <header>
-        <h1>{blog.title}</h1>
+        <Heading id={blog.id} level={HeadingLevels.Two} text={blog.title} />
         <div>By {blog.byline}</div>
         <div>{blog.date}</div>
         <div>
@@ -50,7 +54,7 @@ function BlogPost({ blog }: BlogPostProps) {
       {blog.mainContent.map((contentComponent: ContentComponentObject) =>
         Components(contentComponent)
       )}
-    </article>
+    </Box>
   );
 }
 

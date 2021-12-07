@@ -79,11 +79,11 @@ function VisitTypeFormField({
         id="request-visit-select-type"
         labelText="Please select your visit type"
         onChange={handleChange}
-        selectedOption={values.visitType}
-        required
+        value={values.visitType}
+        isRequired
         showLabel
-        errorText={errors.visitType}
-        errored={errors.visitType !== undefined}
+        invalidText={errors.visitType}
+        isInvalid={errors.visitType !== undefined}
       >
         <option value="" disabled selected>
           -- Select visit type --
@@ -107,11 +107,11 @@ function VisitTypeFormField({
                     e.target.name
                   )
                 }
-                checked={values.virtualVisitServices.includes(
+                isChecked={values.virtualVisitServices.includes(
                   virtualServiceItem.id
                 )}
                 showLabel
-                errored={errors.virtualVisitServices ? true : false}
+                isInvalid={errors.virtualVisitServices ? true : false}
               />
               {virtualServiceItem.id === "services-other" && (
                 <div className={s.otherInput}>
@@ -123,11 +123,11 @@ function VisitTypeFormField({
                     showLabel={false}
                     onChange={handleChange}
                     value={values.virtualVisitServicesOther}
-                    disabled={
+                    isDisabled={
                       !values.virtualVisitServices.includes("services-other")
                     }
-                    errored={errors.virtualVisitServices ? true : false}
-                    errorText={errors.virtualVisitServices}
+                    isInvalid={errors.virtualVisitServices ? true : false}
+                    invalidText={errors.virtualVisitServices}
                   />
                 </div>
               )}
@@ -147,7 +147,7 @@ function VisitTypeFormField({
                 helperText={inPersonItem.helperText}
                 showLabel
                 onChange={(e) => handleChange(e)}
-                errored={errors.inPersonServices ? true : false}
+                isInvalid={errors.inPersonServices ? true : false}
               />
               {inPersonItem.id === "in-person-other" && (
                 <div className={s.otherInput}>
@@ -159,9 +159,9 @@ function VisitTypeFormField({
                     showLabel={false}
                     onChange={handleChange}
                     value={values.inPersonServicesOther}
-                    disabled={values.inPersonServices !== "in-person-other"}
-                    errored={errors.inPersonServices ? true : false}
-                    errorText={errors.inPersonServices}
+                    isDisabled={values.inPersonServices !== "in-person-other"}
+                    isInvalid={errors.inPersonServices ? true : false}
+                    invalidText={errors.inPersonServices}
                   />
                 </div>
               )}

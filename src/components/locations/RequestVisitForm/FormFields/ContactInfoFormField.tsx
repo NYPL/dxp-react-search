@@ -19,9 +19,9 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         }}
         labelText="Name"
         placeholder="Enter your name"
-        required={true}
-        errorText={errors?.contactName}
-        errored={errors.contactName ? true : false}
+        isRequired={true}
+        invalidText={errors?.contactName}
+        isInvalid={errors.contactName ? true : false}
         onChange={handleChange}
         value={values.contactName}
       />
@@ -32,9 +32,9 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         }}
         labelText="Email"
         placeholder="Enter your email"
-        required={true}
-        errorText={errors?.contactEmail}
-        errored={errors.contactEmail ? true : false}
+        isRequired={true}
+        invalidText={errors?.contactEmail}
+        isInvalid={errors.contactEmail ? true : false}
         onChange={handleChange}
         value={values.contactEmai}
       />
