@@ -1,5 +1,10 @@
 import React from "react";
-import { Link, LinkTypes } from "@nypl/design-system-react-components";
+import {
+  Button,
+  ButtonTypes,
+  Link,
+  LinkTypes,
+} from "@nypl/design-system-react-components";
 import { MenuItemType as MenuItemProps } from "./MenuTypes";
 import s from "./Menu.module.css";
 

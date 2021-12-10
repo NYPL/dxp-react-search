@@ -88,6 +88,15 @@ const blogResolver = {
         case "slideshow":
           objectType = "Slideshow";
           break;
+        case "text":
+          objectType = "Text";
+          break;
+        case "social":
+          objectType = "SocialEmbed";
+          break;
+        case "audio":
+          objectType = "AudioEmbed";
+          break;
       }
       return objectType;
     },

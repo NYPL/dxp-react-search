@@ -38,6 +38,7 @@ export function buildAllNodesByContentTypeJsonApiPath(
     includeFields.push([
       "field_main_content.field_ers_media_item.field_media_image",
       "field_main_content.field_erm_media_items.field_media_image",
+      //"field_main_content.field_tfls_summary_descrip"
     ]);
   }
 

@@ -1,14 +1,22 @@
 import Slideshow from "./Slideshow";
 import TextWithImage from "./TextWithImage";
 import Video from "./Video";
+import Text from "./Text";
+import SocialEmbed from "./SocialEmbed";
+import AudioEmbed from "./AudioEmbed";
+// Image
+//
 
-// Is it better to pass this in as an arg in the function? So different instances
+// @TODO Is it better to pass this in as an arg in the function? So different instances
 // can use different sets of Drupal paragraphs?
 const Components = {
   // property is the type name
   video: Video,
   text_with_image: TextWithImage,
   slideshow: Slideshow,
+  text: Text,
+  social: SocialEmbed,
+  audio: AudioEmbed,
 };
 
 // @TODO Figure out better names, some options...

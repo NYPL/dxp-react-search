@@ -47,6 +47,25 @@ export const typeDefs = gql`
     images: [Image]!
   }
 
+  type Text {
+    id: ID!
+    type: String!
+    text: String!
+    heading: String
+  }
+
+  type SocialEmbed {
+    id: ID!
+    type: String!
+    embedCode: String!
+  }
+
+  type AudioEmbed {
+    id: ID!
+    type: String!
+    embedCode: String!
+  }
+
   type Query {
     _empty: String
   }

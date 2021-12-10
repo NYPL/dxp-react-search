@@ -1,5 +1,8 @@
 import React from "react";
-import { VideoPlayer } from "@nypl/design-system-react-components";
+import {
+  VideoPlayer,
+  VideoPlayerTypes,
+} from "@nypl/design-system-react-components";
 
 interface VideoProps {
   id: string;
@@ -17,6 +20,13 @@ function Video({ id, type, heading, description, video }: VideoProps) {
         {id}
         <p>{video}</p>
       </div>
+
+      {/*<VideoPlayer
+        id={id}
+        videoId={video}
+        videoType={VideoPlayerTypes.YouTube}
+      />
+      */}
     </div>
   );
 }

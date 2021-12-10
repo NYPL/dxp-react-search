@@ -13,7 +13,13 @@ export const typeDefs = gql`
     mainContent: [BlogMainContent]
   }
 
-  union BlogMainContent = TextWithImage | Video | Slideshow
+  union BlogMainContent =
+      TextWithImage
+    | Video
+    | Slideshow
+    | Text
+    | SocialEmbed
+    | AudioEmbed
 
   type BlogConnection {
     items: [Blog]

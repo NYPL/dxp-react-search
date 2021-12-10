@@ -48,6 +48,25 @@ export function drupalParagraphsResolver(field, typesInQuery) {
     ) {
       accumulator.push(item);
     }
+
+    if (item.type === "paragraph--text" && typesInQuery.includes("Text")) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--social" &&
+      typesInQuery.includes("SocialEmbed")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--audio" &&
+      typesInQuery.includes("AudioEmbed")
+    ) {
+      accumulator.push(item);
+    }
+
     return accumulator;
   }, []);
 
@@ -74,6 +93,10 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           heading: item.field_ts_heading,
           description: item.field_tfls_description.processed,
           video: item.field_ers_media_item.field_media_oembed_video,
+          /*video: youTubeGetID(
+            item.field_ers_media_item.field_media_oembed_video
+          ),
+          */
         };
         break;
       case "paragraph--slideshow":
@@ -88,8 +111,44 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           images: slideshowImages,
         };
         break;
+      case "paragraph--text":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          text: item.field_tfls_summary_descrip.processed,
+          heading: item.field_ts_heading ? item.field_ts_heading : null,
+        };
+        break;
+      case "paragraph--social":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          embedCode: item.field_ts_social_embed,
+        };
+        break;
+      case "paragraph--audio":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          embedCode: item.field_ers_media_item.field_media_oembed_remote_audio,
+        };
+        break;
     }
     items.push(paragraphComponent);
   });
   return items;
+}
+
+function youTubeGetID(url) {
+  var ID = "";
+  url = url
+    .replace(/(>|<)/gi, "")
+    .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+  if (url[2] !== undefined) {
+    ID = url[2].split(/[^0-9a-z_\-]/i);
+    ID = ID[0];
+  } else {
+    ID = url;
+  }
+  return ID;
 }

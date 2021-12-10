@@ -52,6 +52,22 @@ const BLOG_POST_QUERY = gql`
           heading
           video
         }
+        ... on Text {
+          id
+          type
+          heading
+          text
+        }
+        ... on SocialEmbed {
+          id
+          type
+          embedCode
+        }
+        ... on AudioEmbed {
+          id
+          type
+          embedCode
+        }
       }
     }
   }
