@@ -102,6 +102,9 @@ const blogResolver = {
         case "image":
           objectType = "ImageComponent";
           break;
+        case "link_card_list":
+          objectType = "CardList";
+          break;
       }
       return objectType;
     },

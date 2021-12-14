@@ -5,6 +5,7 @@ import Text from "./Text";
 import SocialEmbed from "./SocialEmbed";
 import AudioEmbed from "./AudioEmbed";
 import ImageComponent from "./ImageComponent";
+import CardList from "./CardList";
 // Image
 //
 
@@ -19,6 +20,7 @@ const Components = {
   social: SocialEmbed,
   audio: AudioEmbed,
   image: ImageComponent,
+  link_card_list: CardList,
 };
 
 // @TODO Figure out better names, some options...

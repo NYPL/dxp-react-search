@@ -87,6 +87,30 @@ export const BLOG_FIELDS_FRAGMENT = gql`
           }
         }
       }
+      ... on CardList {
+        id
+        type
+        heading
+        description
+        items {
+          id
+          title
+          description
+          link
+          image {
+            id
+            uri
+            alt
+            width
+            height
+            transformations {
+              id
+              label
+              uri
+            }
+          }
+        }
+      }
     }
   }
 `;

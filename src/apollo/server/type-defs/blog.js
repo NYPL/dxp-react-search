@@ -21,6 +21,7 @@ export const typeDefs = gql`
     | SocialEmbed
     | AudioEmbed
     | ImageComponent
+    | CardList
 
   type BlogConnection {
     items: [Blog]

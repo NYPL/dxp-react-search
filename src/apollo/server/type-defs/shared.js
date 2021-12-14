@@ -76,6 +76,22 @@ export const typeDefs = gql`
     credit: String
   }
 
+  type CardList {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    items: [CardItem]!
+  }
+
+  type CardItem {
+    id: ID!
+    title: String
+    description: String
+    image: Image
+    link: String
+  }
+
   type Query {
     _empty: String
   }

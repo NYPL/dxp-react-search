@@ -38,6 +38,10 @@ export function buildAllNodesByContentTypeJsonApiPath(
     includeFields.push([
       "field_main_content.field_ers_media_item.field_media_image",
       "field_main_content.field_erm_media_items.field_media_image",
+      // Link Card List
+      "field_main_content.field_erm_link_cards",
+      "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+      //"field_main_content.field_erm_link_cards.field_ts_heading",
       // @TODO this is probs useless.
       //"field_main_content.field_ers_media_item.field_media_image_1",
       //"field_main_content.field_tfls_summary_descrip"
@@ -134,6 +138,9 @@ export function buildNodeByIdJsonApiPath(contentType, id) {
       "field_main_content.field_ers_media_item.field_media_image",
       "field_main_content.field_erm_media_items.field_media_image",
       "field_erm_location",
+      // Link Card List
+      "field_main_content.field_erm_link_cards",
+      "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
     ];
     // Add include
     if (includeFields.length) {

@@ -101,6 +101,13 @@ export function drupalParagraphsResolver(field, typesInQuery) {
       accumulator.push(item);
     }
 
+    if (
+      item.type === "paragraph--link_card_list" &&
+      typesInQuery.includes("CardList")
+    ) {
+      accumulator.push(item);
+    }
+
     return accumulator;
   }, []);
 
@@ -224,6 +231,26 @@ export function drupalParagraphsResolver(field, typesInQuery) {
             ? mediaItem.field_media_image_credit
             : null,
           image: imageResolver(mediaItem),
+        };
+        break;
+
+      case "paragraph--link_card_list":
+        const items = [];
+        item.field_erm_link_cards.map((cardItem) => {
+          items.push({
+            id: cardItem.id,
+            title: cardItem.field_ts_heading,
+            description: cardItem.field_tfls_description.processed,
+            link: cardItem.field_ls_link.uri,
+            image: imageResolver(cardItem.field_ers_image),
+          });
+        });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description.processed,
+          items: items,
         };
         break;
     }
