@@ -121,11 +121,18 @@ export function drupalParagraphsResolver(field, typesInQuery) {
 
     switch (item.type) {
       case "paragraph--text_with_image":
+        const textWithImageMedia = item.field_ers_media_item;
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
           heading: item.field_ts_heading,
           text: item.field_tfls_summary_descrip.processed,
+          caption: textWithImageMedia.field_media_image_caption
+            ? textWithImageMedia.field_media_image_caption
+            : null,
+          credit: textWithImageMedia.field_media_image_credit
+            ? textWithImageMedia.field_media_image_credit
+            : null,
           image: imageResolver(item.field_ers_media_item),
         };
         break;
@@ -233,7 +240,6 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           image: imageResolver(mediaItem),
         };
         break;
-
       case "paragraph--link_card_list":
         const items = [];
         item.field_erm_link_cards.map((cardItem) => {

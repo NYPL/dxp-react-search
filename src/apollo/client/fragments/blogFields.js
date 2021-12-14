@@ -35,6 +35,8 @@ export const BLOG_FIELDS_FRAGMENT = gql`
         type
         heading
         text
+        caption
+        credit
         image {
           id
           alt

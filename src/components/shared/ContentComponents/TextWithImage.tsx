@@ -13,10 +13,20 @@ interface TextWithImageProps {
   type: string;
   heading?: string;
   text: string;
+  caption?: string;
+  credit?: string;
   image: any;
 }
 
-function TextWithImage({ id, type, heading, text, image }: TextWithImageProps) {
+function TextWithImage({
+  id,
+  type,
+  heading,
+  text,
+  caption,
+  credit,
+  image,
+}: TextWithImageProps) {
   return (
     <Box id={`${type}-${id}`} mb="xl">
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
@@ -38,6 +48,16 @@ function TextWithImage({ id, type, heading, text, image }: TextWithImageProps) {
           height={450}
           quality={90}
         />
+        {caption && (
+          <Box fontSize="-1" fontWeight="regular">
+            {caption}
+          </Box>
+        )}
+        {credit && (
+          <Box fontSize="-3" fontStyle="italic">
+            {credit}
+          </Box>
+        )}
       </Box>
       <Box dangerouslySetInnerHTML={{ __html: text }} />
     </Box>

@@ -31,6 +31,8 @@ export const typeDefs = gql`
     heading: String
     text: String!
     image: Image
+    caption: String
+    credit: String
   }
 
   type Video {
