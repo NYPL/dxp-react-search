@@ -69,6 +69,24 @@ export const BLOG_FIELDS_FRAGMENT = gql`
         type
         html
       }
+      ... on ImageComponent {
+        id
+        type
+        caption
+        credit
+        image {
+          id
+          uri
+          alt
+          width
+          height
+          transformations {
+            id
+            label
+            uri
+          }
+        }
+      }
     }
   }
 `;

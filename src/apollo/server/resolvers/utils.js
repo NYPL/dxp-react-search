@@ -47,6 +47,8 @@ export function imageResolver(image) {
         });
         return transformations;
       },
+      ...(mediaImage.meta.width && { width: mediaImage.meta.width }),
+      ...(mediaImage.meta.height && { height: mediaImage.meta.height }),
     };
   }
 }
@@ -88,6 +90,13 @@ export function drupalParagraphsResolver(field, typesInQuery) {
     if (
       item.type === "paragraph--audio" &&
       typesInQuery.includes("AudioEmbed")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--image" &&
+      typesInQuery.includes("ImageComponent")
     ) {
       accumulator.push(item);
     }
@@ -201,6 +210,20 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           id: item.id,
           type: paragraphTypeName,
           html: audioHtml,
+        };
+        break;
+      case "paragraph--image":
+        const mediaItem = item.field_ers_media_item;
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          caption: mediaItem.field_media_image_caption
+            ? mediaItem.field_media_image_caption
+            : null,
+          credit: mediaItem.field_media_image_credit
+            ? mediaItem.field_media_image_credit
+            : null,
+          image: imageResolver(mediaItem),
         };
         break;
     }

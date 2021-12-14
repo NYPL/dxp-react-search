@@ -9,6 +9,7 @@ function Image({
   layout,
   width,
   height,
+  objectFit,
   quality,
   transformationLabel,
   useTransformation,
@@ -29,7 +30,6 @@ function Image({
       }
     });
 
-    console.log(transformationLabel);
     return imageUri;
   }
 
@@ -44,8 +44,17 @@ function Image({
           : uri
       }
       layout={layout}
-      width={width}
-      height={height}
+      {...(width && {
+        width: width,
+      })}
+      {...(height && {
+        height: height,
+      })}
+      {...(objectFit && {
+        objectFit: objectFit,
+      })}
+      //width={width}
+      //height={height}
       quality={quality}
     />
   );

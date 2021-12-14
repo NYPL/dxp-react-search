@@ -99,6 +99,9 @@ const blogResolver = {
         case "audio":
           objectType = "AudioEmbed";
           break;
+        case "image":
+          objectType = "ImageComponent";
+          break;
       }
       return objectType;
     },

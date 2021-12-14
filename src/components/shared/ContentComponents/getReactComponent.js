@@ -4,6 +4,7 @@ import Video from "./Video";
 import Text from "./Text";
 import SocialEmbed from "./SocialEmbed";
 import AudioEmbed from "./AudioEmbed";
+import ImageComponent from "./ImageComponent";
 // Image
 //
 
@@ -17,6 +18,7 @@ const Components = {
   text: Text,
   social: SocialEmbed,
   audio: AudioEmbed,
+  image: ImageComponent,
 };
 
 // @TODO Figure out better names, some options...

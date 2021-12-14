@@ -20,6 +20,7 @@ export const typeDefs = gql`
     | Text
     | SocialEmbed
     | AudioEmbed
+    | ImageComponent
 
   type BlogConnection {
     items: [Blog]

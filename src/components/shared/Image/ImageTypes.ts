@@ -4,8 +4,9 @@ export type ImageType = {
   // @TODO add correct type.
   layout: any;
   // @TODO check if number is correct type.
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  objectFit?: string;
   quality: number;
   uri: string;
   useTransformation: boolean;

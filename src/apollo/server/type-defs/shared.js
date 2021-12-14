@@ -15,6 +15,8 @@ export const typeDefs = gql`
     alt: String
     uri: String!
     transformations: [ImageTransformation]
+    width: Int
+    height: Int
   }
 
   type ImageTransformation {
@@ -64,6 +66,14 @@ export const typeDefs = gql`
     type: String!
     text: String!
     heading: String
+  }
+
+  type ImageComponent {
+    id: ID!
+    type: String!
+    image: Image
+    caption: String
+    credit: String
   }
 
   type Query {
