@@ -12,9 +12,17 @@ interface SocialEmbedProps {
 }
 function SocialEmbed({ id, type, embedCode }: SocialEmbedProps) {
   return (
-    <div id={id} style={{ width: "100%", marginBottom: "3rem" }}>
-      <div dangerouslySetInnerHTML={{ __html: embedCode }} />
-    </div>
+    <Box id={`${type}-${id}`} w="100%" mb="xl">
+      <Box
+        sx={{
+          "& iframe": {
+            width: "100%",
+            maxWidth: "100%",
+          },
+        }}
+        dangerouslySetInnerHTML={{ __html: embedCode }}
+      />
+    </Box>
   );
 }
 

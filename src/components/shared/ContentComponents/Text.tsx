@@ -1,6 +1,9 @@
 import React from "react";
-import { Heading, HeadingLevels } from "@nypl/design-system-react-components";
-import s from "./Text.module.css";
+import {
+  Box,
+  Heading,
+  HeadingLevels,
+} from "@nypl/design-system-react-components";
 
 interface TextProps {
   id: string;
@@ -11,10 +14,17 @@ interface TextProps {
 
 function Text({ id, type, heading, text }: TextProps) {
   return (
-    <div id={id} className={s.container}>
+    <Box id={`${type}-${id}`} mb="xl">
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
-      <div className={s.text} dangerouslySetInnerHTML={{ __html: text }} />
-    </div>
+      <Box
+        sx={{
+          "& ul": {
+            paddingLeft: "s",
+          },
+        }}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
+    </Box>
   );
 }
 

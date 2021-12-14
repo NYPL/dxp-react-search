@@ -28,6 +28,8 @@ function Image({
         imageUri = transformation.uri;
       }
     });
+
+    console.log(transformationLabel);
     return imageUri;
   }
 
@@ -35,6 +37,7 @@ function Image({
     <NextImage
       alt={alt}
       // @ts-ignore
+      //src="https://images.nypl.org/index.php?id=703835F&t=w"
       src={
         useTransformation
           ? getImageTransformation(transformationLabel, transformations)

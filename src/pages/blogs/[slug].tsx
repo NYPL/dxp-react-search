@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 import { withApollo } from "../../apollo/client/withApollo";
+import { BLOG_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/blogFields";
 // Components
 import PageContainer from "../../components/blogs/layouts/PageContainer";
 import BlogPost from "../../components/blogs/BlogPost";
@@ -11,64 +12,10 @@ import BlogPost from "../../components/blogs/BlogPost";
 import useDecoupledRouterQuery from "./../../hooks/useDecoupledRouterQuery";
 
 const BLOG_POST_QUERY = gql`
+  ${BLOG_FIELDS_FRAGMENT}
   query BlogPostQuery($id: String) {
     blog(id: $id) {
-      id
-      title
-      description
-      byline
-      date
-      locations {
-        id
-        name
-        slug
-      }
-      mainContent {
-        __typename
-        ... on Slideshow {
-          id
-          type
-          heading
-        }
-        ... on TextWithImage {
-          id
-          type
-          heading
-          text
-          image {
-            id
-            alt
-            uri
-            transformations {
-              id
-              label
-              uri
-            }
-          }
-        }
-        ... on Video {
-          id
-          type
-          heading
-          video
-        }
-        ... on Text {
-          id
-          type
-          heading
-          text
-        }
-        ... on SocialEmbed {
-          id
-          type
-          embedCode
-        }
-        ... on AudioEmbed {
-          id
-          type
-          embedCode
-        }
-      }
+      ...BlogFields
     }
   }
 `;

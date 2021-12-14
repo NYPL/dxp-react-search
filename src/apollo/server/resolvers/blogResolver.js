@@ -63,10 +63,12 @@ const blogResolver = {
     date: (blog) => formatDate(blog.created),
     image: (blog) =>
       blog.field_ers_media_image.data !== null
-        ? imageResolver(blog.field_ers_media_image.field_media_image)
+        ? imageResolver(blog.field_ers_media_image)
         : null,
     locations: (blog) =>
-      blog.field_erm_location !== null ? blog.field_erm_location : null,
+      blog.field_erm_location.data?.length === 0
+        ? null
+        : blog.field_erm_location,
     mainContent: (blog, args, context, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);

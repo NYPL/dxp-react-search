@@ -62,6 +62,7 @@ const nextConfig = {
       "treasures-d8.nypl.org",
       "nyplorg-sandbox.s3.amazonaws.com",
       "localhost",
+      "images.nypl.org",
       "cdn-d8.nypl.org",
       "d8.nypl.org",
     ],

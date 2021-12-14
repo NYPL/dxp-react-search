@@ -6,6 +6,7 @@ import {
   HeadingLevels,
   Link,
   HStack,
+  Text,
 } from "@nypl/design-system-react-components";
 /*
 @TODO
@@ -32,13 +33,17 @@ function BlogPost({ blog }: BlogPostProps) {
     <Box as="article" w="100%" maxW="866px">
       <Box as="header" pb={10}>
         <Heading id={blog.id} level={HeadingLevels.One} text={blog.title} />
-        <Box>By {blog.byline}</Box>
-        <Box>{blog.date}</Box>
-        <HStack>
-          {blog.locations.map((location: any) => {
-            return <Link href={location.slug}>{location.name}</Link>;
-          })}
-        </HStack>
+        <Box fontSize="1" fontWeight="regular">
+          By {blog.byline}
+        </Box>
+        <Box mb="xs">{blog.date}</Box>
+        {blog.locations && (
+          <HStack>
+            {blog.locations.map((location: any) => {
+              return <Link href={location.slug}>{location.name}</Link>;
+            })}
+          </HStack>
+        )}
       </Box>
       {blog.mainContent.map((contentComponent: ContentComponentObject) =>
         Components(contentComponent)

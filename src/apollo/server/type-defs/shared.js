@@ -36,7 +36,19 @@ export const typeDefs = gql`
     type: String!
     heading: String
     description: String
-    video: String!
+    html: String!
+  }
+
+  type AudioEmbed {
+    id: ID!
+    type: String!
+    html: String!
+  }
+
+  type SocialEmbed {
+    id: ID!
+    type: String!
+    embedCode: String!
   }
 
   type Slideshow {
@@ -52,18 +64,6 @@ export const typeDefs = gql`
     type: String!
     text: String!
     heading: String
-  }
-
-  type SocialEmbed {
-    id: ID!
-    type: String!
-    embedCode: String!
-  }
-
-  type AudioEmbed {
-    id: ID!
-    type: String!
-    embedCode: String!
   }
 
   type Query {

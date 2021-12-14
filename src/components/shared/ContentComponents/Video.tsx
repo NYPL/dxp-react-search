@@ -1,7 +1,8 @@
 import React from "react";
 import {
-  VideoPlayer,
-  VideoPlayerTypes,
+  Box,
+  Heading,
+  HeadingLevels,
 } from "@nypl/design-system-react-components";
 
 interface VideoProps {
@@ -9,25 +10,30 @@ interface VideoProps {
   type: string;
   heading?: string;
   description?: string;
-  video: string;
+  html: string;
 }
 
-function Video({ id, type, heading, description, video }: VideoProps) {
+function Video({ id, type, heading, description, html }: VideoProps) {
   return (
-    <div>
-      <div key={id}>
-        <h3>{type}</h3>
-        {id}
-        <p>{video}</p>
-      </div>
-
-      {/*<VideoPlayer
-        id={id}
-        videoId={video}
-        videoType={VideoPlayerTypes.YouTube}
+    <Box id={`${type}-${id}`} className="video" mb="xl">
+      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
+      <Box
+        paddingBottom="56.25%"
+        position="relative"
+        sx={{
+          "& iframe": {
+            width: "100%",
+            height: "100%",
+            margin: "auto",
+            position: "absolute",
+            top: "0",
+            left: "0",
+          },
+        }}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
-      */}
-    </div>
+    </Box>
   );
 }
 

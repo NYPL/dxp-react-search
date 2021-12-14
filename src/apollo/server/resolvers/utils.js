@@ -1,29 +1,54 @@
 export function imageResolver(image) {
-  return {
-    id: image.id,
-    //alt: image.meta.alt,
-    alt: "imageResolver alt!",
-    uri: () => {
-      if (image.uri.url && image.uri.url.includes("sites/default")) {
-        return `http://localhost:8080${image.uri.url}`;
-      } else {
-        return image.uri.url;
-      }
-    },
-    transformations: () => {
-      let transformations = [];
-      image.image_style_uri.forEach((imageStyle) => {
-        for (const [label, uri] of Object.entries(imageStyle)) {
+  if (image.type === "media--digital_collections_image") {
+    const uri = `https://images.nypl.org/index.php?id=${image.field_media_dc_id}&t=w`;
+    const imageStyles = ["1_1_960", "2_1_320", "2_1_960", "medium"];
+    return {
+      id: image.id,
+      alt: "dc image alt!",
+      uri: uri,
+      transformations: () => {
+        let transformations = [];
+        imageStyles.forEach((imageStyle) => {
           transformations.push({
-            id: `${image.id}__${label}`,
-            label: label,
+            id: `${image.id}__${imageStyle}`,
+            label: imageStyle,
             uri: uri,
           });
+        });
+        return transformations;
+      },
+    };
+  } else {
+    const mediaImage = image.field_media_image;
+    return {
+      id: mediaImage.id,
+      //alt: image.meta.alt,
+      alt: "imageResolver alt!",
+      uri: () => {
+        if (
+          mediaImage.uri.url &&
+          mediaImage.uri.url.includes("sites/default")
+        ) {
+          return `http://localhost:8080${mediaImage.uri.url}`;
+        } else {
+          return mediaImage.uri.url;
         }
-      });
-      return transformations;
-    },
-  };
+      },
+      transformations: () => {
+        let transformations = [];
+        mediaImage.image_style_uri.forEach((imageStyle) => {
+          for (const [label, uri] of Object.entries(imageStyle)) {
+            transformations.push({
+              id: `${mediaImage.id}__${label}`,
+              label: label,
+              uri: uri,
+            });
+          }
+        });
+        return transformations;
+      },
+    };
+  }
 }
 
 export function drupalParagraphsResolver(field, typesInQuery) {
@@ -75,6 +100,8 @@ export function drupalParagraphsResolver(field, typesInQuery) {
   requestedParagraphs.map((item) => {
     let paragraphComponent;
     let paragraphTypeName = item.type.replace("paragraph--", "");
+    let oembedBaseUrl;
+    let embedCode;
 
     switch (item.type) {
       case "paragraph--text_with_image":
@@ -83,20 +110,34 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           type: paragraphTypeName,
           heading: item.field_ts_heading,
           text: item.field_tfls_summary_descrip.processed,
-          image: imageResolver(item.field_ers_media_item.field_media_image),
+          image: imageResolver(item.field_ers_media_item),
         };
         break;
       case "paragraph--video":
+        //let oembedBaseUrl;
+        // Youtube
+        // Ex. oEmbed req: https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=385eTo76OzA
+        if (
+          item.field_ers_media_item.field_media_oembed_video.includes("youtube")
+        ) {
+          oembedBaseUrl = "https://www.youtube.com/oembed?url";
+        }
+        // Vimeo
+        // Ex oEmbed req: https://vimeo.com/api/oembed.json?url=https://vimeo.com/563015803
+        if (
+          item.field_ers_media_item.field_media_oembed_video.includes("vimeo")
+        ) {
+          oembedBaseUrl = "https://vimeo.com/api/oembed.json?url";
+        }
+        embedCode = item.field_ers_media_item.field_media_oembed_video;
+        const videoHtml = fetchOembedData(oembedBaseUrl, embedCode);
+
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
           heading: item.field_ts_heading,
-          description: item.field_tfls_description.processed,
-          video: item.field_ers_media_item.field_media_oembed_video,
-          /*video: youTubeGetID(
-            item.field_ers_media_item.field_media_oembed_video
-          ),
-          */
+          description: item.field_tfls_description?.processed,
+          html: videoHtml,
         };
         break;
       case "paragraph--slideshow":
@@ -127,10 +168,39 @@ export function drupalParagraphsResolver(field, typesInQuery) {
         };
         break;
       case "paragraph--audio":
+        // Soundcloud
+        if (
+          item.field_ers_media_item.field_media_oembed_remote_audio.includes(
+            "soundcloud"
+          )
+        ) {
+          oembedBaseUrl = "https://soundcloud.com/oembed?url";
+        }
+        // Spotify
+        if (
+          item.field_ers_media_item.field_media_oembed_remote_audio.includes(
+            "spotify"
+          )
+        ) {
+          oembedBaseUrl = "https://open.spotify.com/oembed?url";
+        }
+        // Libsyn
+        // Ex: https://sandbox-d8.nypl.org/api/oembed-libsyn?url=https://html5-player.libsyn.com/embed/episode/id/20880053
+        if (
+          item.field_ers_media_item.field_media_oembed_remote_audio.includes(
+            "libsyn"
+          )
+        ) {
+          // @TODO use env var for instance of drupal?
+          oembedBaseUrl = "https://sandbox-d8.nypl.org/api/oembed-libsyn?url";
+        }
+        embedCode = item.field_ers_media_item.field_media_oembed_remote_audio;
+        const audioHtml = fetchOembedData(oembedBaseUrl, embedCode);
+
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
-          embedCode: item.field_ers_media_item.field_media_oembed_remote_audio,
+          html: audioHtml,
         };
         break;
     }
@@ -139,16 +209,12 @@ export function drupalParagraphsResolver(field, typesInQuery) {
   return items;
 }
 
-function youTubeGetID(url) {
-  var ID = "";
-  url = url
-    .replace(/(>|<)/gi, "")
-    .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-  if (url[2] !== undefined) {
-    ID = url[2].split(/[^0-9a-z_\-]/i);
-    ID = ID[0];
-  } else {
-    ID = url;
+async function fetchOembedData(oembedBaseUrl, embedCode) {
+  try {
+    const response = await fetch(`${oembedBaseUrl}=${embedCode}`);
+    const json = await response.json();
+    return json.html;
+  } catch (e) {
+    console.error(e);
   }
-  return ID;
 }

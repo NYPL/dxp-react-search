@@ -1,9 +1,12 @@
 import React from "react";
 // Components
 import {
+  Box,
   ImageRatios,
   ImageSizes,
   CardLayouts,
+  Link,
+  HStack,
 } from "@nypl/design-system-react-components";
 import Card from "../../shared/Card";
 import Image from "../../shared/Image";
@@ -39,19 +42,18 @@ function BlogCard({ item }: BlogCardProps) {
       id={item.id}
       title={item.title}
       subHeading={
-        <div style={{ paddingBottom: ".5em" }}>
-          <div>
+        <Box pb={5}>
+          <Box>
             By {item.byline} | {item.date}
-          </div>
-          {item.locations.map((location: Location) => {
-            return (
-              <a style={{ paddingRight: "10px" }} href={location.slug}>
-                {location.name}
-              </a>
-            );
-          })}
-          &nbsp;
-        </div>
+          </Box>
+          {item.locations && (
+            <HStack>
+              {item.locations.map((location: Location) => {
+                return <Link href={location.slug}>{location.name}</Link>;
+              })}
+            </HStack>
+          )}
+        </Box>
       }
       description={item.description}
       url={item.slug}

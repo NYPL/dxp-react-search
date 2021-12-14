@@ -2,6 +2,7 @@ import React from "react";
 // Apollo
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
+import { BLOG_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/blogFields";
 // Components
 import { Pagination } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
@@ -15,6 +16,7 @@ import { ImageType } from "../../shared/Image/ImageTypes";
 import { useRouter } from "next/router";
 
 const BLOGS_QUERY = gql`
+  ${BLOG_FIELDS_FRAGMENT}
   query BlogsQuery(
     $limit: Int
     $pageNumber: Int
@@ -38,73 +40,7 @@ const BLOGS_QUERY = gql`
       sortBy: $sortBy
     ) {
       items {
-        id
-        title
-        description
-        slug
-        date
-        byline
-        image {
-          id
-          uri
-          alt
-          transformations {
-            id
-            label
-            uri
-          }
-        }
-        locations {
-          id
-          name
-          slug
-        }
-        mainContent {
-          __typename
-          ... on Slideshow {
-            id
-            type
-            heading
-          }
-          ... on TextWithImage {
-            id
-            type
-            heading
-            text
-            image {
-              id
-              alt
-              uri
-              transformations {
-                id
-                label
-                uri
-              }
-            }
-          }
-          ... on Video {
-            id
-            type
-            heading
-            video
-          }
-          ... on Text {
-            id
-            type
-            heading
-            text
-          }
-          ... on SocialEmbed {
-            id
-            type
-            embedCode
-          }
-          ... on AudioEmbed {
-            id
-            type
-            embedCode
-          }
-        }
+        ...BlogFields
       }
       pageInfo {
         totalItems
