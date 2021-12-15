@@ -1,7 +1,13 @@
 export function imageResolver(image) {
   if (image.type === "media--digital_collections_image") {
     const uri = `https://images.nypl.org/index.php?id=${image.field_media_dc_id}&t=w`;
-    const imageStyles = ["1_1_960", "2_1_320", "2_1_960", "medium"];
+    const imageStyles = [
+      "1_1_960",
+      "2_1_320",
+      "2_1_960",
+      "medium",
+      "max_width_960",
+    ];
     return {
       id: image.id,
       alt: "dc image alt!",

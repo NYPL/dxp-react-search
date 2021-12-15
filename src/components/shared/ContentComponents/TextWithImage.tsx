@@ -3,10 +3,10 @@ import {
   Box,
   Heading,
   HeadingLevels,
-  Text,
-  TextDisplaySizes,
 } from "@nypl/design-system-react-components";
 import Image from "../../shared/Image";
+// Utils
+import { getImageTransformation } from "./../../shared/Image/imageUtils";
 
 interface TextWithImageProps {
   id: string;
@@ -36,7 +36,10 @@ function TextWithImage({
         float={[null, null, "left"]}
         mr={[null, null, "m"]}
       >
-        <Image
+        <img
+          src={getImageTransformation("max_width_960", image.transformations)}
+        />
+        {/*<Image
           id={image.id}
           alt={image.alt}
           uri={image.uri}
@@ -48,6 +51,7 @@ function TextWithImage({
           height={450}
           quality={90}
         />
+        */}
         {caption && (
           <Box fontSize="-1" fontWeight="regular">
             {caption}
