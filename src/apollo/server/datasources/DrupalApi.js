@@ -6,8 +6,8 @@ class DrupalApi extends RESTDataSource {
   constructor() {
     super();
     // Temporary hard-code d9 backend for tugboat.
-    //this.baseURL = "https://sandbox-d8.nypl.org";
-    this.baseURL = DRUPAL_API;
+    this.baseURL = "https://sandbox-d8.nypl.org";
+    //this.baseURL = DRUPAL_API;
   }
 
   /**
