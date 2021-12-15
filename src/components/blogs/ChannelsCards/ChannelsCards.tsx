@@ -19,6 +19,7 @@ interface ChannelsCardsProps {
   title: string;
   description: string;
   slug: string;
+  slugLabel?: string;
   limit?: number;
   sortBy?: string;
   featured?: boolean;
@@ -50,6 +51,7 @@ function ChannelsCards({
   title,
   description,
   slug,
+  slugLabel,
   limit,
   sortBy,
   featured,
@@ -72,7 +74,13 @@ function ChannelsCards({
   // Loading state,
   if (loading || !data) {
     return (
-      <CardSet id={id} title={title} slug={slug} description={description}>
+      <CardSet
+        id={id}
+        title={title}
+        slug={slug}
+        slugLabel={slugLabel}
+        description={description}
+      >
         <CardSkeletonLoader
           gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
           gridGap="1.25rem"
@@ -83,7 +91,13 @@ function ChannelsCards({
   }
 
   return (
-    <CardSet id={id} title={title} slug={slug} description={description}>
+    <CardSet
+      id={id}
+      title={title}
+      slug={slug}
+      slugLabel={slugLabel}
+      description={description}
+    >
       <CardGrid
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gap="1.25rem"

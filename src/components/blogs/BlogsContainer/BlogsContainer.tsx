@@ -56,6 +56,7 @@ interface BlogCardsProps {
   title?: string;
   description?: string;
   slug?: string;
+  slugLabel?: string;
   limit?: number;
   pageNumber?: number;
   sortBy?: string;
@@ -86,6 +87,7 @@ function BlogsContainer({
   title = "",
   description = "",
   slug = "",
+  slugLabel = "",
   limit,
   pageNumber,
   sortBy,
@@ -131,7 +133,13 @@ function BlogsContainer({
 
   if (loading || !data) {
     return (
-      <CardSet id={id} title={title} slug={slug} description={description}>
+      <CardSet
+        id={id}
+        title={title}
+        slug={slug}
+        slugLabel={slugLabel}
+        description={description}
+      >
         <CardSkeletonLoader
           gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
           gridGap="1.25rem"
@@ -159,7 +167,13 @@ function BlogsContainer({
           />
         </div>
       )}
-      <CardSet id={id} title={title} slug={slug} description={description}>
+      <CardSet
+        id={id}
+        title={title}
+        slug={slug}
+        slugLabel={slugLabel}
+        description={description}
+      >
         <CardGrid gap="2rem" templateColumns="repeat(1, 1fr)">
           {data.allBlogs.items.map((item: BlogCardItem) => (
             <li key={item.id}>

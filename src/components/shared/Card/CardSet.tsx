@@ -17,6 +17,7 @@ interface CardSetProps {
   title: string;
   description?: string;
   slug?: string;
+  slugLabel?: string;
   children: JSX.Element;
 }
 
@@ -24,16 +25,13 @@ interface CardSetHeadingProps {
   id: string;
   title?: string;
   slug?: string;
+  slugLabel?: string;
 }
 
-function CardSetHeading({ id, title, slug }: CardSetHeadingProps) {
-  if (slug && title) {
+function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
+  if (slug && slugLabel && title) {
     return (
       <div style={{ marginBottom: ".75em" }}>
-        {/*<h2 className="heading" id={id} style={{ display: "inline" }}>
-          {title}
-        </h2>
-        */}
         <HStack alignItems="baseline">
           <Heading id={id} level={HeadingLevels.Two} text={title} />
           <Link href={slug}>
@@ -50,7 +48,7 @@ function CardSetHeading({ id, title, slug }: CardSetHeadingProps) {
                 textDecoration: "none",
               }}
             >
-              See All
+              {slugLabel}
               <span style={{ marginLeft: "5px" }}>
                 <Icon
                   size={IconSizes.Small}
@@ -72,10 +70,24 @@ function CardSetHeading({ id, title, slug }: CardSetHeadingProps) {
   }
 }
 
-function CardSet({ id, title, description, slug, children }: CardSetProps) {
+function CardSet({
+  id,
+  title,
+  description,
+  slug,
+  slugLabel,
+  children,
+}: CardSetProps) {
   return (
     <div style={{ marginBottom: "2rem" }}>
-      {title && <CardSetHeading id={id} title={title} slug={slug} />}
+      {title && (
+        <CardSetHeading
+          id={id}
+          title={title}
+          slug={slug}
+          slugLabel={slugLabel}
+        />
+      )}
       {description && <p>{description}</p>}
       {children}
     </div>

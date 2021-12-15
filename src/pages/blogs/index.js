@@ -22,6 +22,7 @@ function BlogsMainPage() {
         est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
         metus ut volutpat turpis nascetur."
             slug="/blogs/all"
+            slugLabel="View all blogs"
             limit={6}
             featured={true}
             sortBy={"created"}
@@ -33,6 +34,7 @@ function BlogsMainPage() {
         est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
         metus ut volutpat turpis nascetur."
             slug="/blogs/channels"
+            slugLabel="View all channels"
             limit={6}
             sortBy="weight"
             featured={true}
