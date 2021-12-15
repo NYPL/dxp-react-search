@@ -280,3 +280,34 @@ async function fetchOembedData(oembedBaseUrl, embedCode) {
     console.error(e);
   }
 }
+
+export function resolveParagraphTypes(objectType) {
+  let resolvedObjectType;
+  switch (objectType) {
+    case "text_with_image":
+      resolvedObjectType = "TextWithImage";
+      break;
+    case "video":
+      resolvedObjectType = "Video";
+      break;
+    case "slideshow":
+      resolvedObjectType = "Slideshow";
+      break;
+    case "text":
+      resolvedObjectType = "Text";
+      break;
+    case "social":
+      resolvedObjectType = "SocialEmbed";
+      break;
+    case "audio":
+      resolvedObjectType = "AudioEmbed";
+      break;
+    case "image":
+      resolvedObjectType = "ImageComponent";
+      break;
+    case "link_card_list":
+      resolvedObjectType = "CardList";
+      break;
+  }
+  return resolvedObjectType;
+}

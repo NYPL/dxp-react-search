@@ -2,7 +2,11 @@ const graphqlFields = require("graphql-fields");
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
-import { drupalParagraphsResolver, imageResolver } from "./utils";
+import {
+  drupalParagraphsResolver,
+  resolveParagraphTypes,
+  imageResolver,
+} from "./utils";
 import {
   buildAllNodesByContentTypeJsonApiPath,
   buildNodeByIdJsonApiPath,
@@ -77,36 +81,7 @@ const blogResolver = {
   },
   BlogMainContent: {
     __resolveType: (object, context, info) => {
-      // @TODO could be a util function, where object is passed, along with an
-      // array of allowed drupal paragraph types?
-      let objectType;
-      switch (object.type) {
-        case "text_with_image":
-          objectType = "TextWithImage";
-          break;
-        case "video":
-          objectType = "Video";
-          break;
-        case "slideshow":
-          objectType = "Slideshow";
-          break;
-        case "text":
-          objectType = "Text";
-          break;
-        case "social":
-          objectType = "SocialEmbed";
-          break;
-        case "audio":
-          objectType = "AudioEmbed";
-          break;
-        case "image":
-          objectType = "ImageComponent";
-          break;
-        case "link_card_list":
-          objectType = "CardList";
-          break;
-      }
-      return objectType;
+      return resolveParagraphTypes(object.type);
     },
   },
   BlogLocation: {
