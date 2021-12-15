@@ -60,21 +60,22 @@ function BlogCard({ item }: BlogCardProps) {
       layout={CardLayouts.Row}
       center
       image={
-        <Image
-          id={item.image.id}
-          alt={item.image.alt}
-          uri={item.image.uri}
-          useTransformation={true}
-          transformations={item.image.transformations}
-          transformationLabel={"2_1_960"}
-          layout="responsive"
-          width={900}
-          height={450}
-          quality={90}
-        />
+        <Box w="100%" maxWidth="360px" mr={[null, null, "m"]}>
+          <Image
+            id={item.image.id}
+            alt={item.image.alt}
+            uri={item.image.uri}
+            useTransformation={true}
+            transformations={item.image.transformations}
+            transformationLabel={"2_1_960"}
+            layout="responsive"
+            width={900}
+            height={450}
+            quality={90}
+          />
+        </Box>
       }
-      imageAspectRatio={ImageRatios.TwoByOne}
-      imageSize={ImageSizes.Large}
+      imageAspectRatio={ImageRatios.Original}
     />
   );
 }
