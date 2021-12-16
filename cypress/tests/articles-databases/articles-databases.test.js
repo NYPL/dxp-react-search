@@ -65,7 +65,11 @@ describe("Articles & Databases", () => {
     cy.findByRole("button", { name: /subjects/i }).click();
 
     cy.log("Check multiselect item");
-    cy.findByRole("checkbox", { name: "Art" }).click().should("be.checked");
+    // { force: true } might be necessary here, expained here:
+    // https://github.com/chakra-ui/chakra-ui/issues/3955
+    cy.findByRole("checkbox", { name: "Art" })
+      .click({ force: true })
+      .should("be.checked");
 
     search("new york times", {
       textboxName: /search articles and databases/i,
