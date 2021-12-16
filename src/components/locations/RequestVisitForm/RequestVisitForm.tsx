@@ -246,6 +246,7 @@ function RequestVisitForm() {
       onSubmit={handleSubmit}
       noValidate
     >
+      <pre>{JSON.stringify(state, undefined, 2)}</pre>
       <Heading
         id="your-visit"
         displaySize={HeadingDisplaySizes.Secondary}
