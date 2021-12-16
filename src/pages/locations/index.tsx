@@ -1,19 +1,19 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Apollo
-import { getDataFromTree } from "@apollo/client/react/ssr";
-import { withApollo } from "./../../apollo/client/withApollo";
+import { withApollo } from "../../apollo/client/withApollo";
 // Redux
-import { withRedux } from "./../../redux/withRedux";
+import { withRedux } from "../../redux/withRedux";
 // Components
-import PageContainer from "./../../components/shared/layouts/PageContainer";
-import SearchHeader from "./../../components/shared/SearchHeader";
-import Hero from "./../../components/location-finder/Hero";
+import PageContainer from "../../components/shared/layouts/PageContainer";
+import SearchHeader from "../../components/shared/SearchHeader";
+import Hero from "../../components/location-finder/Hero";
 import SearchForm from "../../components/location-finder/SearchForm";
-import Locations from "./../../components/location-finder/Locations/Locations";
-import SearchResultsDetails from "./../../components/location-finder/SearchResultsDetails";
-import Map from "./../../components/location-finder/Map";
+import Locations from "../../components/location-finder/Locations/Locations";
+import SearchResultsDetails from "../../components/location-finder/SearchResultsDetails";
+import Map from "../../components/location-finder/Map";
 import BottomPromo from "../../components/location-finder/BottomPromo";
-import Menu from "./../../components/ds-prototypes/Menu";
+import Menu from "../../components/ds-prototypes/Menu";
+import { ColorVariants } from "@nypl/design-system-react-components";
 //
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import BottomMenuContent from "../../components/shared/BottomMenus/content";
@@ -33,9 +33,10 @@ function LocationFinder() {
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
         },
       ]}
+      breadcrumbsColor={ColorVariants.Locations}
       wrapperClass="nypl--locations"
       contentHeader={
-        <Fragment>
+        <>
           <Hero />
           <SearchHeader
             titleId={"location-finder__title"}
@@ -43,7 +44,7 @@ function LocationFinder() {
           >
             <SearchForm />
           </SearchHeader>
-        </Fragment>
+        </>
       }
       contentPrimary={
         <div className="locations">
@@ -60,7 +61,7 @@ function LocationFinder() {
         </div>
       }
       contentBottom={
-        <Fragment>
+        <>
           <BottomPromo />
           <div
             style={{
@@ -78,6 +79,7 @@ function LocationFinder() {
                   headingLevel={3}
                   headingColor={"#0576d3"}
                   title={menu.title}
+                  // @ts-ignore
                   items={menu.items}
                   menuItemDecoration={false}
                   orientation={"horizontal"}
@@ -85,7 +87,7 @@ function LocationFinder() {
               );
             })}
           </div>
-        </Fragment>
+        </>
       }
     />
   );

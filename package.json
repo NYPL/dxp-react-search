@@ -15,7 +15,7 @@
   "dependencies": {
     "@apollo/client": "^3.3.3",
     "@apollo/react-common": "^3.1.4",
-    "@nypl/design-system-react-components": "0.25.3",
+    "@nypl/design-system-react-components": "0.25.5",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component.git#reactupdate",
     "@nypl/dgx-react-footer": "^0.5.8",
     "@sendgrid/mail": "^7.5.0",

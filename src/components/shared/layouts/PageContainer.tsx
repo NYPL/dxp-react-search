@@ -1,21 +1,54 @@
 import React, { Fragment } from "react";
 import Meta from "../Meta";
-import { Breadcrumbs, DSProvider } from "@nypl/design-system-react-components";
+import {
+  Breadcrumbs,
+  ColorVariants,
+  DSProvider,
+} from "@nypl/design-system-react-components";
 import s from "./PageContainer.module.css";
 
-function PageContainer(props) {
-  const {
-    metaTags,
-    breadcrumbs,
-    wrapperClass,
-    contentHeader,
-    contentPrimary,
-    contentBottom,
-    contentSecondary,
-    sidebarSide,
-    showSidebar,
-  } = props;
+interface PageContainerProps {
+  metaTags: MetaTags;
+  breadcrumbs: BreadcrumbsItem[];
+  breadcrumbsColor: ColorVariants;
+  wrapperClass: string;
+  contentHeader: React.ReactNode;
+  contentPrimary: React.ReactNode;
+  contentBottom: React.ReactNode;
+  contentSecondary?: React.ReactNode;
+  sidebarSide?: SidebarSides;
+  showSidebar?: boolean;
+}
 
+export enum SidebarSides {
+  Right = "right",
+  Left = "left",
+}
+
+export type BreadcrumbsItem = {
+  url: string;
+  text: string | React.ReactNode;
+};
+
+export type MetaTags = {
+  title: string;
+  description: string;
+  url: string;
+  imageUrl?: string;
+};
+
+function PageContainer({
+  metaTags,
+  breadcrumbs,
+  breadcrumbsColor,
+  wrapperClass,
+  contentHeader,
+  contentPrimary,
+  contentBottom,
+  contentSecondary,
+  sidebarSide,
+  showSidebar,
+}: PageContainerProps) {
   let contentPrimaryClass = "grid";
   if (showSidebar) {
     if (sidebarSide === "right") {
@@ -37,7 +70,10 @@ function PageContainer(props) {
       )}
       <div className={`${wrapperClass} nypl-ds`}>
         <DSProvider>
-          <Breadcrumbs breadcrumbsData={breadcrumbs} />
+          <Breadcrumbs
+            breadcrumbsData={breadcrumbs}
+            colorVariant={breadcrumbsColor}
+          />
           <main id="main-content">
             {contentHeader && <div>{contentHeader}</div>}
             <div className={s[contentPrimaryClass]}>

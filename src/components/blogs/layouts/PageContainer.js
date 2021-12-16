@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Components
 import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
 import Menu from "./../../ds-prototypes/Menu";
@@ -7,6 +7,7 @@ import {
   HeadingLevels,
   Hero,
   HeroTypes,
+  ColorVariants,
 } from "@nypl/design-system-react-components";
 //
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
@@ -96,6 +97,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
+      breadcrumbsColor={ColorVariants.WhatsOn}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"
