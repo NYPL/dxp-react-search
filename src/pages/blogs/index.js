@@ -21,31 +21,6 @@ function BlogsMainPage() {
             type="whatever"
             embedCode={`<iframe height="480" src="https://www.google.com/maps/d/u/1/embed?mid=1DLagsELcuhp5bsw5i4kqd8OEYicBoa0j" width="640"></iframe>`}
           />
-          <BlogsContainer
-            id="featured-posts"
-            title={"Featured Posts"}
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
-        est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
-        metus ut volutpat turpis nascetur."
-            slug="/blogs/all"
-            slugLabel="View all blogs"
-            limit={6}
-            featured={true}
-            sortBy={"created"}
-          />
-          <ChannelsCards
-            id="explore-by-channel"
-            title="Explore by Channel"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, in quam
-        est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
-        metus ut volutpat turpis nascetur."
-            slug="/blogs/channels"
-            slugLabel="View all channels"
-            limit={6}
-            sortBy="weight"
-            featured={true}
-          />
-          <SubjectCards />
         </>
       }
     />
