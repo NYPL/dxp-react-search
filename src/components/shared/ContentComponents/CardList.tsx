@@ -47,21 +47,30 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
                 layout={CardLayouts.Row}
                 center
                 imageComponent={
-                  <Image
-                    id={item.image.id}
-                    alt={item.image.alt}
-                    uri={item.image.uri}
-                    useTransformation={true}
-                    transformations={item.image.transformations}
-                    transformationLabel={"1_1_960"}
-                    layout="responsive"
-                    width={960}
-                    height={960}
-                    quality={90}
-                  />
+                  <Box
+                    w="100%"
+                    //
+                    maxWidth={["100%", "100%", "225px", "165px"]}
+                    mr={[null, null, "m"]}
+                    mb={["m", null]}
+                  >
+                    <Image
+                      id={item.image.id}
+                      alt={item.image.alt}
+                      uri={item.image.uri}
+                      useTransformation={true}
+                      transformations={item.image.transformations}
+                      transformationLabel={"1_1_960"}
+                      layout="responsive"
+                      width={960}
+                      height={960}
+                      quality={90}
+                    />
+                  </Box>
                 }
-                imageAspectRatio={ImageRatios.Square}
-                imageSize={ImageSizes.Small}
+                imageAspectRatio={ImageRatios.Original}
+                //imageAspectRatio={ImageRatios.Square}
+                //imageSize={ImageSizes.Small}
               >
                 <CardHeading level={3}>{item.title}</CardHeading>
                 <CardContent>

@@ -4,6 +4,8 @@ import {
   Button,
   ButtonTypes,
   Heading,
+  HeadingLevels,
+  HeadingDisplaySizes,
   Icon,
   IconRotationTypes,
   IconSizes,
@@ -98,7 +100,7 @@ function FilterBar({
               <div className={s.multiSelectsContainerMobile}>
                 <Heading
                   id="search-filters__mobile-heading"
-                  level={3}
+                  level={HeadingLevels.Three}
                   text="Filters"
                 />
                 {children}
@@ -124,8 +126,9 @@ function FilterBar({
         <div className={s.desktopContainer}>
           <Heading
             id="search-filters--heading"
-            className={s.filterBarHeading}
-            level={2}
+            //className={s.filterBarHeading}
+            level={HeadingLevels.Two}
+            displaySize={HeadingDisplaySizes.Tertiary}
             text={label}
           />
           <div className={s.multiSelectsContainerDesktop}>{children}</div>
