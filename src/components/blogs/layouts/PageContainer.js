@@ -97,7 +97,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor={ColorVariants.WhatsOn}
+      breadcrumbsColor={ColorVariants.Blogs}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"
