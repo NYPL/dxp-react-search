@@ -195,7 +195,7 @@ function SearchForm() {
             attributes={{
               "aria-label": "Checking this box will update the results",
             }}
-            checked={openNow}
+            isChecked={openNow}
             onChange={onChangeOpenNow}
           />
         </div>
