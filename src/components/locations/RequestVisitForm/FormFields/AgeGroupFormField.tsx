@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 // Components
-import { Checkbox } from "@nypl/design-system-react-components";
+import { Checkbox, CheckboxGroup } from "@nypl/design-system-react-components";
 // CSS
-import s from "./../RequestVisitForm.module.css";
 import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
@@ -27,22 +26,45 @@ function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
   const { values, errors, touched, isSubmitted } = state;
 
   return (
-    <fieldset>
-      <legend>What age range is your group?</legend>
+    <CheckboxGroup
+      name="age-group"
+      labelText="What age range is your group?"
+      showLabel
+      optReqFlag={false}
+      isRequired
+      isInvalid={errors.ageGroup ? true : false}
+      invalidText={errors.ageGroup}
+    >
       {ageGroupItems.map((ageGroupItem) => (
-        <div className={s.checkBox}>
+        <Checkbox
+          labelText={ageGroupItem.label}
+          name={ageGroupItem.id}
+          isChecked={values.ageGroup.includes(ageGroupItem.id)}
+          showLabel
+          onChange={(e) =>
+            handleChangeCheckboxGroup("ageGroup", ageGroupItem.id)
+          }
+          isInvalid={errors.ageGroup ? true : false}
+        />
+      ))}
+    </CheckboxGroup>
+  );
+
+  /*return (
+    <Fieldset optReqFlag={false} legendText="What age range is your group?">
+      {ageGroupItems.map((ageGroupItem) => (
+        <Box mb="s">
           <Checkbox
             labelText={ageGroupItem.label}
             name={ageGroupItem.id}
             onChange={(e) =>
               handleChangeCheckboxGroup("ageGroup", ageGroupItem.id)
             }
-            // @ts-ignore
-            checked={values.ageGroup.includes(ageGroupItem.id)}
+            isChecked={values.ageGroup.includes(ageGroupItem.id)}
             showLabel
-            errored={errors.ageGroup ? true : false}
+            isInvalid={errors.ageGroup ? true : false}
           />
-        </div>
+        </Box>
       ))}
       {errors.ageGroup && (
         <div
@@ -53,8 +75,9 @@ function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
           {errors.ageGroup}
         </div>
       )}
-    </fieldset>
+    </Fieldset>
   );
+  */
 }
 
 export default AgeGroupFormField;

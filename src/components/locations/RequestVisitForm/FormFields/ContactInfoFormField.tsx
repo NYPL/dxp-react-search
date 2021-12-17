@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { Heading, TextInput } from "@nypl/design-system-react-components";
-import s from "./../RequestVisitForm.module.css";
+import { Box, Heading, TextInput } from "@nypl/design-system-react-components";
 import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
@@ -10,25 +9,35 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
   const { values, errors, touched, isSubmitted } = state;
 
   return (
-    <div className={s.contactInfo}>
+    <Box
+      my="m"
+      // Adds underline to heading. Bad idea?
+      sx={{
+        "& h2": {
+          paddingBottom: "s",
+          borderBottom: "1px solid",
+          borderColor: "ui.gray.medium",
+        },
+      }}
+    >
       <Heading id="contact-info" level={2} text="Your Contact Information" />
-      <TextInput
-        attributes={{
-          name: "contactName",
-          //onBlur: handleChange,
-        }}
-        labelText="Name"
-        placeholder="Enter your name"
-        isRequired={true}
-        invalidText={errors?.contactName}
-        isInvalid={errors.contactName ? true : false}
-        onChange={handleChange}
-        value={values.contactName}
-      />
+      <Box mb="s">
+        <TextInput
+          attributes={{
+            name: "contactName",
+          }}
+          labelText="Name"
+          placeholder="Enter your name"
+          isRequired={true}
+          invalidText={errors?.contactName}
+          isInvalid={errors.contactName ? true : false}
+          onChange={handleChange}
+          value={values.contactName}
+        />
+      </Box>
       <TextInput
         attributes={{
           name: "contactEmail",
-          //onBlur: handleChange,
         }}
         labelText="Email"
         placeholder="Enter your email"
@@ -38,7 +47,7 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         onChange={handleChange}
         value={values.contactEmai}
       />
-    </div>
+    </Box>
   );
 }
 

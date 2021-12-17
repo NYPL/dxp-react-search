@@ -120,3 +120,8 @@
     }
   }
 }
+
+// Header adds a _normalized.scss file that adds a border bottom to fieldset
+.nypl-ds fieldset {
+  border: 0 !important;
+}
