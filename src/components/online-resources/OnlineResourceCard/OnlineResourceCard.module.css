@@ -1,5 +1,5 @@
 .card {
-  margin: var(--space-l) 0;
+  margin: var(--nypl-space-l) 0;
 }
 
 .cardDetailPg {
@@ -8,24 +8,24 @@
 
 .heading {
   display: inline-block;
-  padding: var(--space-xs) 0 0 0;
+  padding: var(--nypl-space-xs) 0 0 0;
 }
 
 .statusBadge {
   display: block;
-  margin: 0 0 var(--space-s);
+  margin: 0 0 var(--nypl-space-s);
 }
 
 @media (min-width: 1024px) {
   .statusBadge {
     display: inline-block;
-    padding: 0 var(--space-xs);
+    padding: 0 var(--nypl-space-xs);
     margin: 0;
   }
 }
 
 .labelItem {
-  padding: var(--space-xxs) 0;
+  padding: var(--nypl-space-xxs) 0;
 }
 
 .labelItem label {
@@ -35,17 +35,17 @@
 .resourceType {
   font-size: 12px;
   font-weight: 700;
-  color: var(--section-research-primary);
+  color: var(--nypl-section-research-primary);
   text-transform: uppercase;
 }
 
 .links {
-  padding: var(--space-s) 0;
+  padding: var(--nypl-space-s) 0;
 }
 
 .links a {
   display: block;
-  margin: 0 0 var(--space-xs);
+  margin: 0 0 var(--nypl-space-xs);
 }
 
 @media (min-width: 1024px) {
@@ -66,19 +66,19 @@
 
 .collapsible {
   display: block;
-  margin: 0 0 var(--space-m);
+  margin: 0 0 var(--nypl-space-m);
 }
 
 .accessLocation {
-  padding-right: var(--space-xs);
+  padding-right: var(--nypl-space-xs);
 }
 
 .accessLocation.disabled {
-  color: var(--ui-gray-dark);
+  color: var(--nypl-ui-gray-dark);
   pointer-events: none;
   text-decoration: none;
 }
 
 .shareDatabase {
-  padding-top: var(--space-s);
+  padding-top: var(--nypl-space-s);
 }
