@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
-import { Icon } from '@nypl/design-system-react-components';
-import FocusTrap from 'focus-trap-react';
+import React, { useState } from "react";
+import {
+  Icon,
+  IconNames,
+  IconSizes,
+} from "@nypl/design-system-react-components";
+import FocusTrap from "focus-trap-react";
 
 function Dropdown(props) {
-  const {
-    id,
-    label,
-    children,
-    checked,
-    onChange,
-    hasSelectedItems
-  } = props;
+  const { id, label, children, checked, onChange, hasSelectedItems } = props;
 
   return (
-    <div className={hasSelectedItems 
-      ? `dropdown hasSelectedItems` 
-      : `dropdown`}
+    <div
+      className={hasSelectedItems ? `dropdown hasSelectedItems` : `dropdown`}
     >
       <FocusTrap
         focusTrapOptions={{
@@ -32,29 +28,26 @@ function Dropdown(props) {
             checked={checked}
             onChange={onChange}
           />
-          <label
-            htmlFor={`dropdown-${id}`}
-            className="dropdown__label"
-          >
+          <label htmlFor={`dropdown-${id}`} className="dropdown__label">
             <span className="dropdown-label">{label}</span>
             <Icon
               decorative={true}
-              name="minus"
-              modifiers={["small", "minus"]}
+              name={IconNames.Minus}
+              size={IconSizes.Small}
+              className="icon--minus"
             />
             <Icon
               decorative={true}
-              name="plus"
-              modifiers={["small", "plus"]}
+              name={IconNames.Plus}
+              size={IconSizes.Small}
+              className="icon--plus"
             />
           </label>
-          <div className="dropdown__content">
-            {children}
-          </div>
+          <div className="dropdown__content">{children}</div>
         </div>
       </FocusTrap>
     </div>
   );
-};
+}
 
 export default Dropdown;

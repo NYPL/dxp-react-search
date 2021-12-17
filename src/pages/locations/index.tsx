@@ -39,7 +39,7 @@ function LocationFinder() {
         <>
           <Hero />
           <SearchHeader
-            titleId={"location-finder__title"}
+            id={"location-finder__title"}
             title={"Find Your Library"}
           >
             <SearchForm />
