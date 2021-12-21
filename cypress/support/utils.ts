@@ -55,7 +55,7 @@ export function fillRequestVisitForm(options: RequestVisitFormOptions) {
       .findByRole("radio", {
         name: /group tour/i,
       })
-      .click()
+      .click({ force: true })
       .should("be.checked");
   }
 
@@ -71,7 +71,7 @@ export function fillRequestVisitForm(options: RequestVisitFormOptions) {
     cy.findByRole("checkbox", {
       name: /introduction to the library/i,
     })
-      .click()
+      .click({ force: true })
       .should("be.checked");
   }
 
@@ -85,7 +85,7 @@ export function fillRequestVisitForm(options: RequestVisitFormOptions) {
     .findByRole("checkbox", {
       name: /adults/i,
     })
-    .click()
+    .click({ force: true })
     .should("be.checked");
 
   cy.log("Enter name")
