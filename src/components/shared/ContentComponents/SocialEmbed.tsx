@@ -18,7 +18,7 @@ function SocialEmbed({ id, type, embedCode }: SocialEmbedProps) {
           display: "none",
         }}
       >
-        Text decsribing this map, that only screen readers will see.
+        Text describing this map, that only screen readers will see.
       </Box>
       <Box
         sx={{
