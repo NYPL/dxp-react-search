@@ -15,11 +15,19 @@ function SocialEmbed({ id, type, embedCode }: SocialEmbedProps) {
     <Box id={`${type}-${id}`} w="100%" mb="xl">
       <Box
         sx={{
+          display: "none",
+        }}
+      >
+        Text decsribing this map, that only screen readers will see.
+      </Box>
+      <Box
+        sx={{
           "& iframe": {
             width: "100%",
             maxWidth: "100%",
           },
         }}
+        aria-hidden={true}
         dangerouslySetInnerHTML={{ __html: embedCode }}
       />
     </Box>
