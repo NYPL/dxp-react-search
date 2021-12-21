@@ -1,17 +1,17 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
-import { axe, toHaveNoViolations } from 'jest-axe';
-import '@testing-library/jest-dom/extend-expect';
-import { MockedProvider } from '@apollo/client/testing';
-import { render } from './../../../../testHelper/customRtlRender';
-import SearchHeader from './SearchHeader';
+import React from "react";
+import { screen } from "@testing-library/react";
+import { axe, toHaveNoViolations } from "jest-axe";
+import "@testing-library/jest-dom/extend-expect";
+import { MockedProvider } from "@apollo/client/testing";
+import { render } from "./../../../../testHelper/customRtlRender";
+import SearchHeader from "./SearchHeader";
 
 expect.extend(toHaveNoViolations);
 
 const mocks = [];
 
-describe('SearchHeader', () => {
-  test('renders SearchHeader component', () => {
+describe("SearchHeader", () => {
+  test("renders SearchHeader component", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchHeader />
@@ -19,20 +19,22 @@ describe('SearchHeader', () => {
     );
   });
 
-  test('SearchHeader component should have title', () => {
+  test("SearchHeader component should have title", () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <SearchHeader title="Location Finder" titleId={'location-finder__title'}>
+        <SearchHeader id={"location-finder__title"} title="Location Finder">
           <form role="search">
             <input type="text" name="search" />
           </form>
         </SearchHeader>
       </MockedProvider>
     );
-    expect(container.querySelector('#location-finder__title')).toBeInTheDocument();
+    expect(
+      container.querySelector("#location-finder__title")
+    ).toBeInTheDocument();
   });
 
-  test('SearchHeader component should have a search form', () => {
+  test("SearchHeader component should have a search form", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchHeader>
@@ -42,14 +44,14 @@ describe('SearchHeader', () => {
         </SearchHeader>
       </MockedProvider>
     );
-    expect(screen.getByRole('search')).toBeInTheDocument();
+    expect(screen.getByRole("search")).toBeInTheDocument();
   });
 
   // Accessbiility tests.
-  test('should not have basic accessibility issues', async () => {
+  test("should not have basic accessibility issues", async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <SearchHeader title="Location Finder" titleId={'location-finder__title'} />
+        <SearchHeader id={"location-finder__title"} title="Location Finder" />
       </MockedProvider>
     );
     const results = await axe(container);
