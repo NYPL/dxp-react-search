@@ -64,6 +64,14 @@ function TextWithImage({
         )}
       </Box>
       <Box dangerouslySetInnerHTML={{ __html: text }} />
+      <Box
+        as="span"
+        sx={{
+          content: "",
+          display: "block",
+          clear: "both",
+        }}
+      />
     </Box>
   );
 }
