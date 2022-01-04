@@ -81,6 +81,11 @@ function PageContainer(props) {
                   label: "Divisions",
                   type: "content",
                 },
+                {
+                  id: "audience_by_age",
+                  label: "Audience",
+                  type: "taxonomy",
+                },
               ]}
             />
           </div>

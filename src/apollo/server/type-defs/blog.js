@@ -43,6 +43,7 @@ export const typeDefs = gql`
     subjects: [String]
     libraries: [String]
     divisions: [String]
+    audiences: [String]
   }
 
   extend type Query {

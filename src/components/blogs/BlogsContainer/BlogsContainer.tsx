@@ -26,6 +26,7 @@ const BLOGS_QUERY = gql`
     $subjects: [String]
     $libraries: [String]
     $divisions: [String]
+    $audiences: [String]
   ) {
     allBlogs(
       limit: $limit
@@ -36,6 +37,7 @@ const BLOGS_QUERY = gql`
         subjects: $subjects
         libraries: $libraries
         divisions: $divisions
+        audiences: $audiences
       }
       sortBy: $sortBy
     ) {
@@ -116,6 +118,9 @@ function BlogsContainer({
       divisions: router.query.division
         ? (router.query.division as string).split(" ")
         : null,
+      audiences: router.query.audience_by_age
+        ? (router.query.audience_by_age as string).split(" ")
+        : null,
     },
   });
 
@@ -150,9 +155,13 @@ function BlogsContainer({
   }
 
   // Check for specific query parameters from url to set filter display status.
-  const showFilterBar = ["channel", "subject", "library", "division"].some(
-    (item) => router.query.hasOwnProperty(item)
-  );
+  const showFilterBar = [
+    "channel",
+    "subject",
+    "library",
+    "division",
+    "audience_by_age",
+  ].some((item) => router.query.hasOwnProperty(item));
 
   return (
     <>

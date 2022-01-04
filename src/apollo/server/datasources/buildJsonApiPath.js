@@ -109,6 +109,12 @@ export function buildAllNodesByContentTypeJsonApiPath(
       filterMultiValueEntityRef(apiParams, division, "field_erm_divisions");
     });
   }
+  // Audience by age
+  if (filter && "audiences" in filter && filter.audiences) {
+    filter.audiences.map((audience) => {
+      filterMultiValueEntityRef(apiParams, audience, "field_erm_audience");
+    });
+  }
 
   // Locations specific
   if (filter && "libraryType" in filter && filter.libraryType) {
