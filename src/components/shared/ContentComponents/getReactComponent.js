@@ -4,6 +4,7 @@ import Video from "./Video";
 import Text from "./Text";
 import SocialEmbed from "./SocialEmbed";
 import AudioEmbed from "./AudioEmbed";
+import GoogleMapEmbed from "./GoogleMapEmbed";
 import ImageComponent from "./ImageComponent";
 import CardList from "./CardList";
 // Image
@@ -18,6 +19,7 @@ const Components = {
   slideshow: Slideshow,
   text: Text,
   social: SocialEmbed,
+  google_map: GoogleMapEmbed,
   audio: AudioEmbed,
   image: ImageComponent,
   link_card_list: CardList,

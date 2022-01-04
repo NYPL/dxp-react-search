@@ -20,6 +20,7 @@ export const typeDefs = gql`
     | Text
     | SocialEmbed
     | AudioEmbed
+    | GoogleMapEmbed
     | ImageComponent
     | CardList
 

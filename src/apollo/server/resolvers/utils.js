@@ -114,6 +114,13 @@ export function drupalParagraphsResolver(field, typesInQuery) {
       accumulator.push(item);
     }
 
+    if (
+      item.type === "paragraph--google_map" &&
+      typesInQuery.includes("GoogleMapEmbed")
+    ) {
+      accumulator.push(item);
+    }
+
     return accumulator;
   }, []);
 
@@ -194,6 +201,14 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           id: item.id,
           type: paragraphTypeName,
           embedCode: item.field_ts_social_embed,
+        };
+        break;
+      case "paragraph--google_map":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          embedCode: item.field_ts_embed_code,
+          accessibleDescription: item.field_ts_accessible_description,
         };
         break;
       case "paragraph--audio":
@@ -298,6 +313,9 @@ export function resolveParagraphTypes(objectType) {
       break;
     case "social":
       resolvedObjectType = "SocialEmbed";
+      break;
+    case "google_map":
+      resolvedObjectType = "GoogleMapEmbed";
       break;
     case "audio":
       resolvedObjectType = "AudioEmbed";

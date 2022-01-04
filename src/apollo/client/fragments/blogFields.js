@@ -66,6 +66,12 @@ export const BLOG_FIELDS_FRAGMENT = gql`
         type
         embedCode
       }
+      ... on GoogleMapEmbed {
+        id
+        type
+        embedCode
+        accessibleDescription
+      }
       ... on AudioEmbed {
         id
         type

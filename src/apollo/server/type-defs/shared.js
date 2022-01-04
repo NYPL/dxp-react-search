@@ -55,6 +55,13 @@ export const typeDefs = gql`
     embedCode: String!
   }
 
+  type GoogleMapEmbed {
+    id: ID!
+    type: String!
+    embedCode: String!
+    accessibleDescription: String!
+  }
+
   type Slideshow {
     id: ID!
     type: String!
