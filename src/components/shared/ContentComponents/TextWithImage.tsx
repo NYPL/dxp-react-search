@@ -58,16 +58,18 @@ function TextWithImage({
           </Box>
         )}
         {credit && (
-          <Box fontSize="-3" fontStyle="italic">
-            {credit}
-          </Box>
+          <Box
+            fontSize="-3"
+            fontStyle="italic"
+            dangerouslySetInnerHTML={{ __html: credit }}
+          />
         )}
       </Box>
       <Box dangerouslySetInnerHTML={{ __html: text }} />
       <Box
         as="span"
         sx={{
-          content: "",
+          content: '""',
           display: "block",
           clear: "both",
         }}

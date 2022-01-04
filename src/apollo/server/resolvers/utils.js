@@ -143,8 +143,8 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           caption: textWithImageMedia.field_media_image_caption
             ? textWithImageMedia.field_media_image_caption
             : null,
-          credit: textWithImageMedia.field_media_image_credit
-            ? textWithImageMedia.field_media_image_credit
+          credit: textWithImageMedia.field_media_image_credit_html
+            ? textWithImageMedia.field_media_image_credit_html.processed
             : null,
           image: imageResolver(item.field_ers_media_item),
         };
@@ -255,8 +255,8 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           caption: mediaItem.field_media_image_caption
             ? mediaItem.field_media_image_caption
             : null,
-          credit: mediaItem.field_media_image_credit
-            ? mediaItem.field_media_image_credit
+          credit: mediaItem.field_media_image_credit_html
+            ? mediaItem.field_media_image_credit_html.processed
             : null,
           image: imageResolver(mediaItem),
         };
