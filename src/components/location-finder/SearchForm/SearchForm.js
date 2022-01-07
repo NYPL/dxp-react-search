@@ -21,7 +21,7 @@ const southWestBound = "40.49, -74.26";
 const northEastBound = "40.91, -73.77";
 Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 // Components
-import { Checkbox } from "@nypl/design-system-react-components";
+import { Box, Checkbox } from "@nypl/design-system-react-components";
 import { default as SharedSearchForm } from "./../../shared/SearchForm";
 import SearchFilters from "./../SearchFilters";
 
@@ -185,11 +185,17 @@ function SearchForm() {
       searchButtonId={"search-form__submit"}
     >
       <div className="search__form-filters">
-        <div className="checkbox">
+        <Box
+          sx={{
+            alignSelf: "flex-end",
+            "& label": {
+              marginLeft: "s",
+            },
+          }}
+        >
           <Checkbox
+            id="checkbox-open-now"
             name="isOpenNow"
-            checkboxId="checkbox-open-now"
-            className="open-now"
             labelText="Open now"
             showLabel={true}
             attributes={{
@@ -198,7 +204,7 @@ function SearchForm() {
             isChecked={openNow}
             onChange={onChangeOpenNow}
           />
-        </div>
+        </Box>
         <SearchFilters />
       </div>
     </SharedSearchForm>

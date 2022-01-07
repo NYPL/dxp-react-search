@@ -16,22 +16,6 @@
     outline: 1px solid var(--ui-focus);
     outline-offset: inherit;
   }
-
-  // DS Checkbox overides
-  // @TODO Remove this when new DS checkbox is avail.
-  .checkbox {
-    align-self: flex-end;
-
-    .open-now {
-      margin-left: 1em;
-    }
-
-    @include breakpoint($breakpoint-medium) {
-      .open-now {
-        margin: initial;
-      }
-    }
-  }
 }
 
 // shared/layouts > Main.js
