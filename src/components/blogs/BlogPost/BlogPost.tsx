@@ -45,9 +45,10 @@ function BlogPost({ blog }: BlogPostProps) {
           </HStack>
         )}
       </Box>
-      {blog.mainContent.map((contentComponent: ContentComponentObject) =>
-        Components(contentComponent)
-      )}
+      {blog.mainContent &&
+        blog.mainContent.map((contentComponent: ContentComponentObject) =>
+          Components(contentComponent)
+        )}
     </Box>
   );
 }

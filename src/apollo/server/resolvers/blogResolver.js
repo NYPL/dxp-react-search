@@ -76,7 +76,11 @@ const blogResolver = {
     mainContent: (blog, args, context, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      return drupalParagraphsResolver(blog.field_main_content, typesInQuery);
+      const mainContent =
+        blog.field_main_content.data?.length === 0
+          ? null
+          : drupalParagraphsResolver(blog.field_main_content, typesInQuery);
+      return mainContent;
     },
   },
   BlogMainContent: {
