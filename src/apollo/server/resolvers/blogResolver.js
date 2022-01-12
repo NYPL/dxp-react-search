@@ -43,7 +43,11 @@ const blogResolver = {
     },
     blog: async (parent, args, { dataSources }) => {
       const apiPath = buildNodeByIdJsonApiPath("blog", args.id);
-      const response = await dataSources.drupalApi.getNodeById(apiPath);
+      const isPreview = args.preview ? true : false;
+      const response = await dataSources.drupalApi.getNodeById(
+        isPreview,
+        apiPath
+      );
       return response;
     },
   },

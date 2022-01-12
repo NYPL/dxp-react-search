@@ -21,7 +21,6 @@ function useDecoupledRouterQuery(slug: string) {
     },
   });
   const uuid = decoupledRouterData?.decoupledRouter?.id;
-  console.log(uuid);
   return uuid;
 }
 

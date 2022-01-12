@@ -1,6 +1,7 @@
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
-const { DRUPAL_API } = process.env;
-import buildJsonApiPath from "./buildJsonApiPath";
+const { DRUPAL_API, DRUPAL_CONSUMER_UUID, DRUPAL_CONSUMER_SECRET } =
+  process.env;
+import getAccessToken from "./../../../utils/getAccessToken";
 
 class DrupalApi extends RESTDataSource {
   constructor() {
@@ -275,8 +276,20 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getNodeById(apiPath) {
-    const response = await this.get(apiPath);
+  async getNodeById(isPreview, apiPath) {
+    // @TODO cleanup this code.
+    let response;
+    if (isPreview) {
+      const accessToken = await getAccessToken();
+      const headers = {
+        Authorization: `Bearer ${accessToken.access_token}`,
+      };
+      response = await this.get(apiPath, undefined, {
+        headers: headers,
+      });
+    } else {
+      response = await this.get(apiPath);
+    }
     return response.data;
   }
 
