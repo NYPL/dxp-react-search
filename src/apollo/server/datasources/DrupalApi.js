@@ -277,15 +277,13 @@ class DrupalApi extends RESTDataSource {
   }
 
   async getNodeById(isPreview, apiPath) {
-    // @TODO cleanup this code.
     let response;
     if (isPreview) {
       const accessToken = await getAccessToken();
-      const headers = {
-        Authorization: `Bearer ${accessToken.access_token}`,
-      };
       response = await this.get(apiPath, undefined, {
-        headers: headers,
+        headers: {
+          Authorization: `Bearer ${accessToken.access_token}`,
+        },
       });
     } else {
       response = await this.get(apiPath);
