@@ -9,7 +9,6 @@ import { BLOG_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/blogFields
 // Components
 import PageContainer from "../../components/blogs/layouts/PageContainer";
 import BlogPost from "../../components/blogs/BlogPost";
-import Error from "./../_error";
 // Hooks
 import useDecoupledRouterQuery from "./../../hooks/useDecoupledRouterQuery";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
@@ -43,7 +42,7 @@ function BlogPostPage() {
     return (
       <PageContainer
         showContentHeader={false}
-        contentPrimary={<Error statusCode={404} />}
+        contentPrimary={<ErrorPage statusCode={404} />}
       />
     );
   }
