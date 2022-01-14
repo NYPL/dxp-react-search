@@ -24,7 +24,9 @@ const BLOG_POST_QUERY = gql`
 
 function BlogPostPage() {
   const router = useRouter();
-  let uuid = useDecoupledRouterQuery(router.asPath);
+  const { data: decoupledRouterData } = useDecoupledRouterQuery(router.asPath);
+
+  let uuid = decoupledRouterData?.decoupledRouter?.uuid;
   // Preview mode.
   const isPreview =
     router.query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET &&

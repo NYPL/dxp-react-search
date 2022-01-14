@@ -129,10 +129,23 @@ class DrupalApi extends RESTDataSource {
 
   /* ---------- DECOUPLED DRUPAL ---------- */
   async getDecoupledRouter(args) {
-    // Get resource url from path.
     let apiPath = `/router/translate-path?path=${args.path}`;
-    const response = await this.get(apiPath);
-    return response;
+    try {
+      const response = await this.get(apiPath);
+      return response;
+    } catch (e) {
+      /*
+       * 404 will be returned by Drupal if there's no matching route.
+       * 403 will be returned if the route matches, but is unpublished.
+       */
+      if (
+        e.extensions.response.status === 404 ||
+        e.extensions.response.status === 403
+      ) {
+        return [];
+      }
+      throw e;
+    }
   }
 
   async getAutoSuggestions(args) {

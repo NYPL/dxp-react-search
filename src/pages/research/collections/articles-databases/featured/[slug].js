@@ -22,7 +22,8 @@ function FeaturedResourceTopicSlug() {
   const router = useRouter();
   const { slug } = router.query;
 
-  const uuid = useDecoupledRouterQuery(router.asPath);
+  const { data: decoupledRouterData } = useDecoupledRouterQuery(router.asPath);
+  const uuid = decoupledRouterData?.decoupledRouter?.uuid;
 
   // Get resource topic by id.
   const { loading, error, data } = useQuery(RESOURCE_TOPIC_BY_ID_QUERY, {
