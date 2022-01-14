@@ -10,6 +10,15 @@ describe("Blog Post Routes Tests", () => {
     }).should("exist");
   });
 
+  it("Unpublished blog post with special url returns correct page.", () => {
+    const previewUrl =
+      "http://localhost:3000/blogs/demo-blog-post-16?preview_secret=o934Ysf3Hpu3irVXFBYvGCAyHjU3F&uuid=d1dcb982-8b39-43de-9aff-a2b2947c6299";
+    cy.visit(previewUrl);
+    cy.findByRole("heading", {
+      name: /demo blog post 1\/6/i,
+    }).should("exist");
+  });
+
   it("Unpublished blog post returns 404.", () => {
     cy.visit("http://localhost:3000/blogs/demo-blog-post-16");
     cy.findByRole("heading", {
