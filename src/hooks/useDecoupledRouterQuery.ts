@@ -4,6 +4,7 @@ const DECOUPLED_ROUTER_QUERY = gql`
   query DecoupledRouterQuery($path: String) {
     decoupledRouter(path: $path) {
       id
+      uuid
       redirect {
         from
         to

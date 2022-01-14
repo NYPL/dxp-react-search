@@ -27,9 +27,9 @@ function BlogPostPage() {
   const { data: decoupledRouterData } = useDecoupledRouterQuery(router.asPath);
   const drupalRouter = decoupledRouterData?.decoupledRouter;
   console.log("--------- drupalRouter --------");
-  console.log(drupalRouter);
+  console.log(drupalRouter.redirect);
 
-  let uuid = decoupledRouterData?.decoupledRouter?.id;
+  let uuid = decoupledRouterData?.decoupledRouter?.uuid;
   // Preview mode.
   const isPreview =
     router.query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET &&
