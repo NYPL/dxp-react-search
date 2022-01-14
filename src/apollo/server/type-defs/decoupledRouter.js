@@ -1,8 +1,9 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type DecoupledRouter {
     id: ID!
+    uuid: String
     redirect: Redirect
   }
 
@@ -14,5 +15,5 @@ export const typeDefs = gql`
 
   extend type Query {
     decoupledRouter(path: String): DecoupledRouter
-  }  
+  }
 `;

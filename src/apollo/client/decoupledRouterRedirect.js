@@ -1,13 +1,11 @@
-import { 
-  DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY 
-} from './queries/DecoupledRouter.gql';
+import { DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY } from "./queries/DecoupledRouter.gql";
 
 async function decoupledRouterRedirect(ctx) {
   return await ctx.apolloClient
     .query({
       query: DECOUPLED_ROUTER_QUERY,
       variables: {
-        path: ctx.asPath
+        path: ctx.asPath,
       },
       // @TODO Do we need this?
       // Prevent caching issues when logging in/out without refresh.

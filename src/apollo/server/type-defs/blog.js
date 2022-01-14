@@ -54,6 +54,6 @@ export const typeDefs = gql`
       filter: BlogFilter
       sortBy: String
     ): BlogConnection
-    blog(id: String): Blog
+    blog(id: String, preview: Boolean): Blog
   }
 `;
