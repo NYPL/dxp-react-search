@@ -25,9 +25,6 @@ const BLOG_POST_QUERY = gql`
 function BlogPostPage() {
   const router = useRouter();
   const { data: decoupledRouterData } = useDecoupledRouterQuery(router.asPath);
-  const drupalRouter = decoupledRouterData?.decoupledRouter;
-  console.log("--------- drupalRouter --------");
-  console.log(drupalRouter.redirect);
 
   let uuid = decoupledRouterData?.decoupledRouter?.uuid;
   // Preview mode.

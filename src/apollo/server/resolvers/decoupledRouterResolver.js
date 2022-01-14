@@ -7,7 +7,6 @@ const decoupledRouterResolver = {
   },
   DecoupledRouter: {
     id: (parent, args, context, info) => {
-      //console.log(info.variableValues.path);
       const router = parent;
       // Set a default for id to the path requested in query, since its non nullable.
       let id = info.variableValues.path;
@@ -15,6 +14,7 @@ const decoupledRouterResolver = {
       if (router.entity) {
         id = `router-id-${router.entity.uuid}`;
       }
+      // This is not a drupal route, so return the resolved redirect as id.
       if (!router.entity && router.resolved) {
         id = `router-id-${router.resolved}`;
       }
