@@ -10,8 +10,7 @@ import { BLOG_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/blogFields
 import PageContainer from "../../components/blogs/layouts/PageContainer";
 import BlogPost from "../../components/blogs/BlogPost";
 // Hooks
-import useDecoupledRouterQuery from "./../../hooks/useDecoupledRouterQuery";
-const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
+import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 
 const BLOG_POST_QUERY = gql`
   ${BLOG_FIELDS_FRAGMENT}
@@ -24,18 +23,7 @@ const BLOG_POST_QUERY = gql`
 
 function BlogPostPage() {
   const router = useRouter();
-  const { data: decoupledRouterData } = useDecoupledRouterQuery(router.asPath);
-  let uuid = decoupledRouterData.decoupledRouter?.uuid;
-  // Preview mode.
-  const isPreview =
-    router.query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET &&
-    router.query.uuid
-      ? true
-      : false;
-  // Set the uuid for preview mode.
-  if (isPreview) {
-    uuid = router.query.uuid;
-  }
+  const { isPreview, uuid } = useDecoupledRouter(router.asPath, router);
 
   const { loading, error, data } = useQuery(BLOG_POST_QUERY, {
     skip: !uuid,
