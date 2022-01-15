@@ -11,8 +11,8 @@ import {
   CardContent,
   CardHeading,
   //CardImage,
-  CardImageRatios,
-  CardImageSizes,
+  ImageRatios,
+  ImageSizes,
   CardLayouts,
   Heading,
   List,
@@ -82,8 +82,8 @@ function BookList() {
                   quality={90}
                 />
               }
-              imageAspectRatio={CardImageRatios.Sqaure}
-              imageSize={CardImageSizes.Small}
+              imageAspectRatio={ImageRatios.Sqaure}
+              imageSize={ImageSizes.Small}
             >
               <CardHeading level={3}>
                 {item.url && (

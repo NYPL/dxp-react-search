@@ -1,13 +1,14 @@
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
-const { DRUPAL_API } = process.env;
-import buildJsonApiPath from "./buildJsonApiPath";
+const { DRUPAL_API, DRUPAL_CONSUMER_UUID, DRUPAL_CONSUMER_SECRET } =
+  process.env;
+import getAccessToken from "./../../../utils/getAccessToken";
 
 class DrupalApi extends RESTDataSource {
   constructor() {
     super();
     // Temporary hard-code d9 backend for tugboat.
-    this.baseURL = "https://sandbox-d8.nypl.org";
-    //this.baseURL = DRUPAL_API;
+    //this.baseURL = "https://sandbox-d8.nypl.org";
+    this.baseURL = DRUPAL_API;
   }
 
   /**
@@ -128,10 +129,23 @@ class DrupalApi extends RESTDataSource {
 
   /* ---------- DECOUPLED DRUPAL ---------- */
   async getDecoupledRouter(args) {
-    // Get resource url from path.
     let apiPath = `/router/translate-path?path=${args.path}`;
-    const response = await this.get(apiPath);
-    return response;
+    try {
+      const response = await this.get(apiPath);
+      return response;
+    } catch (e) {
+      /*
+       * 404 will be returned by Drupal if there's no matching route.
+       * 403 will be returned if the route matches, but is unpublished.
+       */
+      if (
+        e.extensions.response.status === 404 ||
+        e.extensions.response.status === 403
+      ) {
+        return [];
+      }
+      throw e;
+    }
   }
 
   async getAutoSuggestions(args) {
@@ -275,8 +289,18 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getNodeById(apiPath) {
-    const response = await this.get(apiPath);
+  async getNodeById(isPreview, apiPath) {
+    let response;
+    if (isPreview) {
+      const accessToken = await getAccessToken();
+      response = await this.get(apiPath, undefined, {
+        headers: {
+          Authorization: `Bearer ${accessToken.access_token}`,
+        },
+      });
+    } else {
+      response = await this.get(apiPath);
+    }
     return response.data;
   }
 

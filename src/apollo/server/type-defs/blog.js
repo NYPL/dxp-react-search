@@ -13,7 +13,16 @@ export const typeDefs = gql`
     mainContent: [BlogMainContent]
   }
 
-  union BlogMainContent = TextWithImage | Video | Slideshow
+  union BlogMainContent =
+      TextWithImage
+    | Video
+    | Slideshow
+    | Text
+    | SocialEmbed
+    | AudioEmbed
+    | GoogleMapEmbed
+    | ImageComponent
+    | CardList
 
   type BlogConnection {
     items: [Blog]
@@ -35,6 +44,7 @@ export const typeDefs = gql`
     subjects: [String]
     libraries: [String]
     divisions: [String]
+    audiences: [String]
   }
 
   extend type Query {
@@ -44,6 +54,6 @@ export const typeDefs = gql`
       filter: BlogFilter
       sortBy: String
     ): BlogConnection
-    blog(id: String): Blog
+    blog(id: String, preview: Boolean): Blog
   }
 `;

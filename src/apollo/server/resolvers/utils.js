@@ -1,29 +1,62 @@
 export function imageResolver(image) {
-  return {
-    id: image.id,
-    //alt: image.meta.alt,
-    alt: "imageResolver alt!",
-    uri: () => {
-      if (image.uri.url && image.uri.url.includes("sites/default")) {
-        return `http://localhost:8080${image.uri.url}`;
-      } else {
-        return image.uri.url;
-      }
-    },
-    transformations: () => {
-      let transformations = [];
-      image.image_style_uri.forEach((imageStyle) => {
-        for (const [label, uri] of Object.entries(imageStyle)) {
+  if (image.type === "media--digital_collections_image") {
+    const uri = `https://images.nypl.org/index.php?id=${image.field_media_dc_id}&t=w`;
+    const imageStyles = [
+      "1_1_960",
+      "2_1_320",
+      "2_1_960",
+      "medium",
+      "max_width_960",
+    ];
+    return {
+      id: image.id,
+      alt: "dc image alt!",
+      uri: uri,
+      transformations: () => {
+        let transformations = [];
+        imageStyles.forEach((imageStyle) => {
           transformations.push({
-            id: `${image.id}__${label}`,
-            label: label,
+            id: `${image.id}__${imageStyle}`,
+            label: imageStyle,
             uri: uri,
           });
+        });
+        return transformations;
+      },
+    };
+  } else {
+    const mediaImage = image.field_media_image;
+    return {
+      id: mediaImage.id,
+      //alt: image.meta.alt,
+      alt: "imageResolver alt!",
+      uri: () => {
+        if (
+          mediaImage.uri.url &&
+          mediaImage.uri.url.includes("sites/default")
+        ) {
+          return `http://localhost:8080${mediaImage.uri.url}`;
+        } else {
+          return mediaImage.uri.url;
         }
-      });
-      return transformations;
-    },
-  };
+      },
+      transformations: () => {
+        let transformations = [];
+        mediaImage.image_style_uri.forEach((imageStyle) => {
+          for (const [label, uri] of Object.entries(imageStyle)) {
+            transformations.push({
+              id: `${mediaImage.id}__${label}`,
+              label: label,
+              uri: uri,
+            });
+          }
+        });
+        return transformations;
+      },
+      ...(mediaImage.meta.width && { width: mediaImage.meta.width }),
+      ...(mediaImage.meta.height && { height: mediaImage.meta.height }),
+    };
+  }
 }
 
 export function drupalParagraphsResolver(field, typesInQuery) {
@@ -48,6 +81,46 @@ export function drupalParagraphsResolver(field, typesInQuery) {
     ) {
       accumulator.push(item);
     }
+
+    if (item.type === "paragraph--text" && typesInQuery.includes("Text")) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--social" &&
+      typesInQuery.includes("SocialEmbed")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--audio" &&
+      typesInQuery.includes("AudioEmbed")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--image" &&
+      typesInQuery.includes("ImageComponent")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--link_card_list" &&
+      typesInQuery.includes("CardList")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--google_map" &&
+      typesInQuery.includes("GoogleMapEmbed")
+    ) {
+      accumulator.push(item);
+    }
+
     return accumulator;
   }, []);
 
@@ -56,24 +129,51 @@ export function drupalParagraphsResolver(field, typesInQuery) {
   requestedParagraphs.map((item) => {
     let paragraphComponent;
     let paragraphTypeName = item.type.replace("paragraph--", "");
+    let oembedBaseUrl;
+    let embedCode;
 
     switch (item.type) {
       case "paragraph--text_with_image":
+        const textWithImageMedia = item.field_ers_media_item;
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
           heading: item.field_ts_heading,
           text: item.field_tfls_summary_descrip.processed,
-          image: imageResolver(item.field_ers_media_item.field_media_image),
+          caption: textWithImageMedia.field_media_image_caption
+            ? textWithImageMedia.field_media_image_caption
+            : null,
+          credit: textWithImageMedia.field_media_image_credit_html
+            ? textWithImageMedia.field_media_image_credit_html.processed
+            : null,
+          image: imageResolver(item.field_ers_media_item),
         };
         break;
       case "paragraph--video":
+        //let oembedBaseUrl;
+        // Youtube
+        // Ex. oEmbed req: https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=385eTo76OzA
+        if (
+          item.field_ers_media_item.field_media_oembed_video.includes("youtube")
+        ) {
+          oembedBaseUrl = "https://www.youtube.com/oembed?url";
+        }
+        // Vimeo
+        // Ex oEmbed req: https://vimeo.com/api/oembed.json?url=https://vimeo.com/563015803
+        if (
+          item.field_ers_media_item.field_media_oembed_video.includes("vimeo")
+        ) {
+          oembedBaseUrl = "https://vimeo.com/api/oembed.json?url";
+        }
+        embedCode = item.field_ers_media_item.field_media_oembed_video;
+        const videoHtml = fetchOembedData(oembedBaseUrl, embedCode);
+
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
           heading: item.field_ts_heading,
-          description: item.field_tfls_description.processed,
-          video: item.field_ers_media_item.field_media_oembed_video,
+          description: item.field_tfls_description?.processed,
+          html: videoHtml,
         };
         break;
       case "paragraph--slideshow":
@@ -88,8 +188,144 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           images: slideshowImages,
         };
         break;
+      case "paragraph--text":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          text: item.field_tfls_summary_descrip.processed,
+          heading: item.field_ts_heading ? item.field_ts_heading : null,
+        };
+        break;
+      case "paragraph--social":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          embedCode: item.field_ts_social_embed,
+        };
+        break;
+      case "paragraph--google_map":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          embedCode: item.field_ts_embed_code,
+          accessibleDescription: item.field_ts_accessible_description,
+        };
+        break;
+      case "paragraph--audio":
+        // Soundcloud
+        if (
+          item.field_ers_media_item.field_media_oembed_remote_audio.includes(
+            "soundcloud"
+          )
+        ) {
+          oembedBaseUrl = "https://soundcloud.com/oembed?url";
+        }
+        // Spotify
+        if (
+          item.field_ers_media_item.field_media_oembed_remote_audio.includes(
+            "spotify"
+          )
+        ) {
+          oembedBaseUrl = "https://open.spotify.com/oembed?url";
+        }
+        // Libsyn
+        // Ex: https://sandbox-d8.nypl.org/api/oembed-libsyn?url=https://html5-player.libsyn.com/embed/episode/id/20880053
+        if (
+          item.field_ers_media_item.field_media_oembed_remote_audio.includes(
+            "libsyn"
+          )
+        ) {
+          // @TODO use env var for instance of drupal?
+          oembedBaseUrl = "https://sandbox-d8.nypl.org/api/oembed-libsyn?url";
+        }
+        embedCode = item.field_ers_media_item.field_media_oembed_remote_audio;
+        const audioHtml = fetchOembedData(oembedBaseUrl, embedCode);
+
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          html: audioHtml,
+        };
+        break;
+      case "paragraph--image":
+        const mediaItem = item.field_ers_media_item;
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          caption: mediaItem.field_media_image_caption
+            ? mediaItem.field_media_image_caption
+            : null,
+          credit: mediaItem.field_media_image_credit_html
+            ? mediaItem.field_media_image_credit_html.processed
+            : null,
+          image: imageResolver(mediaItem),
+        };
+        break;
+      case "paragraph--link_card_list":
+        const items = [];
+        item.field_erm_link_cards.map((cardItem) => {
+          items.push({
+            id: cardItem.id,
+            title: cardItem.field_ts_heading,
+            description: cardItem.field_tfls_description.processed,
+            link: cardItem.field_ls_link.uri,
+            image: imageResolver(cardItem.field_ers_image),
+          });
+        });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description.processed,
+          items: items,
+        };
+        break;
     }
     items.push(paragraphComponent);
   });
   return items;
+}
+
+async function fetchOembedData(oembedBaseUrl, embedCode) {
+  try {
+    const response = await fetch(`${oembedBaseUrl}=${embedCode}`);
+    const json = await response.json();
+    return json.html;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function resolveParagraphTypes(objectType) {
+  let resolvedObjectType;
+  switch (objectType) {
+    case "text_with_image":
+      resolvedObjectType = "TextWithImage";
+      break;
+    case "video":
+      resolvedObjectType = "Video";
+      break;
+    case "slideshow":
+      resolvedObjectType = "Slideshow";
+      break;
+    case "text":
+      resolvedObjectType = "Text";
+      break;
+    case "social":
+      resolvedObjectType = "SocialEmbed";
+      break;
+    case "google_map":
+      resolvedObjectType = "GoogleMapEmbed";
+      break;
+    case "audio":
+      resolvedObjectType = "AudioEmbed";
+      break;
+    case "image":
+      resolvedObjectType = "ImageComponent";
+      break;
+    case "link_card_list":
+      resolvedObjectType = "CardList";
+      break;
+  }
+  return resolvedObjectType;
 }

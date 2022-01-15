@@ -23,7 +23,9 @@ describe("Articles & Databases Filter Bar", () => {
       cy.get("#multiselect-subject")
         .findByRole("dialog")
         .findByLabelText(item)
-        .click()
+        // { force: true } might be necessary here, expained here:
+        // https://github.com/chakra-ui/chakra-ui/issues/3955
+        .click({ force: true })
         .should("be.checked");
     });
 
@@ -49,7 +51,9 @@ describe("Articles & Databases Filter Bar", () => {
     cy.get("#multiselect-subject")
       .findByRole("dialog")
       .findByLabelText("Art")
-      .click()
+      // { force: true } might be necessary here, expained here:
+      // https://github.com/chakra-ui/chakra-ui/issues/3955
+      .click({ force: true })
       .should("be.checked");
 
     cy.log("Confirm that selected item count is correct");

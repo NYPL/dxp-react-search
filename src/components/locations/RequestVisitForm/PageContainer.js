@@ -4,6 +4,7 @@ import { default as SharedPageContainer } from "../../shared/layouts/PageContain
 import BottomMenuContent from "../../shared/BottomMenus/content";
 import Menu from "../../ds-prototypes/Menu";
 import { FormContextProvider } from "./../../../context/FormContext";
+import { ColorVariants } from "@nypl/design-system-react-components";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function PageContainer(props) {
@@ -27,6 +28,7 @@ function PageContainer(props) {
             url: `${NEXT_PUBLIC_NYPL_DOMAIN}/locations`,
           },
         ]}
+        breadcrumbsColor={ColorVariants.Locations}
         wrapperClass="nypl--locations"
         {...(showContentHeader && {
           contentHeader: contentHeader,

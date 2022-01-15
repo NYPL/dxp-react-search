@@ -2,6 +2,7 @@ import React from "react";
 // Apollo
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
+import { BLOG_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/blogFields";
 // Components
 import { Pagination } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
@@ -15,6 +16,7 @@ import { ImageType } from "../../shared/Image/ImageTypes";
 import { useRouter } from "next/router";
 
 const BLOGS_QUERY = gql`
+  ${BLOG_FIELDS_FRAGMENT}
   query BlogsQuery(
     $limit: Int
     $pageNumber: Int
@@ -24,6 +26,7 @@ const BLOGS_QUERY = gql`
     $subjects: [String]
     $libraries: [String]
     $divisions: [String]
+    $audiences: [String]
   ) {
     allBlogs(
       limit: $limit
@@ -34,61 +37,12 @@ const BLOGS_QUERY = gql`
         subjects: $subjects
         libraries: $libraries
         divisions: $divisions
+        audiences: $audiences
       }
       sortBy: $sortBy
     ) {
       items {
-        id
-        title
-        description
-        slug
-        date
-        byline
-        image {
-          id
-          uri
-          alt
-          transformations {
-            id
-            label
-            uri
-          }
-        }
-        locations {
-          id
-          name
-          slug
-        }
-        mainContent {
-          __typename
-          ... on Slideshow {
-            id
-            type
-            heading
-          }
-          ... on TextWithImage {
-            id
-            type
-            heading
-            text
-            image {
-              id
-              alt
-              uri
-              transformations {
-                id
-                label
-                uri
-              }
-            }
-          }
-          ... on Video {
-            id
-            type
-            heading
-            video
-          }
-        }
+        ...BlogFields
       }
       pageInfo {
         totalItems
@@ -104,6 +58,7 @@ interface BlogCardsProps {
   title?: string;
   description?: string;
   slug?: string;
+  slugLabel?: string;
   limit?: number;
   pageNumber?: number;
   sortBy?: string;
@@ -134,6 +89,7 @@ function BlogsContainer({
   title = "",
   description = "",
   slug = "",
+  slugLabel = "",
   limit,
   pageNumber,
   sortBy,
@@ -162,6 +118,9 @@ function BlogsContainer({
       divisions: router.query.division
         ? (router.query.division as string).split(" ")
         : null,
+      audiences: router.query.audience_by_age
+        ? (router.query.audience_by_age as string).split(" ")
+        : null,
     },
   });
 
@@ -179,7 +138,13 @@ function BlogsContainer({
 
   if (loading || !data) {
     return (
-      <CardSet id={id} title={title} slug={slug} description={description}>
+      <CardSet
+        id={id}
+        title={title}
+        slug={slug}
+        slugLabel={slugLabel}
+        description={description}
+      >
         <CardSkeletonLoader
           gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
           gridGap="1.25rem"
@@ -190,9 +155,13 @@ function BlogsContainer({
   }
 
   // Check for specific query parameters from url to set filter display status.
-  const showFilterBar = ["channel", "subject", "library", "division"].some(
-    (item) => router.query.hasOwnProperty(item)
-  );
+  const showFilterBar = [
+    "channel",
+    "subject",
+    "library",
+    "division",
+    "audience_by_age",
+  ].some((item) => router.query.hasOwnProperty(item));
 
   return (
     <>
@@ -207,7 +176,13 @@ function BlogsContainer({
           />
         </div>
       )}
-      <CardSet id={id} title={title} slug={slug} description={description}>
+      <CardSet
+        id={id}
+        title={title}
+        slug={slug}
+        slugLabel={slugLabel}
+        description={description}
+      >
         <CardGrid gap="2rem" templateColumns="repeat(1, 1fr)">
           {data.allBlogs.items.map((item: BlogCardItem) => (
             <li key={item.id}>
@@ -217,7 +192,8 @@ function BlogsContainer({
         </CardGrid>
       </CardSet>
       <Pagination
-        currentPage={currentPage}
+        // @TODO Confirm that this is working.
+        initialPage={currentPage}
         pageCount={data.allBlogs.pageInfo.pageCount}
         onPageChange={onPageChange}
       />

@@ -1,6 +1,13 @@
 import React from "react";
 import Components from "./../../shared/ContentComponents/getReactComponent";
-
+import {
+  Box,
+  Heading,
+  HeadingLevels,
+  Link,
+  HStack,
+  Text,
+} from "@nypl/design-system-react-components";
 /*
 @TODO
 contentComponent will be an object from gql data, like this, but different
@@ -23,34 +30,26 @@ interface BlogPostProps {
 
 function BlogPost({ blog }: BlogPostProps) {
   return (
-    <article>
-      <header>
-        <h1>{blog.title}</h1>
-        <div>By {blog.byline}</div>
-        <div>{blog.date}</div>
-        <div>
-          {blog.locations.map((location: any) => {
-            return (
-              <a style={{ paddingRight: "5px" }} href={location.slug}>
-                {location.name}
-              </a>
-            );
-          })}
-        </div>
-      </header>
-
-      <br />
-      <br />
-      <p>{blog.id}</p>
-      <p>{blog.description}</p>
-
-      <br />
-      <br />
-
-      {blog.mainContent.map((contentComponent: ContentComponentObject) =>
-        Components(contentComponent)
-      )}
-    </article>
+    <Box as="article" w="100%" maxW="866px">
+      <Box as="header" pb={10}>
+        <Heading id={blog.id} level={HeadingLevels.One} text={blog.title} />
+        <Box fontSize="1" fontWeight="regular">
+          By {blog.byline}
+        </Box>
+        <Box mb="xs">{blog.date}</Box>
+        {blog.locations && (
+          <HStack>
+            {blog.locations.map((location: any) => {
+              return <Link href={location.slug}>{location.name}</Link>;
+            })}
+          </HStack>
+        )}
+      </Box>
+      {blog.mainContent &&
+        blog.mainContent.map((contentComponent: ContentComponentObject) =>
+          Components(contentComponent)
+        )}
+    </Box>
   );
 }
 

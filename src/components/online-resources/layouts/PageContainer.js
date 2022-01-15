@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Components
 import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
 import Hero from "./../Hero";
@@ -6,6 +6,7 @@ import SearchHeader from "./../../shared/SearchHeader";
 import SearchForm from "./../SearchForm";
 import SidebarMenusContent from "../SidebarMenus/content";
 import Menu from "./../../ds-prototypes/Menu";
+import { ColorVariants } from "@nypl/design-system-react-components";
 //
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import BottomMenuContent from "../../shared/BottomMenus/content";
@@ -34,12 +35,12 @@ function PageContainer(props) {
     : defaultBreadcrumbs;
 
   const ContentHeader = (
-    <Fragment>
+    <>
       <Hero />
       <SearchHeader>
         <SearchForm />
       </SearchHeader>
-    </Fragment>
+    </>
   );
 
   return (
@@ -50,6 +51,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
+      breadcrumbsColor={ColorVariants.Research}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"

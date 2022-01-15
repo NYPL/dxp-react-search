@@ -5,9 +5,10 @@ import { gql, useApolloClient } from "@apollo/client";
 import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
 // Components
 import {
+  Box,
   Button,
   Heading,
-  HeadingDisplaySizes,
+  HeadingLevels,
 } from "@nypl/design-system-react-components";
 import LibraryFormField from "./FormFields/LibraryFormField";
 import VisitTypeFormField from "./FormFields/VisitTypeFormField";
@@ -24,7 +25,6 @@ import {
   checkValidation,
   runValidation,
 } from "./../../../utils/formValidation";
-import s from "./RequestVisitForm.module.css";
 
 const SEND_EMAIL_MUTATION = gql`
   mutation ($emailTo: String!, $emailCc: String, $emailBody: String) {
@@ -240,31 +240,46 @@ function RequestVisitForm() {
   }
 
   return (
-    <form
-      id="request-visit-form"
-      className={s.requestAVisit}
-      onSubmit={handleSubmit}
-      noValidate
-    >
-      <Heading
-        id="your-visit"
-        displaySize={HeadingDisplaySizes.Secondary}
-        level={2}
-        text="Your Visit"
-      />
-      <LibraryFormField handleChange={handleChange} />
-      <VisitTypeFormField
-        handleChange={handleChange}
-        handleChangeCheckboxGroup={handleChangeCheckboxGroup}
-      />
-      <OrgFormField handleChange={handleChange} />
-      <AgeGroupFormField
-        handleChangeCheckboxGroup={handleChangeCheckboxGroup}
-      />
-      <ContactInfoFormField handleChange={handleChange} />
-      <HoneypotFormField />
-      <Button type="submit">Submit</Button>
-    </form>
+    <Box maxWidth={[null, null, "637px"]}>
+      <form id="request-visit-form" onSubmit={handleSubmit} noValidate>
+        <pre>{JSON.stringify(state, undefined, 2)}</pre>
+        <Box
+          sx={{
+            "& h2": {
+              paddingBottom: "s",
+              borderBottom: "1px solid",
+              borderColor: "ui.gray.medium",
+            },
+          }}
+        >
+          <Heading
+            id="your-visit"
+            level={HeadingLevels.Two}
+            text="Your Visit"
+          />
+        </Box>
+        <Box my="m">
+          <LibraryFormField handleChange={handleChange} />
+        </Box>
+        <Box my="m">
+          <VisitTypeFormField
+            handleChange={handleChange}
+            handleChangeCheckboxGroup={handleChangeCheckboxGroup}
+          />
+        </Box>
+        <Box my="m">
+          <OrgFormField handleChange={handleChange} />
+        </Box>
+        <Box my="m">
+          <AgeGroupFormField
+            handleChangeCheckboxGroup={handleChangeCheckboxGroup}
+          />
+        </Box>
+        <ContactInfoFormField handleChange={handleChange} />
+        <HoneypotFormField />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Box>
   );
 }
 

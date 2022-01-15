@@ -34,7 +34,11 @@ const onlineResourceResolver = {
     },
     onlineResource: async (parent, args, { dataSources }) => {
       const apiPath = buildNodeByIdJsonApiPath("online_resource", args.id);
-      const response = await dataSources.drupalApi.getNodeById(apiPath);
+      const isPreview = false;
+      const response = await dataSources.drupalApi.getNodeById(
+        isPreview,
+        apiPath
+      );
       return response;
     },
   },

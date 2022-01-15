@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Box } from "@nypl/design-system-react-components";
 interface SlideshowProps {
   id: string;
   type: string;
@@ -8,13 +8,11 @@ interface SlideshowProps {
 }
 
 function Slideshow({ id, type, heading, description }: SlideshowProps) {
-  //console.log(VideoProps);
   return (
-    <div key={id}>
+    <Box id={`${type}-${id}`} mb="xl">
       <h3>{type}</h3>
       {id}
-      <p>{heading}</p>
-    </div>
+    </Box>
   );
 }
 

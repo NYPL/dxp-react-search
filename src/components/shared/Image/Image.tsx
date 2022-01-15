@@ -2,6 +2,8 @@ import React from "react";
 // Next components
 import { default as NextImage } from "next/image";
 import { ImageType as ImageProps, TransformationType } from "./ImageTypes";
+// Utils
+import { getImageTransformation } from "./imageUtils";
 
 function Image({
   id,
@@ -9,40 +11,33 @@ function Image({
   layout,
   width,
   height,
+  objectFit,
   quality,
   transformationLabel,
   useTransformation,
   transformations,
   uri,
 }: ImageProps) {
-  // Get the image transformation value.
-  function getImageTransformation(
-    transformationLabel: string,
-    // @TODO fix this
-    transformations: any
-  ) {
-    let imageUri;
-
-    transformations.map((transformation: TransformationType) => {
-      if (transformation.label === transformationLabel) {
-        imageUri = transformation.uri;
-      }
-    });
-    return imageUri;
-  }
-
   return (
     <NextImage
+      id={`nextjsImage-${id}`}
       alt={alt}
       // @ts-ignore
       src={
-        useTransformation
+        useTransformation && transformations
           ? getImageTransformation(transformationLabel, transformations)
           : uri
       }
       layout={layout}
-      width={width}
-      height={height}
+      {...(width && {
+        width: width,
+      })}
+      {...(height && {
+        height: height,
+      })}
+      {...(objectFit && {
+        objectFit: objectFit,
+      })}
       quality={quality}
     />
   );

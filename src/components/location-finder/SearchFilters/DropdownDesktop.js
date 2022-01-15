@@ -1,25 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 // Components
-import { Button } from '@nypl/design-system-react-components';
-import Dropdown from '../../shared/Dropdown';
-import CheckboxList from './CheckboxList';
+import { Button, ButtonTypes } from "@nypl/design-system-react-components";
+import Dropdown from "../../shared/Dropdown";
+import CheckboxList from "./CheckboxList";
 // Context
-import { SearchFiltersContext } from './SearchFiltersContext';
+import { SearchFiltersContext } from "./SearchFiltersContext";
 // Redux
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import { 
-  setFilters,
-  deleteFilter
-} from '../../../redux/actions';
+import { useDispatch, useSelector } from "react-redux";
+import { setFilters, deleteFilter } from "../../../redux/actions";
 // Utils
-import { 
-  setDropdownLabel, 
-  setDropdownCheckedProp, 
-  hasSelectedItems 
-} from './SearchFiltersUtils';
+import {
+  setDropdownLabel,
+  setDropdownCheckedProp,
+  hasSelectedItems,
+} from "./SearchFiltersUtils";
 
 function DropdownDesktop(props) {
   const [state, dispatch] = useContext(SearchFiltersContext);
@@ -28,19 +22,19 @@ function DropdownDesktop(props) {
 
   // Redux
   const reduxDispatch = useDispatch();
-  const { searchFilters } = useSelector(state => state.search);
-  
+  const { searchFilters } = useSelector((state) => state.search);
+
   function onChangeDropdown(event, vocabId) {
     let dropdownIdChecked = event.target.id;
 
     dispatch({
-      type: 'SET_SELECTED_DROPDOWNS',
-      payload: { 
+      type: "SET_SELECTED_DROPDOWNS",
+      payload: {
         dropdownIdChecked: dropdownIdChecked,
         vocabId: vocabId,
         savedItems: searchFilters,
-        mode: 'desktop'
-      }
+        mode: "desktop",
+      },
     });
   }
 
@@ -48,49 +42,55 @@ function DropdownDesktop(props) {
   function onSaveFilters(vocabId) {
     // Check if there are no terms to save, and clear the state if so.
     if (
-      checkedTerms[vocabId] !== undefined 
-      && checkedTerms[vocabId].terms.length > 0
+      checkedTerms[vocabId] !== undefined &&
+      checkedTerms[vocabId].terms.length > 0
     ) {
-      reduxDispatch(setFilters({
-        searchFilters: {
-          ...searchFilters,
-          [vocabId]: {
-            terms: checkedTerms[vocabId].terms
-          }
-        }
-      }));
+      reduxDispatch(
+        setFilters({
+          searchFilters: {
+            ...searchFilters,
+            [vocabId]: {
+              terms: checkedTerms[vocabId].terms,
+            },
+          },
+        })
+      );
     } else {
-      reduxDispatch(deleteFilter({
-        searchFilters: vocabId
-      }));
+      reduxDispatch(
+        deleteFilter({
+          searchFilters: vocabId,
+        })
+      );
     }
 
     // Close the dropdown.
     dispatch({
-      type: 'SET_SELECTED_DROPDOWNS',
-      payload: { 
+      type: "SET_SELECTED_DROPDOWNS",
+      payload: {
         vocabId: false,
-        mode: 'desktop'
-      }
+        mode: "desktop",
+      },
     });
   }
 
   // Clear the dropdown
-  function onClickClear(vocabId, event) {    
+  function onClickClear(vocabId, event) {
     // Clear context state for dropdown only by vocabId.
     dispatch({
-      type: 'RESET_SELECTED_ITEMS_BY_PARENT_ID',
+      type: "RESET_SELECTED_ITEMS_BY_PARENT_ID",
       payload: {
-        parentId: vocabId      
-      }
+        parentId: vocabId,
+      },
     });
 
     // Remove from saved redux state.
-    reduxDispatch(deleteFilter({
-      searchFilters: vocabId
-    }));
+    reduxDispatch(
+      deleteFilter({
+        searchFilters: vocabId,
+      })
+    );
   }
-  
+
   return (
     <Dropdown
       key={vocab.id}
@@ -103,21 +103,21 @@ function DropdownDesktop(props) {
       <div className="dropdown__content-inner">
         <CheckboxList vocab={vocab} />
       </div>
-      <div 
-        className="dropdown__content-buttons"
-        id={vocab.id}
-      >
+      <div className="dropdown__content-buttons" id={vocab.id}>
         <Button
-          buttonType="link"
+          buttonType={ButtonTypes.Link}
           id={`button-clear-${vocab.id}`}
           mouseDown={false}
           type="button"
           onClick={(e) => onClickClear(vocab.id, e)}
+          additionalStyles={{
+            marginRight: "1rem",
+          }}
         >
           Clear
         </Button>
         <Button
-          buttonType="filled"
+          buttonType={ButtonTypes.Primary}
           id={`button-save-${vocab.id}`}
           mouseDown={false}
           type="button"

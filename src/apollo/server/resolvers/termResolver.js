@@ -29,7 +29,7 @@ const termResolver = {
     description: (term) => term.description?.processed,
     image: (term) =>
       term.field_ers_image.data !== null
-        ? imageResolver(term.field_ers_image.field_media_image)
+        ? imageResolver(term.field_ers_image)
         : null,
     slug: (term) => term.path.alias,
   },

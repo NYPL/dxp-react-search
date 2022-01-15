@@ -76,7 +76,7 @@ describe("Locations Local: Request a Visit", () => {
     cy.findByRole("checkbox", {
       name: /i’m not with a school or organization\./i,
     })
-      .click()
+      .click({ force: true })
       .should("be.checked");
 
     cy.log("Assert that text input is now disabled");

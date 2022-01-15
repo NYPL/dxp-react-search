@@ -1,72 +1,50 @@
 import React from "react";
 // Next
 import { useRouter } from "next/router";
+import ErrorPage from "next/error";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 import { withApollo } from "../../apollo/client/withApollo";
+import { BLOG_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/blogFields";
 // Components
 import PageContainer from "../../components/blogs/layouts/PageContainer";
 import BlogPost from "../../components/blogs/BlogPost";
 // Hooks
-import useDecoupledRouterQuery from "./../../hooks/useDecoupledRouterQuery";
+import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 
 const BLOG_POST_QUERY = gql`
-  query BlogPostQuery($id: String) {
-    blog(id: $id) {
-      id
-      title
-      description
-      byline
-      date
-      locations {
-        id
-        name
-        slug
-      }
-      mainContent {
-        __typename
-        ... on Slideshow {
-          id
-          type
-          heading
-        }
-        ... on TextWithImage {
-          id
-          type
-          heading
-          text
-          image {
-            id
-            alt
-            uri
-            transformations {
-              id
-              label
-              uri
-            }
-          }
-        }
-        ... on Video {
-          id
-          type
-          heading
-          video
-        }
-      }
+  ${BLOG_FIELDS_FRAGMENT}
+  query BlogPostQuery($id: String, $preview: Boolean) {
+    blog(id: $id, preview: $preview) {
+      ...BlogFields
     }
   }
 `;
 
 function BlogPostPage() {
   const router = useRouter();
-  const uuid = useDecoupledRouterQuery(router.asPath);
+  const { isPreview, uuid } = useDecoupledRouter(router);
 
   const { loading, error, data } = useQuery(BLOG_POST_QUERY, {
     skip: !uuid,
     variables: {
       id: uuid,
+      ...(isPreview && {
+        preview: true,
+      }),
     },
   });
+
+  // If uuid returns null from useDecoupledRouter, there was no router
+  // path match in Drupal, so we return 404 status error component.
+  if (!data && uuid === null) {
+    return (
+      <PageContainer
+        showContentHeader={false}
+        contentPrimary={<ErrorPage statusCode={404} />}
+      />
+    );
+  }
 
   // Error state.
   if (error) {

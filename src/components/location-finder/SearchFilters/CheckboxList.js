@@ -49,7 +49,7 @@ function CheckboxList(props) {
                 labelText={<>{term.name}</>}
                 showLabel={true}
                 name={term.name}
-                checked={setFilterCheckedProp(vocab.id, term.id) || false}
+                isChecked={setFilterCheckedProp(vocab.id, term.id) || false}
                 onChange={(e) => onChangeFilters(vocab.id, e)}
               />
             </div>
@@ -64,7 +64,7 @@ function CheckboxList(props) {
                           labelText={<>{childTerm.name}</>}
                           showLabel={true}
                           name={childTerm.name}
-                          checked={
+                          isChecked={
                             setFilterCheckedProp(vocab.id, childTerm.id) ||
                             false
                           }

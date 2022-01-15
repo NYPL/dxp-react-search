@@ -126,7 +126,7 @@ function MultiSelect({
           labelText={<>{item.name}</>}
           showLabel={true}
           name={item.name}
-          checked={setFilterCheckedProp(id, item.id) || false}
+          isChecked={setFilterCheckedProp(id, item.id) || false}
           onChange={handleOnSelectedItemChange}
         />
       );
@@ -138,7 +138,7 @@ function MultiSelect({
           labelText={<>{item.name}</>}
           showLabel={true}
           name={item.name}
-          checked={setFilterCheckedProp(id, item.id) || false}
+          isChecked={setFilterCheckedProp(id, item.id) || false}
           onChange={handleOnSelectedItemChange}
         />
       );
@@ -200,10 +200,10 @@ function MultiSelect({
                         labelText={<>{item.name}</>}
                         showLabel={true}
                         name={item.name}
-                        /*checked={setMixedStateCheckboxCheckedProp(id, item) || false}
+                        /*isChecked={setMixedStateCheckboxCheckedProp(id, item) || false}
                         onChange={() => onChangeMixedStateCheckbox(id, item)}
                         */
-                        checked={setFilterCheckedProp(id, item.id) || false}
+                        isChecked={setFilterCheckedProp(id, item.id) || false}
                         onChange={handleOnSelectedItemChange}
                       />
                       <ul>
@@ -223,7 +223,7 @@ function MultiSelect({
                                 labelText={<>{childItem.name}</>}
                                 showLabel={true}
                                 name={childItem.name}
-                                checked={
+                                isChecked={
                                   setFilterCheckedProp(id, childItem.id) ||
                                   false
                                 }

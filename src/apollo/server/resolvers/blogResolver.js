@@ -2,7 +2,11 @@ const graphqlFields = require("graphql-fields");
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
-import { drupalParagraphsResolver, imageResolver } from "./utils";
+import {
+  drupalParagraphsResolver,
+  resolveParagraphTypes,
+  imageResolver,
+} from "./utils";
 import {
   buildAllNodesByContentTypeJsonApiPath,
   buildNodeByIdJsonApiPath,
@@ -39,7 +43,11 @@ const blogResolver = {
     },
     blog: async (parent, args, { dataSources }) => {
       const apiPath = buildNodeByIdJsonApiPath("blog", args.id);
-      const response = await dataSources.drupalApi.getNodeById(apiPath);
+      const isPreview = args.preview ? true : false;
+      const response = await dataSources.drupalApi.getNodeById(
+        isPreview,
+        apiPath
+      );
       return response;
     },
   },
@@ -63,33 +71,25 @@ const blogResolver = {
     date: (blog) => formatDate(blog.created),
     image: (blog) =>
       blog.field_ers_media_image.data !== null
-        ? imageResolver(blog.field_ers_media_image.field_media_image)
+        ? imageResolver(blog.field_ers_media_image)
         : null,
     locations: (blog) =>
-      blog.field_erm_location !== null ? blog.field_erm_location : null,
+      blog.field_erm_location.data?.length === 0
+        ? null
+        : blog.field_erm_location,
     mainContent: (blog, args, context, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      return drupalParagraphsResolver(blog.field_main_content, typesInQuery);
+      const mainContent =
+        blog.field_main_content.data?.length === 0
+          ? null
+          : drupalParagraphsResolver(blog.field_main_content, typesInQuery);
+      return mainContent;
     },
   },
   BlogMainContent: {
     __resolveType: (object, context, info) => {
-      // @TODO could be a util function, where object is passed, along with an
-      // array of allowed drupal paragraph types?
-      let objectType;
-      switch (object.type) {
-        case "text_with_image":
-          objectType = "TextWithImage";
-          break;
-        case "video":
-          objectType = "Video";
-          break;
-        case "slideshow":
-          objectType = "Slideshow";
-          break;
-      }
-      return objectType;
+      return resolveParagraphTypes(object.type);
     },
   },
   BlogLocation: {

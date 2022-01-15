@@ -37,7 +37,9 @@ export function buildAllNodesByContentTypeJsonApiPath(
     // Add includeFields.
     includeFields.push([
       "field_main_content.field_ers_media_item.field_media_image",
-      "field_main_content.field_erm_media_items.field_media_image",
+      // Link Card List
+      "field_main_content.field_erm_link_cards",
+      "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
     ]);
   }
 
@@ -102,6 +104,12 @@ export function buildAllNodesByContentTypeJsonApiPath(
       filterMultiValueEntityRef(apiParams, division, "field_erm_divisions");
     });
   }
+  // Audience by age
+  if (filter && "audiences" in filter && filter.audiences) {
+    filter.audiences.map((audience) => {
+      filterMultiValueEntityRef(apiParams, audience, "field_erm_audience");
+    });
+  }
 
   // Locations specific
   if (filter && "libraryType" in filter && filter.libraryType) {
@@ -129,8 +137,10 @@ export function buildNodeByIdJsonApiPath(contentType, id) {
     const includeFields = [
       "field_ers_media_image.field_media_image",
       "field_main_content.field_ers_media_item.field_media_image",
-      "field_main_content.field_erm_media_items.field_media_image",
       "field_erm_location",
+      // Link Card List
+      "field_main_content.field_erm_link_cards",
+      "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
     ];
     // Add include
     if (includeFields.length) {
