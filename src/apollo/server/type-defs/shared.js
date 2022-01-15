@@ -15,12 +15,90 @@ export const typeDefs = gql`
     alt: String
     uri: String!
     transformations: [ImageTransformation]
+    width: Int
+    height: Int
   }
 
   type ImageTransformation {
     id: ID!
     label: String!
     uri: String!
+  }
+
+  type TextWithImage {
+    id: ID!
+    type: String!
+    heading: String
+    text: String!
+    image: Image
+    caption: String
+    credit: String
+  }
+
+  type Video {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    html: String!
+  }
+
+  type AudioEmbed {
+    id: ID!
+    type: String!
+    html: String!
+  }
+
+  type SocialEmbed {
+    id: ID!
+    type: String!
+    embedCode: String!
+  }
+
+  type GoogleMapEmbed {
+    id: ID!
+    type: String!
+    embedCode: String!
+    accessibleDescription: String!
+  }
+
+  type Slideshow {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    images: [Image]!
+  }
+
+  type Text {
+    id: ID!
+    type: String!
+    text: String!
+    heading: String
+  }
+
+  type ImageComponent {
+    id: ID!
+    type: String!
+    image: Image
+    caption: String
+    credit: String
+  }
+
+  type CardList {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    items: [CardItem]!
+  }
+
+  type CardItem {
+    id: ID!
+    title: String
+    description: String
+    image: Image
+    link: String
   }
 
   type Query {

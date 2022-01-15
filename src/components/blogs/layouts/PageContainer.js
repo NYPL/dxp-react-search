@@ -1,8 +1,14 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Components
 import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
 import Menu from "./../../ds-prototypes/Menu";
-import { Hero } from "@nypl/design-system-react-components";
+import {
+  Heading,
+  HeadingLevels,
+  Hero,
+  HeroTypes,
+  ColorVariants,
+} from "@nypl/design-system-react-components";
 //
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import blogsContent from "./../../../__content/blogs";
@@ -38,8 +44,8 @@ function PageContainer(props) {
   const ContentHeader = (
     <>
       <Hero
-        heroType={"TERTIARY"}
-        heading={<h1>{title}</h1>}
+        heroType={HeroTypes.Tertiary}
+        heading={<Heading level={HeadingLevels.One} text={title} />}
         subHeaderText={description}
         backgroundColor="#E0E0E0"
         foregroundColor="#000000"
@@ -75,6 +81,11 @@ function PageContainer(props) {
                   label: "Divisions",
                   type: "content",
                 },
+                {
+                  id: "audience_by_age",
+                  label: "Audience",
+                  type: "taxonomy",
+                },
               ]}
             />
           </div>
@@ -91,6 +102,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
+      breadcrumbsColor={ColorVariants.Blogs}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"

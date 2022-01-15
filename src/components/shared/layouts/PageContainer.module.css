@@ -2,14 +2,14 @@
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 var(--space-m);
+  padding: 0 var(--nypl-space-m);
 }
 
 .grid {
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--nypl-space-xs) var(--nypl-space-s);
 
   display: grid;
   grid-gap: 2rem;
@@ -20,7 +20,7 @@
 
 @media (min-width: 600px) {
   .grid {
-    padding: var(--space-l) var(--space-s);
+    padding: var(--nypl-space-l) var(--nypl-space-s);
   }
 }
 
@@ -28,7 +28,7 @@
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: var(--space-m) var(--space-s);
+  padding: var(--nypl-space-m) var(--nypl-space-s);
 
   display: grid;
   grid-gap: 2rem;
@@ -40,7 +40,7 @@
 
 @media (min-width: 600px) {
   .gridWithRightSidebar {
-    padding: var(--space-xl) var(--space-s);
+    padding: var(--nypl-space-xl) var(--nypl-space-s);
     grid-template-columns: auto 250px;
     grid-template-areas:
       "contentPrimary contentSecondary"

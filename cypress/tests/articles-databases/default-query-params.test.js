@@ -42,6 +42,7 @@ describe("Articles & Databases pages with default query params", () => {
       .findByLabelText("Art")
       .should("be.checked")
       .parent()
+      .parent()
       .findByLabelText("Architecture")
       .should("be.checked");
 

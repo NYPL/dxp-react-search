@@ -49,17 +49,17 @@ describe("Location Finder", () => {
     cy.log("Select art from 'Subject Specialties' multiselect filter");
     // Open multiselect.
     cy.get("form")
-      .findByLabelText("Subject Specialties")
+      .findByLabelText(/subject specialties/i)
       .click({ force: true })
       .closest("div")
       .findByRole("dialog")
       .findByLabelText("Art")
-      .click()
+      .click({ force: true })
       .should("be.checked");
 
     cy.log("Submit the form using the multiselect filter");
     cy.get("form")
-      .findByLabelText("Subject Specialties")
+      .findByLabelText(/subject specialties/i)
       .parent("div")
       // Submit multiselect.
       .findByRole("button", { name: "Apply Filters" })

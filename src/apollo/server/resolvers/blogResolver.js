@@ -1,12 +1,22 @@
 const graphqlFields = require("graphql-fields");
+import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
+import {
+  drupalParagraphsResolver,
+  resolveParagraphTypes,
+  imageResolver,
+} from "./utils";
+import {
+  buildAllNodesByContentTypeJsonApiPath,
+  buildNodeByIdJsonApiPath,
+} from "../datasources/buildJsonApiPath";
 
 const blogResolver = {
   Query: {
     allBlogs: async (parent, args, { dataSources }, info) => {
-      const response = await dataSources.drupalApi.getAllNodesByContentType(
-        args.contentType,
+      const apiPath = buildAllNodesByContentTypeJsonApiPath(
+        "blog",
         args.limit,
         args.pageNumber,
         args.filter,
@@ -14,6 +24,11 @@ const blogResolver = {
         graphqlFields(info)
       );
 
+      const response = await dataSources.drupalApi.getAllNodesByContentType(
+        apiPath
+      );
+
+      // @TODO Move this to a utils function.
       return {
         items: response.data,
         pageInfo: {
@@ -26,11 +41,15 @@ const blogResolver = {
         },
       };
     },
-    /*blog: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getOnlineResource(args);
+    blog: async (parent, args, { dataSources }) => {
+      const apiPath = buildNodeByIdJsonApiPath("blog", args.id);
+      const isPreview = args.preview ? true : false;
+      const response = await dataSources.drupalApi.getNodeById(
+        isPreview,
+        apiPath
+      );
       return response;
     },
-    */
   },
   Blog: {
     id: (blog) => blog.id,
@@ -52,34 +71,25 @@ const blogResolver = {
     date: (blog) => formatDate(blog.created),
     image: (blog) =>
       blog.field_ers_media_image.data !== null
-        ? blog.field_ers_media_image.field_media_image
+        ? imageResolver(blog.field_ers_media_image)
         : null,
     locations: (blog) =>
-      blog.field_erm_location !== null ? blog.field_erm_location : null,
-  },
-  Image: {
-    id: (image) => image.id,
-    alt: (image) => "test",
-    uri: (image) => {
-      if (image.uri.url && image.uri.url.includes("sites/default")) {
-        return `http://localhost:8080${image.uri.url}`;
-      } else {
-        return image.uri.url;
-      }
+      blog.field_erm_location.data?.length === 0
+        ? null
+        : blog.field_erm_location,
+    mainContent: (blog, args, context, info) => {
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const mainContent =
+        blog.field_main_content.data?.length === 0
+          ? null
+          : drupalParagraphsResolver(blog.field_main_content, typesInQuery);
+      return mainContent;
     },
-    transformations: (image) => {
-      console.log(image);
-      let transformations = [];
-      image.image_style_uri.forEach((imageStyle) => {
-        for (const [label, uri] of Object.entries(imageStyle)) {
-          transformations.push({
-            id: `${image.id}__${label}`,
-            label: label,
-            uri: uri,
-          });
-        }
-      });
-      return transformations;
+  },
+  BlogMainContent: {
+    __resolveType: (object, context, info) => {
+      return resolveParagraphTypes(object.type);
     },
   },
   BlogLocation: {

@@ -6,8 +6,10 @@ import {
   Button,
   ButtonTypes,
   Icon,
+  IconAlign,
   IconNames,
   IconRotationTypes,
+  IconSizes,
 } from "@nypl/design-system-react-components";
 import OnlineResourceCardHeading from "./OnlineResourceCardHeading";
 // Next
@@ -75,12 +77,12 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
 
   let detailsClassName = "";
   let buttonText = "Full Details";
-  let buttonIconRotation = IconRotationTypes.rotate0;
+  let buttonIconRotation = IconRotationTypes.Rotate0;
   if (collapsible && !isToggled) {
     detailsClassName = s.collapsed;
   } else if (collapsible && isToggled) {
     detailsClassName = s.collapsible;
-    buttonIconRotation = IconRotationTypes.rotate180;
+    buttonIconRotation = IconRotationTypes.Rotate180;
     buttonText = "Close Details";
   }
 
@@ -149,9 +151,11 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
           onClick={toggleDisplay}
         >
           <Icon
-            name={IconNames.arrow}
+            name={IconNames.Arrow}
             decorative={true}
-            modifiers={["small", "icon-left"]}
+            //modifiers={["small", "icon-left"]}
+            size={IconSizes.Small}
+            align={IconAlign.Left}
             iconRotation={buttonIconRotation}
           />
           {buttonText}

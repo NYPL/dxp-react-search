@@ -10,7 +10,19 @@ export const typeDefs = gql`
     byline: String!
     image: Image
     locations: [BlogLocation]
+    mainContent: [BlogMainContent]
   }
+
+  union BlogMainContent =
+      TextWithImage
+    | Video
+    | Slideshow
+    | Text
+    | SocialEmbed
+    | AudioEmbed
+    | GoogleMapEmbed
+    | ImageComponent
+    | CardList
 
   type BlogConnection {
     items: [Blog]
@@ -32,16 +44,16 @@ export const typeDefs = gql`
     subjects: [String]
     libraries: [String]
     divisions: [String]
+    audiences: [String]
   }
 
   extend type Query {
     allBlogs(
-      contentType: String
       limit: Int
       pageNumber: Int
       filter: BlogFilter
       sortBy: String
     ): BlogConnection
-    blog(slug: String): Blog
+    blog(id: String, preview: Boolean): Blog
   }
 `;

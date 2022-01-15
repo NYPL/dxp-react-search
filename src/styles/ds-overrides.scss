@@ -16,32 +16,6 @@
     outline: 1px solid var(--ui-focus);
     outline-offset: inherit;
   }
-
-  .search__form-button {
-    align-self: flex-end;
-    // @TODO change to use space var
-    padding: 9px;
-
-    @include breakpoint($breakpoint-medium) {
-      @include space-inline-s;
-    }
-  }
-
-  // DS Checkbox overides
-  // @TODO Remove this when new DS checkbox is avail.
-  .checkbox {
-    align-self: flex-end;
-
-    .open-now {
-      margin-left: 1em;
-    }
-
-    @include breakpoint($breakpoint-medium) {
-      .open-now {
-        margin: initial;
-      }
-    }
-  }
 }
 
 // shared/layouts > Main.js
@@ -129,4 +103,9 @@
       }
     }
   }
+}
+
+// Header adds a _normalized.scss file that adds a border bottom to fieldset
+.nypl-ds fieldset {
+  border: 0 !important;
 }

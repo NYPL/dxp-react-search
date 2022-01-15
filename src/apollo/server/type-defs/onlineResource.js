@@ -20,8 +20,10 @@ export const typeDefs = gql`
   extend type Query {
     allOnlineResources(
       limit: Int
+      pageNumber: Int
+      sortBy: String
       filter: OnlineResourceFilter
     ): OnlineResourceConnection
-    onlineResource(slug: String): OnlineResource
+    onlineResource(id: String): OnlineResource
   }
 `;

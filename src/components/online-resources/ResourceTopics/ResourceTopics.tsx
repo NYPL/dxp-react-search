@@ -5,7 +5,7 @@ import { gql } from "@apollo/client";
 import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image";
 import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
-import { CardImageRatios } from "@nypl/design-system-react-components";
+import { Box, ImageRatios } from "@nypl/design-system-react-components";
 import CardSet from "../../shared/Card/CardSet";
 import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import CardGrid from "../../ds-prototypes/CardGrid";
@@ -81,20 +81,22 @@ function ResourceTopics({
               description={item.description}
               url={item.slug}
               image={
-                <Image
-                  id={item.image.id}
-                  alt={item.image.alt}
-                  uri={item.image.uri}
-                  useTransformation={true}
-                  transformations={item.image.transformations}
-                  transformationLabel={"2_1_960"}
-                  layout="responsive"
-                  width={900}
-                  height={450}
-                  quality={90}
-                />
+                <Box w="100%" mb="xs">
+                  <Image
+                    id={item.image.id}
+                    alt={item.image.alt}
+                    uri={item.image.uri}
+                    useTransformation={true}
+                    transformations={item.image.transformations}
+                    transformationLabel={"2_1_960"}
+                    layout="responsive"
+                    width={900}
+                    height={450}
+                    quality={90}
+                  />
+                </Box>
               }
-              imageAspectRatio={CardImageRatios.TwoByOne}
+              imageAspectRatio={ImageRatios.Original}
             />
           </li>
         ))}
