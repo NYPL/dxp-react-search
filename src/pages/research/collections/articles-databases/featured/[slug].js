@@ -16,14 +16,12 @@ import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import onlineResourcesContent from "./../../../../../__content/onlineResources";
 // Hooks
-import useDecoupledRouterQuery from "../../../../../hooks/useDecoupledRouterQuery";
+import useDecoupledRouter from "../../../../../hooks/useDecoupledRouter";
 
 function FeaturedResourceTopicSlug() {
   const router = useRouter();
   const { slug } = router.query;
-
-  const { data: decoupledRouterData } = useDecoupledRouterQuery(router.asPath);
-  const uuid = decoupledRouterData?.decoupledRouter?.uuid;
+  const { uuid } = useDecoupledRouter(router);
 
   // Get resource topic by id.
   const { loading, error, data } = useQuery(RESOURCE_TOPIC_BY_ID_QUERY, {

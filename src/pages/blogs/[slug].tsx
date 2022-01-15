@@ -23,7 +23,7 @@ const BLOG_POST_QUERY = gql`
 
 function BlogPostPage() {
   const router = useRouter();
-  const { isPreview, uuid } = useDecoupledRouter(router.asPath, router);
+  const { isPreview, uuid } = useDecoupledRouter(router);
 
   const { loading, error, data } = useQuery(BLOG_POST_QUERY, {
     skip: !uuid,
@@ -35,7 +35,7 @@ function BlogPostPage() {
     },
   });
 
-  // If uuid returns null from useDecoupledRouterQuery, there was no router
+  // If uuid returns null from useDecoupledRouter, there was no router
   // path match in Drupal, so we return 404 status error component.
   if (!data && uuid === null) {
     return (
