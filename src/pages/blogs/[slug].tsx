@@ -25,8 +25,7 @@ const BLOG_POST_QUERY = gql`
 function BlogPostPage() {
   const router = useRouter();
   const { data: decoupledRouterData } = useDecoupledRouterQuery(router.asPath);
-
-  let uuid = decoupledRouterData?.decoupledRouter?.uuid;
+  let uuid;
   // Preview mode.
   const isPreview =
     router.query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET &&
@@ -36,6 +35,8 @@ function BlogPostPage() {
   // Set the uuid for preview mode.
   if (isPreview) {
     uuid = router.query.uuid;
+  } else {
+    uuid = decoupledRouterData?.decoupledRouter?.uuid;
   }
 
   // If uuid returns null from useDecoupledRouterQuery, there was no router
