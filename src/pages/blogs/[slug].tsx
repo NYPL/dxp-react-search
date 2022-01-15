@@ -64,7 +64,7 @@ function BlogPostPage() {
   }
 
   // Loading state,
-  if (loading) {
+  if (loading || !data) {
     return (
       <PageContainer
         showContentHeader={false}
