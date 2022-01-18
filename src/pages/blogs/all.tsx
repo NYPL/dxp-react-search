@@ -1,8 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Apollo
 import { withApollo } from "./../../apollo/client/withApollo";
-// Redux
-import { withRedux } from "./../../redux/withRedux";
 // Components
 import PageContainer from "./../../components/blogs/layouts/PageContainer";
 import BlogsContainer from "../../components/blogs/BlogsContainer";
@@ -17,7 +15,7 @@ function BlogsAllPage() {
   );
 }
 
-export default withApollo(withRedux(BlogsAllPage), {
+export default withApollo(BlogsAllPage, {
   ssr: true,
   redirects: false,
 });

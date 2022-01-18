@@ -23,7 +23,7 @@ function PageContainer(props) {
     showFilterBar,
     showContentHeader,
   } = props;
-  const { title, description } = blogsContent;
+  const { meta } = blogsContent;
 
   // Default breadcrumbs for all online resources pages.
   const defaultBreadcrumbs = [
@@ -45,8 +45,8 @@ function PageContainer(props) {
     <>
       <Hero
         heroType={HeroTypes.Tertiary}
-        heading={<Heading level={HeadingLevels.One} text={title} />}
-        subHeaderText={description}
+        heading={<Heading level={HeadingLevels.One} text={meta.title} />}
+        subHeaderText={meta.description}
         backgroundColor="#E0E0E0"
         foregroundColor="#000000"
       />
