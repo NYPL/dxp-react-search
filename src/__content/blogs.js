@@ -6,7 +6,7 @@ const blogsContent = {
   },
   featured_posts: {
     heading: "Featured Posts",
-    description: "Take a look at the latest posts from the NYPL Blog.",
+    description: "Take a look at the latest posts from the NYPL Blog:",
     slug: "/blogs/all",
     slugLabel: "View all blogs",
   },
