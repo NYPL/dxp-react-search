@@ -119,6 +119,19 @@ export const BLOG_FIELDS_FRAGMENT = gql`
           }
         }
       }
+      ... on CatalogList {
+        id
+        type
+        heading
+        description
+        items {
+          id
+          title
+          description
+          link
+          isbn
+        }
+      }
     }
   }
 `;

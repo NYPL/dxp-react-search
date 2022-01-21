@@ -23,6 +23,7 @@ export const typeDefs = gql`
     | GoogleMapEmbed
     | ImageComponent
     | CardList
+    | CatalogList
 
   type BlogConnection {
     items: [Blog]

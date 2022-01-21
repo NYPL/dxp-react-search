@@ -7,6 +7,7 @@ import AudioEmbed from "./AudioEmbed";
 import GoogleMapEmbed from "./GoogleMapEmbed";
 import ImageComponent from "./ImageComponent";
 import CardList from "./CardList";
+import CatalogList from "./CatalogList";
 // Image
 //
 
@@ -23,6 +24,7 @@ const Components = {
   audio: AudioEmbed,
   image: ImageComponent,
   link_card_list: CardList,
+  catalog_list: CatalogList,
 };
 
 // @TODO Figure out better names, some options...

@@ -115,6 +115,13 @@ export function drupalParagraphsResolver(field, typesInQuery) {
     }
 
     if (
+      item.type === "paragraph--catalog_list" &&
+      typesInQuery.includes("CatalogList")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (
       item.type === "paragraph--google_map" &&
       typesInQuery.includes("GoogleMapEmbed")
     ) {
@@ -262,12 +269,14 @@ export function drupalParagraphsResolver(field, typesInQuery) {
         };
         break;
       case "paragraph--link_card_list":
-        const items = [];
+        const cardItems = [];
         item.field_erm_link_cards.map((cardItem) => {
-          items.push({
+          cardItems.push({
             id: cardItem.id,
             title: cardItem.field_ts_heading,
-            description: cardItem.field_tfls_description.processed,
+            description: cardItem.field_tfls_description
+              ? cardItem.field_tfls_description.processed
+              : null,
             link: cardItem.field_ls_link.uri,
             image: imageResolver(cardItem.field_ers_image),
           });
@@ -277,12 +286,38 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           type: paragraphTypeName,
           heading: item.field_ts_heading,
           description: item.field_tfls_description.processed,
-          items: items,
+          items: cardItems,
+        };
+        break;
+      case "paragraph--catalog_list":
+        const coverImageUri =
+          "https://contentcafecloud.baker-taylor.com/Jacket.svc/D65D0665-050A-487B-9908-16E6D8FF5C3E";
+        const catalogItems = [];
+        item.field_erm_remote_items.map((catalogItem) => {
+          catalogItems.push({
+            id: catalogItem.id,
+            title: catalogItem.title,
+            description: catalogItem.field_tfls_summary_description
+              ? catalogItem.field_tfls_summary_description.processed
+              : null,
+            link: "link!",
+            isbn: catalogItem.field_field_ts_isbn,
+          });
+        });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_summary_description
+            ? item.field_tfls_summary_description.processed
+            : null,
+          items: catalogItems,
         };
         break;
     }
     items.push(paragraphComponent);
   });
+  //console.log(items);
   return items;
 }
 
@@ -325,6 +360,9 @@ export function resolveParagraphTypes(objectType) {
       break;
     case "link_card_list":
       resolvedObjectType = "CardList";
+      break;
+    case "catalog_list":
+      resolvedObjectType = "CatalogList";
       break;
   }
   return resolvedObjectType;

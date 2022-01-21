@@ -65,6 +65,8 @@ const nextConfig = {
       "images.nypl.org",
       "cdn-d8.nypl.org",
       "d8.nypl.org",
+      // For catalog list component
+      "contentcafecloud.baker-taylor.com",
     ],
   },
 };
