@@ -26,7 +26,7 @@ interface CatalogListItem {
   title: string;
   description: string;
   isbn: string;
-  link: string;
+  bNumber: string;
 }
 
 function CatalogList({
@@ -36,8 +36,11 @@ function CatalogList({
   description,
   items,
 }: CatalogListProps) {
+  // Used for generating the remote image stored on content cafe, based on isbn.
   const coverImageUri =
     "https://contentcafecloud.baker-taylor.com/Jacket.svc/D65D0665-050A-487B-9908-16E6D8FF5C3E";
+  // Used for generating the catalog link.
+  const catalogUri = "https://browse.nypl.org/iii/encore/record/C__Rb";
 
   return (
     <Box id={`${type}-${id}`} mb="xl">
@@ -50,6 +53,9 @@ function CatalogList({
         sx={{ listStyleType: "none" }}
       >
         {items.map((item: CatalogListItem) => {
+          const catalogLink = item.bNumber
+            ? `${catalogUri}${item.bNumber}`
+            : "#";
           return (
             <Box as="li" key={item.id}>
               <Card
@@ -58,7 +64,6 @@ function CatalogList({
                 imageComponent={
                   <Box
                     w="100%"
-                    //
                     maxWidth={["100%", "100%", "225px", "165px"]}
                     mr={[null, null, "m"]}
                     mb={["m", null]}
@@ -75,7 +80,7 @@ function CatalogList({
                 imageAspectRatio={ImageRatios.Original}
               >
                 <CardHeading level={HeadingLevels.Three}>
-                  {item.title}
+                  <a href={catalogLink}>{item.title}</a>
                 </CardHeading>
                 <CardContent>
                   <Box

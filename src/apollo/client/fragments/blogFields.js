@@ -128,8 +128,8 @@ export const BLOG_FIELDS_FRAGMENT = gql`
           id
           title
           description
-          link
           isbn
+          bNumber
         }
       }
     }

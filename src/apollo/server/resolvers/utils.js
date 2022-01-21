@@ -290,8 +290,6 @@ export function drupalParagraphsResolver(field, typesInQuery) {
         };
         break;
       case "paragraph--catalog_list":
-        const coverImageUri =
-          "https://contentcafecloud.baker-taylor.com/Jacket.svc/D65D0665-050A-487B-9908-16E6D8FF5C3E";
         const catalogItems = [];
         item.field_erm_remote_items.map((catalogItem) => {
           catalogItems.push({
@@ -300,8 +298,10 @@ export function drupalParagraphsResolver(field, typesInQuery) {
             description: catalogItem.field_tfls_summary_description
               ? catalogItem.field_tfls_summary_description.processed
               : null,
-            link: "link!",
             isbn: catalogItem.field_field_ts_isbn,
+            bNumber: catalogItem.field_ts_id
+              ? catalogItem.field_ts_id
+              : catalogItem.field_ts_ebook_id,
           });
         });
         paragraphComponent = {
@@ -317,7 +317,6 @@ export function drupalParagraphsResolver(field, typesInQuery) {
     }
     items.push(paragraphComponent);
   });
-  //console.log(items);
   return items;
 }
 

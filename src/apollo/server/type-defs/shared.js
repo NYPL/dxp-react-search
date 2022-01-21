@@ -114,7 +114,7 @@ export const typeDefs = gql`
     title: String
     description: String
     isbn: String
-    link: String
+    bNumber: String
   }
 
   type Query {
