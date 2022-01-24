@@ -9,11 +9,12 @@ import {
   HeroTypes,
   ColorVariants,
 } from "@nypl/design-system-react-components";
-//
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import blogsContent from "./../../../__content/blogs";
 import BottomMenuContent from "./../../shared/BottomMenus/content";
 import FilterBar from "./../../shared/FilterBar";
+// Config/Utils
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
 function PageContainer(props) {
   const {
@@ -33,7 +34,7 @@ function PageContainer(props) {
     },
     {
       text: "Blogs",
-      url: `${NEXT_PUBLIC_NYPL_DOMAIN}/blogs`,
+      url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
     },
   ];
 
@@ -58,7 +59,7 @@ function PageContainer(props) {
             <FilterBar
               id="blogs__filter-bar"
               label="Explore By:"
-              routerPathname="/blogs/all"
+              routerPathname={`${BLOGS_BASE_PATH}/all`}
               groups={[
                 {
                   id: "channel",

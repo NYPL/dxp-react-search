@@ -7,6 +7,8 @@ import { TERM_BASE_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/term
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 import CardSet from "../../shared/Card/CardSet";
+// Utils
+import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
 interface SubjectCardItem {
   id: string;
@@ -75,7 +77,7 @@ function SubjectCards() {
             <Card
               id={item.id}
               title={item.title}
-              url={`/blogs/all?subject=${item.tid}`}
+              url={`${BLOGS_BASE_PATH}/all?subject=${item.tid}`}
             />
           </li>
         ))}
