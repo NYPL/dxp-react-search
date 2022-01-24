@@ -23,7 +23,6 @@ const BLOG_POST_QUERY = gql`
 
 function BlogPostPage() {
   const router = useRouter();
-  console.log(router);
   const { isPreview, uuid } = useDecoupledRouter(router);
 
   const { loading, error, data } = useQuery(BLOG_POST_QUERY, {
