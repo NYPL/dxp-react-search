@@ -7,14 +7,14 @@ const blogsContent = {
   featured_posts: {
     heading: "Featured Posts",
     description: "Take a look at the latest posts from the NYPL Blog:",
-    slug: "/blogs/all",
+    slug: "/blog/all",
     slugLabel: "View all blogs",
   },
   explore_by_channel: {
     heading: "Explore By Channel",
     description:
       "The NYPL blog channels can help you discover more posts around the topics you care about. From Black Culture to Women's History and Romance to Horror–there is something for everyone.",
-    slug: "/blogs/channels",
+    slug: "/blog/channels",
     slugLabel: "View all channels",
   },
 };
