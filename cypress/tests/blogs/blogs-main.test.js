@@ -1,7 +1,7 @@
 describe("Blogs Main Tests", () => {
   beforeEach(() => {
     cy.viewport(1024, 768);
-    cy.visit("http://localhost:3000/blogs");
+    cy.visit("http://localhost:3000/blog");
   });
 
   it("Basic smoke test.", () => {
@@ -27,7 +27,7 @@ describe("Blogs Main Tests", () => {
     }).should("exist");
     cy.log("Featured posts description exist.");
     cy.findByText(
-      /take a look at the latest posts from the nypl blog\./i
+      /take a look at the latest posts from the nypl blog:/i
     ).should("exist");
     // @TODO Add test for blogs list.
 
