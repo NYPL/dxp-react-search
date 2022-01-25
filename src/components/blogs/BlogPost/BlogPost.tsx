@@ -6,21 +6,7 @@ import {
   HeadingLevels,
   Link,
   HStack,
-  Text,
 } from "@nypl/design-system-react-components";
-/*
-@TODO
-contentComponent will be an object from gql data, like this, but different
-for every content component.
-
-{
-  __typename: 'Video',
-  heading: 'Test Video',
-  id: '90d64e6a-baed-4f58-8fdb-a33534be259a',
-  type: 'video',
-  video: 'https://www.youtube.com/watch?v=Auta2lagtw4'
-}
-*/
 
 type ContentComponentObject = { [key: string]: any };
 
