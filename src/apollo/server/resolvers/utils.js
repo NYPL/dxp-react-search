@@ -1,4 +1,15 @@
-export function imageResolver(image) {
+const probe = require("probe-image-size");
+
+async function getImageDimensions(uri) {
+  try {
+    const response = await probe(uri);
+    return response;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function imageResolver(image) {
   if (image.type === "media--digital_collections_image") {
     const uri = `https://images.nypl.org/index.php?id=${image.field_media_dc_id}&t=w`;
     const imageStyles = [
@@ -8,6 +19,10 @@ export function imageResolver(image) {
       "medium",
       "max_width_960",
     ];
+    // @TODO add this to json:api in future work.
+    // Get the image dimensions.
+    const imageInfo = await getImageDimensions(uri);
+
     return {
       id: image.id,
       alt: "dc image alt!",
@@ -23,6 +38,8 @@ export function imageResolver(image) {
         });
         return transformations;
       },
+      height: imageInfo.height,
+      width: imageInfo.width,
     };
   } else {
     const mediaImage = image.field_media_image;
