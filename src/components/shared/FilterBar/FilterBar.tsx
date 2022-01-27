@@ -295,6 +295,7 @@ function FilterBar({
               handleChangeMixedStateCheckbox(group.id, childItems);
             }}
             legacy={group.legacy ? true : false}
+            includeChildren={group.includeChildren}
           />
         );
       })}

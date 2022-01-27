@@ -7,11 +7,16 @@ import { SelectedItemsMap } from "./types";
 import { default as DsMultiSelect } from "../../ds-prototypes/MultiSelect/MultiSelect";
 
 const FILTERS_QUERY = gql`
-  query FiltersQuery($id: String, $type: String, $limiter: String) {
+  query FiltersQuery(
+    $id: String
+    $type: String
+    $limiter: String
+    $includeChildren: Boolean!
+  ) {
     allFiltersByGroupId(id: $id, type: $type, limiter: $limiter) {
       id
       name
-      children {
+      children @include(if: $includeChildren) {
         id
         name
       }
@@ -46,6 +51,7 @@ interface MutliSelectProps {
   showCtaButtons: boolean;
   handleChangeMixedStateCheckbox: any;
   legacy?: boolean;
+  includeChildren?: boolean;
 }
 
 function MultiSelect({
@@ -62,6 +68,7 @@ function MultiSelect({
   showCtaButtons,
   handleChangeMixedStateCheckbox,
   legacy,
+  includeChildren = true,
 }: MutliSelectProps) {
   let FiltersQueryAll = FILTERS_QUERY;
   if (legacy) {
@@ -73,6 +80,7 @@ function MultiSelect({
       id: id,
       type: type,
       limiter: limiter ? limiter : null,
+      includeChildren: includeChildren,
     },
   });
 

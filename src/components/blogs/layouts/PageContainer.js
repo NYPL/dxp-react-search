@@ -65,27 +65,32 @@ function PageContainer(props) {
                   id: "channel",
                   label: "Channels",
                   type: "taxonomy",
+                  includeChildren: false,
                 },
                 {
                   id: "subject",
                   label: "Subjects",
                   type: "taxonomy",
                   limiter: "blog",
+                  includeChildren: true,
                 },
                 {
                   id: "library",
                   label: "Libraries",
                   type: "content",
+                  includeChildren: false,
                 },
                 {
                   id: "division",
                   label: "Divisions",
                   type: "content",
+                  includeChildren: false,
                 },
                 {
                   id: "audience_by_age",
                   label: "Audience",
                   type: "taxonomy",
+                  includeChildren: false,
                 },
               ]}
             />
