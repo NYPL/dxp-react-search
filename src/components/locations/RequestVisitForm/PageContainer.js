@@ -1,10 +1,11 @@
 import React from "react";
 // Components
 import { default as SharedPageContainer } from "../../shared/layouts/PageContainer";
-import BottomMenuContent from "../../shared/BottomMenus/content";
 import Menu from "../../ds-prototypes/Menu";
 import { FormContextProvider } from "./../../../context/FormContext";
 import { ColorVariants } from "@nypl/design-system-react-components";
+// Config
+import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function PageContainer(props) {
@@ -38,7 +39,7 @@ function PageContainer(props) {
         sidebarSide="right"
         contentSecondary={
           <>
-            {BottomMenuContent.map((menu) => {
+            {railMenuContent.map((menu) => {
               return (
                 <Menu
                   id={menu.id}

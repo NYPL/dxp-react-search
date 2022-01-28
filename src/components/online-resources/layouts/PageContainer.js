@@ -4,12 +4,14 @@ import { default as SharedPageContainer } from "./../../shared/layouts/PageConta
 import Hero from "./../Hero";
 import SearchHeader from "./../../shared/SearchHeader";
 import SearchForm from "./../SearchForm";
-import SidebarMenusContent from "../SidebarMenus/content";
 import Menu from "./../../ds-prototypes/Menu";
 import { ColorVariants } from "@nypl/design-system-react-components";
-//
+// Config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-import BottomMenuContent from "../../shared/BottomMenus/content";
+import {
+  articlesDatabasesSidebarMenu,
+  railMenuContent,
+} from "./../../../__content/menus";
 
 function PageContainer(props) {
   const { metaTags, breadcrumbs, contentPrimary, showContentHeader } = props;
@@ -57,7 +59,7 @@ function PageContainer(props) {
       sidebarSide="right"
       contentSecondary={
         <>
-          {SidebarMenusContent.map((menu) => {
+          {articlesDatabasesSidebarMenu.map((menu) => {
             return (
               <Menu
                 id={menu.id}
@@ -82,7 +84,7 @@ function PageContainer(props) {
             maxWidth: "800px",
           }}
         >
-          {BottomMenuContent.map((menu) => {
+          {railMenuContent.map((menu) => {
             return (
               <Menu
                 id={menu.id}

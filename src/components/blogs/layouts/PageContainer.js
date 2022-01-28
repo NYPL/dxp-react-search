@@ -9,10 +9,10 @@ import {
   HeroTypes,
   ColorVariants,
 } from "@nypl/design-system-react-components";
-import blogsContent from "./../../../__content/blogs";
-import BottomMenuContent from "./../../shared/BottomMenus/content";
 import FilterBar from "./../../shared/FilterBar";
 // Config/Utils
+import blogsContent from "./../../../__content/blogs";
+import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
@@ -114,7 +114,7 @@ function PageContainer(props) {
       sidebarSide="right"
       contentSecondary={
         <>
-          {BottomMenuContent.map((menu) => {
+          {railMenuContent.map((menu) => {
             return (
               <Menu
                 id={menu.id}
