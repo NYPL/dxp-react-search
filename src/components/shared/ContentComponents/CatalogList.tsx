@@ -68,13 +68,17 @@ function CatalogList({
                     mr={[null, null, "m"]}
                     mb={["m", null]}
                   >
-                    <NextImage
-                      src={`${coverImageUri}/${item.isbn}/Medium/Empty`}
-                      layout="responsive"
-                      width={256}
-                      height={360}
-                      quality={90}
-                    />
+                    <a href={catalogLink}>
+                      <NextImage
+                        alt={item.title}
+                        src={`${coverImageUri}/${item.isbn}/Medium/Empty`}
+                        layout="responsive"
+                        objectFit="cover"
+                        width={960}
+                        height={960}
+                        quality={90}
+                      />
+                    </a>
                   </Box>
                 }
                 imageAspectRatio={ImageRatios.Original}
