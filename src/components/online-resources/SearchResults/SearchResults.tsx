@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 // Apollo
 import { useQuery, useApolloClient } from "@apollo/client";
+// @ts-ignore
 import { SearchDocumentQuery as SEARCH_RESULTS_QUERY } from "./SearchDocumentQuery.gql";
+// @ts-ignore
 import { LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY } from "./LocationMatchesByIp.gql";
 // Components
 import { Pagination } from "@nypl/design-system-react-components";
-import OnlineResourceCard from "./../OnlineResourceCard";
-import AlphabetNav from "./../AlphabetNav";
+import OnlineResourceCard from "../OnlineResourceCard";
+import AlphabetNav from "../AlphabetNav";
 import SearchResultsDetails from "./SearchResultsDetails";
 import SearchResultsSkeleton from "./SearchResultsSkeleton";
 //
@@ -16,11 +18,21 @@ import s from "./SearchResults.module.css";
 
 const SEARCH_RESULTS_LIMIT = 10;
 
-function SearchResults(props) {
-  const { resourceTopicTitle, resourceTopicId } = props;
+interface SearchResultsProps {
+  resourceTopicTitle: string;
+  resourceTopicId: string;
+}
+
+function SearchResults({
+  resourceTopicTitle,
+  resourceTopicId,
+}: SearchResultsProps) {
+  //const { resourceTopicTitle, resourceTopicId } = props;
   const router = useRouter();
   // @TODO do you actually need parseInt here?
-  const currentPage = router.query.page ? parseInt(router.query.page) : 1;
+  const currentPage = router.query.page
+    ? parseInt(router.query.page as string)
+    : 1;
   // Apollo.
   const client = useApolloClient();
   // Local state.
@@ -56,12 +68,16 @@ function SearchResults(props) {
       q: router.query.q ? router.query.q : "",
       tid: resourceTopicId ? resourceTopicId : null,
       alpha: router.query.alpha ? router.query.alpha : null,
-      subjects: router.query.subject ? router.query.subject.split(" ") : null,
+      subjects: router.query.subject
+        ? (router.query.subject as string).split(" ")
+        : null,
       audience_by_age: router.query.audience_by_age
-        ? router.query.audience_by_age.split(" ")
+        ? //? router.query.audience_by_age.split(" ")
+          (router.query.audience_by_age as string).split(" ")
         : null,
       availability: router.query.availability
-        ? router.query.availability.split(" ")
+        ? //? router.query.availability.split(" ")
+          (router.query.availability as string).split(" ")
         : null,
       limit: SEARCH_RESULTS_LIMIT,
       pageNumber: currentPage,
@@ -90,7 +106,7 @@ function SearchResults(props) {
         <div className={s.paginationContainer}>
           <Pagination
             className={s.pagination}
-            currentPage={currentPage}
+            initialPage={currentPage}
             pageCount={10}
             onPageChange={onPageChange}
           />
@@ -126,7 +142,7 @@ function SearchResults(props) {
       if (router.query.alpha === "all") {
         label = "All Results";
       } else {
-        label = router.query.alpha;
+        label = router.query.alpha as string;
       }
     } else if (resourceTopicTitle) {
       label = resourceTopicTitle;
@@ -134,7 +150,7 @@ function SearchResults(props) {
     return label;
   }
 
-  function onPageChange(pageIndex) {
+  function onPageChange(pageIndex: number) {
     router.push({
       query: {
         q: router.query.q,
@@ -153,7 +169,7 @@ function SearchResults(props) {
         }),
       },
     });
-
+    // @ts-ignore
     document.getElementById("main-content").scrollIntoView();
   }
 
@@ -183,7 +199,7 @@ function SearchResults(props) {
             <h3>IP Address: {clientIpAddress}</h3>
           </div>
         )}
-        {data.allSearchDocuments.items.map((item) => (
+        {data.allSearchDocuments.items.map((item: any) => (
           <div key={item.id}>
             <OnlineResourceCard
               item={item}
@@ -195,7 +211,7 @@ function SearchResults(props) {
         <div className={s.paginationContainer}>
           <Pagination
             className={s.pagination}
-            currentPage={currentPage}
+            initialPage={currentPage}
             pageCount={data.allSearchDocuments.pageInfo.pageCount}
             onPageChange={onPageChange}
           />
