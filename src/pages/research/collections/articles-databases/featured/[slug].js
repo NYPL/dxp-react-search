@@ -59,7 +59,6 @@ function FeaturedResourceTopicSlug() {
       metaTags={{
         title: `${resourceTopic.title}`,
         description: resourceTopic.description,
-        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}/${slug}`,
         imageUrl: resourceTopic.image.uri,
       }}
       breadcrumbs={[

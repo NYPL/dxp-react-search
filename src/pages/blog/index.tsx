@@ -5,7 +5,6 @@ import { withApollo } from "../../apollo/client/withApollo";
 import PageContainer from "../../components/blogs/layouts/PageContainer";
 import ChannelsCards from "../../components/blogs/ChannelsCards";
 import BlogsContainer from "../../components/blogs/BlogsContainer";
-import SubjectCards from "../../components/blogs/SubjectCards";
 // Content
 import blogsContent from "../../__content/blogs";
 
@@ -13,6 +12,10 @@ function BlogsMainPage() {
   const { meta, featured_posts, explore_by_channel } = blogsContent;
   return (
     <PageContainer
+      metaTags={{
+        title: meta.title,
+        description: meta.description,
+      }}
       showContentHeader={true}
       contentPrimary={
         <>
@@ -36,7 +39,6 @@ function BlogsMainPage() {
             sortBy="weight"
             featured={true}
           />
-          {/*<SubjectCards />*/}
         </>
       }
     />

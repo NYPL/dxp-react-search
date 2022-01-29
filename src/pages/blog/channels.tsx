@@ -13,9 +13,8 @@ function BlogsChannelsPage() {
   return (
     <PageContainer
       metaTags={{
-        title: "Blogs: Channels",
-        description: "Hello welcome to the NYPL!",
-        url: "https://www.nypl.org",
+        title: `Blogs: ${explore_by_channel.heading}`,
+        description: explore_by_channel.description,
       }}
       showContentHeader={true}
       contentPrimary={
