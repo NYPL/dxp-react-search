@@ -16,6 +16,11 @@ function BlogsAllPage() {
         title: meta.title,
         description: meta.description,
       }}
+      breadcrumbs={[
+        {
+          text: "All Blogs",
+        },
+      ]}
       showContentHeader={true}
       showFilterBar={true}
       contentPrimary={<BlogsContainer id="featured-posts" limit={10} />}

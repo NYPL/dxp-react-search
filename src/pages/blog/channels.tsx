@@ -16,6 +16,11 @@ function BlogsChannelsPage() {
         title: `Blogs: ${explore_by_channel.heading}`,
         description: explore_by_channel.description,
       }}
+      breadcrumbs={[
+        {
+          text: explore_by_channel.heading,
+        },
+      ]}
       showContentHeader={true}
       contentPrimary={
         <ChannelsCards

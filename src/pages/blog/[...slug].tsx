@@ -68,6 +68,11 @@ function BlogPostPage() {
         description: data.blog.description,
         imageUrl: data.blog.image.uri,
       }}
+      breadcrumbs={[
+        {
+          text: data.blog.title,
+        },
+      ]}
       showContentHeader={false}
       contentPrimary={<BlogPost blog={data.blog} />}
     />
