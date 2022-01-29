@@ -12,8 +12,7 @@ import {
   IconSizes,
 } from "@nypl/design-system-react-components";
 import OnlineResourceCardHeading from "./OnlineResourceCardHeading";
-// Next
-import Link from "next/link";
+import NextDsLink from "../../shared/Link/NextDsLink";
 //
 import s from "./OnlineResourceCard.module.css";
 
@@ -120,9 +119,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       ></div>
       {slug && collapsible && (
         <div className={s.shareDatabase}>
-          <Link href={slug}>
-            <a>Share this Database</a>
-          </Link>
+          <NextDsLink href={slug}>Share this Database</NextDsLink>
         </div>
       )}
       <div className={s.links}>

@@ -8,7 +8,7 @@ import {
   ImageSizes,
   CardLayouts,
 } from "@nypl/design-system-react-components";
-import Link from "next/link";
+import NextDsLink from "./../Link/NextDsLink";
 
 interface CardProps {
   /** The id for the card */
@@ -63,11 +63,7 @@ function Card({
       })}
     >
       <CardHeading level={3}>
-        {url && (
-          <Link href={url}>
-            <a>{title}</a>
-          </Link>
-        )}
+        {url && <NextDsLink href={url}>{title}</NextDsLink>}
       </CardHeading>
       <CardContent>
         {subHeading && subHeading}
