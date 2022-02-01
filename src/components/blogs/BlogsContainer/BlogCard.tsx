@@ -1,9 +1,12 @@
 import React from "react";
 // Components
 import {
-  CardImageRatios,
-  CardImageSizes,
+  Box,
+  ImageRatios,
+  ImageSizes,
   CardLayouts,
+  Link,
+  HStack,
 } from "@nypl/design-system-react-components";
 import Card from "../../shared/Card";
 import Image from "../../shared/Image";
@@ -39,40 +42,40 @@ function BlogCard({ item }: BlogCardProps) {
       id={item.id}
       title={item.title}
       subHeading={
-        <div style={{ paddingBottom: ".5em" }}>
-          <div>
+        <Box pb={5}>
+          <Box>
             By {item.byline} | {item.date}
-          </div>
-          {item.locations.map((location: Location) => {
-            return (
-              <a style={{ paddingRight: "10px" }} href={location.slug}>
-                {location.name}
-              </a>
-            );
-          })}
-          &nbsp;
-        </div>
+          </Box>
+          {item.locations && (
+            <HStack>
+              {item.locations.map((location: Location) => {
+                return <Link href={location.slug}>{location.name}</Link>;
+              })}
+            </HStack>
+          )}
+        </Box>
       }
       description={item.description}
       url={item.slug}
-      layout={CardLayouts.Horizontal}
+      layout={CardLayouts.Row}
       center
       image={
-        <Image
-          id={item.image.id}
-          alt={item.image.alt}
-          uri={item.image.uri}
-          useTransformation={true}
-          transformations={item.image.transformations}
-          transformationLabel={"2_1_960"}
-          layout="responsive"
-          width={900}
-          height={450}
-          quality={90}
-        />
+        <Box w="100%" maxWidth="360px" mr={[null, null, "m"]}>
+          <Image
+            id={item.image.id}
+            alt={item.image.alt}
+            uri={item.image.uri}
+            useTransformation={true}
+            transformations={item.image.transformations}
+            transformationLabel={"2_1_960"}
+            layout="responsive"
+            width={900}
+            height={450}
+            quality={90}
+          />
+        </Box>
       }
-      imageAspectRatio={CardImageRatios.TwoByOne}
-      imageSize={CardImageSizes.Large}
+      imageAspectRatio={ImageRatios.Original}
     />
   );
 }

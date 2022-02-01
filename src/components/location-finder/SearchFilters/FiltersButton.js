@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 // Context
-import { SearchFiltersContext } from './SearchFiltersContext';
+import { SearchFiltersContext } from "./SearchFiltersContext";
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 // Components
-import { 
-  Button,
-  Icon
-} from '@nypl/design-system-react-components';
+import { Button, ButtonTypes } from "@nypl/design-system-react-components";
 
 function FiltersButton(props) {
   // Context state.
@@ -15,27 +12,27 @@ function FiltersButton(props) {
   // Props
   const { setIsModalOpen } = props;
   // Redux
-  const { searchFilters } = useSelector(state => state.search);
+  const { searchFilters } = useSelector((state) => state.search);
 
   function onClick(event) {
     // Clear the context state for selectedItems.
     dispatch({
-      type: 'SYNC_SELECTED_ITEMS_FROM_SAVED',
-      payload: { 
+      type: "SYNC_SELECTED_ITEMS_FROM_SAVED",
+      payload: {
         savedItems: searchFilters,
-      }
+      },
     });
-    
+
     // Close modal
     setIsModalOpen(true);
   }
 
-  function setFiltersLabel(searchFilters) {    
+  function setFiltersLabel(searchFilters) {
     let allItems = [];
     for (let [key, value] of Object.entries(searchFilters)) {
-      value.terms.map(term => {
+      value.terms.map((term) => {
         allItems.push(term);
-      })
+      });
     }
     return `Filters ${allItems.length ? `(${allItems.length})` : ``}`;
   }
@@ -49,14 +46,19 @@ function FiltersButton(props) {
   }
 
   return (
-    <div className={hasSelectedItems(searchFilters)
-      ? `mobile-filters-button hasSelectedItems` 
-      : `mobile-filters-button`}
+    <div
+      className={
+        hasSelectedItems(searchFilters)
+          ? `mobile-filters-button hasSelectedItems`
+          : `mobile-filters-button`
+      }
     >
-      <Button 
-        id='search-filters__mobile-filters-button' 
+      <Button
+        id="search-filters__mobile-filters-button"
+        style={{ minWidth: "140px" }}
         onClick={() => onClick()}
-        buttonType='outline'
+        buttonType={ButtonTypes.Secondary}
+        type="button"
       >
         {setFiltersLabel(searchFilters)}
       </Button>

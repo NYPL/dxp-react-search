@@ -18,6 +18,6 @@ export const typeDefs = gql`
       featured: Boolean
       limiter: String
     ): [Term]!
-    termBySlug(slug: String, vocabulary: String): Term
+    term(id: String, vocabulary: String): Term
   }
 `;

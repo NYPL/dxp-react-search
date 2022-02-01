@@ -1,6 +1,10 @@
 import React from "react";
-// Next
-import Link from "next/link";
+import {
+  Heading,
+  HeadingLevels,
+  Link,
+} from "@nypl/design-system-react-components";
+import NextDsLink from "./../../shared/Link/NextDsLink";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
 
@@ -36,30 +40,45 @@ function OnlineResourceCardHeading(props) {
   if (linkAccessCheck() || accessibleFrom?.includes("offsite")) {
     if (authenticationType === "nypl") {
       return (
-        <h3 id={id}>
-          <Link href={`${ONLINE_RESOURCES_BASE_PATH}/verify?uuid=${id}`}>
-            <a>{name}</a>
-          </Link>
-        </h3>
+        <Heading id={id} level={HeadingLevels.Three}>
+          <NextDsLink href={`${ONLINE_RESOURCES_BASE_PATH}/verify?uuid=${id}`}>
+            {name}
+          </NextDsLink>
+        </Heading>
       );
     }
     if (resourceUrl) {
       return (
-        <h3 id={id}>
-          <a href={resourceUrl}>{name}</a>
-        </h3>
+        <Heading id={id} level={HeadingLevels.Three}>
+          <Link
+            href={resourceUrl}
+            additionalStyles={{
+              // ui.link.primary
+              color: "#0576D3 !important",
+              textDecoration: "underline",
+              _hover: {
+                // ui.link.secondary
+                color: "#004B98 !important",
+              },
+            }}
+          >
+            {name}
+          </Link>
+        </Heading>
       );
     } else {
       return (
-        <h3 id={id}>
-          <Link href={slug}>
-            <a>{name}</a>
-          </Link>
-        </h3>
+        <Heading id={id} level={HeadingLevels.Three}>
+          <NextDsLink href={slug}>{name}</NextDsLink>
+        </Heading>
       );
     }
   } else {
-    return <h3 id={id}>{name}</h3>;
+    return (
+      <Heading id={id} level={HeadingLevels.Three}>
+        {name}
+      </Heading>
+    );
   }
 }
 

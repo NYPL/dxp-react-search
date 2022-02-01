@@ -6,12 +6,12 @@
 
 .alphabetNav {
   border-bottom: 1px solid #00838a;
-  padding: 0 0 var(--space-m);
+  padding: 0 0 var(--nypl-space-m);
 }
 
 .paginationContainer {
   display: block;
-  padding: var(--space-xs) 0 var(--space-m) 0;
+  padding: var(--nypl-space-xs) 0 var(--nypl-space-m) 0;
 }
 
 .pagination {

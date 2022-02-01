@@ -18,7 +18,7 @@ const nextConfig = {
     return [];
   },
   // Redirect blogs paths to / for now.
-  async redirects() {
+  /*async redirects() {
     return [
       {
         source: "/blogs",
@@ -32,6 +32,7 @@ const nextConfig = {
       },
     ];
   },
+  */
   webpack(config, options) {
     const { dir } = options;
     // Allows import of .gql files inside components
@@ -61,8 +62,11 @@ const nextConfig = {
       "treasures-d8.nypl.org",
       "nyplorg-sandbox.s3.amazonaws.com",
       "localhost",
+      "images.nypl.org",
       "cdn-d8.nypl.org",
       "d8.nypl.org",
+      // For catalog list component
+      "contentcafecloud.baker-taylor.com",
     ],
   },
 };

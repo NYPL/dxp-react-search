@@ -1,15 +1,20 @@
 const graphqlFields = require("graphql-fields");
+import { buildAllNodesByContentTypeJsonApiPath } from "../datasources/buildJsonApiPath";
 
 const locationResolver = {
   Query: {
     allLocations: async (parent, args, { dataSources }, info) => {
-      const response = await dataSources.drupalApi.getAllNodesByContentType(
-        args.contentType,
+      const apiPath = buildAllNodesByContentTypeJsonApiPath(
+        "library",
         args.limit,
         args.pageNumber,
         args.filter,
         args.sortBy,
         graphqlFields(info)
+      );
+
+      const response = await dataSources.drupalApi.getAllNodesByContentType(
+        apiPath
       );
 
       return {

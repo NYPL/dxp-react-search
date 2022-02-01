@@ -1,17 +1,16 @@
 import React from "react";
-import { Link, LinkTypes } from "@nypl/design-system-react-components";
+import {
+  Icon,
+  IconAlign,
+  IconColors,
+  IconNames,
+  IconRotationTypes,
+  IconSizes,
+  Link,
+  LinkTypes,
+} from "@nypl/design-system-react-components";
 import { MenuItemType as MenuItemProps } from "./MenuTypes";
 import s from "./Menu.module.css";
-
-/*interface MenuItemProps {
-  id: string;
-  title: string;
-  description?: string;
-  link?: string;
-  linkType?: LinkTypes;
-  menuItemDecoration: boolean;
-}
-*/
 
 function MenuItem({
   id,
@@ -26,14 +25,34 @@ function MenuItem({
     linkClass = `${s.link} ${s.noDecoration}`;
   }
 
-  if (link) {
+  if (link && linkType === "button") {
+    return (
+      <Link
+        type={LinkTypes.Button}
+        href={link}
+        additionalStyles={{
+          display: "block",
+          width: "fit-content",
+          background: "brand.primary",
+          _hover: {
+            background: "brand.secondary",
+          },
+        }}
+      >
+        {title}
+        <Icon
+          name={IconNames.Arrow}
+          align={IconAlign.Right}
+          iconRotation={IconRotationTypes.Rotate270}
+          color={IconColors.UiWhite}
+          size={IconSizes.Small}
+        />
+      </Link>
+    );
+  } else if (link && linkType === undefined) {
     return (
       <>
-        <Link
-          type={linkType === "button" ? LinkTypes.Button : LinkTypes.Default}
-          className={linkType === "button" ? s.actionLink : linkClass}
-          href={link}
-        >
+        <Link type={LinkTypes.Default} className={linkClass} href={link}>
           {title}
         </Link>
         {description && <div className={s.description}>{description}</div>}

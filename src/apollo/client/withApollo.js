@@ -150,7 +150,13 @@ function createApolloClient(initialState = {}) {
           resourceTopic(_, { args, toReference }) {
             return toReference({
               __typename: "ResourceTopic",
-              id: args.slug,
+              id: args.id,
+            });
+          },
+          blog(_, { args, toReference }) {
+            return toReference({
+              __typename: "Blog",
+              id: args.id,
             });
           },
         },

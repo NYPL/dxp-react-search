@@ -1,10 +1,10 @@
 .verify {
-  margin: 0 0 var(--space-xl);
+  margin: 0 0 var(--nypl-space-xl);
   max-width: 558px;
   margin-bottom: 325px;
 }
 
 .verify button {
   width: 140px;
-  margin: var(--space-m) 0 var(--space-xs) 0;
+  margin: var(--nypl-space-m) 0 var(--nypl-space-xs) 0;
 }

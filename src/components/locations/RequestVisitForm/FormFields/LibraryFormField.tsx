@@ -60,11 +60,11 @@ function LibraryFormField({ handleChange }: FormFieldProps) {
       id="request-visit-library-select"
       labelText="Please select a location"
       onChange={handleChange}
-      selectedOption={values.library}
-      required
+      value={values.library}
+      isRequired
       showLabel
-      errorText={errors.library}
-      errored={errors.library ? true : false}
+      invalidText={errors.library}
+      isInvalid={errors.library ? true : false}
     >
       {data.allLocations.items.map((location: any) => (
         <option value={location.internalSlug}>{location.name}</option>

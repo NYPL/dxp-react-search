@@ -65,7 +65,11 @@ describe("Articles & Databases", () => {
     cy.findByRole("button", { name: /subjects/i }).click();
 
     cy.log("Check multiselect item");
-    cy.findByRole("checkbox", { name: "Art" }).click().should("be.checked");
+    // { force: true } might be necessary here, expained here:
+    // https://github.com/chakra-ui/chakra-ui/issues/3955
+    cy.findByRole("checkbox", { name: "Art" })
+      .click({ force: true })
+      .should("be.checked");
 
     search("new york times", {
       textboxName: /search articles and databases/i,
@@ -97,7 +101,9 @@ describe("Articles & Databases", () => {
     }).should("exist");
 
     cy.log("Click link to goto featured resource topic page");
-    cy.findByText("Homework Help").click();
+    cy.findByRole("link", {
+      name: /homework help/i,
+    }).click();
 
     cy.log("Confirm featured resource topic page loads correctly.");
     cy.findByRole("heading", {
@@ -122,7 +128,9 @@ describe("Articles & Databases", () => {
     }).should("exist");
 
     cy.log("Click link to goto resource detail page");
-    cy.findByText("Mango Languages").click();
+    cy.findByRole("link", {
+      name: /mango languages/i,
+    }).click();
 
     cy.log("Confirm resource page loads correctly.")
       .findByRole("link", {

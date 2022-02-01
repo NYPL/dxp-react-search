@@ -5,7 +5,7 @@ import { gql } from "@apollo/client";
 import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image";
 import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
-import { CardImageRatios } from "@nypl/design-system-react-components";
+import { Box, ImageRatios } from "@nypl/design-system-react-components";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 import CardSet from "../../shared/Card/CardSet";
@@ -13,12 +13,15 @@ import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import Image from "../../shared/Image";
 // Types
 import { ImageType } from "../../shared/Image/ImageTypes";
+// Utils
+import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
 interface ChannelsCardsProps {
   id: string;
   title: string;
   description: string;
   slug: string;
+  slugLabel?: string;
   limit?: number;
   sortBy?: string;
   featured?: boolean;
@@ -50,6 +53,7 @@ function ChannelsCards({
   title,
   description,
   slug,
+  slugLabel,
   limit,
   sortBy,
   featured,
@@ -72,7 +76,13 @@ function ChannelsCards({
   // Loading state,
   if (loading || !data) {
     return (
-      <CardSet id={id} title={title} slug={slug} description={description}>
+      <CardSet
+        id={id}
+        title={title}
+        slug={slug}
+        slugLabel={slugLabel}
+        description={description}
+      >
         <CardSkeletonLoader
           gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
           gridGap="1.25rem"
@@ -83,7 +93,13 @@ function ChannelsCards({
   }
 
   return (
-    <CardSet id={id} title={title} slug={slug} description={description}>
+    <CardSet
+      id={id}
+      title={title}
+      slug={slug}
+      slugLabel={slugLabel}
+      description={description}
+    >
       <CardGrid
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gap="1.25rem"
@@ -94,22 +110,29 @@ function ChannelsCards({
               id={item.id}
               title={item.title}
               description={item.description}
-              url={`/blogs/all?channel=${item.tid}`}
-              image={
-                <Image
-                  id={item.image.id}
-                  alt={item.image.alt}
-                  uri={item.image.uri}
-                  useTransformation={true}
-                  transformations={item.image.transformations}
-                  transformationLabel={"2_1_960"}
-                  layout="responsive"
-                  width={900}
-                  height={450}
-                  quality={90}
-                />
-              }
-              imageAspectRatio={CardImageRatios.TwoByOne}
+              url={`${BLOGS_BASE_PATH}/all?channel=${item.tid}`}
+              // @TODO Remove this after the channel term field for image is required.
+              {...(item.image && {
+                image: (
+                  <>
+                    <Box w="100%" mb="xs">
+                      <Image
+                        id={item.image.id}
+                        alt={item.image.alt}
+                        uri={item.image.uri}
+                        useTransformation={true}
+                        transformations={item.image.transformations}
+                        transformationLabel={"2_1_960"}
+                        layout="responsive"
+                        width={900}
+                        height={450}
+                        quality={90}
+                      />
+                    </Box>
+                  </>
+                ),
+                imageAspectRatio: ImageRatios.Original,
+              })}
             />
           </li>
         ))}

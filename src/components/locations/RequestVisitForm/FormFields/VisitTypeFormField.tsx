@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 // Components
 import {
+  Box,
   Checkbox,
+  Fieldset,
   Radio,
   Select,
   TextInput,
 } from "@nypl/design-system-react-components";
-// CSS
-import s from "./../RequestVisitForm.module.css";
 import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
@@ -79,11 +79,11 @@ function VisitTypeFormField({
         id="request-visit-select-type"
         labelText="Please select your visit type"
         onChange={handleChange}
-        selectedOption={values.visitType}
-        required
+        value={values.visitType}
+        isRequired
         showLabel
-        errorText={errors.visitType}
-        errored={errors.visitType !== undefined}
+        invalidText={errors.visitType}
+        isInvalid={errors.visitType !== undefined}
       >
         <option value="" disabled selected>
           -- Select visit type --
@@ -92,82 +92,83 @@ function VisitTypeFormField({
         <option value="in-person">In-Person Visit</option>
       </Select>
       {values.visitType === "virtual" && (
-        <fieldset className="request-visit__visit-type">
-          <legend>
-            What services would you like to include in your virtual visit?
-          </legend>
-          {virtualServicesItems.map((virtualServiceItem) => (
-            <div className={s.checkBox}>
-              <Checkbox
-                labelText={virtualServiceItem.label}
-                name={virtualServiceItem.id}
-                onChange={(e) =>
-                  handleChangeCheckboxGroup(
-                    "virtualVisitServices",
-                    e.target.name
-                  )
-                }
-                checked={values.virtualVisitServices.includes(
-                  virtualServiceItem.id
+        <Box my="s">
+          <Fieldset legendText="What services would you like to include in your virtual visit?">
+            {virtualServicesItems.map((virtualServiceItem) => (
+              <Box mb="s">
+                <Checkbox
+                  labelText={virtualServiceItem.label}
+                  name={virtualServiceItem.id}
+                  onChange={(e) =>
+                    handleChangeCheckboxGroup(
+                      "virtualVisitServices",
+                      e.target.name
+                    )
+                  }
+                  isChecked={values.virtualVisitServices.includes(
+                    virtualServiceItem.id
+                  )}
+                  showLabel
+                  isInvalid={errors.virtualVisitServices ? true : false}
+                />
+                {virtualServiceItem.id === "services-other" && (
+                  <Box mt="s">
+                    <TextInput
+                      attributes={{
+                        name: "virtualVisitServicesOther",
+                      }}
+                      labelText="What other service would you like to receive?"
+                      showLabel={false}
+                      onChange={handleChange}
+                      value={values.virtualVisitServicesOther}
+                      isDisabled={
+                        !values.virtualVisitServices.includes("services-other")
+                      }
+                      isInvalid={errors.virtualVisitServices ? true : false}
+                      invalidText={errors.virtualVisitServices}
+                    />
+                  </Box>
                 )}
-                showLabel
-                errored={errors.virtualVisitServices ? true : false}
-              />
-              {virtualServiceItem.id === "services-other" && (
-                <div className={s.otherInput}>
-                  <TextInput
-                    attributes={{
-                      name: "virtualVisitServicesOther",
-                    }}
-                    labelText="What other service would you like to receive?"
-                    showLabel={false}
-                    onChange={handleChange}
-                    value={values.virtualVisitServicesOther}
-                    disabled={
-                      !values.virtualVisitServices.includes("services-other")
-                    }
-                    errored={errors.virtualVisitServices ? true : false}
-                    errorText={errors.virtualVisitServices}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
-        </fieldset>
+              </Box>
+            ))}
+          </Fieldset>
+        </Box>
       )}
       {values.visitType === "in-person" && (
-        <fieldset>
-          <legend>What would you like to request?</legend>
-          {inPersonItems.map((inPersonItem) => (
-            <div className={s.checkBox}>
-              <Radio
-                name="inPersonServices"
-                value={inPersonItem.id}
-                labelText={inPersonItem.label}
-                helperText={inPersonItem.helperText}
-                showLabel
-                onChange={(e) => handleChange(e)}
-                errored={errors.inPersonServices ? true : false}
-              />
-              {inPersonItem.id === "in-person-other" && (
-                <div className={s.otherInput}>
-                  <TextInput
-                    attributes={{
-                      name: "inPersonServicesOther",
-                    }}
-                    labelText="Other request."
-                    showLabel={false}
-                    onChange={handleChange}
-                    value={values.inPersonServicesOther}
-                    disabled={values.inPersonServices !== "in-person-other"}
-                    errored={errors.inPersonServices ? true : false}
-                    errorText={errors.inPersonServices}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
-        </fieldset>
+        <Box my="s">
+          <Fieldset legendText="What would you like to request?">
+            {inPersonItems.map((inPersonItem) => (
+              <Box mb="s">
+                <Radio
+                  // @TODO Radio allows multiple radios to be selected? wtf.
+                  name="inPersonServices"
+                  value={inPersonItem.id}
+                  labelText={inPersonItem.label}
+                  helperText={inPersonItem.helperText}
+                  showLabel
+                  onChange={(e) => handleChange(e)}
+                  isInvalid={errors.inPersonServices ? true : false}
+                />
+                {inPersonItem.id === "in-person-other" && (
+                  <Box mt="s">
+                    <TextInput
+                      attributes={{
+                        name: "inPersonServicesOther",
+                      }}
+                      labelText="Other request."
+                      showLabel={false}
+                      onChange={handleChange}
+                      value={values.inPersonServicesOther}
+                      isDisabled={values.inPersonServices !== "in-person-other"}
+                      isInvalid={errors.inPersonServices ? true : false}
+                      invalidText={errors.inPersonServices}
+                    />
+                  </Box>
+                )}
+              </Box>
+            ))}
+          </Fieldset>
+        </Box>
       )}
     </>
   );

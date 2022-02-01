@@ -1,5 +1,13 @@
-import React, { Fragment } from "react";
-import { Icon, Link } from "@nypl/design-system-react-components";
+import React from "react";
+import {
+  Icon,
+  IconAlign,
+  IconColors,
+  IconNames,
+  IconRotationTypes,
+  IconSizes,
+  Link,
+} from "@nypl/design-system-react-components";
 // Google map
 import {
   withGoogleMap,
@@ -157,7 +165,7 @@ function Map() {
   }
 
   return (
-    <Fragment>
+    <>
       <MapWrapper
         aria-hidden="true"
         onClick={handleClick}
@@ -169,14 +177,14 @@ function Map() {
       <Link href="#locations-list" className="locations-list-anchor">
         Back to List
         <Icon
-          blockName="more-link"
-          iconRotation="rotate-180"
-          decorative
-          modifiers={["right"]}
-          name="arrow"
+          name={IconNames.Arrow}
+          align={IconAlign.Right}
+          iconRotation={IconRotationTypes.Rotate180}
+          color={IconColors.UiBlack}
+          size={IconSizes.Small}
         />
       </Link>
-    </Fragment>
+    </>
   );
 }
 

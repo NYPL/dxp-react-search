@@ -21,7 +21,6 @@ function OnlineResources() {
       metaTags={{
         title: title,
         description: description,
-        url: `https://www.nypl.org${ONLINE_RESOURCES_BASE_PATH}`,
       }}
       showContentHeader={true}
       contentPrimary={

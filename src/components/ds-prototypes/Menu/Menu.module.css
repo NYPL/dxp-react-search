@@ -7,21 +7,21 @@
   font-size: 0.875rem;
   line-height: 1.2;
   border-radius: 2px;
-  background-color: var(--brand-primary);
-  color: var(--ui-white) !important;
+  background-color: var(--nypl-brand-primary);
+  color: var(--nypl-ui-white) !important;
 }
 
 .actionLink:hover {
-  background-color: var(--ui-error);
+  background-color: var(--nypl-ui-error);
 }
 
 .underline {
   border-bottom: 1px solid;
-  padding-bottom: var(--space-xs);
+  padding-bottom: var(--nypl-space-xs);
 }
 
 .link {
-  color: var(--ui-black) !important;
+  color: var(--nypl-ui-black) !important;
 }
 
 .link.noDecoration {

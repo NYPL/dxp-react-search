@@ -1,15 +1,23 @@
 const graphqlFields = require("graphql-fields");
+import {
+  buildAllNodesByContentTypeJsonApiPath,
+  buildNodeByIdJsonApiPath,
+} from "../datasources/buildJsonApiPath";
 
 const onlineResourceResolver = {
   Query: {
     allOnlineResources: async (parent, args, { dataSources }, info) => {
-      const response = await dataSources.drupalApi.getAllNodesByContentType(
+      const apiPath = buildAllNodesByContentTypeJsonApiPath(
         "online_resource",
-        3,
-        1,
+        args.limit,
+        args.pageNumber,
         args.filter,
-        null,
+        args.sortBy,
         graphqlFields(info)
+      );
+
+      const response = await dataSources.drupalApi.getAllNodesByContentType(
+        apiPath
       );
 
       return {
@@ -25,7 +33,12 @@ const onlineResourceResolver = {
       };
     },
     onlineResource: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getOnlineResource(args);
+      const apiPath = buildNodeByIdJsonApiPath("online_resource", args.id);
+      const isPreview = false;
+      const response = await dataSources.drupalApi.getNodeById(
+        isPreview,
+        apiPath
+      );
       return response;
     },
   },
