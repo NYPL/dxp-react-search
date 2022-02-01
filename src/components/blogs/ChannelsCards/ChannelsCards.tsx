@@ -13,6 +13,8 @@ import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import Image from "../../shared/Image";
 // Types
 import { ImageType } from "../../shared/Image/ImageTypes";
+// Utils
+import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
 interface ChannelsCardsProps {
   id: string;
@@ -108,7 +110,7 @@ function ChannelsCards({
               id={item.id}
               title={item.title}
               description={item.description}
-              url={`/blogs/all?channel=${item.tid}`}
+              url={`${BLOGS_BASE_PATH}/all?channel=${item.tid}`}
               // @TODO Remove this after the channel term field for image is required.
               {...(item.image && {
                 image: (

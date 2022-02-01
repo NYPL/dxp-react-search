@@ -63,6 +63,16 @@ function BlogPostPage() {
 
   return (
     <PageContainer
+      metaTags={{
+        title: data.blog.title,
+        description: data.blog.description,
+        imageUrl: data.blog.image.uri,
+      }}
+      breadcrumbs={[
+        {
+          text: data.blog.title,
+        },
+      ]}
       showContentHeader={false}
       contentPrimary={<BlogPost blog={data.blog} />}
     />

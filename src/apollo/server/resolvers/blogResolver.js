@@ -60,12 +60,17 @@ const blogResolver = {
     byline: (blog) => {
       if (blog.field_ts_byline !== null) {
         return blog.field_ts_byline;
-      } else {
+      } else if (
+        blog.author.first_name !== null &&
+        blog.author.last_name !== null
+      ) {
         let byline = `${blog.author.first_name} ${blog.author.last_name}`;
         if (blog.author.job_title !== null) {
           byline = `${byline}, ${blog.author.job_title}`;
         }
         return byline;
+      } else {
+        return "NYPL Staff";
       }
     },
     date: (blog) => formatDate(blog.created),

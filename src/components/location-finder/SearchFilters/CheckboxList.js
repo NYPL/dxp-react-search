@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // Components
-import { Checkbox, List } from "@nypl/design-system-react-components";
+import { Checkbox } from "@nypl/design-system-react-components";
 // Context
 import { SearchFiltersContext } from "./SearchFiltersContext";
 
@@ -39,7 +39,10 @@ function CheckboxList(props) {
   }
 
   return (
-    <ul className="list list--no-list-styling" role="dialog">
+    <ul
+      style={{ listStyleType: "none", padding: "0", margin: "0" }}
+      role="dialog"
+    >
       {vocab.terms.map((term) => {
         return (
           <li key={term.id} className={setParentClassName(term.children)}>
@@ -54,7 +57,7 @@ function CheckboxList(props) {
               />
             </div>
             {term.children && (
-              <List type="ul" modifiers={["no-list-styling"]}>
+              <ul style={{ listStyleType: "none", padding: "0", margin: "0" }}>
                 {term.children.map((childTerm) => {
                   return (
                     <li key={childTerm.id} className="term-child">
@@ -74,7 +77,7 @@ function CheckboxList(props) {
                     </li>
                   );
                 })}
-              </List>
+              </ul>
             )}
           </li>
         );

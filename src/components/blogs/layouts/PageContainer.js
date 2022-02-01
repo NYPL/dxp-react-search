@@ -9,11 +9,12 @@ import {
   HeroTypes,
   ColorVariants,
 } from "@nypl/design-system-react-components";
-//
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-import blogsContent from "./../../../__content/blogs";
-import BottomMenuContent from "./../../shared/BottomMenus/content";
 import FilterBar from "./../../shared/FilterBar";
+// Config/Utils
+import blogsContent from "./../../../__content/blogs";
+import { railMenuContent } from "../../../__content/menus";
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
 function PageContainer(props) {
   const {
@@ -23,7 +24,7 @@ function PageContainer(props) {
     showFilterBar,
     showContentHeader,
   } = props;
-  const { title, description } = blogsContent;
+  const { meta } = blogsContent;
 
   // Default breadcrumbs for all online resources pages.
   const defaultBreadcrumbs = [
@@ -33,7 +34,7 @@ function PageContainer(props) {
     },
     {
       text: "Blogs",
-      url: `${NEXT_PUBLIC_NYPL_DOMAIN}/blogs`,
+      url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
     },
   ];
 
@@ -45,8 +46,8 @@ function PageContainer(props) {
     <>
       <Hero
         heroType={HeroTypes.Tertiary}
-        heading={<Heading level={HeadingLevels.One} text={title} />}
-        subHeaderText={description}
+        heading={<Heading level={HeadingLevels.One} text={meta.title} />}
+        subHeaderText={meta.description}
         backgroundColor="#E0E0E0"
         foregroundColor="#000000"
       />
@@ -58,33 +59,38 @@ function PageContainer(props) {
             <FilterBar
               id="blogs__filter-bar"
               label="Explore By:"
-              routerPathname="/blogs/all"
+              routerPathname={`${BLOGS_BASE_PATH}/all`}
               groups={[
                 {
                   id: "channel",
                   label: "Channels",
                   type: "taxonomy",
+                  includeChildren: false,
                 },
                 {
                   id: "subject",
                   label: "Subjects",
                   type: "taxonomy",
                   limiter: "blog",
+                  includeChildren: true,
                 },
                 {
                   id: "library",
                   label: "Libraries",
                   type: "content",
+                  includeChildren: false,
                 },
                 {
                   id: "division",
                   label: "Divisions",
                   type: "content",
+                  includeChildren: false,
                 },
                 {
                   id: "audience_by_age",
                   label: "Audience",
                   type: "taxonomy",
+                  includeChildren: false,
                 },
               ]}
             />
@@ -108,7 +114,7 @@ function PageContainer(props) {
       sidebarSide="right"
       contentSecondary={
         <>
-          {BottomMenuContent.map((menu) => {
+          {railMenuContent.map((menu) => {
             return (
               <Menu
                 id={menu.id}

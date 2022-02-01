@@ -101,6 +101,22 @@ export const typeDefs = gql`
     link: String
   }
 
+  type CatalogList {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    items: [CatalogListItem]!
+  }
+
+  type CatalogListItem {
+    id: ID!
+    title: String
+    description: String
+    isbn: String
+    bNumber: String
+  }
+
   type Query {
     _empty: String
   }

@@ -14,9 +14,9 @@ import Map from "../../components/location-finder/Map";
 import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
 import { ColorVariants } from "@nypl/design-system-react-components";
-//
+// Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-import BottomMenuContent from "../../components/shared/BottomMenus/content";
+import { railMenuContent } from "./../../__content/menus";
 
 function LocationFinder() {
   return (
@@ -25,7 +25,6 @@ function LocationFinder() {
         title: "Location Finder",
         description:
           "The New York Public Library offers locations throughout the Bronx, Manhattan, and Staten Island.",
-        url: "https://www.nypl.org/locations",
       }}
       breadcrumbs={[
         {
@@ -71,7 +70,7 @@ function LocationFinder() {
               maxWidth: "800px",
             }}
           >
-            {BottomMenuContent.map((menu) => {
+            {railMenuContent.map((menu) => {
               return (
                 <Menu
                   id={menu.id}

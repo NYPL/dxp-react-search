@@ -6,7 +6,15 @@ import { LocationsQuery as LOCATIONS_QUERY } from "./../../../apollo/client/quer
 import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "./../../../redux/actions";
 // Components
-import { Icon, Link } from "@nypl/design-system-react-components";
+import {
+  Icon,
+  IconAlign,
+  IconColors,
+  IconNames,
+  IconRotationTypes,
+  IconSizes,
+  Link,
+} from "@nypl/design-system-react-components";
 import Location from "./../Location";
 import LocationsSkeletonLoader from "./LocationsSkeletonLoader";
 import LocationsPagination from "./LocationsPagination";
@@ -96,10 +104,11 @@ function Locations() {
       <Link href="#locations-gmap" className="locations-gmap-anchor">
         Skip to Map
         <Icon
-          blockName="more-link"
-          decorative
-          modifiers={["right"]}
-          name="arrow"
+          name={IconNames.Arrow}
+          align={IconAlign.Right}
+          iconRotation={IconRotationTypes.Rotate0}
+          color={IconColors.UiBlack}
+          size={IconSizes.Small}
         />
       </Link>
       <ul style={{ listStyleType: "none", padding: "0" }}>

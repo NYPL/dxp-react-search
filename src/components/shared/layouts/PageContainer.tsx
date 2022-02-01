@@ -33,7 +33,6 @@ export type BreadcrumbsItem = {
 export type MetaTags = {
   title: string;
   description: string;
-  url: string;
   imageUrl?: string;
 };
 
@@ -64,7 +63,6 @@ function PageContainer({
         <Meta
           title={metaTags.title}
           description={metaTags.description}
-          url={metaTags.url}
           imageUrl={metaTags.imageUrl}
         />
       )}

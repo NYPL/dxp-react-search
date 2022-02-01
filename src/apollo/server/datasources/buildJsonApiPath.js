@@ -40,6 +40,8 @@ export function buildAllNodesByContentTypeJsonApiPath(
       // Link Card List
       "field_main_content.field_erm_link_cards",
       "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+      // Catalog List
+      "field_main_content.field_erm_remote_items",
     ]);
   }
 
@@ -141,6 +143,8 @@ export function buildNodeByIdJsonApiPath(contentType, id) {
       // Link Card List
       "field_main_content.field_erm_link_cards",
       "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+      // Catalog List
+      "field_main_content.field_erm_remote_items",
     ];
     // Add include
     if (includeFields.length) {

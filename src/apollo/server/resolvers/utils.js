@@ -1,4 +1,15 @@
-export function imageResolver(image) {
+const probe = require("probe-image-size");
+
+async function getImageDimensions(uri) {
+  try {
+    const response = await probe(uri);
+    return response;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function imageResolver(image) {
   if (image.type === "media--digital_collections_image") {
     const uri = `https://images.nypl.org/index.php?id=${image.field_media_dc_id}&t=w`;
     const imageStyles = [
@@ -8,6 +19,10 @@ export function imageResolver(image) {
       "medium",
       "max_width_960",
     ];
+    // @TODO add this to json:api in future work.
+    // Get the image dimensions.
+    const imageInfo = await getImageDimensions(uri);
+
     return {
       id: image.id,
       alt: "dc image alt!",
@@ -23,6 +38,8 @@ export function imageResolver(image) {
         });
         return transformations;
       },
+      height: imageInfo.height,
+      width: imageInfo.width,
     };
   } else {
     const mediaImage = image.field_media_image;
@@ -110,6 +127,13 @@ export function drupalParagraphsResolver(field, typesInQuery) {
     if (
       item.type === "paragraph--link_card_list" &&
       typesInQuery.includes("CardList")
+    ) {
+      accumulator.push(item);
+    }
+
+    if (
+      item.type === "paragraph--catalog_list" &&
+      typesInQuery.includes("CatalogList")
     ) {
       accumulator.push(item);
     }
@@ -262,12 +286,14 @@ export function drupalParagraphsResolver(field, typesInQuery) {
         };
         break;
       case "paragraph--link_card_list":
-        const items = [];
+        const cardItems = [];
         item.field_erm_link_cards.map((cardItem) => {
-          items.push({
+          cardItems.push({
             id: cardItem.id,
             title: cardItem.field_ts_heading,
-            description: cardItem.field_tfls_description.processed,
+            description: cardItem.field_tfls_description
+              ? cardItem.field_tfls_description.processed
+              : null,
             link: cardItem.field_ls_link.uri,
             image: imageResolver(cardItem.field_ers_image),
           });
@@ -277,7 +303,32 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           type: paragraphTypeName,
           heading: item.field_ts_heading,
           description: item.field_tfls_description.processed,
-          items: items,
+          items: cardItems,
+        };
+        break;
+      case "paragraph--catalog_list":
+        const catalogItems = [];
+        item.field_erm_remote_items.map((catalogItem) => {
+          catalogItems.push({
+            id: catalogItem.id,
+            title: catalogItem.title,
+            description: catalogItem.field_tfls_summary_description
+              ? catalogItem.field_tfls_summary_description.processed
+              : null,
+            isbn: catalogItem.field_field_ts_isbn,
+            bNumber: catalogItem.field_ts_id
+              ? catalogItem.field_ts_id
+              : catalogItem.field_ts_ebook_id,
+          });
+        });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_summary_description
+            ? item.field_tfls_summary_description.processed
+            : null,
+          items: catalogItems,
         };
         break;
     }
@@ -325,6 +376,9 @@ export function resolveParagraphTypes(objectType) {
       break;
     case "link_card_list":
       resolvedObjectType = "CardList";
+      break;
+    case "catalog_list":
+      resolvedObjectType = "CatalogList";
       break;
   }
   return resolvedObjectType;
