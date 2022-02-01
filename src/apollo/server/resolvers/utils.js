@@ -25,7 +25,7 @@ export async function imageResolver(image) {
 
     return {
       id: image.id,
-      alt: "dc image alt!",
+      alt: image.field_media_alt_text,
       uri: uri,
       transformations: () => {
         let transformations = [];
@@ -45,8 +45,7 @@ export async function imageResolver(image) {
     const mediaImage = image.field_media_image;
     return {
       id: mediaImage.id,
-      //alt: image.meta.alt,
-      alt: "imageResolver alt!",
+      alt: mediaImage.meta.alt,
       uri: () => {
         if (
           mediaImage.uri.url &&
@@ -273,6 +272,20 @@ export function drupalParagraphsResolver(field, typesInQuery) {
         break;
       case "paragraph--image":
         const mediaItem = item.field_ers_media_item;
+        let imageLink = null;
+        // Media DC image.
+        if (mediaItem.type === "media--digital_collections_image") {
+          if (typeof mediaItem.field_media_dc_link === "object") {
+            imageLink = mediaItem.field_media_dc_link.url;
+          }
+        }
+        // Media image.
+        if (mediaItem.type === "media--image") {
+          // This field is a multivalue link field, so it will be an [].
+          if (mediaItem.field_media_image_link.length > 0) {
+            imageLink = mediaItem.field_media_image_link[0].url;
+          }
+        }
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
@@ -282,6 +295,7 @@ export function drupalParagraphsResolver(field, typesInQuery) {
           credit: mediaItem.field_media_image_credit_html
             ? mediaItem.field_media_image_credit_html.processed
             : null,
+          link: imageLink,
           image: imageResolver(mediaItem),
         };
         break;

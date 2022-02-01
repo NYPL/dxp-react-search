@@ -82,6 +82,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
         type
         caption
         credit
+        link
         image {
           id
           uri
