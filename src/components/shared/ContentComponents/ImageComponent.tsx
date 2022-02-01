@@ -53,9 +53,11 @@ function ImageComponent({
           </Box>
         )}
         {credit && (
-          <Box fontSize="-3" fontStyle="italic">
-            {credit}
-          </Box>
+          <Box
+            fontSize="-3"
+            fontStyle="italic"
+            dangerouslySetInnerHTML={{ __html: credit }}
+          />
         )}
       </WithLink>
     </Box>
