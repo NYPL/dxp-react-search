@@ -1,11 +1,9 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // Next
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 // Apollo
-import { getDataFromTree } from "@apollo/client/react/ssr";
 import { useQuery, useApolloClient } from "@apollo/client";
 import { withApollo } from "./../../../../apollo/client/withApollo";
-import { DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY } from "./../../../../apollo/client/queries/DecoupledRouter.gql";
 import { OnlineResourceByIdQuery as ONLINE_RESOURCE_BY_ID_QUERY } from "./../../../../apollo/client/queries/OnlineResourceById.gql";
 import { LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY } from "./../../../../apollo/client/queries/LocationMatchesByIp.gql";
 // Redux
@@ -18,10 +16,11 @@ import SearchResultsSkeleton from "./../../../../components/online-resources/Sea
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import onlineResourcesContent from "./../../../../__content/onlineResources";
+// Hooks
+import useDecoupledRouter from "./../../../../hooks/useDecoupledRouter";
 
 function OnlineResourceSlug() {
   const router = useRouter();
-  const { slug } = router.query;
 
   // Apollo.
   const client = useApolloClient();
@@ -51,14 +50,7 @@ function OnlineResourceSlug() {
       );
   }, []);
 
-  // Run decoupled router query to get uuid.
-  const { data: decoupledRouterData } = useQuery(DECOUPLED_ROUTER_QUERY, {
-    variables: {
-      path: router.asPath,
-    },
-  });
-
-  const uuid = decoupledRouterData?.decoupledRouter?.id;
+  const { uuid } = useDecoupledRouter(router);
 
   // Query for data.
   const { loading, error, data } = useQuery(ONLINE_RESOURCE_BY_ID_QUERY, {
@@ -102,7 +94,7 @@ function OnlineResourceSlug() {
       ]}
       showContentHeader={true}
       contentPrimary={
-        <Fragment>
+        <>
           {router.query.test_ip && clientIpAddress && (
             <strong>**TEST MODE** Your IP address is: {clientIpAddress}</strong>
           )}
@@ -112,7 +104,7 @@ function OnlineResourceSlug() {
             </div>
           )}
           <OnlineResourceCard item={data.searchDocument} ipInfo={ipInfo} />
-        </Fragment>
+        </>
       }
     />
   );
