@@ -274,17 +274,19 @@ export function drupalParagraphsResolver(field, typesInQuery) {
         const mediaItem = item.field_ers_media_item;
         let imageLink = null;
         // Media DC image.
-        if (mediaItem.type === "media--digital_collections_image") {
-          if (typeof mediaItem.field_media_dc_link === "object") {
-            imageLink = mediaItem.field_media_dc_link.url;
-          }
+        if (
+          mediaItem.type === "media--digital_collections_image" &&
+          typeof mediaItem.field_media_dc_link === "object"
+        ) {
+          imageLink = mediaItem.field_media_dc_link.url;
         }
         // Media image.
-        if (mediaItem.type === "media--image") {
-          // This field is a multivalue link field, so it will be an [].
-          if (mediaItem.field_media_image_link.length > 0) {
-            imageLink = mediaItem.field_media_image_link[0].url;
-          }
+        // This field is a multivalue link field, so it will be an [].
+        if (
+          mediaItem.type === "media--image" &&
+          mediaItem.field_media_image_link.length > 0
+        ) {
+          imageLink = mediaItem.field_media_image_link[0].url;
         }
         paragraphComponent = {
           id: item.id,
