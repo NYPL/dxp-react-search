@@ -276,7 +276,7 @@ export function drupalParagraphsResolver(field, typesInQuery) {
         // Media DC image.
         if (
           mediaItem.type === "media--digital_collections_image" &&
-          typeof mediaItem.field_media_dc_link === "object"
+          mediaItem.field_media_dc_link !== null
         ) {
           imageLink = mediaItem.field_media_dc_link.url;
         }

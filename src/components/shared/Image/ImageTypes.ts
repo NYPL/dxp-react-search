@@ -1,3 +1,9 @@
+/*
+ * @TODO Use Next image type.
+ * @see https://github.com/vercel/next.js/issues/19764
+ * @see https://github.com/vercel/next.js/blob/canary/packages/next/client/image.tsx#L92
+ */
+
 export type ImageType = {
   id: string;
   alt: string;
