@@ -1,8 +1,8 @@
 const blogsContent = {
   meta: {
-    title: "Blogs",
+    title: "NYPL Blog",
     description:
-      "Welcome to The New York Public Library's public blogs, a new space where a small but growing number of librarians, curators and other staff are posting regular dispatches in a variety of languages from their corner of the NYPL community. Learn More.",
+      "Not sure what to read next? Explore expert-curated lists filled with must-read books across all genres. Or take a deep dive into The New York Public Library's research collections with posts written by our librarians, curators, and staff. And discover the diverse array of programs, resources, services, and materials offered by NYPL.",
   },
   featured_posts: {
     heading: "Featured Posts",
