@@ -20,6 +20,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
     }
     locations {
       id
+      drupalInternalId
       name
       slug
     }

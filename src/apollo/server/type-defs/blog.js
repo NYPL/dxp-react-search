@@ -34,6 +34,7 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     contentType: String!
+    drupalInternalId: String!
     slug: String!
     url: String!
     status: String!
@@ -55,6 +56,6 @@ export const typeDefs = gql`
       filter: BlogFilter
       sortBy: String
     ): BlogConnection
-    blog(id: String, preview: Boolean): Blog
+    blog(id: String, revisionId: String, preview: Boolean): Blog
   }
 `;

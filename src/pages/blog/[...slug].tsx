@@ -14,8 +14,8 @@ import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 
 const BLOG_POST_QUERY = gql`
   ${BLOG_FIELDS_FRAGMENT}
-  query BlogPostQuery($id: String, $preview: Boolean) {
-    blog(id: $id, preview: $preview) {
+  query BlogPostQuery($id: String, $revisionId: String, $preview: Boolean) {
+    blog(id: $id, revisionId: $revisionId, preview: $preview) {
       ...BlogFields
     }
   }
@@ -31,6 +31,7 @@ function BlogPostPage() {
       id: uuid,
       ...(isPreview && {
         preview: true,
+        revisionId: router.query.revision_id,
       }),
     },
   });

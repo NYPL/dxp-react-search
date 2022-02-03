@@ -130,7 +130,7 @@ export function buildAllNodesByContentTypeJsonApiPath(
   return apiPath;
 }
 
-export function buildNodeByIdJsonApiPath(contentType, id) {
+export function buildNodeByIdJsonApiPath(contentType, id, revisionId) {
   let apiParams = new DrupalJsonApiParams();
   apiParams.addCustomParam({ jsonapi_include: 1 });
 
@@ -151,6 +151,10 @@ export function buildNodeByIdJsonApiPath(contentType, id) {
       apiParams.addInclude(includeFields);
     }
   }
+  if (revisionId) {
+    apiParams.addCustomParam({ resourceVersion: `id:${revisionId}` });
+  }
+
   const urlencodedQueryString = apiParams.getQueryString({ encode: false });
 
   return `/jsonapi/node/${contentType}/${id}?${urlencodedQueryString}`;

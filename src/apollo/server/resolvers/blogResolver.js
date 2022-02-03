@@ -42,8 +42,12 @@ const blogResolver = {
       };
     },
     blog: async (parent, args, { dataSources }) => {
-      const apiPath = buildNodeByIdJsonApiPath("blog", args.id);
       const isPreview = args.preview ? true : false;
+      const apiPath = buildNodeByIdJsonApiPath(
+        "blog",
+        args.id,
+        args.revisionId
+      );
       const response = await dataSources.drupalApi.getNodeById(
         isPreview,
         apiPath
@@ -99,9 +103,10 @@ const blogResolver = {
   },
   BlogLocation: {
     id: (location) => location.id,
+    drupalInternalId: (location) => location.drupal_internal__nid,
     name: (location) => location.title,
     contentType: (location) => location.type,
-    slug: (location) => "/slug/fix-me",
+    slug: (location) => location.path.alias,
     url: (location) => "/slug/fix-me",
     status: (location) => "/slug/fix-me",
   },
