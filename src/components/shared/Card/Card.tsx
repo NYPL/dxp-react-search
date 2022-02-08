@@ -4,6 +4,7 @@ import {
   Card as DsCard,
   CardContent,
   CardHeading,
+  HeadingLevels,
   ImageRatios,
   ImageSizes,
   CardLayouts,
@@ -62,7 +63,7 @@ function Card({
         imageSize: imageSize,
       })}
     >
-      <CardHeading level={3}>
+      <CardHeading level={HeadingLevels.Three}>
         {url && <NextDsLink href={url}>{title}</NextDsLink>}
       </CardHeading>
       <CardContent>

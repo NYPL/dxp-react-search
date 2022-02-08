@@ -5,7 +5,11 @@ import { withApollo } from "../../../apollo/client/withApollo";
 import { withRedux } from "../../../redux/withRedux";
 // Components
 import PageContainer from "./../../../components/locations/RequestVisitForm/PageContainer";
-import { Heading } from "@nypl/design-system-react-components";
+import {
+  Heading,
+  HeadingDisplaySizes,
+  HeadingLevels,
+} from "@nypl/design-system-react-components";
 import RequestVisitConfirmation from "../../../components/locations/RequestVisitForm/RequestVisitConfirmation";
 
 function LocationsRequestVisitConfirmationPage() {
@@ -15,7 +19,7 @@ function LocationsRequestVisitConfirmationPage() {
         <>
           <Heading
             className="request-visit__header"
-            level={1}
+            level={HeadingLevels.One}
             text="Request a Class Visit or Group Tour"
           />
           <RequestVisitConfirmation />

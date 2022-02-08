@@ -8,9 +8,7 @@ import { useRouter } from "next/router";
 // Components
 import {
   Heading,
-  Icon,
-  IconNames,
-  IconSizes,
+  HeadingLevels,
   Link,
   LinkTypes,
 } from "@nypl/design-system-react-components";
@@ -47,7 +45,11 @@ function RequestVisitConfirmation() {
 
   return (
     <div>
-      <Heading className="request-visit__header" level={2} text="Thank You!" />
+      <Heading
+        className="request-visit__header"
+        level={HeadingLevels.Two}
+        text="Thank You!"
+      />
       <p>
         We've received your request and will get back to you within 48 hours.
       </p>

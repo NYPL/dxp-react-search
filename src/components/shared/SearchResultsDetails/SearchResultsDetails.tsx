@@ -1,6 +1,10 @@
 import React from "react";
 // Components
-import { Button, Heading } from "@nypl/design-system-react-components";
+import {
+  Button,
+  Heading,
+  HeadingLevels,
+} from "@nypl/design-system-react-components";
 import s from "./SearchResultsDetails.module.css";
 
 interface SearchResultsDetailsProps {
@@ -25,7 +29,7 @@ function SearchResultsDetails({
       {label && (
         <Heading
           id={"search-results__details-heading"}
-          level={2}
+          level={HeadingLevels.Two}
           text={label}
         />
       )}

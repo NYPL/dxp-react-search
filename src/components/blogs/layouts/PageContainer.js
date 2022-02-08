@@ -119,7 +119,7 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={3}
+                headingLevel={HeadingLevels.Three}
                 headingColor={"#000"}
                 title={menu.title}
                 items={menu.items}

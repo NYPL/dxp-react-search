@@ -1,5 +1,10 @@
 import React from "react";
-import { Heading, List, ListTypes } from "@nypl/design-system-react-components";
+import {
+  Heading,
+  HeadingLevels,
+  List,
+  ListTypes,
+} from "@nypl/design-system-react-components";
 import MenuItem from "./MenuItem";
 import { MenuItemType } from "./MenuTypes";
 // Styles
@@ -8,7 +13,7 @@ import s from "./Menu.module.css";
 interface MenuProps {
   /** The id for the menu */
   id: string;
-  headingLevel: number;
+  headingLevel: HeadingLevels;
   headingDecoration: string;
   headingColor?: string;
   title: string;

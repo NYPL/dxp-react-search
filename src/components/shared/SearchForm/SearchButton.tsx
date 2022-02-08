@@ -19,7 +19,7 @@ function SearchButton({ id }: { id: string }) {
   return (
     <Button
       id={id}
-      buttonType={ButtonTypes.SearchBar}
+      buttonType={ButtonTypes.Primary}
       mouseDown={false}
       type="submit"
       additionalStyles={{

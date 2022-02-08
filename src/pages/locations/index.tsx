@@ -13,7 +13,10 @@ import SearchResultsDetails from "../../components/location-finder/SearchResults
 import Map from "../../components/location-finder/Map";
 import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
-import { ColorVariants } from "@nypl/design-system-react-components";
+import {
+  ColorVariants,
+  HeadingLevels,
+} from "@nypl/design-system-react-components";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { railMenuContent } from "./../../__content/menus";
@@ -75,7 +78,7 @@ function LocationFinder() {
                 <Menu
                   id={menu.id}
                   key={menu.id}
-                  headingLevel={3}
+                  headingLevel={HeadingLevels.Three}
                   headingColor={"#0576d3"}
                   title={menu.title}
                   // @ts-ignore

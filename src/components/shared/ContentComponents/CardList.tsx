@@ -72,7 +72,9 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
                 //imageAspectRatio={ImageRatios.Square}
                 //imageSize={ImageSizes.Small}
               >
-                <CardHeading level={3}>{item.title}</CardHeading>
+                <CardHeading level={HeadingLevels.Three}>
+                  {item.title}
+                </CardHeading>
                 <CardContent>
                   <Box
                     dangerouslySetInnerHTML={{
