@@ -8,9 +8,12 @@ import { TermByIdQuery as RESOURCE_TOPIC_BY_ID_QUERY } from "./../../../../../ap
 // Redux
 import { withRedux } from "./../../../../../redux/withRedux";
 // Components
-import { SkeletonLoader } from "@nypl/design-system-react-components";
 import PageContainer from "./../../../../../components/online-resources/layouts/PageContainer";
 import SearchResults from "./../../../../../components/online-resources/SearchResults";
+import {
+  SearchResultsSkeletonLoader,
+  SearchResultsDetailsSkeletonLoader,
+} from "./../../../../../components/online-resources/SearchResults/SearchResultsSkeletonLoader";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
@@ -47,7 +50,13 @@ function FeaturedResourceTopicSlug() {
             url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`,
           },
         ]}
-        contentPrimary={<SkeletonLoader />}
+        showContentHeader={true}
+        contentPrimary={
+          <>
+            <SearchResultsDetailsSkeletonLoader />
+            <SearchResultsSkeletonLoader />
+          </>
+        }
       />
     );
   }

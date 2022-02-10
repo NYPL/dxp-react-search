@@ -12,7 +12,10 @@ import { Pagination } from "@nypl/design-system-react-components";
 import OnlineResourceCard from "../OnlineResourceCard";
 import AlphabetNav from "../AlphabetNav";
 import SearchResultsDetails from "./SearchResultsDetails";
-import SearchResultsSkeleton from "./SearchResultsSkeleton";
+import {
+  SearchResultsSkeletonLoader,
+  SearchResultsDetailsSkeletonLoader,
+} from "./SearchResultsSkeletonLoader";
 //
 import s from "./SearchResults.module.css";
 
@@ -92,7 +95,7 @@ function SearchResults({
   // Loading state,
   if (loading || !data) {
     return (
-      <div id="search-results">
+      <div id="search-results__container" className={s.container}>
         {router.query.alpha && (
           <AlphabetNav
             className={s.alphabetNav}
@@ -102,14 +105,17 @@ function SearchResults({
             }
           />
         )}
-        <SearchResultsSkeleton />
-        <div className={s.paginationContainer}>
-          <Pagination
-            className={s.pagination}
-            initialPage={currentPage}
-            pageCount={10}
-            onPageChange={onPageChange}
-          />
+        <SearchResultsDetailsSkeletonLoader />
+        <div id="search-results">
+          <SearchResultsSkeletonLoader />
+          <div className={s.paginationContainer}>
+            <Pagination
+              className={s.pagination}
+              initialPage={currentPage}
+              pageCount={10}
+              onPageChange={onPageChange}
+            />
+          </div>
         </div>
       </div>
     );

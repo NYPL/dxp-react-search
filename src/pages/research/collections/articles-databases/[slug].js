@@ -11,7 +11,7 @@ import { withRedux } from "./../../../../redux/withRedux";
 // Components
 import PageContainer from "./../../../../components/online-resources/layouts/PageContainer";
 import OnlineResourceCard from "./../../../../components/online-resources/OnlineResourceCard";
-import SearchResultsSkeleton from "./../../../../components/online-resources/SearchResults/SearchResultsSkeleton";
+import { SearchResultsCardSkeletonLoader } from "../../../../components/online-resources/SearchResults/SearchResultsSkeletonLoader";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
@@ -75,7 +75,8 @@ function OnlineResourceSlug() {
             url: `${NEXT_PUBLIC_NYPL_DOMAIN}/${ONLINE_RESOURCES_BASE_PATH}`,
           },
         ]}
-        contentPrimary={<SearchResultsSkeleton />}
+        showContentHeader={true}
+        contentPrimary={<SearchResultsCardSkeletonLoader />}
       />
     );
   }
