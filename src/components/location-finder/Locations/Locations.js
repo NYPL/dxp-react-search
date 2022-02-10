@@ -112,7 +112,8 @@ function Locations() {
       <Link
         additionalStyles={{
           display: ["block", "block", "none"],
-          marginBottom: "1em",
+          marginTop: "xs",
+          marginBottom: "m",
         }}
         href="#locations-gmap"
       >

@@ -82,7 +82,7 @@ function SearchResultsDetails() {
 
   if (renderMessage()) {
     return (
-      <Box role="alert" spacing="l" marginBottom="m">
+      <Box role="alert" marginBottom={["xs", "xs", "s"]}>
         {renderMessage()}
         <Button
           id="button"
@@ -91,7 +91,7 @@ function SearchResultsDetails() {
           onClick={onClearSearchTerms}
           additionalStyles={{
             display: "inline",
-            paddingLeft: "xs",
+            paddingLeft: [null, null, "xs"],
           }}
         >
           Clear all search terms.
