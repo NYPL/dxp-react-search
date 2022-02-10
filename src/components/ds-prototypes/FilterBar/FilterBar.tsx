@@ -7,6 +7,8 @@ import {
   HeadingLevels,
   HeadingDisplaySizes,
   Icon,
+  IconAlign,
+  IconNames,
   IconRotationTypes,
   IconSizes,
   Modal,
@@ -71,18 +73,20 @@ function FilterBar({
             <Modal>
               <div className={s.ctaButtonsContainerMobile}>
                 <Button
-                  buttonType={ButtonTypes.Link}
-                  className={s.ctaClearButtonMobile}
                   id={"multiselect-button-goback"}
+                  buttonType={ButtonTypes.Link}
                   mouseDown={false}
-                  type="button"
                   onClick={onClickGoBack}
+                  additionalStyles={{
+                    display: "block",
+                    width: "fit-content",
+                  }}
                 >
                   <Icon
-                    decorative
+                    name={IconNames.Arrow}
+                    align={IconAlign.Left}
                     iconRotation={IconRotationTypes.Rotate90}
                     size={IconSizes.Small}
-                    //name="arrow"
                   />
                   Go Back
                 </Button>
