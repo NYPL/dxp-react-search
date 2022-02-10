@@ -310,7 +310,7 @@ export function drupalParagraphsResolver(field, typesInQuery) {
             description: cardItem.field_tfls_description
               ? cardItem.field_tfls_description.processed
               : null,
-            link: cardItem.field_ls_link.uri,
+            link: cardItem.field_ls_link.url,
             image: imageResolver(cardItem.field_ers_image),
           });
         });

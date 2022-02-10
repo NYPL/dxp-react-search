@@ -6,10 +6,10 @@ import {
   Card,
   CardContent,
   CardHeading,
-  ImageRatios,
   ImageSizes,
   CardLayouts,
   Grid,
+  Link,
 } from "@nypl/design-system-react-components";
 import Image from "../../shared/Image";
 
@@ -47,13 +47,7 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
                 layout={CardLayouts.Row}
                 center
                 imageComponent={
-                  <Box
-                    w="100%"
-                    //
-                    maxWidth={["100%", "100%", "225px", "165px"]}
-                    mr={[null, null, "m"]}
-                    mb={["m", null]}
-                  >
+                  <a href={item.link}>
                     <Image
                       id={item.image.id}
                       alt={item.image.alt}
@@ -66,14 +60,12 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
                       height={960}
                       quality={90}
                     />
-                  </Box>
+                  </a>
                 }
-                imageAspectRatio={ImageRatios.Original}
-                //imageAspectRatio={ImageRatios.Square}
-                //imageSize={ImageSizes.Small}
+                imageSize={ImageSizes.Small}
               >
                 <CardHeading level={HeadingLevels.Three}>
-                  {item.title}
+                  <Link href={item.link}> {item.title}</Link>
                 </CardHeading>
                 <CardContent>
                   <Box

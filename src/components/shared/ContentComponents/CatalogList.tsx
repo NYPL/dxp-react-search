@@ -6,10 +6,10 @@ import {
   Card,
   CardContent,
   CardHeading,
-  ImageRatios,
   ImageSizes,
   CardLayouts,
   Grid,
+  Link,
 } from "@nypl/design-system-react-components";
 import { default as NextImage } from "next/image";
 
@@ -62,29 +62,22 @@ function CatalogList({
                 layout={CardLayouts.Row}
                 center
                 imageComponent={
-                  <Box
-                    w="100%"
-                    maxWidth={["100%", "100%", "225px", "165px"]}
-                    mr={[null, null, "m"]}
-                    mb={["m", null]}
-                  >
-                    <a href={catalogLink}>
-                      <NextImage
-                        alt={item.title}
-                        src={`${coverImageUri}/${item.isbn}/Medium/Empty`}
-                        layout="responsive"
-                        objectFit="cover"
-                        width={960}
-                        height={960}
-                        quality={90}
-                      />
-                    </a>
-                  </Box>
+                  <a href={catalogLink}>
+                    <NextImage
+                      alt={item.title}
+                      src={`${coverImageUri}/${item.isbn}/Medium/Empty`}
+                      layout="responsive"
+                      objectFit="cover"
+                      width={960}
+                      height={960}
+                      quality={90}
+                    />
+                  </a>
                 }
-                imageAspectRatio={ImageRatios.Original}
+                imageSize={ImageSizes.Small}
               >
                 <CardHeading level={HeadingLevels.Three}>
-                  <a href={catalogLink}>{item.title}</a>
+                  <Link href={catalogLink}>{item.title}</Link>
                 </CardHeading>
                 <CardContent>
                   <Box

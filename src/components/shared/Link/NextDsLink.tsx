@@ -14,12 +14,10 @@ function NextDsLink({ children, href }: LinkProps) {
       <Box
         as="a"
         sx={{
-          // ui.link.primary
-          color: "#0576D3 !important",
+          color: "var(--nypl-colors-ui-link-primary) !important",
           textDecoration: "underline",
           _hover: {
-            // ui.link.secondary
-            color: "#004B98 !important",
+            color: "var(--nypl-colors-ui-link-secondary) !important",
           },
         }}
       >
