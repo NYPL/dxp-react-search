@@ -61,7 +61,7 @@ function Location({ location }: LocationProps) {
   }
 
   return (
-    <Box marginBottom="l">
+    <Box marginBottom="m">
       <Heading
         id={`lid-${location.id}`}
         level={HeadingLevels.Two}
