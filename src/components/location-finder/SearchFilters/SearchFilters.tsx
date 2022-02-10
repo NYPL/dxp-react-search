@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 // Apollo
-import { useQuery } from "@apollo/client";
-import { FiltersQuery as FILTERS_QUERY } from "./SearchFilters.gql";
+import { gql, useQuery } from "@apollo/client";
 // Components
 import {
-  Button,
   Heading,
+  HeadingLevels,
   Modal,
-  SkeletonLoader,
 } from "@nypl/design-system-react-components";
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
@@ -20,15 +18,32 @@ import usePrevious from "../../../hooks/usePrevious";
 // Context
 import { SearchFiltersProvider } from "./SearchFiltersContext";
 
+const FILTERS_QUERY = gql`
+  query FiltersQuery {
+    refineryAllTerms {
+      id
+      name
+      terms {
+        id
+        name
+        children {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
 function SearchFilters() {
   // Local state
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState();
+  const [isMobile, setIsMobile] = useState<boolean>();
 
   // Set the isMobile state based on screen width.
   const windowSize = useWindowSize();
   useEffect(() => {
-    if (windowSize >= 600) {
+    if (windowSize && windowSize >= 600) {
       setIsMobile(false);
     } else {
       setIsMobile(true);
@@ -39,6 +54,7 @@ function SearchFilters() {
   const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
     if (isMobile && prevModalState !== isModalOpen) {
+      // @ts-ignore
       document.getElementById("locations-list").scrollIntoView();
     }
   }, [isModalOpen]);
@@ -66,10 +82,10 @@ function SearchFilters() {
               <DropdownMobileButtons setIsModalOpen={setIsModalOpen} />
               <Heading
                 id="search-filters__mobile-heading"
-                level={3}
+                level={HeadingLevels.Three}
                 text="Filters"
               />
-              {data.refineryAllTerms.map((vocab) => {
+              {data.refineryAllTerms.map((vocab: any) => {
                 return <DropdownMobile key={vocab.id} vocab={vocab} />;
               })}
               <DropdownMobileClear />
@@ -82,11 +98,11 @@ function SearchFilters() {
             <Heading
               className="search-filters-group__heading"
               id="search-filters-group1__heading"
-              level={3}
+              level={HeadingLevels.Three}
               text="Filters"
             />
             <div className="search-filters__dropdowns">
-              {data.refineryAllTerms.slice(0, 3).map((vocab) => {
+              {data.refineryAllTerms.slice(0, 3).map((vocab: any) => {
                 return <DropdownDesktop key={vocab.id} vocab={vocab} />;
               })}
             </div>
@@ -95,11 +111,11 @@ function SearchFilters() {
             <Heading
               className="search-filters-group__heading"
               id="search-filters-group2__heading"
-              level={3}
+              level={HeadingLevels.Three}
               text="Research Filters"
             />
             <div className="search-filters__dropdowns">
-              {data.refineryAllTerms.slice(3, 5).map((vocab) => {
+              {data.refineryAllTerms.slice(3, 5).map((vocab: any) => {
                 return <DropdownDesktop key={vocab.id} vocab={vocab} />;
               })}
             </div>

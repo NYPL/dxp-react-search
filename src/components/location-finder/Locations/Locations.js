@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "./../../../redux/actions";
 // Components
 import {
+  Box,
   Icon,
   IconAlign,
   IconColors,
@@ -100,8 +101,21 @@ function Locations() {
   }
 
   return (
-    <div className="locations__list-inner">
-      <Link href="#locations-gmap" className="locations-gmap-anchor">
+    <Box
+      sx={{
+        overflowX: "hidden",
+        overflowY: "scroll",
+        scrollbarWidth: "auto",
+        scrollbarColor: "#888 #f8f8f7",
+      }}
+    >
+      <Link
+        additionalStyles={{
+          display: ["block", "block", "none"],
+          marginBottom: "1em",
+        }}
+        href="#locations-gmap"
+      >
         Skip to Map
         <Icon
           name={IconNames.Arrow}
@@ -119,7 +133,7 @@ function Locations() {
         ))}
       </ul>
       <LocationsPagination limit={limit} />
-    </div>
+    </Box>
   );
 }
 

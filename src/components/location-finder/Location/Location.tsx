@@ -61,7 +61,7 @@ function Location({ location }: LocationProps) {
   }
 
   return (
-    <div className="location">
+    <Box marginBottom="l">
       <Heading
         id={`lid-${location.id}`}
         level={HeadingLevels.Two}
@@ -92,7 +92,7 @@ function Location({ location }: LocationProps) {
         <Box>|</Box>
         <Link href={getDirectionsLink}>Get Directions</Link>
       </HStack>
-    </div>
+    </Box>
   );
 }
 

@@ -14,6 +14,11 @@ import Map from "../../components/location-finder/Map";
 import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
 import {
+  Box,
+  Grid,
+  GridItem,
+  HStack,
+  Stack,
   ColorVariants,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
@@ -49,18 +54,19 @@ function LocationFinder() {
         </>
       }
       contentPrimary={
-        <div className="locations">
-          <div className="locations__list" id="locations-list">
+        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} spacing="l">
+          <GridItem
+            id="locations-list"
+            maxHeight={[null, null, "500px"]}
+            overflowY={[null, null, "auto"]}
+          >
             <SearchResultsDetails />
             <Locations />
-          </div>
-          <div id="locations-gmap" className="locations__map">
-            <div className="locations__map-help-msg">
-              Use two fingers to pan the map.
-            </div>
+          </GridItem>
+          <GridItem id="locations-gmap">
             <Map />
-          </div>
-        </div>
+          </GridItem>
+        </Grid>
       }
       contentBottom={
         <>

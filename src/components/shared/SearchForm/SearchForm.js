@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from "react";
 // Components
-import AutoSuggest from './../../ds-prototypes/AutoSuggest';
-import SearchButton from  './SearchButton';
+import AutoSuggest from "./../../ds-prototypes/AutoSuggest";
+import SearchButton from "./SearchButton";
 
 function SearchForm(props) {
   const {
@@ -19,17 +19,12 @@ function SearchForm(props) {
     suggestionContainerMsg,
     inputOnChange,
     searchButtonId,
-    children
+    children,
   } = props;
 
   return (
-    <div className='search__form'>
-      <form
-        id={id}
-        role='search'
-        aria-label={ariaLabel}
-        onSubmit={onSubmit}
-      >
+    <div className="search__form">
+      <form id={id} role="search" aria-label={ariaLabel} onSubmit={onSubmit}>
         <AutoSuggest
           id={autoSuggestInputId}
           label={label}
@@ -47,6 +42,6 @@ function SearchForm(props) {
       </form>
     </div>
   );
-};
+}
 
 export default SearchForm;

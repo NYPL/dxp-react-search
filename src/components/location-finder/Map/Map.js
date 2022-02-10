@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   Icon,
   IconAlign,
   IconColors,
@@ -166,6 +167,13 @@ function Map() {
 
   return (
     <>
+      <Box
+        display={["block", "block", "none"]}
+        paddingBottom="xs"
+        className="locations__map-help-msg"
+      >
+        Use two fingers to pan the map.
+      </Box>
       <MapWrapper
         aria-hidden="true"
         onClick={handleClick}
@@ -174,7 +182,10 @@ function Map() {
         containerElement={<div style={{ height: `500px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
-      <Link href="#locations-list" className="locations-list-anchor">
+      <Link
+        additionalStyles={{ display: ["block", "block", "none"] }}
+        href="#locations-list"
+      >
         Back to List
         <Icon
           name={IconNames.Arrow}

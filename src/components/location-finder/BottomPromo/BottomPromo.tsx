@@ -10,7 +10,9 @@ import {
   Image,
   Link,
   LinkTypes,
+  Logo,
   LogoNames,
+  LogoSizes,
 } from "@nypl/design-system-react-components";
 
 function BottomPromo() {
@@ -43,6 +45,7 @@ function BottomPromo() {
           />
           <p className="promo-description">{promo_right.description}</p>
           {promo_right.image.map((value, index) => {
+            const typedLogoName = value.logo as LogoNames;
             return (
               <div key={value.link} className="promo-card promo-card-with-icon">
                 <Link type={LinkTypes.Default}>
@@ -51,10 +54,10 @@ function BottomPromo() {
                     href={value.link}
                     className="promo-link"
                   >
-                    <Icon
-                      size={IconSizes.ExtraExtraExtraLarge}
+                    <Logo
                       // @ts-ignore
-                      name={LogoNames[value.logo]}
+                      name={LogoNames[typedLogoName]}
+                      size={LogoSizes.Small}
                     />
                   </a>
                 </Link>
