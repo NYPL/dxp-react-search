@@ -1,7 +1,6 @@
 import React from "react";
 // Apollo
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { BLOG_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/blogFields";
 // Components
 import { Pagination } from "@nypl/design-system-react-components";

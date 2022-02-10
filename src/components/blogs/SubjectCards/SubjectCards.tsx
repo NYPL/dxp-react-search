@@ -1,7 +1,6 @@
 import React from "react";
 // Apollo
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { TERM_BASE_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/term";
 // Components
 import CardGrid from "../../ds-prototypes/CardGrid";
