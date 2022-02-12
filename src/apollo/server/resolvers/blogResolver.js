@@ -27,9 +27,9 @@ const blogResolver = {
   Query: {
     allBlogs: async (parent, args, { dataSources }, info) => {
       const filter = convertFilters(args.filter);
-      const sortBy = {
-        field: args.sortBy.field,
-        direction: args.sortBy.direction,
+      const sort = {
+        field: args.sort.field,
+        direction: args.sort.direction,
       };
       const pagination = {
         limit: args.limit,
@@ -40,7 +40,7 @@ const blogResolver = {
         "blog",
         includedFields,
         filter,
-        sortBy,
+        sort,
         pagination
       );
       const response = await dataSources.drupalJsonApi.getCollectionResource(

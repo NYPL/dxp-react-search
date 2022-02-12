@@ -27,7 +27,7 @@ function BlogsMainPage() {
             slugLabel={featured_posts.slugLabel}
             limit={6}
             featured={true}
-            sortBy={{ field: "created", direction: "DESC" }}
+            sort={{ field: "created", direction: "DESC" }}
           />
           <ChannelsCards
             id="explore-by-channel"

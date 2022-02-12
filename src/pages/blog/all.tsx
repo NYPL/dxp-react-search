@@ -27,7 +27,7 @@ function BlogsAllPage() {
         <BlogsContainer
           id="all-blogs"
           limit={10}
-          sortBy={{ field: "created", direction: "DESC" }}
+          sort={{ field: "created", direction: "DESC" }}
         />
       }
     />

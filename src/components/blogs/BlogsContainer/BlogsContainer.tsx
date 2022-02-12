@@ -20,7 +20,7 @@ const BLOGS_QUERY = gql`
     $limit: Int
     $pageNumber: Int
     $featured: Boolean
-    $sortBy: SortBy
+    $sort: Sort
     $channels: [String]
     $subjects: [String]
     $libraries: [String]
@@ -38,7 +38,7 @@ const BLOGS_QUERY = gql`
         divisions: $divisions
         audiences: $audiences
       }
-      sortBy: $sortBy
+      sort: $sort
     ) {
       items {
         ...BlogFields
@@ -60,7 +60,7 @@ interface BlogCardsProps {
   slugLabel?: string;
   limit?: number;
   pageNumber?: number;
-  sortBy?: any;
+  sort?: any;
   featured?: boolean;
 }
 
@@ -91,7 +91,7 @@ function BlogsContainer({
   slugLabel = "",
   limit,
   pageNumber,
-  sortBy,
+  sort,
   featured,
 }: BlogCardsProps) {
   const router = useRouter();
@@ -104,7 +104,7 @@ function BlogsContainer({
       limit: limit ? limit : null,
       pageNumber: currentPage ? currentPage : 1,
       featured: featured ? featured : null,
-      sortBy: sortBy ? sortBy : null,
+      sort: sort ? sort : null,
       channels: router.query.channel
         ? (router.query.channel as string).split(" ")
         : null,

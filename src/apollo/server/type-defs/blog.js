@@ -54,7 +54,7 @@ export const typeDefs = gql`
       limit: Int
       pageNumber: Int
       filter: BlogFilter
-      sortBy: SortBy
+      sort: Sort
     ): BlogConnection
     blog(id: String, revisionId: String, preview: Boolean): Blog
   }

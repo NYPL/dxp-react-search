@@ -10,7 +10,7 @@ export const typeDefs = gql`
     clientIp: String
   }
 
-  input SortBy {
+  input Sort {
     field: String
     direction: String
   }

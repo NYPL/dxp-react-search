@@ -6,12 +6,12 @@ type PaginationInfo = {
   pageNumber: number;
 };
 
-type SortBy = {
+type Sort = {
   field: string;
-  direction: SortByDirections;
+  direction: SortDirections;
 };
 
-enum SortByDirections {
+enum SortDirections {
   ASC = "ASC",
   DSC = "DESC",
 }
@@ -21,7 +21,7 @@ export function getCollectionResourceJsonApiPath(
   bundle: string,
   includeFields?: string[],
   filters?: ConvertedFilter[],
-  sortBy?: SortBy,
+  sort?: Sort,
   pagination?: PaginationInfo
 ): string {
   let apiParams = new DrupalJsonApiParams();
@@ -63,9 +63,9 @@ export function getCollectionResourceJsonApiPath(
   }
 
   // Add sortBy
-  if (typeof sortBy === "object" && sortBy !== null) {
-    console.log(sortBy);
-    const { field, direction } = sortBy;
+  if (typeof sort === "object" && sort !== null) {
+    console.log(sort);
+    const { field, direction } = sort;
     apiParams.addSort(field, direction);
   }
 

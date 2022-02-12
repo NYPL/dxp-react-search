@@ -46,24 +46,20 @@ describe("getJsonApiPath", () => {
   // Collection
   test("Location collection limit to 5 items", async () => {
     const args = {
-      filter: {
-        limit: 5,
-        pageNumber: 1,
-      },
+      limit: 5,
+      pageNumber: 1,
     };
 
-    const filter = args.filter;
-
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
       "node",
       "library",
       null,
-      filter,
+      null,
       null,
       pagination
     );
@@ -86,30 +82,30 @@ describe("getJsonApiPath", () => {
     ];
 
     const args = {
-      filter: {
-        limit: 10,
-        pageNumber: 1,
+      limit: 10,
+      pageNumber: 1,
+      sort: {
+        field: "created",
+        direction: "ASC",
       },
     };
 
-    const filter = convertFilters(args.filter);
-
-    const sortBy = {
-      field: "created",
-      direction: "ASC",
+    const sort = {
+      field: args.sort.field,
+      direction: args.sort.direction,
     };
 
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
       "node",
       "blog",
       includedFields,
-      filter,
-      sortBy,
+      null,
+      sort,
       pagination
     );
 
@@ -122,16 +118,16 @@ describe("getJsonApiPath", () => {
     const args = {
       filter: {
         libraryType: ["hub", "neighborhood"],
-        limit: 120,
-        pageNumber: 1,
       },
+      limit: 120,
+      pageNumber: 1,
     };
 
     const filter = convertFilters(args.filter);
 
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
@@ -152,16 +148,16 @@ describe("getJsonApiPath", () => {
     const args = {
       filter: {
         featured: true,
-        limit: 6,
-        pageNumber: 1,
       },
+      limit: 6,
+      pageNumber: 1,
     };
 
     const filter = convertFilters(args.filter);
 
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
@@ -182,15 +178,15 @@ describe("getJsonApiPath", () => {
     const args = {
       filter: {
         internalSlug: ["125th-street"],
-        limit: 10,
-        pageNumber: 1,
       },
+      limit: 10,
+      pageNumber: 1,
     };
     const filter = convertFilters(args.filter);
 
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
@@ -211,16 +207,16 @@ describe("getJsonApiPath", () => {
     const args = {
       filter: {
         internalSlug: ["125th-street", "allerton"],
-        limit: 10,
-        pageNumber: 1,
       },
+      limit: 10,
+      pageNumber: 1,
     };
 
     const filter = convertFilters(args.filter);
 
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
@@ -252,16 +248,16 @@ describe("getJsonApiPath", () => {
     const args = {
       filter: {
         channels: ["725"],
-        limit: 10,
-        pageNumber: 1,
       },
+      limit: 10,
+      pageNumber: 1,
     };
 
     const filter = convertFilters(args.filter);
 
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
@@ -283,9 +279,9 @@ describe("getJsonApiPath", () => {
     const args = {
       filter: {
         featured: true,
-        limit: 6,
-        pageNumber: 1,
       },
+      limit: 6,
+      pageNumber: 1,
     };
 
     const filter = convertFilters(args.filter);
@@ -296,8 +292,8 @@ describe("getJsonApiPath", () => {
     };
 
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
@@ -316,30 +312,30 @@ describe("getJsonApiPath", () => {
 
   test("Get 50 taxonomy terms sorted by name desc", async () => {
     const args = {
-      filter: {
-        limit: 50,
-        pageNumber: 1,
+      limit: 50,
+      pageNumber: 1,
+      sort: {
+        field: "name",
+        direction: "DESC",
       },
     };
 
-    const filter = convertFilters(args.filter);
-
-    const sortBy = {
-      field: "name",
-      direction: "DESC",
+    const sort = {
+      field: args.sort.field,
+      direction: args.sort.direction,
     };
 
     const pagination = {
-      limit: args.filter.limit,
-      pageNumber: args.filter.pageNumber,
+      limit: args.limit,
+      pageNumber: args.pageNumber,
     };
 
     const apiPath = getCollectionResourceJsonApiPath(
       "taxonomy_term",
       "subject",
       null,
-      filter,
-      sortBy,
+      null,
+      sort,
       pagination
     );
 
