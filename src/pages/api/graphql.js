@@ -2,6 +2,7 @@ import { ApolloServer } from "apollo-server-micro";
 import { schema } from "../../apollo/server/schema";
 import RefineryApi from "./../../apollo/server/datasources/RefineryApi";
 import DrupalApi from "./../../apollo/server/datasources/DrupalApi";
+import DrupalJsonApi from "./../../apollo/server/datasources/drupal-json-api/DrupalJsonApi";
 import PlatformApi from "./../../apollo/server/datasources/PlatformApi";
 import SendGridApi from "./../../apollo/server/datasources/SendGridApi";
 import Cors from "micro-cors";
@@ -13,6 +14,7 @@ const apolloServer = new ApolloServer({
     return {
       refineryApi: new RefineryApi(),
       drupalApi: new DrupalApi(),
+      drupalJsonApi: new DrupalJsonApi(),
       platformApi: new PlatformApi(),
       sendGridApi: new SendGridApi(),
     };

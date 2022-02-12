@@ -23,7 +23,13 @@ function BlogsAllPage() {
       ]}
       showContentHeader={true}
       showFilterBar={true}
-      contentPrimary={<BlogsContainer id="featured-posts" limit={10} />}
+      contentPrimary={
+        <BlogsContainer
+          id="all-blogs"
+          limit={10}
+          sortBy={{ field: "created", direction: "DESC" }}
+        />
+      }
     />
   );
 }

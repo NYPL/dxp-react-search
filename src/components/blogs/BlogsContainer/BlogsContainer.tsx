@@ -20,7 +20,7 @@ const BLOGS_QUERY = gql`
     $limit: Int
     $pageNumber: Int
     $featured: Boolean
-    $sortBy: String
+    $sortBy: SortBy
     $channels: [String]
     $subjects: [String]
     $libraries: [String]
@@ -60,7 +60,7 @@ interface BlogCardsProps {
   slugLabel?: string;
   limit?: number;
   pageNumber?: number;
-  sortBy?: string;
+  sortBy?: any;
   featured?: boolean;
 }
 
@@ -190,12 +190,14 @@ function BlogsContainer({
           ))}
         </CardGrid>
       </CardSet>
-      <Pagination
-        // @TODO Confirm that this is working.
-        initialPage={currentPage}
-        pageCount={data.allBlogs.pageInfo.pageCount}
-        onPageChange={onPageChange}
-      />
+      {!featured && (
+        <Pagination
+          // @TODO Confirm that this is working.
+          initialPage={currentPage}
+          pageCount={data.allBlogs.pageInfo.pageCount}
+          onPageChange={onPageChange}
+        />
+      )}
     </>
   );
 }

@@ -1,4 +1,3 @@
-const graphqlFields = require("graphql-fields");
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
@@ -8,26 +7,45 @@ import {
   imageResolver,
 } from "./utils";
 import {
-  buildAllNodesByContentTypeJsonApiPath,
-  buildNodeByIdJsonApiPath,
-} from "../datasources/buildJsonApiPath";
+  getIndividualResourceJsonApiPath,
+  getCollectionResourceJsonApiPath,
+} from "./../datasources/drupal-json-api/getJsonApiPath";
+import { convertFilters } from "./../datasources/drupal-json-api/filterHelpers";
+
+const includedFields = [
+  "field_ers_media_image.field_media_image",
+  "field_main_content.field_ers_media_item.field_media_image",
+  "field_erm_location",
+  // Link Card List
+  "field_main_content.field_erm_link_cards",
+  "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+  // Catalog List
+  "field_main_content.field_erm_remote_items",
+];
 
 const blogResolver = {
   Query: {
     allBlogs: async (parent, args, { dataSources }, info) => {
-      const apiPath = buildAllNodesByContentTypeJsonApiPath(
+      const filter = convertFilters(args.filter);
+      const sortBy = {
+        field: args.sortBy.field,
+        direction: args.sortBy.direction,
+      };
+      const pagination = {
+        limit: args.limit,
+        pageNumber: args.pageNumber,
+      };
+      const apiPath = getCollectionResourceJsonApiPath(
+        "node",
         "blog",
-        args.limit,
-        args.pageNumber,
-        args.filter,
-        args.sortBy,
-        graphqlFields(info)
+        includedFields,
+        filter,
+        sortBy,
+        pagination
       );
-
-      const response = await dataSources.drupalApi.getAllNodesByContentType(
+      const response = await dataSources.drupalJsonApi.getCollectionResource(
         apiPath
       );
-
       // @TODO Move this to a utils function.
       return {
         items: response.data,
@@ -41,16 +59,18 @@ const blogResolver = {
         },
       };
     },
-    blog: async (parent, args, { dataSources }) => {
+    blog: async (_, args, { dataSources }) => {
       const isPreview = args.preview ? true : false;
-      const apiPath = buildNodeByIdJsonApiPath(
+      const apiPath = getIndividualResourceJsonApiPath(
+        "node",
         "blog",
+        includedFields,
         args.id,
         args.revisionId
       );
-      const response = await dataSources.drupalApi.getNodeById(
-        isPreview,
-        apiPath
+      const response = await dataSources.drupalJsonApi.getIndividualResource(
+        apiPath,
+        isPreview
       );
       return response;
     },

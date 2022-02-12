@@ -10,6 +10,11 @@ export const typeDefs = gql`
     clientIp: String
   }
 
+  input SortBy {
+    field: String
+    direction: String
+  }
+
   type Image {
     id: ID!
     alt: String
