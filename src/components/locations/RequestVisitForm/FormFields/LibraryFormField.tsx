@@ -11,13 +11,15 @@ const LOCATIONS_QUERY = gql`
     $contentType: String
     $limit: Int
     $pageNumber: Int
-    $libraryType: [String]
+    $filter: LocationFilter
+    $sort: Sort
   ) {
     allLocations(
       contentType: $contentType
       limit: $limit
       pageNumber: $pageNumber
-      filter: { libraryType: $libraryType }
+      filter: $filter
+      sort: $sort
     ) {
       items {
         id
@@ -40,9 +42,19 @@ function LibraryFormField({ handleChange }: FormFieldProps) {
   const { loading, error, data } = useQuery(LOCATIONS_QUERY, {
     variables: {
       contentType: "library",
-      libraryType: ["hub", "neighborhood"],
       limit: 125,
       pageNumber: 1,
+      filter: {
+        libraryType: {
+          fieldName: "field_ts_library_type",
+          operator: "IN",
+          value: ["hub", "neighborhood"],
+        },
+      },
+      sort: {
+        field: "title",
+        direction: "ASC",
+      },
     },
   });
 

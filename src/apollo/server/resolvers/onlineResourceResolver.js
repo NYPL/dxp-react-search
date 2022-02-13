@@ -1,22 +1,24 @@
-const graphqlFields = require("graphql-fields");
 import {
-  buildAllNodesByContentTypeJsonApiPath,
-  buildNodeByIdJsonApiPath,
-} from "../datasources/buildJsonApiPath";
+  getIndividualResourceJsonApiPath,
+  getCollectionResourceJsonApiPath,
+} from "./../datasources/drupal-json-api/getJsonApiPath";
 
 const onlineResourceResolver = {
   Query: {
-    allOnlineResources: async (parent, args, { dataSources }, info) => {
-      const apiPath = buildAllNodesByContentTypeJsonApiPath(
+    allOnlineResources: async (_, args, { dataSources }) => {
+      const pagination = {
+        limit: args.limit,
+        pageNumber: args.pageNumber,
+      };
+      const apiPath = getCollectionResourceJsonApiPath(
+        "node",
         "online_resource",
-        args.limit,
-        args.pageNumber,
+        null,
         args.filter,
-        args.sortBy,
-        graphqlFields(info)
+        args.sort,
+        pagination
       );
-
-      const response = await dataSources.drupalApi.getAllNodesByContentType(
+      const response = await dataSources.drupalJsonApi.getCollectionResource(
         apiPath
       );
 
@@ -32,12 +34,18 @@ const onlineResourceResolver = {
         },
       };
     },
-    onlineResource: async (parent, args, { dataSources }) => {
-      const apiPath = buildNodeByIdJsonApiPath("online_resource", args.id);
-      const isPreview = false;
-      const response = await dataSources.drupalApi.getNodeById(
-        isPreview,
-        apiPath
+    onlineResource: async (_, args, { dataSources }) => {
+      const isPreview = args.preview ? true : false;
+      const apiPath = getIndividualResourceJsonApiPath(
+        "node",
+        "online_resource",
+        null,
+        args.id,
+        args.revisionId
+      );
+      const response = await dataSources.drupalJsonApi.getIndividualResource(
+        apiPath,
+        isPreview
       );
       return response;
     },

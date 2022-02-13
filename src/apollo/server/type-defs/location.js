@@ -29,8 +29,8 @@ export const typeDefs = gql`
   }
 
   input LocationFilter {
-    libraryType: [String]
-    internalSlug: [String]
+    libraryType: QueryFilterItemArray
+    internalSlug: QueryFilterItemArray
   }
 
   extend type Query {
@@ -39,7 +39,7 @@ export const typeDefs = gql`
       limit: Int
       pageNumber: Int
       filter: LocationFilter
-      sortBy: String
+      sort: Sort
     ): LocationConnection
     location(slug: String): Location
   }

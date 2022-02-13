@@ -1,22 +1,26 @@
-const graphqlFields = require("graphql-fields");
-import { buildAllNodesByContentTypeJsonApiPath } from "../datasources/buildJsonApiPath";
+import {
+  getIndividualResourceJsonApiPath,
+  getCollectionResourceJsonApiPath,
+} from "./../datasources/drupal-json-api/getJsonApiPath";
 
 const locationResolver = {
   Query: {
-    allLocations: async (parent, args, { dataSources }, info) => {
-      const apiPath = buildAllNodesByContentTypeJsonApiPath(
-        "library",
-        args.limit,
-        args.pageNumber,
+    allLocations: async (_, args, { dataSources }) => {
+      const pagination = {
+        limit: args.limit,
+        pageNumber: args.pageNumber,
+      };
+      const apiPath = getCollectionResourceJsonApiPath(
+        "node",
+        args.contentType,
+        null,
         args.filter,
-        args.sortBy,
-        graphqlFields(info)
+        args.sort,
+        pagination
       );
-
-      const response = await dataSources.drupalApi.getAllNodesByContentType(
+      const response = await dataSources.drupalJsonApi.getCollectionResource(
         apiPath
       );
-
       return {
         items: response.data,
         pageInfo: {

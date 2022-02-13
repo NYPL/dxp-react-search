@@ -232,30 +232,6 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getAllNodesByContentType(apiPath) {
-    const response = await this.get(apiPath);
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
-  async getNodeById(isPreview, apiPath) {
-    let response;
-    if (isPreview) {
-      const accessToken = await getAccessToken();
-      response = await this.get(apiPath, undefined, {
-        headers: {
-          Authorization: `Bearer ${accessToken.access_token}`,
-        },
-      });
-    } else {
-      response = await this.get(apiPath);
-    }
-    return response.data;
-  }
-
   /* ---------- LEGACY CODE ---------- */
   // Connects to legacy taxonomy-filters api.
   // @TODO This will be removed when subjects taxonomy backend work is complete.

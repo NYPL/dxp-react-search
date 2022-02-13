@@ -9,7 +9,7 @@ export const typeDefs = gql`
   }
 
   input OnlineResourceFilter {
-    mostPopular: Boolean
+    mostPopular: QueryFilterItemString
   }
 
   type OnlineResourceConnection {
@@ -21,7 +21,7 @@ export const typeDefs = gql`
     allOnlineResources(
       limit: Int
       pageNumber: Int
-      sortBy: String
+      sort: Sort
       filter: OnlineResourceFilter
     ): OnlineResourceConnection
     onlineResource(id: String): OnlineResource

@@ -9,16 +9,16 @@ import Card from "../../shared/Card";
 
 const MOST_POPULAR_RESOURCES_QUERY = gql`
   query MostPopularResourcesQuery(
-    $mostPopular: Boolean
     $limit: Int
     $pageNumber: Int
-    $sortBy: String
+    $filter: OnlineResourceFilter
+    $sort: Sort
   ) {
     allOnlineResources(
       limit: $limit
       pageNumber: $pageNumber
-      sortBy: $sortBy
-      filter: { mostPopular: $mostPopular }
+      sort: $sort
+      filter: $filter
     ) {
       items {
         id
@@ -41,8 +41,17 @@ function MostPopularResources({ id, title }: MostPopularResourcesProps) {
     variables: {
       limit: 3,
       pageNumber: 1,
-      sortBy: null,
-      mostPopular: true,
+      filter: {
+        mostPopular: {
+          fieldName: "field_is_most_popular",
+          operator: "IS NOT NULL",
+          value: null,
+        },
+      },
+      sort: {
+        field: "field_is_most_popular",
+        direction: "ASC",
+      },
     },
   });
 

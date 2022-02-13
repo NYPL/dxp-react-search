@@ -285,6 +285,49 @@ describe("getJsonApiPath", () => {
     );
   });
 
+  // Online resource
+  test("Most popular online resources, limit 3, filterd by most popular, sorted asc", async () => {
+    const args = {
+      limit: 3,
+      pageNumber: 1,
+      filter: {
+        // apiParams.addFilter("field_is_most_popular", null, "IS NOT NULL");
+        mostPopular: {
+          fieldName: "field_is_most_popular",
+          operator: "IS NOT NULL",
+          value: null,
+        },
+      },
+      sort: {
+        field: "field_is_most_popular",
+        direction: "ASC",
+      },
+    };
+
+    const pagination = {
+      limit: args.limit,
+      pageNumber: args.pageNumber,
+    };
+
+    const sort = {
+      field: args.sort.field,
+      direction: args.sort.direction,
+    };
+
+    const apiPath = getCollectionResourceJsonApiPath(
+      "node",
+      "online_resource",
+      null,
+      args.filter,
+      sort,
+      pagination
+    );
+
+    expect(apiPath).toEqual(
+      "/jsonapi/node/online_resource?filter[field_is_most_popular][condition][path]=field_is_most_popular&filter[field_is_most_popular][condition][operator]=IS NOT NULL&page[offset]=0&page[limit]=3&sort=field_is_most_popular&jsonapi_include=1"
+    );
+  });
+
   // Taxonomy
   test("Get featured channels, limit 6, sorted by name asc", async () => {
     const includedFields = ["field_ers_image.field_media_image"];

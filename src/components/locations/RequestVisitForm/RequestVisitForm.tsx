@@ -172,7 +172,13 @@ function RequestVisitForm() {
           contentType: "library",
           limit: 1,
           pageNumber: 1,
-          internalSlug: internalSlugArray,
+          filter: {
+            internalSlug: {
+              fieldName: "field_ts_slug",
+              operator: "IN",
+              value: internalSlugArray,
+            },
+          },
         },
       });
       const emailAddress = locationEmailData?.allLocations?.items[0]?.email;

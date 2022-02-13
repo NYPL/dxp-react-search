@@ -1,14 +1,16 @@
 query LocationByInternalSlugQuery(
-  $internalSlug: [String]
   $contentType: String
   $limit: Int
   $pageNumber: Int
+  $filter: LocationFilter
+  $sort: Sort
 ) {
   allLocations(
     contentType: $contentType
     limit: $limit
     pageNumber: $pageNumber
-    filter: { internalSlug: $internalSlug }
+    filter: $filter
+    sort: $sort
   ) {
     items {
       id

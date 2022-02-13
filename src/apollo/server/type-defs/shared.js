@@ -31,7 +31,13 @@ export const typeDefs = gql`
   input QueryFilterItemString {
     fieldName: String!
     operator: String!
-    value: String!
+    value: String
+  }
+
+  input QueryFilterItemArray {
+    fieldName: String!
+    operator: String!
+    value: [String]!
   }
 
   type Image {
