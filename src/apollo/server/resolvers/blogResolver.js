@@ -10,7 +10,6 @@ import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
 } from "./../datasources/drupal-json-api/getJsonApiPath";
-import { convertFilters } from "./../datasources/drupal-json-api/filterHelpers";
 
 const includedFields = [
   "field_ers_media_image.field_media_image",
@@ -25,8 +24,7 @@ const includedFields = [
 
 const blogResolver = {
   Query: {
-    allBlogs: async (parent, args, { dataSources }, info) => {
-      const filter = convertFilters(args.filter);
+    allBlogs: async (_, args, { dataSources }) => {
       const sort = {
         field: args.sort.field,
         direction: args.sort.direction,
@@ -39,7 +37,7 @@ const blogResolver = {
         "node",
         "blog",
         includedFields,
-        filter,
+        args.filter,
         sort,
         pagination
       );

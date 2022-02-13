@@ -41,12 +41,12 @@ export const typeDefs = gql`
   }
 
   input BlogFilter {
-    featured: Boolean
-    channels: [String]
-    subjects: [String]
-    libraries: [String]
-    divisions: [String]
-    audiences: [String]
+    featured: QueryFilterItemBoolean
+    channels: QueryFilterItemReference
+    subjects: QueryFilterItemReference
+    libraries: QueryFilterItemReference
+    divisions: QueryFilterItemReference
+    audiences: QueryFilterItemReference
   }
 
   extend type Query {

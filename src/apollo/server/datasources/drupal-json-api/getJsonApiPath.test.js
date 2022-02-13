@@ -2,7 +2,6 @@ import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
 } from "./getJsonApiPath";
-import { convertFilters } from "./filterHelpers";
 
 describe("getJsonApiPath", () => {
   //
@@ -117,13 +116,15 @@ describe("getJsonApiPath", () => {
   test("Location collection filtered by libraryType", async () => {
     const args = {
       filter: {
-        libraryType: ["hub", "neighborhood"],
+        libraryType: {
+          fieldName: "field_ts_library_type",
+          operator: "IN",
+          value: ["hub", "neighborhood"],
+        },
       },
       limit: 120,
       pageNumber: 1,
     };
-
-    const filter = convertFilters(args.filter);
 
     const pagination = {
       limit: args.limit,
@@ -134,7 +135,7 @@ describe("getJsonApiPath", () => {
       "node",
       "library",
       null,
-      filter,
+      args.filter,
       null,
       pagination
     );
@@ -147,13 +148,15 @@ describe("getJsonApiPath", () => {
   test("Filter for 6 featured blog collection resources", async () => {
     const args = {
       filter: {
-        featured: true,
+        featured: {
+          fieldName: "field_bs_featured",
+          operator: "=",
+          value: true,
+        },
       },
       limit: 6,
       pageNumber: 1,
     };
-
-    const filter = convertFilters(args.filter);
 
     const pagination = {
       limit: args.limit,
@@ -164,7 +167,7 @@ describe("getJsonApiPath", () => {
       "node",
       "blog",
       null,
-      filter,
+      args.filter,
       null,
       pagination
     );
@@ -177,12 +180,15 @@ describe("getJsonApiPath", () => {
   test("Filter library collection by one internal slugs", async () => {
     const args = {
       filter: {
-        internalSlug: ["125th-street"],
+        internalSlug: {
+          fieldName: "field_ts_slug",
+          operator: "IN",
+          value: ["125th-street"],
+        },
       },
       limit: 10,
       pageNumber: 1,
     };
-    const filter = convertFilters(args.filter);
 
     const pagination = {
       limit: args.limit,
@@ -193,7 +199,7 @@ describe("getJsonApiPath", () => {
       "node",
       "library",
       null,
-      filter,
+      args.filter,
       null,
       pagination
     );
@@ -206,13 +212,15 @@ describe("getJsonApiPath", () => {
   test("Filter libraries collection by two internal slugs", async () => {
     const args = {
       filter: {
-        internalSlug: ["125th-street", "allerton"],
+        internalSlug: {
+          fieldName: "field_ts_slug",
+          operator: "IN",
+          value: ["125th-street", "allerton"],
+        },
       },
       limit: 10,
       pageNumber: 1,
     };
-
-    const filter = convertFilters(args.filter);
 
     const pagination = {
       limit: args.limit,
@@ -223,7 +231,7 @@ describe("getJsonApiPath", () => {
       "node",
       "library",
       null,
-      filter,
+      args.filter,
       null,
       pagination
     );
@@ -233,7 +241,7 @@ describe("getJsonApiPath", () => {
     );
   });
 
-  test("Filter blog collection by channel with included fields", async () => {
+  test("Filter blog collection by 1 channel with included fields", async () => {
     const includedFields = [
       "field_ers_media_image.field_media_image",
       "field_main_content.field_ers_media_item.field_media_image",
@@ -247,13 +255,16 @@ describe("getJsonApiPath", () => {
 
     const args = {
       filter: {
-        channels: ["725"],
+        channels: {
+          fieldName: "field_erm_channels",
+          operator: "=",
+          value: ["725"],
+          conjunction: "AND",
+        },
       },
       limit: 10,
       pageNumber: 1,
     };
-
-    const filter = convertFilters(args.filter);
 
     const pagination = {
       limit: args.limit,
@@ -264,7 +275,7 @@ describe("getJsonApiPath", () => {
       "node",
       "blog",
       includedFields,
-      filter,
+      args.filter,
       null,
       pagination
     );
@@ -278,13 +289,15 @@ describe("getJsonApiPath", () => {
   test("Get featured channels, limit 6, sorted by name asc", async () => {
     const args = {
       filter: {
-        featured: true,
+        featured: {
+          fieldName: "field_bs_featured",
+          operator: "=",
+          value: true,
+        },
       },
       limit: 6,
       pageNumber: 1,
     };
-
-    const filter = convertFilters(args.filter);
 
     const sortBy = {
       field: "name",
@@ -300,7 +313,7 @@ describe("getJsonApiPath", () => {
       "taxonomy_term",
       "channel",
       null,
-      filter,
+      args.filter,
       sortBy,
       pagination
     );

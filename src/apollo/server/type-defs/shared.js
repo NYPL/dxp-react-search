@@ -15,6 +15,19 @@ export const typeDefs = gql`
     direction: String
   }
 
+  input QueryFilterItemReference {
+    fieldName: String!
+    operator: String!
+    conjunction: String!
+    value: [String]!
+  }
+
+  input QueryFilterItemBoolean {
+    fieldName: String!
+    operator: String!
+    value: Boolean
+  }
+
   type Image {
     id: ID!
     alt: String

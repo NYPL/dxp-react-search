@@ -48,7 +48,11 @@ function BlogCard({ item }: BlogCardProps) {
           {item.locations && (
             <HStack>
               {item.locations.map((location: Location) => {
-                return <Link href={location.slug}>{location.name}</Link>;
+                return (
+                  <Link key={location.slug} href={location.slug}>
+                    {location.name}
+                  </Link>
+                );
               })}
             </HStack>
           )}

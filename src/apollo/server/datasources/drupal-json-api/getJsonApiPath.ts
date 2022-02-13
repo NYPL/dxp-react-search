@@ -1,9 +1,8 @@
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
-import { filterMultiValueEntityRef, ConvertedFilter } from "./filterHelpers";
+import filterMultiValueEntityRef from "./utils/filterMultiValueEntityRef";
 
-type PaginationInfo = {
-  limit: number;
-  pageNumber: number;
+type FilterItem = {
+  [key: string]: { [key: string]: any };
 };
 
 type Sort = {
@@ -16,11 +15,16 @@ enum SortDirections {
   DSC = "DESC",
 }
 
+type PaginationInfo = {
+  limit: number;
+  pageNumber: number;
+};
+
 export function getCollectionResourceJsonApiPath(
   entityType: string,
   bundle: string,
   includeFields?: string[],
-  filters?: ConvertedFilter[],
+  filter?: FilterItem,
   sort?: Sort,
   pagination?: PaginationInfo
 ): string {
@@ -32,39 +36,40 @@ export function getCollectionResourceJsonApiPath(
   if (Array.isArray(includeFields)) {
     apiParams.addInclude(includeFields);
   }
-
-  // Add Filters
-  if (Array.isArray(filters)) {
-    filters.forEach((filter: ConvertedFilter) => {
-      const { fieldType, fieldName, value, conjunction, operator } = filter;
-
-      if (fieldType === "referenceMultiple") {
-        if (Array.isArray(filter.value)) {
-          filter.value.forEach((item: string) => {
-            filterMultiValueEntityRef(
-              apiParams,
-              item,
-              fieldName,
-              conjunction,
-              operator
-            );
-          });
-        }
-      }
-
+  // Filters
+  if (typeof filter === "object" && filter !== null) {
+    for (const property in filter) {
+      const fieldName = filter[property].fieldName;
+      const conjunction = filter[property].conjunction;
+      const operator = filter[property].operator;
+      let value = filter[property].value;
+      // Check for conjunction property and if value is an array.
       if (
-        fieldType === "listText" ||
-        fieldType === "textPlain" ||
-        fieldType === "boolean"
+        // @see https://github.com/graphql/express-graphql/issues/177
+        "conjunction" in filter[property] &&
+        Array.isArray(filter[property].value)
       ) {
+        filter[property].value.forEach((item: string) => {
+          filterMultiValueEntityRef(
+            apiParams,
+            item,
+            fieldName,
+            conjunction,
+            operator
+          );
+        });
+      } else {
+        // Convert boolean value true to 1 for json api, as true doesn't work.
+        if (filter[property].value === true) {
+          value = 1;
+        }
         apiParams.addFilter(fieldName, value, operator);
       }
-    });
+    }
   }
 
   // Add sortBy
   if (typeof sort === "object" && sort !== null) {
-    console.log(sort);
     const { field, direction } = sort;
     apiParams.addSort(field, direction);
   }
@@ -85,7 +90,6 @@ export function getCollectionResourceJsonApiPath(
     }
   }
 
-  // Final steps.
   const urlencodedQueryString = apiParams.getQueryString({ encode: false });
   let apiPath = `/jsonapi/${entityType}/${bundle}?${urlencodedQueryString}`;
   return apiPath;

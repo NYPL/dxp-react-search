@@ -19,25 +19,13 @@ const BLOGS_QUERY = gql`
   query BlogsQuery(
     $limit: Int
     $pageNumber: Int
-    $featured: Boolean
     $sort: Sort
-    $channels: [String]
-    $subjects: [String]
-    $libraries: [String]
-    $divisions: [String]
-    $audiences: [String]
+    $filter: BlogFilter
   ) {
     allBlogs(
       limit: $limit
       pageNumber: $pageNumber
-      filter: {
-        featured: $featured
-        channels: $channels
-        subjects: $subjects
-        libraries: $libraries
-        divisions: $divisions
-        audiences: $audiences
-      }
+      filter: $filter
       sort: $sort
     ) {
       items {
@@ -98,28 +86,59 @@ function BlogsContainer({
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
     : 1;
+  // Build query filters.
+  let queryFilters: any = {};
+  const queryFiltersArray = [
+    {
+      queryName: "channel",
+      filterName: "channels",
+      fieldName: "field_erm_channels",
+    },
+    {
+      queryName: "subject",
+      filterName: "subjects",
+      fieldName: "field_erm_subjects",
+    },
+    {
+      queryName: "library",
+      filterName: "libraries",
+      fieldName: "field_erm_location",
+    },
+    {
+      queryName: "division",
+      filterName: "divisions",
+      fieldName: "field_erm_divisions",
+    },
+    {
+      queryName: "audience_by_age",
+      filterName: "audiences",
+      fieldName: "field_erm_audience",
+    },
+  ];
+  queryFiltersArray.forEach((queryFilter) => {
+    if (router.query[queryFilter.queryName]) {
+      queryFilters[queryFilter.filterName] = {
+        fieldName: queryFilter.fieldName,
+        operator: "=",
+        value: (router.query[queryFilter.queryName] as string).split(" "),
+        conjunction: "AND",
+      };
+    }
+  });
+  if (featured) {
+    queryFilters["featured"] = {
+      fieldName: "field_bs_featured",
+      operator: "=",
+      value: featured,
+    };
+  }
 
   const { loading, error, data } = useQuery(BLOGS_QUERY, {
     variables: {
       limit: limit ? limit : null,
       pageNumber: currentPage ? currentPage : 1,
-      featured: featured ? featured : null,
       sort: sort ? sort : null,
-      channels: router.query.channel
-        ? (router.query.channel as string).split(" ")
-        : null,
-      subjects: router.query.subject
-        ? (router.query.subject as string).split(" ")
-        : null,
-      libraries: router.query.library
-        ? (router.query.library as string).split(" ")
-        : null,
-      divisions: router.query.division
-        ? (router.query.division as string).split(" ")
-        : null,
-      audiences: router.query.audience_by_age
-        ? (router.query.audience_by_age as string).split(" ")
-        : null,
+      filter: queryFilters,
     },
   });
 
