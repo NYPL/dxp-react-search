@@ -1,25 +1,53 @@
-const graphqlFields = require("graphql-fields");
 import { imageResolver } from "./utils";
+import {
+  getIndividualResourceJsonApiPath,
+  getCollectionResourceJsonApiPath,
+} from "./../datasources/drupal-json-api/getJsonApiPath";
+
+const includedFields = ["field_ers_image.field_media_image"];
 
 const termResolver = {
   Query: {
-    allTermsByVocab: async (parent, args, { dataSources }, info) => {
-      const response = await dataSources.drupalApi.getAllTermsByVocabulary(
+    allTermsByVocab: async (_, args, { dataSources }) => {
+      const addIncludeFields =
+        args.vocabulary === "channel" || args.vocabulary === "resource_topic"
+          ? true
+          : false;
+      const pagination = {
+        limit: args.limit,
+        pageNumber: args.pageNumber,
+      };
+
+      const apiPath = getCollectionResourceJsonApiPath(
+        "taxonomy_term",
         args.vocabulary,
-        args.sortBy,
-        args.limit,
-        args.featured,
-        args.limiter,
-        graphqlFields(info)
+        addIncludeFields ? includedFields : null,
+        args.filter,
+        args.sort,
+        pagination
+      );
+
+      const response = await dataSources.drupalJsonApi.getCollectionResource(
+        apiPath
       );
       return response.data;
     },
-    term: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getTermById(
-        args.id,
-        args.vocabulary
+    term: async (_, args, { dataSources }) => {
+      const addIncludeFields =
+        args.vocabulary === "channel" || args.vocabulary === "resource_topic"
+          ? true
+          : false;
+
+      const apiPath = getIndividualResourceJsonApiPath(
+        "taxonomy_term",
+        args.vocabulary,
+        addIncludeFields ? includedFields : null,
+        args.id
       );
-      return response.data;
+      const response = await dataSources.drupalJsonApi.getIndividualResource(
+        apiPath
+      );
+      return response;
     },
   },
   Term: {

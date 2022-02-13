@@ -14,15 +14,25 @@ interface ResourceTopicsProps {
   id: string;
   title: string;
   limit?: number;
-  sortBy?: string;
+  sort?: string;
   featured?: boolean;
 }
 
 const RESOURCE_TOPICS_QUERY = gql`
   ${TERM_BASE_FIELDS_FRAGMENT}
   ${IMAGE_FIELDS_FRAGMENT}
-  query ResourceTopicsQuery($vocabulary: String, $sortBy: String, $limit: Int) {
-    allTermsByVocab(vocabulary: $vocabulary, sortBy: $sortBy, limit: $limit) {
+  query ResourceTopicsQuery(
+    $vocabulary: String
+    $sort: Sort
+    $limit: Int
+    $filter: TermQueryFilter
+  ) {
+    allTermsByVocab(
+      vocabulary: $vocabulary
+      sort: $sort
+      limit: $limit
+      filter: $filter
+    ) {
       ...TermBaseFields
       ...ImageFields
       slug
@@ -34,16 +44,26 @@ function ResourceTopics({
   id,
   title,
   limit,
-  sortBy,
+  sort,
   featured,
 }: ResourceTopicsProps) {
+  let queryFilters: any = {};
+  if (featured) {
+    queryFilters["featured"] = {
+      fieldName: "field_bs_featured",
+      operator: "=",
+      value: featured,
+    };
+  }
+
   // Query for data.
   const { loading, error, data } = useQuery(RESOURCE_TOPICS_QUERY, {
     variables: {
       vocabulary: "resource_topic",
-      sortBy: sortBy ? sortBy : null,
+      sort: sort ? sort : null,
       limit: limit ? limit : null,
       featured: featured ? featured : null,
+      filter: queryFilters,
     },
   });
 

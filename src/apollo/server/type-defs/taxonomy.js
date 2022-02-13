@@ -10,13 +10,17 @@ export const typeDefs = gql`
     slug: String
   }
 
+  input TermQueryFilter {
+    featured: QueryFilterItemBoolean
+    limiter: QueryFilterItemString
+  }
+
   extend type Query {
     allTermsByVocab(
       vocabulary: String
-      sortBy: String
       limit: Int
-      featured: Boolean
-      limiter: String
+      filter: TermQueryFilter
+      sort: Sort
     ): [Term]!
     term(id: String, vocabulary: String): Term
   }

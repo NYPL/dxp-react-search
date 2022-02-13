@@ -28,8 +28,8 @@ function OnlineResources() {
           <ResourceTopics
             id="featured-resources"
             title="Featured Resources"
-            sortBy="weight"
             limit={30}
+            sort={{ field: "weight", direction: "ASC" }}
           />
           <MostPopularResources id="most-popular" title="Most Popular" />
           <AlphabetNav

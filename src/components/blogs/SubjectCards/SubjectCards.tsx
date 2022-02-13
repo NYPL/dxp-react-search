@@ -21,17 +21,15 @@ const SUBJECTS_QUERY = gql`
   ${TERM_BASE_FIELDS_FRAGMENT}
   query ChannelsQuery(
     $vocabulary: String
-    $sortBy: String
+    $sort: Sort
     $limit: Int
-    $featured: Boolean
-    $limiter: String
+    $filter: TermQueryFilter
   ) {
     allTermsByVocab(
       vocabulary: $vocabulary
-      sortBy: $sortBy
+      sort: $sort
       limit: $limit
-      featured: $featured
-      limiter: $limiter
+      filter: $filter
     ) {
       ...TermBaseFields
     }
@@ -44,8 +42,23 @@ function SubjectCards() {
     variables: {
       vocabulary: "subject",
       limiter: "blog",
-      featured: true,
       limit: 6,
+      filter: {
+        featured: {
+          fieldName: "field_bs_featured",
+          operator: "=",
+          value: true,
+        },
+        limiter: {
+          fieldName: "field_lts_content_type",
+          operator: "=",
+          value: "blog",
+        },
+      },
+      sort: {
+        field: "name",
+        direction: "ASC",
+      },
     },
   });
 

@@ -154,54 +154,6 @@ class DrupalApi extends RESTDataSource {
   }
 
   /* ---------- JSON:API ---------- */
-  // @TODO update to use apiPath / util func approach.
-  async getAllTermsByVocabulary(
-    vocab,
-    sortBy,
-    limit,
-    featured,
-    limiter,
-    queryFields
-  ) {
-    let apiPath = `/jsonapi/taxonomy_term/${vocab}?jsonapi_include=1`;
-    // Temp workaround for only adding include if image is in gql query.
-    if ("image" in queryFields) {
-      apiPath = `${apiPath}&include=field_ers_image.field_media_image`;
-    }
-    if (featured) {
-      apiPath = `${apiPath}&filter[field_bs_featured]=1`;
-    }
-    if (sortBy) {
-      apiPath = `${apiPath}&sort=${sortBy}`;
-    }
-    if (limit) {
-      apiPath = `${apiPath}&page[offset]=0&page[limit]=${limit}`;
-    }
-    if (limiter) {
-      apiPath = `${apiPath}&filter[field_lts_content_type]=${limiter}`;
-    }
-
-    const response = await this.get(apiPath);
-
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
-    }
-  }
-
-  // @TODO update to use apiPath / util func approach.
-  async getTermById(id, vocabulary) {
-    // @TODO this won't always have an image?
-    const response = await this.get(
-      `/jsonapi/taxonomy_term/${vocabulary}/${id}?include=field_ers_image.field_media_image&jsonapi_include=1`
-    );
-    if ("data" in response) {
-      return response;
-    } else {
-      return [];
-    }
-  }
 
   // Get a colletion of filters by group id (entity type): either node (content type) or taxonomy (vocab).
   // /jsonapi/taxonomy_term/subject?fields[taxonomy_term--subject]=name,drupal_internal__tid,vid,uuid,parent&page[limit]=200&jsonapi_include=1

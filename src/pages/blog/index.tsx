@@ -4,6 +4,7 @@ import { withApollo } from "../../apollo/client/withApollo";
 // Components
 import PageContainer from "../../components/blogs/layouts/PageContainer";
 import ChannelsCards from "../../components/blogs/ChannelsCards";
+import SubjectCards from "../../components/blogs/SubjectCards";
 import BlogsContainer from "../../components/blogs/BlogsContainer";
 // Content
 import blogsContent from "../../__content/blogs";
@@ -36,9 +37,10 @@ function BlogsMainPage() {
             slug={explore_by_channel.slug}
             slugLabel={explore_by_channel.slugLabel}
             limit={6}
-            sortBy="weight"
+            sort={{ field: "weight", direction: "ASC" }}
             featured={true}
           />
+          <SubjectCards />
         </>
       }
     />

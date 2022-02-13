@@ -2,9 +2,8 @@ import React from "react";
 // Next
 import { useRouter } from "next/router";
 // Apollo
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { withApollo } from "./../../../../../apollo/client/withApollo";
-import { TermByIdQuery as RESOURCE_TOPIC_BY_ID_QUERY } from "./../../../../../apollo/client/queries/TermById.gql";
 // Redux
 import { withRedux } from "./../../../../../redux/withRedux";
 // Components
@@ -20,6 +19,21 @@ const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import onlineResourcesContent from "./../../../../../__content/onlineResources";
 // Hooks
 import useDecoupledRouter from "../../../../../hooks/useDecoupledRouter";
+
+const RESOURCE_TOPIC_BY_ID_QUERY = gql`
+  query TermByIdQuery($id: String, $vocabulary: String) {
+    term(id: $id, vocabulary: $vocabulary) {
+      id
+      tid
+      title
+      description
+      slug
+      image {
+        uri
+      }
+    }
+  }
+`;
 
 function FeaturedResourceTopicSlug() {
   const router = useRouter();

@@ -28,6 +28,12 @@ export const typeDefs = gql`
     value: Boolean
   }
 
+  input QueryFilterItemString {
+    fieldName: String!
+    operator: String!
+    value: String!
+  }
+
   type Image {
     id: ID!
     alt: String

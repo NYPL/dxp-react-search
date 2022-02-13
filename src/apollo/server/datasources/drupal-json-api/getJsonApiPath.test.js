@@ -287,6 +287,7 @@ describe("getJsonApiPath", () => {
 
   // Taxonomy
   test("Get featured channels, limit 6, sorted by name asc", async () => {
+    const includedFields = ["field_ers_image.field_media_image"];
     const args = {
       filter: {
         featured: {
@@ -299,7 +300,7 @@ describe("getJsonApiPath", () => {
       pageNumber: 1,
     };
 
-    const sortBy = {
+    const sort = {
       field: "name",
       direction: "ASC",
     };
@@ -312,14 +313,14 @@ describe("getJsonApiPath", () => {
     const apiPath = getCollectionResourceJsonApiPath(
       "taxonomy_term",
       "channel",
-      null,
+      includedFields,
       args.filter,
-      sortBy,
+      sort,
       pagination
     );
 
     expect(apiPath).toEqual(
-      "/jsonapi/taxonomy_term/channel?filter[field_bs_featured]=1&page[offset]=0&page[limit]=6&sort=name&jsonapi_include=1"
+      "/jsonapi/taxonomy_term/channel?filter[field_bs_featured]=1&include=field_ers_image.field_media_image&page[offset]=0&page[limit]=6&sort=name&jsonapi_include=1"
     );
   });
 

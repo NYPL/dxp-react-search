@@ -30,7 +30,7 @@ function BlogsChannelsPage() {
           // @ts-ignore
           slug={null}
           limit={30}
-          sortBy="weight"
+          sort={{ field: "weight", direction: "ASC" }}
         />
       }
     />

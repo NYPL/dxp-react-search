@@ -21,7 +21,7 @@ interface ChannelsCardsProps {
   slug: string;
   slugLabel?: string;
   limit?: number;
-  sortBy?: string;
+  sort?: any;
   featured?: boolean;
 }
 
@@ -37,8 +37,18 @@ interface ChannelCardItem {
 const CHANNELS_QUERY = gql`
   ${TERM_BASE_FIELDS_FRAGMENT}
   ${IMAGE_FIELDS_FRAGMENT}
-  query ChannelsQuery($vocabulary: String, $sortBy: String, $limit: Int) {
-    allTermsByVocab(vocabulary: $vocabulary, sortBy: $sortBy, limit: $limit) {
+  query ChannelsQuery(
+    $vocabulary: String
+    $sort: Sort
+    $limit: Int
+    $filter: TermQueryFilter
+  ) {
+    allTermsByVocab(
+      vocabulary: $vocabulary
+      sort: $sort
+      limit: $limit
+      filter: $filter
+    ) {
       ...TermBaseFields
       ...ImageFields
       slug
@@ -53,16 +63,26 @@ function ChannelsCards({
   slug,
   slugLabel,
   limit,
-  sortBy,
+  sort,
   featured,
 }: ChannelsCardsProps) {
+  let queryFilters: any = {};
+  if (featured) {
+    queryFilters["featured"] = {
+      fieldName: "field_bs_featured",
+      operator: "=",
+      value: featured,
+    };
+  }
+
   // Query for data.
   const { loading, error, data } = useQuery(CHANNELS_QUERY, {
     variables: {
       vocabulary: "channel",
-      sortBy: sortBy ? sortBy : null,
+      sort: sort ? sort : null,
       limit: limit ? limit : null,
       featured: featured ? featured : null,
+      filter: queryFilters,
     },
   });
 
