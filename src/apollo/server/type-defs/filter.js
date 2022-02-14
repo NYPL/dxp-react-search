@@ -15,8 +15,19 @@ export const typeDefs = gql`
     drupalInternalId: String
   }
 
+  input FilterQueryFilter {
+    limiter: QueryFilterItemString
+  }
+
   extend type Query {
-    allFiltersByGroupId(id: String, type: String, limiter: String): [FilterItem]
+    allFiltersByGroupId(
+      id: String
+      type: String
+      limit: Int
+      pageNumber: Int
+      filter: FilterQueryFilter
+      sort: Sort
+    ): [FilterItem]
     allFiltersByGroupIdLegacy(
       id: String
       type: String

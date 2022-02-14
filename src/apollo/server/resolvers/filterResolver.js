@@ -1,14 +1,40 @@
 // Utils
 import setNestedFilterItems from "./../../../utils/setNestedFilterItems";
 import setNestedFilterItemsLegacy from "./../../../utils/setNestedFilterItemsLegacy";
+import { getCollectionResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
 
 const filterResolver = {
   Query: {
-    allFiltersByGroupId: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getAllFiltersByGroupId(
-        args.id,
-        args.type,
-        args.limiter
+    allFiltersByGroupId: async (_, args, { dataSources }) => {
+      const pagination = {
+        limit: args.limit,
+        pageNumber: args.pageNumber,
+      };
+
+      let entityType;
+      let addFields = [];
+      if (args.type === "taxonomy") {
+        entityType = "taxonomy_term";
+        addFields = ["name", "drupal_internal__tid", "vid", "uuid", "parent"];
+      }
+      if (args.type === "content") {
+        entityType = "node";
+        addFields = ["title", "drupal_internal__nid"];
+      }
+      const bundle = args.id;
+
+      const apiPath = getCollectionResourceJsonApiPath(
+        entityType,
+        bundle,
+        null,
+        args.filter,
+        args.sort,
+        pagination,
+        addFields
+      );
+
+      const response = await dataSources.drupalJsonApi.getCollectionResource(
+        apiPath
       );
 
       if (args.type === "content") {

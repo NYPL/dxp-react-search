@@ -84,6 +84,7 @@ function SearchResultsDetails() {
     return (
       <Box role="alert" marginBottom={["xs", "xs", "s"]}>
         {renderMessage()}
+        &nbsp;
         <Button
           id="button"
           buttonType={ButtonTypes.Link}

@@ -26,7 +26,8 @@ export function getCollectionResourceJsonApiPath(
   includeFields?: string[],
   filter?: FilterItem,
   sort?: Sort,
-  pagination?: PaginationInfo
+  pagination?: PaginationInfo,
+  addFields?: string[]
 ): string {
   let apiParams = new DrupalJsonApiParams();
   // Add jsonapi include, to simplify json output.
@@ -90,9 +91,14 @@ export function getCollectionResourceJsonApiPath(
     }
   }
 
+  // Add fields - name is misleading, if added, this will limit the fields returned.
+  if (Array.isArray(addFields)) {
+    const resourceType = `${entityType}--${bundle}`;
+    apiParams.addFields(resourceType, addFields);
+  }
+
   const urlencodedQueryString = apiParams.getQueryString({ encode: false });
-  let apiPath = `/jsonapi/${entityType}/${bundle}?${urlencodedQueryString}`;
-  return apiPath;
+  return `/jsonapi/${entityType}/${bundle}?${urlencodedQueryString}`;
 }
 
 export function getIndividualResourceJsonApiPath(
@@ -100,7 +106,8 @@ export function getIndividualResourceJsonApiPath(
   bundle: string,
   includeFields: string[],
   uuid: string,
-  revisionId?: string
+  revisionId?: string,
+  addFields?: string[]
 ): string {
   let apiParams = new DrupalJsonApiParams();
   // @TODO swap out for jsona, handle in Node?
@@ -112,6 +119,12 @@ export function getIndividualResourceJsonApiPath(
 
   if (revisionId) {
     apiParams.addCustomParam({ resourceVersion: `id:${revisionId}` });
+  }
+
+  // Add fields - name is misleading, if added, this will limit the fields returned.
+  if (Array.isArray(addFields)) {
+    const resourceType = `${entityType}--${bundle}`;
+    apiParams.addFields(resourceType, addFields);
   }
 
   const urlencodedQueryString = apiParams.getQueryString({ encode: false });

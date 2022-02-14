@@ -10,10 +10,20 @@ const FILTERS_QUERY = gql`
   query FiltersQuery(
     $id: String
     $type: String
-    $limiter: String
+    $limit: Int
+    $pageNumber: Int
+    $filter: FilterQueryFilter
+    $sort: Sort
     $includeChildren: Boolean!
   ) {
-    allFiltersByGroupId(id: $id, type: $type, limiter: $limiter) {
+    allFiltersByGroupId(
+      id: $id
+      type: $type
+      limit: $limit
+      pageNumber: $pageNumber
+      filter: $filter
+      sort: $sort
+    ) {
       id
       name
       children @include(if: $includeChildren) {
@@ -71,17 +81,37 @@ function MultiSelect({
   includeChildren = true,
 }: MutliSelectProps) {
   let FiltersQueryAll = FILTERS_QUERY;
+  let variables = {
+    id: id,
+    type: type,
+    limit: 200,
+    pageNumber: 1,
+    filter: {
+      limiter: {
+        fieldName: "field_lts_content_type",
+        operator: "=",
+        value: limiter,
+      },
+    },
+    sort: {
+      field: type === "content" ? "title" : "name",
+      direction: "ASC",
+    },
+    includeChildren: includeChildren,
+  };
   if (legacy) {
     FiltersQueryAll = FILTERS_QUERY_LEGACY;
+    variables = {
+      id: id,
+      type: type,
+      // @ts-ignore
+      limiter: limiter,
+      includeChildren: includeChildren,
+    };
   }
 
   const { loading, error, data } = useQuery(FiltersQueryAll, {
-    variables: {
-      id: id,
-      type: type,
-      limiter: limiter ? limiter : null,
-      includeChildren: includeChildren,
-    },
+    variables: variables,
   });
 
   if (error) {

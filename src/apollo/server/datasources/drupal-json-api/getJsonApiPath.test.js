@@ -400,4 +400,43 @@ describe("getJsonApiPath", () => {
       "/jsonapi/taxonomy_term/subject?page[offset]=0&page[limit]=50&sort=-name&jsonapi_include=1"
     );
   });
+
+  // Filters
+  test("Get subject taxonomy terms with sparse fields, limited by blog", async () => {
+    const args = {
+      limit: 200,
+      pageNumber: 1,
+      filter: {
+        limiter: {
+          fieldName: "field_lts_content_type",
+          operator: "=",
+          value: "blog",
+        },
+      },
+      sort: {
+        field: "name",
+        direction: "ASC",
+      },
+      addFields: ["name", "drupal_internal__tid", "vid", "uuid", "parent"],
+    };
+
+    const pagination = {
+      limit: args.limit,
+      pageNumber: args.pageNumber,
+    };
+
+    const apiPath = getCollectionResourceJsonApiPath(
+      "taxonomy_term",
+      "subject",
+      null,
+      args.filter,
+      args.sort,
+      pagination,
+      args.addFields
+    );
+
+    expect(apiPath).toEqual(
+      "/jsonapi/taxonomy_term/subject?filter[field_lts_content_type]=blog&page[offset]=0&page[limit]=200&sort=name&fields[taxonomy_term--subject]=name,drupal_internal__tid,vid,uuid,parent&jsonapi_include=1"
+    );
+  });
 });
