@@ -27,6 +27,7 @@ describe("Location Finder", () => {
       textboxName: /search locations/i,
       resultsId: "#locations-list ul",
       autoSuggest: true,
+      autoSuggestDownArrowCount: 2,
     })
       .first()
       .findByRole("heading", {

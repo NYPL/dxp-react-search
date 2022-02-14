@@ -37,17 +37,18 @@ describe("Articles & Databases", () => {
   });
 
   it("Advanced search using autosuggest.", () => {
-    const queryParams = "?q=Gale+Directory+Library&page=1";
+    const queryParams = "?q=American+Memory&page=1";
     const pathName = "/research/collections/articles-databases/search";
 
-    search("gale", {
+    search("american memory", {
       textboxName: /search articles and databases/i,
       resultsId: "#search-results",
       autoSuggest: true,
+      autoSuggestDownArrowCount: 1,
     })
       // Get the first result.
       .first()
-      .findByRole("link", { name: /gale directory library/i })
+      .findByRole("link", { name: /american memory/i })
       .should("exist")
       // Check that the url has been updated correctly.
       .location()
@@ -75,6 +76,7 @@ describe("Articles & Databases", () => {
       textboxName: /search articles and databases/i,
       resultsId: "#search-results",
       autoSuggest: true,
+      autoSuggestDownArrowCount: 2,
     })
       // Get the first result.
       .first()

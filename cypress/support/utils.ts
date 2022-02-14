@@ -2,14 +2,21 @@ interface SearchOptions {
   textboxName: string;
   resultsId: string;
   autoSuggest: boolean;
+  autoSuggestDownArrowCount: number;
 }
 
 export function search(term: string, options: SearchOptions) {
-  const { textboxName, resultsId, autoSuggest } = options;
+  const { textboxName, resultsId, autoSuggest, autoSuggestDownArrowCount } =
+    options;
 
   let typedString = term;
-  if (autoSuggest) {
-    typedString = `${term}{downarrow}{downarrow}`;
+  if (autoSuggest && autoSuggestDownArrowCount) {
+    let downArrowsString = "";
+    for (var i = 0; i < autoSuggestDownArrowCount; i++) {
+      downArrowsString += "{downarrow}";
+    }
+
+    typedString = `${term}${downArrowsString}`;
   }
 
   return cy
