@@ -1,6 +1,6 @@
-# DXP React Search
+# DXP Scout
 
-React app build for search interfaces on www.nypl.org.
+React app build for www.nypl.org.
 
 ## Installation (Local)
 
@@ -8,10 +8,12 @@ React app build for search interfaces on www.nypl.org.
 - Run `npm install`
 
 ## Setup Local .env file
+
 - Copy `.env.example` to `.env`
 - Update the value for `NEXT_PUBLIC_GOOGLE_MAPS_API` to the NYPL Google Maps/Geocode API Key
 
 ## Start development server
+
 ```
 npm run dev
 ```
