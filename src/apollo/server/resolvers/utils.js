@@ -177,7 +177,12 @@ export function drupalParagraphsResolver(field, typesInQuery) {
         // Youtube
         // Ex. oEmbed req: https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=385eTo76OzA
         if (
-          item.field_ers_media_item.field_media_oembed_video.includes("youtube")
+          item.field_ers_media_item.field_media_oembed_video.includes(
+            "youtube"
+          ) ||
+          item.field_ers_media_item.field_media_oembed_video.includes(
+            "youtu.be"
+          )
         ) {
           oembedBaseUrl = "https://www.youtube.com/oembed?url";
         }
@@ -354,6 +359,7 @@ export function drupalParagraphsResolver(field, typesInQuery) {
 }
 
 async function fetchOembedData(oembedBaseUrl, embedCode) {
+  console.log(oembedBaseUrl);
   try {
     const response = await fetch(`${oembedBaseUrl}=${embedCode}`);
     const json = await response.json();
