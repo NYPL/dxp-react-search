@@ -359,7 +359,6 @@ export function drupalParagraphsResolver(field, typesInQuery) {
 }
 
 async function fetchOembedData(oembedBaseUrl, embedCode) {
-  console.log(oembedBaseUrl);
   try {
     const response = await fetch(`${oembedBaseUrl}=${embedCode}`);
     const json = await response.json();
