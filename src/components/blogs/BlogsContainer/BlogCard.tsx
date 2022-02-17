@@ -46,12 +46,14 @@ function BlogCard({ item }: BlogCardProps) {
             By {item.byline} | {item.date}
           </Box>
           {item.locations && (
-            <HStack>
+            <HStack wrap="wrap" spacing="0" align="left">
               {item.locations.map((location: Location) => {
                 return (
-                  <Link key={location.slug} href={location.slug}>
-                    {location.name}
-                  </Link>
+                  <Box pr="xs">
+                    <Link key={location.slug} href={location.slug}>
+                      {location.name}
+                    </Link>
+                  </Box>
                 );
               })}
             </HStack>

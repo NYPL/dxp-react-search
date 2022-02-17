@@ -24,9 +24,15 @@ function BlogPost({ blog }: BlogPostProps) {
         </Box>
         <Box mb="xs">{blog.date}</Box>
         {blog.locations && (
-          <HStack>
+          <HStack wrap="wrap" spacing="0" align="left">
             {blog.locations.map((location: any) => {
-              return <Link href={location.slug}>{location.name}</Link>;
+              return (
+                <Box pr="xs">
+                  <Link key={location.slug} href={location.slug}>
+                    {location.name}
+                  </Link>
+                </Box>
+              );
             })}
           </HStack>
         )}

@@ -145,6 +145,22 @@ function BlogsContainer({
   function onPageChange(pageIndex: number) {
     router.push({
       query: {
+        // @TODO do this better.
+        ...(router.query.channel && {
+          alpha: router.query.channel,
+        }),
+        ...(router.query.subject && {
+          subject: router.query.subject,
+        }),
+        ...(router.query.library && {
+          library: router.query.library,
+        }),
+        ...(router.query.division && {
+          division: router.query.division,
+        }),
+        ...(router.query.audience_by_age && {
+          audience_by_age: router.query.audience_by_age,
+        }),
         page: pageIndex,
       },
     });

@@ -75,12 +75,10 @@ function SearchResults({
         ? (router.query.subject as string).split(" ")
         : null,
       audience_by_age: router.query.audience_by_age
-        ? //? router.query.audience_by_age.split(" ")
-          (router.query.audience_by_age as string).split(" ")
+        ? (router.query.audience_by_age as string).split(" ")
         : null,
       availability: router.query.availability
-        ? //? router.query.availability.split(" ")
-          (router.query.availability as string).split(" ")
+        ? (router.query.availability as string).split(" ")
         : null,
       limit: SEARCH_RESULTS_LIMIT,
       pageNumber: currentPage,

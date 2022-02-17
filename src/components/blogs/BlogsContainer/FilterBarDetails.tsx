@@ -1,7 +1,6 @@
 import React from "react";
 // Next
 import { useRouter } from "next/router";
-// Redux
 // Components
 import { default as SharedSearchResultsDetails } from "./../../shared/SearchResultsDetails";
 // Utils
@@ -32,12 +31,11 @@ function FilterBarDetails({
 
   function renderMessage() {
     const startIndex = 0;
-
     // Start item number.
     let startItem;
     if (currentPage > 1) {
       if (itemsOnPage < limit) {
-        startItem = totalItems - itemsOnPage;
+        startItem = startItem = totalItems - itemsOnPage + 1;
       } else {
         startItem = (currentPage - 1) * itemsOnPage + 1;
       }
@@ -45,22 +43,22 @@ function FilterBarDetails({
       // Page 1 start item is 1.
       startItem = startIndex + 1;
     }
-
     // End item number.
     let endItem = startItem - 1 + itemsOnPage;
     if (endItem > totalItems) {
       endItem = totalItems;
     }
-
-    const message = `Showing ${startItem}-${endItem} of ${totalItems} results.`;
-
-    return <>{message}</>;
+    // Message.
+    let message = "No results found.";
+    if (itemsOnPage !== 0) {
+      message = `${startItem}-${endItem} of ${totalItems} results.`;
+    }
+    return message;
   }
 
   return (
     <SharedSearchResultsDetails
       onClick={onClearSearchTerms}
-      // @ts-ignore
       message={renderMessage()}
       clearMessage={"Clear all search terms."}
     />
