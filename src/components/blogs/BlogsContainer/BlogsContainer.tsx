@@ -10,7 +10,7 @@ import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import BlogCard from "./BlogCard";
 import FilterBarDetails from "./FilterBarDetails";
 // Types
-import { ImageType } from "../../shared/Image/ImageTypes";
+import { BlogCardItem } from "./BlogCardTypes";
 // Next
 import { useRouter } from "next/router";
 
@@ -40,7 +40,7 @@ const BLOGS_QUERY = gql`
   }
 `;
 
-interface BlogCardsProps {
+interface BlogsContainerProps {
   id: string;
   title?: string;
   description?: string;
@@ -50,25 +50,6 @@ interface BlogCardsProps {
   pageNumber?: number;
   sort?: any;
   featured?: boolean;
-}
-
-// @TODO this should be a shared type,
-// You should also stop using slug and use url? or urlPath?
-interface BlogCardItem {
-  id: string;
-  title: string;
-  description: string;
-  slug: string;
-  byline: string;
-  date: string;
-  locations: Location[];
-  image: ImageType;
-}
-
-interface Location {
-  id: string;
-  name: string;
-  slug: string;
 }
 
 function BlogsContainer({
@@ -81,7 +62,7 @@ function BlogsContainer({
   pageNumber,
   sort,
   featured,
-}: BlogCardsProps) {
+}: BlogsContainerProps) {
   const router = useRouter();
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
@@ -227,7 +208,6 @@ function BlogsContainer({
       </CardSet>
       {!featured && (
         <Pagination
-          // @TODO Confirm that this is working.
           initialPage={currentPage}
           pageCount={data.allBlogs.pageInfo.pageCount}
           onPageChange={onPageChange}

@@ -2,52 +2,53 @@ import React from "react";
 // Components
 import {
   Box,
-  ImageSizes,
-  CardLayouts,
-  Link,
+  Heading,
+  HeadingLevels,
   HStack,
+  Link,
 } from "@nypl/design-system-react-components";
-import Card from "../../shared/Card";
+import NextDsLink from "../../shared/Link/NextDsLink";
 import Image from "../../shared/Image";
 // Types
-import { ImageType } from "../../shared/Image/ImageTypes";
+import { BlogCardItem, BlogLocation } from "./BlogCardTypes";
 
 interface BlogCardProps {
   item: BlogCardItem;
 }
 
-// @TODO this should be a shared type,
-// You should also stop using slug and use url? or urlPath?
-interface BlogCardItem {
-  id: string;
-  title: string;
-  description: string;
-  slug: string;
-  byline: string;
-  date: string;
-  locations: Location[];
-  image: ImageType;
-}
-
-interface Location {
-  id: string;
-  name: string;
-  slug: string;
-}
-
 function BlogCard({ item }: BlogCardProps) {
+  const { id, title, description, slug, byline, date, locations, image } = item;
   return (
-    <Card
-      id={item.id}
-      title={item.title}
-      subHeading={
+    <Box id={id} display={{ lg: "flex" }}>
+      <Box
+        flex={{ lg: "0 0 360px" }}
+        mr={{ lg: "m" }}
+        mb={{ base: "s", lg: 0 }}
+      >
+        <Image
+          id={image.id}
+          alt={image.alt}
+          uri={image.uri}
+          useTransformation={true}
+          transformations={image.transformations}
+          transformationLabel={"2_1_960"}
+          layout="responsive"
+          width={900}
+          height={450}
+          quality={90}
+        />
+      </Box>
+      <Box flexFlow={{ lg: "row nowrap" }}>
+        <Heading level={HeadingLevels.Three}>
+          {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
+        </Heading>
         <Box pb={5}>
           <Box>
-            By {item.byline} | {item.date}
+            By {byline} | {date}
           </Box>
-          {item.locations && (
+          {locations && (
             <HStack wrap="wrap" spacing="0" align="left">
-              {item.locations.map((location: Location) => {
+              {locations.map((location: BlogLocation) => {
                 return (
                   <Box pr="xs">
                     <Link key={location.slug} href={location.slug}>
@@ -59,27 +60,13 @@ function BlogCard({ item }: BlogCardProps) {
             </HStack>
           )}
         </Box>
-      }
-      description={item.description}
-      url={item.slug}
-      layout={CardLayouts.Row}
-      center
-      image={
-        <Image
-          id={item.image.id}
-          alt={item.image.alt}
-          uri={item.image.uri}
-          useTransformation={true}
-          transformations={item.image.transformations}
-          transformationLabel={"2_1_960"}
-          layout="responsive"
-          width={900}
-          height={450}
-          quality={90}
+        <Box
+          dangerouslySetInnerHTML={{
+            __html: description,
+          }}
         />
-      }
-      imageSize={ImageSizes.Large}
-    />
+      </Box>
+    </Box>
   );
 }
 
