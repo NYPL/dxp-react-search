@@ -60,7 +60,9 @@ export const BLOG_FIELDS_FRAGMENT = gql`
         type
         heading
         description
-        html
+        provider
+        embedCode
+        oembedUrl
       }
       ... on SocialEmbed {
         id
@@ -76,7 +78,9 @@ export const BLOG_FIELDS_FRAGMENT = gql`
       ... on AudioEmbed {
         id
         type
-        html
+        provider
+        embedCode
+        oembedUrl
       }
       ... on ImageComponent {
         id

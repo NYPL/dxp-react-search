@@ -4,37 +4,52 @@ import {
   Heading,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
+import useOembedApi from "./../../../hooks/useOembedApi";
 
 interface AudioEmbedProps {
   id: string;
   type: string;
   heading?: string;
   description?: string;
-  html: string;
+  embedCode: string;
+  oembedUrl: string;
+  provider: string;
 }
 
-function AudioEmbed({ id, type, heading, description, html }: AudioEmbedProps) {
+function AudioEmbed({
+  id,
+  type,
+  heading,
+  description,
+  embedCode,
+  oembedUrl,
+  provider,
+}: AudioEmbedProps) {
+  const html = useOembedApi(oembedUrl, embedCode);
+
   return (
     <Box
-      id={`${type}-${id}`}
-      maxWidth={[null, null, "800px"]}
-      w={[null, null, "100%"]}
-      px={[null, null, "xxl"]}
+      id={`${type}-${provider}-${id}`}
+      maxWidth={{ lg: "800px" }}
+      w={{ lg: "100%" }}
+      px={{ lg: "xxl" }}
       my="0"
       mx="auto"
       mb="xl"
     >
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
-      <Box
-        sx={{
-          "& iframe": {
-            width: "100%",
-            maxWidth: "100%",
-          },
-        }}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      {html && (
+        <Box
+          sx={{
+            "& iframe": {
+              width: "100%",
+              maxWidth: "100%",
+            },
+          }}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      )}
     </Box>
   );
 }

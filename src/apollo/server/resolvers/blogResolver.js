@@ -1,11 +1,9 @@
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
-import {
-  drupalParagraphsResolver,
-  resolveParagraphTypes,
-  imageResolver,
-} from "./utils";
+import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
+import resolveParagraphTypes from "./utils/resolveParagraphTypes";
+import { resolveImage } from "./utils/resolveImage";
 import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
@@ -94,7 +92,7 @@ const blogResolver = {
     date: (blog) => formatDate(blog.created),
     image: (blog) =>
       blog.field_ers_media_image.data !== null
-        ? imageResolver(blog.field_ers_media_image)
+        ? resolveImage(blog.field_ers_media_image)
         : null,
     locations: (blog) =>
       blog.field_erm_location.data?.length === 0
@@ -106,7 +104,7 @@ const blogResolver = {
       const mainContent =
         blog.field_main_content.data?.length === 0
           ? null
-          : drupalParagraphsResolver(blog.field_main_content, typesInQuery);
+          : resolveDrupalParagraphs(blog.field_main_content, typesInQuery);
       return mainContent;
     },
   },

@@ -70,13 +70,17 @@ export const typeDefs = gql`
     type: String!
     heading: String
     description: String
-    html: String!
+    provider: String!
+    embedCode: String!
+    oembedUrl: String!
   }
 
   type AudioEmbed {
     id: ID!
     type: String!
-    html: String!
+    provider: String!
+    embedCode: String!
+    oembedUrl: String!
   }
 
   type SocialEmbed {

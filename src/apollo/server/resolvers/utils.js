@@ -76,6 +76,7 @@ export async function imageResolver(image) {
 }
 
 export function drupalParagraphsResolver(field, typesInQuery) {
+  console.log(typesInQuery);
   // Drupal json:api will return all paragraphs for the field.
   // So we first reduce this array of objects only to those paragraphs
   // that we're requested by the gql query.
