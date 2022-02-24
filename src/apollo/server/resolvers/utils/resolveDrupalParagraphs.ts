@@ -265,7 +265,7 @@ export default function resolveDrupalParagraphs(
           id: item.id,
           type: paragraphTypeName,
           heading: item.field_ts_heading,
-          description: item.field_tfls_description.processed,
+          description: item.field_tfls_description?.processed,
           items: cardItems,
         };
         break;
