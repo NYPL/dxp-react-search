@@ -1,4 +1,4 @@
-import { JsonApiResourceObject, ImageTransformation } from "./types";
+import { JsonApiResourceObject } from "./types";
 import { resolveImage } from "./resolveImage";
 
 type ResolvedParagraph = {

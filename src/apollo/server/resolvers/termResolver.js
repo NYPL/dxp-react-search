@@ -1,8 +1,8 @@
-import { imageResolver } from "./utils";
 import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
 } from "./../datasources/drupal-json-api/getJsonApiPath";
+import { resolveImage } from "./utils/resolveImage";
 
 const includedFields = ["field_ers_image.field_media_image"];
 
@@ -57,7 +57,7 @@ const termResolver = {
     description: (term) => term.description?.processed,
     image: (term) =>
       term.field_ers_image.data !== null
-        ? imageResolver(term.field_ers_image)
+        ? resolveImage(term.field_ers_image)
         : null,
     slug: (term) => term.path.alias,
   },

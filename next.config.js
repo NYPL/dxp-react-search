@@ -17,22 +17,6 @@ const nextConfig = {
     }
     return [];
   },
-  // Redirect blogs paths to / for now.
-  /*async redirects() {
-    return [
-      {
-        source: "/blogs",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/blogs/:path*",
-        destination: "/",
-        permanent: true,
-      },
-    ];
-  },
-  */
   webpack(config, options) {
     const { dir } = options;
     // Allows import of .gql files inside components
@@ -56,18 +40,26 @@ const nextConfig = {
       path: `${ASSET_PREFIX}/_next/image`,
     }),
     domains: [
-      "qa-cdn-d8-2.nypl.org",
-      "sandbox-d8.nypl.org",
-      "qa-d8.nypl.org",
-      "treasures-d8.nypl.org",
-      "nyplorg-sandbox.s3.amazonaws.com",
+      // Local
       "localhost",
       "nypl-d8.lndo.site",
-      "images.nypl.org",
+      // Sandbox
+      "sandbox-d8.nypl.org",
+      "nyplorg-sandbox.s3.amazonaws.com",
+      "treasures-d8.nypl.org",
+      // QA
+      "qa-cdn-d8-2.nypl.org",
+      "qa-d8.nypl.org",
+      // PROD
       "cdn-d8.nypl.org",
       "d8.nypl.org",
-      // For catalog list component
+      // Digital collection image
+      "images.nypl.org",
+      // Remote catalog image
+      "images.btol.com",
       "contentcafecloud.baker-taylor.com",
+      "img1.od-cdn.com",
+      "ic.od-cdn.com",
     ],
   },
 };

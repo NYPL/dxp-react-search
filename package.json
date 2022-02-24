@@ -40,7 +40,6 @@
     "next": "10.0.5",
     "next-compose-plugins": "^2.2.1",
     "prettier": "^2.3.2",
-    "probe-image-size": "^7.2.2",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-autosuggest": "^10.0.2",

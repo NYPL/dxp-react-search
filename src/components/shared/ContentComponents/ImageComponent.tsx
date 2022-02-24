@@ -32,6 +32,11 @@ function ImageComponent({
   credit,
   link,
 }: ImageComponentProps) {
+  // Return null for component if image is null, most likely caused by bad data, or missing width and height.
+  if (image === null) {
+    return null;
+  }
+
   return (
     <Box id={`${type}-${id}`} mb="xl">
       <WithLink link={link}>

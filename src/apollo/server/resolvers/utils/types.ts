@@ -1,20 +1,21 @@
 export interface JsonApiResourceObject {
-  [index: string]: string | JsonApiAttributes;
+  [index: string]: JsonSerializable;
 }
 
-export interface JsonApiAttributes {
-  [index: string]:
-    | string
-    | number
-    | boolean
-    | string[]
-    | JsonApiResourceObject
-    | undefined
-    | null;
-}
+export type JsonSerializable =
+  | string
+  | number
+  | boolean
+  | null
+  | JsonSerializable[]
+  | { [key: string]: JsonSerializable };
 
 export interface ImageTransformation {
   id: string;
   label: string;
   uri: string;
 }
+
+export type ResolvedParagraph = {
+  [index: string]: string | number | boolean | object | undefined | null;
+};
