@@ -227,13 +227,12 @@ export default function resolveDrupalParagraphs(
         ) {
           imageLink = mediaItem.field_media_dc_link.url;
         }
-        // Media image.
-        // This field is a multivalue link field, so it will be an [].
+        // Media image & remote catalog image.
         if (
-          mediaItem.type === "media--image" &&
-          mediaItem.field_media_image_link.length > 0
+          mediaItem.type === "media--image" ||
+          mediaItem.type === "media--remote_catalog_image"
         ) {
-          imageLink = mediaItem.field_media_image_link[0].url;
+          imageLink = mediaItem.field_media_image_link_url_only?.url;
         }
         paragraphComponent = {
           id: item.id,
@@ -258,7 +257,10 @@ export default function resolveDrupalParagraphs(
               ? cardItem.field_tfls_description.processed
               : null,
             link: cardItem.field_ls_link.url,
-            image: resolveImage(cardItem.field_ers_image),
+            image:
+              cardItem.field_ers_image.data === null
+                ? null
+                : resolveImage(cardItem.field_ers_image),
           });
         });
         paragraphComponent = {
@@ -269,21 +271,23 @@ export default function resolveDrupalParagraphs(
           items: cardItems,
         };
         break;
-      case "paragraph--catalog_list":
+      // @TODO Add back later.
+      /*case "paragraph--catalog_list":
         const catalogItems: ResolvedParagraph[] = [];
-        item.field_erm_remote_items.map((catalogItem: any) => {
-          catalogItems.push({
-            id: catalogItem.id,
-            title: catalogItem.title,
-            description: catalogItem.field_tfls_summary_description
-              ? catalogItem.field_tfls_summary_description.processed
-              : null,
-            isbn: catalogItem.field_field_ts_isbn,
-            bNumber: catalogItem.field_ts_id
-              ? catalogItem.field_ts_id
-              : catalogItem.field_ts_ebook_id,
+        Array.isArray(item.field_erm_remote_items) &&
+          item.field_erm_remote_items.map((catalogItem: any) => {
+            catalogItems.push({
+              id: catalogItem.id,
+              title: catalogItem.title,
+              description: catalogItem.field_tfls_summary_description
+                ? catalogItem.field_tfls_summary_description.processed
+                : null,
+              isbn: catalogItem.field_field_ts_isbn,
+              bNumber: catalogItem.field_ts_id
+                ? catalogItem.field_ts_id
+                : catalogItem.field_ts_ebook_id,
+            });
           });
-        });
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
@@ -294,6 +298,7 @@ export default function resolveDrupalParagraphs(
           items: catalogItems,
         };
         break;
+        */
     }
     // @ts-ignore
     items.push(paragraphComponent);

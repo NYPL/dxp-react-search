@@ -7,7 +7,6 @@ import AudioEmbed from "./AudioEmbed";
 import GoogleMapEmbed from "./GoogleMapEmbed";
 import ImageComponent from "./ImageComponent";
 import CardList from "./CardList";
-import CatalogList from "./CatalogList";
 
 // @TODO Is it better to pass this in as an arg in the function? So different instances
 // can use different sets of Drupal paragraphs?
@@ -22,7 +21,6 @@ const Components = {
   audio: AudioEmbed,
   image: ImageComponent,
   link_card_list: CardList,
-  catalog_list: CatalogList,
 };
 
 export default function mapContentComponentToReactComponent(contentComponent) {

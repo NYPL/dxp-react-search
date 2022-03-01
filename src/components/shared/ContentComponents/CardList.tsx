@@ -3,15 +3,11 @@ import {
   Box,
   Heading,
   HeadingLevels,
-  Card,
-  CardContent,
-  CardHeading,
-  ImageSizes,
-  CardLayouts,
   Grid,
   Link,
 } from "@nypl/design-system-react-components";
-import Image from "../../shared/Image";
+// Utils
+import { getImageTransformation } from "./../../shared/Image/imageUtils";
 
 interface CardListProps {
   id: string;
@@ -25,7 +21,7 @@ interface CardItem {
   id: string;
   title: string;
   description: string;
-  image: any;
+  image?: any;
   link: string;
 }
 
@@ -36,45 +32,58 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
       <Grid
         as="ul"
+        listStyleType="none"
         gap="l"
         templateColumns="repeat(1, 1fr)"
-        sx={{ listStyleType: "none" }}
       >
         {items.map((item: CardItem) => {
           return (
             <li key={item.id}>
-              <Card
-                layout={CardLayouts.Row}
-                center
-                imageComponent={
-                  <a href={item.link}>
-                    <Image
-                      id={item.image.id}
-                      alt={item.image.alt}
-                      uri={item.image.uri}
-                      useTransformation={true}
-                      transformations={item.image.transformations}
-                      transformationLabel={"1_1_960"}
-                      layout="responsive"
-                      width={960}
-                      height={960}
-                      quality={90}
-                    />
-                  </a>
-                }
-                imageSize={ImageSizes.Small}
+              <Box
+                display={{ lg: "flex" }}
+                flexFlow={{ lg: "row" }}
+                alignItems={{ lg: "center" }}
               >
-                <CardHeading level={HeadingLevels.Three}>
-                  <Link href={item.link}> {item.title}</Link>
-                </CardHeading>
-                <CardContent>
+                {item.image && (
+                  <Box
+                    flex={{ lg: "0 0 165px" }}
+                    mr={{ lg: "l" }}
+                    mb={{ base: "s", lg: 0 }}
+                  >
+                    <a href={item.link}>
+                      <Box
+                        alignItems="center"
+                        backgroundColor="ui.gray.light-warm"
+                        display="flex"
+                        height={{ base: "300px", lg: "165px" }}
+                        justifyContent="center"
+                        overflow="hidden"
+                      >
+                        <Box
+                          as="img"
+                          maxHeight="100%"
+                          width="auto"
+                          src={getImageTransformation(
+                            "max_width_960",
+                            item.image.transformations
+                          )}
+                          alt={item.image.alt}
+                        />
+                      </Box>
+                    </a>
+                  </Box>
+                )}
+                <Box>
+                  <Heading level={HeadingLevels.Three}>
+                    <Link href={item.link}>{item.title}</Link>
+                  </Heading>
                   <Box
                     dangerouslySetInnerHTML={{
                       __html: item.description,
                     }}
                   ></Box>
-                </CardContent>
-              </Card>
+                </Box>
+              </Box>
             </li>
           );
         })}

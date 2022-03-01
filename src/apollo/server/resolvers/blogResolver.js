@@ -16,8 +16,6 @@ const includedFields = [
   // Link Card List
   "field_main_content.field_erm_link_cards",
   "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
-  // Catalog List
-  "field_main_content.field_erm_remote_items",
 ];
 
 const blogResolver = {
@@ -70,8 +68,7 @@ const blogResolver = {
   Blog: {
     id: (blog) => blog.id,
     title: (blog) => blog.title,
-    description: (blog) =>
-      blog.field_tfls_summary_description.processed.substring(0, 165),
+    description: (blog) => blog.field_tfls_summary_description.processed,
     slug: (blog) => blog.path.alias,
     byline: (blog) => {
       if (blog.field_ts_byline !== null) {
@@ -98,7 +95,7 @@ const blogResolver = {
       blog.field_erm_location.data?.length === 0
         ? null
         : blog.field_erm_location,
-    mainContent: (blog, args, context, info) => {
+    mainContent: (blog, _, __, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const mainContent =
@@ -109,7 +106,7 @@ const blogResolver = {
     },
   },
   BlogMainContent: {
-    __resolveType: (object, context, info) => {
+    __resolveType: (object, _, __) => {
       return resolveParagraphTypes(object.type);
     },
   },
@@ -119,8 +116,6 @@ const blogResolver = {
     name: (location) => location.title,
     contentType: (location) => location.type,
     slug: (location) => location.path.alias,
-    url: (location) => "/slug/fix-me",
-    status: (location) => "/slug/fix-me",
   },
 };
 

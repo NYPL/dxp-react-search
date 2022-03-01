@@ -36,8 +36,6 @@ export const typeDefs = gql`
     contentType: String!
     drupalInternalId: String!
     slug: String!
-    url: String!
-    status: String!
   }
 
   input BlogFilter {

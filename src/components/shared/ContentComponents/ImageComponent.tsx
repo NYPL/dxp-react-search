@@ -52,19 +52,19 @@ function ImageComponent({
           layout="responsive"
           quality={90}
         />
-        {caption && (
-          <Box fontSize="-1" fontWeight="regular">
-            {caption}
-          </Box>
-        )}
-        {credit && (
-          <Box
-            fontSize="-3"
-            fontStyle="italic"
-            dangerouslySetInnerHTML={{ __html: credit }}
-          />
-        )}
       </WithLink>
+      {caption && (
+        <Box fontSize="-1" fontWeight="regular">
+          {caption}
+        </Box>
+      )}
+      {credit && (
+        <Box
+          fontSize="-3"
+          fontStyle="italic"
+          dangerouslySetInnerHTML={{ __html: credit }}
+        />
+      )}
     </Box>
   );
 }
