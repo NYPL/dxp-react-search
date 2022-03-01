@@ -11,6 +11,9 @@ import PageContainer from "../../components/blogs/layouts/PageContainer";
 import BlogPost from "../../components/blogs/BlogPost";
 // Hooks
 import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
+// Utils
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import { BLOGS_BASE_PATH } from "./../../utils/config";
 
 const BLOG_POST_QUERY = gql`
   ${BLOG_FIELDS_FRAGMENT}
@@ -71,7 +74,8 @@ function BlogPostPage() {
       }}
       breadcrumbs={[
         {
-          text: data.blog.title,
+          text: "Blogs",
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
         },
       ]}
       showContentHeader={false}

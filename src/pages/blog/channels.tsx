@@ -6,6 +6,9 @@ import PageContainer from "../../components/blogs/layouts/PageContainer";
 import ChannelsCards from "../../components/blogs/ChannelsCards/ChannelsCards";
 // Content
 import blogsContent from "../../__content/blogs";
+// Utils
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import { BLOGS_BASE_PATH } from "./../../utils/config";
 
 function BlogsChannelsPage() {
   const { explore_by_channel } = blogsContent;
@@ -18,7 +21,8 @@ function BlogsChannelsPage() {
       }}
       breadcrumbs={[
         {
-          text: explore_by_channel.heading,
+          text: "Blogs",
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
         },
       ]}
       showContentHeader={true}

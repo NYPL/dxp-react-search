@@ -6,6 +6,9 @@ import PageContainer from "./../../components/blogs/layouts/PageContainer";
 import BlogsContainer from "../../components/blogs/BlogsContainer";
 // Content
 import blogsContent from "../../__content/blogs";
+// Utils
+const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import { BLOGS_BASE_PATH } from "./../../utils/config";
 
 function BlogsAllPage() {
   const { meta } = blogsContent;
@@ -18,7 +21,8 @@ function BlogsAllPage() {
       }}
       breadcrumbs={[
         {
-          text: "All Blogs",
+          text: "Blogs",
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
         },
       ]}
       showContentHeader={true}

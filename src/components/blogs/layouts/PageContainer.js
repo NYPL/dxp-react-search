@@ -32,10 +32,6 @@ function PageContainer(props) {
       text: "Home",
       url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
     },
-    {
-      text: "Blogs",
-      url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
-    },
   ];
 
   const newBreadcrumbs = breadcrumbs
