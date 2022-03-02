@@ -18,6 +18,8 @@ React app build for www.nypl.org.
 npm run dev
 ```
 
+test first day!
+
 ## Deployment
 
 We use TravisCI for continuous integration and delivery. Builds are started on git push to a target branch per environment (`development`, `qa`, `production`). Deployment to AWS will occur on successful build to an Elastic Container Service cluster.
