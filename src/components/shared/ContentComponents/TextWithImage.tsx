@@ -32,9 +32,9 @@ function TextWithImage({
       {image && (
         <Box
           width="100%"
-          maxWidth={[null, null, "50%"]}
-          float={[null, null, "left"]}
-          mr={[null, null, "m"]}
+          maxWidth={{ lg: "50%" }}
+          float={{ lg: "left" }}
+          mr={{ lg: "m" }}
         >
           <img
             id={image.id}
