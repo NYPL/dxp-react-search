@@ -4,6 +4,11 @@ import { withApollo } from "../../../../apollo/client/withApollo";
 // Redux
 import { withRedux } from "../../../../redux/withRedux";
 // Components
+import {
+  Heading,
+  HeadingLevels,
+  Link,
+} from "@nypl/design-system-react-components";
 import PageContainer from "../../../../components/online-resources/layouts/PageContainer";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "../../../../utils/config";
@@ -30,35 +35,41 @@ function OnlineResourcesFindJournalsTitlePage() {
       showContentHeader={false}
       contentPrimary={
         <div>
-          <h1>Find E-Journals and Scholarly E-books by Title in Databases</h1>
+          <Heading level={HeadingLevels.One}>
+            Find E-Journals and Scholarly E-books by Title in Databases
+          </Heading>
           <p>
             Use the resources below to find which databases have the full text
             of specific magazines or journals.
           </p>
           <p>
-            <a
+            <Link
               href="http://tm9qt7lg9g.search.serialssolutions.com/"
-              rel="nofollow"
+              attributes={{
+                rel: "nofollow",
+              }}
             >
               Full-text Journals and Scholarly E-books&nbsp;(from Home)
-            </a>
+            </Link>
           </p>
           <p>
-            <a
+            <Link
               href="http://wu9fb9wh4a.search.serialssolutions.com/"
-              rel="nofollow"
+              attributes={{
+                rel: "nofollow",
+              }}
             >
               Full-text Journals and Scholarly E-Books (on-site in the Library)
-            </a>
+            </Link>
           </p>
           <p>
             To find magazines, newspapers and journals not available
             electronically search the Catalog.
           </p>
           <p>
-            <a href="https://catalog.nypl.org/search/s">
+            <Link href="https://catalog.nypl.org/search/s">
               Journal Title Search in the NYPL Catalog
-            </a>
+            </Link>
           </p>
           <br />
           <p>
