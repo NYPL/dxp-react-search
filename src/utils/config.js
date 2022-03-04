@@ -7,3 +7,5 @@ export const ONLINE_RESOURCES_OFFSITE_UUID = "offsite-uuid";
 export const ONLINE_RESOURCES_ONSITE_UUID = "on-site-uuid";
 // Blogs
 export const BLOGS_BASE_PATH = "/blog";
+// Press
+export const PRESS_BASE_PATH = "/press";
