@@ -140,12 +140,12 @@ function VisitTypeFormField({
             {inPersonItems.map((inPersonItem) => (
               <Box mb="s">
                 <Radio
-                  // @TODO Radio allows multiple radios to be selected? wtf.
                   name="inPersonServices"
                   value={inPersonItem.id}
                   labelText={inPersonItem.label}
                   helperText={inPersonItem.helperText}
                   showLabel
+                  isChecked={values.inPersonServices === inPersonItem.id}
                   onChange={(e) => handleChange(e)}
                   isInvalid={errors.inPersonServices ? true : false}
                 />
