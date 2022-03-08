@@ -47,7 +47,11 @@ function PressRelease({ pressRelease }: PressReleasePorps) {
   return (
     <Box as="article" w="100%" maxW="844px">
       <Box as="header" mb="l">
-        <Heading level={HeadingLevels.Two} text={pressRelease.title} />
+        <Heading
+          level={HeadingLevels.One}
+          displaySize={HeadingDisplaySizes.Secondary}
+          text={pressRelease.title}
+        />
         {description !== null && (
           <Box
             isItalic={true}
