@@ -6,9 +6,10 @@ import getAccessToken from "./../../../utils/getAccessToken";
 class DrupalApi extends RESTDataSource {
   constructor() {
     super();
+    // this.baseURL = DRUPAL_API;
     // Temporary hard-code d9 backend for tugboat.
-    //this.baseURL = "https://sandbox-d8.nypl.org";
-    this.baseURL = DRUPAL_API;
+    // @TODO Remove this before merging. Hard-code sandbox-d8 env as tugboat qa workaround.
+    this.baseURL = "https://sandbox-d8.nypl.org";
   }
 
   /**
