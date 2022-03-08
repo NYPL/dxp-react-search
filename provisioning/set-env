@@ -14,7 +14,7 @@ SENDGRID_EMAIL_ENABLE=true
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
   NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
-  DRUPAL_API=https://nyplo-ecsal-14w2vcuzdkrqm-1798053640.us-east-1.elb.amazonaws.com
+  DRUPAL_API=https://d8.nypl.org
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
