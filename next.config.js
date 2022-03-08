@@ -60,6 +60,8 @@ const nextConfig = {
       "contentcafecloud.baker-taylor.com",
       "img1.od-cdn.com",
       "ic.od-cdn.com",
+      // Parallel instance testing
+      "nyplo-ecsal-14w2vcuzdkrqm-1798053640.us-east-1.elb.amazonaws.com",
     ],
   },
 };
