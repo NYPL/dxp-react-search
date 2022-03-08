@@ -2,6 +2,8 @@ import { DataSourceConfig } from "apollo-datasource";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 import getAccessToken from "../../../../utils/getAccessToken";
 const { DRUPAL_API } = process.env;
+// @TODO Remove this, Temp fix for ssl cert
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 // @TODO Change to use JsonApiResourceObject
 type JsonApiResource = { [key: string]: any };

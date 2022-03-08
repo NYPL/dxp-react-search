@@ -14,13 +14,13 @@ SENDGRID_EMAIL_ENABLE=true
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
   NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
-  DRUPAL_API=https://qa-d8.nypl.org
+  DRUPAL_API=https://nyplo-ecsal-14w2vcuzdkrqm-1798053640.us-east-1.elb.amazonaws.com
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
   SENDGRID_EMAIL_ENABLE=true
   NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
-  DRUPAL_CONSUMER_UUID=7af062d8-1b9d-4d81-81b7-a4f681a651d4
+  DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
 fi
 
 echo -e "\nNEXT_PUBLIC_NYPL_DOMAIN=$NEXT_PUBLIC_NYPL_DOMAIN" >> .env
