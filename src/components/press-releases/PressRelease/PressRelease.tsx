@@ -4,43 +4,84 @@ import Components from "./../../shared/ContentComponents/getReactComponent";
 import {
   Box,
   Heading,
-  TextDisplaySizes,
   HeadingLevels,
+  HeadingDisplaySizes,
   Text,
+  Link,
 } from "@nypl/design-system-react-components";
+// Config/Utils
+import pressContent from "./../../../__content/press";
 
+interface ContentComponentObject {
+  [key: string]: any;
+}
 interface PressReleasePorps {
   pressRelease: any;
 }
 
 function PressRelease({ pressRelease }: PressReleasePorps) {
+  // ensure line breaks are respected
+  const description = pressRelease.description
+    ? pressRelease.description.replace(/\n/g, "<br/>")
+    : null;
+  // section for about NYPL
+  const { about } = pressContent;
+  const About = (
+    <Box mb={8}>
+      <Heading level={HeadingLevels.Two} text={about.title} />
+      <Text>
+        {about.description}
+        <Link
+          href={about.url}
+          additionalStyles={{
+            color: "black",
+            textDecor: "underline",
+          }}
+        >
+          {about.anchorText}
+        </Link>
+      </Text>
+    </Box>
+  );
+
   return (
     <Box as="article" w="100%" maxW="844px">
-      <Box as="header" pb={10}>
-        <Heading level={HeadingLevels.Two} text={"Heading (h2)"} />
-        <Text displaySize={TextDisplaySizes.Default} isItalic={true}>
-          Subheader
-        </Text>
-        <Box mb="xs">{"date"}</Box>
+      <Box as="header" mb="l">
+        <Heading level={HeadingLevels.Two} text={pressRelease.title} />
+        {description !== null && (
+          <Box
+            isItalic={true}
+            mb={4}
+            fontSize={"1"}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
+        )}
+        <Box mb="s">{pressRelease.date}</Box>
       </Box>
-      Here is PressRelease Main Content
-      {/* -> Might be using the same component? */}
-      {/* {pressRelease.mainContent &&
-        pressRelease.mainContent.map((contentComponent: ContentComponentObject) =>
-          Components(contentComponent)
-        )} */}
-      <Box as="header" pb={10}>
-        <Heading
-          level={HeadingLevels.Two}
-          text={"About the New York Public Library"}
-        />
-        <Text displaySize={TextDisplaySizes.Default}>Text</Text>
+      <Box
+        sx={{
+          "& a": {
+            textDecor: "underline",
+          },
+        }}
+      >
+        {pressRelease.mainContent &&
+          pressRelease.mainContent.map(
+            (contentComponent: ContentComponentObject) =>
+              Components(contentComponent)
+          )}
       </Box>
-      <Box as="header" pb={10}>
-        <Heading level={HeadingLevels.Two} text={"Media Contact"} />
-        {/* {pressRelease.mediaContent && pressRelease.mediaContent.map((contact: any) => <SomeComponent/> )} */}
-        <Text displaySize={TextDisplaySizes.Default}>Contact</Text>
-      </Box>
+      {About}
+      <Heading level={HeadingLevels.Two} text="Media Contact" />
+      <Box
+        sx={{
+          "& a": {
+            color: "black",
+            textDecor: "underline",
+          },
+        }}
+        dangerouslySetInnerHTML={{ __html: pressRelease.mediaContacts }}
+      />
     </Box>
   );
 }

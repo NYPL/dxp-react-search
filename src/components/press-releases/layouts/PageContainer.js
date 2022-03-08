@@ -10,13 +10,13 @@ import {
   ColorVariants,
 } from "@nypl/design-system-react-components";
 // Config/Utils
+import pressContent from "./../../../__content/press";
 import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { PRESS_BASE_PATH } from "./../../../utils/config";
 
 function PageContainer(props) {
   const { metaTags, breadcrumbs, contentPrimary, showContentHeader } = props;
-
   // Default breadcrumbs for all online resources pages.
   const defaultBreadcrumbs = [
     {
@@ -52,6 +52,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
+      //not correct color: should be BDBDBD accorindg to Figma
       breadcrumbsColor={ColorVariants.Blogs}
       contentPrimary={contentPrimary}
       showSidebar={true}

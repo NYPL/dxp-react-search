@@ -17,7 +17,7 @@ export const typeDefs = gql`
     pageInfo: PageInfo
   }
 
-  union PressReleaseMainContent = Text | TextWithImage | Image
+  union PressReleaseMainContent = Text | TextWithImage | ImageComponent
 
   extend type Query {
     allPressReleases(limit: Int, pageNumber: Int): PressReleaseConnection
