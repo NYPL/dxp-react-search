@@ -1,6 +1,8 @@
 import React from "react";
 // Components
-import Components from "./../../shared/ContentComponents/getReactComponent";
+import Components, {
+  ContentComponentObject,
+} from "./../../shared/ContentComponents/getReactComponent";
 import {
   Box,
   Heading,
@@ -12,15 +14,12 @@ import {
 // Config/Utils
 import pressContent from "./../../../__content/press";
 
-interface ContentComponentObject {
-  [key: string]: any;
-}
 interface PressReleasePorps {
   pressRelease: any;
 }
 
 function PressRelease({ pressRelease }: PressReleasePorps) {
-  // ensure line breaks are respected
+  // ensure line breaks from Drupal are respected
   const description = pressRelease.description
     ? pressRelease.description.replace(/\n/g, "<br/>")
     : null;
