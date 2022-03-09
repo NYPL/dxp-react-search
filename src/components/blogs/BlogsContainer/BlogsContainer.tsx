@@ -222,11 +222,21 @@ function BlogsContainer({
         </Grid>
       </CardSet>
       {!featured && (
-        <Pagination
-          initialPage={currentPage}
-          pageCount={data.allBlogs.pageInfo.pageCount}
-          onPageChange={onPageChange}
-        />
+        <Box
+          sx={{
+            // Centers the pagination component.
+            "& nav[role=navigation]": {
+              justifyContent: "center",
+            },
+          }}
+          data-testid="blog-pagination"
+        >
+          <Pagination
+            initialPage={currentPage}
+            pageCount={data.allBlogs.pageInfo.pageCount}
+            onPageChange={onPageChange}
+          />
+        </Box>
       )}
     </>
   );

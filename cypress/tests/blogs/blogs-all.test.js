@@ -10,19 +10,15 @@ describe("Blog All pg tests", () => {
 
   it("Breadcrumbs includes page title as last item and is not a link", () => {});
 
+  it("Hero should include h1 title and description", () => {});
+
+  it("Right rail menu should be present in sidebar", () => {});
+
   it("Filter bar with 5 multiselects are present", () => {});
 
-  it("10 blog posts should display on first page", () => {
-    cy.visit("http://localhost:3000/blog/all");
-    cy.log("Get blog collection by test id");
-    cy.get("[data-testid=blog-collection]")
-      .find("li")
-      .should("have.length", 10);
-  });
+  it("Filter bar with selected items from 1 multiselect should update page", () => {});
 
-  it("Next page pagination button takes user to page 2", () => {});
-
-  it("Clicking page 3 link in pagination takes user to page 3", () => {});
+  it("Filter bar with selected items from several multiselect should update page", () => {});
 
   it("Filter bar should reset pagination when applied", () => {
     cy.log("Goto blogs all page starting at page 15");
@@ -55,6 +51,32 @@ describe("Blog All pg tests", () => {
     cy.log("Pagination should be reset to page 1 in the url");
     cy.location().should((loc) => {
       expect(loc.search).to.eq(`?${queryParams}&page=1`);
+    });
+  });
+
+  it("10 blog posts should display on first page", () => {
+    cy.visit("http://localhost:3000/blog/all");
+    cy.log("Get blog collection by test id");
+    cy.get("[data-testid=blog-collection]")
+      .find("li")
+      .should("have.length", 10);
+  });
+
+  it("Clicking next link in pagination takes user to page 2", () => {});
+
+  it("Clicking page 3 link in pagination takes user to page 3", () => {
+    cy.log("Find the pagination component");
+    cy.findByRole("navigation", {
+      name: /pagination/i,
+    }).within(() => {
+      cy.log("Find page 3 link");
+      cy.findByRole("link", {
+        name: "Page 3",
+      }).click();
+    });
+    cy.log("Pagination should be on page 3");
+    cy.location().should((loc) => {
+      expect(loc.search).to.eq(`?page=3`);
     });
   });
 });
