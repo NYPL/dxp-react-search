@@ -8,6 +8,16 @@ describe("Blog All pg tests", () => {
     cy.viewport(1024, 768);
   });
 
+  it("Breadcrumbs includes page title and its not a link", () => {});
+
+  it("Filter bar with 5 multiselects are present", () => {});
+
+  it("First 10 blog posts are present", () => {});
+
+  it("Next page pagination button takes user to page 2", () => {});
+
+  it("Clicking 3 link in pagination takes user to page 3", () => {});
+
   it("Filter bar should reset pagination", () => {
     cy.log("Goto blogs all page starting at page 15");
     cy.visit("http://localhost:3000/blog/all?page=15");
