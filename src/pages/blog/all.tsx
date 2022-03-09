@@ -28,6 +28,7 @@ function BlogsAllPage() {
           id="all-blogs"
           limit={10}
           sort={{ field: "created", direction: "DESC" }}
+          status={true}
         />
       }
     />

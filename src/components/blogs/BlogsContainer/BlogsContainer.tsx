@@ -3,8 +3,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { BLOG_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/blogFields";
 // Components
-import { Pagination } from "@nypl/design-system-react-components";
-import CardGrid from "../../ds-prototypes/CardGrid";
+import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
 import CardSet from "../../shared/Card/CardSet";
 import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
 import BlogCard from "./BlogCard";
@@ -50,6 +49,7 @@ interface BlogsContainerProps {
   pageNumber?: number;
   sort?: any;
   featured?: boolean;
+  status?: boolean;
 }
 
 function BlogsContainer({
@@ -62,6 +62,7 @@ function BlogsContainer({
   pageNumber,
   sort,
   featured,
+  status,
 }: BlogsContainerProps) {
   const router = useRouter();
   const currentPage = router.query.page
@@ -111,6 +112,14 @@ function BlogsContainer({
       fieldName: "field_bs_featured",
       operator: "=",
       value: featured,
+    };
+  }
+  // Published
+  if (status) {
+    queryFilters["status"] = {
+      fieldName: "status",
+      operator: "=",
+      value: status,
     };
   }
 
@@ -181,7 +190,7 @@ function BlogsContainer({
   return (
     <>
       {showFilterBar && (
-        <div style={{ paddingBottom: "2rem" }}>
+        <Box pb="l">
           <FilterBarDetails
             currentPage={currentPage}
             itemsOnPage={data.allBlogs.items.length}
@@ -189,7 +198,7 @@ function BlogsContainer({
             limit={limit}
             totalItems={data.allBlogs.pageInfo.totalItems}
           />
-        </div>
+        </Box>
       )}
       <CardSet
         id={id}
@@ -198,20 +207,36 @@ function BlogsContainer({
         slugLabel={slugLabel}
         description={description}
       >
-        <CardGrid gap="2rem" templateColumns="repeat(1, 1fr)">
+        <Grid
+          as="ul"
+          gap="l"
+          templateColumns="repeat(1, 1fr)"
+          listStyleType="none"
+          data-testid="blog-collection"
+        >
           {data.allBlogs.items.map((item: BlogCardItem) => (
             <li key={item.id}>
               <BlogCard item={item} />
             </li>
           ))}
-        </CardGrid>
+        </Grid>
       </CardSet>
       {!featured && (
-        <Pagination
-          initialPage={currentPage}
-          pageCount={data.allBlogs.pageInfo.pageCount}
-          onPageChange={onPageChange}
-        />
+        <Box
+          sx={{
+            // Centers the pagination component.
+            "& nav[role=navigation]": {
+              justifyContent: "center",
+            },
+          }}
+          data-testid="blog-pagination"
+        >
+          <Pagination
+            initialPage={currentPage}
+            pageCount={data.allBlogs.pageInfo.pageCount}
+            onPageChange={onPageChange}
+          />
+        </Box>
       )}
     </>
   );
