@@ -1,7 +1,7 @@
 describe("Blogs Main Tests", () => {
   beforeEach(() => {
     cy.viewport(1024, 768);
-    cy.visit("http://localhost:3000/blog");
+    cy.visit("/blog");
   });
 
   it("Basic smoke test.", () => {
