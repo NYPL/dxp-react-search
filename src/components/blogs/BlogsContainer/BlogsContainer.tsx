@@ -50,6 +50,7 @@ interface BlogsContainerProps {
   pageNumber?: number;
   sort?: any;
   featured?: boolean;
+  status?: boolean;
 }
 
 function BlogsContainer({
@@ -62,6 +63,7 @@ function BlogsContainer({
   pageNumber,
   sort,
   featured,
+  status,
 }: BlogsContainerProps) {
   const router = useRouter();
   const currentPage = router.query.page
@@ -111,6 +113,14 @@ function BlogsContainer({
       fieldName: "field_bs_featured",
       operator: "=",
       value: featured,
+    };
+  }
+  // Published
+  if (status) {
+    queryFilters["status"] = {
+      fieldName: "status",
+      operator: "=",
+      value: status,
     };
   }
 
