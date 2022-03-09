@@ -40,6 +40,7 @@ export const typeDefs = gql`
 
   input BlogFilter {
     featured: QueryFilterItemBoolean
+    status: QueryFilterItemBoolean
     channels: QueryFilterItemReference
     subjects: QueryFilterItemReference
     libraries: QueryFilterItemReference

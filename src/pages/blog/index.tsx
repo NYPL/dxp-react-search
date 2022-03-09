@@ -28,6 +28,7 @@ function BlogsMainPage() {
             limit={6}
             featured={true}
             sort={{ field: "created", direction: "DESC" }}
+            status={true}
           />
           <ChannelsCards
             id="explore-by-channel"

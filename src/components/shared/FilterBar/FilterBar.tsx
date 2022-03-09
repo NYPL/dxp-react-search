@@ -176,7 +176,7 @@ function FilterBar({
             q: router.query.q,
           }),
           ...queryParamsToAdd,
-          page: router.query.page ? router.query.page : 1,
+          page: 1,
         },
       })
       .then(() => {
