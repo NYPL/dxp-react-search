@@ -61,6 +61,11 @@ function BlogCard({ item }: BlogCardProps) {
           )}
         </Box>
         <Box
+          sx={{
+            "& p": {
+              marginBottom: "0",
+            },
+          }}
           dangerouslySetInnerHTML={{
             __html: description,
           }}

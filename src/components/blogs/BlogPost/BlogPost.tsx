@@ -17,7 +17,7 @@ interface BlogPostProps {
 function BlogPost({ blog }: BlogPostProps) {
   return (
     <Box as="article" w="100%" maxW="866px">
-      <Box as="header" pb={10}>
+      <Box as="header" mb="l">
         <Heading id={blog.id} level={HeadingLevels.One} text={blog.title} />
         <Box fontSize="1" fontWeight="regular">
           By {blog.byline}

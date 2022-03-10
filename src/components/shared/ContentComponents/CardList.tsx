@@ -27,7 +27,7 @@ interface CardItem {
 
 function CardList({ id, type, heading, description, items }: CardListProps) {
   return (
-    <Box id={`${type}-${id}`} mb="xl">
+    <Box id={`${type}-${id}`} mb="l">
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
       <Grid

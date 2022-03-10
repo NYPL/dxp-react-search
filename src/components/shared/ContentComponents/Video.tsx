@@ -28,7 +28,7 @@ function Video({
   const html = useOembedApi(oembedUrl, embedCode);
 
   return (
-    <Box id={`${type}-${provider}-${id}`} mb="xl">
+    <Box id={`${type}-${provider}-${id}`} mb="l">
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
       {html && (
