@@ -8,7 +8,7 @@ const blogsContent = {
     heading: "Featured Posts",
     description: "Take a look at the latest posts from the NYPL Blog:",
     slug: "/blog/all",
-    slugLabel: "View all blogs",
+    slugLabel: "View all blog posts",
   },
   explore_by_channel: {
     heading: "Explore By Channel",
