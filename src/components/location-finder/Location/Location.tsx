@@ -75,7 +75,7 @@ function Location({ location }: LocationProps) {
           {location.parentLibraryName}
         </Box>
       )}
-      <Box whiteSpace="pre-wrap" className="address">
+      <Box mb="xxs" whiteSpace="pre-wrap" className="address">
         {formattedAddress}
       </Box>
       <Box className="phone">{location.phone}</Box>

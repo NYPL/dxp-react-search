@@ -54,7 +54,7 @@ function LocationHours({
   return (
     <>
       {open ? (
-        <HStack align="center">
+        <HStack mb="xxs" align="center">
           <Icon name={IconNames.Clock} size={IconSizes.Large} />
           <Box>Today's Hours:</Box>
           <Box fontWeight="bold">
