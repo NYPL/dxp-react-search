@@ -28,8 +28,8 @@ function OnlineResourcesFindJournalsTitlePage() {
       }}
       breadcrumbs={[
         {
-          text: title,
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`,
+          text: "Scholarly Journals",
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}/find-journals-title-databases`,
         },
       ]}
       showContentHeader={false}
