@@ -67,7 +67,7 @@ function LocationHours({
         </StatusBadge>
       )}
       {appointmentOnly && todayHoursStart && todayHoursEnd && (
-        <Box pl={8} fontWeight="bold">
+        <Box ml="l" fontWeight="bold">
           * Division is by appointment only.
         </Box>
       )}
