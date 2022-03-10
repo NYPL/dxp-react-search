@@ -78,7 +78,9 @@ function Location({ location }: LocationProps) {
       <Box mb="xxs" whiteSpace="pre-wrap" className="address">
         {formattedAddress}
       </Box>
-      <Box className="phone">{location.phone}</Box>
+      <Box mb="xxs" className="phone">
+        {location.phone}
+      </Box>
       <LocationAccessibility
         access={location.wheelchairAccess}
         note={location.accessibilityNote}

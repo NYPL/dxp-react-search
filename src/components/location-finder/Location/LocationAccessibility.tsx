@@ -45,8 +45,8 @@ function LocationAccessibility({ access, note }: LocationAccessibilityProps) {
     accessibilityNote = `: ${note}`;
   }
   return (
-    <HStack mb="xxs" align="center">
-      <Box maxHeight={"24px"}>{wheelchairAccessIcon}</Box>
+    <HStack align="flex-start">
+      <Box>{wheelchairAccessIcon}</Box>
       <Box>
         {wheelchairAccess} {accessibilityNote}
       </Box>
