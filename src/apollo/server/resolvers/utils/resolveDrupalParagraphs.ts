@@ -103,7 +103,10 @@ export default function resolveDrupalParagraphs(
           credit: textWithImageMedia.field_media_image_credit_html
             ? textWithImageMedia.field_media_image_credit_html.processed
             : null,
-          image: resolveImage(item.field_ers_media_item),
+          image:
+            item.field_ers_media_item.data === null
+              ? null
+              : resolveImage(item.field_ers_media_item),
         };
         break;
       case "paragraph--video":

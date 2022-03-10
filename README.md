@@ -1,21 +1,45 @@
 # DXP Scout
 
-React app build for www.nypl.org.
+React app build for www.nypl.org. Pages currently in repo:
+
+- Location Finder - https://www.nypl.org/locations
+- Articles & Databases - https://www.nypl.org/research/collections/articles-databases
+- Blogs, Press Releases, and more (coming soon)
 
 ## Installation (Local)
 
-- Clone the dxp-react-search repo
-- Run `npm install`
+Follow these steps to setup a local installation of the project:
 
-## Setup Local .env file
+1. Clone the repo
 
-- Copy `.env.example` to `.env`
-- Update the value for `NEXT_PUBLIC_GOOGLE_MAPS_API` to the NYPL Google Maps/Geocode API Key
-
-## Start development server
-
+```sh
+$ git clone git@github.com:NYPL/dxp-react-search.git
 ```
-npm run dev
+
+2. Install all the node dependencies
+
+```sh
+$ npm install
+```
+
+3. Copy `.env.example` to create a local .env file
+
+```sh
+$ cp .env.example .env
+```
+
+4. Update the value for `NEXT_PUBLIC_GOOGLE_MAPS_API` to the NYPL Google Maps/Geocode API Key
+
+5a. Start development server
+
+```sh
+$ npm run dev
+```
+
+5b. Alternatively you start the production mode server
+
+```sh
+$ npm run build && npm start
 ```
 
 ## Deployment

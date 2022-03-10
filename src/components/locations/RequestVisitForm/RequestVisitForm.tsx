@@ -248,7 +248,6 @@ function RequestVisitForm() {
   return (
     <Box maxWidth={[null, null, "637px"]}>
       <form id="request-visit-form" onSubmit={handleSubmit} noValidate>
-        <pre>{JSON.stringify(state, undefined, 2)}</pre>
         <Box
           sx={{
             "& h2": {
