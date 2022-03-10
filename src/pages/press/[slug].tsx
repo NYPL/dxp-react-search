@@ -7,6 +7,7 @@ import { gql, useQuery } from "@apollo/client";
 import { withApollo } from "../../apollo/client/withApollo";
 import { PRESS_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/pressFields";
 // Components
+import { SkeletonLoader } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/press-releases/layouts/PageContainer";
 import PressRelease from "../../components/press-releases/PressRelease";
 // Hooks
@@ -57,7 +58,7 @@ function PressReleasePage() {
     return (
       <PageContainer
         showContentHeader={false}
-        contentPrimary={<div>Loading...</div>}
+        contentPrimary={<SkeletonLoader contentSize={5} showImage={false} />}
       />
     );
   }

@@ -10,7 +10,6 @@ import {
   ColorVariants,
 } from "@nypl/design-system-react-components";
 // Config/Utils
-import pressContent from "./../../../__content/press";
 import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { PRESS_BASE_PATH } from "./../../../utils/config";
@@ -38,7 +37,7 @@ function PageContainer(props) {
       <Hero
         heroType={HeroTypes.Tertiary}
         heading={<Heading level={HeadingLevels.One} text={"Press Releases"} />}
-        backgroundColor="#E0E0E0"
+        backgroundColor="ui.gray.light-cool"
         foregroundColor="#000000"
       />
     </>

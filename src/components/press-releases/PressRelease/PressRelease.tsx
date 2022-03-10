@@ -26,7 +26,7 @@ function PressRelease({ pressRelease }: PressReleasePorps) {
   // section for about NYPL
   const { about } = pressContent;
   const About = (
-    <Box mb={8}>
+    <Box mb="l">
       <Heading level={HeadingLevels.Two} text={about.title} />
       <Text>
         {about.description}
@@ -54,7 +54,7 @@ function PressRelease({ pressRelease }: PressReleasePorps) {
         {description !== null && (
           <Box
             isItalic={true}
-            mb={4}
+            mb="s"
             fontSize={"1"}
             dangerouslySetInnerHTML={{ __html: description }}
           />
