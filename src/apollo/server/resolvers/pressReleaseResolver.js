@@ -12,6 +12,7 @@ import {
 const includedFields = [
   "field_ers_media_image.field_media_image",
   "field_main_content",
+  "field_main_content.field_ers_media_item.field_media_image",
 ];
 
 const pressReleaseResolver = {

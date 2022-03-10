@@ -27,7 +27,7 @@ function TextWithImage({
   image,
 }: TextWithImageProps) {
   return (
-    <Box id={`${type}-${id}`} mb="xl">
+    <Box id={`${type}-${id}`} mb="l">
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
       {image && (
         <Box

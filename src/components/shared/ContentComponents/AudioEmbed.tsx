@@ -35,7 +35,7 @@ function AudioEmbed({
       px={{ lg: "xxl" }}
       my="0"
       mx="auto"
-      mb="xl"
+      mb="l"
     >
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
