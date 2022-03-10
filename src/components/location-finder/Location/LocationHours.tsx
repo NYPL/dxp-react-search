@@ -54,10 +54,10 @@ function LocationHours({
   return (
     <>
       {open ? (
-        <HStack align="center">
+        <HStack mb="xxs" align="center">
           <Icon name={IconNames.Clock} size={IconSizes.Large} />
           <Box>Today's Hours:</Box>
-          <Box>
+          <Box fontWeight="bold">
             {formatHours(todayHoursStart, todayHoursEnd, appointmentOnly)}
           </Box>
         </HStack>
@@ -67,7 +67,9 @@ function LocationHours({
         </StatusBadge>
       )}
       {appointmentOnly && todayHoursStart && todayHoursEnd && (
-        <Box>* Division is by appointment only.</Box>
+        <Box ml="l" fontWeight="bold">
+          * Division is by appointment only.
+        </Box>
       )}
     </>
   );
