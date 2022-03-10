@@ -31,7 +31,7 @@ function TextWithImage({
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
       {image && (
         <Box
-          width="100%"
+          width={{ base: "100%", lg: "auto" }}
           maxWidth={{ lg: "50%" }}
           float={{ lg: "left" }}
           mr={{ lg: "m" }}
@@ -39,6 +39,7 @@ function TextWithImage({
           <img
             id={image.id}
             alt={image.alt}
+            width="100%"
             src={getImageTransformation("max_width_960", image.transformations)}
           />
           {caption && (
@@ -55,7 +56,15 @@ function TextWithImage({
           )}
         </Box>
       )}
-      <Box dangerouslySetInnerHTML={{ __html: text }} />
+      <Box
+        sx={{
+          "& ul": {
+            display: "inline-block",
+            paddingLeft: "s",
+          },
+        }}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
       <Box
         as="span"
         sx={{
