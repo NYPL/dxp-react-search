@@ -37,7 +37,8 @@ function PageContainer(props) {
       <Hero
         heroType={HeroTypes.Tertiary}
         heading={<Heading level={HeadingLevels.One} text={"Press Releases"} />}
-        backgroundColor="ui.gray.light-cool"
+        //backgroundColor needs to be replace with correct variable of DS
+        backgroundColor="#E0E0E0"
         foregroundColor="#000000"
       />
     </>
