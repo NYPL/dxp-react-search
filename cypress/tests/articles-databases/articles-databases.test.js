@@ -3,7 +3,7 @@ import { search } from "./../../support/utils";
 describe("Articles & Databases", () => {
   beforeEach(() => {
     cy.viewport(1024, 768);
-    cy.visit("http://localhost:3000/research/collections/articles-databases");
+    cy.visit("/research/collections/articles-databases");
   });
 
   it("Basic smoke test.", () => {
@@ -121,7 +121,7 @@ describe("Articles & Databases", () => {
   });
 
   it("Most popular links take user to correct page", () => {
-    const pathName = "/research/collections/articles-databases/mango-languages";
+    const pathName = "/research/collections/articles-databases/jstor";
 
     cy.log("Most popular heading should exist.");
     cy.findByRole("heading", {
@@ -131,12 +131,12 @@ describe("Articles & Databases", () => {
 
     cy.log("Click link to goto resource detail page");
     cy.findByRole("link", {
-      name: /mango languages/i,
+      name: /jstor/i,
     }).click();
 
     cy.log("Confirm resource page loads correctly.")
       .findByRole("link", {
-        name: /mango languages/i,
+        name: /jstor/i,
       })
       .should("exist")
       // Check that the url has been updated correctly.
