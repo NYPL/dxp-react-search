@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Apollo
 import { withApollo } from "../../../../apollo/client/withApollo";
 // Redux
@@ -9,7 +9,6 @@ import VerifyForm from "../../../../components/online-resources/VerifyForm";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-import onlineResourcesContent from "./../../../../__content/onlineResources";
 
 function OnlineResourcesVerifyPage() {
   return (
@@ -20,7 +19,7 @@ function OnlineResourcesVerifyPage() {
       }}
       breadcrumbs={[
         {
-          text: onlineResourcesContent.title,
+          text: "Login to use this database",
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`,
         },
       ]}
