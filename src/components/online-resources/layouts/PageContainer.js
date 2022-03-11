@@ -8,6 +8,8 @@ import Menu from "./../../ds-prototypes/Menu";
 import { ColorVariants } from "@nypl/design-system-react-components";
 // Config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
+
 import {
   articlesDatabasesSidebarMenu,
   railMenuContent,
@@ -29,6 +31,10 @@ function PageContainer(props) {
     {
       text: "Collections",
       url: `${NEXT_PUBLIC_NYPL_DOMAIN}/research/collections`,
+    },
+    {
+      text: "Articles & Databases",
+      url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`,
     },
   ];
 

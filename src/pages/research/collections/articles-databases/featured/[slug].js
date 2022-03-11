@@ -86,8 +86,8 @@ function FeaturedResourceTopicSlug() {
       }}
       breadcrumbs={[
         {
-          text: onlineResourcesContent.title,
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`,
+          text: resourceTopic.title,
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${resourceTopic.slug}`,
         },
       ]}
       showContentHeader={true}

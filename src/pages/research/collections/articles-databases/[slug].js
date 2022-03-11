@@ -89,8 +89,8 @@ function OnlineResourceSlug() {
       }}
       breadcrumbs={[
         {
-          text: onlineResourcesContent.title,
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`,
+          text: `${data.searchDocument.name}`,
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${data.searchDocument.slug}`,
         },
       ]}
       showContentHeader={true}

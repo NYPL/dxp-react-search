@@ -35,7 +35,7 @@
 .resourceType {
   font-size: 12px;
   font-weight: 700;
-  color: var(--nypl-section-research-primary);
+  color: var(--nypl-colors-section-research-primary);
   text-transform: uppercase;
 }
 

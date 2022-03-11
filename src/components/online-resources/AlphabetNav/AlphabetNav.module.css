@@ -12,6 +12,7 @@
 
 .letters {
   font-weight: bold;
+  font-size: 18px;
   color: var(--nypl-colors-ui-link-primary);
   background-color: transparent;
   border: none;
