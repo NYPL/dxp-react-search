@@ -32,7 +32,7 @@ function Error({ statusCode }: ErrorProps) {
       wrapperClass="nypl--404"
       contentHeader={null}
       contentPrimary={
-        <Box>
+        <Box minHeight="400px">
           <Heading level={HeadingLevels.One}>We're Sorry...</Heading>
           <Box>
             <Text>
@@ -54,11 +54,5 @@ function Error({ statusCode }: ErrorProps) {
     />
   );
 }
-
-/*Error.getInitialProps = ({ res, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  return { statusCode };
-};
-*/
 
 export default Error;

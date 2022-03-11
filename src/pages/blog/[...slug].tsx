@@ -47,7 +47,7 @@ function BlogPostPage() {
     return <div>Error.</div>;
   }
 
-  // Loading state,
+  // Loading state.
   if (loading || !data) {
     return (
       <PageContainer
