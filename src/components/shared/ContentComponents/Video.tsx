@@ -4,6 +4,7 @@ import {
   Heading,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
+import TextFormatted from "./../TextFormatted";
 import useOembedApi from "./../../../hooks/useOembedApi";
 
 interface VideoProps {
@@ -30,7 +31,7 @@ function Video({
   return (
     <Box id={`${type}-${provider}-${id}`} mb="xl">
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
-      {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
+      {description && <TextFormatted html={description} />}
       {html && (
         <Box
           paddingBottom="56.25%"
