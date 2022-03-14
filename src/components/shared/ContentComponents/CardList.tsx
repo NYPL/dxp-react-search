@@ -6,6 +6,7 @@ import {
   Grid,
   Link,
 } from "@nypl/design-system-react-components";
+import TextFormatted from "./../TextFormatted";
 // Utils
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
 
@@ -29,7 +30,7 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
   return (
     <Box id={`${type}-${id}`} mb="l">
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
-      {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
+      {description && <TextFormatted html={description} />}
       <Grid
         as="ul"
         listStyleType="none"
@@ -77,11 +78,7 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
                   <Heading level={HeadingLevels.Three}>
                     <Link href={item.link}>{item.title}</Link>
                   </Heading>
-                  <Box
-                    dangerouslySetInnerHTML={{
-                      __html: item.description,
-                    }}
-                  ></Box>
+                  <TextFormatted html={item.description} />
                 </Box>
               </Box>
             </li>

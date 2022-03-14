@@ -10,6 +10,7 @@ import {
   IconNames,
   IconRotationTypes,
   IconSizes,
+  Link,
 } from "@nypl/design-system-react-components";
 import OnlineResourceCardHeading from "./OnlineResourceCardHeading";
 import NextDsLink from "../../shared/Link/NextDsLink";
@@ -48,7 +49,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
           {items.map((item) => {
             if (item.url) {
               return (
-                <a
+                <Link
                   key={item.id}
                   className={`${s.accessLocation} ${
                     item.id === "all-branch-uuid" && s.disabled
@@ -59,7 +60,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
                   })}
                 >
                   {item.name}
-                </a>
+                </Link>
               );
             }
           })}

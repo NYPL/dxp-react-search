@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Box,
   Button,
@@ -70,10 +71,16 @@ function Location({ location }: LocationProps) {
         <Link href={location.url}>{location.name}</Link>
       </Heading>
       {location.parentLibraryName && (
-        <div className="location__parent">{location.parentLibraryName}</div>
+        <Box fontStyle="italic" className="location__parent">
+          {location.parentLibraryName}
+        </Box>
       )}
-      <div className="address">{formattedAddress}</div>
-      <div className="phone">{location.phone}</div>
+      <Box mb="xxs" whiteSpace="pre-wrap" className="address">
+        {formattedAddress}
+      </Box>
+      <Box mb="xxs" className="phone">
+        {location.phone}
+      </Box>
       <LocationAccessibility
         access={location.wheelchairAccess}
         note={location.accessibilityNote}

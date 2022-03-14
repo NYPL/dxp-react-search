@@ -4,6 +4,7 @@ import {
   Heading,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
+import TextFormatted from "./../TextFormatted";
 // Utils
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
 
@@ -32,14 +33,17 @@ function TextWithImage({
       {image && (
         <Box
           width="100%"
-          maxWidth={{ lg: "50%" }}
-          float={{ lg: "left" }}
-          mr={{ lg: "m" }}
+          maxWidth={{ base: "auto", md: "25%", lg: "40%" }}
+          float={{ md: "left" }}
+          mr={{ md: "l" }}
+          mb="s"
         >
           <img
             id={image.id}
             alt={image.alt}
             src={getImageTransformation("max_width_960", image.transformations)}
+            width="100%"
+            height="auto"
           />
           {caption && (
             <Box fontSize="-1" fontWeight="regular">
@@ -55,7 +59,7 @@ function TextWithImage({
           )}
         </Box>
       )}
-      <Box dangerouslySetInnerHTML={{ __html: text }} />
+      <TextFormatted html={text} />
       <Box
         as="span"
         sx={{

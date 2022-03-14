@@ -24,6 +24,7 @@ import {
 } from "@nypl/design-system-react-components";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+import { LOCATIONS_BASE_PATH } from "./../../utils/config";
 import { railMenuContent } from "./../../__content/menus";
 
 function LocationFinder() {
@@ -38,6 +39,10 @@ function LocationFinder() {
         {
           text: "Home",
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
+        },
+        {
+          text: "Locations",
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${LOCATIONS_BASE_PATH}`,
         },
       ]}
       breadcrumbsColor={ColorVariants.Locations}

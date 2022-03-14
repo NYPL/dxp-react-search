@@ -13,6 +13,7 @@ import {
   SearchResultsSkeletonLoader,
   SearchResultsDetailsSkeletonLoader,
 } from "./../../../../../components/online-resources/SearchResults/SearchResultsSkeletonLoader";
+import Error from "./../../../../_error";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
@@ -54,7 +55,13 @@ function FeaturedResourceTopicSlug() {
     return <div>Error while loading Online Resource.</div>;
   }
 
-  // Loading state,
+  // If uuid returns null from useDecoupledRouter, there was no router
+  // path match in Drupal, so we return 404 status error component.
+  if (!data && uuid === null) {
+    return <Error statusCode={404} />;
+  }
+
+  // Loading state.
   if (loading || !data) {
     return (
       <PageContainer
@@ -86,8 +93,8 @@ function FeaturedResourceTopicSlug() {
       }}
       breadcrumbs={[
         {
-          text: onlineResourcesContent.title,
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${ONLINE_RESOURCES_BASE_PATH}`,
+          text: resourceTopic.title,
+          url: `${NEXT_PUBLIC_NYPL_DOMAIN}${resourceTopic.slug}`,
         },
       ]}
       showContentHeader={true}

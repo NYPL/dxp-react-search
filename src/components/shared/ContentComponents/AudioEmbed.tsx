@@ -4,6 +4,7 @@ import {
   Heading,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
+import TextFormatted from "./../TextFormatted";
 import useOembedApi from "./../../../hooks/useOembedApi";
 
 interface AudioEmbedProps {
@@ -38,7 +39,7 @@ function AudioEmbed({
       mb="l"
     >
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
-      {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
+      {description && <TextFormatted html={description} />}
       {html && (
         <Box
           sx={{
