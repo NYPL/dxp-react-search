@@ -4,6 +4,7 @@ import {
   Heading,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
+import TextFormatted from "./../TextFormatted";
 // Utils
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
 
@@ -55,7 +56,7 @@ function TextWithImage({
           )}
         </Box>
       )}
-      <Box dangerouslySetInnerHTML={{ __html: text }} />
+      <TextFormatted html={text} />
       <Box
         as="span"
         sx={{
