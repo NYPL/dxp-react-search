@@ -11,6 +11,7 @@ import {
   Text,
   Link,
 } from "@nypl/design-system-react-components";
+import MediaContacts from "../layouts/MediaContacts";
 // Config/Utils
 import pressContent from "./../../../__content/press";
 
@@ -75,16 +76,7 @@ function PressRelease({ pressRelease }: PressReleasePorps) {
           )}
       </Box>
       {About}
-      <Heading level={HeadingLevels.Two} text="Media Contact" />
-      <Box
-        sx={{
-          "& a": {
-            color: "black",
-            textDecor: "underline",
-          },
-        }}
-        dangerouslySetInnerHTML={{ __html: pressRelease.mediaContacts }}
-      />
+      <MediaContacts mediaContacts={pressRelease.mediaContacts} />
     </Box>
   );
 }

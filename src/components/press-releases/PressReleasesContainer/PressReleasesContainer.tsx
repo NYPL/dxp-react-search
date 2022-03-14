@@ -4,11 +4,11 @@ import { gql, useQuery } from "@apollo/client";
 import { PRESS_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/pressFields";
 // Components
 import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
-import CardSet from "../../shared/Card/CardSet";
-import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
+import MediaContacts from "../layouts/MediaContacts";
+import ListSkeletonLoader from "../layouts/List/ListSkeletonLoader";
 import PressReleaseCard from "./PressReleaseCard";
-/// Types
-// import { PressCardItem } from "./BlogCardTypes";
+//Type
+import { PressReleaseItem } from "./PressReleaseCardType";
 // Next
 import { useRouter } from "next/router";
 
@@ -31,6 +31,7 @@ const ALL_PRESS_RELEASES_QUERY = gql`
 interface PressReleaseContainerProps {
   id: string;
   description: string;
+  mediaContacts: string;
   limit: number;
   sort: any;
 }
@@ -38,6 +39,7 @@ interface PressReleaseContainerProps {
 function PressReleaseContainer({
   id,
   description,
+  mediaContacts,
   limit,
   sort,
 }: PressReleaseContainerProps) {
@@ -54,32 +56,41 @@ function PressReleaseContainer({
     },
   });
 
+  function onPageChange(pageIndex: number) {
+    router.push({ query: { page: pageIndex } });
+  }
+
   if (error) {
-    return <Box>Error while loeading press releases.</Box>;
+    return <Box>Error while loading press releases.</Box>;
   }
 
   if (loading || !data) {
-    return (
-      <CardSkeletonLoader
-        gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gridGap="1.25rem"
-        itemsCount={10}
-      />
-    );
+    return <ListSkeletonLoader itemsCount={10} />;
   }
+
   return (
-    <Box>
+    <Box
+      sx={{
+        // Centers the pagination component.
+        "& nav[role=navigation]": {
+          justifyContent: "center",
+          marginY: "xl",
+        },
+      }}
+    >
+      <Box mb={"l"}>{description}</Box>
       <Grid>
         {data.allPressReleases.items &&
-          data.allPressReleases.items.map((item: any) => (
+          data.allPressReleases.items.map((item: PressReleaseItem) => (
             <PressReleaseCard item={item} />
           ))}
       </Grid>
       <Pagination
         initialPage={currentPage}
         pageCount={data.allPressReleases.pageInfo.pageCount}
-        // onPageChange={onPageChange}
+        onPageChange={onPageChange}
       />
+      <MediaContacts mediaContacts={mediaContacts} />
     </Box>
   );
 }

@@ -1,28 +1,30 @@
 import React from "react";
 // Components
 import {
-  Card,
-  CardHeading,
-  CardContent,
+  Heading,
   HeadingLevels,
   HorizontalRule,
+  Box,
 } from "@nypl/design-system-react-components";
-import NextDsLink from "../../shared/Link/NextDsLink";
+import NextDsLink from "./../../shared/Link/NextDsLink";
+//Type
+import { PressReleaseItem } from "./PressReleaseCardType";
 
 interface PressReleaseCardProps {
-  item?: any;
+  item: PressReleaseItem;
 }
 function PressReleaseCard({ item }: PressReleaseCardProps) {
-  const { title, date } = item;
-  console.log(item);
+  const { id, title, slug, date } = item;
   return (
-    <>
-      <Card>
-        <CardHeading level={HeadingLevels.Three}>{title}</CardHeading>
-        <CardContent>{date}</CardContent>
-      </Card>
-      <HorizontalRule />
-    </>
+    <Box>
+      <Box py={"s"} pr={"s"} id={`pressRelease-card-${id}`}>
+        <Heading level={HeadingLevels.Three} additionalStyles={{ my: "xxs" }}>
+          {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
+        </Heading>
+        <Box>{date}</Box>
+      </Box>
+      <HorizontalRule className="horizontal-rule" />
+    </Box>
   );
 }
 

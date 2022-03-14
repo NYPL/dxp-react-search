@@ -20,13 +20,10 @@ function PressMainPage() {
         <>
           <PressReleasesContainer
             id="press-releases"
-            // title={featured_posts.heading}
             description={meta.description}
-            // slug={featured_posts.slug}
-            // slugLabel={featured_posts.slugLabel}
+            mediaContacts={mediaContacts.bodyText}
             limit={10}
             sort={{ field: "created", direction: "DESC" }}
-            // status={true}
           />
         </>
       }

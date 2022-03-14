@@ -13,7 +13,7 @@ const pressContent = {
   },
   mediaContacts: {
     bodyText:
-      "For media inquiries about The New York Public Library, contact Senior Publicist Sara Beth Joren at sarabethjoren@nypl.org.\n\nFor media inquiries about The Schomburg Center for Research in Black Culture, contact Assistant Director of Media Relations Amy Geduldig at amygeduldig@nypl.org.\n\nFor media inquiries about The Library for the Performing Arts, contact Assistant Director of Communications for LPA Nora Lyons at noralyons@nypl.org. ",
+      "For media inquiries about The New York Public Library, contact Senior Publicist Sara Beth Joren at <a href='mailto:sarabethjoren@nypl.org'>sarabethjoren@nypl.org</a>.\n\nFor media inquiries about The Schomburg Center for Research in Black Culture, contact Assistant Director of Media Relations Amy Geduldig at <a href='mailto:amygeduldig@nypl.org'>amygeduldig@nypl.org</a>.\n\nFor media inquiries about The Library for the Performing Arts, contact Assistant Director of Communications for LPA Nora Lyons at <a href='mailto:noralyons@nypl.org'>noralyons@nypl.org</a>. ",
   },
 };
 
