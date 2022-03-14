@@ -33,7 +33,7 @@ function PageContainer(props) {
       url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
     },
     {
-      text: "Blogs",
+      text: "Blog",
       url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
     },
   ];

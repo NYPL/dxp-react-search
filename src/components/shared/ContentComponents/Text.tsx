@@ -4,6 +4,7 @@ import {
   Heading,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
+import TextFormatted from "./../TextFormatted";
 
 interface TextProps {
   id: string;
@@ -16,14 +17,7 @@ function Text({ id, type, heading, text }: TextProps) {
   return (
     <Box id={`${type}-${id}`} mb="l">
       {heading && <Heading level={HeadingLevels.Two} text={heading} />}
-      <Box
-        sx={{
-          "& ul": {
-            paddingLeft: "s",
-          },
-        }}
-        dangerouslySetInnerHTML={{ __html: text }}
-      />
+      <TextFormatted html={text} />
     </Box>
   );
 }
