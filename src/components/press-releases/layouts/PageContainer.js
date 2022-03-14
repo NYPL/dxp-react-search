@@ -38,8 +38,8 @@ function PageContainer(props) {
         heroType={HeroTypes.Tertiary}
         heading={<Heading level={HeadingLevels.One} text={"Press Releases"} />}
         //backgroundColor needs to be replace with correct variable of DS
-        backgroundColor="#E0E0E0"
-        foregroundColor="#000000"
+        backgroundColor="var(--nypl-colors-ui-gray-light-cool)"
+        foregroundColor="var(--nypl-colors-ui-black)"
       />
     </>
   );
