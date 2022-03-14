@@ -15,25 +15,32 @@ type ErrorProps = {
 };
 
 function Error({ statusCode }: ErrorProps) {
+  const pageTitle = "We're sorry...";
+
   return (
     <PageContainer
       metaTags={{
-        title: "We're Sorry",
+        title: pageTitle,
         description:
           "The page you requested is either unavailable or you need permission to view the content.",
       }}
       breadcrumbs={[
         {
           text: "Home",
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
+          url: NEXT_PUBLIC_NYPL_DOMAIN as string,
+        },
+        {
+          text: pageTitle,
+          // DS forces us to pass a url here, even tho the last item is never displayed as a link.
+          url: NEXT_PUBLIC_NYPL_DOMAIN as string,
         },
       ]}
-      breadcrumbsColor={ColorVariants.Research}
+      breadcrumbsColor={ColorVariants.WhatsOn}
       wrapperClass="nypl--404"
       contentHeader={null}
       contentPrimary={
         <Box minHeight="400px">
-          <Heading level={HeadingLevels.One}>We're Sorry...</Heading>
+          <Heading level={HeadingLevels.One}>{pageTitle}</Heading>
           <Box>
             <Text>
               The page you requested is either unavailable or you need
@@ -46,7 +53,9 @@ function Error({ statusCode }: ErrorProps) {
               </Link>{" "}
               service.
             </Text>
-            <Box fontWeight="bold">{statusCode}</Box>
+            <Box fontWeight="bold" display="none" visibility="hidden">
+              {statusCode}
+            </Box>
           </Box>
         </Box>
       }
