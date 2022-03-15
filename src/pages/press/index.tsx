@@ -3,7 +3,7 @@ import React from "react";
 import { withApollo } from "../../apollo/client/withApollo";
 // Components
 import PageContainer from "../../components/press-releases/layouts/PageContainer";
-import PressReleasesContainer from "../../components/press-releases/PressReleasesContainer";
+import PressReleaseCollection from "../../components/press-releases/PressReleaseCollection";
 // Content
 import pressContent from "../../__content/press";
 
@@ -18,7 +18,7 @@ function PressMainPage() {
       showContentHeader={true}
       contentPrimary={
         <>
-          <PressReleasesContainer
+          <PressReleaseCollection
             id="press-releases"
             description={meta.description}
             mediaContacts={mediaContacts.bodyText}

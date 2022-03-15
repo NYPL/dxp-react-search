@@ -6,7 +6,7 @@ import {
   HorizontalRule,
   Box,
 } from "@nypl/design-system-react-components";
-import NextDsLink from "./../../shared/Link/NextDsLink";
+import NextDsLink from "../../shared/Link/NextDsLink";
 //Type
 import { PressReleaseItem } from "./PressReleaseCardType";
 
@@ -23,7 +23,7 @@ function PressReleaseCard({ item }: PressReleaseCardProps) {
         </Heading>
         <Box>{date}</Box>
       </Box>
-      <HorizontalRule className="horizontal-rule" />
+      <HorizontalRule />
     </Box>
   );
 }

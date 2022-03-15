@@ -1,7 +1,7 @@
 import React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-import { PRESS_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/pressFields";
+import { PRESS_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/pressFields";
 // Components
 import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
 import MediaContacts from "../layouts/MediaContacts";
@@ -28,7 +28,7 @@ const ALL_PRESS_RELEASES_QUERY = gql`
   }
 `;
 
-interface PressReleaseContainerProps {
+interface PressReleaseCollectionProps {
   id: string;
   description: string;
   mediaContacts: string;
@@ -36,13 +36,13 @@ interface PressReleaseContainerProps {
   sort: any;
 }
 
-function PressReleaseContainer({
+function PressReleaseCollection({
   id,
   description,
   mediaContacts,
   limit,
   sort,
-}: PressReleaseContainerProps) {
+}: PressReleaseCollectionProps) {
   const router = useRouter();
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
@@ -69,15 +69,7 @@ function PressReleaseContainer({
   }
 
   return (
-    <Box
-      sx={{
-        // Centers the pagination component.
-        "& nav[role=navigation]": {
-          justifyContent: "center",
-          marginY: "xl",
-        },
-      }}
-    >
+    <Box>
       <Box mb={"l"}>{description}</Box>
       <Grid>
         {data.allPressReleases.items &&
@@ -85,13 +77,23 @@ function PressReleaseContainer({
             <PressReleaseCard item={item} />
           ))}
       </Grid>
-      <Pagination
-        initialPage={currentPage}
-        pageCount={data.allPressReleases.pageInfo.pageCount}
-        onPageChange={onPageChange}
-      />
+      <Box
+        sx={{
+          // Centers the pagination component.
+          "& nav[role=navigation]": {
+            justifyContent: "center",
+            marginY: "xl",
+          },
+        }}
+      >
+        <Pagination
+          initialPage={currentPage}
+          pageCount={data.allPressReleases.pageInfo.pageCount}
+          onPageChange={onPageChange}
+        />
+      </Box>
       <MediaContacts mediaContacts={mediaContacts} />
     </Box>
   );
 }
-export default PressReleaseContainer;
+export default PressReleaseCollection;
