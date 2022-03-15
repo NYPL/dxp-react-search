@@ -3,7 +3,10 @@ import React from "react";
 import { default as SharedPageContainer } from "../../shared/layouts/PageContainer";
 import Menu from "../../ds-prototypes/Menu";
 import { FormContextProvider } from "./../../../context/FormContext";
-import { ColorVariants } from "@nypl/design-system-react-components";
+import {
+  ColorVariants,
+  HeadingLevels,
+} from "@nypl/design-system-react-components";
 // Config
 import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
@@ -27,6 +30,10 @@ function PageContainer(props) {
             text: "Locations",
             url: `${NEXT_PUBLIC_NYPL_DOMAIN}/locations`,
           },
+          {
+            text: "Request a Class Visit or Group Tour",
+            url: `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/request-visit`,
+          },
         ]}
         breadcrumbsColor={ColorVariants.Locations}
         wrapperClass="nypl--locations"
@@ -43,10 +50,9 @@ function PageContainer(props) {
                 <Menu
                   id={menu.id}
                   key={menu.id}
-                  headingLevel={3}
+                  headingLevel={HeadingLevels.Three}
                   headingColor={"#c60917"}
                   title={menu.title}
-                  // @ts-ignore
                   items={menu.items}
                   menuItemDecoration={false}
                   orientation={"vertical"}

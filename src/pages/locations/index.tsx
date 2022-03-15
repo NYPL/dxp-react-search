@@ -17,8 +17,6 @@ import {
   Box,
   Grid,
   GridItem,
-  HStack,
-  Stack,
   ColorVariants,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
@@ -76,13 +74,12 @@ function LocationFinder() {
       contentBottom={
         <>
           <BottomPromo />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexFlow: "row nowrap",
-              maxWidth: "800px",
-            }}
+          <Box
+            display={{ md: "flex" }}
+            justifyContent={{ md: "space-between" }}
+            flexFlow={{ md: "row nowrap" }}
+            maxWidth={{ md: "800px" }}
+            mb="l"
           >
             {railMenuContent.map((menu) => {
               return (
@@ -99,7 +96,7 @@ function LocationFinder() {
                 />
               );
             })}
-          </div>
+          </Box>
         </>
       }
     />
