@@ -19,6 +19,7 @@ function Hero({ title, description, tag, image }: HeroProps) {
       minHeight="400px"
       pb="35px"
       bgImage={`url(${image})`}
+      mb={8}
     >
       <Box flex="0 0 50%" maxWidth="1313px" width="100%" margin="0 auto">
         <Box
