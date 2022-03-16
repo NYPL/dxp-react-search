@@ -43,7 +43,7 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
               <Box
                 display={{ lg: "flex" }}
                 flexFlow={{ lg: "row" }}
-                alignItems={{ lg: "center" }}
+                alignItems={{ lg: "flex-start" }}
               >
                 {item.image && (
                   <Box
