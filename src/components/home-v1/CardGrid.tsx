@@ -20,12 +20,12 @@ function CardGrid({ title, items }: CardGridProps) {
       <Grid
         as="ul"
         listStyleType="none"
-        templateColumns="repeat(auto-fit, minmax(275px, 1fr))"
-        gap={2}
+        templateColumns="repeat(auto-fit, minmax(267px, 1fr))"
+        gap={6}
       >
         {items.map((item: CardGridItem) => (
           <li key={item.id}>
-            <img src={item.image} />
+            <img width="100%" height="auto" src={item.image} />
             <Heading
               as="h3"
               size="md"

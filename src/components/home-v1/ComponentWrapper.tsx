@@ -9,8 +9,12 @@ interface ComponentWrapperProps {
 function ComponentWrapper({ title, children }: ComponentWrapperProps) {
   return (
     <Box mb={8}>
-      <Grid templateColumns="repeat(10, 1fr)" gap={1}>
-        <GridItem width="150px">
+      <Grid
+        templateAreas={`'heading component'`}
+        templateColumns="150px auto"
+        gap={1}
+      >
+        <GridItem gridArea="heading">
           <Box borderTop="2px solid red" mr="25px">
             <Heading
               as="h2"
@@ -25,7 +29,7 @@ function ComponentWrapper({ title, children }: ComponentWrapperProps) {
             </Heading>
           </Box>
         </GridItem>
-        <GridItem colSpan={9}>{children}</GridItem>
+        <GridItem gridArea="component">{children}</GridItem>
       </Grid>
     </Box>
   );
