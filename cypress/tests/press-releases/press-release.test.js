@@ -1,4 +1,4 @@
-import { testBreadcrumbs, testMenus } from "./../../support/_utils";
+import { testBreadcrumbs, testMenus } from "./../../support/utils";
 
 describe("Press Release Individual Page Tests", () => {
   beforeEach(() => {

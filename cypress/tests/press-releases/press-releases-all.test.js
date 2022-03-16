@@ -2,7 +2,7 @@ import {
   testBreadcrumbs,
   testMenus,
   testPagination,
-} from "./../../support/_utils";
+} from "./../../support/utils";
 
 describe("Press Release Main/Landing Page Tests", () => {
   beforeEach(() => {
