@@ -13,23 +13,22 @@ export const spotlightContent = {
     {
       id: "nypl-service-update",
       title: "NYPL Service Update",
-      image: "https://placeimg.com/256/159/animals",
+      image: "https://placeimg.com/267/167/animals",
     },
     {
       id: "ukraine-history",
       title: "Understanding the History of Ukraine: Recommended Reading",
-      image:
-        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/Spotlight_Service_Updates.png?itok=iOuxFehY",
+      image: "https://placeimg.com/267/167/animals",
     },
     {
       id: "exhibitions",
       title: "Discover Our New Free Exhibitions",
-      image: "https://placeimg.com/256/159/animals",
+      image: "https://placeimg.com/267/167/animals",
     },
     {
       id: "late-fines",
       title: "Did You Know? Late Fines Are Gone!",
-      image: "https://placeimg.com/256/159/animals",
+      image: "https://placeimg.com/267/167/animals",
     },
   ],
 };

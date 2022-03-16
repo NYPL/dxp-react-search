@@ -27,7 +27,7 @@ function HomePage() {
             </Box>
             <Box
               id="content-primary"
-              maxWidth="1313px"
+              maxWidth="1350px"
               width="100%"
               margin="0 auto"
               padding="0 20px"
