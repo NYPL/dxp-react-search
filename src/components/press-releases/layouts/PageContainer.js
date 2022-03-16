@@ -52,7 +52,6 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      //not correct color: should be BDBDBD accorindg to Figma
       breadcrumbsColor={ColorVariants.Blogs}
       contentPrimary={contentPrimary}
       showSidebar={true}
