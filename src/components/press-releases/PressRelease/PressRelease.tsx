@@ -15,11 +15,11 @@ import MediaContacts from "../layouts/MediaContacts";
 // Config/Utils
 import pressContent from "./../../../__content/press";
 
-interface PressReleasePorps {
+interface PressReleaseProps {
   pressRelease: any;
 }
 
-function PressRelease({ pressRelease }: PressReleasePorps) {
+function PressRelease({ pressRelease }: PressReleaseProps) {
   // ensure line breaks from Drupal are respected
   const description = pressRelease.description
     ? pressRelease.description.replace(/\n/g, "<br/>")

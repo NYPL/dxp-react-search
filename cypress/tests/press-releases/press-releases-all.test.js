@@ -7,14 +7,13 @@ import {
 describe("Press Release Main/Landing Page Tests", () => {
   beforeEach(() => {
     cy.viewport(1024, 768);
-    cy.visit("http://localhost:3000/press/");
-  });
-  // Check breadcrumbs
-  it("Breadcrumbs includes page title as last item and is not a link", () => {
-    testBreadcrumbs(2);
+    cy.visit("/press");
   });
 
-  // Check for Hero.
+  it("Breadcrumbs includes page title as last item and is not a link", () => {
+    testBreadcrumbs(2, "Press Releases");
+  });
+
   it("Hero should include h1 title", () => {
     cy.log("Hero exists.");
     cy.findByTestId("hero-content")
@@ -26,12 +25,10 @@ describe("Press Release Main/Landing Page Tests", () => {
       });
   });
 
-  // Check for any menus.
   it("Right rail menu should be present in sidebar", () => {
     testMenus();
   });
 
-  // Check for 10 Press Releases on main page
   it("10 press releases should display on first page", () => {
     cy.get("[id=page-container--content-primary]")
       .get("[class=css-1vubhz0]")
@@ -39,7 +36,6 @@ describe("Press Release Main/Landing Page Tests", () => {
       .should("exist");
   });
 
-  // Check Pagination
   it("Pagination provides navigation to next/previous page", () => {
     testPagination();
   });

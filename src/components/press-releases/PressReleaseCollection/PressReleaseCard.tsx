@@ -7,7 +7,7 @@ import {
   Box,
 } from "@nypl/design-system-react-components";
 import NextDsLink from "../../shared/Link/NextDsLink";
-//Type
+// Type
 import { PressReleaseItem } from "./PressReleaseCardType";
 
 interface PressReleaseCardProps {

@@ -1,6 +1,3 @@
-// decided to keep this as is for now since this might change if we someday
-// replace PageContainer.tsx in components/shared/layouts
-// with the Ds TempalteApContainer?
 export function testMenus() {
   return cy
     .log(

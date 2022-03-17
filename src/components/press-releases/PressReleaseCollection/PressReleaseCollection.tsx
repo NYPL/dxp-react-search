@@ -7,7 +7,7 @@ import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
 import MediaContacts from "../layouts/MediaContacts";
 import ListSkeletonLoader from "../layouts/List/ListSkeletonLoader";
 import PressReleaseCard from "./PressReleaseCard";
-//Type
+// Type
 import { PressReleaseItem } from "./PressReleaseCardType";
 // Next
 import { useRouter } from "next/router";

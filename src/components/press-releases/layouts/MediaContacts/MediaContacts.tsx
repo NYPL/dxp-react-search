@@ -1,9 +1,11 @@
 import React from "react";
+// Components
 import {
   Heading,
   HeadingLevels,
   Box,
 } from "@nypl/design-system-react-components";
+
 function MediaContacts({ mediaContacts }: any) {
   const contacts = mediaContacts.replace(/\n/g, "<br/>");
   return (

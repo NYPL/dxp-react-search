@@ -1,4 +1,4 @@
-export function testBreadcrumbs(length: number) {
+export function testBreadcrumbs(length: number, title: string) {
   return cy
     .log("Breadcumbs nav bar is present on page)")
     .findByRole("navigation", {
@@ -6,7 +6,7 @@ export function testBreadcrumbs(length: number) {
     })
     .should("exist")
     .log(
-      "Breadcumbs contains navigation links for all previsous pages and the title of current page)"
+      "Breadcumbs contains navigation links to all previsous pages and the title of current page)"
     )
     .findByRole("navigation", {
       name: /breadcrumb/i,
@@ -18,23 +18,10 @@ export function testBreadcrumbs(length: number) {
       for (let i = 0; i < $li.length; i++) {
         if (i === $li.length - 1) {
           expect($li[i]).to.have.descendants("span");
+          expect($li[i].innerText).to.eq(title);
         } else {
           expect($li[i]).to.have.descendants("a");
         }
       }
-    })
-    .findByRole("heading", {
-      level: 1,
-    })
-    .should(($heading) => {
-      const text = $heading.text();
-    })
-    .then((text) => {
-      cy.findByRole("navigation", {
-        name: /breadcrumb/i,
-      })
-        // @ts-ignore
-        .find("span", { name: /\text/ })
-        .should("exist");
     });
 }

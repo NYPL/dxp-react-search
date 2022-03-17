@@ -1,5 +1,5 @@
 import React from "react";
-//Comonents
+// Components
 import { SkeletonLoader, Grid } from "@nypl/design-system-react-components";
 
 interface ListSkeletonLoaderProps {
