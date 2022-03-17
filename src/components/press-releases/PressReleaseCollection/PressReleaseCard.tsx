@@ -13,6 +13,7 @@ import { PressReleaseItem } from "./PressReleaseCardType";
 interface PressReleaseCardProps {
   item: PressReleaseItem;
 }
+
 function PressReleaseCard({ item }: PressReleaseCardProps) {
   const { id, title, slug, date } = item;
   return (

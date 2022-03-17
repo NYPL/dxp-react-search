@@ -14,7 +14,7 @@ function MediaContacts({ mediaContacts }: any) {
       <Box
         sx={{
           "& a": {
-            color: "black",
+            color: "var(--nypl-colors-ui-black)",
             textDecor: "underline",
           },
         }}

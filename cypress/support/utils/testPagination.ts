@@ -1,4 +1,4 @@
-//TODO test that pagination only appears when more resluts are more than max per page
+// TODO test that pagination only appears when more resluts are more than max per page
 export function testPagination() {
   return cy
     .log("Pagination is present.")
