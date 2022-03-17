@@ -6,7 +6,7 @@ import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/te
 // Components
 import CardSet from "../../shared/Card/CardSet";
 import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
-import CardGrid from "../../ds-prototypes/CardGrid";
+import { Grid } from "@nypl/design-system-react-components";
 import Card from "../../shared/Card";
 import Image from "../../shared/Image";
 
@@ -87,9 +87,11 @@ function ResourceTopics({
 
   return (
     <CardSet id={id} title={title}>
-      <CardGrid
+      <Grid
+        as="ul"
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gap="1.25rem"
+        listStyleType="none"
       >
         {data.allTermsByVocab.map((item: any) => (
           <li key={item.id}>
@@ -115,7 +117,7 @@ function ResourceTopics({
             />
           </li>
         ))}
-      </CardGrid>
+      </Grid>
     </CardSet>
   );
 }
