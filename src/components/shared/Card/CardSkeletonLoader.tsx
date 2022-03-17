@@ -1,10 +1,10 @@
 import React from "react";
 // Components
 import {
+  SimpleGrid,
   SkeletonLoader,
   SkeletonLoaderImageRatios,
 } from "@nypl/design-system-react-components";
-import CardGrid from "../../ds-prototypes/CardGrid";
 
 interface CardSkeletonLoaderProps {
   gridTemplateColumns: string;
@@ -24,11 +24,7 @@ function CardSkeletonLoader({
     );
   }
 
-  return (
-    <CardGrid templateColumns={gridTemplateColumns} gap={gridGap}>
-      {skeletonLoaders}
-    </CardGrid>
-  );
+  return <SimpleGrid>{skeletonLoaders}</SimpleGrid>;
 }
 
 export default CardSkeletonLoader;
