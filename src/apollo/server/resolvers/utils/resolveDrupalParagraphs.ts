@@ -215,6 +215,8 @@ export default function resolveDrupalParagraphs(
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
           provider: audioProvider,
           embedCode: item.field_ers_media_item.field_media_oembed_remote_audio,
           oembedUrl: audioOembedUrl,
