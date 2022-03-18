@@ -5,11 +5,14 @@ import Hero from "./../Hero";
 import SearchHeader from "./../../shared/SearchHeader";
 import SearchForm from "./../SearchForm";
 import Menu from "./../../ds-prototypes/Menu";
-import { ColorVariants } from "@nypl/design-system-react-components";
+import {
+  Box,
+  ColorVariants,
+  HeadingLevels,
+} from "@nypl/design-system-react-components";
 // Config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
-
 import {
   articlesDatabasesSidebarMenu,
   railMenuContent,
@@ -70,10 +73,11 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={2}
+                headingLevel={HeadingLevels.Two}
                 headingColor={"#00838A"}
                 headingDecoration={"underline"}
                 title={menu.title}
+                // @ts-ignore
                 items={menu.items}
                 orientation={"vertical"}
               />
@@ -82,29 +86,29 @@ function PageContainer(props) {
         </>
       }
       contentBottom={
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexFlow: "row nowrap",
-            maxWidth: "800px",
-          }}
+        <Box
+          display={{ md: "flex" }}
+          justifyContent={{ md: "space-between" }}
+          flexFlow={{ md: "row nowrap" }}
+          maxWidth={{ md: "800px" }}
+          mb="l"
         >
           {railMenuContent.map((menu) => {
             return (
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={3}
+                headingLevel={HeadingLevels.Three}
                 headingColor={"#00838A"}
                 title={menu.title}
+                // @ts-ignore
                 items={menu.items}
                 menuItemDecoration={false}
                 orientation={"horizontal"}
               />
             );
           })}
-        </div>
+        </Box>
       }
     />
   );
