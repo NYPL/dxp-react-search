@@ -1,6 +1,6 @@
 import React from "react";
 // Content
-import BottomPromoContent from "./content";
+import BottomPromoContent from "../../../__content/locationFinder";
 // Components
 import {
   Heading,
@@ -13,13 +13,20 @@ import {
   Logo,
   LogoNames,
   LogoSizes,
+  Box,
+  Text,
+  TextDisplaySizes,
 } from "@nypl/design-system-react-components";
 
 function BottomPromo() {
   const { promo_left, promo_right } = BottomPromoContent;
 
   return (
-    <div className="bottom-promo">
+    <Box
+      mb="l"
+      bgGradient="linear(to-t, #fffbf8, $gray-xlight)"
+      className="bottom-promo"
+    >
       <div className="row">
         <div className="column left">
           <Heading
@@ -43,7 +50,9 @@ function BottomPromo() {
             level={HeadingLevels.Two}
             text={promo_right.title}
           />
-          <p className="promo-description">{promo_right.description}</p>
+          <Text displaySize={TextDisplaySizes.Caption}>
+            {promo_right.description}
+          </Text>
           {promo_right.image.map((value, index) => {
             const typedLogoName = value.logo as LogoNames;
             return (
@@ -66,7 +75,7 @@ function BottomPromo() {
           })}
         </div>
       </div>
-    </div>
+    </Box>
   );
 }
 
