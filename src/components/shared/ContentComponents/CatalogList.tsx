@@ -60,7 +60,7 @@ function CatalogList({
             <Box as="li" key={item.id}>
               <Card
                 layout={CardLayouts.Row}
-                center
+                isCentered
                 imageComponent={
                   <a href={catalogLink}>
                     <NextImage
