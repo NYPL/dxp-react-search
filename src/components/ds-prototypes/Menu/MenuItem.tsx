@@ -33,6 +33,7 @@ function MenuItem({
         additionalStyles={{
           display: "block",
           width: "fit-content",
+          marginTop: "var(--nypl-space-xs)",
           background: "brand.primary",
           _hover: {
             background: "brand.secondary",

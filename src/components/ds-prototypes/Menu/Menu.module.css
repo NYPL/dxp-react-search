@@ -1,5 +1,10 @@
+@media (max-width: 600px) {
+  .horizontal {
+    margin: var(--nypl-space-s) 0rem;
+  }
+}
 .vertical {
-  margin-bottom: 2rem;
+  margin: var(--nypl-space-s) 0rem;
 }
 
 .actionLink {

@@ -78,6 +78,8 @@ export const typeDefs = gql`
   type AudioEmbed {
     id: ID!
     type: String!
+    heading: String
+    description: String
     provider: String!
     embedCode: String!
     oembedUrl: String!
