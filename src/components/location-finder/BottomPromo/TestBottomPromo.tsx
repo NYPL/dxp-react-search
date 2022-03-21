@@ -25,35 +25,31 @@ function TestBottomPromo() {
     <Box
       mx={"calc(-50vw + 50%)"}
       mb="l"
-      bgGradient={"linear(to-r,#FFFBF8,#f5f5f5 )"}
+      bgGradient={"linear(to-r,#FFFBF8,ui.gray.x-light-cool)"}
     >
-      <Flex
-        direction={["column", null, "row"]}
-        justify={[null, null, null, "center"]}
-      >
+      <Flex direction={{ sm: "column", md: "row" }} justify={{ xl: "center" }}>
         <Box
           bg="#FFFBF8"
-          w={["100%", null, "50%", null, "624px"]}
-          p={"1rem"}
-          pl={["1rem", null, null, null, "0px"]}
+          w={{ sm: "100%", md: "50%", xl: "624px" }}
+          p={"var(--nypl-space-s)"}
+          pl={{ sm: "var(--nypl-space-s)", xl: "0px" }}
         >
           <Heading
             id="promo-left-section-title"
             level={HeadingLevels.Two}
             text={promo_left.title}
           />
-          <Flex direction={["column", null, "row"]}>
+          <Flex direction={{ sm: "column", md: "row" }}>
             {promo_left.image.map((value, index) => {
               return (
                 <Box
                   key={value.link}
-                  mr={[
-                    "20%",
-                    null,
-                    `${index === image.length - 1 ? null : "0px"}`,
-                  ]}
-                  mb={["2rem", null, "0px"]}
-                  w={["65%", null, "100%"]}
+                  mr={{
+                    sm: "20%",
+                    md: `${index === image.length - 1 ? null : "0px"}`,
+                  }}
+                  mb={{ sm: "var(--nypl-space-l)", md: "0px" }}
+                  w={{ sm: "65%", md: "100%" }}
                 >
                   <Link
                     href={value.link}
@@ -69,9 +65,9 @@ function TestBottomPromo() {
         </Box>
         <Box
           bg="ui.gray.x-light-cool"
-          w={["100%", null, "50%", null, "624px"]}
-          p={"1rem"}
-          ml={["calc(-50vw + 50%)", null, "0px"]}
+          w={{ sm: "100%", md: "50%", xl: "624px" }}
+          p={"var(--nypl-space-s)"}
+          ml={{ sm: "calc(-50vw + 50%)", xl: "0px" }}
         >
           <Heading
             id="promo-right-section-title"
@@ -81,11 +77,11 @@ function TestBottomPromo() {
           <Text displaySize={TextDisplaySizes.Caption}>
             {promo_right.description}
           </Text>
-          <Flex justify={[null, null, "space-between"]}>
-            {promo_right.image.map((value, index) => {
+          <Flex justify={{ md: "space-between" }}>
+            {promo_right.image.map((value) => {
               const typedLogoName = value.logo as LogoNames;
               return (
-                <Box key={value.link} w={["50%", null, "40%"]}>
+                <Box key={value.link} w={{ sm: "50%", md: "40%" }}>
                   <Link type={LinkTypes.Default}>
                     <a aria-label={value.logo_alt} href={value.link}>
                       <Logo
