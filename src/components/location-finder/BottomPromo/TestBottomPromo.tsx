@@ -53,8 +53,10 @@ function TestBottomPromo() {
                 >
                   <Link
                     href={value.link}
-                    textDecoration={"none"}
-                    color={"ui.black"}
+                    additionalStyles={{
+                      textDecor: "none",
+                      color: "ui.black",
+                    }}
                   >
                     <Image alt="" imageCaption={value.name} src={value.url} />
                   </Link>
