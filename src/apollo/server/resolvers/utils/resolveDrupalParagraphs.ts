@@ -254,7 +254,7 @@ export default function resolveDrupalParagraphs(
         break;
       case "paragraph--link_card_list":
         const cardItems: ResolvedParagraph[] = [];
-        item.field_erm_link_card &&
+        Array.isArray(item.field_erm_link_cards) &&
           item.field_erm_link_cards.map((cardItem: any) => {
             cardItems.push({
               id: cardItem.id,
