@@ -79,6 +79,8 @@ export const BLOG_FIELDS_FRAGMENT = gql`
         id
         type
         provider
+        heading
+        description
         embedCode
         oembedUrl
       }

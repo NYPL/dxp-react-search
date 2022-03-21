@@ -215,6 +215,8 @@ export default function resolveDrupalParagraphs(
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
           provider: audioProvider,
           embedCode: item.field_ers_media_item.field_media_oembed_remote_audio,
           oembedUrl: audioOembedUrl,
@@ -252,20 +254,21 @@ export default function resolveDrupalParagraphs(
         break;
       case "paragraph--link_card_list":
         const cardItems: ResolvedParagraph[] = [];
-        item.field_erm_link_cards.map((cardItem: any) => {
-          cardItems.push({
-            id: cardItem.id,
-            title: cardItem.field_ts_heading,
-            description: cardItem.field_tfls_description
-              ? cardItem.field_tfls_description.processed
-              : null,
-            link: cardItem.field_ls_link.url,
-            image:
-              cardItem.field_ers_image.data === null
-                ? null
-                : resolveImage(cardItem.field_ers_image),
+        Array.isArray(item.field_erm_link_cards) &&
+          item.field_erm_link_cards.map((cardItem: any) => {
+            cardItems.push({
+              id: cardItem.id,
+              title: cardItem.field_ts_heading,
+              description: cardItem.field_tfls_description
+                ? cardItem.field_tfls_description.processed
+                : null,
+              link: cardItem.field_ls_link.url,
+              image:
+                cardItem.field_ers_image.data === null
+                  ? null
+                  : resolveImage(cardItem.field_ers_image),
+            });
           });
-        });
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
