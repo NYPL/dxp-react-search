@@ -57,7 +57,7 @@ function LocationFinder() {
         </>
       }
       contentPrimary={
-        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} spacing="l">
+        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} gap="l">
           <GridItem
             id="locations-list"
             maxHeight={[null, null, "500px"]}
