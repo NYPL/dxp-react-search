@@ -137,7 +137,7 @@ function BlogsContainer({
       query: {
         // @TODO do this better.
         ...(router.query.channel && {
-          alpha: router.query.channel,
+          channel: router.query.channel,
         }),
         ...(router.query.subject && {
           subject: router.query.subject,
