@@ -172,7 +172,7 @@ function BlogsContainer({
         <CardGridSkeletonLoader
           templateColumns="repeat(1, 1fr)"
           gap="l"
-          orientation="horizontal"
+          cardLayout="row"
           showImage={true}
           itemsCount={5}
         />
