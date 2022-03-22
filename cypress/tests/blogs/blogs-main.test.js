@@ -19,7 +19,7 @@ describe("Blogs Main Tests", () => {
     }).should("exist");
     cy.log("Featured posts link should exist.");
     cy.findByRole("link", {
-      name: /view all blogs/i,
+      name: /view all blog posts/i,
     }).should("exist");
     // @TODO Add test for blogs list.
 
