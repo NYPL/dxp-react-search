@@ -5,7 +5,7 @@ import { PRESS_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/pressFie
 // Components
 import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
 import MediaContacts from "../layouts/MediaContacts";
-import ListSkeletonLoader from "../layouts/List/ListSkeletonLoader";
+import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 import PressReleaseCard from "./PressReleaseCard";
 // Type
 import { PressReleaseItem } from "./PressReleaseCardType";
@@ -65,7 +65,15 @@ function PressReleaseCollection({
   }
 
   if (loading || !data) {
-    return <ListSkeletonLoader itemsCount={10} />;
+    return (
+      <CardGridSkeletonLoader
+        gap="l"
+        templateColumns="repeat(1, 1fr)"
+        itemsCount={10}
+        showImage={false}
+        orientation="horizontal"
+      />
+    );
   }
 
   return (
