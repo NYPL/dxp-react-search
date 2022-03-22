@@ -71,7 +71,7 @@ function PressReleaseCollection({
         templateColumns="repeat(1, 1fr)"
         itemsCount={10}
         showImage={false}
-        orientation="horizontal"
+        cardLayout="row"
       />
     );
   }
