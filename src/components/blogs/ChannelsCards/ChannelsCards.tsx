@@ -6,7 +6,7 @@ import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/te
 // Components
 import Card from "../../shared/Card";
 import CardSet from "../../shared/Card/CardSet";
-import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
+import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 import Image from "../../shared/Image";
 import { Grid } from "@nypl/design-system-react-components";
 // Types
@@ -101,9 +101,9 @@ function ChannelsCards({
         slugLabel={slugLabel}
         description={description}
       >
-        <CardSkeletonLoader
-          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gridGap="1.25rem"
+        <CardGridSkeletonLoader
+          templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+          gap="1.25rem"
           itemsCount={6}
         />
       </CardSet>
