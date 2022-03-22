@@ -10,24 +10,24 @@ interface CardGridSkeletonLoaderProps {
   templateColumns: string;
   gap: string;
   itemsCount: number;
-  orientation?: "vertical" | "horizontal" | undefined;
+  cardLayout?: "column" | "row" | undefined;
   showImage?: boolean;
 }
 
 type CardSkeletonLoaderProps = Pick<
   CardGridSkeletonLoaderProps,
-  "orientation" | "showImage"
+  "cardLayout" | "showImage"
 >;
 
 function CardSkeletonLoader({
-  orientation,
+  cardLayout,
   showImage = true,
 }: CardSkeletonLoaderProps) {
-  if (orientation === "vertical") {
+  if (cardLayout === "column") {
     return (
       <SkeletonLoader imageAspectRatio={SkeletonLoaderImageRatios.Landscape} />
     );
-  } else if (orientation === "horizontal") {
+  } else if (cardLayout === "row") {
     return (
       <Box display={{ lg: "flex" }}>
         {showImage && (
@@ -67,14 +67,14 @@ export default function CardGridSkeletonLoader({
   templateColumns,
   gap,
   itemsCount,
-  orientation = "vertical",
+  cardLayout = "column",
   showImage = true,
 }: CardGridSkeletonLoaderProps) {
   let skeletonLoaders = [];
   for (var i = 0; i < itemsCount; i++) {
     skeletonLoaders.push(
       <li key={i}>
-        <CardSkeletonLoader orientation={orientation} showImage={showImage} />
+        <CardSkeletonLoader cardLayout={cardLayout} showImage={showImage} />
       </li>
     );
   }
