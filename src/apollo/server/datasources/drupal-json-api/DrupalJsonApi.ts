@@ -9,7 +9,8 @@ type JsonApiResource = { [key: string]: any };
 class DrupalJsonApi<TContext = any> extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = DRUPAL_API;
+    this.baseURL = "https://qa-d8.nypl.org";
+    //this.baseURL = DRUPAL_API;
   }
 
   /**
