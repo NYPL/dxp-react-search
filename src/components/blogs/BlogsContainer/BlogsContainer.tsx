@@ -5,7 +5,7 @@ import { BLOG_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/blogFie
 // Components
 import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
 import CardSet from "../../shared/Card/CardSet";
-import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
+import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 import BlogCard from "./BlogCard";
 import FilterBarDetails from "./FilterBarDetails";
 // Types
@@ -169,10 +169,12 @@ function BlogsContainer({
         slugLabel={slugLabel}
         description={description}
       >
-        <CardSkeletonLoader
-          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gridGap="1.25rem"
-          itemsCount={6}
+        <CardGridSkeletonLoader
+          templateColumns="repeat(1, 1fr)"
+          gap="l"
+          orientation="horizontal"
+          showImage={true}
+          itemsCount={5}
         />
       </CardSet>
     );
