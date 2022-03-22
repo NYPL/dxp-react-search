@@ -75,4 +75,24 @@ describe("Blog All pg tests", () => {
       expect(loc.search).to.eq(`?page=3`);
     });
   });
+
+  it("Clicking next link in pagination with filters already selected should goto page 2 and retain filter selection", () => {
+    cy.log("Goto blogs all page");
+    cy.visit("/blog/all?channel=730&page=1");
+
+    cy.log("Find the pagination component");
+    cy.findByRole("navigation", {
+      name: /pagination/i,
+    }).within(() => {
+      cy.log("Click next page");
+      cy.findByRole("link", {
+        name: /next page/i,
+      }).click();
+    });
+
+    cy.log("Filter id is retained and pagination should be on page 2");
+    cy.location().should((loc) => {
+      expect(loc.search).to.eq(`?channel=730&page=2`);
+    });
+  });
 });
