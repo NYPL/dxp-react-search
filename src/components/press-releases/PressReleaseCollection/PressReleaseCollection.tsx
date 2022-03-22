@@ -79,10 +79,12 @@ function PressReleaseCollection({
   return (
     <Box>
       <Box mb={"l"}>{description}</Box>
-      <Grid>
+      <Grid as="ul" listStyleType="none">
         {data.allPressReleases.items &&
           data.allPressReleases.items.map((item: PressReleaseItem) => (
-            <PressReleaseCard item={item} />
+            <li key={item.id}>
+              <PressReleaseCard item={item} />
+            </li>
           ))}
       </Grid>
       <Box
