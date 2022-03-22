@@ -5,7 +5,7 @@ import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image"
 import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
 import CardSet from "../../shared/Card/CardSet";
-import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
+import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 import Image from "../../shared/Image";
@@ -76,9 +76,9 @@ function ResourceTopics({
   if (loading || !data) {
     return (
       <CardSet id={id} title={title}>
-        <CardSkeletonLoader
-          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gridGap="1.25rem"
+        <CardGridSkeletonLoader
+          templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+          gap="1.25rem"
           itemsCount={6}
         />
       </CardSet>
