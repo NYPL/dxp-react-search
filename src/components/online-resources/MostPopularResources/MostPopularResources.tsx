@@ -3,7 +3,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 // Components
 import CardSet from "../../shared/Card/CardSet";
-import CardSkeletonLoader from "../../shared/Card/CardSkeletonLoader";
+import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 
@@ -64,9 +64,9 @@ function MostPopularResources({ id, title }: MostPopularResourcesProps) {
   if (loading || !data) {
     return (
       <CardSet id={id} title={title}>
-        <CardSkeletonLoader
-          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gridGap="1.25rem"
+        <CardGridSkeletonLoader
+          templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+          gap="1.25rem"
           itemsCount={3}
         />
       </CardSet>

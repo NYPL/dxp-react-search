@@ -39,7 +39,7 @@ function Menu({
       id={id}
       key={id}
       aria-labelledby={headingId}
-      className={orientation === "vertical" ? s.vertical : ""}
+      className={orientation === "vertical" ? s.vertical : s.horizontal}
     >
       <span style={headingColor ? { color: headingColor } : { color: "black" }}>
         <Heading
