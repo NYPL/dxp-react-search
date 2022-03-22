@@ -20,7 +20,11 @@ export const typeDefs = gql`
   union PressReleaseMainContent = Text | TextWithImage | ImageComponent
 
   extend type Query {
-    allPressReleases(limit: Int, pageNumber: Int): PressReleaseConnection
+    allPressReleases(
+      limit: Int
+      pageNumber: Int
+      sort: Sort
+    ): PressReleaseConnection
     pressRelease(id: String, revisionId: String, preview: Boolean): PressRelease
   }
 `;

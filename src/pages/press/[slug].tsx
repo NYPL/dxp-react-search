@@ -1,7 +1,7 @@
 import React from "react";
 // Next
 import { useRouter } from "next/router";
-import ErrorPage from "next/error";
+import Error from "../_error";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 import { withApollo } from "../../apollo/client/withApollo";
@@ -39,17 +39,11 @@ function PressReleasePage() {
   // If uuid returns null from useDecoupledRouter, there was no router
   // path match in Drupal, so we return 404 status error component.
   if (!data && uuid === null) {
-    return (
-      <PageContainer
-        showContentHeader={false}
-        contentPrimary={<ErrorPage statusCode={404} />}
-      />
-    );
+    return <Error statusCode={404} />;
   }
 
   // Error state.
   if (error) {
-    console.log(error);
     return <div>Error.</div>;
   }
 

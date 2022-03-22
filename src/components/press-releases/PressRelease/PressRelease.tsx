@@ -11,14 +11,15 @@ import {
   Text,
   Link,
 } from "@nypl/design-system-react-components";
+import MediaContacts from "../layouts/MediaContacts";
 // Config/Utils
 import pressContent from "./../../../__content/press";
 
-interface PressReleasePorps {
+interface PressReleaseProps {
   pressRelease: any;
 }
 
-function PressRelease({ pressRelease }: PressReleasePorps) {
+function PressRelease({ pressRelease }: PressReleaseProps) {
   // ensure line breaks from Drupal are respected
   const description = pressRelease.description
     ? pressRelease.description.replace(/\n/g, "<br/>")
@@ -75,16 +76,7 @@ function PressRelease({ pressRelease }: PressReleasePorps) {
           )}
       </Box>
       {About}
-      <Heading level={HeadingLevels.Two} text="Media Contact" />
-      <Box
-        sx={{
-          "& a": {
-            color: "black",
-            textDecor: "underline",
-          },
-        }}
-        dangerouslySetInnerHTML={{ __html: pressRelease.mediaContacts }}
-      />
+      <MediaContacts mediaContacts={pressRelease.mediaContacts} />
     </Box>
   );
 }

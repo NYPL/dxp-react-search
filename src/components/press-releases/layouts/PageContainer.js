@@ -37,8 +37,8 @@ function PageContainer(props) {
       <Hero
         heroType={HeroTypes.Tertiary}
         heading={<Heading level={HeadingLevels.One} text={"Press Releases"} />}
-        backgroundColor="ui.gray.light-cool"
-        foregroundColor="#000000"
+        backgroundColor="var(--nypl-colors-ui-gray-light-cool)"
+        foregroundColor="var(--nypl-colors-ui-black)"
       />
     </>
   );
@@ -51,7 +51,6 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      //not correct color: should be BDBDBD accorindg to Figma
       breadcrumbsColor={ColorVariants.Blogs}
       contentPrimary={contentPrimary}
       showSidebar={true}
