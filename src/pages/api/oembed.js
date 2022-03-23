@@ -15,10 +15,6 @@ export default async function handler(req, res) {
   // Run cors
   await cors(req, res);
 
-  if (req.method === "OPTIONS") {
-    return res.end();
-  }
-
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(response.statusText);
