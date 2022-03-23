@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-const { NEXT_PUBLIC_SCOUT_DOMAIN } = process.env;
+//const { NEXT_PUBLIC_SCOUT_DOMAIN } = process.env;
 
 function useOembedApi(oembedUrl: string, embedCode: string) {
   const [html, setHtml] = useState("");
 
   useEffect(() => {
     const fetchOembed = async () => {
-      const response = await fetch(`${NEXT_PUBLIC_SCOUT_DOMAIN}/api/oembed`, {
+      /*const response = await fetch(`${NEXT_PUBLIC_SCOUT_DOMAIN}/api/oembed`, {
         body: JSON.stringify({
           url: `${oembedUrl}=${embedCode}`,
         }),
@@ -15,6 +15,8 @@ function useOembedApi(oembedUrl: string, embedCode: string) {
         },
         method: "POST",
       });
+      */
+      const response = await fetch(`${oembedUrl}=${embedCode}`);
       const json = await response.json();
       setHtml(json.html);
     };
