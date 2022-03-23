@@ -91,7 +91,7 @@ function ChannelsCards({
     return <div>Error while loading channels.</div>;
   }
 
-  // Loading state,
+  // Loading state.
   if (loading || !data) {
     return (
       <CardSet
@@ -103,7 +103,7 @@ function ChannelsCards({
       >
         <CardGridSkeletonLoader
           templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gap="1.25rem"
+          gap="m"
           itemsCount={6}
         />
       </CardSet>
@@ -120,9 +120,9 @@ function ChannelsCards({
     >
       <Grid
         as="ul"
-        templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap="1.25rem"
         listStyleType="none"
+        templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+        gap="m"
       >
         {data.allTermsByVocab.map((item: ChannelCardItem) => (
           <li key={item.id}>

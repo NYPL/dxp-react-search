@@ -72,13 +72,13 @@ function ResourceTopics({
     return <div>Error while loading resource topics.</div>;
   }
 
-  // Loading state,
+  // Loading state.
   if (loading || !data) {
     return (
       <CardSet id={id} title={title}>
         <CardGridSkeletonLoader
           templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gap="1.25rem"
+          gap="m"
           itemsCount={6}
         />
       </CardSet>
@@ -89,9 +89,9 @@ function ResourceTopics({
     <CardSet id={id} title={title}>
       <Grid
         as="ul"
-        templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap="1.25rem"
         listStyleType="none"
+        templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+        gap="m"
       >
         {data.allTermsByVocab.map((item: any) => (
           <li key={item.id}>

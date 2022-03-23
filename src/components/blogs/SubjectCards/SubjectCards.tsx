@@ -82,9 +82,9 @@ function SubjectCards() {
     >
       <Grid
         as="ul"
-        templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap="1.25rem"
         listStyleType="none"
+        templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+        gap="m"
       >
         {data.allTermsByVocab.map((item: SubjectCardItem) => (
           <li key={item.id}>
