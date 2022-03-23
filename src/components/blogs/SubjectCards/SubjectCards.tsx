@@ -3,7 +3,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { TERM_BASE_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/term";
 // Components
-import CardGrid from "../../ds-prototypes/CardGrid";
+import { Grid } from "@nypl/design-system-react-components";
 import Card from "../../shared/Card";
 import CardSet from "../../shared/Card/CardSet";
 // Utils
@@ -80,9 +80,11 @@ function SubjectCards() {
         est, ac varius integer pharetra nulla pellentesque. Nunc neque enim
         metus ut volutpat turpis nascetur."
     >
-      <CardGrid
+      <Grid
+        as="ul"
+        listStyleType="none"
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap="1.25rem"
+        gap="m"
       >
         {data.allTermsByVocab.map((item: SubjectCardItem) => (
           <li key={item.id}>
@@ -93,7 +95,7 @@ function SubjectCards() {
             />
           </li>
         ))}
-      </CardGrid>
+      </Grid>
     </CardSet>
   );
 }

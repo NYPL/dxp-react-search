@@ -3,8 +3,8 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 // Components
 import CardSet from "../../shared/Card/CardSet";
+import { Grid } from "@nypl/design-system-react-components";
 import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
-import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 
 const MOST_POPULAR_RESOURCES_QUERY = gql`
@@ -60,13 +60,13 @@ function MostPopularResources({ id, title }: MostPopularResourcesProps) {
     return <div>Error while loading most popular.</div>;
   }
 
-  // Loading state,
+  // Loading state.
   if (loading || !data) {
     return (
       <CardSet id={id} title={title}>
         <CardGridSkeletonLoader
           templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gap="1.25rem"
+          gap="m"
           itemsCount={3}
         />
       </CardSet>
@@ -75,9 +75,11 @@ function MostPopularResources({ id, title }: MostPopularResourcesProps) {
 
   return (
     <CardSet id={id} title={title}>
-      <CardGrid
+      <Grid
+        as="ul"
+        listStyleType="none"
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap="1.25rem"
+        gap="m"
       >
         {data.allOnlineResources.items.map(
           (item: {
@@ -96,7 +98,7 @@ function MostPopularResources({ id, title }: MostPopularResourcesProps) {
             </li>
           )
         )}
-      </CardGrid>
+      </Grid>
     </CardSet>
   );
 }
