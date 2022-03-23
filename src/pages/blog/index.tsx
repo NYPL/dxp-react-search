@@ -4,7 +4,7 @@ import { withApollo } from "../../apollo/client/withApollo";
 // Components
 import PageContainer from "../../components/blogs/layouts/PageContainer";
 import ChannelsCards from "../../components/blogs/ChannelsCards";
-import BlogsContainer from "../../components/blogs/BlogsContainer";
+import BlogCollection from "../../components/blogs/BlogCollection";
 // Content
 import blogsContent from "../../__content/blogs";
 
@@ -19,7 +19,7 @@ function BlogsMainPage() {
       showContentHeader={true}
       contentPrimary={
         <>
-          <BlogsContainer
+          <BlogCollection
             id="featured-posts"
             title={featured_posts.heading}
             description={featured_posts.description}

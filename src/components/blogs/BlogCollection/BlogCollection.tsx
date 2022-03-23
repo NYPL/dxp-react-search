@@ -39,7 +39,7 @@ const BLOGS_QUERY = gql`
   }
 `;
 
-interface BlogsContainerProps {
+interface BlogCollectionProps {
   id: string;
   title?: string;
   description?: string;
@@ -52,7 +52,7 @@ interface BlogsContainerProps {
   status?: boolean;
 }
 
-function BlogsContainer({
+function BlogCollection({
   id,
   title = "",
   description = "",
@@ -63,7 +63,7 @@ function BlogsContainer({
   sort,
   featured,
   status,
-}: BlogsContainerProps) {
+}: BlogCollectionProps) {
   const router = useRouter();
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
@@ -244,4 +244,4 @@ function BlogsContainer({
   );
 }
 
-export default BlogsContainer;
+export default BlogCollection;
