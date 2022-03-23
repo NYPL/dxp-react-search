@@ -1,9 +1,10 @@
 import Cors from "micro-cors";
+const { NEXT_PUBLIC_ALLOWED_ORIGIN } = process.env;
 
 // Set cors policy.
-// @TODO Add origin as NEXT_PUBLIC_ALLOWED_ORIGIN ?
 const cors = Cors({
   allowMethods: ["GET", "POST", "OPTIONS"],
+  origin: `${NEXT_PUBLIC_ALLOWED_ORIGIN}`,
 });
 
 export default async function handler(req, res) {
