@@ -1,6 +1,7 @@
 import Cors from "micro-cors";
 
 // Set cors policy.
+// @TODO Add origin as NEXT_PUBLIC_ALLOWED_ORIGIN ?
 const cors = Cors({
   allowMethods: ["GET", "POST", "OPTIONS"],
 });
