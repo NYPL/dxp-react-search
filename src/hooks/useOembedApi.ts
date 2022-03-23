@@ -5,7 +5,15 @@ function useOembedApi(oembedUrl: string, embedCode: string) {
 
   useEffect(() => {
     const fetchOembed = async () => {
-      const response = await fetch(`${oembedUrl}=${embedCode}`);
+      const response = await fetch("/api/oembed", {
+        body: JSON.stringify({
+          url: `${oembedUrl}=${embedCode}`,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
       const json = await response.json();
       setHtml(json.html);
     };
