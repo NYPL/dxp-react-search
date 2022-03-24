@@ -1,7 +1,6 @@
 import React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-import { BLOG_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/blogFields";
 // Components
 import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
 import CardSet from "../../shared/Card/CardSet";
@@ -14,7 +13,6 @@ import { BlogCardItem } from "./BlogCardTypes";
 import { useRouter } from "next/router";
 
 const BLOGS_QUERY = gql`
-  ${BLOG_FIELDS_FRAGMENT}
   query BlogsQuery(
     $limit: Int
     $pageNumber: Int
@@ -28,7 +26,28 @@ const BLOGS_QUERY = gql`
       sort: $sort
     ) {
       items {
-        ...BlogFields
+        id
+        title
+        description
+        slug
+        date
+        byline
+        image {
+          id
+          uri
+          alt
+          transformations {
+            id
+            label
+            uri
+          }
+        }
+        locations {
+          id
+          drupalInternalId
+          name
+          slug
+        }
       }
       pageInfo {
         totalItems

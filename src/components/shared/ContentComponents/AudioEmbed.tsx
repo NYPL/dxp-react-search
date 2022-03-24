@@ -5,16 +5,14 @@ import {
   HeadingLevels,
 } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
-import useOembedApi from "./../../../hooks/useOembedApi";
 
 interface AudioEmbedProps {
   id: string;
   type: string;
   heading?: string;
   description?: string;
-  embedCode: string;
-  oembedUrl: string;
   provider: string;
+  html: string;
 }
 
 function AudioEmbed({
@@ -22,12 +20,9 @@ function AudioEmbed({
   type,
   heading,
   description,
-  embedCode,
-  oembedUrl,
   provider,
+  html,
 }: AudioEmbedProps) {
-  const html = useOembedApi(oembedUrl, embedCode);
-
   return (
     <Box
       id={`${type}-${provider}-${id}`}

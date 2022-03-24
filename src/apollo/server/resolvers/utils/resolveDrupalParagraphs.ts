@@ -1,5 +1,6 @@
 import { JsonApiResourceObject } from "./types";
 import { resolveImage } from "./resolveImage";
+import fetchOembedApi from "./fetchOembedApi";
 
 type ResolvedParagraph = {
   [index: string]: string | number | boolean | object | undefined | null;
@@ -181,7 +182,7 @@ export default function resolveDrupalParagraphs(
         break;
       case "paragraph--audio":
         let audioProvider;
-        let audioOembedUrl;
+        let audioOembedUrl = "";
         // Soundcloud
         if (
           item.field_ers_media_item.field_media_oembed_remote_audio.includes(
@@ -211,6 +212,10 @@ export default function resolveDrupalParagraphs(
           audioOembedUrl = "https://d8.nypl.org/api/oembed-libsyn?url";
         }
 
+        const audioEmbedCode =
+          item.field_ers_media_item.field_media_oembed_remote_audio;
+        const audioHtml = fetchOembedApi(audioOembedUrl, audioEmbedCode);
+
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
@@ -219,6 +224,7 @@ export default function resolveDrupalParagraphs(
           provider: audioProvider,
           embedCode: item.field_ers_media_item.field_media_oembed_remote_audio,
           oembedUrl: audioOembedUrl,
+          html: audioHtml,
         };
         break;
       case "paragraph--image":
