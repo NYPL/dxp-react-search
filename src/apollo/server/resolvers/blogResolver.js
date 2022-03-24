@@ -9,18 +9,14 @@ import {
   getCollectionResourceJsonApiPath,
 } from "./../datasources/drupal-json-api/getJsonApiPath";
 
-const includedFields = [
-  "field_ers_media_image.field_media_image",
-  "field_main_content.field_ers_media_item.field_media_image",
-  "field_erm_location",
-  // Link Card List
-  "field_main_content.field_erm_link_cards",
-  "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
-];
-
 const blogResolver = {
   Query: {
     allBlogs: async (_, args, { dataSources }) => {
+      const includedFields = [
+        "field_ers_media_image.field_media_image",
+        "field_main_content.field_ers_media_item.field_media_image",
+        "field_erm_location",
+      ];
       const pagination = {
         limit: args.limit,
         pageNumber: args.pageNumber,
@@ -50,6 +46,14 @@ const blogResolver = {
       };
     },
     blog: async (_, args, { dataSources }) => {
+      const includedFields = [
+        "field_ers_media_image.field_media_image",
+        "field_main_content.field_ers_media_item.field_media_image",
+        "field_erm_location",
+        // Link Card List
+        "field_main_content.field_erm_link_cards",
+        "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+      ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
         "node",
