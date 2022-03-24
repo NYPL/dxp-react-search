@@ -83,6 +83,7 @@ export const typeDefs = gql`
     provider: String!
     embedCode: String!
     oembedUrl: String!
+    html: String!
   }
 
   type SocialEmbed {
