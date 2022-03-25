@@ -2,6 +2,12 @@
 
 ---
 
+### v0.5.1 [2022-03-24] Blogs Bug Fix
+
+---
+
+- Fix for libsyn podcast audio embed not rendering on frontend.
+
 ### v0.5.0 [2022-03-23] Blogs Release!
 
 ---
