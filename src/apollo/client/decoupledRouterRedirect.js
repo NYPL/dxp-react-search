@@ -12,14 +12,20 @@ async function decoupledRouterRedirect(ctx) {
       //fetchPolicy: 'network-only',
     })
     .then(({ data }) => {
-      // Return false if this is not a redirect.
+      // Route is not found in CMS, so set 404 status and return false.
+      if (
+        data.decoupledRouter.uuid === null &&
+        !data.decoupledRouter.redirect
+      ) {
+        ctx.res.statusCode = 404;
+        return false;
+      }
+      // Route is not a redirect so return false.
       if (!data || !data.decoupledRouter.redirect) {
         return false;
       }
-
       // Handle the redirect.
       const redirect = data.decoupledRouter.redirect;
-
       if (ctx.res) {
         ctx.res.writeHead(redirect.status, {
           Location: redirect.to,
