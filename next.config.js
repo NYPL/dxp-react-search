@@ -57,6 +57,8 @@ const nextConfig = {
       "images.nypl.org",
       // Remote catalog image
       "images.btol.com",
+      "imagesa.btol.com",
+      "imagesb.btol.com",
       "contentcafecloud.baker-taylor.com",
       "img1.od-cdn.com",
       "ic.od-cdn.com",

@@ -2,6 +2,14 @@
 
 ---
 
+### v0.5.0 [2022-03-23] Blogs Release!
+
+---
+
+- Initial build of Blogs.
+- Upgraded to NYPL DS 0.25.9.
+- General application refactoring and code cleanup.
+
 ### v0.4.0 [2021-12-06] Locations Local Release
 
 ---
