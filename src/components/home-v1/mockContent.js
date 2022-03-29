@@ -32,3 +32,83 @@ export const spotlightContent = {
     },
   ],
 };
+
+export const sliderContent = {
+  title: "New & Noteworthy",
+  items: [
+    {
+      id: "never_cought",
+      title: "Never Caught",
+      author: "Erica A. Dunbar",
+      genre: "Nonfiction",
+      audience: "Adult",
+      image:
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/NeverCaught.jpg?itok=xc-5mlme",
+    },
+    {
+      id: "city_of_mist",
+      title: "The City of Mist: Stories",
+      author: "Carlos Ruiz Zafon",
+      genre: "Fiction",
+      audience: "Adult",
+      image:
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/CityMist.jpg?itok=s9Io0Qdb",
+    },
+    {
+      id: "i_was_better",
+      title: "I was better last night",
+      author: "Harvey Fierstein",
+      genre: "Nonfiction",
+      audience: "Adult",
+      image: "https://placeimg.com/267/167/animals",
+    },
+    {
+      id: "the_stars_are",
+      title: "The Stars Are Not Yet Bells",
+      author: "Hanah L. Assadi",
+      genre: "Fiction",
+      audience: "Adult",
+      image: "https://placeimg.com/267/167/animals",
+    },
+    {
+      id: "the_naked_dont",
+      title: "The Naked don't Fear the water",
+      author: "Matthieu Aikins",
+      genre: "Nonfiction",
+      audience: "Adult",
+      image: "https://placeimg.com/267/167/animals",
+    },
+    {
+      id: "education_accross",
+      title: "Education Accross Borders",
+      author: "Patrick Sylvain",
+      genre: "Nonfiction",
+      audience: "Adult",
+      image: "https://placeimg.com/267/167/animals",
+    },
+    {
+      id: "vagabonds",
+      title: "Vagabonds!",
+      author: "Eloghosa Osunde",
+      genre: "Fiction",
+      audience: "Adult",
+      image: "https://placeimg.com/267/167/animals",
+    },
+    {
+      id: "invisible_kingdom",
+      title: "Invisible Kingdom",
+      author: "Meghan O'Rourke",
+      genre: "Nonfiction",
+      audience: "Adult",
+      image: "https://placeimg.com/267/167/animals",
+    },
+    {
+      id: "finally_donovan",
+      title: "Finally Donovan Is Killing It",
+      author: "Elle Cosimano",
+      genre: "Fiction",
+      audience: "Adult",
+      image: "https://placeimg.com/267/167/animals",
+    },
+  ],
+};
