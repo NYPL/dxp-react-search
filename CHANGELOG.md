@@ -2,6 +2,13 @@
 
 ---
 
+### v0.5.2 [2022-03-30] Blogs Bug Fixes & Additions
+
+---
+
+- Fixes bug where Scout 404 page returned a 200 status.
+- Adds support for livestream to Video embed component.
+
 ### v0.5.1 [2022-03-24] Blogs Bug Fix
 
 ---
