@@ -134,6 +134,16 @@ export default function resolveDrupalParagraphs(
           videoProvider = "vimeo";
           videoOembedUrl = "https://vimeo.com/api/oembed.json?url";
         }
+        // Livestream
+        // Ex oEmbed req: https://livestream.com/oembed?url=https://livestream.com/accounts/7326672/events/8601331/videos/188700578
+        if (
+          item.field_ers_media_item.field_media_oembed_video.includes(
+            "livestream"
+          )
+        ) {
+          videoProvider = "livestream";
+          videoOembedUrl = "https://livestream.com/oembed?url";
+        }
 
         paragraphComponent = {
           id: item.id,
