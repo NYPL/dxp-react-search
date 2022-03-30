@@ -33,7 +33,7 @@ export const spotlightContent = {
   ],
 };
 
-export const sliderContent = {
+export const slideShowContent = {
   title: "New & Noteworthy",
   items: [
     {
