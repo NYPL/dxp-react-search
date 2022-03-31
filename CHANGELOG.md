@@ -2,6 +2,27 @@
 
 ---
 
+### v0.5.2 [2022-03-30] Blogs Bug Fixes & Additions
+
+---
+
+- Fixes bug where Scout 404 page returned a 200 status.
+- Adds support for livestream to Video embed component.
+
+### v0.5.1 [2022-03-24] Blogs Bug Fix
+
+---
+
+- Fix for libsyn podcast audio embed not rendering on frontend.
+
+### v0.5.0 [2022-03-23] Blogs Release!
+
+---
+
+- Initial build of Blogs.
+- Upgraded to NYPL DS 0.25.9.
+- General application refactoring and code cleanup.
+
 ### v0.4.0 [2021-12-06] Locations Local Release
 
 ---

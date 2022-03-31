@@ -3,7 +3,7 @@ import React from "react";
 import { withApollo } from "./../../apollo/client/withApollo";
 // Components
 import PageContainer from "./../../components/blogs/layouts/PageContainer";
-import BlogsContainer from "../../components/blogs/BlogsContainer";
+import BlogCollection from "../../components/blogs/BlogCollection";
 // Content
 import blogsContent from "../../__content/blogs";
 
@@ -24,7 +24,7 @@ function BlogsAllPage() {
       showContentHeader={true}
       showFilterBar={true}
       contentPrimary={
-        <BlogsContainer
+        <BlogCollection
           id="all-blogs"
           limit={10}
           sort={{ field: "created", direction: "DESC" }}
