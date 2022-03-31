@@ -83,6 +83,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
         description
         embedCode
         oembedUrl
+        html
       }
       ... on ImageComponent {
         id

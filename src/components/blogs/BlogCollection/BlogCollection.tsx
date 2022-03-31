@@ -1,7 +1,6 @@
 import React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-import { BLOG_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/blogFields";
 // Components
 import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
 import CardSet from "../../shared/Card/CardSet";
@@ -14,7 +13,6 @@ import { BlogCardItem } from "./BlogCardTypes";
 import { useRouter } from "next/router";
 
 const BLOGS_QUERY = gql`
-  ${BLOG_FIELDS_FRAGMENT}
   query BlogsQuery(
     $limit: Int
     $pageNumber: Int
@@ -28,7 +26,28 @@ const BLOGS_QUERY = gql`
       sort: $sort
     ) {
       items {
-        ...BlogFields
+        id
+        title
+        description
+        slug
+        date
+        byline
+        image {
+          id
+          uri
+          alt
+          transformations {
+            id
+            label
+            uri
+          }
+        }
+        locations {
+          id
+          drupalInternalId
+          name
+          slug
+        }
       }
       pageInfo {
         totalItems
@@ -39,7 +58,7 @@ const BLOGS_QUERY = gql`
   }
 `;
 
-interface BlogsContainerProps {
+interface BlogCollectionProps {
   id: string;
   title?: string;
   description?: string;
@@ -52,7 +71,7 @@ interface BlogsContainerProps {
   status?: boolean;
 }
 
-function BlogsContainer({
+function BlogCollection({
   id,
   title = "",
   description = "",
@@ -63,7 +82,7 @@ function BlogsContainer({
   sort,
   featured,
   status,
-}: BlogsContainerProps) {
+}: BlogCollectionProps) {
   const router = useRouter();
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
@@ -244,4 +263,4 @@ function BlogsContainer({
   );
 }
 
-export default BlogsContainer;
+export default BlogCollection;
