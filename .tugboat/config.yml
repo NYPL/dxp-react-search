@@ -1,6 +1,7 @@
 services:
   node:
     image: tugboatqa/httpd
+    expose: 3000
     commands:
       build:
         - apt-get update
@@ -9,4 +10,4 @@ services:
         - npm install
         - npm run build
         - npm start &
-        - ln -snf "${TUGBOAT_ROOT}" "${DOCROOT}"
+#        - ln -snf "${TUGBOAT_ROOT}" "${DOCROOT}"
