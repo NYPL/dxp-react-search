@@ -4,7 +4,8 @@ React app build for www.nypl.org. Pages currently in repo:
 
 - Location Finder - https://www.nypl.org/locations
 - Articles & Databases - https://www.nypl.org/research/collections/articles-databases
-- Blogs, Press Releases, and more (coming soon)
+- Blogs - https://www.nypl.org/blog
+- Press Releases, Homepage and more (coming soon)
 
 ## Installation (Local)
 
@@ -13,33 +14,33 @@ Follow these steps to setup a local installation of the project:
 1. Clone the repo
 
 ```sh
-$ git clone git@github.com:NYPL/dxp-react-search.git
+git clone git@github.com:NYPL/dxp-react-search.git
 ```
 
 2. Install all the node dependencies
 
 ```sh
-$ npm install
+npm install
 ```
 
 3. Copy `.env.example` to create a local .env file
 
 ```sh
-$ cp .env.example .env
+cp .env.example .env
 ```
 
 4. Update the value for `NEXT_PUBLIC_GOOGLE_MAPS_API` to the NYPL Google Maps/Geocode API Key
 
-5a. Start development server
+5. Start development server
 
 ```sh
-$ npm run dev
+npm run dev
 ```
 
-5b. Alternatively you start the production mode server
+6. Alternatively you start the production mode server
 
 ```sh
-$ npm run build && npm start
+npm run build && npm start
 ```
 
 ## Deployment

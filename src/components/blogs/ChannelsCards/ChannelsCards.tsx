@@ -4,11 +4,11 @@ import { gql, useQuery } from "@apollo/client";
 import { IMAGE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/image";
 import { TERM_BASE_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/term";
 // Components
-import CardGrid from "../../ds-prototypes/CardGrid";
 import Card from "../../shared/Card";
 import CardSet from "../../shared/Card/CardSet";
 import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 import Image from "../../shared/Image";
+import { Grid } from "@nypl/design-system-react-components";
 // Types
 import { ImageType } from "../../shared/Image/ImageTypes";
 // Utils
@@ -91,7 +91,7 @@ function ChannelsCards({
     return <div>Error while loading channels.</div>;
   }
 
-  // Loading state,
+  // Loading state.
   if (loading || !data) {
     return (
       <CardSet
@@ -103,7 +103,7 @@ function ChannelsCards({
       >
         <CardGridSkeletonLoader
           templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gap="1.25rem"
+          gap="m"
           itemsCount={6}
         />
       </CardSet>
@@ -118,9 +118,11 @@ function ChannelsCards({
       slugLabel={slugLabel}
       description={description}
     >
-      <CardGrid
+      <Grid
+        as="ul"
+        listStyleType="none"
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap="1.25rem"
+        gap="m"
       >
         {data.allTermsByVocab.map((item: ChannelCardItem) => (
           <li key={item.id}>
@@ -149,7 +151,7 @@ function ChannelsCards({
             />
           </li>
         ))}
-      </CardGrid>
+      </Grid>
     </CardSet>
   );
 }
