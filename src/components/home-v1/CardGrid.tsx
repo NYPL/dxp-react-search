@@ -19,7 +19,7 @@ function CardGrid({ title, items }: CardGridProps) {
     <ComponentWrapper
       title={title}
       textColor="red.200"
-      borderColor="red"
+      borderColor="#e32a30"
       paddingTop={true}
     >
       <Grid
@@ -30,12 +30,12 @@ function CardGrid({ title, items }: CardGridProps) {
           md: "repeat(auto-fit, minmax(267px, 1fr))",
         }}
         w="full"
-        gap={6}
+        gap={{ base: 9, md: 6 }}
       >
         {items.map((item: CardGridItem) => (
           <li key={item.id}>
             <Box display={"flex"} flexDirection={{ base: "row", md: "column" }}>
-              <Box w={{ base: "30vw", md: "100%" }}>
+              <Box w={{ base: "31vw", md: "100%" }}>
                 <img width="100%" height="auto" src={item.image} />
               </Box>
               <Heading

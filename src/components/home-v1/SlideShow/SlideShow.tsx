@@ -28,7 +28,7 @@ function SlideShow({ title, items }: SlideShowProps) {
       <Box
         w="full"
         position="relative"
-        mt={{ base: `${currentSlide === 0 ? "0px" : "-35px"}`, md: "0px" }}
+        mt={{ base: `${currentSlide === 0 ? 0 : -9}`, md: 0 }}
       >
         {currentSlide > 0 && (
           <SlideShowButton direction={"prev"} prevSlide={prevSlide} />

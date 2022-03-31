@@ -5,4 +5,5 @@ export interface SlideShowItem {
   genre: string;
   audience: string;
   image: string;
+  url: string;
 }

@@ -14,11 +14,7 @@ function SlideShowContainer({
   slideShowStyle,
 }: SlideShowContainerProps) {
   return (
-    <Box
-      w="full"
-      overflow={"hidden"}
-      // position="relative"
-    >
+    <Box w="full" overflow={"hidden"}>
       <Grid
         as="ul"
         w="full"
@@ -36,21 +32,23 @@ function SlideShowContainer({
                 as="li"
                 bg="red.200"
                 h="full"
-                mr={{ base: "15px", md: "20px", lg: "30px" }}
-                w={{ base: "165.6px", md: "143px", lg: "191px", xl: "220px" }}
+                mr={{ base: 4, md: 5, lg: "33px" }}
+                w={{ base: "165.6px", md: "143px", lg: "193px", xl: "212px" }}
               >
-                <Link>
+                <Link _hover={{ textDecoration: "none" }}>
                   <Image
                     src={item.image}
-                    boxSize={{ md: "216px", xl: "220px" }}
+                    boxSize={{ base: "216px", xl: "220px" }}
                     fit="cover"
+                    objectPosition={"15% 0%"}
                   />
                   <Box
                     h={{ base: "130px", md: "150px", lg: "140px" }}
+                    w="full"
                     bg={"red.200"}
                     position="relative"
-                    bottom={{ base: "20px", md: "65px", lg: "20px" }}
-                    px="15px"
+                    bottom={{ base: 9, md: 16, lg: 5 }}
+                    px={4}
                     zIndex={1}
                     display="flex"
                     flexDirection={"column"}
@@ -58,7 +56,7 @@ function SlideShowContainer({
                   >
                     <Heading
                       as="h3"
-                      pt="15px"
+                      pt={4}
                       fontFamily="Kievit-Book"
                       color="brand.100"
                       fontSize={{
@@ -74,12 +72,12 @@ function SlideShowContainer({
                     <Box
                       color="brand.100"
                       fontFamily="Kievit-Book"
-                      mt="10px"
-                      mb="5px"
+                      mt={2.5}
+                      mb={1.5}
                     >
                       <Text
                         fontSize="md"
-                        mb={{ base: "5px", md: "15px" }}
+                        mb={{ base: 1.5, md: 4 }}
                         fontWeight="semibold"
                         lineHeight="none"
                       >

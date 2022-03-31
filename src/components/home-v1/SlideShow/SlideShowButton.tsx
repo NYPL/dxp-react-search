@@ -16,25 +16,29 @@ function SlideShowButton({
   return (
     <Button
       float={{ md: "left" }}
+      color="brand.100"
+      border="2px"
+      borderColor="brand.100"
+      borderRadius="full"
+      fontSize="3xl"
+      bg="transparent"
+      h={9}
+      w={9}
+      minWidth="unset"
       ml={{
-        base: direction === "next" ? "50vw" : "35vw",
-        md: direction === "next" ? "-60px" : "-110px",
+        base: direction === "prev" ? "40vw" : "55vw",
+        md: direction === "prev" ? "-120px" : "-60px",
+        lg: direction === "prev" ? "-110px" : "-60px",
       }}
       mt={{
-        md: direction === "next" ? "-155px" : "-180px",
-        lg: direction === "next" ? "-155px" : "-160px",
+        md: direction === "prev" ? "125px" : "-175px",
+        lg: direction === "prev" ? "125px" : "-215px",
       }}
-      top={{ base: direction === "next" ? "15px" : "350px" }}
-      color="white"
-      border="2px"
-      borderColor="white"
-      borderRadius="full"
-      fontSize="30px"
-      bg="transparent"
-      h="35px !important"
-      w="35px !important"
-      minWidth="unset"
-      onClick={direction === "next" ? nextSlide : prevSlide}
+      top={{
+        base: direction === "prev" ? "362px" : 4,
+        md: 0,
+      }}
+      onClick={direction === "prev" ? prevSlide : nextSlide}
     >
       {direction === "next" ? `>` : `<`}
     </Button>
