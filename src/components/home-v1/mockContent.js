@@ -44,6 +44,7 @@ export const slideShowContent = {
       audience: "Adult",
       image:
         "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/NeverCaught.jpg?itok=xc-5mlme",
+      url: "https://browse.nypl.org/iii/encore/search/C__Snever%20caught%20dunbar__Orightresult__U?lang=eng&suite=def&ivts=GQmg07tt6au4ixps%2FJo%2FTQ%3D%3D&casts=nAEIq7PQ5qU0LDs92TlNHA%3D%3D",
     },
     {
       id: "city_of_mist",
@@ -53,6 +54,7 @@ export const slideShowContent = {
       audience: "Adult",
       image:
         "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/CityMist.jpg?itok=s9Io0Qdb",
+      url: "https://browse.nypl.org/iii/encore/search/C__SThe%20City%20of%20Mist%20zafon__Orightresult__U?lang=eng&suite=def",
     },
     {
       id: "i_was_better",
@@ -61,6 +63,7 @@ export const slideShowContent = {
       genre: "Nonfiction",
       audience: "Adult",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://en.wikipedia.org/wiki/Cat",
     },
     {
       id: "the_stars_are",
@@ -69,6 +72,7 @@ export const slideShowContent = {
       genre: "Fiction",
       audience: "Adult",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://en.wikipedia.org/wiki/Dolphin",
     },
     {
       id: "the_naked_dont",
@@ -77,6 +81,7 @@ export const slideShowContent = {
       genre: "Nonfiction",
       audience: "Adult",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://en.wikipedia.org/wiki/Violetear",
     },
     {
       id: "education_accross",
@@ -85,6 +90,7 @@ export const slideShowContent = {
       genre: "Nonfiction",
       audience: "Adult",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://en.wikipedia.org/wiki/Cattle",
     },
     {
       id: "vagabonds",
@@ -93,6 +99,7 @@ export const slideShowContent = {
       genre: "Fiction",
       audience: "Adult",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://en.wikipedia.org/wiki/Giraffe",
     },
     {
       id: "invisible_kingdom",
@@ -101,6 +108,7 @@ export const slideShowContent = {
       genre: "Nonfiction",
       audience: "Adult",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://en.wikipedia.org/wiki/Blue_whale",
     },
     {
       id: "finally_donovan",
@@ -109,6 +117,7 @@ export const slideShowContent = {
       genre: "Fiction",
       audience: "Adult",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://en.wikipedia.org/wiki/Stegosaurus",
     },
   ],
 };

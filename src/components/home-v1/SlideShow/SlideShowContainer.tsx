@@ -35,7 +35,7 @@ function SlideShowContainer({
                 mr={{ base: 4, md: 5, lg: "33px" }}
                 w={{ base: "165.6px", md: "143px", lg: "193px", xl: "212px" }}
               >
-                <Link _hover={{ textDecoration: "none" }}>
+                <Link _hover={{ textDecoration: "none" }} href={item.url}>
                   <Image
                     src={item.image}
                     boxSize={{ base: "216px", xl: "220px" }}
