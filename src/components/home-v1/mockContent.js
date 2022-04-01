@@ -33,6 +33,30 @@ export const spotlightContent = {
   ],
 };
 
+export const staffPicks = {
+  title: "Staff Picks",
+  items: [
+    {
+      id: "social_grace",
+      quote:
+        "For fans of the Gilded Age, a fascinating look at the feud between Caroline Astor and Alva Vanderbilt (old money v. nouveau riche).",
+      image:
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/SocialGraces.jpg?itok=01UVUs5s",
+      author: "Margaret Kaczorowski",
+      location: "Allerton Library",
+    },
+    {
+      id: "universal_harvester",
+      quote:
+        "Perfect for readers who like stories that turn out to be completely different than the expected. Offbeat and lends itself to speculation.",
+      image:
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/Universal.jpg?itok=fDweOSck",
+      author: "Jenny Baum",
+      location: "Mulberry Street",
+    },
+  ],
+};
+
 export const slideShowContent = {
   title: "New & Noteworthy",
   items: [
