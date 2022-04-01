@@ -29,7 +29,7 @@ function StaffPick({ title, items }: StaffPicksProps) {
     >
       <Grid
         as="ul"
-        maxWidth={{ md: "78vw", lg: "82vw", xl: "85vw" }}
+        maxWidth={{ md: "75vw", lg: "82vw", xl: "85vw" }}
         listStyleType="none"
         templateColumns={{
           base: " 1fr",

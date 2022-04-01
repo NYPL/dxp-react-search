@@ -68,7 +68,11 @@ function ComponentWrapper({
           w={{ base: "100vw", md: "90vw" }}
           maxW="6xl"
         >
-          <Box w="full" textAlign="center" mt={{ base: 6, md: -3 }}>
+          <Box
+            maxWidth={{ md: "75vw", lg: "82vw", xl: "85vw" }}
+            textAlign="center"
+            mt={{ base: 6, md: -3 }}
+          >
             <Link
               pt={3.5}
               pb={3}
