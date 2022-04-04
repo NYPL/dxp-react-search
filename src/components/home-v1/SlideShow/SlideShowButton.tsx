@@ -15,32 +15,12 @@ function SlideShowButton({
 }: SlideShowButtonProps) {
   return (
     <Button
-      float={{ md: "left" }}
-      color="brand.100"
-      border="2px"
-      borderColor="brand.100"
-      borderRadius="full"
-      fontSize="3xl"
-      bg="transparent"
-      h={9}
-      w={9}
-      minWidth="unset"
-      ml={{
-        base: direction === "prev" ? "40vw" : "55vw",
-        md: direction === "prev" ? "-120px" : "-60px",
-        lg: direction === "prev" ? "-110px" : "-60px",
-      }}
-      mt={{
-        md: direction === "prev" ? "125px" : "-175px",
-        lg: direction === "prev" ? "125px" : "-215px",
-      }}
-      top={{
-        base: direction === "prev" ? "362px" : 4,
-        md: 0,
-      }}
+      variant="slide-show"
+      //@ts-ignore
+      direction={direction}
       onClick={direction === "prev" ? prevSlide : nextSlide}
     >
-      {direction === "next" ? `>` : `<`}
+      {direction === "prev" ? `<` : `>`}
     </Button>
   );
 }

@@ -22,7 +22,6 @@ function ComponentWrapper({
 }: ComponentWrapperProps) {
   return (
     <Box
-      mb={8}
       bg={bg ? bg : ""}
       pt={{ base: 3, lg: 4, xl: 8 }}
       pl={{ base: 5, md: 9, lg: 5, xl: 7 }}
@@ -42,13 +41,10 @@ function ComponentWrapper({
             <Heading
               as="h2"
               size="md"
+              variant="section-title"
               color={textColor}
-              fontWeight="bold"
-              fontFamily="fonts.body"
-              textAlign={{ base: "left", md: "right" }}
-              pt={paddingTop === true ? 2 : 0}
-              borderTop={`2px solid `}
-              borderColor={`${borderColor ? borderColor : ""}`}
+              pt={paddingTop === true ? { base: 4, md: 2 } : 0}
+              borderTopColor={`${borderColor ? borderColor : ""}`}
             >
               {title}
             </Heading>
@@ -74,14 +70,11 @@ function ComponentWrapper({
             mt={{ base: 6, md: -3 }}
           >
             <Link
-              pt={3.5}
-              pb={3}
-              px={5}
+              variant="see-more"
               color={textColor}
-              textAlign="center"
-              bg={bg ? bg : ""}
-              border={`2px solid ${buttonBorder ? buttonBorder : borderColor}`}
-              borderRadius="3xl"
+              border="2px"
+              borderColor={buttonBorder || borderColor}
+              borderStyle="solid"
             >
               ...SEE MORE
             </Link>
