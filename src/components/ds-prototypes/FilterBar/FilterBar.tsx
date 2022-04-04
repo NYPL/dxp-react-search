@@ -12,6 +12,8 @@ import {
   IconRotationTypes,
   IconSizes,
   Modal,
+  MultiSelectItem,
+  SelectedItems,
 } from "@nypl/design-system-react-components";
 // Styles
 import s from "./FilterBar.module.css";
@@ -23,15 +25,16 @@ interface FilterBarProps {
   onClickMobileFiltersButton: () => void;
   onClickGoBack: () => void;
   isMobile: boolean;
-  selectedItems: FbSelectedItems;
+  selectedItems: SelectedItems;
   onClearSelectedItems: () => void;
   onSaveSelectedItems: () => void;
   children: React.ReactNode;
 }
 
-interface FbSelectedItems {
+/*interface FbSelectedItems {
   [name: string]: { items: string[] };
 }
+*/
 
 function FilterBar({
   id,
@@ -46,7 +49,7 @@ function FilterBar({
   children,
 }: FilterBarProps) {
   // Sets the label of the filters button.
-  function setFilterButtonLabel(selectedItems: FbSelectedItems) {
+  function setFilterButtonLabel(selectedItems: SelectedItems) {
     let allItems = [];
     for (let [key, value] of Object.entries(selectedItems)) {
       value.items.map((item) => {

@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import useWindowSize from "../../../hooks/useWindowSize";
 import usePrevious from "../../../hooks/usePrevious";
 // Types
-import { FilterBarGroupItem, SelectedItems, SelectedItemsMap } from "./types";
+import { FilterBarGroupItem } from "./types";
+// @ts-ignore
+// @TODO fix only adding this to commit code
+import { SelectedItems } from "@nypl/design-system-react-components";
+
 // Components
 import { default as DsFilterBar } from "./../../ds-prototypes/FilterBar/FilterBar";
 import MultiSelect from "./MultiSelect";
@@ -33,7 +37,7 @@ function FilterBar({
   const [isMobile, setIsMobile] = useState<boolean>();
   // MultiSelect state
   // @TODO default should not be empty object!
-  const [selectedItems, setSelectedItems] = useState<SelectedItemsMap>({});
+  const [selectedItems, setSelectedItems] = useState<SelectedItems>({});
   // Menu state
   const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
 
@@ -80,11 +84,11 @@ function FilterBar({
   }, [router.query]);
 
   //
-  function onMenuClick(groupId: string) {
+  function handleMenuToggle(groupId: string) {
     const mode = "desktop";
     let selectedGroupIdsCopy: string[] = [];
 
-    const nextState = (object: SelectedItemsMap, property: string) => {
+    const nextState = (object: SelectedItems, property: string) => {
       let { [property]: omit, ...rest } = object;
       return rest;
     };
@@ -117,10 +121,10 @@ function FilterBar({
   }
 
   //
-  function onSelectedItemChange(itemId: string, groupId: string) {
+  function handleChange(itemId: string, groupId: string) {
     itemId = itemId.replace(/^[^__]*__/, "");
 
-    const nextState = (object: SelectedItemsMap, property: string) => {
+    const nextState = (object: SelectedItems, property: string) => {
       let { [property]: omit, ...rest } = object;
       return rest;
     };
@@ -155,7 +159,7 @@ function FilterBar({
   }
 
   //
-  function onSaveMultiSelect() {
+  function handleApply() {
     // Get the query params to add using the groups.
     let queryParamsToAdd = {};
     groups.map((group: FilterBarGroupItem) => {
@@ -187,7 +191,7 @@ function FilterBar({
   }
 
   //
-  function onClearAllMultiSelects() {
+  function handleClearSelectedItems() {
     // Remove the selectedItems from url state.
     router.push({
       pathname: routerPathname,
@@ -202,7 +206,7 @@ function FilterBar({
     });
   }
 
-  function onClearMultiSelect(groupId: string) {
+  function handleClear(groupId: string) {
     // Run through query param state and remove
     let queryStateToKeep = {} as any;
     for (let [key, value] of Object.entries(router.query)) {
@@ -271,8 +275,8 @@ function FilterBar({
       onClickGoBack={() => setIsModalOpen(false)}
       isMobile={isMobile ? isMobile : false}
       selectedItems={selectedItems}
-      onClearSelectedItems={onClearAllMultiSelects}
-      onSaveSelectedItems={onSaveMultiSelect}
+      onClearSelectedItems={handleClearSelectedItems}
+      onSaveSelectedItems={handleApply}
     >
       {groups.map((group: FilterBarGroupItem) => {
         return (
@@ -282,15 +286,19 @@ function FilterBar({
             type={group.type}
             limiter={group.limiter}
             label={group.label}
-            onSelectedItemChange={(e: React.MouseEvent<HTMLButtonElement>) =>
-              onSelectedItemChange(e.currentTarget.id, group.id)
-            }
+            onChange={(e) => {
+              handleChange(e.currentTarget.id, group.id);
+            }}
             selectedItems={selectedItems}
-            onClearMultiSelect={() => onClearMultiSelect(group.id)}
-            onSaveMultiSelect={onSaveMultiSelect}
-            onMenuClick={() => onMenuClick(group.id)}
+            // @ts-ignore
+            // Prevents jump to top of pg on click.
+            onClear={(e: any) => {
+              e.preventDefault();
+              handleClear(group.id);
+            }}
+            onApply={handleApply}
+            onMenuToggle={() => handleMenuToggle(group.id)}
             selectedGroupIds={selectedGroupIds}
-            showCtaButtons={isMobile ? false : true}
             handleChangeMixedStateCheckbox={(childItems: string[]) => {
               handleChangeMixedStateCheckbox(group.id, childItems);
             }}

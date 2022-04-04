@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-// Types
-import { SelectedItemsMap } from "./types";
 // Components
-import { default as DsMultiSelect } from "../../ds-prototypes/MultiSelect/MultiSelect";
+// @ts-ignore
+// @TODO fix only adding this to commit code
+import {
+  MultiSelect as DsMultiSelect,
+  SelectedItems,
+} from "@nypl/design-system-react-components";
 
 const FILTERS_QUERY = gql`
   query FiltersQuery(
@@ -47,21 +50,22 @@ const FILTERS_QUERY_LEGACY = gql`
   }
 `;
 
-interface MutliSelectProps {
+interface MultiSelectProps {
   id: string;
   label: string;
   type: string;
   limiter?: string;
-  onSelectedItemChange(event: React.MouseEvent<HTMLButtonElement>): void;
-  selectedItems: SelectedItemsMap;
-  onClearMultiSelect: () => void;
-  onSaveMultiSelect: () => void;
-  onMenuClick: () => void;
-  selectedGroupIds: string[];
-  showCtaButtons: boolean;
-  handleChangeMixedStateCheckbox: any;
   legacy?: boolean;
   includeChildren?: boolean;
+  //
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedItems: SelectedItems;
+  onClear: () => void;
+  onApply: () => void;
+  onMenuToggle: () => void;
+  selectedGroupIds: string[];
+  // @TODO fix the typing on this.
+  handleChangeMixedStateCheckbox: any;
 }
 
 function MultiSelect({
@@ -69,17 +73,16 @@ function MultiSelect({
   label,
   type,
   limiter,
-  onSelectedItemChange,
+  onChange,
   selectedItems,
-  onClearMultiSelect,
-  onSaveMultiSelect,
-  onMenuClick,
+  onClear,
+  onApply,
+  onMenuToggle,
   selectedGroupIds,
-  showCtaButtons,
   handleChangeMixedStateCheckbox,
   legacy,
   includeChildren = true,
-}: MutliSelectProps) {
+}: MultiSelectProps) {
   let FiltersQueryAll = FILTERS_QUERY;
   let variables = {
     id: id,
@@ -120,7 +123,7 @@ function MultiSelect({
 
   // Loading state,
   if (loading || !data) {
-    return (
+    /*return (
       <DsMultiSelect
         id={id}
         label={label}
@@ -135,6 +138,8 @@ function MultiSelect({
         handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
       />
     );
+    */
+    return <div>Loading</div>;
   }
 
   let filterItemsData = data.allFiltersByGroupId;
@@ -142,19 +147,21 @@ function MultiSelect({
     filterItemsData = data.allFiltersByGroupIdLegacy;
   }
 
+  const isOpen = selectedGroupIds.includes(id);
+
   return (
     <DsMultiSelect
+      variant="dialog"
       id={id}
       label={label}
+      onMenuToggle={onMenuToggle}
+      isOpen={isOpen}
+      onApply={onApply}
+      onClear={onClear}
       items={filterItemsData}
-      handleOnSelectedItemChange={onSelectedItemChange}
+      onChange={onChange}
       selectedItems={selectedItems}
-      onClearMultiSelect={onClearMultiSelect}
-      onSaveMultiSelect={onSaveMultiSelect}
-      onMenuClick={onMenuClick}
-      selectedGroupIds={selectedGroupIds}
-      showCtaButtons={showCtaButtons}
-      handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
+      onMixedStateChange={handleChangeMixedStateCheckbox}
     />
   );
 }
