@@ -18,7 +18,7 @@ function StaffPicks({ title, items }: StaffPicksProps) {
       title={title}
       textColor={"brand.100"}
       borderColor={"brand.100"}
-      buttonBorder={"white"}
+      buttonBorder={"brand.100"}
       bg={"red.200"}
       paddingTop={true}
     >

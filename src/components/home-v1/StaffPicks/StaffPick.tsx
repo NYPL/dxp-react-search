@@ -5,15 +5,17 @@ import { GridItem, Box, Text, Image, Link } from "@chakra-ui/react";
 // Type
 import { StaffPicksItem } from "./StaffPicksTypes";
 
-interface StaffPickProps {
-  item: StaffPicksItem;
-}
 const QuoteBg = () => {
   const styles = useStyleConfig("QuoteBg");
   return <Box sx={styles}></Box>;
 };
+
+interface StaffPickProps {
+  item: StaffPicksItem;
+}
+
 function StaffPick({ item }: StaffPickProps) {
-  const { id, quote, image, author, location } = item;
+  const { id, quote, image, url, staff_name, staff_location } = item;
   return (
     <GridItem as="li" id={id}>
       <Box h={{ base: "264px", xl: "374px" }} position="relative">
@@ -37,6 +39,7 @@ function StaffPick({ item }: StaffPickProps) {
           position="absolute"
           bottom="0px"
           right="0px"
+          href={url}
         >
           <Image
             src={image}
@@ -57,9 +60,9 @@ function StaffPick({ item }: StaffPickProps) {
           pb={1}
           fontSize={{ base: "lg", xl: "xl" }}
         >
-          {author}
+          {staff_name}
         </Text>
-        <Text fontSize="md">{location}</Text>
+        <Text fontSize="md">{staff_location}</Text>
       </Box>
     </GridItem>
   );

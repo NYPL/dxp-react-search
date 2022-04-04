@@ -42,8 +42,9 @@ export const staffPicks = {
         "For fans of the Gilded Age, a fascinating look at the feud between Caroline Astor and Alva Vanderbilt (old money v. nouveau riche).",
       image:
         "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/SocialGraces.jpg?itok=01UVUs5s",
-      author: "Margaret Kaczorowski",
-      location: "Allerton Library",
+      staff_name: "Margaret Kaczorowski",
+      staff_location: "Allerton Library",
+      url: "https://browse.nypl.org/iii/encore/search/C__S%20The%20Social%20Graces%20Rosen__Orightresult__U?lang=eng&suite=def&ivts=YOUF4wgel9FOc8yV%2F%2B7w3A%3D%3D&casts=8iCdv6qcF01G9po2d7ywuA%3D%3D",
     },
     {
       id: "universal_harvester",
@@ -51,8 +52,9 @@ export const staffPicks = {
         "Perfect for readers who like stories that turn out to be completely different than the expected. Offbeat and lends itself to speculation.",
       image:
         "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/Universal.jpg?itok=fDweOSck",
-      author: "Jenny Baum",
-      location: "Mulberry Street",
+      staff_name: "Jenny Baum",
+      staff_location: "Mulberry Street",
+      url: "https://browse.nypl.org/iii/encore/search/C__SUniversal%20Harvester__Orightresult__U?lang=eng&suite=def",
     },
   ],
 };
