@@ -23,7 +23,7 @@ function SlideShow({ title, items }: SlideShowProps) {
       textColor="brand.100"
       bg="red.100"
       borderColor="red.100"
-      buttonBorder="white"
+      buttonBorder="brand.100"
     >
       <Box
         w="full"

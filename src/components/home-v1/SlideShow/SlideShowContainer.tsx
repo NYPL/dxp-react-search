@@ -60,10 +60,9 @@ function SlideShowContainer({
                       fontFamily="Kievit-Book"
                       color="brand.100"
                       fontSize={{
-                        base: "18px",
-                        md: "18px",
-                        lg: "20px",
-                        xl: "22px",
+                        base: "lg",
+                        lg: "xl",
+                        xl: "1xl",
                       }}
                       lineHeight="none"
                     >
