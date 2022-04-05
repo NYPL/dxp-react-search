@@ -122,20 +122,18 @@ function SearchForm() {
             label: "Subjects",
             type: "taxonomy",
             limiter: "online_resource",
-            legacy: true,
           },
           {
             id: "audience_by_age",
             label: "Audience",
             type: "taxonomy",
-            limiter: "online_resource",
-            legacy: true,
+            includeChildren: false,
           },
           {
             id: "availability",
             label: "Availability",
             type: "taxonomy",
-            legacy: true,
+            mock: true,
           },
         ]}
       />

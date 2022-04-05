@@ -13,4 +13,5 @@ export interface FilterBarGroupItem {
   limiter: string;
   legacy?: boolean;
   includeChildren?: boolean;
+  mock?: boolean;
 }

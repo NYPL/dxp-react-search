@@ -8,13 +8,6 @@ export const typeDefs = gql`
     drupalInternalId: String
   }
 
-  type FilterItemLegacy {
-    id: ID!
-    name: String!
-    children: [FilterItemLegacy]
-    drupalInternalId: String
-  }
-
   input FilterQueryFilter {
     limiter: QueryFilterItemString
   }
@@ -27,11 +20,7 @@ export const typeDefs = gql`
       pageNumber: Int
       filter: FilterQueryFilter
       sort: Sort
+      mock: Boolean
     ): [FilterItem]
-    allFiltersByGroupIdLegacy(
-      id: String
-      type: String
-      limiter: String
-    ): [FilterItemLegacy]
   }
 `;
