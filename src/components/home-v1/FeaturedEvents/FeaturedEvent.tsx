@@ -46,9 +46,12 @@ function EventCard({ event }: EventCardProps) {
     <Grid
       mb={{ base: "0px", lg: 4 }}
       as="li"
-      templateColumns={{ base: "1fr 2fr", md: "", xl: "1fr 2fr" }}
+      templateColumns={{
+        base: "1fr 2fr",
+        md: "",
+        lg: "1fr 3fr",
+      }}
       gap={{ base: 6, lg: 4 }}
-      //   w={{ md: "33vw", lg: "auto" }}
     >
       <GridItem>
         <Image src={image} />
@@ -78,7 +81,7 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
       as="ul"
       templateColumns={{
         base: "1fr 1fr",
-        lg: "4fr 7fr",
+        lg: "2fr 3fr",
         xl: "1fr 1fr",
       }}
       gap={{ base: 1, lg: 9 }}

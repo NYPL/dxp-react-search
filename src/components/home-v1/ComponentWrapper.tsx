@@ -34,7 +34,11 @@ function ComponentWrapper({
         m="auto"
         maxWidth="1313px"
         templateAreas={{ md: `'heading component'` }}
-        templateColumns={{ base: "1fr", md: "88px 8fr", lg: "120px 8fr" }}
+        templateColumns={{
+          base: "1fr",
+          md: "12vw 20fr",
+          lg: "120px 8fr",
+        }}
         gap={{ base: 0, md: 6, xl: 7 }}
         overflow="hidden"
       >
@@ -68,7 +72,6 @@ function ComponentWrapper({
           gridColumn={{ md: 2 }}
           gridRow={{ md: 3 }}
           h={{ base: "70px", md: "48px" }}
-          w={{ base: "100vw", md: "90vw" }}
           maxW="6xl"
         >
           <Box
