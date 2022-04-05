@@ -133,7 +133,7 @@ function SearchForm() {
             id: "availability",
             label: "Availability",
             type: "taxonomy",
-            mock: true,
+            customData: true,
           },
         ]}
       />

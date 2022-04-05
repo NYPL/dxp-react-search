@@ -20,7 +20,7 @@ export const typeDefs = gql`
       pageNumber: Int
       filter: FilterQueryFilter
       sort: Sort
-      mock: Boolean
+      customData: Boolean
     ): [FilterItem]
   }
 `;

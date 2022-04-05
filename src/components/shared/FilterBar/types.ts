@@ -7,11 +7,16 @@ export interface SelectedItemsMap {
 }
 
 export interface FilterBarGroupItem {
+  /** The id of the multiselect. */
   id: string;
+  /** The label of the multiselect. */
   label: string;
-  type: string;
+  /** The entity type (content type or taxonomy) to be used for the api request. */
+  type: "content" | "taxonomy";
+  /** The content type to use for limiting the items returned by the api request. */
   limiter: string;
-  legacy?: boolean;
+  /** Include 2nd level child items. */
   includeChildren?: boolean;
-  mock?: boolean;
+  /** Escape hatch for use cases where the filter data does not come from api request, but hard coded. */
+  customData?: boolean;
 }

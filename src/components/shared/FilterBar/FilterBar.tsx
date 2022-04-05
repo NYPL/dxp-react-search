@@ -297,7 +297,7 @@ function FilterBar({
               handleChangeMixedStateCheckbox(group.id, childItems);
             }}
             includeChildren={group.includeChildren}
-            mock={group.mock}
+            customData={group.customData}
           />
         );
       })}

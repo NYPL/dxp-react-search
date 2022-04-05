@@ -15,7 +15,7 @@ const FILTERS_QUERY = gql`
     $filter: FilterQueryFilter
     $sort: Sort
     $includeChildren: Boolean!
-    $mock: Boolean
+    $customData: Boolean
   ) {
     allFiltersByGroupId(
       id: $id
@@ -24,7 +24,7 @@ const FILTERS_QUERY = gql`
       pageNumber: $pageNumber
       filter: $filter
       sort: $sort
-      mock: $mock
+      customData: $customData
     ) {
       id
       name
@@ -49,9 +49,10 @@ interface MutliSelectProps {
   selectedGroupIds: string[];
   showCtaButtons: boolean;
   handleChangeMixedStateCheckbox: any;
+  /** Include 2nd level child items. */
   includeChildren?: boolean;
-  /** Optional boolean to use a mock data source. */
-  mock?: boolean;
+  /** Escape hatch for use cases where the filter data does not come from api request, but hard coded. */
+  customData?: boolean;
 }
 
 function MultiSelect({
@@ -68,7 +69,7 @@ function MultiSelect({
   showCtaButtons,
   handleChangeMixedStateCheckbox,
   includeChildren = true,
-  mock = false,
+  customData = false,
 }: MutliSelectProps) {
   let variables = {
     id: id,
@@ -87,7 +88,7 @@ function MultiSelect({
       direction: "ASC",
     },
     includeChildren: includeChildren,
-    mock: mock,
+    customData: customData,
   };
 
   const { loading, error, data } = useQuery(FILTERS_QUERY, {

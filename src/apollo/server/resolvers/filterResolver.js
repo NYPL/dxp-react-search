@@ -6,9 +6,9 @@ import { availabilityFilterData } from "./../../../__content/onlineResources";
 const filterResolver = {
   Query: {
     allFiltersByGroupId: async (_, args, { dataSources }) => {
-      console.log(args);
       // Special handling for "availability" filters for online resources.
-      if (args.mock && args.id === "availability") {
+      // @TODO Could move this to a util function, where you pass the id?
+      if (args.customData && args.id === "availability") {
         return availabilityFilterData.data;
       }
 
