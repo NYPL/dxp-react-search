@@ -72,6 +72,8 @@ const theme = extendTheme({
     brand: {
       // white
       100: "#FFFFFF",
+      // black
+      200: "#000000",
       900: "transparent",
     },
   },

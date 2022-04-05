@@ -9,6 +9,7 @@ interface ComponentWrapperProps {
   buttonBorder?: string;
   bg?: string;
   paddingTop?: boolean;
+  alignSectionHeading?: string;
 }
 
 function ComponentWrapper({
@@ -19,6 +20,7 @@ function ComponentWrapper({
   buttonBorder,
   bg,
   paddingTop,
+  alignSectionHeading,
 }: ComponentWrapperProps) {
   return (
     <Box
@@ -32,12 +34,17 @@ function ComponentWrapper({
         m="auto"
         maxWidth="1313px"
         templateAreas={{ md: `'heading component'` }}
-        templateColumns={{ base: "1fr", md: "120px 8fr" }}
+        templateColumns={{ base: "1fr", md: "88px 8fr", lg: "120px 8fr" }}
         gap={{ base: 0, md: 6, xl: 7 }}
         overflow="hidden"
       >
         <GridItem gridArea={{ md: "heading" }}>
-          <Box>
+          <Box
+            mt={{
+              base: "",
+              lg: `${alignSectionHeading ? alignSectionHeading : ""}`,
+            }}
+          >
             <Heading
               as="h2"
               size="md"

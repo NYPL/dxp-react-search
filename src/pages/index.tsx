@@ -5,11 +5,13 @@ import Hero from "./../components/home-v1/Hero";
 import CardGrid from "./../components/home-v1/CardGrid";
 import SlideShow from "../components/home-v1/SlideShow/SlideShow";
 import StaffPicks from "../components/home-v1/StaffPicks/StaffPicks";
+import FeaturedEvents from "../components/home-v1/FeaturedEvents/FeaturedEvents";
 import ScoutHomepageV1Provider from "../components/home-v1/theme";
 // Mock content
 import {
   heroContent,
   spotlightContent,
+  featuredEvents,
   staffPicks,
   slideShowContent,
 } from "./../components/home-v1/mockContent";
@@ -39,6 +41,10 @@ function HomePage() {
               <CardGrid
                 title={spotlightContent.title}
                 items={spotlightContent.items}
+              />
+              <FeaturedEvents
+                title={featuredEvents.title}
+                items={featuredEvents.items}
               />
               <StaffPicks title={staffPicks.title} items={staffPicks.items} />
               <SlideShow

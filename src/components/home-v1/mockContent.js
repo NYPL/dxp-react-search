@@ -33,6 +33,154 @@ export const spotlightContent = {
   ],
 };
 
+export const featuredEvents = {
+  title: "What's On",
+  items: [
+    {
+      theme: "author talks & conversations",
+      events: [
+        {
+          title: "NYPL's World Literature Festival",
+          date: "Apr 11 - 30",
+          location: "Online",
+          image:
+            "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/World_Lit_Festival_Spotlight_1.png?itok=1No7b9xD",
+          link: "https://www.nypl.org/spotlight/world-literature-festival",
+        },
+        {
+          title:
+            "Darren Walker and Gara LaMarche with Peter Osnos on George Soros",
+          date: "TUES, APR 5 | 6:30 PM",
+          location: "Stavros Niarchos Foundation Library (SNFL) & Online",
+          image:
+            "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/LIVE_040522_Osnos_Spotlight.png?itok=iRlPpzM6",
+          link: "https://www.showclix.com/event/georgesorosalifeinfull/tag/nyplhomepage",
+        },
+        {
+          title:
+            "Elizabeth Alexander with Charles M. Blow: The Trayvon Generation",
+          date: "WED, APR 6 | 6:30 PM",
+          location: "Online",
+          image:
+            "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/LIVE_040622_Elizabeth_Alexander_Spotlight.png?itok=DwDzc8e4",
+          link: "https://www.showclix.com/event/thetrayvongeneration/tag/nyplhomepage",
+        },
+        {
+          title: "Alien Nation: True Tales of Immigration",
+          date: "THURS, APR 14 | 7 PM",
+          location: "Stavros Niarchos Foundation Library (SNFL) & Online",
+          image:
+            "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/LIVE_041422_Sofija%20Stefanovic_Spotlight.png?itok=_XQfh0xD",
+          link: "https://www.showclix.com/event/aliennation/tag/nyplhomepage",
+        },
+      ],
+    },
+    {
+      theme: "exhibitions",
+      events: [
+        {
+          title: "Been Seen",
+          date: "OPEN NOW.",
+          location: "Schomburg Center",
+          image:
+            "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/BeenSeen_567x354.jpg?itok=JCjOY_lJ",
+          link: "https://www.nypl.org/events/exhibitions/been-seen",
+        },
+        {
+          title:
+            "Polonsky Exhibition of The New York Public Library's Treasures",
+          date: "OPEN NOW.",
+          location: "Schwarzman Building",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/spotlight/treasures",
+        },
+        {
+          title: "Boundless: 10 Years of Seeding Black Comic Futures",
+          date: "OPEN NOW.",
+          location: "Schomburg Center",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
+        },
+        {
+          title: "The Mestizo as Ambassadorn",
+          date: "OPEN NOW.",
+          location: "Library for the Performing Arts",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
+        },
+      ],
+    },
+    {
+      theme: "kids & teens",
+      events: [
+        {
+          title: "Let's Talk About...Reading Together with NoNieqa Ramos!",
+          date: "THROUGH MAY, 2022",
+          location: "Various Locations",
+          image:
+            "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/NoNieqa_Kids_567x354.png?itok=rAgxAD-j",
+          link: "https://www.nypl.org/events/calendar?keyword=NoNieqa+Ramos",
+        },
+        {
+          title: "NYPL After School",
+          date: "MONDAY–THURSDAY",
+          location: "Select Locations",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/spotlight/treasures",
+        },
+        {
+          title: "Activities for Kids",
+          date: "ONGOING",
+          location: "In-person & Online",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
+        },
+        {
+          title: "Events & Clubs for Teens",
+          date: "ONGOING",
+          location: "In-person & Online",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
+        },
+      ],
+    },
+    {
+      theme: "other events",
+      events: [
+        {
+          title:
+            "Artist-in-Residence: 'Creating in Color' with Roundabout Theatre Company",
+          date: "THROUGH JUNE 2022.",
+          location: "Various Locations",
+          image:
+            "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/ArtistinResidence_Workshop_567x354.png?itok=eF9ND6Ba",
+          link: "https://www.nypl.org/events/calendar?keyword=roundabout",
+        },
+        {
+          title: "Get Lit Book Club Discussions",
+          date: "ONGOING",
+          location: "Various Locations",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/spotlight/treasures",
+        },
+        {
+          title: "Thomas Yoseloff Business Center Events at SNFL",
+          date: "ONGOING",
+          location: "Online",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
+        },
+        {
+          title: "Let's Talk About Mental Health",
+          date: "ONGOING",
+          location: "Various Locations",
+          image: "https://placeimg.com/267/167/animals",
+          link: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
+        },
+      ],
+    },
+  ],
+};
 export const staffPicks = {
   title: "Staff Picks",
   items: [
