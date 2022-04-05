@@ -4,7 +4,7 @@ const onlineResourcesContent = {
     "Explore our collection of hundreds of online resources and databases. Use our free online content to help with your research, whether it's finding a single article, tracing a family tree, learning a new language, or anything in between.",
 };
 
-export const availabilityFilterMock = {
+export const availabilityFilterData = {
   data: [
     {
       id: "aa50711e-ad06-4451-bc59-ae9821681ee2",

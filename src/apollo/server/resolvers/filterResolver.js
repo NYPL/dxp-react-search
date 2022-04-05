@@ -1,7 +1,7 @@
 // Utils
 import setNestedFilterItems from "./../../../utils/setNestedFilterItems";
 import { getCollectionResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
-import { availabilityFilterMock } from "./../../../__content/onlineResources";
+import { availabilityFilterData } from "./../../../__content/onlineResources";
 
 const filterResolver = {
   Query: {
@@ -9,7 +9,7 @@ const filterResolver = {
       console.log(args);
       // Special handling for "availability" filters for online resources.
       if (args.mock && args.id === "availability") {
-        return availabilityFilterMock.data;
+        return availabilityFilterData.data;
       }
 
       const pagination = {

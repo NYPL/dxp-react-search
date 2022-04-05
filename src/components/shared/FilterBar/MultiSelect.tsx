@@ -90,9 +90,6 @@ function MultiSelect({
     mock: mock,
   };
 
-  console.log("mock!");
-  console.log(mock);
-
   const { loading, error, data } = useQuery(FILTERS_QUERY, {
     variables: variables,
   });
