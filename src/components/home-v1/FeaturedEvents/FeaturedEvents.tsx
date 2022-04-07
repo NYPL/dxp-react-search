@@ -36,6 +36,7 @@ function FeaturedEvents({ title, items }: FeaturedEventsProps) {
       alignSectionHeading="46px"
     >
       <Box>
+        {/* mobile view */}
         <Box display={{ base: "block", md: "none" }}>
           {items &&
             items.map((item) => (
@@ -60,6 +61,7 @@ function FeaturedEvents({ title, items }: FeaturedEventsProps) {
               </Card>
             ))}
         </Box>
+        {/* desktop view */}
         <Tabs
           display={{ base: "none", md: "block" }}
           align="end"

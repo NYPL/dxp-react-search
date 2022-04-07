@@ -12,7 +12,7 @@ function EventSpotlightCard({ event }: EventCardProps) {
   const { title, date, location, image, link } = event;
 
   return (
-    <Grid templateRows={"1fr 1fr"}>
+    <Grid templateRows={"1fr 1fr"} gap={1.5}>
       <GridItem as="a">
         <Image src={image} />
       </GridItem>
@@ -23,7 +23,6 @@ function EventSpotlightCard({ event }: EventCardProps) {
           fontFamily="font.body"
           fontSize="26px"
           fontWeight="bold"
-          mt={1.5}
         >
           {title}
         </Heading>
@@ -53,7 +52,7 @@ function EventCard({ event }: EventCardProps) {
       </GridItem>
       <GridItem textAlign="left">
         <Heading
-          as="h4"
+          as="h3"
           size="md"
           fontFamily="font.body"
           fontSize="lg"
