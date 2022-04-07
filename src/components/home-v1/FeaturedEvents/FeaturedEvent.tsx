@@ -1,6 +1,7 @@
 import React from "react";
 // Component
-import { Box, Grid, GridItem, Image, Heading, Text } from "@chakra-ui/react";
+import { Grid, GridItem, Image, Heading, Text } from "@chakra-ui/react";
+import { EventCard, EventSpotlightCard } from "./FeaturedEventCards";
 // Type
 import { FeaturedEventItem } from "./FeaturedEventsTypes";
 
@@ -8,73 +9,6 @@ interface FeaturedEventProps {
   events: FeaturedEventItem[];
 }
 
-interface EventCardProps {
-  event: FeaturedEventItem;
-}
-
-function EventSpotlightCard({ event }: EventCardProps) {
-  const { title, date, location, image, link } = event;
-
-  return (
-    <Grid templateRows={"1fr 1fr"} display={{ base: "none", lg: "grid" }}>
-      <GridItem as="a">
-        <Image src={image} />
-      </GridItem>
-      <GridItem textAlign="left">
-        <Heading
-          as="h3"
-          size="md"
-          fontFamily="font.body"
-          fontSize="26px"
-          fontWeight="bold"
-          mt="5px"
-        >
-          {title}
-        </Heading>
-        <Text mt="5px" fontSize="sm" lineHeight="none">
-          {date}
-        </Text>
-        <Text fontSize="sm">{location}</Text>
-      </GridItem>
-    </Grid>
-  );
-}
-
-function EventCard({ event }: EventCardProps) {
-  const { title, date, location, image, link } = event;
-  return (
-    <Grid
-      mb={{ base: "0px", lg: 4 }}
-      as="li"
-      templateColumns={{
-        base: "1fr 2fr",
-        md: "",
-        lg: "1fr 3fr",
-      }}
-      gap={{ base: 6, lg: 4 }}
-    >
-      <GridItem>
-        <Image src={image} />
-      </GridItem>
-      <GridItem textAlign="left">
-        <Heading
-          as="h4"
-          size="md"
-          fontFamily="font.body"
-          fontSize="18px"
-          fontWeight="bold"
-          mt="5px"
-        >
-          {title}
-        </Heading>
-        <Text mt="5px" fontSize="sm" lineHeight="none">
-          {date}
-        </Text>
-        <Text fontSize="sm">{location}</Text>
-      </GridItem>
-    </Grid>
-  );
-}
 function FeaturedEvent({ events }: FeaturedEventProps) {
   return (
     <Grid
@@ -102,7 +36,7 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
       {events &&
         events.map((event) => {
           return (
-            <GridItem display={{ base: "grid", lg: "none" }}>
+            <GridItem display={{ base: "none", md: "grid", lg: "none" }}>
               <EventCard event={event} />
             </GridItem>
           );

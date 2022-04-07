@@ -71,11 +71,11 @@ function ComponentWrapper({
         <GridItem
           gridColumn={{ md: 2 }}
           gridRow={{ md: 3 }}
-          h={{ base: "70px", md: "48px" }}
+          h={{ base: "80px", md: "70px", lg: "48px" }}
           maxW="6xl"
         >
           <Box
-            maxWidth={{ md: "75vw", lg: "82vw", xl: "85vw" }}
+            maxWidth={{ base: "90vw", md: "75vw", lg: "90vw", xl: "85vw" }}
             textAlign="center"
             mt={{ base: 6, md: -3 }}
           >

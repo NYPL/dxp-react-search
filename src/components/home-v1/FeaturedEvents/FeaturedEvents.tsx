@@ -1,8 +1,18 @@
 import React from "react";
 // Component
-import { Box, Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import {
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Heading,
+  Text,
+  Box,
+} from "@chakra-ui/react";
 import ComponentWrapper from "../ComponentWrapper";
 import FeaturedEvent from "./FeaturedEvent";
+import Card from "../TempletCard";
 // Type
 import { FeaturedEventItem } from "./FeaturedEventsTypes";
 
@@ -25,45 +35,72 @@ function FeaturedEvents({ title, items }: FeaturedEventsProps) {
       paddingTop={true}
       alignSectionHeading="46px"
     >
-      <Tabs
-        align="end"
-        variant="enclosed"
-        mr={{ base: "35px", xl: "0px" }}
-        borderColor="red.200"
-      >
-        <TabList borderBottomWidth="2px" pr={{ base: "70px", lg: "0px" }}>
+      <Box>
+        <Box display={{ base: "block", md: "none" }}>
           {items &&
             items.map((item) => (
-              <Tab
-                flex={{ base: 1, lg: "unset" }}
-                py="10px"
-                px="20px"
-                w={{ lg: "15.5%", xl: "12.5%" }}
-                textTransform="uppercase"
-                overflowWrap={"break-word"}
-                fontSize="12px"
-                lineHeight="none"
-                _selected={{
-                  color: "red.200",
-                  borderRadius: "none",
-                  border: "2px solid ",
-                  borderBottomColor: "brand.100",
-                  mb: "-2px",
-                }}
-              >
-                {item.theme}
-              </Tab>
+              <Card image={item.events[0].image} title={item.theme}>
+                <Box>
+                  <Heading
+                    as="h3"
+                    fontFamily="font.body"
+                    fontSize="lg"
+                    fontWeight="bold"
+                    mt={1.5}
+                  >
+                    {item.events[0].title}
+                  </Heading>
+                  <Text mt={1.5} fontSize="xs" lineHeight="none">
+                    {item.events[0].date}
+                  </Text>
+                  <Text mt={1.5} fontSize="xs">
+                    {item.events[0].location}
+                  </Text>
+                </Box>
+              </Card>
             ))}
-        </TabList>
-        <TabPanels>
-          {items &&
-            items.map((item) => (
-              <TabPanel px={0}>
-                <FeaturedEvent events={item.events} />
-              </TabPanel>
-            ))}
-        </TabPanels>
-      </Tabs>
+        </Box>
+        <Tabs
+          display={{ base: "none", md: "block" }}
+          align="end"
+          variant="enclosed"
+          mr={{ base: 9, xl: 0 }}
+          borderColor="red.200"
+        >
+          <TabList borderBottomWidth="2px" pr={{ base: "70px", lg: 0 }}>
+            {items &&
+              items.map((item) => (
+                <Tab
+                  flex={{ base: 1, lg: "unset" }}
+                  py={2.5}
+                  px={5}
+                  w={{ lg: "15.5%", xl: "12.5%" }}
+                  textTransform="uppercase"
+                  overflowWrap={"break-word"}
+                  fontSize="xs"
+                  lineHeight="none"
+                  _selected={{
+                    color: "red.200",
+                    borderRadius: "none",
+                    border: "2px solid ",
+                    borderBottomColor: "brand.100",
+                    mb: "-0.5",
+                  }}
+                >
+                  {item.theme}
+                </Tab>
+              ))}
+          </TabList>
+          <TabPanels>
+            {items &&
+              items.map((item) => (
+                <TabPanel px={0}>
+                  <FeaturedEvent events={item.events} />
+                </TabPanel>
+              ))}
+          </TabPanels>
+        </Tabs>
+      </Box>
     </ComponentWrapper>
   );
 }

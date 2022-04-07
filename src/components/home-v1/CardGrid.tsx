@@ -19,7 +19,7 @@ function CardGrid({ title, items }: CardGridProps) {
     <ComponentWrapper
       title={title}
       textColor="red.200"
-      borderColor="#e32a30"
+      borderColor="red.200"
       paddingTop={true}
     >
       <Grid
@@ -29,7 +29,6 @@ function CardGrid({ title, items }: CardGridProps) {
           base: "1fr",
           md: "repeat(auto-fit, minmax(267px, 1fr))",
         }}
-        w="full"
         gap={{ base: 9, md: 6 }}
       >
         {items.map((item: CardGridItem) => (
@@ -42,10 +41,11 @@ function CardGrid({ title, items }: CardGridProps) {
                 as="h3"
                 size="md"
                 w={{ base: "60vw", md: "auto" }}
-                fontWeight="bold"
+                fontWeight="normal"
                 fontFamily="Kievit-Book"
-                my={2}
-                mx={{ base: "5vw", md: "0px" }}
+                fontSize={{ base: "lg", md: "xl" }}
+                mt={4}
+                mx="5%"
               >
                 {item.title}
               </Heading>
