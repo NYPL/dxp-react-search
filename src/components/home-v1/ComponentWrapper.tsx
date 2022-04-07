@@ -9,6 +9,7 @@ interface ComponentWrapperProps {
   buttonBorder?: string;
   bg?: string;
   paddingTop?: boolean;
+  alignSectionHeading?: string;
 }
 
 function ComponentWrapper({
@@ -19,6 +20,7 @@ function ComponentWrapper({
   buttonBorder,
   bg,
   paddingTop,
+  alignSectionHeading,
 }: ComponentWrapperProps) {
   return (
     <Box
@@ -32,12 +34,21 @@ function ComponentWrapper({
         m="auto"
         maxWidth="1313px"
         templateAreas={{ md: `'heading component'` }}
-        templateColumns={{ base: "1fr", md: "120px 8fr" }}
+        templateColumns={{
+          base: "1fr",
+          md: "12vw 20fr",
+          lg: "120px 8fr",
+        }}
         gap={{ base: 0, md: 6, xl: 7 }}
         overflow="hidden"
       >
         <GridItem gridArea={{ md: "heading" }}>
-          <Box>
+          <Box
+            mt={{
+              base: "",
+              lg: `${alignSectionHeading ? alignSectionHeading : ""}`,
+            }}
+          >
             <Heading
               as="h2"
               size="md"
@@ -60,12 +71,11 @@ function ComponentWrapper({
         <GridItem
           gridColumn={{ md: 2 }}
           gridRow={{ md: 3 }}
-          h={{ base: "70px", md: "48px" }}
-          w={{ base: "100vw", md: "90vw" }}
+          h={{ base: "80px", md: "70px", lg: "48px" }}
           maxW="6xl"
         >
           <Box
-            maxWidth={{ md: "75vw", lg: "82vw", xl: "85vw" }}
+            maxWidth={{ base: "90vw", md: "75vw", lg: "90vw", xl: "85vw" }}
             textAlign="center"
             mt={{ base: 6, md: -3 }}
           >

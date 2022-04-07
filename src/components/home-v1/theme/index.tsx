@@ -59,6 +59,7 @@ const theme = extendTheme({
     //lg: "1.125rem", -> 18px
     //xl: "1.25rem", -> 20px
     "1xl": "1.375rem", // -> 22px
+    //2xl: "1.5rem", -> 24px
     "2.5xl": "1.75rem", //-> 28px
     //"3xl": "1.875rem", -> 30px
     //"4xl": "2.25rem", -> 36px
@@ -67,11 +68,12 @@ const theme = extendTheme({
     red: {
       100: "#B80F15",
       200: "#E32B31",
-      300: "#e32a30",
     },
     brand: {
       // white
       100: "#FFFFFF",
+      // black
+      200: "#000000",
       900: "transparent",
     },
   },
@@ -154,8 +156,11 @@ const theme = extendTheme({
       //212px
       //215px
       //233px
-      //320px
+      //300px
+      //310px
+      //325px
       //360px
+      //423px
     },
   },
 });
