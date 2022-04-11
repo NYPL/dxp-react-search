@@ -30,16 +30,6 @@ import useWindowSize from "./../../../hooks/useWindowSize";
 // Utils
 import setTermsFilter from "./../../../utils/setTermsFilter";
 
-function sortForMap(a, b) {
-  if (a.name < b.name) {
-    return -1;
-  }
-  if (a.name > b.name) {
-    return 1;
-  }
-  return 0;
-}
-
 const MapWrapper = compose(
   withScriptjs,
   withGoogleMap
