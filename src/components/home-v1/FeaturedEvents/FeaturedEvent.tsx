@@ -2,6 +2,8 @@ import React from "react";
 // Component
 import { Grid, GridItem, Image, Heading, Text } from "@chakra-ui/react";
 import { EventCard, EventSpotlightCard } from "./FeaturedEventCards";
+import LinkCard, { Variant } from "../LinkCard";
+
 // Type
 import { FeaturedEventItem } from "./FeaturedEventsTypes";
 
@@ -24,20 +26,44 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
       w={{ base: "78vw", xl: "full" }}
     >
       <GridItem as="li" display={{ base: "none", lg: "grid" }}>
-        {events && <EventSpotlightCard event={events[0]} />}
+        {
+          events && (
+            <LinkCard
+              item={events[0]}
+              variant={Variant.EventSpotlight}
+              templateRows={"1fr 1fr"}
+              size="xl"
+            />
+          )
+          // <EventSpotlightCard event={events[0]} />
+        }
       </GridItem>
       <GridItem as="ul" display={{ base: "none", lg: "block" }}>
         {events &&
           events.map((event, i) => {
             if (i === 0) return;
-            return <EventCard event={event} />;
+            return (
+              <LinkCard
+                item={event}
+                variant={Variant.EventCard}
+                templateColumns={{ md: "1fr 2fr", lg: "1fr 3fr" }}
+                size="sm"
+              />
+            );
+            // <EventCard event={event} />;
           })}
       </GridItem>
       {events &&
         events.map((event) => {
           return (
             <GridItem display={{ base: "none", md: "grid", lg: "none" }}>
-              <EventCard event={event} />
+              <LinkCard
+                item={event}
+                variant={Variant.EventCard}
+                templateColumns={{ md: "1fr 2fr", lg: "1fr 3fr" }}
+                size="sm"
+              />
+              {/* <EventCard event={event} /> */}
             </GridItem>
           );
         })}

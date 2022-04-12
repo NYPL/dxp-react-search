@@ -12,12 +12,13 @@ import {
 } from "@chakra-ui/react";
 import ComponentWrapper from "../ComponentWrapper";
 import FeaturedEvent from "./FeaturedEvent";
-import Card from "../TempletCard";
+import LinkCard, { Variant } from "../LinkCard";
 // Type
 import { FeaturedEventItem } from "./FeaturedEventsTypes";
 
 interface FeaturedEventsProps {
   title: string;
+  link: string;
   items: FeaturedEventsItem[];
 }
 
@@ -26,39 +27,41 @@ interface FeaturedEventsItem {
   events: FeaturedEventItem[];
 }
 
-function FeaturedEvents({ title, items }: FeaturedEventsProps) {
+function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
   return (
     <ComponentWrapper
       title={title}
+      link={link}
       textColor="red.200"
       borderColor="red.200"
       paddingTop={true}
       alignSectionHeading="46px"
+      hoverStyle={true}
     >
       <Box>
         {/* mobile view */}
         <Box display={{ base: "block", md: "none" }}>
           {items &&
             items.map((item) => (
-              <Card image={item.events[0].image} title={item.theme}>
-                <Box>
-                  <Heading
-                    as="h3"
-                    fontFamily="font.body"
-                    fontSize="lg"
-                    fontWeight="bold"
-                    mt={1.5}
-                  >
-                    {item.events[0].title}
-                  </Heading>
-                  <Text mt={1.5} fontSize="xs" lineHeight="none">
-                    {item.events[0].date}
-                  </Text>
-                  <Text mt={1.5} fontSize="xs">
-                    {item.events[0].location}
-                  </Text>
-                </Box>
-              </Card>
+              <Box my={8}>
+                <Heading
+                  as="h3"
+                  fontFamily="Kievit-Medium"
+                  fontSize="xs"
+                  fontWeight="bold"
+                  textTransform="uppercase"
+                  color="red.200"
+                  my={2.5}
+                >
+                  {item.theme}
+                </Heading>
+                <LinkCard
+                  item={item.events[0]}
+                  size="xs"
+                  variant={Variant.EventCard}
+                  templateColumns="1fr 2fr"
+                />
+              </Box>
             ))}
         </Box>
         {/* desktop view */}

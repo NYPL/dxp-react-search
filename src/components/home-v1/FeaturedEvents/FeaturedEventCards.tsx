@@ -13,13 +13,12 @@ function EventSpotlightCard({ event }: EventCardProps) {
 
   return (
     <Grid templateRows={"1fr 1fr"} gap={1.5}>
-      <GridItem as="a">
+      <GridItem>
         <Image src={image} />
       </GridItem>
       <GridItem textAlign="left">
         <Heading
           as="h3"
-          size="md"
           fontFamily="font.body"
           fontSize="26px"
           fontWeight="bold"

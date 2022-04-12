@@ -6,15 +6,23 @@ import CardGrid from "./../components/home-v1/CardGrid";
 import SlideShow from "../components/home-v1/SlideShow/SlideShow";
 import StaffPicks from "../components/home-v1/StaffPicks/StaffPicks";
 import FeaturedEvents from "../components/home-v1/FeaturedEvents/FeaturedEvents";
+import LinkCardGrid from "../components/home-v1/LinkCardGrid";
+import Updates from "../components/home-v1/Updates";
 import ScoutHomepageV1Provider from "../components/home-v1/theme";
+// Type
+import { Variant } from "../components/home-v1/LinkCard";
 // Mock content
 import {
   heroContent,
   spotlightContent,
   featuredEvents,
+  discoverContent,
   staffPicks,
   slideShowContent,
+  blogContent,
+  updatesContent,
 } from "./../components/home-v1/mockContent";
+import { repeat } from "cypress/types/lodash";
 
 function HomePage() {
   return (
@@ -40,16 +48,44 @@ function HomePage() {
             >
               <CardGrid
                 title={spotlightContent.title}
+                link={spotlightContent.link}
                 items={spotlightContent.items}
               />
               <FeaturedEvents
                 title={featuredEvents.title}
+                link={featuredEvents.link}
                 items={featuredEvents.items}
+              />
+              <LinkCardGrid
+                title={discoverContent.title}
+                link={discoverContent.link}
+                items={discoverContent.items}
+                hoverStyle={true}
               />
               <StaffPicks title={staffPicks.title} items={staffPicks.items} />
               <SlideShow
                 title={slideShowContent.title}
                 items={slideShowContent.items}
+              />
+              <LinkCardGrid
+                title={blogContent.title}
+                link={updatesContent.link}
+                items={blogContent.items}
+                templateColumns={{
+                  base: "1fr 2fr",
+                  md: "12fr 13fr",
+                  lg: "5fr 9fr",
+                  xl: "9fr 10fr",
+                }}
+                layout="row"
+                gap={{ base: 6, xl: 12 }}
+                variant={Variant.BlogCard}
+                hoverStyle={true}
+              />
+              <Updates
+                title={updatesContent.title}
+                link={updatesContent.link}
+                items={updatesContent.items}
               />
             </Box>
           </main>

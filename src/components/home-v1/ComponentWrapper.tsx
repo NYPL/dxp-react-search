@@ -3,6 +3,7 @@ import { Box, Grid, GridItem, Heading, Link } from "@chakra-ui/react";
 
 interface ComponentWrapperProps {
   title: string;
+  link: string;
   children: JSX.Element;
   textColor: string;
   borderColor?: string;
@@ -10,10 +11,12 @@ interface ComponentWrapperProps {
   bg?: string;
   paddingTop?: boolean;
   alignSectionHeading?: string;
+  hoverStyle?: boolean;
 }
 
 function ComponentWrapper({
   title,
+  link,
   children,
   textColor,
   borderColor,
@@ -21,6 +24,7 @@ function ComponentWrapper({
   bg,
   paddingTop,
   alignSectionHeading,
+  hoverStyle = false,
 }: ComponentWrapperProps) {
   return (
     <Box
@@ -37,7 +41,7 @@ function ComponentWrapper({
         templateColumns={{
           base: "1fr",
           md: "12vw 20fr",
-          lg: "120px 8fr",
+          lg: "1fr 9fr",
         }}
         gap={{ base: 0, md: 6, xl: 7 }}
         overflow="hidden"
@@ -57,7 +61,16 @@ function ComponentWrapper({
               pt={paddingTop === true ? { base: 4, md: 2 } : 0}
               borderTopColor={`${borderColor ? borderColor : ""}`}
             >
-              {title}
+              <Link
+                href={link}
+                variant={
+                  hoverStyle === true
+                    ? "link-hover-style"
+                    : "link-hover-no-style"
+                }
+              >
+                {title}
+              </Link>
             </Heading>
           </Box>
         </GridItem>
@@ -80,13 +93,17 @@ function ComponentWrapper({
             mt={{ base: 6, md: -3 }}
           >
             <Link
-              variant="see-more"
+              variant={
+                hoverStyle === true
+                  ? "see-more-hover-style"
+                  : "see-more-hover-no-style"
+              }
               color={textColor}
               border="2px"
               borderColor={buttonBorder || borderColor}
               borderStyle="solid"
             >
-              ...SEE MORE
+              SEE MORE...
             </Link>
           </Box>
         </GridItem>

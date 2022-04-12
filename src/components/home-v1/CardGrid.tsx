@@ -4,6 +4,7 @@ import ComponentWrapper from "./ComponentWrapper";
 
 interface CardGridProps {
   title: string;
+  link: string;
   items: CardGridItem[];
 }
 
@@ -14,13 +15,15 @@ interface CardGridItem {
   image?: string;
 }
 
-function CardGrid({ title, items }: CardGridProps) {
+function CardGrid({ title, link, items }: CardGridProps) {
   return (
     <ComponentWrapper
       title={title}
+      link={link}
       textColor="red.200"
       borderColor="red.200"
       paddingTop={true}
+      hoverStyle={true}
     >
       <Grid
         as="ul"

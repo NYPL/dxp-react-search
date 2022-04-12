@@ -9,11 +9,13 @@ export const heroContent = {
 
 export const spotlightContent = {
   title: "Spotlight",
+  link: "https://www.nypl.org/spotlight",
   items: [
     {
       id: "nypl-service-update",
       title: "NYPL Service Update",
       image: "https://placeimg.com/267/167/animals",
+      // image: "https://placeimg.com/300/150/animals",
     },
     {
       id: "ukraine-history",
@@ -35,6 +37,7 @@ export const spotlightContent = {
 
 export const featuredEvents = {
   title: "What's On",
+  link: "https://www.nypl.org/events",
   items: [
     {
       theme: "author talks & conversations",
@@ -45,6 +48,7 @@ export const featuredEvents = {
           location: "Online",
           image:
             "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/World_Lit_Festival_Spotlight_1.png?itok=1No7b9xD",
+          // image: "https://placeimg.com/300/150/animals",
           link: "https://www.nypl.org/spotlight/world-literature-festival",
         },
         {
@@ -181,8 +185,89 @@ export const featuredEvents = {
     },
   ],
 };
+
+export const discoverContent = {
+  title: "Discover",
+  link: "https://www.nypl.org/about/remote-resources",
+  items: [
+    {
+      id: "get-a-library-card",
+      title: "Get a Digital Library Card Today",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/library-card",
+    },
+    {
+      id: "e-books",
+      title: "E-Books & More with SimplyE",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
+    },
+    {
+      id: "online-classes-events",
+      title: "Online Classes & Events",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/events/calendar/online",
+    },
+    {
+      id: "multilingual-resources",
+      title: "NYPL en Español & More Multilingual Resources",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/spotlight/multilingual",
+    },
+    {
+      id: "online-learning",
+      title: "Online Learning & Skills Training for Adults",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/education/adults",
+    },
+    {
+      id: "remote-learning-support",
+      title: "Remote Learning Support: Kids, Teens & Educators",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
+    },
+    {
+      id: "remote-research",
+      title: "Remote Research at NYPL",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/events/calendar/online",
+    },
+    {
+      id: "news-magazines",
+      title: "Newspapers, Magazines & Databases",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/spotlight/multilingual",
+    },
+    {
+      id: "covid-support",
+      title: "COVID-19: Community Support Resources",
+      image: "https://placeimg.com/267/167/animals",
+      link: "https://www.nypl.org/library-card",
+    },
+    {
+      id: "remote-accessible-resources",
+      title: "Remote Accessible Resources",
+      image: "https://placeimg.com/267/167/arch",
+      link: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
+    },
+    {
+      id: "ask-nypl",
+      title: "Get Help: Ask NYPL",
+      image: "https://placeimg.com/267/167/nature",
+      link: "https://www.nypl.org/events/calendar/online",
+    },
+    {
+      id: "nypl-newsletter-signup",
+      title: "Get NYPL Updates",
+      image: "https://placeimg.com/267/167/nature",
+      link: "https://www.nypl.org/spotlight/multilingual",
+    },
+  ],
+};
+
 export const staffPicks = {
   title: "Staff Picks",
+  link: "https://www.nypl.org/books-more/recommendations/staff-picks/adults",
   items: [
     {
       id: "social_grace",
@@ -209,6 +294,7 @@ export const staffPicks = {
 
 export const slideShowContent = {
   title: "New & Noteworthy",
+  link: "https://www.nypl.org/books-music-movies/new-arrivals",
   items: [
     {
       id: "never_cought",
@@ -292,6 +378,51 @@ export const slideShowContent = {
       audience: "Adult",
       image: "https://placeimg.com/267/167/animals",
       url: "https://en.wikipedia.org/wiki/Stegosaurus",
+    },
+  ],
+};
+
+export const blogContent = {
+  title: "From Our Blog",
+  link: "https://www.nypl.org/blog",
+  items: [
+    {
+      title: "Views from the Digital Collections: New York in 1950",
+      description:
+        "To celebrate the release of the 1950 Cencus let's take a look at some imaged from that year in New York City.",
+      image:
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/1950%20petrol.jpg?itok=6JUQSSvC",
+      link: "https://www.nypl.org/blog/2022/03/30/views-digital-collections-new-york-1950",
+    },
+    {
+      title: "Celebrate Poetry Month with Our Favorite Poetry Books of 2021",
+      description: "These 10 titles demonstrate poetry's range and power",
+      image:
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/best%20poetry%20petrol.png?itok=ZqZxucj6",
+      link: "https://www.nypl.org/blog/2022/03/31/celebrate-national-poetry-month-our-favorite-poetry-books-2021",
+    },
+  ],
+};
+
+export const updatesContent = {
+  title: "Updates",
+  link: "https://www.nypl.org/press",
+  items: [
+    {
+      title: "SimplyE",
+      description:
+        "Download the latest version of the Library's free e-reader app to browse and read 300,000+ e-books, from bestsellers to classics.",
+      image:
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/simplyE2.0_0.jpg?itok=mwAqeLUy",
+      url: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
+    },
+    {
+      title: "Get Email Updates",
+      description:
+        "NYPL ConnectGet Email UpdatesStay connected with the latest happenings at the Library. There's something for everyone.",
+      image:
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/NYPL_Connect_567x354.png?itok=fjRSBSXr",
+      url: "https://pages.email.nypl.org/nyplconnect",
     },
   ],
 };
