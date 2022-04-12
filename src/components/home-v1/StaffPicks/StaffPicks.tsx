@@ -9,13 +9,15 @@ import { StaffPicksItem } from "./StaffPicksTypes";
 
 interface StaffPicksProps {
   title: string;
+  link: string;
   items: StaffPicksItem[];
 }
 
-function StaffPicks({ title, items }: StaffPicksProps) {
+function StaffPicks({ title, link, items }: StaffPicksProps) {
   return (
     <ComponentWrapper
       title={title}
+      link={link}
       textColor={"brand.100"}
       borderColor={"brand.100"}
       buttonBorder={"brand.100"}

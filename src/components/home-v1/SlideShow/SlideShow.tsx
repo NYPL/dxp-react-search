@@ -11,15 +11,17 @@ import { SlideShowItem } from "./SlideShowTypes";
 
 interface SlideShowProps {
   title: string;
+  link: string;
   items: SlideShowItem[];
 }
 
-function SlideShow({ title, items }: SlideShowProps) {
+function SlideShow({ title, link, items }: SlideShowProps) {
   const { currentSlide, prevSlide, nextSlide, slideShowStyle } =
     useSlideShowStyles(items.length, 11);
   return (
     <ComponentWrapper
       title={title}
+      link={link}
       textColor="brand.100"
       bg="red.100"
       borderColor="red.100"

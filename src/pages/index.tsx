@@ -22,7 +22,6 @@ import {
   blogContent,
   updatesContent,
 } from "./../components/home-v1/mockContent";
-import { repeat } from "cypress/types/lodash";
 
 function HomePage() {
   return (
@@ -46,11 +45,17 @@ function HomePage() {
               margin="0 auto"
               padding="0 20px"
             >
-              <CardGrid
+              <LinkCardGrid
                 title={spotlightContent.title}
                 link={spotlightContent.link}
                 items={spotlightContent.items}
+                hoverStyle={true}
               />
+              {/* <CardGrid
+                title={spotlightContent.title}
+                link={spotlightContent.link}
+                items={spotlightContent.items}
+              /> */}
               <FeaturedEvents
                 title={featuredEvents.title}
                 link={featuredEvents.link}
@@ -62,9 +67,14 @@ function HomePage() {
                 items={discoverContent.items}
                 hoverStyle={true}
               />
-              <StaffPicks title={staffPicks.title} items={staffPicks.items} />
+              <StaffPicks
+                title={staffPicks.title}
+                link={staffPicks.link}
+                items={staffPicks.items}
+              />
               <SlideShow
                 title={slideShowContent.title}
+                link={slideShowContent.link}
                 items={slideShowContent.items}
               />
               <LinkCardGrid
