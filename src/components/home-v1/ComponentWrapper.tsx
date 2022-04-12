@@ -40,8 +40,8 @@ function ComponentWrapper({
         templateAreas={{ md: `'heading component'` }}
         templateColumns={{
           base: "1fr",
-          md: "12vw 20fr",
-          lg: "1fr 9fr",
+          md: "1fr 7fr",
+          lg: "2fr 19fr",
         }}
         gap={{ base: 0, md: 6, xl: 7 }}
         overflow="hidden"

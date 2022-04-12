@@ -7,7 +7,6 @@ import {
   TabPanels,
   TabPanel,
   Heading,
-  Text,
   Box,
 } from "@chakra-ui/react";
 import ComponentWrapper from "../ComponentWrapper";
@@ -43,7 +42,7 @@ function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
         <Box display={{ base: "block", md: "none" }}>
           {items &&
             items.map((item) => (
-              <Box my={8}>
+              <Box mb={8}>
                 <Heading
                   as="h3"
                   fontFamily="Kievit-Medium"
@@ -69,19 +68,18 @@ function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
           display={{ base: "none", md: "block" }}
           align="end"
           variant="enclosed"
-          mr={{ base: 9, xl: 0 }}
+          mr={{ md: 1, lg: 0 }}
           borderColor="red.200"
         >
-          <TabList borderBottomWidth="2px" pr={{ base: "70px", lg: 0 }}>
+          <TabList borderBottomWidth="2px">
             {items &&
               items.map((item) => (
                 <Tab
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
-                  px={5}
-                  w={{ lg: "15.5%", xl: "12.5%" }}
+                  px={7}
+                  w={{ lg: "15.5%", xl: "12%" }}
                   textTransform="uppercase"
-                  overflowWrap={"break-word"}
                   fontSize="xs"
                   lineHeight="none"
                   _selected={{

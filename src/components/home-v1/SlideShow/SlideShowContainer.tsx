@@ -14,7 +14,7 @@ function SlideShowContainer({
   slideShowStyle,
 }: SlideShowContainerProps) {
   return (
-    <Box w="full" overflow={"hidden"}>
+    <Box w="full" overflow="hidden">
       <Grid
         as="ul"
         w="full"

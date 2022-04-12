@@ -59,7 +59,6 @@ const LinkCard: ComponentStyleConfig = {
       fontFamily: "Kievit-Medium",
       fontWeight: "bold",
       textAlign: "left",
-      lineHeight: "21px",
       h3: {
         fontFamily: "Kievit-Medium",
         lineHeight: "22px",
@@ -71,7 +70,7 @@ const LinkCard: ComponentStyleConfig = {
         px: 0,
         fontSize: { base: "xs", md: "xs" },
       },
-      p: { px: 0, fontSize: "xs" },
+      p: { px: 0, fontSize: "xs", lineHeight: "21px" },
     },
     "blog-card": {
       w: { base: "full", xl: "78vw" },
