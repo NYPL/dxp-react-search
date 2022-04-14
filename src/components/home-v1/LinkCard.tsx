@@ -23,7 +23,8 @@ export interface LinkCardItem {
 interface LinkCardProps {
   item: LinkCardItem;
   variant?: Variant;
-  size?: string | Record<string, string>;
+  // size?: string | Record<string, string>;
+  size?: any;
 }
 
 function LinkCard({ item, variant, size = "md" }: LinkCardProps) {
