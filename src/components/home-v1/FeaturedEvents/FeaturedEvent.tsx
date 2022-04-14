@@ -19,7 +19,7 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
         lg: "7fr 12fr",
         xl: "1fr 1fr",
       }}
-      gap={{ base: 6, lg: 5, xl: 7 }}
+      gap={{ base: 6, lg: 7 }}
       listStyleType="none"
     >
       <GridItem as="li" display={{ base: "none", lg: "block" }}>
@@ -27,7 +27,6 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
           <LinkCard
             item={events[0]}
             variant={Variant.EventSpotlight}
-            templateRows={"1fr 1fr"}
             size="xl"
           />
         )}
@@ -37,12 +36,7 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
           events.map((event, i) => {
             if (i === 0) return;
             return (
-              <LinkCard
-                item={event}
-                variant={Variant.EventCard}
-                templateColumns={{ md: "1fr 2fr", lg: "1fr 3fr" }}
-                size="sm"
-              />
+              <LinkCard item={event} variant={Variant.EventCard} size="sm" />
             );
           })}
       </GridItem>
@@ -50,12 +44,7 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
         events.map((event) => {
           return (
             <GridItem display={{ base: "none", md: "block", lg: "none" }}>
-              <LinkCard
-                item={event}
-                variant={Variant.EventCard}
-                templateColumns={{ md: "5fr 11fr", lg: "1fr 3fr" }}
-                size="sm"
-              />
+              <LinkCard item={event} variant={Variant.EventCard} size="sm" />
             </GridItem>
           );
         })}

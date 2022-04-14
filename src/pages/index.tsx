@@ -1,8 +1,8 @@
 import React from "react";
+// Component
 import { Box } from "@chakra-ui/react";
 import Meta from "./../components/shared/Meta";
 import Hero from "./../components/home-v1/Hero";
-import CardGrid from "./../components/home-v1/CardGrid";
 import SlideShow from "../components/home-v1/SlideShow/SlideShow";
 import StaffPicks from "../components/home-v1/StaffPicks/StaffPicks";
 import FeaturedEvents from "../components/home-v1/FeaturedEvents/FeaturedEvents";
@@ -40,8 +40,8 @@ function HomePage() {
             </Box>
             <Box
               id="content-primary"
-              maxWidth="1350px"
               width="100%"
+              maxWidth="1350px"
               margin="0 auto"
               padding="0 20px"
             >
@@ -51,11 +51,6 @@ function HomePage() {
                 items={spotlightContent.items}
                 hoverStyle={true}
               />
-              {/* <CardGrid
-                title={spotlightContent.title}
-                link={spotlightContent.link}
-                items={spotlightContent.items}
-              /> */}
               <FeaturedEvents
                 title={featuredEvents.title}
                 link={featuredEvents.link}
@@ -81,16 +76,10 @@ function HomePage() {
                 title={blogContent.title}
                 link={updatesContent.link}
                 items={blogContent.items}
-                templateColumns={{
-                  base: "1fr 2fr",
-                  md: "12fr 13fr",
-                  lg: "5fr 9fr",
-                  xl: "9fr 10fr",
-                }}
+                hoverStyle={true}
                 layout="row"
                 gap={{ base: 6, xl: 12 }}
                 variant={Variant.BlogCard}
-                hoverStyle={true}
               />
               <Updates
                 title={updatesContent.title}

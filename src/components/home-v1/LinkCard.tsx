@@ -4,7 +4,6 @@ import { useStyleConfig } from "@chakra-ui/system";
 import { Heading, Text, Link, Grid, GridItem, Image } from "@chakra-ui/react";
 
 export enum Variant {
-  AllCaps = "all-caps",
   EventSpotlight = "event-spotlight",
   EventCard = "event-card",
   BlogCard = "blog-card",
@@ -25,33 +24,14 @@ interface LinkCardProps {
   item: LinkCardItem;
   variant?: Variant;
   size?: string | Record<string, string>;
-  gap?: string | Record<string, string>;
-  templateColumns?: string | Record<string, string>;
-  templateRows?: string | Record<string, string>;
 }
 
-function LinkCard({
-  item,
-  variant,
-  size,
-  templateColumns,
-  templateRows,
-  gap,
-}: LinkCardProps) {
-  const styles = useStyleConfig("LinkCard", { variant, size, gap });
+function LinkCard({ item, variant, size }: LinkCardProps) {
+  const styles = useStyleConfig("LinkCard", { variant, size });
   return (
     <Grid
-      as="li"
-      templateRows={
-        templateRows !== undefined
-          ? templateRows
-          : { base: "1fr", md: "min-content" }
-      }
-      templateColumns={
-        templateColumns !== undefined
-          ? templateColumns
-          : { base: "1fr 2fr", md: "1fr" }
-      }
+      templateRows={{ base: "1fr", md: "min-content" }}
+      templateColumns={{ base: "1fr 2fr", md: "1fr" }}
       sx={styles}
     >
       <GridItem>
@@ -63,9 +43,11 @@ function LinkCard({
         <Heading as="h3">
           <Link href={item.link}>{item.title}</Link>
         </Heading>
-        {item.date && <Text as="span">{item.date}</Text>}
-        {item.description && <Text>{item.description}</Text>}
-        {item.location && <Text>{item.location}</Text>}
+        <Link href={item.link} display="block" tabIndex={"-1"}>
+          {item.date && <Text as="span">{item.date}</Text>}
+          {item.description && <Text>{item.description}</Text>}
+          {item.location && <Text>{item.location}</Text>}
+        </Link>
       </GridItem>
     </Grid>
   );

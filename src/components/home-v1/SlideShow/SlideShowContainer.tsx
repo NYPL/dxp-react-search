@@ -1,7 +1,6 @@
 import React from "react";
 // Components
 import { Box, Image, Heading, Text, Grid, Link } from "@chakra-ui/react";
-import ComponentWrapper from "../ComponentWrapper";
 // Types
 import { SlideShowItem } from "./SlideShowTypes";
 

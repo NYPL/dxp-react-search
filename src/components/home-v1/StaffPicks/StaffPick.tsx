@@ -39,8 +39,8 @@ function StaffPick({ item }: StaffPickProps) {
           display="inline-block"
           float="right"
           position="absolute"
-          bottom="0px"
-          right="0px"
+          bottom={0}
+          right={0}
           href={url}
         >
           <Image

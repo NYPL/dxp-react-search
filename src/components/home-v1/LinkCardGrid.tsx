@@ -8,35 +8,33 @@ interface LinkCardGridProps {
   title: string;
   link: string;
   items: LinkCardItem[];
+  hoverStyle?: boolean;
   layout?: string;
   gap?: string | Record<string, number>;
-  hoverStyle?: boolean;
+  //props below go inform styling of LinkCard
   variant?: Variant;
   size?: string | Record<string, string>;
-  templateColumns?: string | Record<string, string>;
-  templateRows?: string | Record<string, string>;
 }
 
 function LinkCardGrid({
   title,
   link,
   items,
+  hoverStyle = false,
   layout = "column",
   gap,
-  hoverStyle = false,
   variant,
   size,
-  templateColumns = undefined,
-  templateRows = undefined,
 }: LinkCardGridProps) {
   return (
     <ComponentWrapper
       title={title}
       link={link}
+      hoverStyle={hoverStyle}
+      //last three could become passed through props
       textColor="red.200"
       borderColor="red.200"
       paddingTop={true}
-      hoverStyle={hoverStyle}
     >
       <Grid
         as="ul"
@@ -60,8 +58,6 @@ function LinkCardGrid({
                 item={item}
                 size={size || { base: "sm", md: "lg" }}
                 variant={variant}
-                templateColumns={templateColumns}
-                templateRows={templateRows}
               />
             </GridItem>
           ))}

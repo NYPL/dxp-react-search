@@ -56,9 +56,8 @@ function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
                 </Heading>
                 <LinkCard
                   item={item.events[0]}
-                  size="xs"
                   variant={Variant.EventCard}
-                  templateColumns="1fr 2fr"
+                  size="xs"
                 />
               </Box>
             ))}

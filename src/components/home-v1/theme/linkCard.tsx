@@ -3,8 +3,8 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 const LinkCard: ComponentStyleConfig = {
   // Styles for the base style
   baseStyle: {
-    w: { base: "100vw", md: "auto" },
-    fontFamily: "Kievit-Book",
+    gap: { base: 9, md: 4 },
+    // title
     h3: {
       fontFamily: "Kievit-Book",
       fontSize: { base: "lg", md: "xl" },
@@ -12,22 +12,22 @@ const LinkCard: ComponentStyleConfig = {
       lineHeight: "none",
       px: { base: 0, md: "5%" },
     },
+    // link
     a: { _hover: { textDecoration: "none" } },
+    // date
     span: {
       fontSize: "sm",
       lineHeight: "none",
       px: { base: 0, md: "5%" },
       textTransform: "uppercase",
     },
+    // description | location
     p: { fontSize: "sm", lineHeight: "none", px: { base: 0, md: "5%" } },
-    img: { w: "100%" },
-    gap: { base: 9, md: 4 },
   },
-  // Styles for the size variations
+  // Heading sizes
   sizes: {
     xs: {
       h3: { fontSize: "lg" },
-      span: { fontSize: "xs" },
     },
     sm: {
       h3: { fontSize: "lg" },
@@ -36,29 +36,25 @@ const LinkCard: ComponentStyleConfig = {
     lg: { h3: { fontSize: "2xl" } },
     xl: { h3: { fontSize: "26px" } },
   },
-  // Styles for the visual style variations
+  // LinkCard variants
   variants: {
-    "all-caps": {
-      p: { textTransform: "uppercase" },
-    },
     "event-spotlight": {
       gap: 1.5,
-      fontFamily: "Kievit-Medium",
-      fontWeight: "bold",
       textAlign: "left",
       h3: {
         fontFamily: "Kievit-Medium",
         px: 0,
+        mb: { lg: 3, xl: 0 },
       },
-      span: { mt: 1.5, px: 0 },
+      span: { px: 0 },
       p: { px: 0 },
     },
     "event-card": {
-      gap: { base: 6, lg: 4 },
+      gridTemplateColumns: { base: "3fr 7fr", md: "5fr 11fr", lg: "1fr 3fr" },
+      gap: { base: 12, md: 6, lg: 4 },
       mb: { base: 0, lg: 4 },
-      fontFamily: "Kievit-Medium",
-      fontWeight: "bold",
       textAlign: "left",
+
       h3: {
         fontFamily: "Kievit-Medium",
         lineHeight: "22px",
@@ -68,13 +64,22 @@ const LinkCard: ComponentStyleConfig = {
       span: {
         mt: 1.5,
         px: 0,
-        fontSize: { base: "xs", md: "xs" },
       },
-      p: { px: 0, fontSize: "xs", lineHeight: "21px" },
+      p: {
+        px: 0,
+        lineHeight: "21px",
+        fontSize: "xs",
+      },
     },
     "blog-card": {
-      w: { base: "full", xl: "78vw" },
       maxWidth: { xl: "1130px" },
+      float: "right",
+      gridTemplateColumns: {
+        base: "1fr 2fr",
+        md: "12fr 13fr",
+        lg: "5fr 9fr",
+        xl: "9fr 10fr",
+      },
       gap: { base: 12, md: 0 },
       h3: {
         fontFamily: "Milo-Regular",
@@ -84,15 +89,17 @@ const LinkCard: ComponentStyleConfig = {
       },
       p: {
         display: { base: "none", lg: "block" },
-        fontSize: "15px",
-        pt: "10px",
+        fontSize: "md",
+        pt: 2.5,
       },
       img: { maxHeight: "280px", w: "auto", float: "right" },
     },
     "updates-card": {
-      h3: { mt: "5px", mb: "15px" },
-      p: { display: { base: "none", lg: "block" }, mb: "15px" },
+      gridTemplateColumns: { base: "1fr 2fr", md: "2fr 1fr", lg: "1fr 1fr" },
       gap: { lg: 12 },
+      mb: { lg: 16, xl: 10 },
+      h3: { mt: 1.5, mb: 4 },
+      p: { display: { base: "none", lg: "block" }, mb: 4 },
     },
   },
   // The default `size` or `variant` values

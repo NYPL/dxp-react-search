@@ -4,27 +4,27 @@ import { Box, Grid, GridItem, Heading, Link } from "@chakra-ui/react";
 interface ComponentWrapperProps {
   title: string;
   link: string;
-  children: JSX.Element;
+  alignSectionHeading?: string;
+  hoverStyle?: boolean;
+  paddingTop?: boolean;
   textColor: string;
   borderColor?: string;
   buttonBorder?: string;
   bg?: string;
-  paddingTop?: boolean;
-  alignSectionHeading?: string;
-  hoverStyle?: boolean;
+  children: JSX.Element;
 }
 
 function ComponentWrapper({
   title,
   link,
-  children,
+  alignSectionHeading,
+  hoverStyle = false,
+  paddingTop,
   textColor,
   borderColor,
   buttonBorder,
   bg,
-  paddingTop,
-  alignSectionHeading,
-  hoverStyle = false,
+  children,
 }: ComponentWrapperProps) {
   return (
     <Box
@@ -81,16 +81,12 @@ function ComponentWrapper({
         >
           {children}
         </GridItem>
-        <GridItem
-          gridColumn={{ md: 2 }}
-          gridRow={{ md: 3 }}
-          h={{ base: "80px", md: "70px", lg: "48px" }}
-          maxW="6xl"
-        >
+        <GridItem gridColumn={{ md: 2 }} gridRow={{ md: 3 }} maxW="6xl">
           <Box
             maxWidth={{ base: "90vw", md: "75vw", lg: "90vw", xl: "85vw" }}
             textAlign="center"
-            mt={{ base: 6, md: -3 }}
+            mt={{ base: 6, md: -3, lg: -8 }}
+            mb={{ base: 10, lg: 8 }}
           >
             <Link
               variant={

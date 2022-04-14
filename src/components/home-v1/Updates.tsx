@@ -21,28 +21,23 @@ function Updates({ title, link, items }: UpdatesProps) {
     <ComponentWrapper
       title={title}
       link={link}
+      hoverStyle={true}
+      paddingTop={true}
       textColor="red.200"
       borderColor="red.200"
-      paddingTop={true}
-      hoverStyle={true}
     >
       <Grid
         as="ul"
         listStyleType="none"
         templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-        templateRows={{ base: "1fr 3fr", md: "1fr" }}
         gap={{ base: 5, md: 3 }}
       >
         {items &&
           items.map((item) => {
             return (
-              <GridItem as="li" w="100%">
+              <GridItem as="li">
                 <Link variant="link-hover-no-style">
-                  <LinkCard
-                    item={item}
-                    variant={Variant.Updates}
-                    templateColumns={{ base: "1fr 2fr", md: "1fr 1fr" }}
-                  />
+                  <LinkCard item={item} variant={Variant.Updates} />
                 </Link>
               </GridItem>
             );
