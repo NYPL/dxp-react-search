@@ -15,22 +15,25 @@ export const spotlightContent = {
       id: "nypl-service-update",
       title: "NYPL Service Update",
       image: "https://placeimg.com/267/167/animals",
-      // image: "https://placeimg.com/300/150/animals",
+      url: "https://www.nypl.org/spotlight/fines",
     },
     {
       id: "ukraine-history",
       title: "Understanding the History of Ukraine: Recommended Reading",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://www.nypl.org/spotlight/fines",
     },
     {
       id: "exhibitions",
       title: "Discover Our New Free Exhibitions",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://www.nypl.org/spotlight/fines",
     },
     {
       id: "late-fines",
       title: "Did You Know? Late Fines Are Gone!",
       image: "https://placeimg.com/267/167/animals",
+      url: "https://www.nypl.org/spotlight/fines",
     },
   ],
 };
@@ -48,8 +51,7 @@ export const featuredEvents = {
           location: "Online",
           image:
             "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/World_Lit_Festival_Spotlight_1.png?itok=1No7b9xD",
-          // image: "https://placeimg.com/300/150/animals",
-          link: "https://www.nypl.org/spotlight/world-literature-festival",
+          url: "https://www.nypl.org/spotlight/world-literature-festival",
         },
         {
           title:
@@ -58,7 +60,7 @@ export const featuredEvents = {
           location: "Stavros Niarchos Foundation Library (SNFL) & Online",
           image:
             "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/LIVE_040522_Osnos_Spotlight.png?itok=iRlPpzM6",
-          link: "https://www.showclix.com/event/georgesorosalifeinfull/tag/nyplhomepage",
+          url: "https://www.showclix.com/event/georgesorosalifeinfull/tag/nyplhomepage",
         },
         {
           title:
@@ -67,7 +69,7 @@ export const featuredEvents = {
           location: "Online",
           image:
             "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/LIVE_040622_Elizabeth_Alexander_Spotlight.png?itok=DwDzc8e4",
-          link: "https://www.showclix.com/event/thetrayvongeneration/tag/nyplhomepage",
+          url: "https://www.showclix.com/event/thetrayvongeneration/tag/nyplhomepage",
         },
         {
           title: "Alien Nation: True Tales of Immigration",
@@ -75,7 +77,7 @@ export const featuredEvents = {
           location: "Stavros Niarchos Foundation Library (SNFL) & Online",
           image:
             "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/LIVE_041422_Sofija%20Stefanovic_Spotlight.png?itok=_XQfh0xD",
-          link: "https://www.showclix.com/event/aliennation/tag/nyplhomepage",
+          url: "https://www.showclix.com/event/aliennation/tag/nyplhomepage",
         },
       ],
     },
@@ -88,7 +90,7 @@ export const featuredEvents = {
           location: "Schomburg Center",
           image:
             "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/BeenSeen_567x354.jpg?itok=JCjOY_lJ",
-          link: "https://www.nypl.org/events/exhibitions/been-seen",
+          url: "https://www.nypl.org/events/exhibitions/been-seen",
         },
         {
           title:
@@ -96,21 +98,21 @@ export const featuredEvents = {
           date: "OPEN NOW.",
           location: "Schwarzman Building",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/spotlight/treasures",
+          url: "https://www.nypl.org/spotlight/treasures",
         },
         {
           title: "Boundless: 10 Years of Seeding Black Comic Futures",
           date: "OPEN NOW.",
           location: "Schomburg Center",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
+          url: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
         },
         {
           title: "The Mestizo as Ambassadorn",
           date: "OPEN NOW.",
           location: "Library for the Performing Arts",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
+          url: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
         },
       ],
     },
@@ -123,28 +125,28 @@ export const featuredEvents = {
           location: "Various Locations",
           image:
             "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/NoNieqa_Kids_567x354.png?itok=rAgxAD-j",
-          link: "https://www.nypl.org/events/calendar?keyword=NoNieqa+Ramos",
+          url: "https://www.nypl.org/events/calendar?keyword=NoNieqa+Ramos",
         },
         {
           title: "NYPL After School",
           date: "MONDAY–THURSDAY",
           location: "Select Locations",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/spotlight/treasures",
+          url: "https://www.nypl.org/spotlight/treasures",
         },
         {
           title: "Activities for Kids",
           date: "ONGOING",
           location: "In-person & Online",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
+          url: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
         },
         {
           title: "Events & Clubs for Teens",
           date: "ONGOING",
           location: "In-person & Online",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
+          url: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
         },
       ],
     },
@@ -158,28 +160,28 @@ export const featuredEvents = {
           location: "Various Locations",
           image:
             "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/ArtistinResidence_Workshop_567x354.png?itok=eF9ND6Ba",
-          link: "https://www.nypl.org/events/calendar?keyword=roundabout",
+          url: "https://www.nypl.org/events/calendar?keyword=roundabout",
         },
         {
           title: "Get Lit Book Club Discussions",
           date: "ONGOING",
           location: "Various Locations",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/spotlight/treasures",
+          url: "https://www.nypl.org/spotlight/treasures",
         },
         {
           title: "Thomas Yoseloff Business Center Events at SNFL",
           date: "ONGOING",
           location: "Online",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
+          url: "https://www.nypl.org/events/exhibitions/boundless-10-years-seeding-black-comic-futures",
         },
         {
           title: "Let's Talk About Mental Health",
           date: "ONGOING",
           location: "Various Locations",
           image: "https://placeimg.com/267/167/animals",
-          link: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
+          url: "https://www.nypl.org/events/exhibitions/mestizo-ambassador",
         },
       ],
     },
@@ -194,73 +196,73 @@ export const discoverContent = {
       id: "get-a-library-card",
       title: "Get a Digital Library Card Today",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/library-card",
+      url: "https://www.nypl.org/library-card",
     },
     {
       id: "e-books",
       title: "E-Books & More with SimplyE",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
+      url: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
     },
     {
       id: "online-classes-events",
       title: "Online Classes & Events",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/events/calendar/online",
+      url: "https://www.nypl.org/events/calendar/online",
     },
     {
       id: "multilingual-resources",
       title: "NYPL en Español & More Multilingual Resources",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/spotlight/multilingual",
+      url: "https://www.nypl.org/spotlight/multilingual",
     },
     {
       id: "online-learning",
       title: "Online Learning & Skills Training for Adults",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/education/adults",
+      url: "https://www.nypl.org/education/adults",
     },
     {
       id: "remote-learning-support",
       title: "Remote Learning Support: Kids, Teens & Educators",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
+      url: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
     },
     {
       id: "remote-research",
       title: "Remote Research at NYPL",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/events/calendar/online",
+      url: "https://www.nypl.org/events/calendar/online",
     },
     {
       id: "news-magazines",
       title: "Newspapers, Magazines & Databases",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/spotlight/multilingual",
+      url: "https://www.nypl.org/spotlight/multilingual",
     },
     {
       id: "covid-support",
       title: "COVID-19: Community Support Resources",
       image: "https://placeimg.com/267/167/animals",
-      link: "https://www.nypl.org/library-card",
+      url: "https://www.nypl.org/library-card",
     },
     {
       id: "remote-accessible-resources",
       title: "Remote Accessible Resources",
       image: "https://placeimg.com/267/167/arch",
-      link: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
+      url: "https://www.nypl.org/books-music-movies/ebookcentral/simplye",
     },
     {
       id: "ask-nypl",
       title: "Get Help: Ask NYPL",
       image: "https://placeimg.com/267/167/nature",
-      link: "https://www.nypl.org/events/calendar/online",
+      url: "https://www.nypl.org/events/calendar/online",
     },
     {
       id: "nypl-newsletter-signup",
       title: "Get NYPL Updates",
       image: "https://placeimg.com/267/167/nature",
-      link: "https://www.nypl.org/spotlight/multilingual",
+      url: "https://www.nypl.org/spotlight/multilingual",
     },
   ],
 };
@@ -392,14 +394,14 @@ export const blogContent = {
         "To celebrate the release of the 1950 Cencus let's take a look at some imaged from that year in New York City.",
       image:
         "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/1950%20petrol.jpg?itok=6JUQSSvC",
-      link: "https://www.nypl.org/blog/2022/03/30/views-digital-collections-new-york-1950",
+      url: "https://www.nypl.org/blog/2022/03/30/views-digital-collections-new-york-1950",
     },
     {
       title: "Celebrate Poetry Month with Our Favorite Poetry Books of 2021",
       description: "These 10 titles demonstrate poetry's range and power",
       image:
         "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/best%20poetry%20petrol.png?itok=ZqZxucj6",
-      link: "https://www.nypl.org/blog/2022/03/31/celebrate-national-poetry-month-our-favorite-poetry-books-2021",
+      url: "https://www.nypl.org/blog/2022/03/31/celebrate-national-poetry-month-our-favorite-poetry-books-2021",
     },
   ],
 };

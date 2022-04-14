@@ -17,7 +17,7 @@ export interface LinkCardItem {
   description?: string;
   location?: string;
   image: string;
-  link?: string;
+  url?: string;
 }
 
 interface LinkCardProps {
@@ -35,15 +35,20 @@ function LinkCard({ item, variant, size }: LinkCardProps) {
       sx={styles}
     >
       <GridItem>
-        <Link href={item.link}>
+        <Link href={item.url}>
           <Image src={item.image} />
         </Link>
       </GridItem>
       <GridItem>
         <Heading as="h3">
-          <Link href={item.link}>{item.title}</Link>
+          <Link href={item.url}>{item.title}</Link>
         </Heading>
-        <Link href={item.link} display="block" tabIndex={"-1"}>
+        <Link
+          href={item.url}
+          display="block"
+          //@ts-ignore
+          tabIndex="-1"
+        >
           {item.date && <Text as="span">{item.date}</Text>}
           {item.description && <Text>{item.description}</Text>}
           {item.location && <Text>{item.location}</Text>}

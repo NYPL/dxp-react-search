@@ -89,6 +89,7 @@ function ComponentWrapper({
             mb={{ base: 10, lg: 8 }}
           >
             <Link
+              href={link}
               variant={
                 hoverStyle === true
                   ? "see-more-hover-style"

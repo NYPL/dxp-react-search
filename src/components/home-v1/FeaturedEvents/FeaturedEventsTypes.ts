@@ -3,5 +3,5 @@ export interface FeaturedEventItem {
   date: string;
   location: string;
   image: string;
-  link: string;
+  url: string;
 }

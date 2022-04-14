@@ -74,6 +74,8 @@ function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
             {items &&
               items.map((item) => (
                 <Tab
+                  //@ts-ignore
+                  tabIndex="-1"
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
                   px={7}
