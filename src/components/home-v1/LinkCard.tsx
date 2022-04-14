@@ -26,7 +26,7 @@ interface LinkCardProps {
   size?: string | Record<string, string>;
 }
 
-function LinkCard({ item, variant, size }: LinkCardProps) {
+function LinkCard({ item, variant, size = "md" }: LinkCardProps) {
   const styles = useStyleConfig("LinkCard", { variant, size });
   return (
     <Grid
