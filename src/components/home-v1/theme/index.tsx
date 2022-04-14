@@ -4,6 +4,7 @@ import { Global } from "@emotion/react";
 // Component Styles
 import QuoteBg from "./quoteBg";
 import LinkCard from "./linkCard";
+import LinkCardGrid from "./linkCardGrid";
 
 const Fonts = () => (
   <Global
@@ -181,6 +182,7 @@ const theme = extendTheme({
     },
     QuoteBg,
     LinkCard,
+    LinkCardGrid,
   },
   spacing: {
     space: {

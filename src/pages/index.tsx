@@ -7,7 +7,6 @@ import SlideShow from "../components/home-v1/SlideShow/SlideShow";
 import StaffPicks from "../components/home-v1/StaffPicks/StaffPicks";
 import FeaturedEvents from "../components/home-v1/FeaturedEvents/FeaturedEvents";
 import LinkCardGrid from "../components/home-v1/LinkCardGrid";
-import Updates from "../components/home-v1/Updates";
 import ScoutHomepageV1Provider from "../components/home-v1/theme";
 // Type
 import { Variant } from "../components/home-v1/LinkCard";
@@ -50,6 +49,7 @@ function HomePage() {
                 link={spotlightContent.link}
                 items={spotlightContent.items}
                 hoverStyle={true}
+                variant="column-grid"
               />
               <FeaturedEvents
                 title={featuredEvents.title}
@@ -61,6 +61,7 @@ function HomePage() {
                 link={discoverContent.link}
                 items={discoverContent.items}
                 hoverStyle={true}
+                variant="column-grid"
               />
               <StaffPicks
                 title={staffPicks.title}
@@ -77,14 +78,16 @@ function HomePage() {
                 link={updatesContent.link}
                 items={blogContent.items}
                 hoverStyle={true}
-                layout="row"
-                gap={{ base: 6, xl: 12 }}
-                variant={Variant.BlogCard}
+                cardVariant={Variant.BlogCard}
               />
-              <Updates
+              <LinkCardGrid
                 title={updatesContent.title}
                 link={updatesContent.link}
                 items={updatesContent.items}
+                hoverStyle={true}
+                variant="updates-grid"
+                cardVariant={Variant.Updates}
+                size="sm"
               />
             </Box>
           </main>

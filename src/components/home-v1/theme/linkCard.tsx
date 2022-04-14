@@ -95,11 +95,17 @@ const LinkCard: ComponentStyleConfig = {
       img: { maxHeight: "280px", w: "auto", float: "right" },
     },
     "updates-card": {
-      gridTemplateColumns: { base: "1fr 2fr", md: "2fr 1fr", lg: "1fr 1fr" },
+      gridTemplateColumns: { base: "1fr 2fr", md: "2fr 1fr", lg: "15fr 16fr" },
       gap: { lg: 12 },
+      fontFamily: "Kievit-Book",
       mb: { lg: 16, xl: 10 },
       h3: { mt: 1.5, mb: 4 },
-      p: { display: { base: "none", lg: "block" }, mb: 4 },
+      p: {
+        display: { base: "none", lg: "block" },
+        fontSize: "sm",
+        lineHeight: "19px",
+        mb: 4,
+      },
     },
   },
   // The default `size` or `variant` values

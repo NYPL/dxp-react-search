@@ -1,4 +1,5 @@
 import React from "react";
+import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Grid, GridItem } from "@chakra-ui/react";
 import ComponentWrapper from "./ComponentWrapper";
@@ -9,10 +10,9 @@ interface LinkCardGridProps {
   link: string;
   items: LinkCardItem[];
   hoverStyle?: boolean;
-  layout?: string;
-  gap?: string | Record<string, number>;
+  variant?: string;
   //props below go inform styling of LinkCard
-  variant?: Variant;
+  cardVariant?: Variant;
   size?: string | Record<string, string>;
 }
 
@@ -21,11 +21,11 @@ function LinkCardGrid({
   link,
   items,
   hoverStyle = false,
-  layout = "column",
-  gap,
   variant,
+  cardVariant,
   size,
 }: LinkCardGridProps) {
+  const styles = useStyleConfig("LinkCardGrid", { variant });
   return (
     <ComponentWrapper
       title={title}
@@ -36,28 +36,14 @@ function LinkCardGrid({
       borderColor="red.200"
       paddingTop={true}
     >
-      <Grid
-        as="ul"
-        templateRows={
-          layout === "column" ? { base: "1fr", md: "min-content" } : ""
-        }
-        templateColumns={
-          layout === "column"
-            ? {
-                base: "1fr",
-                md: "repeat(auto-fit, minmax(267px, 1fr))",
-              }
-            : ""
-        }
-        gap={gap || { base: 9, md: 6, xl: 7 }}
-      >
+      <Grid as="ul" sx={styles}>
         {items &&
           items.map((item) => (
-            <GridItem as="li" listStyleType="none" w="100%">
+            <GridItem as="li" listStyleType="none">
               <LinkCard
                 item={item}
                 size={size || { base: "sm", md: "lg" }}
-                variant={variant}
+                variant={cardVariant}
               />
             </GridItem>
           ))}
