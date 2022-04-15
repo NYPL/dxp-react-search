@@ -5,6 +5,7 @@ import DrupalApi from "./../../apollo/server/datasources/DrupalApi";
 import DrupalJsonApi from "./../../apollo/server/datasources/drupal-json-api/DrupalJsonApi";
 import PlatformApi from "./../../apollo/server/datasources/PlatformApi";
 import SendGridApi from "./../../apollo/server/datasources/SendGridApi";
+import CommunicoApi from "./../../apollo/server/datasources/CommunicoApi";
 import Cors from "micro-cors";
 const { NEXT_PUBLIC_ALLOWED_ORIGIN } = process.env;
 
@@ -17,6 +18,7 @@ const apolloServer = new ApolloServer({
       drupalJsonApi: new DrupalJsonApi(),
       platformApi: new PlatformApi(),
       sendGridApi: new SendGridApi(),
+      communicoApi: new CommunicoApi(),
     };
   },
   context: ({ req }) => ({

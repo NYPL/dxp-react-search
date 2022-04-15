@@ -14,6 +14,8 @@ import blogResolver from "./blogResolver";
 import locationResolver from "./locationResolver";
 // Mutations
 import sendEmailResolver from "./sendEmailResolver";
+// Communico
+import eventResolver from "./eventResolver";
 
 export const resolvers = mergeResolvers([
   refineryLocationResolver,
@@ -30,4 +32,5 @@ export const resolvers = mergeResolvers([
   filterResolver,
   ipAccessCheckResolver,
   sendEmailResolver,
+  eventResolver,
 ]);

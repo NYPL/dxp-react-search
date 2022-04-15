@@ -17,6 +17,8 @@ import { typeDefs as BlogTypes } from "./type-defs/blog.js";
 import { typeDefs as LocationTypes } from "./type-defs/location.js";
 // Mutations
 import { typeDefs as SendEmailTypes } from "./type-defs/sendEmail.js";
+// Communico
+import { typeDefs as EventTypes } from "./type-defs/event.js";
 
 export const schema = makeExecutableSchema({
   typeDefs: [
@@ -34,6 +36,8 @@ export const schema = makeExecutableSchema({
     BlogTypes,
     LocationTypes,
     SendEmailTypes,
+    //
+    EventTypes,
   ],
   resolvers,
 });

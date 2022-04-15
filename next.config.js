@@ -62,6 +62,8 @@ const nextConfig = {
       "contentcafecloud.baker-taylor.com",
       "img1.od-cdn.com",
       "ic.od-cdn.com",
+      // Communico
+      "nypl.libnet.info",
     ],
   },
 };
