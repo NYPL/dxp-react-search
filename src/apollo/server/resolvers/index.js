@@ -16,6 +16,7 @@ import locationResolver from "./locationResolver";
 import sendEmailResolver from "./sendEmailResolver";
 // Communico
 import eventResolver from "./eventResolver";
+import eventFilterResolver from "./eventFilterResolver";
 
 export const resolvers = mergeResolvers([
   refineryLocationResolver,
@@ -33,4 +34,5 @@ export const resolvers = mergeResolvers([
   ipAccessCheckResolver,
   sendEmailResolver,
   eventResolver,
+  eventFilterResolver,
 ]);

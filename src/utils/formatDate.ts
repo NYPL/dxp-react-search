@@ -6,10 +6,9 @@ var timezone = require("dayjs/plugin/timezone");
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-function formatDate(date) {
-  const dateFormat = "MMMM D, YYYY";
+function formatDate(dateTime: string, dateFormat: string) {
   const timezone = "America/New_York";
-  return dayjs(date).tz(timezone).format(dateFormat);
+  return dayjs(dateTime).tz(timezone).format(dateFormat);
 }
 
 export default formatDate;

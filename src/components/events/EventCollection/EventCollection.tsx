@@ -15,13 +15,8 @@ import {
 import NextDsLink from "../../shared/Link/NextDsLink";
 // Next
 import { useRouter } from "next/router";
-// DayJS
-const dayjs = require("dayjs");
-// DayJS timezone
-var utc = require("dayjs/plugin/utc");
-var timezone = require("dayjs/plugin/timezone");
-dayjs.extend(utc);
-dayjs.extend(timezone);
+// Utils
+import formatDate from "../../../utils/formatDate";
 
 const EVENT_COLLECTION_QUERY = gql`
   ${EVENT_FIELDS_FRAGMENT}
@@ -50,12 +45,6 @@ interface EventCollectionProps {
   sort?: any;
   featured?: boolean;
   status?: boolean;
-}
-
-function formatDate(datetime: string) {
-  const dateFormat = "MMMM D, YYYY | h:mmA";
-  const timezone = "America/New_York";
-  return dayjs(datetime).tz(timezone).format(dateFormat);
 }
 
 function EventCollection({ id, limit, sort }: EventCollectionProps) {
@@ -121,7 +110,10 @@ function EventCollection({ id, limit, sort }: EventCollectionProps) {
                     </NextDsLink>
                   )}
                 </Heading>
-                <Box fontWeight="bold">{formatDate(item.startDate)}</Box>
+                <Box fontWeight="bold">
+                  {formatDate(item.startDate, "MMMM D, YYYY | h:mmA")}
+                </Box>
+                <Box fontWeight="bold">{item.locationName}</Box>
                 <Box
                   dangerouslySetInnerHTML={{
                     __html: item.description,

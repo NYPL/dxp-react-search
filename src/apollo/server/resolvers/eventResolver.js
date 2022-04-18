@@ -2,6 +2,7 @@ const eventResolver = {
   Query: {
     eventCollection: async (_, args, { dataSources }) => {
       const response = await dataSources.communicoApi.getCollectionResource(
+        "events",
         args.limit,
         args.pageNumber,
         args.sort
@@ -33,6 +34,7 @@ const eventResolver = {
     endDate: (event) => event.eventEnd,
     // @TODO this should really be featuredImage ?
     featuredImage: (event) => event.eventImage,
+    locationName: (event) => event.locationName,
   },
 };
 

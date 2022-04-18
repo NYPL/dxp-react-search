@@ -90,7 +90,7 @@ const blogResolver = {
         return "NYPL Staff";
       }
     },
-    date: (blog) => formatDate(blog.created),
+    date: (blog) => formatDate(blog.created, "MMMM D, YYYY"),
     image: (blog) =>
       blog.field_ers_media_image.data !== null
         ? resolveImage(blog.field_ers_media_image)

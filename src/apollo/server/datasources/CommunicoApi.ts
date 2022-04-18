@@ -61,7 +61,7 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
   // Sets the bearer token for the api request.
   // @see http://communicocollege.com/communico-client-api-1137
   async willSendRequest(request: any) {
-    const COMMUNICO_BEARER_TOKEN = "b38beddfb0a5c06ee76e5044db935ad020c45eda";
+    const COMMUNICO_BEARER_TOKEN = "f2bb6e72e81dd1d672187dc859e8fb3fc69cdacb";
 
     // const accessToken = await this.getAccessToken();
     // // @ts-ignore
@@ -78,28 +78,31 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
 
   // @see https://api.communico.co/docs/#!/attend/get_v3_attend_events
   async getCollectionResource(
-    limit: number,
-    pageNumber: number,
-    sort: any
+    resourceType: "events" | "ages" | "types",
+    limit?: number,
+    pageNumber?: number,
+    sort?: any
   ): Promise<CommunicoResponse> {
-    let apiPath = "/v3/attend/events?fields=featuredImage,eventImage";
+    let apiPath = `/v3/attend/${resourceType}`;
 
-    // Add limit and offset.
-    if (limit && pageNumber) {
-      // Calculate offset
-      let offset = 0;
-      if (pageNumber === 2) {
-        offset = limit;
-      } else {
-        offset = limit * (pageNumber - 1);
+    if (resourceType === "events") {
+      apiPath = `${apiPath}?fields=featuredImage,eventImage`;
+      // Add limit and offset.
+      if (limit && pageNumber) {
+        // Calculate offset
+        let offset = 0;
+        if (pageNumber === 2) {
+          offset = limit;
+        } else {
+          offset = limit * (pageNumber - 1);
+        }
+        apiPath = `${apiPath}&limit=${limit}&start=${offset}`;
       }
-      apiPath = `${apiPath}&limit=${limit}&start=${offset}`;
-    }
-
-    // Add sorting.
-    if (typeof sort === "object" && sort !== null) {
-      const { field, direction } = sort;
-      apiPath = `${apiPath}&sortBy=${field}&sortOrder=${direction}`;
+      // Add sorting.
+      if (typeof sort === "object" && sort !== null) {
+        const { field, direction } = sort;
+        apiPath = `${apiPath}&sortBy=${field}&sortOrder=${direction}`;
+      }
     }
 
     const response = await this.get(apiPath);

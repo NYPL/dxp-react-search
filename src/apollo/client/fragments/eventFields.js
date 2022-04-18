@@ -8,5 +8,6 @@ export const EVENT_FIELDS_FRAGMENT = gql`
     startDate
     endDate
     featuredImage
+    locationName
   }
 `;

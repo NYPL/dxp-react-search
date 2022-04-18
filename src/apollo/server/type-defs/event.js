@@ -8,6 +8,12 @@ export const typeDefs = gql`
     startDate: String!
     endDate: String!
     featuredImage: String
+    locationName: String
+  }
+
+  type EventFilter {
+    id: ID!
+    name: String
   }
 
   type EventConnection {
@@ -18,5 +24,6 @@ export const typeDefs = gql`
   extend type Query {
     eventCollection(limit: Int, pageNumber: Int, sort: Sort): EventConnection
     event(id: String): Event
+    eventFilterCollection(resourceType: String): [EventFilter]
   }
 `;

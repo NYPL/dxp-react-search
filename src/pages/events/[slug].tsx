@@ -7,8 +7,14 @@ import { gql, useQuery } from "@apollo/client";
 import { withApollo } from "../../apollo/client/withApollo";
 import { EVENT_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/eventFields";
 // Components
-import { Heading, HeadingLevels } from "@nypl/design-system-react-components";
+import {
+  Box,
+  Heading,
+  HeadingLevels,
+} from "@nypl/design-system-react-components";
 import PageContainer from "../../components/events/layouts/PageContainer";
+// Utils
+import formatDate from "../../utils/formatDate";
 
 // /events/6478939
 const EVENT_QUERY = gql`
@@ -60,7 +66,15 @@ function EventSlugPage() {
       contentPrimary={
         <>
           <Heading level={HeadingLevels.One}>{data.event.title}</Heading>
-          <div dangerouslySetInnerHTML={{ __html: data.event.description }} />
+          <Box fontWeight="bold">
+            {formatDate(data.event.startDate, "MMMM D, YYYY | h:mmA")}
+          </Box>
+          <Box fontWeight="bold">{data.event.locationName}</Box>
+          <Box
+            dangerouslySetInnerHTML={{
+              __html: data.event.description,
+            }}
+          />
         </>
       }
     />

@@ -20,6 +20,7 @@ import { EVENTS_BASE_PATH } from "../../../utils/config";
 function PageContainer({
   metaTags,
   breadcrumbs,
+  contentHeader,
   contentPrimary,
   showFilterBar,
   showContentHeader,
@@ -46,10 +47,13 @@ function PageContainer({
       metaTags={metaTags}
       breadcrumbs={newBreadcrumbs}
       breadcrumbsColor={ColorVariants.Blogs}
+      {...(showContentHeader &&
+        contentHeader && {
+          contentHeader: contentHeader,
+        })}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide={SidebarSides.Right}
-      contentHeader={null}
       contentSecondary={
         <>
           {railMenuContent.map((menu) => {

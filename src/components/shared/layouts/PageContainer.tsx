@@ -75,6 +75,15 @@ function PageContainer({
           <main id="main-content">
             {contentHeader && <div>{contentHeader}</div>}
             <div className={s[contentPrimaryClass]}>
+              {contentSecondary && showSidebar && sidebarSide === "left" && (
+                <div
+                  id="page-container--content-secondary"
+                  className={s.contentSecondary}
+                >
+                  {contentSecondary}
+                </div>
+              )}
+
               {contentPrimary && (
                 <div
                   id="page-container--content-primary"
