@@ -4,6 +4,12 @@ const Card: ComponentStyleConfig = {
   // Styles for the base style
   baseStyle: {
     gap: { base: 9, md: 4 },
+    _focusWithin: {
+      outlineStyle: "solid",
+      outlineColor: "#135772",
+      outlineWidth: "3px",
+      boxShadow: "1px 1px 1px 1px #135772",
+    },
     // title
     h3: {
       fontFamily: "Kievit-Book",
@@ -15,13 +21,9 @@ const Card: ComponentStyleConfig = {
     // link
     a: {
       _hover: { textDecoration: "none" },
-      _after: {
-        position: "absolute",
-        content: "''",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
+      _focus: {
+        boxShadow: "unset",
+        outline: "unset",
       },
     },
     // date
@@ -33,6 +35,7 @@ const Card: ComponentStyleConfig = {
     },
     // description | location
     p: { fontSize: "sm", lineHeight: "none", px: { base: 0, md: "5%" } },
+    img: { w: "full" },
   },
   // Heading sizes
   sizes: {
@@ -60,7 +63,7 @@ const Card: ComponentStyleConfig = {
       p: { px: 0 },
     },
     "event-card": {
-      gridTemplateColumns: { base: "3fr 7fr", md: "5fr 11fr", lg: "1fr 3fr" },
+      gridTemplateColumns: { base: "4fr 9fr", md: "5fr 11fr", lg: "1fr 3fr" },
       gap: { base: 12, md: 6, lg: 4 },
       mb: { base: 0, lg: 4 },
       textAlign: "left",
@@ -85,7 +88,7 @@ const Card: ComponentStyleConfig = {
       maxWidth: { xl: "1130px" },
       float: "right",
       gridTemplateColumns: {
-        base: "1fr 2fr",
+        base: "4fr 9fr",
         md: "12fr 13fr",
         lg: "5fr 9fr",
         xl: "9fr 10fr",
@@ -105,8 +108,8 @@ const Card: ComponentStyleConfig = {
       img: { maxHeight: "280px", w: "auto", float: "right" },
     },
     "updates-card": {
-      gridTemplateColumns: { base: "1fr 2fr", md: "2fr 1fr", lg: "15fr 16fr" },
-      gap: { lg: 12 },
+      gridTemplateColumns: { base: "4fr 9fr", md: "2fr 1fr", lg: "15fr 16fr" },
+      gap: { base: 12 },
       fontFamily: "Kievit-Book",
       mb: { lg: 16, xl: 10 },
       h3: { mt: 1.5, mb: 4 },

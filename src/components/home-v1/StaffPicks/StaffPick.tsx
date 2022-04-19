@@ -45,6 +45,7 @@ function StaffPick({ item }: StaffPickProps) {
         >
           <Image
             src={image}
+            alt=""
             zIndex={1}
             maxHeight={{ base: "175px", lg: "233px", xl: "320px" }}
             maxWidth={{ base: "115px", lg: "153px", xl: "212px" }}

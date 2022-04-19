@@ -26,25 +26,19 @@ function Card({ item, variant, size = "md" }: CardProps) {
     <Grid
       position="relative"
       templateRows={{ base: "1fr", md: "min-content" }}
-      templateColumns={{ base: "1fr 2fr", md: "1fr" }}
+      templateColumns={{ base: "5fr 9fr", md: "1fr" }}
       sx={styles}
     >
-      <GridItem>
-        <Image src={item.image} />
-      </GridItem>
       <GridItem>
         <Heading as="h3">
           <Link href={item.url}>{item.title}</Link>
         </Heading>
-        {/* <Link
-          href={item.url}
-          display="block"
-          tabIndex={-1}
-        > */}
         {item.date && <Text as="span">{item.date}</Text>}
         {item.description && <Text>{item.description}</Text>}
         {item.location && <Text>{item.location}</Text>}
-        {/* </Link> */}
+      </GridItem>
+      <GridItem colStart={1} rowStart={1}>
+        <Image src={item.image} />
       </GridItem>
     </Grid>
   );

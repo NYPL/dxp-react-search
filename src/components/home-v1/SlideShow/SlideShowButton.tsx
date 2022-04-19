@@ -15,6 +15,7 @@ function SlideShowButton({
 }: SlideShowButtonProps) {
   return (
     <Button
+      tabIndex={-1}
       variant="slide-show"
       //@ts-ignore
       direction={direction}

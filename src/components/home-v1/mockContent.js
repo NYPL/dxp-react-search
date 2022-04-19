@@ -393,7 +393,7 @@ export const blogContent = {
       description:
         "To celebrate the release of the 1950 Cencus let's take a look at some imaged from that year in New York City.",
       image:
-        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/1950%20petrol.jpg?itok=6JUQSSvC",
+        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/ellis%20island%20petrol.jpg?itok=sxSY-pbk",
       url: "https://www.nypl.org/blog/2022/03/30/views-digital-collections-new-york-1950",
     },
     {

@@ -7,12 +7,12 @@ const CardGrid: ComponentStyleConfig = {
       pb: { md: 2, lg: 5 },
     },
     "column-grid": {
-      gridTemplateRows: { base: "1fr", md: "min-content" },
+      gridTemplateRows: { base: "1fr", md: "fr1 fr1", lg: "min-content" },
       gridTemplateColumns: {
         base: "1fr",
         md: "repeat(auto-fit, minmax(267px, 1fr))",
       },
-      gap: { base: 9, md: 6, xl: 7 },
+      gap: { base: 7, lg: 6, xl: 7 },
     },
     "updates-grid": {
       gridTemplateColumns: { base: "1fr", md: "1fr 1fr" },

@@ -29,14 +29,15 @@ function ComponentWrapper({
   return (
     <Box
       bg={bg ? bg : ""}
-      pt={{ base: 3, lg: 4, xl: 8 }}
-      pl={{ base: 5, md: 9, lg: 5, xl: 7 }}
-      pr={{ base: 5, md: 10, lg: 7 }}
+      pt={{ base: 2, lg: 3, xl: 7 }}
+      pl={{ base: 2, md: 8, lg: 4, xl: 6 }}
+      pr={{ base: 4, md: 9, lg: 6 }}
       mx="calc(-50vw + 50%)"
     >
       <Grid
         m="auto"
         maxWidth="1313px"
+        p={1}
         templateAreas={{ md: `'heading component'` }}
         templateColumns={{
           base: "1fr",
