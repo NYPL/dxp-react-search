@@ -39,8 +39,7 @@ function Card({ item, variant, size = "md" }: CardProps) {
         {/* <Link
           href={item.url}
           display="block"
-          //@ts-ignore
-          tabIndex="-1"
+          tabIndex={-1}
         > */}
         {item.date && <Text as="span">{item.date}</Text>}
         {item.description && <Text>{item.description}</Text>}

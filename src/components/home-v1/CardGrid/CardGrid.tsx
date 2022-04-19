@@ -10,7 +10,7 @@ interface CardGridProps {
   link: string;
   items: CardItem[];
   hoverStyle?: boolean;
-  variant?: string;
+  variant?: "row-grid" | "column-grid" | "updates-grid";
   //props below go inform styling of LinkCard
   cardVariant?: "event-spotlight" | "event-card" | "blog-card" | "updates-card";
   size?: string | Record<string, string>;
