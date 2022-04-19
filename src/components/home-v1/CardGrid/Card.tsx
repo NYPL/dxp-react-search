@@ -3,13 +3,6 @@ import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Heading, Text, Link, Grid, GridItem, Image } from "@chakra-ui/react";
 
-export enum Variant {
-  EventSpotlight = "event-spotlight",
-  EventCard = "event-card",
-  BlogCard = "blog-card",
-  Updates = "updates-card",
-}
-
 export interface CardItem {
   id?: string;
   title: string;
@@ -22,7 +15,7 @@ export interface CardItem {
 
 interface CardProps {
   item: CardItem;
-  variant?: Variant;
+  variant?: "event-spotlight" | "event-card" | "blog-card" | "updates-card";
   // size?: string | Record<string, string>;
   size?: any;
 }

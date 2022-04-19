@@ -8,8 +8,6 @@ import StaffPicks from "../components/home-v1/StaffPicks/StaffPicks";
 import FeaturedEvents from "../components/home-v1/FeaturedEvents/FeaturedEvents";
 import CardGrid from "../components/home-v1/CardGrid/CardGrid";
 import ScoutHomepageV1Provider from "../components/home-v1/theme";
-// Type
-import { Variant } from "../components/home-v1/CardGrid/Card";
 // Mock content
 import {
   heroContent,
@@ -78,7 +76,7 @@ function HomePage() {
                 link={updatesContent.link}
                 items={blogContent.items}
                 hoverStyle={true}
-                cardVariant={Variant.BlogCard}
+                cardVariant="blog-card"
               />
               <CardGrid
                 title={updatesContent.title}
@@ -86,7 +84,7 @@ function HomePage() {
                 items={updatesContent.items}
                 hoverStyle={true}
                 variant="updates-grid"
-                cardVariant={Variant.Updates}
+                cardVariant="updates-card"
                 size="sm"
               />
             </Box>

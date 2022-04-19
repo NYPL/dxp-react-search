@@ -3,7 +3,7 @@ import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Grid, GridItem } from "@chakra-ui/react";
 import ComponentWrapper from "../ComponentWrapper";
-import Card, { Variant, CardItem } from "./Card";
+import Card, { CardItem } from "./Card";
 
 interface CardGridProps {
   title: string;
@@ -12,7 +12,7 @@ interface CardGridProps {
   hoverStyle?: boolean;
   variant?: string;
   //props below go inform styling of LinkCard
-  cardVariant?: Variant;
+  cardVariant?: "event-spotlight" | "event-card" | "blog-card" | "updates-card";
   size?: string | Record<string, string>;
 }
 
