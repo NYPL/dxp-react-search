@@ -2,13 +2,13 @@ import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Grid, GridItem } from "@chakra-ui/react";
-import ComponentWrapper from "./ComponentWrapper";
-import LinkCard, { Variant, LinkCardItem } from "./LinkCard";
+import ComponentWrapper from "../ComponentWrapper";
+import Card, { Variant, CardItem } from "./Card";
 
-interface LinkCardGridProps {
+interface CardGridProps {
   title: string;
   link: string;
-  items: LinkCardItem[];
+  items: CardItem[];
   hoverStyle?: boolean;
   variant?: string;
   //props below go inform styling of LinkCard
@@ -16,7 +16,7 @@ interface LinkCardGridProps {
   size?: string | Record<string, string>;
 }
 
-function LinkCardGrid({
+function CardGrid({
   title,
   link,
   items,
@@ -24,8 +24,8 @@ function LinkCardGrid({
   variant,
   cardVariant,
   size,
-}: LinkCardGridProps) {
-  const styles = useStyleConfig("LinkCardGrid", { variant });
+}: CardGridProps) {
+  const styles = useStyleConfig("CardGrid", { variant });
   return (
     <ComponentWrapper
       title={title}
@@ -40,7 +40,7 @@ function LinkCardGrid({
         {items &&
           items.map((item) => (
             <GridItem as="li" listStyleType="none">
-              <LinkCard
+              <Card
                 item={item}
                 size={size || { base: "sm", md: "lg" }}
                 variant={cardVariant}
@@ -52,4 +52,4 @@ function LinkCardGrid({
   );
 }
 
-export default LinkCardGrid;
+export default CardGrid;

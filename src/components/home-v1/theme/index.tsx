@@ -3,8 +3,8 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Global } from "@emotion/react";
 // Component Styles
 import QuoteBg from "./quoteBg";
-import LinkCard from "./linkCard";
-import LinkCardGrid from "./linkCardGrid";
+import Card from "./card";
+import CardGrid from "./cardGrid";
 
 const Fonts = () => (
   <Global
@@ -181,8 +181,8 @@ const theme = extendTheme({
       },
     },
     QuoteBg,
-    LinkCard,
-    LinkCardGrid,
+    Card,
+    CardGrid,
   },
   spacing: {
     space: {

@@ -1,6 +1,6 @@
 import type { ComponentStyleConfig } from "@chakra-ui/theme";
 
-const LinkCardGrid: ComponentStyleConfig = {
+const CardGrid: ComponentStyleConfig = {
   variants: {
     "row-grid": {
       gap: { base: 4, md: 6, xl: 12 },
@@ -23,4 +23,4 @@ const LinkCardGrid: ComponentStyleConfig = {
   defaultProps: { variant: "row-grid" },
 };
 
-export default LinkCardGrid;
+export default CardGrid;

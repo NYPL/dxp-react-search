@@ -1,7 +1,7 @@
 import React from "react";
 // Component
 import { Grid, GridItem } from "@chakra-ui/react";
-import LinkCard, { Variant } from "../LinkCard";
+import Card, { Variant } from "../CardGrid/Card";
 
 // Type
 import { FeaturedEventItem } from "./FeaturedEventsTypes";
@@ -24,27 +24,21 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
     >
       <GridItem as="li" display={{ base: "none", lg: "block" }}>
         {events && (
-          <LinkCard
-            item={events[0]}
-            variant={Variant.EventSpotlight}
-            size="xl"
-          />
+          <Card item={events[0]} variant={Variant.EventSpotlight} size="xl" />
         )}
       </GridItem>
       <GridItem as="ul" display={{ base: "none", lg: "block" }}>
         {events &&
           events.map((event, i) => {
             if (i === 0) return;
-            return (
-              <LinkCard item={event} variant={Variant.EventCard} size="sm" />
-            );
+            return <Card item={event} variant={Variant.EventCard} size="sm" />;
           })}
       </GridItem>
       {events &&
         events.map((event) => {
           return (
             <GridItem display={{ base: "none", md: "block", lg: "none" }}>
-              <LinkCard item={event} variant={Variant.EventCard} size="sm" />
+              <Card item={event} variant={Variant.EventCard} size="sm" />
             </GridItem>
           );
         })}

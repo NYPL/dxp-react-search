@@ -1,6 +1,6 @@
 import type { ComponentStyleConfig } from "@chakra-ui/theme";
 
-const LinkCard: ComponentStyleConfig = {
+const Card: ComponentStyleConfig = {
   // Styles for the base style
   baseStyle: {
     gap: { base: 9, md: 4 },
@@ -13,7 +13,17 @@ const LinkCard: ComponentStyleConfig = {
       px: { base: 0, md: "5%" },
     },
     // link
-    a: { _hover: { textDecoration: "none" } },
+    a: {
+      _hover: { textDecoration: "none" },
+      _after: {
+        position: "absolute",
+        content: "''",
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+      },
+    },
     // date
     span: {
       fontSize: "sm",
@@ -112,4 +122,4 @@ const LinkCard: ComponentStyleConfig = {
   defaultProps: { size: "md" },
 };
 
-export default LinkCard;
+export default Card;

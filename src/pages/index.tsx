@@ -6,10 +6,10 @@ import Hero from "./../components/home-v1/Hero";
 import SlideShow from "../components/home-v1/SlideShow/SlideShow";
 import StaffPicks from "../components/home-v1/StaffPicks/StaffPicks";
 import FeaturedEvents from "../components/home-v1/FeaturedEvents/FeaturedEvents";
-import LinkCardGrid from "../components/home-v1/LinkCardGrid";
+import CardGrid from "../components/home-v1/CardGrid/CardGrid";
 import ScoutHomepageV1Provider from "../components/home-v1/theme";
 // Type
-import { Variant } from "../components/home-v1/LinkCard";
+import { Variant } from "../components/home-v1/CardGrid/Card";
 // Mock content
 import {
   heroContent,
@@ -44,7 +44,7 @@ function HomePage() {
               margin="0 auto"
               padding="0 20px"
             >
-              <LinkCardGrid
+              <CardGrid
                 title={spotlightContent.title}
                 link={spotlightContent.link}
                 items={spotlightContent.items}
@@ -56,7 +56,7 @@ function HomePage() {
                 link={featuredEvents.link}
                 items={featuredEvents.items}
               />
-              <LinkCardGrid
+              <CardGrid
                 title={discoverContent.title}
                 link={discoverContent.link}
                 items={discoverContent.items}
@@ -73,14 +73,14 @@ function HomePage() {
                 link={slideShowContent.link}
                 items={slideShowContent.items}
               />
-              <LinkCardGrid
+              <CardGrid
                 title={blogContent.title}
                 link={updatesContent.link}
                 items={blogContent.items}
                 hoverStyle={true}
                 cardVariant={Variant.BlogCard}
               />
-              <LinkCardGrid
+              <CardGrid
                 title={updatesContent.title}
                 link={updatesContent.link}
                 items={updatesContent.items}

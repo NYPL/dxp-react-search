@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import ComponentWrapper from "../ComponentWrapper";
 import FeaturedEvent from "./FeaturedEvent";
-import LinkCard, { Variant } from "../LinkCard";
+import Card, { Variant } from "../CardGrid/Card";
 // Type
 import { FeaturedEventItem } from "./FeaturedEventsTypes";
 
@@ -54,7 +54,7 @@ function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
                 >
                   {item.theme}
                 </Heading>
-                <LinkCard
+                <Card
                   item={item.events[0]}
                   variant={Variant.EventCard}
                   size="xs"

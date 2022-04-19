@@ -10,7 +10,7 @@ export enum Variant {
   Updates = "updates-card",
 }
 
-export interface LinkCardItem {
+export interface CardItem {
   id?: string;
   title: string;
   date?: string;
@@ -20,43 +20,42 @@ export interface LinkCardItem {
   url?: string;
 }
 
-interface LinkCardProps {
-  item: LinkCardItem;
+interface CardProps {
+  item: CardItem;
   variant?: Variant;
   // size?: string | Record<string, string>;
   size?: any;
 }
 
-function LinkCard({ item, variant, size = "md" }: LinkCardProps) {
-  const styles = useStyleConfig("LinkCard", { variant, size });
+function Card({ item, variant, size = "md" }: CardProps) {
+  const styles = useStyleConfig("Card", { variant, size });
   return (
     <Grid
+      position="relative"
       templateRows={{ base: "1fr", md: "min-content" }}
       templateColumns={{ base: "1fr 2fr", md: "1fr" }}
       sx={styles}
     >
       <GridItem>
-        <Link href={item.url}>
-          <Image src={item.image} />
-        </Link>
+        <Image src={item.image} />
       </GridItem>
       <GridItem>
         <Heading as="h3">
           <Link href={item.url}>{item.title}</Link>
         </Heading>
-        <Link
+        {/* <Link
           href={item.url}
           display="block"
           //@ts-ignore
           tabIndex="-1"
-        >
-          {item.date && <Text as="span">{item.date}</Text>}
-          {item.description && <Text>{item.description}</Text>}
-          {item.location && <Text>{item.location}</Text>}
-        </Link>
+        > */}
+        {item.date && <Text as="span">{item.date}</Text>}
+        {item.description && <Text>{item.description}</Text>}
+        {item.location && <Text>{item.location}</Text>}
+        {/* </Link> */}
       </GridItem>
     </Grid>
   );
 }
 
-export default LinkCard;
+export default Card;
