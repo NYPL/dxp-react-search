@@ -116,7 +116,7 @@ function EventCollection({ id, limit, sort }: EventCollectionProps) {
                 <Box fontWeight="bold">{item.locationName}</Box>
                 <Box
                   dangerouslySetInnerHTML={{
-                    __html: item.description,
+                    __html: item.shortDescription,
                   }}
                 />
               </Box>

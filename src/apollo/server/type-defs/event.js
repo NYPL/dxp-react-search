@@ -4,11 +4,14 @@ export const typeDefs = gql`
   type Event {
     id: ID!
     title: String!
+    shortDescription: String
     description: String
     startDate: String!
     endDate: String!
     featuredImage: String
     locationName: String
+    audience: [EventFilter]
+    eventTypes: [EventFilter]
   }
 
   type EventFilter {

@@ -29,12 +29,33 @@ const eventResolver = {
   Event: {
     id: (event) => event.eventId,
     title: (event) => event.title,
-    description: (event) => event.shortDescription,
+    shortDescription: (event) => event.shortDescription,
+    description: (event) => event.description,
     startDate: (event) => event.eventStart,
     endDate: (event) => event.eventEnd,
-    // @TODO this should really be featuredImage ?
+    // @TODO this should really be event.featuredImage ?
     featuredImage: (event) => event.eventImage,
     locationName: (event) => event.locationName,
+    audience: (event) => {
+      const agesData = [];
+      event.ages?.map((item) => {
+        agesData.push({
+          id: item.replace(/\s+/g, "-").toLowerCase(),
+          name: item,
+        });
+      });
+      return agesData;
+    },
+    eventTypes: (event) => {
+      const eventTypesData = [];
+      event.types?.map((item) => {
+        eventTypesData.push({
+          id: item.replace(/\s+/g, "-").toLowerCase(),
+          name: item,
+        });
+      });
+      return eventTypesData;
+    },
   },
 };
 

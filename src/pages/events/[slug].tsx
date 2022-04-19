@@ -11,6 +11,8 @@ import {
   Box,
   Heading,
   HeadingLevels,
+  HStack,
+  Link,
 } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/events/layouts/PageContainer";
 // Utils
@@ -70,11 +72,47 @@ function EventSlugPage() {
             {formatDate(data.event.startDate, "MMMM D, YYYY | h:mmA")}
           </Box>
           <Box fontWeight="bold">{data.event.locationName}</Box>
-          <Box
-            dangerouslySetInnerHTML={{
-              __html: data.event.description,
-            }}
-          />
+          <Box my="l">
+            <Heading level={HeadingLevels.Two}>Event Details</Heading>
+            <Box
+              dangerouslySetInnerHTML={{
+                __html: data.event.description,
+              }}
+            />
+            {data.event.audience && (
+              <Box mb="l">
+                <Box fontWeight="bold">Audience</Box>
+                <HStack wrap="wrap" spacing="0" align="left">
+                  {data.event.audience.map((audienceItem: any) => {
+                    return (
+                      <Box pr="xs">
+                        <Link key={audienceItem.id} href={audienceItem.id}>
+                          {audienceItem.name}
+                        </Link>
+                      </Box>
+                    );
+                  })}
+                </HStack>
+              </Box>
+            )}
+
+            {data.event.eventTypes && (
+              <Box mb="l">
+                <Box fontWeight="bold">Event Types</Box>
+                <HStack wrap="wrap" spacing="0" align="left">
+                  {data.event.eventTypes.map((eventType: any) => {
+                    return (
+                      <Box pr="xs">
+                        <Link key={eventType.id} href={eventType.id}>
+                          {eventType.name}
+                        </Link>
+                      </Box>
+                    );
+                  })}
+                </HStack>
+              </Box>
+            )}
+          </Box>
         </>
       }
     />

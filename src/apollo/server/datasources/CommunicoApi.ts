@@ -61,7 +61,7 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
   // Sets the bearer token for the api request.
   // @see http://communicocollege.com/communico-client-api-1137
   async willSendRequest(request: any) {
-    const COMMUNICO_BEARER_TOKEN = "f2bb6e72e81dd1d672187dc859e8fb3fc69cdacb";
+    const COMMUNICO_BEARER_TOKEN = "6a2afdb7161a3f35990e94f210147aec80ced4e4";
 
     // const accessToken = await this.getAccessToken();
     // // @ts-ignore
@@ -86,7 +86,7 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
     let apiPath = `/v3/attend/${resourceType}`;
 
     if (resourceType === "events") {
-      apiPath = `${apiPath}?fields=featuredImage,eventImage`;
+      apiPath = `${apiPath}?fields=featuredImage,eventImage,ages,types`;
       // Add limit and offset.
       if (limit && pageNumber) {
         // Calculate offset
@@ -111,7 +111,7 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
 
   // @see https://api.communico.co/docs/#!/attend/get_v3_attend_events_eventId
   async getIndividualResource(id: string): Promise<CommunicoResponse> {
-    let apiPath = `/v3/attend/events/${id}`;
+    let apiPath = `/v3/attend/events/${id}?fields=featuredImage,eventImage,ages,types`;
 
     const response = await this.get(apiPath);
     return response;

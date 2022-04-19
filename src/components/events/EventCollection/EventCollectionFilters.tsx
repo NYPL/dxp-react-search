@@ -8,6 +8,8 @@ import {
   Checkbox,
   CheckboxGroup,
   CheckboxGroupLayoutTypes,
+  DatePicker,
+  DatePickerTypes,
   Grid,
   Heading,
   HeadingLevels,
@@ -40,6 +42,12 @@ function EventCollectionFilters() {
     return <div>Loading</div>;
   }
 
+  let dateObject: any = {};
+  const onChange = (data: any) => {
+    dateObject = data;
+    console.log(dateObject);
+  };
+
   return (
     <>
       <CheckboxGroup
@@ -57,6 +65,23 @@ function EventCollectionFilters() {
           />
         ))}
       </CheckboxGroup>
+      <DatePicker
+        id="date-range"
+        dateFormat="yyyy-MM-dd"
+        dateType={DatePickerTypes.Full}
+        minDate="1/1/2021"
+        maxDate="3/1/2023"
+        labelText="Select the date range you want to visit NYPL"
+        nameFrom="visit-dates-from"
+        nameTo="visit-dates-to"
+        helperTextFrom="From this date."
+        helperTextTo="To this date."
+        helperText="Select a valid date range."
+        invalidText="There was an error with the date range :("
+        showOptReqLabel={false}
+        isDateRange
+        onChange={onChange}
+      />
     </>
   );
 }
