@@ -277,6 +277,7 @@ export const staffPicks = {
         "For fans of the Gilded Age, a fascinating look at the feud between Caroline Astor and Alva Vanderbilt (old money v. nouveau riche).",
       image:
         "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/SocialGraces.jpg?itok=01UVUs5s",
+      alt: "book cover of The Social Graces by Renée Rosen",
       staff_name: "Margaret Kaczorowski",
       staff_location: "Allerton Library",
       url: "https://browse.nypl.org/iii/encore/search/C__S%20The%20Social%20Graces%20Rosen__Orightresult__U?lang=eng&suite=def&ivts=YOUF4wgel9FOc8yV%2F%2B7w3A%3D%3D&casts=8iCdv6qcF01G9po2d7ywuA%3D%3D",
@@ -287,6 +288,7 @@ export const staffPicks = {
         "Perfect for readers who like stories that turn out to be completely different than the expected. Offbeat and lends itself to speculation.",
       image:
         "https://cdn-petrol.nypl.org/sites/default/media/styles/scale_tall/public/Universal.jpg?itok=fDweOSck",
+      alt: "book cover of Universal Harvester by John Darnielle",
       staff_name: "Jenny Baum",
       staff_location: "Mulberry Street",
       url: "https://browse.nypl.org/iii/encore/search/C__SUniversal%20Harvester__Orightresult__U?lang=eng&suite=def",
@@ -399,8 +401,7 @@ export const blogContent = {
     {
       title: "Celebrate Poetry Month with Our Favorite Poetry Books of 2021",
       description: "These 10 titles demonstrate poetry's range and power",
-      image:
-        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/best%20poetry%20petrol.png?itok=ZqZxucj6",
+      image: "https://placeimg.com/760/480/animals",
       url: "https://www.nypl.org/blog/2022/03/31/celebrate-national-poetry-month-our-favorite-poetry-books-2021",
     },
   ],

@@ -39,10 +39,10 @@ function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
     >
       <Box>
         {/* mobile view */}
-        <Box display={{ base: "block", md: "none" }}>
+        <Box as="ul" display={{ base: "block", md: "none" }}>
           {items &&
             items.map((item) => (
-              <Box mb={8}>
+              <Box as="li" mb={8}>
                 <Heading
                   as="h3"
                   fontFamily="Kievit-Medium"
@@ -70,7 +70,6 @@ function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
             {items &&
               items.map((item) => (
                 <Tab
-                  tabIndex={-1}
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
                   px={7}
@@ -93,7 +92,7 @@ function FeaturedEvents({ title, link, items }: FeaturedEventsProps) {
           <TabPanels>
             {items &&
               items.map((item) => (
-                <TabPanel px={0}>
+                <TabPanel px={0} tabIndex={-1}>
                   <FeaturedEvent events={item.events} />
                 </TabPanel>
               ))}

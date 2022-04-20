@@ -3,6 +3,7 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 const Card: ComponentStyleConfig = {
   // Styles for the base style
   baseStyle: {
+    w: "full",
     gap: { base: 9, md: 4 },
     _focusWithin: {
       outlineStyle: "solid",
@@ -65,7 +66,7 @@ const Card: ComponentStyleConfig = {
     "event-card": {
       gridTemplateColumns: { base: "4fr 9fr", md: "5fr 11fr", lg: "1fr 3fr" },
       gap: { base: 12, md: 6, lg: 4 },
-      mb: { base: 0, lg: 4 },
+      mb: { base: 0, lg: 7 },
       textAlign: "left",
 
       h3: {
@@ -80,8 +81,33 @@ const Card: ComponentStyleConfig = {
       },
       p: {
         px: 0,
-        lineHeight: "21px",
+        // lineHeight: "21px",
         fontSize: "xs",
+      },
+    },
+    "slide-show-card": {
+      gridTemplateRows: "fr1 fr2",
+      bg: "red.200",
+      color: "brand.100",
+      h: "full",
+      mr: { base: 4, md: 5, lg: "33px" },
+      w: { base: "165.6px", md: "143px", lg: "193px", xl: "212px" },
+      h3: {
+        pt: 4,
+        fontFamily: "Kievit-Book",
+        color: "brand.100",
+        fontSize: {
+          base: "lg",
+          lg: "xl",
+          xl: "1xl",
+        },
+        lineHeight: "none",
+      },
+      span: { display: "block", fontSize: "xs" },
+      img: {
+        boxSize: { base: "216px", xl: "220px" },
+        fit: "cover",
+        objectPosition: "15% 0%",
       },
     },
     "blog-card": {
@@ -105,7 +131,7 @@ const Card: ComponentStyleConfig = {
         fontSize: "md",
         pt: 2.5,
       },
-      img: { maxHeight: "280px", w: "auto", float: "right" },
+      img: { h: "full", maxHeight: "280px", w: "auto", float: "right" },
     },
     "updates-card": {
       gridTemplateColumns: { base: "4fr 9fr", md: "2fr 1fr", lg: "15fr 16fr" },

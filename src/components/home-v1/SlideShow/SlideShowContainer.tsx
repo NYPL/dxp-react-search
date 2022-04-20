@@ -1,6 +1,7 @@
 import React from "react";
 // Components
 import { Box, Image, Heading, Text, Grid, Link } from "@chakra-ui/react";
+import Card from "../CardGrid/Card";
 // Types
 import { SlideShowItem } from "./SlideShowTypes";
 
@@ -26,6 +27,7 @@ function SlideShowContainer({
       >
         {items &&
           items.map((item: SlideShowItem) => {
+            // return <Card item={item} variant="slide-show-card" />;
             return (
               <Box
                 as="li"

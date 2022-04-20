@@ -76,6 +76,7 @@ function HomePage() {
                 link={updatesContent.link}
                 items={blogContent.items}
                 hoverStyle={true}
+                variant="row-grid"
                 cardVariant="blog-card"
               />
               <CardGrid

@@ -90,6 +90,7 @@ function ComponentWrapper({
             mb={{ base: 10, lg: 8 }}
           >
             <Link
+              aria-description={`main of ${title}`}
               href={link}
               variant={
                 hoverStyle === true
