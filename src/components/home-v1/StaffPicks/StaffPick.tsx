@@ -15,7 +15,7 @@ interface StaffPickProps {
 }
 
 function StaffPick({ item }: StaffPickProps) {
-  const { id, quote, image, url, staff_name, staff_location } = item;
+  const { id, quote, image, alt, url, staff_name, staff_location } = item;
   return (
     <GridItem as="li" id={id}>
       <Box
@@ -23,30 +23,36 @@ function StaffPick({ item }: StaffPickProps) {
         position="relative"
       >
         <QuoteBg />
-        <Text
-          pl={{ base: 4, xl: 8 }}
-          pr={{ base: "120px", lg: "157px", xl: "220px" }}
-          position="absolute"
-          bottom="13%"
-          fontFamily="Milo-Light-Italic"
-          lineHeight="none"
-          fontSize={{ base: "xl", lg: "2.5xl", xl: "4xl" }}
-          textAlign="left"
-        >
-          {quote}
-        </Text>
         <Link
           display="inline-block"
           float="right"
           position="absolute"
           bottom={0}
           right={0}
+          left={0}
+          top={0}
           href={url}
         >
+          <Text
+            pl={{ base: 4, xl: 8 }}
+            pr={{ base: "120px", lg: "157px", xl: "220px" }}
+            position="absolute"
+            bottom="13%"
+            fontFamily="Milo-Light-Italic"
+            lineHeight="none"
+            fontSize={{ base: "xl", lg: "2.5xl", xl: "4xl" }}
+            textAlign="left"
+          >
+            {quote}
+          </Text>
+
           <Image
             src={image}
-            alt=""
+            alt={`image of ${alt}`}
             zIndex={1}
+            position="absolute"
+            bottom={0}
+            right={0}
             maxHeight={{ base: "175px", lg: "233px", xl: "320px" }}
             maxWidth={{ base: "115px", lg: "153px", xl: "212px" }}
           />

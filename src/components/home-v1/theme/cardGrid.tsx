@@ -3,6 +3,7 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 const CardGrid: ComponentStyleConfig = {
   variants: {
     "row-grid": {
+      gridTemplateRows: "1fr 1fr",
       gap: { base: 4, md: 6, xl: 12 },
       pb: { md: 2, lg: 5 },
     },

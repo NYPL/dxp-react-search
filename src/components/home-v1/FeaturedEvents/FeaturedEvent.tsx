@@ -19,25 +19,42 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
         lg: "7fr 12fr",
         xl: "1fr 1fr",
       }}
-      gap={{ base: 6, lg: 7 }}
+      templateRows={{ base: "1fr", lg: "min-content min-content min-content" }}
+      columnGap={{ base: 6, lg: 7 }}
+      gap={{ base: 6, lg: 0 }}
       listStyleType="none"
     >
-      <GridItem as="li" display={{ base: "none", lg: "block" }}>
+      <GridItem
+        as="li"
+        display={{ base: "none", lg: "block" }}
+        colStart={1}
+        rowStart={1}
+        rowEnd={{ base: 4, lg: 6 }}
+      >
         {events && (
           <Card item={events[0]} variant="event-spotlight" size="xl" />
         )}
       </GridItem>
-      <GridItem as="ul" display={{ base: "none", lg: "block" }}>
-        {events &&
-          events.map((event, i) => {
-            if (i === 0) return;
-            return <Card item={event} variant="event-card" size="sm" />;
-          })}
-      </GridItem>
+      {events &&
+        events.map((event, i) => {
+          if (i === 0) return;
+          return (
+            <GridItem
+              as="li"
+              display={{ base: "none", lg: "block" }}
+              colStart={2}
+            >
+              <Card item={event} variant="event-card" size="sm" />
+            </GridItem>
+          );
+        })}
       {events &&
         events.map((event) => {
           return (
-            <GridItem display={{ base: "none", md: "block", lg: "none" }}>
+            <GridItem
+              as="li"
+              display={{ base: "none", md: "block", lg: "none" }}
+            >
               <Card item={event} variant="event-card" size="sm" />
             </GridItem>
           );
