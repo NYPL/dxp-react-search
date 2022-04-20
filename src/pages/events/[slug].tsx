@@ -1,10 +1,12 @@
 import React from "react";
 // Next
 import { useRouter } from "next/router";
+import { GetServerSidePropsContext } from "next";
 import Error from "./../_error";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-import { withApollo } from "../../apollo/client/withApollo";
+import withApollo from "../../apollo/withApollo";
+import { initializeApollo } from "./../../apollo/withApollo/apollo";
 import { EVENT_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/eventFields";
 // Components
 import {
@@ -50,7 +52,17 @@ function EventSlugPage() {
 
   // Loading state.
   if (loading || !data) {
-    return <div>Loading ...</div>;
+    return (
+      <PageContainer
+        breadcrumbs={[
+          {
+            text: "Event Title",
+          },
+        ]}
+        showContentHeader={false}
+        contentPrimary={<div>Loading</div>}
+      />
+    );
   }
 
   return (
@@ -119,7 +131,23 @@ function EventSlugPage() {
   );
 }
 
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: EVENT_QUERY,
+    variables: {
+      id: context.params?.slug,
+    },
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  };
+}
+
 export default withApollo(EventSlugPage, {
-  ssr: true,
   redirects: false,
 });

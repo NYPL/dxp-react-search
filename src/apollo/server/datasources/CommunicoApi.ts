@@ -22,6 +22,9 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = COMMUNICO_API;
+    // Needs for SSG
+    // @see https://github.com/apollographql/apollo-server/issues/2240
+    this.httpCache = new HTTPCache();
   }
 
   async getAccessToken() {
@@ -61,7 +64,7 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
   // Sets the bearer token for the api request.
   // @see http://communicocollege.com/communico-client-api-1137
   async willSendRequest(request: any) {
-    const COMMUNICO_BEARER_TOKEN = "6a2afdb7161a3f35990e94f210147aec80ced4e4";
+    const COMMUNICO_BEARER_TOKEN = "172a5f5186249a070709d3352d2731cac77cb040";
 
     // const accessToken = await this.getAccessToken();
     // // @ts-ignore
@@ -86,7 +89,7 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
     let apiPath = `/v3/attend/${resourceType}`;
 
     if (resourceType === "events") {
-      apiPath = `${apiPath}?fields=featuredImage,eventImage,ages,types`;
+      apiPath = `${apiPath}?fields=featuredImage,eventImage,ages,types,customQuestions`;
       // Add limit and offset.
       if (limit && pageNumber) {
         // Calculate offset
@@ -111,7 +114,7 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
 
   // @see https://api.communico.co/docs/#!/attend/get_v3_attend_events_eventId
   async getIndividualResource(id: string): Promise<CommunicoResponse> {
-    let apiPath = `/v3/attend/events/${id}?fields=featuredImage,eventImage,ages,types`;
+    let apiPath = `/v3/attend/events/${id}?fields=featuredImage,eventImage,ages,types,customQuestions`;
 
     const response = await this.get(apiPath);
     return response;

@@ -18,7 +18,7 @@ import {
   Pagination,
 } from "@nypl/design-system-react-components";
 
-const EVENT_FILTER_QUERY = gql`
+export const EVENT_FILTER_QUERY = gql`
   query EventFilterQuery($resourceType: String) {
     eventFilterCollection(resourceType: $resourceType) {
       id

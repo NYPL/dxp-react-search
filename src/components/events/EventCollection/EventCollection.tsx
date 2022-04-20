@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 // Utils
 import formatDate from "../../../utils/formatDate";
 
-const EVENT_COLLECTION_QUERY = gql`
+export const EVENT_COLLECTION_QUERY = gql`
   ${EVENT_FIELDS_FRAGMENT}
   query EventCollectionQuery($pageNumber: Int, $limit: Int, $sort: Sort) {
     eventCollection(limit: $limit, pageNumber: $pageNumber, sort: $sort) {

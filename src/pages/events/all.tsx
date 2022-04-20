@@ -1,6 +1,7 @@
 import React from "react";
 // Apollo
-import { withApollo } from "./../../apollo/client/withApollo";
+import WithApollo from "../../apollo/withApollo";
+import { initializeApollo } from "./../../apollo/withApollo/apollo";
 // Components
 import {
   Box,
@@ -10,18 +11,22 @@ import {
   HeroTypes,
 } from "@nypl/design-system-react-components";
 import PageContainer from "./../../components/events/layouts/PageContainer";
-import EventCollection from "../../components/events/EventCollection";
-import EventCollectionFilters from "./../../components/events/EventCollection/EventCollectionFilters";
-// // Content
-// import blogsContent from "../../__content/blogs";
+import EventCollection, {
+  EVENT_COLLECTION_QUERY,
+} from "../../components/events/EventCollection/EventCollection";
+import EventCollectionFilters, {
+  EVENT_FILTER_QUERY,
+} from "./../../components/events/EventCollection/EventCollectionFilters";
+// Content
+import eventsContent from "../../__content/events";
 
 function EventsAllPage() {
+  const { meta } = eventsContent;
   return (
     <PageContainer
       metaTags={{
-        // @TODO This should be something else?
-        title: "Events All",
-        description: "Events All Description",
+        title: meta.title,
+        description: meta.description,
       }}
       breadcrumbs={[
         {
@@ -34,8 +39,8 @@ function EventsAllPage() {
         <>
           <Hero
             heroType={HeroTypes.Tertiary}
-            heading={<Heading level={HeadingLevels.One} text="Events" />}
-            subHeaderText="The Library is here to help you learn and connect with your community through our wide array of free events, programs, classes, book clubs, and more. Please check listings to confirm if a program is in-person, online, or outdoors."
+            heading={<Heading level={HeadingLevels.One}>{meta.title}</Heading>}
+            subHeaderText={meta.description}
             backgroundColor="#E0E0E0"
             foregroundColor="#000000"
           />
@@ -56,7 +61,36 @@ function EventsAllPage() {
   );
 }
 
-export default withApollo(EventsAllPage, {
-  ssr: true,
+// We prefetch the gql queries and populate the initial apollo cache.
+// Components still have gql queries in them, but will already have data
+// on first load, and will req data changes client side, the same as they would using ssr.
+export async function getStaticProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: EVENT_FILTER_QUERY,
+    variables: {
+      resourceType: "ages",
+    },
+  });
+
+  await apolloClient.query({
+    query: EVENT_COLLECTION_QUERY,
+    variables: {
+      limit: 10,
+      pageNumber: 1,
+      sort: { field: "eventStart", direction: "descending" },
+    },
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+    revalidate: 120,
+  };
+}
+
+export default WithApollo(EventsAllPage, {
   redirects: false,
 });
