@@ -40,23 +40,27 @@ function Card({ item, variant, size = "md" }: CardProps) {
   const styles = useStyleConfig("Card", { variant, size });
   const ariaDescription = `${item.date ? `${item.date}` : ""} ${
     item.location ? `at ${item.location}` : ""
-  } ${item.description ? `${item.description}` : ""}`;
+  } ${item.description ? `${item.description}` : ""} ${
+    item.author ? `by ${item.author}` : ""
+  } ${item.genre ? ` a ${item.genre} book` : ""} ${
+    item.audience ? `for ${item.audience}` : ""
+  } `;
   return (
     <Grid
       templateRows={{ base: "1fr", md: "min-content" }}
       templateColumns={{ base: "5fr 9fr", md: "1fr" }}
       sx={styles}
     >
-      <GridItem>
+      <GridItem className="textBox">
         <Heading as="h3" aria-description={ariaDescription}>
           <Link href={item.url}>{item.title} </Link>
         </Heading>
-        <Box>
+        <Box className="details">
           {item.date && <Text as="span">{item.date}</Text>}
           {item.description && <Text>{item.description}</Text>}
           {item.location && <Text>{item.location}</Text>}
           {item.author && <Text>{item.author}</Text>}
-          {item.audience && <Text as="span">{item.audience}</Text>}
+          {item.genre && <Text as="span">{item.audience}</Text>}
           {item.genre && <Text as="span">{item.genre}</Text>}
         </Box>
       </GridItem>

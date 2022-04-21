@@ -26,6 +26,7 @@ function SlideShow({ title, link, items }: SlideShowProps) {
       bg="red.100"
       borderColor="red.100"
       buttonBorder="brand.100"
+      gap={{ base: 0, md: 2, lg: 3, xl: 9 }}
     >
       <Box
         w="full"

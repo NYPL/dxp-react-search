@@ -11,6 +11,7 @@ interface ComponentWrapperProps {
   borderColor?: string;
   buttonBorder?: string;
   bg?: string;
+  gap?: any;
   children: JSX.Element;
 }
 
@@ -24,6 +25,7 @@ function ComponentWrapper({
   borderColor,
   buttonBorder,
   bg,
+  gap,
   children,
 }: ComponentWrapperProps) {
   return (
@@ -44,7 +46,7 @@ function ComponentWrapper({
           md: "1fr 7fr",
           lg: "2fr 19fr",
         }}
-        gap={{ base: 0, md: 6, xl: 7 }}
+        gap={gap ? gap : { base: 0, md: 5, xl: 7 }}
         overflow="hidden"
       >
         <GridItem gridArea={{ md: "heading" }}>
