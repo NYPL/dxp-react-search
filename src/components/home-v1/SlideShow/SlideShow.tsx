@@ -11,19 +11,22 @@ import { SlideShowItem } from "./SlideShowTypes";
 
 interface SlideShowProps {
   title: string;
+  link: string;
   items: SlideShowItem[];
 }
 
-function SlideShow({ title, items }: SlideShowProps) {
+function SlideShow({ title, link, items }: SlideShowProps) {
   const { currentSlide, prevSlide, nextSlide, slideShowStyle } =
     useSlideShowStyles(items.length, 11);
   return (
     <ComponentWrapper
       title={title}
+      link={link}
       textColor="brand.100"
       bg="red.100"
       borderColor="red.100"
       buttonBorder="brand.100"
+      gap={{ base: 0, md: 2, lg: 3, xl: 9 }}
     >
       <Box
         w="full"
@@ -33,7 +36,13 @@ function SlideShow({ title, items }: SlideShowProps) {
         {currentSlide > 0 && (
           <SlideShowButton direction={"prev"} prevSlide={prevSlide} />
         )}
-        <SlideShowContainer items={items} slideShowStyle={slideShowStyle} />
+        <SlideShowContainer
+          items={items}
+          slideShowStyle={slideShowStyle}
+          currentSlide={currentSlide}
+          nextSlide={nextSlide}
+          prevSlide={prevSlide}
+        />
         {currentSlide !== items.length - 1 && (
           <SlideShowButton direction={"next"} nextSlide={nextSlide} />
         )}

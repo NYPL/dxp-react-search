@@ -3,6 +3,8 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Global } from "@emotion/react";
 // Component Styles
 import QuoteBg from "./quoteBg";
+import Card from "./card";
+import CardGrid from "./cardGrid";
 
 const Fonts = () => (
   <Global
@@ -35,13 +37,19 @@ const Fonts = () => (
         font-weight: 700;
         src: url('https://d2znry4lg8s0tq.cloudfront.net/milo-web/milo-slab-pro-light/MiloSlabWebPro.woff') format('woff2')
       }
+      @font-face {
+        font-family: 'Milo-Light-Italic';
+        font-style: normal;
+        font-weight: 700;
+        src: url('https://ux-static.nypl.org/milo-web/milo-slab-pro-light-italic/MiloSlabWebPro-LightItalic.woff") format('woff2')
+      }
       /* does not work */
       @font-face {
         font-family: 'nypl-moon';
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url('https://ux-static.nypl.org/ff_nypl_moon/nypl-moon.woff') format('woff2')
+        src: url('https://d2znry4lg8s0tq.cloudfront.net/nypl-moon/nypl-moon.woff2?viik85') format('woff2')
       }
       `}
   />
@@ -69,11 +77,19 @@ const theme = extendTheme({
       100: "#B80F15",
       200: "#E32B31",
     },
+    blue: {
+      //focus
+      100: "#3b99fc",
+      //hover
+      200: "#1B7FA7",
+    },
     brand: {
       // white
       100: "#FFFFFF",
       // black
       200: "#000000",
+      //lion svg
+      300: "C51D12",
       900: "transparent",
     },
   },
@@ -98,12 +114,39 @@ const theme = extendTheme({
     },
     Link: {
       variants: {
-        "see-more": {
+        "see-more-hover-style": {
           pt: 3.5,
           pb: 3,
           px: 5,
           textAlign: "center",
           borderRadius: "3xl",
+          _hover: {
+            textDecoration: "none",
+            borderColor: "blue.200",
+            color: "blue.200",
+          },
+        },
+        "see-more-hover-no-style": {
+          pt: 3.5,
+          pb: 3,
+          px: 5,
+          textAlign: "center",
+          borderRadius: "3xl",
+          _hover: {
+            textDecoration: "none",
+          },
+        },
+        "link-hover-style": {
+          _hover: {
+            textDecoration: "none",
+            borderColor: "blue.200",
+            color: "blue.200",
+          },
+        },
+        "link-hover-no-style": {
+          _hover: {
+            textDecoration: "none",
+          },
         },
       },
     },
@@ -115,6 +158,7 @@ const theme = extendTheme({
           border: "2px",
           borderColor: "brand.100",
           borderRadius: "full",
+          // fontFamily: "nypl-moon",
           fontSize: "3xl",
           bg: "transparent",
           h: 9,
@@ -137,6 +181,8 @@ const theme = extendTheme({
       },
     },
     QuoteBg,
+    Card,
+    CardGrid,
   },
   spacing: {
     space: {

@@ -1,7 +1,8 @@
 import React from "react";
 // Component
-import { Grid, GridItem, Image, Heading, Text } from "@chakra-ui/react";
-import { EventCard, EventSpotlightCard } from "./FeaturedEventCards";
+import { Grid, GridItem } from "@chakra-ui/react";
+import Card from "../CardGrid/Card";
+
 // Type
 import { FeaturedEventItem } from "./FeaturedEventsTypes";
 
@@ -15,29 +16,46 @@ function FeaturedEvent({ events }: FeaturedEventProps) {
       as="ul"
       templateColumns={{
         base: "1fr 1fr",
-        lg: "2fr 3fr",
+        lg: "7fr 12fr",
         xl: "1fr 1fr",
       }}
-      gap={{ base: 1, lg: 9 }}
+      templateRows={{ base: "1fr", lg: "min-content min-content min-content" }}
+      columnGap={{ base: 6, lg: 7 }}
+      gap={{ base: 6, lg: 0 }}
       listStyleType="none"
-      h={{ md: "300px", lg: "325px", xl: "423px" }}
-      w={{ base: "78vw", xl: "full" }}
     >
-      <GridItem as="li" display={{ base: "none", lg: "grid" }}>
-        {events && <EventSpotlightCard event={events[0]} />}
+      <GridItem
+        as="li"
+        display={{ base: "none", lg: "block" }}
+        colStart={1}
+        rowStart={1}
+        rowEnd={{ base: 4, lg: 6 }}
+      >
+        {events && (
+          <Card item={events[0]} variant="event-spotlight" size="xl" />
+        )}
       </GridItem>
-      <GridItem as="ul" display={{ base: "none", lg: "block" }}>
-        {events &&
-          events.map((event, i) => {
-            if (i === 0) return;
-            return <EventCard event={event} />;
-          })}
-      </GridItem>
+      {events &&
+        events.map((event, i) => {
+          if (i === 0) return;
+          return (
+            <GridItem
+              as="li"
+              display={{ base: "none", lg: "block" }}
+              colStart={2}
+            >
+              <Card item={event} variant="event-card" size="sm" />
+            </GridItem>
+          );
+        })}
       {events &&
         events.map((event) => {
           return (
-            <GridItem display={{ base: "none", md: "grid", lg: "none" }}>
-              <EventCard event={event} />
+            <GridItem
+              as="li"
+              display={{ base: "none", md: "block", lg: "none" }}
+            >
+              <Card item={event} variant="event-card" size="sm" />
             </GridItem>
           );
         })}
