@@ -85,6 +85,7 @@ const Card: ComponentStyleConfig = {
       },
     },
     "slide-show-card": {
+      h: "full",
       gridTemplateColumns: "1fr",
       gridTemplateRows: {
         base: "180px auto",

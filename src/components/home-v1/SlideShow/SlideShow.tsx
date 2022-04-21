@@ -36,7 +36,13 @@ function SlideShow({ title, link, items }: SlideShowProps) {
         {currentSlide > 0 && (
           <SlideShowButton direction={"prev"} prevSlide={prevSlide} />
         )}
-        <SlideShowContainer items={items} slideShowStyle={slideShowStyle} />
+        <SlideShowContainer
+          items={items}
+          slideShowStyle={slideShowStyle}
+          currentSlide={currentSlide}
+          nextSlide={nextSlide}
+          prevSlide={prevSlide}
+        />
         {currentSlide !== items.length - 1 && (
           <SlideShowButton direction={"next"} nextSlide={nextSlide} />
         )}
