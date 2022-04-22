@@ -56,9 +56,7 @@ interface MutliSelectProps {
   selectedItems: SelectedItemsMap;
   onClearMultiSelect: () => void;
   onSaveMultiSelect: () => void;
-  onMenuClick: () => void;
   selectedGroupIds: string[];
-  showCtaButtons: boolean;
   handleChangeMixedStateCheckbox: any;
   legacy?: boolean;
   includeChildren?: boolean;
@@ -73,9 +71,6 @@ function MultiSelect({
   selectedItems,
   onClearMultiSelect,
   onSaveMultiSelect,
-  onMenuClick,
-  selectedGroupIds,
-  showCtaButtons,
   handleChangeMixedStateCheckbox,
   legacy,
   includeChildren = true,
@@ -124,14 +119,12 @@ function MultiSelect({
       <DsMultiSelect
         id={id}
         label={label}
+        // @ts-ignore
         items={null}
         handleOnSelectedItemChange={onSelectedItemChange}
         selectedItems={selectedItems}
         onClearMultiSelect={onClearMultiSelect}
         onSaveMultiSelect={onSaveMultiSelect}
-        onMenuClick={onMenuClick}
-        selectedGroupIds={selectedGroupIds}
-        showCtaButtons={showCtaButtons}
         handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
       />
     );
@@ -151,10 +144,7 @@ function MultiSelect({
       selectedItems={selectedItems}
       onClearMultiSelect={onClearMultiSelect}
       onSaveMultiSelect={onSaveMultiSelect}
-      onMenuClick={onMenuClick}
-      selectedGroupIds={selectedGroupIds}
-      showCtaButtons={showCtaButtons}
-      handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
+      //handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
     />
   );
 }

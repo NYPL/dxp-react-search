@@ -80,43 +80,6 @@ function FilterBar({
   }, [router.query]);
 
   //
-  function onMenuClick(groupId: string) {
-    const mode = "desktop";
-    let selectedGroupIdsCopy: string[] = [];
-
-    const nextState = (object: SelectedItemsMap, property: string) => {
-      let { [property]: omit, ...rest } = object;
-      return rest;
-    };
-
-    if (selectedGroupIds !== undefined) {
-      let groupIdExists = selectedGroupIds.indexOf(groupId) > -1;
-      // Make a copy of the existing array.
-      selectedGroupIdsCopy = selectedGroupIds.slice();
-      // If groupIdExists exists, remove it from the array.
-      if (groupIdExists) {
-        selectedGroupIdsCopy = selectedGroupIdsCopy.filter(
-          (id) => id != groupId
-        );
-      } else {
-        // Desktop
-        if (mode === "desktop") {
-          // Desktop: only allow 1 item in the array.
-          selectedGroupIdsCopy = [groupId];
-        } else {
-          // Mobile: allow multiple items in the array.
-          selectedGroupIdsCopy.push(groupId);
-        }
-      }
-    } else {
-      // No dropdowns open, so add the checked dropdown to the array.
-      selectedGroupIdsCopy = [groupId];
-    }
-
-    setSelectedGroupIds(selectedGroupIdsCopy);
-  }
-
-  //
   function onSelectedItemChange(itemId: string, groupId: string) {
     itemId = itemId.replace(/^[^__]*__/, "");
 
@@ -288,9 +251,7 @@ function FilterBar({
             selectedItems={selectedItems}
             onClearMultiSelect={() => onClearMultiSelect(group.id)}
             onSaveMultiSelect={onSaveMultiSelect}
-            onMenuClick={() => onMenuClick(group.id)}
             selectedGroupIds={selectedGroupIds}
-            showCtaButtons={isMobile ? false : true}
             handleChangeMixedStateCheckbox={(childItems: string[]) => {
               handleChangeMixedStateCheckbox(group.id, childItems);
             }}

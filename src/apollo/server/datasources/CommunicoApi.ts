@@ -64,11 +64,11 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
   // Sets the bearer token for the api request.
   // @see http://communicocollege.com/communico-client-api-1137
   async willSendRequest(request: any) {
-    const COMMUNICO_BEARER_TOKEN = "172a5f5186249a070709d3352d2731cac77cb040";
+    //const COMMUNICO_BEARER_TOKEN = "172a5f5186249a070709d3352d2731cac77cb040";
 
-    // const accessToken = await this.getAccessToken();
-    // // @ts-ignore
-    // const COMMUNICO_BEARER_TOKEN = accessToken.access_token;
+    const accessToken = await this.getAccessToken();
+    // @ts-ignore
+    const COMMUNICO_BEARER_TOKEN = accessToken.access_token;
 
     if (!request.headers) {
       request.headers = {};
@@ -84,7 +84,8 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
     resourceType: "events" | "ages" | "types",
     limit?: number,
     pageNumber?: number,
-    sort?: any
+    sort?: any,
+    filter?: any
   ): Promise<CommunicoResponse> {
     let apiPath = `/v3/attend/${resourceType}`;
 
@@ -108,6 +109,19 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
       }
     }
 
+    // Filters
+    if (typeof filter === "object" && filter !== null) {
+      for (const property in filter) {
+        if (property === "audiences") {
+          const items = filter[property].join(",");
+          apiPath = `${apiPath}&ages=${items}`;
+        }
+        if (property === "eventTypes") {
+          const items = filter[property].join(",");
+          apiPath = `${apiPath}&types=${items}`;
+        }
+      }
+    }
     const response = await this.get(apiPath);
     return response;
   }

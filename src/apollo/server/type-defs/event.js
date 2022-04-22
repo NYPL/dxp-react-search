@@ -10,13 +10,18 @@ export const typeDefs = gql`
     endDate: String!
     featuredImage: String
     locationName: String
-    audience: [EventFilter]
-    eventTypes: [EventFilter]
+    audience: [EventFilterItem]
+    eventTypes: [EventFilterItem]
   }
 
-  type EventFilter {
+  type EventFilterItem {
     id: ID!
     name: String
+  }
+
+  input EventFilter {
+    audiences: [String]
+    eventTypes: [String]
   }
 
   type EventConnection {
@@ -25,8 +30,13 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    eventCollection(limit: Int, pageNumber: Int, sort: Sort): EventConnection
+    eventCollection(
+      limit: Int
+      pageNumber: Int
+      sort: Sort
+      filter: EventFilter
+    ): EventConnection
     event(id: String): Event
-    eventFilterCollection(resourceType: String): [EventFilter]
+    eventFilterCollection(resourceType: String): [EventFilterItem]
   }
 `;

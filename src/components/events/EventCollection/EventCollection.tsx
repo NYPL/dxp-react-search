@@ -20,8 +20,18 @@ import formatDate from "../../../utils/formatDate";
 
 export const EVENT_COLLECTION_QUERY = gql`
   ${EVENT_FIELDS_FRAGMENT}
-  query EventCollectionQuery($pageNumber: Int, $limit: Int, $sort: Sort) {
-    eventCollection(limit: $limit, pageNumber: $pageNumber, sort: $sort) {
+  query EventCollectionQuery(
+    $pageNumber: Int
+    $limit: Int
+    $sort: Sort
+    $filter: EventFilter
+  ) {
+    eventCollection(
+      limit: $limit
+      pageNumber: $pageNumber
+      sort: $sort
+      filter: $filter
+    ) {
       items {
         ...EventFields
       }
@@ -58,6 +68,15 @@ function EventCollection({ id, limit, sort }: EventCollectionProps) {
       limit: limit ? limit : null,
       pageNumber: currentPage ? currentPage : 1,
       sort: sort ? sort : null,
+      // @TODO Add check for router.query for any query params and only add this property?
+      filter: {
+        ...(router.query.audience && {
+          audiences: (router.query.audience as string).split(" "),
+        }),
+        ...(router.query["event-type"] && {
+          eventTypes: (router.query["event-type"] as string).split(" "),
+        }),
+      },
     },
   });
 

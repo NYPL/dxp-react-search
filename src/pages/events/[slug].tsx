@@ -17,6 +17,7 @@ import {
   Link,
 } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/events/layouts/PageContainer";
+import EventRegistrationForm from "../../components/events/EventRegistrationForm";
 // Utils
 import formatDate from "../../utils/formatDate";
 
@@ -124,6 +125,8 @@ function EventSlugPage() {
                 </HStack>
               </Box>
             )}
+
+            <EventRegistrationForm />
           </Box>
         </>
       }

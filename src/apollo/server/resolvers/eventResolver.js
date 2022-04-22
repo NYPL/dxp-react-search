@@ -5,7 +5,8 @@ const eventResolver = {
         "events",
         args.limit,
         args.pageNumber,
-        args.sort
+        args.sort,
+        args.filter
       );
       return {
         items: response.data.entries,

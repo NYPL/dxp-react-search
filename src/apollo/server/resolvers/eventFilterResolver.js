@@ -20,7 +20,7 @@ const eventFilterResolver = {
       }
     },
   },
-  EventFilter: {
+  EventFilterItem: {
     id: (item) => item.name.replace(/\s+/g, "-").toLowerCase(),
     name: (item) => item.name,
   },

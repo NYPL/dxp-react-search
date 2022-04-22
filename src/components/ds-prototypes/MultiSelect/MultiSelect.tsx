@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 // Components
 import {
+  Box,
   Button,
   ButtonTypes,
   Checkbox,
@@ -8,32 +9,21 @@ import {
   Radio,
 } from "@nypl/design-system-react-components";
 import FocusTrap from "focus-trap-react";
+// Hooks
+import useWindowSize from "../../../hooks/useWindowSize";
+import useOnClickOutside from "../../../hooks/useOnClickOutside";
+import { MultiSelectItem, SelectedItems } from "./MultiSelect.types";
 // Styles
 import s from "./MultiSelect.module.css";
 
 interface MultiSelectProps {
   id: string;
   label: string;
-  items: any;
+  items: MultiSelectItem[];
   handleOnSelectedItemChange: any;
-  selectedItems: any;
+  selectedItems: SelectedItems;
   onSaveMultiSelect: () => void;
   onClearMultiSelect: () => void;
-  onMenuClick: () => void;
-  selectedGroupIds: string[];
-  showCtaButtons: boolean;
-  handleChangeMixedStateCheckbox: any;
-}
-
-interface MsItem {
-  id: string;
-  name: string;
-  children: [
-    {
-      id: string;
-      name: string;
-    }
-  ];
 }
 
 function MultiSelect({
@@ -44,12 +34,26 @@ function MultiSelect({
   selectedItems,
   onSaveMultiSelect,
   onClearMultiSelect,
-  onMenuClick,
-  selectedGroupIds,
-  showCtaButtons,
-  handleChangeMixedStateCheckbox,
 }: MultiSelectProps) {
-  const isOpen = selectedGroupIds.includes(id);
+  //const isOpen = selectedGroupIds.includes(id);
+  // Track the window size width, to set isMobile.
+  const [isMobile, setIsMobile] = useState<boolean>();
+  const width = useWindowSize();
+  useEffect(() => {
+    if (width && width >= 600) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
+    }
+  }, [width]);
+
+  // Control the open or closed state of the multiselect.
+  const [isOpen, setIsOpen] = useState(false);
+  // Create a ref that we add to the element for which we want to detect outside clicks.
+  const ref = useRef<HTMLDivElement>(null);
+  // Closes the multiselect if click outside event.
+  useOnClickOutside(ref, () => setIsOpen(false));
+
   const iconType = isOpen ? "minus" : "plus";
 
   function getButtonLabel(id: string) {
@@ -60,85 +64,43 @@ function MultiSelect({
     return buttonLabel;
   }
 
-  function setFilterCheckedProp(groupdId: string, itemId: string) {
-    let checked = false;
-    if (selectedItems[groupdId] !== undefined) {
-      checked = selectedItems[groupdId].items.find(
-        (filter: string) => filter === itemId
-      );
+  function isChecked(multiSelectId: string, itemId: string): boolean {
+    if (
+      selectedItems[multiSelectId]?.items.find(
+        // @ts-ignore
+        (selectedItemId: string) => selectedItemId === itemId
+      )
+    ) {
+      return true;
     }
-    return checked;
+    return false;
   }
-
-  /*function onChangeMixedStateCheckbox(groupId: string, item: any) {
-    // Build an array of child items.
-    // @ts-ignore
-    let childIds = [];
-    // @ts-ignore
-    item.children.map((childItem) => {
-      childIds.push(childItem.id);
-    });
-
-    // This is the prop passed into the component that returns the childIds.
-    // @ts-ignore
-    handleChangeMixedStateCheckbox(childIds);
-  }
-  */
-
-  /**
-   * Determines the checked state of a mixed state checkbox (parent).
-   *
-   * @param {string} groupdId - groupId of the checkbox group.
-   * @param {array} item - an array of objects containing checkbox items.
-   * @return {boolean} checked - true or false.
-   */
-  /*function setMixedStateCheckboxCheckedProp(
-    groupdId: string,
-    item: { id: string; name: string; children: string[] }
-  ) {
-    let childIds = [];
-    item.children.map((childItem) => {
-      childIds.push(childItem.id);
-    });
-
-    let checked = false;
-    if (selectedItems[groupdId] !== undefined) {
-      //
-      if (
-        childIds.every((childItem) =>
-          selectedItems[groupdId].items.includes(childItem)
-        )
-      ) {
-        checked = true;
-      }
-    }
-    return checked;
-  }
-  */
 
   // @TODO Temp workaround to render availability as radio not checkbox.
-  function RadioOrCheckboxComponent(id: string, item: MsItem) {
+  function RadioOrCheckboxComponent(id: string, item: MultiSelectItem) {
+    const itemId = `${item.name.replace(/\s+/g, "-").toLowerCase()}__${
+      item.id
+    }`;
+
     if (id === "availability") {
       return (
         <Radio
-          id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${item.id}`}
-          // @ts-ignore
-          labelText={<>{item.name}</>}
+          id={itemId}
+          labelText={item.name}
           showLabel={true}
           name={item.name}
-          isChecked={setFilterCheckedProp(id, item.id) || false}
+          isChecked={isChecked(id, item.id) || false}
           onChange={handleOnSelectedItemChange}
         />
       );
     } else {
       return (
         <Checkbox
-          id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${item.id}`}
-          // @ts-ignore
-          labelText={<>{item.name}</>}
+          id={itemId}
+          labelText={item.name}
           showLabel={true}
           name={item.name}
-          isChecked={setFilterCheckedProp(id, item.id) || false}
+          isChecked={isChecked(id, item.id) || false}
           onChange={handleOnSelectedItemChange}
         />
       );
@@ -165,11 +127,13 @@ function MultiSelect({
       }}
       active={isOpen}
     >
-      <div id={`multiselect-${id}`} className={s.multiSelect}>
+      <Box id={`multiselect-${id}`} className={s.multiSelect} ref={ref}>
         <button
           className={`${s.menuButton} ${hasSelectedItems() && s.active}`}
           type="button"
-          onClick={onMenuClick}
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
         >
           <span>{getButtonLabel(id)}</span>
           <Icon
@@ -183,7 +147,7 @@ function MultiSelect({
         <div className={`${s.menu} ${isOpen && s.active}`}>
           <ul className={s.menuInner} role="dialog">
             {isOpen &&
-              items.map((item: MsItem) => (
+              items.map((item: MultiSelectItem) => (
                 <li
                   key={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${
                     item.id
@@ -203,7 +167,7 @@ function MultiSelect({
                         /*isChecked={setMixedStateCheckboxCheckedProp(id, item) || false}
                         onChange={() => onChangeMixedStateCheckbox(id, item)}
                         */
-                        isChecked={setFilterCheckedProp(id, item.id) || false}
+                        isChecked={isChecked(id, item.id) || false}
                         onChange={handleOnSelectedItemChange}
                       />
                       <ul>
@@ -223,10 +187,7 @@ function MultiSelect({
                                 labelText={<>{childItem.name}</>}
                                 showLabel={true}
                                 name={childItem.name}
-                                isChecked={
-                                  setFilterCheckedProp(id, childItem.id) ||
-                                  false
-                                }
+                                isChecked={isChecked(id, childItem.id) || false}
                                 onChange={handleOnSelectedItemChange}
                               />
                             </li>
@@ -240,7 +201,7 @@ function MultiSelect({
                 </li>
               ))}
           </ul>
-          {isOpen && showCtaButtons && (
+          {isOpen && !isMobile && (
             <div className={s.ctaButtonsContainer}>
               <Button
                 buttonType={ButtonTypes.Link}
@@ -257,14 +218,17 @@ function MultiSelect({
                 id={`multiselect-button-save-${id}`}
                 mouseDown={false}
                 type="button"
-                onClick={onSaveMultiSelect}
+                onClick={() => {
+                  onSaveMultiSelect();
+                  setIsOpen(false);
+                }}
               >
                 Apply Filters
               </Button>
             </div>
           )}
         </div>
-      </div>
+      </Box>
     </FocusTrap>
   );
 }
