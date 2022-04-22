@@ -13,6 +13,7 @@ import {
   Pagination,
 } from "@nypl/design-system-react-components";
 import NextDsLink from "../../shared/Link/NextDsLink";
+import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 // Next
 import { useRouter } from "next/router";
 // Utils
@@ -93,7 +94,23 @@ function EventCollection({ id, limit, sort }: EventCollectionProps) {
   }
 
   if (loading || !data) {
-    return <div>Loading</div>;
+    return (
+      <Grid
+        as="ul"
+        gap="l"
+        templateColumns="repeat(1, 1fr)"
+        listStyleType="none"
+        data-testid="event-collection"
+      >
+        <CardGridSkeletonLoader
+          templateColumns="repeat(1, 1fr)"
+          gap="l"
+          cardLayout="row"
+          showImage={true}
+          itemsCount={5}
+        />
+      </Grid>
+    );
   }
 
   return (

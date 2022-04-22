@@ -113,11 +113,21 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
     if (typeof filter === "object" && filter !== null) {
       for (const property in filter) {
         if (property === "audiences") {
-          const items = filter[property].join(",");
+          // Replace - with spaces for sending query params to api.
+          let newArray: string[] = [];
+          filter[property].forEach((item: string) => {
+            newArray.push(item.replace(/-/g, " "));
+          });
+          const items = newArray.join(",");
           apiPath = `${apiPath}&ages=${items}`;
         }
         if (property === "eventTypes") {
-          const items = filter[property].join(",");
+          // Replace - with spaces for sending query params to api.
+          let newArray: string[] = [];
+          filter[property].forEach((item: string) => {
+            newArray.push(item.replace(/-/g, " "));
+          });
+          const items = newArray.join(",");
           apiPath = `${apiPath}&types=${items}`;
         }
       }

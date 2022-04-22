@@ -174,18 +174,22 @@ function EventCollectionFilters() {
   const isMobile = false;
 
   return (
-    <FilterBar
-      id="event-collection-filterbar"
-      label="Events Filter Bar"
-      isModalOpen={isModalOpen}
-      onClickMobileFiltersButton={() => setIsModalOpen(true)}
-      onClickGoBack={() => setIsModalOpen(false)}
-      isMobile={isMobile ? isMobile : false}
-      selectedItems={{}}
-      onClearSelectedItems={onClearAllMultiSelects}
-      onSaveSelectedItems={onSaveMultiSelect}
-    >
-      {/* <Box maxWidth="500px" padding="2rem 0">
+    <>
+      {/* <Box>
+        <pre>{JSON.stringify(selectedItems, null, 2)}</pre>
+      </Box> */}
+      <FilterBar
+        id="event-collection-filterbar"
+        label="Events Filter Bar"
+        isModalOpen={isModalOpen}
+        onClickMobileFiltersButton={() => setIsModalOpen(true)}
+        onClickGoBack={() => setIsModalOpen(false)}
+        isMobile={isMobile ? isMobile : false}
+        selectedItems={{}}
+        onClearSelectedItems={onClearAllMultiSelects}
+        onSaveSelectedItems={onSaveMultiSelect}
+      >
+        {/* <Box maxWidth="500px" padding="2rem 0">
         <DatePicker
           id="date-range"
           dateFormat="yyyy-MM-dd"
@@ -204,21 +208,22 @@ function EventCollectionFilters() {
           onChange={onChange}
         />
       </Box> */}
-      {groups.map((group: any) => (
-        <MultiSelect
-          id={group.id}
-          label={group.label}
-          items={data[group.resourceType]}
-          selectedItems={selectedItems}
-          handleOnSelectedItemChange={(e: any) => {
-            console.log(e.currentTarget.name);
-            onSelectedItemChange(e.currentTarget.id, group.id);
-          }}
-          onClearMultiSelect={() => setSelectedItems({})}
-          onSaveMultiSelect={onSaveMultiSelect}
-        />
-      ))}
-    </FilterBar>
+        {groups.map((group: any) => (
+          <MultiSelect
+            id={group.id}
+            label={group.label}
+            items={data[group.resourceType]}
+            selectedItems={selectedItems}
+            handleOnSelectedItemChange={(e: any) => {
+              console.log(e.currentTarget.name);
+              onSelectedItemChange(e.currentTarget.id, group.id);
+            }}
+            onClearMultiSelect={() => setSelectedItems({})}
+            onSaveMultiSelect={onSaveMultiSelect}
+          />
+        ))}
+      </FilterBar>
+    </>
   );
 }
 
