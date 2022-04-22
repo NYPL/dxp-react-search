@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Box,
-  ColorVariants,
+  BreadcrumbsTypes,
   Heading,
   HeadingLevels,
   Link,
@@ -35,7 +35,7 @@ function Error({ statusCode }: ErrorProps) {
           url: NEXT_PUBLIC_NYPL_DOMAIN as string,
         },
       ]}
-      breadcrumbsColor={ColorVariants.WhatsOn}
+      breadcrumbsColor={BreadcrumbsTypes.WhatsOn}
       wrapperClass="nypl--404"
       contentHeader={null}
       contentPrimary={

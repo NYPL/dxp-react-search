@@ -7,7 +7,7 @@ import { withRedux } from "../../../redux/withRedux";
 import PageContainer from "./../../../components/locations/RequestVisitForm/PageContainer";
 import {
   Heading,
-  HeadingDisplaySizes,
+  HeadingSizes,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
 import RequestVisitConfirmation from "../../../components/locations/RequestVisitForm/RequestVisitConfirmation";

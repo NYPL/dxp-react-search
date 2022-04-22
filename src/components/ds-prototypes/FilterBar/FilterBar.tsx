@@ -5,7 +5,7 @@ import {
   ButtonTypes,
   Heading,
   HeadingLevels,
-  HeadingDisplaySizes,
+  HeadingSizes,
   Icon,
   IconAlign,
   IconNames,
@@ -132,7 +132,7 @@ function FilterBar({
             id="search-filters--heading"
             //className={s.filterBarHeading}
             level={HeadingLevels.Two}
-            displaySize={HeadingDisplaySizes.Tertiary}
+            size={HeadingSizes.Tertiary}
             text={label}
           />
           <div className={s.multiSelectsContainerDesktop}>{children}</div>

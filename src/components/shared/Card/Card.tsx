@@ -7,7 +7,7 @@ import {
   HeadingLevels,
   ImageRatios,
   ImageSizes,
-  CardLayouts,
+  LayoutTypes,
 } from "@nypl/design-system-react-components";
 import NextDsLink from "./../Link/NextDsLink";
 
@@ -26,7 +26,7 @@ interface CardProps {
   image?: JSX.Element;
   /** */
   imageAspectRatio?: ImageRatios;
-  layout?: CardLayouts;
+  layout?: LayoutTypes;
   center?: boolean;
   imageSize?: ImageSizes;
 }
@@ -47,7 +47,9 @@ function Card({
     <DsCard
       id={id}
       {...(image && {
-        imageComponent: image,
+        imageProps: {
+          component: image,
+        },
       })}
       {...(image &&
         imageAspectRatio && {

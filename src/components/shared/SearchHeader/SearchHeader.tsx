@@ -3,7 +3,7 @@ import {
   Box,
   Heading,
   HeadingLevels,
-  HeadingDisplaySizes,
+  HeadingSizes,
 } from "@nypl/design-system-react-components";
 
 interface SearchHeaderProps {
@@ -20,7 +20,7 @@ function SearchHeader({ id, title, children }: SearchHeaderProps) {
           <Heading
             id={id}
             level={HeadingLevels.One}
-            displaySize={HeadingDisplaySizes.Secondary}
+            size={HeadingSizes.Secondary}
             text={title}
           />
         )}

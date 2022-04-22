@@ -47,7 +47,7 @@ function AutoSuggest(props) {
           ...inputProps,
           "aria-label": autoSuggestAriaLabel,
         }}
-        showOptReqLabel={false}
+        showRequiredLabel={false}
       />
     );
   }

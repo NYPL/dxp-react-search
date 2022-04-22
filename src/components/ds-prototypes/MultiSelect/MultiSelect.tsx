@@ -5,6 +5,7 @@ import {
   ButtonTypes,
   Checkbox,
   Icon,
+  IconSizes,
   Radio,
 } from "@nypl/design-system-react-components";
 import FocusTrap from "focus-trap-react";
@@ -177,7 +178,7 @@ function MultiSelect({
             // @ts-ignore
             name={iconType}
             // @ts-ignore
-            modifiers={["small", { iconType }]}
+            size={IconSizes.Small}
           />
         </button>
         <div className={`${s.menu} ${isOpen && s.active}`}>

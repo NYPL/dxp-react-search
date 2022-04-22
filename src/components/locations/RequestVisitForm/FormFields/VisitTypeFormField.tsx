@@ -93,10 +93,14 @@ function VisitTypeFormField({
       </Select>
       {values.visitType === "virtual" && (
         <Box my="s">
-          <Fieldset legendText="What services would you like to include in your virtual visit?">
+          <Fieldset
+            id="services-container"
+            legendText="What services would you like to include in your virtual visit?"
+          >
             {virtualServicesItems.map((virtualServiceItem) => (
               <Box mb="s">
                 <Checkbox
+                  id={virtualServiceItem.id}
                   labelText={virtualServiceItem.label}
                   name={virtualServiceItem.id}
                   onChange={(e) =>
@@ -114,6 +118,7 @@ function VisitTypeFormField({
                 {virtualServiceItem.id === "services-other" && (
                   <Box mt="s">
                     <TextInput
+                      id="virtualVisitServicesOther"
                       attributes={{
                         name: "virtualVisitServicesOther",
                       }}
@@ -136,10 +141,14 @@ function VisitTypeFormField({
       )}
       {values.visitType === "in-person" && (
         <Box my="s">
-          <Fieldset legendText="What would you like to request?">
+          <Fieldset
+            id="request-type"
+            legendText="What would you like to request?"
+          >
             {inPersonItems.map((inPersonItem) => (
               <Box mb="s">
                 <Radio
+                  id="inPersonServices"
                   name="inPersonServices"
                   value={inPersonItem.id}
                   labelText={inPersonItem.label}
@@ -152,6 +161,7 @@ function VisitTypeFormField({
                 {inPersonItem.id === "in-person-other" && (
                   <Box mt="s">
                     <TextInput
+                      id="inPersonServicesOther"
                       attributes={{
                         name: "inPersonServicesOther",
                       }}

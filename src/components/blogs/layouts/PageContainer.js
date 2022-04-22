@@ -7,7 +7,7 @@ import {
   HeadingLevels,
   Hero,
   HeroTypes,
-  ColorVariants,
+  BreadcrumbsTypes,
 } from "@nypl/design-system-react-components";
 import FilterBar from "./../../shared/FilterBar";
 // Config/Utils
@@ -108,7 +108,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor={ColorVariants.Blogs}
+      breadcrumbsColor={BreadcrumbsTypes.Blogs}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"

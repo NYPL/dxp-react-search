@@ -32,6 +32,7 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
       />
       <Box mb="s">
         <TextInput
+          id="contactName"
           attributes={{
             name: "contactName",
           }}
@@ -45,6 +46,7 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         />
       </Box>
       <TextInput
+        id="contactEmail"
         attributes={{
           name: "contactEmail",
         }}

@@ -12,6 +12,7 @@ function OrgFormField({ handleChange }: FormFieldProps) {
     <>
       <Box mb="s">
         <TextInput
+          id="organization"
           labelText="Please tell us about your school or organization"
           attributes={{
             name: "organization",
@@ -22,12 +23,13 @@ function OrgFormField({ handleChange }: FormFieldProps) {
           isRequired={!values.noSchoolOrOrg}
           showLabel
           placeholder="Enter school or organization name"
-          showOptReqLabel={!values.noSchoolOrOrg}
+          showRequiredLabel={!values.noSchoolOrOrg}
           invalidText={errors.organization}
           isInvalid={errors.organization ? true : false}
         />
       </Box>
       <Checkbox
+        id="noSchoolOrOrg"
         isChecked={values.noSchoolOrOrg}
         labelText="I’m not with a school or organization."
         name="noSchoolOrOrg"

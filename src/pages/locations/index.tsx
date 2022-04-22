@@ -17,7 +17,7 @@ import {
   Box,
   Grid,
   GridItem,
-  ColorVariants,
+  BreadcrumbsTypes,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
 // Content + config
@@ -43,7 +43,7 @@ function LocationFinder() {
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}${LOCATIONS_BASE_PATH}`,
         },
       ]}
-      breadcrumbsColor={ColorVariants.Locations}
+      breadcrumbsColor={BreadcrumbsTypes.Locations}
       wrapperClass="nypl--locations"
       contentHeader={
         <>
@@ -57,7 +57,7 @@ function LocationFinder() {
         </>
       }
       contentPrimary={
-        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} spacing="l">
+        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} gap="l">
           <GridItem
             id="locations-list"
             maxHeight={[null, null, "500px"]}

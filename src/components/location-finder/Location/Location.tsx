@@ -5,7 +5,7 @@ import {
   Button,
   ButtonTypes,
   Heading,
-  HeadingDisplaySizes,
+  HeadingSizes,
   HeadingLevels,
   HStack,
   Link,
@@ -66,7 +66,7 @@ function Location({ location }: LocationProps) {
       <Heading
         id={`lid-${location.id}`}
         level={HeadingLevels.Two}
-        displaySize={HeadingDisplaySizes.Tertiary}
+        size={HeadingSizes.Tertiary}
       >
         <Link href={location.url}>{location.name}</Link>
       </Heading>
@@ -93,7 +93,11 @@ function Location({ location }: LocationProps) {
       />
       <LocationDistance locationPoint={location.geoLocation} />
       <HStack>
-        <Button buttonType={ButtonTypes.Link} onClick={onClickViewOnMap}>
+        <Button
+          id={`button-view-on-map-${location.id}`}
+          buttonType={ButtonTypes.Link}
+          onClick={onClickViewOnMap}
+        >
           View on Map
         </Button>
         <Box>|</Box>

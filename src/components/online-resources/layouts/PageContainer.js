@@ -7,7 +7,7 @@ import SearchForm from "./../SearchForm";
 import Menu from "./../../ds-prototypes/Menu";
 import {
   Box,
-  ColorVariants,
+  BreadcrumbsTypes,
   HeadingLevels,
 } from "@nypl/design-system-react-components";
 // Config
@@ -62,7 +62,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor={ColorVariants.Research}
+      breadcrumbsColor={BreadcrumbsTypes.Research}
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"

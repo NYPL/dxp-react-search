@@ -282,7 +282,9 @@ function RequestVisitForm() {
         </Box>
         <ContactInfoFormField handleChange={handleChange} />
         <HoneypotFormField />
-        <Button type="submit">Submit</Button>
+        <Button id="request-visit-form-button" type="submit">
+          Submit
+        </Button>
       </form>
     </Box>
   );

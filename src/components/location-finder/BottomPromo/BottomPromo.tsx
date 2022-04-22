@@ -31,7 +31,7 @@ function BottomPromo() {
             return (
               <div key={value.link} className="promo-card">
                 <Link href={value.link} className="promo-link">
-                  <Image alt="" imageCaption={value.name} src={value.url} />
+                  <Image alt="" caption={value.name} src={value.url} />
                 </Link>
               </div>
             );
