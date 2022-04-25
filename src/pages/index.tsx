@@ -27,12 +27,14 @@ function HomePage() {
       <Box className="scout__homepage">
         <ScoutHomepageV1Provider>
           <main id="main-content">
-            <Box id="content-header">
+            <Box id="content-header" p={0} m={0}>
               <Hero
                 title={heroContent.title}
                 description={heroContent.description}
                 image={heroContent.image}
+                mobileImg={heroContent.mobileImg}
                 tag={heroContent.tag}
+                url={heroContent.url}
               />
             </Box>
             <Box

@@ -31,7 +31,8 @@ function ComponentWrapper({
   return (
     <Box
       bg={bg ? bg : ""}
-      pt={{ base: 2, lg: 3, xl: 7 }}
+      // pt={3}
+      pt={{ base: 4, xl: "30px" }}
       pl={{ base: 2, md: 8, lg: 4, xl: 6 }}
       pr={{ base: 4, md: 9, lg: 6 }}
       mx="calc(-50vw + 50%)"
@@ -46,7 +47,8 @@ function ComponentWrapper({
           md: "1fr 7fr",
           lg: "2fr 19fr",
         }}
-        gap={gap ? gap : { base: 0, md: 5, xl: 7 }}
+        gridColumnGap={gap ? gap : { base: 0, md: 5, xl: 7 }}
+        gridRowGap={{ base: 0, md: 2, xl: 3 }}
         overflow="hidden"
       >
         <GridItem gridArea={{ md: "heading" }}>
@@ -88,11 +90,11 @@ function ComponentWrapper({
           <Box
             maxWidth={{ base: "90vw", md: "75vw", lg: "90vw", xl: "85vw" }}
             textAlign="center"
-            mt={{ base: 6, md: -3, lg: -8 }}
+            mt={{ base: 6 }}
             mb={{ base: 10, lg: 8 }}
           >
             <Link
-              aria-description={`main of ${title}`}
+              aria-label={`see more of ${title}`}
               href={link}
               variant={
                 hoverStyle === true

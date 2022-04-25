@@ -43,9 +43,14 @@ function SlideShow({ title, link, items }: SlideShowProps) {
           nextSlide={nextSlide}
           prevSlide={prevSlide}
         />
-        {currentSlide !== items.length - 1 && (
-          <SlideShowButton direction={"next"} nextSlide={nextSlide} />
-        )}
+        {/* {currentSlide !== items.length - 1 && ( */}
+        <SlideShowButton
+          direction={"next"}
+          nextSlide={nextSlide}
+          visibility={`${
+            currentSlide !== items.length - 1 ? "visibile" : "hidden"
+          }`}
+        />
       </Box>
     </ComponentWrapper>
   );

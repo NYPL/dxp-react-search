@@ -5,6 +5,7 @@ import { Global } from "@emotion/react";
 import QuoteBg from "./quoteBg";
 import Card from "./card";
 import CardGrid from "./cardGrid";
+import Hero from "./hero";
 
 const Fonts = () => (
   <Global
@@ -88,6 +89,8 @@ const theme = extendTheme({
       100: "#FFFFFF",
       // black
       200: "#000000",
+      //charcol
+      250: "#333",
       //lion svg
       300: "C51D12",
       900: "transparent",
@@ -165,9 +168,8 @@ const theme = extendTheme({
           w: 9,
           minWidth: "unset",
           ml: {
-            base: props.direction === "prev" ? "40vw" : "55vw",
-            md: props.direction === "prev" ? "-120px" : "-60px",
-            lg: props.direction === "prev" ? "-110px" : "-60px",
+            base: props.direction === "prev" ? "35vw" : "50vw",
+            md: props.direction === "prev" ? "-110px" : "-60px",
           },
           mt: {
             md: props.direction === "prev" ? "125px" : "-175px",
@@ -183,6 +185,7 @@ const theme = extendTheme({
     QuoteBg,
     Card,
     CardGrid,
+    Hero,
   },
   spacing: {
     space: {

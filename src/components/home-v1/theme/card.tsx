@@ -136,10 +136,10 @@ const Card: ComponentStyleConfig = {
         lg: "5fr 9fr",
         xl: "9fr 10fr",
       },
-      gap: { base: 12, md: 0 },
+      gap: { base: 6, md: 0 },
       h3: {
         fontFamily: "Milo-Regular",
-        lineHeight: "28px",
+        lineHeight: { base: "21px", md: "28px" },
         fontSize: { base: "lg", md: "2xl" },
         fontWeight: "bold",
       },
@@ -154,7 +154,7 @@ const Card: ComponentStyleConfig = {
       gridTemplateColumns: { base: "4fr 9fr", md: "2fr 1fr", lg: "15fr 16fr" },
       gap: { base: 12 },
       fontFamily: "Kievit-Book",
-      mb: { lg: 16, xl: 10 },
+      mb: { lg: 3 },
       h3: { mt: 1.5, mb: 4 },
       p: {
         display: { base: "none", lg: "block" },

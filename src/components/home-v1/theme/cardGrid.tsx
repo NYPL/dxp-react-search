@@ -5,7 +5,6 @@ const CardGrid: ComponentStyleConfig = {
     "row-grid": {
       gridTemplateRows: "1fr 1fr",
       gap: { base: 4, md: 6, xl: 12 },
-      pb: { md: 2, lg: 5 },
     },
     "column-grid": {
       gridTemplateRows: { base: "1fr", md: "fr1 fr1", lg: "min-content" },
