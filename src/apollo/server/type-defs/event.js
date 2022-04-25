@@ -20,6 +20,7 @@ export const typeDefs = gql`
   }
 
   input EventFilter {
+    q: String
     audiences: [String]
     eventTypes: [String]
   }

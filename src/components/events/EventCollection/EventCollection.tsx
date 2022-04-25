@@ -5,6 +5,8 @@ import { EVENT_FIELDS_FRAGMENT } from "./../../../apollo/client/fragments/eventF
 // Components
 import {
   Box,
+  Button,
+  ButtonTypes,
   Grid,
   Heading,
   HeadingLevels,
@@ -71,6 +73,9 @@ function EventCollection({ id, limit, sort }: EventCollectionProps) {
       sort: sort ? sort : null,
       // @TODO Add check for router.query for any query params and only add this property?
       filter: {
+        ...(router.query.q && {
+          q: router.query.q as string,
+        }),
         ...(router.query.audience && {
           audiences: (router.query.audience as string).split(" "),
         }),
@@ -113,8 +118,26 @@ function EventCollection({ id, limit, sort }: EventCollectionProps) {
     );
   }
 
+  const showClearAll = ["q", "audience", "event-type"].some((item) =>
+    router.query.hasOwnProperty(item)
+  );
+
   return (
     <>
+      {showClearAll && (
+        <Box>
+          <Button
+            buttonType={ButtonTypes.Link}
+            onClick={() => {
+              router.replace("/events/all", undefined, {
+                shallow: true,
+              });
+            }}
+          >
+            Clear search
+          </Button>
+        </Box>
+      )}
       <Grid
         as="ul"
         gap="l"

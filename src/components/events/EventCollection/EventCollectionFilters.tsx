@@ -1,12 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
-import {
-  Box,
-  DatePicker,
-  DatePickerTypes,
-} from "@nypl/design-system-react-components";
 import FilterBar from "./../../ds-prototypes/FilterBar/FilterBar";
 import MultiSelect from "../../ds-prototypes/MultiSelect/MultiSelect";
 import { SelectedItems } from "../../ds-prototypes/MultiSelect/MultiSelect.types";
@@ -48,6 +43,21 @@ function EventCollectionFilters() {
   // MultiSelect state
   // @TODO default should not be empty object!
   const [selectedItems, setSelectedItems] = useState<SelectedItems>({});
+  // Sync the url state with the local react state when query params change.
+  useEffect(() => {
+    let urlState = {};
+    for (let [groupId, value] of Object.entries(router.query)) {
+      if (groupId !== "page" && groupId !== "q") {
+        urlState = {
+          ...urlState,
+          [groupId]: {
+            items: (router.query[groupId] as string).split(" "),
+          },
+        };
+      }
+    }
+    setSelectedItems(urlState);
+  }, [router.query]);
 
   const { loading, error, data } = useQuery(EVENT_FILTER_QUERY, {});
 
@@ -159,9 +169,9 @@ function EventCollectionFilters() {
       .push({
         pathname: routerPathname,
         query: {
-          // ...(searchQuery && {
-          //   q: router.query.q,
-          // }),
+          ...(router.query.q && {
+            q: router.query.q,
+          }),
           ...queryParamsToAdd,
           page: 1,
         },
@@ -180,7 +190,7 @@ function EventCollectionFilters() {
       </Box> */}
       <FilterBar
         id="event-collection-filterbar"
-        label="Events Filter Bar"
+        label="Filter By"
         isModalOpen={isModalOpen}
         onClickMobileFiltersButton={() => setIsModalOpen(true)}
         onClickGoBack={() => setIsModalOpen(false)}
@@ -190,24 +200,24 @@ function EventCollectionFilters() {
         onSaveSelectedItems={onSaveMultiSelect}
       >
         {/* <Box maxWidth="500px" padding="2rem 0">
-        <DatePicker
-          id="date-range"
-          dateFormat="yyyy-MM-dd"
-          dateType={DatePickerTypes.Full}
-          minDate="1/1/2021"
-          maxDate="3/1/2023"
-          labelText="Select the date range you want to visit NYPL"
-          nameFrom="visit-dates-from"
-          nameTo="visit-dates-to"
-          helperTextFrom="From this date."
-          helperTextTo="To this date."
-          helperText="Select a valid date range."
-          invalidText="There was an error with the date range :("
-          showOptReqLabel={false}
-          isDateRange
-          onChange={onChange}
-        />
-      </Box> */}
+          <DatePicker
+            id="date-range"
+            dateFormat="yyyy-MM-dd"
+            dateType={DatePickerTypes.Full}
+            minDate="1/1/2021"
+            maxDate="3/1/2023"
+            labelText="Select the date range you want to visit NYPL"
+            nameFrom="visit-dates-from"
+            nameTo="visit-dates-to"
+            helperTextFrom="From this date."
+            helperTextTo="To this date."
+            helperText="Select a valid date range."
+            invalidText="There was an error with the date range :("
+            showOptReqLabel={false}
+            isDateRange
+            onChange={onChange}
+          />
+        </Box> */}
         {groups.map((group: any) => (
           <MultiSelect
             id={group.id}
@@ -218,7 +228,7 @@ function EventCollectionFilters() {
               console.log(e.currentTarget.name);
               onSelectedItemChange(e.currentTarget.id, group.id);
             }}
-            onClearMultiSelect={() => setSelectedItems({})}
+            onClearMultiSelect={() => onClearMultiSelect(group.id)}
             onSaveMultiSelect={onSaveMultiSelect}
           />
         ))}

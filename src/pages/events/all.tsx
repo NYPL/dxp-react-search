@@ -14,9 +14,8 @@ import PageContainer from "./../../components/events/layouts/PageContainer";
 import EventCollection, {
   EVENT_COLLECTION_QUERY,
 } from "../../components/events/EventCollection/EventCollection";
-import EventCollectionFilters, {
-  EVENT_FILTER_QUERY,
-} from "./../../components/events/EventCollection/EventCollectionFilters";
+import { EVENT_FILTER_QUERY } from "./../../components/events/EventCollection/EventCollectionFilters";
+import EventCollectionSearchForm from "./../../components/events/EventCollection/EventCollectionSearchForm";
 // Content
 import eventsContent from "../../__content/events";
 
@@ -45,7 +44,7 @@ function EventsAllPage() {
             foregroundColor="#000000"
           />
           <Box maxWidth="1280px" padding="1rem 1rem" margin="0 auto">
-            <EventCollectionFilters />
+            <EventCollectionSearchForm />
           </Box>
         </>
       }

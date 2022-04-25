@@ -209,7 +209,10 @@ function MultiSelect({
                 className={s.ctaButtonsDesktopClear}
                 mouseDown={false}
                 type="button"
-                onClick={onClearMultiSelect}
+                onClick={() => {
+                  setIsOpen(false);
+                  onClearMultiSelect();
+                }}
               >
                 Clear
               </Button>
@@ -219,8 +222,8 @@ function MultiSelect({
                 mouseDown={false}
                 type="button"
                 onClick={() => {
-                  onSaveMultiSelect();
                   setIsOpen(false);
+                  onSaveMultiSelect();
                 }}
               >
                 Apply Filters

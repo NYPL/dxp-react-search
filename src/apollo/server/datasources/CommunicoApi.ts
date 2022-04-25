@@ -112,8 +112,13 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
     // Filters
     if (typeof filter === "object" && filter !== null) {
       for (const property in filter) {
+        // Search by keyword, Search will find "term" in the
+        // following fields: title, subTitle, shortDescription, description fields, and "search tags".
+        if (property === "q") {
+          apiPath = `${apiPath}&term=${filter.q}`;
+        }
         if (property === "audiences") {
-          // Replace - with spaces for sending query params to api.
+          // Replace "-"" with " " for sending query params to api.
           let newArray: string[] = [];
           filter[property].forEach((item: string) => {
             newArray.push(item.replace(/-/g, " "));
@@ -122,7 +127,7 @@ class CommunicoApi<TContext = any> extends RESTDataSource {
           apiPath = `${apiPath}&ages=${items}`;
         }
         if (property === "eventTypes") {
-          // Replace - with spaces for sending query params to api.
+          // Replace "-"" with " " for sending query params to api.
           let newArray: string[] = [];
           filter[property].forEach((item: string) => {
             newArray.push(item.replace(/-/g, " "));
