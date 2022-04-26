@@ -46,8 +46,9 @@ function EventCollectionFilters() {
   // Local state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   // MultiSelect state
-  // @TODO default should not be empty object!
   const [selectedItems, setSelectedItems] = useState<SelectedItems>({});
+  // Datepicker state
+  //const [selectedItems, setSelectedItems] = useState<SelectedItems>({});
   // Sync the url state with the local react state when query params change.
   useEffect(() => {
     let urlState = {};
@@ -218,7 +219,7 @@ function EventCollectionFilters() {
             onSaveMultiSelect={onSaveMultiSelect}
           />
         ))}
-        <Box maxWidth="500px" padding="2rem 0">
+        {/* <Box maxWidth="500px" padding="2rem 0">
           <DatePicker
             id="date-range"
             dateFormat="yyyy-MM-dd"
@@ -236,7 +237,7 @@ function EventCollectionFilters() {
             isDateRange
             onChange={handleDatePickerOnChange}
           />
-        </Box>
+        </Box> */}
       </FilterBar>
     </>
   );
