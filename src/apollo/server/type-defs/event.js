@@ -12,6 +12,15 @@ export const typeDefs = gql`
     locationName: String
     audience: [EventFilterItem]
     eventTypes: [EventFilterItem]
+    customQuestions: [EventCustomQuestion]
+  }
+
+  type EventCustomQuestion {
+    id: ID!
+    label: String!
+    formType: String!
+    required: Boolean
+    options: [String]
   }
 
   type EventFilterItem {

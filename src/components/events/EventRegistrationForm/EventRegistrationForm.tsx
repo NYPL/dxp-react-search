@@ -6,6 +6,7 @@ import {
   Select,
   TextInput,
 } from "@nypl/design-system-react-components";
+import EventRegistrationFormCustomQuestions from "./EventRegistrationFormCustomQuestions";
 
 const formFields = [
   {
@@ -41,7 +42,14 @@ const ageOptions = [
   },
 ];
 
-function EventRegistrationForm() {
+interface EventRegistrationFormProps {
+  customQuestions: any;
+}
+
+function EventRegistrationForm({
+  customQuestions,
+}: EventRegistrationFormProps) {
+  console.log(customQuestions);
   return (
     <Box maxWidth={[null, null, "637px"]}>
       <form
@@ -61,6 +69,9 @@ function EventRegistrationForm() {
           <Heading id="event-reg" level={HeadingLevels.Two}>
             Event Registration
           </Heading>
+          <Box mb="l">
+            Form is not currently wired up to send data to Communico
+          </Box>
         </Box>
         {formFields.map((formField: any) => (
           <Box mb="s">
@@ -69,7 +80,7 @@ function EventRegistrationForm() {
               attributes={{
                 name: formField.id,
               }}
-              value=""
+              //value=""
               isRequired={true}
               showLabel
               placeholder={formField.placeholder}
@@ -96,6 +107,18 @@ function EventRegistrationForm() {
             ))}
           </Select>
         </Box>
+
+        {customQuestions && (
+          <Heading id="event-reg-custom-questions" level={HeadingLevels.Three}>
+            Custom Questions
+          </Heading>
+        )}
+        {customQuestions &&
+          customQuestions.map((customQuestion: any) => (
+            <Box mb="l">
+              {EventRegistrationFormCustomQuestions(customQuestion)}
+            </Box>
+          ))}
         <Button type="submit">Register</Button>
       </form>
     </Box>

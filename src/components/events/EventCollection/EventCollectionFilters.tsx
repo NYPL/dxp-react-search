@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
+import {
+  Box,
+  DatePicker,
+  DatePickerTypes,
+} from "@nypl/design-system-react-components";
 import FilterBar from "./../../ds-prototypes/FilterBar/FilterBar";
 import MultiSelect from "../../ds-prototypes/MultiSelect/MultiSelect";
 import { SelectedItems } from "../../ds-prototypes/MultiSelect/MultiSelect.types";
@@ -70,7 +75,7 @@ function EventCollectionFilters() {
   }
 
   let dateObject: any = {};
-  const onChange = (data: any) => {
+  const handleDatePickerOnChange = (data: any) => {
     dateObject = data;
     console.log(dateObject);
   };
@@ -199,7 +204,21 @@ function EventCollectionFilters() {
         onClearSelectedItems={onClearAllMultiSelects}
         onSaveSelectedItems={onSaveMultiSelect}
       >
-        {/* <Box maxWidth="500px" padding="2rem 0">
+        {groups.map((group: any) => (
+          <MultiSelect
+            id={group.id}
+            label={group.label}
+            items={data[group.resourceType]}
+            selectedItems={selectedItems}
+            handleOnSelectedItemChange={(e: any) => {
+              console.log(e.currentTarget.name);
+              onSelectedItemChange(e.currentTarget.id, group.id);
+            }}
+            onClearMultiSelect={() => onClearMultiSelect(group.id)}
+            onSaveMultiSelect={onSaveMultiSelect}
+          />
+        ))}
+        <Box maxWidth="500px" padding="2rem 0">
           <DatePicker
             id="date-range"
             dateFormat="yyyy-MM-dd"
@@ -215,23 +234,9 @@ function EventCollectionFilters() {
             invalidText="There was an error with the date range :("
             showOptReqLabel={false}
             isDateRange
-            onChange={onChange}
+            onChange={handleDatePickerOnChange}
           />
-        </Box> */}
-        {groups.map((group: any) => (
-          <MultiSelect
-            id={group.id}
-            label={group.label}
-            items={data[group.resourceType]}
-            selectedItems={selectedItems}
-            handleOnSelectedItemChange={(e: any) => {
-              console.log(e.currentTarget.name);
-              onSelectedItemChange(e.currentTarget.id, group.id);
-            }}
-            onClearMultiSelect={() => onClearMultiSelect(group.id)}
-            onSaveMultiSelect={onSaveMultiSelect}
-          />
-        ))}
+        </Box>
       </FilterBar>
     </>
   );

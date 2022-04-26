@@ -126,7 +126,9 @@ function EventSlugPage() {
               </Box>
             )}
 
-            <EventRegistrationForm />
+            <EventRegistrationForm
+              customQuestions={data.event.customQuestions}
+            />
           </Box>
         </>
       }

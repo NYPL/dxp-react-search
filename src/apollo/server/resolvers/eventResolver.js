@@ -57,6 +57,23 @@ const eventResolver = {
       });
       return eventTypesData;
     },
+    customQuestions: (event) =>
+      !event.customQuestions.fields.length
+        ? null
+        : event.customQuestions.fields,
+  },
+  EventCustomQuestion: {
+    id: (item) => item.name,
+    label: (item) => item.title,
+    formType: (item) => item.type,
+    required: (item) => item.required,
+    options: (item) => {
+      if (item.options) {
+        const optionsArray = item.options.split("\n");
+        return optionsArray;
+      }
+      return null;
+    },
   },
 };
 

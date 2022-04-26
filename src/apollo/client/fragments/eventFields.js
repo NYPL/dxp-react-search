@@ -18,5 +18,12 @@ export const EVENT_FIELDS_FRAGMENT = gql`
       id
       name
     }
+    customQuestions {
+      id
+      label
+      formType
+      required
+      options
+    }
   }
 `;
