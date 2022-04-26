@@ -58,7 +58,7 @@ const eventResolver = {
       return eventTypesData;
     },
     customQuestions: (event) =>
-      !event.customQuestions.fields.length
+      !event.customQuestions.fields?.length
         ? null
         : event.customQuestions.fields,
   },
