@@ -61,7 +61,6 @@ const Hero: ComponentStyleConfig = {
       },
     },
     ".svg-wrapper": {
-      fill: { base: "red.200", md: "brand.100" },
       position: "absolute",
       right: { base: 10, md: 1.5 },
       bottom: { base: 5, md: 1.5 },
