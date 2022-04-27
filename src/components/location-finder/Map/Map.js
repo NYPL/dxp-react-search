@@ -87,8 +87,8 @@ const MapWrapper = compose(
   // This causes all the map pins to be in the same point, and the last location in the array
   // is visible by default. So we move all parent libraries to end of the locations array so
   // they are visible on default render of the map.
-  const keep = [];
-  const move = [];
+  let keep = [];
+  let move = [];
   const slugs = ["schwarzman", "snfl", "schomburg", "lpa"];
   data.refineryAllLocations.locations.forEach((item) => {
     if (!slugs.includes(item.slug)) {
