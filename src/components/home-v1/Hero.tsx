@@ -36,7 +36,7 @@ function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
       bgSize="cover"
     >
       <Box
-        flex={{ base: 1, md: "0 0 73%" }}
+        flex={{ base: 1, md: "1 0 70%" }}
         maxWidth="1313px"
         mx={0}
         my="auto"

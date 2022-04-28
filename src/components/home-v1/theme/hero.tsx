@@ -3,9 +3,10 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 const Hero: ComponentStyleConfig = {
   baseStyle: {
     ".hero-text-box": {
-      w: { base: "full", md: "57%" },
+      w: { base: "full", md: "43%" },
+      ml: { base: 0, md: "11%" },
       minWidth: "400px",
-      maxWidth: { base: "full", xl: "525px" },
+      maxWidth: { base: "full", md: "560px" },
       maxHeight: { md: "300px" },
       backgroundColor: { base: "brand.100", md: "brand.250" },
       color: { base: "brand.200", md: "brand.100" },
@@ -62,8 +63,8 @@ const Hero: ComponentStyleConfig = {
     },
     ".svg-wrapper": {
       position: "absolute",
-      right: { base: 10, md: 1.5 },
-      bottom: { base: 5, md: 1.5 },
+      right: { base: "6%", md: 1.5 },
+      bottom: { base: 6, md: 1.5 },
       w: 9,
       h: 9,
       py: { base: "2px" },
