@@ -18,7 +18,7 @@ function LocationsRequestVisitPage() {
         <>
           <Heading
             className="request-visit__header"
-            level={HeadingLevels.One}
+            level="one"
             text="Request a Class Visit or Group Tour"
           />
           <p className="request-visit__description">

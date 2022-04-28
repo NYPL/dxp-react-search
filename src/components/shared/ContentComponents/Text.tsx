@@ -16,7 +16,7 @@ interface TextProps {
 function Text({ id, type, heading, text }: TextProps) {
   return (
     <Box id={`${type}-${id}`} mb="xl">
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       <TextFormatted html={text} />
     </Box>
   );

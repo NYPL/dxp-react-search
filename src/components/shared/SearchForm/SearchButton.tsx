@@ -1,12 +1,6 @@
 import React from "react";
 // Components
-import {
-  Button,
-  ButtonTypes,
-  Icon,
-  IconNames,
-  IconSizes,
-} from "@nypl/design-system-react-components";
+import { Button, Icon } from "@nypl/design-system-react-components";
 
 // @TODO this should be properly exported from DS.
 enum IconAlign {
@@ -19,18 +13,15 @@ function SearchButton({ id }: { id: string }) {
   return (
     <Button
       id={id}
-      buttonType={ButtonTypes.Primary}
+      buttonType="primary"
       mouseDown={false}
       type="submit"
-      additionalStyles={{
+      // additionalStyles
+      sx={{
         alignSelf: "flex-end",
       }}
     >
-      <Icon
-        align={IconAlign.Left}
-        name={IconNames.Search}
-        size={IconSizes.Medium}
-      />
+      <Icon align="left" name="search" size="medium" />
       Search
     </Button>
   );

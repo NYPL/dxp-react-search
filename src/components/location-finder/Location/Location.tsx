@@ -63,11 +63,7 @@ function Location({ location }: LocationProps) {
 
   return (
     <Box marginBottom="m">
-      <Heading
-        id={`lid-${location.id}`}
-        level={HeadingLevels.Two}
-        size={HeadingSizes.Tertiary}
-      >
+      <Heading id={`lid-${location.id}`} level="two" size="tertiary">
         <Link href={location.url}>{location.name}</Link>
       </Heading>
       {location.parentLibraryName && (
@@ -95,7 +91,7 @@ function Location({ location }: LocationProps) {
       <HStack>
         <Button
           id={`button-view-on-map-${location.id}`}
-          buttonType={ButtonTypes.Link}
+          buttonType="link"
           onClick={onClickViewOnMap}
         >
           View on Map

@@ -257,11 +257,7 @@ function RequestVisitForm() {
             },
           }}
         >
-          <Heading
-            id="your-visit"
-            level={HeadingLevels.Two}
-            text="Your Visit"
-          />
+          <Heading id="your-visit" level="two" text="Your Visit" />
         </Box>
         <Box my="m">
           <LibraryFormField handleChange={handleChange} />

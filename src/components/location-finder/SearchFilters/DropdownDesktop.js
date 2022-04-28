@@ -105,7 +105,7 @@ function DropdownDesktop(props) {
       </div>
       <div className="dropdown__content-buttons" id={vocab.id}>
         <Button
-          buttonType={ButtonTypes.Link}
+          buttonType="link"
           id={`button-clear-${vocab.id}`}
           mouseDown={false}
           type="button"
@@ -117,7 +117,7 @@ function DropdownDesktop(props) {
           Clear
         </Button>
         <Button
-          buttonType={ButtonTypes.Primary}
+          buttonType="primary"
           id={`button-save-${vocab.id}`}
           mouseDown={false}
           type="button"

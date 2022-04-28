@@ -29,7 +29,7 @@ interface CardItem {
 function CardList({ id, type, heading, description, items }: CardListProps) {
   return (
     <Box id={`${type}-${id}`} mb="xl">
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       {description && <TextFormatted html={description} />}
       <Grid
         as="ul"
@@ -75,7 +75,7 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
                   </Box>
                 )}
                 <Box>
-                  <Heading level={HeadingLevels.Three}>
+                  <Heading level="three">
                     <Link href={item.link}>{item.title}</Link>
                   </Heading>
                   <TextFormatted html={item.description} />

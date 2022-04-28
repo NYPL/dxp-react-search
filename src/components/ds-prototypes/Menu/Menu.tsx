@@ -49,7 +49,7 @@ function Menu({
           text={title}
         />
       </span>
-      <List noStyling type={ListTypes.Unordered}>
+      <List noStyling type="ul">
         {items.map((item: MenuItemType) => {
           return (
             <li key={item.title.toLowerCase().replace(/\s/g, "-")}>

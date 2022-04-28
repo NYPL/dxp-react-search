@@ -25,11 +25,7 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         },
       }}
     >
-      <Heading
-        id="contact-info"
-        level={HeadingLevels.Two}
-        text="Your Contact Information"
-      />
+      <Heading id="contact-info" level="two" text="Your Contact Information" />
       <Box mb="s">
         <TextInput
           id="contactName"

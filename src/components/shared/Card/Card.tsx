@@ -65,7 +65,7 @@ function Card({
         imageSize: imageSize,
       })}
     >
-      <CardHeading level={HeadingLevels.Three}>
+      <CardHeading level="three">
         {url && <NextDsLink href={url}>{title}</NextDsLink>}
       </CardHeading>
       <CardContent>

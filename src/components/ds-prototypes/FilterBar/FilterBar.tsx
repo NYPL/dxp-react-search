@@ -1,18 +1,7 @@
 import React from "react";
 // Components
-import {
-  Button,
-  ButtonTypes,
-  Heading,
-  HeadingLevels,
-  HeadingSizes,
-  Icon,
-  IconAlign,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
-  Modal,
-} from "@nypl/design-system-react-components";
+import { Button, Heading, Icon } from "@nypl/design-system-react-components";
+import Modal from "./Modal";
 // Styles
 import s from "./FilterBar.module.css";
 
@@ -64,7 +53,7 @@ function FilterBar({
             id="search-filters__mobile-filters-button"
             className={s.filterBarButtonMobile}
             onClick={onClickMobileFiltersButton}
-            buttonType={ButtonTypes.Secondary}
+            buttonType="secondary"
             type="button"
           >
             {setFilterButtonLabel(selectedItems)}
@@ -74,25 +63,26 @@ function FilterBar({
               <div className={s.ctaButtonsContainerMobile}>
                 <Button
                   id={"multiselect-button-goback"}
-                  buttonType={ButtonTypes.Link}
+                  buttonType="link"
                   mouseDown={false}
                   onClick={onClickGoBack}
-                  additionalStyles={{
+                  // additionalStyles
+                  sx={{
                     display: "block",
                     width: "fit-content",
                   }}
                 >
                   <Icon
-                    name={IconNames.Arrow}
-                    align={IconAlign.Left}
-                    iconRotation={IconRotationTypes.Rotate90}
-                    size={IconSizes.Small}
+                    name="arrow"
+                    align="left"
+                    iconRotation="rotate90"
+                    size="small"
                   />
                   Go Back
                 </Button>
                 <Button
                   // filled
-                  buttonType={ButtonTypes.Primary}
+                  buttonType="primary"
                   id={`multiselect-button-save`}
                   mouseDown={false}
                   type="button"
@@ -104,13 +94,13 @@ function FilterBar({
               <div className={s.multiSelectsContainerMobile}>
                 <Heading
                   id="search-filters__mobile-heading"
-                  level={HeadingLevels.Three}
+                  level="three"
                   text="Filters"
                 />
                 {children}
                 {Object.keys(selectedItems).length > 0 && (
                   <Button
-                    buttonType={ButtonTypes.Link}
+                    buttonType="link"
                     //iconName={null}
                     //iconPosition={null}
                     id="mobile-clear-all-button"
@@ -131,8 +121,8 @@ function FilterBar({
           <Heading
             id="search-filters--heading"
             //className={s.filterBarHeading}
-            level={HeadingLevels.Two}
-            size={HeadingSizes.Tertiary}
+            level="two"
+            size="tertiary"
             text={label}
           />
           <div className={s.multiSelectsContainerDesktop}>{children}</div>

@@ -33,7 +33,7 @@ function AudioEmbed({
       mx="auto"
       mb="xl"
     >
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       {description && <TextFormatted html={description} />}
       {html && (
         <Box

@@ -4,12 +4,7 @@ import {
   Link as DsLink,
   StatusBadge,
   Button,
-  ButtonTypes,
   Icon,
-  IconAlign,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
   Link,
 } from "@nypl/design-system-react-components";
 import OnlineResourceCardHeading from "./OnlineResourceCardHeading";
@@ -145,15 +140,15 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       {collapsible && (
         <Button
           className={s.readmore}
-          buttonType={ButtonTypes.Secondary}
+          buttonType="secondary"
           onClick={toggleDisplay}
         >
           <Icon
-            name={IconNames.Arrow}
+            name="arrow"
             decorative={true}
             //modifiers={["small", "icon-left"]}
-            size={IconSizes.Small}
-            align={IconAlign.Left}
+            size="small"
+            align="left"
             iconRotation={buttonIconRotation}
           />
           {buttonText}

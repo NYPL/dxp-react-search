@@ -29,7 +29,7 @@ function SearchResultsDetails({
       {label && (
         <Heading
           id={"search-results__details-heading"}
-          level={HeadingLevels.Two}
+          level="two"
           text={label}
         />
       )}
@@ -38,8 +38,9 @@ function SearchResultsDetails({
         className={s.button}
         // @ts-ignore
         buttonType="link"
-        iconName={null}
-        iconPosition={null}
+        // @FIXLATER
+        //iconName={null}
+        //iconPosition={null}
         id="search-results__details-button"
         mouseDown={false}
         onClick={onClick}

@@ -5,11 +5,7 @@ import Hero from "./../Hero";
 import SearchHeader from "./../../shared/SearchHeader";
 import SearchForm from "./../SearchForm";
 import Menu from "./../../ds-prototypes/Menu";
-import {
-  Box,
-  BreadcrumbsTypes,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 // Config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
@@ -73,7 +69,7 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={HeadingLevels.Two}
+                headingLevel="two"
                 headingColor={"#00838A"}
                 headingDecoration={"underline"}
                 title={menu.title}
@@ -98,7 +94,7 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={HeadingLevels.Three}
+                headingLevel="three"
                 headingColor={"#00838A"}
                 title={menu.title}
                 // @ts-ignore

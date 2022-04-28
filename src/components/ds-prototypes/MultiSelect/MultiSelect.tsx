@@ -178,7 +178,7 @@ function MultiSelect({
             // @ts-ignore
             name={iconType}
             // @ts-ignore
-            size={IconSizes.Small}
+            size="small"
           />
         </button>
         <div className={`${s.menu} ${isOpen && s.active}`}>
@@ -244,7 +244,7 @@ function MultiSelect({
           {isOpen && showCtaButtons && (
             <div className={s.ctaButtonsContainer}>
               <Button
-                buttonType={ButtonTypes.Link}
+                buttonType="link"
                 id={`multiselect-button-clear-${id}`}
                 className={s.ctaButtonsDesktopClear}
                 mouseDown={false}
@@ -254,7 +254,7 @@ function MultiSelect({
                 Clear
               </Button>
               <Button
-                buttonType={ButtonTypes.Primary}
+                buttonType="primary"
                 id={`multiselect-button-save-${id}`}
                 mouseDown={false}
                 type="button"

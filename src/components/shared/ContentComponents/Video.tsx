@@ -30,7 +30,7 @@ function Video({
 
   return (
     <Box id={`${type}-${provider}-${id}`} mb="xl">
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       {description && <TextFormatted html={description} />}
       {html && (
         <Box

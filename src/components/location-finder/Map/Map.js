@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Icon,
-  IconAlign,
-  IconColors,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Box, Icon, Link } from "@nypl/design-system-react-components";
 // Google map
 import {
   withGoogleMap,
@@ -188,11 +179,11 @@ function Map() {
       >
         Back to List
         <Icon
-          name={IconNames.Arrow}
-          align={IconAlign.Right}
+          name="arrow"
+          align="right"
           iconRotation={IconRotationTypes.Rotate180}
           color={IconColors.UiBlack}
-          size={IconSizes.Small}
+          size="small"
         />
       </Link>
     </>

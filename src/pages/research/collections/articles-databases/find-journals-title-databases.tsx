@@ -35,7 +35,7 @@ function OnlineResourcesFindJournalsTitlePage() {
       showContentHeader={false}
       contentPrimary={
         <div>
-          <Heading level={HeadingLevels.One}>
+          <Heading level="one">
             Find E-Journals and Scholarly E-books by Title in Databases
           </Heading>
           <p>

@@ -4,15 +4,9 @@ import BottomPromoContent from "./content";
 // Components
 import {
   Heading,
-  HeadingLevels,
-  Icon,
-  IconSizes,
   Image,
   Link,
-  LinkTypes,
   Logo,
-  LogoNames,
-  LogoSizes,
 } from "@nypl/design-system-react-components";
 
 function BottomPromo() {
@@ -24,7 +18,7 @@ function BottomPromo() {
         <div className="column left">
           <Heading
             id="promo-left-section-title"
-            level={HeadingLevels.Two}
+            level="two"
             text={promo_left.title}
           />
           {promo_left.image.map((value, index) => {
@@ -40,15 +34,14 @@ function BottomPromo() {
         <div className="column right">
           <Heading
             id="promo-right-section-title"
-            level={HeadingLevels.Two}
+            level="two"
             text={promo_right.title}
           />
           <p className="promo-description">{promo_right.description}</p>
           {promo_right.image.map((value, index) => {
-            const typedLogoName = value.logo as LogoNames;
             return (
               <div key={value.link} className="promo-card promo-card-with-icon">
-                <Link type={LinkTypes.Default}>
+                <Link type="default">
                   <a
                     aria-label={value.logo_alt}
                     href={value.link}
@@ -56,8 +49,8 @@ function BottomPromo() {
                   >
                     <Logo
                       // @ts-ignore
-                      name={LogoNames[typedLogoName]}
-                      size={LogoSizes.Small}
+                      name={value.logo}
+                      size="small"
                     />
                   </a>
                 </Link>

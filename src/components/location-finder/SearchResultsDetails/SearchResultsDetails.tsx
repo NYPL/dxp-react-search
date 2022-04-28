@@ -87,10 +87,11 @@ function SearchResultsDetails() {
         &nbsp;
         <Button
           id="button"
-          buttonType={ButtonTypes.Link}
+          buttonType="link"
           mouseDown={false}
           onClick={onClearSearchTerms}
-          additionalStyles={{
+          // additionalStyles
+          sx={{
             display: "inline",
             paddingLeft: [null, null, "xs"],
           }}

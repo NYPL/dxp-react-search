@@ -1,8 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Notification,
-  NotificationTypes,
-} from "@nypl/design-system-react-components";
+import { Notification } from "@nypl/design-system-react-components";
 import { FormContext } from "./../../../context/FormContext";
 
 function RequestVisitFormError() {
@@ -32,7 +29,7 @@ function RequestVisitFormError() {
         role="alert"
       >
         <Notification
-          notificationType={NotificationTypes.Warning}
+          notificationType="warning"
           notificationContent={<strong>{message}</strong>}
         />
       </div>

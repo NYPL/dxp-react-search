@@ -2,13 +2,7 @@ import React from "react";
 // Components
 import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
 import Menu from "./../../ds-prototypes/Menu";
-import {
-  Heading,
-  HeadingLevels,
-  Hero,
-  HeroTypes,
-  BreadcrumbsTypes,
-} from "@nypl/design-system-react-components";
+import { Heading, Hero } from "@nypl/design-system-react-components";
 import FilterBar from "./../../shared/FilterBar";
 // Config/Utils
 import blogsContent from "./../../../__content/blogs";
@@ -45,8 +39,8 @@ function PageContainer(props) {
   const ContentHeader = (
     <>
       <Hero
-        heroType={HeroTypes.Tertiary}
-        heading={<Heading level={HeadingLevels.One} text={meta.title} />}
+        heroType="tertiary"
+        heading={<Heading level="one" text={meta.title} />}
         subHeaderText={meta.description}
         backgroundColor="#E0E0E0"
         foregroundColor="#000000"
@@ -108,7 +102,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor={BreadcrumbsTypes.Blogs}
+      breadcrumbsColor="blogs"
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"
@@ -119,7 +113,7 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={HeadingLevels.Three}
+                headingLevel="three"
                 headingColor={"#000"}
                 title={menu.title}
                 items={menu.items}

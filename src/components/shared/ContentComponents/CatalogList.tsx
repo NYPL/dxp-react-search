@@ -2,12 +2,9 @@ import React from "react";
 import {
   Box,
   Heading,
-  HeadingLevels,
   Card,
   CardContent,
   CardHeading,
-  ImageSizes,
-  LayoutTypes,
   Grid,
   Link,
 } from "@nypl/design-system-react-components";
@@ -44,7 +41,7 @@ function CatalogList({
 
   return (
     <Box id={`${type}-${id}`} mb="xl">
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
       <Grid
         as="ul"
@@ -59,7 +56,7 @@ function CatalogList({
           return (
             <Box as="li" key={item.id}>
               <Card
-                layout={LayoutTypes.Row}
+                layout="row"
                 isCentered
                 imageProps={{
                   component: (
@@ -75,10 +72,10 @@ function CatalogList({
                       />
                     </a>
                   ),
-                  size: ImageSizes.Small,
+                  size: "small",
                 }}
               >
-                <CardHeading level={HeadingLevels.Three}>
+                <CardHeading level="three">
                   <Link href={catalogLink}>{item.title}</Link>
                 </CardHeading>
                 <CardContent>

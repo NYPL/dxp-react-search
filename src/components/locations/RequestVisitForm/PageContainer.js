@@ -35,7 +35,7 @@ function PageContainer(props) {
             url: `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/request-visit`,
           },
         ]}
-        breadcrumbsColor={BreadcrumbsTypes.Locations}
+        breadcrumbsColor="locations"
         wrapperClass="nypl--locations"
         {...(showContentHeader && {
           contentHeader: contentHeader,
@@ -50,7 +50,7 @@ function PageContainer(props) {
                 <Menu
                   id={menu.id}
                   key={menu.id}
-                  headingLevel={HeadingLevels.Three}
+                  headingLevel="three"
                   headingColor={"#c60917"}
                   title={menu.title}
                   items={menu.items}
