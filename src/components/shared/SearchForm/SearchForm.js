@@ -1,6 +1,6 @@
 import React from "react";
 // Components
-import AutoSuggest from "./../../ds-prototypes/AutoSuggest";
+import AutoSuggest from "../../ds-prototypes/AutoSuggestLegacy";
 import SearchButton from "./SearchButton";
 
 function SearchForm(props) {

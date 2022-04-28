@@ -10,6 +10,7 @@ import {
   IconSizes,
   TextInput,
 } from "@nypl/design-system-react-components";
+import AutoSuggest from "../../ds-prototypes/AutoSuggest";
 import EventCollectionFilters from "./EventCollectionFilters";
 import { useRouter } from "next/router";
 
@@ -45,10 +46,61 @@ function EventCollectionSearchForm() {
     });
   }
 
+  const items = [
+    "Neptunium",
+    "Plutonium",
+    "Americium",
+    "Curium",
+    "Berkelium",
+    "Californium",
+    "Einsteinium",
+    "Fermium",
+    "Mendelevium",
+    "Nobelium",
+    "Lawrencium",
+    "Rutherfordium",
+    "Dubnium",
+    "Seaborgium",
+    "Bohrium",
+    "Hassium",
+    "Meitnerium",
+    "Darmstadtium",
+    "Roentgenium",
+    "Copernicium",
+    "Nihonium",
+    "Flerovium",
+    "Moscovium",
+    "Livermorium",
+    "Tennessine",
+    "Oganesson",
+  ];
+
+  const [inputItems, setInputItems] = useState(items);
+
+  function handleChange({ inputValue }: any) {
+    setInputItems(
+      items.filter((item) => item.toLowerCase().indexOf(inputValue) >= 0)
+    );
+  }
+
+  function handleSelectedItemChange({ selectedItem }: any) {
+    setSearch(selectedItem);
+  }
+
   return (
     <form id="event-collection__form" onSubmit={handleSubmit}>
       <Box display="flex" maxWidth="760px">
-        <TextInput
+        <AutoSuggest
+          id="events-search-bar"
+          labelText="Enter a search term."
+          items={inputItems}
+          onChange={handleChange}
+          placeholder={"Enter a search term"}
+          suggestionsToShow={5}
+          selectedItem={search}
+          handleSelectedItemChange={handleSelectedItemChange}
+        />
+        {/* <TextInput
           id="events-search-bar"
           labelText="Search events by key word."
           value={search}
@@ -59,7 +111,7 @@ function EventCollectionSearchForm() {
           additionalStyles={{
             width: "100%",
           }}
-        />
+        /> */}
         <Button
           id="events-search-button"
           buttonType={ButtonTypes.Primary}

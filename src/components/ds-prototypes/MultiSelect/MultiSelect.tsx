@@ -119,6 +119,23 @@ function MultiSelect({
 
   //console.log(items);
 
+  const MultiSelectStyles = {
+    baseStyle: {
+      width: {
+        base: "100%",
+        md: "fit-content",
+      },
+      minWidth: {
+        md: "175px",
+      },
+      position: "relative",
+      margin: {
+        base: ".75rem 0",
+        md: "0 2em 0 0",
+      },
+    },
+  };
+
   return (
     <FocusTrap
       focusTrapOptions={{
@@ -127,7 +144,11 @@ function MultiSelect({
       }}
       active={isOpen}
     >
-      <Box id={`multiselect-${id}`} className={s.multiSelect} ref={ref}>
+      <Box
+        id={`multiselect-${id}`}
+        __css={MultiSelectStyles.baseStyle}
+        ref={ref}
+      >
         <button
           className={`${s.menuButton} ${hasSelectedItems() && s.active}`}
           type="button"
