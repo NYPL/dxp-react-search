@@ -4,7 +4,7 @@ import { withApollo } from "../../../apollo/client/withApollo";
 // Redux
 import { withRedux } from "../../../redux/withRedux";
 // Components
-import { Heading, HeadingLevels } from "@nypl/design-system-react-components";
+import { Heading } from "@nypl/design-system-react-components";
 import PageContainer from "./../../../components/locations/RequestVisitForm/PageContainer";
 import RequestVisitForm from "../../../components/locations/RequestVisitForm/RequestVisitForm";
 import RequestVisitFormError from "../../../components/locations/RequestVisitForm/RequestVisitFormError";

@@ -52,7 +52,8 @@ function DropdownMobileButtons(props) {
         id={"button-clear-all"}
         mouseDown={false}
         onClick={(e) => onClearAllFilters(e)}
-        additionalStyles={{
+        // additionalStyles
+        sx={{
           display: "block",
           width: "fit-content",
         }}

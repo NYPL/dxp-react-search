@@ -22,8 +22,8 @@ import s from "./SearchResults.module.css";
 const SEARCH_RESULTS_LIMIT = 10;
 
 interface SearchResultsProps {
-  resourceTopicTitle: string;
-  resourceTopicId: string;
+  resourceTopicTitle?: string;
+  resourceTopicId?: string;
 }
 
 function SearchResults({

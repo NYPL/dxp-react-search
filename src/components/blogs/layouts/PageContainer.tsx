@@ -1,6 +1,10 @@
 import React from "react";
 // Components
-import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
+import {
+  default as SharedPageContainer,
+  PageContainerProps,
+  BreadcrumbsItem,
+} from "./../../shared/layouts/PageContainer";
 import Menu from "./../../ds-prototypes/Menu";
 import { Heading, Hero } from "@nypl/design-system-react-components";
 import FilterBar from "./../../shared/FilterBar";
@@ -10,14 +14,22 @@ import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
-function PageContainer(props) {
-  const {
-    metaTags,
-    breadcrumbs,
-    contentPrimary,
-    showFilterBar,
-    showContentHeader,
-  } = props;
+type BlogPageContainerProps = Omit<
+  PageContainerProps,
+  "breadcrumbsColor" | "wrapperClass" | "breadcrumbs"
+> & {
+  showFilterBar?: boolean;
+  showContentHeader: boolean;
+  breadcrumbs?: BreadcrumbsItem[];
+};
+
+function PageContainer({
+  metaTags,
+  breadcrumbs,
+  contentPrimary,
+  showFilterBar,
+  showContentHeader,
+}: BlogPageContainerProps) {
   const { meta } = blogsContent;
 
   // Default breadcrumbs for all online resources pages.
@@ -31,7 +43,6 @@ function PageContainer(props) {
       url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
     },
   ];
-
   const newBreadcrumbs = breadcrumbs
     ? [...defaultBreadcrumbs, ...breadcrumbs]
     : defaultBreadcrumbs;
@@ -97,7 +108,9 @@ function PageContainer(props) {
   return (
     <SharedPageContainer
       wrapperClass="nypl--articles"
-      metaTags={metaTags}
+      {...(metaTags && {
+        metaTags: metaTags,
+      })}
       {...(showContentHeader && {
         contentHeader: ContentHeader,
       })}
@@ -116,6 +129,7 @@ function PageContainer(props) {
                 headingLevel="three"
                 headingColor={"#000"}
                 title={menu.title}
+                // @ts-ignore
                 items={menu.items}
                 menuItemDecoration={false}
                 orientation={"vertical"}

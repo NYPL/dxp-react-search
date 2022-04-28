@@ -3,16 +3,21 @@ import React from "react";
 import { default as SharedPageContainer } from "../../shared/layouts/PageContainer";
 import Menu from "../../ds-prototypes/Menu";
 import { FormContextProvider } from "./../../../context/FormContext";
-import {
-  BreadcrumbsTypes,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
 // Config
 import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
-function PageContainer(props) {
-  const { contentHeader, contentPrimary, showContentHeader } = props;
+type RequestVisitPageContainerProps = {
+  showContentHeader?: boolean;
+  contentHeader?: React.ReactNode;
+  contentPrimary: React.ReactNode;
+};
+
+function PageContainer({
+  contentHeader,
+  contentPrimary,
+  showContentHeader,
+}: RequestVisitPageContainerProps) {
   return (
     <FormContextProvider>
       <SharedPageContainer
@@ -53,6 +58,7 @@ function PageContainer(props) {
                   headingLevel="three"
                   headingColor={"#c60917"}
                   title={menu.title}
+                  // @ts-ignore
                   items={menu.items}
                   menuItemDecoration={false}
                   orientation={"vertical"}

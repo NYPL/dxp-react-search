@@ -46,20 +46,7 @@ function OnlineResourceCardHeading(props) {
     if (resourceUrl) {
       return (
         <Heading id={id} level="three">
-          <Link
-            href={resourceUrl}
-            additionalStyles={{
-              // ui.link.primary
-              color: "#0576D3 !important",
-              textDecoration: "underline",
-              _hover: {
-                // ui.link.secondary
-                color: "#004B98 !important",
-              },
-            }}
-          >
-            {name}
-          </Link>
+          <Link href={resourceUrl}>{name}</Link>
         </Heading>
       );
     } else {

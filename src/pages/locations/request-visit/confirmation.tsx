@@ -5,11 +5,7 @@ import { withApollo } from "../../../apollo/client/withApollo";
 import { withRedux } from "../../../redux/withRedux";
 // Components
 import PageContainer from "./../../../components/locations/RequestVisitForm/PageContainer";
-import {
-  Heading,
-  HeadingSizes,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Heading } from "@nypl/design-system-react-components";
 import RequestVisitConfirmation from "../../../components/locations/RequestVisitForm/RequestVisitConfirmation";
 
 function LocationsRequestVisitConfirmationPage() {

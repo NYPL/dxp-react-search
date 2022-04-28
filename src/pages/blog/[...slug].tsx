@@ -69,6 +69,7 @@ function BlogPostPage() {
       breadcrumbs={[
         {
           text: data.blog.title,
+          url: "",
         },
       ]}
       showContentHeader={false}

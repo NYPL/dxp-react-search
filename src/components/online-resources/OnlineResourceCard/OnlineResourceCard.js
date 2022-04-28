@@ -72,12 +72,12 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
 
   let detailsClassName = "";
   let buttonText = "Full Details";
-  let buttonIconRotation = IconRotationTypes.Rotate0;
+  let buttonIconRotation = "rotate0";
   if (collapsible && !isToggled) {
     detailsClassName = s.collapsed;
   } else if (collapsible && isToggled) {
     detailsClassName = s.collapsible;
-    buttonIconRotation = IconRotationTypes.Rotate180;
+    buttonIconRotation = "rotate180";
     buttonText = "Close Details";
   }
 

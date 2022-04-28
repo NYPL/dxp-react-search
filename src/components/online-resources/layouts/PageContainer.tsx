@@ -1,6 +1,10 @@
 import React from "react";
 // Components
-import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
+import {
+  default as SharedPageContainer,
+  MetaTags,
+  BreadcrumbsItem,
+} from "./../../shared/layouts/PageContainer";
 import Hero from "./../Hero";
 import SearchHeader from "./../../shared/SearchHeader";
 import SearchForm from "./../SearchForm";
@@ -14,9 +18,23 @@ import {
   railMenuContent,
 } from "./../../../__content/menus";
 
-function PageContainer(props) {
-  const { metaTags, breadcrumbs, contentPrimary, showContentHeader } = props;
+// type OnlineResourcePageContainerProps = PageContainerProps & {
+//   showContentHeader: boolean;
+// };
 
+type OnlineResourcePageContainerProps = {
+  metaTags: MetaTags;
+  breadcrumbs?: BreadcrumbsItem[];
+  contentPrimary: React.ReactNode;
+  showContentHeader: boolean;
+};
+
+function PageContainer({
+  metaTags,
+  breadcrumbs,
+  contentPrimary,
+  showContentHeader,
+}: OnlineResourcePageContainerProps) {
   // Default breadcrumbs for all online resources pages.
   const defaultBreadcrumbs = [
     {
@@ -44,7 +62,7 @@ function PageContainer(props) {
   const ContentHeader = (
     <>
       <Hero />
-      <SearchHeader>
+      <SearchHeader id="test1234" title="What is this SearchHeader component?">
         <SearchForm />
       </SearchHeader>
     </>
@@ -58,7 +76,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor={BreadcrumbsTypes.Research}
+      breadcrumbsColor="research"
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"

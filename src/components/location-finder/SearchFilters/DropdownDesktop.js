@@ -110,7 +110,8 @@ function DropdownDesktop(props) {
           mouseDown={false}
           type="button"
           onClick={(e) => onClickClear(vocab.id, e)}
-          additionalStyles={{
+          // additionalStyles
+          sx={{
             marginRight: "1rem",
           }}
         >

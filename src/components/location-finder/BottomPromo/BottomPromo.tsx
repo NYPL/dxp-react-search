@@ -7,6 +7,7 @@ import {
   Image,
   Link,
   Logo,
+  LogoNames,
 } from "@nypl/design-system-react-components";
 
 function BottomPromo() {
@@ -47,11 +48,7 @@ function BottomPromo() {
                     href={value.link}
                     className="promo-link"
                   >
-                    <Logo
-                      // @ts-ignore
-                      name={value.logo}
-                      size="small"
-                    />
+                    <Logo name={value.logo as LogoNames} size="small" />
                   </a>
                 </Link>
               </div>

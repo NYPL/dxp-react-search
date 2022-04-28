@@ -28,13 +28,13 @@ function Dropdown(props) {
             <span className="dropdown-label">{label}</span>
             <Icon
               decorative={true}
-              name={IconNames.Minus}
+              name="minus"
               size="small"
               className="icon--minus"
             />
             <Icon
               decorative={true}
-              name={IconNames.Plus}
+              name="plus"
               size="small"
               className="icon--plus"
             />
