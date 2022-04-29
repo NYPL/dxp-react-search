@@ -3,10 +3,7 @@ import React from "react";
 import {
   Box,
   Button,
-  ButtonTypes,
   Heading,
-  HeadingSizes,
-  HeadingLevels,
   HStack,
   Link,
 } from "@nypl/design-system-react-components";

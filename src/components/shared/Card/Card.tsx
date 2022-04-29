@@ -4,9 +4,8 @@ import {
   Card as DsCard,
   CardContent,
   CardHeading,
-  HeadingLevels,
-  ImageRatios,
-  ImageSizes,
+  // ImageRatios,
+  // ImageSizes,
   LayoutTypes,
 } from "@nypl/design-system-react-components";
 import NextDsLink from "./../Link/NextDsLink";
@@ -25,10 +24,8 @@ interface CardProps {
   // @TODO this should be the type for NextJS image.
   image?: JSX.Element;
   /** */
-  imageAspectRatio?: ImageRatios;
   layout?: LayoutTypes;
-  center?: boolean;
-  imageSize?: ImageSizes;
+  isCentered?: boolean;
 }
 
 function Card({
@@ -38,10 +35,8 @@ function Card({
   title,
   subHeading,
   description,
-  imageAspectRatio,
-  center,
+  isCentered,
   layout,
-  imageSize,
 }: CardProps) {
   return (
     <DsCard
@@ -49,21 +44,19 @@ function Card({
       {...(image && {
         imageProps: {
           component: image,
+          // Workaround to suppress console.warn message for component and aspect ratio.
+          aspectRatio: "square",
         },
       })}
-      {...(image &&
-        imageAspectRatio && {
-          imageAspectRatio: imageAspectRatio,
-        })}
-      {...(center && {
-        center: true,
+      {...(isCentered && {
+        isCentered: true,
       })}
       {...(layout && {
         layout: layout,
       })}
-      {...(imageSize && {
-        imageSize: imageSize,
-      })}
+      // {...(imageSize && {
+      //   imageSize: imageSize,
+      // })}
     >
       <CardHeading level="three">
         {url && <NextDsLink href={url}>{title}</NextDsLink>}

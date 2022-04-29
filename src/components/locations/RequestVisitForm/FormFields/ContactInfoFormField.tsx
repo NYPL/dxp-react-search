@@ -1,17 +1,12 @@
 import React, { useContext } from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-  TextInput,
-} from "@nypl/design-system-react-components";
+import { Box, Heading, TextInput } from "@nypl/design-system-react-components";
 import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
 function ContactInfoFormField({ handleChange }: FormFieldProps) {
   // @ts-ignore
   const [state] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
+  const { values, errors } = state;
 
   return (
     <Box

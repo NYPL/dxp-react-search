@@ -2,10 +2,8 @@ import React from "react";
 // Components
 import {
   Button,
-  ButtonTypes,
   Checkbox,
   Icon,
-  IconSizes,
   Radio,
 } from "@nypl/design-system-react-components";
 import FocusTrap from "focus-trap-react";
@@ -48,6 +46,7 @@ function MultiSelect({
   onMenuClick,
   selectedGroupIds,
   showCtaButtons,
+  // @ts-ignore
   handleChangeMixedStateCheckbox,
 }: MultiSelectProps) {
   const isOpen = selectedGroupIds.includes(id);
@@ -168,6 +167,7 @@ function MultiSelect({
     >
       <div id={`multiselect-${id}`} className={s.multiSelect}>
         <button
+          id={`multiselect-menu-button-${id}`}
           className={`${s.menuButton} ${hasSelectedItems() && s.active}`}
           type="button"
           onClick={onMenuClick}

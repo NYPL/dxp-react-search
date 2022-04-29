@@ -1,15 +1,6 @@
 import React from "react";
 // Components
-import {
-  Heading,
-  HeadingLevels,
-  HStack,
-  Icon,
-  IconColors,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
-} from "@nypl/design-system-react-components";
+import { Heading, HStack, Icon } from "@nypl/design-system-react-components";
 import Link from "next/link";
 
 interface CardSetProps {

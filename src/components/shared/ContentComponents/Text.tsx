@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
 
 interface TextProps {

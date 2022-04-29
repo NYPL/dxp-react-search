@@ -142,10 +142,7 @@ function Map() {
 
   const windowSize = useWindowSize();
 
-  function handleClick(
-    location: object,
-    event: React.MouseEventHandler<HTMLButtonElement>
-  ) {
+  function handleClick(location: object) {
     dispatch(
       setMapInfoWindow({
         // @ts-ignore

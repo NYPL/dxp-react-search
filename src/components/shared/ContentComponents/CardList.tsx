@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-  Grid,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Box, Heading, Grid, Link } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
 // Utils
 import { getImageTransformation } from "./../../shared/Image/imageUtils";

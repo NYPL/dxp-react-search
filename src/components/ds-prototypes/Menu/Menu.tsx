@@ -3,7 +3,6 @@ import {
   Heading,
   HeadingLevels,
   List,
-  ListTypes,
 } from "@nypl/design-system-react-components";
 import MenuItem from "./MenuItem";
 import { MenuItemType } from "./MenuTypes";

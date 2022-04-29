@@ -22,7 +22,7 @@ function BottomPromo() {
             level="two"
             text={promo_left.title}
           />
-          {promo_left.image.map((value, index) => {
+          {promo_left.image.map((value) => {
             return (
               <div key={value.link} className="promo-card">
                 <Link href={value.link} className="promo-link">
@@ -39,7 +39,7 @@ function BottomPromo() {
             text={promo_right.title}
           />
           <p className="promo-description">{promo_right.description}</p>
-          {promo_right.image.map((value, index) => {
+          {promo_right.image.map((value) => {
             return (
               <div key={value.link} className="promo-card promo-card-with-icon">
                 <Link type="default">

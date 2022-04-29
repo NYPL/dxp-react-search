@@ -23,7 +23,7 @@ const ageGroupItems = [
 function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
   // @ts-ignore
   const [state] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
+  const { values, errors } = state;
 
   return (
     <CheckboxGroup
@@ -43,7 +43,7 @@ function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
           name={ageGroupItem.id}
           isChecked={values.ageGroup.includes(ageGroupItem.id)}
           showLabel
-          onChange={(e) =>
+          onChange={() =>
             handleChangeCheckboxGroup("ageGroup", ageGroupItem.id)
           }
           isInvalid={errors.ageGroup ? true : false}

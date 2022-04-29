@@ -13,13 +13,7 @@ import SearchResultsDetails from "../../components/location-finder/SearchResults
 import Map from "../../components/location-finder/Map";
 import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
-import {
-  Box,
-  Grid,
-  GridItem,
-  BreadcrumbsTypes,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box, Grid, GridItem } from "@nypl/design-system-react-components";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { LOCATIONS_BASE_PATH } from "./../../utils/config";
@@ -49,7 +43,7 @@ function LocationFinder() {
         <>
           <Hero />
           <SearchHeader
-            id={"location-finder__title"}
+            headingId={"location-finder__title"}
             title={"Find Your Library"}
           >
             <SearchForm />

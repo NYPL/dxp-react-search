@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Box, Button, ButtonTypes } from "@nypl/design-system-react-components";
+import { Box, Button } from "@nypl/design-system-react-components";
 // Redux
 import { batch, useDispatch, useSelector } from "react-redux";
 import { resetSearch, resetMap } from "./../../../redux/actions";

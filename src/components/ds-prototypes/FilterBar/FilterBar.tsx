@@ -37,7 +37,7 @@ function FilterBar({
   // Sets the label of the filters button.
   function setFilterButtonLabel(selectedItems: FbSelectedItems) {
     let allItems = [];
-    for (let [key, value] of Object.entries(selectedItems)) {
+    for (let [_, value] of Object.entries(selectedItems)) {
       value.items.map((item) => {
         allItems.push(item);
       });
@@ -62,7 +62,7 @@ function FilterBar({
             <Modal>
               <div className={s.ctaButtonsContainerMobile}>
                 <Button
-                  id={"multiselect-button-goback"}
+                  id="multiselect-button-goback"
                   buttonType="link"
                   mouseDown={false}
                   onClick={onClickGoBack}
@@ -81,9 +81,8 @@ function FilterBar({
                   Go Back
                 </Button>
                 <Button
-                  // filled
+                  id="multiselect-button-save"
                   buttonType="primary"
-                  id={`multiselect-button-save`}
                   mouseDown={false}
                   type="button"
                   onClick={onSaveSelectedItems}
@@ -100,10 +99,8 @@ function FilterBar({
                 {children}
                 {Object.keys(selectedItems).length > 0 && (
                   <Button
-                    buttonType="link"
-                    //iconName={null}
-                    //iconPosition={null}
                     id="mobile-clear-all-button"
+                    buttonType="link"
                     className={s.clearAllFiltersButton}
                     mouseDown={false}
                     onClick={onClearSelectedItems}

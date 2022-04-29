@@ -4,7 +4,6 @@ import { MenuItemType as MenuItemProps } from "./MenuTypes";
 import s from "./Menu.module.css";
 
 function MenuItem({
-  id,
   title,
   description,
   link,

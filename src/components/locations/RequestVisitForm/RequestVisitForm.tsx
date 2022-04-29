@@ -4,12 +4,7 @@ import { gql, useApolloClient } from "@apollo/client";
 // @ts-ignore
 import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
 // Components
-import {
-  Box,
-  Button,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box, Button, Heading } from "@nypl/design-system-react-components";
 import LibraryFormField from "./FormFields/LibraryFormField";
 import VisitTypeFormField from "./FormFields/VisitTypeFormField";
 import OrgFormField from "./FormFields/OrgFormField";

@@ -5,7 +5,7 @@ import { FormContext } from "./../../../context/FormContext";
 function RequestVisitFormError() {
   // @ts-ignore
   const [state] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted, serverError } = state;
+  const { isSubmitted, serverError } = state;
 
   let message =
     "There was a problem with your submissions. Errors have been highlighted below.";

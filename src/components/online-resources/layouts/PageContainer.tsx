@@ -18,12 +18,8 @@ import {
   railMenuContent,
 } from "./../../../__content/menus";
 
-// type OnlineResourcePageContainerProps = PageContainerProps & {
-//   showContentHeader: boolean;
-// };
-
 type OnlineResourcePageContainerProps = {
-  metaTags: MetaTags;
+  metaTags?: MetaTags;
   breadcrumbs?: BreadcrumbsItem[];
   contentPrimary: React.ReactNode;
   showContentHeader: boolean;
@@ -62,7 +58,7 @@ function PageContainer({
   const ContentHeader = (
     <>
       <Hero />
-      <SearchHeader id="test1234" title="What is this SearchHeader component?">
+      <SearchHeader>
         <SearchForm />
       </SearchHeader>
     </>

@@ -3,7 +3,6 @@ import Components from "./../../shared/ContentComponents/getReactComponent";
 import {
   Box,
   Heading,
-  HeadingLevels,
   Link,
   HStack,
 } from "@nypl/design-system-react-components";

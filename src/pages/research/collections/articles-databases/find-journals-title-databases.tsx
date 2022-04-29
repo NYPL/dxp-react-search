@@ -1,23 +1,16 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Apollo
 import { withApollo } from "../../../../apollo/client/withApollo";
 // Redux
 import { withRedux } from "../../../../redux/withRedux";
 // Components
-import {
-  Heading,
-  HeadingLevels,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Heading, Link } from "@nypl/design-system-react-components";
 import PageContainer from "../../../../components/online-resources/layouts/PageContainer";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-import onlineResourcesContent from "./../../../../__content/onlineResources";
 
 function OnlineResourcesFindJournalsTitlePage() {
-  const { title } = onlineResourcesContent;
-
   return (
     <PageContainer
       metaTags={{

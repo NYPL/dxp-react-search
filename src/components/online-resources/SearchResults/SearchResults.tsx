@@ -59,6 +59,7 @@ function SearchResults({
             response.data?.allLocationMatches?.pageInfo.clientIp
           );
         },
+        // @ts-ignore
         (error) => {
           //console.error(error);
         }
@@ -124,7 +125,7 @@ function SearchResults({
     return (
       <>
         <SearchResultsDetails
-          label={"Search Results"}
+          label="Search Results"
           details={{
             currentPage: 1,
             itemsOnPage: 0,

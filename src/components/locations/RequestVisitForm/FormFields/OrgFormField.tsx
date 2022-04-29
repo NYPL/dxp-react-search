@@ -6,7 +6,7 @@ import { FormContext } from "./../../../../context/FormContext";
 function OrgFormField({ handleChange }: FormFieldProps) {
   // @ts-ignore
   const [state] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
+  const { values, errors } = state;
 
   return (
     <>
