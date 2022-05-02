@@ -68,9 +68,6 @@ export async function getStaticProps() {
 
   await apolloClient.query({
     query: EVENT_FILTER_QUERY,
-    variables: {
-      resourceType: "ages",
-    },
   });
 
   await apolloClient.query({
@@ -79,6 +76,7 @@ export async function getStaticProps() {
       limit: 10,
       pageNumber: 1,
       sort: { field: "eventStart", direction: "descending" },
+      filter: {},
     },
   });
 
