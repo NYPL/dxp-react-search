@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
-import {
-  Box,
-  DatePicker,
-  DatePickerTypes,
-} from "@nypl/design-system-react-components";
 import FilterBar from "./../../ds-prototypes/FilterBar/FilterBar";
 import MultiSelect from "../../ds-prototypes/MultiSelect/MultiSelect";
 import { SelectedItems } from "../../ds-prototypes/MultiSelect/MultiSelect.types";
