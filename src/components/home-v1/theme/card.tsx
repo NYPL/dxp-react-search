@@ -4,7 +4,7 @@ const Card: ComponentStyleConfig = {
   // Styles for the base style
   baseStyle: {
     w: "full",
-    //use gridGap instead of gap when not directly implemented within a <grid> tag { https://chakra-ui.com/docs/styled-system/features/style-props#grid-layout }
+    // Use gridGap instead of gap when not directly implemented within a <grid> tag { https://chakra-ui.com/docs/styled-system/features/style-props#grid-layout }
     gridGap: { base: 6, md: 4 },
     _focusWithin: {
       outlineStyle: "solid",
@@ -12,7 +12,7 @@ const Card: ComponentStyleConfig = {
       outlineWidth: "3px",
       boxShadow: "1px 1px 1px 1px #135772",
     },
-    // title
+    // Title
     h3: {
       fontFamily: "Kievit-Book",
       fontSize: { base: "lg", md: "xl" },
@@ -20,7 +20,7 @@ const Card: ComponentStyleConfig = {
       lineHeight: "none",
       px: { base: 0, md: "5%" },
     },
-    // link
+    // Link
     a: {
       _hover: { textDecoration: "none" },
       _focus: {
@@ -28,14 +28,14 @@ const Card: ComponentStyleConfig = {
         outline: "unset",
       },
     },
-    // date
+    // Date
     span: {
       fontSize: "sm",
       lineHeight: "none",
       px: { base: 0, md: "5%" },
       textTransform: "uppercase",
     },
-    // description | location
+    // Description | Location
     p: { fontSize: "sm", lineHeight: "none", px: { base: 0, md: "5%" } },
     img: { w: "full" },
   },

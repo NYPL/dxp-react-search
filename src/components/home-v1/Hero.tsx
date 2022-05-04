@@ -1,9 +1,9 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
-//Component
+// Component
 import { Box, Link, Heading, Text, Image, createIcon } from "@chakra-ui/react";
 
-//SVG Icon
+// SVG Icon
 const RightArrowIcon = createIcon({
   displayName: "RightArrow",
   viewBox: "-2 -2 32 32",

@@ -4,7 +4,7 @@ const CardGrid: ComponentStyleConfig = {
   variants: {
     "row-grid": {
       gridTemplateRows: "1fr 1fr",
-      //use gridGap instead of gap when not directly implemented within a <grid> tag { https://chakra-ui.com/docs/styled-system/features/style-props#grid-layout }
+      // Use gridGap instead of gap when not directly implemented within a <grid> tag { https://chakra-ui.com/docs/styled-system/features/style-props#grid-layout }
       gridGap: { base: 4, md: 6, xl: 12 },
     },
     "column-grid": {

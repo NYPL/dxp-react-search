@@ -31,8 +31,8 @@ function ComponentWrapper({
   return (
     <Box
       bg={bg ? bg : ""}
-      // pt={3}
-      pt={{ base: 4, xl: "30px" }}
+      // Original pt={3} for ref
+      pt={{ base: 2, lg: 3, xl: 6 }}
       pl={{ base: 2, md: 8, lg: 4, xl: 6 }}
       pr={{ base: 4, md: 9, lg: 6 }}
       mx="calc(-50vw + 50%)"
