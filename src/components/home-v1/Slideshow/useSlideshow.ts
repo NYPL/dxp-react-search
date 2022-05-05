@@ -6,7 +6,7 @@ import React from "react";
  * as a CSS style object that should be use to transition between slides.
  * Inspired by: https://codesandbox.io/s/fxjeo
  */
-const useSlideShowStyles = (slidesCount = 0, slideWidth = 100) => {
+const useSlideshowStyles = (slidesCount = 0, slideWidth = 100) => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   // This wraps around to the last slide if this is invoked while the
   // first slide is active.
@@ -23,11 +23,11 @@ const useSlideShowStyles = (slidesCount = 0, slideWidth = 100) => {
   };
   // Updates the left margin for the carousel so the elements can
   // slide inside the container.
-  const slideShowStyle = {
+  const slideshowStyle = {
     transition: "all .5s",
     marginLeft: `-${currentSlide * slideWidth}%`,
   };
-  return { currentSlide, prevSlide, nextSlide, slideShowStyle, goToStart };
+  return { currentSlide, prevSlide, nextSlide, slideshowStyle, goToStart };
 };
 
-export default useSlideShowStyles;
+export default useSlideshowStyles;

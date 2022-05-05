@@ -3,10 +3,10 @@ import React from "react";
 import { Box } from "@chakra-ui/react";
 import Meta from "./../components/shared/Meta";
 import Hero from "./../components/home-v1/Hero";
-import SlideShow from "../components/home-v1/SlideShow/SlideShow";
-import StaffPicks from "../components/home-v1/StaffPicks/StaffPicks";
-import FeaturedEvents from "../components/home-v1/FeaturedEvents/FeaturedEvents";
-import CardGrid from "../components/home-v1/CardGrid/CardGrid";
+import Slideshow from "../components/home-v1/Slideshow/";
+import StaffPicks from "../components/home-v1/StaffPicks";
+import FeaturedEvents from "../components/home-v1/FeaturedEvents";
+import CardGrid from "../components/home-v1/CardGrid";
 import ScoutHomepageV1Provider from "../components/home-v1/theme";
 // Mock content
 import {
@@ -15,7 +15,7 @@ import {
   featuredEvents,
   discoverContent,
   staffPicks,
-  slideShowContent,
+  slideshowContent,
   blogContent,
   updatesContent,
 } from "./../components/home-v1/mockContent";
@@ -68,10 +68,10 @@ function HomePage() {
                 link={staffPicks.link}
                 items={staffPicks.items}
               />
-              <SlideShow
-                title={slideShowContent.title}
-                link={slideShowContent.link}
-                items={slideShowContent.items}
+              <Slideshow
+                title={slideshowContent.title}
+                link={slideshowContent.link}
+                items={slideshowContent.items}
               />
               <CardGrid
                 title={blogContent.title}

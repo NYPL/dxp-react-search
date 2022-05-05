@@ -2,19 +2,19 @@ import React from "react";
 // Components
 import { Button } from "@chakra-ui/react";
 
-interface SlideShowButtonProps {
+interface SlideshowButtonProps {
   direction: string;
   nextSlide?: any;
   prevSlide?: any;
   visibility?: any;
 }
 
-function SlideShowButton({
+function SlideshowButton({
   direction,
   nextSlide,
   prevSlide,
   visibility,
-}: SlideShowButtonProps) {
+}: SlideshowButtonProps) {
   return (
     <Button
       tabIndex={-1}
@@ -28,4 +28,4 @@ function SlideShowButton({
     </Button>
   );
 }
-export default SlideShowButton;
+export default SlideshowButton;
