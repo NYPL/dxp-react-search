@@ -60,12 +60,14 @@ function Card({ item, variant, size = "md" }: CardProps) {
           {item.description && <Text>{item.description}</Text>}
           {item.location && <Text>{item.location}</Text>}
           {item.author && <Text>{item.author}</Text>}
-          {item.genre && <Text as="span">{item.audience}</Text>}
+          {item.audience && <Text as="span">{item.audience}</Text>}
           {item.genre && <Text as="span">{item.genre}</Text>}
         </Box>
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
-        <Image src={item.image} />
+        <Link href={item.url} tabIndex={-1}>
+          <Image src={item.image} />
+        </Link>
       </GridItem>
     </Grid>
   );

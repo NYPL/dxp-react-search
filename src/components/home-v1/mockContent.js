@@ -1,10 +1,13 @@
 export const heroContent = {
-  title: "Women's History Month at NYPL",
+  title: "Books for All: NYPL Stands for the Right to Read Freely",
   image:
-    "https://cdn-d8.nypl.org/s3fs-public/styles/2_1_960/public/2022-02/22XXX_WHM_photo_collage_Kathie-Coblentz_021622_FINAL_0.png?h=5dabf909&itok=2FHJhsaz",
+    "https://cdn-petrol.nypl.org/sites/default/media/styles/banner/public/Banned_Books_Homepage_Banner_040622.png?itok=4fccNBi6",
+  mobileImg:
+    "https://cdn-petrol.nypl.org/sites/default/media/styles/mobile_banner/public/Books_for_All_Homepage_Mobile_Banner.png?itok=HAdhu7u8",
   description:
-    "Join us all month long for new programs, book recommendations, and items from our collections that celebrate women past and present.",
-  tag: "Celebrate",
+    "The Library is making a selection of commonly banned books available to anyone in the country—no waits, no fines. ",
+  tag: "Knowledge is power",
+  url: "https://www.nypl.org/spotlight/books-for-all",
 };
 
 export const spotlightContent = {
@@ -394,8 +397,7 @@ export const blogContent = {
       title: "Views from the Digital Collections: New York in 1950",
       description:
         "To celebrate the release of the 1950 Cencus let's take a look at some imaged from that year in New York City.",
-      image:
-        "https://cdn-petrol.nypl.org/sites/default/media/styles/extralarge/public/ellis%20island%20petrol.jpg?itok=sxSY-pbk",
+      image: "https://placeimg.com/760/480/animals",
       url: "https://www.nypl.org/blog/2022/03/30/views-digital-collections-new-york-1950",
     },
     {

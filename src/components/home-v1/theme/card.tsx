@@ -4,14 +4,15 @@ const Card: ComponentStyleConfig = {
   // Styles for the base style
   baseStyle: {
     w: "full",
-    gap: { base: 9, md: 4 },
+    // Use gridGap instead of gap when not directly implemented within a <grid> tag { https://chakra-ui.com/docs/styled-system/features/style-props#grid-layout }
+    gridGap: { base: 6, md: 4 },
     _focusWithin: {
       outlineStyle: "solid",
       outlineColor: "#135772",
       outlineWidth: "3px",
       boxShadow: "1px 1px 1px 1px #135772",
     },
-    // title
+    // Title
     h3: {
       fontFamily: "Kievit-Book",
       fontSize: { base: "lg", md: "xl" },
@@ -19,7 +20,7 @@ const Card: ComponentStyleConfig = {
       lineHeight: "none",
       px: { base: 0, md: "5%" },
     },
-    // link
+    // Link
     a: {
       _hover: { textDecoration: "none" },
       _focus: {
@@ -27,14 +28,14 @@ const Card: ComponentStyleConfig = {
         outline: "unset",
       },
     },
-    // date
+    // Date
     span: {
       fontSize: "sm",
       lineHeight: "none",
       px: { base: 0, md: "5%" },
       textTransform: "uppercase",
     },
-    // description | location
+    // Description | Location
     p: { fontSize: "sm", lineHeight: "none", px: { base: 0, md: "5%" } },
     img: { w: "full" },
   },
@@ -65,7 +66,7 @@ const Card: ComponentStyleConfig = {
     },
     "event-card": {
       gridTemplateColumns: { base: "4fr 9fr", md: "5fr 11fr", lg: "1fr 3fr" },
-      gap: { base: 12, md: 6, lg: 4 },
+      gridGap: { base: 9, md: 6, lg: 4 },
       mb: { base: 0, lg: 7 },
       textAlign: "left",
 
@@ -93,7 +94,7 @@ const Card: ComponentStyleConfig = {
         lg: "190px auto",
         xl: "200px auto",
       },
-      gap: 0,
+      gridGap: 0,
       bg: "red.200",
       color: "brand.100",
       fontFamily: "Kievit-Book",
@@ -136,10 +137,10 @@ const Card: ComponentStyleConfig = {
         lg: "5fr 9fr",
         xl: "9fr 10fr",
       },
-      gap: { base: 12, md: 0 },
+      gridGap: { base: 9, md: 0 },
       h3: {
         fontFamily: "Milo-Regular",
-        lineHeight: "28px",
+        lineHeight: { base: "21px", md: "28px" },
         fontSize: { base: "lg", md: "2xl" },
         fontWeight: "bold",
       },
@@ -151,10 +152,10 @@ const Card: ComponentStyleConfig = {
       img: { h: "full", maxHeight: "280px", w: "auto", float: "right" },
     },
     "updates-card": {
-      gridTemplateColumns: { base: "4fr 9fr", md: "2fr 1fr", lg: "15fr 16fr" },
-      gap: { base: 12 },
+      gridTemplateColumns: { base: "4fr 9fr", md: "7fr 3fr", lg: "15fr 16fr" },
+      gridGap: { base: 9, md: 7, lg: 12 },
       fontFamily: "Kievit-Book",
-      mb: { lg: 16, xl: 10 },
+      mb: { lg: 3 },
       h3: { mt: 1.5, mb: 4 },
       p: {
         display: { base: "none", lg: "block" },

@@ -33,6 +33,16 @@ function StaffPick({ item }: StaffPickProps) {
           top={0}
           href={url}
         >
+          <Image
+            src={image}
+            alt={`image of ${alt}`}
+            zIndex={1}
+            position="absolute"
+            bottom={0}
+            right={0}
+            maxHeight={{ base: "175px", lg: "233px", xl: "320px" }}
+            maxWidth={{ base: "115px", lg: "153px", xl: "212px" }}
+          />
           <Text
             pl={{ base: 4, xl: 8 }}
             pr={{ base: "120px", lg: "157px", xl: "220px" }}
@@ -45,17 +55,6 @@ function StaffPick({ item }: StaffPickProps) {
           >
             {quote}
           </Text>
-
-          <Image
-            src={image}
-            alt={`image of ${alt}`}
-            zIndex={1}
-            position="absolute"
-            bottom={0}
-            right={0}
-            maxHeight={{ base: "175px", lg: "233px", xl: "320px" }}
-            maxWidth={{ base: "115px", lg: "153px", xl: "212px" }}
-          />
         </Link>
       </Box>
       <Box
