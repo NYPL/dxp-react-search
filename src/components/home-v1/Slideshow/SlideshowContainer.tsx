@@ -3,22 +3,22 @@ import React from "react";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import Card from "../CardGrid/Card";
 // Types
-import { SlideShowItem } from "./SlideShowTypes";
+import { SlideshowItem } from "./SlideshowTypes";
 
-interface SlideShowContainerProps {
-  items: SlideShowItem[];
-  slideShowStyle: Record<string, string>;
+interface SlideshowContainerProps {
+  items: SlideshowItem[];
+  slideshowStyle: Record<string, string>;
   currentSlide: any;
   nextSlide: () => void;
   prevSlide: () => void;
 }
-function SlideShowContainer({
+function SlideshowContainer({
   items,
-  slideShowStyle,
+  slideshowStyle,
   currentSlide,
   nextSlide,
   prevSlide,
-}: SlideShowContainerProps) {
+}: SlideshowContainerProps) {
   const changeSlide = (i: number) => {
     if (currentSlide === 0 && i === 0) return;
     else if (currentSlide < i + 1) {
@@ -36,11 +36,11 @@ function SlideShowContainer({
         listStyleType="none"
         templateColumns="repeat(10, 1fr)"
         gap={{ base: 4, md: 5, lg: "32px" }}
-        ml={slideShowStyle.marginLeft}
-        transition={slideShowStyle.transition}
+        ml={slideshowStyle.marginLeft}
+        transition={slideshowStyle.transition}
       >
         {items &&
-          items.map((item: SlideShowItem, i) => {
+          items.map((item: SlideshowItem, i) => {
             return (
               <GridItem as="li" h="full" onFocus={() => changeSlide(i)}>
                 <Card item={item} variant="slide-show-card" />
@@ -51,4 +51,4 @@ function SlideShowContainer({
     </Box>
   );
 }
-export default SlideShowContainer;
+export default SlideshowContainer;

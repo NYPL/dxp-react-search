@@ -299,7 +299,7 @@ export const staffPicks = {
   ],
 };
 
-export const slideShowContent = {
+export const slideshowContent = {
   title: "New & Noteworthy",
   link: "https://www.nypl.org/books-music-movies/new-arrivals",
   items: [
