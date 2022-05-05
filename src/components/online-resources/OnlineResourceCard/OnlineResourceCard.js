@@ -139,6 +139,7 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       </div>
       {collapsible && (
         <Button
+          id="online-resource-card-read-more"
           className={s.readmore}
           buttonType="secondary"
           onClick={toggleDisplay}
@@ -146,7 +147,6 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
           <Icon
             name="arrow"
             decorative={true}
-            //modifiers={["small", "icon-left"]}
             size="small"
             align="left"
             iconRotation={buttonIconRotation}

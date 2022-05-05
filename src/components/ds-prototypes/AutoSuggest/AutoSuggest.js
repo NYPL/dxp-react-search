@@ -43,11 +43,9 @@ function AutoSuggest(props) {
         id={id}
         name="search"
         labelText={label}
-        attributes={{
-          ...inputProps,
-          "aria-label": autoSuggestAriaLabel,
-        }}
         showRequiredLabel={false}
+        aria-label={autoSuggestAriaLabel}
+        {...inputProps}
       />
     );
   }

@@ -38,9 +38,7 @@ function OnlineResourcesFindJournalsTitlePage() {
           <p>
             <Link
               href="http://tm9qt7lg9g.search.serialssolutions.com/"
-              attributes={{
-                rel: "nofollow",
-              }}
+              type="external"
             >
               Full-text Journals and Scholarly E-books&nbsp;(from Home)
             </Link>
@@ -48,9 +46,7 @@ function OnlineResourcesFindJournalsTitlePage() {
           <p>
             <Link
               href="http://wu9fb9wh4a.search.serialssolutions.com/"
-              attributes={{
-                rel: "nofollow",
-              }}
+              type="external"
             >
               Full-text Journals and Scholarly E-Books (on-site in the Library)
             </Link>

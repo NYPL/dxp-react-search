@@ -13,10 +13,8 @@ function OrgFormField({ handleChange }: FormFieldProps) {
       <Box mb="s">
         <TextInput
           id="organization"
+          name="organization"
           labelText="Please tell us about your school or organization"
-          attributes={{
-            name: "organization",
-          }}
           onChange={handleChange}
           value={values.organization}
           isDisabled={values.noSchoolOrOrg}

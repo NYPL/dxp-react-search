@@ -24,9 +24,7 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
       <Box mb="s">
         <TextInput
           id="contactName"
-          attributes={{
-            name: "contactName",
-          }}
+          name="contactName"
           labelText="Name"
           placeholder="Enter your name"
           isRequired={true}
@@ -38,9 +36,7 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
       </Box>
       <TextInput
         id="contactEmail"
-        attributes={{
-          name: "contactEmail",
-        }}
+        name="contactEmail"
         labelText="Email"
         placeholder="Enter your email"
         isRequired={true}

@@ -119,9 +119,7 @@ function VisitTypeFormField({
                   <Box mt="s">
                     <TextInput
                       id="virtualVisitServicesOther"
-                      attributes={{
-                        name: "virtualVisitServicesOther",
-                      }}
+                      name="virtualVisitServicesOther"
                       labelText="What other service would you like to receive?"
                       showLabel={false}
                       onChange={handleChange}
@@ -162,9 +160,7 @@ function VisitTypeFormField({
                   <Box mt="s">
                     <TextInput
                       id="inPersonServicesOther"
-                      attributes={{
-                        name: "inPersonServicesOther",
-                      }}
+                      name="inPersonServicesOther"
                       labelText="Other request."
                       showLabel={false}
                       onChange={handleChange}

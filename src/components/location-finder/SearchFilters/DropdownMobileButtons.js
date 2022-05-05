@@ -48,8 +48,8 @@ function DropdownMobileButtons(props) {
   return (
     <div className="dropdown__content-buttons">
       <Button
+        id="button-clear-all"
         buttonType="link"
-        id={"button-clear-all"}
         mouseDown={false}
         onClick={(e) => onClearAllFilters(e)}
         // additionalStyles
@@ -62,8 +62,8 @@ function DropdownMobileButtons(props) {
         Go Back
       </Button>
       <Button
+        id="button-save-all"
         buttonType="primary"
-        id={"button-save-all"}
         mouseDown={false}
         onClick={(e) => {
           onSaveAllFilters(e);
