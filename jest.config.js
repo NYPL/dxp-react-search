@@ -1,5 +1,5 @@
 module.exports = {
-  collectCoverageFrom: ["**/*.{js,jsx}", "!**/node_modules/**"],
+  collectCoverageFrom: ["**/*.{js,jsx,tsx}", "!**/node_modules/**"],
   setupFilesAfterEnv: ["<rootDir>/testHelper/browser.js"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/", "/cypress/"],
   transform: {
