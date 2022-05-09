@@ -38,6 +38,14 @@ interface CardProps {
 
 function Card({ item, variant, size = "md" }: CardProps) {
   const styles = useStyleConfig("Card", { variant, size });
+  let describedBy = [];
+  if (item.date) describedBy.push(`${item.id}-date`);
+  if (item.description) describedBy.push(`${item.id}-description`);
+  if (item.location) describedBy.push(`${item.id}-location`);
+  if (item.author) describedBy.push(`${item.id}-author`);
+  if (item.audience) describedBy.push(`${item.id}-audience`);
+  if (item.genre) describedBy.push(`${item.id}-genre`);
+  const describedByString = describedBy.join(" ");
 
   return (
     <Grid
@@ -46,10 +54,7 @@ function Card({ item, variant, size = "md" }: CardProps) {
       sx={styles}
     >
       <GridItem className="textBox">
-        <Heading
-          as="h3"
-          aria-describedby={`${item.id}-date ${item.id}-description ${item.id}-location ${item.id}-author ${item.id}-audience ${item.id}-genre`}
-        >
+        <Heading as="h3" aria-describedby={describedByString}>
           <Link href={item.url}>{item.title} </Link>
         </Heading>
         <Box className="details">
@@ -79,7 +84,13 @@ function Card({ item, variant, size = "md" }: CardProps) {
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
         <Link href={item.url} tabIndex={-1}>
-          <Image src={item.image} role="presentation" />
+          <Image
+            src={item.image}
+            // @QUESTION should role="presentation" be used instead of alte="" source: https://www.digitala11y.com/presentation-role/
+            role="presentation"
+            // @TODO discuss with Zach if there should be a empty alt attribute instead/alt information
+            // alt={item.alt | ""}
+          />
         </Link>
       </GridItem>
     </Grid>
