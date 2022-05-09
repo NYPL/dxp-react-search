@@ -20,12 +20,12 @@ const BottomPromoContent = {
       "The boroughs of Brooklyn and Queens are each served by their own library systems:",
     image: [
       {
-        logo: "logo_bpl_black",
+        logo: "bplBlack",
         logo_alt: "Brooklyn Public Library",
         link: "https://www.bklynlibrary.org/",
       },
       {
-        logo: "logo_qpl_alt_black",
+        logo: "qplAltBlack",
         logo_alt: "Queens Public Library",
         link: "https://www.queenslibrary.org/",
       },

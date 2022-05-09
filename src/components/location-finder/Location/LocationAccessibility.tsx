@@ -18,11 +18,11 @@ function LocationAccessibility({ access, note }: LocationAccessibilityProps) {
   switch (access) {
     case "full":
       wheelchairAccess = "Fully Accessible";
-      wheelchairAccessIcon = <Icon name="accessibility_full" size="large" />;
+      wheelchairAccessIcon = <Icon name="accessibilityFull" size="large" />;
       break;
     case "partial":
       wheelchairAccess = "Partially Accessible";
-      wheelchairAccessIcon = <Icon name="accessibility_partial" size="large" />;
+      wheelchairAccessIcon = <Icon name="accessibilityPartial" size="large" />;
       break;
     case "none":
       wheelchairAccess = "Not Accessible";
