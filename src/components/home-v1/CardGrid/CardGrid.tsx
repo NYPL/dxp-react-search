@@ -11,7 +11,7 @@ interface CardGridProps {
   items: CardItem[];
   hoverStyle?: boolean;
   variant?: "row-grid" | "column-grid" | "updates-grid";
-  //props below go inform styling of LinkCard
+  // Props below inform styling of Card
   cardVariant?: "event-spotlight" | "event-card" | "blog-card" | "updates-card";
   size?: string | Record<string, string>;
 }
@@ -31,7 +31,7 @@ function CardGrid({
       title={title}
       link={link}
       hoverStyle={hoverStyle}
-      //last three could become passed through props
+      // @QUESTION Props below could become variant or passed through props
       textColor="red.200"
       borderColor="red.200"
       paddingTop={true}
@@ -39,7 +39,7 @@ function CardGrid({
       <Grid as="ul" sx={styles}>
         {items &&
           items.map((item) => (
-            <GridItem as="li" listStyleType="none">
+            <GridItem as="li" id={item.id} listStyleType="none">
               <Card
                 item={item}
                 size={size || { base: "sm", md: "lg" }}

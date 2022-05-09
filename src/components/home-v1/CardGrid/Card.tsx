@@ -38,13 +38,7 @@ interface CardProps {
 
 function Card({ item, variant, size = "md" }: CardProps) {
   const styles = useStyleConfig("Card", { variant, size });
-  const ariaDescription = `${item.date ? `${item.date}` : ""} ${
-    item.location ? `at ${item.location}` : ""
-  } ${item.description ? `${item.description}` : ""} ${
-    item.author ? `by ${item.author}` : ""
-  } ${item.genre ? ` a ${item.genre} book` : ""} ${
-    item.audience ? `for ${item.audience}` : ""
-  } `;
+
   return (
     <Grid
       templateRows={{ base: "1fr", md: "min-content" }}
@@ -52,21 +46,40 @@ function Card({ item, variant, size = "md" }: CardProps) {
       sx={styles}
     >
       <GridItem className="textBox">
-        <Heading as="h3" aria-description={ariaDescription}>
+        <Heading
+          as="h3"
+          aria-describedby={`${item.id}-date ${item.id}-description ${item.id}-location ${item.id}-author ${item.id}-audience ${item.id}-genre`}
+        >
           <Link href={item.url}>{item.title} </Link>
         </Heading>
         <Box className="details">
-          {item.date && <Text as="span">{item.date}</Text>}
-          {item.description && <Text>{item.description}</Text>}
-          {item.location && <Text>{item.location}</Text>}
-          {item.author && <Text>{item.author}</Text>}
-          {item.audience && <Text as="span">{item.audience}</Text>}
-          {item.genre && <Text as="span">{item.genre}</Text>}
+          {item.date && (
+            <Text as="span" id={`${item.id}-date`}>
+              {item.date}
+            </Text>
+          )}
+          {item.description && (
+            <Text id={`${item.id}-description`}>{item.description}</Text>
+          )}
+          {item.location && (
+            <Text id={`${item.id}-location`}>{item.location}</Text>
+          )}
+          {item.author && <Text id={`${item.id}-author`}>{item.author}</Text>}
+          {item.audience && (
+            <Text as="span" id={`${item.id}-audience`}>
+              {item.audience}
+            </Text>
+          )}
+          {item.genre && (
+            <Text as="span" id={`${item.id}-genre`}>
+              {item.genre}
+            </Text>
+          )}
         </Box>
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
         <Link href={item.url} tabIndex={-1}>
-          <Image src={item.image} />
+          <Image src={item.image} role="presentation" />
         </Link>
       </GridItem>
     </Grid>
