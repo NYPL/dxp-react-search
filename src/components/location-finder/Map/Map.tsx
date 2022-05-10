@@ -77,6 +77,23 @@ const MapWrapper = compose(
     return <div>'error while loading locations'</div>;
   }
 
+  // Locations that use a parent library will have the same geo-cordinates as parent library.
+  // This causes all the map pins to be in the same point, and the last location in the array
+  // is visible by default. So we move all parent libraries to end of the locations array so
+  // they are visible on default render of the map.
+  // @TODO Need to fix this when actual types are added for the location data.
+  let keep: any = [];
+  let move: any = [];
+  const slugs = ["schwarzman", "snfl", "schomburg", "lpa"];
+  data.refineryAllLocations.locations.forEach((item: any) => {
+    if (!slugs.includes(item.slug)) {
+      keep.push(item);
+    } else {
+      move.push(item);
+    }
+  });
+  const locations = [...keep, ...move];
+
   return (
     <GoogleMap
       defaultOptions={{ mapTypeControl: false }}
@@ -96,7 +113,7 @@ const MapWrapper = compose(
           }}
         />
       )}
-      {data.refineryAllLocations.locations.map((location: any) => {
+      {locations.map((location) => {
         // Binds onClick from Map prop
         // @ts-ignore
         const onClick = props.onClick.bind(this, location);
