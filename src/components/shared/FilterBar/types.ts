@@ -14,7 +14,7 @@ export interface FilterBarGroupItem {
   /** The entity type (content type or taxonomy) to be used for the api request. */
   type: "content" | "taxonomy";
   /** The content type to use for limiting the items returned by the api request. */
-  limiter: string;
+  limiter?: string;
   /** Include 2nd level child items. */
   includeChildren?: boolean;
   /** Escape hatch for use cases where the filter data does not come from api request, but hard coded. */
