@@ -48,26 +48,22 @@ function DropdownMobileButtons(props) {
   return (
     <div className="dropdown__content-buttons">
       <Button
-        buttonType={ButtonTypes.Link}
-        id={"button-clear-all"}
+        id="button-clear-all"
+        buttonType="link"
         mouseDown={false}
         onClick={(e) => onClearAllFilters(e)}
-        additionalStyles={{
+        // additionalStyles
+        sx={{
           display: "block",
           width: "fit-content",
         }}
       >
-        <Icon
-          name={IconNames.Arrow}
-          align={IconAlign.Left}
-          iconRotation={IconRotationTypes.Rotate90}
-          size={IconSizes.Small}
-        />
+        <Icon name="arrow" align="left" iconRotation="rotate90" size="small" />
         Go Back
       </Button>
       <Button
-        buttonType={ButtonTypes.Primary}
-        id={"button-save-all"}
+        id="button-save-all"
+        buttonType="primary"
         mouseDown={false}
         onClick={(e) => {
           onSaveAllFilters(e);

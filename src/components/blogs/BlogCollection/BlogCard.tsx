@@ -3,7 +3,6 @@ import React from "react";
 import {
   Box,
   Heading,
-  HeadingLevels,
   HStack,
   Link,
 } from "@nypl/design-system-react-components";
@@ -39,7 +38,7 @@ function BlogCard({ item }: BlogCardProps) {
         />
       </Box>
       <Box flexFlow={{ lg: "row nowrap" }}>
-        <Heading level={HeadingLevels.Three}>
+        <Heading level="three">
           {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
         </Heading>
         <Box pb={5}>

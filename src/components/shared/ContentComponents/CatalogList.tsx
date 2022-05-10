@@ -2,12 +2,9 @@ import React from "react";
 import {
   Box,
   Heading,
-  HeadingLevels,
   Card,
   CardContent,
   CardHeading,
-  ImageSizes,
-  CardLayouts,
   Grid,
   Link,
 } from "@nypl/design-system-react-components";
@@ -44,7 +41,7 @@ function CatalogList({
 
   return (
     <Box id={`${type}-${id}`} mb="l">
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
       <Grid
         as="ul"
@@ -59,24 +56,26 @@ function CatalogList({
           return (
             <Box as="li" key={item.id}>
               <Card
-                layout={CardLayouts.Row}
-                center
-                imageComponent={
-                  <a href={catalogLink}>
-                    <NextImage
-                      alt={item.title}
-                      src={`${coverImageUri}/${item.isbn}/Medium/Empty`}
-                      layout="responsive"
-                      objectFit="cover"
-                      width={960}
-                      height={960}
-                      quality={90}
-                    />
-                  </a>
-                }
-                imageSize={ImageSizes.Small}
+                layout="row"
+                isCentered
+                imageProps={{
+                  component: (
+                    <a href={catalogLink}>
+                      <NextImage
+                        alt={item.title}
+                        src={`${coverImageUri}/${item.isbn}/Medium/Empty`}
+                        layout="responsive"
+                        objectFit="cover"
+                        width={960}
+                        height={960}
+                        quality={90}
+                      />
+                    </a>
+                  ),
+                  size: "small",
+                }}
               >
-                <CardHeading level={HeadingLevels.Three}>
+                <CardHeading level="three">
                   <Link href={catalogLink}>{item.title}</Link>
                 </CardHeading>
                 <CardContent>

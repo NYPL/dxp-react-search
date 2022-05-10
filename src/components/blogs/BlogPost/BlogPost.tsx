@@ -5,7 +5,6 @@ import Components, {
 import {
   Box,
   Heading,
-  HeadingLevels,
   Link,
   HStack,
 } from "@nypl/design-system-react-components";
@@ -17,8 +16,8 @@ interface BlogPostProps {
 function BlogPost({ blog }: BlogPostProps) {
   return (
     <Box as="article" w="100%" maxW="866px">
-      <Box as="header" mb="l">
-        <Heading id={blog.id} level={HeadingLevels.One} text={blog.title} />
+      <Box as="header" pb={10}>
+        <Heading id={blog.id} level="one" text={blog.title} />
         <Box fontSize="1" fontWeight="regular">
           By {blog.byline}
         </Box>

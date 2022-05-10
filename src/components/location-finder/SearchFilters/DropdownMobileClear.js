@@ -1,14 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 // Context
-import { SearchFiltersContext } from './SearchFiltersContext';
+import { SearchFiltersContext } from "./SearchFiltersContext";
 // Redux
-import { useDispatch } from 'react-redux';
-import { setFilters } from '../../../redux/actions';
+import { useDispatch } from "react-redux";
+import { setFilters } from "../../../redux/actions";
 // Components
-import { 
-  Button,
-  Icon
-} from '@nypl/design-system-react-components';
+import { Button, Icon } from "@nypl/design-system-react-components";
 
 function DropdownMobileClear() {
   // Context state.
@@ -20,31 +17,33 @@ function DropdownMobileClear() {
   function onClick(event) {
     event.preventDefault();
     // Clear the Redux saved state.
-    reduxDispatch(setFilters({
-      searchFilters: []
-    }));
+    reduxDispatch(
+      setFilters({
+        searchFilters: [],
+      })
+    );
 
     // Clear the context state for selectedItems.
     dispatch({
-      type: 'RESET_SELECTED_ITEMS'
+      type: "RESET_SELECTED_ITEMS",
     });
   }
 
   return (
     <div className="dropdown-mobile-clear-wrapper">
-      {Object.keys(checkedTerms).length > 0 &&
+      {Object.keys(checkedTerms).length > 0 && (
         <Button
+          id="mobile-clear-all-button"
           buttonType="link"
           iconName={null}
           iconPosition={null}
-          id="mobile-clear-all-button"
           mouseDown={false}
           onClick={(e) => onClick(e)}
           type="submit"
         >
           Clear all filters
         </Button>
-      }
+      )}
     </div>
   );
 }

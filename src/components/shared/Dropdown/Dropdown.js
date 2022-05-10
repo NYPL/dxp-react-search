@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  Icon,
-  IconNames,
-  IconSizes,
-} from "@nypl/design-system-react-components";
+import { Icon } from "@nypl/design-system-react-components";
 import FocusTrap from "focus-trap-react";
 
 function Dropdown(props) {
@@ -32,14 +28,14 @@ function Dropdown(props) {
             <span className="dropdown-label">{label}</span>
             <Icon
               decorative={true}
-              name={IconNames.Minus}
-              size={IconSizes.Small}
+              name="minus"
+              size="small"
               className="icon--minus"
             />
             <Icon
               decorative={true}
-              name={IconNames.Plus}
-              size={IconSizes.Small}
+              name="plus"
+              size="small"
               className="icon--plus"
             />
           </label>

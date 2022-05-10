@@ -7,7 +7,7 @@ interface SlideshowProps {
   description?: string;
 }
 
-function Slideshow({ id, type, heading, description }: SlideshowProps) {
+function Slideshow({ id, type }: SlideshowProps) {
   return (
     <Box id={`${type}-${id}`} mb="l">
       <h3>{type}</h3>

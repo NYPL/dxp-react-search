@@ -13,13 +13,7 @@ import SearchResultsDetails from "../../components/location-finder/SearchResults
 import Map from "../../components/location-finder/Map";
 import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
-import {
-  Box,
-  Grid,
-  GridItem,
-  ColorVariants,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box, Grid, GridItem } from "@nypl/design-system-react-components";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { LOCATIONS_BASE_PATH } from "./../../utils/config";
@@ -43,13 +37,13 @@ function LocationFinder() {
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}${LOCATIONS_BASE_PATH}`,
         },
       ]}
-      breadcrumbsColor={ColorVariants.Locations}
+      breadcrumbsColor="locations"
       wrapperClass="nypl--locations"
       contentHeader={
         <>
           <Hero />
           <SearchHeader
-            id={"location-finder__title"}
+            headingId={"location-finder__title"}
             title={"Find Your Library"}
           >
             <SearchForm />
@@ -57,7 +51,7 @@ function LocationFinder() {
         </>
       }
       contentPrimary={
-        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} spacing="l">
+        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} gap="l">
           <GridItem
             id="locations-list"
             maxHeight={[null, null, "500px"]}
@@ -86,7 +80,7 @@ function LocationFinder() {
                 <Menu
                   id={menu.id}
                   key={menu.id}
-                  headingLevel={HeadingLevels.Three}
+                  headingLevel="three"
                   headingColor={"#0576d3"}
                   title={menu.title}
                   // @ts-ignore

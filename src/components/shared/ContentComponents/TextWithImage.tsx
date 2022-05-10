@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
 // Utils
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
@@ -29,7 +25,7 @@ function TextWithImage({
 }: TextWithImageProps) {
   return (
     <Box id={`${type}-${id}`} mb="l">
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       {image && (
         <Box
           width="100%"

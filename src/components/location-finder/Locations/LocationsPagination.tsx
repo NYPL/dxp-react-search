@@ -7,7 +7,7 @@ import { Pagination } from "@nypl/design-system-react-components";
 
 function LocationsPagination({ limit }: { limit: number }) {
   // Redux
-  const { offset, pageCount, pageNumber, resultsCount } = useSelector(
+  const { pageCount, pageNumber } = useSelector(
     // @ts-ignore
     (state) => state.search
   );
