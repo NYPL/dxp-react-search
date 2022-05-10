@@ -9,21 +9,12 @@ import renderer from "react-test-renderer";
 import Slideshow from "./Slideshow";
 import SlideshowContainer from "./SlideshowContainer";
 import SlideshowButton from "./SlideshowButton";
+import useSlideshowStyles from "./useSlideshow";
 
-const item = {
-  id: "test-id-1",
-  title: "Test",
-  author: "writer 1",
-  genre: "genre",
-  audience: "people",
-  image: "https://placeimg.com/400/200/arch",
-  link: "https://www.nypl.org/",
-  location: "Stephen A. Schwarzman Building",
-};
 const items = [
   {
     id: "test-id-1",
-    title: "Test",
+    title: "Test 1",
     author: "writer 1",
     genre: "genre",
     audience: "people",
@@ -32,7 +23,7 @@ const items = [
   },
   {
     id: "test-id-2",
-    title: "Test",
+    title: "Test 2",
     author: "writer 2",
     genre: "genre",
     audience: "people",
@@ -41,7 +32,7 @@ const items = [
   },
   {
     id: "test-id-3",
-    title: "Test",
+    title: "Test 3",
     author: "writer 3",
     genre: "genre",
     audience: "people",
@@ -50,7 +41,7 @@ const items = [
   },
   {
     id: "test-id-4",
-    title: "Test",
+    title: "Test 4",
     author: "writer 4",
     genre: "genre",
     audience: "people",
@@ -99,24 +90,61 @@ xdescribe("SlideshowButton tests", () => {
 });
 
 xdescribe("SlideshowContainer tests", () => {
-  //   it("shold pass axe accessibility test", async () => {
+  //   it("should pass axe accessibility test", async () => {
   //     const { container } = render(<SlideshowContainer items={items} />);
   //   });
-  it("shold render list of cards ", () => {});
+  it("should render list of cards ", () => {});
   it("should render the UI snapshot correctly", () => {});
 });
 
-xdescribe("Slideshow tests", () => {
+describe("Slideshow tests", () => {
+  beforeEach(() => {
+    render(<Slideshow title="Test" link="https://nypl.com" items={items} />);
+  });
   it("shold pass axe accessibility test", async () => {
     const { container } = render(
       <Slideshow title="Test" link="https://nypl.com" items={items} />
     );
     expect(await axe(container)).toHaveNoViolations();
   });
-  it("shold not show the prev button upon rendering", () => {});
-  it("shold show the prev button ones the next button has been clicked", () => {});
-  it("shold move the SlideshowContainer to the left if the next button is clicked", () => {});
-  it("shold move the SlideshowContainer to the right if the prev button is clicked", () => {});
-  it("shold should hide the next button when the end of the is reached", () => {});
-  it("should render the UI snapshot correctly", () => {});
+  it("should not show the prev button upon rendering", () => {
+    expect(
+      screen.queryByRole("button", { name: /</i })
+    ).not.toBeInTheDocument();
+  });
+  it("should show the prev button ones the next button has been clicked", () => {
+    userEvent.click(screen.getByRole("button", { name: />/i }));
+    expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
+  });
+  // @QUESTION can this be tested? does not show margin value/ can't access position
+  xit("should move the SlideshowContainer to the left if the next button is clicked", () => {
+    const prevPosition = screen
+      .getByRole("heading", { name: /Test 1/i })
+      .getBoundingClientRect();
+    console.log(prevPosition);
+    userEvent.click(screen.getByRole("button", { name: />/i }));
+    const nextPosition = screen
+      .getByRole("heading", { name: /Test 1/i })
+      .getBoundingClientRect();
+    console.log(nextPosition);
+  });
+  // @QUESTION can this be tested? does not show margin value/ can't access position
+  xit("should move the SlideshowContainer to the right if the prev button is clicked", () => {});
+  it("should hide the next button when the end of the list is reached", () => {
+    userEvent.click(screen.getByRole("button", { name: />/i }));
+    userEvent.click(screen.getByRole("button", { name: />/i }));
+    userEvent.click(screen.getByRole("button", { name: />/i }));
+    //renders prev button
+    expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
+    //does not render next button
+    expect(
+      screen.queryByRole("button", { name: />/i })
+    ).not.toBeInTheDocument();
+  });
+  it("should render the UI snapshot correctly", () => {
+    const basicView = renderer
+      .create(<Slideshow title="Test" link="https://nypl.com" items={items} />)
+      .toJSON();
+    expect(basicView).toMatchSnapshot();
+  });
 });

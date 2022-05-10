@@ -42,7 +42,12 @@ function SlideshowContainer({
         {items &&
           items.map((item: SlideshowItem, i) => {
             return (
-              <GridItem as="li" h="full" onFocus={() => changeSlide(i)}>
+              <GridItem
+                as="li"
+                key={item.id}
+                h="full"
+                onFocus={() => changeSlide(i)}
+              >
                 <Card item={item} variant="slide-show-card" />
               </GridItem>
             );
