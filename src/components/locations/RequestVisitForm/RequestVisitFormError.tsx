@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
-import {
-  Notification,
-  NotificationTypes,
-} from "@nypl/design-system-react-components";
+import { Notification } from "@nypl/design-system-react-components";
 import { FormContext } from "./../../../context/FormContext";
 
 function RequestVisitFormError() {
   // @ts-ignore
   const [state] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted, serverError } = state;
+  const { isSubmitted, serverError } = state;
 
   let message =
     "There was a problem with your submissions. Errors have been highlighted below.";
@@ -32,7 +29,7 @@ function RequestVisitFormError() {
         role="alert"
       >
         <Notification
-          notificationType={NotificationTypes.Warning}
+          notificationType="warning"
           notificationContent={<strong>{message}</strong>}
         />
       </div>

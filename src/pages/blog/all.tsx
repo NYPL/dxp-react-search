@@ -19,6 +19,7 @@ function BlogsAllPage() {
       breadcrumbs={[
         {
           text: "All",
+          url: "",
         },
       ]}
       showContentHeader={true}

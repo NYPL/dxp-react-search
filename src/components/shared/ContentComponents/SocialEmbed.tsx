@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 
 interface SocialEmbedProps {
   id: string;

@@ -3,7 +3,6 @@ import {
   Heading,
   HeadingLevels,
   List,
-  ListTypes,
 } from "@nypl/design-system-react-components";
 import MenuItem from "./MenuItem";
 import { MenuItemType } from "./MenuTypes";
@@ -49,7 +48,7 @@ function Menu({
           text={title}
         />
       </span>
-      <List noStyling type={ListTypes.Unordered}>
+      <List noStyling type="ul">
         {items.map((item: MenuItemType) => {
           return (
             <li key={item.title.toLowerCase().replace(/\s/g, "-")}>

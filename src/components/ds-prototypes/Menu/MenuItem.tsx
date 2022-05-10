@@ -1,19 +1,9 @@
 import React from "react";
-import {
-  Icon,
-  IconAlign,
-  IconColors,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
-  Link,
-  LinkTypes,
-} from "@nypl/design-system-react-components";
+import { Icon, Link } from "@nypl/design-system-react-components";
 import { MenuItemType as MenuItemProps } from "./MenuTypes";
 import s from "./Menu.module.css";
 
 function MenuItem({
-  id,
   title,
   description,
   link,
@@ -28,9 +18,10 @@ function MenuItem({
   if (link && linkType === "button") {
     return (
       <Link
-        type={LinkTypes.Button}
+        type="button"
         href={link}
-        additionalStyles={{
+        // additionalStyles
+        sx={{
           display: "block",
           width: "fit-content",
           marginTop: "var(--nypl-space-xs)",
@@ -42,18 +33,18 @@ function MenuItem({
       >
         {title}
         <Icon
-          name={IconNames.Arrow}
-          align={IconAlign.Right}
-          iconRotation={IconRotationTypes.Rotate270}
-          color={IconColors.UiWhite}
-          size={IconSizes.Small}
+          name="arrow"
+          align="right"
+          iconRotation="rotate270"
+          color="ui.white"
+          size="small"
         />
       </Link>
     );
   } else if (link && linkType === undefined) {
     return (
       <>
-        <Link type={LinkTypes.Default} className={linkClass} href={link}>
+        <Link type="default" className={linkClass} href={link}>
           {title}
         </Link>
         {description && <div className={s.description}>{description}</div>}

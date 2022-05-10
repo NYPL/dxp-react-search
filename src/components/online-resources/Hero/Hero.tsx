@@ -1,11 +1,6 @@
 import React from "react";
 // Components
-import {
-  Hero as DsHero,
-  HeroTypes,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Hero as DsHero, Heading } from "@nypl/design-system-react-components";
 // Content
 import onlineResourcesContent from "./../../../__content/onlineResources";
 
@@ -14,8 +9,8 @@ function Hero() {
 
   return (
     <DsHero
-      heroType={HeroTypes.Tertiary}
-      heading={<Heading level={HeadingLevels.One} text={title} />}
+      heroType="tertiary"
+      heading={<Heading level="one" text={title} />}
       subHeaderText={description}
       backgroundColor="#00838A"
       foregroundColor="#ffffff"

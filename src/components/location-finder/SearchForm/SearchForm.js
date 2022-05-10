@@ -198,9 +198,7 @@ function SearchForm() {
             name="isOpenNow"
             labelText="Open now"
             showLabel={true}
-            attributes={{
-              "aria-label": "Checking this box will update the results",
-            }}
+            aria-label="Checking this box will update the results"
             isChecked={openNow}
             onChange={onChangeOpenNow}
           />

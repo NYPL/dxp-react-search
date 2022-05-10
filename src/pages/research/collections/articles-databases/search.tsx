@@ -1,6 +1,5 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Apollo
-import { getDataFromTree } from "@apollo/client/react/ssr";
 import { withApollo } from "../../../../apollo/client/withApollo";
 // Redux
 import { withRedux } from "../../../../redux/withRedux";
@@ -8,8 +7,6 @@ import { withRedux } from "../../../../redux/withRedux";
 import PageContainer from "./../../../../components/online-resources/layouts/PageContainer";
 import SearchResults from "../../../../components/online-resources/SearchResults";
 // Utils
-import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../utils/config";
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import onlineResourcesContent from "./../../../../__content/onlineResources";
 
 function OnlineResourcesSearchPage() {
@@ -24,6 +21,7 @@ function OnlineResourcesSearchPage() {
       breadcrumbs={[
         {
           text: "Search",
+          url: "",
         },
       ]}
       showContentHeader={true}
