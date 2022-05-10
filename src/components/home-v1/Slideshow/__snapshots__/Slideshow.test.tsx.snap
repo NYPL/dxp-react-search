@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SlideshowButton tests should render the UI snapshot correctly 1`] = `
+<button
+  className="chakra-button css-5c2176"
+  direction="next"
+  onClick={[MockFunction]}
+  tabIndex={-1}
+  type="button"
+>
+  &gt;
+</button>
+`;
+
+exports[`SlideshowButton tests should render the UI snapshot correctly 2`] = `
+<button
+  className="chakra-button css-5c2176"
+  direction="prev"
+  onClick={[MockFunction]}
+  tabIndex={-1}
+  type="button"
+>
+  &lt;
+</button>
+`;
