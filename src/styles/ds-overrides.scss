@@ -109,3 +109,22 @@
 .nypl-ds fieldset {
   border: 0 !important;
 }
+
+.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  top: -100vh;
+}
+
+.modal {
+  padding: var(--nypl-space-s);
+
+  background-color: var(--nypl-colors-ui-gray-x-light-warm);
+  height: 100vh;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 999;
+}

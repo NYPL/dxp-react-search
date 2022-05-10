@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  ColorVariants,
-  Heading,
-  HeadingLevels,
-  Link,
-  Text,
-} from "@nypl/design-system-react-components";
+import { Box, Heading, Link, Text } from "@nypl/design-system-react-components";
 import PageContainer from "../components/shared/layouts/PageContainer";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -35,12 +28,12 @@ function Error({ statusCode }: ErrorProps) {
           url: NEXT_PUBLIC_NYPL_DOMAIN as string,
         },
       ]}
-      breadcrumbsColor={ColorVariants.WhatsOn}
+      breadcrumbsColor="whatsOn"
       wrapperClass="nypl--404"
       contentHeader={null}
       contentPrimary={
         <Box minHeight="400px">
-          <Heading level={HeadingLevels.One}>{pageTitle}</Heading>
+          <Heading level="one">{pageTitle}</Heading>
           <Box>
             <Text>
               The page you requested is either unavailable or you need

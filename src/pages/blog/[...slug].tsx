@@ -9,7 +9,6 @@ import { BLOG_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/blogFields
 // Components
 import PageContainer from "../../components/blogs/layouts/PageContainer";
 import BlogPost from "../../components/blogs/BlogPost";
-import { Box, SkeletonLoader } from "@nypl/design-system-react-components";
 import BlogPostSkeletonLoader from "./../../components/blogs/BlogPost/BlogPostSkeletonLoader";
 // Hooks
 import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
@@ -69,6 +68,7 @@ function BlogPostPage() {
       breadcrumbs={[
         {
           text: data.blog.title,
+          url: "",
         },
       ]}
       showContentHeader={false}

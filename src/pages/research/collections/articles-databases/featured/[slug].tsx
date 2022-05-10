@@ -38,7 +38,6 @@ const RESOURCE_TOPIC_BY_ID_QUERY = gql`
 
 function FeaturedResourceTopicSlug() {
   const router = useRouter();
-  const { slug } = router.query;
   const { uuid } = useDecoupledRouter(router);
 
   // Get resource topic by id.

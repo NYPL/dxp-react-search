@@ -4,12 +4,7 @@ import { gql, useApolloClient } from "@apollo/client";
 // @ts-ignore
 import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
 // Components
-import {
-  Box,
-  Button,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box, Button, Heading } from "@nypl/design-system-react-components";
 import LibraryFormField from "./FormFields/LibraryFormField";
 import VisitTypeFormField from "./FormFields/VisitTypeFormField";
 import OrgFormField from "./FormFields/OrgFormField";
@@ -257,11 +252,7 @@ function RequestVisitForm() {
             },
           }}
         >
-          <Heading
-            id="your-visit"
-            level={HeadingLevels.Two}
-            text="Your Visit"
-          />
+          <Heading id="your-visit" level="two" text="Your Visit" />
         </Box>
         <Box my="m">
           <LibraryFormField handleChange={handleChange} />
@@ -282,7 +273,9 @@ function RequestVisitForm() {
         </Box>
         <ContactInfoFormField handleChange={handleChange} />
         <HoneypotFormField />
-        <Button type="submit">Submit</Button>
+        <Button id="request-visit-form-button" type="submit">
+          Submit
+        </Button>
       </form>
     </Box>
   );

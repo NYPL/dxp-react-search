@@ -4,15 +4,10 @@ import BottomPromoContent from "./content";
 // Components
 import {
   Heading,
-  HeadingLevels,
-  Icon,
-  IconSizes,
   Image,
   Link,
-  LinkTypes,
   Logo,
   LogoNames,
-  LogoSizes,
 } from "@nypl/design-system-react-components";
 
 function BottomPromo() {
@@ -23,15 +18,15 @@ function BottomPromo() {
       <div className="row">
         <div className="column left">
           <Heading
-            id="promo-left-section-title"
-            level={HeadingLevels.Two}
+            id="location-finder-bottom-promo__left-heading"
+            level="two"
             text={promo_left.title}
           />
-          {promo_left.image.map((value, index) => {
+          {promo_left.image.map((value) => {
             return (
               <div key={value.link} className="promo-card">
                 <Link href={value.link} className="promo-link">
-                  <Image alt="" imageCaption={value.name} src={value.url} />
+                  <Image alt="" caption={value.name} src={value.url} />
                 </Link>
               </div>
             );
@@ -39,26 +34,21 @@ function BottomPromo() {
         </div>
         <div className="column right">
           <Heading
-            id="promo-right-section-title"
-            level={HeadingLevels.Two}
+            id="location-finder-bottom-promo__right-heading"
+            level="two"
             text={promo_right.title}
           />
           <p className="promo-description">{promo_right.description}</p>
-          {promo_right.image.map((value, index) => {
-            const typedLogoName = value.logo as LogoNames;
+          {promo_right.image.map((value) => {
             return (
               <div key={value.link} className="promo-card promo-card-with-icon">
-                <Link type={LinkTypes.Default}>
+                <Link type="default">
                   <a
                     aria-label={value.logo_alt}
                     href={value.link}
                     className="promo-link"
                   >
-                    <Logo
-                      // @ts-ignore
-                      name={LogoNames[typedLogoName]}
-                      size={LogoSizes.Small}
-                    />
+                    <Logo name={value.logo as LogoNames} size="small" />
                   </a>
                 </Link>
               </div>

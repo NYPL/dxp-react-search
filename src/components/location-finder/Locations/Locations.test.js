@@ -3,8 +3,7 @@ import { cleanup, screen, waitFor } from "@testing-library/react";
 import { render } from "./../../../../testHelper/customRtlRender";
 import "@testing-library/jest-dom/extend-expect";
 import { GraphQLError } from "graphql";
-import Locations from "./Locations";
-import { LocationsQuery as LOCATIONS_QUERY } from "./../../../apollo/client/queries/Locations.gql";
+import Locations, { LOCATIONS_QUERY } from "./Locations";
 // Mock data
 import allLocations from "./../../../../testHelper/__mocks/allLocations";
 // Axe

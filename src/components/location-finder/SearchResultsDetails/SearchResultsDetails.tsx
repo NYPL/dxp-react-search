@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Box, Button, ButtonTypes } from "@nypl/design-system-react-components";
+import { Box, Button } from "@nypl/design-system-react-components";
 // Redux
 import { batch, useDispatch, useSelector } from "react-redux";
 import { resetSearch, resetMap } from "./../../../redux/actions";
@@ -86,11 +86,12 @@ function SearchResultsDetails() {
         {renderMessage()}
         &nbsp;
         <Button
-          id="button"
-          buttonType={ButtonTypes.Link}
+          id="location-finder-search-results-details__clear"
+          buttonType="link"
           mouseDown={false}
           onClick={onClearSearchTerms}
-          additionalStyles={{
+          // additionalStyles
+          sx={{
             display: "inline",
             paddingLeft: [null, null, "xs"],
           }}

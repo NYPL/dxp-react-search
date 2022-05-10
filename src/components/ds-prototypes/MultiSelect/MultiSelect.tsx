@@ -2,7 +2,6 @@ import React from "react";
 // Components
 import {
   Button,
-  ButtonTypes,
   Checkbox,
   Icon,
   Radio,
@@ -47,6 +46,7 @@ function MultiSelect({
   onMenuClick,
   selectedGroupIds,
   showCtaButtons,
+  // @ts-ignore
   handleChangeMixedStateCheckbox,
 }: MultiSelectProps) {
   const isOpen = selectedGroupIds.includes(id);
@@ -167,6 +167,7 @@ function MultiSelect({
     >
       <div id={`multiselect-${id}`} className={s.multiSelect}>
         <button
+          id={`multiselect-menu-button-${id}`}
           className={`${s.menuButton} ${hasSelectedItems() && s.active}`}
           type="button"
           onClick={onMenuClick}
@@ -177,7 +178,7 @@ function MultiSelect({
             // @ts-ignore
             name={iconType}
             // @ts-ignore
-            modifiers={["small", { iconType }]}
+            size="small"
           />
         </button>
         <div className={`${s.menu} ${isOpen && s.active}`}>
@@ -243,7 +244,7 @@ function MultiSelect({
           {isOpen && showCtaButtons && (
             <div className={s.ctaButtonsContainer}>
               <Button
-                buttonType={ButtonTypes.Link}
+                buttonType="link"
                 id={`multiselect-button-clear-${id}`}
                 className={s.ctaButtonsDesktopClear}
                 mouseDown={false}
@@ -253,7 +254,7 @@ function MultiSelect({
                 Clear
               </Button>
               <Button
-                buttonType={ButtonTypes.Primary}
+                buttonType="primary"
                 id={`multiselect-button-save-${id}`}
                 mouseDown={false}
                 type="button"

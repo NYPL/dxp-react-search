@@ -3,7 +3,6 @@ import {
   Box,
   Grid,
   SkeletonLoader,
-  SkeletonLoaderImageRatios,
 } from "@nypl/design-system-react-components";
 
 interface CardGridSkeletonLoaderProps {
@@ -24,9 +23,7 @@ function CardSkeletonLoader({
   showImage = true,
 }: CardSkeletonLoaderProps) {
   if (cardLayout === "column") {
-    return (
-      <SkeletonLoader imageAspectRatio={SkeletonLoaderImageRatios.Landscape} />
-    );
+    return <SkeletonLoader imageAspectRatio="landscape" />;
   } else if (cardLayout === "row") {
     return (
       <Box display={{ lg: "flex" }}>

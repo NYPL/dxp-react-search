@@ -3,10 +3,7 @@ import {
   Box,
   HStack,
   Icon,
-  IconNames,
-  IconSizes,
   StatusBadge,
-  StatusBadgeTypes,
 } from "@nypl/design-system-react-components";
 
 interface LocationHoursProps {
@@ -55,16 +52,14 @@ function LocationHours({
     <>
       {open ? (
         <HStack mb="xxs" align="center">
-          <Icon name={IconNames.Clock} size={IconSizes.Large} />
+          <Icon name="clock" size="large" />
           <Box>Today's Hours:</Box>
           <Box fontWeight="bold">
             {formatHours(todayHoursStart, todayHoursEnd, appointmentOnly)}
           </Box>
         </HStack>
       ) : (
-        <StatusBadge level={StatusBadgeTypes.Medium}>
-          Location is temporarily closed
-        </StatusBadge>
+        <StatusBadge level="medium">Location is temporarily closed</StatusBadge>
       )}
       {appointmentOnly && todayHoursStart && todayHoursEnd && (
         <Box ml="l" fontWeight="bold">
