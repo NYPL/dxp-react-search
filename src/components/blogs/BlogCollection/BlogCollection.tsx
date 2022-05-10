@@ -78,7 +78,6 @@ function BlogCollection({
   slug = "",
   slugLabel = "",
   limit,
-  pageNumber,
   sort,
   featured,
   status,

@@ -4,12 +4,7 @@ import {
   Link as DsLink,
   StatusBadge,
   Button,
-  ButtonTypes,
   Icon,
-  IconAlign,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
   Link,
 } from "@nypl/design-system-react-components";
 import OnlineResourceCardHeading from "./OnlineResourceCardHeading";
@@ -77,12 +72,12 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
 
   let detailsClassName = "";
   let buttonText = "Full Details";
-  let buttonIconRotation = IconRotationTypes.Rotate0;
+  let buttonIconRotation = "rotate0";
   if (collapsible && !isToggled) {
     detailsClassName = s.collapsed;
   } else if (collapsible && isToggled) {
     detailsClassName = s.collapsible;
-    buttonIconRotation = IconRotationTypes.Rotate180;
+    buttonIconRotation = "rotate180";
     buttonText = "Close Details";
   }
 
@@ -144,16 +139,16 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       </div>
       {collapsible && (
         <Button
+          id="online-resource-card-read-more"
           className={s.readmore}
-          buttonType={ButtonTypes.Secondary}
+          buttonType="secondary"
           onClick={toggleDisplay}
         >
           <Icon
-            name={IconNames.Arrow}
+            name="arrow"
             decorative={true}
-            //modifiers={["small", "icon-left"]}
-            size={IconSizes.Small}
-            align={IconAlign.Left}
+            size="small"
+            align="left"
             iconRotation={buttonIconRotation}
           />
           {buttonText}

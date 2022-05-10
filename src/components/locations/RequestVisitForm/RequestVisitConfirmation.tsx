@@ -6,12 +6,7 @@ import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../.
 // Next
 import { useRouter } from "next/router";
 // Components
-import {
-  Heading,
-  HeadingLevels,
-  Link,
-  LinkTypes,
-} from "@nypl/design-system-react-components";
+import { Heading, Link } from "@nypl/design-system-react-components";
 import { FormContext } from "./../../../context/FormContext";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -53,13 +48,13 @@ function RequestVisitConfirmation() {
     <div>
       <Heading
         className="request-visit__header"
-        level={HeadingLevels.Two}
+        level="two"
         text="Thank You!"
       />
       <p>
         We've received your request and will get back to you within 48 hours.
       </p>
-      <Link type={LinkTypes.Action} href={locationUrl}>
+      <Link type="action" href={locationUrl}>
         Back to {locationName}
       </Link>
     </div>
