@@ -23,25 +23,27 @@ const ageGroupItems = [
 function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
   // @ts-ignore
   const [state] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
+  const { values, errors } = state;
 
   return (
     <CheckboxGroup
+      id="age-group"
       name="age-group"
       labelText="What age range is your group?"
       showLabel
-      optReqFlag={false}
+      showRequiredLabel={false}
       isRequired
       isInvalid={errors.ageGroup ? true : false}
       invalidText={errors.ageGroup}
     >
       {ageGroupItems.map((ageGroupItem) => (
         <Checkbox
+          id={ageGroupItem.id}
           labelText={ageGroupItem.label}
           name={ageGroupItem.id}
           isChecked={values.ageGroup.includes(ageGroupItem.id)}
           showLabel
-          onChange={(e) =>
+          onChange={() =>
             handleChangeCheckboxGroup("ageGroup", ageGroupItem.id)
           }
           isInvalid={errors.ageGroup ? true : false}
@@ -51,7 +53,7 @@ function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
   );
 
   /*return (
-    <Fieldset optReqFlag={false} legendText="What age range is your group?">
+    <Fieldset showRequiredLabel={false} legendText="What age range is your group?">
       {ageGroupItems.map((ageGroupItem) => (
         <Box mb="s">
           <Checkbox

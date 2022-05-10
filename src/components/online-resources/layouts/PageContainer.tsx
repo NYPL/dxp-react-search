@@ -1,15 +1,15 @@
 import React from "react";
 // Components
-import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
+import {
+  default as SharedPageContainer,
+  MetaTags,
+  BreadcrumbsItem,
+} from "./../../shared/layouts/PageContainer";
 import Hero from "./../Hero";
 import SearchHeader from "./../../shared/SearchHeader";
 import SearchForm from "./../SearchForm";
 import Menu from "./../../ds-prototypes/Menu";
-import {
-  Box,
-  ColorVariants,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 // Config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
@@ -18,9 +18,19 @@ import {
   railMenuContent,
 } from "./../../../__content/menus";
 
-function PageContainer(props) {
-  const { metaTags, breadcrumbs, contentPrimary, showContentHeader } = props;
+type OnlineResourcePageContainerProps = {
+  metaTags?: MetaTags;
+  breadcrumbs?: BreadcrumbsItem[];
+  contentPrimary: React.ReactNode;
+  showContentHeader: boolean;
+};
 
+function PageContainer({
+  metaTags,
+  breadcrumbs,
+  contentPrimary,
+  showContentHeader,
+}: OnlineResourcePageContainerProps) {
   // Default breadcrumbs for all online resources pages.
   const defaultBreadcrumbs = [
     {
@@ -62,7 +72,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor={ColorVariants.Research}
+      breadcrumbsColor="research"
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"
@@ -73,7 +83,7 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={HeadingLevels.Two}
+                headingLevel="two"
                 headingColor={"#00838A"}
                 headingDecoration={"underline"}
                 title={menu.title}
@@ -98,7 +108,7 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={HeadingLevels.Three}
+                headingLevel="three"
                 headingColor={"#00838A"}
                 title={menu.title}
                 // @ts-ignore

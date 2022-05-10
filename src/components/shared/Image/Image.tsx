@@ -1,7 +1,7 @@
 import React from "react";
 // Next components
 import { default as NextImage } from "next/image";
-import { ImageType as ImageProps, TransformationType } from "./ImageTypes";
+import { ImageType as ImageProps } from "./ImageTypes";
 // Utils
 import { getImageTransformation } from "./imageUtils";
 

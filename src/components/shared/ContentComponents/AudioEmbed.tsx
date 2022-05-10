@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
 
 interface AudioEmbedProps {
@@ -33,7 +29,7 @@ function AudioEmbed({
       mx="auto"
       mb="xl"
     >
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       {description && <TextFormatted html={description} />}
       {html && (
         <Box
