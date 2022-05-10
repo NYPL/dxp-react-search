@@ -1,11 +1,5 @@
 import React from "react";
-// Components
-import {
-  Button,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
-import s from "./SearchResultsDetails.module.css";
+import { Box, Button, Heading } from "@nypl/design-system-react-components";
 
 interface SearchResultsDetailsProps {
   /** The label used in the component's heading. */
@@ -18,6 +12,10 @@ interface SearchResultsDetailsProps {
   onClick: (event: React.MouseEvent | React.KeyboardEvent) => void;
 }
 
+/*
+ * Renders the search results details, i.e., "1-10 of 843 results"
+ * and clear search/filters button.
+ */
 function SearchResultsDetails({
   label,
   message,
@@ -25,29 +23,29 @@ function SearchResultsDetails({
   onClick,
 }: SearchResultsDetailsProps) {
   return (
-    <div id="search-results__details" role="alert">
+    <Box id="search-results-details" role="alert">
       {label && (
         <Heading
-          id={"search-results__details-heading"}
-          level={HeadingLevels.Two}
+          id="search-results-details__heading"
+          level="two"
           text={label}
         />
       )}
       {message}
       <Button
-        className={s.button}
-        // @ts-ignore
+        id="search-results-details__button"
         buttonType="link"
-        iconName={null}
-        iconPosition={null}
-        id="search-results__details-button"
+        type="submit"
         mouseDown={false}
         onClick={onClick}
-        type="submit"
+        sx={{
+          display: "inline",
+          paddingLeft: { md: "xs" },
+        }}
       >
         {clearMessage}
       </Button>
-    </div>
+    </Box>
   );
 }
 

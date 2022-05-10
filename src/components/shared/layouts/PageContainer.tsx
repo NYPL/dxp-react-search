@@ -1,28 +1,23 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Meta from "../Meta";
 import {
   Breadcrumbs,
-  ColorVariants,
+  BreadcrumbsTypes,
   DSProvider,
 } from "@nypl/design-system-react-components";
 import s from "./PageContainer.module.css";
 
-interface PageContainerProps {
-  metaTags: MetaTags;
+export interface PageContainerProps {
+  metaTags?: MetaTags;
   breadcrumbs: BreadcrumbsItem[];
-  breadcrumbsColor: ColorVariants;
+  breadcrumbsColor: BreadcrumbsTypes;
   wrapperClass: string;
-  contentHeader: React.ReactNode;
+  contentHeader?: React.ReactNode;
   contentPrimary: React.ReactNode;
-  contentBottom: React.ReactNode;
+  contentBottom?: React.ReactNode;
   contentSecondary?: React.ReactNode;
-  sidebarSide?: SidebarSides;
+  sidebarSide?: "right" | "left";
   showSidebar?: boolean;
-}
-
-export enum SidebarSides {
-  Right = "right",
-  Left = "left",
 }
 
 export type BreadcrumbsItem = {
@@ -70,7 +65,7 @@ function PageContainer({
         <DSProvider>
           <Breadcrumbs
             breadcrumbsData={breadcrumbs}
-            colorVariant={breadcrumbsColor}
+            breadcrumbsType={breadcrumbsColor}
           />
           <main id="main-content">
             {contentHeader && <div>{contentHeader}</div>}

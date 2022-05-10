@@ -10,7 +10,7 @@ export interface FilterBarGroupItem {
   id: string;
   label: string;
   type: string;
-  limiter: string;
+  limiter?: string;
   legacy?: boolean;
   includeChildren?: boolean;
 }

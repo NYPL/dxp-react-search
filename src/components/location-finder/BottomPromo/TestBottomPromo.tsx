@@ -4,19 +4,14 @@ import BottomPromoContent from "../../../__content/locationFinder";
 // Components
 import {
   Heading,
-  HeadingLevels,
   Image,
   Link,
-  LinkTypes,
   Logo,
   LogoNames,
-  LogoSizes,
   Flex,
   Box,
   Text,
-  TextDisplaySizes,
 } from "@nypl/design-system-react-components";
-import image from "next/image";
 
 function TestBottomPromo() {
   const { promo_left, promo_right } = BottomPromoContent;
@@ -36,29 +31,34 @@ function TestBottomPromo() {
         >
           <Heading
             id="promo-left-section-title"
-            level={HeadingLevels.Two}
+            level="two"
             text={promo_left.title}
           />
           <Flex direction={{ sm: "column", md: "row" }}>
-            {promo_left.image.map((value, index) => {
+            {promo_left.image.map((promoImageLeft) => {
               return (
                 <Box
-                  key={value.link}
+                  key={promoImageLeft.link}
                   mr={{
                     sm: "20%",
-                    md: `${index === image.length - 1 ? null : "0px"}`,
+                    // @TODO What was the logic here?
+                    //md: `${index === image.length - 1 ? null : "0px"}`,
                   }}
                   mb={{ sm: "var(--nypl-space-l)", md: "0px" }}
                   w={{ sm: "65%", md: "100%" }}
                 >
                   <Link
-                    href={value.link}
-                    additionalStyles={{
+                    href={promoImageLeft.link}
+                    sx={{
                       textDecor: "none",
                       color: "ui.black",
                     }}
                   >
-                    <Image alt="" imageCaption={value.name} src={value.url} />
+                    <Image
+                      alt=""
+                      caption={promoImageLeft.name}
+                      src={promoImageLeft.url}
+                    />
                   </Link>
                 </Box>
               );
@@ -73,23 +73,22 @@ function TestBottomPromo() {
         >
           <Heading
             id="promo-right-section-title"
-            level={HeadingLevels.Two}
+            level="two"
             text={promo_right.title}
           />
-          <Text displaySize={TextDisplaySizes.Caption}>
-            {promo_right.description}
-          </Text>
+          <Text size="caption">{promo_right.description}</Text>
           <Flex justify={{ md: "space-between" }}>
-            {promo_right.image.map((value) => {
-              const typedLogoName = value.logo as LogoNames;
+            {promo_right.image.map((promoRightImage) => {
               return (
-                <Box key={value.link} w={{ sm: "50%", md: "40%" }}>
-                  <Link type={LinkTypes.Default}>
-                    <a aria-label={value.logo_alt} href={value.link}>
+                <Box key={promoRightImage.link} w={{ sm: "50%", md: "40%" }}>
+                  <Link type="default">
+                    <a
+                      aria-label={promoRightImage.logo_alt}
+                      href={promoRightImage.link}
+                    >
                       <Logo
-                        // @ts-ignore
-                        name={LogoNames[typedLogoName]}
-                        size={LogoSizes.Small}
+                        name={promoRightImage.logo as LogoNames}
+                        size="small"
                       />
                     </a>
                   </Link>

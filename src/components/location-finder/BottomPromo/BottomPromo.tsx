@@ -4,18 +4,11 @@ import BottomPromoContent from "../../../__content/locationFinder";
 // Components
 import {
   Heading,
-  HeadingLevels,
-  Icon,
-  IconSizes,
   Image,
   Link,
-  LinkTypes,
   Logo,
   LogoNames,
-  LogoSizes,
-  Box,
   Text,
-  TextDisplaySizes,
 } from "@nypl/design-system-react-components";
 import TestBottomPromo from "./TestBottomPromo";
 
@@ -29,14 +22,14 @@ function BottomPromo() {
           <div className="column left">
             <Heading
               id="promo-left-section-title"
-              level={HeadingLevels.Two}
+              level="two"
               text={promo_left.title}
             />
-            {promo_left.image.map((value, index) => {
+            {promo_left.image.map((value) => {
               return (
                 <div key={value.link} className="promo-card">
                   <Link href={value.link} className="promo-link">
-                    <Image alt="" imageCaption={value.name} src={value.url} />
+                    <Image alt="" caption={value.name} src={value.url} />
                   </Link>
                 </div>
               );
@@ -45,20 +38,17 @@ function BottomPromo() {
           <div className="column right">
             <Heading
               id="promo-right-section-title"
-              level={HeadingLevels.Two}
+              level="two"
               text={promo_right.title}
             />
-            <Text displaySize={TextDisplaySizes.Caption}>
-              {promo_right.description}
-            </Text>
-            {promo_right.image.map((value, index) => {
-              const typedLogoName = value.logo as LogoNames;
+            <Text size="caption">{promo_right.description}</Text>
+            {promo_right.image.map((value) => {
               return (
                 <div
                   key={value.link}
                   className="promo-card promo-card-with-icon"
                 >
-                  <Link type={LinkTypes.Default}>
+                  <Link type="default">
                     <a
                       aria-label={value.logo_alt}
                       href={value.link}
@@ -66,8 +56,8 @@ function BottomPromo() {
                     >
                       <Logo
                         // @ts-ignore
-                        name={LogoNames[typedLogoName]}
-                        size={LogoSizes.Small}
+                        name={value.logo as LogoNames}
+                        size="small"
                       />
                     </a>
                   </Link>

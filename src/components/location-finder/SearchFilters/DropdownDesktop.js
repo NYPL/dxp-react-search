@@ -105,20 +105,21 @@ function DropdownDesktop(props) {
       </div>
       <div className="dropdown__content-buttons" id={vocab.id}>
         <Button
-          buttonType={ButtonTypes.Link}
           id={`button-clear-${vocab.id}`}
+          buttonType="link"
           mouseDown={false}
           type="button"
           onClick={(e) => onClickClear(vocab.id, e)}
-          additionalStyles={{
+          // additionalStyles
+          sx={{
             marginRight: "1rem",
           }}
         >
           Clear
         </Button>
         <Button
-          buttonType={ButtonTypes.Primary}
           id={`button-save-${vocab.id}`}
+          buttonType="primary"
           mouseDown={false}
           type="button"
           onClick={(e) => onSaveFilters(vocab.id)}
