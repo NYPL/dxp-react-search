@@ -55,7 +55,7 @@ function Card({ item, variant, size = "md" }: CardProps) {
     >
       <GridItem className="textBox">
         <Heading as="h3" aria-describedby={describedByString}>
-          <Link href={item.url}>{item.title} </Link>
+          <Link href={item.url}>{item.title}</Link>
         </Heading>
         <Box className="details">
           {item.date && (
@@ -83,7 +83,8 @@ function Card({ item, variant, size = "md" }: CardProps) {
         </Box>
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
-        <Link href={item.url} tabIndex={-1}>
+        {/* @QUESTION Axe accessibility test requires aria-label for link here */}
+        <Link href={item.url} aria-label={item.title} tabIndex={-1}>
           <Image
             src={item.image}
             // @QUESTION should role="presentation" be used instead of alte="" source: https://www.digitala11y.com/presentation-role/
