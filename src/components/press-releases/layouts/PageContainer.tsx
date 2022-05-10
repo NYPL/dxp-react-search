@@ -1,21 +1,31 @@
 import React from "react";
 // Components
-import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
-import Menu from "./../../ds-prototypes/Menu";
 import {
-  Heading,
-  HeadingLevels,
-  Hero,
-  HeroTypes,
-  ColorVariants,
-} from "@nypl/design-system-react-components";
+  default as SharedPageContainer,
+  PageContainerProps,
+  BreadcrumbsItem,
+} from "./../../shared/layouts/PageContainer";
+import Menu from "./../../ds-prototypes/Menu";
+import { Heading, Hero } from "@nypl/design-system-react-components";
 // Config/Utils
 import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { PRESS_BASE_PATH } from "./../../../utils/config";
 
-function PageContainer(props) {
-  const { metaTags, breadcrumbs, contentPrimary, showContentHeader } = props;
+type PressPageContainerProps = Omit<
+  PageContainerProps,
+  "breadcrumbsColor" | "wrapperClass" | "breadcrumbs"
+> & {
+  showContentHeader: boolean;
+  breadcrumbs?: BreadcrumbsItem[];
+};
+
+function PageContainer({
+  metaTags,
+  breadcrumbs,
+  contentPrimary,
+  showContentHeader,
+}: PressPageContainerProps) {
   // Default breadcrumbs for all online resources pages.
   const defaultBreadcrumbs = [
     {
@@ -35,8 +45,8 @@ function PageContainer(props) {
   const ContentHeader = (
     <>
       <Hero
-        heroType={HeroTypes.Tertiary}
-        heading={<Heading level={HeadingLevels.One} text={"Press Releases"} />}
+        heroType="tertiary"
+        heading={<Heading level="one" text="Press Releases" />}
         backgroundColor="var(--nypl-colors-ui-gray-light-cool)"
         foregroundColor="var(--nypl-colors-ui-black)"
       />
@@ -51,7 +61,7 @@ function PageContainer(props) {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor={ColorVariants.Blogs}
+      breadcrumbsColor="blogs"
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"
@@ -62,12 +72,13 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={HeadingLevels.Three}
-                headingColor={"#000"}
+                headingLevel="three"
+                headingColor="#000"
                 title={menu.title}
+                // @ts-ignore
                 items={menu.items}
                 menuItemDecoration={false}
-                orientation={"vertical"}
+                orientation="vertical"
               />
             );
           })}

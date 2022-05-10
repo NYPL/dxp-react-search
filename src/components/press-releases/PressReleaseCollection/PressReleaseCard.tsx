@@ -2,7 +2,6 @@ import React from "react";
 // Components
 import {
   Heading,
-  HeadingLevels,
   HorizontalRule,
   Box,
 } from "@nypl/design-system-react-components";
@@ -19,7 +18,7 @@ function PressReleaseCard({ item }: PressReleaseCardProps) {
   return (
     <Box>
       <Box py={"s"} pr={"s"} id={`pressRelease-card-${id}`}>
-        <Heading level={HeadingLevels.Three} additionalStyles={{ my: "xxs" }}>
+        <Heading level="three" sx={{ my: "xxs" }}>
           {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
         </Heading>
         <Box>{date}</Box>

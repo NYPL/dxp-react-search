@@ -77,7 +77,7 @@ function PressReleaseCollection({
   }
 
   return (
-    <Box>
+    <Box id={id}>
       <Box mb={"l"}>{description}</Box>
       <Grid as="ul" listStyleType="none">
         {data.allPressReleases.items &&

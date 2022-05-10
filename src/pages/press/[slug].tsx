@@ -67,6 +67,7 @@ function PressReleasePage() {
       breadcrumbs={[
         {
           text: data.pressRelease.title,
+          url: "",
         },
       ]}
       showContentHeader={false}

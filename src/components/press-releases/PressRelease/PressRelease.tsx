@@ -3,14 +3,7 @@ import React from "react";
 import Components, {
   ContentComponentObject,
 } from "./../../shared/ContentComponents/getReactComponent";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-  HeadingDisplaySizes,
-  Text,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Box, Heading, Text, Link } from "@nypl/design-system-react-components";
 import MediaContacts from "../layouts/MediaContacts";
 // Config/Utils
 import pressContent from "./../../../__content/press";
@@ -28,12 +21,12 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
   const { about } = pressContent;
   const About = (
     <Box mb="l">
-      <Heading level={HeadingLevels.Two} text={about.title} />
+      <Heading level="two" text={about.title} />
       <Text>
         {about.description}
         <Link
           href={about.url}
-          additionalStyles={{
+          sx={{
             color: "black",
             textDecor: "underline",
           }}
@@ -47,14 +40,11 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
   return (
     <Box as="article" w="100%" maxW="844px">
       <Box as="header" mb="l">
-        <Heading
-          level={HeadingLevels.One}
-          displaySize={HeadingDisplaySizes.Secondary}
-          text={pressRelease.title}
-        />
+        <Heading level="one" size="secondary" text={pressRelease.title} />
         {description !== null && (
           <Box
-            isItalic={true}
+            // @TODO This no longer works, lets fix this soon.
+            //isItalic={true}
             mb="s"
             fontSize={"1"}
             dangerouslySetInnerHTML={{ __html: description }}

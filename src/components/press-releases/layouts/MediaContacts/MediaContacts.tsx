@@ -1,16 +1,12 @@
 import React from "react";
 // Components
-import {
-  Heading,
-  HeadingLevels,
-  Box,
-} from "@nypl/design-system-react-components";
+import { Heading, Box } from "@nypl/design-system-react-components";
 
 function MediaContacts({ mediaContacts }: any) {
   const contacts = mediaContacts.replace(/\n/g, "<br/>");
   return (
     <>
-      <Heading level={HeadingLevels.Two} text="Media Contacts" />
+      <Heading level="two" text="Media Contacts" />
       <Box
         sx={{
           "& a": {
