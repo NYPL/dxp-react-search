@@ -23,17 +23,17 @@ function SearchResultsDetails({
   onClick,
 }: SearchResultsDetailsProps) {
   return (
-    <Box id="search-results__details" role="alert">
+    <Box id="search-results-details" role="alert">
       {label && (
         <Heading
-          id="search-results__details-heading"
+          id="search-results-details__heading"
           level="two"
           text={label}
         />
       )}
       {message}
       <Button
-        id="search-results__details-button"
+        id="search-results-details__button"
         buttonType="link"
         type="submit"
         mouseDown={false}

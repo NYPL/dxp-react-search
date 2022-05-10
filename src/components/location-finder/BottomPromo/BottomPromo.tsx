@@ -18,7 +18,7 @@ function BottomPromo() {
       <div className="row">
         <div className="column left">
           <Heading
-            id="promo-left-section-title"
+            id="location-finder-bottom-promo__left-heading"
             level="two"
             text={promo_left.title}
           />
@@ -34,7 +34,7 @@ function BottomPromo() {
         </div>
         <div className="column right">
           <Heading
-            id="promo-right-section-title"
+            id="location-finder-bottom-promo__right-heading"
             level="two"
             text={promo_right.title}
           />

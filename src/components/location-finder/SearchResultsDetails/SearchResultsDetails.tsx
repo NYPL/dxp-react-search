@@ -86,7 +86,7 @@ function SearchResultsDetails() {
         {renderMessage()}
         &nbsp;
         <Button
-          id="button"
+          id="location-finder-search-results-details__clear"
           buttonType="link"
           mouseDown={false}
           onClick={onClearSearchTerms}
