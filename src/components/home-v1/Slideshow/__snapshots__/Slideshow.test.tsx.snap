@@ -36,7 +36,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
         >
           <ul
             className="css-1lmqp65"
-            data-testid="slideshow-container"
           >
             <li
               className="css-1fzgmij"
