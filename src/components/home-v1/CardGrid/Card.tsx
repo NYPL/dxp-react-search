@@ -38,14 +38,14 @@ interface CardProps {
 
 function Card({ item, variant, size = "md" }: CardProps) {
   const styles = useStyleConfig("Card", { variant, size });
-  let describedBy = [];
-  if (item.date) describedBy.push(`${item.id}-date`);
-  if (item.description) describedBy.push(`${item.id}-description`);
-  if (item.location) describedBy.push(`${item.id}-location`);
-  if (item.author) describedBy.push(`${item.id}-author`);
-  if (item.audience) describedBy.push(`${item.id}-audience`);
-  if (item.genre) describedBy.push(`${item.id}-genre`);
-  const describedByString = describedBy.join(" ");
+  let describedByIdsArray = [];
+  const omitItems = ["id", "title", "image", "url"];
+  for (const propName in item) {
+    if (!omitItems.includes(propName)) {
+      describedByIdsArray.push(`${item.id}-${propName}`);
+    }
+  }
+  const describedByIdsString = describedByIdsArray.join(" ");
 
   return (
     <Grid
@@ -54,7 +54,12 @@ function Card({ item, variant, size = "md" }: CardProps) {
       sx={styles}
     >
       <GridItem className="textBox">
-        <Heading as="h3" aria-describedby={describedByString}>
+        <Heading
+          as="h3"
+          {...(describedByIdsString && {
+            "aria-describedby": describedByIdsString,
+          })}
+        >
           <Link href={item.url}>{item.title}</Link>
         </Heading>
         <Box className="details">
