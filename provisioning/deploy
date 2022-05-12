@@ -35,6 +35,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   docker build --target production --tag $LOCAL_TAG_NAME .
   echo "Pushing $LOCAL_TAG_NAME"
   docker tag $LOCAL_TAG_NAME "$REMOTE_FULL_URL"
+  eval $(aws ecr get-login --no-include-email --region us-east-1)
   docker push "$REMOTE_FULL_URL"
   echo "Pushed $LOCAL_TAG_NAME to $REMOTE_FULL_URL"
 
