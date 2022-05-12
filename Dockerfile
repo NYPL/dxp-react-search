@@ -1,5 +1,7 @@
 FROM node:14 AS production
 
+RUN apt-get update && apt-get upgrade -y
+
 WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
