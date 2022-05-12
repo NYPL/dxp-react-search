@@ -49,7 +49,7 @@ export const featuredEvents = {
       theme: "author talks & conversations",
       events: [
         {
-          id: "aurthor-talks-1",
+          id: "author-talks-1",
           title: "NYPL's World Literature Festival",
           date: "Apr 11 - 30",
           location: "Online",
@@ -58,7 +58,7 @@ export const featuredEvents = {
           url: "https://www.nypl.org/spotlight/world-literature-festival",
         },
         {
-          id: "aurthor-talks-2",
+          id: "author-talks-2",
           title:
             "Darren Walker and Gara LaMarche with Peter Osnos on George Soros",
           date: "Tues, Apr 5 | 6:30 PM",
@@ -68,7 +68,7 @@ export const featuredEvents = {
           url: "https://www.showclix.com/event/georgesorosalifeinfull/tag/nyplhomepage",
         },
         {
-          id: "aurthor-talks-3",
+          id: "author-talks-3",
           title:
             "Elizabeth Alexander with Charles M. Blow: The Trayvon Generation",
           date: "Wed, Apr 6 | 6:30 PM",
@@ -78,7 +78,7 @@ export const featuredEvents = {
           url: "https://www.showclix.com/event/thetrayvongeneration/tag/nyplhomepage",
         },
         {
-          id: "aurthor-talks-4",
+          id: "author-talks-4",
           title: "Alien Nation: True Tales of Immigration",
           date: "Thurs, Apr 14 | 7 PM",
           location: "Stavros Niarchos Foundation Library (SNFL) & Online",
