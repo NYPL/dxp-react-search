@@ -35,14 +35,15 @@ function TestBottomPromo() {
             text={promo_left.title}
           />
           <Flex direction={{ sm: "column", md: "row" }}>
-            {promo_left.image.map((promoImageLeft) => {
+            {promo_left.image.map((promoImageLeft, index) => {
               return (
                 <Box
                   key={promoImageLeft.link}
                   mr={{
                     sm: "20%",
-                    // @TODO What was the logic here?
-                    //md: `${index === image.length - 1 ? null : "0px"}`,
+                    md: `${
+                      index === promo_left.image.length - 1 ? "0px" : null
+                    }`,
                   }}
                   mb={{ sm: "var(--nypl-space-l)", md: "0px" }}
                   w={{ sm: "65%", md: "100%" }}
@@ -54,6 +55,10 @@ function TestBottomPromo() {
                       color: "ui.black",
                     }}
                   >
+                    {/* @QUESTION caption text on live site has size="caption" vs here it is set by the DS as size="tag",
+                    see: https://github.com/NYPL/nypl-design-system/blob/development/src/theme/components/image.ts line: 96
+                    AND caption text has underline styling when hover
+                     */}
                     <Image
                       alt=""
                       caption={promoImageLeft.name}
