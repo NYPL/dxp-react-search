@@ -1,6 +1,7 @@
 import * as React from "react";
 import { jest } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
+import { renderHook, act } from "@testing-library/react-hooks";
 import userEvent from "@testing-library/user-event";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
@@ -11,21 +12,6 @@ import Slideshow from "./Slideshow";
 import SlideshowContainer from "./SlideshowContainer";
 import SlideshowButton from "./SlideshowButton";
 import useSlideshowStyles from "./useSlideshow";
-
-// Mock useSlideshow hook
-// jest.mock("./useSlideshowStyle", () => {
-//   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
-//     useSlideshowStyles(items.length, 11);
-//   return {
-//     useSlideshowStyles: () => {
-//       return { currentSlide, prevSlide, nextSlide, slideshowStyle };
-//     },
-//   };
-// });
-
-// const mockUseSlideshowStyle = useSlideshowStyles as jest.MockedFunction<
-//   typeof useSlideshowStyles
-// >;
 
 const items = [
   {
@@ -65,16 +51,26 @@ const items = [
     url: "https://www.nypl.org/",
   },
 ];
-
+describe("useSlideshow tests", () => {
+  // Mock useSlideshow hook
+  // jest.mock("./useSlideshowStyle", () => {
+  //   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
+  //     useSlideshowStyles(items.length, 11);
+  //   return {
+  //     useSlideshowStyles: () => {
+  //       return { currentSlide, prevSlide, nextSlide, slideshowStyle };
+  //     },
+  //   };
+  // });
+  // const mockUseSlideshowStyle = useSlideshowStyles as jest.MockedFunction<
+  //   typeof useSlideshowStyles
+  // >;
+  it("should provide the currentSlide as a number and the slideshowStyle as an object", () => {});
+  it("should provide a nextSlide  function that moves pointer of currentSlide to the next Slide", () => {});
+  it("should provide a prevSlide function that moves pointer of currentSlide to the previous Slide", () => {});
+  it("should update the slideshowStyles with according to the currentSlide", () => {});
+});
 xdescribe("SlideshowButton tests", () => {
-  // This is not working!
-  let mockPrevSlide: jest.MockedFunction<() => void>;
-  let mockNextSlide: jest.MockedFunction<() => void>;
-  beforeEach(() => {
-    mockPrevSlide = jest.fn();
-    mockNextSlide = jest.fn();
-  });
-
   it("should pass axe accessibility test", async () => {
     const { container } = render(<SlideshowButton direction="next" />);
     expect(await axe(container)).toHaveNoViolations();
@@ -84,36 +80,81 @@ xdescribe("SlideshowButton tests", () => {
     expect(screen.getByRole("button", { name: />/i })).toBeInTheDocument();
   });
   it("should call correct function when clicked", () => {
+    const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
+    let spyNextSlide = jest.spyOn(result.current, "nextSlide");
+    let spyPrevSlide = jest.spyOn(result.current, "prevSlide");
+
     render(
       <SlideshowButton
         direction="next"
-        nextSlide={mockNextSlide}
-        prevSlide={mockPrevSlide}
+        nextSlide={spyNextSlide}
+        prevSlide={spyPrevSlide}
       />
     );
-    userEvent.click(screen.getByRole("button", { name: />/i }));
-    expect(mockNextSlide).toBeCalledTimes(1);
-    expect(mockPrevSlide).not.toBeCalled();
+    act(() => userEvent.click(screen.getByRole("button", { name: />/i })));
+    expect(spyNextSlide).toBeCalledTimes(1);
+    expect(spyPrevSlide).not.toBeCalled();
   });
   it("should render the UI snapshot correctly", () => {
+    // Mock passe in functions
+    let prevSlide = jest.fn();
+    let nextSlide = jest.fn();
+    // Alternative option to mock hook
+    // const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
+    // const { prevSlide, nextSlide } = result.current;
     const nextButton = renderer
-      .create(<SlideshowButton direction="next" nextSlide={mockNextSlide} />)
+      .create(<SlideshowButton direction="next" nextSlide={nextSlide} />)
       .toJSON();
     const prevButton = renderer
-      .create(<SlideshowButton direction="prev" prevSlide={mockPrevSlide} />)
+      .create(<SlideshowButton direction="prev" prevSlide={prevSlide} />)
       .toJSON();
     expect(nextButton).toMatchSnapshot();
     expect(prevButton).toMatchSnapshot();
   });
 });
 
-xdescribe("SlideshowContainer tests", async () => {
-  //   it("should pass axe accessibility test", async () => {
-  //     const { container } = render(<SlideshowContainer items={items} />);
-  // expect(await axe(container)).toHaveNoViolations();
-  //   });
-  it("should render list of cards ", () => {});
-  it("should render the UI snapshot correctly", () => {});
+describe("SlideshowContainer tests", () => {
+  // Mock useSlideshow hook
+  const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
+  const { currentSlide, prevSlide, nextSlide, slideshowStyle } = result.current;
+  xit("should pass axe accessibility test", async () => {
+    const { container } = render(
+      <SlideshowContainer
+        items={items}
+        slideshowStyle={slideshowStyle}
+        currentSlide={currentSlide}
+        nextSlide={nextSlide}
+        prevSlide={prevSlide}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+  it("should render list of cards ", () => {
+    render(
+      <SlideshowContainer
+        items={items}
+        slideshowStyle={slideshowStyle}
+        currentSlide={currentSlide}
+        nextSlide={nextSlide}
+        prevSlide={prevSlide}
+      />
+    );
+    expect(screen.getAllByRole("listitem")).toHaveLength(4);
+  });
+  it("should render the UI snapshot correctly", () => {
+    const slideshowContainer = renderer
+      .create(
+        <SlideshowContainer
+          items={items}
+          slideshowStyle={slideshowStyle}
+          currentSlide={currentSlide}
+          nextSlide={nextSlide}
+          prevSlide={prevSlide}
+        />
+      )
+      .toJSON();
+    expect(slideshowContainer).toMatchSnapshot();
+  });
 });
 
 xdescribe("Slideshow tests", () => {
