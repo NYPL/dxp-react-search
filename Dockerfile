@@ -1,6 +1,7 @@
 FROM node:14 AS production
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update
+RUN apt-get upgrade -y
 
 WORKDIR /app
 
