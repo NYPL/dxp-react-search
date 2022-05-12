@@ -1,6 +1,6 @@
 const { NEXT_PUBLIC_GTM_TRACKING_ID } = process.env;
 const { NEXT_PUBLIC_GA_TRACKING_ID } = process.env;
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class ScoutDocument extends Document {
   render() {
@@ -26,6 +26,11 @@ class ScoutDocument extends Document {
                 });
               `,
             }}
+          />
+          {/* NYPL Header */}
+          <script
+            async
+            src="https://header.nypl.org/dgx-header.min.js?skipNav=main-content&urls=absolute"
           />
         </Head>
         <body>
