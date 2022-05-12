@@ -21,13 +21,6 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   export PATH=$PATH:$HOME/.local/bin
   # eval $(aws ecr get-login --no-include-email --region us-east-1)
 
-  # awscli v2 client uses new login routine
-  aws ecr get-login-password --region us-east-1 \
-  | docker login \
-      --password-stdin \
-      --username AWS \
-      $DOCKER_REPO_URL
-
   # Build and push to ECR.
   IMAGE_NAME=nypldxpsearch
   LOCAL_TAG_NAME=$IMAGE_NAME:$TRAVIS_BRANCH-latest
@@ -36,6 +29,14 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   echo "Pushing $LOCAL_TAG_NAME"
   docker tag $LOCAL_TAG_NAME "$REMOTE_FULL_URL"
   # eval $(aws ecr get-login --no-include-email --region us-east-1)
+
+  # awscli v2 client uses new login routine
+  aws ecr get-login-password --region us-east-1 \
+  | docker login \
+      --password-stdin \
+      --username AWS \
+      $DOCKER_REPO_URL
+
   docker push "$REMOTE_FULL_URL"
   echo "Pushed $LOCAL_TAG_NAME to $REMOTE_FULL_URL"
 
