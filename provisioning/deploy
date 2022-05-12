@@ -6,11 +6,13 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     production)
       export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PRODUCTION
       export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PRODUCTION
+      AWS_PROFILE="nypl"
       DOCKER_REPO_URL=$REMOTE_IMAGE_URL_NYPL
       ;;
     *)
       export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEVELOPMENT
       export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEVELOPMENT
+      AWS_PROFILE="nypl-dev"
       DOCKER_REPO_URL=$REMOTE_IMAGE_URL_NYPL_DEV
       ;;
   esac
@@ -19,14 +21,14 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # Change it accordingly to your docker repo
   pip install --user awscli
   export PATH=$PATH:$HOME/.local/bin
-  eval $(aws ecr get-login --no-include-email --region us-east-1)
+  # eval $(aws ecr get-login --no-include-email --region us-east-1)
 
   # awscli v2 client uses new login routine
-  # aws ecr get-login-password --region us-east-1 --profile nypl-dev \
-  # | docker login \
-  #     --password-stdin \
-  #     --username AWS \
-  #     $DOCKER_REPO_URL
+  aws ecr get-login-password --region us-east-1 --profile $AWS_PROFILE \
+  | docker login \
+      --password-stdin \
+      --username AWS \
+      $DOCKER_REPO_URL
 
   # Build and push to ECR.
   IMAGE_NAME=nypldxpsearch
@@ -35,7 +37,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   docker build --target production --tag $LOCAL_TAG_NAME .
   echo "Pushing $LOCAL_TAG_NAME"
   docker tag $LOCAL_TAG_NAME "$REMOTE_FULL_URL"
-  eval $(aws ecr get-login --no-include-email --region us-east-1)
+  # eval $(aws ecr get-login --no-include-email --region us-east-1)
   docker push "$REMOTE_FULL_URL"
   echo "Pushed $LOCAL_TAG_NAME to $REMOTE_FULL_URL"
 
