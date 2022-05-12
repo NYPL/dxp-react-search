@@ -13,7 +13,7 @@ SENDGRID_EMAIL_ENABLE=true
 NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
 DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
 
-if [ "$TRAVIS_BRANCH" == "qa" ]; then
+if [ "$TRAVIS_BRANCH" == "qa-test" ]; then
   NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
   DRUPAL_API=https://qa-d8.nypl.org
