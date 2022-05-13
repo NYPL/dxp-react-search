@@ -1,5 +1,8 @@
 FROM node:14 AS production
 
+RUN apt-get update
+RUN apt-get upgrade -y
+
 WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
@@ -10,6 +13,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install dependencies.
 COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 
 # Add application code.
