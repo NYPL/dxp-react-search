@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-} from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
 
 interface TextProps {
@@ -16,7 +12,7 @@ interface TextProps {
 function Text({ id, type, heading, text }: TextProps) {
   return (
     <Box id={`${type}-${id}`} mb="xl">
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       <TextFormatted html={text} />
     </Box>
   );

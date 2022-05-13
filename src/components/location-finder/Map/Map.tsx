@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Icon,
-  IconAlign,
-  IconColors,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Box, Icon, Link } from "@nypl/design-system-react-components";
 // Google map
 import {
   withGoogleMap,
@@ -24,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMapInfoWindow } from "./../../../redux/actions";
 // Apollo
 import { useQuery } from "@apollo/client";
-import { LocationsQuery as LOCATIONS_QUERY } from "./../../../apollo/client/queries/Locations.gql";
+import { LOCATIONS_QUERY } from "./../Locations/Locations";
 // Hooks
 import useWindowSize from "./../../../hooks/useWindowSize";
 // Utils
@@ -33,6 +24,7 @@ import setTermsFilter from "./../../../utils/setTermsFilter";
 const MapWrapper = compose(
   withScriptjs,
   withGoogleMap
+  // @ts-ignore
 )((props) => {
   // Redux
   const {
@@ -43,8 +35,10 @@ const MapWrapper = compose(
     offset,
     pageNumber,
     searchFilters,
+    // @ts-ignore
   } = useSelector((state) => state.search);
   const { mapCenter, mapZoom, infoWindowId, infoWindowIsVisible } = useSelector(
+    // @ts-ignore
     (state) => state.map
   );
 
@@ -52,7 +46,7 @@ const MapWrapper = compose(
   const windowSize = useWindowSize();
   // Set limit based on window size, to disable pagination for desktop only.
   let limit = 300;
-  if (windowSize < 600) {
+  if (windowSize && windowSize < 600) {
     limit = 10;
   }
 
@@ -83,6 +77,23 @@ const MapWrapper = compose(
     return <div>'error while loading locations'</div>;
   }
 
+  // Locations that use a parent library will have the same geo-cordinates as parent library.
+  // This causes all the map pins to be in the same point, and the last location in the array
+  // is visible by default. So we move all parent libraries to end of the locations array so
+  // they are visible on default render of the map.
+  // @TODO Need to fix this when actual types are added for the location data.
+  let keep: any = [];
+  let move: any = [];
+  const slugs = ["schwarzman", "snfl", "schomburg", "lpa"];
+  data.refineryAllLocations.locations.forEach((item: any) => {
+    if (!slugs.includes(item.slug)) {
+      keep.push(item);
+    } else {
+      move.push(item);
+    }
+  });
+  const locations = [...keep, ...move];
+
   return (
     <GoogleMap
       defaultOptions={{ mapTypeControl: false }}
@@ -93,6 +104,7 @@ const MapWrapper = compose(
         <Marker
           icon={{
             url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            // @ts-ignore
             scaledSize: new google.maps.Size(32, 32),
           }}
           position={{
@@ -101,8 +113,9 @@ const MapWrapper = compose(
           }}
         />
       )}
-      {data.refineryAllLocations.locations.map((location) => {
+      {locations.map((location) => {
         // Binds onClick from Map prop
+        // @ts-ignore
         const onClick = props.onClick.bind(this, location);
 
         return (
@@ -111,6 +124,7 @@ const MapWrapper = compose(
             onClick={onClick}
             icon={{
               url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+              // @ts-ignore
               scaledSize: new google.maps.Size(32, 32),
             }}
             position={{
@@ -145,20 +159,24 @@ function Map() {
 
   const windowSize = useWindowSize();
 
-  function handleClick(location, event) {
+  function handleClick(location: object) {
     dispatch(
       setMapInfoWindow({
+        // @ts-ignore
         infoWindowId: location.id,
         infoWindowIsVisible: true,
       })
     );
 
     // Scroll to location on list when map marker is clicked for desktop only.
-    if (windowSize >= 600) {
+    if (windowSize && windowSize >= 600) {
       // Set focus
+      // @ts-ignore
       document.querySelector(`#lid-${location.id} a`).focus();
       // Scroll into view.
+      // @ts-ignore
       document.getElementById(`lid-${location.id}`).scrollIntoView({
+        // @ts-ignore
         alignToTop: false,
         behavior: "smooth",
       });
@@ -176,6 +194,7 @@ function Map() {
       </Box>
       <MapWrapper
         aria-hidden="true"
+        // @ts-ignore
         onClick={handleClick}
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
         loadingElement={<div style={{ height: `100%` }} />}
@@ -183,16 +202,17 @@ function Map() {
         mapElement={<div style={{ height: `100%` }} />}
       />
       <Link
-        additionalStyles={{ display: ["block", "block", "none"] }}
+        // additionalStyles
+        sx={{ display: ["block", "block", "none"] }}
         href="#locations-list"
       >
         Back to List
         <Icon
-          name={IconNames.Arrow}
-          align={IconAlign.Right}
-          iconRotation={IconRotationTypes.Rotate180}
-          color={IconColors.UiBlack}
-          size={IconSizes.Small}
+          name="arrow"
+          align="right"
+          iconRotation="rotate180"
+          color="ui.black"
+          size="small"
         />
       </Link>
     </>
