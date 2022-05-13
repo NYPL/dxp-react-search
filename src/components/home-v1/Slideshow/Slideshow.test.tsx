@@ -51,35 +51,94 @@ const items = [
     url: "https://www.nypl.org/",
   },
 ];
+
 describe("useSlideshow tests", () => {
-  // Mock useSlideshow hook
-  // jest.mock("./useSlideshowStyle", () => {
-  //   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
-  //     useSlideshowStyles(items.length, 11);
-  //   return {
-  //     useSlideshowStyles: () => {
-  //       return { currentSlide, prevSlide, nextSlide, slideshowStyle };
-  //     },
-  //   };
-  // });
-  // const mockUseSlideshowStyle = useSlideshowStyles as jest.MockedFunction<
-  //   typeof useSlideshowStyles
-  // >;
-  it("should provide the currentSlide as a number and the slideshowStyle as an object", () => {});
-  it("should provide a nextSlide  function that moves pointer of currentSlide to the next Slide", () => {});
-  it("should provide a prevSlide function that moves pointer of currentSlide to the previous Slide", () => {});
-  it("should update the slideshowStyles with according to the currentSlide", () => {});
+  it("returns two functions, the currentSlide number and a CSS style object", () => {
+    const { result } = renderHook(() => useSlideshowStyles());
+
+    expect(typeof result.current.nextSlide).toEqual("function");
+    expect(typeof result.current.prevSlide).toEqual("function");
+    expect(typeof result.current.currentSlide).toEqual("number");
+    expect(result.current.slideshowStyle).toEqual({
+      marginLeft: "-0%",
+      transition: "all .5s",
+    });
+  });
+  it("should update the currentSlide and the slideshowStyle obeject when the nextSlide/prevSlide function is called", () => {
+    // The second argument passed determins the with in percent of each slide
+    const { result } = renderHook(() => useSlideshowStyles(items.length, 100));
+    const mockPrevSlide = result.current.prevSlide;
+    const mockNextSlide = result.current.nextSlide;
+    // Starts on first slide
+    expect(result.current.slideshowStyle).toEqual({
+      marginLeft: "-0%",
+      transition: "all .5s",
+    });
+    expect(result.current.currentSlide).toEqual(0);
+    // Try to move to a previous slide when on first slide
+    act(() => mockPrevSlide());
+    // Stayes on first slide
+    expect(result.current.slideshowStyle).toEqual({
+      marginLeft: "-0%",
+      transition: "all .5s",
+    });
+    expect(result.current.currentSlide).toEqual(0);
+    // Move two slides
+    act(() => mockNextSlide());
+    act(() => mockNextSlide());
+    expect(result.current.slideshowStyle).toEqual({
+      marginLeft: "-200%",
+      transition: "all .5s",
+    });
+    expect(result.current.currentSlide).toEqual(2);
+    // Move to previsou slide
+    act(() => mockPrevSlide());
+    expect(result.current.slideshowStyle).toEqual({
+      marginLeft: "-100%",
+      transition: "all .5s",
+    });
+    expect(result.current.currentSlide).toEqual(1);
+    // Move to last slide
+    act(() => mockNextSlide());
+    act(() => mockNextSlide());
+    expect(result.current.slideshowStyle).toEqual({
+      marginLeft: "-300%",
+      transition: "all .5s",
+    });
+    expect(result.current.currentSlide).toEqual(3);
+    // Try to move passed the last slide
+    act(() => mockNextSlide());
+    act(() => mockNextSlide());
+    // Expect to be still on the last slide
+    expect(result.current.slideshowStyle).toEqual({
+      marginLeft: "-300%",
+      transition: "all .5s",
+    });
+    expect(result.current.currentSlide).toEqual(3);
+    // Move to previous slide
+    act(() => mockPrevSlide());
+    expect(result.current.slideshowStyle).toEqual({
+      marginLeft: "-200%",
+      transition: "all .5s",
+    });
+    expect(result.current.currentSlide).toEqual(2);
+  });
 });
-xdescribe("SlideshowButton tests", () => {
+
+describe("SlideshowButton tests", () => {
   it("should pass axe accessibility test", async () => {
     const { container } = render(<SlideshowButton direction="next" />);
     expect(await axe(container)).toHaveNoViolations();
   });
   it("should render correct button according to direction prop", () => {
-    render(<SlideshowButton direction="next" />);
+    // Render button with direction set to next should render the next button
+    const { rerender } = render(<SlideshowButton direction="next" />);
     expect(screen.getByRole("button", { name: />/i })).toBeInTheDocument();
+    // Render button with direction set to prev should render the next button
+    rerender(<SlideshowButton direction="prev" />);
+    expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
   });
-  it("should call correct function when clicked", () => {
+  it("should call the nextSlide function when the next button is clicked", () => {
     const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
     let spyNextSlide = jest.spyOn(result.current, "nextSlide");
     let spyPrevSlide = jest.spyOn(result.current, "prevSlide");
@@ -94,6 +153,22 @@ xdescribe("SlideshowButton tests", () => {
     act(() => userEvent.click(screen.getByRole("button", { name: />/i })));
     expect(spyNextSlide).toBeCalledTimes(1);
     expect(spyPrevSlide).not.toBeCalled();
+  });
+  it("should call the prevSlide function when the previous button is clicked", () => {
+    const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
+    let spyNextSlide = jest.spyOn(result.current, "nextSlide");
+    let spyPrevSlide = jest.spyOn(result.current, "prevSlide");
+
+    render(
+      <SlideshowButton
+        direction="prev"
+        nextSlide={spyNextSlide}
+        prevSlide={spyPrevSlide}
+      />
+    );
+    act(() => userEvent.click(screen.getByRole("button", { name: /</i })));
+    expect(spyPrevSlide).toBeCalledTimes(1);
+    expect(spyNextSlide).not.toBeCalled();
   });
   it("should render the UI snapshot correctly", () => {
     // Mock passe in functions
@@ -114,7 +189,7 @@ xdescribe("SlideshowButton tests", () => {
 });
 
 describe("SlideshowContainer tests", () => {
-  // Mock useSlideshow hook
+  // Call useSlideshow hook to get props for SlideshowContainer component
   const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } = result.current;
   xit("should pass axe accessibility test", async () => {
@@ -141,6 +216,7 @@ describe("SlideshowContainer tests", () => {
     );
     expect(screen.getAllByRole("listitem")).toHaveLength(4);
   });
+
   it("should render the UI snapshot correctly", () => {
     const slideshowContainer = renderer
       .create(
@@ -157,8 +233,8 @@ describe("SlideshowContainer tests", () => {
   });
 });
 
-xdescribe("Slideshow tests", () => {
-  it("shold pass axe accessibility test", async () => {
+describe("Slideshow tests", () => {
+  xit("shold pass axe accessibility test", async () => {
     const { container } = render(
       <Slideshow title="Test" link="https://nypl.com" items={items} />
     );
@@ -175,21 +251,6 @@ xdescribe("Slideshow tests", () => {
     userEvent.click(screen.getByRole("button", { name: />/i }));
     expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
   });
-  // @QUESTION can this be tested? does not show margin value/ can't access position
-  xit("should move the SlideshowContainer to the left if the next button is clicked", () => {
-    render(<Slideshow title="Test" link="https://nypl.com" items={items} />);
-    const prevPosition = screen
-      .getByRole("heading", { name: /Test 1/i })
-      .getBoundingClientRect();
-    console.log(prevPosition);
-    userEvent.click(screen.getByRole("button", { name: />/i }));
-    const nextPosition = screen
-      .getByRole("heading", { name: /Test 1/i })
-      .getBoundingClientRect();
-    console.log(nextPosition);
-  });
-  // @QUESTION can this be tested? does not show margin value/ can't access position
-  xit("should move the SlideshowContainer to the right if the prev button is clicked", () => {});
   it("should hide the next button when the end of the list is reached", () => {
     render(<Slideshow title="Test" link="https://nypl.com" items={items} />);
     userEvent.click(screen.getByRole("button", { name: />/i }));
@@ -201,6 +262,29 @@ xdescribe("Slideshow tests", () => {
     expect(
       screen.queryByRole("button", { name: />/i })
     ).not.toBeInTheDocument();
+  });
+  it("should support keyboard naviagtion", () => {
+    render(<Slideshow title="Test" link="https://nypl.com" items={items} />);
+
+    userEvent.tab();
+    expect(screen.getByRole("link", { name: "Test" })).toHaveFocus();
+    // To slide #one
+    userEvent.tab();
+    expect(screen.getByRole("link", { name: "Test 1" })).toHaveFocus();
+    // To slide #two
+    userEvent.tab();
+    expect(screen.getByRole("link", { name: "Test 2" })).toHaveFocus();
+    // Back to slide #one
+    userEvent.tab({ shift: true });
+    expect(screen.getByRole("link", { name: "Test 1" })).toHaveFocus();
+    // userEvent.tab();
+    // userEvent.tab();
+    // userEvent.tab();
+    // // Last slide
+    // expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
+    // userEvent.tab();
+    // // Can not pass last slide
+    // expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
   });
   it("should render the UI snapshot correctly", () => {
     const basicView = renderer
