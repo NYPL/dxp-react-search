@@ -82,10 +82,10 @@ const MapWrapper = compose(
   // is visible by default. So we move all parent libraries to end of the locations array so
   // they are visible on default render of the map.
   // @TODO Need to fix this when actual types are added for the location data.
-  let keep: any = [];
-  let move: any = [];
+  let keep = [];
+  let move = [];
   const slugs = ["schwarzman", "snfl", "schomburg", "lpa"];
-  data.refineryAllLocations.locations.forEach((item: any) => {
+  data.refineryAllLocations.locations.forEach((item) => {
     if (!slugs.includes(item.slug)) {
       keep.push(item);
     } else {
@@ -159,7 +159,7 @@ function Map() {
 
   const windowSize = useWindowSize();
 
-  function handleClick(location: object) {
+  function handleClick(location) {
     dispatch(
       setMapInfoWindow({
         // @ts-ignore

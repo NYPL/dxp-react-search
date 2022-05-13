@@ -24,6 +24,7 @@ function SearchApp({ Component, pageProps }: AppProps) {
 
   return (
     <AppLayout>
+      {/* @ts-ignore */}
       <Component {...pageProps} />
     </AppLayout>
   );
