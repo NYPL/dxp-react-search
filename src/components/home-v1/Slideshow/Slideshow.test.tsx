@@ -192,6 +192,8 @@ describe("SlideshowContainer tests", () => {
   // Call useSlideshow hook to get props for SlideshowContainer component
   const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } = result.current;
+  // @TODO axe test throws error
+  // fix to this accessibility error is added on cardgrid-test
   xit("should pass axe accessibility test", async () => {
     const { container } = render(
       <SlideshowContainer
@@ -234,6 +236,8 @@ describe("SlideshowContainer tests", () => {
 });
 
 describe("Slideshow tests", () => {
+  // @TODO axe test throws error
+  // fix to this accessibility error is added on cardgrid-test
   xit("shold pass axe accessibility test", async () => {
     const { container } = render(
       <Slideshow title="Test" link="https://nypl.com" items={items} />
