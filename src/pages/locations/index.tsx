@@ -11,8 +11,7 @@ import SearchForm from "../../components/location-finder/SearchForm";
 import Locations from "../../components/location-finder/Locations/Locations";
 import SearchResultsDetails from "../../components/location-finder/SearchResultsDetails";
 import Map from "../../components/location-finder/Map";
-// import BottomPromo from "../../components/location-finder/BottomPromo";
-import TestBottomPromo from "../../components/location-finder/BottomPromo/TestBottomPromo";
+import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
 import { Box, Grid, GridItem } from "@nypl/design-system-react-components";
 // Content + config
@@ -68,7 +67,7 @@ function LocationFinder() {
       }
       contentBottom={
         <>
-          <TestBottomPromo />
+          <BottomPromo />
           <Box
             display={{ md: "flex" }}
             justifyContent={{ md: "space-between" }}
