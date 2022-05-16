@@ -7,9 +7,11 @@
 ---
 
 - Adds vercel.sh bash script for skipping preview builds on qa and production.
-- Upgrades DS from 0.25.9 -> 0.28.0.
 - Code refactoring and cleanup related to DS update.
 - Bug fix for SASB and SNFL not visible on Location Finder map.
+- Upgrades DS from 0.28.0 -> v1.0.0.
+- Removes Header component and replaces with Header script with static component.
+- Updates to Dockerfile to copy package-lock.json
 
 ---
 
