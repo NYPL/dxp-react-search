@@ -2,8 +2,8 @@
 $space: 1rem;
 
 // Spacing variants
-$space-xxs: $space/4; //  4px
-$space-xs: $space/2; //  8px
+$space-xxs: calc($space/4); //  4px
+$space-xs: calc($space/2); //  8px
 $space-s: $space * 1; // 16px
 $space-m: $space * 1.5; // 24px
 $space-l: $space * 2; // 32px
@@ -11,6 +11,6 @@ $space-xl: $space * 3; // 48px
 $space-xxl: $space * 4; // 64px
 $space-xxxl: $space * 6; // 96px
 
-@import '_space-inline';
-@import '_space-inset';
-@import '_space-stack';
+@import "_space-inline";
+@import "_space-inset";
+@import "_space-stack";
