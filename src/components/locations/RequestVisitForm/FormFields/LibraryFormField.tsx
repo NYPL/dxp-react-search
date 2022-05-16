@@ -37,7 +37,7 @@ const LOCATIONS_QUERY = gql`
 function LibraryFormField({ handleChange }: FormFieldProps) {
   // @ts-ignore
   const [state] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
+  const { values, errors } = state;
 
   const { loading, error, data } = useQuery(LOCATIONS_QUERY, {
     variables: {

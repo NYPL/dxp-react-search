@@ -1,34 +1,30 @@
 import React from "react";
-// Components
 import {
+  Box,
   Card as DsCard,
   CardContent,
   CardHeading,
-  HeadingLevels,
-  ImageRatios,
-  ImageSizes,
-  CardLayouts,
+  LayoutTypes,
 } from "@nypl/design-system-react-components";
 import NextDsLink from "./../Link/NextDsLink";
 
 interface CardProps {
-  /** The id for the card */
+  /** The id for the card. */
   id: string;
-  /** The name for the card */
+  /** The heading text for the card's h3. */
   title: string;
+  /** The sub heading component for the card. */
   subHeading?: JSX.Element;
-  /** The description for the card */
+  /** The description for the card. */
   description?: string;
-  /** The url for the card */
+  /** The url for the card. */
   url: string;
-  /** The image for the card */
-  // @TODO this should be the type for NextJS image.
+  /** An optional image component that can be passed to the card. */
   image?: JSX.Element;
-  /** */
-  imageAspectRatio?: ImageRatios;
-  layout?: CardLayouts;
-  center?: boolean;
-  imageSize?: ImageSizes;
+  /** Optional value to render the layout in a row or column. */
+  layout?: LayoutTypes;
+  /** Optional value to control the alignment of the text and elements. */
+  isCentered?: boolean;
 }
 
 function Card({
@@ -38,42 +34,33 @@ function Card({
   title,
   subHeading,
   description,
-  imageAspectRatio,
-  center,
+  isCentered,
   layout,
-  imageSize,
 }: CardProps) {
   return (
     <DsCard
       id={id}
       {...(image && {
-        imageComponent: image,
+        imageProps: {
+          component: image,
+          // Workaround to suppress console.warn message for component and aspect ratio.
+          aspectRatio: "square",
+        },
       })}
-      {...(image &&
-        imageAspectRatio && {
-          imageAspectRatio: imageAspectRatio,
-        })}
-      {...(center && {
-        center: true,
-      })}
-      {...(layout && {
-        layout: layout,
-      })}
-      {...(imageSize && {
-        imageSize: imageSize,
-      })}
+      isCentered={isCentered}
+      layout={layout}
     >
-      <CardHeading level={HeadingLevels.Three}>
+      <CardHeading level="three">
         {url && <NextDsLink href={url}>{title}</NextDsLink>}
       </CardHeading>
       <CardContent>
         {subHeading && subHeading}
         {description && (
-          <div
+          <Box
             dangerouslySetInnerHTML={{
               __html: description,
             }}
-          ></div>
+          ></Box>
         )}
       </CardContent>
     </DsCard>

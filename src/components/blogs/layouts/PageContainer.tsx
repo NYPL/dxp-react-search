@@ -1,14 +1,12 @@
 import React from "react";
 // Components
-import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
-import Menu from "./../../ds-prototypes/Menu";
 import {
-  Heading,
-  HeadingLevels,
-  Hero,
-  HeroTypes,
-  ColorVariants,
-} from "@nypl/design-system-react-components";
+  default as SharedPageContainer,
+  PageContainerProps,
+  BreadcrumbsItem,
+} from "./../../shared/layouts/PageContainer";
+import Menu from "./../../ds-prototypes/Menu";
+import { Heading, Hero } from "@nypl/design-system-react-components";
 import FilterBar from "./../../shared/FilterBar";
 // Config/Utils
 import blogsContent from "./../../../__content/blogs";
@@ -16,14 +14,22 @@ import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
-function PageContainer(props) {
-  const {
-    metaTags,
-    breadcrumbs,
-    contentPrimary,
-    showFilterBar,
-    showContentHeader,
-  } = props;
+type BlogPageContainerProps = Omit<
+  PageContainerProps,
+  "breadcrumbsColor" | "wrapperClass" | "breadcrumbs"
+> & {
+  showFilterBar?: boolean;
+  showContentHeader: boolean;
+  breadcrumbs?: BreadcrumbsItem[];
+};
+
+function PageContainer({
+  metaTags,
+  breadcrumbs,
+  contentPrimary,
+  showFilterBar,
+  showContentHeader,
+}: BlogPageContainerProps) {
   const { meta } = blogsContent;
 
   // Default breadcrumbs for all online resources pages.
@@ -37,7 +43,6 @@ function PageContainer(props) {
       url: `${NEXT_PUBLIC_NYPL_DOMAIN}${BLOGS_BASE_PATH}`,
     },
   ];
-
   const newBreadcrumbs = breadcrumbs
     ? [...defaultBreadcrumbs, ...breadcrumbs]
     : defaultBreadcrumbs;
@@ -45,8 +50,8 @@ function PageContainer(props) {
   const ContentHeader = (
     <>
       <Hero
-        heroType={HeroTypes.Tertiary}
-        heading={<Heading level={HeadingLevels.One} text={meta.title} />}
+        heroType="tertiary"
+        heading={<Heading level="one" text={meta.title} />}
         subHeaderText={meta.description}
         backgroundColor="#E0E0E0"
         foregroundColor="#000000"
@@ -103,12 +108,14 @@ function PageContainer(props) {
   return (
     <SharedPageContainer
       wrapperClass="nypl--articles"
-      metaTags={metaTags}
+      {...(metaTags && {
+        metaTags: metaTags,
+      })}
       {...(showContentHeader && {
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor={ColorVariants.Blogs}
+      breadcrumbsColor="blogs"
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"
@@ -119,9 +126,10 @@ function PageContainer(props) {
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel={HeadingLevels.Three}
+                headingLevel="three"
                 headingColor={"#000"}
                 title={menu.title}
+                // @ts-ignore
                 items={menu.items}
                 menuItemDecoration={false}
                 orientation={"vertical"}

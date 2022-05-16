@@ -15,7 +15,7 @@
   "dependencies": {
     "@apollo/client": "^3.3.3",
     "@apollo/react-common": "^3.1.4",
-    "@nypl/design-system-react-components": "0.25.9",
+    "@nypl/design-system-react-components": "0.28.0",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component.git#reactupdate",
     "@nypl/dgx-react-footer": "^0.5.8",
     "@sendgrid/mail": "^7.5.0",
@@ -67,6 +67,7 @@
     "@types/jest-axe": "^3.5.3",
     "@types/react": "^17.0.17",
     "@types/react-test-renderer": "^17.0.2",
+    "@types/recompose": "^0.30.10",
     "babel-register": "^6.26.0",
     "cypress": "^8.5.0",
     "eslint": "^7.32.0",
