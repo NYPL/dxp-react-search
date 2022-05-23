@@ -149,14 +149,7 @@ function Locations() {
   }
 
   return (
-    <Box
-      sx={{
-        overflowX: "hidden",
-        overflowY: "scroll",
-        scrollbarWidth: "auto",
-        scrollbarColor: "#888 #f8f8f7",
-      }}
-    >
+    <Box>
       <Link
         // additionalStyles
         sx={{
