@@ -13,7 +13,9 @@ import { useRouter } from "next/router";
 interface FilterBarProps {
   /** The id of the filter bar instance. */
   id: string;
+  /** The label of the filter bar instance. */
   label: string;
+  /** The groups of the filter bar instance. */
   groups: FilterBarGroupItem[];
   /** The path to use for clear and saving of multiselects. */
   routerPathname: string;
@@ -294,8 +296,8 @@ function FilterBar({
             handleChangeMixedStateCheckbox={(childItems: string[]) => {
               handleChangeMixedStateCheckbox(group.id, childItems);
             }}
-            legacy={group.legacy ? true : false}
             includeChildren={group.includeChildren}
+            customData={group.customData}
           />
         );
       })}
