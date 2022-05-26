@@ -51,11 +51,11 @@ function LocationFinder() {
         </>
       }
       contentPrimary={
-        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} gap="l">
+        <Grid templateColumns={{ md: "repeat(2, 1fr)" }}>
           <GridItem
             id="locations-list"
-            maxHeight={[null, null, "500px"]}
-            overflowY={[null, null, "auto"]}
+            maxHeight={{ md: "500px" }}
+            overflowY={{ md: "auto" }}
           >
             <SearchResultsDetails />
             <Locations />
