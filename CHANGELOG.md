@@ -2,6 +2,20 @@
 
 ---
 
+### v0.6.0 [2022-?] Scout Maintenance & Improvements
+
+---
+
+- Adds vercel.sh bash script for skipping preview builds on qa and production.
+- Code refactoring and cleanup related to DS update.
+- Bug fix for SASB and SNFL not visible on Location Finder map.
+- Upgrades DS from 0.28.0 -> v1.0.0.
+- Removes Header component and replaces with Header script with static component.
+- Updates to Dockerfile to copy package-lock.json.
+- Fix for double scroll bars on Location Finder.
+
+---
+
 ### v0.5.2 [2022-03-30] Blogs Bug Fixes & Additions
 
 ---

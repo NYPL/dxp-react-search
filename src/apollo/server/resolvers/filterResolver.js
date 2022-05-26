@@ -1,11 +1,17 @@
 // Utils
 import setNestedFilterItems from "./../../../utils/setNestedFilterItems";
-import setNestedFilterItemsLegacy from "./../../../utils/setNestedFilterItemsLegacy";
 import { getCollectionResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
+import { availabilityFilterData } from "./../../../__content/onlineResources";
 
 const filterResolver = {
   Query: {
     allFiltersByGroupId: async (_, args, { dataSources }) => {
+      // Special handling for "availability" filters for online resources.
+      // @TODO Could move this to a util function, where you pass the id?
+      if (args.customData && args.id === "availability") {
+        return availabilityFilterData.data;
+      }
+
       const pagination = {
         limit: args.limit,
         pageNumber: args.pageNumber,
@@ -48,19 +54,6 @@ const filterResolver = {
         return setNestedFilterItems(terms);
       }
     },
-    // Legacy version.
-    allFiltersByGroupIdLegacy: async (parent, args, { dataSources }) => {
-      const response = await dataSources.drupalApi.getAllFiltersByGroupIdLegacy(
-        args.id,
-        args.limiter
-      );
-      const terms = response.data.terms;
-      // Sort alpha.
-      terms.sort((a, b) => a.name.localeCompare(b.name));
-      // Set the item nesting.
-      const nestedItems = setNestedFilterItemsLegacy(terms);
-      return nestedItems;
-    },
   },
   FilterItem: {
     id: (filterItem, args, context, info) => {
@@ -88,12 +81,6 @@ const filterResolver = {
         return null;
       }
     },
-  },
-  FilterItemLegacy: {
-    id: (filterItem) => String(filterItem.tid),
-    name: (filterItem) => filterItem.name,
-    drupalInternalId: (filterItem) => filterItem.tid,
-    children: (filterItem) => filterItem.children,
   },
 };
 
