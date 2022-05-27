@@ -15,7 +15,7 @@
   "dependencies": {
     "@apollo/client": "^3.3.3",
     "@apollo/react-common": "^3.1.4",
-    "@nypl/design-system-react-components": "1.0.0",
+    "@nypl/design-system-react-components": "git+https://git@github.com/NYPL/nypl-design-system.git#DSD-240-multiselect",
     "@nypl/dgx-react-footer": "^0.5.8",
     "@sendgrid/mail": "^7.5.0",
     "apollo-datasource-rest": "^0.9.3",

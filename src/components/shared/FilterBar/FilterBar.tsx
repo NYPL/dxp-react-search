@@ -36,8 +36,6 @@ function FilterBar({
   // MultiSelect state
   // @TODO default should not be empty object!
   const [selectedItems, setSelectedItems] = useState<SelectedItemsMap>({});
-  // Menu state
-  const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
 
   // Set the isMobile state based on screen width.
   const windowSize = useWindowSize();
@@ -81,51 +79,8 @@ function FilterBar({
     setSelectedItems(urlState);
   }, [router.query]);
 
-  //
-  function onMenuClick(groupId: string) {
-    const mode = "desktop";
-    let selectedGroupIdsCopy: string[] = [];
-
-    // const nextState = (object: SelectedItemsMap, property: string) => {
-    //   let { [property]: omit, ...rest } = object;
-    //   return rest;
-    // };
-
-    if (selectedGroupIds !== undefined) {
-      let groupIdExists = selectedGroupIds.indexOf(groupId) > -1;
-      // Make a copy of the existing array.
-      selectedGroupIdsCopy = selectedGroupIds.slice();
-      // If groupIdExists exists, remove it from the array.
-      if (groupIdExists) {
-        selectedGroupIdsCopy = selectedGroupIdsCopy.filter(
-          (id) => id != groupId
-        );
-      } else {
-        // Desktop
-        if (mode === "desktop") {
-          // Desktop: only allow 1 item in the array.
-          selectedGroupIdsCopy = [groupId];
-        } else {
-          // Mobile: allow multiple items in the array.
-          selectedGroupIdsCopy.push(groupId);
-        }
-      }
-    } else {
-      // No dropdowns open, so add the checked dropdown to the array.
-      selectedGroupIdsCopy = [groupId];
-    }
-
-    setSelectedGroupIds(selectedGroupIdsCopy);
-  }
-
-  //
-  function onSelectedItemChange(itemId: string, groupId: string) {
+  function handleChange(itemId: string, groupId: string) {
     itemId = itemId.replace(/^[^__]*__/, "");
-
-    // const nextState = (object: SelectedItemsMap, property: string) => {
-    //   let { [property]: omit, ...rest } = object;
-    //   return rest;
-    // };
 
     let itemIds;
     // Check if the tid already exists in the state
@@ -156,8 +111,7 @@ function FilterBar({
     });
   }
 
-  //
-  function onSaveMultiSelect() {
+  function handleApply() {
     // Get the query params to add using the groups.
     let queryParamsToAdd = {};
     groups.map((group: FilterBarGroupItem) => {
@@ -183,8 +137,6 @@ function FilterBar({
       })
       .then(() => {
         setIsModalOpen(false);
-        // Reset any open multiselect menus.
-        setSelectedGroupIds([]);
       });
   }
 
@@ -204,7 +156,7 @@ function FilterBar({
     });
   }
 
-  function onClearMultiSelect(groupId: string) {
+  function handleClear(groupId: string) {
     // Run through query param state and remove
     let queryStateToKeep = {} as any;
     for (let [key] of Object.entries(router.query)) {
@@ -227,41 +179,6 @@ function FilterBar({
         ...queryStateToKeep,
       },
     });
-    // Reset any open multiselect menus.
-    setSelectedGroupIds([]);
-  }
-
-  //
-  function handleChangeMixedStateCheckbox(
-    groupId: string,
-    childItems: string[]
-  ) {
-    let newItems;
-    // Some selected items for group already exist in state.
-    if (selectedItems[groupId] !== undefined) {
-      //
-      if (
-        childItems.every((childItem) =>
-          selectedItems[groupId].items.includes(childItem)
-        )
-      ) {
-        newItems = selectedItems[groupId].items.filter(
-          (stateItem) => !childItems.includes(stateItem)
-        );
-      } else {
-        // Merge all child items.
-        newItems = [...childItems, ...selectedItems[groupId].items];
-      }
-    } else {
-      newItems = childItems;
-    }
-
-    setSelectedItems({
-      ...selectedItems,
-      [groupId]: {
-        items: newItems,
-      },
-    });
   }
 
   return (
@@ -274,7 +191,7 @@ function FilterBar({
       isMobile={isMobile ? isMobile : false}
       selectedItems={selectedItems}
       onClearSelectedItems={onClearAllMultiSelects}
-      onSaveSelectedItems={onSaveMultiSelect}
+      onSaveSelectedItems={handleApply}
     >
       {groups.map((group: FilterBarGroupItem) => {
         return (
@@ -284,18 +201,10 @@ function FilterBar({
             type={group.type}
             limiter={group.limiter}
             label={group.label}
-            onSelectedItemChange={(e: React.MouseEvent<HTMLButtonElement>) =>
-              onSelectedItemChange(e.currentTarget.id, group.id)
-            }
+            onChange={(e) => handleChange(e.currentTarget.id, group.id)}
             selectedItems={selectedItems}
-            onClearMultiSelect={() => onClearMultiSelect(group.id)}
-            onSaveMultiSelect={onSaveMultiSelect}
-            onMenuClick={() => onMenuClick(group.id)}
-            selectedGroupIds={selectedGroupIds}
-            showCtaButtons={isMobile ? false : true}
-            handleChangeMixedStateCheckbox={(childItems: string[]) => {
-              handleChangeMixedStateCheckbox(group.id, childItems);
-            }}
+            onClear={() => handleClear(group.id)}
+            onApply={handleApply}
             includeChildren={group.includeChildren}
             customData={group.customData}
           />

@@ -1,10 +1,11 @@
 import React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-// Types
-import { SelectedItemsMap } from "./types";
 // Components
-import { default as DsMultiSelect } from "../../ds-prototypes/MultiSelect/MultiSelect";
+import {
+  MultiSelect as DsMultiSelect,
+  SelectedItems,
+} from "@nypl/design-system-react-components";
 
 const FILTERS_QUERY = gql`
   query FiltersQuery(
@@ -36,23 +37,19 @@ const FILTERS_QUERY = gql`
   }
 `;
 
-interface MutliSelectProps {
+interface MultiSelectProps {
   id: string;
   label: string;
   type: string;
   limiter?: string;
-  onSelectedItemChange(event: React.MouseEvent<HTMLButtonElement>): void;
-  selectedItems: SelectedItemsMap;
-  onClearMultiSelect: () => void;
-  onSaveMultiSelect: () => void;
-  onMenuClick: () => void;
-  selectedGroupIds: string[];
-  showCtaButtons: boolean;
-  handleChangeMixedStateCheckbox: any;
   /** Include 2nd level child items. */
   includeChildren?: boolean;
   /** Escape hatch for use cases where the filter data does not come from api request, but hard coded. */
   customData?: boolean;
+  selectedItems: SelectedItems;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onApply: () => void;
+  onClear?: () => void;
 }
 
 function MultiSelect({
@@ -60,17 +57,13 @@ function MultiSelect({
   label,
   type,
   limiter,
-  onSelectedItemChange,
+  onChange,
   selectedItems,
-  onClearMultiSelect,
-  onSaveMultiSelect,
-  onMenuClick,
-  selectedGroupIds,
-  showCtaButtons,
-  handleChangeMixedStateCheckbox,
+  onClear,
+  onApply,
   includeChildren = true,
   customData = false,
-}: MutliSelectProps) {
+}: MultiSelectProps) {
   let variables = {
     id: id,
     type: type,
@@ -104,16 +97,13 @@ function MultiSelect({
     return (
       <DsMultiSelect
         id={id}
+        variant="dialog"
         label={label}
-        items={null}
-        handleOnSelectedItemChange={onSelectedItemChange}
+        items={[]}
+        onChange={onChange}
         selectedItems={selectedItems}
-        onClearMultiSelect={onClearMultiSelect}
-        onSaveMultiSelect={onSaveMultiSelect}
-        onMenuClick={onMenuClick}
-        selectedGroupIds={selectedGroupIds}
-        showCtaButtons={showCtaButtons}
-        handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
+        onClear={onClear}
+        onApply={onApply}
       />
     );
   }
@@ -123,16 +113,14 @@ function MultiSelect({
   return (
     <DsMultiSelect
       id={id}
+      variant="dialog"
       label={label}
       items={items}
-      handleOnSelectedItemChange={onSelectedItemChange}
+      width="fitContent"
+      onChange={onChange}
       selectedItems={selectedItems}
-      onClearMultiSelect={onClearMultiSelect}
-      onSaveMultiSelect={onSaveMultiSelect}
-      onMenuClick={onMenuClick}
-      selectedGroupIds={selectedGroupIds}
-      showCtaButtons={showCtaButtons}
-      handleChangeMixedStateCheckbox={handleChangeMixedStateCheckbox}
+      onClear={onClear}
+      onApply={onApply}
     />
   );
 }
