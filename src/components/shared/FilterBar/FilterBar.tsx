@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import useWindowSize from "../../../hooks/useWindowSize";
 import usePrevious from "../../../hooks/usePrevious";
 // Types
-import { FilterBarGroupItem, SelectedItemsMap } from "./types";
+import { FilterBarGroupItem } from "./types";
+import { SelectedItems } from "@nypl/design-system-react-components";
 // Components
 import { default as DsFilterBar } from "./../../ds-prototypes/FilterBar/FilterBar";
 import MultiSelect from "./MultiSelect";
@@ -35,7 +36,7 @@ function FilterBar({
   const [isMobile, setIsMobile] = useState<boolean>();
   // MultiSelect state
   // @TODO default should not be empty object!
-  const [selectedItems, setSelectedItems] = useState<SelectedItemsMap>({});
+  const [selectedItems, setSelectedItems] = useState<SelectedItems>({});
 
   // Set the isMobile state based on screen width.
   const windowSize = useWindowSize();
@@ -140,7 +141,6 @@ function FilterBar({
       });
   }
 
-  //
   function onClearAllMultiSelects() {
     // Remove the selectedItems from url state.
     router.push({
