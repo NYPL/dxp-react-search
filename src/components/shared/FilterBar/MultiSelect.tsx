@@ -48,6 +48,7 @@ interface MultiSelectProps {
   customData?: boolean;
   selectedItems: SelectedItems;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onMixedStateChange?: any;
   onApply: () => void;
   onClear?: () => void;
 }
@@ -58,6 +59,7 @@ function MultiSelect({
   type,
   limiter,
   onChange,
+  onMixedStateChange,
   selectedItems,
   onClear,
   onApply,
@@ -101,6 +103,7 @@ function MultiSelect({
         label={label}
         items={[]}
         onChange={onChange}
+        //onMixedStateChange={onMixedStateChange}
         selectedItems={selectedItems}
         onClear={onClear}
         onApply={onApply}
@@ -110,6 +113,12 @@ function MultiSelect({
 
   const items = data.allFiltersByGroupId;
 
+  const handleMixedStateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const multiSelectId = id;
+    const parentId = e.currentTarget.id;
+    onMixedStateChange(multiSelectId, parentId, items);
+  };
+
   return (
     <DsMultiSelect
       id={id}
@@ -118,6 +127,13 @@ function MultiSelect({
       items={items}
       width="fitContent"
       onChange={onChange}
+      // onMixedStateChange={(e) => {
+      //   const multiSelectId = id;
+      //   const parentId = e.currentTarget.id;
+      //   onMixedStateChange(multiSelectId, parentId, items);
+      // }}
+      //onMixedStateChange={(e) => handleMixedStateChange(e)}
+      onMixedStateChange={handleMixedStateChange}
       selectedItems={selectedItems}
       onClear={onClear}
       onApply={onApply}

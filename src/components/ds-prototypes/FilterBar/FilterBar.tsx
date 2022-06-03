@@ -1,41 +1,53 @@
-import React from "react";
+import * as React from "react";
 // Components
-import { Button, Heading, Icon } from "@nypl/design-system-react-components";
+import {
+  Button,
+  Heading,
+  Icon,
+  SelectedItems,
+} from "@nypl/design-system-react-components";
 import Modal from "./Modal";
 // Styles
 import s from "./FilterBar.module.css";
+// Hooks
+import useWindowSize from "./../../../hooks/useWindowSize";
 
 interface FilterBarProps {
   id: string;
   label: string;
-  isModalOpen: boolean;
-  onClickMobileFiltersButton: () => void;
-  onClickGoBack: () => void;
-  isMobile: boolean;
-  selectedItems: FbSelectedItems;
-  onClearSelectedItems: () => void;
-  onSaveSelectedItems: () => void;
+  selectedItems: SelectedItems;
+  isOpen: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+  onClear: () => void;
+  onApply: () => void;
   children: React.ReactNode;
-}
-
-interface FbSelectedItems {
-  [name: string]: { items: string[] };
 }
 
 function FilterBar({
   id,
   label,
-  isModalOpen,
-  onClickMobileFiltersButton,
-  onClickGoBack,
-  isMobile,
   selectedItems,
-  onClearSelectedItems,
-  onSaveSelectedItems,
+  isOpen,
+  onToggle,
+  onClose,
+  onClear,
+  onApply,
   children,
 }: FilterBarProps) {
+  const [isMobile, setIsMobile] = React.useState<boolean>();
+  // Set the isMobile state based on screen width.
+  const windowSize = useWindowSize();
+  React.useEffect(() => {
+    if (windowSize && windowSize >= 600) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
+    }
+  }, [windowSize]);
+
   // Sets the label of the filters button.
-  function setFilterButtonLabel(selectedItems: FbSelectedItems) {
+  function setFilterButtonLabel(selectedItems: SelectedItems) {
     let allItems = [];
     for (let [_, value] of Object.entries(selectedItems)) {
       value.items.map((item) => {
@@ -52,20 +64,20 @@ function FilterBar({
           <Button
             id="search-filters__mobile-filters-button"
             className={s.filterBarButtonMobile}
-            onClick={onClickMobileFiltersButton}
+            onClick={onToggle}
             buttonType="secondary"
             type="button"
           >
             {setFilterButtonLabel(selectedItems)}
           </Button>
-          {isModalOpen && (
+          {isOpen && (
             <Modal>
               <div className={s.ctaButtonsContainerMobile}>
                 <Button
                   id="multiselect-button-goback"
                   buttonType="link"
                   mouseDown={false}
-                  onClick={onClickGoBack}
+                  onClick={onClose}
                   // additionalStyles
                   sx={{
                     display: "block",
@@ -85,7 +97,7 @@ function FilterBar({
                   buttonType="primary"
                   mouseDown={false}
                   type="button"
-                  onClick={onSaveSelectedItems}
+                  onClick={onApply}
                 >
                   Show Results
                 </Button>
@@ -103,7 +115,7 @@ function FilterBar({
                     buttonType="link"
                     className={s.clearAllFiltersButton}
                     mouseDown={false}
-                    onClick={onClearSelectedItems}
+                    onClick={onClear}
                     type="submit"
                   >
                     Clear all filters
