@@ -2,12 +2,11 @@ import React from "react";
 import { Box, Icon, Link } from "@nypl/design-system-react-components";
 // Google map
 import {
-  withGoogleMap,
-  withScriptjs,
+  LoadScript,
   GoogleMap,
   Marker,
   InfoWindow,
-} from "react-google-maps";
+} from "@react-google-maps/api";
 import { compose } from "recompose";
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
 // Redux
@@ -22,8 +21,6 @@ import useWindowSize from "./../../../hooks/useWindowSize";
 import setTermsFilter from "./../../../utils/setTermsFilter";
 
 const MapWrapper = compose(
-  withScriptjs,
-  withGoogleMap
   // @ts-ignore
 )((props) => {
   // Redux
@@ -49,6 +46,11 @@ const MapWrapper = compose(
   if (windowSize && windowSize < 600) {
     limit = 10;
   }
+
+  const containerStyle = {
+    width: '100%',
+    height: '500px'
+  };
 
   // Apollo
   const searchGeoLat = searchQueryGeoLat ? searchQueryGeoLat : null;
@@ -95,8 +97,12 @@ const MapWrapper = compose(
   const locations = [...keep, ...move];
 
   return (
+    <LoadScript
+      googleMapsApiKey={NEXT_PUBLIC_GOOGLE_MAPS_API}
+    >
     <GoogleMap
-      defaultOptions={{ mapTypeControl: false }}
+      options={{ mapTypeControl: false }}
+      mapContainerStyle={containerStyle}
       zoom={mapZoom}
       center={mapCenter}
     >
@@ -104,8 +110,6 @@ const MapWrapper = compose(
         <Marker
           icon={{
             url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
-            // @ts-ignore
-            scaledSize: new google.maps.Size(32, 32),
           }}
           position={{
             lat: searchQueryGeoLat,
@@ -124,8 +128,6 @@ const MapWrapper = compose(
             onClick={onClick}
             icon={{
               url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-              // @ts-ignore
-              scaledSize: new google.maps.Size(32, 32),
             }}
             position={{
               lat: location.geoLocation.lat,
@@ -150,6 +152,7 @@ const MapWrapper = compose(
         );
       })}
     </GoogleMap>
+    </LoadScript>
   );
 });
 
@@ -196,7 +199,6 @@ function Map() {
         aria-hidden="true"
         // @ts-ignore
         onClick={handleClick}
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${NEXT_PUBLIC_GOOGLE_MAPS_API}`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `500px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
