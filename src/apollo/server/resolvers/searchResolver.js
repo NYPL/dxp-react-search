@@ -156,6 +156,7 @@ const searchResolver = {
     name: (accessLocation) => accessLocation.title,
     url: (accessLocation) => {
       let accessLocationUrl = accessLocation.url;
+      // @TODO I don't know what this does or why it's here :/
       if (accessLocation?.url) {
         const baseDomains = [
           "http://localhost:8080",

@@ -3,6 +3,7 @@ import {
   ImageTransformation,
   ResolvedParagraph,
 } from "./types";
+const { NEXT_PUBLIC_SERVER_ENV, DRUPAL_API } = process.env;
 
 export function resolveImage(image: any): ResolvedParagraph | null {
   // Special handling for these media types, as they are "fake" media images in D9.
@@ -59,22 +60,38 @@ export function resolveImage(image: any): ResolvedParagraph | null {
   return {
     id: mediaImage.id,
     alt: mediaImage.meta.alt,
-    uri: () => {
-      if (mediaImage.uri.url && mediaImage.uri.url.includes("sites/default")) {
-        return `http://localhost:8080${mediaImage.uri.url}`;
-      } else {
-        return mediaImage.uri.url;
-      }
-    },
+    // @TODO Without cdn, this value is always just the path without domain.
+    // Confirm this is true and remove this before merging.
+    // uri: () => {
+    //   // @TODO Without cdn, this value is always just the path without domain.
+    //   if (NEXT_PUBLIC_SERVER_ENV === "local") {
+    //     return `${DRUPAL_API}${mediaImage.uri.url}`;
+    //   } else {
+    //     //if (mediaImage.uri.url && mediaImage.uri.url.includes("sites/default")) {
+    //     //   return `http://localhost:8080${mediaImage.uri.url}`;
+    //     // } else {
+    //     return mediaImage.uri.url;
+    //   }
+    // },
+    uri: `${DRUPAL_API}${mediaImage.uri.url}`,
     transformations: () => {
       let transformations: ImageTransformation[] = [];
       mediaImage.image_style_uri.forEach(
         (imageStyle: JsonApiResourceObject) => {
           for (const [label, uri] of Object.entries(imageStyle)) {
+            let transformedImageUri = uri as string;
+            // If the NEXT_PUBLIC_SERVER_ENV is development or qa, append basic
+            // auth username and password to url for pantheon envs that are locked.
+            if (NEXT_PUBLIC_SERVER_ENV !== "production") {
+              transformedImageUri = (uri as string).replace(
+                "https://",
+                "https://nypl1:nypl1@"
+              );
+            }
             transformations.push({
               id: `${mediaImage.id}__${label}`,
               label: label,
-              uri: uri as string,
+              uri: transformedImageUri,
             });
           }
         }

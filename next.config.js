@@ -43,6 +43,12 @@ const nextConfig = {
       // Local
       "localhost",
       "nypl-d8.lndo.site",
+      // Pantheon envs.
+      // @TODO Might need to use an env variable here for pantheon,
+      // Multidev envs will with have random, different urls.
+      "dev-drupal.nypl.org",
+      "test-drupal.nypl.org",
+      "drupal.nypl.org",
       // Sandbox
       "sandbox-d8.nypl.org",
       "nyplorg-sandbox.s3.amazonaws.com",
