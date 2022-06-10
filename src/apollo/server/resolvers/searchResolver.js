@@ -156,7 +156,7 @@ const searchResolver = {
       let accessLocationUrl = accessLocation.url;
       if (accessLocation?.url) {
         // Drupal api will return absolute urls with the nypl.org backend subdomain,
-        // i.e., "https://dev-drupal.nypl.org/locations/schwarzman"
+        // i.e., "https://drupal.nypl.org/locations/schwarzman"
         // Since the access location links are public facing, we replace this
         // domain with the public facing url, i.e, nypl.org or qa-www.nypl.org.
         // Strip out the http basic auth from DRUPAL_API env var.
