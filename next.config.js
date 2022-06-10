@@ -3,6 +3,13 @@ const withPlugins = require("next-compose-plugins");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const { NEXT_PUBLIC_SERVER_ENV, DRUPAL_API } = process.env;
+
+// Get the domain only from the DRUPAL_API env variable.
+let DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://", "");
+if (NEXT_PUBLIC_SERVER_ENV !== "production") {
+  DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://nypl1:nypl1@", "");
+}
 
 const nextConfig = {
   assetPrefix: ASSET_PREFIX,
@@ -44,11 +51,7 @@ const nextConfig = {
       "localhost",
       "nypl-d8.lndo.site",
       // Pantheon envs.
-      // @TODO Might need to use an env variable here for pantheon,
-      // Multidev envs will with have random, different urls.
-      "dev-drupal.nypl.org",
-      "test-drupal.nypl.org",
-      "drupal.nypl.org",
+      DRUPAL_API_DOMAIN_ONLY,
       // Sandbox
       "sandbox-d8.nypl.org",
       "nyplorg-sandbox.s3.amazonaws.com",
