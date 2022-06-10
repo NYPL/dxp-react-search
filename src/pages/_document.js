@@ -1,7 +1,7 @@
 const {
   NEXT_PUBLIC_GTM_TRACKING_ID,
   NEXT_PUBLIC_GA_TRACKING_ID,
-  NEXT_PUBLIC_NYPL_DOMAIN,
+  NEXT_PUBLIC_SERVER_ENV,
 } = process.env;
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
@@ -11,7 +11,7 @@ class ScoutDocument extends Document {
     // This will generate enviornment aware links in the header logins.
     let nyplHeaderScript =
       "https://header.nypl.org/dgx-header.min.js?skipNav=main-content&urls=absolute";
-    if (NEXT_PUBLIC_NYPL_DOMAIN !== "https://www.nypl.org") {
+    if (NEXT_PUBLIC_SERVER_ENV !== "production") {
       nyplHeaderScript =
         "https://qa-header.nypl.org/dgx-header.min.js?skipNav=main-content&urls=absolute";
     }

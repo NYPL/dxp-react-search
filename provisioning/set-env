@@ -1,9 +1,10 @@
 #! /bin/bash
 
 # Set production values
+NEXT_PUBLIC_SERVER_ENV=production
 NEXT_PUBLIC_NYPL_DOMAIN=https://www.nypl.org
 REFINERY_API=https://refinery.nypl.org/api/nypl
-DRUPAL_API=https://d8.nypl.org
+DRUPAL_API=https://drupal.nypl.org
 GRAPHQL_API_URL=https://scout.nypl.org/api/graphql
 GA_TRACKING_ID=UA-1420324-3
 GTM_TRACKING_ID=GTM-537Q6Q4
@@ -14,9 +15,10 @@ NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
 DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
 
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
+  NEXT_PUBLIC_SERVER_ENV=qa
   NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
-  DRUPAL_API=https://qa-d8.nypl.org
+  DRUPAL_API=https://nypl1:nypl1@qa-drupal.nypl.org
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
@@ -25,6 +27,7 @@ if [ "$TRAVIS_BRANCH" == "qa" ]; then
   DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
 fi
 
+echo -e "\nNEXT_PUBLIC_SERVER_ENV=$NEXT_PUBLIC_SERVER_ENV" >> .env
 echo -e "\nNEXT_PUBLIC_NYPL_DOMAIN=$NEXT_PUBLIC_NYPL_DOMAIN" >> .env
 echo -e "\nREFINERY_API=$REFINERY_API" >> .env
 echo -e "\nDRUPAL_API=$DRUPAL_API" >> .env
