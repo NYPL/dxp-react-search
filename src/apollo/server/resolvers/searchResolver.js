@@ -153,27 +153,25 @@ const searchResolver = {
     id: (accessLocation) => accessLocation.uuid,
     name: (accessLocation) => accessLocation.title,
     url: (accessLocation) => {
-      let accessLocationUrl = accessLocation.url;
       if (accessLocation?.url) {
         // Drupal api will return absolute urls with the nypl.org backend subdomain,
         // i.e., "https://drupal.nypl.org/locations/schwarzman"
         // Since the access location links are public facing, we replace this
         // domain with the public facing url, i.e, nypl.org or qa-www.nypl.org.
         // Strip out the http basic auth from DRUPAL_API env var.
-        let DRUPAL_API_DOMAIN_ONLY = DRUPAL_API;
-        if (NEXT_PUBLIC_SERVER_ENV !== "production") {
-          DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace(
-            "https://nypl1:nypl1@",
-            "https://"
-          );
-        }
+        const DRUPAL_API_DOMAIN_ONLY =
+          NEXT_PUBLIC_SERVER_ENV !== "production"
+            ? DRUPAL_API.replace("https://nypl1:nypl1@", "https://")
+            : DRUPAL_API;
+
         // Replace the url with our cleaned up url.
-        accessLocationUrl = accessLocation.url.replace(
+        const accessLocationUrl = accessLocation.url.replace(
           DRUPAL_API_DOMAIN_ONLY,
           NEXT_PUBLIC_NYPL_DOMAIN
         );
+        return accessLocationUrl;
       }
-      return accessLocationUrl;
+      return null;
     },
   },
 };
