@@ -60,19 +60,8 @@ export function resolveImage(image: any): ResolvedParagraph | null {
   return {
     id: mediaImage.id,
     alt: mediaImage.meta.alt,
-    // @TODO Without cdn, this value is always just the path without domain.
-    // Confirm this is true and remove this before merging.
-    // uri: () => {
-    //   // @TODO Without cdn, this value is always just the path without domain.
-    //   if (NEXT_PUBLIC_SERVER_ENV === "local") {
-    //     return `${DRUPAL_API}${mediaImage.uri.url}`;
-    //   } else {
-    //     //if (mediaImage.uri.url && mediaImage.uri.url.includes("sites/default")) {
-    //     //   return `http://localhost:8080${mediaImage.uri.url}`;
-    //     // } else {
-    //     return mediaImage.uri.url;
-    //   }
-    // },
+    // Drupal json:api returns a relative path for the image, without domain,
+    // so we add the domain here from the .env variable.
     uri: `${DRUPAL_API}${mediaImage.uri.url}`,
     transformations: () => {
       let transformations: ImageTransformation[] = [];
@@ -80,6 +69,8 @@ export function resolveImage(image: any): ResolvedParagraph | null {
         (imageStyle: JsonApiResourceObject) => {
           for (const [label, uri] of Object.entries(imageStyle)) {
             let transformedImageUri = uri as string;
+            // Drupal json:api will return an absolute path, but for "locked"
+            // pantheon enviornemnts, we'll need to modify the url.
             // If the NEXT_PUBLIC_SERVER_ENV is development or qa, append basic
             // auth username and password to url for pantheon envs that are locked.
             if (NEXT_PUBLIC_SERVER_ENV !== "production") {
