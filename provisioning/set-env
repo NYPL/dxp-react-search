@@ -18,7 +18,7 @@ if [ "$TRAVIS_BRANCH" == "qa" ]; then
   NEXT_PUBLIC_SERVER_ENV=qa
   NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
-  DRUPAL_API=https://nypl1:nypl1@test-drupal.nypl.org
+  DRUPAL_API=https://nypl1:nypl1@qa-drupal.nypl.org
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
   GA_TRACKING_ID=UA-1420324-122
   ALLOWED_ORIGIN=https://qa-www.nypl.org
