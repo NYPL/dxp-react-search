@@ -7,9 +7,10 @@ const { NEXT_PUBLIC_SERVER_ENV, DRUPAL_API } = process.env;
 
 // Get the domain only from the DRUPAL_API env variable.
 let DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://", "");
-if (NEXT_PUBLIC_SERVER_ENV !== "production") {
-  DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://nypl1:nypl1@", "");
-}
+// @TODO Commented out for now to test QA.
+// if (NEXT_PUBLIC_SERVER_ENV !== "production") {
+//   DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://nypl1:nypl1@", "");
+// }
 
 const nextConfig = {
   assetPrefix: ASSET_PREFIX,
