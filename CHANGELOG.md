@@ -9,6 +9,7 @@
 - Locks Dockerfile to use Node 16.15.0
 - Locks Travis CI to use Node 16.15.0
 - Updates CI build scripts to set Pantheon domains in env vars
+- Refactors `CardList` and `TextWithImage` to use NextJS Image component.
 
 ---
 
