@@ -2,6 +2,16 @@
 
 ---
 
+### v0.6.1 [2022-06-21] Pantheon Integration Changes & Maintenance
+
+---
+
+- Locks Dockerfile to use Node 16.15.0
+- Locks Travis CI to use Node 16.15.0
+- Updates CI build scripts to set Pantheon domains in env vars
+
+---
+
 ### v0.6.0 [2022-05-31] Scout Maintenance & Improvements
 
 ---
