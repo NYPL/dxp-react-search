@@ -2,7 +2,7 @@
 
 ---
 
-### v0.6.1 [2022-06-21] Pantheon Integration Changes & Maintenance
+### v0.6.1 [2022-06-22] Pantheon Integration Changes & Maintenance
 
 ---
 
