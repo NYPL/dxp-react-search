@@ -137,12 +137,12 @@ function SearchForm() {
               );
 
               // Dispatch for map info window.
-              /* dispatch(
+              dispatch(
                 setMapInfoWindow({
                   infoWindowId,
                   infoWindowIsVisible: true,
                 })
-              ); */
+              );
             });
           },
           (error) => {

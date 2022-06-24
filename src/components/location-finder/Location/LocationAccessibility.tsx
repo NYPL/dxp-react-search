@@ -2,14 +2,8 @@ import React from "react";
 import { Box, HStack, Icon } from "@nypl/design-system-react-components";
 
 interface LocationAccessibilityProps {
-  access: AccessNames;
+  access: "full" | "partial" | "none";
   note?: string;
-}
-
-enum AccessNames {
-  Full = "full",
-  Partial = "partial",
-  None = "none",
 }
 
 function LocationAccessibility({ access, note }: LocationAccessibilityProps) {
