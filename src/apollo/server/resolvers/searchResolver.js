@@ -11,8 +11,7 @@ dayjs.tz.setDefault("America/New_York");
 import { ONLINE_RESOURCES_ALL_BRANCH_UUID } from "./../../../utils/config";
 import getRequestIp from "./../../../utils/getRequestIp";
 // Env vars
-const { NEXT_PUBLIC_SERVER_ENV, DRUPAL_API, NEXT_PUBLIC_NYPL_DOMAIN } =
-  process.env;
+const { DRUPAL_API, NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 const searchResolver = {
   Query: {
@@ -154,19 +153,20 @@ const searchResolver = {
     name: (accessLocation) => accessLocation.title,
     url: (accessLocation) => {
       if (accessLocation?.url) {
+        // @TODO Figure out if we're locking down dev and qa with basic auth.
         // Drupal api will return absolute urls with the nypl.org backend subdomain,
         // i.e., "https://drupal.nypl.org/locations/schwarzman"
         // Since the access location links are public facing, we replace this
         // domain with the public facing url, i.e, nypl.org or qa-www.nypl.org.
         // Strip out the http basic auth from DRUPAL_API env var.
-        const DRUPAL_API_DOMAIN_ONLY =
-          NEXT_PUBLIC_SERVER_ENV !== "production"
-            ? DRUPAL_API.replace("https://nypl1:nypl1@", "https://")
-            : DRUPAL_API;
+        // const DRUPAL_API_DOMAIN_ONLY =
+        //   NEXT_PUBLIC_SERVER_ENV !== "production"
+        //     ? DRUPAL_API.replace("https://nypl1:nypl1@", "https://")
+        //     : DRUPAL_API;
 
         // Replace the url with our cleaned up url.
         const accessLocationUrl = accessLocation.url.replace(
-          DRUPAL_API_DOMAIN_ONLY,
+          DRUPAL_API,
           NEXT_PUBLIC_NYPL_DOMAIN
         );
         return accessLocationUrl;

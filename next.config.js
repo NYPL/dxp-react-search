@@ -3,11 +3,11 @@ const withPlugins = require("next-compose-plugins");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
-const { NEXT_PUBLIC_SERVER_ENV, DRUPAL_API } = process.env;
+const { DRUPAL_API } = process.env;
 
 // Get the domain only from the DRUPAL_API env variable.
 let DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://", "");
-// @TODO Commented out for now to test QA.
+// @TODO Figure out if we're locking down dev and qa with basic auth.
 // if (NEXT_PUBLIC_SERVER_ENV !== "production") {
 //   DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://nypl1:nypl1@", "");
 // }
@@ -51,8 +51,8 @@ const nextConfig = {
       // Local
       "localhost",
       "nypl-d8.lndo.site",
-      // Pantheon envs.
       DRUPAL_API_DOMAIN_ONLY,
+      // @TODO After pantheon migration remove old AWS domains.
       // Sandbox
       "sandbox-d8.nypl.org",
       "nyplorg-sandbox.s3.amazonaws.com",

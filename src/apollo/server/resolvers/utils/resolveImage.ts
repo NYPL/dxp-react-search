@@ -3,7 +3,7 @@ import {
   ImageTransformation,
   ResolvedParagraph,
 } from "./types";
-const { NEXT_PUBLIC_SERVER_ENV, DRUPAL_API } = process.env;
+const { DRUPAL_API } = process.env;
 
 export function resolveImage(image: any): ResolvedParagraph | null {
   // Special handling for these media types, as they are "fake" media images in D9.
@@ -68,17 +68,18 @@ export function resolveImage(image: any): ResolvedParagraph | null {
       mediaImage.image_style_uri.forEach(
         (imageStyle: JsonApiResourceObject) => {
           for (const [label, uri] of Object.entries(imageStyle)) {
-            let transformedImageUri = uri as string;
+            const transformedImageUri = uri as string;
+            // @TODO Figure out if we're locking down dev and qa with basic auth.
             // Drupal json:api will return an absolute path, but for "locked"
             // pantheon enviornemnts, we'll need to modify the url.
             // If the NEXT_PUBLIC_SERVER_ENV is development or qa, append basic
             // auth username and password to url for pantheon envs that are locked.
-            if (NEXT_PUBLIC_SERVER_ENV !== "production") {
-              transformedImageUri = (uri as string).replace(
-                "https://",
-                "https://nypl1:nypl1@"
-              );
-            }
+            // if (NEXT_PUBLIC_SERVER_ENV !== "production") {
+            //   transformedImageUri = (uri as string).replace(
+            //     "https://",
+            //     "https://nypl1:nypl1@"
+            //   );
+            // }
             transformations.push({
               id: `${mediaImage.id}__${label}`,
               label: label,
