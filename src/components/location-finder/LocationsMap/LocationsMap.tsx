@@ -32,8 +32,7 @@ function LocationsMap() {
       // Scroll into view.
       document.getElementById(`lid-${location.id}`)?.scrollIntoView({
         behavior: "smooth",
-        // corresponds to alingToTop = false
-        block: "end",
+        block: "start",
         inline: "nearest",
       });
     }
