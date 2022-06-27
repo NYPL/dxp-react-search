@@ -135,7 +135,6 @@ const LocationsMapContainer = (props: LocationsMapContainerProps) => {
         )}
         {locations.map((location: Location) => {
           // Binds onClick from Map prop
-          // @ts-ignore
           const onClick = props.onClick.bind(this, location);
           const position = {
             lat: location.geoLocation.lat,
