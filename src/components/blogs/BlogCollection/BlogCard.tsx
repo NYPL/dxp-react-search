@@ -49,10 +49,8 @@ function BlogCard({ item }: BlogCardProps) {
             <HStack wrap="wrap" spacing="0" align="left">
               {locations.map((location: BlogLocation) => {
                 return (
-                  <Box pr="xs">
-                    <Link key={location.slug} href={location.slug}>
-                      {location.name}
-                    </Link>
+                  <Box key={location.slug} pr="xs">
+                    <Link href={location.slug}>{location.name}</Link>
                   </Box>
                 );
               })}

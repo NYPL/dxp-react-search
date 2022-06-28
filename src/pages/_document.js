@@ -1,9 +1,21 @@
-const { NEXT_PUBLIC_GTM_TRACKING_ID } = process.env;
-const { NEXT_PUBLIC_GA_TRACKING_ID } = process.env;
+const {
+  NEXT_PUBLIC_GTM_TRACKING_ID,
+  NEXT_PUBLIC_GA_TRACKING_ID,
+  NEXT_PUBLIC_SERVER_ENV,
+} = process.env;
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class ScoutDocument extends Document {
   render() {
+    // Set PROD or QA version of the remote header embed script.
+    // This will generate enviornment aware links in the header logins.
+    let nyplHeaderScript =
+      "https://header.nypl.org/dgx-header.min.js?skipNav=main-content&urls=absolute";
+    if (NEXT_PUBLIC_SERVER_ENV !== "production") {
+      nyplHeaderScript =
+        "https://qa-header.nypl.org/dgx-header.min.js?skipNav=main-content&urls=absolute";
+    }
+
     return (
       <Html lang="en">
         <Head>
@@ -28,10 +40,7 @@ class ScoutDocument extends Document {
             }}
           />
           {/* NYPL Header */}
-          <script
-            async
-            src="https://header.nypl.org/dgx-header.min.js?skipNav=main-content&urls=absolute"
-          />
+          <script async src={nyplHeaderScript} />
         </Head>
         <body>
           <Main />
