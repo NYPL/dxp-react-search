@@ -1,13 +1,9 @@
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
-const { DRUPAL_API, DRUPAL_CONSUMER_UUID, DRUPAL_CONSUMER_SECRET } =
-  process.env;
-import getAccessToken from "./../../../utils/getAccessToken";
+const { DRUPAL_API } = process.env;
 
 class DrupalApi extends RESTDataSource {
   constructor() {
     super();
-    // Temporary hard-code d9 backend for tugboat.
-    //this.baseURL = "https://sandbox-d8.nypl.org";
     this.baseURL = DRUPAL_API;
   }
 

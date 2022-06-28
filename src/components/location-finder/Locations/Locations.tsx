@@ -170,8 +170,8 @@ function Locations() {
       </Link>
       <ul style={{ listStyleType: "none", padding: "0" }}>
         {data.refineryAllLocations.locations.map((location: any) => (
-          <li>
-            <Location key={location.id} location={location} />
+          <li key={location.id}>
+            <Location location={location} />
           </li>
         ))}
       </ul>
