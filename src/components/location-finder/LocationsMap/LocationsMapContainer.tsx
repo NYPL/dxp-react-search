@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Link,
-  SkeletonLoader,
-} from "@nypl/design-system-react-components";
+import { Box, Link } from "@nypl/design-system-react-components";
 // Google map
 import {
   LoadScript,
@@ -26,7 +22,7 @@ import { LocationProps as Location } from "../Location/Location";
 
 interface LocationsMapContainerProps {
   onClick: (location: Location) => void;
-  loadingElement: React.ReactNode;
+  loadingElement: React.ReactElement;
 }
 
 const LocationsMapContainer = (props: LocationsMapContainerProps) => {
@@ -84,7 +80,7 @@ const LocationsMapContainer = (props: LocationsMapContainerProps) => {
     },
   });
   if (loading || !data) {
-    return <SkeletonLoader showContent={false} showHeading={false} />;
+    return props.loadingElement;
   }
 
   if (error) {
