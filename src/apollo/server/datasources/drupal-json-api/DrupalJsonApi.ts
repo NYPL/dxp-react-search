@@ -1,8 +1,7 @@
 import { DataSourceConfig } from "apollo-datasource";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 import getAccessToken from "../../../../utils/getAccessToken";
-// @TODO Remove this before merging. Hard-code sandbox-d8 env as tugboat qa/vercel workaround.
-//const { DRUPAL_API } = process.env;
+const { DRUPAL_API } = process.env;
 
 // @TODO Change to use JsonApiResourceObject
 type JsonApiResource = { [key: string]: any };
@@ -10,9 +9,7 @@ type JsonApiResource = { [key: string]: any };
 class DrupalJsonApi<TContext = any> extends RESTDataSource {
   constructor() {
     super();
-    //this.baseURL = DRUPAL_API;
-    // @TODO Remove this before merging. Hard-code sandbox-d8 env as tugboat qa/vercel workaround.
-    this.baseURL = "https://sandbox-d8.nypl.org";
+    this.baseURL = DRUPAL_API;
   }
 
   /**
