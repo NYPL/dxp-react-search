@@ -1,6 +1,11 @@
 import React from "react";
 // Component
-import { Box, Icon, Link } from "@nypl/design-system-react-components";
+import {
+  Box,
+  Icon,
+  Link,
+  SkeletonLoader,
+} from "@nypl/design-system-react-components";
 import LocationsMapContainer from "./LocationsMapContainer";
 // Redux
 import { useDispatch } from "react-redux";
@@ -46,9 +51,9 @@ function LocationsMap() {
       <LocationsMapContainer
         aria-hidden="true"
         onClick={handleClick}
-        loadingElement={<Box h="100%" bg="red" />}
-        containerElement={<Box sx={{ height: `500px` }} />}
-        mapElement={<Box sx={{ height: `100%` }} />}
+        loadingElement={
+          <SkeletonLoader showContent={false} showHeading={false} />
+        }
       />
       <Link
         // additionalStyles
