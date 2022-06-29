@@ -90,7 +90,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
               className="textBox css-0"
             >
               <h3
-                aria-describedby=""
                 className="chakra-heading css-0"
               >
                 <a
@@ -133,7 +132,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
               className="textBox css-0"
             >
               <h3
-                aria-describedby=""
                 className="chakra-heading css-0"
               >
                 <a
@@ -176,7 +174,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
               className="textBox css-0"
             >
               <h3
-                aria-describedby=""
                 className="chakra-heading css-0"
               >
                 <a
@@ -219,7 +216,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
               className="textBox css-0"
             >
               <h3
-                aria-describedby=""
                 className="chakra-heading css-0"
               >
                 <a
