@@ -12,7 +12,7 @@ const item = {
   id: "test-id-1",
   title: "Test",
   image: "https://placeimg.com/400/200/arch",
-  link: "https://www.nypl.org/",
+  url: "https://www.nypl.org/",
   location: "Stephen A. Schwarzman Building",
 };
 const items = [
@@ -20,25 +20,25 @@ const items = [
     id: "test-id-1",
     title: "Test",
     image: "https://placeimg.com/400/200/arch",
-    link: "https://www.nypl.org/",
+    url: "https://www.nypl.org/",
   },
   {
     id: "test-id-2",
     title: "Test",
     image: "https://placeimg.com/400/200/arch",
-    link: "https://www.nypl.org/",
+    url: "https://www.nypl.org/",
   },
   {
     id: "test-id-3",
     title: "Test",
     image: "https://placeimg.com/400/200/arch",
-    link: "https://www.nypl.org/",
+    url: "https://www.nypl.org/",
   },
   {
     id: "test-id-4",
     title: "Test",
     image: "https://placeimg.com/400/200/arch",
-    link: "https://www.nypl.org/",
+    url: "https://www.nypl.org/",
   },
 ];
 

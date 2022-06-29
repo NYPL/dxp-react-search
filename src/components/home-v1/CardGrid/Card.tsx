@@ -38,14 +38,14 @@ interface CardProps {
 
 function Card({ item, variant, size = "md" }: CardProps) {
   const styles = useStyleConfig("Card", { variant, size });
-  let describedBy = [];
-  if (item.date) describedBy.push(`${item.id}-date`);
-  if (item.description) describedBy.push(`${item.id}-description`);
-  if (item.location) describedBy.push(`${item.id}-location`);
-  if (item.author) describedBy.push(`${item.id}-author`);
-  if (item.audience) describedBy.push(`${item.id}-audience`);
-  if (item.genre) describedBy.push(`${item.id}-genre`);
-  const describedByString = describedBy.join(" ");
+  let describedByIdsArray = [];
+  const omitItems = ["id", "title", "image", "url"];
+  for (const propName in item) {
+    if (!omitItems.includes(propName)) {
+      describedByIdsArray.push(`${item.id}-${propName}`);
+    }
+  }
+  const describedByIdsString = describedByIdsArray.join(" ");
 
   return (
     <Grid
@@ -54,8 +54,13 @@ function Card({ item, variant, size = "md" }: CardProps) {
       sx={styles}
     >
       <GridItem className="textBox">
-        <Heading as="h3" aria-describedby={describedByString}>
-          <Link href={item.url}>{item.title} </Link>
+        <Heading
+          as="h3"
+          {...(describedByIdsString && {
+            "aria-describedby": describedByIdsString,
+          })}
+        >
+          <Link href={item.url}>{item.title}</Link>
         </Heading>
         <Box className="details">
           {item.date && (
@@ -83,7 +88,8 @@ function Card({ item, variant, size = "md" }: CardProps) {
         </Box>
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
-        <Link href={item.url} tabIndex={-1}>
+        {/* @QUESTION Axe accessibility test requires aria-label for link here */}
+        <Link href={item.url} aria-label={item.title} tabIndex={-1}>
           <Image
             src={item.image}
             // @QUESTION should role="presentation" be used instead of alte="" source: https://www.digitala11y.com/presentation-role/

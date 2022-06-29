@@ -6,7 +6,8 @@ import {
   Icon,
   Radio,
 } from "@nypl/design-system-react-components";
-import FocusTrap from "focus-trap-react";
+//import FocusTrap from "focus-trap-react";
+const FocusTrap = require("focus-trap-react");
 // Styles
 import s from "./MultiSelect.module.css";
 

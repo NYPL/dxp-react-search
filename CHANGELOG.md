@@ -2,6 +2,34 @@
 
 ---
 
+### v0.6.1 [2022-06-22] Pantheon Integration Changes & Maintenance
+
+---
+
+- Locks Dockerfile to use Node 16.15.0
+- Locks Travis CI to use Node 16.15.0
+- Updates CI build scripts to set Pantheon domains in env vars
+- Refactors `CardList` and `TextWithImage` to use NextJS Image component.
+
+---
+
+### v0.6.0 [2022-05-31] Scout Maintenance & Improvements
+
+---
+
+- Adds vercel.sh bash script for skipping preview builds on qa and production.
+- Bug fix for SASB and SNFL not visible on Location Finder map.
+- Fix for double scroll bars on Location Finder.
+- Updates Location Finder's BottomPromo component to use Chakra components.
+- Removed legacy taxonomy api integration and replaces with D9 json:api.
+- Upgrades DS from 0.28.0 -> v1.0.0.
+- Code refactoring and cleanup related to DS update.
+- Removes Header component and replaces with Header script with static component.
+- Updates to Dockerfile to copy package-lock.json.
+- Updates Dockerfile to use Node 16.
+
+---
+
 ### v0.5.2 [2022-03-30] Blogs Bug Fixes & Additions
 
 ---

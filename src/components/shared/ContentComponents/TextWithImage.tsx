@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import { Box, Heading } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
-// Utils
+import Image from "next/image";
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
 
 interface TextWithImageProps {
@@ -34,12 +34,16 @@ function TextWithImage({
           mr={{ md: "l" }}
           mb="s"
         >
-          <img
+          <Image
             id={image.id}
             alt={image.alt}
-            src={getImageTransformation("max_width_960", image.transformations)}
-            width="100%"
-            height="auto"
+            src={
+              image.transformations &&
+              getImageTransformation("max_width_960", image.transformations)
+            }
+            layout="responsive"
+            width={image.width}
+            height={image.height}
           />
           {caption && (
             <Box fontSize="-1" fontWeight="regular">

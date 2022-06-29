@@ -10,7 +10,7 @@ import Hero from "../../components/location-finder/Hero";
 import SearchForm from "../../components/location-finder/SearchForm";
 import Locations from "../../components/location-finder/Locations/Locations";
 import SearchResultsDetails from "../../components/location-finder/SearchResultsDetails";
-import Map from "../../components/location-finder/Map";
+import LocationsMap from "../../components/location-finder/LocationsMap";
 import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
 import { Box, Grid, GridItem } from "@nypl/design-system-react-components";
@@ -51,17 +51,17 @@ function LocationFinder() {
         </>
       }
       contentPrimary={
-        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} gap="l">
+        <Grid templateColumns={{ md: "repeat(2, 1fr)" }}>
           <GridItem
             id="locations-list"
-            maxHeight={[null, null, "500px"]}
-            overflowY={[null, null, "auto"]}
+            maxHeight={{ md: "500px" }}
+            overflowY={{ md: "auto" }}
           >
             <SearchResultsDetails />
             <Locations />
           </GridItem>
           <GridItem id="locations-gmap">
-            <Map />
+            <LocationsMap />
           </GridItem>
         </Grid>
       }

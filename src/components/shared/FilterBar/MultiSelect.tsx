@@ -15,6 +15,7 @@ const FILTERS_QUERY = gql`
     $filter: FilterQueryFilter
     $sort: Sort
     $includeChildren: Boolean!
+    $customData: Boolean
   ) {
     allFiltersByGroupId(
       id: $id
@@ -23,23 +24,11 @@ const FILTERS_QUERY = gql`
       pageNumber: $pageNumber
       filter: $filter
       sort: $sort
+      customData: $customData
     ) {
       id
       name
       children @include(if: $includeChildren) {
-        id
-        name
-      }
-    }
-  }
-`;
-
-const FILTERS_QUERY_LEGACY = gql`
-  query MultiSelectQuery($id: String, $limiter: String) {
-    allFiltersByGroupIdLegacy(id: $id, limiter: $limiter) {
-      id
-      name
-      children {
         id
         name
       }
@@ -60,8 +49,10 @@ interface MutliSelectProps {
   selectedGroupIds: string[];
   showCtaButtons: boolean;
   handleChangeMixedStateCheckbox: any;
-  legacy?: boolean;
+  /** Include 2nd level child items. */
   includeChildren?: boolean;
+  /** Escape hatch for use cases where the filter data does not come from api request, but hard coded. */
+  customData?: boolean;
 }
 
 function MultiSelect({
@@ -77,10 +68,9 @@ function MultiSelect({
   selectedGroupIds,
   showCtaButtons,
   handleChangeMixedStateCheckbox,
-  legacy,
   includeChildren = true,
+  customData = false,
 }: MutliSelectProps) {
-  let FiltersQueryAll = FILTERS_QUERY;
   let variables = {
     id: id,
     type: type,
@@ -98,19 +88,10 @@ function MultiSelect({
       direction: "ASC",
     },
     includeChildren: includeChildren,
+    customData: customData,
   };
-  if (legacy) {
-    FiltersQueryAll = FILTERS_QUERY_LEGACY;
-    variables = {
-      id: id,
-      type: type,
-      // @ts-ignore
-      limiter: limiter,
-      includeChildren: includeChildren,
-    };
-  }
 
-  const { loading, error, data } = useQuery(FiltersQueryAll, {
+  const { loading, error, data } = useQuery(FILTERS_QUERY, {
     variables: variables,
   });
 
@@ -118,7 +99,7 @@ function MultiSelect({
     return <div>Error while loading ...</div>;
   }
 
-  // Loading state,
+  // Loading state.
   if (loading || !data) {
     return (
       <DsMultiSelect
@@ -137,16 +118,13 @@ function MultiSelect({
     );
   }
 
-  let filterItemsData = data.allFiltersByGroupId;
-  if (legacy) {
-    filterItemsData = data.allFiltersByGroupIdLegacy;
-  }
+  const items = data.allFiltersByGroupId;
 
   return (
     <DsMultiSelect
       id={id}
       label={label}
-      items={filterItemsData}
+      items={items}
       handleOnSelectedItemChange={onSelectedItemChange}
       selectedItems={selectedItems}
       onClearMultiSelect={onClearMultiSelect}

@@ -8,13 +8,10 @@ dayjs.extend(timezone);
 // Set default timezone.
 dayjs.tz.setDefault("America/New_York");
 // Utils
-import {
-  ONLINE_RESOURCES_ALL_BRANCH_UUID,
-  ONLINE_RESOURCES_OFFSITE_UUID,
-} from "./../../../utils/config";
+import { ONLINE_RESOURCES_ALL_BRANCH_UUID } from "./../../../utils/config";
 import getRequestIp from "./../../../utils/getRequestIp";
 // Env vars
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+const { DRUPAL_API, NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 const searchResolver = {
   Query: {
@@ -155,24 +152,26 @@ const searchResolver = {
     id: (accessLocation) => accessLocation.uuid,
     name: (accessLocation) => accessLocation.title,
     url: (accessLocation) => {
-      let accessLocationUrl = accessLocation.url;
       if (accessLocation?.url) {
-        const baseDomains = [
-          "http://localhost:8080",
-          "http://sandbox-d8.nypl.org",
-          "http://qa-d8.nypl.org",
-          "http://d8.nypl.org",
-        ];
-        baseDomains.forEach((baseDomain) => {
-          if (accessLocation.url.includes(baseDomain)) {
-            accessLocationUrl = accessLocation.url.replace(
-              baseDomain,
-              NEXT_PUBLIC_NYPL_DOMAIN
-            );
-          }
-        });
+        // @TODO Figure out if we're locking down dev and qa with basic auth.
+        // Drupal api will return absolute urls with the nypl.org backend subdomain,
+        // i.e., "https://drupal.nypl.org/locations/schwarzman"
+        // Since the access location links are public facing, we replace this
+        // domain with the public facing url, i.e, nypl.org or qa-www.nypl.org.
+        // Strip out the http basic auth from DRUPAL_API env var.
+        // const DRUPAL_API_DOMAIN_ONLY =
+        //   NEXT_PUBLIC_SERVER_ENV !== "production"
+        //     ? DRUPAL_API.replace("https://nypl1:nypl1@", "https://")
+        //     : DRUPAL_API;
+
+        // Replace the url with our cleaned up url.
+        const accessLocationUrl = accessLocation.url.replace(
+          DRUPAL_API,
+          NEXT_PUBLIC_NYPL_DOMAIN
+        );
+        return accessLocationUrl;
       }
-      return accessLocationUrl;
+      return null;
     },
   },
 };
