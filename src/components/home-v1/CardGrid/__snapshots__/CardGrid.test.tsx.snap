@@ -33,7 +33,7 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
     className="css-ys3583"
   >
     <a
-      aria-label="Test"
+      aria-label="Test-image"
       className="chakra-link css-0"
       href="https://www.nypl.org/"
       tabIndex={-1}
@@ -107,7 +107,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
               className="css-ys3583"
             >
               <a
-                aria-label="Test"
+                aria-label="Test-image"
                 className="chakra-link css-0"
                 href="https://www.nypl.org/"
                 tabIndex={-1}
@@ -149,7 +149,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
               className="css-ys3583"
             >
               <a
-                aria-label="Test"
+                aria-label="Test-image"
                 className="chakra-link css-0"
                 href="https://www.nypl.org/"
                 tabIndex={-1}
@@ -191,7 +191,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
               className="css-ys3583"
             >
               <a
-                aria-label="Test"
+                aria-label="Test-image"
                 className="chakra-link css-0"
                 href="https://www.nypl.org/"
                 tabIndex={-1}
@@ -233,7 +233,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
               className="css-ys3583"
             >
               <a
-                aria-label="Test"
+                aria-label="Test-image"
                 className="chakra-link css-0"
                 href="https://www.nypl.org/"
                 tabIndex={-1}

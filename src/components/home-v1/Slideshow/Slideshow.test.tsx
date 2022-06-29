@@ -194,7 +194,7 @@ describe("SlideshowContainer tests", () => {
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } = result.current;
   // @TODO axe test throws error
   // fix to this accessibility error is added on cardgrid-test
-  xit("should pass axe accessibility test", async () => {
+  it("should pass axe accessibility test", async () => {
     const { container } = render(
       <SlideshowContainer
         items={items}
@@ -238,7 +238,7 @@ describe("SlideshowContainer tests", () => {
 describe("Slideshow tests", () => {
   // @TODO axe test throws error
   // fix to this accessibility error is added on cardgrid-test
-  xit("shold pass axe accessibility test", async () => {
+  it("shold pass axe accessibility test", async () => {
     const { container } = render(
       <Slideshow title="Test" link="https://nypl.com" items={items} />
     );

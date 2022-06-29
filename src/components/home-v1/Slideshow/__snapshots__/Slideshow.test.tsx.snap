@@ -85,7 +85,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                   className="css-ys3583"
                 >
                   <a
-                    aria-label="Test 1"
+                    aria-label="Test 1-image"
                     className="chakra-link css-0"
                     href="https://www.nypl.org/"
                     tabIndex={-1}
@@ -147,7 +147,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                   className="css-ys3583"
                 >
                   <a
-                    aria-label="Test 2"
+                    aria-label="Test 2-image"
                     className="chakra-link css-0"
                     href="https://www.nypl.org/"
                     tabIndex={-1}
@@ -209,7 +209,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                   className="css-ys3583"
                 >
                   <a
-                    aria-label="Test 3"
+                    aria-label="Test 3-image"
                     className="chakra-link css-0"
                     href="https://www.nypl.org/"
                     tabIndex={-1}
@@ -271,7 +271,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                   className="css-ys3583"
                 >
                   <a
-                    aria-label="Test 4"
+                    aria-label="Test 4-image"
                     className="chakra-link css-0"
                     href="https://www.nypl.org/"
                     tabIndex={-1}
@@ -396,7 +396,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
           className="css-ys3583"
         >
           <a
-            aria-label="Test 1"
+            aria-label="Test 1-image"
             className="chakra-link css-0"
             href="https://www.nypl.org/"
             tabIndex={-1}
@@ -458,7 +458,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
           className="css-ys3583"
         >
           <a
-            aria-label="Test 2"
+            aria-label="Test 2-image"
             className="chakra-link css-0"
             href="https://www.nypl.org/"
             tabIndex={-1}
@@ -520,7 +520,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
           className="css-ys3583"
         >
           <a
-            aria-label="Test 3"
+            aria-label="Test 3-image"
             className="chakra-link css-0"
             href="https://www.nypl.org/"
             tabIndex={-1}
@@ -582,7 +582,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
           className="css-ys3583"
         >
           <a
-            aria-label="Test 4"
+            aria-label="Test 4-image"
             className="chakra-link css-0"
             href="https://www.nypl.org/"
             tabIndex={-1}
