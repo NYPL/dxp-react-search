@@ -1,4 +1,4 @@
-import Head from "next/head";
+//import Head from "next/head";
 import { ApolloClient, ApolloProvider, HttpLink } from "@apollo/client";
 import { InMemoryCache } from "@apollo/client/cache";
 const { NEXT_PUBLIC_GRAPHQL_API } = process.env;
@@ -89,7 +89,7 @@ export function withApollo(PageComponent, config) {
 
           // getDataFromTree does not call componentWillUnmount
           // head side effect therefore need to be cleared manually
-          Head.rewind();
+          //Head.rewind();
         }
       }
 

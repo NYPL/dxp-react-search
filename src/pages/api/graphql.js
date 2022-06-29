@@ -1,4 +1,5 @@
 import { ApolloServer } from "apollo-server-micro";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { schema } from "../../apollo/server/schema";
 import RefineryApi from "./../../apollo/server/datasources/RefineryApi";
 import DrupalApi from "./../../apollo/server/datasources/DrupalApi";
@@ -10,6 +11,7 @@ const { NEXT_PUBLIC_ALLOWED_ORIGIN } = process.env;
 
 const apolloServer = new ApolloServer({
   schema,
+  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   dataSources: () => {
     return {
       refineryApi: new RefineryApi(),
@@ -46,9 +48,19 @@ const cors = Cors({
   origin: `${NEXT_PUBLIC_ALLOWED_ORIGIN}`,
 });
 
-export default cors((req, res) => {
+// export default cors((req, res) => {
+//   if (req.method === "OPTIONS") {
+//     return res.end();
+//   }
+//   return apolloServer.createHandler({ path: "/api/graphql" })(req, res);
+// });
+
+const startServer = apolloServer.start();
+
+export default cors(async (req, res) => {
   if (req.method === "OPTIONS") {
     return res.end();
   }
-  return apolloServer.createHandler({ path: "/api/graphql" })(req, res);
+  await startServer;
+  await apolloServer.createHandler({ path: "/api/graphql" })(req, res);
 });
