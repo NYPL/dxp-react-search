@@ -57,6 +57,8 @@ const Fonts = () => (
 );
 
 const theme = extendTheme({
+  // Dependent on static Header approach @see https://github.com/NYPL/dxp-react-search/pull/282/
+  styles: { global: { svg: { display: "inline" } } },
   fonts: {
     heading: "Milo-Regular",
     body: "Kievit-Medium",

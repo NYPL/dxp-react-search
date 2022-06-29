@@ -11,7 +11,7 @@ expect.extend(toHaveNoViolations);
 const mocks = [];
 
 describe("SearchHeader", () => {
-  test("renders SearchHeader component", () => {
+  it("should render component without errors", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchHeader />
@@ -19,10 +19,10 @@ describe("SearchHeader", () => {
     );
   });
 
-  test("SearchHeader component should have title", () => {
-    const { container } = render(
+  it("should render title prop as heading", () => {
+    render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <SearchHeader id={"location-finder__title"} title="Location Finder">
+        <SearchHeader id="location-finder__title" title="Location Finder">
           <form role="search">
             <input type="text" name="search" />
           </form>
@@ -30,11 +30,13 @@ describe("SearchHeader", () => {
       </MockedProvider>
     );
     expect(
-      container.querySelector("#location-finder__title")
+      screen.getByRole("heading", {
+        name: /location finder/i,
+      })
     ).toBeInTheDocument();
   });
 
-  test("SearchHeader component should have a search form", () => {
+  it("should have a search form child component", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchHeader>
@@ -47,8 +49,7 @@ describe("SearchHeader", () => {
     expect(screen.getByRole("search")).toBeInTheDocument();
   });
 
-  // Accessbiility tests.
-  test("should not have basic accessibility issues", async () => {
+  it("should not have basic accessibility issues", async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchHeader id={"location-finder__title"} title="Location Finder" />

@@ -3,7 +3,6 @@ import React from "react";
 import {
   Box,
   Heading,
-  HeadingLevels,
   HStack,
   Link,
 } from "@nypl/design-system-react-components";
@@ -39,7 +38,7 @@ function BlogCard({ item }: BlogCardProps) {
         />
       </Box>
       <Box flexFlow={{ lg: "row nowrap" }}>
-        <Heading level={HeadingLevels.Three}>
+        <Heading level="three">
           {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
         </Heading>
         <Box pb={5}>
@@ -50,10 +49,8 @@ function BlogCard({ item }: BlogCardProps) {
             <HStack wrap="wrap" spacing="0" align="left">
               {locations.map((location: BlogLocation) => {
                 return (
-                  <Box pr="xs">
-                    <Link key={location.slug} href={location.slug}>
-                      {location.name}
-                    </Link>
+                  <Box key={location.slug} pr="xs">
+                    <Link href={location.slug}>{location.name}</Link>
                   </Box>
                 );
               })}

@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
-import {
-  Heading,
-  HeadingLevels,
-  Modal,
-} from "@nypl/design-system-react-components";
+import { Heading } from "@nypl/design-system-react-components";
+import Modal from "../../ds-prototypes/FilterBar/Modal";
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
 import DropdownMobileButtons from "./DropdownMobileButtons";
@@ -82,7 +79,7 @@ function SearchFilters() {
               <DropdownMobileButtons setIsModalOpen={setIsModalOpen} />
               <Heading
                 id="search-filters__mobile-heading"
-                level={HeadingLevels.Three}
+                level="three"
                 text="Filters"
               />
               {data.refineryAllTerms.map((vocab: any) => {
@@ -98,7 +95,7 @@ function SearchFilters() {
             <Heading
               className="search-filters-group__heading"
               id="search-filters-group1__heading"
-              level={HeadingLevels.Three}
+              level="three"
               text="Filters"
             />
             <div className="search-filters__dropdowns">
@@ -111,7 +108,7 @@ function SearchFilters() {
             <Heading
               className="search-filters-group__heading"
               id="search-filters-group2__heading"
-              level={HeadingLevels.Three}
+              level="three"
               text="Research Filters"
             />
             <div className="search-filters__dropdowns">

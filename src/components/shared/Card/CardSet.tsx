@@ -1,15 +1,6 @@
 import React from "react";
 // Components
-import {
-  Heading,
-  HeadingLevels,
-  HStack,
-  Icon,
-  IconColors,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
-} from "@nypl/design-system-react-components";
+import { Heading, HStack, Icon } from "@nypl/design-system-react-components";
 import Link from "next/link";
 
 interface CardSetProps {
@@ -33,7 +24,7 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
     return (
       <div style={{ marginBottom: ".75em" }}>
         <HStack alignItems="baseline">
-          <Heading id={id} level={HeadingLevels.Two} text={title} />
+          <Heading id={id} level="two" text={title} />
           <Link href={slug}>
             <a
               style={{
@@ -51,11 +42,11 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
               {slugLabel}
               <span style={{ marginLeft: "5px" }}>
                 <Icon
-                  size={IconSizes.Small}
-                  name={IconNames.Arrow}
+                  size="small"
+                  name="arrow"
                   decorative={true}
-                  iconRotation={IconRotationTypes.Rotate270}
-                  color={IconColors.BrandPrimary}
+                  iconRotation="rotate270"
+                  color="brand.primary"
                 />
               </span>
             </a>
@@ -64,7 +55,7 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
       </div>
     );
   } else if (title) {
-    return <Heading id={id} level={HeadingLevels.Two} text={title} />;
+    return <Heading id={id} level="two" text={title} />;
   } else {
     return null;
   }

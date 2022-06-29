@@ -1,4 +1,7 @@
-FROM node:14 AS production
+FROM node:16.15.0 AS production
+
+RUN apt-get update
+RUN apt-get upgrade -y
 
 WORKDIR /app
 
@@ -10,6 +13,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install dependencies.
 COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 
 # Add application code.

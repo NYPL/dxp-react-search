@@ -1,17 +1,12 @@
 import React, { useContext } from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-  TextInput,
-} from "@nypl/design-system-react-components";
+import { Box, Heading, TextInput } from "@nypl/design-system-react-components";
 import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
 function ContactInfoFormField({ handleChange }: FormFieldProps) {
   // @ts-ignore
   const [state] = useContext(FormContext);
-  const { values, errors, touched, isSubmitted } = state;
+  const { values, errors } = state;
 
   return (
     <Box
@@ -25,16 +20,11 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         },
       }}
     >
-      <Heading
-        id="contact-info"
-        level={HeadingLevels.Two}
-        text="Your Contact Information"
-      />
+      <Heading id="contact-info" level="two" text="Your Contact Information" />
       <Box mb="s">
         <TextInput
-          attributes={{
-            name: "contactName",
-          }}
+          id="contactName"
+          name="contactName"
           labelText="Name"
           placeholder="Enter your name"
           isRequired={true}
@@ -45,9 +35,8 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         />
       </Box>
       <TextInput
-        attributes={{
-          name: "contactEmail",
-        }}
+        id="contactEmail"
+        name="contactEmail"
         labelText="Email"
         placeholder="Enter your email"
         isRequired={true}

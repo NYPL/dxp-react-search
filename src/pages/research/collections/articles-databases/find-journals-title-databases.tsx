@@ -1,23 +1,16 @@
-import React, { Fragment } from "react";
+import React from "react";
 // Apollo
 import { withApollo } from "../../../../apollo/client/withApollo";
 // Redux
 import { withRedux } from "../../../../redux/withRedux";
 // Components
-import {
-  Heading,
-  HeadingLevels,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Heading, Link } from "@nypl/design-system-react-components";
 import PageContainer from "../../../../components/online-resources/layouts/PageContainer";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "../../../../utils/config";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-import onlineResourcesContent from "./../../../../__content/onlineResources";
 
 function OnlineResourcesFindJournalsTitlePage() {
-  const { title } = onlineResourcesContent;
-
   return (
     <PageContainer
       metaTags={{
@@ -35,7 +28,7 @@ function OnlineResourcesFindJournalsTitlePage() {
       showContentHeader={false}
       contentPrimary={
         <div>
-          <Heading level={HeadingLevels.One}>
+          <Heading level="one">
             Find E-Journals and Scholarly E-books by Title in Databases
           </Heading>
           <p>
@@ -45,9 +38,7 @@ function OnlineResourcesFindJournalsTitlePage() {
           <p>
             <Link
               href="http://tm9qt7lg9g.search.serialssolutions.com/"
-              attributes={{
-                rel: "nofollow",
-              }}
+              type="external"
             >
               Full-text Journals and Scholarly E-books&nbsp;(from Home)
             </Link>
@@ -55,9 +46,7 @@ function OnlineResourcesFindJournalsTitlePage() {
           <p>
             <Link
               href="http://wu9fb9wh4a.search.serialssolutions.com/"
-              attributes={{
-                rel: "nofollow",
-              }}
+              type="external"
             >
               Full-text Journals and Scholarly E-Books (on-site in the Library)
             </Link>

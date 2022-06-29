@@ -57,7 +57,7 @@ function FiltersButton(props) {
         id="search-filters__mobile-filters-button"
         style={{ minWidth: "140px" }}
         onClick={() => onClick()}
-        buttonType={ButtonTypes.Secondary}
+        buttonType="secondary"
         type="button"
       >
         {setFiltersLabel(searchFilters)}

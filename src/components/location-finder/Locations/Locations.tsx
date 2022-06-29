@@ -1,35 +1,84 @@
 import React, { useEffect } from "react";
 // Apollo
-import { useQuery } from "@apollo/client";
-import { LocationsQuery as LOCATIONS_QUERY } from "./../../../apollo/client/queries/Locations.gql";
+import { useQuery, gql } from "@apollo/client";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "./../../../redux/actions";
 // Components
-import {
-  Box,
-  Icon,
-  IconAlign,
-  IconColors,
-  IconNames,
-  IconRotationTypes,
-  IconSizes,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Box, Icon, Link } from "@nypl/design-system-react-components";
 import Location from "./../Location";
 import LocationsSkeletonLoader from "./LocationsSkeletonLoader";
 import LocationsPagination from "./LocationsPagination";
+// Type
+import { LocationProps } from "../Location/Location";
 // Hooks
 import useWindowSize from "./../../../hooks/useWindowSize";
 // Utils
 import setTermsFilter from "./../../../utils/setTermsFilter";
+
+export const LOCATIONS_QUERY = gql`
+  query LocationsQuery(
+    $searchGeoLat: Float
+    $searchGeoLng: Float
+    $searchQuery: String
+    $openNow: Boolean
+    $termIds: [RefineryTermsFilter]
+    $limit: Int
+    $pageNumber: Int
+    $offset: Int
+  ) {
+    refineryAllLocations(
+      limit: $limit
+      pageNumber: $pageNumber
+      offset: $offset
+      filter: { openNow: $openNow, termIds: $termIds }
+      sortByDistance: {
+        originLat: $searchGeoLat
+        originLng: $searchGeoLng
+        searchQuery: $searchQuery
+      }
+    ) {
+      locations {
+        id
+        name
+        contentType
+        slug
+        url
+        status
+        parentLibraryName
+        address_line1
+        address_line2
+        locality
+        administrative_area
+        postal_code
+        phone
+        wheelchairAccess
+        accessibilityNote
+        geoLocation {
+          lat
+          lng
+        }
+        todayHours {
+          start
+          end
+        }
+        appointmentOnly
+        open
+      }
+      pageInfo {
+        totalItems
+        timestamp
+      }
+    }
+  }
+`;
 
 function Locations() {
   // Special handling for pagination on desktop
   const windowSize = useWindowSize();
   // Set limit based on window size, to disable pagination for desktop only.
   let limit = 300;
-  if (windowSize < 600) {
+  if (windowSize && windowSize < 600) {
     limit = 10;
   }
 
@@ -42,6 +91,7 @@ function Locations() {
     searchFilters,
     offset,
     pageNumber,
+    // @ts-ignore
   } = useSelector((state) => state.search);
 
   const dispatch = useDispatch();
@@ -101,16 +151,10 @@ function Locations() {
   }
 
   return (
-    <Box
-      sx={{
-        overflowX: "hidden",
-        overflowY: "scroll",
-        scrollbarWidth: "auto",
-        scrollbarColor: "#888 #f8f8f7",
-      }}
-    >
+    <Box>
       <Link
-        additionalStyles={{
+        // additionalStyles
+        sx={{
           display: ["block", "block", "none"],
           marginTop: "xs",
           marginBottom: "m",
@@ -119,17 +163,17 @@ function Locations() {
       >
         Skip to Map
         <Icon
-          name={IconNames.Arrow}
-          align={IconAlign.Right}
-          iconRotation={IconRotationTypes.Rotate0}
-          color={IconColors.UiBlack}
-          size={IconSizes.Small}
+          name="arrow"
+          align="right"
+          iconRotation="rotate0"
+          color="ui.black"
+          size="small"
         />
       </Link>
       <ul style={{ listStyleType: "none", padding: "0" }}>
-        {data.refineryAllLocations.locations.map((location) => (
-          <li>
-            <Location key={location.id} location={location} />
+        {data.refineryAllLocations.locations.map((location: LocationProps) => (
+          <li key={location.id}>
+            <Location {...location} />
           </li>
         ))}
       </ul>

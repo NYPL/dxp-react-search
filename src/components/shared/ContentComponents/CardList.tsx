@@ -1,13 +1,8 @@
-import React from "react";
-import {
-  Box,
-  Heading,
-  HeadingLevels,
-  Grid,
-  Link,
-} from "@nypl/design-system-react-components";
+import * as React from "react";
+import { Box, Heading, Grid, Link } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
-// Utils
+import Image from "next/image";
+import useWindowSize from "../../../hooks/useWindowSize";
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
 
 interface CardListProps {
@@ -27,9 +22,27 @@ interface CardItem {
 }
 
 function CardList({ id, type, heading, description, items }: CardListProps) {
+  const [isMobile, setIsMobile] = React.useState<boolean>();
+  const windowSize = useWindowSize();
+
+  React.useEffect(() => {
+    if (windowSize && windowSize >= 600) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
+    }
+  }, [windowSize]);
+
+  function calculateAspectRatioFit(srcWidth: number, srcHeight: number) {
+    const maxWidth = isMobile ? 300 : 165;
+    const maxHeight = isMobile ? 300 : 165;
+    const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+    return { width: srcWidth * ratio, height: srcHeight * ratio };
+  }
+
   return (
     <Box id={`${type}-${id}`} mb="xl">
-      {heading && <Heading level={HeadingLevels.Two} text={heading} />}
+      {heading && <Heading level="two" text={heading} />}
       {description && <TextFormatted html={description} />}
       <Grid
         as="ul"
@@ -60,22 +73,29 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
                         justifyContent="center"
                         overflow="hidden"
                       >
-                        <Box
-                          as="img"
-                          maxHeight="100%"
-                          width="auto"
-                          src={getImageTransformation(
-                            "max_width_960",
-                            item.image.transformations
-                          )}
+                        <Image
+                          id={item.image.id}
                           alt={item.image.alt}
+                          src={
+                            item.image.transformations &&
+                            getImageTransformation(
+                              "max_width_960",
+                              item.image.transformations
+                            )
+                          }
+                          layout="intrinsic"
+                          objectFit="contain"
+                          {...calculateAspectRatioFit(
+                            item.image.width,
+                            item.image.height
+                          )}
                         />
                       </Box>
                     </a>
                   </Box>
                 )}
                 <Box>
-                  <Heading level={HeadingLevels.Three}>
+                  <Heading level="three">
                     <Link href={item.link}>{item.title}</Link>
                   </Heading>
                   <TextFormatted html={item.description} />

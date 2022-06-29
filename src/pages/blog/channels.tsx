@@ -19,6 +19,7 @@ function BlogsChannelsPage() {
       breadcrumbs={[
         {
           text: explore_by_channel.heading,
+          url: "",
         },
       ]}
       showContentHeader={true}

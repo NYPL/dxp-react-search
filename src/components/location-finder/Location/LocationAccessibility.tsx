@@ -1,21 +1,9 @@
 import React from "react";
-import {
-  Box,
-  HStack,
-  Icon,
-  IconNames,
-  IconSizes,
-} from "@nypl/design-system-react-components";
+import { Box, HStack, Icon } from "@nypl/design-system-react-components";
 
 interface LocationAccessibilityProps {
-  access: AccessNames;
+  access: "full" | "partial" | "none";
   note?: string;
-}
-
-enum AccessNames {
-  Full = "full",
-  Partial = "partial",
-  None = "none",
 }
 
 function LocationAccessibility({ access, note }: LocationAccessibilityProps) {
@@ -24,15 +12,11 @@ function LocationAccessibility({ access, note }: LocationAccessibilityProps) {
   switch (access) {
     case "full":
       wheelchairAccess = "Fully Accessible";
-      wheelchairAccessIcon = (
-        <Icon name={IconNames.AccessibilityFull} size={IconSizes.Large} />
-      );
+      wheelchairAccessIcon = <Icon name="accessibilityFull" size="large" />;
       break;
     case "partial":
       wheelchairAccess = "Partially Accessible";
-      wheelchairAccessIcon = (
-        <Icon name={IconNames.AccessibilityPartial} size={IconSizes.Large} />
-      );
+      wheelchairAccessIcon = <Icon name="accessibilityPartial" size="large" />;
       break;
     case "none":
       wheelchairAccess = "Not Accessible";

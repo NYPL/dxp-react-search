@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useWindowSize from "../../../hooks/useWindowSize";
 import usePrevious from "../../../hooks/usePrevious";
 // Types
-import { FilterBarGroupItem, SelectedItems, SelectedItemsMap } from "./types";
+import { FilterBarGroupItem, SelectedItemsMap } from "./types";
 // Components
 import { default as DsFilterBar } from "./../../ds-prototypes/FilterBar/FilterBar";
 import MultiSelect from "./MultiSelect";
@@ -13,7 +13,9 @@ import { useRouter } from "next/router";
 interface FilterBarProps {
   /** The id of the filter bar instance. */
   id: string;
+  /** The label of the filter bar instance. */
   label: string;
+  /** The groups of the filter bar instance. */
   groups: FilterBarGroupItem[];
   /** The path to use for clear and saving of multiselects. */
   routerPathname: string;
@@ -66,7 +68,7 @@ function FilterBar({
   // Sync the url state with the local react state when query params change.
   useEffect(() => {
     let urlState = {};
-    for (let [groupId, value] of Object.entries(router.query)) {
+    for (let [groupId] of Object.entries(router.query)) {
       if (groupId !== "page" && groupId !== "q") {
         urlState = {
           ...urlState,
@@ -84,10 +86,10 @@ function FilterBar({
     const mode = "desktop";
     let selectedGroupIdsCopy: string[] = [];
 
-    const nextState = (object: SelectedItemsMap, property: string) => {
-      let { [property]: omit, ...rest } = object;
-      return rest;
-    };
+    // const nextState = (object: SelectedItemsMap, property: string) => {
+    //   let { [property]: omit, ...rest } = object;
+    //   return rest;
+    // };
 
     if (selectedGroupIds !== undefined) {
       let groupIdExists = selectedGroupIds.indexOf(groupId) > -1;
@@ -120,10 +122,10 @@ function FilterBar({
   function onSelectedItemChange(itemId: string, groupId: string) {
     itemId = itemId.replace(/^[^__]*__/, "");
 
-    const nextState = (object: SelectedItemsMap, property: string) => {
-      let { [property]: omit, ...rest } = object;
-      return rest;
-    };
+    // const nextState = (object: SelectedItemsMap, property: string) => {
+    //   let { [property]: omit, ...rest } = object;
+    //   return rest;
+    // };
 
     let itemIds;
     // Check if the tid already exists in the state
@@ -205,7 +207,7 @@ function FilterBar({
   function onClearMultiSelect(groupId: string) {
     // Run through query param state and remove
     let queryStateToKeep = {} as any;
-    for (let [key, value] of Object.entries(router.query)) {
+    for (let [key] of Object.entries(router.query)) {
       if (groupId !== key) {
         queryStateToKeep[key] = router.query[key];
       }
@@ -294,8 +296,8 @@ function FilterBar({
             handleChangeMixedStateCheckbox={(childItems: string[]) => {
               handleChangeMixedStateCheckbox(group.id, childItems);
             }}
-            legacy={group.legacy ? true : false}
             includeChildren={group.includeChildren}
+            customData={group.customData}
           />
         );
       })}
