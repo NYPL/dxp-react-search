@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 // Component
 import { Box } from "@nypl/design-system-react-components";
 // Content
