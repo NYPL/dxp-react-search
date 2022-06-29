@@ -1,0 +1,269 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card tests should render the UI snapshot correctly 1`] = `
+<div
+  className="css-pgu20y"
+>
+  <div
+    className="textBox css-0"
+  >
+    <h3
+      aria-describedby="test-id-1-location"
+      className="chakra-heading css-0"
+    >
+      <a
+        className="chakra-link css-0"
+        href="https://www.nypl.org/"
+      >
+        Test
+      </a>
+    </h3>
+    <div
+      className="details css-0"
+    >
+      <p
+        className="chakra-text css-0"
+        id="test-id-1-location"
+      >
+        Stephen A. Schwarzman Building
+      </p>
+    </div>
+  </div>
+  <div
+    className="css-ys3583"
+  >
+    <a
+      aria-label="Test"
+      className="chakra-link css-0"
+      href="https://www.nypl.org/"
+      tabIndex={-1}
+    >
+      <img
+        className="chakra-image css-0"
+        role="presentation"
+        src="https://placeimg.com/400/200/arch"
+      />
+    </a>
+  </div>
+</div>
+`;
+
+exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
+<div
+  className="css-15j2i3p"
+>
+  <div
+    className="css-1ngwrio"
+  >
+    <div
+      className="css-1m8gjtz"
+    >
+      <div
+        className="css-y9cf5o"
+      >
+        <h2
+          className="chakra-heading css-18pkilg"
+        >
+          <a
+            className="chakra-link css-0"
+            href="https://nypl.com"
+          >
+            Test title
+          </a>
+        </h2>
+      </div>
+    </div>
+    <div
+      className="css-1y2jlch"
+    >
+      <ul
+        className="css-lgj0h8"
+      >
+        <li
+          className="css-155za0w"
+          id="test-id-1"
+        >
+          <div
+            className="css-pgu20y"
+          >
+            <div
+              className="textBox css-0"
+            >
+              <h3
+                className="chakra-heading css-0"
+              >
+                <a
+                  className="chakra-link css-0"
+                  href="https://www.nypl.org/"
+                >
+                  Test
+                </a>
+              </h3>
+              <div
+                className="details css-0"
+              />
+            </div>
+            <div
+              className="css-ys3583"
+            >
+              <a
+                aria-label="Test"
+                className="chakra-link css-0"
+                href="https://www.nypl.org/"
+                tabIndex={-1}
+              >
+                <img
+                  className="chakra-image css-0"
+                  role="presentation"
+                  src="https://placeimg.com/400/200/arch"
+                />
+              </a>
+            </div>
+          </div>
+        </li>
+        <li
+          className="css-155za0w"
+          id="test-id-2"
+        >
+          <div
+            className="css-pgu20y"
+          >
+            <div
+              className="textBox css-0"
+            >
+              <h3
+                className="chakra-heading css-0"
+              >
+                <a
+                  className="chakra-link css-0"
+                  href="https://www.nypl.org/"
+                >
+                  Test
+                </a>
+              </h3>
+              <div
+                className="details css-0"
+              />
+            </div>
+            <div
+              className="css-ys3583"
+            >
+              <a
+                aria-label="Test"
+                className="chakra-link css-0"
+                href="https://www.nypl.org/"
+                tabIndex={-1}
+              >
+                <img
+                  className="chakra-image css-0"
+                  role="presentation"
+                  src="https://placeimg.com/400/200/arch"
+                />
+              </a>
+            </div>
+          </div>
+        </li>
+        <li
+          className="css-155za0w"
+          id="test-id-3"
+        >
+          <div
+            className="css-pgu20y"
+          >
+            <div
+              className="textBox css-0"
+            >
+              <h3
+                className="chakra-heading css-0"
+              >
+                <a
+                  className="chakra-link css-0"
+                  href="https://www.nypl.org/"
+                >
+                  Test
+                </a>
+              </h3>
+              <div
+                className="details css-0"
+              />
+            </div>
+            <div
+              className="css-ys3583"
+            >
+              <a
+                aria-label="Test"
+                className="chakra-link css-0"
+                href="https://www.nypl.org/"
+                tabIndex={-1}
+              >
+                <img
+                  className="chakra-image css-0"
+                  role="presentation"
+                  src="https://placeimg.com/400/200/arch"
+                />
+              </a>
+            </div>
+          </div>
+        </li>
+        <li
+          className="css-155za0w"
+          id="test-id-4"
+        >
+          <div
+            className="css-pgu20y"
+          >
+            <div
+              className="textBox css-0"
+            >
+              <h3
+                className="chakra-heading css-0"
+              >
+                <a
+                  className="chakra-link css-0"
+                  href="https://www.nypl.org/"
+                >
+                  Test
+                </a>
+              </h3>
+              <div
+                className="details css-0"
+              />
+            </div>
+            <div
+              className="css-ys3583"
+            >
+              <a
+                aria-label="Test"
+                className="chakra-link css-0"
+                href="https://www.nypl.org/"
+                tabIndex={-1}
+              >
+                <img
+                  className="chakra-image css-0"
+                  role="presentation"
+                  src="https://placeimg.com/400/200/arch"
+                />
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="css-1ktje31"
+    >
+      <div
+        className="css-9cvqd6"
+      >
+        <a
+          aria-label="see more of Test title"
+          className="chakra-link css-1g0i10k"
+          href="https://nypl.com"
+        >
+          SEE MORE...
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
