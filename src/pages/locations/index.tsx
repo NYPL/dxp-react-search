@@ -10,7 +10,7 @@ import Hero from "../../components/location-finder/Hero";
 import SearchForm from "../../components/location-finder/SearchForm";
 import Locations from "../../components/location-finder/Locations/Locations";
 import SearchResultsDetails from "../../components/location-finder/SearchResultsDetails";
-import Map from "../../components/location-finder/Map";
+import LocationsMap from "../../components/location-finder/LocationsMap";
 import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
 import { Box, Grid, GridItem } from "@nypl/design-system-react-components";
@@ -61,7 +61,7 @@ function LocationFinder() {
             <Locations />
           </GridItem>
           <GridItem id="locations-gmap">
-            <Map />
+            <LocationsMap />
           </GridItem>
         </Grid>
       }
