@@ -1,13 +1,10 @@
 // NYPL Static Header
 @import "./../components/shared/NyplHeaderStatic/nypl-header-static.css";
 // NYPL node package styles
-// @TODO check if exist
-@import "~@nypl/design-system-react-components/dist/styles.css";
 @import "~@nypl/dgx-react-footer/dist/styles/styles.scss";
 @import "~breakpoint-sass/stylesheets/breakpoint";
 // Internal app styles
 @import "./base/_base.scss";
-//@import "./base/_focus.scss";
 @import "./base/_breakpoints.scss";
 @import "./space/_space.scss";
 @import "./typography/_typography.scss";
