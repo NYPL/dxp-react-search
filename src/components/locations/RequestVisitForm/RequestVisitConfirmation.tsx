@@ -6,7 +6,7 @@ import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../.
 // Next
 import { useRouter } from "next/router";
 // Components
-import { Heading, Link } from "@nypl/design-system-react-components";
+import { Heading, Link, Box } from "@nypl/design-system-react-components";
 import { FormContext } from "./../../../context/FormContext";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -37,27 +37,23 @@ function RequestVisitConfirmation() {
   const locationUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${data?.allLocations?.items[0]?.url}`;
 
   if (error) {
-    return <div>'error while loading locations'</div>;
+    return <Box>'error while loading locations'</Box>;
   }
 
   if (loading || !data) {
-    return <div>Loading</div>;
+    return <Box>Loading</Box>;
   }
 
   return (
-    <div>
-      <Heading
-        className="request-visit__header"
-        level="two"
-        text="Thank You!"
-      />
+    <Box>
+      <Heading level="two" fontWeight="medium" text="Thank You!" />
       <p>
         We've received your request and will get back to you within 48 hours.
       </p>
       <Link type="action" href={locationUrl}>
         Back to {locationName}
       </Link>
-    </div>
+    </Box>
   );
 }
 

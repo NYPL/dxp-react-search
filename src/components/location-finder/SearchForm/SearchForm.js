@@ -184,7 +184,7 @@ function SearchForm() {
       suggestionContainerMsg={"Search for locations near:"}
       searchButtonId={"search-form__submit"}
     >
-      <div className="search__form-filters">
+      <Box className="search__form-filters">
         <Box
           sx={{
             alignSelf: "flex-end",
@@ -204,7 +204,7 @@ function SearchForm() {
           />
         </Box>
         <SearchFilters />
-      </div>
+      </Box>
     </SharedSearchForm>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 // Components
+import { Box } from "@nypl/design-system-react-components";
 import AutoSuggest from "./../../ds-prototypes/AutoSuggest";
 import SearchButton from "./SearchButton";
 
@@ -23,8 +24,14 @@ function SearchForm(props) {
   } = props;
 
   return (
-    <div className="search__form">
-      <form id={id} role="search" aria-label={ariaLabel} onSubmit={onSubmit}>
+    <Box className="search__form">
+      <form
+        id={id}
+        role="search"
+        aria-label={ariaLabel}
+        onSubmit={onSubmit}
+        style={{ display: "flex", flexWrap: "wrap" }}
+      >
         <AutoSuggest
           id={autoSuggestInputId}
           label={label}
@@ -40,7 +47,7 @@ function SearchForm(props) {
         <SearchButton id={searchButtonId} />
         {children}
       </form>
-    </div>
+    </Box>
   );
 }
 

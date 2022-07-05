@@ -14,8 +14,8 @@ function LocationsRequestVisitConfirmationPage() {
       contentPrimary={
         <>
           <Heading
-            className="request-visit__header"
             level="one"
+            fontWeight="medium"
             text="Request a Class Visit or Group Tour"
           />
           <RequestVisitConfirmation />
