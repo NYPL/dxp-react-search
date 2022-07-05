@@ -1,6 +1,7 @@
 // NYPL Static Header
 @import "./../components/shared/NyplHeaderStatic/nypl-header-static.css";
 // NYPL node package styles
+// @TODO check if exist
 @import "~@nypl/design-system-react-components/dist/styles.css";
 @import "~@nypl/dgx-react-footer/dist/styles/styles.scss";
 @import "~breakpoint-sass/stylesheets/breakpoint";
@@ -18,6 +19,3 @@
 @import "./../components/ds-prototypes/AutoSuggest/AutoSuggest.scss";
 // Location Finder
 @import "./../components/location-finder/SearchFilters/SearchFilters.scss";
-@import "./../components/location-finder/BottomPromo/BottomPromo.scss";
-// DS Overrides
-@import "./ds-overrides.scss";
