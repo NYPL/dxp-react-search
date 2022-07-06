@@ -1,12 +1,8 @@
 import React from "react";
 // Components
-import {
-  Box,
-  Heading,
-  HStack,
-  Link,
-} from "@nypl/design-system-react-components";
-import NextDsLink from "../../shared/Link/NextDsLink";
+import { Box, Heading, HStack } from "@nypl/design-system-react-components";
+// import NextDsLink from "../../shared/Link/NextDsLink";
+import ScoutLink from "../../shared/ScoutLink";
 import Image from "../../shared/Image";
 // Types
 import { BlogCardItem, BlogLocation } from "./BlogCardTypes";
@@ -39,7 +35,11 @@ function BlogCard({ item }: BlogCardProps) {
       </Box>
       <Box flexFlow={{ lg: "row nowrap" }}>
         <Heading level="three">
-          {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
+          {slug && (
+            <ScoutLink variant="next-link" href={slug} id={id}>
+              {title}
+            </ScoutLink>
+          )}
         </Heading>
         <Box pb={5}>
           <Box>
@@ -50,7 +50,13 @@ function BlogCard({ item }: BlogCardProps) {
               {locations.map((location: BlogLocation) => {
                 return (
                   <Box key={location.slug} pr="xs">
-                    <Link href={location.slug}>{location.name}</Link>
+                    <ScoutLink
+                      variant="reservoir-link"
+                      href={location.slug}
+                      id={location.id}
+                    >
+                      {location.name}
+                    </ScoutLink>
                   </Box>
                 );
               })}
