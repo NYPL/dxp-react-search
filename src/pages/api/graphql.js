@@ -10,6 +10,7 @@ import Cors from "micro-cors";
 const { NEXT_PUBLIC_ALLOWED_ORIGIN } = process.env;
 
 const apolloServer = new ApolloServer({
+  //cache: "bounded",
   schema,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   dataSources: () => {

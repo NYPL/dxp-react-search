@@ -59,9 +59,9 @@ function SearchResults({
             response.data?.allLocationMatches?.pageInfo.clientIp
           );
         },
-        // @ts-ignore
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         (error) => {
-          //console.error(error);
+          console.error(error);
         }
       );
   }, []);
