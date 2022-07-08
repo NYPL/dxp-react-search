@@ -11,6 +11,7 @@ const { NEXT_PUBLIC_ALLOWED_ORIGIN } = process.env;
 
 const apolloServer = new ApolloServer({
   //cache: "bounded",
+  persistedQueries: false,
   schema,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   dataSources: () => {

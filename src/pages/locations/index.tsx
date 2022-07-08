@@ -1,6 +1,10 @@
 import React from "react";
 // Apollo
-import { withApollo } from "../../apollo/client/withApollo";
+//import { withApollo } from "../../apollo/client/withApollo";
+import withApollo from "./../../apollo/withApollo";
+import { initializeApollo } from "./../../apollo/withApollo/apollo";
+import { LOCATIONS_QUERY } from "../../components/location-finder/Locations/Locations";
+import { FILTERS_QUERY } from "./../../components/location-finder/SearchFilters/SearchFilters";
 // Redux
 import { withRedux } from "../../redux/withRedux";
 // Components
@@ -97,7 +101,60 @@ function LocationFinder() {
   );
 }
 
-export default withApollo(withRedux(LocationFinder), {
-  ssr: true,
-  redirects: false,
-});
+// export default withApollo(withRedux(LocationFinder), {
+//   ssr: true,
+//   redirects: false,
+// });
+
+export async function getServerSideProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: FILTERS_QUERY,
+  });
+
+  await apolloClient.query({
+    query: LOCATIONS_QUERY,
+    variables: {
+      limit: 300,
+      offset: 0,
+      openNow: false,
+      pageNumber: 1,
+      searchGeoLat: null,
+      searchGeoLng: null,
+      termIds: [],
+    },
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  };
+}
+
+// @ts-ignore
+export default withApollo(withRedux(LocationFinder));
+
+// We prefetch the gql queries and populate the initial apollo cache.
+// Components still have gql queries in them, but will already have data
+// on first load, and will req data changes client side, the same as they would using ssr.
+// export async function getStaticProps() {
+//   const apolloClient = initializeApollo();
+
+//   await apolloClient.query({
+//     query: LOCATIONS_QUERY,
+//   });
+
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//     revalidate: 120,
+//     //fallback: false,
+//   };
+// }
+
+// export default withApollo(withRedux(LocationFinder));
+
+// withApollo(withRedux(LocationFinder)

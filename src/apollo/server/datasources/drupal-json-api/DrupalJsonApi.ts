@@ -10,6 +10,7 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = DRUPAL_API;
+    this.initialize({} as DataSourceConfig<any>);
   }
 
   /**
