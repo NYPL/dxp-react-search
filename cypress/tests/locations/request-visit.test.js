@@ -13,6 +13,9 @@ describe("Locations Local: Request a Visit", () => {
     }).should("exist");
   });
 
+  // @TODO
+  it("should prepopulate locations select list if id query parameter is present.", () => {});
+
   it("Form validation should work.", () => {
     cy.log("Submit form without filling out any fields");
     cy.findByRole("button", {

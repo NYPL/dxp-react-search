@@ -1,21 +1,12 @@
 import React from "react";
+import { NextComponentType } from "next";
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "./apollo";
-import { NextComponentType } from "next";
-
-// interface WithApolloOptions {
-//   redirects: boolean;
-// }
 
 /*
  * HOC component for wrapping next page components with <ApolloProvider>.
  */
-export default function withApollo(
-  PageComponent: NextComponentType
-  //options: WithApolloOptions
-) {
-  //const { redirects } = options;
-
+export default function withApollo(PageComponent: NextComponentType) {
   const WithApollo = ({ ...pageProps }) => {
     /*
      * pageProps.initialApolloState is set as a prop

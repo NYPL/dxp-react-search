@@ -1,14 +1,42 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { useMemo } from "react";
 import getDataSources from "./../server/datasources/getDataSources";
-const { NEXT_PUBLIC_GRAPHQL_API } = process.env;
 import { schema } from "./../server/schema";
+const { NEXT_PUBLIC_GRAPHQL_API } = process.env;
 
 let apolloClient: ApolloClient<any>;
 
-export function useApollo(initialState: any) {
-  const store = useMemo(() => initializeApollo(initialState), [initialState]);
-  return store;
+function createIsomorphLink() {
+  if (typeof window === "undefined") {
+    // Server
+    // SchemaLink allows us to query gql without network calls.
+    const { SchemaLink } = require("@apollo/client/link/schema");
+    //const { schema } = require("./../server/schema");
+
+    return new SchemaLink({
+      schema: schema,
+      context: {
+        dataSources: getDataSources(),
+      },
+    });
+  } else {
+    // Client
+    const { HttpLink } = require("@apollo/client/link/http");
+
+    return new HttpLink({
+      uri: NEXT_PUBLIC_GRAPHQL_API,
+      credentials: "same-origin",
+    });
+  }
+}
+
+export function createApolloClient() {
+  return new ApolloClient({
+    ssrMode: typeof window === "undefined",
+    link: createIsomorphLink(),
+    // @TODO add apollo cache overrides from old version.
+    cache: new InMemoryCache(),
+  });
 }
 
 export function initializeApollo(initialState = null) {
@@ -30,37 +58,7 @@ export function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
-function createIsomorphLink() {
-  if (typeof window === "undefined") {
-    // Server
-    // SchemaLink allows us to query gql without network calls.
-    const { SchemaLink } = require("@apollo/client/link/schema");
-    //const { schema } = require("./../server/schema");
-
-    //console.log(schema);
-
-    return new SchemaLink({
-      schema: schema,
-      context: {
-        dataSources: getDataSources(),
-      },
-    });
-  } else {
-    // Client
-    const { HttpLink } = require("@apollo/client/link/http");
-    //const { HttpLink } = require("@apollo/client");
-
-    return new HttpLink({
-      uri: NEXT_PUBLIC_GRAPHQL_API,
-      credentials: "same-origin",
-    });
-  }
-}
-
-export function createApolloClient() {
-  return new ApolloClient({
-    ssrMode: typeof window === "undefined",
-    link: createIsomorphLink(),
-    cache: new InMemoryCache(),
-  });
+export function useApollo(initialState: any) {
+  const store = useMemo(() => initializeApollo(initialState), [initialState]);
+  return store;
 }

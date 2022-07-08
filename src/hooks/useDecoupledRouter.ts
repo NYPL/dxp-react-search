@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { NextRouter } from "next/router";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
-const DECOUPLED_ROUTER_QUERY = gql`
+export const DECOUPLED_ROUTER_QUERY = gql`
   query DecoupledRouterQuery($path: String) {
     decoupledRouter(path: $path) {
       id
