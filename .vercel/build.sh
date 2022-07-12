@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Set vercel only env variable
-# We set the env vars here and not via Vercel GUI, because we need to use "system env vars"
+# We set the env vars here and not via Vercel GUI, because we need these
+# to be dynamic, based on the current vercel preview url.
 export NEXT_PUBLIC_GRAPHQL_API=https://$NEXT_PUBLIC_VERCEL_URL/api/graphql
 echo "NEXT_PUBLIC_GRAPHQL_API: $NEXT_PUBLIC_GRAPHQL_API"
 
