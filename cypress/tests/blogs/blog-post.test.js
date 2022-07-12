@@ -40,8 +40,7 @@ describe("Blog Post Tests", () => {
       url: slug,
       followRedirect: false, // turn off following redirects
     }).then((resp) => {
-      // @TODO confirm that changing this to 308 is correct.
-      expect(resp.status).to.eq(308);
+      expect(resp.status).to.eq(301);
       expect(resp.redirectedToUrl).to.eq(redirectUrl);
     });
 

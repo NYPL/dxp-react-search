@@ -122,9 +122,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     if (redirect) {
       return {
         redirect: {
-          // Will return 308 status, not 301.
-          // @see https://stackoverflow.com/a/42138726
-          permanent: true,
+          statusCode: 301,
           destination: redirect.to,
         },
         props: {},
