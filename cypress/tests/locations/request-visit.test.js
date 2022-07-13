@@ -1,9 +1,25 @@
 import { fillRequestVisitForm } from "./../../support/utils";
 
+describe("Locations Local: Request a Visit Query Params", () => {
+  beforeEach(() => {
+    cy.viewport(1024, 768);
+    cy.visit("/locations/request-visit?id=bronx-library-center");
+  });
+
+  it("should select specific location from select list if id query parameter is present in url.", () => {
+    cy.log("Check selected location")
+      .findByRole("combobox", {
+        name: /please select a location/i,
+      })
+      .select("Bronx Library Center")
+      .should("have.value", "bronx-library-center");
+  });
+});
+
 describe("Locations Local: Request a Visit", () => {
   beforeEach(() => {
     cy.viewport(1024, 768);
-    cy.visit("http://localhost:3000/locations/request-visit");
+    cy.visit("/locations/request-visit");
   });
 
   it("Load the request visit page.", () => {
@@ -12,9 +28,6 @@ describe("Locations Local: Request a Visit", () => {
       name: /request a class visit or group tour/i,
     }).should("exist");
   });
-
-  // @TODO
-  it("should prepopulate locations select list if id query parameter is present.", () => {});
 
   it("Form validation should work.", () => {
     cy.log("Submit form without filling out any fields");
