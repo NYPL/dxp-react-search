@@ -5,7 +5,7 @@
 # to be dynamic, based on the current vercel preview url.
 
 # This is the clean url for the preview enviornment, that won't change for each deployment. 
-NEXT_PUBLIC_VERCEL_DOMAIN=https://scout-git-$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF-nypl
+NEXT_PUBLIC_VERCEL_DOMAIN=scout-git-$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF-nypl
 
 export NEXT_PUBLIC_GRAPHQL_API=https://$NEXT_PUBLIC_VERCEL_DOMAIN/api/graphql
 echo "NEXT_PUBLIC_GRAPHQL_API: $NEXT_PUBLIC_GRAPHQL_API"
