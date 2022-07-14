@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 // Next
 import { useRouter } from "next/router";
 // Apollo
-import { useQuery, useApolloClient } from "@apollo/client";
+import { gql, useQuery, useApolloClient } from "@apollo/client";
 import { withApollo } from "./../../../../apollo/client/withApollo";
-import { OnlineResourceByIdQuery as ONLINE_RESOURCE_BY_ID_QUERY } from "./../../../../apollo/client/queries/OnlineResourceById.gql";
-import { LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY } from "./../../../../apollo/client/queries/LocationMatchesByIp.gql";
+import { LOCATION_MATCHES_BY_IP_QUERY } from "./../../../../components/online-resources/SearchResults/SearchResults";
 // Redux
 import { withRedux } from "./../../../../redux/withRedux";
 // Components
@@ -19,6 +18,36 @@ const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import onlineResourcesContent from "./../../../../__content/onlineResources";
 // Hooks
 import useDecoupledRouter from "./../../../../hooks/useDecoupledRouter";
+
+export const ONLINE_RESOURCE_BY_ID_QUERY = gql`
+  query OnlineResourceByIdQuery($id: String) {
+    searchDocument(id: $id) {
+      ... on OnlineResourceDocument {
+        id
+        slug
+        name
+        description
+        accessibilityLink
+        termsConditionsLink
+        privacyPolicyLink
+        subjects {
+          id
+          name
+        }
+        accessLocations {
+          id
+          name
+          url
+        }
+        accessibleFrom
+        resourceUrl
+        notes
+        language
+        availabilityStatus
+      }
+    }
+  }
+`;
 
 function OnlineResourceSlug() {
   const router = useRouter();
@@ -46,7 +75,7 @@ function OnlineResourceSlug() {
           );
         },
         (error) => {
-          //console.error(error);
+          console.error(error);
         }
       );
   }, []);
@@ -111,7 +140,11 @@ function OnlineResourceSlug() {
               <h3>IP Address: {clientIpAddress}</h3>
             </div>
           )}
-          <OnlineResourceCard item={data.searchDocument} ipInfo={ipInfo} />
+          <OnlineResourceCard
+            collapsible={null}
+            item={data.searchDocument}
+            ipInfo={ipInfo}
+          />
         </>
       }
     />
