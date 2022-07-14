@@ -17,7 +17,10 @@ const searchResolver = {
   Query: {
     allSearchDocuments: async (parent, args, { dataSources }) => {
       const response = await dataSources.drupalApi.getAllSearchDocuments(args);
-      const clientIp = await getRequestIp(dataSources.drupalApi.context.req);
+
+      // @TODO Had to remove this because it fails when called from getStaticProps or getServerSideProps.
+      //const clientIp = await getRequestIp(dataSources.drupalApi.context.req);
+      //const clientIp = "1234";
 
       // Create a dayjs date object, using default timezone.
       // @see https://github.com/iamkun/dayjs/issues/1227
@@ -34,7 +37,7 @@ const searchResolver = {
             : 0,
           pageCount: response.results.length ? response.pager.pages : 0,
           timestamp: now,
-          clientIp: clientIp,
+          //clientIp: clientIp,
         },
       };
     },
