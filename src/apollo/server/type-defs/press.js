@@ -8,7 +8,7 @@ export const typeDefs = gql`
     image: Image
     slug: String!
     date: String!
-    mediaContacts: String!
+    mediaContacts: String
     mainContent: [PressReleaseMainContent]
   }
 

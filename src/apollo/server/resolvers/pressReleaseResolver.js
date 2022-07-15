@@ -68,7 +68,7 @@ const pressReleaseResolver = {
     id: (pressRelease) => pressRelease.id,
     title: (pressRelease) => pressRelease.title,
     description: (pressRelease) =>
-      pressRelease.field_tfls_summary_description.processed,
+      pressRelease.field_tfls_summary_description?.processed,
     slug: (pressRelease) => pressRelease.path.alias,
     date: (pressRelease) => formatDate(pressRelease.created),
     image: (pressRelease) =>
@@ -76,7 +76,7 @@ const pressReleaseResolver = {
         ? resolveImage(pressRelease.field_ers_media_image)
         : null,
     mediaContacts: (pressRelease) =>
-      pressRelease.field_tfls_media_contacts.processed,
+      pressRelease.field_tfls_media_contacts?.processed,
     mainContent: (pressRelease, _, __, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
