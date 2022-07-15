@@ -47,7 +47,7 @@ export const config = {
 // Set cors policy.
 const cors = Cors({
   allowMethods: ["POST", "OPTIONS"],
-  origin: `${NEXT_PUBLIC_ALLOWED_ORIGIN}`,
+  origin: NEXT_PUBLIC_ALLOWED_ORIGIN,
 });
 
 // export default cors((req, res) => {
