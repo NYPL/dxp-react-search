@@ -37,7 +37,9 @@ interface CardProps {
 }
 
 function Card({ item, variant, size = "md" }: CardProps) {
+  // Get Card theme styles
   const styles = useStyleConfig("Card", { variant, size });
+  // Generate describedBy string (used by Sideshow Card)
   let describedByIdsArray = [];
   const omitItems = ["id", "title", "image", "url"];
   for (const propName in item) {
@@ -89,7 +91,7 @@ function Card({ item, variant, size = "md" }: CardProps) {
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
         {/* @QUESTION Axe accessibility test requires aria-label for link here */}
-        <Link href={item.url} aria-label={item.title} tabIndex={-1}>
+        <Link href={item.url} aria-label={`${item.title}-image`} tabIndex={-1}>
           <Image
             src={item.image}
             // @QUESTION should role="presentation" be used instead of alte="" source: https://www.digitala11y.com/presentation-role/

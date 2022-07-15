@@ -1,0 +1,601 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
+<div
+  className="css-1kbeyk8"
+>
+  <div
+    className="css-1fqkwup"
+  >
+    <div
+      className="css-1m8gjtz"
+    >
+      <div
+        className="css-y9cf5o"
+      >
+        <h2
+          className="chakra-heading css-m35uou"
+        >
+          <a
+            className="chakra-link css-0"
+            href="https://nypl.com"
+          >
+            Test
+          </a>
+        </h2>
+      </div>
+    </div>
+    <div
+      className="css-1y2jlch"
+    >
+      <div
+        className="css-144klqr"
+      >
+        <div
+          className="css-1ric1bm"
+        >
+          <ul
+            className="css-1lmqp65"
+          >
+            <li
+              className="css-1fzgmij"
+              onFocus={[Function]}
+            >
+              <div
+                className="css-pgu20y"
+              >
+                <div
+                  className="textBox css-0"
+                >
+                  <h3
+                    aria-describedby="test-id-1-author test-id-1-genre test-id-1-audience"
+                    className="chakra-heading css-0"
+                  >
+                    <a
+                      className="chakra-link css-0"
+                      href="https://www.nypl.org/"
+                    >
+                      Test 1
+                    </a>
+                  </h3>
+                  <div
+                    className="details css-0"
+                  >
+                    <p
+                      className="chakra-text css-0"
+                      id="test-id-1-author"
+                    >
+                      writer 1
+                    </p>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-1-audience"
+                    >
+                      people
+                    </span>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-1-genre"
+                    >
+                      genre
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="css-ys3583"
+                >
+                  <a
+                    aria-label="Test 1-image"
+                    className="chakra-link css-0"
+                    href="https://www.nypl.org/"
+                    tabIndex={-1}
+                  >
+                    <img
+                      className="chakra-image css-0"
+                      role="presentation"
+                      src="https://placeimg.com/400/200/arch"
+                    />
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li
+              className="css-1fzgmij"
+              onFocus={[Function]}
+            >
+              <div
+                className="css-pgu20y"
+              >
+                <div
+                  className="textBox css-0"
+                >
+                  <h3
+                    aria-describedby="test-id-2-author test-id-2-genre test-id-2-audience"
+                    className="chakra-heading css-0"
+                  >
+                    <a
+                      className="chakra-link css-0"
+                      href="https://www.nypl.org/"
+                    >
+                      Test 2
+                    </a>
+                  </h3>
+                  <div
+                    className="details css-0"
+                  >
+                    <p
+                      className="chakra-text css-0"
+                      id="test-id-2-author"
+                    >
+                      writer 2
+                    </p>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-2-audience"
+                    >
+                      people
+                    </span>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-2-genre"
+                    >
+                      genre
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="css-ys3583"
+                >
+                  <a
+                    aria-label="Test 2-image"
+                    className="chakra-link css-0"
+                    href="https://www.nypl.org/"
+                    tabIndex={-1}
+                  >
+                    <img
+                      className="chakra-image css-0"
+                      role="presentation"
+                      src="https://placeimg.com/400/200/arch"
+                    />
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li
+              className="css-1fzgmij"
+              onFocus={[Function]}
+            >
+              <div
+                className="css-pgu20y"
+              >
+                <div
+                  className="textBox css-0"
+                >
+                  <h3
+                    aria-describedby="test-id-3-author test-id-3-genre test-id-3-audience"
+                    className="chakra-heading css-0"
+                  >
+                    <a
+                      className="chakra-link css-0"
+                      href="https://www.nypl.org/"
+                    >
+                      Test 3
+                    </a>
+                  </h3>
+                  <div
+                    className="details css-0"
+                  >
+                    <p
+                      className="chakra-text css-0"
+                      id="test-id-3-author"
+                    >
+                      writer 3
+                    </p>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-3-audience"
+                    >
+                      people
+                    </span>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-3-genre"
+                    >
+                      genre
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="css-ys3583"
+                >
+                  <a
+                    aria-label="Test 3-image"
+                    className="chakra-link css-0"
+                    href="https://www.nypl.org/"
+                    tabIndex={-1}
+                  >
+                    <img
+                      className="chakra-image css-0"
+                      role="presentation"
+                      src="https://placeimg.com/400/200/arch"
+                    />
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li
+              className="css-1fzgmij"
+              onFocus={[Function]}
+            >
+              <div
+                className="css-pgu20y"
+              >
+                <div
+                  className="textBox css-0"
+                >
+                  <h3
+                    aria-describedby="test-id-4-author test-id-4-genre test-id-4-audience"
+                    className="chakra-heading css-0"
+                  >
+                    <a
+                      className="chakra-link css-0"
+                      href="https://www.nypl.org/"
+                    >
+                      Test 4
+                    </a>
+                  </h3>
+                  <div
+                    className="details css-0"
+                  >
+                    <p
+                      className="chakra-text css-0"
+                      id="test-id-4-author"
+                    >
+                      writer 4
+                    </p>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-4-audience"
+                    >
+                      people
+                    </span>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-4-genre"
+                    >
+                      genre
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="css-ys3583"
+                >
+                  <a
+                    aria-label="Test 4-image"
+                    className="chakra-link css-0"
+                    href="https://www.nypl.org/"
+                    tabIndex={-1}
+                  >
+                    <img
+                      className="chakra-image css-0"
+                      role="presentation"
+                      src="https://placeimg.com/400/200/arch"
+                    />
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button
+          className="chakra-button css-r8n6x3"
+          direction="next"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        >
+          &gt;
+        </button>
+      </div>
+    </div>
+    <div
+      className="css-1ktje31"
+    >
+      <div
+        className="css-9cvqd6"
+      >
+        <a
+          aria-label="see more of Test"
+          className="chakra-link css-18n047l"
+          href="https://nypl.com"
+        >
+          SEE MORE...
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SlideshowButton tests should render the UI snapshot correctly 1`] = `
+<button
+  className="chakra-button css-5c2176"
+  direction="next"
+  onClick={[MockFunction]}
+  tabIndex={-1}
+  type="button"
+>
+  &gt;
+</button>
+`;
+
+exports[`SlideshowButton tests should render the UI snapshot correctly 2`] = `
+<button
+  className="chakra-button css-5c2176"
+  direction="prev"
+  onClick={[MockFunction]}
+  tabIndex={-1}
+  type="button"
+>
+  &lt;
+</button>
+`;
+
+exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = `
+<div
+  className="css-1ric1bm"
+>
+  <ul
+    className="css-1lmqp65"
+  >
+    <li
+      className="css-1fzgmij"
+      onFocus={[Function]}
+    >
+      <div
+        className="css-pgu20y"
+      >
+        <div
+          className="textBox css-0"
+        >
+          <h3
+            aria-describedby="test-id-1-author test-id-1-genre test-id-1-audience"
+            className="chakra-heading css-0"
+          >
+            <a
+              className="chakra-link css-0"
+              href="https://www.nypl.org/"
+            >
+              Test 1
+            </a>
+          </h3>
+          <div
+            className="details css-0"
+          >
+            <p
+              className="chakra-text css-0"
+              id="test-id-1-author"
+            >
+              writer 1
+            </p>
+            <span
+              className="chakra-text css-0"
+              id="test-id-1-audience"
+            >
+              people
+            </span>
+            <span
+              className="chakra-text css-0"
+              id="test-id-1-genre"
+            >
+              genre
+            </span>
+          </div>
+        </div>
+        <div
+          className="css-ys3583"
+        >
+          <a
+            aria-label="Test 1-image"
+            className="chakra-link css-0"
+            href="https://www.nypl.org/"
+            tabIndex={-1}
+          >
+            <img
+              className="chakra-image css-0"
+              role="presentation"
+              src="https://placeimg.com/400/200/arch"
+            />
+          </a>
+        </div>
+      </div>
+    </li>
+    <li
+      className="css-1fzgmij"
+      onFocus={[Function]}
+    >
+      <div
+        className="css-pgu20y"
+      >
+        <div
+          className="textBox css-0"
+        >
+          <h3
+            aria-describedby="test-id-2-author test-id-2-genre test-id-2-audience"
+            className="chakra-heading css-0"
+          >
+            <a
+              className="chakra-link css-0"
+              href="https://www.nypl.org/"
+            >
+              Test 2
+            </a>
+          </h3>
+          <div
+            className="details css-0"
+          >
+            <p
+              className="chakra-text css-0"
+              id="test-id-2-author"
+            >
+              writer 2
+            </p>
+            <span
+              className="chakra-text css-0"
+              id="test-id-2-audience"
+            >
+              people
+            </span>
+            <span
+              className="chakra-text css-0"
+              id="test-id-2-genre"
+            >
+              genre
+            </span>
+          </div>
+        </div>
+        <div
+          className="css-ys3583"
+        >
+          <a
+            aria-label="Test 2-image"
+            className="chakra-link css-0"
+            href="https://www.nypl.org/"
+            tabIndex={-1}
+          >
+            <img
+              className="chakra-image css-0"
+              role="presentation"
+              src="https://placeimg.com/400/200/arch"
+            />
+          </a>
+        </div>
+      </div>
+    </li>
+    <li
+      className="css-1fzgmij"
+      onFocus={[Function]}
+    >
+      <div
+        className="css-pgu20y"
+      >
+        <div
+          className="textBox css-0"
+        >
+          <h3
+            aria-describedby="test-id-3-author test-id-3-genre test-id-3-audience"
+            className="chakra-heading css-0"
+          >
+            <a
+              className="chakra-link css-0"
+              href="https://www.nypl.org/"
+            >
+              Test 3
+            </a>
+          </h3>
+          <div
+            className="details css-0"
+          >
+            <p
+              className="chakra-text css-0"
+              id="test-id-3-author"
+            >
+              writer 3
+            </p>
+            <span
+              className="chakra-text css-0"
+              id="test-id-3-audience"
+            >
+              people
+            </span>
+            <span
+              className="chakra-text css-0"
+              id="test-id-3-genre"
+            >
+              genre
+            </span>
+          </div>
+        </div>
+        <div
+          className="css-ys3583"
+        >
+          <a
+            aria-label="Test 3-image"
+            className="chakra-link css-0"
+            href="https://www.nypl.org/"
+            tabIndex={-1}
+          >
+            <img
+              className="chakra-image css-0"
+              role="presentation"
+              src="https://placeimg.com/400/200/arch"
+            />
+          </a>
+        </div>
+      </div>
+    </li>
+    <li
+      className="css-1fzgmij"
+      onFocus={[Function]}
+    >
+      <div
+        className="css-pgu20y"
+      >
+        <div
+          className="textBox css-0"
+        >
+          <h3
+            aria-describedby="test-id-4-author test-id-4-genre test-id-4-audience"
+            className="chakra-heading css-0"
+          >
+            <a
+              className="chakra-link css-0"
+              href="https://www.nypl.org/"
+            >
+              Test 4
+            </a>
+          </h3>
+          <div
+            className="details css-0"
+          >
+            <p
+              className="chakra-text css-0"
+              id="test-id-4-author"
+            >
+              writer 4
+            </p>
+            <span
+              className="chakra-text css-0"
+              id="test-id-4-audience"
+            >
+              people
+            </span>
+            <span
+              className="chakra-text css-0"
+              id="test-id-4-genre"
+            >
+              genre
+            </span>
+          </div>
+        </div>
+        <div
+          className="css-ys3583"
+        >
+          <a
+            aria-label="Test 4-image"
+            className="chakra-link css-0"
+            href="https://www.nypl.org/"
+            tabIndex={-1}
+          >
+            <img
+              className="chakra-image css-0"
+              role="presentation"
+              src="https://placeimg.com/400/200/arch"
+            />
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+`;
