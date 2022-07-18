@@ -15,7 +15,7 @@ function Meta({ title, description, imageUrl }: MetaProps) {
   const pageUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${asPath}`;
 
   // Description clean up.
-  const metaDescription = description.replace(/(<([^>]+)>)/gi, "").trim();
+  const metaDescription = description?.replace(/(<([^>]+)>)/gi, "").trim();
 
   // Image default.
   let image = "https://www.nypl.org/sites/default/files/SASBopeng.jpg";
