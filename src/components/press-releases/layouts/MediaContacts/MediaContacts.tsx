@@ -3,7 +3,7 @@ import React from "react";
 import { Heading, Box } from "@nypl/design-system-react-components";
 
 function MediaContacts({ mediaContacts }: any) {
-  const contacts = mediaContacts.replace(/\n/g, "<br/>");
+  const contacts = mediaContacts?.replace(/\n/g, "<br/>");
   return (
     <>
       <Heading level="two" text="Media Contacts" />
