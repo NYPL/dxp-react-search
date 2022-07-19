@@ -79,6 +79,13 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
+      if (
+        item.type === "paragraph--hp_hero" &&
+        typesInQuery.includes("HpHero")
+      ) {
+        accumulator.push(item);
+      }
+
       return accumulator;
     },
     []
@@ -320,6 +327,18 @@ export default function resolveDrupalParagraphs(
         };
         break;
         */
+      case "paragraph--hp_hero":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          image:
+            item.field_ers_image.data === null
+              ? null
+              : resolveImage(item.field_ers_image),
+        };
+        break;
     }
     // @ts-ignore
     items.push(paragraphComponent);
