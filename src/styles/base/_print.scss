@@ -5,9 +5,10 @@
  */
 
  @media print {
+  // Ensure Contrast
   body {
-     color: #000;
-     background: #fff;
+     color: #000 !important;
+     background: #fff !important;
   }
   // Hide unnecessary navigation and asides
   #nypl-header-static,
@@ -15,6 +16,14 @@
   #page-container--content-secondary,
   #footer {
     display: none;
+  }
+  // Remove grid layout and margins
+  #main-content {
+    > div {
+      display: block !important;
+      margin: 0;
+      padding: 0;
+    }
   }
   // Expand hrefs to print underlying links
   article a {
@@ -24,5 +33,9 @@
       content:" <" attr(href) "> ";
       font-weight: normal !important;
     }
+  }
+  // Readable margin
+  @page {
+    margin: 2cm;
   }
 }
