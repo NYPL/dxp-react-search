@@ -1,0 +1,28 @@
+/**
+ * Stylesheet for print-friendly pages
+ *
+ *
+ */
+
+ @media print {
+  body {
+     color: #000;
+     background: #fff;
+  }
+  // Hide unnecessary navigation and asides
+  #nypl-header-static,
+  nav[aria-label="Breadcrumb"],
+  #page-container--content-secondary,
+  #footer {
+    display: none;
+  }
+  // Expand hrefs to print underlying links
+  article a {
+    font-weight: bold !important;
+    text-decoration: none !important;
+    &[href^=http]:after {
+      content:" <" attr(href) "> ";
+      font-weight: normal !important;
+    }
+  }
+}
