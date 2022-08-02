@@ -62,7 +62,8 @@ function PressReleasePage() {
       metaTags={{
         title: data.pressRelease.title,
         description: data.pressRelease.description,
-        imageUrl: data.pressRelease.image.uri,
+        // Press releases have optional social/share image field.
+        imageUrl: data.pressRelease.image?.uri,
       }}
       breadcrumbs={[
         {
