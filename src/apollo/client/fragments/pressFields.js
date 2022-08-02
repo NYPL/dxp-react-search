@@ -36,6 +36,8 @@ export const PRESS_FIELDS_FRAGMENT = gql`
           id
           alt
           uri
+          width
+          height
           transformations {
             id
             label
