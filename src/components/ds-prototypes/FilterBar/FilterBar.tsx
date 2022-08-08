@@ -1,6 +1,7 @@
 import * as React from "react";
 // Components
 import {
+  //Box,
   Button,
   Heading,
   Icon,
@@ -70,65 +71,63 @@ export default function FilterBar({
           >
             {setFilterButtonLabel(selectedItems)}
           </Button>
-          {isOpen && (
-            <Modal isOpen={isOpen} onClose={onClose} size="full">
-              <ModalOverlay />
-              <ModalContent>
-                <ModalBody>
-                  <div className={s.ctaButtonsContainerMobile}>
-                    <Button
-                      id="multiselect-button-goback"
-                      buttonType="link"
-                      mouseDown={false}
-                      onClick={onClose}
-                      // additionalStyles
-                      sx={{
-                        display: "block",
-                        width: "fit-content",
-                      }}
-                    >
-                      <Icon
-                        name="arrow"
-                        align="left"
-                        iconRotation="rotate90"
-                        size="small"
-                      />
-                      Go Back
-                    </Button>
-                    <Button
-                      id="multiselect-button-save"
-                      buttonType="primary"
-                      mouseDown={false}
-                      type="button"
-                      onClick={onApply}
-                    >
-                      Show Results
-                    </Button>
-                  </div>
-                  <div className={s.multiSelectsContainerMobile}>
-                    <Heading
-                      id="search-filters__mobile-heading"
-                      level="three"
-                      text="Filters"
+          <Modal isOpen={isOpen} onClose={onClose} size="full">
+            <ModalOverlay />
+            <ModalContent>
+              <ModalBody>
+                <div className={s.ctaButtonsContainerMobile}>
+                  <Button
+                    id="multiselect-button-goback"
+                    buttonType="link"
+                    mouseDown={false}
+                    onClick={onClose}
+                    // additionalStyles
+                    sx={{
+                      display: "block",
+                      width: "fit-content",
+                    }}
+                  >
+                    <Icon
+                      name="arrow"
+                      align="left"
+                      iconRotation="rotate90"
+                      size="small"
                     />
-                    {children}
-                    {Object.keys(selectedItems).length > 0 && (
-                      <Button
-                        id="mobile-clear-all-button"
-                        buttonType="link"
-                        className={s.clearAllFiltersButton}
-                        mouseDown={false}
-                        onClick={onClear}
-                        type="submit"
-                      >
-                        Clear all filters
-                      </Button>
-                    )}
-                  </div>
-                </ModalBody>
-              </ModalContent>
-            </Modal>
-          )}
+                    Go Back
+                  </Button>
+                  <Button
+                    id="multiselect-button-save"
+                    buttonType="primary"
+                    mouseDown={false}
+                    type="button"
+                    onClick={onApply}
+                  >
+                    Show Results
+                  </Button>
+                </div>
+                <div className={s.multiSelectsContainerMobile}>
+                  <Heading
+                    id="search-filters__mobile-heading"
+                    level="three"
+                    text="Filters"
+                  />
+                  {children}
+                  {Object.keys(selectedItems).length > 0 && (
+                    <Button
+                      id="mobile-clear-all-button"
+                      buttonType="link"
+                      className={s.clearAllFiltersButton}
+                      mouseDown={false}
+                      onClick={onClear}
+                      type="submit"
+                    >
+                      Clear all filters
+                    </Button>
+                  )}
+                </div>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
         </div>
       ) : (
         <div className={s.desktopContainer}>
