@@ -32,7 +32,17 @@ export default function resolveParagraphTypes(objectType: string) {
       resolvedObjectType = "CatalogList";
       break;
     case "hp_hero":
-      resolvedObjectType = "HpHero";
+      resolvedObjectType = "HomePageHeroComponent";
+      break;
+    case "hp_events":
+      resolvedObjectType = "HomePageEventsComponent";
+      break;
+    case "hp_card_grid":
+      resolvedObjectType = "HomePageCardGridComponent";
+      break;
+    case "hp_spotlight":
+      resolvedObjectType = "HomePageSpotlightComponent";
+      break;
   }
   return resolvedObjectType;
 }

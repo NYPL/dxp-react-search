@@ -39,8 +39,23 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
     return response;
   }
 
-  async getCollectionResource(apiPath: string): Promise<JsonApiResource[]> {
-    const response = await this.get(apiPath);
+  async getCollectionResource(
+    apiPath: string,
+    isPreview: boolean
+  ): Promise<JsonApiResource[]> {
+    let response;
+    if (isPreview) {
+      const accessToken = await getAccessToken();
+      response = await this.get(apiPath, undefined, {
+        headers: {
+          // @ts-ignore
+          Authorization: `Bearer ${accessToken.access_token}`,
+        },
+      });
+    } else {
+      response = await this.get(apiPath);
+    }
+
     if (Array.isArray(response.data)) {
       return response;
     } else {

@@ -7,30 +7,143 @@ export const typeDefs = gql`
     description: String
     publishDate: String
     unpublishDate: String
-    slotOne: [SlotOne]
+    sectionOne: [SectionOne]
+    sectionTwo: [SectionTwo]
+    sectionThree: [SectionThree]
+    sectionFour: [SectionFour]
+    sectionSeven: [SectionSeven]
   }
 
-  union SlotOne = HpHero | HpVideo
+  union SectionOne = HomePageHeroComponent
+  union SectionTwo = HomePageSpotlightComponent | HomePageCardGridComponent
+  union SectionThree = HomePageEventsComponent | HomePageCardGridComponent
+  union SectionFour = HomePageCardGridComponent | HomePageEventsComponent
+  union SectionSeven = HomePageCardGridComponent
 
-  type HpHero {
+  # Home page content components (Drupal paragraphs).
+  type HomePageHeroComponent {
     id: ID!
     type: String
     heading: String
     description: String
     image: Image
+    link: String
+    tag: String
   }
 
-  type HpVideo {
+  type HomePageEventsComponent {
     id: ID!
-    type: String!
+    type: String
+    heading: String
+    link: String
+    seeMore: SeeMore
+  }
+
+  type HomePageSpotlightComponent {
+    id: ID!
+    type: String
+    heading: String
+    link: String
+    seeMore: SeeMore
+    gridVariant: String
+  }
+
+  type HomePageCardGridComponent {
+    id: ID!
+    type: String
+    heading: String
+    link: String
+    seeMore: SeeMore
+    gridVariant: String
+    items: [HomePageCardComponent]
+  }
+
+  type SeeMore {
+    link: String
+    text: String
+  }
+
+  type HomePageCardComponent {
+    id: ID!
+    title: String
+    description: String
+    url: String
+    image: Image
+  }
+
+  # Home page content types.
+  # Event
+  type HomePageEvent {
+    id: ID!
+    title: String!
+    image: Image
+    link: String
+    category: String
+    featured: Boolean
+    location: String!
+    displayDate: String
+    publishOn: String
+    unpublishOn: String
+    published: Boolean
+    weight: Int
+  }
+
+  type HomePageEventConnection {
+    items: [HomePageEvent]
+    pageInfo: PageInfo
+  }
+
+  # Hero
+  type HomePageHero {
+    id: ID!
+    type: String
     heading: String
     description: String
-    provider: String!
-    embedCode: String!
-    oembedUrl: String!
+    image: Image
+    link: String
+    tag: String
+    publishOn: String
+    unpublishOn: String
+    published: Boolean
+  }
+
+  type HomePageHeroConnection {
+    items: [HomePageHero]
+    pageInfo: PageInfo
+  }
+
+  # Spotlight
+  type HomePageSpotlightItem {
+    id: ID!
+    type: String
+    title: String
+    image: Image
+    url: String
+  }
+
+  type HomePageSpotlightItemConnection {
+    items: [HomePageSpotlightItem]
+    pageInfo: PageInfo
   }
 
   extend type Query {
     homePage(id: String, revisionId: String, preview: Boolean): HomePage
+    homePageHeroCollection(
+      limit: Int
+      filter: QueryFilter
+      preview: Boolean
+    ): HomePageHeroConnection
+    homePageSpotlightCollection(
+      limit: Int
+      filter: QueryFilter
+      sort: Sort
+      preview: Boolean
+    ): HomePageSpotlightItemConnection
+    homePageEventCollection(
+      limit: Int
+      filter: QueryFilter
+      sort: Sort
+      preview: Boolean
+    ): HomePageEventConnection
   }
 `;

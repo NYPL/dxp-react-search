@@ -2,7 +2,9 @@ import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Grid, GridItem } from "@chakra-ui/react";
-import ComponentWrapper from "../ComponentWrapper";
+import ComponentWrapper, {
+  SeeMore,
+} from "../ComponentWrapper/ComponentWrapper";
 import Card, { CardItem } from "./Card";
 
 interface CardGridProps {
@@ -12,8 +14,13 @@ interface CardGridProps {
   hoverStyle?: boolean;
   variant?: "row-grid" | "column-grid" | "updates-grid";
   // Props below inform styling of Card
-  cardVariant?: "event-spotlight" | "event-card" | "blog-card" | "updates-card";
+  cardVariant?:
+    | "event-card-featured"
+    | "event-card"
+    | "blog-card"
+    | "updates-card";
   size?: string | Record<string, string>;
+  seeMore?: SeeMore;
 }
 
 function CardGrid({
@@ -24,6 +31,7 @@ function CardGrid({
   variant,
   cardVariant,
   size,
+  seeMore,
 }: CardGridProps) {
   const styles = useStyleConfig("CardGrid", { variant });
   return (
@@ -35,6 +43,7 @@ function CardGrid({
       textColor="red.200"
       borderColor="red.200"
       paddingTop={true}
+      seeMore={seeMore}
     >
       <Grid as="ul" sx={styles}>
         {items &&

@@ -53,7 +53,7 @@ const Card: ComponentStyleConfig = {
   },
   // LinkCard variants
   variants: {
-    "event-spotlight": {
+    "event-card-featured": {
       gap: 1.5,
       textAlign: "left",
       h3: {

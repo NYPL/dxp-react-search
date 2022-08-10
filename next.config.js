@@ -51,6 +51,7 @@ const nextConfig = {
       // Local
       "localhost",
       "nypl-d8.lndo.site",
+      "nypl-pantheon.ddev.site",
       DRUPAL_API_DOMAIN_ONLY,
       // @TODO After pantheon migration remove old AWS domains.
       // Sandbox

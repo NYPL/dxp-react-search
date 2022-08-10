@@ -8,46 +8,120 @@ import { withApollo } from "./../../apollo/client/withApollo";
 // Component
 import { Box } from "@chakra-ui/react";
 import Meta from "./../../components/shared/Meta";
-import Hero from "./../../components/home-v1/Hero";
-import Slideshow from "../../components/home-v1/Slideshow/";
-import StaffPicks from "../../components/home-v1/StaffPicks";
-import FeaturedEvents from "../../components/home-v1/FeaturedEvents";
+// import Hero from "./../../components/home-v1/Hero";
+import HeroWithData from "./../../components/home-v1/Hero/HeroWithData";
+// import Slideshow from "../../components/home-v1/Slideshow/";
+// import StaffPicks from "../../components/home-v1/StaffPicks";
+import EventCollection from "../../components/home-v1/EventCollection";
 import CardGrid from "../../components/home-v1/CardGrid";
+
+import Spotlight from "../../components/home-v1/Spotlight";
 import ScoutHomepageV1Provider from "../../components/home-v1/theme";
 
 // Mock content
-import {
-  heroContent,
-  spotlightContent,
-  featuredEvents,
-  discoverContent,
-  staffPicks,
-  slideshowContent,
-  blogContent,
-  updatesContent,
-} from "./../../components/home-v1/mockContent";
+// import {
+//   spotlightContent,
+//   discoverContent,
+//   staffPicks,
+//   slideshowContent,
+//   blogContent,
+//   updatesContent,
+// } from "./../../components/home-v1/mockContent";
 // Hooks
 import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 
-const HOMEPAGE_QUERY = gql`
+export const HOMEPAGE_QUERY = gql`
   query ($id: String, $revisionId: String, $preview: Boolean) {
     homePage(id: $id, revisionId: $revisionId, preview: $preview) {
       id
       title
-      slotOne {
+      sectionTwo {
         __typename
-        ... on HpHero {
+        ... on HomePageSpotlightComponent {
           id
           type
           heading
-          description
-          image {
+          link
+          gridVariant
+          seeMore {
+            text
+            link
+          }
+        }
+      }
+      sectionThree {
+        __typename
+        ... on HomePageEventsComponent {
+          id
+          type
+          heading
+          link
+          seeMore {
+            text
+            link
+          }
+        }
+      }
+      sectionFour {
+        __typename
+        ... on HomePageCardGridComponent {
+          id
+          type
+          heading
+          link
+          gridVariant
+          items {
             id
-            uri
-            transformations {
-              label
+            title
+            url
+            image {
+              id
               uri
+              alt
+              width
+              height
+              transformations {
+                id
+                label
+                uri
+              }
             }
+          }
+          seeMore {
+            text
+            link
+          }
+        }
+      }
+      sectionSeven {
+        __typename
+        ... on HomePageCardGridComponent {
+          id
+          type
+          heading
+          link
+          gridVariant
+          items {
+            id
+            title
+            description
+            url
+            image {
+              id
+              uri
+              alt
+              width
+              height
+              transformations {
+                id
+                label
+                uri
+              }
+            }
+          }
+          seeMore {
+            text
+            link
           }
         }
       }
@@ -59,7 +133,7 @@ function HomePage() {
   const router = useRouter();
 
   const nextRouter = router;
-  nextRouter.asPath = "/home2";
+  nextRouter.asPath = "/home";
 
   const { isPreview, uuid } = useDecoupledRouter(nextRouter);
 
@@ -90,7 +164,10 @@ function HomePage() {
     return <div>Loading...</div>;
   }
 
-  const homePageDataSlotOne = data.homePage.slotOne[0];
+  const homePageDataSectionTwo = data.homePage.sectionTwo[0];
+  const homePageDataSectionThree = data.homePage.sectionThree[0];
+  const homePageDataSectionFour = data.homePage.sectionFour[0];
+  const homePageDataSectionSeven = data.homePage.sectionSeven[0];
 
   return (
     <>
@@ -99,14 +176,7 @@ function HomePage() {
         <ScoutHomepageV1Provider>
           <main id="main-content">
             <Box id="content-header" p={0} m={0}>
-              <Hero
-                title={homePageDataSlotOne.heading}
-                description={homePageDataSlotOne.description}
-                image={homePageDataSlotOne.image.uri}
-                mobileImg={heroContent.mobileImg}
-                tag={heroContent.tag}
-                url={heroContent.url}
-              />
+              <HeroWithData />
             </Box>
             <Box
               id="content-primary"
@@ -115,19 +185,37 @@ function HomePage() {
               margin="0 auto"
               padding="0 20px"
             >
+              <Spotlight
+                title={homePageDataSectionTwo.heading}
+                link={homePageDataSectionTwo.link}
+                variant={homePageDataSectionTwo.gridVariant}
+                seeMore={homePageDataSectionTwo.seeMore}
+              />
+              <EventCollection
+                title={homePageDataSectionThree.heading}
+                link={homePageDataSectionThree.link}
+                seeMore={homePageDataSectionThree.seeMore}
+              />
               <CardGrid
-                title={spotlightContent.title}
-                link={spotlightContent.link}
-                items={spotlightContent.items}
+                title={homePageDataSectionFour.heading}
+                link={homePageDataSectionFour.link}
+                variant={homePageDataSectionFour.gridVariant}
                 hoverStyle={true}
-                variant="column-grid"
+                items={homePageDataSectionFour.items}
+                seeMore={homePageDataSectionFour.seeMore}
               />
-              <FeaturedEvents
-                title={featuredEvents.title}
-                link={featuredEvents.link}
-                items={featuredEvents.items}
-              />
+              {/* From Our Blogs */}
               <CardGrid
+                title={homePageDataSectionSeven.heading}
+                link={homePageDataSectionSeven.link}
+                variant={homePageDataSectionSeven.gridVariant}
+                hoverStyle={true}
+                items={homePageDataSectionSeven.items}
+                // @TODO why do we add this?
+                cardVariant="blog-card"
+                seeMore={homePageDataSectionSeven.seeMore}
+              />
+              {/* <CardGrid
                 title={discoverContent.title}
                 link={discoverContent.link}
                 items={discoverContent.items}
@@ -160,7 +248,7 @@ function HomePage() {
                 variant="updates-grid"
                 cardVariant="updates-card"
                 size="sm"
-              />
+              /> */}
             </Box>
           </main>
         </ScoutHomepageV1Provider>
@@ -168,8 +256,6 @@ function HomePage() {
     </>
   );
 }
-
-//export default HomePage;
 
 export default withApollo(HomePage, {
   ssr: true,

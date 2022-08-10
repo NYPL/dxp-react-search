@@ -4,6 +4,7 @@ import { Box, Grid, GridItem, Heading, Link } from "@chakra-ui/react";
 interface ComponentWrapperProps {
   title: string;
   link: string;
+  seeMore?: SeeMore;
   alignSectionHeading?: string;
   hoverStyle?: boolean;
   paddingTop?: boolean;
@@ -15,9 +16,15 @@ interface ComponentWrapperProps {
   children: JSX.Element;
 }
 
+export type SeeMore = {
+  link: string;
+  text: string;
+};
+
 function ComponentWrapper({
   title,
   link,
+  seeMore,
   alignSectionHeading,
   hoverStyle = false,
   paddingTop,
@@ -93,21 +100,24 @@ function ComponentWrapper({
             mt={{ base: 6 }}
             mb={{ base: 10, lg: 8 }}
           >
-            <Link
-              aria-label={`see more of ${title}`}
-              href={link}
-              variant={
-                hoverStyle === true
-                  ? "see-more-hover-style"
-                  : "see-more-hover-no-style"
-              }
-              color={textColor}
-              border="2px"
-              borderColor={buttonBorder || borderColor}
-              borderStyle="solid"
-            >
-              SEE MORE...
-            </Link>
+            {seeMore && (
+              <Link
+                aria-label={`see more of ${title}`}
+                href={seeMore.link}
+                variant={
+                  hoverStyle === true
+                    ? "see-more-hover-style"
+                    : "see-more-hover-no-style"
+                }
+                color={textColor}
+                border="2px"
+                borderColor={buttonBorder || borderColor}
+                borderStyle="solid"
+                textTransform="uppercase"
+              >
+                {seeMore.text} . . .
+              </Link>
+            )}
           </Box>
         </GridItem>
       </Grid>

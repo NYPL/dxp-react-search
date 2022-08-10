@@ -7,9 +7,10 @@ import {
   Link,
   Grid,
   GridItem,
-  Image,
+  // Image,
   Box,
 } from "@chakra-ui/react";
+import Image from "./../../shared/Image";
 
 export interface CardItem {
   id?: string;
@@ -20,14 +21,14 @@ export interface CardItem {
   genre?: string;
   audience?: string;
   location?: string;
-  image: string;
+  image: any;
   url?: string;
 }
 
 interface CardProps {
   item: CardItem;
   variant?:
-    | "event-spotlight"
+    | "event-card-featured"
     | "event-card"
     | "slide-show-card"
     | "blog-card"
@@ -92,12 +93,24 @@ function Card({ item, variant, size = "md" }: CardProps) {
       <GridItem colStart={1} rowStart={1}>
         {/* @QUESTION Axe accessibility test requires aria-label for link here */}
         <Link href={item.url} aria-label={`${item.title}-image`} tabIndex={-1}>
-          <Image
+          {/* <Image
             src={item.image}
             // @QUESTION should role="presentation" be used instead of alte="" source: https://www.digitala11y.com/presentation-role/
             role="presentation"
             // @TODO discuss with Zach if there should be a empty alt attribute instead/alt information
             // alt={item.alt | ""}
+          /> */}
+          <Image
+            id={item.image.id}
+            alt={item.image.alt}
+            uri={item.image.uri}
+            useTransformation={true}
+            transformations={item.image.transformations}
+            transformationLabel={"2_1_960"}
+            layout="responsive"
+            width={900}
+            height={450}
+            quality={90}
           />
         </Link>
       </GridItem>
