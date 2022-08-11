@@ -14,5 +14,9 @@ echo "NEXT_PUBLIC_NYPL_DOMAIN: $NEXT_PUBLIC_NYPL_DOMAIN"
 export NEXT_PUBLIC_ALLOWED_ORIGIN=https://$NEXT_PUBLIC_VERCEL_URL
 echo "NEXT_PUBLIC_ALLOWED_ORIGIN: $NEXT_PUBLIC_ALLOWED_ORIGIN"
 
+# Hardcode pantheon multidev for now.
+export DRUPAL_API=https://pr974-nypl1.pantheonsite.io
+echo "DRUPAL_API: $DRUPAL_API"
+
 # Run build
 npm run build
