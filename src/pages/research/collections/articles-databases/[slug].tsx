@@ -17,8 +17,8 @@ import Error from "./../../../_error";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../../utils/config";
 import onlineResourcesContent from "./../../../../__content/onlineResources";
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
+const { NEXT_PUBLIC_NYPL_DOMAIN, NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } =
+  process.env;
 // Hooks
 import useDecoupledRouter, {
   DECOUPLED_ROUTER_QUERY,
