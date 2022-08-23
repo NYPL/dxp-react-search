@@ -36,11 +36,41 @@ function createIsomorphLink() {
 export function createApolloClient() {
   const isServer = typeof window === "undefined";
 
+  const cache = new InMemoryCache({
+    typePolicies: {
+      FilterItem: {
+        // IDs will clash between taxonomy tid and content nids.
+        keyFields: ["id", "name"],
+      },
+      Query: {
+        fields: {
+          searchDocument(_, { args, toReference }) {
+            return toReference({
+              __typename: "OnlineResourceDocument",
+              id: args?.id,
+            });
+          },
+          resourceTopic(_, { args, toReference }) {
+            return toReference({
+              __typename: "ResourceTopic",
+              id: args?.id,
+            });
+          },
+          blog(_, { args, toReference }) {
+            return toReference({
+              __typename: "Blog",
+              id: args?.id,
+            });
+          },
+        },
+      },
+    },
+  });
+
   return new ApolloClient({
     ssrMode: isServer,
     link: createIsomorphLink(),
-    // @TODO add apollo cache overrides from old version.
-    cache: new InMemoryCache(),
+    cache: cache,
   });
 }
 
@@ -59,7 +89,26 @@ export function initializeApollo(
   // If your page has Next.js data fetching methods that use Apollo Client,
   // the initial state gets hydrated here.
   if (initialState) {
-    // @TODO add cache merging here?
+    // @TODO Add merge cache here.
+    // Requires:
+    // import merge from 'deepmerge';
+    // import isEqual from 'lodash/isEqual';
+    //
+    // Get existing cache, loaded during client side data fetching.
+    // const existingCache = _apolloClient.extract();
+
+    // // Merge the existing cache into data passed from getStaticProps/getServerSideProps.
+    // const data = merge(initialState, existingCache, {
+    //   // Combine arrays using object equality (like in sets)
+    //   arrayMerge: (destinationArray, sourceArray) => [
+    //     ...sourceArray,
+    //     ...destinationArray.filter((d) =>
+    //       sourceArray.every((s) => !isEqual(d, s))
+    //     ),
+    //   ],
+    // });
+    // // Restore the cache with the merged data.
+    // _apolloClient.cache.restore(initialState);
 
     _apolloClient.cache.restore(initialState);
   }
