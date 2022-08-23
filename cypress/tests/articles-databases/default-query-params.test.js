@@ -4,8 +4,7 @@
 // https://github.com/cypress-io/eslint-plugin-cypress
 
 describe("Articles & Databases pages with default query params", () => {
-  const url =
-    "http://localhost:3000/research/collections/articles-databases/search";
+  const url = "/research/collections/articles-databases/search";
   const queryParams = "?q=new&page=1&subject=64&audience_by_age=216";
   const queryParamsMultiple =
     "?q=new&subject=64+62&audience_by_age=216+217&availability=on-site-only&page=1";
@@ -69,9 +68,11 @@ describe("Articles & Databases pages with default query params", () => {
     cy.visit(`${url}${queryParams}`);
     cy.get("form")
       .findByRole("button", { name: "Audience (1)" })
+      .should("be.visible")
       .click()
       .parent()
       .findByRole("dialog")
+      .should("be.visible")
       .findByLabelText("Adults")
       .should("be.checked");
   });
@@ -80,11 +81,13 @@ describe("Articles & Databases pages with default query params", () => {
     cy.visit(`${url}${queryParams}`);
     cy.get("form")
       .findByRole("button", { name: "Audience (1)" })
+      .should("be.visible")
       .click()
       .parent()
       .findByRole("dialog")
       .parent()
       .findByRole("button", { name: "Clear" })
+      .should("be.visible")
       .click()
       // Check that the url has been updated correctly.
       .location()

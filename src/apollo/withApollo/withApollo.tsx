@@ -6,7 +6,9 @@ import { useApollo } from "./apollo";
 /*
  * HOC component for wrapping next page components with <ApolloProvider>.
  */
-export default function withApollo(PageComponent: NextComponentType) {
+export default function withApollo(
+  PageComponent: NextComponentType
+): NextComponentType {
   const WithApollo = ({ ...pageProps }) => {
     /*
      * pageProps.initialApolloState is set as a prop
