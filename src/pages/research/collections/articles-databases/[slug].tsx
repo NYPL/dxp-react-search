@@ -7,6 +7,7 @@ import { gql, useQuery, useApolloClient } from "@apollo/client";
 import withApollo from "./../../../../apollo/withApollo";
 import { initializeApollo } from "./../../../../apollo/withApollo/apollo";
 import { LOCATION_MATCHES_BY_IP_QUERY } from "./../../../../components/online-resources/SearchResults/SearchResults";
+import { queryOnlineResourceFilters } from "./search";
 // Redux
 import { withRedux } from "./../../../../redux/withRedux";
 // Components
@@ -210,6 +211,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       id: uuid,
     },
   });
+
+  await queryOnlineResourceFilters(apolloClient);
 
   return {
     props: {

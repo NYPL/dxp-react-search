@@ -133,6 +133,7 @@ function SearchForm() {
             id: "availability",
             label: "Availability",
             type: "taxonomy",
+            includeChildren: false,
             customData: true,
           },
         ]}

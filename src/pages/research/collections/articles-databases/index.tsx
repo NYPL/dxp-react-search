@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 // Apollo
 import withApollo from "./../../../../apollo/withApollo";
 import { initializeApollo } from "./../../../../apollo/withApollo/apollo";
+import { queryOnlineResourceFilters } from "./search";
 // Redux
 import { withRedux } from "./../../../../redux/withRedux";
 // Components
@@ -78,6 +79,8 @@ export const getStaticProps: GetStaticProps = async () => {
       sort: { field: "field_is_most_popular", direction: "ASC" },
     },
   });
+
+  await queryOnlineResourceFilters(apolloClient);
 
   return {
     props: {

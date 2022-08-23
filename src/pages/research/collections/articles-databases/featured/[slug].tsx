@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { gql, useQuery } from "@apollo/client";
 import withApollo from "./../../../../../apollo/withApollo";
 import { initializeApollo } from "./../../../../../apollo/withApollo/apollo";
+import { queryOnlineResourceFilters } from "./../search";
 // Redux
 import { withRedux } from "./../../../../../redux/withRedux";
 // Components
@@ -186,6 +187,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       tid: resourceTopicTid,
     },
   });
+
+  await queryOnlineResourceFilters(apolloClient);
 
   return {
     props: {
