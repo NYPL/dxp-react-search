@@ -2,6 +2,7 @@ import React from "react";
 // Apollo
 import withApollo from "./../../apollo/withApollo";
 import { initializeApollo } from "./../../apollo/withApollo/apollo";
+import { FILTERS_QUERY } from "./../../components/shared/FilterBar/MultiSelect";
 // Components
 import PageContainer from "./../../components/blogs/layouts/PageContainer";
 import BlogCollection, {
@@ -43,8 +44,6 @@ function BlogsAllPage() {
 export const getServerSideProps = async () => {
   const apolloClient = initializeApollo();
 
-  // @TODO Add Blog filters queries here.
-
   await apolloClient.query({
     query: BLOGS_QUERY,
     variables: {
@@ -52,6 +51,98 @@ export const getServerSideProps = async () => {
       pageNumber: 1,
       sort: { field: "created", direction: "DESC" },
       filter: { status: { fieldName: "status", operator: "=", value: true } },
+    },
+  });
+
+  // Channels filters.
+  await apolloClient.query({
+    query: FILTERS_QUERY,
+    variables: {
+      id: "channel",
+      type: "taxonomy",
+      limit: 200,
+      pageNumber: 1,
+      sort: {
+        field: "name",
+        direction: "ASC",
+      },
+      includeChildren: true,
+      customData: false,
+    },
+  });
+
+  // Subjects filters.
+  await apolloClient.query({
+    query: FILTERS_QUERY,
+    variables: {
+      id: "subject",
+      type: "taxonomy",
+      limit: 200,
+      pageNumber: 1,
+      filter: {
+        limiter: {
+          fieldName: "field_lts_content_type",
+          operator: "=",
+          value: "blog",
+        },
+      },
+      sort: {
+        field: "name",
+        direction: "ASC",
+      },
+      includeChildren: true,
+      customData: false,
+    },
+  });
+
+  // Libraries filters.
+  await apolloClient.query({
+    query: FILTERS_QUERY,
+    variables: {
+      id: "library",
+      type: "content",
+      limit: 200,
+      pageNumber: 1,
+      sort: {
+        field: "title",
+        direction: "ASC",
+      },
+      includeChildren: false,
+      customData: false,
+    },
+  });
+
+  // Divisions filters.
+  await apolloClient.query({
+    query: FILTERS_QUERY,
+    variables: {
+      id: "division",
+      type: "content",
+      limit: 200,
+      pageNumber: 1,
+      sort: {
+        field: "title",
+        direction: "ASC",
+      },
+      includeChildren: false,
+      customData: false,
+    },
+  });
+
+  // Audience filters.
+  await apolloClient.query({
+    query: FILTERS_QUERY,
+    variables: {
+      id: "audience_by_age",
+      type: "taxonomy",
+      limit: 200,
+      pageNumber: 1,
+      sort: {
+        field: "name",
+        direction: "ASC",
+      },
+      includeChildren: false,
+      customData: false,
     },
   });
 
