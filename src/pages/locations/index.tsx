@@ -100,15 +100,17 @@ function LocationFinder() {
   );
 }
 
-// We prefetch the gql queries and populate the initial apollo cache.
-// Components still have gql queries in them, but will already have data
-// on first load, and will req data changes client side, the same as they would using ssr.
-export async function getServerSideProps() {
+export const getServerSideProps = async () => {
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
-    query: FILTERS_QUERY,
-  });
+  // We add a try/catch to avoid the entire pg returning an error.
+  try {
+    await apolloClient.query({
+      query: FILTERS_QUERY,
+    });
+  } catch (error) {
+    console.error(`Apollo Client ${error}`);
+  }
 
   await apolloClient.query({
     query: LOCATIONS_QUERY,
@@ -128,7 +130,7 @@ export async function getServerSideProps() {
       initialApolloState: apolloClient.cache.extract(),
     },
   };
-}
+};
 
 // @ts-ignore
 export default withApollo(withRedux(LocationFinder));
