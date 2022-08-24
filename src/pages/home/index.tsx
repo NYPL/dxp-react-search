@@ -125,6 +125,38 @@ export const HOMEPAGE_QUERY = gql`
           }
         }
       }
+      sectionEight {
+        __typename
+        ... on HomePageCardGridComponent {
+          id
+          type
+          heading
+          link
+          gridVariant
+          items {
+            id
+            title
+            description
+            url
+            image {
+              id
+              uri
+              alt
+              width
+              height
+              transformations {
+                id
+                label
+                uri
+              }
+            }
+          }
+          seeMore {
+            text
+            link
+          }
+        }
+      }
     }
   }
 `;
@@ -168,6 +200,7 @@ function HomePage() {
   const homePageDataSectionThree = data.homePage.sectionThree[0];
   const homePageDataSectionFour = data.homePage.sectionFour[0];
   const homePageDataSectionSeven = data.homePage.sectionSeven[0];
+  const homePageDataSectionEight = data.homePage.sectionEight[0];
 
   return (
     <>
@@ -215,6 +248,17 @@ function HomePage() {
                 cardVariant="blog-card"
                 seeMore={homePageDataSectionSeven.seeMore}
               />
+              {/* Updates */}
+              <CardGrid
+                title={homePageDataSectionEight.heading}
+                link={homePageDataSectionEight.link}
+                items={homePageDataSectionEight.items}
+                variant={homePageDataSectionEight.gridVariant}
+                hoverStyle={true}
+                seeMore={homePageDataSectionEight.seeMore}
+                cardVariant="updates-card"
+                size="sm"
+              />
               {/* <CardGrid
                 title={discoverContent.title}
                 link={discoverContent.link}
@@ -239,8 +283,8 @@ function HomePage() {
                 hoverStyle={true}
                 variant="row-grid"
                 cardVariant="blog-card"
-              />
-              <CardGrid
+              /> 
+                <CardGrid
                 title={updatesContent.title}
                 link={updatesContent.link}
                 items={updatesContent.items}
