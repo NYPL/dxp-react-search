@@ -43,7 +43,6 @@ const EVENT_COLLECTION_QUERY = gql`
         published
         link
         category
-        featured
         location
         displayDate
         publishOn
@@ -157,6 +156,17 @@ export default function EventCollection({
 
   const eventsCategories = Object.keys(eventsGroupedByCategory);
 
+  const setCategoryTitle = (category: string) => {
+    switch (category) {
+      case "kids_teens":
+        return "Kids & Teens";
+      case "author_talks":
+        return "Author Talks & Conversations";
+      default:
+        return category;
+    }
+  };
+
   return (
     <ComponentWrapper
       title={title}
@@ -171,31 +181,38 @@ export default function EventCollection({
       <Box>
         {/* Mobile */}
         <Box as="ul" display={{ base: "block", md: "none" }}>
-          {Object.keys(eventsGroupedByCategory).map((eventCategory) => {
-            let featuredEvent: any;
-            eventsGroupedByCategory[eventCategory] &&
-              eventsGroupedByCategory[eventCategory].map((event: EventItem) => {
-                if (event.featured === true) {
+          {eventsCategories.map((eventCategory) => {
+            let featuredEvent: EventItem | undefined;
+            if (eventsGroupedByCategory[eventCategory]) {
+              // Get the first event to be featured on mobile
+              eventsGroupedByCategory[eventCategory].forEach((event) => {
+                if (event.weight === 0) {
                   featuredEvent = event;
                 }
               });
-
-            return (
-              <Box as="li" mb={8}>
-                <Heading
-                  as="h3"
-                  fontFamily="Kievit-Medium"
-                  fontSize="xs"
-                  fontWeight="bold"
-                  textTransform="uppercase"
-                  color="red.200"
-                  my={2.5}
-                >
-                  {eventCategory}
-                </Heading>
-                <EventCard {...featuredEvent} />
-              </Box>
-            );
+            }
+            if (featuredEvent) {
+              return (
+                <Box as="li" mb={8}>
+                  <Heading
+                    as="h3"
+                    fontFamily="Kievit-Medium"
+                    fontSize="xs"
+                    fontWeight="bold"
+                    textTransform="uppercase"
+                    color="red.200"
+                    my={2.5}
+                  >
+                    {setCategoryTitle(eventCategory)}
+                  </Heading>
+                  <EventCard
+                    {...featuredEvent}
+                    variant="event-card"
+                    size="lg"
+                  />
+                </Box>
+              );
+            }
           })}
         </Box>
 
@@ -213,7 +230,7 @@ export default function EventCollection({
                 <Tab
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
-                  px={7}
+                  px={5}
                   w={{ lg: "15.5%", xl: "12%" }}
                   textTransform="uppercase"
                   fontSize="xs"
@@ -226,12 +243,12 @@ export default function EventCollection({
                     mb: "-0.5",
                   }}
                 >
-                  {eventsCategory}
+                  {setCategoryTitle(eventsCategory)}
                 </Tab>
               ))}
           </TabList>
           <TabPanels>
-            {Object.keys(eventsGroupedByCategory).map((eventCategory) => {
+            {eventsCategories.map((eventCategory) => {
               return (
                 <TabPanel px={0} tabIndex={-1} key={eventCategory}>
                   <EventCollectionTabPanelContent

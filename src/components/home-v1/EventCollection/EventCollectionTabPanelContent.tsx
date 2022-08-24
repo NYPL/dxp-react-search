@@ -1,7 +1,7 @@
 import * as React from "react";
+
 // Components
-import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
-import Image from "./../../shared/Image";
+import { Grid, GridItem } from "@chakra-ui/react";
 import EventCard, { EventCardProps as EventItem } from "./EventCard";
 
 interface EventCollectionTabPanelContentProps {
@@ -13,14 +13,6 @@ export default function EventCollectionTabPanelContent({
   id,
   events,
 }: EventCollectionTabPanelContentProps) {
-  // let featuredEvent: any;
-  // events &&
-  //   events.map((event) => {
-  //     if (event.featured === true) {
-  //       featuredEvent = event;
-  //     }
-  //   });
-
   // Sort events by weight.
   events.sort(function (a, b) {
     return a.weight - b.weight;
@@ -55,45 +47,23 @@ export default function EventCollectionTabPanelContent({
         rowEnd={{ base: 4, lg: 6 }}
       >
         {featuredEvent && (
-          <Box textAlign="left">
-            <a href={featuredEvent.link}>
-              <Image
-                id={featuredEvent.image.id}
-                alt={featuredEvent.image.alt}
-                uri={featuredEvent.image.uri}
-                useTransformation={true}
-                transformations={featuredEvent.image.transformations}
-                transformationLabel={"2_1_960"}
-                layout="responsive"
-                width={900}
-                height={450}
-                quality={90}
-              />
-            </a>
-            <Heading
-              as="h3"
-              fontFamily="Kievit-Medium"
-              fontSize={{ base: "lg", md: "xl" }}
-            >
-              <a href={featuredEvent.link}>{featuredEvent.title}</a>
-            </Heading>
-            <Box>{featuredEvent.displayDate}</Box>
-            <Box>{featuredEvent.location}</Box>
-          </Box>
+          <EventCard
+            {...featuredEvent}
+            variant="event-card-feaured"
+            size="xl"
+          />
         )}
       </GridItem>
       {/* Desktop */}
       {events &&
-        events.slice(0, 4).map((event, i) => {
-          // @TODO what is this for?
-          if (i === 0) return;
+        events.slice(1, 4).map((event) => {
           return (
             <GridItem
               as="li"
               display={{ base: "none", lg: "block" }}
               colStart={2}
             >
-              <EventCard {...event} />
+              <EventCard {...event} variant="event-card" size="sm" />
             </GridItem>
           );
         })}
@@ -105,7 +75,7 @@ export default function EventCollectionTabPanelContent({
               as="li"
               display={{ base: "none", md: "block", lg: "none" }}
             >
-              <EventCard {...event} />
+              <EventCard {...event} variant="event-card" size="sm" />
             </GridItem>
           );
         })}
