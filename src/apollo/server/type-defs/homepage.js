@@ -12,6 +12,7 @@ export const typeDefs = gql`
     sectionThree: [SectionThree]
     sectionFour: [SectionFour]
     sectionSeven: [SectionSeven]
+    sectionEight: [SectionEight]
   }
 
   union SectionOne = HomePageHeroComponent
@@ -19,6 +20,7 @@ export const typeDefs = gql`
   union SectionThree = HomePageEventsComponent | HomePageCardGridComponent
   union SectionFour = HomePageCardGridComponent | HomePageEventsComponent
   union SectionSeven = HomePageCardGridComponent
+  union SectionEight = HomePageCardGridComponent
 
   # Home page content components (Drupal paragraphs).
   type HomePageHeroComponent {

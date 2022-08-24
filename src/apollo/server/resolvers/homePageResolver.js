@@ -21,6 +21,8 @@ const homePageResolver = {
         "field_hp_section_4.field_erm_hp_cards.field_ers_image.field_media_image",
         "field_hp_section_7.field_erm_hp_cards",
         "field_hp_section_7.field_erm_hp_cards.field_ers_image.field_media_image",
+        "field_hp_section_8.field_erm_hp_cards",
+        "field_hp_section_8.field_erm_hp_cards.field_ers_image.field_media_image",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
@@ -190,14 +192,26 @@ const homePageResolver = {
     sectionSeven: (homePage, _, __, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      const sectionFour =
+      const sectionSeven =
         homePage.field_hp_section_7.data?.length === 0
           ? null
           : resolveDrupalParagraphs(
               [homePage.field_hp_section_7],
               typesInQuery
             );
-      return sectionFour;
+      return sectionSeven;
+    },
+    sectionEight: (homePage, _, __, info) => {
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const sectionEight =
+        homePage.field_hp_section_8.data?.length === 0
+          ? null
+          : resolveDrupalParagraphs(
+              [homePage.field_hp_section_8],
+              typesInQuery
+            );
+      return sectionEight;
     },
   },
   SectionOne: {
@@ -221,6 +235,11 @@ const homePageResolver = {
     },
   },
   SectionSeven: {
+    __resolveType: (object, _, __) => {
+      return resolveParagraphTypes(object.type);
+    },
+  },
+  SectionEight: {
     __resolveType: (object, _, __) => {
       return resolveParagraphTypes(object.type);
     },
