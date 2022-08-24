@@ -36,19 +36,15 @@ const Event: ComponentStyleConfig = {
       textTransform: "uppercase",
       px: 0,
     },
-    // Description | Location
+    // Location
     p: { fontSize: "sm", lineHeight: "none", px: 0 },
     img: { w: "full" },
   },
   // Heading sizes
   sizes: {
-    xs: {
-      h3: { fontSize: "lg" },
-    },
     sm: {
       h3: { fontSize: "lg" },
     },
-    md: { h3: { fontSize: "xl" } },
     lg: { h3: { fontSize: "2xl" } },
     xl: { h3: { fontSize: "26px" } },
   },
@@ -75,8 +71,8 @@ const Event: ComponentStyleConfig = {
       },
     },
   },
-  // The default `size` or `variant` values
-  defaultProps: { size: "md" },
+  // The default `size` value
+  defaultProps: { size: "lg" },
 };
 
 export default Event;

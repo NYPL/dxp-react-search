@@ -56,6 +56,7 @@ export default function EventCollectionTabPanelContent({
       </GridItem>
       {/* Desktop */}
       {events &&
+        // Skip featured event item
         events.slice(1, 4).map((event) => {
           return (
             <GridItem
