@@ -1,15 +1,7 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
-import {
-  Heading,
-  Text,
-  Link,
-  Grid,
-  GridItem,
-  // Image,
-  Box,
-} from "@chakra-ui/react";
+import { Heading, Text, Link, Grid, GridItem, Box } from "@chakra-ui/react";
 import Image from "./../../shared/Image";
 
 export interface CardItem {
@@ -27,13 +19,7 @@ export interface CardItem {
 
 interface CardProps {
   item: CardItem;
-  variant?:
-    | "event-card-featured"
-    | "event-card"
-    | "slide-show-card"
-    | "blog-card"
-    | "updates-card";
-  // size?: string | Record<string, string>;
+  variant?: "slide-show-card" | "blog-card" | "updates-card";
   size?: any;
 }
 
@@ -95,7 +81,7 @@ function Card({ item, variant, size = "md" }: CardProps) {
         <Link href={item.url} aria-label={`${item.title}-image`} tabIndex={-1}>
           {/* <Image
             src={item.image}
-            // @QUESTION should role="presentation" be used instead of alte="" source: https://www.digitala11y.com/presentation-role/
+            // @QUESTION should role="presentation" be used instead of alt="" source: https://www.digitala11y.com/presentation-role/
             role="presentation"
             // @TODO discuss with Zach if there should be a empty alt attribute instead/alt information
             // alt={item.alt | ""}
