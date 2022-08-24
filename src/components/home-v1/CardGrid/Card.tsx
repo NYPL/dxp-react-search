@@ -7,12 +7,10 @@ import Image from "./../../shared/Image";
 export interface CardItem {
   id?: string;
   title: string;
-  date?: string;
   description?: string;
   author?: string;
   genre?: string;
   audience?: string;
-  location?: string;
   image: any;
   url?: string;
 }
@@ -52,16 +50,8 @@ function Card({ item, variant, size = "md" }: CardProps) {
           <Link href={item.url}>{item.title}</Link>
         </Heading>
         <Box className="details">
-          {item.date && (
-            <Text as="span" id={`${item.id}-date`}>
-              {item.date}
-            </Text>
-          )}
           {item.description && (
             <Text id={`${item.id}-description`}>{item.description}</Text>
-          )}
-          {item.location && (
-            <Text id={`${item.id}-location`}>{item.location}</Text>
           )}
           {item.author && <Text id={`${item.id}-author`}>{item.author}</Text>}
           {item.audience && (

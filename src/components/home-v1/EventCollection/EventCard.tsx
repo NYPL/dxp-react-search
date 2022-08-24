@@ -29,12 +29,7 @@ export default function EventCard({
 }: EventCardProps) {
   const styles: any = useStyleConfig("Event", { variant, size });
   return (
-    <Grid
-      id={id}
-      // templateRows={{ base: "1fr", md: "min-content" }}
-      // templateColumns={{ base: "5fr 9fr", md: "1fr" }}
-      sx={styles}
-    >
+    <Grid id={id} sx={styles}>
       <GridItem className="textBox">
         <Heading as="h3">
           <Link href={link}>{title}</Link>
