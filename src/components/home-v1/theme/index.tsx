@@ -6,6 +6,7 @@ import QuoteBg from "./quoteBg";
 import Card from "./card";
 import CardGrid from "./cardGrid";
 import Hero from "./hero";
+import Event from "./event";
 
 const Fonts = () => (
   <Global
@@ -188,6 +189,7 @@ const theme = extendTheme({
     Card,
     CardGrid,
     Hero,
+    Event,
   },
   spacing: {
     space: {

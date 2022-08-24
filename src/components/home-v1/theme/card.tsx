@@ -53,38 +53,6 @@ const Card: ComponentStyleConfig = {
   },
   // LinkCard variants
   variants: {
-    "event-card-featured": {
-      gap: 1.5,
-      textAlign: "left",
-      h3: {
-        fontFamily: "Kievit-Medium",
-        px: 0,
-        mb: { lg: 3, xl: 0 },
-      },
-      span: { px: 0 },
-      p: { px: 0 },
-    },
-    "event-card": {
-      gridTemplateColumns: { base: "4fr 9fr", md: "5fr 11fr", lg: "1fr 3fr" },
-      gridGap: { base: 9, md: 6, lg: 4 },
-      mb: { base: 0, lg: 7 },
-      textAlign: "left",
-
-      h3: {
-        fontFamily: "Kievit-Medium",
-        lineHeight: "22px",
-        px: 0,
-        mt: { base: 0, lg: 1.5 },
-      },
-      span: {
-        mt: 1.5,
-        px: 0,
-      },
-      p: {
-        px: 0,
-        fontSize: "xs",
-      },
-    },
     "slide-show-card": {
       h: "full",
       gridTemplateColumns: "1fr",
