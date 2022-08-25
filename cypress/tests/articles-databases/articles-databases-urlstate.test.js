@@ -37,7 +37,7 @@ describe("Articles & Databases Url State Tests", () => {
     cy.findByRole("button", { name: "Subjects (2)" }).should("be.visible");
   });
 
-  it("it should remove subjects query param only when subjects multiselect clear button is pressed.", () => {
+  it("should remove subjects query param only when subjects multiselect clear button is pressed.", () => {
     cy.visit(`${url}${queryParams}`);
 
     cy.findByRole("button", { name: /subjects/i }).click();
