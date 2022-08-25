@@ -1,15 +1,22 @@
 import React from "react";
+import { GetStaticProps } from "next";
 // Apollo
-import { withApollo } from "../../apollo/client/withApollo";
+import withApollo from "./../../apollo/withApollo";
+import { initializeApollo } from "./../../apollo/withApollo/apollo";
 // Components
 import PageContainer from "../../components/blogs/layouts/PageContainer";
-import ChannelsCards from "../../components/blogs/ChannelsCards";
-import BlogCollection from "../../components/blogs/BlogCollection";
+import ChannelsCards, {
+  CHANNELS_QUERY,
+} from "../../components/blogs/ChannelsCards/ChannelsCards";
+import BlogCollection, {
+  BLOGS_QUERY,
+} from "../../components/blogs/BlogCollection/BlogCollection";
 // Content
 import blogsContent from "../../__content/blogs";
 
 function BlogsMainPage() {
   const { meta, featured_posts, explore_by_channel } = blogsContent;
+
   return (
     <PageContainer
       metaTags={{
@@ -46,7 +53,49 @@ function BlogsMainPage() {
   );
 }
 
-export default withApollo(BlogsMainPage, {
-  ssr: true,
-  redirects: false,
-});
+export const getStaticProps: GetStaticProps = async () => {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: BLOGS_QUERY,
+    variables: {
+      sort: { field: "created", direction: "DESC" },
+      limit: 6,
+      pageNumber: 1,
+      filter: {
+        featured: {
+          fieldName: "field_bs_featured",
+          operator: "=",
+          value: true,
+        },
+        status: { fieldName: "status", operator: "=", value: true },
+      },
+    },
+  });
+
+  await apolloClient.query({
+    query: CHANNELS_QUERY,
+    variables: {
+      vocabulary: "channel",
+      sort: { field: "weight", direction: "ASC" },
+      limit: 6,
+      filter: {
+        featured: {
+          fieldName: "field_bs_featured",
+          operator: "=",
+          value: true,
+        },
+      },
+    },
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+    // 10 mins.
+    revalidate: 600,
+  };
+};
+
+export default withApollo(BlogsMainPage);

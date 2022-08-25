@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import * as React from "react";
 // Apollo
 import { useQuery } from "@apollo/client";
 // @ts-ignore
@@ -7,13 +7,10 @@ import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../.
 import { useRouter } from "next/router";
 // Components
 import { Heading, Link } from "@nypl/design-system-react-components";
-import { FormContext } from "./../../../context/FormContext";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function RequestVisitConfirmation() {
   const router = useRouter();
-  // @ts-ignore
-  const [state] = useContext(FormContext);
 
   let internalSlugArray = [];
   internalSlugArray.push(router.query.id);

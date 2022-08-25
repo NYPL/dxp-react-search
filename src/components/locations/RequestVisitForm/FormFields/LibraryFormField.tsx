@@ -6,7 +6,7 @@ import { Select } from "@nypl/design-system-react-components";
 import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
-const LOCATIONS_QUERY = gql`
+export const LOCATIONS_QUERY = gql`
   query LocationsQuery(
     $contentType: String
     $limit: Int

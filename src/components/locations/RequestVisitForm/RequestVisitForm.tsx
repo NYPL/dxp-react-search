@@ -178,7 +178,7 @@ function RequestVisitForm() {
       });
       const emailAddress = locationEmailData?.allLocations?.items[0]?.email;
       // Add a fallback email in case there is no email data set in CMS?
-      const emailTo = emailAddress ? emailAddress : `gethelp+fallback@nypl.org`;
+      const emailTo = emailAddress ? emailAddress : "gethelp+fallback@nypl.org";
       // Get the location internal slug value from query, for use in redirect.
       const locationInternalSlug =
         locationEmailData?.allLocations?.items[0]?.internalSlug;
@@ -213,7 +213,7 @@ function RequestVisitForm() {
       if (sendEmail.statusCode === 202 || !sendEmail.emailEnable) {
         // Redirect to confirmation pg.
         router.push({
-          pathname: `/locations/request-visit/confirmation`,
+          pathname: "/locations/request-visit/confirmation",
           query: {
             id: locationInternalSlug,
           },
