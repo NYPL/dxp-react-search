@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 // Next
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
@@ -12,7 +12,7 @@ import PageContainer from "../../components/blogs/layouts/PageContainer";
 import BlogPost from "../../components/blogs/BlogPost";
 import BlogPostSkeletonLoader from "./../../components/blogs/BlogPost/BlogPostSkeletonLoader";
 // Hooks
-import useDecoupledRouter /*DECOUPLED_ROUTER_QUERY,*/ from "./../../hooks/useDecoupledRouter";
+import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 // HOC
 import withDecoupledRouter, {
   WithDecoupledRouterReturnProps,
