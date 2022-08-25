@@ -2,6 +2,17 @@
 
 ---
 
+### v0.7.0 [PRE-RELEASE] React 17+NextJS 12 & Maintenance & Improvements
+
+---
+
+- Upgrades to React 17 and NextJS 12.
+- Updates vercel build scripts for env variables.
+- Replaces `react-google-maps` with newer `@react-google-maps/api`.
+- Update Location Finder `Hero` to use DS Chakra components.
+
+---
+
 ### v0.6.1 [2022-06-22] Pantheon Integration Changes & Maintenance
 
 ---
