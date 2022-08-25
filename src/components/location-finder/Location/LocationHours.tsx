@@ -44,7 +44,7 @@ function LocationHours({
       endMinutesOnly != 0 ? endHours + ":" + endMinutesOnly : endHours;
     // Append asterisk if location hours are by appointment only.
     return `${startHoursFinal}${startMeridiem}–${endHoursFinal}${endMeridiem}${
-      appointment ? `*` : ``
+      appointment ? "*" : ""
     }`;
   }
 

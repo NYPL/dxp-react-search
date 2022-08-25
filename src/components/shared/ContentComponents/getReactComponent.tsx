@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Slideshow from "./Slideshow";
 import TextWithImage from "./TextWithImage";
 import Video from "./Video";

@@ -21,7 +21,7 @@ export function SearchResultsSkeletonLoader() {
   let skeletonLoaders = [];
   const itemsCount = 6;
   for (var i = 0; i < itemsCount; i++) {
-    skeletonLoaders.push(<SearchResultsCardSkeletonLoader />);
+    skeletonLoaders.push(<SearchResultsCardSkeletonLoader key={i} />);
   }
 
   return <div>{skeletonLoaders}</div>;
