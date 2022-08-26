@@ -154,14 +154,25 @@ export default function EventCollection({
       {}
     );
 
+  // Sort events by weight for each category.
+  for (let category in eventsGroupedByCategory) {
+    eventsGroupedByCategory[category].sort(function (a, b) {
+      return a.weight - b.weight;
+    });
+  }
+
   const eventsCategories = Object.keys(eventsGroupedByCategory);
 
-  const setCategoryTitle = (category: string) => {
+  const eventCategoryLabel = (category: string) => {
     switch (category) {
       case "kids_teens":
         return "Kids & Teens";
       case "author_talks":
         return "Author Talks & Conversations";
+      case "exhibitions":
+        return "Exhibitions";
+      case "other":
+        return "Other Events";
       default:
         return category;
     }
@@ -185,11 +196,7 @@ export default function EventCollection({
             let featuredEvent: EventItem | undefined;
             if (eventsGroupedByCategory[eventCategory]) {
               // Get the first event to be featured on mobile
-              eventsGroupedByCategory[eventCategory].forEach((event) => {
-                if (event.weight === 0) {
-                  featuredEvent = event;
-                }
-              });
+              featuredEvent = eventsGroupedByCategory[eventCategory][0];
             }
             if (featuredEvent) {
               return (
@@ -203,7 +210,7 @@ export default function EventCollection({
                     color="red.200"
                     my={2.5}
                   >
-                    {setCategoryTitle(eventCategory)}
+                    {eventCategoryLabel(eventCategory)}
                   </Heading>
                   <EventCard
                     {...featuredEvent}
@@ -243,7 +250,7 @@ export default function EventCollection({
                     mb: "-0.5",
                   }}
                 >
-                  {setCategoryTitle(eventsCategory)}
+                  {eventCategoryLabel(eventsCategory)}
                 </Tab>
               ))}
           </TabList>

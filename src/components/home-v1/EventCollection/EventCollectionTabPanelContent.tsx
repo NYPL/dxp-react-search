@@ -13,11 +13,6 @@ export default function EventCollectionTabPanelContent({
   id,
   events,
 }: EventCollectionTabPanelContentProps) {
-  // Sort events by weight.
-  events.sort(function (a, b) {
-    return a.weight - b.weight;
-  });
-
   // Get only first 4 events.
   // Create a new array.
 

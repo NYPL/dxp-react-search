@@ -28,6 +28,7 @@ export default function EventCard({
   size,
 }: EventCardProps) {
   const styles: any = useStyleConfig("Event", { variant, size });
+
   return (
     <Grid id={id} sx={styles}>
       <GridItem className="textBox">
