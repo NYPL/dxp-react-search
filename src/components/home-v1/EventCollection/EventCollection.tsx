@@ -20,7 +20,7 @@ import EventCollectionTabPanelContent from "./EventCollectionTabPanelContent";
 import EventCard, { EventCardProps as EventItem } from "./EventCard";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
-const EVENT_COLLECTION_QUERY = gql`
+export const HOME_PAGE_EVENT_COLLECTION_QUERY = gql`
   query ($filter: QueryFilter, $preview: Boolean, $sort: Sort, $limit: Int) {
     homePageEventCollection(
       filter: $filter
@@ -53,6 +53,48 @@ const EVENT_COLLECTION_QUERY = gql`
   }
 `;
 
+export const queryFilters = (publish_on: string) => {
+  return {
+    experimental: true,
+    conjunction: "OR",
+    groups: [
+      {
+        conjunction: "AND",
+        conditions: [
+          {
+            field: "status",
+            operator: "=",
+            value: "true",
+          },
+          {
+            field: "publish_on",
+            operator: "IS NULL",
+          },
+          {
+            field: "unpublish_on",
+            operator: "IS NULL",
+          },
+        ],
+      },
+      {
+        conjunction: "AND",
+        conditions: [
+          {
+            field: "publish_on",
+            operator: "<=",
+            value: publish_on,
+          },
+          {
+            field: "unpublish_on",
+            operator: ">=",
+            value: publish_on,
+          },
+        ],
+      },
+    ],
+  };
+};
+
 interface EventCollectionProps {
   title: string;
   link: string;
@@ -78,54 +120,11 @@ export default function EventCollection({
 
   const isTimeMachine = isPreview && router.query.publish_on ? true : false;
 
-  let queryFilters;
-  if (isTimeMachine) {
-    queryFilters = {
-      experimental: true,
-      conjunction: "OR",
-      groups: [
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "status",
-              operator: "=",
-              value: "true",
-            },
-            {
-              field: "publish_on",
-              operator: "IS NULL",
-            },
-            {
-              field: "unpublish_on",
-              operator: "IS NULL",
-            },
-          ],
-        },
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "publish_on",
-              operator: "<=",
-              value: router.query.publish_on,
-            },
-            {
-              field: "unpublish_on",
-              operator: ">=",
-              value: router.query.publish_on,
-            },
-          ],
-        },
-      ],
-    };
-  }
-
-  const { loading, error, data } = useQuery(EVENT_COLLECTION_QUERY, {
+  const { loading, error, data } = useQuery(HOME_PAGE_EVENT_COLLECTION_QUERY, {
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: queryFilters,
+        filter: queryFilters(router.query.publish_on as string),
       }),
       sort: {
         field: "field_lts_event_category",

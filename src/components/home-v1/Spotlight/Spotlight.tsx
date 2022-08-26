@@ -7,7 +7,7 @@ import { gql, useQuery } from "@apollo/client";
 import CardGrid from "./../../../components/home-v1/CardGrid";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
-const SPOTLIGHT_QUERY = gql`
+export const HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY = gql`
   query ($filter: QueryFilter, $preview: Boolean, $sort: Sort, $limit: Int) {
     homePageSpotlightCollection(
       filter: $filter
@@ -33,6 +33,48 @@ const SPOTLIGHT_QUERY = gql`
   }
 `;
 
+export const queryFilters = (publish_on: string) => {
+  return {
+    experimental: true,
+    conjunction: "OR",
+    groups: [
+      {
+        conjunction: "AND",
+        conditions: [
+          {
+            field: "status",
+            operator: "=",
+            value: "true",
+          },
+          {
+            field: "publish_on",
+            operator: "IS NULL",
+          },
+          {
+            field: "unpublish_on",
+            operator: "IS NULL",
+          },
+        ],
+      },
+      {
+        conjunction: "AND",
+        conditions: [
+          {
+            field: "publish_on",
+            operator: "<=",
+            value: publish_on,
+          },
+          {
+            field: "unpublish_on",
+            operator: ">=",
+            value: publish_on,
+          },
+        ],
+      },
+    ],
+  };
+};
+
 export interface SpotlightProps {
   title: string;
   link: string;
@@ -57,62 +99,22 @@ export default function Spotlight({
 
   const isTimeMachine = isPreview && router.query.publish_on ? true : false;
 
-  let queryFilters;
-  if (isTimeMachine) {
-    queryFilters = {
-      experimental: true,
-      conjunction: "OR",
-      groups: [
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "status",
-              operator: "=",
-              value: "true",
-            },
-            {
-              field: "publish_on",
-              operator: "IS NULL",
-            },
-            {
-              field: "unpublish_on",
-              operator: "IS NULL",
-            },
-          ],
+  const { loading, error, data } = useQuery(
+    HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY,
+    {
+      variables: {
+        ...(isTimeMachine && {
+          preview: true,
+          filter: queryFilters(router.query.publish_on as string),
+        }),
+        limit: 16,
+        sort: {
+          field: "field_is_weight",
+          direction: "ASC",
         },
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "publish_on",
-              operator: "<=",
-              value: router.query.publish_on,
-            },
-            {
-              field: "unpublish_on",
-              operator: ">=",
-              value: router.query.publish_on,
-            },
-          ],
-        },
-      ],
-    };
-  }
-
-  const { loading, error, data } = useQuery(SPOTLIGHT_QUERY, {
-    variables: {
-      ...(isTimeMachine && {
-        preview: true,
-        filter: queryFilters,
-      }),
-      limit: 16,
-      sort: {
-        field: "field_is_weight",
-        direction: "ASC",
       },
-    },
-  });
+    }
+  );
 
   if (error) {
     return <div>Error while loading homepage spotlight items.</div>;
