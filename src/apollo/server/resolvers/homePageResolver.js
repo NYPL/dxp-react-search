@@ -286,8 +286,6 @@ const homePageResolver = {
     },
     link: (homePageEvent) => homePageEvent.field_lns_link?.url,
     category: (homePageEvent) => homePageEvent.field_lts_event_category,
-    featured: (homePageEvent) =>
-      homePageEvent.field_bs_featured ? homePageEvent.field_bs_featured : false,
     location: (homePageEvent) => homePageEvent.field_ts_display_location,
     displayDate: (homePageEvent) => homePageEvent.field_ts_date,
     publishOn: (homePageEvent) => homePageEvent.publish_on,
