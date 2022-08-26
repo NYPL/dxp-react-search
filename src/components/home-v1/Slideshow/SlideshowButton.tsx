@@ -24,7 +24,7 @@ function SlideshowButton({
       direction={direction}
       onClick={direction === "prev" ? prevSlide : nextSlide}
     >
-      {direction === "prev" ? `<` : `>`}
+      {direction === "prev" ? "<" : ">"}
     </Button>
   );
 }

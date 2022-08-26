@@ -48,7 +48,7 @@ function ComponentWrapper({
         m="auto"
         maxWidth="1313px"
         p={1}
-        templateAreas={{ md: `'heading component'` }}
+        templateAreas={{ md: "'heading component'" }}
         templateColumns={{
           base: "1fr",
           md: "1fr 7fr",
