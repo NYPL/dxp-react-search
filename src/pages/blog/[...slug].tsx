@@ -1,10 +1,11 @@
-import React from "react";
+import * as React from "react";
 // Next
+import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import Error from "./../_error";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-import { withApollo } from "../../apollo/client/withApollo";
+import withApollo from "./../../apollo/withApollo";
 import { BLOG_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/blogFields";
 // Components
 import PageContainer from "../../components/blogs/layouts/PageContainer";
@@ -12,6 +13,10 @@ import BlogPost from "../../components/blogs/BlogPost";
 import BlogPostSkeletonLoader from "./../../components/blogs/BlogPost/BlogPostSkeletonLoader";
 // Hooks
 import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
+// HOC
+import withDecoupledRouter, {
+  WithDecoupledRouterReturnProps,
+} from "./../../apollo/withDecoupledRouter";
 
 const BLOG_POST_QUERY = gql`
   ${BLOG_FIELDS_FRAGMENT}
@@ -77,7 +82,30 @@ function BlogPostPage() {
   );
 }
 
-export default withApollo(BlogPostPage, {
-  ssr: true,
-  redirects: true,
-});
+export const getServerSideProps = withDecoupledRouter(
+  async (
+    context: GetServerSidePropsContext,
+    props: WithDecoupledRouterReturnProps
+  ) => {
+    const { uuid, isPreview, apolloClient } = props;
+
+    await apolloClient.query({
+      query: BLOG_POST_QUERY,
+      variables: {
+        id: uuid,
+        ...(isPreview && {
+          preview: true,
+          revisionId: context.query.revision_id,
+        }),
+      },
+    });
+
+    return {
+      props: {
+        initialApolloState: apolloClient.cache.extract(),
+      },
+    };
+  }
+);
+
+export default withApollo(BlogPostPage);

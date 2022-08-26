@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 // Next
 import { useRouter } from "next/router";
 // Apollo
-import { useQuery, useApolloClient } from "@apollo/client";
-// @ts-ignore
-import { SearchDocumentQuery as SEARCH_RESULTS_QUERY } from "./SearchDocumentQuery.gql";
-// @ts-ignore
-import { LocationMatchesByIpQuery as LOCATION_MATCHES_BY_IP_QUERY } from "./LocationMatchesByIp.gql";
+import { useQuery, useApolloClient, gql } from "@apollo/client";
 // Components
 import { Pagination } from "@nypl/design-system-react-components";
 import OnlineResourceCard from "../OnlineResourceCard";
@@ -19,6 +15,86 @@ import {
 //
 import s from "./SearchResults.module.css";
 
+export const SEARCH_RESULTS_QUERY = gql`
+  query SearchDocumentQuery(
+    $q: String
+    $tid: String
+    $alpha: String
+    $subjects: [String]
+    $audience_by_age: [String]
+    $availability: [String]
+    $limit: Int
+    $pageNumber: Int
+    $offset: Int
+  ) {
+    allSearchDocuments(
+      limit: $limit
+      pageNumber: $pageNumber
+      offset: $offset
+      filter: {
+        q: $q
+        tid: $tid
+        alpha: $alpha
+        subjects: $subjects
+        audience_by_age: $audience_by_age
+        availability: $availability
+      }
+    ) {
+      items {
+        ... on OnlineResourceDocument {
+          id
+          slug
+          name
+          description
+          accessibilityLink
+          termsConditionsLink
+          privacyPolicyLink
+          subjects {
+            id
+            name
+          }
+          accessLocations {
+            id
+            name
+            url
+          }
+          accessibleFrom
+          resourceUrl
+          notes
+          language
+          authenticationType
+          isCoreResource
+          isFreeResource
+          availabilityStatus
+        }
+      }
+      pageInfo {
+        totalItems
+        limit
+        pageNumber
+        pageCount
+        timestamp
+        clientIp
+      }
+    }
+  }
+`;
+
+export const LOCATION_MATCHES_BY_IP_QUERY = gql`
+  query LocationMatchesByIpQuery($ip: String) {
+    allLocationMatches(ip: $ip) {
+      items {
+        id
+        name
+        locationId
+      }
+      pageInfo {
+        clientIp
+      }
+    }
+  }
+`;
+
 const SEARCH_RESULTS_LIMIT = 10;
 
 interface SearchResultsProps {
@@ -30,7 +106,6 @@ function SearchResults({
   resourceTopicTitle,
   resourceTopicId,
 }: SearchResultsProps) {
-  //const { resourceTopicTitle, resourceTopicId } = props;
   const router = useRouter();
   // @TODO do you actually need parseInt here?
   const currentPage = router.query.page
@@ -59,9 +134,9 @@ function SearchResults({
             response.data?.allLocationMatches?.pageInfo.clientIp
           );
         },
-        // @ts-ignore
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         (error) => {
-          //console.error(error);
+          console.error(error);
         }
       );
   }, []);
@@ -85,6 +160,44 @@ function SearchResults({
       pageNumber: currentPage,
     },
   });
+
+  function getSearchResultsDetailsLabel() {
+    // Handle the label for search results details.
+    let label = "Search Results";
+    if (router.query.alpha) {
+      if (router.query.alpha === "all") {
+        label = "All Results";
+      } else {
+        label = router.query.alpha as string;
+      }
+    } else if (resourceTopicTitle) {
+      label = resourceTopicTitle;
+    }
+    return label;
+  }
+
+  function onPageChange(pageIndex: number) {
+    router.push({
+      query: {
+        q: router.query.q,
+        page: pageIndex,
+        ...(router.query.alpha && {
+          alpha: router.query.alpha,
+        }),
+        ...(router.query.subject && {
+          subject: router.query.subject,
+        }),
+        ...(router.query.audience_by_age && {
+          audience_by_age: router.query.audience_by_age,
+        }),
+        ...(router.query.availability && {
+          availability: router.query.availability,
+        }),
+      },
+    });
+    // @ts-ignore
+    document.getElementById("main-content").scrollIntoView();
+  }
 
   // Error state.
   if (error) {
@@ -138,44 +251,6 @@ function SearchResults({
         <div className="no-results">Try adjusting search terms or filters.</div>
       </>
     );
-  }
-
-  function getSearchResultsDetailsLabel() {
-    // Handle the label for search results details.
-    let label = "Search Results";
-    if (router.query.alpha) {
-      if (router.query.alpha === "all") {
-        label = "All Results";
-      } else {
-        label = router.query.alpha as string;
-      }
-    } else if (resourceTopicTitle) {
-      label = resourceTopicTitle;
-    }
-    return label;
-  }
-
-  function onPageChange(pageIndex: number) {
-    router.push({
-      query: {
-        q: router.query.q,
-        page: pageIndex,
-        ...(router.query.alpha && {
-          alpha: router.query.alpha,
-        }),
-        ...(router.query.subject && {
-          subject: router.query.subject,
-        }),
-        ...(router.query.audience_by_age && {
-          audience_by_age: router.query.audience_by_age,
-        }),
-        ...(router.query.availability && {
-          availability: router.query.availability,
-        }),
-      },
-    });
-    // @ts-ignore
-    document.getElementById("main-content").scrollIntoView();
   }
 
   return (

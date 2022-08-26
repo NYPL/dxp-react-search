@@ -5,6 +5,7 @@ class DrupalApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = DRUPAL_API;
+    this.initialize({});
   }
 
   /**

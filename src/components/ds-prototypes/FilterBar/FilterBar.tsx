@@ -37,12 +37,13 @@ function FilterBar({
   // Sets the label of the filters button.
   function setFilterButtonLabel(selectedItems: FbSelectedItems) {
     let allItems = [];
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     for (let [_, value] of Object.entries(selectedItems)) {
       value.items.map((item) => {
         allItems.push(item);
       });
     }
-    return `Filters ${allItems.length ? `(${allItems.length})` : ``}`;
+    return `Filters ${allItems.length ? `(${allItems.length})` : ""}`;
   }
 
   return (

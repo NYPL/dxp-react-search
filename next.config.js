@@ -6,11 +6,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const { DRUPAL_API } = process.env;
 
 // Get the domain only from the DRUPAL_API env variable.
-let DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://", "");
-// @TODO Figure out if we're locking down dev and qa with basic auth.
-// if (NEXT_PUBLIC_SERVER_ENV !== "production") {
-//   DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://nypl1:nypl1@", "");
-// }
+const DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://", "");
 
 const nextConfig = {
   assetPrefix: ASSET_PREFIX,
@@ -23,10 +19,12 @@ const nextConfig = {
         },
       ];
     }
+
     return [];
   },
   webpack(config, options) {
-    const { dir } = options;
+    const { dir, isServer } = options;
+
     // Allows import of .gql files inside components
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
@@ -38,6 +36,14 @@ const nextConfig = {
         },
       ],
     });
+
+    // Fixes bug in SendGridApi datasource, error: "Module not found: Can't resolve 'fs' in"
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+      };
+    }
+
     return config;
   },
   images: {
@@ -53,11 +59,6 @@ const nextConfig = {
       "nypl-d8.lndo.site",
       "nypl-pantheon.ddev.site",
       DRUPAL_API_DOMAIN_ONLY,
-      // @TODO After pantheon migration remove old AWS domains.
-      // Sandbox
-      "sandbox-d8.nypl.org",
-      "nyplorg-sandbox.s3.amazonaws.com",
-      "treasures-d8.nypl.org",
       // QA
       "qa-cdn-d8-2.nypl.org",
       "qa-d8.nypl.org",

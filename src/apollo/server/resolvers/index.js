@@ -1,4 +1,4 @@
-import { mergeResolvers } from "graphql-tools";
+import { mergeResolvers } from "@graphql-tools/merge";
 import refineryLocationResolver from "./refineryLocationResolver";
 import refineryTermResolver from "./refineryTermResolver";
 import termResolver from "./termResolver";
