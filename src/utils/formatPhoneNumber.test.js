@@ -29,9 +29,9 @@ describe('formatPhoneNumber', () => {
     expect(formattedPhoneNumbers).toEqual(expectedPhoneNumbers);
   });
 
-  test('Any bad data should return an empty string', () => {
+  test('Any bad data should return a null', () => {
     badPhoneData.forEach((data) => {
-      expect(formatPhoneNumber(data)).toEqual('');
+      expect(formatPhoneNumber(data)).toEqual(null);
     });
   });
 });
