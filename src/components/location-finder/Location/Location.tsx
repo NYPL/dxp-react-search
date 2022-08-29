@@ -75,10 +75,7 @@ function Location({
 
   // Address and Phone formatting.
   const formattedAddress = `${address_line1}\n${locality}, ${administrative_area} ${postal_code}`;
-  let formattedPhone = '';
-  if (phone) {
-    formattedPhone = formatPhoneNumber(phone);
-  }
+  const formattedPhone = formatPhoneNumber(phone);
   // Get directions link.
   const encodedAddress = encodeURIComponent(formattedAddress);
   const getDirectionsLink =
