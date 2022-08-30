@@ -19,6 +19,8 @@ const homePageResolver = {
         "field_hp_section_3",
         "field_hp_section_4.field_erm_hp_cards",
         "field_hp_section_4.field_erm_hp_cards.field_ers_image.field_media_image",
+        "field_hp_section_5.field_erm_hp_staffpicks",
+        "field_hp_section_5.field_erm_hp_staffpicks.field_ers_image.field_media_image",
         "field_hp_section_7.field_erm_hp_cards",
         "field_hp_section_7.field_erm_hp_cards.field_ers_image.field_media_image",
         "field_hp_section_8.field_erm_hp_cards",
@@ -189,6 +191,18 @@ const homePageResolver = {
             );
       return sectionFour;
     },
+    sectionFive: (homePage, _, __, info) => {
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const sectionFive =
+        homePage.field_hp_section_5.data?.length === 0
+          ? null
+          : resolveDrupalParagraphs(
+              [homePage.field_hp_section_5],
+              typesInQuery
+            );
+      return sectionFive;
+    },
     sectionSeven: (homePage, _, __, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
@@ -230,6 +244,11 @@ const homePageResolver = {
     },
   },
   SectionFour: {
+    __resolveType: (object, _, __) => {
+      return resolveParagraphTypes(object.type);
+    },
+  },
+  SectionFive: {
     __resolveType: (object, _, __) => {
       return resolveParagraphTypes(object.type);
     },

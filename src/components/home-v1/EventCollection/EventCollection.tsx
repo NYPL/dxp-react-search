@@ -158,7 +158,7 @@ export default function EventCollection({
             }
             if (featuredEvent) {
               return (
-                <Box as="li" mb={8}>
+                <Box as="li" mb={8} key={`${eventCategory}-featured-event-key`}>
                   <Heading
                     as="h3"
                     fontFamily="Kievit-Medium"
@@ -191,8 +191,9 @@ export default function EventCollection({
         >
           <TabList borderBottomWidth="2px">
             {eventsCategories &&
-              eventsCategories.map((eventsCategory) => (
+              eventsCategories.map((eventsCategory, i) => (
                 <Tab
+                  key={`event-category-tab-key-${i}`}
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
                   px={5}

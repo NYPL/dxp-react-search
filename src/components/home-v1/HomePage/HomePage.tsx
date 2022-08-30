@@ -13,6 +13,7 @@ import HeroWithData from "./../Hero/HeroWithData";
 import Spotlight from "./../Spotlight";
 import EventCollection from "./../EventCollection";
 import CardGrid from "./../CardGrid";
+import StaffPicks from "./../StaffPicks";
 
 export const HOME_PAGE_QUERY = gql`
   query ($id: String, $revisionId: String, $preview: Boolean) {
@@ -74,6 +75,34 @@ export const HOME_PAGE_QUERY = gql`
           seeMore {
             text
             link
+          }
+        }
+      }
+      sectionFive {
+        __typename
+        ... on HomePageStaffPicksComponent {
+          id
+          type
+          heading
+          link
+          items {
+            id
+            quote
+            staffName
+            staffLocation
+            url
+            image {
+              id
+              uri
+              alt
+              width
+              height
+              transformations {
+                id
+                label
+                uri
+              }
+            }
           }
         }
       }
@@ -183,6 +212,7 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
   const homePageDataSectionTwo = data.homePage.sectionTwo[0];
   const homePageDataSectionThree = data.homePage.sectionThree[0];
   const homePageDataSectionFour = data.homePage.sectionFour[0];
+  const homePageDataSectionFive = data.homePage.sectionFive[0];
   const homePageDataSectionSeven = data.homePage.sectionSeven[0];
   const homePageDataSectionEight = data.homePage.sectionEight[0];
 
@@ -220,6 +250,11 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
                 hoverStyle={true}
                 items={homePageDataSectionFour.items}
                 seeMore={homePageDataSectionFour.seeMore}
+              />
+              <StaffPicks
+                title={homePageDataSectionFive.heading}
+                link={homePageDataSectionFive.link}
+                items={homePageDataSectionFive.items}
               />
               {/* From Our Blogs */}
               <CardGrid
