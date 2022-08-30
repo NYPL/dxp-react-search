@@ -2,6 +2,7 @@ import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Component
 import { Box, Link, Heading, Text, Image, createIcon } from "@chakra-ui/react";
+import { getImageTransformation } from "../../shared/Image/imageUtils";
 
 // SVG Icon
 const RightArrowIcon = createIcon({
@@ -16,12 +17,17 @@ interface HeroProps {
   title: string;
   description: string;
   tag: string;
-  image?: string;
-  mobileImg?: string;
+  image: any;
+  mobileImg: string;
   url: string;
 }
 
 function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
+  const desktopImageSrc = getImageTransformation(
+    "hero_header_focal_point_2400x400",
+    image.transformations
+  );
+
   const styles = useStyleConfig("Hero");
   return (
     <Box
@@ -32,7 +38,7 @@ function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
       height={{ md: "30vw" }}
       maxHeight={{ xl: "400px" }}
       minHeight="250px"
-      bgImage={{ base: "none", md: `url(${image})` }}
+      bgImage={{ base: "none", md: `url(${desktopImageSrc})` }}
       bgSize="cover"
     >
       <Box
