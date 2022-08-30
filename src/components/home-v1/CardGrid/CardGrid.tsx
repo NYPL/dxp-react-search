@@ -47,8 +47,13 @@ function CardGrid({
     >
       <Grid as="ul" sx={styles}>
         {items &&
-          items.map((item) => (
-            <GridItem as="li" id={item.id} listStyleType="none">
+          items.map((item, i) => (
+            <GridItem
+              as="li"
+              key={`card-grid-item-key-${i}`}
+              id={item.id}
+              listStyleType="none"
+            >
               <Card
                 item={item}
                 size={size || { base: "sm", md: "lg" }}

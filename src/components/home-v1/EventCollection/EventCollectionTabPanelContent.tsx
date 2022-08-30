@@ -90,6 +90,7 @@ export default function EventCollectionTabPanelContent({
           return (
             <GridItem
               as="li"
+              key={`event-item-key-${i}`}
               display={{ base: "none", lg: "block" }}
               colStart={2}
             >
@@ -99,10 +100,11 @@ export default function EventCollectionTabPanelContent({
         })}
       {/* Tablet */}
       {events &&
-        events.slice(0, 4).map((event) => {
+        events.slice(0, 4).map((event, i) => {
           return (
             <GridItem
               as="li"
+              key={`event-item-key-${i}`}
               display={{ base: "none", md: "block", lg: "none" }}
             >
               <EventCard {...event} />

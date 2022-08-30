@@ -171,7 +171,7 @@ export default function EventCollection({
       <Box>
         {/* Mobile */}
         <Box as="ul" display={{ base: "block", md: "none" }}>
-          {Object.keys(eventsGroupedByCategory).map((eventCategory) => {
+          {Object.keys(eventsGroupedByCategory).map((eventCategory, i) => {
             let featuredEvent: any;
             eventsGroupedByCategory[eventCategory] &&
               eventsGroupedByCategory[eventCategory].map((event: EventItem) => {
@@ -181,7 +181,7 @@ export default function EventCollection({
               });
 
             return (
-              <Box as="li" mb={8}>
+              <Box as="li" key={`event-category-label-key-${i}`} mb={8}>
                 <Heading
                   as="h3"
                   fontFamily="Kievit-Medium"
@@ -209,8 +209,9 @@ export default function EventCollection({
         >
           <TabList borderBottomWidth="2px">
             {eventsCategories &&
-              eventsCategories.map((eventsCategory) => (
+              eventsCategories.map((eventsCategory, i) => (
                 <Tab
+                  key={`event-category-tab-key-${i}`}
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
                   px={7}
