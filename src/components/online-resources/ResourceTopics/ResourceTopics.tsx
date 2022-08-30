@@ -18,7 +18,7 @@ interface ResourceTopicsProps {
   featured?: boolean;
 }
 
-const RESOURCE_TOPICS_QUERY = gql`
+export const RESOURCE_TOPICS_QUERY = gql`
   ${TERM_BASE_FIELDS_FRAGMENT}
   ${IMAGE_FIELDS_FRAGMENT}
   query ResourceTopicsQuery(

@@ -12,7 +12,7 @@ import { BlogCardItem } from "./BlogCardTypes";
 // Next
 import { useRouter } from "next/router";
 
-const BLOGS_QUERY = gql`
+export const BLOGS_QUERY = gql`
   query BlogsQuery(
     $limit: Int
     $pageNumber: Int

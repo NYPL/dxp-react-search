@@ -47,8 +47,6 @@ function MultiSelect({
   onMenuClick,
   selectedGroupIds,
   showCtaButtons,
-  // @ts-ignore
-  handleChangeMixedStateCheckbox,
 }: MultiSelectProps) {
   const isOpen = selectedGroupIds.includes(id);
   const iconType = isOpen ? "minus" : "plus";

@@ -34,7 +34,7 @@ interface ChannelCardItem {
   image: ImageType;
 }
 
-const CHANNELS_QUERY = gql`
+export const CHANNELS_QUERY = gql`
   ${TERM_BASE_FIELDS_FRAGMENT}
   ${IMAGE_FIELDS_FRAGMENT}
   query ChannelsQuery(
