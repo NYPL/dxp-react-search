@@ -39,7 +39,7 @@ function HomePagePreview() {
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  // Page is for content only, not public, so if preview and time machine mode
+  // Page is for content admins only, not public, so if preview and time machine mode
   // query params are missing, return 404.
   if (!context.query.preview_secret || !context.query.publish_on) {
     return {
