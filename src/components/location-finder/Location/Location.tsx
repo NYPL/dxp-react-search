@@ -16,6 +16,8 @@ import LocationHours from "./LocationHours";
 import LocationDistance from "./LocationDistance";
 // Hooks
 import useWindowSize from "../../../hooks/useWindowSize";
+// Utils
+import formatPhoneNumber from "../../../utils/formatPhoneNumber";
 
 export interface LocationProps {
   id: string;
@@ -71,8 +73,9 @@ function Location({
 
   const windowSize = useWindowSize();
 
-  // Address formatting.
+  // Address and Phone formatting.
   const formattedAddress = `${address_line1}\n${locality}, ${administrative_area} ${postal_code}`;
+  const formattedPhone = formatPhoneNumber(phone);
   // Get directions link.
   const encodedAddress = encodeURIComponent(formattedAddress);
   const getDirectionsLink =
@@ -115,9 +118,11 @@ function Location({
       <Box mb="xxs" whiteSpace="pre-wrap" className="address">
         {formattedAddress}
       </Box>
-      <Box mb="xxs" className="phone">
-        {phone}
-      </Box>
+      {formattedPhone && (
+        <Box mb="xxs" className="phone">
+          {formattedPhone}
+        </Box>
+      )}
       <LocationAccessibility
         access={wheelchairAccess}
         note={accessibilityNote}
