@@ -26,7 +26,7 @@ function StaffPicks({ title, link, items }: StaffPicksProps) {
     >
       <Grid
         as="ul"
-        maxWidth={{ base: "75vw", lg: "85vw" }}
+        maxWidth={{ base: "100vw", lg: "85vw" }}
         listStyleType="none"
         templateColumns={{
           base: " 1fr",
@@ -35,7 +35,9 @@ function StaffPicks({ title, link, items }: StaffPicksProps) {
         gap={{ base: 7, lg: 8, xl: 10 }}
       >
         {items &&
-          items.map((item: StaffPicksItem) => <StaffPick item={item} />)}
+          items.map((item: StaffPicksItem, i) => (
+            <StaffPick item={item} key={`staff-pick-item-key-${i}`} />
+          ))}
       </Grid>
     </ComponentWrapper>
   );

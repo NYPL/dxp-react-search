@@ -1,7 +1,8 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 //Component
-import { GridItem, Box, Text, Image, Link } from "@chakra-ui/react";
+import { GridItem, Box, Text, Link } from "@chakra-ui/react";
+import Image from "../../shared/Image";
 // Type
 import { StaffPicksItem } from "./StaffPicksTypes";
 
@@ -15,7 +16,7 @@ interface StaffPickProps {
 }
 
 function StaffPick({ item }: StaffPickProps) {
-  const { id, quote, image, alt, url, staff_name, staff_location } = item;
+  const { id, quote, image, url, staff_name, staff_location } = item;
   return (
     <GridItem as="li" id={id}>
       <Box
@@ -33,16 +34,27 @@ function StaffPick({ item }: StaffPickProps) {
           top={0}
           href={url}
         >
-          <Image
-            src={image}
-            alt={`image of ${alt}`}
-            zIndex={1}
+          <Box
+            display="flex"
             position="absolute"
             bottom={0}
             right={0}
             maxHeight={{ base: "175px", lg: "233px", xl: "320px" }}
             maxWidth={{ base: "115px", lg: "153px", xl: "212px" }}
-          />
+          >
+            <Image
+              id={image.id}
+              alt={image.alt}
+              uri={image.uri}
+              useTransformation={true}
+              transformations={image.transformations}
+              transformationLabel={"max_width_960"}
+              layout="intrinsic"
+              width={image.width}
+              height={image.height}
+              quality={90}
+            />
+          </Box>
           <Text
             pl={{ base: 4, xl: 8 }}
             pr={{ base: "120px", lg: "157px", xl: "220px" }}
