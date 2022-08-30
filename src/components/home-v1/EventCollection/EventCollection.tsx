@@ -3,6 +3,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
+import { homePagePreviewQueryFilters } from "./../../../pages/home-preview";
 // Component
 import {
   Tabs,
@@ -20,7 +21,7 @@ import EventCollectionTabPanelContent from "./EventCollectionTabPanelContent";
 import EventCard, { EventCardProps as EventItem } from "./EventCard";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
-const EVENT_COLLECTION_QUERY = gql`
+export const HOME_PAGE_EVENT_COLLECTION_QUERY = gql`
   query ($filter: QueryFilter, $preview: Boolean, $sort: Sort, $limit: Int) {
     homePageEventCollection(
       filter: $filter
@@ -43,7 +44,6 @@ const EVENT_COLLECTION_QUERY = gql`
         published
         link
         category
-        featured
         location
         displayDate
         publishOn
@@ -79,54 +79,11 @@ export default function EventCollection({
 
   const isTimeMachine = isPreview && router.query.publish_on ? true : false;
 
-  let queryFilters;
-  if (isTimeMachine) {
-    queryFilters = {
-      experimental: true,
-      conjunction: "OR",
-      groups: [
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "status",
-              operator: "=",
-              value: "true",
-            },
-            {
-              field: "publish_on",
-              operator: "IS NULL",
-            },
-            {
-              field: "unpublish_on",
-              operator: "IS NULL",
-            },
-          ],
-        },
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "publish_on",
-              operator: "<=",
-              value: router.query.publish_on,
-            },
-            {
-              field: "unpublish_on",
-              operator: ">=",
-              value: router.query.publish_on,
-            },
-          ],
-        },
-      ],
-    };
-  }
-
-  const { loading, error, data } = useQuery(EVENT_COLLECTION_QUERY, {
+  const { loading, error, data } = useQuery(HOME_PAGE_EVENT_COLLECTION_QUERY, {
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: queryFilters,
+        filter: homePagePreviewQueryFilters(router.query.publish_on as string),
       }),
       sort: {
         field: "field_lts_event_category",
@@ -155,7 +112,29 @@ export default function EventCollection({
       {}
     );
 
+  // Sort events by weight for each category.
+  for (let category in eventsGroupedByCategory) {
+    eventsGroupedByCategory[category].sort(function (a, b) {
+      return a.weight - b.weight;
+    });
+  }
+
   const eventsCategories = Object.keys(eventsGroupedByCategory);
+
+  const eventCategoryLabel = (category: string) => {
+    switch (category) {
+      case "kids_teens":
+        return "Kids & Teens";
+      case "author_talks":
+        return "Author Talks & Conversations";
+      case "exhibitions":
+        return "Exhibitions";
+      case "other":
+        return "Other Events";
+      default:
+        return category;
+    }
+  };
 
   return (
     <ComponentWrapper
@@ -171,31 +150,34 @@ export default function EventCollection({
       <Box>
         {/* Mobile */}
         <Box as="ul" display={{ base: "block", md: "none" }}>
-          {Object.keys(eventsGroupedByCategory).map((eventCategory, i) => {
-            let featuredEvent: any;
-            eventsGroupedByCategory[eventCategory] &&
-              eventsGroupedByCategory[eventCategory].map((event: EventItem) => {
-                if (event.featured === true) {
-                  featuredEvent = event;
-                }
-              });
-
-            return (
-              <Box as="li" key={`event-category-label-key-${i}`} mb={8}>
-                <Heading
-                  as="h3"
-                  fontFamily="Kievit-Medium"
-                  fontSize="xs"
-                  fontWeight="bold"
-                  textTransform="uppercase"
-                  color="red.200"
-                  my={2.5}
-                >
-                  {eventCategory}
-                </Heading>
-                <EventCard {...featuredEvent} />
-              </Box>
-            );
+          {eventsCategories.map((eventCategory) => {
+            let featuredEvent: EventItem | undefined;
+            if (eventsGroupedByCategory[eventCategory]) {
+              // Get the first event to be featured on mobile
+              featuredEvent = eventsGroupedByCategory[eventCategory][0];
+            }
+            if (featuredEvent) {
+              return (
+                <Box as="li" mb={8}>
+                  <Heading
+                    as="h3"
+                    fontFamily="Kievit-Medium"
+                    fontSize="xs"
+                    fontWeight="bold"
+                    textTransform="uppercase"
+                    color="red.200"
+                    my={2.5}
+                  >
+                    {eventCategoryLabel(eventCategory)}
+                  </Heading>
+                  <EventCard
+                    {...featuredEvent}
+                    variant="event-card"
+                    size="lg"
+                  />
+                </Box>
+              );
+            }
           })}
         </Box>
 
@@ -214,7 +196,7 @@ export default function EventCollection({
                   key={`event-category-tab-key-${i}`}
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
-                  px={7}
+                  px={5}
                   w={{ lg: "15.5%", xl: "12%" }}
                   textTransform="uppercase"
                   fontSize="xs"
@@ -227,12 +209,12 @@ export default function EventCollection({
                     mb: "-0.5",
                   }}
                 >
-                  {eventsCategory}
+                  {eventCategoryLabel(eventsCategory)}
                 </Tab>
               ))}
           </TabList>
           <TabPanels>
-            {Object.keys(eventsGroupedByCategory).map((eventCategory) => {
+            {eventsCategories.map((eventCategory) => {
               return (
                 <TabPanel px={0} tabIndex={-1} key={eventCategory}>
                   <EventCollectionTabPanelContent

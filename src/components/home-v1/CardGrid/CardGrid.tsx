@@ -14,11 +14,7 @@ interface CardGridProps {
   hoverStyle?: boolean;
   variant?: "row-grid" | "column-grid" | "updates-grid";
   // Props below inform styling of Card
-  cardVariant?:
-    | "event-card-featured"
-    | "event-card"
-    | "blog-card"
-    | "updates-card";
+  cardVariant?: "blog-card" | "updates-card";
   size?: string | Record<string, string>;
   seeMore?: SeeMore;
 }

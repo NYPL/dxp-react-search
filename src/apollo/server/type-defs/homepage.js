@@ -101,7 +101,6 @@ export const typeDefs = gql`
     image: Image
     link: String
     category: String
-    featured: Boolean
     location: String!
     displayDate: String
     publishOn: String

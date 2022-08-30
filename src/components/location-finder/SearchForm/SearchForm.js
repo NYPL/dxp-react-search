@@ -44,6 +44,7 @@ function SearchForm() {
 
   // When component mounts, prefetch the items for autosuggest.
   useEffect(() => {
+    /* eslint-disable react-hooks/exhaustive-deps */
     client.query({ query: LOCATIONS_QUERY }).then(
       (response) => {
         setAutoSuggestItems(response.data.refineryAllLocations.locations);

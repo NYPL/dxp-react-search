@@ -77,7 +77,7 @@ describe("Card tests", () => {
     ).toBeInTheDocument();
   });
   // Image should have alt text or have role="none"/"presentatio"
-  it("should render an image", () => {});
+  // it("should render an image", () => {});
   it("should add a aria-describedby with additional information", () => {
     render(<Card item={item} />);
     expect(screen.getByRole("heading", { name: /Test/i })).toHaveAttribute(
