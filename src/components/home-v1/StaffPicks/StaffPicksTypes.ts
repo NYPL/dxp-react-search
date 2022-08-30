@@ -1,8 +1,7 @@
 export interface StaffPicksItem {
   id: string;
   quote: string;
-  image: string;
-  alt: string;
+  image: any;
   url: string;
   staff_name: string;
   staff_location: string;

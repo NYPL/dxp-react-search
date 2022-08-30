@@ -11,6 +11,7 @@ export const typeDefs = gql`
     sectionTwo: [SectionTwo]
     sectionThree: [SectionThree]
     sectionFour: [SectionFour]
+    sectionFive: [SectionFive]
     sectionSeven: [SectionSeven]
     sectionEight: [SectionEight]
   }
@@ -19,6 +20,7 @@ export const typeDefs = gql`
   union SectionTwo = HomePageSpotlightComponent | HomePageCardGridComponent
   union SectionThree = HomePageEventsComponent | HomePageCardGridComponent
   union SectionFour = HomePageCardGridComponent | HomePageEventsComponent
+  union SectionFive = HomePageStaffpicksComponent
   union SectionSeven = HomePageCardGridComponent
   union SectionEight = HomePageCardGridComponent
 
@@ -50,6 +52,15 @@ export const typeDefs = gql`
     gridVariant: String
   }
 
+  type HomePageStaffpicksComponent {
+    id: ID!
+    type: String
+    heading: String
+    link: String
+    seeMore: SeeMore
+    items: [HomePageStaffpicksCardComponent]
+  }
+
   type HomePageCardGridComponent {
     id: ID!
     type: String
@@ -69,6 +80,15 @@ export const typeDefs = gql`
     id: ID!
     title: String
     description: String
+    url: String
+    image: Image
+  }
+
+  type HomePageStaffpicksCardComponent {
+    id: ID!
+    quote: String
+    staff_name: String
+    staff_location: String
     url: String
     image: Image
   }

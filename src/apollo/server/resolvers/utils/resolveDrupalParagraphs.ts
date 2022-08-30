@@ -107,6 +107,13 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
+      if (
+        item.type === "paragraph--hp_staff_picks" &&
+        typesInQuery.includes("HomePageStaffpicksComponent")
+      ) {
+        accumulator.push(item);
+      }
+
       return accumulator;
     },
     []
@@ -417,6 +424,35 @@ export default function resolveDrupalParagraphs(
           link: item.field_ls_link.url,
           gridVariant: item.field_lts_hp_card_grid_variant,
           items: hpCardItems,
+          seeMore: {
+            link: item.field_lns_see_all.url,
+            text: item.field_lns_see_all.title,
+          },
+        };
+        break;
+      //
+      case "paragraph--hp_staff_picks":
+        const staffpicksItems: ResolvedParagraph[] = [];
+        Array.isArray(item.field_erm_hp_staffpicks) &&
+          item.field_erm_hp_staffpicks.map((staffpicksItem: any) => {
+            staffpicksItems.push({
+              id: staffpicksItem.id,
+              url: staffpicksItem.field_ls_link.url,
+              quote: staffpicksItem.field_ts_quote,
+              staff_name: staffpicksItem.field_ts_staff_name,
+              staff_location: staffpicksItem.field_ts_staff_location,
+              image:
+                staffpicksItem.field_ers_image.data === null
+                  ? null
+                  : resolveImage(staffpicksItem.field_ers_image),
+            });
+          });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          link: item.field_ls_link.url,
+          items: staffpicksItems,
           seeMore: {
             link: item.field_lns_see_all.url,
             text: item.field_lns_see_all.title,

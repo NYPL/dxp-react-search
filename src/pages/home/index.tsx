@@ -11,7 +11,7 @@ import Meta from "./../../components/shared/Meta";
 // import Hero from "./../../components/home-v1/Hero";
 import HeroWithData from "./../../components/home-v1/Hero/HeroWithData";
 // import Slideshow from "../../components/home-v1/Slideshow/";
-// import StaffPicks from "../../components/home-v1/StaffPicks";
+import StaffPicks from "../../components/home-v1/StaffPicks";
 import EventCollection from "../../components/home-v1/EventCollection";
 import CardGrid from "../../components/home-v1/CardGrid";
 
@@ -90,6 +90,34 @@ export const HOMEPAGE_QUERY = gql`
           seeMore {
             text
             link
+          }
+        }
+      }
+      sectionFive {
+        __typename
+        ... on HomePageStaffpicksComponent {
+          id
+          type
+          heading
+          link
+          items {
+            id
+            quote
+            staff_name
+            staff_location
+            url
+            image {
+              id
+              uri
+              alt
+              width
+              height
+              transformations {
+                id
+                label
+                uri
+              }
+            }
           }
         }
       }
@@ -199,6 +227,7 @@ function HomePage() {
   const homePageDataSectionTwo = data.homePage.sectionTwo[0];
   const homePageDataSectionThree = data.homePage.sectionThree[0];
   const homePageDataSectionFour = data.homePage.sectionFour[0];
+  const homePageDataSectionFive = data.homePage.sectionFive[0];
   const homePageDataSectionSeven = data.homePage.sectionSeven[0];
   const homePageDataSectionEight = data.homePage.sectionEight[0];
 
@@ -236,6 +265,11 @@ function HomePage() {
                 hoverStyle={true}
                 items={homePageDataSectionFour.items}
                 seeMore={homePageDataSectionFour.seeMore}
+              />
+              <StaffPicks
+                title={homePageDataSectionFive.heading}
+                link={homePageDataSectionFive.link}
+                items={homePageDataSectionFive.items}
               />
               {/* From Our Blogs */}
               <CardGrid
