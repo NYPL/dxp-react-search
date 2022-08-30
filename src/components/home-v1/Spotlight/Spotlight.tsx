@@ -3,11 +3,12 @@ import * as React from "react";
 import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
+import { homePagePreviewQueryFilters } from "./../../../pages/home-preview";
 // Components
 import CardGrid from "./../../../components/home-v1/CardGrid";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
-const SPOTLIGHT_QUERY = gql`
+export const HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY = gql`
   query ($filter: QueryFilter, $preview: Boolean, $sort: Sort, $limit: Int) {
     homePageSpotlightCollection(
       filter: $filter
@@ -57,62 +58,24 @@ export default function Spotlight({
 
   const isTimeMachine = isPreview && router.query.publish_on ? true : false;
 
-  let queryFilters;
-  if (isTimeMachine) {
-    queryFilters = {
-      experimental: true,
-      conjunction: "OR",
-      groups: [
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "status",
-              operator: "=",
-              value: "true",
-            },
-            {
-              field: "publish_on",
-              operator: "IS NULL",
-            },
-            {
-              field: "unpublish_on",
-              operator: "IS NULL",
-            },
-          ],
+  const { loading, error, data } = useQuery(
+    HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY,
+    {
+      variables: {
+        ...(isTimeMachine && {
+          preview: true,
+          filter: homePagePreviewQueryFilters(
+            router.query.publish_on as string
+          ),
+        }),
+        limit: 16,
+        sort: {
+          field: "field_is_weight",
+          direction: "ASC",
         },
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "publish_on",
-              operator: "<=",
-              value: router.query.publish_on,
-            },
-            {
-              field: "unpublish_on",
-              operator: ">=",
-              value: router.query.publish_on,
-            },
-          ],
-        },
-      ],
-    };
-  }
-
-  const { loading, error, data } = useQuery(SPOTLIGHT_QUERY, {
-    variables: {
-      ...(isTimeMachine && {
-        preview: true,
-        filter: queryFilters,
-      }),
-      limit: 16,
-      sort: {
-        field: "field_is_weight",
-        direction: "ASC",
       },
-    },
-  });
+    }
+  );
 
   if (error) {
     return <div>Error while loading homepage spotlight items.</div>;

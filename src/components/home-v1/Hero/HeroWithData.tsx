@@ -3,12 +3,13 @@ import * as React from "react";
 import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
+import { homePagePreviewQueryFilters } from "./../../../pages/home-preview";
 //
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 // Components
 import Hero from "./Hero";
 
-const HOME_PAGE_HERO_COLLECTION_QUERY = gql`
+export const HOME_PAGE_HERO_COLLECTION_QUERY = gql`
   query ($filter: QueryFilter, $preview: Boolean) {
     homePageHeroCollection(filter: $filter, preview: $preview) {
       items {
@@ -45,55 +46,14 @@ export default function HeroWithData() {
 
   const isTimeMachine = isPreview && router.query.publish_on ? true : false;
 
-  let queryFilters;
-  if (isTimeMachine) {
-    queryFilters = {
-      experimental: true,
-      conjunction: "OR",
-      groups: [
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "status",
-              operator: "=",
-              value: "true",
-            },
-            {
-              field: "publish_on",
-              operator: "IS NULL",
-            },
-            {
-              field: "unpublish_on",
-              operator: ">=",
-              value: router.query.publish_on,
-            },
-          ],
-        },
-        {
-          conjunction: "AND",
-          conditions: [
-            {
-              field: "publish_on",
-              operator: "<=",
-              value: router.query.publish_on,
-            },
-            {
-              field: "unpublish_on",
-              operator: ">=",
-              value: router.query.publish_on,
-            },
-          ],
-        },
-      ],
-    };
-  }
-
   const { loading, error, data } = useQuery(HOME_PAGE_HERO_COLLECTION_QUERY, {
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: queryFilters,
+        filter: homePagePreviewQueryFilters(
+          router.query.publish_on as string,
+          true
+        ),
       }),
     },
   });
