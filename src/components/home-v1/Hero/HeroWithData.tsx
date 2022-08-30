@@ -3,6 +3,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
+import { homePagePreviewQueryFilters } from "./../../../pages/home-preview";
 //
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 // Components
@@ -33,49 +34,6 @@ export const HOME_PAGE_HERO_COLLECTION_QUERY = gql`
   }
 `;
 
-export const queryFilters = (publish_on: string) => {
-  return {
-    experimental: true,
-    conjunction: "OR",
-    groups: [
-      {
-        conjunction: "AND",
-        conditions: [
-          {
-            field: "status",
-            operator: "=",
-            value: "true",
-          },
-          {
-            field: "publish_on",
-            operator: "IS NULL",
-          },
-          {
-            field: "unpublish_on",
-            operator: ">=",
-            value: publish_on,
-          },
-        ],
-      },
-      {
-        conjunction: "AND",
-        conditions: [
-          {
-            field: "publish_on",
-            operator: "<=",
-            value: publish_on,
-          },
-          {
-            field: "unpublish_on",
-            operator: ">=",
-            value: publish_on,
-          },
-        ],
-      },
-    ],
-  };
-};
-
 export default function HeroWithData() {
   const router = useRouter();
 
@@ -92,7 +50,10 @@ export default function HeroWithData() {
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: queryFilters(router.query.publish_on as string),
+        filter: homePagePreviewQueryFilters(
+          router.query.publish_on as string,
+          true
+        ),
       }),
     },
   });

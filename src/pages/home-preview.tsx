@@ -9,23 +9,77 @@ import { initializeApollo } from "./../apollo/withApollo/apollo";
 import HomePage, {
   HOME_PAGE_QUERY,
 } from "./../components/home-v1/HomePage/HomePage";
-import {
-  queryFilters as homePageHeroCollectionQueryFilters,
-  HOME_PAGE_HERO_COLLECTION_QUERY,
-} from "./../components/home-v1/Hero/HeroWithData";
-import {
-  queryFilters as homePageSpotlightCollectionQueryFilters,
-  HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY,
-} from "./../components/home-v1/Spotlight/Spotlight";
-import {
-  queryFilters as homePageEventCollectionQueryFilters,
-  HOME_PAGE_EVENT_COLLECTION_QUERY,
-} from "./../components/home-v1/EventCollection/EventCollection";
+import { HOME_PAGE_HERO_COLLECTION_QUERY } from "./../components/home-v1/Hero/HeroWithData";
+import { HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY } from "./../components/home-v1/Spotlight/Spotlight";
+import { HOME_PAGE_EVENT_COLLECTION_QUERY } from "./../components/home-v1/EventCollection/EventCollection";
 // Hooks
 import useDecoupledRouter, {
   DECOUPLED_ROUTER_QUERY,
 } from "./../hooks/useDecoupledRouter";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
+
+/**
+ * Helper to generate the query filter groups for previewing homepage content that uses scheduling.
+ *
+ * @param publishOn - The date the content is scheduled to be published.
+ * @param schedulingIsRequired - Whether or not the content requires scheduling.
+ * @returns The query filter groups.
+ *
+ */
+export function homePagePreviewQueryFilters(
+  publishOn: string,
+  schedulingIsRequired: boolean = false
+) {
+  let unpublishOn: Record<string, string> = {
+    field: "unpublish_on",
+    operator: "IS NULL",
+  };
+
+  if (schedulingIsRequired) {
+    unpublishOn = {
+      field: "unpublish_on",
+      operator: ">=",
+      value: publishOn,
+    };
+  }
+
+  return {
+    experimental: true,
+    conjunction: "OR",
+    groups: [
+      {
+        conjunction: "AND",
+        conditions: [
+          {
+            field: "status",
+            operator: "=",
+            value: "true",
+          },
+          {
+            field: "publish_on",
+            operator: "IS NULL",
+          },
+          unpublishOn,
+        ],
+      },
+      {
+        conjunction: "AND",
+        conditions: [
+          {
+            field: "publish_on",
+            operator: "<=",
+            value: publishOn,
+          },
+          {
+            field: "unpublish_on",
+            operator: ">=",
+            value: publishOn,
+          },
+        ],
+      },
+    ],
+  };
+}
 
 function HomePagePreview() {
   const router = useRouter();
@@ -82,8 +136,9 @@ export const getServerSideProps = async (
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: homePageHeroCollectionQueryFilters(
-          context.query.publish_on as string
+        filter: homePagePreviewQueryFilters(
+          context.query.publish_on as string,
+          true
         ),
       }),
     },
@@ -94,9 +149,7 @@ export const getServerSideProps = async (
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: homePageSpotlightCollectionQueryFilters(
-          context.query.publish_on as string
-        ),
+        filter: homePagePreviewQueryFilters(context.query.publish_on as string),
       }),
       limit: 16,
       sort: {
@@ -111,9 +164,7 @@ export const getServerSideProps = async (
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: homePageEventCollectionQueryFilters(
-          context.query.publish_on as string
-        ),
+        filter: homePagePreviewQueryFilters(context.query.publish_on as string),
       }),
       sort: {
         field: "field_lts_event_category",
