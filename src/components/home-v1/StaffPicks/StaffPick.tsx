@@ -16,7 +16,7 @@ interface StaffPickProps {
 }
 
 function StaffPick({ item }: StaffPickProps) {
-  const { id, quote, image, url, staff_name, staff_location } = item;
+  const { id, quote, image, url, staffName, staffLocation } = item;
   return (
     <GridItem as="li" id={id}>
       <Box
@@ -113,10 +113,10 @@ function StaffPick({ item }: StaffPickProps) {
             lineHeight="none"
             display="block-inline"
           >
-            {staff_name}
+            {staffName}
           </Text>
           <Text fontSize="md" lineHeight="none" display="block-inline">
-            {staff_location}
+            {staffLocation}
           </Text>
         </Box>
       </Box>

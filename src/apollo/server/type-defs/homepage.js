@@ -20,7 +20,7 @@ export const typeDefs = gql`
   union SectionTwo = HomePageSpotlightComponent | HomePageCardGridComponent
   union SectionThree = HomePageEventsComponent | HomePageCardGridComponent
   union SectionFour = HomePageCardGridComponent | HomePageEventsComponent
-  union SectionFive = HomePageStaffpicksComponent
+  union SectionFive = HomePageStaffPicksComponent
   union SectionSeven = HomePageCardGridComponent
   union SectionEight = HomePageCardGridComponent
 
@@ -52,13 +52,13 @@ export const typeDefs = gql`
     gridVariant: String
   }
 
-  type HomePageStaffpicksComponent {
+  type HomePageStaffPicksComponent {
     id: ID!
     type: String
     heading: String
     link: String
     seeMore: SeeMore
-    items: [HomePageStaffpicksCardComponent]
+    items: [HomePageStaffPicksItemComponent]
   }
 
   type HomePageCardGridComponent {
@@ -84,11 +84,11 @@ export const typeDefs = gql`
     image: Image
   }
 
-  type HomePageStaffpicksCardComponent {
+  type HomePageStaffPicksItemComponent {
     id: ID!
     quote: String
-    staff_name: String
-    staff_location: String
+    staffName: String
+    staffLocation: String
     url: String
     image: Image
   }

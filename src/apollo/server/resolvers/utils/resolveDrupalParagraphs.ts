@@ -109,7 +109,7 @@ export default function resolveDrupalParagraphs(
 
       if (
         item.type === "paragraph--hp_staff_picks" &&
-        typesInQuery.includes("HomePageStaffpicksComponent")
+        typesInQuery.includes("HomePageStaffPicksComponent")
       ) {
         accumulator.push(item);
       }
@@ -439,8 +439,8 @@ export default function resolveDrupalParagraphs(
               id: staffpicksItem.id,
               url: staffpicksItem.field_ls_link.url,
               quote: staffpicksItem.field_ts_quote,
-              staff_name: staffpicksItem.field_ts_staff_name,
-              staff_location: staffpicksItem.field_ts_staff_location,
+              staffName: staffpicksItem.field_ts_staff_name,
+              staffLocation: staffpicksItem.field_ts_staff_location,
               image:
                 staffpicksItem.field_ers_image.data === null
                   ? null

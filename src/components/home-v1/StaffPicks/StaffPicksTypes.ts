@@ -3,6 +3,6 @@ export interface StaffPicksItem {
   quote: string;
   image: any;
   url: string;
-  staff_name: string;
-  staff_location: string;
+  staffName: string;
+  staffLocation: string;
 }

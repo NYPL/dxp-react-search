@@ -80,7 +80,7 @@ export const HOME_PAGE_QUERY = gql`
       }
       sectionFive {
         __typename
-        ... on HomePageStaffpicksComponent {
+        ... on HomePageStaffPicksComponent {
           id
           type
           heading
@@ -88,8 +88,8 @@ export const HOME_PAGE_QUERY = gql`
           items {
             id
             quote
-            staff_name
-            staff_location
+            staffName
+            staffLocation
             url
             image {
               id
