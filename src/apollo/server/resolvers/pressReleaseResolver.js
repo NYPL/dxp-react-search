@@ -26,7 +26,7 @@ const pressReleaseResolver = {
         "node",
         "press_release",
         includedFields,
-        null,
+        args.filter,
         args.sort,
         pagination
       );

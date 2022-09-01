@@ -19,11 +19,16 @@ export const typeDefs = gql`
 
   union PressReleaseMainContent = Text | TextWithImage | ImageComponent
 
+  input PressFilter {
+    status: QueryFilterItemBoolean
+  }
+
   extend type Query {
     allPressReleases(
       limit: Int
       pageNumber: Int
       sort: Sort
+      filter: PressFilter
     ): PressReleaseConnection
     pressRelease(id: String, revisionId: String, preview: Boolean): PressRelease
   }
