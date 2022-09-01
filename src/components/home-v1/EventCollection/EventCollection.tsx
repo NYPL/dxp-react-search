@@ -158,7 +158,7 @@ export default function EventCollection({
             }
             if (featuredEvent) {
               return (
-                <Box as="li" mb={8} key={`${eventCategory}-featured-event-key`}>
+                <Box as="li" mb={4} key={`${eventCategory}-featured-event-key`}>
                   <Heading
                     as="h3"
                     fontFamily="Kievit-Medium"

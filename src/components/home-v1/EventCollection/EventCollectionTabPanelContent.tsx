@@ -29,8 +29,8 @@ export default function EventCollectionTabPanelContent({
         xl: "1fr 1fr",
       }}
       templateRows={{ base: "1fr", lg: "min-content min-content min-content" }}
-      columnGap={{ base: 6, lg: 7 }}
-      gap={{ base: 6, lg: 0 }}
+      columnGap={{ base: 4, lg: 7 }}
+      gap={{ base: 4, lg: 0 }}
       listStyleType="none"
     >
       {/* Desktop */}
