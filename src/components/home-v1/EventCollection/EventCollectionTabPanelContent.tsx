@@ -29,10 +29,11 @@ export default function EventCollectionTabPanelContent({
         xl: "1fr 1fr",
       }}
       templateRows={{ base: "1fr", lg: "min-content min-content min-content" }}
-      columnGap={{ base: 6, lg: 7 }}
-      gap={{ base: 6, lg: 0 }}
+      columnGap={{ base: 4, lg: 7 }}
+      gap={{ base: 4, lg: 0 }}
       listStyleType="none"
     >
+      {/* Desktop */}
       <GridItem
         id={`${id}__featured-item`}
         as="li"
@@ -49,7 +50,6 @@ export default function EventCollectionTabPanelContent({
           />
         )}
       </GridItem>
-      {/* Desktop */}
       {events &&
         // Skip featured event item
         events.slice(1, 4).map((event, i) => {
@@ -60,7 +60,7 @@ export default function EventCollectionTabPanelContent({
               display={{ base: "none", lg: "block" }}
               colStart={2}
             >
-              <EventCard {...event} variant="event-card" size="sm" />
+              <EventCard {...event} variant="event-card" />
             </GridItem>
           );
         })}
@@ -73,7 +73,7 @@ export default function EventCollectionTabPanelContent({
               key={`event-item-key-${i}`}
               display={{ base: "none", md: "block", lg: "none" }}
             >
-              <EventCard {...event} variant="event-card" size="sm" />
+              <EventCard {...event} variant="event-card" />
             </GridItem>
           );
         })}
