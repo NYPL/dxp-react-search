@@ -16,7 +16,7 @@ const Event: ComponentStyleConfig = {
     // Title
     h3: {
       fontFamily: "Kievit-Medium",
-      fontSize: { base: "lg", md: "xl" },
+      fontSize: { base: "lg", lg: "xl" },
       fontWeight: "normal",
       lineHeight: "none",
       px: 0,
@@ -38,14 +38,11 @@ const Event: ComponentStyleConfig = {
     },
     // Location
     p: { fontSize: "sm", lineHeight: "none", px: 0 },
+    // Image
     img: { w: "full" },
   },
   // Heading sizes
   sizes: {
-    sm: {
-      h3: { fontSize: "lg" },
-    },
-    lg: { h3: { fontSize: "2xl" } },
     xl: { h3: { fontSize: "26px" } },
   },
   variants: {
@@ -57,7 +54,7 @@ const Event: ComponentStyleConfig = {
     },
     "event-card": {
       gridTemplateColumns: { base: "4fr 9fr", md: "5fr 11fr", lg: "1fr 3fr" },
-      gridGap: { base: 9, md: 6, lg: 4 },
+      gridGap: { base: 6, lg: 4 },
       mb: { base: 0, lg: 7 },
       h3: {
         lineHeight: "22px",
@@ -65,14 +62,13 @@ const Event: ComponentStyleConfig = {
       },
       span: {
         mt: 1.5,
+        fontSize: { base: "xs", lg: "sm" },
       },
       p: {
         fontSize: "xs",
       },
     },
   },
-  // The default `size` value
-  defaultProps: { size: "lg" },
 };
 
 export default Event;

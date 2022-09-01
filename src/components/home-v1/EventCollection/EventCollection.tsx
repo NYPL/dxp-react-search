@@ -170,11 +170,7 @@ export default function EventCollection({
                   >
                     {eventCategoryLabel(eventCategory)}
                   </Heading>
-                  <EventCard
-                    {...featuredEvent}
-                    variant="event-card"
-                    size="lg"
-                  />
+                  <EventCard {...featuredEvent} variant="event-card" />
                 </Box>
               );
             }
