@@ -28,6 +28,7 @@ function PressMainPage() {
             mediaContacts={mediaContacts.bodyText}
             limit={10}
             sort={{ field: "created", direction: "DESC" }}
+            status={true}
           />
         </>
       }
@@ -49,7 +50,7 @@ export const getStaticProps: GetStaticProps = async () => {
   });
   return {
     props: {
-      initializeApollo: apolloClient.cache.extract(),
+      initialApolloState: apolloClient.cache.extract(),
     },
     // 10 mins.
     revalidate: 600,

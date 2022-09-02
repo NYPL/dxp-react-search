@@ -44,6 +44,7 @@ interface PressReleaseCollectionProps {
   mediaContacts: string;
   limit: number;
   sort: any;
+  status: boolean;
 }
 
 function PressReleaseCollection({
@@ -52,6 +53,7 @@ function PressReleaseCollection({
   mediaContacts,
   limit,
   sort,
+  status,
 }: PressReleaseCollectionProps) {
   const router = useRouter();
   const currentPage = router.query.page
@@ -63,7 +65,7 @@ function PressReleaseCollection({
       limit: limit ? limit : null,
       pageNumber: currentPage ? currentPage : 1,
       sort: sort ? sort : null,
-      filter: { status: { fieldName: "status", operator: "=", value: true } },
+      filter: { status: { fieldName: "status", operator: "=", value: status } },
     },
   });
 
