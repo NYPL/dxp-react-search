@@ -76,7 +76,7 @@ function Card({ item, variant, size = "md" }: CardProps) {
             // @TODO discuss with Zach if there should be a empty alt attribute instead/alt information
             // alt={item.alt | ""}
           /> */}
-          <Image
+          {/* <Image
             id={item.image.id}
             alt={item.image.alt}
             uri={item.image.uri}
@@ -86,6 +86,19 @@ function Card({ item, variant, size = "md" }: CardProps) {
             layout="responsive"
             width={900}
             height={450}
+            quality={90}
+          /> */}
+          {/* Slideshow Test */}
+          <Image
+            id={item.image.id}
+            alt={item.image.alt}
+            uri={item.image.uri}
+            useTransformation={true}
+            transformations={item.image.transformations}
+            transformationLabel={"max_width_960"}
+            layout="responsive"
+            width={item.image.width ? item.image.width : 900}
+            height={item.image.height ? item.image.height : 450}
             quality={90}
           />
         </Link>

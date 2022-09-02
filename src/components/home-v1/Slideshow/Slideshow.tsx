@@ -1,7 +1,7 @@
 import React from "react";
 // Components
 import { Box } from "@chakra-ui/react";
-import ComponentWrapper from "../ComponentWrapper";
+import ComponentWrapper, { SeeMore } from "../ComponentWrapper";
 import SlideshowContainer from "./SlideshowContainer";
 import SlideshowButton from "./SlideshowButton";
 // Hooks
@@ -13,11 +13,12 @@ interface SlideshowProps {
   title: string;
   link: string;
   items: SlideshowItem[];
+  seeMore?: SeeMore;
 }
 
-function Slideshow({ title, link, items }: SlideshowProps) {
+function Slideshow({ title, link, items, seeMore }: SlideshowProps) {
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
-    useSlideshowStyles(items.length, 11);
+    useSlideshowStyles(items.length, 15);
   return (
     <ComponentWrapper
       title={title}
@@ -27,6 +28,7 @@ function Slideshow({ title, link, items }: SlideshowProps) {
       borderColor="red.100"
       buttonBorder="brand.100"
       gap={{ base: 0, md: 2, lg: 3, xl: 9 }}
+      seeMore={seeMore}
     >
       <Box
         w="full"
