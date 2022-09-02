@@ -88,6 +88,7 @@ export const getServerSideProps = withDecoupledRouter(
     props: WithDecoupledRouterReturnProps
   ) => {
     const { uuid, isPreview, apolloClient } = props;
+
     await apolloClient.query({
       query: PRESS_RELEASE_QUERY,
       variables: {
@@ -98,6 +99,7 @@ export const getServerSideProps = withDecoupledRouter(
         }),
       },
     });
+
     return {
       props: {
         initialApolloState: apolloClient.cache.extract(),

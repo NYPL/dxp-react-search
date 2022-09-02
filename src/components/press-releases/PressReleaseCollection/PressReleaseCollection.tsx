@@ -4,7 +4,6 @@ import { gql, useQuery } from "@apollo/client";
 import { PRESS_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/pressFields";
 // Components
 import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
-import MediaContacts from "../layouts/MediaContacts";
 import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 import PressReleaseCard from "./PressReleaseCard";
 // Type
@@ -40,8 +39,6 @@ export const ALL_PRESS_RELEASES_QUERY = gql`
 
 interface PressReleaseCollectionProps {
   id: string;
-  description: string;
-  mediaContacts: string;
   limit: number;
   sort: any;
   status: boolean;
@@ -49,8 +46,6 @@ interface PressReleaseCollectionProps {
 
 function PressReleaseCollection({
   id,
-  description,
-  mediaContacts,
   limit,
   sort,
   status,
@@ -91,7 +86,6 @@ function PressReleaseCollection({
 
   return (
     <Box id={id}>
-      <Box mb={"l"}>{description}</Box>
       <Grid as="ul" listStyleType="none">
         {data.allPressReleases.items &&
           data.allPressReleases.items.map((item: PressReleaseItem) => (
@@ -115,7 +109,6 @@ function PressReleaseCollection({
           onPageChange={onPageChange}
         />
       </Box>
-      <MediaContacts mediaContacts={mediaContacts} />
     </Box>
   );
 }

@@ -7,6 +7,7 @@ import {
   ApolloPageProps,
 } from "./../../apollo/withApollo/apollo";
 // Components
+import { Heading, Box } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/press-releases/layouts/PageContainer";
 import PressReleaseCollection, {
   ALL_PRESS_RELEASES_QUERY,
@@ -15,7 +16,7 @@ import PressReleaseCollection, {
 import pressContent from "../../__content/press";
 
 function PressMainPage() {
-  const { meta, mediaContacts } = pressContent;
+  const { meta, mediaInquiries } = pressContent;
 
   return (
     <PageContainer
@@ -26,10 +27,19 @@ function PressMainPage() {
       showContentHeader={true}
       contentPrimary={
         <>
+          <Heading level="two">{mediaInquiries.heading}</Heading>
+          <Box
+            sx={{
+              "& a": {
+                color: "var(--nypl-colors-ui-black)",
+                textDecor: "underline",
+              },
+            }}
+            dangerouslySetInnerHTML={{ __html: mediaInquiries.description }}
+          />
+
           <PressReleaseCollection
             id="press-releases"
-            description={meta.description}
-            mediaContacts={mediaContacts.bodyText}
             limit={10}
             sort={{ field: "created", direction: "DESC" }}
             status={true}
