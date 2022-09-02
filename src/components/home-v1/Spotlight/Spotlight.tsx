@@ -6,6 +6,7 @@ import { gql, useQuery } from "@apollo/client";
 import { homePagePreviewQueryFilters } from "./../../../pages/home-preview";
 // Components
 import CardGrid from "./../../../components/home-v1/CardGrid";
+import { SeeMore } from "../ComponentWrapper";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
 export const HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY = gql`
@@ -38,7 +39,7 @@ export interface SpotlightProps {
   title: string;
   link: string;
   variant: "row-grid" | "column-grid" | "updates-grid";
-  seeMore: any;
+  seeMore: SeeMore;
 }
 
 export default function Spotlight({
