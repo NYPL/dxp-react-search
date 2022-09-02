@@ -1,8 +1,11 @@
 import React from "react";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 // Apollo
 import withApollo from "./../../apollo/withApollo";
-import { initializeApollo } from "./../../apollo/withApollo/apollo";
+import {
+  initializeApollo,
+  ApolloPageProps,
+} from "./../../apollo/withApollo/apollo";
 // Components
 import PageContainer from "../../components/press-releases/layouts/PageContainer";
 import PressReleaseCollection, {
@@ -13,6 +16,7 @@ import pressContent from "../../__content/press";
 
 function PressMainPage() {
   const { meta, mediaContacts } = pressContent;
+
   return (
     <PageContainer
       metaTags={{
@@ -36,7 +40,9 @@ function PressMainPage() {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps<
+  ApolloPageProps
+> = async () => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
@@ -48,12 +54,11 @@ export const getStaticProps: GetStaticProps = async () => {
       filter: { status: { fieldName: "status", operator: "=", value: true } },
     },
   });
+
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
     },
-    // 10 mins.
-    revalidate: 600,
   };
 };
 
