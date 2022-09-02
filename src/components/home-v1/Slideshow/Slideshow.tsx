@@ -18,7 +18,7 @@ interface SlideshowProps {
 
 function Slideshow({ title, link, items, seeMore }: SlideshowProps) {
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
-    useSlideshowStyles(items.length, 15);
+    useSlideshowStyles(items.length, 15.7);
   return (
     <ComponentWrapper
       title={title}
