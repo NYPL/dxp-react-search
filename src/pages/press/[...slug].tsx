@@ -1,10 +1,11 @@
 import React from "react";
 // Next
+import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import Error from "../_error";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-import { withApollo } from "../../apollo/client/withApollo";
+import withApollo from "./../../apollo/withApollo";
 import { PRESS_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/pressFields";
 // Components
 import { SkeletonLoader } from "@nypl/design-system-react-components";
@@ -12,6 +13,10 @@ import PageContainer from "../../components/press-releases/layouts/PageContainer
 import PressRelease from "../../components/press-releases/PressRelease";
 // Hooks
 import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
+// HOC
+import withDecoupledRouter, {
+  WithDecoupledRouterReturnProps,
+} from "../../apollo/withDecoupledRouter";
 
 const PRESS_RELEASE_QUERY = gql`
   ${PRESS_FIELDS_FRAGMENT}
@@ -77,7 +82,28 @@ function PressReleasePage() {
   );
 }
 
-export default withApollo(PressReleasePage, {
-  ssr: true,
-  redirects: true,
-});
+export const getServerSideProps = withDecoupledRouter(
+  async (
+    context: GetServerSidePropsContext,
+    props: WithDecoupledRouterReturnProps
+  ) => {
+    const { uuid, isPreview, apolloClient } = props;
+    await apolloClient.query({
+      query: PRESS_RELEASE_QUERY,
+      variables: {
+        id: uuid,
+        ...(isPreview && {
+          preview: true,
+          revisionId: context.query.revision_id,
+        }),
+      },
+    });
+    return {
+      props: {
+        initialApolloState: apolloClient.cache.extract(),
+      },
+    };
+  }
+);
+
+export default withApollo(PressReleasePage);

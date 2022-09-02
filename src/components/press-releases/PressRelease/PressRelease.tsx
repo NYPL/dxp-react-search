@@ -43,8 +43,7 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
         <Heading level="one" size="secondary" text={pressRelease.title} />
         {description !== null && (
           <Box
-            // @TODO This no longer works, lets fix this soon.
-            //isItalic={true}
+            as="i"
             mb="s"
             fontSize={"1"}
             dangerouslySetInnerHTML={{ __html: description }}

@@ -12,10 +12,20 @@ import { PressReleaseItem } from "./PressReleaseCardType";
 // Next
 import { useRouter } from "next/router";
 
-const ALL_PRESS_RELEASES_QUERY = gql`
+export const ALL_PRESS_RELEASES_QUERY = gql`
   ${PRESS_FIELDS_FRAGMENT}
-  query AllPressReleases($limit: Int, $pageNumber: Int, $sort: Sort) {
-    allPressReleases(limit: $limit, pageNumber: $pageNumber, sort: $sort) {
+  query AllPressReleases(
+    $limit: Int
+    $pageNumber: Int
+    $sort: Sort
+    $filter: PressFilter
+  ) {
+    allPressReleases(
+      limit: $limit
+      pageNumber: $pageNumber
+      sort: $sort
+      filter: $filter
+    ) {
       items {
         ...PressFields
       }
@@ -34,6 +44,7 @@ interface PressReleaseCollectionProps {
   mediaContacts: string;
   limit: number;
   sort: any;
+  status: boolean;
 }
 
 function PressReleaseCollection({
@@ -42,6 +53,7 @@ function PressReleaseCollection({
   mediaContacts,
   limit,
   sort,
+  status,
 }: PressReleaseCollectionProps) {
   const router = useRouter();
   const currentPage = router.query.page
@@ -53,6 +65,7 @@ function PressReleaseCollection({
       limit: limit ? limit : null,
       pageNumber: currentPage ? currentPage : 1,
       sort: sort ? sort : null,
+      filter: { status: { fieldName: "status", operator: "=", value: status } },
     },
   });
 
