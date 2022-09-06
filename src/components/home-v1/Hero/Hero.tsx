@@ -1,7 +1,9 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Component
-import { Box, Link, Heading, Text, Image, createIcon } from "@chakra-ui/react";
+import { Box, Link, Heading, Text, createIcon } from "@chakra-ui/react";
+import { getImageTransformation } from "../../shared/Image/imageUtils";
+import { default as NextImage } from "../../shared/Image";
 
 // SVG Icon
 const RightArrowIcon = createIcon({
@@ -16,13 +18,23 @@ interface HeroProps {
   title: string;
   description: string;
   tag: string;
-  image?: string;
-  mobileImg?: string;
+  image: any;
   url: string;
 }
 
-function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
+function Hero({ title, description, tag, image, url }: HeroProps) {
+  const desktopImageSrc = getImageTransformation(
+    "hero_header_focal_point_2400x400",
+    image.transformations
+  );
+
+  // const mobileImageSrc = getImageTransformation(
+  //   "2_1_960",
+  //   image.transformations
+  // );
+
   const styles = useStyleConfig("Hero");
+
   return (
     <Box
       alignItems="center"
@@ -32,7 +44,8 @@ function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
       height={{ md: "30vw" }}
       maxHeight={{ xl: "400px" }}
       minHeight="250px"
-      bgImage={{ base: "none", md: `url(${image})` }}
+      bgImage={{ base: "none", md: `url(${desktopImageSrc})` }}
+      //bgImage={{ base: "none", md: `url(${image.uri})` }}
       bgSize="cover"
     >
       <Box
@@ -46,7 +59,19 @@ function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
         }}
         sx={styles}
       >
-        <Image src={mobileImg} />
+        {/* <Image alt={image.alt} src={mobileImageSrc} /> */}
+        <NextImage
+          id={image.id}
+          alt={image.alt}
+          uri={image.uri}
+          useTransformation={true}
+          transformations={image.transformations}
+          transformationLabel={"2_1_960"}
+          layout="responsive"
+          width={image.width}
+          height={image.height}
+          quality={90}
+        />
         <Box className="hero-text-box">
           <Link
             href={url}

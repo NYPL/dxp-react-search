@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 import { homePagePreviewQueryFilters } from "./../../../pages/home-preview";
-//
-const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 // Components
 import Hero from "./Hero";
+//
+const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
 export const HOME_PAGE_HERO_COLLECTION_QUERY = gql`
   query ($filter: QueryFilter, $preview: Boolean) {
@@ -20,6 +20,8 @@ export const HOME_PAGE_HERO_COLLECTION_QUERY = gql`
         image {
           id
           uri
+          width
+          height
           transformations {
             id
             uri
@@ -76,8 +78,7 @@ export default function HeroWithData() {
       <Hero
         title={homePageHero.heading}
         description={homePageHero.description}
-        image={homePageHero.image.uri}
-        mobileImg={homePageHero.image.uri}
+        image={homePageHero.image}
         tag={homePageHero.tag}
         url={homePageHero.link}
       />
