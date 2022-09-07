@@ -6,7 +6,7 @@ import Image from "./../../shared/Image";
 import { ImageType } from "../../shared/Image/ImageTypes";
 
 export interface CardItem {
-  id?: string;
+  id: string;
   title: string;
   description?: string;
   image: ImageType;

@@ -6,7 +6,7 @@ import Image from "./../../shared/Image";
 import { ImageType } from "../../shared/Image/ImageTypes";
 
 export interface SlideshowCardItem {
-  id?: string;
+  id: string;
   title: string;
   author: string;
   genre: string;
@@ -15,11 +15,11 @@ export interface SlideshowCardItem {
   url?: string;
 }
 
-interface CardProps {
+interface SlideshowCardProps {
   item: SlideshowCardItem;
 }
 
-function SlideshowCard({ item }: CardProps) {
+function SlideshowCard({ item }: SlideshowCardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant: "slide-show-card" });
   // Generate describedBy string
