@@ -2,9 +2,7 @@ import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Grid, GridItem } from "@chakra-ui/react";
-import ComponentWrapper, {
-  SeeMore,
-} from "../ComponentWrapper/ComponentWrapper";
+import ComponentWrapper, { SeeMore } from "../ComponentWrapper";
 import Card, { CardItem } from "./Card";
 
 interface CardGridProps {

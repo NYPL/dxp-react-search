@@ -1,7 +1,7 @@
 import React from "react";
 // Components
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import Card from "../CardGrid/Card";
+import SlideshowCard from "./SlideshowCard";
 // Types
 import { SlideshowItem } from "./SlideshowTypes";
 
@@ -48,7 +48,7 @@ function SlideshowContainer({
                 h="full"
                 onFocus={() => changeSlide(i)}
               >
-                <Card item={item} variant="slide-show-card" />
+                <SlideshowCard item={item} />
               </GridItem>
             );
           })}

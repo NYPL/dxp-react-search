@@ -114,6 +114,13 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
+      if (
+        item.type === "paragraph--hp_slideshow" &&
+        typesInQuery.includes("HomePageSlideshowComponent")
+      ) {
+        accumulator.push(item);
+      }
+
       return accumulator;
     },
     []
@@ -424,6 +431,36 @@ export default function resolveDrupalParagraphs(
           link: item.field_ls_link.url,
           gridVariant: item.field_lts_hp_card_grid_variant,
           items: hpCardItems,
+          seeMore: {
+            link: item.field_lns_see_all.url,
+            text: item.field_lns_see_all.title,
+          },
+        };
+        break;
+      // Slideshow
+      case "paragraph--hp_slideshow":
+        const slideshowItems: ResolvedParagraph[] = [];
+        Array.isArray(item.field_erm_hp_slideshow_items) &&
+          item.field_erm_hp_slideshow_items.map((slideshowItem: any) => {
+            slideshowItems.push({
+              id: slideshowItem.id,
+              url: slideshowItem.field_ls_link.url,
+              title: slideshowItem.field_ts_heading,
+              audience: slideshowItem.field_ts_audience,
+              genre: slideshowItem.field_ts_genre,
+              author: slideshowItem.field_ts_author,
+              image:
+                slideshowItem.field_ers_image.data === null
+                  ? null
+                  : resolveImage(slideshowItem.field_ers_image),
+            });
+          });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          link: item.field_ls_link.url,
+          items: slideshowItems,
           seeMore: {
             link: item.field_lns_see_all.url,
             text: item.field_lns_see_all.title,

@@ -12,6 +12,7 @@ export const typeDefs = gql`
     sectionThree: [SectionThree]
     sectionFour: [SectionFour]
     sectionFive: [SectionFive]
+    sectionSix: [SectionSix]
     sectionSeven: [SectionSeven]
     sectionEight: [SectionEight]
   }
@@ -21,6 +22,7 @@ export const typeDefs = gql`
   union SectionThree = HomePageEventsComponent | HomePageCardGridComponent
   union SectionFour = HomePageCardGridComponent | HomePageEventsComponent
   union SectionFive = HomePageStaffPicksComponent
+  union SectionSix = HomePageSlideshowComponent
   union SectionSeven = HomePageCardGridComponent
   union SectionEight = HomePageCardGridComponent
 
@@ -61,6 +63,15 @@ export const typeDefs = gql`
     items: [HomePageStaffPicksItemComponent]
   }
 
+  type HomePageSlideshowComponent {
+    id: ID!
+    type: String
+    heading: String
+    link: String
+    seeMore: SeeMore
+    items: [HomePageSlideshowItem]
+  }
+
   type HomePageCardGridComponent {
     id: ID!
     type: String
@@ -91,6 +102,16 @@ export const typeDefs = gql`
     staffLocation: String
     url: String
     image: Image
+  }
+
+  type HomePageSlideshowItem {
+    id: ID!
+    title: String
+    image: Image
+    author: String
+    audience: String
+    genre: String
+    url: String
   }
 
   # Home page content types.

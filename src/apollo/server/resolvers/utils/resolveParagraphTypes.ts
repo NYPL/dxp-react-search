@@ -46,6 +46,9 @@ export default function resolveParagraphTypes(objectType: string) {
     case "hp_staff_picks":
       resolvedObjectType = "HomePageStaffPicksComponent";
       break;
+    case "hp_slideshow":
+      resolvedObjectType = "HomePageSlideshowComponent";
+      break;
   }
   return resolvedObjectType;
 }
