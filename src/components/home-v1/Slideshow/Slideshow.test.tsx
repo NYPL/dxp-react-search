@@ -9,8 +9,8 @@ expect.extend(toHaveNoViolations);
 import renderer from "react-test-renderer";
 // Component
 import Slideshow from "./Slideshow";
-import SlideshowContainer from "./SlideshowContainer";
 import SlideshowButton from "./SlideshowButton";
+import SlideshowContainer from "./SlideshowContainer";
 import useSlideshowStyles from "./useSlideshow";
 
 const items = [
@@ -20,7 +20,17 @@ const items = [
     author: "writer 1",
     genre: "genre",
     audience: "people",
-    image: "https://placeimg.com/400/200/arch",
+    image: {
+      id: "test-id-1",
+      alt: "image-1-alt-text",
+      layout: "responsive",
+      width: 400,
+      height: 200,
+      quality: 90,
+      uri: "https://placeimg.com/400/200/arch",
+      useTransformation: false,
+      transformationLabel: "2_1_960",
+    },
     url: "https://www.nypl.org/",
   },
   {
@@ -29,7 +39,17 @@ const items = [
     author: "writer 2",
     genre: "genre",
     audience: "people",
-    image: "https://placeimg.com/400/200/arch",
+    image: {
+      id: "test-id-2",
+      alt: "image-2-alt-text",
+      layout: "responsive",
+      width: 400,
+      height: 200,
+      quality: 90,
+      uri: "https://placeimg.com/400/200/arch",
+      useTransformation: false,
+      transformationLabel: "2_1_960",
+    },
     url: "https://www.nypl.org/",
   },
   {
@@ -38,7 +58,17 @@ const items = [
     author: "writer 3",
     genre: "genre",
     audience: "people",
-    image: "https://placeimg.com/400/200/arch",
+    image: {
+      id: "test-id-3",
+      alt: "image-3-alt-text",
+      layout: "responsive",
+      width: 400,
+      height: 200,
+      quality: 90,
+      uri: "https://placeimg.com/400/200/arch",
+      useTransformation: false,
+      transformationLabel: "2_1_960",
+    },
     url: "https://www.nypl.org/",
   },
   {
@@ -47,7 +77,17 @@ const items = [
     author: "writer 4",
     genre: "genre",
     audience: "people",
-    image: "https://placeimg.com/400/200/arch",
+    image: {
+      id: "test-id-4",
+      alt: "image-4-alt-text",
+      layout: "responsive",
+      width: 400,
+      height: 200,
+      quality: 90,
+      uri: "https://placeimg.com/400/200/arch",
+      useTransformation: false,
+      transformationLabel: "2_1_960",
+    },
     url: "https://www.nypl.org/",
   },
 ];
@@ -55,7 +95,6 @@ const items = [
 describe("useSlideshow tests", () => {
   it("returns two functions, the currentSlide number and a CSS style object", () => {
     const { result } = renderHook(() => useSlideshowStyles());
-
     expect(typeof result.current.nextSlide).toEqual("function");
     expect(typeof result.current.prevSlide).toEqual("function");
     expect(typeof result.current.currentSlide).toEqual("number");
@@ -93,6 +132,7 @@ describe("useSlideshow tests", () => {
     expect(result.current.currentSlide).toEqual(2);
     // Move to previsou slide
     act(() => mockPrevSlide());
+
     expect(result.current.slideshowStyle).toEqual({
       marginLeft: "-100%",
       transition: "all .5s",
@@ -192,8 +232,6 @@ describe("SlideshowContainer tests", () => {
   // Call useSlideshow hook to get props for SlideshowContainer component
   const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } = result.current;
-  // @TODO axe test throws error
-  // fix to this accessibility error is added on cardgrid-test
   it("should pass axe accessibility test", async () => {
     const { container } = render(
       <SlideshowContainer
@@ -218,7 +256,6 @@ describe("SlideshowContainer tests", () => {
     );
     expect(screen.getAllByRole("listitem")).toHaveLength(4);
   });
-
   it("should render the UI snapshot correctly", () => {
     const slideshowContainer = renderer
       .create(
@@ -236,8 +273,6 @@ describe("SlideshowContainer tests", () => {
 });
 
 describe("Slideshow tests", () => {
-  // @TODO axe test throws error
-  // fix to this accessibility error is added on cardgrid-test
   it("shold pass axe accessibility test", async () => {
     const { container } = render(
       <Slideshow title="Test" link="https://nypl.com" items={items} />
@@ -274,12 +309,15 @@ describe("Slideshow tests", () => {
     expect(screen.getByRole("link", { name: "Test" })).toHaveFocus();
     // To slide #one
     userEvent.tab();
+
     expect(screen.getByRole("link", { name: "Test 1" })).toHaveFocus();
     // To slide #two
     userEvent.tab();
+
     expect(screen.getByRole("link", { name: "Test 2" })).toHaveFocus();
     // Back to slide #one
     userEvent.tab({ shift: true });
+
     expect(screen.getByRole("link", { name: "Test 1" })).toHaveFocus();
     // userEvent.tab();
     // userEvent.tab();
@@ -290,7 +328,7 @@ describe("Slideshow tests", () => {
     // // Can not pass last slide
     // expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
   });
-  it("should render the UI snapshot correctly", () => {
+  it("should render the UI snapshot correctly", async () => {
     const basicView = renderer
       .create(<Slideshow title="Test" link="https://nypl.com" items={items} />)
       .toJSON();
