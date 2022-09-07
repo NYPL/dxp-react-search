@@ -73,12 +73,8 @@ const Hero: ComponentStyleConfig = {
       borderColor: { base: "red.200", md: "transparent" },
       borderRadius: { base: "3xl" },
     },
-    img: {
+    ".scout-nextjs-image": {
       display: { base: "block", md: "none" },
-      w: "full",
-      maxHeight: { base: "390px" },
-      objectFit: "cover",
-      objectPosition: "center 0",
     },
   },
 };

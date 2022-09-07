@@ -28,11 +28,6 @@ function Hero({ title, description, tag, image, url }: HeroProps) {
     image.transformations
   );
 
-  // const mobileImageSrc = getImageTransformation(
-  //   "2_1_960",
-  //   image.transformations
-  // );
-
   const styles = useStyleConfig("Hero");
 
   return (
@@ -45,7 +40,6 @@ function Hero({ title, description, tag, image, url }: HeroProps) {
       maxHeight={{ xl: "400px" }}
       minHeight="250px"
       bgImage={{ base: "none", md: `url(${desktopImageSrc})` }}
-      //bgImage={{ base: "none", md: `url(${image.uri})` }}
       bgSize="cover"
     >
       <Box
@@ -59,7 +53,6 @@ function Hero({ title, description, tag, image, url }: HeroProps) {
         }}
         sx={styles}
       >
-        {/* <Image alt={image.alt} src={mobileImageSrc} /> */}
         <NextImage
           id={image.id}
           alt={image.alt}
@@ -68,8 +61,8 @@ function Hero({ title, description, tag, image, url }: HeroProps) {
           transformations={image.transformations}
           transformationLabel={"2_1_960"}
           layout="responsive"
-          width={image.width}
-          height={image.height}
+          width={960}
+          height={480}
           quality={90}
         />
         <Box className="hero-text-box">
