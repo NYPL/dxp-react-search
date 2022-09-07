@@ -14,6 +14,7 @@ import Spotlight from "./../Spotlight";
 import EventCollection from "./../EventCollection";
 import CardGrid from "./../CardGrid";
 import StaffPicks from "./../StaffPicks";
+import Slideshow from "../Slideshow";
 
 export const HOME_PAGE_QUERY = gql`
   query ($id: String, $revisionId: String, $preview: Boolean) {
@@ -103,6 +104,39 @@ export const HOME_PAGE_QUERY = gql`
                 uri
               }
             }
+          }
+        }
+      }
+      sectionSix {
+        __typename
+        ... on HomePageSlideshowComponent {
+          id
+          type
+          heading
+          link
+          items {
+            id
+            url
+            title
+            author
+            genre
+            audience
+            image {
+              id
+              uri
+              alt
+              width
+              height
+              transformations {
+                id
+                label
+                uri
+              }
+            }
+          }
+          seeMore {
+            text
+            link
           }
         }
       }
@@ -213,6 +247,7 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
   const homePageDataSectionThree = data.homePage.sectionThree[0];
   const homePageDataSectionFour = data.homePage.sectionFour[0];
   const homePageDataSectionFive = data.homePage.sectionFive[0];
+  const homePageDataSectionSix = data.homePage.sectionSix[0];
   const homePageDataSectionSeven = data.homePage.sectionSeven[0];
   const homePageDataSectionEight = data.homePage.sectionEight[0];
 
@@ -255,6 +290,12 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
                 title={homePageDataSectionFive.heading}
                 link={homePageDataSectionFive.link}
                 items={homePageDataSectionFive.items}
+              />
+              <Slideshow
+                title={homePageDataSectionSix.heading}
+                link={homePageDataSectionSix.link}
+                items={homePageDataSectionSix.items}
+                seeMore={homePageDataSectionSix.seeMore}
               />
               {/* From Our Blogs */}
               <CardGrid

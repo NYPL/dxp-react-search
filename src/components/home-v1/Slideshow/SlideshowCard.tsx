@@ -5,24 +5,24 @@ import { Heading, Text, Link, Grid, GridItem, Box } from "@chakra-ui/react";
 import Image from "./../../shared/Image";
 import { ImageType } from "../../shared/Image/ImageTypes";
 
-export interface CardItem {
+export interface SlideshowCardItem {
   id: string;
   title: string;
-  description?: string;
+  author: string;
+  genre: string;
+  audience: string;
   image: ImageType;
   url?: string;
 }
 
-interface CardProps {
-  item: CardItem;
-  variant?: "blog-card" | "updates-card";
-  size?: any;
+interface SlideshowCardProps {
+  item: SlideshowCardItem;
 }
 
-function Card({ item, variant, size = "md" }: CardProps) {
+function SlideshowCard({ item }: SlideshowCardProps) {
   // Get Card theme styles
-  const styles = useStyleConfig("Card", { variant, size });
-  // Generate describedBy string (used by Blog Card)
+  const styles = useStyleConfig("Card", { variant: "slide-show-card" });
+  // Generate describedBy string
   let describedByIdsArray = [];
   const omitItems = ["id", "title", "image", "url", "__typename"];
   for (const propName in item) {
@@ -48,27 +48,27 @@ function Card({ item, variant, size = "md" }: CardProps) {
           <Link href={item.url}>{item.title}</Link>
         </Heading>
         <Box className="details">
-          {item.description && (
-            <Text id={`${item.id}-description`}>{item.description}</Text>
-          )}
+          <Text id={`${item.id}-author`}>{item.author}</Text>
+          <Text as="span" id={`${item.id}-audience`}>
+            {item.audience}
+          </Text>
+          <Text as="span" id={`${item.id}-genre`}>
+            {item.genre}
+          </Text>
         </Box>
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
         <Link href={item.url} aria-label={`${item.title}-image`} tabIndex={-1}>
-          {/* 
-            // @QUESTION should role="presentation" be used instead of alt="" source: https://www.digitala11y.com/presentation-role/
-            role="presentation"
-          */}
           <Image
             id={item.image.id}
             alt={item.image.alt}
             uri={item.image.uri}
             useTransformation={true}
             transformations={item.image.transformations}
-            transformationLabel={"2_1_960"}
+            transformationLabel={"max_width_960"}
             layout="responsive"
-            width={900}
-            height={450}
+            width={item.image.width}
+            height={item.image.height}
             quality={90}
           />
         </Link>
@@ -77,4 +77,4 @@ function Card({ item, variant, size = "md" }: CardProps) {
   );
 }
 
-export default Card;
+export default SlideshowCard;

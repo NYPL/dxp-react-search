@@ -14,9 +14,7 @@ import {
   Heading,
   Box,
 } from "@chakra-ui/react";
-import ComponentWrapper, {
-  SeeMore,
-} from "../ComponentWrapper/ComponentWrapper";
+import ComponentWrapper, { SeeMore } from "../ComponentWrapper";
 import EventCollectionTabPanelContent from "./EventCollectionTabPanelContent";
 import EventCard, { EventCardProps as EventItem } from "./EventCard";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
