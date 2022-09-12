@@ -90,22 +90,8 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     href="https://www.nypl.org/"
                     tabIndex={-1}
                   >
-                    <span
-                      style={
-                        Object {
-                          "background": "none",
-                          "border": 0,
-                          "boxSizing": "border-box",
-                          "display": "block",
-                          "height": "initial",
-                          "margin": 0,
-                          "opacity": 1,
-                          "overflow": "hidden",
-                          "padding": 0,
-                          "position": "relative",
-                          "width": "initial",
-                        }
-                      }
+                    <div
+                      className="scout-nextjs-image"
                     >
                       <span
                         style={
@@ -117,53 +103,37 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             "height": "initial",
                             "margin": 0,
                             "opacity": 1,
+                            "overflow": "hidden",
                             "padding": 0,
-                            "paddingTop": "50%",
+                            "position": "relative",
                             "width": "initial",
                           }
                         }
-                      />
-                      <img
-                        alt="image-1-alt-text"
-                        data-nimg="responsive"
-                        decoding="async"
-                        id="nextjsImage-test-id-1"
-                        onError={[Function]}
-                        onLoad={[Function]}
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                        style={
-                          Object {
-                            "border": "none",
-                            "bottom": 0,
-                            "boxSizing": "border-box",
-                            "display": "block",
-                            "height": 0,
-                            "left": 0,
-                            "margin": "auto",
-                            "maxHeight": "100%",
-                            "maxWidth": "100%",
-                            "minHeight": "100%",
-                            "minWidth": "100%",
-                            "objectFit": undefined,
-                            "objectPosition": undefined,
-                            "padding": 0,
-                            "position": "absolute",
-                            "right": 0,
-                            "top": 0,
-                            "width": 0,
+                      >
+                        <span
+                          style={
+                            Object {
+                              "background": "none",
+                              "border": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": "initial",
+                              "margin": 0,
+                              "opacity": 1,
+                              "padding": 0,
+                              "paddingTop": "50%",
+                              "width": "initial",
+                            }
                           }
-                        }
-                      />
-                      <noscript>
+                        />
                         <img
                           alt="image-1-alt-text"
                           data-nimg="responsive"
                           decoding="async"
                           id="nextjsImage-test-id-1"
-                          loading="lazy"
-                          sizes="100vw"
-                          src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
-                          srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                          onError={[Function]}
+                          onLoad={[Function]}
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                           style={
                             Object {
                               "border": "none",
@@ -187,8 +157,42 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             }
                           }
                         />
-                      </noscript>
-                    </span>
+                        <noscript>
+                          <img
+                            alt="image-1-alt-text"
+                            data-nimg="responsive"
+                            decoding="async"
+                            id="nextjsImage-test-id-1"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                            srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                            style={
+                              Object {
+                                "border": "none",
+                                "bottom": 0,
+                                "boxSizing": "border-box",
+                                "display": "block",
+                                "height": 0,
+                                "left": 0,
+                                "margin": "auto",
+                                "maxHeight": "100%",
+                                "maxWidth": "100%",
+                                "minHeight": "100%",
+                                "minWidth": "100%",
+                                "objectFit": undefined,
+                                "objectPosition": undefined,
+                                "padding": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "top": 0,
+                                "width": 0,
+                              }
+                            }
+                          />
+                        </noscript>
+                      </span>
+                    </div>
                   </a>
                 </div>
               </div>
@@ -246,22 +250,8 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     href="https://www.nypl.org/"
                     tabIndex={-1}
                   >
-                    <span
-                      style={
-                        Object {
-                          "background": "none",
-                          "border": 0,
-                          "boxSizing": "border-box",
-                          "display": "block",
-                          "height": "initial",
-                          "margin": 0,
-                          "opacity": 1,
-                          "overflow": "hidden",
-                          "padding": 0,
-                          "position": "relative",
-                          "width": "initial",
-                        }
-                      }
+                    <div
+                      className="scout-nextjs-image"
                     >
                       <span
                         style={
@@ -273,53 +263,37 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             "height": "initial",
                             "margin": 0,
                             "opacity": 1,
+                            "overflow": "hidden",
                             "padding": 0,
-                            "paddingTop": "50%",
+                            "position": "relative",
                             "width": "initial",
                           }
                         }
-                      />
-                      <img
-                        alt="image-2-alt-text"
-                        data-nimg="responsive"
-                        decoding="async"
-                        id="nextjsImage-test-id-2"
-                        onError={[Function]}
-                        onLoad={[Function]}
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                        style={
-                          Object {
-                            "border": "none",
-                            "bottom": 0,
-                            "boxSizing": "border-box",
-                            "display": "block",
-                            "height": 0,
-                            "left": 0,
-                            "margin": "auto",
-                            "maxHeight": "100%",
-                            "maxWidth": "100%",
-                            "minHeight": "100%",
-                            "minWidth": "100%",
-                            "objectFit": undefined,
-                            "objectPosition": undefined,
-                            "padding": 0,
-                            "position": "absolute",
-                            "right": 0,
-                            "top": 0,
-                            "width": 0,
+                      >
+                        <span
+                          style={
+                            Object {
+                              "background": "none",
+                              "border": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": "initial",
+                              "margin": 0,
+                              "opacity": 1,
+                              "padding": 0,
+                              "paddingTop": "50%",
+                              "width": "initial",
+                            }
                           }
-                        }
-                      />
-                      <noscript>
+                        />
                         <img
                           alt="image-2-alt-text"
                           data-nimg="responsive"
                           decoding="async"
                           id="nextjsImage-test-id-2"
-                          loading="lazy"
-                          sizes="100vw"
-                          src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
-                          srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                          onError={[Function]}
+                          onLoad={[Function]}
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                           style={
                             Object {
                               "border": "none",
@@ -343,8 +317,42 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             }
                           }
                         />
-                      </noscript>
-                    </span>
+                        <noscript>
+                          <img
+                            alt="image-2-alt-text"
+                            data-nimg="responsive"
+                            decoding="async"
+                            id="nextjsImage-test-id-2"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                            srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                            style={
+                              Object {
+                                "border": "none",
+                                "bottom": 0,
+                                "boxSizing": "border-box",
+                                "display": "block",
+                                "height": 0,
+                                "left": 0,
+                                "margin": "auto",
+                                "maxHeight": "100%",
+                                "maxWidth": "100%",
+                                "minHeight": "100%",
+                                "minWidth": "100%",
+                                "objectFit": undefined,
+                                "objectPosition": undefined,
+                                "padding": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "top": 0,
+                                "width": 0,
+                              }
+                            }
+                          />
+                        </noscript>
+                      </span>
+                    </div>
                   </a>
                 </div>
               </div>
@@ -402,22 +410,8 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     href="https://www.nypl.org/"
                     tabIndex={-1}
                   >
-                    <span
-                      style={
-                        Object {
-                          "background": "none",
-                          "border": 0,
-                          "boxSizing": "border-box",
-                          "display": "block",
-                          "height": "initial",
-                          "margin": 0,
-                          "opacity": 1,
-                          "overflow": "hidden",
-                          "padding": 0,
-                          "position": "relative",
-                          "width": "initial",
-                        }
-                      }
+                    <div
+                      className="scout-nextjs-image"
                     >
                       <span
                         style={
@@ -429,53 +423,37 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             "height": "initial",
                             "margin": 0,
                             "opacity": 1,
+                            "overflow": "hidden",
                             "padding": 0,
-                            "paddingTop": "50%",
+                            "position": "relative",
                             "width": "initial",
                           }
                         }
-                      />
-                      <img
-                        alt="image-3-alt-text"
-                        data-nimg="responsive"
-                        decoding="async"
-                        id="nextjsImage-test-id-3"
-                        onError={[Function]}
-                        onLoad={[Function]}
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                        style={
-                          Object {
-                            "border": "none",
-                            "bottom": 0,
-                            "boxSizing": "border-box",
-                            "display": "block",
-                            "height": 0,
-                            "left": 0,
-                            "margin": "auto",
-                            "maxHeight": "100%",
-                            "maxWidth": "100%",
-                            "minHeight": "100%",
-                            "minWidth": "100%",
-                            "objectFit": undefined,
-                            "objectPosition": undefined,
-                            "padding": 0,
-                            "position": "absolute",
-                            "right": 0,
-                            "top": 0,
-                            "width": 0,
+                      >
+                        <span
+                          style={
+                            Object {
+                              "background": "none",
+                              "border": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": "initial",
+                              "margin": 0,
+                              "opacity": 1,
+                              "padding": 0,
+                              "paddingTop": "50%",
+                              "width": "initial",
+                            }
                           }
-                        }
-                      />
-                      <noscript>
+                        />
                         <img
                           alt="image-3-alt-text"
                           data-nimg="responsive"
                           decoding="async"
                           id="nextjsImage-test-id-3"
-                          loading="lazy"
-                          sizes="100vw"
-                          src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
-                          srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                          onError={[Function]}
+                          onLoad={[Function]}
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                           style={
                             Object {
                               "border": "none",
@@ -499,8 +477,42 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             }
                           }
                         />
-                      </noscript>
-                    </span>
+                        <noscript>
+                          <img
+                            alt="image-3-alt-text"
+                            data-nimg="responsive"
+                            decoding="async"
+                            id="nextjsImage-test-id-3"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                            srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                            style={
+                              Object {
+                                "border": "none",
+                                "bottom": 0,
+                                "boxSizing": "border-box",
+                                "display": "block",
+                                "height": 0,
+                                "left": 0,
+                                "margin": "auto",
+                                "maxHeight": "100%",
+                                "maxWidth": "100%",
+                                "minHeight": "100%",
+                                "minWidth": "100%",
+                                "objectFit": undefined,
+                                "objectPosition": undefined,
+                                "padding": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "top": 0,
+                                "width": 0,
+                              }
+                            }
+                          />
+                        </noscript>
+                      </span>
+                    </div>
                   </a>
                 </div>
               </div>
@@ -558,22 +570,8 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     href="https://www.nypl.org/"
                     tabIndex={-1}
                   >
-                    <span
-                      style={
-                        Object {
-                          "background": "none",
-                          "border": 0,
-                          "boxSizing": "border-box",
-                          "display": "block",
-                          "height": "initial",
-                          "margin": 0,
-                          "opacity": 1,
-                          "overflow": "hidden",
-                          "padding": 0,
-                          "position": "relative",
-                          "width": "initial",
-                        }
-                      }
+                    <div
+                      className="scout-nextjs-image"
                     >
                       <span
                         style={
@@ -585,53 +583,37 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             "height": "initial",
                             "margin": 0,
                             "opacity": 1,
+                            "overflow": "hidden",
                             "padding": 0,
-                            "paddingTop": "50%",
+                            "position": "relative",
                             "width": "initial",
                           }
                         }
-                      />
-                      <img
-                        alt="image-4-alt-text"
-                        data-nimg="responsive"
-                        decoding="async"
-                        id="nextjsImage-test-id-4"
-                        onError={[Function]}
-                        onLoad={[Function]}
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                        style={
-                          Object {
-                            "border": "none",
-                            "bottom": 0,
-                            "boxSizing": "border-box",
-                            "display": "block",
-                            "height": 0,
-                            "left": 0,
-                            "margin": "auto",
-                            "maxHeight": "100%",
-                            "maxWidth": "100%",
-                            "minHeight": "100%",
-                            "minWidth": "100%",
-                            "objectFit": undefined,
-                            "objectPosition": undefined,
-                            "padding": 0,
-                            "position": "absolute",
-                            "right": 0,
-                            "top": 0,
-                            "width": 0,
+                      >
+                        <span
+                          style={
+                            Object {
+                              "background": "none",
+                              "border": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": "initial",
+                              "margin": 0,
+                              "opacity": 1,
+                              "padding": 0,
+                              "paddingTop": "50%",
+                              "width": "initial",
+                            }
                           }
-                        }
-                      />
-                      <noscript>
+                        />
                         <img
                           alt="image-4-alt-text"
                           data-nimg="responsive"
                           decoding="async"
                           id="nextjsImage-test-id-4"
-                          loading="lazy"
-                          sizes="100vw"
-                          src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
-                          srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                          onError={[Function]}
+                          onLoad={[Function]}
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                           style={
                             Object {
                               "border": "none",
@@ -655,8 +637,42 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             }
                           }
                         />
-                      </noscript>
-                    </span>
+                        <noscript>
+                          <img
+                            alt="image-4-alt-text"
+                            data-nimg="responsive"
+                            decoding="async"
+                            id="nextjsImage-test-id-4"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                            srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                            style={
+                              Object {
+                                "border": "none",
+                                "bottom": 0,
+                                "boxSizing": "border-box",
+                                "display": "block",
+                                "height": 0,
+                                "left": 0,
+                                "margin": "auto",
+                                "maxHeight": "100%",
+                                "maxWidth": "100%",
+                                "minHeight": "100%",
+                                "minWidth": "100%",
+                                "objectFit": undefined,
+                                "objectPosition": undefined,
+                                "padding": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "top": 0,
+                                "width": 0,
+                              }
+                            }
+                          />
+                        </noscript>
+                      </span>
+                    </div>
                   </a>
                 </div>
               </div>
@@ -769,22 +785,8 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             href="https://www.nypl.org/"
             tabIndex={-1}
           >
-            <span
-              style={
-                Object {
-                  "background": "none",
-                  "border": 0,
-                  "boxSizing": "border-box",
-                  "display": "block",
-                  "height": "initial",
-                  "margin": 0,
-                  "opacity": 1,
-                  "overflow": "hidden",
-                  "padding": 0,
-                  "position": "relative",
-                  "width": "initial",
-                }
-              }
+            <div
+              className="scout-nextjs-image"
             >
               <span
                 style={
@@ -796,53 +798,37 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     "height": "initial",
                     "margin": 0,
                     "opacity": 1,
+                    "overflow": "hidden",
                     "padding": 0,
-                    "paddingTop": "50%",
+                    "position": "relative",
                     "width": "initial",
                   }
                 }
-              />
-              <img
-                alt="image-1-alt-text"
-                data-nimg="responsive"
-                decoding="async"
-                id="nextjsImage-test-id-1"
-                onError={[Function]}
-                onLoad={[Function]}
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                style={
-                  Object {
-                    "border": "none",
-                    "bottom": 0,
-                    "boxSizing": "border-box",
-                    "display": "block",
-                    "height": 0,
-                    "left": 0,
-                    "margin": "auto",
-                    "maxHeight": "100%",
-                    "maxWidth": "100%",
-                    "minHeight": "100%",
-                    "minWidth": "100%",
-                    "objectFit": undefined,
-                    "objectPosition": undefined,
-                    "padding": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                    "width": 0,
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "margin": 0,
+                      "opacity": 1,
+                      "padding": 0,
+                      "paddingTop": "50%",
+                      "width": "initial",
+                    }
                   }
-                }
-              />
-              <noscript>
+                />
                 <img
                   alt="image-1-alt-text"
                   data-nimg="responsive"
                   decoding="async"
                   id="nextjsImage-test-id-1"
-                  loading="lazy"
-                  sizes="100vw"
-                  src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
-                  srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style={
                     Object {
                       "border": "none",
@@ -866,8 +852,42 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     }
                   }
                 />
-              </noscript>
-            </span>
+                <noscript>
+                  <img
+                    alt="image-1-alt-text"
+                    data-nimg="responsive"
+                    decoding="async"
+                    id="nextjsImage-test-id-1"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                    srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </noscript>
+              </span>
+            </div>
           </a>
         </div>
       </div>
@@ -925,22 +945,8 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             href="https://www.nypl.org/"
             tabIndex={-1}
           >
-            <span
-              style={
-                Object {
-                  "background": "none",
-                  "border": 0,
-                  "boxSizing": "border-box",
-                  "display": "block",
-                  "height": "initial",
-                  "margin": 0,
-                  "opacity": 1,
-                  "overflow": "hidden",
-                  "padding": 0,
-                  "position": "relative",
-                  "width": "initial",
-                }
-              }
+            <div
+              className="scout-nextjs-image"
             >
               <span
                 style={
@@ -952,53 +958,37 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     "height": "initial",
                     "margin": 0,
                     "opacity": 1,
+                    "overflow": "hidden",
                     "padding": 0,
-                    "paddingTop": "50%",
+                    "position": "relative",
                     "width": "initial",
                   }
                 }
-              />
-              <img
-                alt="image-2-alt-text"
-                data-nimg="responsive"
-                decoding="async"
-                id="nextjsImage-test-id-2"
-                onError={[Function]}
-                onLoad={[Function]}
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                style={
-                  Object {
-                    "border": "none",
-                    "bottom": 0,
-                    "boxSizing": "border-box",
-                    "display": "block",
-                    "height": 0,
-                    "left": 0,
-                    "margin": "auto",
-                    "maxHeight": "100%",
-                    "maxWidth": "100%",
-                    "minHeight": "100%",
-                    "minWidth": "100%",
-                    "objectFit": undefined,
-                    "objectPosition": undefined,
-                    "padding": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                    "width": 0,
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "margin": 0,
+                      "opacity": 1,
+                      "padding": 0,
+                      "paddingTop": "50%",
+                      "width": "initial",
+                    }
                   }
-                }
-              />
-              <noscript>
+                />
                 <img
                   alt="image-2-alt-text"
                   data-nimg="responsive"
                   decoding="async"
                   id="nextjsImage-test-id-2"
-                  loading="lazy"
-                  sizes="100vw"
-                  src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
-                  srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style={
                     Object {
                       "border": "none",
@@ -1022,8 +1012,42 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     }
                   }
                 />
-              </noscript>
-            </span>
+                <noscript>
+                  <img
+                    alt="image-2-alt-text"
+                    data-nimg="responsive"
+                    decoding="async"
+                    id="nextjsImage-test-id-2"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                    srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </noscript>
+              </span>
+            </div>
           </a>
         </div>
       </div>
@@ -1081,22 +1105,8 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             href="https://www.nypl.org/"
             tabIndex={-1}
           >
-            <span
-              style={
-                Object {
-                  "background": "none",
-                  "border": 0,
-                  "boxSizing": "border-box",
-                  "display": "block",
-                  "height": "initial",
-                  "margin": 0,
-                  "opacity": 1,
-                  "overflow": "hidden",
-                  "padding": 0,
-                  "position": "relative",
-                  "width": "initial",
-                }
-              }
+            <div
+              className="scout-nextjs-image"
             >
               <span
                 style={
@@ -1108,53 +1118,37 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     "height": "initial",
                     "margin": 0,
                     "opacity": 1,
+                    "overflow": "hidden",
                     "padding": 0,
-                    "paddingTop": "50%",
+                    "position": "relative",
                     "width": "initial",
                   }
                 }
-              />
-              <img
-                alt="image-3-alt-text"
-                data-nimg="responsive"
-                decoding="async"
-                id="nextjsImage-test-id-3"
-                onError={[Function]}
-                onLoad={[Function]}
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                style={
-                  Object {
-                    "border": "none",
-                    "bottom": 0,
-                    "boxSizing": "border-box",
-                    "display": "block",
-                    "height": 0,
-                    "left": 0,
-                    "margin": "auto",
-                    "maxHeight": "100%",
-                    "maxWidth": "100%",
-                    "minHeight": "100%",
-                    "minWidth": "100%",
-                    "objectFit": undefined,
-                    "objectPosition": undefined,
-                    "padding": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                    "width": 0,
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "margin": 0,
+                      "opacity": 1,
+                      "padding": 0,
+                      "paddingTop": "50%",
+                      "width": "initial",
+                    }
                   }
-                }
-              />
-              <noscript>
+                />
                 <img
                   alt="image-3-alt-text"
                   data-nimg="responsive"
                   decoding="async"
                   id="nextjsImage-test-id-3"
-                  loading="lazy"
-                  sizes="100vw"
-                  src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
-                  srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style={
                     Object {
                       "border": "none",
@@ -1178,8 +1172,42 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     }
                   }
                 />
-              </noscript>
-            </span>
+                <noscript>
+                  <img
+                    alt="image-3-alt-text"
+                    data-nimg="responsive"
+                    decoding="async"
+                    id="nextjsImage-test-id-3"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                    srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </noscript>
+              </span>
+            </div>
           </a>
         </div>
       </div>
@@ -1237,22 +1265,8 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             href="https://www.nypl.org/"
             tabIndex={-1}
           >
-            <span
-              style={
-                Object {
-                  "background": "none",
-                  "border": 0,
-                  "boxSizing": "border-box",
-                  "display": "block",
-                  "height": "initial",
-                  "margin": 0,
-                  "opacity": 1,
-                  "overflow": "hidden",
-                  "padding": 0,
-                  "position": "relative",
-                  "width": "initial",
-                }
-              }
+            <div
+              className="scout-nextjs-image"
             >
               <span
                 style={
@@ -1264,53 +1278,37 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     "height": "initial",
                     "margin": 0,
                     "opacity": 1,
+                    "overflow": "hidden",
                     "padding": 0,
-                    "paddingTop": "50%",
+                    "position": "relative",
                     "width": "initial",
                   }
                 }
-              />
-              <img
-                alt="image-4-alt-text"
-                data-nimg="responsive"
-                decoding="async"
-                id="nextjsImage-test-id-4"
-                onError={[Function]}
-                onLoad={[Function]}
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                style={
-                  Object {
-                    "border": "none",
-                    "bottom": 0,
-                    "boxSizing": "border-box",
-                    "display": "block",
-                    "height": 0,
-                    "left": 0,
-                    "margin": "auto",
-                    "maxHeight": "100%",
-                    "maxWidth": "100%",
-                    "minHeight": "100%",
-                    "minWidth": "100%",
-                    "objectFit": undefined,
-                    "objectPosition": undefined,
-                    "padding": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                    "width": 0,
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "margin": 0,
+                      "opacity": 1,
+                      "padding": 0,
+                      "paddingTop": "50%",
+                      "width": "initial",
+                    }
                   }
-                }
-              />
-              <noscript>
+                />
                 <img
                   alt="image-4-alt-text"
                   data-nimg="responsive"
                   decoding="async"
                   id="nextjsImage-test-id-4"
-                  loading="lazy"
-                  sizes="100vw"
-                  src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
-                  srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style={
                     Object {
                       "border": "none",
@@ -1334,8 +1332,42 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     }
                   }
                 />
-              </noscript>
-            </span>
+                <noscript>
+                  <img
+                    alt="image-4-alt-text"
+                    data-nimg="responsive"
+                    decoding="async"
+                    id="nextjsImage-test-id-4"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                    srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </noscript>
+              </span>
+            </div>
           </a>
         </div>
       </div>

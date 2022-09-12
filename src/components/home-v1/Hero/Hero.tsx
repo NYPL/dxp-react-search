@@ -1,7 +1,10 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Component
-import { Box, Link, Heading, Text, Image, createIcon } from "@chakra-ui/react";
+import { Box, Link, Heading, Text, createIcon } from "@chakra-ui/react";
+import { getImageTransformation } from "../../shared/Image/imageUtils";
+import { default as NextImage } from "../../shared/Image";
+import { ImageType } from "../../shared/Image/ImageTypes";
 
 // SVG Icon
 const RightArrowIcon = createIcon({
@@ -16,13 +19,20 @@ interface HeroProps {
   title: string;
   description: string;
   tag: string;
-  image?: string;
-  mobileImg?: string;
+  image: ImageType;
   url: string;
 }
 
-function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
+function Hero({ title, description, tag, image, url }: HeroProps) {
+  const desktopImageSrc = image.transformations
+    ? getImageTransformation(
+        "hero_header_focal_point_2400x400",
+        image.transformations
+      )
+    : image.uri;
+
   const styles = useStyleConfig("Hero");
+
   return (
     <Box
       alignItems="center"
@@ -32,7 +42,7 @@ function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
       height={{ md: "30vw" }}
       maxHeight={{ xl: "400px" }}
       minHeight="250px"
-      bgImage={{ base: "none", md: `url(${image})` }}
+      bgImage={{ base: "none", md: `url(${desktopImageSrc})` }}
       bgSize="cover"
     >
       <Box
@@ -46,7 +56,18 @@ function Hero({ title, description, tag, image, mobileImg, url }: HeroProps) {
         }}
         sx={styles}
       >
-        <Image src={mobileImg} />
+        <NextImage
+          id={image.id}
+          alt={image.alt}
+          uri={image.uri}
+          useTransformation={true}
+          transformations={image.transformations}
+          transformationLabel={"2_1_960"}
+          layout="responsive"
+          width={960}
+          height={480}
+          quality={90}
+        />
         <Box className="hero-text-box">
           <Link
             href={url}
