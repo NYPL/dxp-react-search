@@ -1,8 +1,9 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
-import { Heading, Text, Link, Grid, GridItem, Box } from "@chakra-ui/react";
+import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import Image from "./../../shared/Image";
+import HomePageLink from "../HomePageLink";
 import { ImageType } from "../../shared/Image/ImageTypes";
 
 export interface CardItem {
@@ -17,9 +18,10 @@ interface CardProps {
   item: CardItem;
   variant?: "blog-card" | "updates-card";
   size?: any;
+  gaEventActionName: string;
 }
 
-function Card({ item, variant, size = "md" }: CardProps) {
+function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant, size });
   // Generate describedBy string (used by Blog Card)
@@ -31,6 +33,8 @@ function Card({ item, variant, size = "md" }: CardProps) {
     }
   }
   const describedByIdsString = describedByIdsArray.join(" ");
+
+  console.log(gaEventActionName);
 
   return (
     <Grid
@@ -45,7 +49,9 @@ function Card({ item, variant, size = "md" }: CardProps) {
             "aria-describedby": describedByIdsString,
           })}
         >
-          <Link href={item.url}>{item.title}</Link>
+          <HomePageLink href={item.url} gaEventActionName={gaEventActionName}>
+            {item.title}
+          </HomePageLink>
         </Heading>
         <Box className="details">
           {item.description && (
@@ -54,7 +60,12 @@ function Card({ item, variant, size = "md" }: CardProps) {
         </Box>
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
-        <Link href={item.url} aria-label={`${item.title}-image`} tabIndex={-1}>
+        <HomePageLink
+          href={item.url}
+          aria-label={`${item.title}-image`}
+          tabIndex={-1}
+          gaEventActionName={gaEventActionName}
+        >
           {/* 
             // @QUESTION should role="presentation" be used instead of alt="" source: https://www.digitala11y.com/presentation-role/
             role="presentation"
@@ -71,7 +82,7 @@ function Card({ item, variant, size = "md" }: CardProps) {
             height={450}
             quality={90}
           />
-        </Link>
+        </HomePageLink>
       </GridItem>
     </Grid>
   );
