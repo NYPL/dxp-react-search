@@ -4,6 +4,7 @@ import { useStyleConfig } from "@chakra-ui/system";
 import { Box, Link, Heading, Text, createIcon } from "@chakra-ui/react";
 import { getImageTransformation } from "../../shared/Image/imageUtils";
 import { default as NextImage } from "../../shared/Image";
+import { ImageType } from "../../shared/Image/ImageTypes";
 
 // SVG Icon
 const RightArrowIcon = createIcon({
@@ -18,15 +19,17 @@ interface HeroProps {
   title: string;
   description: string;
   tag: string;
-  image: any;
+  image: ImageType;
   url: string;
 }
 
 function Hero({ title, description, tag, image, url }: HeroProps) {
-  const desktopImageSrc = getImageTransformation(
-    "hero_header_focal_point_2400x400",
-    image.transformations
-  );
+  const desktopImageSrc = image.transformations
+    ? getImageTransformation(
+        "hero_header_focal_point_2400x400",
+        image.transformations
+      )
+    : image.uri;
 
   const styles = useStyleConfig("Hero");
 
