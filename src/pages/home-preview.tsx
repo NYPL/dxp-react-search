@@ -22,27 +22,10 @@ const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
  * Helper to generate the query filter groups for previewing homepage content that uses scheduling.
  *
  * @param publishOn - The date the content is scheduled to be published.
- * @param schedulingIsRequired - Whether or not the content requires scheduling.
  * @returns The query filter groups.
  *
  */
-export function homePagePreviewQueryFilters(
-  publishOn: string,
-  schedulingIsRequired: boolean = false
-) {
-  let unpublishOn: Record<string, string> = {
-    field: "unpublish_on",
-    operator: "IS NULL",
-  };
-
-  if (schedulingIsRequired) {
-    unpublishOn = {
-      field: "unpublish_on",
-      operator: ">=",
-      value: publishOn,
-    };
-  }
-
+export function homePagePreviewQueryFilters(publishOn: string) {
   return {
     experimental: true,
     conjunction: "OR",
@@ -59,7 +42,11 @@ export function homePagePreviewQueryFilters(
             field: "publish_on",
             operator: "IS NULL",
           },
-          unpublishOn,
+          {
+            field: "unpublish_on",
+            operator: ">=",
+            value: publishOn,
+          },
         ],
       },
       {
@@ -136,10 +123,7 @@ export const getServerSideProps = async (
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: homePagePreviewQueryFilters(
-          context.query.publish_on as string,
-          true
-        ),
+        filter: homePagePreviewQueryFilters(context.query.publish_on as string),
       }),
     },
   });

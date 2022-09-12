@@ -52,10 +52,7 @@ export default function HeroWithData() {
     variables: {
       ...(isTimeMachine && {
         preview: true,
-        filter: homePagePreviewQueryFilters(
-          router.query.publish_on as string,
-          true
-        ),
+        filter: homePagePreviewQueryFilters(router.query.publish_on as string),
       }),
     },
   });
