@@ -7,8 +7,11 @@ const { DRUPAL_API } = process.env;
 
 // Get the domain only from the DRUPAL_API env variable.
 const DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://", "");
+// Generate consistent build id, so RP can proxy `_next/data/scout` assets.
+const SCOUT_BUILD_ID = "scout";
 
 const nextConfig = {
+  generateBuildId: async () => SCOUT_BUILD_ID,
   assetPrefix: ASSET_PREFIX,
   async rewrites() {
     if (ASSET_PREFIX) {
