@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, useStyleConfig } from "@chakra-ui/react";
 
 /*
   @TODO
@@ -22,14 +22,18 @@ export interface HomePageLinkProps {
   tabIndex?: number;
   /** */
   gaEventActionName?: string;
+  /** */
+  variant?: string;
 }
 
 const HomePageLink = React.forwardRef<
   HTMLDivElement & HTMLAnchorElement,
   HomePageLinkProps
 >((props, ref?) => {
-  const { id, children, href, gaEventActionName, ...rest } = props;
-
+  const { id, children, href, gaEventActionName, variant, ...rest } = props;
+  const hoverStyle = useStyleConfig("Link", {
+    variant,
+  });
   function handleChange(event: any) {
     event.preventDefault;
     //alert(gaEventActionName);
@@ -54,7 +58,15 @@ const HomePageLink = React.forwardRef<
   }
 
   return (
-    <Box id={id} as="a" ref={ref} onClick={handleChange} href={href} {...rest}>
+    <Box
+      id={id}
+      as="a"
+      __css={hoverStyle}
+      ref={ref}
+      onClick={handleChange}
+      href={href}
+      {...rest}
+    >
       {children}
     </Box>
   );

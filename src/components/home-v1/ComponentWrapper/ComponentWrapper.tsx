@@ -1,7 +1,10 @@
 import React from "react";
-import { Box, Grid, GridItem, Heading, Link } from "@chakra-ui/react";
+// Component
+import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
+import HomePageLink from "./../HomePageLink";
 
 interface ComponentWrapperProps {
+  id?: string;
   title: string;
   link: string;
   seeMore?: SeeMore;
@@ -22,6 +25,7 @@ export type SeeMore = {
 };
 
 function ComponentWrapper({
+  id,
   title,
   link,
   seeMore,
@@ -35,6 +39,15 @@ function ComponentWrapper({
   gap,
   children,
 }: ComponentWrapperProps) {
+  // @TODO fix for styling of seeMore button
+  const seeMoreStyle = {
+    color: textColor,
+    border: "2px",
+    borderColor: buttonBorder || borderColor,
+    borderStyle: "solid",
+    textTransform: "uppercase",
+  };
+
   return (
     <Box
       bg={bg ? bg : ""}
@@ -73,8 +86,10 @@ function ComponentWrapper({
               pt={paddingTop === true ? { base: 4, md: 2 } : 0}
               borderTopColor={`${borderColor ? borderColor : ""}`}
             >
-              <Link
+              <HomePageLink
+                id={`${id}-heading`}
                 href={link}
+                gaEventActionName="Heading"
                 variant={
                   hoverStyle === true
                     ? "link-hover-style"
@@ -82,7 +97,7 @@ function ComponentWrapper({
                 }
               >
                 {title}
-              </Link>
+              </HomePageLink>
             </Heading>
           </Box>
         </GridItem>
@@ -101,22 +116,20 @@ function ComponentWrapper({
             mb={{ base: 10, lg: 8 }}
           >
             {seeMore && (
-              <Link
+              <HomePageLink
+                id={`${id}-seeMore`}
                 aria-label={`see more of ${title}`}
                 href={seeMore.link}
+                gaEventActionName="See More"
                 variant={
                   hoverStyle === true
                     ? "see-more-hover-style"
                     : "see-more-hover-no-style"
                 }
-                color={textColor}
-                border="2px"
-                borderColor={buttonBorder || borderColor}
-                borderStyle="solid"
-                textTransform="uppercase"
+                {...seeMoreStyle}
               >
                 {seeMore.text} . . .
-              </Link>
+              </HomePageLink>
             )}
           </Box>
         </GridItem>
