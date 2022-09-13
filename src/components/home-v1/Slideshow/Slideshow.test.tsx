@@ -278,23 +278,49 @@ describe("SlideshowContainer tests", () => {
 describe("Slideshow tests", () => {
   it("shold pass axe accessibility test", async () => {
     const { container } = render(
-      <Slideshow title="Test" link="https://nypl.com" items={items} />
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
     );
     expect(await axe(container)).toHaveNoViolations();
   });
   it("should not show the prev button upon rendering", () => {
-    render(<Slideshow title="Test" link="https://nypl.com" items={items} />);
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
     expect(
       screen.queryByRole("button", { name: /</i })
     ).not.toBeInTheDocument();
   });
   it("should show the prev button ones the next button has been clicked", () => {
-    render(<Slideshow title="Test" link="https://nypl.com" items={items} />);
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
     userEvent.click(screen.getByRole("button", { name: />/i }));
     expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
   });
   it("should hide the next button when the end of the list is reached", () => {
-    render(<Slideshow title="Test" link="https://nypl.com" items={items} />);
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
     userEvent.click(screen.getByRole("button", { name: />/i }));
     userEvent.click(screen.getByRole("button", { name: />/i }));
     userEvent.click(screen.getByRole("button", { name: />/i }));
@@ -306,7 +332,14 @@ describe("Slideshow tests", () => {
     ).not.toBeInTheDocument();
   });
   it("should support keyboard naviagtion", () => {
-    render(<Slideshow title="Test" link="https://nypl.com" items={items} />);
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
 
     userEvent.tab();
     expect(screen.getByRole("link", { name: "Test" })).toHaveFocus();
@@ -333,7 +366,14 @@ describe("Slideshow tests", () => {
   });
   it("should render the UI snapshot correctly", async () => {
     const basicView = renderer
-      .create(<Slideshow title="Test" link="https://nypl.com" items={items} />)
+      .create(
+        <Slideshow
+          id="slideshow-test-id"
+          title="Test"
+          link="https://nypl.com"
+          items={items}
+        />
+      )
       .toJSON();
     expect(basicView).toMatchSnapshot();
   });

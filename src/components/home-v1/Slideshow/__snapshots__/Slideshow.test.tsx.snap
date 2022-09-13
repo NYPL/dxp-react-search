@@ -17,8 +17,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
           className="chakra-heading css-m35uou"
         >
           <a
-            className="chakra-link css-0"
+            className="css-0"
             href="https://nypl.com"
+            id="slideshow-test-id-heading"
+            onClick={[Function]}
           >
             Test
           </a>
