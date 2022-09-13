@@ -61,8 +61,8 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
         <HomePageLink
           href={item.url}
           aria-label={`${item.title}-image`}
-          tabIndex={-1}
           gaEventActionName={gaEventActionName}
+          {...{ tabIndex: -1 }}
         >
           {/* 
             // @QUESTION should role="presentation" be used instead of alt="" source: https://www.digitala11y.com/presentation-role/

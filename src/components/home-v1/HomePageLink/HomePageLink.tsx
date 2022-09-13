@@ -19,10 +19,8 @@ export interface HomePageLinkProps {
   /** The `href` attribute for the anchor element. */
   href?: string;
   /** */
-  tabIndex?: number;
-  /** */
   gaEventActionName?: string;
-  /** */
+  /** Infroms styling of links in ComponentWrapper */
   variant?: string;
 }
 
@@ -36,13 +34,13 @@ const HomePageLink = React.forwardRef<
   });
   function handleChange(event: any) {
     event.preventDefault;
-    //alert(gaEventActionName);
 
     /*
       GA event:
       - category (Homepage)
       - action [ <section title> - <card title> - <slot number> ]
       - action (what's on) [ <section name> - <category label> - <card title> - <slot number> ]
+      - action (staff picks) [ <section name> - <slot number> ]
       - action (hero) Main link: "Hero" | Arrow Icon: "Hero button"
       - action (component wrapper) "Heading" or "See More"
       - label (component wrapper) "Section title"
@@ -53,7 +51,6 @@ const HomePageLink = React.forwardRef<
     window.gtag("event", gaEventActionName, {
       event_category: "Homepage Scout Local",
       event_label: href,
-      //value: href,
     });
   }
 
@@ -61,10 +58,10 @@ const HomePageLink = React.forwardRef<
     <Box
       id={id}
       as="a"
-      __css={hoverStyle}
       ref={ref}
       onClick={handleChange}
       href={href}
+      __css={hoverStyle}
       {...rest}
     >
       {children}
