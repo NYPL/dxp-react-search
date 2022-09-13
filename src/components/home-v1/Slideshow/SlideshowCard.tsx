@@ -1,7 +1,8 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
-import { Heading, Text, Link, Grid, GridItem, Box } from "@chakra-ui/react";
+import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
+import HomePageLink from "../HomePageLink";
 import Image from "./../../shared/Image";
 import { ImageType } from "../../shared/Image/ImageTypes";
 
@@ -17,9 +18,10 @@ export interface SlideshowCardItem {
 
 interface SlideshowCardProps {
   item: SlideshowCardItem;
+  gaEventActionName: string;
 }
 
-function SlideshowCard({ item }: SlideshowCardProps) {
+function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant: "slide-show-card" });
   // Generate describedBy string
@@ -45,7 +47,13 @@ function SlideshowCard({ item }: SlideshowCardProps) {
             "aria-describedby": describedByIdsString,
           })}
         >
-          <Link href={item.url}>{item.title}</Link>
+          <HomePageLink
+            id={`${item.id}-link`}
+            href={item.url}
+            gaEventActionName={gaEventActionName}
+          >
+            {item.title}
+          </HomePageLink>
         </Heading>
         <Box className="details">
           <Text id={`${item.id}-author`}>{item.author}</Text>
@@ -58,7 +66,13 @@ function SlideshowCard({ item }: SlideshowCardProps) {
         </Box>
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
-        <Link href={item.url} aria-label={`${item.title}-image`} tabIndex={-1}>
+        <HomePageLink
+          id={item.id}
+          href={item.url}
+          gaEventActionName={gaEventActionName}
+          aria-label={`${item.title}-image`}
+          tabIndex={-1}
+        >
           <Image
             id={item.image.id}
             alt={item.image.alt}
@@ -71,7 +85,7 @@ function SlideshowCard({ item }: SlideshowCardProps) {
             height={item.image.height}
             quality={90}
           />
-        </Link>
+        </HomePageLink>
       </GridItem>
     </Grid>
   );

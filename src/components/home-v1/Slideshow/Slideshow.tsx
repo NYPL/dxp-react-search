@@ -44,6 +44,7 @@ function Slideshow({ title, link, items, seeMore }: SlideshowProps) {
           currentSlide={currentSlide}
           nextSlide={nextSlide}
           prevSlide={prevSlide}
+          sectionTitle={title}
         />
         <SlideshowButton
           direction={"next"}

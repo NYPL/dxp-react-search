@@ -240,6 +240,7 @@ describe("SlideshowContainer tests", () => {
         currentSlide={currentSlide}
         nextSlide={nextSlide}
         prevSlide={prevSlide}
+        sectionTitle={"testSection"}
       />
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -252,6 +253,7 @@ describe("SlideshowContainer tests", () => {
         currentSlide={currentSlide}
         nextSlide={nextSlide}
         prevSlide={prevSlide}
+        sectionTitle={"testSection"}
       />
     );
     expect(screen.getAllByRole("listitem")).toHaveLength(4);
@@ -265,6 +267,7 @@ describe("SlideshowContainer tests", () => {
           currentSlide={currentSlide}
           nextSlide={nextSlide}
           prevSlide={prevSlide}
+          sectionTitle={"testSection"}
         />
       )
       .toJSON();
