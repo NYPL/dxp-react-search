@@ -17,6 +17,7 @@ export const HOME_PAGE_HERO_COLLECTION_QUERY = gql`
         heading
         description
         tag
+        link
         image {
           id
           uri
@@ -73,6 +74,7 @@ export default function HeroWithData() {
   if (homePageHero) {
     return (
       <Hero
+        id={homePageHero.id}
         title={homePageHero.heading}
         description={homePageHero.description}
         image={homePageHero.image}
