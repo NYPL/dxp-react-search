@@ -34,8 +34,6 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
   }
   const describedByIdsString = describedByIdsArray.join(" ");
 
-  console.log(gaEventActionName);
-
   return (
     <Grid
       templateRows={{ base: "1fr", md: "min-content" }}
