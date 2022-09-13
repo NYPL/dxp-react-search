@@ -53,6 +53,7 @@ export const HOME_PAGE_EVENT_COLLECTION_QUERY = gql`
 `;
 
 interface EventCollectionProps {
+  id: string;
   title: string;
   link: string;
   seeMore: SeeMore;
@@ -61,6 +62,7 @@ interface EventCollectionProps {
 type eventsGroupedByCategoryType = { [key: string]: EventItem[] };
 
 export default function EventCollection({
+  id,
   title,
   link,
   seeMore,
@@ -136,6 +138,7 @@ export default function EventCollection({
 
   return (
     <ComponentWrapper
+      id={id}
       title={title}
       link={link}
       textColor="red.200"
@@ -168,7 +171,11 @@ export default function EventCollection({
                   >
                     {eventCategoryLabel(eventCategory)}
                   </Heading>
-                  <EventCard {...featuredEvent} variant="event-card" />
+                  <EventCard
+                    {...featuredEvent}
+                    variant="event-card"
+                    gaEventActionName={`${title} - ${eventCategory} - ${featuredEvent.title} - mobile`}
+                  />
                 </Box>
               );
             }
@@ -214,6 +221,7 @@ export default function EventCollection({
                   <EventCollectionTabPanelContent
                     id={`event-tab-panel-${eventCategory}`}
                     events={eventsGroupedByCategory[eventCategory]}
+                    sectionTitle={`${title} - ${eventCategory}`}
                   />
                 </TabPanel>
               );
