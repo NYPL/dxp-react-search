@@ -126,20 +126,35 @@ describe("Card tests", () => {
 describe("CardGrid tests", () => {
   it("should pass axe accessibility test with children components", async () => {
     const { container } = render(
-      <CardGrid title="Test title" link="https://nypl.com" items={items} />
+      <CardGrid
+        id={"card-grid-test-id"}
+        title="Test title"
+        link="https://nypl.com"
+        items={items}
+      />
     );
     expect(await axe(container)).toHaveNoViolations();
   });
   it("should render list of items passed to the component", () => {
     render(
-      <CardGrid title="Test title" link="https://nypl.com" items={items} />
+      <CardGrid
+        id={"card-grid-test-id"}
+        title="Test title"
+        link="https://nypl.com"
+        items={items}
+      />
     );
     expect(screen.getAllByRole("listitem")).toHaveLength(4);
   });
   it("should render the UI snapshot correctly", () => {
     const cardGrid = renderer
       .create(
-        <CardGrid title="Test title" link="https://nypl.com" items={items} />
+        <CardGrid
+          id={"card-grid-test-id"}
+          title="Test title"
+          link="https://nypl.com"
+          items={items}
+        />
       )
       .toJSON();
     expect(cardGrid).toMatchSnapshot();

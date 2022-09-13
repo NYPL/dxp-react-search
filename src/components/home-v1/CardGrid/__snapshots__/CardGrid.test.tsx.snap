@@ -158,8 +158,10 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
           className="chakra-heading css-18pkilg"
         >
           <a
-            className="chakra-link css-0"
+            className="css-0"
             href="https://nypl.com"
+            id="card-grid-test-id-heading"
+            onClick={[Function]}
           >
             Test title
           </a>
