@@ -11,7 +11,7 @@ const DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://", "");
 const SCOUT_BUILD_ID = "scout";
 
 const nextConfig = {
-  generateBuildId: async () => SCOUT_BUILD_ID,
+  generateBuildId: async () => `${SCOUT_BUILD_ID}`,
   assetPrefix: ASSET_PREFIX,
   async rewrites() {
     if (ASSET_PREFIX) {
