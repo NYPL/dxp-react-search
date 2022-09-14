@@ -10,17 +10,19 @@ import useSlideshowStyles from "./useSlideshow";
 import { SlideshowItem } from "./SlideshowTypes";
 
 interface SlideshowProps {
+  id?: string;
   title: string;
   link: string;
   items: SlideshowItem[];
   seeMore?: SeeMore;
 }
 
-function Slideshow({ title, link, items, seeMore }: SlideshowProps) {
+function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
     useSlideshowStyles(items.length, 15.7);
   return (
     <ComponentWrapper
+      id={id}
       title={title}
       link={link}
       textColor="brand.100"
@@ -44,6 +46,7 @@ function Slideshow({ title, link, items, seeMore }: SlideshowProps) {
           currentSlide={currentSlide}
           nextSlide={nextSlide}
           prevSlide={prevSlide}
+          sectionTitle={title}
         />
         <SlideshowButton
           direction={"next"}

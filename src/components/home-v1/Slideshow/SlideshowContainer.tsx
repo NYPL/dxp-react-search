@@ -11,6 +11,7 @@ interface SlideshowContainerProps {
   currentSlide: any;
   nextSlide: () => void;
   prevSlide: () => void;
+  sectionTitle: string;
 }
 function SlideshowContainer({
   items,
@@ -18,6 +19,7 @@ function SlideshowContainer({
   currentSlide,
   nextSlide,
   prevSlide,
+  sectionTitle,
 }: SlideshowContainerProps) {
   const changeSlide = (i: number) => {
     if (currentSlide === 0 && i === 0) return;
@@ -48,7 +50,12 @@ function SlideshowContainer({
                 h="full"
                 onFocus={() => changeSlide(i)}
               >
-                <SlideshowCard item={item} />
+                <SlideshowCard
+                  item={item}
+                  gaEventActionName={`${sectionTitle} - ${item.title} - ${
+                    i + 1
+                  }`}
+                />
               </GridItem>
             );
           })}

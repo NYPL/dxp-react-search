@@ -17,8 +17,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
           className="chakra-heading css-m35uou"
         >
           <a
-            className="chakra-link css-0"
+            className="css-0"
             href="https://nypl.com"
+            id="slideshow-test-id-heading"
+            onClick={[Function]}
           >
             Test
           </a>
@@ -52,8 +54,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     className="chakra-heading css-0"
                   >
                     <a
-                      className="chakra-link css-0"
+                      className="css-0"
                       href="https://www.nypl.org/"
+                      id="test-id-1-link"
+                      onClick={[Function]}
                     >
                       Test 1
                     </a>
@@ -86,8 +90,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                 >
                   <a
                     aria-label="Test 1-image"
-                    className="chakra-link css-0"
+                    className="css-0"
                     href="https://www.nypl.org/"
+                    id="test-id-1"
+                    onClick={[Function]}
                     tabIndex={-1}
                   >
                     <div
@@ -212,8 +218,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     className="chakra-heading css-0"
                   >
                     <a
-                      className="chakra-link css-0"
+                      className="css-0"
                       href="https://www.nypl.org/"
+                      id="test-id-2-link"
+                      onClick={[Function]}
                     >
                       Test 2
                     </a>
@@ -246,8 +254,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                 >
                   <a
                     aria-label="Test 2-image"
-                    className="chakra-link css-0"
+                    className="css-0"
                     href="https://www.nypl.org/"
+                    id="test-id-2"
+                    onClick={[Function]}
                     tabIndex={-1}
                   >
                     <div
@@ -372,8 +382,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     className="chakra-heading css-0"
                   >
                     <a
-                      className="chakra-link css-0"
+                      className="css-0"
                       href="https://www.nypl.org/"
+                      id="test-id-3-link"
+                      onClick={[Function]}
                     >
                       Test 3
                     </a>
@@ -406,8 +418,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                 >
                   <a
                     aria-label="Test 3-image"
-                    className="chakra-link css-0"
+                    className="css-0"
                     href="https://www.nypl.org/"
+                    id="test-id-3"
+                    onClick={[Function]}
                     tabIndex={-1}
                   >
                     <div
@@ -532,8 +546,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     className="chakra-heading css-0"
                   >
                     <a
-                      className="chakra-link css-0"
+                      className="css-0"
                       href="https://www.nypl.org/"
+                      id="test-id-4-link"
+                      onClick={[Function]}
                     >
                       Test 4
                     </a>
@@ -566,8 +582,10 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                 >
                   <a
                     aria-label="Test 4-image"
-                    className="chakra-link css-0"
+                    className="css-0"
                     href="https://www.nypl.org/"
+                    id="test-id-4"
+                    onClick={[Function]}
                     tabIndex={-1}
                   >
                     <div
@@ -747,8 +765,10 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             className="chakra-heading css-0"
           >
             <a
-              className="chakra-link css-0"
+              className="css-0"
               href="https://www.nypl.org/"
+              id="test-id-1-link"
+              onClick={[Function]}
             >
               Test 1
             </a>
@@ -781,8 +801,10 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
         >
           <a
             aria-label="Test 1-image"
-            className="chakra-link css-0"
+            className="css-0"
             href="https://www.nypl.org/"
+            id="test-id-1"
+            onClick={[Function]}
             tabIndex={-1}
           >
             <div
@@ -907,8 +929,10 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             className="chakra-heading css-0"
           >
             <a
-              className="chakra-link css-0"
+              className="css-0"
               href="https://www.nypl.org/"
+              id="test-id-2-link"
+              onClick={[Function]}
             >
               Test 2
             </a>
@@ -941,8 +965,10 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
         >
           <a
             aria-label="Test 2-image"
-            className="chakra-link css-0"
+            className="css-0"
             href="https://www.nypl.org/"
+            id="test-id-2"
+            onClick={[Function]}
             tabIndex={-1}
           >
             <div
@@ -1067,8 +1093,10 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             className="chakra-heading css-0"
           >
             <a
-              className="chakra-link css-0"
+              className="css-0"
               href="https://www.nypl.org/"
+              id="test-id-3-link"
+              onClick={[Function]}
             >
               Test 3
             </a>
@@ -1101,8 +1129,10 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
         >
           <a
             aria-label="Test 3-image"
-            className="chakra-link css-0"
+            className="css-0"
             href="https://www.nypl.org/"
+            id="test-id-3"
+            onClick={[Function]}
             tabIndex={-1}
           >
             <div
@@ -1227,8 +1257,10 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             className="chakra-heading css-0"
           >
             <a
-              className="chakra-link css-0"
+              className="css-0"
               href="https://www.nypl.org/"
+              id="test-id-4-link"
+              onClick={[Function]}
             >
               Test 4
             </a>
@@ -1261,8 +1293,10 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
         >
           <a
             aria-label="Test 4-image"
-            className="chakra-link css-0"
+            className="css-0"
             href="https://www.nypl.org/"
+            id="test-id-4"
+            onClick={[Function]}
             tabIndex={-1}
           >
             <div

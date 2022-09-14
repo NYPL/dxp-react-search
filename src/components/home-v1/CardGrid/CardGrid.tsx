@@ -6,6 +6,7 @@ import ComponentWrapper, { SeeMore } from "../ComponentWrapper";
 import Card, { CardItem } from "./Card";
 
 interface CardGridProps {
+  id?: string;
   title: string;
   link: string;
   items: CardItem[];
@@ -18,6 +19,7 @@ interface CardGridProps {
 }
 
 function CardGrid({
+  id,
   title,
   link,
   items,
@@ -30,6 +32,7 @@ function CardGrid({
   const styles = useStyleConfig("CardGrid", { variant });
   return (
     <ComponentWrapper
+      id={id}
       title={title}
       link={link}
       hoverStyle={hoverStyle}
@@ -52,6 +55,7 @@ function CardGrid({
                 item={item}
                 size={size || { base: "sm", md: "lg" }}
                 variant={cardVariant}
+                gaEventActionName={`${title} - ${item.title} - ${i + 1}`}
               />
             </GridItem>
           ))}

@@ -1,7 +1,8 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Component
-import { Box, Link, Heading, Text, createIcon } from "@chakra-ui/react";
+import { Box, Heading, Text, createIcon } from "@chakra-ui/react";
+import HomePageLink from "../HomePageLink";
 import { getImageTransformation } from "../../shared/Image/imageUtils";
 import { default as NextImage } from "../../shared/Image";
 import { ImageType } from "../../shared/Image/ImageTypes";
@@ -16,6 +17,7 @@ const RightArrowIcon = createIcon({
 });
 
 interface HeroProps {
+  id?: string;
   title: string;
   description: string;
   tag: string;
@@ -23,7 +25,7 @@ interface HeroProps {
   url: string;
 }
 
-function Hero({ title, description, tag, image, url }: HeroProps) {
+function Hero({ id, title, description, tag, image, url }: HeroProps) {
   const desktopImageSrc = image.transformations
     ? getImageTransformation(
         "hero_header_focal_point_2400x400",
@@ -46,6 +48,7 @@ function Hero({ title, description, tag, image, url }: HeroProps) {
       bgSize="cover"
     >
       <Box
+        id={id}
         flex={{ base: 1, md: "1 0 70%" }}
         maxWidth="1313px"
         mx={0}
@@ -69,21 +72,25 @@ function Hero({ title, description, tag, image, url }: HeroProps) {
           quality={90}
         />
         <Box className="hero-text-box">
-          <Link
+          <Box as="span">{tag}</Box>
+          <HomePageLink
+            id={id}
             href={url}
             aria-label={`${tag}, link to ${title}, ${description}`}
+            gaEventActionName={"Hero"}
           />
-          <Box as="span">{tag}</Box>
-          <Heading>{title}</Heading>
+          <Heading as="h2">{title}</Heading>
           <Text>{description}</Text>
           <Box h={{ base: 0, md: "25px" }} position="relative">
-            <Box className="svg-wrapper">
-              <RightArrowIcon
-                h="25px"
-                w="25px"
-                fill={{ base: "red.200", md: "brand.100" }}
-              />
-            </Box>
+            <HomePageLink id={id} href={url} gaEventActionName={"Hero button"}>
+              <Box className="svg-wrapper">
+                <RightArrowIcon
+                  h="25px"
+                  w="25px"
+                  fill={{ base: "red.200", md: "brand.100" }}
+                />
+              </Box>
+            </HomePageLink>
           </Box>
         </Box>
       </Box>

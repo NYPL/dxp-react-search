@@ -1,7 +1,8 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 //Component
-import { GridItem, Box, Text, Link } from "@chakra-ui/react";
+import { GridItem, Box, Text } from "@chakra-ui/react";
+import HomePageLink from "../HomePageLink";
 import Image from "../../shared/Image";
 // Type
 import { StaffPicksItem } from "./StaffPicksTypes";
@@ -13,10 +14,23 @@ const QuoteBg = () => {
 
 interface StaffPickProps {
   item: StaffPicksItem;
+  gaEventActionName: string;
 }
 
-function StaffPick({ item }: StaffPickProps) {
+function StaffPick({ item, gaEventActionName }: StaffPickProps) {
   const { id, quote, image, url, staffName, staffLocation } = item;
+
+  // @TODO fix style for StaffPick link
+  const style = {
+    display: "inline-block",
+    float: "right",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    left: 0,
+    top: 0,
+  };
+
   return (
     <GridItem as="li" id={id}>
       <Box
@@ -24,15 +38,11 @@ function StaffPick({ item }: StaffPickProps) {
         position="relative"
       >
         <QuoteBg />
-        <Link
-          display="inline-block"
-          float="right"
-          position="absolute"
-          bottom={0}
-          right={0}
-          left={0}
-          top={0}
+        <HomePageLink
+          id={id}
           href={url}
+          gaEventActionName={gaEventActionName}
+          {...style}
         >
           <Box
             display="flex"
@@ -67,7 +77,7 @@ function StaffPick({ item }: StaffPickProps) {
           >
             {quote}
           </Text>
-        </Link>
+        </HomePageLink>
       </Box>
       <Box
         color="brand.100"

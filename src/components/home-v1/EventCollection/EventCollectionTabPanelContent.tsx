@@ -7,11 +7,13 @@ import EventCard, { EventCardProps as EventItem } from "./EventCard";
 interface EventCollectionTabPanelContentProps {
   id: string;
   events: EventItem[];
+  sectionTitle: string;
 }
 
 export default function EventCollectionTabPanelContent({
   id,
   events,
+  sectionTitle,
 }: EventCollectionTabPanelContentProps) {
   // Get only first 4 events.
   // Create a new array.
@@ -47,6 +49,7 @@ export default function EventCollectionTabPanelContent({
             {...featuredEvent}
             variant="event-card-feaured"
             size="xl"
+            gaEventActionName={`${sectionTitle} - ${featuredEvent.title} - 1`}
           />
         )}
       </GridItem>
@@ -60,7 +63,13 @@ export default function EventCollectionTabPanelContent({
               display={{ base: "none", lg: "block" }}
               colStart={2}
             >
-              <EventCard {...event} variant="event-card" />
+              <EventCard
+                {...event}
+                variant="event-card"
+                gaEventActionName={`${sectionTitle} - ${event.title} - ${
+                  i + 2
+                }`}
+              />
             </GridItem>
           );
         })}
@@ -73,7 +82,13 @@ export default function EventCollectionTabPanelContent({
               key={`event-item-key-${i}`}
               display={{ base: "none", md: "block", lg: "none" }}
             >
-              <EventCard {...event} variant="event-card" />
+              <EventCard
+                {...event}
+                variant="event-card"
+                gaEventActionName={`${sectionTitle} - ${event.title} - ${
+                  i + 1
+                }`}
+              />
             </GridItem>
           );
         })}

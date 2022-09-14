@@ -12,8 +12,9 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
       className="chakra-heading css-0"
     >
       <a
-        className="chakra-link css-0"
+        className="css-0"
         href="https://www.nypl.org/"
+        onClick={[Function]}
       >
         Test
       </a>
@@ -27,8 +28,9 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
   >
     <a
       aria-label="Test-image"
-      className="chakra-link css-0"
+      className="css-0"
       href="https://www.nypl.org/"
+      onClick={[Function]}
       tabIndex={-1}
     >
       <div
@@ -156,8 +158,10 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
           className="chakra-heading css-18pkilg"
         >
           <a
-            className="chakra-link css-0"
+            className="css-0"
             href="https://nypl.com"
+            id="card-grid-test-id-heading"
+            onClick={[Function]}
           >
             Test title
           </a>
@@ -184,8 +188,9 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                 className="chakra-heading css-0"
               >
                 <a
-                  className="chakra-link css-0"
+                  className="css-0"
                   href="https://www.nypl.org/"
+                  onClick={[Function]}
                 >
                   Test
                 </a>
@@ -199,8 +204,9 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
             >
               <a
                 aria-label="Test-image"
-                className="chakra-link css-0"
+                className="css-0"
                 href="https://www.nypl.org/"
+                onClick={[Function]}
                 tabIndex={-1}
               >
                 <div
@@ -324,8 +330,9 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                 className="chakra-heading css-0"
               >
                 <a
-                  className="chakra-link css-0"
+                  className="css-0"
                   href="https://www.nypl.org/"
+                  onClick={[Function]}
                 >
                   Test
                 </a>
@@ -339,8 +346,9 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
             >
               <a
                 aria-label="Test-image"
-                className="chakra-link css-0"
+                className="css-0"
                 href="https://www.nypl.org/"
+                onClick={[Function]}
                 tabIndex={-1}
               >
                 <div
@@ -464,8 +472,9 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                 className="chakra-heading css-0"
               >
                 <a
-                  className="chakra-link css-0"
+                  className="css-0"
                   href="https://www.nypl.org/"
+                  onClick={[Function]}
                 >
                   Test
                 </a>
@@ -479,8 +488,9 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
             >
               <a
                 aria-label="Test-image"
-                className="chakra-link css-0"
+                className="css-0"
                 href="https://www.nypl.org/"
+                onClick={[Function]}
                 tabIndex={-1}
               >
                 <div
@@ -604,8 +614,9 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                 className="chakra-heading css-0"
               >
                 <a
-                  className="chakra-link css-0"
+                  className="css-0"
                   href="https://www.nypl.org/"
+                  onClick={[Function]}
                 >
                   Test
                 </a>
@@ -619,8 +630,9 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
             >
               <a
                 aria-label="Test-image"
-                className="chakra-link css-0"
+                className="css-0"
                 href="https://www.nypl.org/"
+                onClick={[Function]}
                 tabIndex={-1}
               >
                 <div

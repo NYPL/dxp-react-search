@@ -105,6 +105,10 @@ export const HOME_PAGE_QUERY = gql`
               }
             }
           }
+          seeMore {
+            text
+            link
+          }
         }
       }
       sectionSix {
@@ -268,17 +272,20 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
               padding="0 20px"
             >
               <Spotlight
+                id={homePageDataSectionTwo.id}
                 title={homePageDataSectionTwo.heading}
                 link={homePageDataSectionTwo.link}
                 variant={homePageDataSectionTwo.gridVariant}
                 seeMore={homePageDataSectionTwo.seeMore}
               />
               <EventCollection
+                id={homePageDataSectionThree.id}
                 title={homePageDataSectionThree.heading}
                 link={homePageDataSectionThree.link}
                 seeMore={homePageDataSectionThree.seeMore}
               />
               <CardGrid
+                id={homePageDataSectionFour.id}
                 title={homePageDataSectionFour.heading}
                 link={homePageDataSectionFour.link}
                 variant={homePageDataSectionFour.gridVariant}
@@ -287,11 +294,14 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
                 seeMore={homePageDataSectionFour.seeMore}
               />
               <StaffPicks
+                id={homePageDataSectionFive.id}
                 title={homePageDataSectionFive.heading}
                 link={homePageDataSectionFive.link}
                 items={homePageDataSectionFive.items}
+                seeMore={homePageDataSectionFive.seeMore}
               />
               <Slideshow
+                id={homePageDataSectionSix.id}
                 title={homePageDataSectionSix.heading}
                 link={homePageDataSectionSix.link}
                 items={homePageDataSectionSix.items}
@@ -299,6 +309,7 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
               />
               {/* From Our Blogs */}
               <CardGrid
+                id={homePageDataSectionSeven.id}
                 title={homePageDataSectionSeven.heading}
                 link={homePageDataSectionSeven.link}
                 variant={homePageDataSectionSeven.gridVariant}
@@ -310,6 +321,7 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
               />
               {/* Updates */}
               <CardGrid
+                id={homePageDataSectionEight.id}
                 title={homePageDataSectionEight.heading}
                 link={homePageDataSectionEight.link}
                 items={homePageDataSectionEight.items}

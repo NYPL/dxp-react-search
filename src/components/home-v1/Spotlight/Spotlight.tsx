@@ -36,6 +36,7 @@ export const HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY = gql`
 `;
 
 export interface SpotlightProps {
+  id?: string;
   title: string;
   link: string;
   variant: "row-grid" | "column-grid" | "updates-grid";
@@ -43,6 +44,7 @@ export interface SpotlightProps {
 }
 
 export default function Spotlight({
+  id,
   title,
   link,
   variant,
@@ -88,6 +90,7 @@ export default function Spotlight({
 
   return (
     <CardGrid
+      id={id}
       title={title}
       link={link}
       variant={variant}
