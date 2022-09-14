@@ -1,6 +1,6 @@
 import React from "react";
 // Component
-import ComponentWrapper from "../ComponentWrapper";
+import ComponentWrapper, { SeeMore } from "../ComponentWrapper";
 import { Grid } from "@chakra-ui/react";
 import StaffPick from "./StaffPick";
 // Type
@@ -11,9 +11,10 @@ interface StaffPicksProps {
   title: string;
   link: string;
   items: StaffPicksItem[];
+  seeMore?: SeeMore;
 }
 
-function StaffPicks({ id, title, link, items }: StaffPicksProps) {
+function StaffPicks({ id, title, link, items, seeMore }: StaffPicksProps) {
   return (
     <ComponentWrapper
       id={id}
@@ -24,6 +25,7 @@ function StaffPicks({ id, title, link, items }: StaffPicksProps) {
       buttonBorder={"brand.100"}
       bg={"red.200"}
       paddingTop={true}
+      seeMore={seeMore}
     >
       <Grid
         as="ul"

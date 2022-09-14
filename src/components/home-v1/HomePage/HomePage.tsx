@@ -105,6 +105,10 @@ export const HOME_PAGE_QUERY = gql`
               }
             }
           }
+          seeMore {
+            text
+            link
+          }
         }
       }
       sectionSix {
@@ -294,6 +298,7 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
                 title={homePageDataSectionFive.heading}
                 link={homePageDataSectionFive.link}
                 items={homePageDataSectionFive.items}
+                seeMore={homePageDataSectionFive.seeMore}
               />
               <Slideshow
                 id={homePageDataSectionSix.id}
