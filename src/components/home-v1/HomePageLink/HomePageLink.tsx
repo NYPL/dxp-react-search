@@ -8,7 +8,7 @@ export interface HomePageLinkProps {
   children?: React.ReactNode;
   /** The `href` attribute for the anchor element. */
   href?: string;
-  /** */
+  /** The value that will appear as the event action in Google Analytics Event reports. */
   gaEventActionName?: string;
   /** Infroms styling of links in ComponentWrapper */
   variant?: string;
@@ -22,28 +22,34 @@ const HomePageLink = React.forwardRef<
 >((props, ref?) => {
   const { id, children, href, gaEventActionName, variant, tabIndex, ...rest } =
     props;
+
   const hoverStyle = useStyleConfig("Link", {
     variant,
   });
-  function handleChange(event: any) {
+
+  const handleClick = (
+    event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement, MouseEvent>
+  ) => {
     event.preventDefault;
+    // @TODO Update this after review with comms, to correct value of "Homepage".
+    const eventCategory = "Homepage Scout Local";
 
     // @ts-ignore
     window.gtag("event", gaEventActionName, {
-      event_category: "Homepage Scout Local",
+      event_category: eventCategory,
       event_label: href,
     });
-  }
+  };
 
   return (
     <Box
       id={id}
-      as="a"
       ref={ref}
-      onClick={handleChange}
+      as="a"
       href={href}
-      __css={hoverStyle}
       tabIndex={tabIndex}
+      onClick={handleClick}
+      __css={hoverStyle}
       {...rest}
     >
       {children}
