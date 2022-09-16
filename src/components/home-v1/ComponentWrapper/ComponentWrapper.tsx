@@ -60,7 +60,7 @@ function ComponentWrapper({
       <Grid
         m="auto"
         maxWidth="1313px"
-        p={1}
+        p={{ base: 4, md: 1 }}
         templateAreas={{ md: "'heading component'" }}
         templateColumns={{
           base: "1fr",
@@ -71,7 +71,10 @@ function ComponentWrapper({
         gridRowGap={{ base: 0, md: 2, xl: 3 }}
         overflow="hidden"
       >
-        <GridItem gridArea={{ md: "heading" }}>
+        <GridItem
+          gridArea={{ md: "heading" }}
+          w={{ base: "full", md: "121px" }}
+        >
           <Box
             mt={{
               base: "",
