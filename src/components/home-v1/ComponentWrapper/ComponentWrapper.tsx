@@ -128,7 +128,7 @@ function ComponentWrapper({
                 }
                 {...seeMoreStyle}
               >
-                {seeMore.text} . . .
+                {seeMore.text}
               </HomePageLink>
             )}
           </Box>
