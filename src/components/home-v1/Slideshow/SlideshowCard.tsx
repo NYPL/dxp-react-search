@@ -4,7 +4,7 @@ import { useStyleConfig } from "@chakra-ui/system";
 import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import HomePageLink from "../HomePageLink";
 import Image from "./../../shared/Image";
-import { ImageType } from "../../shared/Image/ImageTypes";
+import { ImageType } from "../../shared/Image";
 
 export interface SlideshowCardItem {
   id: string;

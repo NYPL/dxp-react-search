@@ -4,8 +4,7 @@ import { useStyleConfig } from "@chakra-ui/system";
 import { Box, Heading, Text, createIcon } from "@chakra-ui/react";
 import HomePageLink from "../HomePageLink";
 import { getImageTransformation } from "../../shared/Image/imageUtils";
-import { default as NextImage } from "../../shared/Image";
-import { ImageType } from "../../shared/Image/ImageTypes";
+import { default as NextImage, ImageType } from "../../shared/Image";
 
 // SVG Icon
 const RightArrowIcon = createIcon({

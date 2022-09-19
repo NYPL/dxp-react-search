@@ -3,7 +3,7 @@ import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Box, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
 import HomePageLink from "../HomePageLink";
-import Image from "./../../shared/Image";
+import Image, { ImageType } from "./../../shared/Image";
 
 export interface EventCardProps {
   id: string;
@@ -11,7 +11,7 @@ export interface EventCardProps {
   category: string;
   displayDate: string;
   location: string;
-  image: any;
+  image: ImageType;
   link: string;
   weight: number;
   variant: string;

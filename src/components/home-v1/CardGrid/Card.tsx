@@ -2,9 +2,8 @@ import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
-import Image from "./../../shared/Image";
+import Image, { ImageType } from "./../../shared/Image";
 import HomePageLink from "../HomePageLink";
-import { ImageType } from "../../shared/Image/ImageTypes";
 
 export interface CardItem {
   id: string;
