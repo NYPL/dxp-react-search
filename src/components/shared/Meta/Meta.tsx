@@ -14,6 +14,12 @@ function Meta({ title, description, imageUrl }: MetaProps) {
   // @TODO See if you can also get the domain from useRouter, even with RP?
   const pageUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${asPath}`;
 
+  // Home page doesn't use the postfix `| The New York Public Library`.
+  let finalTitle = `${title} | The New York Public Library`;
+  if (asPath === "/home") {
+    finalTitle = title;
+  }
+
   // Description clean up.
   const metaDescription = description.replace(/(<([^>]+)>)/gi, "").trim();
 
@@ -25,7 +31,7 @@ function Meta({ title, description, imageUrl }: MetaProps) {
 
   return (
     <Head>
-      <title>{title} | The New York Public Library</title>
+      <title>{finalTitle}</title>
       <link
         rel="shortcut icon"
         href="https://ux-static.nypl.org/images/favicon.ico"
@@ -34,13 +40,13 @@ function Meta({ title, description, imageUrl }: MetaProps) {
       <meta name="keywords" content="The New York Public Library (NYPL)" />
       <meta name="description" content={metaDescription} />
       <meta name="allow-search" content="yes" />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={finalTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
       <meta property="og:image" content={image} />
       <meta property="og:site_name" content="The New York Public Library" />
       <meta property="og:url" content={pageUrl} />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={finalTitle} />
       <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@nypl" />
