@@ -218,9 +218,14 @@ export default function EventCollection({
               ))}
           </TabList>
           <TabPanels>
-            {eventsCategories.map((eventCategory) => {
+            {eventsCategories.map((eventCategory, i) => {
               return (
-                <TabPanel px={0} tabIndex={-1} key={eventCategory}>
+                <TabPanel
+                  id={`event-tab-panel-${i}`}
+                  px={0}
+                  tabIndex={-1}
+                  key={eventCategory}
+                >
                   <EventCollectionTabPanelContent
                     id={`event-tab-panel-${eventCategory}`}
                     events={eventsGroupedByCategory[eventCategory]}
