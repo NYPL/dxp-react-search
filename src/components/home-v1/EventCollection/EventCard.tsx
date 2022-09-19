@@ -33,11 +33,11 @@ export default function EventCard({
   const styles: any = useStyleConfig("Event", { variant, size });
 
   return (
-    <Grid id={id} sx={styles}>
+    <Grid id={`event-card-${id}`} sx={styles}>
       <GridItem className="textBox">
         <Heading as="h3">
           <HomePageLink
-            id={id}
+            id={`event-card-heading-link-${id}`}
             href={link}
             gaEventActionName={gaEventActionName}
           >
@@ -51,7 +51,7 @@ export default function EventCard({
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
         <HomePageLink
-          id={id}
+          id={`event-card-image-link-${id}`}
           href={link}
           aria-label={`${title}-image`}
           tabIndex={-1}
