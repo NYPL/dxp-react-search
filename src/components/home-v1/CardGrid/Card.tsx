@@ -35,6 +35,7 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
 
   return (
     <Grid
+      id={`card-${item.id}`}
       templateRows={{ base: "1fr", md: "min-content" }}
       templateColumns={{ base: "5fr 9fr", md: "1fr" }}
       sx={styles}
@@ -52,12 +53,13 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
         </Heading>
         <Box className="details">
           {item.description && (
-            <Text id={`${item.id}-description`}>{item.description}</Text>
+            <Text id={`card-description-${item.id}`}>{item.description}</Text>
           )}
         </Box>
       </GridItem>
-      <GridItem colStart={1} rowStart={1}>
+      <GridItem id={`card-image-${item.id}`} colStart={1} rowStart={1}>
         <HomePageLink
+          id={`card-image-link-${item.id}`}
           href={item.url}
           aria-label={`${item.title}-image`}
           gaEventActionName={gaEventActionName}
