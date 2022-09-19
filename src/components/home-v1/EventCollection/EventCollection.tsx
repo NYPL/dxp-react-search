@@ -33,6 +33,7 @@ export const HOME_PAGE_EVENT_COLLECTION_QUERY = gql`
         image {
           id
           uri
+          alt
           transformations {
             id
             uri
