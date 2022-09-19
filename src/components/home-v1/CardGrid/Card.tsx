@@ -70,7 +70,7 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
             role="presentation"
           */}
           <Image
-            id={item.image.id}
+            id={`card-image-${item.image.id}`}
             alt={item.image.alt}
             uri={item.image.uri}
             useTransformation={true}
