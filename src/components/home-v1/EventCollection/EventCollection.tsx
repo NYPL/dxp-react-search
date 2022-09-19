@@ -174,6 +174,7 @@ export default function EventCollection({
                   </Heading>
                   <EventCard
                     {...featuredEvent}
+                    id={`featured-${featuredEvent.id}`}
                     variant="event-card"
                     gaEventActionName={`${title} - ${eventCategory} - ${featuredEvent.title} - mobile`}
                   />
@@ -195,6 +196,7 @@ export default function EventCollection({
             {eventsCategories &&
               eventsCategories.map((eventsCategory, i) => (
                 <Tab
+                  id={`event-category-tab-${eventsCategory}`}
                   key={`event-category-tab-key-${i}`}
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
