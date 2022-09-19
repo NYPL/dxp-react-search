@@ -47,7 +47,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
       bgSize="cover"
     >
       <Box
-        id={id}
+        id={`hero-${id}`}
         flex={{ base: 1, md: "1 0 70%" }}
         maxWidth="1313px"
         mx={0}
@@ -59,7 +59,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
         sx={styles}
       >
         <NextImage
-          id={image.id}
+          id={`hero-image-${image.id}`}
           alt={image.alt}
           uri={image.uri}
           useTransformation={true}
@@ -73,7 +73,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
         <Box className="hero-text-box">
           <Box as="span">{tag}</Box>
           <HomePageLink
-            id={id}
+            id={`hero-heading-link-${id}`}
             href={url}
             aria-label={`${tag}, link to ${title}, ${description}`}
             gaEventActionName={"Hero"}
@@ -81,7 +81,11 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
           <Heading as="h2">{title}</Heading>
           <Text>{description}</Text>
           <Box h={{ base: 0, md: "25px" }} position="relative">
-            <HomePageLink id={id} href={url} gaEventActionName={"Hero button"}>
+            <HomePageLink
+              id={`hero-button-link-${id}`}
+              href={url}
+              gaEventActionName={"Hero button"}
+            >
               <Box className="svg-wrapper">
                 <RightArrowIcon
                   h="25px"
