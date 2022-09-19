@@ -174,7 +174,7 @@ export default function EventCollection({
                   </Heading>
                   <EventCard
                     {...featuredEvent}
-                    id={`featured-${featuredEvent.id}`}
+                    id={`featured-${featuredEvent.id}-mobile`}
                     variant="event-card"
                     gaEventActionName={`${title} - ${eventCategory} - ${featuredEvent.title} - mobile`}
                   />

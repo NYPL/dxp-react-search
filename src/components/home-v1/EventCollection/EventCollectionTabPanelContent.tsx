@@ -85,6 +85,7 @@ export default function EventCollectionTabPanelContent({
             >
               <EventCard
                 {...event}
+                id={`${id}-tablet`}
                 variant="event-card"
                 gaEventActionName={`${sectionTitle} - ${event.title} - ${
                   i + 1
