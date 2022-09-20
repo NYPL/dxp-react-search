@@ -77,7 +77,6 @@ export function getCollectionResourceJsonApiPath(
           });
         });
       } else {
-        console.log("basic filter!");
         //
         // Basic filter: 'conditions' property exists and is array.
         //
