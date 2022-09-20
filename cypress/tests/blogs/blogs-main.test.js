@@ -36,5 +36,29 @@ describe("Blogs Main Tests", () => {
     // @TODO Add test for channels list.
   });
 
-  it("Featured blog posts site browsing works as expected.", () => {});
+  it("should navigate to blogs all pg when view blog posts in clicked.", () => {
+    cy.log("click view all posts link");
+    cy.findByRole("link", {
+      name: /view all blog posts/i,
+    })
+      .should("exist")
+      .click();
+    cy.log("should be blogs all pg");
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq("/blog/all");
+    });
+  });
+
+  it("should navigate to channels pg when view channels in clicked.", () => {
+    cy.log("click view all channels link");
+    cy.findByRole("link", {
+      name: /view all channels/i,
+    })
+      .should("exist")
+      .click();
+    cy.log("should be channels all pg");
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq("/blog/channels");
+    });
+  });
 });

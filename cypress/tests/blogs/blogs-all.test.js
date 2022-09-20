@@ -15,7 +15,7 @@ describe("Blog All pg tests", () => {
 
   it("Filter bar with selected items from several multiselect should update page", () => {});
 
-  it("Filter bar should reset pagination when applied", () => {
+  it("should reset pagination state in url when multiselect is applied.", () => {
     cy.log("Goto blogs all page starting at page 15");
     cy.visit("/blog/all?page=15");
 
@@ -26,6 +26,14 @@ describe("Blog All pg tests", () => {
     cy.get("#blogs__filter-bar")
       .findByRole("button", { name: "Channels" })
       .click();
+
+    // Multiselect filters are added only on the client side, because they are slow down page transitions.
+    cy.log("Check that the multiselect has finished loading");
+    cy.get("#multiselect-channel")
+      .findByRole("dialog")
+      .find("li", { timeout: 10000 })
+      .should("have.length.gt", 0);
+
     // Map over items to select them from multiselect.
     items.map((item) => {
       cy.log("Select item from multiselect");
