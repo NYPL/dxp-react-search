@@ -60,7 +60,7 @@ function ComponentWrapper({
       <Grid
         m="auto"
         maxWidth="1313px"
-        p={{ base: 4, md: 1 }}
+        p={1}
         templateAreas={{ md: "'heading component'" }}
         templateColumns={{
           base: "1fr",
@@ -73,7 +73,7 @@ function ComponentWrapper({
       >
         <GridItem
           gridArea={{ md: "heading" }}
-          w={{ base: "full", md: "121px" }}
+          w={{ base: "full", md: "110px", lg: "121px" }}
         >
           <Box
             mt={{
@@ -116,7 +116,7 @@ function ComponentWrapper({
             maxWidth={{ base: "90vw", md: "75vw", lg: "90vw", xl: "85vw" }}
             textAlign="center"
             mt={{ base: 6 }}
-            mb={{ base: 10, lg: 8 }}
+            mb={{ base: 7, md: 10, lg: 8 }}
           >
             {seeMore && (
               <HomePageLink
