@@ -164,7 +164,12 @@ export default function EventCollection({
             }
             if (featuredEvent) {
               return (
-                <Box as="li" mb={4} key={`${eventCategory}-featured-event-key`}>
+                <Box
+                  as="li"
+                  mb={4}
+                  key={`${eventCategory}-featured-event-key`}
+                  listStyleType="none"
+                >
                   <Heading
                     as="h3"
                     fontFamily="Kievit-Medium"
