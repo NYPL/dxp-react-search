@@ -1,6 +1,6 @@
 import React from "react";
 // Components
-import { Button } from "@chakra-ui/react";
+import { Button, Box, useStyleConfig } from "@chakra-ui/react";
 
 interface SlideshowButtonProps {
   buttonDirection: string;
@@ -15,17 +15,19 @@ function SlideshowButton({
   prevSlide,
   visibility,
 }: SlideshowButtonProps) {
+  const style = useStyleConfig("ButtonContainer", { buttonDirection });
   return (
-    <Button
-      tabIndex={-1}
-      variant="slide-show"
-      visibility={visibility}
-      //@ts-ignore
-      buttonDirection={buttonDirection}
-      onClick={buttonDirection === "prev" ? prevSlide : nextSlide}
-    >
-      {buttonDirection === "prev" ? "<" : ">"}
-    </Button>
+    <Box id={`slideshow-${buttonDirection}-button-container`} __css={style}>
+      <Button
+        id={`slideshow-${buttonDirection}-button`}
+        tabIndex={-1}
+        variant="slide-show"
+        visibility={visibility}
+        onClick={buttonDirection === "prev" ? prevSlide : nextSlide}
+      >
+        {buttonDirection === "prev" ? "<" : ">"}
+      </Button>
+    </Box>
   );
 }
 export default SlideshowButton;

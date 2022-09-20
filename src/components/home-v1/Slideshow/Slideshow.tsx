@@ -32,11 +32,7 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
       gap={{ base: 0, md: 2, lg: 3, xl: 9 }}
       seeMore={seeMore}
     >
-      <Box
-        w="full"
-        position="relative"
-        mt={{ base: `${currentSlide === 0 ? 0 : -9}`, md: 0 }}
-      >
+      <Box w="full" position="relative" mt={{ base: -9, md: 0 }}>
         <SlideshowButton
           buttonDirection={"prev"}
           prevSlide={prevSlide}
