@@ -21,7 +21,9 @@
     "jsx": "preserve",
     "types": [
       "cypress",
-      "@testing-library/cypress"
+      "@testing-library/cypress",
+      "jest",
+      "@testing-library/jest-dom"
     ],
     "incremental": true
   },

@@ -31,6 +31,24 @@ export default function resolveParagraphTypes(objectType: string) {
     case "catalog_list":
       resolvedObjectType = "CatalogList";
       break;
+    case "hp_hero":
+      resolvedObjectType = "HomePageHeroComponent";
+      break;
+    case "hp_events":
+      resolvedObjectType = "HomePageEventsComponent";
+      break;
+    case "hp_card_grid":
+      resolvedObjectType = "HomePageCardGridComponent";
+      break;
+    case "hp_spotlight":
+      resolvedObjectType = "HomePageSpotlightComponent";
+      break;
+    case "hp_staff_picks":
+      resolvedObjectType = "HomePageStaffPicksComponent";
+      break;
+    case "hp_slideshow":
+      resolvedObjectType = "HomePageSlideshowComponent";
+      break;
   }
   return resolvedObjectType;
 }

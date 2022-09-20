@@ -40,6 +40,25 @@ export const typeDefs = gql`
     value: [String]!
   }
 
+  # New QueryFilters pattern.
+  input QueryFilter {
+    experimental: Boolean
+    conjunction: String
+    groups: [QueryFilterGroup]
+    conditions: [QueryFilterCondition]
+  }
+
+  input QueryFilterGroup {
+    conjunction: String
+    conditions: [QueryFilterCondition]
+  }
+
+  input QueryFilterCondition {
+    field: String
+    operator: String
+    value: String
+  }
+
   type Image {
     id: ID!
     alt: String
