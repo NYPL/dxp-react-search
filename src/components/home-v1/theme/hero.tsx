@@ -5,12 +5,12 @@ const Hero: ComponentStyleConfig = {
     ".hero-text-box": {
       w: { base: "full", md: "43%" },
       ml: { base: 0, md: "11%" },
-      minWidth: "400px",
       maxWidth: { base: "full", md: "560px" },
       maxHeight: { md: "300px" },
       backgroundColor: { base: "brand.100", md: "brand.250" },
       color: { base: "brand.200", md: "brand.100" },
-      padding: 4,
+      py: 4,
+      px: 3,
       position: "relative",
       cursor: "pointer",
       _hover: {
@@ -37,7 +37,7 @@ const Hero: ComponentStyleConfig = {
     h2: {
       fontSize: { base: "27px", xl: "4xl" },
       lineHeight: "normal",
-      w: { base: "60%", md: "full" },
+      w: { base: "70%", md: "full" },
     },
     span: {
       display: "block",
