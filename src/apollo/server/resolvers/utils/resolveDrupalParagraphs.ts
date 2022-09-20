@@ -79,6 +79,48 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
+      if (
+        item.type === "paragraph--hp_hero" &&
+        typesInQuery.includes("HomePageHeroComponent")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--hp_events" &&
+        typesInQuery.includes("HomePageEventsComponent")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--hp_card_grid" &&
+        typesInQuery.includes("HomePageCardGridComponent")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--hp_spotlight" &&
+        typesInQuery.includes("HomePageSpotlightComponent")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--hp_staff_picks" &&
+        typesInQuery.includes("HomePageStaffPicksComponent")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--hp_slideshow" &&
+        typesInQuery.includes("HomePageSlideshowComponent")
+      ) {
+        accumulator.push(item);
+      }
+
       return accumulator;
     },
     []
@@ -320,6 +362,140 @@ export default function resolveDrupalParagraphs(
         };
         break;
         */
+      case "paragraph--hp_hero":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          tag: item.field_ts_hp_hero_tag,
+          link: item.field_ls_link.url,
+          image:
+            item.field_ers_image.data === null
+              ? null
+              : resolveImage(item.field_ers_image),
+        };
+        break;
+      //
+      case "paragraph--hp_spotlight":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          link: item.field_ls_link.url,
+          gridVariant: item.field_lts_hp_card_grid_variant,
+          seeMore: {
+            link: item.field_lns_see_all.url,
+            text: item.field_lns_see_all.title,
+          },
+        };
+        break;
+
+      //
+      case "paragraph--hp_events":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          link: item.field_ls_link.url,
+          seeMore: {
+            link: item.field_lns_see_all.url,
+            text: item.field_lns_see_all.title,
+          },
+        };
+        break;
+      //
+      case "paragraph--hp_card_grid":
+        const hpCardItems: ResolvedParagraph[] = [];
+
+        Array.isArray(item.field_erm_hp_cards) &&
+          item.field_erm_hp_cards.map((hpCardItem: any) => {
+            hpCardItems.push({
+              id: hpCardItem.id,
+              title: hpCardItem.field_ts_heading,
+              url: hpCardItem.field_ls_link.url,
+              image:
+                hpCardItem.field_ers_image.data === null
+                  ? null
+                  : resolveImage(hpCardItem.field_ers_image),
+              description: hpCardItem.field_tfls_description
+                ? hpCardItem.field_tfls_description.processed
+                : null,
+            });
+          });
+
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          link: item.field_ls_link.url,
+          gridVariant: item.field_lts_hp_card_grid_variant,
+          items: hpCardItems,
+          seeMore: {
+            link: item.field_lns_see_all.url,
+            text: item.field_lns_see_all.title,
+          },
+        };
+        break;
+      // Slideshow
+      case "paragraph--hp_slideshow":
+        const slideshowItems: ResolvedParagraph[] = [];
+        Array.isArray(item.field_erm_hp_slideshow_items) &&
+          item.field_erm_hp_slideshow_items.map((slideshowItem: any) => {
+            slideshowItems.push({
+              id: slideshowItem.id,
+              url: slideshowItem.field_ls_link.url,
+              title: slideshowItem.field_ts_heading,
+              audience: slideshowItem.field_ts_audience,
+              genre: slideshowItem.field_ts_genre,
+              author: slideshowItem.field_ts_author,
+              image:
+                slideshowItem.field_ers_image.data === null
+                  ? null
+                  : resolveImage(slideshowItem.field_ers_image),
+            });
+          });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          link: item.field_ls_link.url,
+          items: slideshowItems,
+          seeMore: {
+            link: item.field_lns_see_all.url,
+            text: item.field_lns_see_all.title,
+          },
+        };
+        break;
+      //
+      case "paragraph--hp_staff_picks":
+        const staffpicksItems: ResolvedParagraph[] = [];
+        Array.isArray(item.field_erm_hp_staffpicks) &&
+          item.field_erm_hp_staffpicks.map((staffpicksItem: any) => {
+            staffpicksItems.push({
+              id: staffpicksItem.id,
+              url: staffpicksItem.field_ls_link.url,
+              quote: staffpicksItem.field_ts_quote,
+              staffName: staffpicksItem.field_ts_staff_name,
+              staffLocation: staffpicksItem.field_ts_staff_location,
+              image:
+                staffpicksItem.field_ers_image.data === null
+                  ? null
+                  : resolveImage(staffpicksItem.field_ers_image),
+            });
+          });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          link: item.field_ls_link.url,
+          items: staffpicksItems,
+          seeMore: {
+            link: item.field_lns_see_all.url,
+            text: item.field_lns_see_all.title,
+          },
+        };
+        break;
     }
     // @ts-ignore
     items.push(paragraphComponent);

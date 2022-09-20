@@ -1,0 +1,1411 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
+<div
+  className="css-1kbeyk8"
+>
+  <div
+    className="css-1fqkwup"
+  >
+    <div
+      className="css-1m8gjtz"
+    >
+      <div
+        className="css-y9cf5o"
+      >
+        <h2
+          className="chakra-heading css-m35uou"
+        >
+          <a
+            className="css-0"
+            href="https://nypl.com"
+            id="slideshow-test-id-heading"
+            onClick={[Function]}
+          >
+            Test
+          </a>
+        </h2>
+      </div>
+    </div>
+    <div
+      className="css-1y2jlch"
+    >
+      <div
+        className="css-144klqr"
+      >
+        <div
+          className="css-1ric1bm"
+        >
+          <ul
+            className="css-1lmqp65"
+          >
+            <li
+              className="css-1fzgmij"
+              onFocus={[Function]}
+            >
+              <div
+                className="css-pgu20y"
+              >
+                <div
+                  className="textBox css-0"
+                >
+                  <h3
+                    aria-describedby="test-id-1-author test-id-1-genre test-id-1-audience"
+                    className="chakra-heading css-0"
+                  >
+                    <a
+                      className="css-0"
+                      href="https://www.nypl.org/"
+                      id="test-id-1-link"
+                      onClick={[Function]}
+                    >
+                      Test 1
+                    </a>
+                  </h3>
+                  <div
+                    className="details css-0"
+                  >
+                    <p
+                      className="chakra-text css-0"
+                      id="test-id-1-author"
+                    >
+                      writer 1
+                    </p>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-1-audience"
+                    >
+                      people
+                    </span>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-1-genre"
+                    >
+                      genre
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="css-ys3583"
+                >
+                  <a
+                    aria-label="Test 1-image"
+                    className="css-0"
+                    href="https://www.nypl.org/"
+                    id="test-id-1"
+                    onClick={[Function]}
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="scout-nextjs-image"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "background": "none",
+                            "border": 0,
+                            "boxSizing": "border-box",
+                            "display": "block",
+                            "height": "initial",
+                            "margin": 0,
+                            "opacity": 1,
+                            "overflow": "hidden",
+                            "padding": 0,
+                            "position": "relative",
+                            "width": "initial",
+                          }
+                        }
+                      >
+                        <span
+                          style={
+                            Object {
+                              "background": "none",
+                              "border": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": "initial",
+                              "margin": 0,
+                              "opacity": 1,
+                              "padding": 0,
+                              "paddingTop": "50%",
+                              "width": "initial",
+                            }
+                          }
+                        />
+                        <img
+                          alt="image-1-alt-text"
+                          data-nimg="responsive"
+                          decoding="async"
+                          id="nextjsImage-test-id-1"
+                          onError={[Function]}
+                          onLoad={[Function]}
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                          style={
+                            Object {
+                              "border": "none",
+                              "bottom": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": 0,
+                              "left": 0,
+                              "margin": "auto",
+                              "maxHeight": "100%",
+                              "maxWidth": "100%",
+                              "minHeight": "100%",
+                              "minWidth": "100%",
+                              "objectFit": undefined,
+                              "objectPosition": undefined,
+                              "padding": 0,
+                              "position": "absolute",
+                              "right": 0,
+                              "top": 0,
+                              "width": 0,
+                            }
+                          }
+                        />
+                        <noscript>
+                          <img
+                            alt="image-1-alt-text"
+                            data-nimg="responsive"
+                            decoding="async"
+                            id="nextjsImage-test-id-1"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                            srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                            style={
+                              Object {
+                                "border": "none",
+                                "bottom": 0,
+                                "boxSizing": "border-box",
+                                "display": "block",
+                                "height": 0,
+                                "left": 0,
+                                "margin": "auto",
+                                "maxHeight": "100%",
+                                "maxWidth": "100%",
+                                "minHeight": "100%",
+                                "minWidth": "100%",
+                                "objectFit": undefined,
+                                "objectPosition": undefined,
+                                "padding": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "top": 0,
+                                "width": 0,
+                              }
+                            }
+                          />
+                        </noscript>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li
+              className="css-1fzgmij"
+              onFocus={[Function]}
+            >
+              <div
+                className="css-pgu20y"
+              >
+                <div
+                  className="textBox css-0"
+                >
+                  <h3
+                    aria-describedby="test-id-2-author test-id-2-genre test-id-2-audience"
+                    className="chakra-heading css-0"
+                  >
+                    <a
+                      className="css-0"
+                      href="https://www.nypl.org/"
+                      id="test-id-2-link"
+                      onClick={[Function]}
+                    >
+                      Test 2
+                    </a>
+                  </h3>
+                  <div
+                    className="details css-0"
+                  >
+                    <p
+                      className="chakra-text css-0"
+                      id="test-id-2-author"
+                    >
+                      writer 2
+                    </p>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-2-audience"
+                    >
+                      people
+                    </span>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-2-genre"
+                    >
+                      genre
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="css-ys3583"
+                >
+                  <a
+                    aria-label="Test 2-image"
+                    className="css-0"
+                    href="https://www.nypl.org/"
+                    id="test-id-2"
+                    onClick={[Function]}
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="scout-nextjs-image"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "background": "none",
+                            "border": 0,
+                            "boxSizing": "border-box",
+                            "display": "block",
+                            "height": "initial",
+                            "margin": 0,
+                            "opacity": 1,
+                            "overflow": "hidden",
+                            "padding": 0,
+                            "position": "relative",
+                            "width": "initial",
+                          }
+                        }
+                      >
+                        <span
+                          style={
+                            Object {
+                              "background": "none",
+                              "border": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": "initial",
+                              "margin": 0,
+                              "opacity": 1,
+                              "padding": 0,
+                              "paddingTop": "50%",
+                              "width": "initial",
+                            }
+                          }
+                        />
+                        <img
+                          alt="image-2-alt-text"
+                          data-nimg="responsive"
+                          decoding="async"
+                          id="nextjsImage-test-id-2"
+                          onError={[Function]}
+                          onLoad={[Function]}
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                          style={
+                            Object {
+                              "border": "none",
+                              "bottom": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": 0,
+                              "left": 0,
+                              "margin": "auto",
+                              "maxHeight": "100%",
+                              "maxWidth": "100%",
+                              "minHeight": "100%",
+                              "minWidth": "100%",
+                              "objectFit": undefined,
+                              "objectPosition": undefined,
+                              "padding": 0,
+                              "position": "absolute",
+                              "right": 0,
+                              "top": 0,
+                              "width": 0,
+                            }
+                          }
+                        />
+                        <noscript>
+                          <img
+                            alt="image-2-alt-text"
+                            data-nimg="responsive"
+                            decoding="async"
+                            id="nextjsImage-test-id-2"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                            srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                            style={
+                              Object {
+                                "border": "none",
+                                "bottom": 0,
+                                "boxSizing": "border-box",
+                                "display": "block",
+                                "height": 0,
+                                "left": 0,
+                                "margin": "auto",
+                                "maxHeight": "100%",
+                                "maxWidth": "100%",
+                                "minHeight": "100%",
+                                "minWidth": "100%",
+                                "objectFit": undefined,
+                                "objectPosition": undefined,
+                                "padding": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "top": 0,
+                                "width": 0,
+                              }
+                            }
+                          />
+                        </noscript>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li
+              className="css-1fzgmij"
+              onFocus={[Function]}
+            >
+              <div
+                className="css-pgu20y"
+              >
+                <div
+                  className="textBox css-0"
+                >
+                  <h3
+                    aria-describedby="test-id-3-author test-id-3-genre test-id-3-audience"
+                    className="chakra-heading css-0"
+                  >
+                    <a
+                      className="css-0"
+                      href="https://www.nypl.org/"
+                      id="test-id-3-link"
+                      onClick={[Function]}
+                    >
+                      Test 3
+                    </a>
+                  </h3>
+                  <div
+                    className="details css-0"
+                  >
+                    <p
+                      className="chakra-text css-0"
+                      id="test-id-3-author"
+                    >
+                      writer 3
+                    </p>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-3-audience"
+                    >
+                      people
+                    </span>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-3-genre"
+                    >
+                      genre
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="css-ys3583"
+                >
+                  <a
+                    aria-label="Test 3-image"
+                    className="css-0"
+                    href="https://www.nypl.org/"
+                    id="test-id-3"
+                    onClick={[Function]}
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="scout-nextjs-image"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "background": "none",
+                            "border": 0,
+                            "boxSizing": "border-box",
+                            "display": "block",
+                            "height": "initial",
+                            "margin": 0,
+                            "opacity": 1,
+                            "overflow": "hidden",
+                            "padding": 0,
+                            "position": "relative",
+                            "width": "initial",
+                          }
+                        }
+                      >
+                        <span
+                          style={
+                            Object {
+                              "background": "none",
+                              "border": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": "initial",
+                              "margin": 0,
+                              "opacity": 1,
+                              "padding": 0,
+                              "paddingTop": "50%",
+                              "width": "initial",
+                            }
+                          }
+                        />
+                        <img
+                          alt="image-3-alt-text"
+                          data-nimg="responsive"
+                          decoding="async"
+                          id="nextjsImage-test-id-3"
+                          onError={[Function]}
+                          onLoad={[Function]}
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                          style={
+                            Object {
+                              "border": "none",
+                              "bottom": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": 0,
+                              "left": 0,
+                              "margin": "auto",
+                              "maxHeight": "100%",
+                              "maxWidth": "100%",
+                              "minHeight": "100%",
+                              "minWidth": "100%",
+                              "objectFit": undefined,
+                              "objectPosition": undefined,
+                              "padding": 0,
+                              "position": "absolute",
+                              "right": 0,
+                              "top": 0,
+                              "width": 0,
+                            }
+                          }
+                        />
+                        <noscript>
+                          <img
+                            alt="image-3-alt-text"
+                            data-nimg="responsive"
+                            decoding="async"
+                            id="nextjsImage-test-id-3"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                            srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                            style={
+                              Object {
+                                "border": "none",
+                                "bottom": 0,
+                                "boxSizing": "border-box",
+                                "display": "block",
+                                "height": 0,
+                                "left": 0,
+                                "margin": "auto",
+                                "maxHeight": "100%",
+                                "maxWidth": "100%",
+                                "minHeight": "100%",
+                                "minWidth": "100%",
+                                "objectFit": undefined,
+                                "objectPosition": undefined,
+                                "padding": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "top": 0,
+                                "width": 0,
+                              }
+                            }
+                          />
+                        </noscript>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li
+              className="css-1fzgmij"
+              onFocus={[Function]}
+            >
+              <div
+                className="css-pgu20y"
+              >
+                <div
+                  className="textBox css-0"
+                >
+                  <h3
+                    aria-describedby="test-id-4-author test-id-4-genre test-id-4-audience"
+                    className="chakra-heading css-0"
+                  >
+                    <a
+                      className="css-0"
+                      href="https://www.nypl.org/"
+                      id="test-id-4-link"
+                      onClick={[Function]}
+                    >
+                      Test 4
+                    </a>
+                  </h3>
+                  <div
+                    className="details css-0"
+                  >
+                    <p
+                      className="chakra-text css-0"
+                      id="test-id-4-author"
+                    >
+                      writer 4
+                    </p>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-4-audience"
+                    >
+                      people
+                    </span>
+                    <span
+                      className="chakra-text css-0"
+                      id="test-id-4-genre"
+                    >
+                      genre
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="css-ys3583"
+                >
+                  <a
+                    aria-label="Test 4-image"
+                    className="css-0"
+                    href="https://www.nypl.org/"
+                    id="test-id-4"
+                    onClick={[Function]}
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="scout-nextjs-image"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "background": "none",
+                            "border": 0,
+                            "boxSizing": "border-box",
+                            "display": "block",
+                            "height": "initial",
+                            "margin": 0,
+                            "opacity": 1,
+                            "overflow": "hidden",
+                            "padding": 0,
+                            "position": "relative",
+                            "width": "initial",
+                          }
+                        }
+                      >
+                        <span
+                          style={
+                            Object {
+                              "background": "none",
+                              "border": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": "initial",
+                              "margin": 0,
+                              "opacity": 1,
+                              "padding": 0,
+                              "paddingTop": "50%",
+                              "width": "initial",
+                            }
+                          }
+                        />
+                        <img
+                          alt="image-4-alt-text"
+                          data-nimg="responsive"
+                          decoding="async"
+                          id="nextjsImage-test-id-4"
+                          onError={[Function]}
+                          onLoad={[Function]}
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                          style={
+                            Object {
+                              "border": "none",
+                              "bottom": 0,
+                              "boxSizing": "border-box",
+                              "display": "block",
+                              "height": 0,
+                              "left": 0,
+                              "margin": "auto",
+                              "maxHeight": "100%",
+                              "maxWidth": "100%",
+                              "minHeight": "100%",
+                              "minWidth": "100%",
+                              "objectFit": undefined,
+                              "objectPosition": undefined,
+                              "padding": 0,
+                              "position": "absolute",
+                              "right": 0,
+                              "top": 0,
+                              "width": 0,
+                            }
+                          }
+                        />
+                        <noscript>
+                          <img
+                            alt="image-4-alt-text"
+                            data-nimg="responsive"
+                            decoding="async"
+                            id="nextjsImage-test-id-4"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                            srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                            style={
+                              Object {
+                                "border": "none",
+                                "bottom": 0,
+                                "boxSizing": "border-box",
+                                "display": "block",
+                                "height": 0,
+                                "left": 0,
+                                "margin": "auto",
+                                "maxHeight": "100%",
+                                "maxWidth": "100%",
+                                "minHeight": "100%",
+                                "minWidth": "100%",
+                                "objectFit": undefined,
+                                "objectPosition": undefined,
+                                "padding": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "top": 0,
+                                "width": 0,
+                              }
+                            }
+                          />
+                        </noscript>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button
+          className="chakra-button css-r8n6x3"
+          direction="next"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        >
+          &gt;
+        </button>
+      </div>
+    </div>
+    <div
+      className="css-1ktje31"
+    >
+      <div
+        className="css-9cvqd6"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SlideshowButton tests should render the UI snapshot correctly 1`] = `
+<button
+  className="chakra-button css-5c2176"
+  direction="next"
+  onClick={[MockFunction]}
+  tabIndex={-1}
+  type="button"
+>
+  &gt;
+</button>
+`;
+
+exports[`SlideshowButton tests should render the UI snapshot correctly 2`] = `
+<button
+  className="chakra-button css-5c2176"
+  direction="prev"
+  onClick={[MockFunction]}
+  tabIndex={-1}
+  type="button"
+>
+  &lt;
+</button>
+`;
+
+exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = `
+<div
+  className="css-1ric1bm"
+>
+  <ul
+    className="css-1lmqp65"
+  >
+    <li
+      className="css-1fzgmij"
+      onFocus={[Function]}
+    >
+      <div
+        className="css-pgu20y"
+      >
+        <div
+          className="textBox css-0"
+        >
+          <h3
+            aria-describedby="test-id-1-author test-id-1-genre test-id-1-audience"
+            className="chakra-heading css-0"
+          >
+            <a
+              className="css-0"
+              href="https://www.nypl.org/"
+              id="test-id-1-link"
+              onClick={[Function]}
+            >
+              Test 1
+            </a>
+          </h3>
+          <div
+            className="details css-0"
+          >
+            <p
+              className="chakra-text css-0"
+              id="test-id-1-author"
+            >
+              writer 1
+            </p>
+            <span
+              className="chakra-text css-0"
+              id="test-id-1-audience"
+            >
+              people
+            </span>
+            <span
+              className="chakra-text css-0"
+              id="test-id-1-genre"
+            >
+              genre
+            </span>
+          </div>
+        </div>
+        <div
+          className="css-ys3583"
+        >
+          <a
+            aria-label="Test 1-image"
+            className="css-0"
+            href="https://www.nypl.org/"
+            id="test-id-1"
+            onClick={[Function]}
+            tabIndex={-1}
+          >
+            <div
+              className="scout-nextjs-image"
+            >
+              <span
+                style={
+                  Object {
+                    "background": "none",
+                    "border": 0,
+                    "boxSizing": "border-box",
+                    "display": "block",
+                    "height": "initial",
+                    "margin": 0,
+                    "opacity": 1,
+                    "overflow": "hidden",
+                    "padding": 0,
+                    "position": "relative",
+                    "width": "initial",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "margin": 0,
+                      "opacity": 1,
+                      "padding": 0,
+                      "paddingTop": "50%",
+                      "width": "initial",
+                    }
+                  }
+                />
+                <img
+                  alt="image-1-alt-text"
+                  data-nimg="responsive"
+                  decoding="async"
+                  id="nextjsImage-test-id-1"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  style={
+                    Object {
+                      "border": "none",
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": 0,
+                      "left": 0,
+                      "margin": "auto",
+                      "maxHeight": "100%",
+                      "maxWidth": "100%",
+                      "minHeight": "100%",
+                      "minWidth": "100%",
+                      "objectFit": undefined,
+                      "objectPosition": undefined,
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": 0,
+                    }
+                  }
+                />
+                <noscript>
+                  <img
+                    alt="image-1-alt-text"
+                    data-nimg="responsive"
+                    decoding="async"
+                    id="nextjsImage-test-id-1"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                    srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </noscript>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li
+      className="css-1fzgmij"
+      onFocus={[Function]}
+    >
+      <div
+        className="css-pgu20y"
+      >
+        <div
+          className="textBox css-0"
+        >
+          <h3
+            aria-describedby="test-id-2-author test-id-2-genre test-id-2-audience"
+            className="chakra-heading css-0"
+          >
+            <a
+              className="css-0"
+              href="https://www.nypl.org/"
+              id="test-id-2-link"
+              onClick={[Function]}
+            >
+              Test 2
+            </a>
+          </h3>
+          <div
+            className="details css-0"
+          >
+            <p
+              className="chakra-text css-0"
+              id="test-id-2-author"
+            >
+              writer 2
+            </p>
+            <span
+              className="chakra-text css-0"
+              id="test-id-2-audience"
+            >
+              people
+            </span>
+            <span
+              className="chakra-text css-0"
+              id="test-id-2-genre"
+            >
+              genre
+            </span>
+          </div>
+        </div>
+        <div
+          className="css-ys3583"
+        >
+          <a
+            aria-label="Test 2-image"
+            className="css-0"
+            href="https://www.nypl.org/"
+            id="test-id-2"
+            onClick={[Function]}
+            tabIndex={-1}
+          >
+            <div
+              className="scout-nextjs-image"
+            >
+              <span
+                style={
+                  Object {
+                    "background": "none",
+                    "border": 0,
+                    "boxSizing": "border-box",
+                    "display": "block",
+                    "height": "initial",
+                    "margin": 0,
+                    "opacity": 1,
+                    "overflow": "hidden",
+                    "padding": 0,
+                    "position": "relative",
+                    "width": "initial",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "margin": 0,
+                      "opacity": 1,
+                      "padding": 0,
+                      "paddingTop": "50%",
+                      "width": "initial",
+                    }
+                  }
+                />
+                <img
+                  alt="image-2-alt-text"
+                  data-nimg="responsive"
+                  decoding="async"
+                  id="nextjsImage-test-id-2"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  style={
+                    Object {
+                      "border": "none",
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": 0,
+                      "left": 0,
+                      "margin": "auto",
+                      "maxHeight": "100%",
+                      "maxWidth": "100%",
+                      "minHeight": "100%",
+                      "minWidth": "100%",
+                      "objectFit": undefined,
+                      "objectPosition": undefined,
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": 0,
+                    }
+                  }
+                />
+                <noscript>
+                  <img
+                    alt="image-2-alt-text"
+                    data-nimg="responsive"
+                    decoding="async"
+                    id="nextjsImage-test-id-2"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                    srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </noscript>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li
+      className="css-1fzgmij"
+      onFocus={[Function]}
+    >
+      <div
+        className="css-pgu20y"
+      >
+        <div
+          className="textBox css-0"
+        >
+          <h3
+            aria-describedby="test-id-3-author test-id-3-genre test-id-3-audience"
+            className="chakra-heading css-0"
+          >
+            <a
+              className="css-0"
+              href="https://www.nypl.org/"
+              id="test-id-3-link"
+              onClick={[Function]}
+            >
+              Test 3
+            </a>
+          </h3>
+          <div
+            className="details css-0"
+          >
+            <p
+              className="chakra-text css-0"
+              id="test-id-3-author"
+            >
+              writer 3
+            </p>
+            <span
+              className="chakra-text css-0"
+              id="test-id-3-audience"
+            >
+              people
+            </span>
+            <span
+              className="chakra-text css-0"
+              id="test-id-3-genre"
+            >
+              genre
+            </span>
+          </div>
+        </div>
+        <div
+          className="css-ys3583"
+        >
+          <a
+            aria-label="Test 3-image"
+            className="css-0"
+            href="https://www.nypl.org/"
+            id="test-id-3"
+            onClick={[Function]}
+            tabIndex={-1}
+          >
+            <div
+              className="scout-nextjs-image"
+            >
+              <span
+                style={
+                  Object {
+                    "background": "none",
+                    "border": 0,
+                    "boxSizing": "border-box",
+                    "display": "block",
+                    "height": "initial",
+                    "margin": 0,
+                    "opacity": 1,
+                    "overflow": "hidden",
+                    "padding": 0,
+                    "position": "relative",
+                    "width": "initial",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "margin": 0,
+                      "opacity": 1,
+                      "padding": 0,
+                      "paddingTop": "50%",
+                      "width": "initial",
+                    }
+                  }
+                />
+                <img
+                  alt="image-3-alt-text"
+                  data-nimg="responsive"
+                  decoding="async"
+                  id="nextjsImage-test-id-3"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  style={
+                    Object {
+                      "border": "none",
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": 0,
+                      "left": 0,
+                      "margin": "auto",
+                      "maxHeight": "100%",
+                      "maxWidth": "100%",
+                      "minHeight": "100%",
+                      "minWidth": "100%",
+                      "objectFit": undefined,
+                      "objectPosition": undefined,
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": 0,
+                    }
+                  }
+                />
+                <noscript>
+                  <img
+                    alt="image-3-alt-text"
+                    data-nimg="responsive"
+                    decoding="async"
+                    id="nextjsImage-test-id-3"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                    srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </noscript>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li
+      className="css-1fzgmij"
+      onFocus={[Function]}
+    >
+      <div
+        className="css-pgu20y"
+      >
+        <div
+          className="textBox css-0"
+        >
+          <h3
+            aria-describedby="test-id-4-author test-id-4-genre test-id-4-audience"
+            className="chakra-heading css-0"
+          >
+            <a
+              className="css-0"
+              href="https://www.nypl.org/"
+              id="test-id-4-link"
+              onClick={[Function]}
+            >
+              Test 4
+            </a>
+          </h3>
+          <div
+            className="details css-0"
+          >
+            <p
+              className="chakra-text css-0"
+              id="test-id-4-author"
+            >
+              writer 4
+            </p>
+            <span
+              className="chakra-text css-0"
+              id="test-id-4-audience"
+            >
+              people
+            </span>
+            <span
+              className="chakra-text css-0"
+              id="test-id-4-genre"
+            >
+              genre
+            </span>
+          </div>
+        </div>
+        <div
+          className="css-ys3583"
+        >
+          <a
+            aria-label="Test 4-image"
+            className="css-0"
+            href="https://www.nypl.org/"
+            id="test-id-4"
+            onClick={[Function]}
+            tabIndex={-1}
+          >
+            <div
+              className="scout-nextjs-image"
+            >
+              <span
+                style={
+                  Object {
+                    "background": "none",
+                    "border": 0,
+                    "boxSizing": "border-box",
+                    "display": "block",
+                    "height": "initial",
+                    "margin": 0,
+                    "opacity": 1,
+                    "overflow": "hidden",
+                    "padding": 0,
+                    "position": "relative",
+                    "width": "initial",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "margin": 0,
+                      "opacity": 1,
+                      "padding": 0,
+                      "paddingTop": "50%",
+                      "width": "initial",
+                    }
+                  }
+                />
+                <img
+                  alt="image-4-alt-text"
+                  data-nimg="responsive"
+                  decoding="async"
+                  id="nextjsImage-test-id-4"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  style={
+                    Object {
+                      "border": "none",
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": 0,
+                      "left": 0,
+                      "margin": "auto",
+                      "maxHeight": "100%",
+                      "maxWidth": "100%",
+                      "minHeight": "100%",
+                      "minWidth": "100%",
+                      "objectFit": undefined,
+                      "objectPosition": undefined,
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": 0,
+                    }
+                  }
+                />
+                <noscript>
+                  <img
+                    alt="image-4-alt-text"
+                    data-nimg="responsive"
+                    decoding="async"
+                    id="nextjsImage-test-id-4"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
+                    srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </noscript>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+`;

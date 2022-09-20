@@ -15,6 +15,7 @@ import { typeDefs as FilterTypes } from "./type-defs/filter";
 // Content types
 import { typeDefs as BlogTypes } from "./type-defs/blog";
 import { typeDefs as LocationTypes } from "./type-defs/location";
+import { typeDefs as HomePageTypes } from "./type-defs/homepage";
 // Mutations
 import { typeDefs as SendEmailTypes } from "./type-defs/sendEmail";
 
@@ -33,6 +34,7 @@ export const schema = makeExecutableSchema({
     FilterTypes,
     BlogTypes,
     LocationTypes,
+    HomePageTypes,
     SendEmailTypes,
   ],
   resolvers,
