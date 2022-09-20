@@ -37,9 +37,11 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
         position="relative"
         mt={{ base: `${currentSlide === 0 ? 0 : -9}`, md: 0 }}
       >
-        {currentSlide > 0 && (
-          <SlideshowButton direction={"prev"} prevSlide={prevSlide} />
-        )}
+        <SlideshowButton
+          buttonDirection={"prev"}
+          prevSlide={prevSlide}
+          visibility={currentSlide > 0 ? "visible" : "hidden"}
+        />
         <SlideshowContainer
           items={items}
           slideshowStyle={slideshowStyle}
@@ -49,9 +51,9 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
           sectionTitle={title}
         />
         <SlideshowButton
-          direction={"next"}
+          buttonDirection={"next"}
           nextSlide={nextSlide}
-          visibility={currentSlide !== items.length - 1 ? "visibile" : "hidden"}
+          visibility={currentSlide !== items.length - 1 ? "visible" : "hidden"}
         />
       </Box>
     </ComponentWrapper>

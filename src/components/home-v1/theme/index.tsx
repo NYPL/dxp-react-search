@@ -171,15 +171,15 @@ const theme = extendTheme({
           w: 9,
           minWidth: "unset",
           ml: {
-            base: props.direction === "prev" ? "35vw" : "50vw",
-            md: props.direction === "prev" ? "-110px" : "-60px",
+            base: props.buttonDirection === "prev" ? "35vw" : "50vw",
+            md: props.buttonDirection === "prev" ? "-110px" : "-60px",
           },
           mt: {
-            md: props.direction === "prev" ? "125px" : "-175px",
-            lg: props.direction === "prev" ? "125px" : "-215px",
+            md: props.buttonDirection === "prev" ? "125px" : "-175px",
+            lg: props.buttonDirection === "prev" ? "125px" : "-215px",
           },
           top: {
-            base: props.direction === "prev" ? "362px" : 4,
+            base: props.buttonDirection === "prev" ? "362px" : 4,
             md: 0,
           },
         }),

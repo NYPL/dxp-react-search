@@ -121,11 +121,11 @@ function StaffPick({ item, gaEventActionName }: StaffPickProps) {
             pb={1}
             fontSize={{ base: "lg", xl: "xl" }}
             lineHeight="none"
-            display="block-inline"
+            display="block"
           >
             {staffName}
           </Text>
-          <Text fontSize="md" lineHeight="none" display="block-inline">
+          <Text fontSize="md" lineHeight="none" display="block">
             {staffLocation}
           </Text>
         </Box>
