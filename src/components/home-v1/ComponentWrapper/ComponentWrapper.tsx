@@ -80,6 +80,7 @@ function ComponentWrapper({
           >
             <Heading
               as="h2"
+              id={`component-wrapper-heading-${id}`}
               size="md"
               variant="section-title"
               color={textColor}
@@ -87,7 +88,7 @@ function ComponentWrapper({
               borderTopColor={`${borderColor ? borderColor : ""}`}
             >
               <HomePageLink
-                id={`${id}-heading`}
+                id={`component-wrapper-heading-link-${id}`}
                 href={link}
                 gaEventActionName="Heading"
                 variant={
@@ -117,7 +118,7 @@ function ComponentWrapper({
           >
             {seeMore && (
               <HomePageLink
-                id={`${id}-seeMore`}
+                id={`component-wrapper-seeMore-link-${id}`}
                 aria-label={`see more of ${title}`}
                 href={seeMore.link}
                 gaEventActionName="See More"
