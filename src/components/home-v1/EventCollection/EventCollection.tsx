@@ -136,6 +136,11 @@ export default function EventCollection({
     }
   };
 
+  // Don't display the section if there's no items.
+  if (data.homePageEventCollection.items.length === 0) {
+    return null;
+  }
+
   return (
     <ComponentWrapper
       id={id}
