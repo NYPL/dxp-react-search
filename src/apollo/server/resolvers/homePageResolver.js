@@ -314,7 +314,7 @@ const homePageResolver = {
   },
   HomePageEvent: {
     id: (homePageEvent) => homePageEvent.id,
-    title: (homePageEvent) => homePageEvent.title,
+    title: (homePageEvent) => homePageEvent.field_ts_heading,
     image: (homePageEvent) => {
       const image =
         homePageEvent.field_ers_media_image.data === null
