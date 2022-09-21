@@ -1,4 +1,4 @@
-# DXP Scout
+# DXP Scout TEST Home page content entry sandbox
 
 React app build for www.nypl.org. Pages currently in repo:
 
