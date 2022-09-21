@@ -59,7 +59,7 @@ export default function EventCard({
         >
           {image && (
             <Image
-              id={image.id}
+              id={`event-image-${id}-${image.id}`}
               alt={image.alt}
               uri={image.uri}
               useTransformation={true}
