@@ -41,7 +41,9 @@ function BlogsAllPage() {
   );
 }
 
-export const getServerSideProps = async () => {
+const BlogsAllPageWithApollo = withApollo(BlogsAllPage);
+
+BlogsAllPageWithApollo.getInitialProps = async () => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
@@ -147,10 +149,8 @@ export const getServerSideProps = async () => {
   });
 
   return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
+    initialApolloState: apolloClient.cache.extract(),
   };
 };
 
-export default withApollo(BlogsAllPage);
+export default BlogsAllPageWithApollo;
