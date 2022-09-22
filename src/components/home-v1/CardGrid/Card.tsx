@@ -28,7 +28,7 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
   const omitItems = ["id", "title", "image", "url", "__typename"];
   for (const propName in item) {
     if (!omitItems.includes(propName)) {
-      describedByIdsArray.push(`${item.id}-${propName}`);
+      describedByIdsArray.push(`card-${propName}-${item.id}`);
     }
   }
   const describedByIdsString = describedByIdsArray.join(" ");
