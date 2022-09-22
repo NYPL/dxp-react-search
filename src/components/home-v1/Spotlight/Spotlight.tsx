@@ -89,6 +89,11 @@ export default function Spotlight({
     return <div>Loading ...</div>;
   }
 
+  // Don't display the section if there's no items.
+  if (data.homePageSpotlightCollection.items.length === 0) {
+    return null;
+  }
+
   return (
     <CardGrid
       id={id}

@@ -8,18 +8,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
     className="css-1fqkwup"
   >
     <div
-      className="css-1m8gjtz"
+      className="css-hze00u"
     >
       <div
         className="css-y9cf5o"
       >
         <h2
           className="chakra-heading css-m35uou"
+          id="component-wrapper-heading-slideshow-test-id"
         >
           <a
             className="css-0"
             href="https://nypl.com"
-            id="slideshow-test-id-heading"
+            id="component-wrapper-heading-link-slideshow-test-id"
             onClick={[Function]}
           >
             Test
@@ -31,8 +32,22 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
       className="css-1y2jlch"
     >
       <div
-        className="css-144klqr"
+        className="css-14ix2g8"
       >
+        <div
+          className="css-0"
+          id="slideshow-prev-button-container"
+        >
+          <button
+            className="chakra-button css-kk119v"
+            id="slideshow-prev-button"
+            onClick={[Function]}
+            tabIndex={-1}
+            type="button"
+          >
+            &lt;
+          </button>
+        </div>
         <div
           className="css-1ric1bm"
         >
@@ -45,18 +60,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             >
               <div
                 className="css-pgu20y"
+                id="slideshow-card-test-id-1"
               >
                 <div
                   className="textBox css-0"
                 >
                   <h3
-                    aria-describedby="test-id-1-author test-id-1-genre test-id-1-audience"
+                    aria-describedby="slideshow-card-author-test-id-1 slideshow-card-genre-test-id-1 slideshow-card-audience-test-id-1"
                     className="chakra-heading css-0"
                   >
                     <a
                       className="css-0"
                       href="https://www.nypl.org/"
-                      id="test-id-1-link"
+                      id="slideshow-card-heading-link-test-id-1"
                       onClick={[Function]}
                     >
                       Test 1
@@ -67,19 +83,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                   >
                     <p
                       className="chakra-text css-0"
-                      id="test-id-1-author"
+                      id="slideshow-card-author-test-id-1"
                     >
                       writer 1
                     </p>
                     <span
                       className="chakra-text css-0"
-                      id="test-id-1-audience"
+                      id="slideshow-card-audience-test-id-1"
                     >
                       people
                     </span>
                     <span
                       className="chakra-text css-0"
-                      id="test-id-1-genre"
+                      id="slideshow-card-genre-test-id-1"
                     >
                       genre
                     </span>
@@ -92,12 +108,13 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     aria-label="Test 1-image"
                     className="css-0"
                     href="https://www.nypl.org/"
-                    id="test-id-1"
+                    id="slideshow-card-image-link-test-id-1"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <div
                       className="scout-nextjs-image"
+                      id="nextjsImage-slideshow-test-id-1"
                     >
                       <span
                         style={
@@ -136,7 +153,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                           alt="image-1-alt-text"
                           data-nimg="responsive"
                           decoding="async"
-                          id="nextjsImage-test-id-1"
                           onError={[Function]}
                           onLoad={[Function]}
                           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -168,7 +184,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             alt="image-1-alt-text"
                             data-nimg="responsive"
                             decoding="async"
-                            id="nextjsImage-test-id-1"
                             loading="lazy"
                             sizes="100vw"
                             src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
@@ -209,18 +224,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             >
               <div
                 className="css-pgu20y"
+                id="slideshow-card-test-id-2"
               >
                 <div
                   className="textBox css-0"
                 >
                   <h3
-                    aria-describedby="test-id-2-author test-id-2-genre test-id-2-audience"
+                    aria-describedby="slideshow-card-author-test-id-2 slideshow-card-genre-test-id-2 slideshow-card-audience-test-id-2"
                     className="chakra-heading css-0"
                   >
                     <a
                       className="css-0"
                       href="https://www.nypl.org/"
-                      id="test-id-2-link"
+                      id="slideshow-card-heading-link-test-id-2"
                       onClick={[Function]}
                     >
                       Test 2
@@ -231,19 +247,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                   >
                     <p
                       className="chakra-text css-0"
-                      id="test-id-2-author"
+                      id="slideshow-card-author-test-id-2"
                     >
                       writer 2
                     </p>
                     <span
                       className="chakra-text css-0"
-                      id="test-id-2-audience"
+                      id="slideshow-card-audience-test-id-2"
                     >
                       people
                     </span>
                     <span
                       className="chakra-text css-0"
-                      id="test-id-2-genre"
+                      id="slideshow-card-genre-test-id-2"
                     >
                       genre
                     </span>
@@ -256,12 +272,13 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     aria-label="Test 2-image"
                     className="css-0"
                     href="https://www.nypl.org/"
-                    id="test-id-2"
+                    id="slideshow-card-image-link-test-id-2"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <div
                       className="scout-nextjs-image"
+                      id="nextjsImage-slideshow-test-id-2"
                     >
                       <span
                         style={
@@ -300,7 +317,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                           alt="image-2-alt-text"
                           data-nimg="responsive"
                           decoding="async"
-                          id="nextjsImage-test-id-2"
                           onError={[Function]}
                           onLoad={[Function]}
                           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -332,7 +348,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             alt="image-2-alt-text"
                             data-nimg="responsive"
                             decoding="async"
-                            id="nextjsImage-test-id-2"
                             loading="lazy"
                             sizes="100vw"
                             src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
@@ -373,18 +388,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             >
               <div
                 className="css-pgu20y"
+                id="slideshow-card-test-id-3"
               >
                 <div
                   className="textBox css-0"
                 >
                   <h3
-                    aria-describedby="test-id-3-author test-id-3-genre test-id-3-audience"
+                    aria-describedby="slideshow-card-author-test-id-3 slideshow-card-genre-test-id-3 slideshow-card-audience-test-id-3"
                     className="chakra-heading css-0"
                   >
                     <a
                       className="css-0"
                       href="https://www.nypl.org/"
-                      id="test-id-3-link"
+                      id="slideshow-card-heading-link-test-id-3"
                       onClick={[Function]}
                     >
                       Test 3
@@ -395,19 +411,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                   >
                     <p
                       className="chakra-text css-0"
-                      id="test-id-3-author"
+                      id="slideshow-card-author-test-id-3"
                     >
                       writer 3
                     </p>
                     <span
                       className="chakra-text css-0"
-                      id="test-id-3-audience"
+                      id="slideshow-card-audience-test-id-3"
                     >
                       people
                     </span>
                     <span
                       className="chakra-text css-0"
-                      id="test-id-3-genre"
+                      id="slideshow-card-genre-test-id-3"
                     >
                       genre
                     </span>
@@ -420,12 +436,13 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     aria-label="Test 3-image"
                     className="css-0"
                     href="https://www.nypl.org/"
-                    id="test-id-3"
+                    id="slideshow-card-image-link-test-id-3"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <div
                       className="scout-nextjs-image"
+                      id="nextjsImage-slideshow-test-id-3"
                     >
                       <span
                         style={
@@ -464,7 +481,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                           alt="image-3-alt-text"
                           data-nimg="responsive"
                           decoding="async"
-                          id="nextjsImage-test-id-3"
                           onError={[Function]}
                           onLoad={[Function]}
                           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -496,7 +512,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             alt="image-3-alt-text"
                             data-nimg="responsive"
                             decoding="async"
-                            id="nextjsImage-test-id-3"
                             loading="lazy"
                             sizes="100vw"
                             src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
@@ -537,18 +552,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             >
               <div
                 className="css-pgu20y"
+                id="slideshow-card-test-id-4"
               >
                 <div
                   className="textBox css-0"
                 >
                   <h3
-                    aria-describedby="test-id-4-author test-id-4-genre test-id-4-audience"
+                    aria-describedby="slideshow-card-author-test-id-4 slideshow-card-genre-test-id-4 slideshow-card-audience-test-id-4"
                     className="chakra-heading css-0"
                   >
                     <a
                       className="css-0"
                       href="https://www.nypl.org/"
-                      id="test-id-4-link"
+                      id="slideshow-card-heading-link-test-id-4"
                       onClick={[Function]}
                     >
                       Test 4
@@ -559,19 +575,19 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                   >
                     <p
                       className="chakra-text css-0"
-                      id="test-id-4-author"
+                      id="slideshow-card-author-test-id-4"
                     >
                       writer 4
                     </p>
                     <span
                       className="chakra-text css-0"
-                      id="test-id-4-audience"
+                      id="slideshow-card-audience-test-id-4"
                     >
                       people
                     </span>
                     <span
                       className="chakra-text css-0"
-                      id="test-id-4-genre"
+                      id="slideshow-card-genre-test-id-4"
                     >
                       genre
                     </span>
@@ -584,12 +600,13 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     aria-label="Test 4-image"
                     className="css-0"
                     href="https://www.nypl.org/"
-                    id="test-id-4"
+                    id="slideshow-card-image-link-test-id-4"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <div
                       className="scout-nextjs-image"
+                      id="nextjsImage-slideshow-test-id-4"
                     >
                       <span
                         style={
@@ -628,7 +645,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                           alt="image-4-alt-text"
                           data-nimg="responsive"
                           decoding="async"
-                          id="nextjsImage-test-id-4"
                           onError={[Function]}
                           onLoad={[Function]}
                           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -660,7 +676,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             alt="image-4-alt-text"
                             data-nimg="responsive"
                             decoding="async"
-                            id="nextjsImage-test-id-4"
                             loading="lazy"
                             sizes="100vw"
                             src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
@@ -697,22 +712,27 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             </li>
           </ul>
         </div>
-        <button
-          className="chakra-button css-r8n6x3"
-          direction="next"
-          onClick={[Function]}
-          tabIndex={-1}
-          type="button"
+        <div
+          className="css-0"
+          id="slideshow-next-button-container"
         >
-          &gt;
-        </button>
+          <button
+            className="chakra-button css-14x6ec9"
+            id="slideshow-next-button"
+            onClick={[Function]}
+            tabIndex={-1}
+            type="button"
+          >
+            &gt;
+          </button>
+        </div>
       </div>
     </div>
     <div
       className="css-1ktje31"
     >
       <div
-        className="css-9cvqd6"
+        className="css-i2lecr"
       />
     </div>
   </div>
@@ -720,27 +740,37 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
 `;
 
 exports[`SlideshowButton tests should render the UI snapshot correctly 1`] = `
-<button
-  className="chakra-button css-5c2176"
-  direction="next"
-  onClick={[MockFunction]}
-  tabIndex={-1}
-  type="button"
+<div
+  className="css-0"
+  id="slideshow-next-button-container"
 >
-  &gt;
-</button>
+  <button
+    className="chakra-button css-5c2176"
+    id="slideshow-next-button"
+    onClick={[MockFunction]}
+    tabIndex={-1}
+    type="button"
+  >
+    &gt;
+  </button>
+</div>
 `;
 
 exports[`SlideshowButton tests should render the UI snapshot correctly 2`] = `
-<button
-  className="chakra-button css-5c2176"
-  direction="prev"
-  onClick={[MockFunction]}
-  tabIndex={-1}
-  type="button"
+<div
+  className="css-0"
+  id="slideshow-prev-button-container"
 >
-  &lt;
-</button>
+  <button
+    className="chakra-button css-5c2176"
+    id="slideshow-prev-button"
+    onClick={[MockFunction]}
+    tabIndex={-1}
+    type="button"
+  >
+    &lt;
+  </button>
+</div>
 `;
 
 exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = `
@@ -756,18 +786,19 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     >
       <div
         className="css-pgu20y"
+        id="slideshow-card-test-id-1"
       >
         <div
           className="textBox css-0"
         >
           <h3
-            aria-describedby="test-id-1-author test-id-1-genre test-id-1-audience"
+            aria-describedby="slideshow-card-author-test-id-1 slideshow-card-genre-test-id-1 slideshow-card-audience-test-id-1"
             className="chakra-heading css-0"
           >
             <a
               className="css-0"
               href="https://www.nypl.org/"
-              id="test-id-1-link"
+              id="slideshow-card-heading-link-test-id-1"
               onClick={[Function]}
             >
               Test 1
@@ -778,19 +809,19 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
           >
             <p
               className="chakra-text css-0"
-              id="test-id-1-author"
+              id="slideshow-card-author-test-id-1"
             >
               writer 1
             </p>
             <span
               className="chakra-text css-0"
-              id="test-id-1-audience"
+              id="slideshow-card-audience-test-id-1"
             >
               people
             </span>
             <span
               className="chakra-text css-0"
-              id="test-id-1-genre"
+              id="slideshow-card-genre-test-id-1"
             >
               genre
             </span>
@@ -803,12 +834,13 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             aria-label="Test 1-image"
             className="css-0"
             href="https://www.nypl.org/"
-            id="test-id-1"
+            id="slideshow-card-image-link-test-id-1"
             onClick={[Function]}
             tabIndex={-1}
           >
             <div
               className="scout-nextjs-image"
+              id="nextjsImage-slideshow-test-id-1"
             >
               <span
                 style={
@@ -847,7 +879,6 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                   alt="image-1-alt-text"
                   data-nimg="responsive"
                   decoding="async"
-                  id="nextjsImage-test-id-1"
                   onError={[Function]}
                   onLoad={[Function]}
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -879,7 +910,6 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     alt="image-1-alt-text"
                     data-nimg="responsive"
                     decoding="async"
-                    id="nextjsImage-test-id-1"
                     loading="lazy"
                     sizes="100vw"
                     src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
@@ -920,18 +950,19 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     >
       <div
         className="css-pgu20y"
+        id="slideshow-card-test-id-2"
       >
         <div
           className="textBox css-0"
         >
           <h3
-            aria-describedby="test-id-2-author test-id-2-genre test-id-2-audience"
+            aria-describedby="slideshow-card-author-test-id-2 slideshow-card-genre-test-id-2 slideshow-card-audience-test-id-2"
             className="chakra-heading css-0"
           >
             <a
               className="css-0"
               href="https://www.nypl.org/"
-              id="test-id-2-link"
+              id="slideshow-card-heading-link-test-id-2"
               onClick={[Function]}
             >
               Test 2
@@ -942,19 +973,19 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
           >
             <p
               className="chakra-text css-0"
-              id="test-id-2-author"
+              id="slideshow-card-author-test-id-2"
             >
               writer 2
             </p>
             <span
               className="chakra-text css-0"
-              id="test-id-2-audience"
+              id="slideshow-card-audience-test-id-2"
             >
               people
             </span>
             <span
               className="chakra-text css-0"
-              id="test-id-2-genre"
+              id="slideshow-card-genre-test-id-2"
             >
               genre
             </span>
@@ -967,12 +998,13 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             aria-label="Test 2-image"
             className="css-0"
             href="https://www.nypl.org/"
-            id="test-id-2"
+            id="slideshow-card-image-link-test-id-2"
             onClick={[Function]}
             tabIndex={-1}
           >
             <div
               className="scout-nextjs-image"
+              id="nextjsImage-slideshow-test-id-2"
             >
               <span
                 style={
@@ -1011,7 +1043,6 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                   alt="image-2-alt-text"
                   data-nimg="responsive"
                   decoding="async"
-                  id="nextjsImage-test-id-2"
                   onError={[Function]}
                   onLoad={[Function]}
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -1043,7 +1074,6 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     alt="image-2-alt-text"
                     data-nimg="responsive"
                     decoding="async"
-                    id="nextjsImage-test-id-2"
                     loading="lazy"
                     sizes="100vw"
                     src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
@@ -1084,18 +1114,19 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     >
       <div
         className="css-pgu20y"
+        id="slideshow-card-test-id-3"
       >
         <div
           className="textBox css-0"
         >
           <h3
-            aria-describedby="test-id-3-author test-id-3-genre test-id-3-audience"
+            aria-describedby="slideshow-card-author-test-id-3 slideshow-card-genre-test-id-3 slideshow-card-audience-test-id-3"
             className="chakra-heading css-0"
           >
             <a
               className="css-0"
               href="https://www.nypl.org/"
-              id="test-id-3-link"
+              id="slideshow-card-heading-link-test-id-3"
               onClick={[Function]}
             >
               Test 3
@@ -1106,19 +1137,19 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
           >
             <p
               className="chakra-text css-0"
-              id="test-id-3-author"
+              id="slideshow-card-author-test-id-3"
             >
               writer 3
             </p>
             <span
               className="chakra-text css-0"
-              id="test-id-3-audience"
+              id="slideshow-card-audience-test-id-3"
             >
               people
             </span>
             <span
               className="chakra-text css-0"
-              id="test-id-3-genre"
+              id="slideshow-card-genre-test-id-3"
             >
               genre
             </span>
@@ -1131,12 +1162,13 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             aria-label="Test 3-image"
             className="css-0"
             href="https://www.nypl.org/"
-            id="test-id-3"
+            id="slideshow-card-image-link-test-id-3"
             onClick={[Function]}
             tabIndex={-1}
           >
             <div
               className="scout-nextjs-image"
+              id="nextjsImage-slideshow-test-id-3"
             >
               <span
                 style={
@@ -1175,7 +1207,6 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                   alt="image-3-alt-text"
                   data-nimg="responsive"
                   decoding="async"
-                  id="nextjsImage-test-id-3"
                   onError={[Function]}
                   onLoad={[Function]}
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -1207,7 +1238,6 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     alt="image-3-alt-text"
                     data-nimg="responsive"
                     decoding="async"
-                    id="nextjsImage-test-id-3"
                     loading="lazy"
                     sizes="100vw"
                     src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
@@ -1248,18 +1278,19 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     >
       <div
         className="css-pgu20y"
+        id="slideshow-card-test-id-4"
       >
         <div
           className="textBox css-0"
         >
           <h3
-            aria-describedby="test-id-4-author test-id-4-genre test-id-4-audience"
+            aria-describedby="slideshow-card-author-test-id-4 slideshow-card-genre-test-id-4 slideshow-card-audience-test-id-4"
             className="chakra-heading css-0"
           >
             <a
               className="css-0"
               href="https://www.nypl.org/"
-              id="test-id-4-link"
+              id="slideshow-card-heading-link-test-id-4"
               onClick={[Function]}
             >
               Test 4
@@ -1270,19 +1301,19 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
           >
             <p
               className="chakra-text css-0"
-              id="test-id-4-author"
+              id="slideshow-card-author-test-id-4"
             >
               writer 4
             </p>
             <span
               className="chakra-text css-0"
-              id="test-id-4-audience"
+              id="slideshow-card-audience-test-id-4"
             >
               people
             </span>
             <span
               className="chakra-text css-0"
-              id="test-id-4-genre"
+              id="slideshow-card-genre-test-id-4"
             >
               genre
             </span>
@@ -1295,12 +1326,13 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             aria-label="Test 4-image"
             className="css-0"
             href="https://www.nypl.org/"
-            id="test-id-4"
+            id="slideshow-card-image-link-test-id-4"
             onClick={[Function]}
             tabIndex={-1}
           >
             <div
               className="scout-nextjs-image"
+              id="nextjsImage-slideshow-test-id-4"
             >
               <span
                 style={
@@ -1339,7 +1371,6 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                   alt="image-4-alt-text"
                   data-nimg="responsive"
                   decoding="async"
-                  id="nextjsImage-test-id-4"
                   onError={[Function]}
                   onLoad={[Function]}
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -1371,7 +1402,6 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     alt="image-4-alt-text"
                     data-nimg="responsive"
                     decoding="async"
-                    id="nextjsImage-test-id-4"
                     loading="lazy"
                     sizes="100vw"
                     src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"

@@ -137,6 +137,11 @@ export default function EventCollection({
     }
   };
 
+  // Don't display the section if there's no items.
+  if (data.homePageEventCollection.items.length === 0) {
+    return null;
+  }
+
   return (
     <ComponentWrapper
       id={id}
@@ -160,7 +165,12 @@ export default function EventCollection({
             }
             if (featuredEvent) {
               return (
-                <Box as="li" mb={4} key={`${eventCategory}-featured-event-key`}>
+                <Box
+                  as="li"
+                  mb={4}
+                  key={`${eventCategory}-featured-event-key`}
+                  listStyleType="none"
+                >
                   <Heading
                     as="h3"
                     fontFamily="Kievit-Medium"
@@ -218,14 +228,9 @@ export default function EventCollection({
               ))}
           </TabList>
           <TabPanels>
-            {eventsCategories.map((eventCategory, i) => {
+            {eventsCategories.map((eventCategory) => {
               return (
-                <TabPanel
-                  id={`event-tab-panel-${i}`}
-                  px={0}
-                  tabIndex={-1}
-                  key={eventCategory}
-                >
+                <TabPanel px={0} tabIndex={-1} key={eventCategory}>
                   <EventCollectionTabPanelContent
                     id={`event-tab-panel-${eventCategory}`}
                     events={eventsGroupedByCategory[eventCategory]}

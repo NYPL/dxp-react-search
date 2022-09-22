@@ -15,6 +15,7 @@ import EventCollection from "./../EventCollection";
 import CardGrid from "./../CardGrid";
 import StaffPicks from "./../StaffPicks";
 import Slideshow from "../Slideshow";
+import homePageContent from "../../../__content/homePage";
 
 export const HOME_PAGE_QUERY = gql`
   query ($id: String, $revisionId: String, $preview: Boolean) {
@@ -255,9 +256,15 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
   const homePageDataSectionSeven = data.homePage.sectionSeven[0];
   const homePageDataSectionEight = data.homePage.sectionEight[0];
 
+  const { meta } = homePageContent;
+
   return (
     <>
-      <Meta title="homepage!" description="homepage desc!" />
+      <Meta
+        title={meta.title}
+        description={meta.description}
+        imageUrl={meta.imageUrl}
+      />
       <Box className="scout__homepage">
         <ScoutHomepageV1Provider>
           <main id="main-content">

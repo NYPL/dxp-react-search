@@ -78,7 +78,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
             aria-label={`${tag}, link to ${title}, ${description}`}
             gaEventActionName={"Hero"}
           />
-          <Heading as="h2">{title}</Heading>
+          <Heading as="h1">{title}</Heading>
           <Text>{description}</Text>
           <Box h={{ base: 0, md: "25px" }} position="relative">
             <HomePageLink
