@@ -82,6 +82,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
           <Text>{description}</Text>
           <Box h={{ base: 0, md: "25px" }} position="relative">
             <HomePageLink
+              aria-label={title}
               id={`hero-button-link-${id}`}
               href={url}
               gaEventActionName={"Hero button"}
