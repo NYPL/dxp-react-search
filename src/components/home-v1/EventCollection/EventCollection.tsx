@@ -196,6 +196,7 @@ export default function EventCollection({
 
         {/* Desktop */}
         <Tabs
+          id={`event-tabs-${id}`}
           display={{ base: "none", md: "block" }}
           align="end"
           variant="enclosed"
