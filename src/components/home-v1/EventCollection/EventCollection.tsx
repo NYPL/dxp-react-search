@@ -204,7 +204,83 @@ export default function EventCollection({
           borderColor="red.200"
         >
           <TabList borderBottomWidth="2px">
-            {eventsCategories &&
+            <Tab
+              key={`event-tab-key-${eventsCategories[0]}`}
+              flex={{ base: 1, lg: "unset" }}
+              py={2.5}
+              px={5}
+              w={{ lg: "15.5%", xl: "12%" }}
+              textTransform="uppercase"
+              fontSize="xs"
+              lineHeight="none"
+              _selected={{
+                color: "red.200",
+                borderRadius: "none",
+                border: "2px solid ",
+                borderBottomColor: "brand.100",
+                mb: "-0.5",
+              }}
+            >
+              {eventCategoryLabel(eventsCategories[0])}
+            </Tab>
+            <Tab
+              key={`event-tab-key-${eventsCategories[1]}`}
+              flex={{ base: 1, lg: "unset" }}
+              py={2.5}
+              px={5}
+              w={{ lg: "15.5%", xl: "12%" }}
+              textTransform="uppercase"
+              fontSize="xs"
+              lineHeight="none"
+              _selected={{
+                color: "red.200",
+                borderRadius: "none",
+                border: "2px solid ",
+                borderBottomColor: "brand.100",
+                mb: "-0.5",
+              }}
+            >
+              {eventCategoryLabel(eventsCategories[1])}
+            </Tab>
+            <Tab
+              key={`event-tab-key-${eventsCategories[2]}`}
+              flex={{ base: 1, lg: "unset" }}
+              py={2.5}
+              px={5}
+              w={{ lg: "15.5%", xl: "12%" }}
+              textTransform="uppercase"
+              fontSize="xs"
+              lineHeight="none"
+              _selected={{
+                color: "red.200",
+                borderRadius: "none",
+                border: "2px solid ",
+                borderBottomColor: "brand.100",
+                mb: "-0.5",
+              }}
+            >
+              {eventCategoryLabel(eventsCategories[2])}
+            </Tab>
+            <Tab
+              key={`event-tab-key-${eventsCategories[3]}`}
+              flex={{ base: 1, lg: "unset" }}
+              py={2.5}
+              px={5}
+              w={{ lg: "15.5%", xl: "12%" }}
+              textTransform="uppercase"
+              fontSize="xs"
+              lineHeight="none"
+              _selected={{
+                color: "red.200",
+                borderRadius: "none",
+                border: "2px solid ",
+                borderBottomColor: "brand.100",
+                mb: "-0.5",
+              }}
+            >
+              {eventCategoryLabel(eventsCategories[3])}
+            </Tab>
+            {/* {eventsCategories &&
               eventsCategories.map((eventsCategory) => (
                 <Tab
                   key={`event-tab-key-${eventsCategory}`}
@@ -225,7 +301,7 @@ export default function EventCollection({
                 >
                   {eventCategoryLabel(eventsCategory)}
                 </Tab>
-              ))}
+              ))} */}
           </TabList>
           <TabPanels>
             {eventsCategories.map((eventCategory) => {
