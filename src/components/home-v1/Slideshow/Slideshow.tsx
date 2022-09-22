@@ -18,11 +18,12 @@ interface SlideshowProps {
 }
 
 function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
-  // Ensure items array is never longer than 10 items
+  // Ensure items array is never longer than 10 items.
   const finalItems: SlideshowItem[] = items.slice(0, 10);
 
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
     useSlideshowStyles(finalItems.length, Math.floor(100 / finalItems.length));
+
   return (
     <ComponentWrapper
       id={id}
