@@ -29,6 +29,7 @@ function SlideshowContainer({
       prevSlide();
     }
   };
+
   return (
     <Box w="full" overflow="hidden">
       <Grid

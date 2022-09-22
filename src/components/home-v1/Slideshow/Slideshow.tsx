@@ -18,8 +18,15 @@ interface SlideshowProps {
 }
 
 function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
+  let itemsSlice: SlideshowItem[];
+  // Ensure items array is never longer than 10 items
+  if (items.length > 10) {
+    itemsSlice = items.slice(0, 10);
+  } else {
+    itemsSlice = items.slice();
+  }
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
-    useSlideshowStyles(items.length, 15.7);
+    useSlideshowStyles(itemsSlice.length, Math.floor(100 / itemsSlice.length));
   return (
     <ComponentWrapper
       id={id}
@@ -40,7 +47,7 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
           <SlideshowButton direction={"prev"} prevSlide={prevSlide} />
         )}
         <SlideshowContainer
-          items={items}
+          items={itemsSlice}
           slideshowStyle={slideshowStyle}
           currentSlide={currentSlide}
           nextSlide={nextSlide}
@@ -50,7 +57,9 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
         <SlideshowButton
           direction={"next"}
           nextSlide={nextSlide}
-          visibility={currentSlide !== items.length - 1 ? "visibile" : "hidden"}
+          visibility={
+            currentSlide !== itemsSlice.length - 1 ? "visibile" : "hidden"
+          }
         />
       </Box>
     </ComponentWrapper>
