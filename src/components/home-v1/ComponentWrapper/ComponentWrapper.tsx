@@ -77,7 +77,7 @@ function ComponentWrapper({
         >
           <Box
             mt={{
-              base: "",
+              base: 0,
               lg: `${alignSectionHeading ? alignSectionHeading : ""}`,
             }}
           >
