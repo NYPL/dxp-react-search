@@ -29,7 +29,7 @@ function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
   const omitItems = ["id", "title", "image", "url", "__typename"];
   for (const propName in item) {
     if (!omitItems.includes(propName)) {
-      describedByIdsArray.push(`${item.id}-${propName}`);
+      describedByIdsArray.push(`slidesho-card-${propName}-${item.id}`);
     }
   }
   const describedByIdsString = describedByIdsArray.join(" ");
