@@ -1,4 +1,4 @@
-# DXP Scout @REMOVE ME
+# DXP Scout
 
 React app build for www.nypl.org. Pages currently in repo:
 
