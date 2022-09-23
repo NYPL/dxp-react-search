@@ -47,6 +47,7 @@ export default function EventCollectionTabPanelContent({
         {featuredEvent && (
           <EventCard
             {...featuredEvent}
+            id={`featured-${featuredEvent.id}`}
             variant="event-card-feaured"
             size="xl"
             gaEventActionName={`${sectionTitle} - ${featuredEvent.title} - 1`}
@@ -84,6 +85,7 @@ export default function EventCollectionTabPanelContent({
             >
               <EventCard
                 {...event}
+                id={`${event.id}-tablet`}
                 variant="event-card"
                 gaEventActionName={`${sectionTitle} - ${event.title} - ${
                   i + 1

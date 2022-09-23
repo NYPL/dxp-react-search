@@ -21,6 +21,7 @@ export const HOME_PAGE_HERO_COLLECTION_QUERY = gql`
         image {
           id
           uri
+          alt
           width
           height
           transformations {
