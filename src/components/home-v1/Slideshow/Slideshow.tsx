@@ -20,6 +20,7 @@ interface SlideshowProps {
 function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
   const { currentSlide, prevSlide, nextSlide, slideshowStyle } =
     useSlideshowStyles(items.length, 15.7);
+
   return (
     <ComponentWrapper
       id={id}
@@ -33,7 +34,7 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
     >
       <Box w="full" position="relative" mt={{ base: -9, md: 0 }}>
         <SlideshowButton
-          buttonDirection={"prev"}
+          buttonDirection="prev"
           prevSlide={prevSlide}
           visibility={currentSlide > 0 ? "visible" : "hidden"}
         />
@@ -46,7 +47,7 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
           sectionTitle={title}
         />
         <SlideshowButton
-          buttonDirection={"next"}
+          buttonDirection="next"
           nextSlide={nextSlide}
           visibility={currentSlide !== items.length - 1 ? "visible" : "hidden"}
         />

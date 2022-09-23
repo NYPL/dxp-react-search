@@ -16,6 +16,7 @@ function SlideshowButton({
   visibility,
 }: SlideshowButtonProps) {
   const style = useStyleConfig("ButtonContainer", { buttonDirection });
+
   return (
     <Box id={`slideshow-${buttonDirection}-button-container`} __css={style}>
       <Button
