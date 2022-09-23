@@ -717,7 +717,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
           id="slideshow-next-button-container"
         >
           <button
-            className="chakra-button css-14x6ec9"
+            className="chakra-button css-r8n6x3"
             id="slideshow-next-button"
             onClick={[Function]}
             tabIndex={-1}
