@@ -3,7 +3,7 @@ import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Box, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
 import HomePageLink from "../HomePageLink";
-import Image from "./../../shared/Image";
+import Image, { ImageType } from "./../../shared/Image";
 
 export interface EventCardProps {
   id: string;
@@ -11,7 +11,7 @@ export interface EventCardProps {
   category: string;
   displayDate: string;
   location: string;
-  image: any;
+  image: ImageType;
   link: string;
   weight: number;
   variant: string;
@@ -33,11 +33,11 @@ export default function EventCard({
   const styles: any = useStyleConfig("Event", { variant, size });
 
   return (
-    <Grid id={id} sx={styles}>
+    <Grid id={`event-card-${id}`} sx={styles}>
       <GridItem className="textBox">
         <Heading as="h3">
           <HomePageLink
-            id={id}
+            id={`event-card-heading-link-${id}`}
             href={link}
             gaEventActionName={gaEventActionName}
           >
@@ -51,7 +51,7 @@ export default function EventCard({
       </GridItem>
       <GridItem colStart={1} rowStart={1}>
         <HomePageLink
-          id={id}
+          id={`event-card-image-link-${id}`}
           href={link}
           aria-label={`${title}-image`}
           tabIndex={-1}
@@ -59,7 +59,7 @@ export default function EventCard({
         >
           {image && (
             <Image
-              id={image.id}
+              id={`event-image-${id}-${image.id}`}
               alt={image.alt}
               uri={image.uri}
               useTransformation={true}

@@ -156,10 +156,27 @@ const theme = extendTheme({
         },
       },
     },
+    ButtonContainer: {
+      baseStyle: ({ buttonDirection }: { buttonDirection: string }) => ({
+        position: "relative",
+        float: { md: "left" },
+        ml: {
+          base: buttonDirection === "prev" ? "35vw" : "50vw",
+          md: buttonDirection === "prev" ? "-110px" : "-60px",
+        },
+        mt: {
+          md: buttonDirection === "prev" ? "125px" : "-175px",
+          lg: buttonDirection === "prev" ? "125px" : "-215px",
+        },
+        top: {
+          base: buttonDirection === "prev" ? "362px" : 4,
+          md: 0,
+        },
+      }),
+    },
     Button: {
       variants: {
-        "slide-show": (props: any) => ({
-          float: { md: "left" },
+        "slide-show": {
           color: "brand.100",
           border: "2px",
           borderColor: "brand.100",
@@ -170,19 +187,7 @@ const theme = extendTheme({
           h: 9,
           w: 9,
           minWidth: "unset",
-          ml: {
-            base: props.direction === "prev" ? "35vw" : "50vw",
-            md: props.direction === "prev" ? "-110px" : "-60px",
-          },
-          mt: {
-            md: props.direction === "prev" ? "125px" : "-175px",
-            lg: props.direction === "prev" ? "125px" : "-215px",
-          },
-          top: {
-            base: props.direction === "prev" ? "362px" : 4,
-            md: 0,
-          },
-        }),
+        },
       },
     },
     QuoteBg,
