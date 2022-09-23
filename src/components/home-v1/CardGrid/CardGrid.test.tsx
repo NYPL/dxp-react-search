@@ -112,7 +112,7 @@ describe("Card tests", () => {
     render(<Card item={item} gaEventActionName={"cardTest"} />);
     expect(screen.getByRole("heading", { name: /Test/i })).toHaveAttribute(
       "aria-describedby",
-      "test-id-1-location"
+      "card-location-test-id-1"
     );
   });
   it("should render the UI snapshot correctly", () => {

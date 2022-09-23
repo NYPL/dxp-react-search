@@ -48,7 +48,7 @@ function CardGrid({
             <GridItem
               as="li"
               key={`card-grid-item-key-${i}`}
-              id={item.id}
+              id={`card-grid-item-${item.id}`}
               listStyleType="none"
             >
               <Card
