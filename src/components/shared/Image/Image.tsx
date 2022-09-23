@@ -19,9 +19,9 @@ function Image({
   uri,
 }: ImageProps) {
   return (
-    <div className="scout-nextjs-image">
+    <div id={`nextjsImage-${id}`} className="scout-nextjs-image">
       <NextImage
-        id={`nextjsImage-${id}`}
+        // id={`nextjsImage-${id}`}
         alt={alt}
         // @ts-ignore
         src={

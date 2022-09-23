@@ -35,14 +35,12 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
       buttonBorder="brand.100"
       seeMore={seeMore}
     >
-      <Box
-        w="full"
-        position="relative"
-        mt={{ base: `${currentSlide === 0 ? 0 : -9}`, md: 0 }}
-      >
-        {currentSlide > 0 && (
-          <SlideshowButton direction={"prev"} prevSlide={prevSlide} />
-        )}
+      <Box w="full" position="relative" mt={{ base: -9, md: 0 }}>
+        <SlideshowButton
+          buttonDirection="prev"
+          prevSlide={prevSlide}
+          visibility={currentSlide > 0 ? "visible" : "hidden"}
+        />
         <SlideshowContainer
           items={finalItems}
           slideshowStyle={slideshowStyle}
@@ -52,7 +50,7 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
           sectionTitle={title}
         />
         <SlideshowButton
-          direction={"next"}
+          buttonDirection="next"
           nextSlide={nextSlide}
           visibility={
             currentSlide !== finalItems.length - 1 ? "visibile" : "hidden"

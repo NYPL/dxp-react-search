@@ -167,15 +167,15 @@ describe("useSlideshow tests", () => {
 
 describe("SlideshowButton tests", () => {
   it("should pass axe accessibility test", async () => {
-    const { container } = render(<SlideshowButton direction="next" />);
+    const { container } = render(<SlideshowButton buttonDirection="next" />);
     expect(await axe(container)).toHaveNoViolations();
   });
   it("should render correct button according to direction prop", () => {
     // Render button with direction set to next should render the next button
-    const { rerender } = render(<SlideshowButton direction="next" />);
+    const { rerender } = render(<SlideshowButton buttonDirection="next" />);
     expect(screen.getByRole("button", { name: />/i })).toBeInTheDocument();
     // Render button with direction set to prev should render the next button
-    rerender(<SlideshowButton direction="prev" />);
+    rerender(<SlideshowButton buttonDirection="prev" />);
     expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
   });
   it("should call the nextSlide function when the next button is clicked", () => {
@@ -185,7 +185,7 @@ describe("SlideshowButton tests", () => {
 
     render(
       <SlideshowButton
-        direction="next"
+        buttonDirection="next"
         nextSlide={spyNextSlide}
         prevSlide={spyPrevSlide}
       />
@@ -201,7 +201,7 @@ describe("SlideshowButton tests", () => {
 
     render(
       <SlideshowButton
-        direction="prev"
+        buttonDirection="prev"
         nextSlide={spyNextSlide}
         prevSlide={spyPrevSlide}
       />
@@ -218,10 +218,10 @@ describe("SlideshowButton tests", () => {
     // const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
     // const { prevSlide, nextSlide } = result.current;
     const nextButton = renderer
-      .create(<SlideshowButton direction="next" nextSlide={nextSlide} />)
+      .create(<SlideshowButton buttonDirection="next" nextSlide={nextSlide} />)
       .toJSON();
     const prevButton = renderer
-      .create(<SlideshowButton direction="prev" prevSlide={prevSlide} />)
+      .create(<SlideshowButton buttonDirection="prev" prevSlide={prevSlide} />)
       .toJSON();
     expect(nextButton).toMatchSnapshot();
     expect(prevButton).toMatchSnapshot();

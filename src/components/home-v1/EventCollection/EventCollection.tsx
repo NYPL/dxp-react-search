@@ -33,6 +33,7 @@ export const HOME_PAGE_EVENT_COLLECTION_QUERY = gql`
         image {
           id
           uri
+          alt
           transformations {
             id
             uri
@@ -183,6 +184,7 @@ export default function EventCollection({
                   </Heading>
                   <EventCard
                     {...featuredEvent}
+                    id={`featured-${featuredEvent.id}-mobile`}
                     variant="event-card"
                     gaEventActionName={`${title} - ${eventCategory} - ${featuredEvent.title} - mobile`}
                   />
@@ -202,9 +204,9 @@ export default function EventCollection({
         >
           <TabList borderBottomWidth="2px">
             {eventsCategories &&
-              eventsCategories.map((eventsCategory, i) => (
+              eventsCategories.map((eventsCategory) => (
                 <Tab
-                  key={`event-category-tab-key-${i}`}
+                  key={`event-tab-key-${eventsCategory}`}
                   flex={{ base: 1, lg: "unset" }}
                   py={2.5}
                   px={5}
@@ -217,7 +219,7 @@ export default function EventCollection({
                     borderRadius: "none",
                     border: "2px solid ",
                     borderBottomColor: "brand.100",
-                    mb: "-0.5",
+                    mb: -0.5,
                   }}
                 >
                   {eventCategoryLabel(eventsCategory)}
@@ -227,7 +229,11 @@ export default function EventCollection({
           <TabPanels>
             {eventsCategories.map((eventCategory) => {
               return (
-                <TabPanel px={0} tabIndex={-1} key={eventCategory}>
+                <TabPanel
+                  px={0}
+                  tabIndex={-1}
+                  key={`event-tab-panel-key-${eventCategory}`}
+                >
                   <EventCollectionTabPanelContent
                     id={`event-tab-panel-${eventCategory}`}
                     events={eventsGroupedByCategory[eventCategory]}
