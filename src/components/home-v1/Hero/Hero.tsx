@@ -82,7 +82,12 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
           <Heading as="h1">{title}</Heading>
           <Text>{description}</Text>
           <Box h={{ base: 0, md: "25px" }} position="relative">
-            <HomePageLink id={id} href={url} gaEventActionName={"Hero button"}>
+            <HomePageLink
+              id={id}
+              href={url}
+              gaEventActionName={"Hero button"}
+              tabIndex={-1}
+            >
               <Box className="svg-wrapper">
                 <RightArrowIcon
                   h="25px"
