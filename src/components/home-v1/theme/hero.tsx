@@ -14,7 +14,7 @@ const Hero: ComponentStyleConfig = {
       position: "relative",
       cursor: "pointer",
       _hover: {
-        h2: { textDecoration: "underline" },
+        h1: { textDecoration: "underline" },
         ".svg-wrapper": {
           border: "2px solid",
           borderColor: { base: "red.200", md: "brand.100" },
@@ -26,7 +26,9 @@ const Hero: ComponentStyleConfig = {
         outlineColor: "#135772",
         outlineWidth: "3px",
         boxShadow: "1px 1px 1px 1px #135772",
-        h2: { textDecoration: "underline" },
+        h1: {
+          textDecoration: "underline",
+        },
         ".svg-wrapper": {
           border: "2px solid",
           borderColor: { base: "red.200", md: "brand.100" },
@@ -34,8 +36,9 @@ const Hero: ComponentStyleConfig = {
         },
       },
     },
-    h2: {
+    h1: {
       fontSize: { base: "27px", xl: "4xl" },
+      fontWeight: 400,
       lineHeight: "normal",
       w: { base: "70%", md: "full" },
     },
