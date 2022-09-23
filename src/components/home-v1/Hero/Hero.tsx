@@ -86,6 +86,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
               id={`hero-button-link-${id}`}
               href={url}
               gaEventActionName={"Hero button"}
+              tabIndex={-1}
             >
               <Box className="svg-wrapper">
                 <RightArrowIcon
