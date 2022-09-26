@@ -4,8 +4,7 @@ import { useStyleConfig } from "@chakra-ui/system";
 import { Box, Heading, Text, createIcon } from "@chakra-ui/react";
 import HomePageLink from "../HomePageLink";
 import { getImageTransformation } from "../../shared/Image/imageUtils";
-import { default as NextImage } from "../../shared/Image";
-import { ImageType } from "../../shared/Image/ImageTypes";
+import { default as NextImage, ImageType } from "../../shared/Image";
 
 // SVG Icon
 const RightArrowIcon = createIcon({
@@ -48,7 +47,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
       bgSize="cover"
     >
       <Box
-        id={id}
+        id={`hero-${id}`}
         flex={{ base: 1, md: "1 0 70%" }}
         maxWidth="1313px"
         mx={0}
@@ -60,7 +59,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
         sx={styles}
       >
         <NextImage
-          id={image.id}
+          id={`hero-image-${image.id}`}
           alt={image.alt}
           uri={image.uri}
           useTransformation={true}
@@ -74,15 +73,21 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
         <Box className="hero-text-box">
           <Box as="span">{tag}</Box>
           <HomePageLink
-            id={id}
+            id={`hero-heading-link-${id}`}
             href={url}
             aria-label={`${tag}, link to ${title}, ${description}`}
             gaEventActionName={"Hero"}
           />
-          <Heading as="h2">{title}</Heading>
+          <Heading as="h1">{title}</Heading>
           <Text>{description}</Text>
           <Box h={{ base: 0, md: "25px" }} position="relative">
-            <HomePageLink id={id} href={url} gaEventActionName={"Hero button"}>
+            <HomePageLink
+              aria-label={title}
+              id={`hero-button-link-${id}`}
+              href={url}
+              gaEventActionName={"Hero button"}
+              tabIndex={-1}
+            >
               <Box className="svg-wrapper">
                 <RightArrowIcon
                   h="25px"

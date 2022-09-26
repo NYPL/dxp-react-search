@@ -1,4 +1,4 @@
-import { ImageType } from "../../shared/Image/ImageTypes";
+import { ImageType } from "../../shared/Image";
 
 export interface SlideshowItem {
   id: string;

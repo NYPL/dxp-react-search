@@ -2,9 +2,8 @@ import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
-import Image from "./../../shared/Image";
+import Image, { ImageType } from "./../../shared/Image";
 import HomePageLink from "../HomePageLink";
-import { ImageType } from "../../shared/Image/ImageTypes";
 
 export interface CardItem {
   id: string;
@@ -29,13 +28,14 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
   const omitItems = ["id", "title", "image", "url", "__typename"];
   for (const propName in item) {
     if (!omitItems.includes(propName)) {
-      describedByIdsArray.push(`${item.id}-${propName}`);
+      describedByIdsArray.push(`card-${propName}-${item.id}`);
     }
   }
   const describedByIdsString = describedByIdsArray.join(" ");
 
   return (
     <Grid
+      id={`card-${item.id}`}
       templateRows={{ base: "1fr", md: "min-content" }}
       templateColumns={{ base: "5fr 9fr", md: "1fr" }}
       sx={styles}
@@ -53,12 +53,13 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
         </Heading>
         <Box className="details">
           {item.description && (
-            <Text id={`${item.id}-description`}>{item.description}</Text>
+            <Text id={`card-description-${item.id}`}>{item.description}</Text>
           )}
         </Box>
       </GridItem>
-      <GridItem colStart={1} rowStart={1}>
+      <GridItem id={`card-image-${item.id}`} colStart={1} rowStart={1}>
         <HomePageLink
+          id={`card-image-link-${item.id}`}
           href={item.url}
           aria-label={`${item.title}-image`}
           gaEventActionName={gaEventActionName}
@@ -69,7 +70,7 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
             role="presentation"
           */}
           <Image
-            id={item.image.id}
+            id={`card-image-${item.image.id}`}
             alt={item.image.alt}
             uri={item.image.uri}
             useTransformation={true}

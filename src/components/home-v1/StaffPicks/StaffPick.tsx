@@ -32,14 +32,14 @@ function StaffPick({ item, gaEventActionName }: StaffPickProps) {
   };
 
   return (
-    <GridItem as="li" id={id}>
+    <GridItem as="li" id={`staff-pick-card-${id}`}>
       <Box
         h={{ base: "200px", md: "210px", lg: "260px", xl: "374px" }}
         position="relative"
       >
         <QuoteBg />
         <HomePageLink
-          id={id}
+          id={`staff-pick-card-link-${id}`}
           href={url}
           gaEventActionName={gaEventActionName}
           {...style}
@@ -88,7 +88,7 @@ function StaffPick({ item, gaEventActionName }: StaffPickProps) {
       >
         <Box pt={{ base: 3, xl: 6 }} pr={2.5}>
           <svg
-            id="nyplLionLogo-icon"
+            id={`staff-pick-${id}-nyplLionLogo-icon`}
             width="60px"
             height="60px"
             viewBox="0 0 25 25"
@@ -121,11 +121,11 @@ function StaffPick({ item, gaEventActionName }: StaffPickProps) {
             pb={1}
             fontSize={{ base: "lg", xl: "xl" }}
             lineHeight="none"
-            display="block-inline"
+            display="block"
           >
             {staffName}
           </Text>
-          <Text fontSize="md" lineHeight="none" display="block-inline">
+          <Text fontSize="md" lineHeight="none" display="block">
             {staffLocation}
           </Text>
         </Box>
