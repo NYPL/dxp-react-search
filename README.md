@@ -4,8 +4,9 @@ React app build for www.nypl.org. Pages currently in repo:
 
 - Location Finder - https://www.nypl.org/locations
 - Articles & Databases - https://www.nypl.org/research/collections/articles-databases
-- Blogs - https://www.nypl.org/blog
-- Press Releases, Homepage and more (coming soon)
+- Blog - https://www.nypl.org/blog
+- Homepage - https://www.nypl.org
+- Press Releases, Section Fronts, and more (coming soon)
 
 ## Installation (Local)
 
