@@ -31,12 +31,11 @@ const HomePageLink = React.forwardRef<
     event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement, MouseEvent>
   ) => {
     event.preventDefault;
-    // @TODO Update this after review with comms, to correct value of "Homepage".
-    const eventCategory = "Homepage Scout Local";
+    const gaEventCategory = "Homepage";
 
     // @ts-ignore
     window.gtag("event", gaEventActionName, {
-      event_category: eventCategory,
+      event_category: gaEventCategory,
       event_label: href,
     });
   };
