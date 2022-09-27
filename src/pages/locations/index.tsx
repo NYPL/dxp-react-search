@@ -1,6 +1,9 @@
 import React from "react";
 // Apollo
-import { withApollo } from "../../apollo/client/withApollo";
+import withApollo from "./../../apollo/withApollo";
+import { initializeApollo } from "./../../apollo/withApollo/apollo";
+import { LOCATIONS_QUERY } from "../../components/location-finder/Locations/Locations";
+import { FILTERS_QUERY } from "./../../components/location-finder/SearchFilters/SearchFilters";
 // Redux
 import { withRedux } from "../../redux/withRedux";
 // Components
@@ -10,7 +13,7 @@ import Hero from "../../components/location-finder/Hero";
 import SearchForm from "../../components/location-finder/SearchForm";
 import Locations from "../../components/location-finder/Locations/Locations";
 import SearchResultsDetails from "../../components/location-finder/SearchResultsDetails";
-import Map from "../../components/location-finder/Map";
+import LocationsMap from "../../components/location-finder/LocationsMap";
 import BottomPromo from "../../components/location-finder/BottomPromo";
 import Menu from "../../components/ds-prototypes/Menu";
 import { Box, Grid, GridItem } from "@nypl/design-system-react-components";
@@ -51,17 +54,17 @@ function LocationFinder() {
         </>
       }
       contentPrimary={
-        <Grid templateColumns={[null, null, "repeat(2, 1fr)"]} gap="l">
+        <Grid templateColumns={{ md: "repeat(2, 1fr)" }}>
           <GridItem
             id="locations-list"
-            maxHeight={[null, null, "500px"]}
-            overflowY={[null, null, "auto"]}
+            maxHeight={{ md: "500px" }}
+            overflowY={{ md: "auto" }}
           >
             <SearchResultsDetails />
             <Locations />
           </GridItem>
           <GridItem id="locations-gmap">
-            <Map />
+            <LocationsMap />
           </GridItem>
         </Grid>
       }
@@ -97,7 +100,37 @@ function LocationFinder() {
   );
 }
 
-export default withApollo(withRedux(LocationFinder), {
-  ssr: true,
-  redirects: false,
-});
+export const getServerSideProps = async () => {
+  const apolloClient = initializeApollo();
+
+  // We add a try/catch to avoid the entire pg returning an error.
+  try {
+    await apolloClient.query({
+      query: FILTERS_QUERY,
+    });
+  } catch (error) {
+    console.error(`Apollo Client ${error}`);
+  }
+
+  await apolloClient.query({
+    query: LOCATIONS_QUERY,
+    variables: {
+      limit: 300,
+      offset: 0,
+      openNow: false,
+      pageNumber: 1,
+      searchGeoLat: null,
+      searchGeoLng: null,
+      termIds: [],
+    },
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  };
+};
+
+// @ts-ignore
+export default withApollo(withRedux(LocationFinder));

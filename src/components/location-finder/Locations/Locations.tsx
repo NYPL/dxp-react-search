@@ -9,6 +9,8 @@ import { Box, Icon, Link } from "@nypl/design-system-react-components";
 import Location from "./../Location";
 import LocationsSkeletonLoader from "./LocationsSkeletonLoader";
 import LocationsPagination from "./LocationsPagination";
+// Type
+import { LocationProps } from "../Location/Location";
 // Hooks
 import useWindowSize from "./../../../hooks/useWindowSize";
 // Utils
@@ -149,14 +151,7 @@ function Locations() {
   }
 
   return (
-    <Box
-      sx={{
-        overflowX: "hidden",
-        overflowY: "scroll",
-        scrollbarWidth: "auto",
-        scrollbarColor: "#888 #f8f8f7",
-      }}
-    >
+    <Box>
       <Link
         // additionalStyles
         sx={{
@@ -176,9 +171,9 @@ function Locations() {
         />
       </Link>
       <ul style={{ listStyleType: "none", padding: "0" }}>
-        {data.refineryAllLocations.locations.map((location: any) => (
-          <li>
-            <Location key={location.id} location={location} />
+        {data.refineryAllLocations.locations.map((location: LocationProps) => (
+          <li key={location.id}>
+            <Location {...location} />
           </li>
         ))}
       </ul>

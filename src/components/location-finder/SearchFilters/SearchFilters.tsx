@@ -15,7 +15,7 @@ import usePrevious from "../../../hooks/usePrevious";
 // Context
 import { SearchFiltersProvider } from "./SearchFiltersContext";
 
-const FILTERS_QUERY = gql`
+export const FILTERS_QUERY = gql`
   query FiltersQuery {
     refineryAllTerms {
       id

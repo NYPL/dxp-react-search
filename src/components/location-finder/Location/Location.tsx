@@ -16,19 +16,66 @@ import LocationHours from "./LocationHours";
 import LocationDistance from "./LocationDistance";
 // Hooks
 import useWindowSize from "../../../hooks/useWindowSize";
+// Utils
+import formatPhoneNumber from "../../../utils/formatPhoneNumber";
 
-interface LocationProps {
-  location: any;
+export interface LocationProps {
+  id: string;
+  accessibilityNote: string;
+  address_line1: string;
+  address_line2: string;
+  administrative_area: string;
+  appointmentOnly: boolean;
+  contentType: string;
+  geoLocation: GeoLocation;
+  locality: string;
+  name: string;
+  open: boolean;
+  parentLibraryName: string | null;
+  phone: string;
+  postal_code: string;
+  slug: string;
+  status: string;
+  todayHours: TodayHours;
+  url: string;
+  wheelchairAccess: "full" | "partial" | "none";
 }
 
-function Location({ location }: LocationProps) {
+type GeoLocation = {
+  lat: number;
+  lng: number;
+};
+
+type TodayHours = {
+  end: string;
+  start: string;
+};
+
+function Location({
+  id,
+  accessibilityNote,
+  address_line1,
+  administrative_area,
+  appointmentOnly,
+  geoLocation,
+  locality,
+  name,
+  open,
+  parentLibraryName,
+  phone,
+  postal_code,
+  todayHours,
+  url,
+  wheelchairAccess,
+}: LocationProps) {
   // Redux dispatch
   const dispatch = useDispatch();
 
   const windowSize = useWindowSize();
 
-  // Address formatting.
-  const formattedAddress = `${location.address_line1}\n${location.locality}, ${location.administrative_area} ${location.postal_code}`;
+  // Address and Phone formatting.
+  const formattedAddress = `${address_line1}\n${locality}, ${administrative_area} ${postal_code}`;
+  const formattedPhone = formatPhoneNumber(phone);
   // Get directions link.
   const encodedAddress = encodeURIComponent(formattedAddress);
   const getDirectionsLink =
@@ -39,14 +86,14 @@ function Location({ location }: LocationProps) {
 
     dispatch(
       setMapPosition({
-        mapCenter: location.geoLocation,
+        mapCenter: geoLocation,
         mapZoom: 14,
       })
     );
 
     dispatch(
       setMapInfoWindow({
-        infoWindowId: location.id,
+        infoWindowId: id,
         infoWindowIsVisible: true,
       })
     );
@@ -60,34 +107,36 @@ function Location({ location }: LocationProps) {
 
   return (
     <Box marginBottom="m">
-      <Heading id={`lid-${location.id}`} level="two" size="tertiary">
-        <Link href={location.url}>{location.name}</Link>
+      <Heading id={`lid-${id}`} level="two" size="tertiary">
+        <Link href={url}>{name}</Link>
       </Heading>
-      {location.parentLibraryName && (
+      {parentLibraryName && (
         <Box fontStyle="italic" className="location__parent">
-          {location.parentLibraryName}
+          {parentLibraryName}
         </Box>
       )}
       <Box mb="xxs" whiteSpace="pre-wrap" className="address">
         {formattedAddress}
       </Box>
-      <Box mb="xxs" className="phone">
-        {location.phone}
-      </Box>
+      {formattedPhone && (
+        <Box mb="xxs" className="phone">
+          {formattedPhone}
+        </Box>
+      )}
       <LocationAccessibility
-        access={location.wheelchairAccess}
-        note={location.accessibilityNote}
+        access={wheelchairAccess}
+        note={accessibilityNote}
       />
       <LocationHours
-        open={location.open}
-        todayHoursStart={location.todayHours.start}
-        todayHoursEnd={location.todayHours.end}
-        appointmentOnly={location.appointmentOnly}
+        open={open}
+        todayHoursStart={todayHours.start}
+        todayHoursEnd={todayHours.end}
+        appointmentOnly={appointmentOnly}
       />
-      <LocationDistance locationPoint={location.geoLocation} />
+      <LocationDistance locationPoint={geoLocation} />
       <HStack>
         <Button
-          id={`button-view-on-map-${location.id}`}
+          id={`button-view-on-map-${id}`}
           buttonType="link"
           onClick={onClickViewOnMap}
         >

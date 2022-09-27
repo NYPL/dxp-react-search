@@ -21,12 +21,7 @@ export function SearchResultsSkeletonLoader() {
   let skeletonLoaders = [];
   const itemsCount = 6;
   for (var i = 0; i < itemsCount; i++) {
-    skeletonLoaders.push(
-      <SearchResultsCardSkeletonLoader
-        // @TODO look ito using something else than index for key
-        key={`result-skeleton-loader-item-${i}`}
-      />
-    );
+    skeletonLoaders.push(<SearchResultsCardSkeletonLoader key={i} />);
   }
 
   return <div>{skeletonLoaders}</div>;

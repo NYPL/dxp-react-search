@@ -7,7 +7,7 @@ import {
   SelectedItems,
 } from "@nypl/design-system-react-components";
 
-const FILTERS_QUERY = gql`
+export const FILTERS_QUERY = gql`
   query FiltersQuery(
     $id: String
     $type: String
@@ -69,13 +69,15 @@ function MultiSelect({
     type: type,
     limit: 200,
     pageNumber: 1,
-    filter: {
-      limiter: {
-        fieldName: "field_lts_content_type",
-        operator: "=",
-        value: limiter,
+    ...(limiter && {
+      filter: {
+        limiter: {
+          fieldName: "field_lts_content_type",
+          operator: "=",
+          value: limiter,
+        },
       },
-    },
+    }),
     sort: {
       field: type === "content" ? "title" : "name",
       direction: "ASC",

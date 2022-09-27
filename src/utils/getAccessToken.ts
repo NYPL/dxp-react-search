@@ -18,7 +18,6 @@ async function getAccessToken(): Promise<AccessToken | null> {
     grant_type: "client_credentials",
   });
 
-  //const DRUPAL_API_TUGBOAT = "https://sandbox-d8.nypl.org";
   const response = await fetch(`${DRUPAL_API}/oauth/token`, {
     method: "POST",
     headers: {

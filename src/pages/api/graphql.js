@@ -1,24 +1,15 @@
 import { ApolloServer } from "apollo-server-micro";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { schema } from "../../apollo/server/schema";
-import RefineryApi from "./../../apollo/server/datasources/RefineryApi";
-import DrupalApi from "./../../apollo/server/datasources/DrupalApi";
-import DrupalJsonApi from "./../../apollo/server/datasources/drupal-json-api/DrupalJsonApi";
-import PlatformApi from "./../../apollo/server/datasources/PlatformApi";
-import SendGridApi from "./../../apollo/server/datasources/SendGridApi";
+import getDataSources from "./../../apollo/server/datasources/getDataSources";
 import Cors from "micro-cors";
 const { NEXT_PUBLIC_ALLOWED_ORIGIN } = process.env;
 
 const apolloServer = new ApolloServer({
+  persistedQueries: false,
   schema,
-  dataSources: () => {
-    return {
-      refineryApi: new RefineryApi(),
-      drupalApi: new DrupalApi(),
-      drupalJsonApi: new DrupalJsonApi(),
-      platformApi: new PlatformApi(),
-      sendGridApi: new SendGridApi(),
-    };
-  },
+  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  dataSources: () => getDataSources(),
   context: ({ req }) => ({
     req,
   }),
@@ -43,12 +34,15 @@ export const config = {
 // Set cors policy.
 const cors = Cors({
   allowMethods: ["POST", "OPTIONS"],
-  origin: `${NEXT_PUBLIC_ALLOWED_ORIGIN}`,
+  origin: NEXT_PUBLIC_ALLOWED_ORIGIN,
 });
 
-export default cors((req, res) => {
+const startServer = apolloServer.start();
+
+export default cors(async (req, res) => {
   if (req.method === "OPTIONS") {
     return res.end();
   }
-  return apolloServer.createHandler({ path: "/api/graphql" })(req, res);
+  await startServer;
+  await apolloServer.createHandler({ path: "/api/graphql" })(req, res);
 });

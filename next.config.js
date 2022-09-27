@@ -3,8 +3,15 @@ const withPlugins = require("next-compose-plugins");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const { DRUPAL_API } = process.env;
+
+// Get the domain only from the DRUPAL_API env variable.
+const DRUPAL_API_DOMAIN_ONLY = DRUPAL_API.replace("https://", "");
+// Generate consistent build id, so RP can proxy `_next/data/scout` assets.
+const SCOUT_BUILD_ID = "scout";
 
 const nextConfig = {
+  generateBuildId: async () => SCOUT_BUILD_ID,
   assetPrefix: ASSET_PREFIX,
   async rewrites() {
     if (ASSET_PREFIX) {
@@ -15,10 +22,12 @@ const nextConfig = {
         },
       ];
     }
+
     return [];
   },
   webpack(config, options) {
-    const { dir } = options;
+    const { dir, isServer } = options;
+
     // Allows import of .gql files inside components
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
@@ -30,6 +39,14 @@ const nextConfig = {
         },
       ],
     });
+
+    // Fixes bug in SendGridApi datasource, error: "Module not found: Can't resolve 'fs' in"
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+      };
+    }
+
     return config;
   },
   images: {
@@ -43,10 +60,8 @@ const nextConfig = {
       // Local
       "localhost",
       "nypl-d8.lndo.site",
-      // Sandbox
-      "sandbox-d8.nypl.org",
-      "nyplorg-sandbox.s3.amazonaws.com",
-      "treasures-d8.nypl.org",
+      "nypl-pantheon.ddev.site",
+      DRUPAL_API_DOMAIN_ONLY,
       // QA
       "qa-cdn-d8-2.nypl.org",
       "qa-d8.nypl.org",

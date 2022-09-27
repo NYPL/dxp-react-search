@@ -7,7 +7,7 @@ import { Grid } from "@nypl/design-system-react-components";
 import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
 import Card from "../../shared/Card";
 
-const MOST_POPULAR_RESOURCES_QUERY = gql`
+export const MOST_POPULAR_RESOURCES_QUERY = gql`
   query MostPopularResourcesQuery(
     $limit: Int
     $pageNumber: Int
