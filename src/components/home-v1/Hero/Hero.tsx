@@ -41,7 +41,7 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
       flexFlow="row nowrap"
       justifyContent="center"
       height={{ md: "30vw" }}
-      maxHeight={{ xl: "400px" }}
+      maxHeight={{ xl: "400px", xxxl: "520px" }}
       minHeight="250px"
       bgImage={{ base: "none", md: `url(${desktopImageSrc})` }}
       bgSize="cover"
