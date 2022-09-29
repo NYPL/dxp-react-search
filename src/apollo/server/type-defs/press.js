@@ -4,6 +4,7 @@ export const typeDefs = gql`
   type PressRelease {
     id: ID!
     title: String!
+    subtitle: String
     description: String
     image: Image
     slug: String!

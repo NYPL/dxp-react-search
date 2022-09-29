@@ -12,9 +12,9 @@ interface PressReleaseProps {
 }
 
 function PressRelease({ pressRelease }: PressReleaseProps) {
-  // Ensure line breaks from Drupal are respected.
-  const description = pressRelease.description
-    ? pressRelease.description.replace(/\n/g, "<br/>")
+  // Ensure line breaks from Drupal are respected. @QUESTION: is still needed fro subtitles?
+  const subtitle = pressRelease.subtitle
+    ? pressRelease.subtitle.replace(/\n/g, "<br/>")
     : null;
 
   const { about } = pressContent;
@@ -26,12 +26,12 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
         <Heading level="one" size="secondary">
           {pressRelease.title}
         </Heading>
-        {description !== null && (
+        {subtitle !== null && (
           <Box
             as="i"
             mb="s"
             fontSize={"1"}
-            dangerouslySetInnerHTML={{ __html: description }}
+            dangerouslySetInnerHTML={{ __html: subtitle }}
           />
         )}
         <Box mb="s">{pressRelease.date}</Box>

@@ -4,6 +4,7 @@ export const PRESS_FIELDS_FRAGMENT = gql`
   fragment PressFields on PressRelease {
     id
     title
+    subtitle
     description
     slug
     date
