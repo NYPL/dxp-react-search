@@ -2,6 +2,13 @@
 
 ---
 
+### v0.7.1 [?] Homepage Hero Adjustments
+
+---
+
+- Adjustments for home page hero for image placement on large screens.
+- Fix hero text overlay on iPad.
+
 ### v0.7.0 [2022-09-27] Homepage Release, React 17+NextJS 12, Maintenance & Improvements
 
 ---
