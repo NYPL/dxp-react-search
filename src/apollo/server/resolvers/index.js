@@ -13,6 +13,7 @@ import validatePatronCardResolver from "./validatePatronCardResolver";
 import blogResolver from "./blogResolver";
 import locationResolver from "./locationResolver";
 import homePageResolver from "./homePageResolver";
+import sectionFrontResolver from "./sectionFrontResolver";
 // Mutations
 import sendEmailResolver from "./sendEmailResolver";
 
@@ -22,6 +23,7 @@ export const resolvers = mergeResolvers([
   blogResolver,
   locationResolver,
   homePageResolver,
+  sectionFrontResolver,
   termResolver,
   onlineResourceResolver,
   searchResolver,
