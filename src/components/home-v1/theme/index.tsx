@@ -100,13 +100,9 @@ const theme = extendTheme({
     },
   },
   breakpoints: {
-    // 768px
     md: "768px",
-    // 1024px
     lg: "1024px",
-    // 1280px
     xl: "1313px",
-    // 1900px
     xxxl: "1900px",
   },
   components: {
