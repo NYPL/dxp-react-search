@@ -6,6 +6,7 @@ const Hero: ComponentStyleConfig = {
       w: { base: "full", md: "43%" },
       ml: { base: 0, md: "11%" },
       maxWidth: { base: "full", md: "560px" },
+      minWidth: { md: "450px" },
       maxHeight: { md: "300px" },
       backgroundColor: { base: "brand.100", md: "brand.250" },
       color: { base: "brand.200", md: "brand.100" },
