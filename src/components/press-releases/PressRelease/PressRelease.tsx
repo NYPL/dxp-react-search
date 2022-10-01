@@ -34,7 +34,6 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}
-        <Box mb="s">{pressRelease.date}</Box>
       </Box>
       <Box
         sx={{
