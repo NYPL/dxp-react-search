@@ -13,8 +13,9 @@ interface PressReleaseProps {
 
 function PressRelease({ pressRelease }: PressReleaseProps) {
   // Ensure line breaks from Drupal are respected.
-  const description = pressRelease.description
-    ? pressRelease.description.replace(/\n/g, "<br/>")
+  // @TODO: Determine if this is still needed for subTitle values.
+  const subTitle = pressRelease.subTitle
+    ? pressRelease.subTitle.replace(/\n/g, "<br/>")
     : null;
 
   const { about } = pressContent;
@@ -26,12 +27,12 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
         <Heading level="one" size="secondary">
           {pressRelease.title}
         </Heading>
-        {description !== null && (
+        {subTitle !== null && (
           <Box
             as="i"
             mb="s"
             fontSize={"1"}
-            dangerouslySetInnerHTML={{ __html: description }}
+            dangerouslySetInnerHTML={{ __html: subTitle }}
           />
         )}
       </Box>
