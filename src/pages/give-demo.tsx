@@ -49,7 +49,7 @@ function SectionFrontsGivePage() {
           />
         </>
       }
-      contentPrimary={<Box backgroundColor="red">contentPrimary!</Box>}
+      contentPrimary={<Box backgroundColor="red"></Box>}
     />
   );
 }
