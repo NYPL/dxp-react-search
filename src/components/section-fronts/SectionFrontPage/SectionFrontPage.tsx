@@ -9,13 +9,20 @@ import DonationPromo from "../DonationPromo";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
-// Export consts for getStaticPaths.
+// Used in the catch all page template to determine component to render.
 export const sectionFrontsSlugs = ["/give"];
-// @TODO You could do a forEach on the slugs, and generate this object to save code?
-export const sectionFrontsPaths = [
-  { params: { slug: ["give"] } },
-  // { params: { slug: ["research"] } },
-];
+
+// Generate the static paths for getStaticPaths
+type GetStaticPropsParamsType = {
+  params: { slug: string[] };
+};
+
+let slugsArray: GetStaticPropsParamsType[] = [];
+sectionFrontsSlugs.forEach((slug) => {
+  slugsArray.push({ params: { slug: [slug.replace("/", "")] } });
+});
+
+export const sectionFrontsPaths = slugsArray;
 
 export const SECTION_FRONT_QUERY = gql`
   query SectionFrontQuery($id: String, $revisionId: String, $preview: Boolean) {
@@ -101,11 +108,11 @@ SectionFrontPageProps) {
   gift."
             defaultAmount="200"
             donationFormBaseUrl="https://secure.nypl.org/site/Donation2?7825.donation=form1&df_id=7825"
-            donationOtherLevelId="14860"
+            donationOtherLevelId="21325"
           />
         </>
       }
-      contentPrimary={<Box backgroundColor="red">contentPrimary!</Box>}
+      contentPrimary={<Box>contentPrimary</Box>}
     />
   );
 }
