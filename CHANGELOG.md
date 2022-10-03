@@ -2,7 +2,7 @@
 
 ---
 
-### v0.7.1 [?] Homepage Hero Adjustments
+### v0.7.1 [2022-10-03] Homepage Hero Adjustments
 
 ---
 
