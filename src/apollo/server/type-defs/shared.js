@@ -174,6 +174,17 @@ export const typeDefs = gql`
     bNumber: String
   }
 
+  type Donation {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    image: Image
+    formBaseUrl: String
+    otherLevelId: String
+    defaultAmount: String
+  }
+
   type Query {
     _empty: String
   }

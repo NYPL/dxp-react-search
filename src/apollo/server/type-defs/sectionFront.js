@@ -5,7 +5,11 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     description: String
+    image: Image
+    featuredContent: [SectionFrontFeaturedContent]
   }
+
+  union SectionFrontFeaturedContent = Donation
 
   type SectionFrontConnection {
     items: [SectionFront]
@@ -18,6 +22,6 @@ export const typeDefs = gql`
       pageNumber: Int
       sort: Sort
     ): SectionFrontConnection
-    sectionFront(id: String, revisionId: String, preview: Boolean): Blog
+    sectionFront(id: String, revisionId: String, preview: Boolean): SectionFront
   }
 `;

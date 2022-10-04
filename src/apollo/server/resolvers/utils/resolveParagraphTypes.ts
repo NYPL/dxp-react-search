@@ -31,6 +31,10 @@ export default function resolveParagraphTypes(objectType: string) {
     case "catalog_list":
       resolvedObjectType = "CatalogList";
       break;
+    case "donation":
+      resolvedObjectType = "Donation";
+      break;
+    // Home page.
     case "hp_hero":
       resolvedObjectType = "HomePageHeroComponent";
       break;

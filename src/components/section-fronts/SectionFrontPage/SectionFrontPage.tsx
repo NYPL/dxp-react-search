@@ -5,7 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import PageContainer from "../../shared/layouts/PageContainer";
 import Error from "../../../pages/_error";
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
-import DonationPromo from "../DonationPromo";
+import Donation from "../Donation";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -30,6 +30,40 @@ export const SECTION_FRONT_QUERY = gql`
       id
       title
       description
+      image {
+        id
+        uri
+        alt
+        transformations {
+          id
+          label
+          uri
+        }
+      }
+      featuredContent {
+        ... on Donation {
+          __typename
+          id
+          type
+          heading
+          description
+          image {
+            id
+            uri
+            alt
+            width
+            height
+            transformations {
+              id
+              label
+              uri
+            }
+          }
+          formBaseUrl
+          defaultAmount
+          otherLevelId
+        }
+      }
     }
   }
 `;
@@ -72,11 +106,15 @@ SectionFrontPageProps) {
 
   const sectionFront = data.sectionFront;
 
+  // @TODO This might not always be the donation component?
+  const featuredContent = sectionFront.featuredContent[0];
+
   return (
     <PageContainer
       metaTags={{
         title: sectionFront.title,
         description: sectionFront.description,
+        imageUrl: sectionFront.image.uri,
       }}
       breadcrumbs={[
         {
@@ -99,16 +137,14 @@ SectionFrontPageProps) {
             backgroundColor="brand.primary"
             foregroundColor="ui.white"
           />
-          <DonationPromo
-            id="give-donation"
-            heading="Donate to NYPL"
-            description="Each dollar you give helps the Library serve people of all ages,
-  backgrounds, and beliefs. Monthly donors provide much-needed
-  consistent support to the Library. Receive a tote as a thank you
-  gift."
-            defaultAmount="200"
-            donationFormBaseUrl="https://secure.nypl.org/site/Donation2?7825.donation=form1&df_id=7825"
-            donationOtherLevelId="21325"
+          <Donation
+            id={featuredContent.id}
+            heading={featuredContent.heading}
+            description={featuredContent.description}
+            image={featuredContent.image}
+            donationFormBaseUrl={featuredContent.formBaseUrl}
+            defaultAmount={featuredContent.defaultAmount}
+            donationOtherLevelId={featuredContent.otherLevelId}
           />
         </>
       }

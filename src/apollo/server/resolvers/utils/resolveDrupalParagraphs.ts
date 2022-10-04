@@ -80,6 +80,13 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
+        item.type === "paragraph--donation" &&
+        typesInQuery.includes("Donation")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
         item.type === "paragraph--hp_hero" &&
         typesInQuery.includes("HomePageHeroComponent")
       ) {
@@ -362,6 +369,22 @@ export default function resolveDrupalParagraphs(
         };
         break;
         */
+      case "paragraph--donation":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          image:
+            item.field_ers_image.data === null
+              ? null
+              : resolveImage(item.field_ers_image),
+          formBaseUrl: item.field_ls_link.url,
+          defaultAmount: item.field_fs_donation_default_amount,
+          otherLevelId: item.field_ts_donation_other_level_id,
+        };
+        break;
+      // Home page.
       case "paragraph--hp_hero":
         paragraphComponent = {
           id: item.id,

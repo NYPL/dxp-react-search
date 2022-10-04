@@ -1,24 +1,17 @@
-// import { parseResolveInfo } from "graphql-parse-resolve-info";
-// // Utils
-// import formatDate from "../../../utils/formatDate";
-// import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
-// import resolveParagraphTypes from "./utils/resolveParagraphTypes";
-// import { resolveImage } from "./utils/resolveImage";
-import {
-  getIndividualResourceJsonApiPath,
-  // getCollectionResourceJsonApiPath,
-} from "./../datasources/drupal-json-api/getJsonApiPath";
+import { parseResolveInfo } from "graphql-parse-resolve-info";
+// Utils
+import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
+import resolveParagraphTypes from "./utils/resolveParagraphTypes";
+import { resolveImage } from "./utils/resolveImage";
+import { getIndividualResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
 
 const sectionFrontResolver = {
   Query: {
     sectionFront: async (_, args, { dataSources }) => {
       const includedFields = [
-        // "field_ers_media_image.field_media_image",
-        // "field_main_content.field_ers_media_item.field_media_image",
-        // "field_erm_location",
-        // // Link Card List
-        // "field_main_content.field_erm_link_cards",
-        // "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+        "field_ers_media_image.field_media_image",
+        "field_ers_featured",
+        "field_ers_featured.field_ers_image.field_media_image",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
@@ -40,6 +33,27 @@ const sectionFrontResolver = {
     title: (sectionFront) => sectionFront.title,
     description: (sectionFront) =>
       sectionFront.field_tfls_summary_description.processed,
+    image: (sectionFront) =>
+      sectionFront.field_ers_media_image.data !== null
+        ? resolveImage(sectionFront.field_ers_media_image)
+        : null,
+    featuredContent: (sectionFront, _, __, info) => {
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const featuredContent =
+        sectionFront.field_ers_featured.data?.length === 0
+          ? null
+          : resolveDrupalParagraphs(
+              [sectionFront.field_ers_featured],
+              typesInQuery
+            );
+      return featuredContent;
+    },
+  },
+  SectionFrontFeaturedContent: {
+    __resolveType: (object, _, __) => {
+      return resolveParagraphTypes(object.type);
+    },
   },
 };
 
