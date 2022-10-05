@@ -18,7 +18,7 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
     ? pressRelease.subTitle.replace(/\n/g, "<br/>")
     : null;
 
-  const { about } = pressContent;
+  //const { about } = pressContent;
   const { mediaContacts } = pressContent;
 
   return (
@@ -49,7 +49,7 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
               Components(contentComponent)
           )}
       </Box>
-      <Box mb="l">
+      {/* <Box mb="l">
         <Heading level="two">{about.title}</Heading>
         <Box
           sx={{
@@ -60,7 +60,7 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
           }}
           dangerouslySetInnerHTML={{ __html: about.description }}
         />
-      </Box>
+      </Box> */}
       {pressRelease.mediaContacts && (
         <Box>
           <Heading level="two">{mediaContacts.heading}</Heading>
