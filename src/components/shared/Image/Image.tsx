@@ -19,27 +19,29 @@ function Image({
   uri,
 }: ImageProps) {
   return (
-    <NextImage
-      id={`nextjsImage-${id}`}
-      alt={alt}
-      // @ts-ignore
-      src={
-        useTransformation && transformations
-          ? getImageTransformation(transformationLabel, transformations)
-          : uri
-      }
-      layout={layout}
-      {...(width && {
-        width: width,
-      })}
-      {...(height && {
-        height: height,
-      })}
-      {...(objectFit && {
-        objectFit: objectFit,
-      })}
-      quality={quality}
-    />
+    <div id={`nextjsImage-${id}`} className="scout-nextjs-image">
+      <NextImage
+        // id={`nextjsImage-${id}`}
+        alt={alt}
+        // @ts-ignore
+        src={
+          useTransformation && transformations
+            ? getImageTransformation(transformationLabel, transformations)
+            : uri
+        }
+        layout={layout}
+        {...(width && {
+          width: width,
+        })}
+        {...(height && {
+          height: height,
+        })}
+        {...(objectFit && {
+          objectFit: objectFit,
+        })}
+        quality={quality}
+      />
+    </div>
   );
 }
 
