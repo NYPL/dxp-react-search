@@ -57,6 +57,7 @@ const nextConfig = {
       path: `${ASSET_PREFIX}/_next/image`,
     }),
     domains: [
+      "placeimg.com",
       // Local
       "localhost",
       "nypl-d8.lndo.site",
