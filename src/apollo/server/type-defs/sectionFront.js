@@ -7,9 +7,12 @@ export const typeDefs = gql`
     description: String
     image: Image
     featuredContent: [SectionFrontFeaturedContent]
+    mainContent: [SectionFrontMainContent]
   }
 
   union SectionFrontFeaturedContent = Donation
+
+  union SectionFrontMainContent = CardGrid | Donation
 
   type SectionFrontConnection {
     items: [SectionFront]

@@ -20,7 +20,7 @@ describe("Donation component tests", () => {
     render(
       <Donation
         id="test-id"
-        heading="Donate to NYPL"
+        title="Donate to NYPL"
         description="Donation description"
         image={mockNextJsImage}
         donationFormBaseUrl="https://test.com?id=1"

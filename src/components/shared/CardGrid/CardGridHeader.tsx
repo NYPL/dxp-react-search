@@ -11,23 +11,23 @@ export interface CardGridHeaderProps {
   id: string;
   title?: string;
   headingColor?: string;
-  href?: string;
+  link?: string;
   hrefText?: string;
 }
 
 export default function CardGridHeader({
   id,
   title,
-  headingColor,
-  href,
+  headingColor = "brand.primary",
+  link,
   hrefText,
 }: CardGridHeaderProps) {
-  if (href && hrefText && title) {
+  if (link && hrefText && title) {
     return (
       <Box mb=".75em">
         <HStack alignItems="baseline">
           <Heading id={id} level="two" text={title} color={headingColor} />
-          <Link href={href}>
+          <Link href={link}>
             <a
               style={{
                 display: "inline-flex",

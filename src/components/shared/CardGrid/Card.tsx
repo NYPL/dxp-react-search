@@ -25,6 +25,8 @@ export interface CardProps {
   layout?: LayoutTypes;
   /** Optional value to control the alignment of the text and elements. */
   isCentered?: boolean;
+  /** Optional value to control the border. */
+  isBordered?: boolean;
 }
 
 export default function Card({
@@ -36,6 +38,7 @@ export default function Card({
   image,
   layout,
   isCentered,
+  isBordered = false,
 }: CardProps) {
   let imagePropsFinal = {};
 
@@ -62,6 +65,7 @@ export default function Card({
       })}
       isCentered={isCentered}
       layout={layout}
+      isBordered={isBordered}
     >
       <CardHeading level="three">
         {href && <NextDsLink href={href}>{heading}</NextDsLink>}

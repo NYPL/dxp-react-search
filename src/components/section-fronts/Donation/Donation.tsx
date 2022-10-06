@@ -9,7 +9,7 @@ export interface DonationProps {
   /** The id of the donation component. */
   id: string;
   /** The heading of the donation component. */
-  heading: string;
+  title: string;
   /** The description of the donation component. */
   description: string;
   /** The image of the donation component */
@@ -24,7 +24,7 @@ export interface DonationProps {
 
 export default function Donation({
   id,
-  heading,
+  title,
   description,
   image,
   donationFormBaseUrl,
@@ -73,7 +73,7 @@ export default function Donation({
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         >
           <Heading level="two" color="brand.primary">
-            {heading}
+            {title}
           </Heading>
           <Flex flexFlow={{ base: "column", lg: "row" }}>
             <Box

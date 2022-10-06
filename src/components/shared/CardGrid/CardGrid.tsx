@@ -7,11 +7,12 @@ import Card from "./Card";
 export interface CardGridCommonProps {
   id: string;
   type: string;
-  heading: string;
+  title: string;
   headingColor?: string;
   description?: string;
-  href?: string;
+  link?: string;
   hrefText?: string;
+  isBordered?: boolean;
 }
 
 type CardGridConditionalProps =
@@ -33,34 +34,37 @@ export interface CardItem {
   title: string;
   description: string;
   image?: any;
-  href: string;
+  link: string;
 }
 
 export default function CardGrid({
   id,
   type,
-  heading,
+  title,
   headingColor,
   description,
-  href,
+  link,
   hrefText,
   layout,
+  isBordered = false,
   items,
   children,
 }: CardGridProps) {
   let templateColumns = "repeat(auto-fit, minmax(300px, 1fr))";
+  let isBorderedFinal = isBordered;
   if (layout === "row") {
     templateColumns = "repeat(1, 1fr)";
+    isBorderedFinal = true;
   }
 
   return (
     <Box id={`${type}-${id}`} mb="2em">
-      {heading && (
+      {title && (
         <CardGridHeader
           id={id}
-          title={heading}
+          title={title}
           headingColor={headingColor}
-          href={href}
+          link={link}
           hrefText={hrefText}
         />
       )}
@@ -78,8 +82,9 @@ export default function CardGrid({
                 id={item.id}
                 heading={item.title}
                 description={item.description}
-                href={item.href}
+                href={item.link}
                 layout={layout}
+                isBordered={isBorderedFinal}
                 image={
                   <Image
                     id={item.image.id}
@@ -89,8 +94,10 @@ export default function CardGrid({
                     transformations={item.image.transformations}
                     transformationLabel={"2_1_960"}
                     layout="responsive"
-                    width={item.image.width}
-                    height={item.image.height}
+                    // width={item.image.width}
+                    // height={item.image.height}
+                    width={900}
+                    height={450}
                     quality={90}
                   />
                 }

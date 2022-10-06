@@ -12,6 +12,9 @@ const sectionFrontResolver = {
         "field_ers_media_image.field_media_image",
         "field_ers_featured",
         "field_ers_featured.field_ers_image.field_media_image",
+        // Link Card List
+        "field_main_content.field_erm_link_cards",
+        "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
@@ -49,10 +52,27 @@ const sectionFrontResolver = {
             );
       return featuredContent;
     },
+    mainContent: (sectionFront, _, __, info) => {
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const mainContent =
+        sectionFront.field_main_content.data?.length === 0
+          ? null
+          : resolveDrupalParagraphs(
+              sectionFront.field_main_content,
+              typesInQuery
+            );
+      return mainContent;
+    },
   },
   SectionFrontFeaturedContent: {
     __resolveType: (object, _, __) => {
       return resolveParagraphTypes(object.type);
+    },
+  },
+  SectionFrontMainContent: {
+    __resolveType: (object, _, __) => {
+      return resolveParagraphTypes(object.type, "section_front");
     },
   },
 };

@@ -64,6 +64,13 @@ export default function resolveDrupalParagraphs(
       ) {
         accumulator.push(item);
       }
+      // Section front
+      if (
+        item.type === "paragraph--link_card_list" &&
+        typesInQuery.includes("CardGrid")
+      ) {
+        accumulator.push(item);
+      }
 
       if (
         item.type === "paragraph--catalog_list" &&
@@ -316,6 +323,7 @@ export default function resolveDrupalParagraphs(
           image: resolveImage(mediaItem),
         };
         break;
+
       case "paragraph--link_card_list":
         const cardItems: ResolvedParagraph[] = [];
         Array.isArray(item.field_erm_link_cards) &&
@@ -336,8 +344,9 @@ export default function resolveDrupalParagraphs(
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
-          heading: item.field_ts_heading,
+          title: item.field_ts_heading,
           description: item.field_tfls_description?.processed,
+          layout: item.field_lts_card_grid_layout,
           items: cardItems,
         };
         break;
@@ -373,7 +382,7 @@ export default function resolveDrupalParagraphs(
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
-          heading: item.field_ts_heading,
+          title: item.field_ts_heading,
           description: item.field_tfls_description?.processed,
           image:
             item.field_ers_image.data === null

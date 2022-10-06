@@ -145,7 +145,7 @@ export const typeDefs = gql`
   type CardList {
     id: ID!
     type: String!
-    heading: String
+    title: String
     description: String
     items: [CardItem]!
   }
@@ -177,12 +177,29 @@ export const typeDefs = gql`
   type Donation {
     id: ID!
     type: String!
-    heading: String
+    title: String
     description: String
     image: Image
     formBaseUrl: String
     otherLevelId: String
     defaultAmount: String
+  }
+
+  type CardGrid {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    layout: String
+    items: [CardGridItem]!
+  }
+
+  type CardGridItem {
+    id: ID!
+    title: String
+    description: String
+    image: Image
+    link: String
   }
 
   type Query {

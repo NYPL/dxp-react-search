@@ -109,7 +109,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
       ... on CardList {
         id
         type
-        heading
+        title
         description
         items {
           id
