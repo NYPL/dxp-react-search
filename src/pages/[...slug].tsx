@@ -46,6 +46,8 @@ function CatchAllRoutesPage({
 
 export async function getStaticPaths() {
   return {
+    // @TODO the paths shouldn't be hardcoded, b/c if a node is unpublished but included here,
+    // the build will break.
     paths: sectionFrontsPaths,
     fallback: false, // can also be true or 'blocking'
   };
@@ -103,16 +105,20 @@ export const getStaticProps: GetStaticProps<
     // }
   }
 
-  await apolloClient.query({
-    query: SECTION_FRONT_QUERY,
-    variables: {
-      id: uuid,
-      ...(isPreview && {
-        preview: true,
-        revisionId: revisionId,
-      }),
-    },
-  });
+  try {
+    await apolloClient.query({
+      query: SECTION_FRONT_QUERY,
+      variables: {
+        id: uuid,
+        ...(isPreview && {
+          preview: true,
+          revisionId: revisionId,
+        }),
+      },
+    });
+  } catch (error) {
+    console.error(`getStaticProps: ${error}`);
+  }
 
   return {
     props: {
