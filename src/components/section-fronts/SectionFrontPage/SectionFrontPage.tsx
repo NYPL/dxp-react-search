@@ -99,20 +99,24 @@ export const SECTION_FRONT_QUERY = gql`
 interface SectionFrontPageProps {
   uuid: string;
   isPreview?: boolean;
+  revisionId?: string;
 }
+
+// @TODO I dont think you need isPreview and revisionId inside this component, and it never gets called?
 
 export default function SectionFrontPage({
   uuid,
-}: //isPreview,
-SectionFrontPageProps) {
+  isPreview,
+  revisionId,
+}: SectionFrontPageProps) {
   const { loading, error, data } = useQuery(SECTION_FRONT_QUERY, {
     skip: !uuid,
     variables: {
       id: uuid,
-      // ...(isPreview && {
-      //   preview: true,
-      //   revisionId: router.query.revision_id,
-      // }),
+      ...(isPreview && {
+        preview: true,
+        revisionId: revisionId,
+      }),
     },
   });
 

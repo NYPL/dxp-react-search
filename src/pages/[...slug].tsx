@@ -1,26 +1,46 @@
 import * as React from "react";
 // Next
 import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
 // Apollo
 import withApollo from "../apollo/withApollo";
 import { initializeApollo } from "../apollo/withApollo/apollo";
 import { DECOUPLED_ROUTER_QUERY } from "./../hooks/useDecoupledRouter";
-// Section front.
+// Section front
 import SectionFrontPage, {
   sectionFrontsPaths,
   sectionFrontsSlugs,
   SECTION_FRONT_QUERY,
 } from "../components/section-fronts/SectionFrontPage/SectionFrontPage";
 
-function CatchAllRoutesPage({ uuid }: any) {
-  const router = useRouter();
-  const slug = router.asPath;
+type CatchAllRoutesPageProps = {
+  slug: string;
+  uuid: string;
+  isPreview: boolean;
+  revisionId: string;
+};
 
-  if (sectionFrontsSlugs.includes(slug)) {
-    return <SectionFrontPage uuid={uuid} />;
+interface CatchAllRoutesParams extends ParsedUrlQuery {
+  slug: string;
+}
+
+function CatchAllRoutesPage({
+  slug,
+  uuid,
+  isPreview,
+  revisionId,
+}: CatchAllRoutesPageProps) {
+  // Determine which page template to use by current slug.
+  if (sectionFrontsSlugs.includes(`/${slug}`)) {
+    return (
+      <SectionFrontPage
+        uuid={uuid}
+        isPreview={isPreview}
+        revisionId={revisionId}
+      />
+    );
   }
-  // Get the page slug
+
   return <div>Something else?</div>;
 }
 
@@ -31,36 +51,81 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<
+  CatchAllRoutesPageProps,
+  CatchAllRoutesParams
+> = async (context) => {
   const apolloClient = initializeApollo();
-  // @ts-ignore
-  // @see https://github.com/vercel/next.js/discussions/16522#discussioncomment-81590
-  const { slug } = params;
 
-  // Get decoupled router data.
-  const decoupledRouterData = await apolloClient.query({
-    query: DECOUPLED_ROUTER_QUERY,
-    variables: {
-      path: slug[0],
-    },
-  });
+  const slug = context.params?.slug[0];
+  const { previewData }: any = context;
 
-  const uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+  let uuid;
+  let revisionId = null;
+
+  // Preview mode.
+  const isPreview = context.preview ? context.preview : false;
+
+  // const uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+  // Set the uuid for preview mode.
+  if (isPreview) {
+    uuid = previewData.uuid;
+    revisionId = previewData.revisionId;
+  } else {
+    // Get the slug from the params object.
+    // Get decoupled router data.
+    const decoupledRouterData = await apolloClient.query({
+      query: DECOUPLED_ROUTER_QUERY,
+      variables: {
+        path: slug,
+      },
+    });
+
+    uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+    // Redirect logic
+    // @TODO this doesn't work, @SEE https://github.com/vercel/next.js/discussions/11346
+    // const redirect = await decoupledRouterData?.data?.decoupledRouter?.redirect;
+    // // Route is not found in CMS, so set 404 status.
+    // if (uuid === null && !redirect) {
+    //   return {
+    //     notFound: true,
+    //   };
+    // }
+
+    // // Handle the redirect.
+    // if (redirect) {
+    //   return {
+    //     redirect: {
+    //       statusCode: 301,
+    //       destination: redirect.to,
+    //     },
+    //   };
+    // }
+  }
 
   await apolloClient.query({
     query: SECTION_FRONT_QUERY,
     variables: {
       id: uuid,
+      ...(isPreview && {
+        preview: true,
+        revisionId: revisionId,
+      }),
     },
   });
 
   return {
     props: {
+      slug: slug,
       uuid: uuid,
+      isPreview: isPreview,
+      ...(revisionId && {
+        revisionId: revisionId,
+      }),
       initialApolloState: apolloClient.cache.extract(),
     },
     revalidate: 60,
   };
 };
 
-export default withApollo(CatchAllRoutesPage);
+export default withApollo(CatchAllRoutesPage as any);
