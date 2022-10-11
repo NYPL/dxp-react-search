@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Box, Grid, LayoutTypes } from "@nypl/design-system-react-components";
 import Image from "./../../shared/Image";
+import { ImageType } from "../Image/ImageTypes";
 import CardGridHeader from "./CardGridHeader";
 import Card from "./Card";
 
@@ -33,7 +34,7 @@ export interface CardItem {
   id: string;
   title: string;
   description: string;
-  image?: any;
+  image?: ImageType;
   link: string;
 }
 
@@ -85,22 +86,24 @@ export default function CardGrid({
                 href={item.link}
                 layout={layout}
                 isBordered={isBorderedFinal}
-                image={
-                  <Image
-                    id={item.image.id}
-                    alt={item.image.alt}
-                    uri={item.image.uri}
-                    useTransformation={true}
-                    transformations={item.image.transformations}
-                    transformationLabel={"2_1_960"}
-                    layout="responsive"
-                    // width={item.image.width}
-                    // height={item.image.height}
-                    width={900}
-                    height={450}
-                    quality={90}
-                  />
-                }
+                {...(item.image && {
+                  image: (
+                    <Image
+                      id={item.image.id}
+                      alt={item.image.alt}
+                      uri={item.image.uri}
+                      useTransformation={true}
+                      transformations={item.image.transformations}
+                      transformationLabel={"2_1_960"}
+                      layout="responsive"
+                      // width={item.image.width}
+                      // height={item.image.height}
+                      width={900}
+                      height={450}
+                      quality={90}
+                    />
+                  ),
+                })}
               />
             </li>
           ))}
