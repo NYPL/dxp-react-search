@@ -130,7 +130,7 @@ export const getStaticProps: GetStaticProps<
       }),
       initialApolloState: apolloClient.cache.extract(),
     },
-    revalidate: 60,
+    revalidate: 600,
   };
 };
 
