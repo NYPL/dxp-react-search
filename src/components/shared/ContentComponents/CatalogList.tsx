@@ -40,7 +40,7 @@ function CatalogList({
   const catalogUri = "https://browse.nypl.org/iii/encore/record/C__Rb";
 
   return (
-    <Box id={`${type}-${id}`} mb="xl">
+    <Box id={`${type}-${id}`} mb="l">
       {heading && <Heading level="two" text={heading} />}
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
       <Grid

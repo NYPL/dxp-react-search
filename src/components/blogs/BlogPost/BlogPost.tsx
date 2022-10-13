@@ -1,13 +1,13 @@
 import React from "react";
-import Components from "./../../shared/ContentComponents/getReactComponent";
+import Components, {
+  ContentComponentObject,
+} from "./../../shared/ContentComponents/getReactComponent";
 import {
   Box,
   Heading,
   Link,
   HStack,
 } from "@nypl/design-system-react-components";
-
-type ContentComponentObject = { [key: string]: any };
 
 interface BlogPostProps {
   blog: any;

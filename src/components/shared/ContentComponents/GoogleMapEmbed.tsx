@@ -14,7 +14,7 @@ function GoogleMapEmbed({
   embedCode,
 }: GoogleMapEmbedProps) {
   return (
-    <Box id={`${type}-${id}`} w="100%" mb="xl">
+    <Box id={`${type}-${id}`} w="100%" mb="l">
       <Box
         sx={{
           display: "none",
