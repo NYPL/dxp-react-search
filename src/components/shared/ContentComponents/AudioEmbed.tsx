@@ -27,7 +27,7 @@ function AudioEmbed({
       px={{ lg: "xxl" }}
       my="0"
       mx="auto"
-      mb="xl"
+      mb="l"
     >
       {heading && <Heading level="two" text={heading} />}
       {description && <TextFormatted html={description} />}
