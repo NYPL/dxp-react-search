@@ -29,6 +29,7 @@ function PressMainPage() {
         <>
           <Heading level="two">{mediaInquiries.heading}</Heading>
           <Box
+            marginBottom="s"
             sx={{
               "& a": {
                 color: "var(--nypl-colors-ui-black)",
