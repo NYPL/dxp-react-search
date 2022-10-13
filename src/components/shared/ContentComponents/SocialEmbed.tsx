@@ -8,7 +8,7 @@ interface SocialEmbedProps {
 }
 function SocialEmbed({ id, type, embedCode }: SocialEmbedProps) {
   return (
-    <Box id={`${type}-${id}`} w="100%" mb="xl">
+    <Box id={`${type}-${id}`} w="100%" mb="l">
       <Box
         sx={{
           "& iframe": {
