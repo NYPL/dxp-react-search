@@ -47,10 +47,21 @@ export default function Donation({
   const singleDonationLink = `${donationFormBaseUrl}&set.DonationLevel=${donationOtherLevelId}&set.Value=${donationAmountFinal}`;
   const recurringDonationLink = `${donationFormBaseUrl}&set.DonationLevel=${donationOtherLevelId}&set.Value=${donationAmountFinal}&set.OptionalRepeat=TRUE`;
 
-  // Background image.
-  const backgroundImageSrc = image.transformations
+  // Background images.
+  const backgroundImageSrcSm = image.transformations
+    ? getImageTransformation("2_1_960", image.transformations)
+    : image.uri;
+
+  const backgroundImageSrcMd = image.transformations
     ? getImageTransformation(
-        "hero_header_focal_point_2400x400",
+        "donation_background_focal_point_1280x464",
+        image.transformations
+      )
+    : image.uri;
+
+  const backgroundImageSrcXl = image.transformations
+    ? getImageTransformation(
+        "donation_background_focal_point_1920x464",
         image.transformations
       )
     : image.uri;
@@ -58,9 +69,14 @@ export default function Donation({
   return (
     <Box id={id} minHeight="700px">
       <Box
-        backgroundImage={backgroundImageSrc}
-        backgroundSize="cover"
-        minHeight="464px"
+        backgroundImage={{
+          sm: backgroundImageSrcSm,
+          md: backgroundImageSrcMd,
+          xl: backgroundImageSrcXl,
+        }}
+        backgroundSize={{ sm: "100%", md: "cover" }}
+        backgroundPosition={{ md: "center" }}
+        minHeight={{ sm: "196px", md: "464px" }}
       >
         <Box
           id="overlay"
@@ -69,7 +85,7 @@ export default function Donation({
           margin="0 auto"
           backgroundColor="white"
           position="relative"
-          top="365px"
+          top={{ sm: "190px", md: "365px", xl: "425px" }}
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         >
           <Heading level="two" color="brand.primary">
