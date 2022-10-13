@@ -9,3 +9,5 @@ export const ONLINE_RESOURCES_ONSITE_UUID = "on-site-uuid";
 export const LOCATIONS_BASE_PATH = "/locations";
 // Blogs
 export const BLOGS_BASE_PATH = "/blog";
+// Press
+export const PRESS_BASE_PATH = "/press";

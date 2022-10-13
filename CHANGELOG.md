@@ -2,7 +2,14 @@
 
 ---
 
-### v0.7.0 [PRE-RELEASE] React 17+NextJS 12 & Maintenance & Improvements
+### v0.7.1 [2022-10-03] Homepage Hero Adjustments
+
+---
+
+- Adjustments for home page hero for image placement on large screens.
+- Fix hero text overlay on iPad.
+
+### v0.7.0 [2022-09-27] Homepage Release, React 17+NextJS 12, Maintenance & Improvements
 
 ---
 
@@ -10,7 +17,9 @@
 - Updates vercel build scripts for env variables.
 - Replaces `react-google-maps` with newer `@react-google-maps/api`.
 - Update Location Finder `Hero` to use DS Chakra components.
-- Adds a constant Build ID to next.config.js so RP can proxy `_next/data/scout` assets
+- Adds a constant Build ID to next.config.js so RP can proxy `_next/data/scout` assets.
+- Updates Location Finder to format phone numbers according to NYPL style guide.
+- Initial build for new home page.
 
 ---
 

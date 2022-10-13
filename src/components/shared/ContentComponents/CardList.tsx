@@ -41,7 +41,7 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
   }
 
   return (
-    <Box id={`${type}-${id}`} mb="xl">
+    <Box id={`${type}-${id}`} mb="l">
       {heading && <Heading level="two" text={heading} />}
       {description && <TextFormatted html={description} />}
       <Grid
