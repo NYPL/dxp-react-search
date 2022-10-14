@@ -15,6 +15,7 @@ import { typeDefs as FilterTypes } from "./type-defs/filter";
 // Content types
 import { typeDefs as BlogTypes } from "./type-defs/blog";
 import { typeDefs as LocationTypes } from "./type-defs/location";
+import { typeDefs as PressReleaseTypes } from "./type-defs/press";
 import { typeDefs as HomePageTypes } from "./type-defs/homepage";
 import { typeDefs as SectionFrontTypes } from "./type-defs/sectionFront";
 // Mutations
@@ -35,6 +36,7 @@ export const schema = makeExecutableSchema({
     FilterTypes,
     BlogTypes,
     LocationTypes,
+    PressReleaseTypes,
     HomePageTypes,
     SectionFrontTypes,
     SendEmailTypes,

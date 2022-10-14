@@ -15,7 +15,7 @@ import CardGrid from "./../CardGrid";
 
 // @TODO is it better to pass this in as an arg in the function? So different instances
 // can use different sets of Drupal paragraphs?
-const Components = {
+const Components: any = {
   // Property is the __type name
   Video: Video,
   TextWithImage: TextWithImage,
@@ -29,7 +29,13 @@ const Components = {
   CardGrid: CardGrid,
 };
 
-export default function mapContentComponentToReactComponent(contentComponent) {
+export interface ContentComponentObject {
+  [key: string]: any;
+}
+
+export default function mapContentComponentToReactComponent(
+  contentComponent: ContentComponentObject
+) {
   if (typeof Components[contentComponent["__typename"]] !== "undefined") {
     return React.createElement(Components[contentComponent["__typename"]], {
       key: contentComponent.id,
