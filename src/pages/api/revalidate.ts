@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
-// http://localhost:3000/api/revalidate?secret=o934Ysf3Hpu3irVXFBYvGCAyHjU3F&slug=/give
-
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
