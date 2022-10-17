@@ -1,4 +1,4 @@
-# DXP Scout
+# DXP Scout - Press Releases 10/17
 
 React app build for www.nypl.org. Pages currently in repo:
 
