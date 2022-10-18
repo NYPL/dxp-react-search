@@ -1,9 +1,7 @@
+// @see https://nextjs.org/docs/advanced-features/preview-mode
+
 import { NextApiRequest, NextApiResponse } from "next";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
-
-// @see https://www.sanity.io/guides/nextjs-live-preview
-// @see https://github.com/vercel/next.js/blob/canary/examples/cms-wordpress/pages/api/preview.ts
-// @see https://github.com/vercel/next.js/blob/canary/examples/cms-wordpress/pages/posts/%5Bslug%5D.tsx
 
 export default async function handler(
   request: NextApiRequest,
@@ -24,7 +22,11 @@ export default async function handler(
   }
 
   // Enable Preview Mode by setting the cookies.
+  // @TODO doesn't work in dev mode?
+  // This method adds 2 cookies: __prerender_bypass and __next_preview_data.
   response.setPreviewData({
+    maxAge: 60,
+    path: request.query.slug,
     uuid: request?.query?.uuid,
     revisionId: request?.query?.revision_id,
   });

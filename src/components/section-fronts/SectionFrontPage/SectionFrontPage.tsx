@@ -7,6 +7,7 @@ import Error from "../../../pages/_error";
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 import Donation from "../Donation";
 import Components from "./../../shared/ContentComponents/getReactComponent";
+import PreviewModeNotification from "../../shared/PreviewModeNotification";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -102,8 +103,6 @@ interface SectionFrontPageProps {
   revisionId?: string;
 }
 
-// @TODO I dont think you need isPreview and revisionId inside this component, and it never gets called?
-
 export default function SectionFrontPage({
   uuid,
   isPreview,
@@ -162,6 +161,7 @@ export default function SectionFrontPage({
       wrapperClass="nypl--section-fronts"
       contentHeader={
         <>
+          {isPreview && <PreviewModeNotification />}
           <Hero
             heroType="tertiary"
             heading={<Heading level="one" text={sectionFront.title} />}
