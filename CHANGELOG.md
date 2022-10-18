@@ -2,7 +2,7 @@
 
 ---
 
-### v0.8.0 [?] Press Releases Release!
+### v0.8.0 [2022-10-18] Press Releases Release!
 
 ---
 
