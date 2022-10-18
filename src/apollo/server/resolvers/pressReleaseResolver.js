@@ -67,7 +67,7 @@ const pressReleaseResolver = {
   PressRelease: {
     id: (pressRelease) => pressRelease.id,
     title: (pressRelease) => pressRelease.title,
-    subTitle: (pressRelease) => pressRelease.field_tfls_subTitle?.processed,
+    subTitle: (pressRelease) => pressRelease.field_tfls_subtitle?.processed,
     description: (pressRelease) =>
       pressRelease.field_tfls_summary_description?.processed,
     slug: (pressRelease) => pressRelease.path.alias,
