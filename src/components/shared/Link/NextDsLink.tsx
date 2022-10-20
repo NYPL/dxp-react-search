@@ -5,12 +5,13 @@ import { default as NextLink } from "next/link";
 interface LinkProps {
   children: React.ReactNode;
   href: string;
+  prefetch?: boolean;
 }
 
 // @TODO Replace Box with DS Link eventually.
-function NextDsLink({ children, href }: LinkProps) {
+function NextDsLink({ children, href, prefetch = true }: LinkProps) {
   return (
-    <NextLink href={href} passHref>
+    <NextLink href={href} prefetch={prefetch} passHref>
       <Box
         as="a"
         sx={{

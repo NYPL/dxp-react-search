@@ -1,5 +1,9 @@
-export default function resolveParagraphTypes(objectType: string) {
+export default function resolveParagraphTypes(
+  objectType: string,
+  contentType?: string
+) {
   let resolvedObjectType;
+
   switch (objectType) {
     case "text_with_image":
       resolvedObjectType = "TextWithImage";
@@ -31,6 +35,10 @@ export default function resolveParagraphTypes(objectType: string) {
     case "catalog_list":
       resolvedObjectType = "CatalogList";
       break;
+    case "donation":
+      resolvedObjectType = "Donation";
+      break;
+    // Home page.
     case "hp_hero":
       resolvedObjectType = "HomePageHeroComponent";
       break;
@@ -50,5 +58,15 @@ export default function resolveParagraphTypes(objectType: string) {
       resolvedObjectType = "HomePageSlideshowComponent";
       break;
   }
+
+  // @TODO Should blog instead be the exception to the rule?
+  if (contentType === "section_front") {
+    switch (objectType) {
+      case "link_card_list":
+        resolvedObjectType = "CardGrid";
+        break;
+    }
+  }
+
   return resolvedObjectType;
 }
