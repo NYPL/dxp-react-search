@@ -14,6 +14,7 @@ export interface CardGridCommonProps {
   link?: string;
   hrefText?: string;
   isBordered?: boolean;
+  isCentered?: boolean;
 }
 
 type CardGridConditionalProps =
@@ -48,14 +49,17 @@ export default function CardGrid({
   hrefText,
   layout,
   isBordered = false,
+  isCentered = false,
   items,
   children,
 }: CardGridProps) {
   let templateColumns = "repeat(auto-fit, minmax(300px, 1fr))";
   let isBorderedFinal = isBordered;
+  let isCenteredFinal = isCentered;
   if (layout === "row") {
     templateColumns = "repeat(1, 1fr)";
     isBorderedFinal = true;
+    isCenteredFinal = true;
   }
 
   return (
@@ -86,6 +90,7 @@ export default function CardGrid({
                 href={item.link}
                 layout={layout}
                 isBordered={isBorderedFinal}
+                isCentered={isCenteredFinal}
                 {...(item.image && {
                   image: (
                     <Image
