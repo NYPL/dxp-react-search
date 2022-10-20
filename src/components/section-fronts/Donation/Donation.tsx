@@ -80,24 +80,25 @@ export default function Donation({
       >
         <Box
           id="overlay"
-          padding="l"
-          maxWidth="1153px"
+          padding={{ sm: "m", md: "xl" }}
+          maxWidth="1240px"
           margin="0 auto"
           backgroundColor="white"
           position="relative"
           top={{ sm: "190px", md: "365px", xl: "425px" }}
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         >
-          <Heading level="two" color="brand.primary">
-            {title}
-          </Heading>
           <Flex flexFlow={{ base: "column", lg: "row" }}>
-            <Box
-              as="p"
-              flex={{ lg: "1 0 50%" }}
-              fontWeight="500"
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
+            <Box flex={{ lg: "1 0 50%" }} paddingRight={{ md: "s" }}>
+              <Heading level="two" color="brand.primary">
+                {title}
+              </Heading>
+              <Box
+                as="p"
+                fontWeight="500"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
+            </Box>
             <Box
               id="donation-form"
               flex={{ lg: "1 0 50%" }}
