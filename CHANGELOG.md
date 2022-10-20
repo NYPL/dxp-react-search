@@ -2,6 +2,14 @@
 
 ---
 
+### v0.9.0 [?] Section Fronts: Give Release
+
+---
+
+- Initial build of Section Fronts Give page.
+
+---
+
 ### v0.8.0 [2022-10-18] Press Releases Release!
 
 ---
