@@ -79,6 +79,11 @@ const nextConfig = {
       "ic.od-cdn.com",
     ],
   },
+  // Disable isr memory cache to avoid load balanced servers falling out of sync.
+  // @see https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#self-hosting-isr
+  experimental: {
+    isrMemoryCacheSize: 0,
+  },
 };
 
 module.exports = withPlugins([[withBundleAnalyzer]], nextConfig);
