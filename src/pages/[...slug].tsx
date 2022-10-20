@@ -41,7 +41,7 @@ function CatchAllRoutesPage({
     );
   }
 
-  return <div>Something else?</div>;
+  return null;
 }
 
 export async function getStaticPaths() {
