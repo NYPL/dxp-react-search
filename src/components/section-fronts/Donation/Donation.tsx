@@ -49,10 +49,6 @@ export default function Donation({
 
   //Background images.
   const backgroundImageSrcLg = image.transformations
-    ? getImageTransformation("2_1_960", image.transformations)
-    : image.uri;
-
-  const backgroundImageSrcXl = image.transformations
     ? getImageTransformation(
         "donation_background_focal_point_1280x464",
         image.transformations
@@ -72,7 +68,6 @@ export default function Donation({
         backgroundImage={{
           md: "none",
           lg: backgroundImageSrcLg,
-          xl: backgroundImageSrcXl,
           "2xl": backgroundImageSrc2Xl,
         }}
         backgroundSize={{ sm: "100%", md: "cover" }}
