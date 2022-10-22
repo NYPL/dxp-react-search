@@ -2,8 +2,8 @@ import * as React from "react";
 import { Box, Heading, Flex } from "@nypl/design-system-react-components";
 import DonationAmountInput from "./DonationAmountInput";
 import DonationLinkButton from "./DonationLinkButton";
+import Image, { ImageType } from "../../shared/Image";
 import { getImageTransformation } from "../../shared/Image/imageUtils";
-import { ImageType } from "../../shared/Image";
 
 export interface DonationProps {
   /** The id of the donation component. */
@@ -47,19 +47,19 @@ export default function Donation({
   const singleDonationLink = `${donationFormBaseUrl}&set.DonationLevel=${donationOtherLevelId}&set.Value=${donationAmountFinal}`;
   const recurringDonationLink = `${donationFormBaseUrl}&set.DonationLevel=${donationOtherLevelId}&set.Value=${donationAmountFinal}&set.OptionalRepeat=TRUE`;
 
-  // Background images.
-  const backgroundImageSrcSm = image.transformations
+  //Background images.
+  const backgroundImageSrcLg = image.transformations
     ? getImageTransformation("2_1_960", image.transformations)
     : image.uri;
 
-  const backgroundImageSrcMd = image.transformations
+  const backgroundImageSrcXl = image.transformations
     ? getImageTransformation(
         "donation_background_focal_point_1280x464",
         image.transformations
       )
     : image.uri;
 
-  const backgroundImageSrcXl = image.transformations
+  const backgroundImageSrc2Xl = image.transformations
     ? getImageTransformation(
         "donation_background_focal_point_1920x464",
         image.transformations
@@ -67,25 +67,41 @@ export default function Donation({
     : image.uri;
 
   return (
-    <Box id={id} minHeight="700px">
+    <Box id={id} minHeight={{ lg: "700px" }}>
       <Box
         backgroundImage={{
-          sm: backgroundImageSrcSm,
-          md: backgroundImageSrcMd,
+          md: "none",
+          lg: backgroundImageSrcLg,
           xl: backgroundImageSrcXl,
+          "2xl": backgroundImageSrc2Xl,
         }}
         backgroundSize={{ sm: "100%", md: "cover" }}
         backgroundPosition={{ md: "center" }}
-        minHeight={{ sm: "196px", md: "464px" }}
+        minHeight={{ md: "464px" }}
+        marginBottom={{ sm: "m", md: "initial" }}
       >
+        <Box display={{ lg: "none" }}>
+          <Image
+            id={image.id}
+            alt={image.alt}
+            uri={image.uri}
+            useTransformation={true}
+            transformations={image.transformations}
+            transformationLabel={"2_1_960"}
+            layout="responsive"
+            width={960}
+            height={480}
+            quality={90}
+          />
+        </Box>
         <Box
           id="overlay"
-          padding={{ sm: "m", md: "xl" }}
+          padding={{ sm: "s", md: "xl" }}
           maxWidth="1240px"
           margin="0 auto"
           backgroundColor="white"
           position="relative"
-          top={{ sm: "190px", md: "365px", xl: "425px" }}
+          top={{ lg: "444px", xl: "425px" }}
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         >
           <Flex flexFlow={{ base: "column", lg: "row" }}>
