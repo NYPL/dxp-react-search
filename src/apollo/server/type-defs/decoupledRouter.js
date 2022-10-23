@@ -5,6 +5,14 @@ export const typeDefs = gql`
     id: ID!
     uuid: String
     redirect: Redirect
+    status: DecoupledRouterStatus
+  }
+
+  enum DecoupledRouterStatus {
+    SUCCESS
+    ERROR
+    NOT_FOUND
+    MAINTENANCE_MODE
   }
 
   type Redirect {

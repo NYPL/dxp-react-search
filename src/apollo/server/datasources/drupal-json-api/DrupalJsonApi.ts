@@ -33,6 +33,7 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
     }
   }
 
+  // @TODO this is currently not used.
   async getDecoupledRouter(args: { path: string }) {
     // Get resource url from path.
     let apiPath = `/router/translate-path?path=${args.path}`;

@@ -119,6 +119,7 @@ export default function SectionFrontPage({
     },
   });
 
+  // @TODO Do you actually need this, since gsp is already handling the 404 status?
   // If uuid returns null from useDecoupledRouter, there was no router
   // path match in Drupal, so we return 404 status error component.
   if (!data && uuid === null) {

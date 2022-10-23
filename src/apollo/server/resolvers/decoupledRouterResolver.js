@@ -19,6 +19,7 @@ const decoupledRouterResolver = {
       if (!router.entity && router.resolved) {
         id = router.resolved;
       }
+      // @TODO Make this unqiue and include the status returned?
       return `router-id-${id}`;
     },
     uuid: (router) => {
@@ -27,6 +28,20 @@ const decoupledRouterResolver = {
     redirect: (router) => {
       if (Array.isArray(router.redirect)) {
         return router.redirect[0];
+      }
+    },
+    status: (router) => {
+      console.log("resolver-status-router");
+      console.log(router);
+
+      if (
+        router.status === "NOT_FOUND" ||
+        router.status === "ERROR" ||
+        router.status === "MAINTENANCE_MODE"
+      ) {
+        return router.status;
+      } else {
+        return "SUCCESS";
       }
     },
   },

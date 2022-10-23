@@ -18,6 +18,7 @@ type CatchAllRoutesPageProps = {
   uuid: string;
   isPreview: boolean;
   revisionId: string;
+  status: "SUCCESS" | "ERROR" | "NOT_FOUND" | "MAINTENANCE_MODE";
 };
 
 interface CatchAllRoutesParams extends ParsedUrlQuery {
@@ -67,17 +68,15 @@ export const getStaticProps: GetStaticProps<
 
   let uuid;
   let revisionId = null;
+  let status;
 
   // Preview mode.
   const isPreview = context.preview ? context.preview : false;
-
-  // const uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
   // Set the uuid for preview mode.
   if (isPreview) {
     uuid = previewData.uuid;
     revisionId = previewData.revisionId;
   } else {
-    // Get the slug from the params object.
     // Get decoupled router data.
     const decoupledRouterData = await apolloClient.query({
       query: DECOUPLED_ROUTER_QUERY,
@@ -87,16 +86,34 @@ export const getStaticProps: GetStaticProps<
     });
 
     uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+    status = await decoupledRouterData?.data?.decoupledRouter?.status;
+
+    // CMS is in maintenance mode, so throw an error to prevent revalidation.
+    // This will allow the old page to continue to render, even if CMS is offline.
+    if (status === "MAINTENANCE_MODE") {
+      throw new Error("CMS is in maintenance mode. Do not revalidate.");
+    }
+
+    // Error
+    // if (status === "ERROR") {
+    //   throw new Error("CMS returned an error. Do not revalidate.");
+    // }
+
+    // Route is not found in CMS, so set 404 status.
+    if (status === "NOT_FOUND") {
+      return {
+        notFound: true,
+      };
+    }
+
+    // Handle the redirect.
+    // const redirect = await decoupledRouterData?.data?.decoupledRouter?.redirect;
+    // if (status === "SUCCESS" && redirect) {
+    // }
+
     // Redirect logic
     // @TODO this doesn't work, @SEE https://github.com/vercel/next.js/discussions/11346
     // const redirect = await decoupledRouterData?.data?.decoupledRouter?.redirect;
-    // // Route is not found in CMS, so set 404 status.
-    // if (uuid === null && !redirect) {
-    //   return {
-    //     notFound: true,
-    //   };
-    // }
-
     // // Handle the redirect.
     // if (redirect) {
     //   return {
@@ -108,6 +125,7 @@ export const getStaticProps: GetStaticProps<
     // }
   }
 
+  // @TODO What is the point of this?
   try {
     await apolloClient.query({
       query: SECTION_FRONT_QUERY,
@@ -127,6 +145,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       slug: slug,
       uuid: uuid,
+      status: status,
       isPreview: isPreview,
       ...(revisionId && {
         revisionId: revisionId,
