@@ -82,10 +82,10 @@ export default function Donation({
             uri={image.uri}
             useTransformation={true}
             transformations={image.transformations}
-            transformationLabel={"2_1_960"}
+            transformationLabel={"donation_background_focal_point_1280x464"}
             layout="responsive"
-            width={960}
-            height={480}
+            width={image.width}
+            height={image.height}
             quality={90}
           />
         </Box>
