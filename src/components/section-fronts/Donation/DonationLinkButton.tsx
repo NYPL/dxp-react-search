@@ -22,6 +22,11 @@ export default function DonationLinkButton({
         backgroundColor: "white",
         borderRadius: "12px",
         fontWeight: "bold",
+        // Fixes link text wrapping to 2 lines on 375 and lower mobiles.
+        fontSize: {
+          base: "15px",
+          md: "initial",
+        },
         _hover: {
           backgroundColor: "ui.gray.light-cool",
           color: "var(--nypl-colors-brand-primary)",
