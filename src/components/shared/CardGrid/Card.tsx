@@ -5,8 +5,8 @@ import {
   CardContent,
   CardHeading,
   LayoutTypes,
+  Link,
 } from "@nypl/design-system-react-components";
-import NextDsLink from "./../Link/NextDsLink";
 
 export interface CardProps {
   /** The id for the card. */
@@ -68,7 +68,7 @@ export default function Card({
       isBordered={isBordered}
     >
       <CardHeading level="three">
-        {href && <NextDsLink href={href}>{heading}</NextDsLink>}
+        {href && <Link href={href}>{heading}</Link>}
       </CardHeading>
       <CardContent>
         {subHeading && subHeading}
