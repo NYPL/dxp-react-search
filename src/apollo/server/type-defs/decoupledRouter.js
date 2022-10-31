@@ -12,7 +12,7 @@ export const typeDefs = gql`
     SUCCESS
     ERROR
     NOT_FOUND
-    MAINTENANCE_MODE
+    SERVICE_UNAVAILABLE
   }
 
   type Redirect {

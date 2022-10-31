@@ -19,8 +19,17 @@ const decoupledRouterResolver = {
       if (!router.entity && router.resolved) {
         id = router.resolved;
       }
-      // @TODO Make this unqiue and include the status returned?
-      return `router-id-${id}`;
+      // Set the status for use in the id.
+      let status = "success";
+      if (
+        router.status === "NOT_FOUND" ||
+        router.status === "ERROR" ||
+        router.status === "SERVICE_UNAVAILABLE"
+      ) {
+        status = router.status.toLowerCase();
+      }
+      // @TODO this id could be better formatted, but it is unique?
+      return `router-id-${id}-${status}`;
     },
     uuid: (router) => {
       return router.entity?.uuid ? router.entity.uuid : null;
@@ -31,13 +40,10 @@ const decoupledRouterResolver = {
       }
     },
     status: (router) => {
-      console.log("resolver-status-router");
-      console.log(router);
-
       if (
         router.status === "NOT_FOUND" ||
         router.status === "ERROR" ||
-        router.status === "MAINTENANCE_MODE"
+        router.status === "SERVICE_UNAVAILABLE"
       ) {
         return router.status;
       } else {

@@ -130,37 +130,14 @@ class DrupalApi extends RESTDataSource {
     let apiPath = `/router/translate-path?path=${args.path}`;
     try {
       const response = await this.get(apiPath);
-      console.log("datasource");
-      console.log(typeof response);
-      console.log(response);
-
-      // Maintenance mode will return a string, not a json object.
-      // @TODO Add a patch to drupal decoupled_router module to return a better response.
-      // @TODO disabling maintenance 200 drupal module, will then allow for a proper 503 response code returned.
-      // MAINTENANCE_MODE could then be SERVICE_UNAVAILABLE and cover maintenance mode and other errors?
-      if (typeof response === "string") {
-        console.log("maintenance mode!");
-        return {
-          status: "MAINTENANCE_MODE",
-        };
-      }
-
       return response;
     } catch (e) {
-      console.log("e");
-      console.log(e);
-
-      /*
-       * 404 will be returned by Drupal if there's no matching route.
-       * 403 will be returned if the route matches, but is unpublished.
-       */
       if (
+        // 404 will be returned by Drupal if there's no matching route.
         e.extensions.response.status === 404 ||
+        // 403 will be returned if the route matches, but is unpublished.
         e.extensions.response.status === 403
       ) {
-        console.log("not found!");
-        console.log(e.extensions.response.status);
-
         return {
           status: "NOT_FOUND",
         };
@@ -169,6 +146,12 @@ class DrupalApi extends RESTDataSource {
       if (e.extensions.response.status === 500) {
         return {
           status: "ERROR",
+        };
+      }
+
+      if (e.extensions.response.status === 503) {
+        return {
+          status: "SERVICE_UNAVAILABLE",
         };
       }
       throw e;
