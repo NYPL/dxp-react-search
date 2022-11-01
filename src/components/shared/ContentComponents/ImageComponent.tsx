@@ -38,7 +38,7 @@ function ImageComponent({
   }
 
   return (
-    <Box id={`${type}-${id}`} mb="xl">
+    <Box id={`${type}-${id}`} mb="l">
       <WithLink link={link}>
         <Image
           id={image.id}

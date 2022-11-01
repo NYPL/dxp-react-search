@@ -6,7 +6,9 @@ React app build for www.nypl.org. Pages currently in repo:
 - Articles & Databases - https://www.nypl.org/research/collections/articles-databases
 - Blog - https://www.nypl.org/blog
 - Homepage - https://www.nypl.org
-- Press Releases, Section Fronts, and more (coming soon)
+- Press Releases - https://www.nypl.org/press
+- Section Fronts: Give - https://www.nypl.org/give
+- Section Fronts, Events, and more (coming soon)
 
 ## Installation (Local)
 

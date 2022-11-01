@@ -9,7 +9,7 @@ interface SlideshowProps {
 
 function Slideshow({ id, type }: SlideshowProps) {
   return (
-    <Box id={`${type}-${id}`} mb="xl">
+    <Box id={`${type}-${id}`} mb="l">
       <h3>{type}</h3>
       {id}
     </Box>

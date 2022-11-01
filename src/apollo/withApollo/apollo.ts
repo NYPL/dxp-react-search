@@ -8,6 +8,12 @@ import getDataSources from "./../server/datasources/getDataSources";
 import { schema } from "./../server/schema";
 const { NEXT_PUBLIC_GRAPHQL_API } = process.env;
 
+// Add type for the apollo page props
+// @see https://github.com/vercel/next.js/discussions/16522
+export interface ApolloPageProps {
+  initialApolloState: NormalizedCacheObject;
+}
+
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 function createIsomorphLink() {

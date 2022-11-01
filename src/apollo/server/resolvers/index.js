@@ -12,7 +12,9 @@ import validatePatronCardResolver from "./validatePatronCardResolver";
 // Content types
 import blogResolver from "./blogResolver";
 import locationResolver from "./locationResolver";
+import pressReleaseResolver from "./pressReleaseResolver";
 import homePageResolver from "./homePageResolver";
+import sectionFrontResolver from "./sectionFrontResolver";
 // Mutations
 import sendEmailResolver from "./sendEmailResolver";
 
@@ -21,7 +23,9 @@ export const resolvers = mergeResolvers([
   refineryTermResolver,
   blogResolver,
   locationResolver,
+  pressReleaseResolver,
   homePageResolver,
+  sectionFrontResolver,
   termResolver,
   onlineResourceResolver,
   searchResolver,

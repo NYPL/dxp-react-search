@@ -8,7 +8,7 @@ import { getImageTransformation } from "./../../shared/Image/imageUtils";
 interface CardListProps {
   id: string;
   type: string;
-  heading?: string;
+  title?: string;
   description?: string;
   items: CardItem[];
 }
@@ -21,7 +21,7 @@ interface CardItem {
   link: string;
 }
 
-function CardList({ id, type, heading, description, items }: CardListProps) {
+function CardList({ id, type, title, description, items }: CardListProps) {
   const [isMobile, setIsMobile] = React.useState<boolean>();
   const windowSize = useWindowSize();
 
@@ -42,7 +42,7 @@ function CardList({ id, type, heading, description, items }: CardListProps) {
 
   return (
     <Box id={`${type}-${id}`} mb="xl">
-      {heading && <Heading level="two" text={heading} />}
+      {title && <Heading level="two" text={title} />}
       {description && <TextFormatted html={description} />}
       <Grid
         as="ul"
