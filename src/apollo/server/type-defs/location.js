@@ -26,6 +26,7 @@ export const typeDefs = gql`
   type LocationConnection {
     items: [Location]
     pageInfo: PageInfo
+    responseInfo: ResponseInfo!
   }
 
   input LocationFilter {

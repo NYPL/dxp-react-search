@@ -2,6 +2,7 @@ import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
 } from "./../datasources/drupal-json-api/getJsonApiPath";
+import resolveCollectionResponse from "./utils/resolveCollectionResponse";
 
 const locationResolver = {
   Query: {
@@ -18,20 +19,7 @@ const locationResolver = {
         args.sort,
         pagination
       );
-      const response = await dataSources.drupalJsonApi.getCollectionResource(
-        apiPath
-      );
-      return {
-        items: response.data,
-        pageInfo: {
-          totalItems: response.meta ? response.meta.count : 0,
-          limit: args.limit ? args.limit : null,
-          pageCount: response.meta
-            ? Math.ceil(response.meta.count / args.limit)
-            : 120,
-          pageNumber: args.pageNumber ? args.pageNumber : 1,
-        },
-      };
+      return resolveCollectionResponse(dataSources, apiPath, args);
     },
   },
   Location: {
