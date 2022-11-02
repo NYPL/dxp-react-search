@@ -9,7 +9,7 @@ import SectionFrontPage, {
   sectionFrontsSlugs,
   SECTION_FRONT_QUERY,
 } from "../components/section-fronts/SectionFrontPage/SectionFrontPage";
-
+// HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
 } from "../apollo/with-drupal-router";
@@ -60,6 +60,7 @@ export const getStaticProps: GetStaticProps<
   CatchAllRoutesPageProps,
   CatchAllRoutesParams
 > = withDrupalRouter(
+  // @ts-ignore
   async (
     // @ts-ignore
     context: GetStaticPropsContext,

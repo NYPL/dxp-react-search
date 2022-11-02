@@ -1,11 +1,8 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+import { GetServerSidePropsContext } from "next";
 // Apollo
 import withApollo from "./../../apollo/withApollo";
-import {
-  initializeApollo,
-  ApolloPageProps,
-} from "./../../apollo/withApollo/apollo";
+import { initializeApollo } from "./../../apollo/withApollo/apollo";
 // Components
 import { Heading, Box } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/press-releases/layouts/PageContainer";
@@ -51,12 +48,12 @@ function PressMainPage() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<
-  ApolloPageProps
-> = async () => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
+  const pressCollectionQuery = await apolloClient.query({
     query: ALL_PRESS_RELEASES_QUERY,
     variables: {
       limit: 10,
@@ -65,6 +62,21 @@ export const getServerSideProps: GetServerSideProps<
       filter: { status: { fieldName: "status", operator: "=", value: true } },
     },
   });
+
+  // @TODO figure out how to make this code reuseable?
+  // Handle errors.
+  const responseInfo = await pressCollectionQuery?.data?.allPressReleases
+    ?.responseInfo;
+  if (responseInfo.httpStatus !== "SUCCESS") {
+    // Set the response code headers.
+    context.res.statusCode = responseInfo.httpStatusCode;
+    // Return the response http status code, which will get picked up by Error pg.
+    return {
+      props: {
+        errorCode: responseInfo.httpStatusCode,
+      },
+    };
+  }
 
   return {
     props: {

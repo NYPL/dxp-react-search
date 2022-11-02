@@ -33,6 +33,11 @@ export const ALL_PRESS_RELEASES_QUERY = gql`
         limit
         pageCount
       }
+      responseInfo {
+        httpStatus
+        httpStatusCode
+        apiPath
+      }
     }
   }
 `;
