@@ -86,17 +86,34 @@ export default function withDrupalRouter(
       uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
       status = await decoupledRouterData?.data?.decoupledRouter?.status;
 
-      // CMS is in maintenance mode, so throw an error to prevent revalidation.
-      // This will allow the old page to continue to render, even if CMS is offline.
-      if (status === "SERVICE_UNAVAILABLE") {
-        throw new Error(
-          "CMS is in maintenance mode. Skipping static revalidation."
-        );
-      }
+      // Static pg only responses.
+      if (isGetStaticPropsFunction) {
+        // CMS is in maintenance mode, so throw an error to prevent revalidation.
+        // This will allow the old page to continue to render, even if CMS is offline.
+        if (status === "SERVICE_UNAVAILABLE") {
+          throw new Error(
+            "CMS is in maintenance mode. Skipping static revalidation."
+          );
+        }
 
-      // Error
-      if (status === "ERROR") {
-        throw new Error("CMS returned an error. Skipping static revalidation.");
+        // Error
+        if (status === "ERROR") {
+          throw new Error(
+            "CMS returned an error. Skipping static revalidation."
+          );
+        }
+      } else {
+        // @TODO figure out how to make this code reuseable?
+        if (status !== "SUCCESS") {
+          // Set the response code headers.
+          (context as GetServerSidePropsContext).res.statusCode = 503;
+          // Return the response http status code, which will get picked up by Error pg.
+          return {
+            props: {
+              errorCode: 503,
+            },
+          };
+        }
       }
 
       // Route is not found in CMS, so set 404 status.
