@@ -41,7 +41,11 @@ describe("withDrupalRouter", () => {
       id: "test-success-id",
       uuid: "test-success-uuid",
       redirect: null,
-      status: "SUCCESS",
+      responseInfo: {
+        httpStatus: "SUCCESS",
+        httpStatusCode: 200,
+        apiPath: "https://apipath",
+      },
     };
 
     requestHandler.mockResolvedValueOnce({
@@ -57,7 +61,7 @@ describe("withDrupalRouter", () => {
     // console.log("200");
     // console.log(result);
 
-    expect(result.status).toEqual("SUCCESS");
+    expect(result.responseInfo.httpStatus).toEqual("SUCCESS");
   });
 
   it("should return redirect object is redirect is present", async () => {
@@ -76,7 +80,11 @@ describe("withDrupalRouter", () => {
         to: "/new-slug",
         status: "301",
       },
-      status: "SUCCESS",
+      responseInfo: {
+        httpStatus: "SUCCESS",
+        httpStatusCode: 200,
+        apiPath: "https://apipath",
+      },
     };
 
     requestHandler.mockResolvedValueOnce({
@@ -142,7 +150,11 @@ describe("withDrupalRouter", () => {
       id: "test-404-uuid",
       uuid: "test-404-uuid",
       redirect: null,
-      status: "NOT_FOUND",
+      responseInfo: {
+        httpStatus: "NOT_FOUND",
+        httpStatusCode: 404,
+        apiPath: "https://apipath",
+      },
     };
 
     requestHandler.mockResolvedValueOnce({
@@ -173,7 +185,11 @@ describe("withDrupalRouter", () => {
       id: "test-503-id",
       uuid: "test-503-uuid",
       redirect: null,
-      status: "SERVICE_UNAVAILABLE",
+      responseInfo: {
+        httpStatus: "SERVICE_UNAVAILABLE",
+        httpStatusCode: 503,
+        apiPath: "https://apipath",
+      },
     };
 
     requestHandler.mockResolvedValueOnce({
@@ -201,7 +217,11 @@ describe("withDrupalRouter", () => {
       id: "test-500-id",
       uuid: "test-500-uuid",
       redirect: null,
-      status: "ERROR",
+      responseInfo: {
+        httpStatus: "ERROR",
+        httpStatusCode: 500,
+        apiPath: "https://apipath",
+      },
     };
 
     requestHandler.mockResolvedValueOnce({
@@ -216,4 +236,6 @@ describe("withDrupalRouter", () => {
       "CMS returned an error. Skipping static revalidation."
     );
   });
+
+  // @TODO Add specific tests for getServerSideProps and getStaticProps.
 });

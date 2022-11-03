@@ -7,11 +7,15 @@ export const DECOUPLED_ROUTER_QUERY = gql`
     decoupledRouter(path: $path) {
       id
       uuid
-      status
       redirect {
         from
         to
         status
+      }
+      responseInfo {
+        httpStatus
+        httpStatusCode
+        apiPath
       }
     }
   }
@@ -39,12 +43,12 @@ function useDecoupledRouter(nextRouter: NextRouter) {
     },
   });
   const uuid = decoupledRouterData?.decoupledRouter?.uuid;
-  const status = decoupledRouterData?.decoupledRouter?.status;
+  const responseInfo = decoupledRouterData?.decoupledRouter?.responseInfo;
 
   return {
-    isPreview: isPreview,
     uuid: uuid,
-    status: status,
+    isPreview: isPreview,
+    responseInfo: responseInfo,
   };
 }
 

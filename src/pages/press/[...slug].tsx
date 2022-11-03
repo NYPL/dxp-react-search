@@ -14,9 +14,10 @@ import PressRelease from "../../components/press-releases/PressRelease";
 // Hooks
 import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 // HOC
-import withDecoupledRouter, {
-  WithDecoupledRouterReturnProps,
-} from "../../apollo/withDecoupledRouter";
+import withDrupalRouter, {
+  WithDrupalRouterReturnProps,
+  // NextDataFetchingFunctionContext,
+} from "../../apollo/with-drupal-router";
 
 const PRESS_RELEASE_QUERY = gql`
   ${PRESS_FIELDS_FRAGMENT}
@@ -82,10 +83,11 @@ function PressReleasePage() {
   );
 }
 
-export const getServerSideProps = withDecoupledRouter(
+export const getServerSideProps = withDrupalRouter(
+  // @ts-ignore
   async (
     context: GetServerSidePropsContext,
-    props: WithDecoupledRouterReturnProps
+    props: WithDrupalRouterReturnProps
   ) => {
     const { uuid, isPreview, apolloClient } = props;
 

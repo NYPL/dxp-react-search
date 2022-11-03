@@ -30,6 +30,11 @@ export const LOCATIONS_QUERY = gql`
         limit
         totalItems
       }
+      responseInfo {
+        httpStatus
+        httpStatusCode
+        apiPath
+      }
     }
   }
 `;

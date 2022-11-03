@@ -8,6 +8,7 @@ import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
 } from "./../datasources/drupal-json-api/getJsonApiPath";
+import resolveCollectionResponse from "./utils/resolveCollectionResponse";
 
 const includedFields = [
   "field_ers_media_image.field_media_image",
@@ -30,23 +31,7 @@ const pressReleaseResolver = {
         args.sort,
         pagination
       );
-
-      const response = await dataSources.drupalJsonApi.getCollectionResource(
-        apiPath
-      );
-
-      // @TODO Move this to a utils function.
-      return {
-        items: response.data,
-        pageInfo: {
-          totalItems: response.meta ? response.meta.count : 0,
-          limit: args.limit ? args.limit : null,
-          pageCount: response.meta
-            ? Math.ceil(response.meta.count / args.limit)
-            : 120,
-          pageNumber: args.pageNumber ? args.pageNumber : 1,
-        },
-      };
+      return resolveCollectionResponse(dataSources, apiPath, args);
     },
     pressRelease: async (_, args, { dataSources }) => {
       const isPreview = args.preview ? true : false;

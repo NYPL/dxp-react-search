@@ -9,7 +9,7 @@ import SectionFrontPage, {
   sectionFrontsSlugs,
   SECTION_FRONT_QUERY,
 } from "../components/section-fronts/SectionFrontPage/SectionFrontPage";
-
+// HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
 } from "../apollo/with-drupal-router";
@@ -19,7 +19,7 @@ type CatchAllRoutesPageProps = {
   uuid: string;
   isPreview: boolean;
   revisionId: string;
-  status: "SUCCESS" | "ERROR" | "NOT_FOUND" | "SERVICE_UNAVAILABLE";
+  responseInfo: any;
 };
 
 interface CatchAllRoutesParams extends ParsedUrlQuery {
@@ -60,12 +60,14 @@ export const getStaticProps: GetStaticProps<
   CatchAllRoutesPageProps,
   CatchAllRoutesParams
 > = withDrupalRouter(
+  // @ts-ignore
   async (
     // @ts-ignore
     context: GetStaticPropsContext,
     props: WithDrupalRouterReturnProps
   ) => {
-    const { uuid, revisionId, slug, isPreview, status, apolloClient } = props;
+    const { uuid, revisionId, slug, isPreview, responseInfo, apolloClient } =
+      props;
 
     await apolloClient.query({
       query: SECTION_FRONT_QUERY,
@@ -82,7 +84,7 @@ export const getStaticProps: GetStaticProps<
       props: {
         slug: slug,
         uuid: uuid,
-        status: status,
+        responseInfo: responseInfo,
         isPreview: isPreview,
         ...(revisionId && {
           revisionId: revisionId,
