@@ -10,7 +10,7 @@ export type WithDrupalRouterReturnProps = {
   revisionId: string;
   slug: string;
   isPreview: boolean;
-  status: string;
+  responseInfo: any;
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
@@ -39,7 +39,7 @@ export default function withDrupalRouter(
     let revisionId = null;
     let slug;
     let isPreview;
-    let status;
+    let responseInfo;
 
     // getStaticProps().
     if (isGetStaticPropsFunction) {
@@ -84,40 +84,41 @@ export default function withDrupalRouter(
       });
 
       uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
-      status = await decoupledRouterData?.data?.decoupledRouter?.status;
+      responseInfo = await decoupledRouterData?.data?.decoupledRouter
+        ?.responseInfo;
 
       // Static pg only responses.
       if (isGetStaticPropsFunction) {
         // CMS is in maintenance mode, so throw an error to prevent revalidation.
         // This will allow the old page to continue to render, even if CMS is offline.
-        if (status === "SERVICE_UNAVAILABLE") {
+        if (responseInfo.httpStatus === "SERVICE_UNAVAILABLE") {
           throw new Error(
             "CMS is in maintenance mode. Skipping static revalidation."
           );
         }
-
         // Error
-        if (status === "ERROR") {
+        if (responseInfo.httpStatus === "ERROR") {
           throw new Error(
             "CMS returned an error. Skipping static revalidation."
           );
         }
       } else {
         // @TODO figure out how to make this code reuseable?
-        if (status !== "SUCCESS") {
+        if (responseInfo.httpStatus !== "SUCCESS") {
           // Set the response code headers.
-          (context as GetServerSidePropsContext).res.statusCode = 503;
+          (context as GetServerSidePropsContext).res.statusCode =
+            responseInfo.httpStatusCode;
           // Return the response http status code, which will get picked up by Error pg.
           return {
             props: {
-              errorCode: 503,
+              errorCode: responseInfo.httpStatusCode,
             },
           };
         }
       }
 
       // Route is not found in CMS, so set 404 status.
-      if (status === "NOT_FOUND") {
+      if (responseInfo.httpStatus === "NOT_FOUND") {
         return {
           notFound: true,
         };
@@ -126,7 +127,7 @@ export default function withDrupalRouter(
       // Handle the redirect.
       const redirect = await decoupledRouterData?.data?.decoupledRouter
         ?.redirect;
-      if (status === "SUCCESS" && redirect) {
+      if (responseInfo.httpStatus === "SUCCESS" && redirect) {
         return {
           redirect: {
             statusCode: 301,
@@ -145,7 +146,7 @@ export default function withDrupalRouter(
       revisionId,
       slug,
       isPreview,
-      status,
+      responseInfo,
       apolloClient,
     });
   };
