@@ -101,6 +101,7 @@ export default function withDrupalRouter(
     // @TODO instead of adding props seperate from context, you could add them into context itself?
     // @see https://stackoverflow.com/a/72035518
     // @ts-ignore
+    // Extend a type's parameters to include the props
     return await nextDataFetchingFunction(context, {
       uuid,
       revisionId,

@@ -38,18 +38,6 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   });
 
-  // CMS is in maintenance mode, so throw an error to prevent revalidation.
-  // This will allow the old page to continue to render, even if CMS is offline.
-  // if (status === "SERVICE_UNAVAILABLE") {
-  //   throw new Error(
-  //     "CMS is in maintenance mode. Skipping static revalidation."
-  //   );
-  // }
-  // // Error
-  // if (status === "ERROR") {
-  //   throw new Error("CMS returned an error. Skipping static revalidation.");
-  // }
-
   const uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
 
   await apolloClient.query({

@@ -1,10 +1,18 @@
-import React from "react";
+import * as React from "react";
+import { NextPageContext } from "next";
+import { ApolloError } from "@apollo/client/errors";
 import { Box, Heading, Link, Text } from "@nypl/design-system-react-components";
 import PageContainer from "../components/shared/layouts/PageContainer";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 type ErrorProps = {
   statusCode: number;
+};
+
+type NextError = { statusCode?: number | undefined };
+
+type ErrorContext = Omit<NextPageContext, "err"> & {
+  err: ApolloError | NextError;
 };
 
 // function ErrorContent({ statusCode }: ErrorProps) {
@@ -87,16 +95,20 @@ function Error({ statusCode }: ErrorProps) {
   );
 }
 
-// @ts-ignore
-// Only gets called if getServersideProps throws an error.
-Error.getInitialProps = async ({ res, err }) => {
-  // console.log("WTF");
-  // console.log(err.graphQLErrors[0].extensions);
-
-  const statusCode = err.graphQLErrors[0].extensions.response.status;
+// Only gets called if app throws an error either on client or server side.
+Error.getInitialProps = async ({ res, err }: ErrorContext) => {
+  let statusCode;
+  if (err.hasOwnProperty("graphQLErrors")) {
+    statusCode = (err as ApolloError).graphQLErrors[0].extensions?.response
+      ?.status;
+  } else {
+    statusCode = (err as NextError).statusCode;
+  }
 
   // Set the response headers to the correct status code.
-  res.statusCode = statusCode;
+  if (res) {
+    res.statusCode = statusCode;
+  }
   // Pass the statusCode prop to the component.
   return { statusCode: statusCode };
 };
