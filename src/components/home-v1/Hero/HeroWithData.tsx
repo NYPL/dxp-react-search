@@ -52,10 +52,25 @@ export default function HeroWithData() {
 
   const { loading, error, data } = useQuery(HOME_PAGE_HERO_COLLECTION_QUERY, {
     variables: {
-      ...(isTimeMachine && {
-        preview: true,
-        filter: homePagePreviewQueryFilters(router.query.publish_on as string),
-      }),
+      ...(isTimeMachine
+        ? {
+            preview: true,
+            filter: homePagePreviewQueryFilters(
+              router.query.publish_on as string
+            ),
+          }
+        : {
+            filter: {
+              experimental: true,
+              conditions: [
+                {
+                  operator: "=",
+                  field: "status",
+                  value: "true",
+                },
+              ],
+            },
+          }),
     },
   });
 
