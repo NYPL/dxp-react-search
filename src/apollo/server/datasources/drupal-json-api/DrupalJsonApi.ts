@@ -1,6 +1,7 @@
 import { DataSourceConfig } from "apollo-datasource";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 import getAccessToken from "../../../../utils/getAccessToken";
+import { toApolloError } from "apollo-server-errors";
 const { DRUPAL_API } = process.env;
 
 // @TODO Change to use JsonApiResourceObject
@@ -45,23 +46,25 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
     apiPath: string,
     isPreview: boolean
   ): Promise<JsonApiResource[]> {
-    let response;
     if (isPreview) {
-      const accessToken = await getAccessToken();
-      response = await this.get(apiPath, undefined, {
-        headers: {
-          // @ts-ignore
-          Authorization: `Bearer ${accessToken.access_token}`,
-        },
-      });
+      try {
+        const accessToken = await getAccessToken();
+        const response = await this.get(apiPath, undefined, {
+          headers: {
+            Authorization: `Bearer ${accessToken?.access_token}`,
+          },
+        });
+        return response;
+      } catch (error: any) {
+        throw toApolloError(error);
+      }
     } else {
-      response = await this.get(apiPath);
-    }
-
-    if (Array.isArray(response.data)) {
-      return response;
-    } else {
-      return [];
+      try {
+        const response = await this.get(apiPath);
+        return response;
+      } catch (error: any) {
+        throw toApolloError(error);
+      }
     }
   }
 
@@ -69,19 +72,26 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
     apiPath: string,
     isPreview: boolean
   ): Promise<JsonApiResource> {
-    let response;
     if (isPreview) {
-      const accessToken = await getAccessToken();
-      response = await this.get(apiPath, undefined, {
-        headers: {
-          // @ts-ignore
-          Authorization: `Bearer ${accessToken.access_token}`,
-        },
-      });
+      try {
+        const accessToken = await getAccessToken();
+        const response = await this.get(apiPath, undefined, {
+          headers: {
+            Authorization: `Bearer ${accessToken?.access_token}`,
+          },
+        });
+        return response.data;
+      } catch (error: any) {
+        throw toApolloError(error);
+      }
     } else {
-      response = await this.get(apiPath);
+      try {
+        const response = await this.get(apiPath);
+        return response.data;
+      } catch (error: any) {
+        throw toApolloError(error);
+      }
     }
-    return response.data;
   }
 }
 

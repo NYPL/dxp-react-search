@@ -1,4 +1,5 @@
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
+import { toApolloError } from "apollo-server-errors";
 const { DRUPAL_API } = process.env;
 
 class DrupalApi extends RESTDataSource {
@@ -128,8 +129,12 @@ class DrupalApi extends RESTDataSource {
   /* ---------- DECOUPLED DRUPAL ---------- */
   async getDecoupledRouter(args) {
     let apiPath = `/router/translate-path?path=${args.path}`;
-    const response = await this.get(apiPath);
-    return response;
+    try {
+      const response = await this.get(apiPath);
+      return response;
+    } catch (error) {
+      throw toApolloError(error);
+    }
   }
 
   async getAutoSuggestions(args) {

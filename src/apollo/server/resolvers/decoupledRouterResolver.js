@@ -1,15 +1,10 @@
-import { toApolloError } from "apollo-server-errors";
 const { DRUPAL_API } = process.env;
 
 const decoupledRouterResolver = {
   Query: {
     decoupledRouter: async (parent, args, { dataSources }) => {
-      try {
-        const response = await dataSources.drupalApi.getDecoupledRouter(args);
-        return response;
-      } catch (error) {
-        throw toApolloError(error);
-      }
+      const response = await dataSources.drupalApi.getDecoupledRouter(args);
+      return response;
     },
   },
   DecoupledRouter: {
