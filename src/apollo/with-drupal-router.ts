@@ -10,7 +10,6 @@ export type WithDrupalRouterReturnProps = {
   revisionId: string;
   slug: string;
   isPreview: boolean;
-  responseInfo: any;
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
@@ -39,7 +38,6 @@ export default function withDrupalRouter(
     let revisionId = null;
     let slug;
     let isPreview;
-    let responseInfo;
 
     // getStaticProps().
     if (isGetStaticPropsFunction) {
@@ -84,50 +82,12 @@ export default function withDrupalRouter(
       });
 
       uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
-      responseInfo = await decoupledRouterData?.data?.decoupledRouter
-        ?.responseInfo;
-
-      // Static pg only responses.
-      if (isGetStaticPropsFunction) {
-        // CMS is in maintenance mode, so throw an error to prevent revalidation.
-        // This will allow the old page to continue to render, even if CMS is offline.
-        if (responseInfo.httpStatus === "SERVICE_UNAVAILABLE") {
-          throw new Error(
-            "CMS is in maintenance mode. Skipping static revalidation."
-          );
-        }
-        // Error
-        if (responseInfo.httpStatus === "ERROR") {
-          throw new Error(
-            "CMS returned an error. Skipping static revalidation."
-          );
-        }
-      } else {
-        // @TODO figure out how to make this code reuseable?
-        if (responseInfo.httpStatus !== "SUCCESS") {
-          // Set the response code headers.
-          (context as GetServerSidePropsContext).res.statusCode =
-            responseInfo.httpStatusCode;
-          // Return the response http status code, which will get picked up by Error pg.
-          return {
-            props: {
-              errorCode: responseInfo.httpStatusCode,
-            },
-          };
-        }
-      }
-
-      // Route is not found in CMS, so set 404 status.
-      if (responseInfo.httpStatus === "NOT_FOUND") {
-        return {
-          notFound: true,
-        };
-      }
 
       // Handle the redirect.
       const redirect = await decoupledRouterData?.data?.decoupledRouter
         ?.redirect;
-      if (responseInfo.httpStatus === "SUCCESS" && redirect) {
+
+      if (redirect) {
         return {
           redirect: {
             statusCode: 301,
@@ -146,7 +106,6 @@ export default function withDrupalRouter(
       revisionId,
       slug,
       isPreview,
-      responseInfo,
       apolloClient,
     });
   };

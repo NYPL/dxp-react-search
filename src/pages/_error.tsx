@@ -31,7 +31,7 @@ type ErrorProps = {
 //   }
 // }
 
-export default function Error({ statusCode }: ErrorProps) {
+function Error({ statusCode }: ErrorProps) {
   let title = "We're Sorry ...";
   if (statusCode === 500) {
     title = "Error!";
@@ -86,3 +86,19 @@ export default function Error({ statusCode }: ErrorProps) {
     />
   );
 }
+
+// @ts-ignore
+// Only gets called if getServersideProps throws an error.
+Error.getInitialProps = async ({ res, err }) => {
+  // console.log("WTF");
+  // console.log(err.graphQLErrors[0].extensions);
+
+  const statusCode = err.graphQLErrors[0].extensions.response.status;
+
+  // Set the response headers to the correct status code.
+  res.statusCode = statusCode;
+  // Pass the statusCode prop to the component.
+  return { statusCode: statusCode };
+};
+
+export default Error;

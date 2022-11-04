@@ -12,11 +12,6 @@ export const DECOUPLED_ROUTER_QUERY = gql`
         to
         status
       }
-      responseInfo {
-        httpStatus
-        httpStatusCode
-        apiPath
-      }
     }
   }
 `;
@@ -43,12 +38,10 @@ function useDecoupledRouter(nextRouter: NextRouter) {
     },
   });
   const uuid = decoupledRouterData?.decoupledRouter?.uuid;
-  const responseInfo = decoupledRouterData?.decoupledRouter?.responseInfo;
 
   return {
     uuid: uuid,
     isPreview: isPreview,
-    responseInfo: responseInfo,
   };
 }
 

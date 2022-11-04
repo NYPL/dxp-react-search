@@ -5,7 +5,6 @@ export const typeDefs = gql`
     id: ID!
     uuid: String
     redirect: Redirect
-    responseInfo: ResponseInfo!
   }
 
   type Redirect {

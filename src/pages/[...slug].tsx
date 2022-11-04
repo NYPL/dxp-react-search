@@ -19,7 +19,6 @@ type CatchAllRoutesPageProps = {
   uuid: string;
   isPreview: boolean;
   revisionId: string;
-  responseInfo: any;
 };
 
 interface CatchAllRoutesParams extends ParsedUrlQuery {
@@ -66,8 +65,7 @@ export const getStaticProps: GetStaticProps<
     context: GetStaticPropsContext,
     props: WithDrupalRouterReturnProps
   ) => {
-    const { uuid, revisionId, slug, isPreview, responseInfo, apolloClient } =
-      props;
+    const { uuid, revisionId, slug, isPreview, apolloClient } = props;
 
     await apolloClient.query({
       query: SECTION_FRONT_QUERY,
@@ -84,7 +82,6 @@ export const getStaticProps: GetStaticProps<
       props: {
         slug: slug,
         uuid: uuid,
-        responseInfo: responseInfo,
         isPreview: isPreview,
         ...(revisionId && {
           revisionId: revisionId,

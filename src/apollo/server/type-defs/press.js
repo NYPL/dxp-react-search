@@ -16,7 +16,6 @@ export const typeDefs = gql`
   type PressReleaseConnection {
     items: [PressRelease]
     pageInfo: PageInfo
-    responseInfo: ResponseInfo!
   }
 
   union PressReleaseMainContent = Text | TextWithImage | ImageComponent
