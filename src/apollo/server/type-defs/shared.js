@@ -202,19 +202,6 @@ export const typeDefs = gql`
     link: String
   }
 
-  enum HttpStatus {
-    SUCCESS
-    ERROR
-    NOT_FOUND
-    SERVICE_UNAVAILABLE
-  }
-
-  type ResponseInfo {
-    httpStatus: HttpStatus!
-    httpStatusCode: Int!
-    apiPath: String!
-  }
-
   type Query {
     _empty: String
   }
