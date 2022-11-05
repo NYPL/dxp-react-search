@@ -21,7 +21,7 @@ const decoupledRouterResolver = {
       if (!router.entity && router.resolved) {
         id = router.resolved;
       }
-      return `router-id-${id}__success`;
+      return `router-id-${id}`;
     },
     uuid: (router) => {
       return router.entity?.uuid ? router.entity.uuid : null;

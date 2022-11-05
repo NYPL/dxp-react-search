@@ -25,7 +25,6 @@ class DrupalApi extends RESTDataSource {
     if (response.headers.get("Content-Type").includes("json")) {
       return response.json();
     } else {
-      //console.log("parseBody");
       return response.text();
     }
   }

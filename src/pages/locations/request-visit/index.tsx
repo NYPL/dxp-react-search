@@ -8,7 +8,6 @@ import { Heading } from "@nypl/design-system-react-components";
 import PageContainer from "./../../../components/locations/RequestVisitForm/PageContainer";
 import RequestVisitForm from "../../../components/locations/RequestVisitForm/RequestVisitForm";
 import RequestVisitFormError from "../../../components/locations/RequestVisitForm/RequestVisitFormError";
-// import withDrupal from "../../../apollo/with-drupal";
 
 function LocationsRequestVisitPage() {
   return (
