@@ -2,10 +2,6 @@ import withDrupalRouter from "./with-drupal-router";
 import { createMockClient } from "mock-apollo-client";
 import { DECOUPLED_ROUTER_QUERY } from "./../hooks/useDecoupledRouter";
 
-// @see https://stackoverflow.com/questions/65281989/how-to-mock-a-function-that-returns-a-function-using-jest?utm_source=pocket_mylist
-// Using jest.doMock()
-// @see https://stackoverflow.com/a/71614273
-
 let mockClient = createMockClient();
 let requestHandler;
 
@@ -16,7 +12,7 @@ jest.mock("./withApollo/apollo", () => {
   };
 });
 
-describe("withDrupalRouter", () => {
+describe("with-drupal-router success states.", () => {
   beforeAll(() => {
     mockClient = createMockClient();
     requestHandler = jest.fn();
@@ -29,7 +25,7 @@ describe("withDrupalRouter", () => {
     jest.clearAllMocks();
   });
 
-  it("should return 200 if status is SUCCESS", async () => {
+  it("should not return a redirect if successful route is resolved.", async () => {
     const contextMock = {
       params: {
         slug: ["/slug-200"],
@@ -41,30 +37,24 @@ describe("withDrupalRouter", () => {
       id: "test-success-id",
       uuid: "test-success-uuid",
       redirect: null,
-      responseInfo: {
-        httpStatus: "SUCCESS",
-        httpStatusCode: 200,
-        apiPath: "https://apipath",
-      },
     };
 
     requestHandler.mockResolvedValueOnce({
       data: { decoupledRouter: decoupledRouterDataMock },
     });
 
-    const getStaticPropsMock = withDrupalRouter(async (context, props) => {
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
       return props;
     });
 
     const result = await getStaticPropsMock(contextMock);
 
-    // console.log("200");
-    // console.log(result);
-
-    expect(result.responseInfo.httpStatus).toEqual("SUCCESS");
+    expect(result.redirect).toEqual(undefined);
+    expect(result.isPreview).toEqual(false);
+    expect(result.revisionId).toEqual(null);
   });
 
-  it("should return redirect object is redirect is present", async () => {
+  it("should return nextjs redirect object is redirect data is returned from decoupled router.", async () => {
     const contextMock = {
       params: {
         slug: ["/slug-redirect"],
@@ -80,18 +70,13 @@ describe("withDrupalRouter", () => {
         to: "/new-slug",
         status: "301",
       },
-      responseInfo: {
-        httpStatus: "SUCCESS",
-        httpStatusCode: 200,
-        apiPath: "https://apipath",
-      },
     };
 
     requestHandler.mockResolvedValueOnce({
       data: { decoupledRouter: decoupledRouterDataMock },
     });
 
-    const getStaticPropsMock = withDrupalRouter(async (context, props) => {
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
       return props;
     });
 
@@ -104,9 +89,6 @@ describe("withDrupalRouter", () => {
     };
 
     const result = await getStaticPropsMock(contextMock);
-
-    // console.log("redirect");
-    // console.log(result);
 
     expect(result).toEqual(redirectMock);
   });
@@ -129,15 +111,42 @@ describe("withDrupalRouter", () => {
 
     const result = await getStaticPropsMock(contextMock);
 
-    // console.log("preview");
-    // console.log(result);
-
     expect(result.isPreview).toEqual(true);
     expect(result.uuid).toEqual("slug-preview-uuid");
     expect(result.revisionId).toEqual("slug-preview-revision-id");
   });
+});
 
-  it("should return 404 not found if status is NOT_FOUND", async () => {
+// describe("with-drupal-router getServerSideProps success states.", () => {
+//   /*
+//       // getServerSideProps().
+//       const { resolvedUrl, query } = context as GetServerSidePropsContext;
+
+//       slug = resolvedUrl;
+//       // Preview mode.
+//       isPreview =
+//         query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET && query.uuid
+//           ? true
+//           : false;
+//       // Set the uuid for preview mode.
+//       if (isPreview) {
+//         uuid = query.uuid;
+//       }
+//   */
+// });
+
+describe("with-drupal-router error states.", () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("should allow 404 error throw to pass through.", async () => {
+    mockClient = createMockClient();
+    requestHandler = jest.fn();
+
     const contextMock = {
       id: "test",
       params: {
@@ -145,97 +154,67 @@ describe("withDrupalRouter", () => {
       },
     };
 
-    // Mock the apollo client query for DECOUPLED_ROUTER_QUERY.
-    const decoupledRouterDataMock = {
-      id: "test-404-uuid",
-      uuid: "test-404-uuid",
-      redirect: null,
-      responseInfo: {
-        httpStatus: "NOT_FOUND",
-        httpStatusCode: 404,
-        apiPath: "https://apipath",
-      },
-    };
+    mockClient.setRequestHandler(DECOUPLED_ROUTER_QUERY, () =>
+      Promise.resolve({ errors: [{ message: "ApolloError: 404: Not Found" }] })
+    );
 
-    requestHandler.mockResolvedValueOnce({
-      data: { decoupledRouter: decoupledRouterDataMock },
-    });
-
-    const getStaticPropsMock = withDrupalRouter(async (context, props) => {
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
       return props;
     });
 
-    const result = await getStaticPropsMock(contextMock);
-
-    // console.log("404");
-    // console.log(result);
-
-    expect(result).toEqual({ notFound: true });
+    await expect(getStaticPropsMock(contextMock)).rejects.toThrow(
+      "ApolloError: 404: Not Found"
+    );
   });
 
-  it("should throw an error if status is 503 SERVICE_UNAVAILABLE.", async () => {
+  it("should allow 503 error throw to pass through.", async () => {
+    mockClient = createMockClient();
+    requestHandler = jest.fn();
+
     const contextMock = {
       params: {
         slug: ["/slug-503"],
       },
     };
 
-    // Mock the apollo client query for DECOUPLED_ROUTER_QUERY.
-    const decoupledRouterDataMock = {
-      id: "test-503-id",
-      uuid: "test-503-uuid",
-      redirect: null,
-      responseInfo: {
-        httpStatus: "SERVICE_UNAVAILABLE",
-        httpStatusCode: 503,
-        apiPath: "https://apipath",
-      },
-    };
+    mockClient.setRequestHandler(DECOUPLED_ROUTER_QUERY, () =>
+      Promise.resolve({
+        errors: [{ message: "ApolloError: 503: Service Unavailable" }],
+      })
+    );
 
-    requestHandler.mockResolvedValueOnce({
-      data: { decoupledRouter: decoupledRouterDataMock },
-    });
-
-    const getStaticPropsMock = withDrupalRouter(async (context, props) => {
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
       return props;
     });
 
     await expect(getStaticPropsMock(contextMock)).rejects.toThrow(
-      "CMS is in maintenance mode. Skipping static revalidation."
+      "ApolloError: 503: Service Unavailable"
     );
   });
 
-  it("should throw an error if status is 500 ERROR.", async () => {
+  it("should allow 500 error throw to pass through.", async () => {
+    mockClient = createMockClient();
+    requestHandler = jest.fn();
+
     const contextMock = {
       params: {
         slug: ["/slug-500"],
       },
     };
 
-    // Mock the apollo client query for DECOUPLED_ROUTER_QUERY.
-    const decoupledRouterDataMock = {
-      id: "test-500-id",
-      uuid: "test-500-uuid",
-      redirect: null,
-      responseInfo: {
-        httpStatus: "ERROR",
-        httpStatusCode: 500,
-        apiPath: "https://apipath",
-      },
-    };
+    mockClient.setRequestHandler(DECOUPLED_ROUTER_QUERY, () =>
+      Promise.resolve({
+        errors: [{ message: "ApolloError: 500: Server error" }],
+      })
+    );
 
-    requestHandler.mockResolvedValueOnce({
-      data: { decoupledRouter: decoupledRouterDataMock },
-    });
-
-    const getStaticPropsMock = withDrupalRouter(async (context, props) => {
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
       return props;
     });
 
     await expect(getStaticPropsMock(contextMock)).rejects.toThrow(
-      "CMS returned an error. Skipping static revalidation."
+      "ApolloError: 500: Server error"
     );
   });
-
-  // @TODO Add specific tests for getServerSideProps and getStaticProps.
 });
+// @TODO Add specific tests for getServerSideProps and getStaticProps.
