@@ -2,6 +2,14 @@
 
 ---
 
+### v0.9.1 [2022-11-07] Home page events bug fix
+
+---
+
+- Fixes bug where events json:api query was not specifying statue published.
+
+---
+
 ### v0.9.0 [2022-10-25] Section Fronts: Give Release
 
 ---
