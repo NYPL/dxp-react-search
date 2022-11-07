@@ -49,11 +49,33 @@ export const getStaticProps: GetStaticProps = async () => {
 
   await apolloClient.query({
     query: HOME_PAGE_HERO_COLLECTION_QUERY,
+    variables: {
+      filter: {
+        experimental: true,
+        conditions: [
+          {
+            operator: "=",
+            field: "status",
+            value: "true",
+          },
+        ],
+      },
+    },
   });
 
   await apolloClient.query({
     query: HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY,
     variables: {
+      filter: {
+        experimental: true,
+        conditions: [
+          {
+            operator: "=",
+            field: "status",
+            value: "true",
+          },
+        ],
+      },
       limit: 16,
       sort: {
         field: "field_is_weight",
@@ -65,6 +87,16 @@ export const getStaticProps: GetStaticProps = async () => {
   await apolloClient.query({
     query: HOME_PAGE_EVENT_COLLECTION_QUERY,
     variables: {
+      filter: {
+        experimental: true,
+        conditions: [
+          {
+            operator: "=",
+            field: "status",
+            value: "true",
+          },
+        ],
+      },
       sort: {
         field: "field_lts_event_category",
         direction: "ASC",

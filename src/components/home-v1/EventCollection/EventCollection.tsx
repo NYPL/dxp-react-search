@@ -82,10 +82,25 @@ export default function EventCollection({
 
   const { loading, error, data } = useQuery(HOME_PAGE_EVENT_COLLECTION_QUERY, {
     variables: {
-      ...(isTimeMachine && {
-        preview: true,
-        filter: homePagePreviewQueryFilters(router.query.publish_on as string),
-      }),
+      ...(isTimeMachine
+        ? {
+            preview: true,
+            filter: homePagePreviewQueryFilters(
+              router.query.publish_on as string
+            ),
+          }
+        : {
+            filter: {
+              experimental: true,
+              conditions: [
+                {
+                  operator: "=",
+                  field: "status",
+                  value: "true",
+                },
+              ],
+            },
+          }),
       sort: {
         field: "field_lts_event_category",
         direction: "ASC",
