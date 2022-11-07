@@ -6,7 +6,7 @@
 
 ---
 
-- Fixes bug where events json:api query was not specifying statue published.
+- Fixes bug where events json:api query was not specifying status published.
 
 ---
 
