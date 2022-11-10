@@ -23,13 +23,13 @@ describe("Blog All pg tests", () => {
     const queryParams = "channel=730+734";
 
     cy.log("Open multiselect menu");
-    cy.get("#blogs__filter-bar")
+    cy.get("#filter-bar-blogs")
       .findByRole("button", { name: "Channels" })
       .click();
     // Map over items to select them from multiselect.
     items.map((item) => {
       cy.log("Select item from multiselect");
-      cy.get("#multiselect-channel")
+      cy.get("#channel")
         .findByRole("dialog")
         .findByLabelText(item)
         // { force: true } might be necessary here, expained here:
@@ -39,11 +39,10 @@ describe("Blog All pg tests", () => {
     });
 
     cy.log("Submit multiselect");
-    cy.get("#multiselect-channel")
-      .findByRole("button", { name: "Apply Filters" })
-      .click();
+    cy.get("#channel").findByRole("button", { name: "Apply" }).click();
 
     cy.log("Pagination should be reset to page 1 in the url");
+    cy.wait(5000);
     cy.location().should((loc) => {
       expect(loc.search).to.eq(`?${queryParams}&page=1`);
     });
@@ -71,6 +70,7 @@ describe("Blog All pg tests", () => {
       }).click();
     });
     cy.log("Pagination should be on page 3");
+    cy.wait(5000);
     cy.location().should((loc) => {
       expect(loc.search).to.eq(`?page=3`);
     });
@@ -91,6 +91,8 @@ describe("Blog All pg tests", () => {
     });
 
     cy.log("Filter id is retained and pagination should be on page 2");
+    cy.wait(5000);
+
     cy.location().should((loc) => {
       expect(loc.search).to.eq(`?channel=730&page=2`);
     });

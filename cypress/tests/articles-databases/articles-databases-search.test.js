@@ -8,7 +8,7 @@ describe("Articles & Databases Search Page Tests", () => {
     cy.log("Open multiselect menu by clicking its button");
     cy.get("form").findByRole("button", { name: "Availability" }).click();
     cy.log("Find the open multiselect and check for items");
-    cy.get("#multiselect-availability")
+    cy.get("#availability")
       .findByRole("dialog")
       .within(() => {
         cy.findByLabelText(/available everywhere/i).should("exist");
@@ -22,7 +22,7 @@ describe("Articles & Databases Search Page Tests", () => {
     cy.get("form").findByRole("button", { name: "Subjects" }).click();
 
     cy.log("Select item from multiselect");
-    cy.get("#multiselect-subject")
+    cy.get("#subject")
       .findByRole("dialog")
       .findByLabelText("Art")
       // { force: true } might be necessary here, expained here:
@@ -31,8 +31,8 @@ describe("Articles & Databases Search Page Tests", () => {
       .should("be.checked");
 
     cy.log("Confirm that selected item count is correct");
-    cy.get("#multiselect-subject")
-      .findByRole("button", { name: "Subjects (1)" })
+    cy.get("#subject")
+      .findByRole("button", { name: "1 item selected" })
       .should("exist");
   });
 
@@ -45,7 +45,7 @@ describe("Articles & Databases Search Page Tests", () => {
 
     items.map((item) => {
       cy.log("Select item from multiselect");
-      cy.get("#multiselect-subject")
+      cy.get("#subject")
         .findByRole("dialog")
         .findByLabelText(item)
         // { force: true } might be necessary here, expained here:
@@ -55,9 +55,7 @@ describe("Articles & Databases Search Page Tests", () => {
     });
 
     cy.log("Submit multiselect");
-    cy.get("#multiselect-subject")
-      .findByRole("button", { name: "Apply Filters" })
-      .click();
+    cy.get("#subject").findByRole("button", { name: "Apply" }).click();
 
     cy.log("Confirm url state is updated correctly");
     cy.location().should((loc) => {

@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // Hooks
-import useWindowSize from "../../../hooks/useWindowSize";
 import usePrevious from "../../../hooks/usePrevious";
 // Types
 import { FilterBarGroupItem } from "./types";
-import { SelectedItems } from "@nypl/design-system-react-components";
+import {
+  SelectedItems,
+  FilterBar as DsFilterBar,
+  MultiSelectGroup,
+  useFilterBar,
+  useNYPLBreakpoints,
+} from "@nypl/design-system-react-components";
 // Components
-import { default as DsFilterBar } from "./../../ds-prototypes/FilterBar/FilterBar";
 import MultiSelect from "./MultiSelect";
 // Next
 import { useRouter } from "next/router";
@@ -31,32 +35,27 @@ function FilterBar({
   routerPathname,
   searchQuery,
 }: FilterBarProps) {
-  // Local state
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>();
-  // MultiSelect state
-  // @TODO default should not be empty object!
-  const [selectedItems, setSelectedItems] = useState<SelectedItems>({});
-
-  // Set the isMobile state based on screen width.
-  const windowSize = useWindowSize();
-  useEffect(() => {
-    // @ts-ignore
-    if (windowSize >= 600) {
-      setIsMobile(false);
-    } else {
-      setIsMobile(true);
-    }
-  }, [windowSize]);
-
   // Next router
   const router = useRouter();
+  const { isLargerThanMobile } = useNYPLBreakpoints();
+
+  const {
+    selectedItems,
+    setSelectedItems,
+    onChange,
+    onClear,
+    onClearAll,
+    isModalOpen,
+    onToggle,
+  } = useFilterBar();
+
+  const hasSelection = () => Object.keys(selectedItems).length > 0;
 
   // Handle the scroll after modal closes.
   // @TODO fix this, only works on search pg, div not on main pg!
   const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
-    if (isMobile && prevModalState !== isModalOpen) {
+    if (!isLargerThanMobile && prevModalState !== isModalOpen) {
       // @ts-ignore
       document
         .getElementById("page-container--content-primary")
@@ -64,55 +63,44 @@ function FilterBar({
     }
   }, [isModalOpen]);
 
-  // Sync the url state with the local react state when query params change.
+  // Sync the selectedItems with the url state if the "clear all search terms" function in SearchResultsDetails.js is called.
   useEffect(() => {
-    let urlState = {};
-    for (let [groupId] of Object.entries(router.query)) {
-      if (groupId !== "page" && groupId !== "q") {
-        urlState = {
-          ...urlState,
-          [groupId]: {
-            items: (router.query[groupId] as string).split(" "),
-          },
-        };
+    if (
+      Object.keys(router.query).length > 0 &&
+      Object.keys(selectedItems).length === 0
+    ) {
+      let urlState = {};
+      for (let [groupId] of Object.entries(router.query)) {
+        if (groupId !== "page" && groupId !== "q") {
+          urlState = {
+            ...urlState,
+            [groupId]: {
+              items: (router.query[groupId] as string).split(" "),
+            },
+          };
+        }
       }
+      setSelectedItems(urlState);
     }
-    setSelectedItems(urlState);
+    if (
+      Object.keys(router.query).length === 0 &&
+      Object.keys(selectedItems).length > 0
+    ) {
+      onClearAll();
+    }
   }, [router.query]);
 
   function handleChange(itemId: string, groupId: string) {
     itemId = itemId.replace(/^[^__]*__/, "");
-
-    let itemIds;
-    // Check if the tid already exists in the state
-    if (
-      selectedItems[groupId] !== undefined &&
-      // @TODO Temporary hack to make availability multiselect use radios.
-      groupId !== "availability"
-    ) {
-      let itemIdExists = selectedItems[groupId].items.indexOf(itemId) > -1;
-      // Make a copy of the existing array.
-      itemIds = selectedItems[groupId].items.slice();
-      // If termId exists, remove it from the array.
-      if (itemIdExists) {
-        itemIds = itemIds.filter((id) => id != itemId);
-      } else {
-        // Add it to the array, but modify the copy, not the original.
-        itemIds.push(itemId);
-      }
+    // @TODO Hack to allow only one selection for Availability
+    if (groupId === "availability") {
+      setSelectedItems({ ...selectedItems, [groupId]: { items: [itemId] } });
     } else {
-      itemIds = [];
-      itemIds.push(itemId);
+      onChange(itemId, groupId);
     }
-    setSelectedItems({
-      ...selectedItems,
-      [groupId]: {
-        items: itemIds,
-      },
-    });
   }
 
-  function handleApply() {
+  function handleApply(selectedItems: SelectedItems) {
     // Get the query params to add using the groups.
     let queryParamsToAdd = {};
     groups.map((group: FilterBarGroupItem) => {
@@ -137,11 +125,12 @@ function FilterBar({
         },
       })
       .then(() => {
-        setIsModalOpen(false);
+        onToggle(false);
       });
   }
 
   function onClearAllMultiSelects() {
+    onClearAll();
     // Remove the selectedItems from url state.
     router.push({
       pathname: routerPathname,
@@ -157,6 +146,7 @@ function FilterBar({
   }
 
   function handleClear(groupId: string) {
+    onClear(groupId);
     // Run through query param state and remove
     let queryStateToKeep = {} as any;
     for (let [key] of Object.entries(router.query)) {
@@ -184,32 +174,40 @@ function FilterBar({
   return (
     <DsFilterBar
       id={id}
-      label={label}
-      isModalOpen={isModalOpen}
-      onClickMobileFiltersButton={() => setIsModalOpen(true)}
-      onClickGoBack={() => setIsModalOpen(false)}
-      isMobile={isMobile ? isMobile : false}
+      layout="row"
+      isOpen={isModalOpen}
+      onToggle={onToggle}
       selectedItems={selectedItems}
-      onClearSelectedItems={onClearAllMultiSelects}
-      onSaveSelectedItems={handleApply}
+      onClear={onClearAllMultiSelects}
+      onSubmit={() => handleApply(selectedItems)}
+      showClearAll={hasSelection()}
+      showSubmitAll={false}
+      headingText={label}
     >
-      {groups.map((group: FilterBarGroupItem) => {
-        return (
-          <MultiSelect
-            key={group.id}
-            id={group.id}
-            type={group.type}
-            limiter={group.limiter}
-            label={group.label}
-            onChange={(e) => handleChange(e.currentTarget.id, group.id)}
-            selectedItems={selectedItems}
-            onClear={() => handleClear(group.id)}
-            onApply={handleApply}
-            includeChildren={group.includeChildren}
-            customData={group.customData}
-          />
-        );
-      })}
+      <MultiSelectGroup
+        key="multiSelectGroup-key"
+        id="multiSelectGroup"
+        labelText="label"
+        showLabel={false}
+      >
+        {groups.map((group: FilterBarGroupItem) => {
+          return (
+            <MultiSelect
+              key={group.id}
+              id={group.id}
+              type={group.type}
+              limiter={group.limiter}
+              label={group.label}
+              onChange={(e) => handleChange(e.currentTarget.id, group.id)}
+              selectedItems={selectedItems}
+              onClear={() => handleClear(group.id)}
+              onApply={() => handleApply(selectedItems)}
+              includeChildren={group.includeChildren}
+              customData={group.customData}
+            />
+          );
+        })}
+      </MultiSelectGroup>
     </DsFilterBar>
   );
 }

@@ -25,7 +25,10 @@ describe("Articles & Databases Url State Tests", () => {
 
     cy.findByRole("button", { name: /subjects/i }).click();
     cy.findByRole("checkbox", { name: "Art" }).should("be.checked");
-    cy.findByRole("button", { name: "Subjects (1)" }).should("be.visible");
+    cy.log("Confirm that selected item count is correct");
+    cy.get("#subject")
+      .findByRole("button", { name: "1 item selected" })
+      .should("be.visible");
   });
 
   it("should preselect multiple items in subjects multiselect.", () => {
@@ -34,7 +37,10 @@ describe("Articles & Databases Url State Tests", () => {
     cy.findByRole("button", { name: /subjects/i }).click();
     cy.findByRole("checkbox", { name: "Art" }).should("be.checked");
     cy.findByRole("checkbox", { name: "Architecture" }).should("be.checked");
-    cy.findByRole("button", { name: "Subjects (2)" }).should("be.visible");
+    cy.log("Confirm that selected item count is correct");
+    cy.get("#subject")
+      .findByRole("button", { name: "2 items selected" })
+      .should("be.visible");
   });
 
   it("should remove subjects query param only when subjects multiselect clear button is pressed.", () => {
@@ -57,7 +63,10 @@ describe("Articles & Databases Url State Tests", () => {
 
     cy.findByRole("button", { name: /audience/i }).click();
     cy.findByRole("checkbox", { name: "Adults" }).should("be.checked");
-    cy.findByRole("button", { name: "Audience (1)" }).should("be.visible");
+    cy.log("Confirm that selected item count is correct");
+    cy.get("#audience_by_age")
+      .findByRole("button", { name: "1 item selected" })
+      .should("be.visible");
   });
 
   it("should remove audience query param only when audience multiselect clear button is pressed.", () => {

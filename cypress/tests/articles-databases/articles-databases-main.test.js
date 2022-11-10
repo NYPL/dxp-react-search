@@ -59,7 +59,8 @@ describe("Articles & Databases Tests", () => {
   });
 
   it("Advanced search using autosuggest and multiselect filter.", () => {
-    const queryParams = "?q=New+York+Times+%281980-present%29&page=1";
+    const queryParams =
+      "?q=New+York+Times+%281980-present%29&page=1&subject=64";
     const pathName = "/research/collections/articles-databases/search";
 
     cy.log("Open multiselect");
@@ -71,6 +72,9 @@ describe("Articles & Databases Tests", () => {
     cy.findByRole("checkbox", { name: "Art" })
       .click({ force: true })
       .should("be.checked");
+    cy.log("Submit multiselect");
+    cy.get("#subject").findByRole("button", { name: "Apply" }).click();
+    cy.wait(3000);
 
     search("new york times", {
       textboxName: /search articles and databases/i,
@@ -81,7 +85,7 @@ describe("Articles & Databases Tests", () => {
       // Get the first result.
       .first()
       .findByRole("link", {
-        name: /new york times \(1980\-present\)/i,
+        name: "New York Art Resources Consortium Catalog (Arcade)",
       })
       .should("exist")
       // Check that the url has been updated correctly.

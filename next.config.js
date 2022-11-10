@@ -65,6 +65,7 @@ const nextConfig = {
       // QA
       "qa-cdn-d8-2.nypl.org",
       "qa-d8.nypl.org",
+      "qa-drupal.nypl.org",
       // PROD
       "cdn-d8.nypl.org",
       "d8.nypl.org",

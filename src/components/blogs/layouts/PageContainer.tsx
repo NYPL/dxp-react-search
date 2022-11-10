@@ -62,7 +62,7 @@ function PageContainer({
             style={{ maxWidth: "1280px", padding: "0 1rem", margin: "0 auto" }}
           >
             <FilterBar
-              id="blogs__filter-bar"
+              id="blogs"
               label="Explore By:"
               routerPathname={`${BLOGS_BASE_PATH}/all`}
               groups={[

@@ -30,7 +30,7 @@ export function search(term: string, options: SearchOptions) {
     .get("form")
     .findByRole("button", { name: "Search" })
     .click()
-    .wait(3000)
+    .wait(5000)
     .get(resultsId)
     .as("getSearchResults");
 }
