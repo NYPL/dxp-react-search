@@ -66,12 +66,25 @@ export default function Spotlight({
     HOME_PAGE_SPOTLIGHT_COLLECTION_QUERY,
     {
       variables: {
-        ...(isTimeMachine && {
-          preview: true,
-          filter: homePagePreviewQueryFilters(
-            router.query.publish_on as string
-          ),
-        }),
+        ...(isTimeMachine
+          ? {
+              preview: true,
+              filter: homePagePreviewQueryFilters(
+                router.query.publish_on as string
+              ),
+            }
+          : {
+              filter: {
+                experimental: true,
+                conditions: [
+                  {
+                    operator: "=",
+                    field: "status",
+                    value: "true",
+                  },
+                ],
+              },
+            }),
         limit: 16,
         sort: {
           field: "field_is_weight",
