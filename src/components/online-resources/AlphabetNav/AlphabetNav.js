@@ -7,9 +7,8 @@ import { useQuery } from "@apollo/client";
 // @TODO move this to a shared query?
 import { AutoSuggestQuery as AUTO_SUGGEST_QUERY } from "./../SearchForm/AutoSuggest.gql";
 // Components
-import { AlphabetFilter } from "@nypl/design-system-react-components";
+import { AlphabetFilter, Box } from "@nypl/design-system-react-components";
 import { Heading } from "@nypl/design-system-react-components";
-import s from "./AlphabetNav.module.css";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
 import getActiveLetters from "./../../../utils/getActiveLetters";
@@ -26,25 +25,27 @@ function AlphabetNav({ className, title, description }) {
   );
   const filteredActiveLetters = activeLetters.filter(x => isNaN(x)).map(letter => letter.toLowerCase());
 
-  function alphaLink(link) {
+  const handleClick = (link) => {  
     if (link === "showAll") {
-      window.location = `${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`;
+      router.push(`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`);
     } else {
-      window.location = `${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${link.toUpperCase()}`;
+      router.push(`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${link.toUpperCase()}`);
     }
   }
 
   return (
     <>
-      <AlphabetFilter
-        activeLetters={filteredActiveLetters}
-        className={`${s.AlphabetNav} ${className ? className : ""}`}
-        currentLetter={selectedLetter}
-        descriptionText={description}
-        headingText={title}
-        id="alphabet-filter-id"
-        onClick={(e) => alphaLink(e)}
-      />
+      <Box mb="l">
+        <AlphabetFilter
+          activeLetters={filteredActiveLetters}
+          className={`${className ? className : ""}`}
+          currentLetter={selectedLetter}
+          descriptionText={description}
+          headingText={title}
+          id="alphabet-filter-id"
+          onClick={(e) => handleClick(e)}
+        />
+      </Box>
     </>
   );
 }
