@@ -8,6 +8,8 @@ import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 import Donation from "../Donation";
 import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
+// Utils
+import getColorsByRoute from "../../../utils/getColorsByRoute";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -140,6 +142,8 @@ export default function SectionFrontPage({
   // @TODO This might not always be the donation component?
   const featuredContent = sectionFront.featuredContent[0];
 
+  const { heroBackgroundColor, heroColor } = getColorsByRoute();
+
   return (
     <PageContainer
       metaTags={{
@@ -166,8 +170,8 @@ export default function SectionFrontPage({
             heroType="tertiary"
             heading={<Heading level="one" text={sectionFront.title} />}
             subHeaderText={sectionFront.description}
-            backgroundColor="brand.primary"
-            foregroundColor="ui.white"
+            backgroundColor={heroBackgroundColor}
+            foregroundColor={heroColor}
           />
           {featuredContent && (
             <Donation
