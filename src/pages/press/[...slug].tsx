@@ -84,12 +84,12 @@ function PressReleasePage() {
 }
 
 export const getServerSideProps = withDrupalRouter(
-  // @ts-ignore
-  async (
-    context: GetServerSidePropsContext,
+  async function getServerSideProps(
+    context,
     props: WithDrupalRouterReturnProps
-  ) => {
+  ) {
     const { uuid, isPreview, apolloClient } = props;
+    const { query } = context as GetServerSidePropsContext;
 
     await apolloClient.query({
       query: PRESS_RELEASE_QUERY,
@@ -97,7 +97,7 @@ export const getServerSideProps = withDrupalRouter(
         id: uuid,
         ...(isPreview && {
           preview: true,
-          revisionId: context.query.revision_id,
+          revisionId: query.revision_id,
         }),
       },
     });
@@ -107,7 +107,8 @@ export const getServerSideProps = withDrupalRouter(
         initialApolloState: apolloClient.cache.extract(),
       },
     };
-  }
+  },
+  { method: "SSR", customPreview: false }
 );
 
 export default withApollo(PressReleasePage);

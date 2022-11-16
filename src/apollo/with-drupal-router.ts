@@ -1,5 +1,9 @@
-import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
-import { GetServerSideProps, GetStaticProps } from "next";
+import {
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+} from "next";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { initializeApollo } from "./withApollo/apollo";
 import { DECOUPLED_ROUTER_QUERY } from "./../hooks/useDecoupledRouter";
@@ -8,43 +12,40 @@ const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 export type WithDrupalRouterReturnProps = {
   uuid: string;
   revisionId: string;
-  slug: string;
+  slug?: string;
   isPreview: boolean;
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
-export type NextDataFetchingFunctionContext =
-  | GetServerSidePropsContext
-  | GetStaticPropsContext;
+type WithDrupalRouterOptions = {
+  method: "SSG" | "SSR";
+  customPreview: boolean;
+};
 
-export type NextDataFetchingFunction = GetServerSideProps | GetStaticProps;
-
-// @TODO Add typing for nextDataFetchingFunction.
-// @see typing for nextDataFetchingFunction? https://github.com/vercel/next.js/discussions/10925#discussioncomment-1031901
-// @see https://stackoverflow.com/a/72041520
-export default function withDrupalRouter(
-  nextDataFetchingFunction: NextDataFetchingFunctionContext
+export default function withDrupalRouter<
+  P extends { [key: string]: unknown } = { [key: string]: unknown }
+>(
+  handler: (
+    context: GetServerSidePropsContext | GetStaticPropsContext,
+    props: WithDrupalRouterReturnProps
+  ) => Promise<GetServerSidePropsResult<P>> | Promise<GetStaticPropsResult<P>>,
+  options: WithDrupalRouterOptions
 ) {
-  return async (
-    context: NextDataFetchingFunctionContext
-  ): Promise<NextDataFetchingFunction | any> => {
-    const isGetStaticPropsFunction = context.hasOwnProperty("resolvedUrl")
-      ? false
-      : true;
-
+  return async function handlerWrapperWithDrupalRouter(
+    context: GetServerSidePropsContext | GetStaticPropsContext
+  ) {
     const apolloClient = initializeApollo();
 
     let uuid;
     let revisionId = null;
     let slug;
-    let isPreview;
+    let isPreview = false;
 
-    // getStaticProps().
-    if (isGetStaticPropsFunction) {
+    if (options.method === "SSG") {
       slug = Array.isArray(context.params?.slug)
         ? context.params?.slug[0]
         : context.params?.slug;
-      const { previewData }: any = context;
+      const { previewData }: any = context as GetStaticPropsContext;
 
       // Preview mode.
       isPreview = context.preview ? context.preview : false;
@@ -54,7 +55,9 @@ export default function withDrupalRouter(
         uuid = previewData.uuid;
         revisionId = previewData.revisionId;
       }
-    } else {
+    }
+
+    if (options.method === "SSR") {
       // getServerSideProps().
       const { resolvedUrl, query } = context as GetServerSidePropsContext;
 
@@ -98,17 +101,25 @@ export default function withDrupalRouter(
       }
     }
 
-    // @TODO instead of adding props seperate from context, you could add them into context itself?
-    // @see https://stackoverflow.com/a/72035518
-    // @ts-ignore
-    // @TODO Extend a type's parameters to include the props
-    // @see extend existing type with additional params: https://stackoverflow.com/a/69668215
-    return await nextDataFetchingFunction(context, {
-      uuid,
-      revisionId,
-      slug,
-      isPreview,
-      apolloClient,
-    });
+    // Return handlers based on type of function passed.
+    if (options.method === "SSG") {
+      return handler(context, {
+        uuid,
+        revisionId,
+        slug,
+        isPreview,
+        apolloClient,
+      }) as Promise<GetStaticPropsResult<P>>;
+    }
+
+    if (options.method === "SSR") {
+      return handler(context, {
+        uuid,
+        revisionId,
+        slug,
+        isPreview,
+        apolloClient,
+      }) as Promise<GetServerSidePropsResult<P>>;
+    }
   };
 }

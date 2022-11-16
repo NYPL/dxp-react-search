@@ -1,7 +1,7 @@
 import * as React from "react";
 // Next
-import { GetStaticProps, GetStaticPropsContext } from "next";
-import { ParsedUrlQuery } from "querystring";
+import { /*GetStaticProps, */ GetStaticPropsContext } from "next";
+// import { ParsedUrlQuery } from "querystring";
 // Apollo
 import withApollo from "../apollo/withApollo";
 // Section front
@@ -21,9 +21,9 @@ type CatchAllRoutesPageProps = {
   revisionId: string;
 };
 
-interface CatchAllRoutesParams extends ParsedUrlQuery {
-  slug: string;
-}
+// interface CatchAllRoutesParams extends ParsedUrlQuery {
+//   slug: string;
+// }
 
 function CatchAllRoutesPage({
   slug,
@@ -55,17 +55,15 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps: GetStaticProps<
-  CatchAllRoutesPageProps,
-  CatchAllRoutesParams
-> = withDrupalRouter(
-  // @ts-ignore
-  async (
+export const getStaticProps = withDrupalRouter(
+  async function getStaticProps(
     // @ts-ignore
     context: GetStaticPropsContext,
     props: WithDrupalRouterReturnProps
-  ) => {
+  ) {
     const { uuid, revisionId, slug, isPreview, apolloClient } = props;
+
+    console.log(props);
 
     await apolloClient.query({
       query: SECTION_FRONT_QUERY,
@@ -93,7 +91,8 @@ export const getStaticProps: GetStaticProps<
       // Set revalidate to 1 min
       revalidate: 60,
     };
-  }
+  },
+  { method: "SSG", customPreview: false }
 );
 
 export default withApollo(CatchAllRoutesPage as any);
