@@ -16,7 +16,6 @@ import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 // HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
-  // NextDataFetchingFunctionContext,
 } from "../../apollo/with-drupal-router";
 
 const PRESS_RELEASE_QUERY = gql`

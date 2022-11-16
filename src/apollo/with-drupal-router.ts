@@ -86,7 +86,7 @@ export default function withDrupalRouter<
 
       uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
 
-      // Handle the redirect.
+      // Handle the redirect if it exists.
       const redirect = await decoupledRouterData?.data?.decoupledRouter
         ?.redirect;
 
