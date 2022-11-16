@@ -49,8 +49,6 @@ function FilterBar({
     onToggle,
   } = useFilterBar();
 
-  const hasSelection = () => Object.keys(selectedItems).length > 0;
-
   // Handle the scroll after modal closes.
   // @TODO fix this, only works on search pg, div not on main pg!
   const prevModalState = usePrevious(isModalOpen);
@@ -180,7 +178,7 @@ function FilterBar({
       selectedItems={selectedItems}
       onClear={onClearAllMultiSelects}
       onSubmit={() => handleApply(selectedItems)}
-      showClearAll={hasSelection()}
+      showClearAll={false}
       showSubmitAll={false}
       headingText={label}
     >
@@ -189,6 +187,7 @@ function FilterBar({
         id="multiSelectGroup"
         labelText="label"
         showLabel={false}
+        gap="s"
       >
         {groups.map((group: FilterBarGroupItem) => {
           return (

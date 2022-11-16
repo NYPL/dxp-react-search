@@ -118,7 +118,6 @@ function MultiSelect({
       variant="dialog"
       label={label}
       items={items}
-      width="fitContent"
       onChange={onChange}
       selectedItems={selectedItems}
       onClear={onClear}
