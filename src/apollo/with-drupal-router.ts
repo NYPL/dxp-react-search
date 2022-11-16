@@ -10,30 +10,37 @@ import { DECOUPLED_ROUTER_QUERY } from "./../hooks/useDecoupledRouter";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
 export type WithDrupalRouterReturnProps = {
+  /** The uuid of the Drupal entity. */
   uuid: string;
+  /** The revision id of the Drupal entity. */
   revisionId: string;
+  /** The slug of the Drupal entity. */
   slug?: string;
+  /** Whether or not preview mode is activated. */
   isPreview: boolean;
+  /** The ApolloClient instance defined inside the with-drupal-router function. */
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
-type WithDrupalRouterOptions = {
+export type WithDrupalRouterOptions = {
+  /** The NextJS data fetching function type. */
   method: "SSG" | "SSR";
+  /** Whether the preview mode is custom version or using NextJS preview mode. */
   customPreview: boolean;
 };
+
+type NextContext = GetServerSidePropsContext | GetStaticPropsContext;
 
 export default function withDrupalRouter<
   P extends { [key: string]: unknown } = { [key: string]: unknown }
 >(
   handler: (
-    context: GetServerSidePropsContext | GetStaticPropsContext,
+    context: NextContext,
     props: WithDrupalRouterReturnProps
   ) => Promise<GetServerSidePropsResult<P>> | Promise<GetStaticPropsResult<P>>,
   options: WithDrupalRouterOptions
 ) {
-  return async function handlerWrapperWithDrupalRouter(
-    context: GetServerSidePropsContext | GetStaticPropsContext
-  ) {
+  return async function handlerWrapperWithDrupalRouter(context: NextContext) {
     const apolloClient = initializeApollo();
 
     let uuid;
