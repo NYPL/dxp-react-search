@@ -31,6 +31,9 @@ export type WithDrupalRouterOptions = {
 
 type NextContext = GetServerSidePropsContext | GetStaticPropsContext;
 
+/*
+ * Higher order function to use with getStaticProps or getServerSideProps to connect to Drupal's routing system.
+ */
 export default function withDrupalRouter<
   P extends { [key: string]: unknown } = { [key: string]: unknown }
 >(
