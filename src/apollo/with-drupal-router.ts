@@ -1,72 +1,115 @@
-import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
-import { GetServerSideProps, GetStaticProps } from "next";
+import {
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+} from "next";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { initializeApollo } from "./withApollo/apollo";
 import { DECOUPLED_ROUTER_QUERY } from "./../hooks/useDecoupledRouter";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
 export type WithDrupalRouterReturnProps = {
+  /** The uuid of the Drupal entity. */
   uuid: string;
-  revisionId: string;
-  slug: string;
+  /** The revision id of the Drupal entity. */
+  revisionId?: string;
+  /** The slug of the Drupal entity. */
+  slug: string | undefined;
+  /** If true, preview mode is activated. */
   isPreview: boolean;
+  /** The ApolloClient instance defined inside the with-drupal-router function. */
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
-export type NextDataFetchingFunctionContext =
-  | GetServerSidePropsContext
-  | GetStaticPropsContext;
+export type WithDrupalRouterOptions = {
+  /** If true, sets the preview mode to custom, otherwise defaults to use NextJS preview mode. */
+  customPreview?: boolean;
+};
 
-export type NextDataFetchingFunction = GetServerSideProps | GetStaticProps;
+type NextContext = GetServerSidePropsContext | GetStaticPropsContext;
 
-// @TODO Add typing for nextDataFetchingFunction.
-// @see typing for nextDataFetchingFunction? https://github.com/vercel/next.js/discussions/10925#discussioncomment-1031901
-// @see https://stackoverflow.com/a/72041520
-export default function withDrupalRouter(
-  nextDataFetchingFunction: NextDataFetchingFunctionContext
+export type WithDrupalRouterNextPreviewData = {
+  uuid: string;
+  revisionId: string;
+};
+
+/*
+ * Higher order function to use with getStaticProps or getServerSideProps to connect to Drupal's routing system.
+ */
+export default function withDrupalRouter<
+  P extends { [key: string]: any } = { [key: string]: any }
+>(
+  handler: (
+    context: NextContext,
+    props: WithDrupalRouterReturnProps
+  ) => Promise<GetServerSidePropsResult<P>> | Promise<GetStaticPropsResult<P>>,
+  options?: WithDrupalRouterOptions
 ) {
-  return async (
-    context: NextDataFetchingFunctionContext
-  ): Promise<NextDataFetchingFunction | any> => {
-    const isGetStaticPropsFunction = context.hasOwnProperty("resolvedUrl")
-      ? false
-      : true;
+  return async function handlerWrappedWithDrupalRouter(context: NextContext) {
+    // Only getServerSideProps will have `res` and `req` properties in the context object.
+    const isGetStaticPropsFunction =
+      !context.hasOwnProperty("res") && !context.hasOwnProperty("req");
 
     const apolloClient = initializeApollo();
 
     let uuid;
-    let revisionId = null;
+    let revisionId;
     let slug;
-    let isPreview;
+    let isPreview = false;
 
-    // getStaticProps().
+    // Handle different types of preview mode.
+    const isNextPreview = !options?.customPreview;
+
     if (isGetStaticPropsFunction) {
       slug = Array.isArray(context.params?.slug)
         ? context.params?.slug[0]
         : context.params?.slug;
-      const { previewData }: any = context;
 
-      // Preview mode.
+      const { previewData } = context as GetStaticPropsContext;
+
+      // Preview mode. If getStaticProps, only NextJS preview mode works.
       isPreview = context.preview ? context.preview : false;
 
       // Set the uuid for preview mode.
       if (isPreview) {
-        uuid = previewData.uuid;
-        revisionId = previewData.revisionId;
+        const nextPreviewData = previewData as WithDrupalRouterNextPreviewData;
+
+        uuid = nextPreviewData.uuid;
+        revisionId = nextPreviewData.revisionId;
       }
     } else {
       // getServerSideProps().
-      const { resolvedUrl, query } = context as GetServerSidePropsContext;
+      const { previewData, resolvedUrl, query } =
+        context as GetServerSidePropsContext;
 
       slug = resolvedUrl;
-      // Preview mode.
-      isPreview =
-        query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET && query.uuid
-          ? true
-          : false;
-      // Set the uuid for preview mode.
-      if (isPreview) {
-        uuid = query.uuid;
+      // Preview modes.
+      if (isNextPreview) {
+        // NextJS preview mode.
+        isPreview = context.preview ? context.preview : false;
+
+        // Set the uuid for preview mode.
+        if (isPreview) {
+          const nextPreviewData =
+            previewData as WithDrupalRouterNextPreviewData;
+
+          uuid = nextPreviewData.uuid;
+          revisionId = nextPreviewData.revisionId;
+        }
+      } else {
+        // Custom preview mode.
+        isPreview =
+          query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET &&
+          query.uuid &&
+          query.revision_id
+            ? true
+            : false;
+        // Set the uuid and revisionId for preview mode.
+        if (isPreview) {
+          uuid = query.uuid as string;
+          revisionId = query.revision_id as string;
+        }
       }
     }
 
@@ -83,7 +126,7 @@ export default function withDrupalRouter(
 
       uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
 
-      // Handle the redirect.
+      // Handle the redirect if it exists.
       const redirect = await decoupledRouterData?.data?.decoupledRouter
         ?.redirect;
 
@@ -98,17 +141,21 @@ export default function withDrupalRouter(
       }
     }
 
-    // @TODO instead of adding props seperate from context, you could add them into context itself?
-    // @see https://stackoverflow.com/a/72035518
-    // @ts-ignore
-    // @TODO Extend a type's parameters to include the props
-    // @see extend existing type with additional params: https://stackoverflow.com/a/69668215
-    return await nextDataFetchingFunction(context, {
+    const returnProps: WithDrupalRouterReturnProps = {
       uuid,
       revisionId,
       slug,
       isPreview,
       apolloClient,
-    });
+    };
+
+    // Return handlers based on type of function passed.
+    if (isGetStaticPropsFunction) {
+      return handler(context, returnProps) as Promise<GetStaticPropsResult<P>>;
+    } else {
+      return handler(context, returnProps) as Promise<
+        GetServerSidePropsResult<P>
+      >;
+    }
   };
 }
