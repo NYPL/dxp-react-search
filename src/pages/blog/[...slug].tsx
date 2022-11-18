@@ -14,9 +14,10 @@ import BlogPostSkeletonLoader from "./../../components/blogs/BlogPost/BlogPostSk
 // Hooks
 import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 // HOC
-import withDecoupledRouter, {
-  WithDecoupledRouterReturnProps,
-} from "./../../apollo/withDecoupledRouter";
+import withDrupalRouter, {
+  WithDrupalRouterReturnProps,
+  // NextDataFetchingFunctionContext,
+} from "../../apollo/with-drupal-router";
 
 const BLOG_POST_QUERY = gql`
   ${BLOG_FIELDS_FRAGMENT}
@@ -82,10 +83,11 @@ function BlogPostPage() {
   );
 }
 
-export const getServerSideProps = withDecoupledRouter(
+export const getServerSideProps = withDrupalRouter(
+  // @ts-ignore
   async (
     context: GetServerSidePropsContext,
-    props: WithDecoupledRouterReturnProps
+    props: WithDrupalRouterReturnProps
   ) => {
     const { uuid, isPreview, apolloClient } = props;
 
