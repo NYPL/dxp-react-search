@@ -50,40 +50,37 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps = withDrupalRouter(
-  async function getStaticProps(
-    /* @ts-ignore */
-    context: GetStaticPropsContext,
-    props: WithDrupalRouterReturnProps
-  ) {
-    const { uuid, revisionId, slug, isPreview, apolloClient } = props;
+export const getStaticProps = withDrupalRouter(async function (
+  // @ts-ignore
+  context: GetStaticPropsContext,
+  props: WithDrupalRouterReturnProps
+) {
+  const { uuid, revisionId, slug, isPreview, apolloClient } = props;
 
-    await apolloClient.query({
-      query: SECTION_FRONT_QUERY,
-      variables: {
-        id: uuid,
-        ...(isPreview && {
-          preview: true,
-          revisionId: revisionId,
-        }),
-      },
-    });
+  await apolloClient.query({
+    query: SECTION_FRONT_QUERY,
+    variables: {
+      id: uuid,
+      ...(isPreview && {
+        preview: true,
+        revisionId: revisionId,
+      }),
+    },
+  });
 
-    return {
-      props: {
-        slug: slug,
-        uuid: uuid,
-        isPreview: isPreview,
-        ...(revisionId && {
-          revisionId: revisionId,
-        }),
-        initialApolloState: apolloClient.cache.extract(),
-      },
-      // Set revalidate to 1 min
-      revalidate: 60,
-    };
-  },
-  { method: "SSG", customPreview: false }
-);
+  return {
+    props: {
+      slug: slug,
+      uuid: uuid,
+      isPreview: isPreview,
+      ...(revisionId && {
+        revisionId: revisionId,
+      }),
+      initialApolloState: apolloClient.cache.extract(),
+    },
+    // Set revalidate to 1 min.
+    revalidate: 60,
+  };
+});
 
 export default withApollo(CatchAllRoutesPage as any);

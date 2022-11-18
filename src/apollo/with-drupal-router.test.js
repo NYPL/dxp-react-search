@@ -43,18 +43,15 @@ describe("with-drupal-router success states.", () => {
       data: { decoupledRouter: decoupledRouterDataMock },
     });
 
-    const getStaticPropsMock = withDrupalRouter(
-      async (contextMock, props) => {
-        return props;
-      },
-      { method: "SSG", customPreview: false }
-    );
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
+      return props;
+    });
 
     const result = await getStaticPropsMock(contextMock);
 
     expect(result.redirect).toEqual(undefined);
     expect(result.isPreview).toEqual(false);
-    expect(result.revisionId).toEqual(null);
+    expect(result.revisionId).toEqual(undefined);
   });
 
   it("should return nextjs redirect object is redirect data is returned from decoupled router.", async () => {
@@ -79,12 +76,9 @@ describe("with-drupal-router success states.", () => {
       data: { decoupledRouter: decoupledRouterDataMock },
     });
 
-    const getStaticPropsMock = withDrupalRouter(
-      async (contextMock, props) => {
-        return props;
-      },
-      { method: "SSG", customPreview: false }
-    );
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
+      return props;
+    });
 
     const redirectMock = {
       redirect: {
@@ -111,12 +105,9 @@ describe("with-drupal-router success states.", () => {
       },
     };
 
-    const getStaticPropsMock = withDrupalRouter(
-      async (context, props) => {
-        return props;
-      },
-      { method: "SSG", customPreview: false }
-    );
+    const getStaticPropsMock = withDrupalRouter(async (context, props) => {
+      return props;
+    });
 
     const result = await getStaticPropsMock(contextMock);
 
@@ -167,12 +158,9 @@ describe("with-drupal-router error states.", () => {
       Promise.resolve({ errors: [{ message: "ApolloError: 404: Not Found" }] })
     );
 
-    const getStaticPropsMock = withDrupalRouter(
-      async (contextMock, props) => {
-        return props;
-      },
-      { method: "SSG", customPreview: false }
-    );
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
+      return props;
+    });
 
     await expect(getStaticPropsMock(contextMock)).rejects.toThrow(
       "ApolloError: 404: Not Found"
@@ -195,12 +183,9 @@ describe("with-drupal-router error states.", () => {
       })
     );
 
-    const getStaticPropsMock = withDrupalRouter(
-      async (contextMock, props) => {
-        return props;
-      },
-      { method: "SSG", customPreview: false }
-    );
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
+      return props;
+    });
 
     await expect(getStaticPropsMock(contextMock)).rejects.toThrow(
       "ApolloError: 503: Service Unavailable"
@@ -223,12 +208,9 @@ describe("with-drupal-router error states.", () => {
       })
     );
 
-    const getStaticPropsMock = withDrupalRouter(
-      async (contextMock, props) => {
-        return props;
-      },
-      { method: "SSG", customPreview: false }
-    );
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
+      return props;
+    });
 
     await expect(getStaticPropsMock(contextMock)).rejects.toThrow(
       "ApolloError: 500: Server error"

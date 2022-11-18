@@ -13,73 +13,103 @@ export type WithDrupalRouterReturnProps = {
   /** The uuid of the Drupal entity. */
   uuid: string;
   /** The revision id of the Drupal entity. */
-  revisionId: string;
+  revisionId?: string;
   /** The slug of the Drupal entity. */
-  slug?: string;
-  /** Whether or not preview mode is activated. */
+  slug: string | undefined;
+  /** If true, preview mode is activated. */
   isPreview: boolean;
   /** The ApolloClient instance defined inside the with-drupal-router function. */
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
 export type WithDrupalRouterOptions = {
-  /** The NextJS data fetching function type. */
-  method: "SSG" | "SSR";
-  /** Whether the preview mode is custom version or using NextJS preview mode. */
-  customPreview: boolean;
+  /** If true, sets the preview mode to custom, otherwise defaults to use NextJS preview mode. */
+  customPreview?: boolean;
 };
 
 type NextContext = GetServerSidePropsContext | GetStaticPropsContext;
+
+export type WithDrupalRouterNextPreviewData = {
+  uuid: string;
+  revisionId: string;
+};
 
 /*
  * Higher order function to use with getStaticProps or getServerSideProps to connect to Drupal's routing system.
  */
 export default function withDrupalRouter<
-  P extends { [key: string]: unknown } = { [key: string]: unknown }
+  P extends { [key: string]: any } = { [key: string]: any }
 >(
   handler: (
     context: NextContext,
     props: WithDrupalRouterReturnProps
   ) => Promise<GetServerSidePropsResult<P>> | Promise<GetStaticPropsResult<P>>,
-  options: WithDrupalRouterOptions
+  options?: WithDrupalRouterOptions
 ) {
-  return async function handlerWrapperWithDrupalRouter(context: NextContext) {
+  return async function handlerWrappedWithDrupalRouter(context: NextContext) {
+    // Only getServerSideProps will have `res` and `req` properties in the context object.
+    const isGetStaticPropsFunction =
+      !context.hasOwnProperty("res") && !context.hasOwnProperty("req");
+
     const apolloClient = initializeApollo();
 
     let uuid;
-    let revisionId = null;
+    let revisionId;
     let slug;
     let isPreview = false;
 
-    if (options.method === "SSG") {
+    // Handle different types of preview mode.
+    const isNextPreview = !options?.customPreview;
+
+    if (isGetStaticPropsFunction) {
       slug = Array.isArray(context.params?.slug)
         ? context.params?.slug[0]
         : context.params?.slug;
-      const { previewData }: any = context as GetStaticPropsContext;
 
-      // Preview mode.
+      const { previewData } = context as GetStaticPropsContext;
+
+      // Preview mode. If getStaticProps, only NextJS preview mode works.
       isPreview = context.preview ? context.preview : false;
 
       // Set the uuid for preview mode.
       if (isPreview) {
-        uuid = previewData.uuid;
-        revisionId = previewData.revisionId;
-      }
-    }
+        const nextPreviewData = previewData as WithDrupalRouterNextPreviewData;
 
-    if (options.method === "SSR") {
+        uuid = nextPreviewData.uuid;
+        revisionId = nextPreviewData.revisionId;
+      }
+    } else {
       // getServerSideProps().
-      const { resolvedUrl, query } = context as GetServerSidePropsContext;
+      const { previewData, resolvedUrl, query } =
+        context as GetServerSidePropsContext;
 
       slug = resolvedUrl;
-      // Preview mode.
-      isPreview =
-        query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET && query.uuid
-          ? true
-          : false;
-      // Set the uuid for preview mode.
-      if (isPreview) {
-        uuid = query.uuid;
+      // Preview modes.
+      if (isNextPreview) {
+        // NextJS preview mode.
+        isPreview = context.preview ? context.preview : false;
+
+        // Set the uuid for preview mode.
+        if (isPreview) {
+          const nextPreviewData =
+            previewData as WithDrupalRouterNextPreviewData;
+
+          uuid = nextPreviewData.uuid;
+          revisionId = nextPreviewData.revisionId;
+        }
+      } else {
+        // Custom preview mode.
+        isPreview =
+          query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET &&
+          query.uuid &&
+          query.revision_id
+            ? true
+            : false;
+        // Set the uuid and revisionId for preview mode.
+        if (isPreview) {
+          uuid = query.uuid as string;
+          revisionId = query.revision_id as string;
+        }
       }
     }
 
@@ -111,25 +141,21 @@ export default function withDrupalRouter<
       }
     }
 
-    // Return handlers based on type of function passed.
-    if (options.method === "SSG") {
-      return handler(context, {
-        uuid,
-        revisionId,
-        slug,
-        isPreview,
-        apolloClient,
-      }) as Promise<GetStaticPropsResult<P>>;
-    }
+    const returnProps: WithDrupalRouterReturnProps = {
+      uuid,
+      revisionId,
+      slug,
+      isPreview,
+      apolloClient,
+    };
 
-    if (options.method === "SSR") {
-      return handler(context, {
-        uuid,
-        revisionId,
-        slug,
-        isPreview,
-        apolloClient,
-      }) as Promise<GetServerSidePropsResult<P>>;
+    // Return handlers based on type of function passed.
+    if (isGetStaticPropsFunction) {
+      return handler(context, returnProps) as Promise<GetStaticPropsResult<P>>;
+    } else {
+      return handler(context, returnProps) as Promise<
+        GetServerSidePropsResult<P>
+      >;
     }
   };
 }

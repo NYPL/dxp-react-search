@@ -1,6 +1,6 @@
 import React from "react";
 // Next
-import { GetServerSidePropsContext } from "next";
+// import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import Error from "../_error";
 // Apollo
@@ -83,12 +83,9 @@ function PressReleasePage() {
 }
 
 export const getServerSideProps = withDrupalRouter(
-  async function getServerSideProps(
-    context,
-    props: WithDrupalRouterReturnProps
-  ) {
-    const { uuid, isPreview, apolloClient } = props;
-    const { query } = context as GetServerSidePropsContext;
+  // @ts-ignore -- temp fix for context unused but declared.
+  async function (context, props: WithDrupalRouterReturnProps) {
+    const { uuid, revisionId, isPreview, apolloClient } = props;
 
     await apolloClient.query({
       query: PRESS_RELEASE_QUERY,
@@ -96,7 +93,7 @@ export const getServerSideProps = withDrupalRouter(
         id: uuid,
         ...(isPreview && {
           preview: true,
-          revisionId: query.revision_id,
+          revisionId: revisionId,
         }),
       },
     });
@@ -107,7 +104,7 @@ export const getServerSideProps = withDrupalRouter(
       },
     };
   },
-  { method: "SSR", customPreview: false }
+  { customPreview: true }
 );
 
 export default withApollo(PressReleasePage);
