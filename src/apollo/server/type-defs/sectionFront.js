@@ -12,7 +12,7 @@ export const typeDefs = gql`
 
   union SectionFrontFeaturedContent = Donation
 
-  union SectionFrontMainContent = CardGrid | Donation
+  union SectionFrontMainContent = CardGrid | Donation | CatalogSearchForm
 
   type SectionFrontConnection {
     items: [SectionFront]

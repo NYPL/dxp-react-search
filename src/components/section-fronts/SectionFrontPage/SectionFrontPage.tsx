@@ -11,8 +11,6 @@ import PreviewModeNotification from "../../shared/PreviewModeNotification";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
-import CatalogSearchForm from "../../shared/ContentComponents/CatalogSearchForm";
-
 // Used in the catch all page template to determine component to render.
 export const sectionFrontsSlugs = ["/give", "/research"];
 
@@ -93,6 +91,15 @@ export const SECTION_FRONT_QUERY = gql`
               }
             }
           }
+        }
+        ... on CatalogSearchForm {
+          __typename
+          id
+          type
+          title
+          description
+          formBaseUrl
+          formPlaceholder
         }
       }
     }
@@ -186,11 +193,6 @@ export default function SectionFrontPage({
       }
       contentPrimary={
         <Box>
-          <CatalogSearchForm
-            id="research-catalog-form"
-            title="Search the Research Catalog"
-            description="Discover NYPL's new Research Catalog, featuring the combined Shared Collections of Columbia University, Princeton University, and Harvard University Libraries. Learn more. Or get your documents electronically through Scan & Deliver."
-          />
           {sectionFront.mainContent &&
             sectionFront.mainContent.map(
               (contentComponent: { [key: string]: any }) =>

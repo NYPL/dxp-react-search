@@ -38,6 +38,9 @@ export default function resolveParagraphTypes(
     case "donation":
       resolvedObjectType = "Donation";
       break;
+    case "research_catalog_form":
+      resolvedObjectType = "CatalogSearchForm";
+      break;
     // Home page.
     case "hp_hero":
       resolvedObjectType = "HomePageHeroComponent";

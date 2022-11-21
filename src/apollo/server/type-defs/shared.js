@@ -185,6 +185,15 @@ export const typeDefs = gql`
     defaultAmount: String
   }
 
+  type CatalogSearchForm {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    formBaseUrl: String
+    formPlaceholder: String
+  }
+
   type CardGrid {
     id: ID!
     type: String!

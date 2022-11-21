@@ -1,11 +1,11 @@
 import * as React from "react";
 import {
   Box,
+  Button,
+  Flex,
   Heading,
   Icon,
   TextInput,
-  Button,
-  Flex,
 } from "@nypl/design-system-react-components";
 
 export interface CatalogSearchFormProps {
@@ -15,43 +15,58 @@ export interface CatalogSearchFormProps {
   title: string;
   /** The description of the donation component. */
   description: string;
+  /** The base url of the search form, to be used for the generating the url. */
+  formBaseUrl: string;
+  /** The placeholder text for the search form input. */
+  formPlaceholder: string;
 }
 
 export default function CatalogSearchForm({
   id,
   title,
   description,
+  formBaseUrl,
+  formPlaceholder,
 }: CatalogSearchFormProps) {
   const [input, setInput] = React.useState("");
 
   function handleSubmit(event: React.SyntheticEvent): void {
-    const baseUrl = `https://nypl.na2.iiivega.com/search?query=${input}`;
     event.preventDefault();
-    window.location.href = baseUrl;
+
+    let searchUrl = "www.nypl.org/research/research-catalog/search";
+    // Vega catalog.
+    if (formBaseUrl.includes("nypl.na2.iiivega.com")) {
+      searchUrl = `${formBaseUrl}?query=${input}`;
+    }
+    // NYPL research catalog.
+    if (formBaseUrl.includes("www.nypl.org/research/research-catalog/search")) {
+      searchUrl = `${formBaseUrl}?q=${input}`;
+    }
+
+    window.location.href = searchUrl;
   }
 
   return (
-    <Box id={id} mb="l">
-      <Heading level="two">{title}</Heading>
-      <Box
-        as="p"
-        fontWeight="500"
-        dangerouslySetInnerHTML={{ __html: description }}
-      />
+    <Box id={`catalog-search-form-${id}`} mb="l">
+      <Heading level="two" color="brand.primary">
+        {title}
+      </Heading>
+      <Box as="p" dangerouslySetInnerHTML={{ __html: description }} />
       <form
         id="catalog-search-form"
         role="search"
         aria-label="Catalog search form"
         onSubmit={handleSubmit}
       >
-        <Flex width="100%">
+        <Flex flexDirection={{ base: "column", md: "row" }}>
           <TextInput
             id="catalog-search-form-input"
             labelText={"Search the Research Catalog"}
             showLabel={false}
-            placeholder={"Search the Research Catalog"}
+            placeholder={formPlaceholder}
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            flex={{ md: "1 1 auto" }}
           />
           <Button id="catalog-search-form-button" type="submit">
             <Icon name="search" align="left" size="small" />
