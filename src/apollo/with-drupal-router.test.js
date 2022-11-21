@@ -51,7 +51,7 @@ describe("with-drupal-router success states.", () => {
 
     expect(result.redirect).toEqual(undefined);
     expect(result.isPreview).toEqual(false);
-    expect(result.revisionId).toEqual(null);
+    expect(result.revisionId).toEqual(undefined);
   });
 
   it("should return nextjs redirect object is redirect data is returned from decoupled router.", async () => {
