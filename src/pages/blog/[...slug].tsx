@@ -103,7 +103,8 @@ export const getServerSideProps = withDrupalRouter(
         initialApolloState: apolloClient.cache.extract(),
       },
     };
-  }
+  },
+  { customPreview: true }
 );
 
 export default withApollo(BlogPostPage);
