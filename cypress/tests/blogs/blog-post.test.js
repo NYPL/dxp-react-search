@@ -13,7 +13,7 @@ describe("Blog Post Tests", () => {
     }).should("exist");
   });
 
-  it("404 page and status are returned if route doesn't exist in cms.", () => {
+  it("should return 404 status and message for blog post if route does not exist in CMS.", () => {
     const slug = "/blog/slug-that-doesnt-exist";
 
     cy.log("Check for 404 status code.");
@@ -25,7 +25,7 @@ describe("Blog Post Tests", () => {
     cy.log("Check h1 for 404 message.");
     cy.findByRole("heading", {
       level: 1,
-      name: /we're sorry\.\.\./i,
+      name: /we're sorry \.\.\./i,
     }).should("exist");
   });
 

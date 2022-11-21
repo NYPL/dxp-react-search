@@ -26,7 +26,6 @@ import useDecoupledRouter from "../../../../../hooks/useDecoupledRouter";
 // HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
-  // NextDataFetchingFunctionContext,
 } from "../../../../../apollo/with-drupal-router";
 
 const RESOURCE_TOPIC_BY_ID_QUERY = gql`
@@ -118,7 +117,7 @@ function FeaturedResourceTopicSlug() {
 export const getServerSideProps = withDrupalRouter(
   // @ts-ignore
   async (context, props: WithDrupalRouterReturnProps) => {
-    const { uuid, isPreview, apolloClient, revisionId } = props;
+    const { uuid, revisionId, isPreview, apolloClient } = props;
 
     const ResourceTopicData = await apolloClient.query({
       query: RESOURCE_TOPIC_BY_ID_QUERY,

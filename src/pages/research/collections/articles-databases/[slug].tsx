@@ -22,7 +22,6 @@ import useDecoupledRouter from "./../../../../hooks/useDecoupledRouter";
 // HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
-  // NextDataFetchingFunctionContext,
 } from "../../../../apollo/with-drupal-router";
 
 export const ONLINE_RESOURCE_BY_ID_QUERY = gql`
@@ -160,7 +159,7 @@ function OnlineResourceSlug() {
 export const getServerSideProps = withDrupalRouter(
   // @ts-ignore -- temp fix for context unused but declared.
   async (context, props: WithDrupalRouterReturnProps) => {
-    const { uuid, isPreview, apolloClient, revisionId } = props;
+    const { uuid, revisionId, isPreview, apolloClient } = props;
 
     await apolloClient.query({
       query: ONLINE_RESOURCE_BY_ID_QUERY,
