@@ -1,6 +1,6 @@
 import React from "react";
 // Next
-import { GetServerSidePropsContext } from "next";
+// import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import Error from "../_error";
 // Apollo
@@ -16,7 +16,6 @@ import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 // HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
-  // NextDataFetchingFunctionContext,
 } from "../../apollo/with-drupal-router";
 
 const PRESS_RELEASE_QUERY = gql`
@@ -84,12 +83,9 @@ function PressReleasePage() {
 }
 
 export const getServerSideProps = withDrupalRouter(
-  // @ts-ignore
-  async (
-    context: GetServerSidePropsContext,
-    props: WithDrupalRouterReturnProps
-  ) => {
-    const { uuid, isPreview, apolloClient } = props;
+  // @ts-ignore -- temp fix for context unused but declared.
+  async function (context, props: WithDrupalRouterReturnProps) {
+    const { uuid, revisionId, isPreview, apolloClient } = props;
 
     await apolloClient.query({
       query: PRESS_RELEASE_QUERY,
@@ -97,7 +93,7 @@ export const getServerSideProps = withDrupalRouter(
         id: uuid,
         ...(isPreview && {
           preview: true,
-          revisionId: context.query.revision_id,
+          revisionId: revisionId,
         }),
       },
     });
@@ -107,7 +103,8 @@ export const getServerSideProps = withDrupalRouter(
         initialApolloState: apolloClient.cache.extract(),
       },
     };
-  }
+  },
+  { customPreview: true }
 );
 
 export default withApollo(PressReleasePage);
