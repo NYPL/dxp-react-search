@@ -180,7 +180,8 @@ export const getServerSideProps = withDrupalRouter(
         initialApolloState: apolloClient.cache.extract(),
       },
     };
-  }
+  },
+  { customPreview: true }
 );
 // @ts-ignore
 export default withApollo(withRedux(OnlineResourceSlug));
