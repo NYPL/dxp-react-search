@@ -1,6 +1,5 @@
 import * as React from "react";
 // Next
-import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
@@ -118,11 +117,8 @@ function FeaturedResourceTopicSlug() {
 
 export const getServerSideProps = withDrupalRouter(
   // @ts-ignore
-  async (
-    context: GetServerSidePropsContext,
-    props: WithDrupalRouterReturnProps
-  ) => {
-    const { uuid, isPreview, apolloClient } = props;
+  async (context, props: WithDrupalRouterReturnProps) => {
+    const { uuid, isPreview, apolloClient, revisionId } = props;
 
     const ResourceTopicData = await apolloClient.query({
       query: RESOURCE_TOPIC_BY_ID_QUERY,
@@ -130,7 +126,7 @@ export const getServerSideProps = withDrupalRouter(
         id: uuid,
         ...(isPreview && {
           preview: true,
-          revisionId: context.query.revision_id,
+          revisionId: revisionId,
         }),
         vocabulary: "resource_topic",
       },

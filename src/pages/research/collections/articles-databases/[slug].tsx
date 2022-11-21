@@ -1,6 +1,5 @@
 import * as React from "react";
 // Next
-import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery, useApolloClient } from "@apollo/client";
@@ -159,12 +158,9 @@ function OnlineResourceSlug() {
 }
 
 export const getServerSideProps = withDrupalRouter(
-  // @ts-ignore
-  async (
-    context: GetServerSidePropsContext,
-    props: WithDrupalRouterReturnProps
-  ) => {
-    const { uuid, isPreview, apolloClient } = props;
+  // @ts-ignore -- temp fix for context unused but declared.
+  async (context, props: WithDrupalRouterReturnProps) => {
+    const { uuid, isPreview, apolloClient, revisionId } = props;
 
     await apolloClient.query({
       query: ONLINE_RESOURCE_BY_ID_QUERY,
@@ -172,7 +168,7 @@ export const getServerSideProps = withDrupalRouter(
         id: uuid,
         ...(isPreview && {
           preview: true,
-          revisionId: context.query.revision_id,
+          revisionId: revisionId,
         }),
       },
     });
