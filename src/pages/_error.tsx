@@ -1,9 +1,18 @@
 import * as React from "react";
 import { NextPageContext } from "next";
 import { ApolloError } from "@apollo/client/errors";
-import { Box, Heading, Link, Text } from "@nypl/design-system-react-components";
+import {
+  Button,
+  Box,
+  Flex,
+  Heading,
+  Logo,
+  Text,
+} from "@nypl/design-system-react-components";
 import PageContainer from "../components/shared/layouts/PageContainer";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+// Next
+import { useRouter } from "next/router";
 
 type ErrorProps = {
   statusCode: number;
@@ -15,45 +24,30 @@ type ErrorContext = Omit<NextPageContext, "err"> & {
   err: ApolloError | NextError;
 };
 
-// function ErrorContent({ statusCode }: ErrorProps) {
-//   switch (statusCode) {
-//     case 404:
-//       return (
-//         <Box>
-//           <Text>
-//             The page you requested is either unavailable or you need permission
-//             to view the content.
-//           </Text>
-//           <Text>
-//             If you can't find the page you're looking for, please try our{" "}
-//             <Link href="https://www.nypl.org/get-help/contact-us">
-//               ASK NYPL
-//             </Link>{" "}
-//             service.
-//           </Text>
-//           <Box fontWeight="bold" /*display="none" visibility="hidden"*/>
-//             {statusCode}
-//           </Box>
-//         </Box>
-//       );
-//   }
-// }
-
 function Error({ statusCode }: ErrorProps) {
   let title = "We're Sorry ...";
+  let description =
+    "The page you requested is either unavailable or you need permission to view the content.";
   if (statusCode === 500) {
     title = "Error!";
   }
   if (statusCode === 503) {
-    title = "Maintenance Mode";
+    title = "Site Under Maintenance";
+    description =
+      "The New York Public Library is currently under maintenance. We should be back shortly. Thank you for your patience.";
   }
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(NEXT_PUBLIC_NYPL_DOMAIN as string);
+  };
 
   return (
     <PageContainer
       metaTags={{
         title: title,
-        description:
-          "The page you requested is either unavailable or you need permission to view the content.",
+        description: description,
       }}
       breadcrumbs={[
         {
@@ -70,25 +64,40 @@ function Error({ statusCode }: ErrorProps) {
       wrapperClass="nypl--404"
       contentHeader={null}
       contentPrimary={
-        <Box minHeight="400px">
-          <Heading level="one">{title}</Heading>
-          <Box>
-            <Text>
-              The page you requested is either unavailable or you need
-              permission to view the content.
-            </Text>
-            <Text>
-              If you can't find the page you're looking for, please try our{" "}
-              <Link href="https://www.nypl.org/get-help/contact-us">
-                ASK NYPL
-              </Link>{" "}
-              service.
-            </Text>
-            <Box fontWeight="bold" /*display="none" visibility="hidden"*/>
-              {statusCode}
+        <Flex direction={{ sm: "column", md: "row" }} alignItems="center">
+          <Box overflow="hidden" width={{ base: "60%", md: "50%", lg: "40%" }}>
+            <Box ml={{ base: 0, md: "-60px" }}>
+              <Logo
+                decorative
+                id="nypl-lion-logo"
+                name="nyplLionBlack"
+                size="default"
+                opacity={0.2}
+              />
             </Box>
           </Box>
-        </Box>
+          <Box
+            pl={{ base: "0", md: "100px" }}
+            textAlign={{ base: "center", md: "left" }}
+          >
+            <Heading
+              as="h1"
+              fontSize={{ base: "24px", md: "48px", lg: "72px" }}
+              color="brand.primary"
+            >
+              {title}
+            </Heading>
+            <Text mb={{ base: "m", md: "xl" }}>{description}</Text>
+            <Button
+              buttonType="primary"
+              id="large-primary"
+              m={{ base: "0 auto", md: "0" }}
+              onClick={handleClick}
+            >
+              Back to Home
+            </Button>
+          </Box>
+        </Flex>
       }
       contentBottom={null}
     />
