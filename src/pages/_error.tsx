@@ -28,7 +28,7 @@ function Error({ statusCode }: ErrorProps) {
           url: NEXT_PUBLIC_NYPL_DOMAIN as string,
         },
       ]}
-      breadcrumbsColor="whatsOn"
+      breadcrumbsType="whatsOn"
       wrapperClass="nypl--404"
       contentHeader={null}
       contentPrimary={
