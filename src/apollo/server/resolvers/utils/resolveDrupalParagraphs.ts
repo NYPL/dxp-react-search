@@ -97,7 +97,7 @@ export default function resolveDrupalParagraphs(
 
       if (
         item.type === "paragraph--research_catalog_form" &&
-        typesInQuery.includes("CatalogSearchForm")
+        typesInQuery.includes("CatalogSearch")
       ) {
         accumulator.push(item);
       }

@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "@nypl/design-system-react-components";
 
-export interface CatalogSearchFormProps {
+export interface CatalogSearchProps {
   /** The id of the catalog search component. */
   id: string;
   /** The heading of the catalog search component. */
@@ -23,15 +23,14 @@ export interface CatalogSearchFormProps {
   formPlaceholder: string;
 }
 
-// @TODO rename CatalogSearch ?
-export default function CatalogSearchForm({
+export default function CatalogSearch({
   id,
   title,
   headingColor,
   description,
   formBaseUrl,
   formPlaceholder,
-}: CatalogSearchFormProps) {
+}: CatalogSearchProps) {
   const [input, setInput] = React.useState("");
 
   function handleSubmit(event: React.SyntheticEvent): void {
@@ -51,7 +50,7 @@ export default function CatalogSearchForm({
   }
 
   return (
-    <Box id={`catalog-search-form-${id}`} mb="l">
+    <Box id={`catalog-search-${id}`} mb="l">
       <Heading level="two" color={headingColor}>
         {title}
       </Heading>

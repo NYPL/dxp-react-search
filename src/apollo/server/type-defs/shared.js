@@ -185,7 +185,7 @@ export const typeDefs = gql`
     defaultAmount: String
   }
 
-  type CatalogSearchForm {
+  type CatalogSearch {
     id: ID!
     type: String!
     title: String

@@ -100,7 +100,7 @@ export const SECTION_FRONT_QUERY = gql`
             }
           }
         }
-        ... on CatalogSearchForm {
+        ... on CatalogSearch {
           __typename
           id
           type
