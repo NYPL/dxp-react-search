@@ -40,7 +40,7 @@ function LocationFinder() {
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}${LOCATIONS_BASE_PATH}`,
         },
       ]}
-      breadcrumbsColor="locations"
+      breadcrumbsType="locations"
       wrapperClass="nypl--locations"
       contentHeader={
         <>

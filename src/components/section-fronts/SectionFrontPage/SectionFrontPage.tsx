@@ -177,7 +177,7 @@ export default function SectionFrontPage({
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
         },
       ]}
-      newBcrumbColor={sectionFront.colorway.secondary}
+      breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
       contentHeader={
         <>
