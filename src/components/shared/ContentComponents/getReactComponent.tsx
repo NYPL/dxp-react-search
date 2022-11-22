@@ -41,6 +41,10 @@ export default function mapContentComponentToReactComponent(
   if (typeof Components[contentComponent["__typename"]] !== "undefined") {
     return React.createElement(Components[contentComponent["__typename"]], {
       key: contentComponent.id,
+      // Add colorways if passed.
+      ...(contentComponent.colorway && {
+        headingColor: contentComponent.colorway.primary,
+      }),
       // Add the props.
       ...contentComponent,
     });

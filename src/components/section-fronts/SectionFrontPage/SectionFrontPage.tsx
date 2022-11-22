@@ -1,4 +1,5 @@
 import * as React from "react";
+// import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
@@ -32,6 +33,10 @@ export const SECTION_FRONT_QUERY = gql`
       id
       title
       description
+      colorway {
+        primary
+        secondary
+      }
       image {
         id
         uri
@@ -73,6 +78,9 @@ export const SECTION_FRONT_QUERY = gql`
           type
           title
           layout
+          colorway {
+            primary
+          }
           items {
             id
             title
@@ -100,6 +108,9 @@ export const SECTION_FRONT_QUERY = gql`
           description
           formBaseUrl
           formPlaceholder
+          colorway {
+            primary
+          }
         }
       }
     }
@@ -166,7 +177,7 @@ export default function SectionFrontPage({
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
         },
       ]}
-      breadcrumbsColor="booksAndMore"
+      newBcrumbColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
       contentHeader={
         <>
@@ -175,7 +186,7 @@ export default function SectionFrontPage({
             heroType="tertiary"
             heading={<Heading level="one" text={sectionFront.title} />}
             subHeaderText={sectionFront.description}
-            backgroundColor="brand.primary"
+            backgroundColor={sectionFront.colorway.primary}
             foregroundColor="ui.white"
           />
           {featuredContent && (

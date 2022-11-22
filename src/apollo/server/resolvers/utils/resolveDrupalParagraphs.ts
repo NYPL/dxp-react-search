@@ -1,6 +1,7 @@
 import { JsonApiResourceObject } from "./types";
 import { resolveImage } from "./resolveImage";
 import fetchOembedApi from "./fetchOembedApi";
+import getColorways from "./../../../../utils/get-colorways";
 
 type ResolvedParagraph = {
   [index: string]: string | number | boolean | object | undefined | null;
@@ -8,7 +9,8 @@ type ResolvedParagraph = {
 
 export default function resolveDrupalParagraphs(
   paragraphResourceObjects: JsonApiResourceObject[],
-  typesInQuery: string[]
+  typesInQuery: string[],
+  contentType?: string
 ): ResolvedParagraph[] {
   // Drupal json:api will return all paragraphs for the field.
   // So we first reduce this array of objects only to those paragraphs
@@ -355,6 +357,10 @@ export default function resolveDrupalParagraphs(
           description: item.field_tfls_description?.processed,
           layout: item.field_lts_card_grid_layout,
           items: cardItems,
+          colorway:
+            contentType === "section_front"
+              ? getColorways("section_front")
+              : null,
         };
         break;
       // @TODO Add back later.
@@ -408,6 +414,10 @@ export default function resolveDrupalParagraphs(
           description: item.field_tfls_description?.processed,
           formBaseUrl: item.field_ls_link.url,
           formPlaceholder: item.field_ts_placeholder,
+          colorway:
+            contentType === "section_front"
+              ? getColorways("section_front")
+              : null,
         };
         break;
 

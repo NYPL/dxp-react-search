@@ -8,6 +8,7 @@ export const typeDefs = gql`
     image: Image
     featuredContent: [SectionFrontFeaturedContent]
     mainContent: [SectionFrontMainContent]
+    colorway: Colorway
   }
 
   union SectionFrontFeaturedContent = Donation

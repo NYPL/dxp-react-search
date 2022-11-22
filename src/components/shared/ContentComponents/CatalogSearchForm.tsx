@@ -9,11 +9,13 @@ import {
 } from "@nypl/design-system-react-components";
 
 export interface CatalogSearchFormProps {
-  /** The id of the donation component. */
+  /** The id of the catalog search component. */
   id: string;
-  /** The heading of the donation component. */
+  /** The heading of the catalog search component. */
   title: string;
-  /** The description of the donation component. */
+  /** The heading color of the catalog search component. */
+  headingColor?: string;
+  /** The description of the catalog search component. */
   description: string;
   /** The base url of the search form, to be used for the generating the url. */
   formBaseUrl: string;
@@ -21,9 +23,11 @@ export interface CatalogSearchFormProps {
   formPlaceholder: string;
 }
 
+// @TODO rename CatalogSearch ?
 export default function CatalogSearchForm({
   id,
   title,
+  headingColor,
   description,
   formBaseUrl,
   formPlaceholder,
@@ -48,7 +52,7 @@ export default function CatalogSearchForm({
 
   return (
     <Box id={`catalog-search-form-${id}`} mb="l">
-      <Heading level="two" color="brand.primary">
+      <Heading level="two" color={headingColor}>
         {title}
       </Heading>
       <Box as="p" dangerouslySetInnerHTML={{ __html: description }} />

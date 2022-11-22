@@ -192,6 +192,7 @@ export const typeDefs = gql`
     description: String
     formBaseUrl: String
     formPlaceholder: String
+    colorway: Colorway
   }
 
   type CardGrid {
@@ -201,6 +202,7 @@ export const typeDefs = gql`
     description: String
     layout: String
     items: [CardGridItem]!
+    colorway: Colorway
   }
 
   type CardGridItem {
@@ -209,6 +211,11 @@ export const typeDefs = gql`
     description: String
     image: Image
     link: String
+  }
+
+  type Colorway {
+    primary: String
+    secondary: String
   }
 
   type Query {
