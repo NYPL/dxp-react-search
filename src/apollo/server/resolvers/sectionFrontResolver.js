@@ -4,7 +4,7 @@ import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
 import { getIndividualResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
-import getColorways from "../../../utils/get-colorways";
+import getColorway from "../../../utils/get-colorway";
 
 const sectionFrontResolver = {
   Query: {
@@ -68,7 +68,7 @@ const sectionFrontResolver = {
     },
     colorway: (sectionFront) => {
       const slug = sectionFront.path?.alias;
-      return getColorways(slug);
+      return getColorway(slug);
     },
   },
   SectionFrontFeaturedContent: {

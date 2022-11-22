@@ -1,12 +1,16 @@
-export interface Colorways {
+export interface Colorway {
   primary: string;
   secondary: string;
 }
 
+export type ColorwayMap = {
+  [name: string]: Colorway;
+};
+
 type SlugOrSection = "/give" | "/research" | "section_front";
 
-export default function getColorways(slugOrSection: SlugOrSection): Colorways {
-  const colorwaysMap = {
+export default function getColorway(slugOrSection: SlugOrSection): Colorway {
+  const colorwayMap: ColorwayMap = {
     default: {
       primary: "brand.primary",
       secondary: "brand.secondary",
@@ -25,5 +29,5 @@ export default function getColorways(slugOrSection: SlugOrSection): Colorways {
     },
   };
 
-  return colorwaysMap[slugOrSection] || colorwaysMap.default;
+  return colorwayMap[slugOrSection] || colorwayMap.default;
 }

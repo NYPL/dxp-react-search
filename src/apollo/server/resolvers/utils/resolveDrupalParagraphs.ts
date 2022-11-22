@@ -1,7 +1,7 @@
 import { JsonApiResourceObject } from "./types";
 import { resolveImage } from "./resolveImage";
 import fetchOembedApi from "./fetchOembedApi";
-import getColorways from "./../../../../utils/get-colorways";
+import getColorway from "./../../../../utils/get-colorway";
 
 type ResolvedParagraph = {
   [index: string]: string | number | boolean | object | undefined | null;
@@ -359,7 +359,7 @@ export default function resolveDrupalParagraphs(
           items: cardItems,
           colorway:
             contentType === "section_front"
-              ? getColorways("section_front")
+              ? getColorway("section_front")
               : null,
         };
         break;
@@ -416,7 +416,7 @@ export default function resolveDrupalParagraphs(
           formPlaceholder: item.field_ts_placeholder,
           colorway:
             contentType === "section_front"
-              ? getColorways("section_front")
+              ? getColorway("section_front")
               : null,
         };
         break;
