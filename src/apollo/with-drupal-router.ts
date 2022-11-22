@@ -5,6 +5,7 @@ import {
   GetStaticPropsResult,
 } from "next";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
+import { ApolloError } from "@apollo/client/errors";
 import { initializeApollo } from "./withApollo/apollo";
 import { DECOUPLED_ROUTER_QUERY } from "./../hooks/useDecoupledRouter";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
@@ -117,27 +118,41 @@ export default function withDrupalRouter<
     // Not preview mode, so run the rest of the routing logic.
     if (!isPreview) {
       // Get decoupled router data.
-      const decoupledRouterData = await apolloClient.query({
-        query: DECOUPLED_ROUTER_QUERY,
-        variables: {
-          path: slug,
-        },
-      });
-
-      uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
-
-      // Handle the redirect if it exists.
-      const redirect = await decoupledRouterData?.data?.decoupledRouter
-        ?.redirect;
-
-      if (redirect) {
-        return {
-          redirect: {
-            statusCode: 301,
-            destination: redirect.to,
+      try {
+        const decoupledRouterData = await apolloClient.query({
+          query: DECOUPLED_ROUTER_QUERY,
+          variables: {
+            path: slug,
           },
-          props: {},
-        };
+        });
+
+        uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+
+        // Handle the redirect if it exists.
+        const redirect = await decoupledRouterData?.data?.decoupledRouter
+          ?.redirect;
+
+        if (redirect) {
+          return {
+            redirect: {
+              statusCode: 301,
+              destination: redirect.to,
+            },
+            props: {},
+          };
+        }
+      } catch (e) {
+        const statusCode = (e as ApolloError).graphQLErrors[0].extensions
+          ?.response?.status;
+
+        if (statusCode === 404) {
+          return {
+            notFound: true,
+          };
+        }
+        // console.log(statusCode);
+
+        //console.log(e);
       }
     }
 
