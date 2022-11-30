@@ -1,17 +1,27 @@
-import { DataSourceConfig } from "apollo-datasource";
-import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
+// import { DataSourceConfig } from "apollo-datasource";
+import {
+  // DataSourceConfig,
+  // HTTPCache,
+  RESTDataSource,
+} from "@apollo/datasource-rest";
 import getAccessToken from "../../../../utils/getAccessToken";
-import { toApolloError } from "apollo-server-errors";
+import toApolloError from "../../../../utils/to-apollo-error";
 const { DRUPAL_API } = process.env;
 
 // @TODO Change to use JsonApiResourceObject
 type JsonApiResource = { [key: string]: any };
 
-class DrupalJsonApi<TContext = any> extends RESTDataSource {
+class DrupalJsonApi /*<TContext = any>*/ extends RESTDataSource {
+  // override baseURL = DRUPAL_API;
+
   constructor() {
     super();
     this.baseURL = DRUPAL_API;
-    this.initialize({} as DataSourceConfig<any>);
+    // this.initialize({} as DataSourceConfig<any>);
+    // Disables cache @see https://github.com/apollographql/datasource-rest#memoizegetrequests
+    // @see https://github.com/apollographql/apollo-server/issues/1562
+    // Defaults to true
+    this.memoizeGetRequests = false;
   }
 
   /**
@@ -20,10 +30,10 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
    * api endpoints responses, which is not really necessary anyway, since
    * Apollo client cache (in memory) is already doing the heavy lifting.
    */
-  initialize(config: DataSourceConfig<TContext>): void {
-    this.context = config.context;
-    this.httpCache = new HTTPCache();
-  }
+  // initialize(config?: DataSourceConfig<TContext>): void {
+  //   this.context = config.context;
+  //   this.httpCache = new HTTPCache();
+  // }
 
   // D8 api is a json api, which datasource-rest does not handle by default.
   parseBody(response: JsonApiResource) {
@@ -49,7 +59,7 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
     if (isPreview) {
       try {
         const accessToken = await getAccessToken();
-        const response = await this.get(apiPath, undefined, {
+        const response = await this.get(apiPath, {
           headers: {
             Authorization: `Bearer ${accessToken?.access_token}`,
           },
@@ -75,7 +85,7 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
     if (isPreview) {
       try {
         const accessToken = await getAccessToken();
-        const response = await this.get(apiPath, undefined, {
+        const response = await this.get(apiPath, {
           headers: {
             Authorization: `Bearer ${accessToken?.access_token}`,
           },

@@ -1,4 +1,3 @@
-import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
 import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
@@ -29,6 +28,8 @@ const blogResolver = {
         args.sort,
         pagination
       );
+
+      console.log(dataSources);
       const response = await dataSources.drupalJsonApi.getCollectionResource(
         apiPath
       );
@@ -100,8 +101,17 @@ const blogResolver = {
         ? null
         : blog.field_erm_location,
     mainContent: (blog, _, __, info) => {
-      const resolveInfo = parseResolveInfo(info);
-      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const typesInQuery = [
+        "Text",
+        "TextWithImage",
+        "Video",
+        "SocialEmbed",
+        "AudioEmbed",
+        "GoogleMapEmbed",
+        "ImageComponent",
+        "CardList",
+        "CatalogList",
+      ];
       const mainContent =
         blog.field_main_content.data?.length === 0
           ? null

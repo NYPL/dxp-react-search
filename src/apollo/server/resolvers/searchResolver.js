@@ -11,7 +11,7 @@ dayjs.tz.setDefault("America/New_York");
 import { ONLINE_RESOURCES_ALL_BRANCH_UUID } from "./../../../utils/config";
 import getRequestIp from "./../../../utils/getRequestIp";
 // Env vars
-const { DRUPAL_API, NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+// const { DRUPAL_API, NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 const searchResolver = {
   Query: {
@@ -164,8 +164,8 @@ const searchResolver = {
 
         // Replace the url with our cleaned up url.
         const accessLocationUrl = accessLocation.url.replace(
-          DRUPAL_API,
-          NEXT_PUBLIC_NYPL_DOMAIN
+          process.env.DRUPAL_API,
+          process.env.NEXT_PUBLIC_NYPL_DOMAIN
         );
         return accessLocationUrl;
       }

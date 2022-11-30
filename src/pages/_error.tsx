@@ -108,8 +108,7 @@ function Error({ statusCode }: ErrorProps) {
 Error.getInitialProps = async ({ res, err }: ErrorContext) => {
   let statusCode;
   if (err.hasOwnProperty("graphQLErrors")) {
-    statusCode = (err as ApolloError).graphQLErrors[0].extensions?.response
-      ?.status;
+    statusCode = (err as any).graphQLErrors[0].extensions?.response?.status;
   } else {
     statusCode = (err as NextError).statusCode;
   }

@@ -1,12 +1,17 @@
-import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
-import { toApolloError } from "apollo-server-errors";
+import { /*HTTPCache,*/ RESTDataSource } from "@apollo/datasource-rest";
+// import { toApolloError } from "apollo-server-errors";
+import toApolloError from "./../../../utils/to-apollo-error";
 const { DRUPAL_API } = process.env;
 
 class DrupalApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = DRUPAL_API;
-    this.initialize({});
+    // this.initialize({} as DataSourceConfig<any>);
+    // Disables cache @see https://github.com/apollographql/datasource-rest#memoizegetrequests
+    // @see https://github.com/apollographql/apollo-server/issues/1562
+    // Defaults to true
+    //this.memoizeGetRequests = false;
   }
 
   /**
@@ -15,13 +20,13 @@ class DrupalApi extends RESTDataSource {
    * api endpoints responses, which is not really necessary anyway, since
    * Apollo client cache (in memory) is already doing the heavy lifting.
    */
-  initialize({ context }) {
-    this.context = context;
-    this.httpCache = new HTTPCache();
-  }
+  // initialize({ context }) {
+  //   this.context = context;
+  //   this.httpCache = new HTTPCache();
+  // }
 
   // D8 api is a json api, which datasource-rest does not handle by default.
-  parseBody(response) {
+  parseBody(response: any) {
     if (response.headers.get("Content-Type").includes("json")) {
       return response.json();
     } else {
@@ -30,7 +35,7 @@ class DrupalApi extends RESTDataSource {
   }
 
   /* ---------- ONLINE RESOURCES ---------- */
-  async getAllSearchDocuments(args) {
+  async getAllSearchDocuments(args: any) {
     let apiPath = "/api/search-online-resources";
 
     // Filter by q.
@@ -68,7 +73,7 @@ class DrupalApi extends RESTDataSource {
     // Subjects
     // subjects[]=123&subjects[]=556
     if (args.filter && "subjects" in args.filter && args.filter.subjects) {
-      args.filter.subjects.map((subject) => {
+      args.filter.subjects.map((subject: string) => {
         apiPath = `${apiPath}&subjects[]=${subject}`;
       });
     }
@@ -80,7 +85,7 @@ class DrupalApi extends RESTDataSource {
       "audience_by_age" in args.filter &&
       args.filter.audience_by_age
     ) {
-      args.filter.audience_by_age.map((audienceItem) => {
+      args.filter.audience_by_age.map((audienceItem: string) => {
         apiPath = `${apiPath}&audience[]=${audienceItem}`;
       });
     }
@@ -111,14 +116,14 @@ class DrupalApi extends RESTDataSource {
     }
   }
 
-  async getSearchDocument(args) {
+  async getSearchDocument(args: any) {
     const response = await this.get(
       `/api/search-online-resources?uuid=${args.id}`
     );
     return response.results;
   }
 
-  async getIpAccessCheck(clientIp) {
+  async getIpAccessCheck(clientIp: string) {
     const response = await this.get(`/api/ip?testMode=true&ip=${clientIp}`);
     if (response) {
       return response;
@@ -126,18 +131,20 @@ class DrupalApi extends RESTDataSource {
   }
 
   /* ---------- DECOUPLED DRUPAL ---------- */
-  async getDecoupledRouter(args) {
+  async getDecoupledRouter(args: any) {
     let apiPath = `/router/translate-path?path=${args.path}`;
     try {
       const response = await this.get(apiPath);
       return response;
-    } catch (error) {
+    } catch (error: any) {
+      // console.log("getDecoupledRouter");
+      // console.log(error.extensions);
       throw toApolloError(error);
     }
   }
 
-  async getAutoSuggestions(args) {
-    const response = await this.get(`/api/search-online-resources-autosuggest`);
+  async getAutoSuggestions() {
+    const response = await this.get("/api/search-online-resources-autosuggest");
     return response.results;
   }
 }

@@ -1,6 +1,3 @@
-const { DRUPAL_API, DRUPAL_CONSUMER_UUID, DRUPAL_CONSUMER_SECRET } =
-  process.env;
-
 export type AccessToken = {
   token_type: string;
   expires_in: number;
@@ -8,6 +5,9 @@ export type AccessToken = {
 };
 
 async function getAccessToken(): Promise<AccessToken | null> {
+  const { DRUPAL_API, DRUPAL_CONSUMER_UUID, DRUPAL_CONSUMER_SECRET } =
+    process.env;
+
   if (!DRUPAL_CONSUMER_UUID || !DRUPAL_CONSUMER_SECRET) {
     return null;
   }

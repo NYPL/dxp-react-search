@@ -1,4 +1,3 @@
-import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
@@ -41,8 +40,7 @@ const sectionFrontResolver = {
         ? resolveImage(sectionFront.field_ers_media_image)
         : null,
     featuredContent: (sectionFront, _, __, info) => {
-      const resolveInfo = parseResolveInfo(info);
-      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const typesInQuery = ["Donation"];
       const featuredContent =
         sectionFront.field_ers_featured.data?.length === 0
           ? null
@@ -53,8 +51,8 @@ const sectionFrontResolver = {
       return featuredContent;
     },
     mainContent: (sectionFront, _, __, info) => {
-      const resolveInfo = parseResolveInfo(info);
-      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const typesInQuery = ["CardGrid"];
+
       const mainContent =
         sectionFront.field_main_content.data?.length === 0
           ? null
