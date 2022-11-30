@@ -39,6 +39,7 @@
     "drupal-jsonapi-params": "^1.2.2",
     "focus-trap-react": "^8.4.2",
     "graphql": "16.6.0",
+    "graphql-parse-resolve-info": "git+https://github.com/wluisi/graphql-parse-resolve-info.git",
     "graphql-tag": "2.12.6",
     "graphql-tools": "8.3.0",
     "lodash.isequal": "^4.5.0",

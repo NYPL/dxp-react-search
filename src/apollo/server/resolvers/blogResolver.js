@@ -1,3 +1,4 @@
+import { parseResolveInfo } from "graphql-parse-resolve-info";
 import formatDate from "../../../utils/formatDate";
 import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
@@ -98,17 +99,20 @@ const blogResolver = {
         ? null
         : blog.field_erm_location,
     mainContent: (blog, _, __, info) => {
-      const typesInQuery = [
-        "Text",
-        "TextWithImage",
-        "Video",
-        "SocialEmbed",
-        "AudioEmbed",
-        "GoogleMapEmbed",
-        "ImageComponent",
-        "CardList",
-        "CatalogList",
-      ];
+      // const typesInQuery = [
+      //   "Text",
+      //   "TextWithImage",
+      //   "Video",
+      //   "SocialEmbed",
+      //   "AudioEmbed",
+      //   "GoogleMapEmbed",
+      //   "ImageComponent",
+      //   "CardList",
+      //   "CatalogList",
+      // ];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+
       const mainContent =
         blog.field_main_content.data?.length === 0
           ? null
