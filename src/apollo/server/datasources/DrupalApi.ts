@@ -137,8 +137,6 @@ class DrupalApi extends RESTDataSource {
       const response = await this.get(apiPath);
       return response;
     } catch (error: any) {
-      // console.log("getDecoupledRouter");
-      // console.log(error.extensions);
       throw toApolloError(error);
     }
   }

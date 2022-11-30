@@ -1,4 +1,3 @@
-// Utils
 import formatDate from "../../../utils/formatDate";
 import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
@@ -28,8 +27,6 @@ const blogResolver = {
         args.sort,
         pagination
       );
-
-      console.log(dataSources);
       const response = await dataSources.drupalJsonApi.getCollectionResource(
         apiPath
       );
