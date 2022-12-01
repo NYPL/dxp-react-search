@@ -2,6 +2,7 @@ import * as React from "react";
 import { jest } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 import { renderHook, act } from "@testing-library/react-hooks";
+import { act as utilAct } from "react-dom/test-utils";
 import userEvent from "@testing-library/user-event";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
@@ -91,6 +92,13 @@ const items = [
     url: "https://www.nypl.org/",
   },
 ];
+
+const resizeWindow = (x: number) => {
+  window.innerWidth = x;
+  utilAct(() => {
+    window.dispatchEvent(new Event("resize"));
+  });
+};
 
 describe("useSlideshow tests", () => {
   it("returns two functions, the currentSlide number and a CSS style object", () => {
@@ -276,6 +284,9 @@ describe("SlideshowContainer tests", () => {
 });
 
 describe("Slideshow tests", () => {
+  beforeEach(() => {
+    resizeWindow(1024);
+  });
   it("shold pass axe accessibility test", async () => {
     const { container } = render(
       <Slideshow
@@ -287,7 +298,7 @@ describe("Slideshow tests", () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
-  it("should not show the prev button upon rendering", () => {
+  it("should show only the next button upon rendering", () => {
     render(
       <Slideshow
         id="slideshow-test-id"
@@ -296,6 +307,7 @@ describe("Slideshow tests", () => {
         items={items}
       />
     );
+    expect(screen.queryByRole("button", { name: />/i })).toBeInTheDocument();
     expect(
       screen.queryByRole("button", { name: /</i })
     ).not.toBeInTheDocument();
@@ -355,17 +367,52 @@ describe("Slideshow tests", () => {
     userEvent.tab({ shift: true });
 
     expect(screen.getByRole("link", { name: "Test 1" })).toHaveFocus();
-    // userEvent.tab();
-    // userEvent.tab();
-    // userEvent.tab();
-    // // Last slide
-    // expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
-    // userEvent.tab();
-    // // Can not pass last slide
-    // expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
+    //   userEvent.tab();
+    //   userEvent.tab();
+    //   userEvent.tab();
+    //   // Last slide
+    //   expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
+    //   userEvent.tab();
+    //   // Can not pass last slide
+    //   expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
   });
-  it("should render the UI snapshot correctly", async () => {
-    const basicView = renderer
+  it("should render buttons on tablet", () => {
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
+    resizeWindow(800);
+
+    expect(screen.queryByRole("button", { name: />/i })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /</i })
+    ).not.toBeInTheDocument();
+    userEvent.click(screen.getByRole("button", { name: />/i }));
+    expect(screen.queryByRole("button", { name: /</i })).toBeInTheDocument();
+  });
+  it("should render no buttons on mobile", () => {
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
+    resizeWindow(600);
+    expect(
+      screen.queryByRole("button", { name: />/i })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /</i })
+    ).not.toBeInTheDocument();
+  });
+  it("should render the UI snapshot correctly", () => {
+    const desktopSlideshow = renderer
       .create(
         <Slideshow
           id="slideshow-test-id"
@@ -375,6 +422,6 @@ describe("Slideshow tests", () => {
         />
       )
       .toJSON();
-    expect(basicView).toMatchSnapshot();
+    expect(desktopSlideshow).toMatchSnapshot();
   });
 });

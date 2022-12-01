@@ -6,6 +6,7 @@ import SlideshowContainer from "./SlideshowContainer";
 import SlideshowButton from "./SlideshowButton";
 // Hooks
 import useSlideshowStyles from "./useSlideshow";
+import useWindowSize from "../../../hooks/useWindowSize";
 // Types
 import { SlideshowItem } from "./SlideshowTypes";
 
@@ -18,6 +19,20 @@ interface SlideshowProps {
 }
 
 function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
+  const [isMobileOrTablet, setIsMobileOrTablet] = React.useState(false);
+  const [isLargerThanMobile, setIsLargerThanMobile] = React.useState(false);
+  const windowSize = useWindowSize();
+  React.useEffect(() => {
+    if (windowSize) {
+      setIsMobileOrTablet(windowSize <= 820);
+    }
+  }, [windowSize]);
+
+  React.useEffect(() => {
+    if (windowSize) {
+      setIsLargerThanMobile(windowSize > 600);
+    }
+  }, [windowSize]);
   // Ensure items array is never longer than 10 items.
   const finalItems: SlideshowItem[] = items.slice(0, 10);
 
@@ -35,12 +50,14 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
       buttonBorder="brand.100"
       seeMore={seeMore}
     >
-      <Box w="full" position="relative" mt={{ base: -9, md: 0 }}>
-        <SlideshowButton
-          buttonDirection="prev"
-          prevSlide={prevSlide}
-          visibility={currentSlide > 0 ? "visible" : "hidden"}
-        />
+      <Box w="full" position="relative" mt={{ base: 0, sx: -9, md: 0 }}>
+        {isLargerThanMobile && (
+          <SlideshowButton
+            buttonDirection="prev"
+            prevSlide={prevSlide}
+            visibility={currentSlide > 0 ? "visible" : "hidden"}
+          />
+        )}
         <SlideshowContainer
           items={finalItems}
           slideshowStyle={slideshowStyle}
@@ -48,14 +65,17 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
           nextSlide={nextSlide}
           prevSlide={prevSlide}
           sectionTitle={title}
+          isMobileOrTablet={isMobileOrTablet}
         />
-        <SlideshowButton
-          buttonDirection="next"
-          nextSlide={nextSlide}
-          visibility={
-            currentSlide !== finalItems.length - 1 ? "visibile" : "hidden"
-          }
-        />
+        {isLargerThanMobile && (
+          <SlideshowButton
+            buttonDirection="next"
+            nextSlide={nextSlide}
+            visibility={
+              currentSlide !== finalItems.length - 1 ? "visibile" : "hidden"
+            }
+          />
+        )}
       </Box>
     </ComponentWrapper>
   );

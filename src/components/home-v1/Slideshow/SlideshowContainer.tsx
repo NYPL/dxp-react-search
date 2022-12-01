@@ -12,6 +12,7 @@ interface SlideshowContainerProps {
   nextSlide: () => void;
   prevSlide: () => void;
   sectionTitle: string;
+  isMobileOrTablet?: boolean;
 }
 function SlideshowContainer({
   items,
@@ -20,6 +21,7 @@ function SlideshowContainer({
   nextSlide,
   prevSlide,
   sectionTitle,
+  isMobileOrTablet,
 }: SlideshowContainerProps) {
   const changeSlide = (i: number) => {
     if (currentSlide === 0 && i === 0) return;
@@ -27,6 +29,17 @@ function SlideshowContainer({
       nextSlide();
     } else {
       prevSlide();
+    }
+  };
+  // @TODO Swap useWindowSize for useNYPLBreakpoints
+  const onTouchSlideChange = (e: React.PointerEvent) => {
+    if (isMobileOrTablet) {
+      if (e.movementX > 4) {
+        prevSlide();
+      }
+      if (e.movementX < -4) {
+        nextSlide();
+      }
     }
   };
 
@@ -50,6 +63,7 @@ function SlideshowContainer({
                 key={item.id}
                 h="full"
                 onFocus={() => changeSlide(i)}
+                onPointerMove={(e) => onTouchSlideChange(e)}
               >
                 <SlideshowCard
                   item={item}
