@@ -394,6 +394,17 @@ describe("Slideshow tests", () => {
     userEvent.click(screen.getByRole("button", { name: />/i }));
     expect(screen.queryByRole("button", { name: /</i })).toBeInTheDocument();
   });
+  // @TODO userEvent.pointer() was introduced in testing-library/user-event v14.0.0-beta.1
+  xit("should allow the user to swipe throught the slideshow on tablet", () => {
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
+  });
   it("should render no buttons on mobile", () => {
     render(
       <Slideshow
@@ -410,6 +421,17 @@ describe("Slideshow tests", () => {
     expect(
       screen.queryByRole("button", { name: /</i })
     ).not.toBeInTheDocument();
+  });
+  // @TODO userEvent.pointer() was introduced in testing-library/user-event v14.0.0-beta.1
+  xit("should allow the user to swipe throught the slideshow on mobile", () => {
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
   });
   it("should render the UI snapshot correctly", () => {
     const desktopSlideshow = renderer
