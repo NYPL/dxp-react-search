@@ -1,3 +1,4 @@
+import { parseResolveInfo } from "graphql-parse-resolve-info";
 import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
@@ -10,8 +11,6 @@ const homePageResolver = {
   Query: {
     homePage: async (_, args, { dataSources }) => {
       const includedFields = [
-        // "field_hp_section_2.field_erm_hp_cards",
-        // "field_hp_section_2.field_erm_hp_cards.field_ers_image.field_media_image",
         "field_hp_section_2",
         "field_hp_section_3",
         "field_hp_section_4.field_erm_hp_cards",
@@ -143,7 +142,8 @@ const homePageResolver = {
     id: (homePage) => homePage.id,
     title: (homePage) => homePage.title,
     sectionOne: (homePage, _, __, info) => {
-      const typesInQuery = ["HomePageHeroComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const sectionOne =
         homePage.field_hp_section_1.data?.length === 0
           ? null
@@ -154,7 +154,8 @@ const homePageResolver = {
       return sectionOne;
     },
     sectionTwo: (homePage, _, __, info) => {
-      const typesInQuery = ["HomePageSpotlightComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const sectionTwo =
         homePage.field_hp_section_2.data?.length === 0
           ? null
@@ -165,7 +166,8 @@ const homePageResolver = {
       return sectionTwo;
     },
     sectionThree: (homePage, _, __, info) => {
-      const typesInQuery = ["HomePageEventsComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const sectionThree =
         homePage.field_hp_section_3.data?.length === 0
           ? null
@@ -176,7 +178,8 @@ const homePageResolver = {
       return sectionThree;
     },
     sectionFour: (homePage, _, __, info) => {
-      const typesInQuery = ["HomePageCardGridComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const sectionFour =
         homePage.field_hp_section_4.data?.length === 0
           ? null
@@ -187,7 +190,8 @@ const homePageResolver = {
       return sectionFour;
     },
     sectionFive: (homePage, _, __, info) => {
-      const typesInQuery = ["HomePageStaffPicksComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const sectionFive =
         homePage.field_hp_section_5.data?.length === 0
           ? null
@@ -198,7 +202,8 @@ const homePageResolver = {
       return sectionFive;
     },
     sectionSix: (homePage, _, __, info) => {
-      const typesInQuery = ["HomePageSlideshowComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const sectionSix =
         homePage.field_hp_section_6.data?.length === 0
           ? null
@@ -209,7 +214,8 @@ const homePageResolver = {
       return sectionSix;
     },
     sectionSeven: (homePage, _, __, info) => {
-      const typesInQuery = ["HomePageCardGridComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const sectionSeven =
         homePage.field_hp_section_7.data?.length === 0
           ? null
@@ -220,7 +226,8 @@ const homePageResolver = {
       return sectionSeven;
     },
     sectionEight: (homePage, _, __, info) => {
-      const typesInQuery = ["HomePageCardGridComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const sectionEight =
         homePage.field_hp_section_8.data?.length === 0
           ? null

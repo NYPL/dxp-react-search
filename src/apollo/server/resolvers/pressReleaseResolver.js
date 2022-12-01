@@ -1,4 +1,4 @@
-// Utils
+import { parseResolveInfo } from "graphql-parse-resolve-info";
 import formatDate from "../../../utils/formatDate";
 import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
@@ -75,7 +75,9 @@ const pressReleaseResolver = {
     mediaContacts: (pressRelease) =>
       pressRelease.field_tfls_media_contacts?.processed,
     mainContent: (pressRelease, _, __, info) => {
-      const typesInQuery = ["Text", "TextWithImage", "ImageComponent"];
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+
       const mainContent =
         pressRelease.field_main_content.data?.length === 0
           ? null

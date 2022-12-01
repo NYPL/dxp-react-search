@@ -99,17 +99,6 @@ const blogResolver = {
         ? null
         : blog.field_erm_location,
     mainContent: (blog, _, __, info) => {
-      // const typesInQuery = [
-      //   "Text",
-      //   "TextWithImage",
-      //   "Video",
-      //   "SocialEmbed",
-      //   "AudioEmbed",
-      //   "GoogleMapEmbed",
-      //   "ImageComponent",
-      //   "CardList",
-      //   "CatalogList",
-      // ];
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
 
