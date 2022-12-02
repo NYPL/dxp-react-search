@@ -12,18 +12,19 @@ const { DRUPAL_API } = process.env;
 type JsonApiResource = { [key: string]: any };
 
 class DrupalJsonApi /*<TContext = any>*/ extends RESTDataSource {
-  // override baseURL = DRUPAL_API;
-
   constructor() {
     super();
     this.baseURL = DRUPAL_API;
+    // @TODO what did this do? it doesn't work in v4
     // this.initialize({} as DataSourceConfig<any>);
+
     // Disables cache @see https://github.com/apollographql/datasource-rest#memoizegetrequests
     // @see https://github.com/apollographql/apollo-server/issues/1562
     // Defaults to true
     this.memoizeGetRequests = false;
   }
 
+  // @TODO Need to confirm that this can be fixed some other way.
   /**
    * Fixes 304 not modified issue when Drupal's page cache is enabled.
    * This essentially disables the RESTDataSource cacheing of remote
@@ -42,14 +43,6 @@ class DrupalJsonApi /*<TContext = any>*/ extends RESTDataSource {
     } else {
       return response.text();
     }
-  }
-
-  // @TODO this is currently not used.
-  async getDecoupledRouter(args: { path: string }) {
-    // Get resource url from path.
-    let apiPath = `/router/translate-path?path=${args.path}`;
-    const response = await this.get(apiPath);
-    return response;
   }
 
   async getCollectionResource(

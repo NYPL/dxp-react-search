@@ -1,11 +1,12 @@
-import { RESTDataSource } from "apollo-datasource-rest";
+import { RESTDataSource } from "@apollo/datasource-rest";
 const { REFINERY_API } = process.env;
 
 class RefineryApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = REFINERY_API;
-    this.initialize({});
+    // @TODO what did this do? it doesn't work in v4
+    // this.initialize({});
   }
 
   async getAllLocations() {

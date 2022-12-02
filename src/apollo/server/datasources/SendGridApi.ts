@@ -1,5 +1,4 @@
-import { RESTDataSource } from "apollo-datasource-rest";
-const { SENDGRID_API_KEY, SENDGRID_EMAIL_ENABLE } = process.env;
+import { RESTDataSource } from "@apollo/datasource-rest";
 const sgMail = require("@sendgrid/mail");
 
 // @SEE @sendgrid/mail
@@ -11,7 +10,9 @@ class SendGridApi extends RESTDataSource {
     super();
   }
 
-  async sendEmail(emailTo, emailCc, emailBody) {
+  async sendEmail(emailTo: string, emailCc: string, emailBody: string) {
+    const { SENDGRID_API_KEY, SENDGRID_EMAIL_ENABLE } = process.env;
+
     let statusCode;
     let responseMessage;
 
@@ -23,7 +24,6 @@ class SendGridApi extends RESTDataSource {
         to: emailTo,
         cc: emailCc ? emailCc : null,
         subject: "Location Request Visit",
-        //text: "Hello world",
         html: emailBody,
       };
 
@@ -31,7 +31,7 @@ class SendGridApi extends RESTDataSource {
         let response = await sgMail.send(message);
         statusCode = response[0].statusCode;
         responseMessage = "Email sent.";
-      } catch (error) {
+      } catch (error: any) {
         statusCode = error.code;
         responseMessage = error.message;
       }
