@@ -5,7 +5,7 @@ echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
 
 if [[ "$VERCEL_GIT_COMMIT_REF" == "sandbox" || "$VERCEL_GIT_COMMIT_REF" == "development" || "$VERCEL_GIT_COMMIT_REF" == "qa" || "$VERCEL_GIT_COMMIT_REF" == "production"  ]] ; then
   # Don't build a preview.
-  echo "🛑 - Skipping build for sandbox, development, qa, or production branch detected."
+  echo "🛑 - Skipping build: sandbox, development, qa, or production branch detected."
   exit 0;
 
 else
