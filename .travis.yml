@@ -8,6 +8,8 @@ cache:
     - node_modules
 branches:
   only:
+    - sandbox
+    - development
     - qa
     - production
 env:

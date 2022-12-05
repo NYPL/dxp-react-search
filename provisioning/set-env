@@ -14,6 +14,19 @@ SENDGRID_EMAIL_ENABLE=true
 NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
 DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
 
+if [ "$TRAVIS_BRANCH" == "development" ]; then
+  NEXT_PUBLIC_SERVER_ENV=dev
+  NEXT_PUBLIC_NYPL_DOMAIN=https://dev-www.nypl.org
+  REFINERY_API=https://qa-refinery.nypl.org/api/nypl
+  DRUPAL_API=https://dev-drupal.nypl.org
+  GRAPHQL_API_URL=https://dev-scout.nypl.org/api/graphql
+  GA_TRACKING_ID=UA-1420324-122
+  ALLOWED_ORIGIN=https://dev-www.nypl.org
+  SENDGRID_EMAIL_ENABLE=true
+  NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
+  DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
+fi
+
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
   NEXT_PUBLIC_SERVER_ENV=qa
   NEXT_PUBLIC_NYPL_DOMAIN=https://qa-www.nypl.org
