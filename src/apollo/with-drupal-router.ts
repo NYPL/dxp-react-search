@@ -62,9 +62,13 @@ export default function withDrupalRouter<
     const isNextPreview = !options?.customPreview;
 
     if (isGetStaticPropsFunction) {
-      slug = Array.isArray(context.params?.slug)
-        ? context.params?.slug[0]
-        : context.params?.slug;
+      // The slug value can be ["research"] or ["research", "support"],
+      // So we convert the array into a url slug path, i.e., /research/support
+      if (Array.isArray(context.params?.slug)) {
+        slug = `/${context.params?.slug.join(",").replace(",", "/")}`;
+      } else {
+        slug = `/${context.params?.slug}`;
+      }
 
       const { previewData } = context as GetStaticPropsContext;
 
@@ -84,6 +88,8 @@ export default function withDrupalRouter<
         context as GetServerSidePropsContext;
 
       slug = resolvedUrl;
+      console.log("resolvedUrl!");
+      console.log(slug);
       // Preview modes.
       if (isNextPreview) {
         // NextJS preview mode.

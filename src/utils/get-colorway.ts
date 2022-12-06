@@ -23,6 +23,14 @@ export default function getColorway(slugOrSection: SlugOrSection): Colorway {
       primary: "section.research.primary",
       secondary: "section.research.secondary",
     },
+    "/research/collections": {
+      primary: "section.research.primary",
+      secondary: "section.research.secondary",
+    },
+    "/research/support": {
+      primary: "section.research.primary",
+      secondary: "section.research.secondary",
+    },
     section_front: {
       primary: "brand.primary",
       secondary: "brand.secondary",

@@ -12,7 +12,12 @@ import PreviewModeNotification from "../../shared/PreviewModeNotification";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 // Used in the catch all page template to determine component to render.
-export const sectionFrontsSlugs = ["/give", "/research"];
+export const sectionFrontsSlugs = [
+  "/give",
+  "/research",
+  "/research/collections",
+  "/research/support",
+];
 
 // Generate the static paths for getStaticPaths
 type GetStaticPropsParamsType = {
