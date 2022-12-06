@@ -40,8 +40,8 @@ function useDecoupledRouter(nextRouter: NextRouter) {
   const uuid = decoupledRouterData?.decoupledRouter?.uuid;
 
   return {
-    isPreview: isPreview,
     uuid: uuid,
+    isPreview: isPreview,
   };
 }
 
