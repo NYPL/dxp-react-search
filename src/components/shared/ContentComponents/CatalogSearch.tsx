@@ -17,8 +17,8 @@ export interface CatalogSearchProps {
   headingColor?: string;
   /** The description of the catalog search component. */
   description: string;
-  /** The base url of the search form, to be used for the generating the url. */
-  formBaseUrl: string;
+  /** The catalog type of the form, to be used for the generating the url. */
+  catalogType: "research_catalog" | "vega";
   /** The placeholder text for the search form input. */
   formPlaceholder: string;
 }
@@ -28,7 +28,7 @@ export default function CatalogSearch({
   title,
   headingColor,
   description,
-  formBaseUrl,
+  catalogType,
   formPlaceholder,
 }: CatalogSearchProps) {
   const [input, setInput] = React.useState("");
@@ -37,13 +37,16 @@ export default function CatalogSearch({
     event.preventDefault();
 
     let searchUrl = "www.nypl.org/research/research-catalog/search";
-    // Vega catalog.
-    if (formBaseUrl.includes("nypl.na2.iiivega.com")) {
-      searchUrl = `${formBaseUrl}?query=${input}`;
-    }
-    // NYPL research catalog.
-    if (formBaseUrl.includes("www.nypl.org/research/research-catalog/search")) {
+    let formBaseUrl = "https://www.nypl.org/research/research-catalog/search";
+
+    if (catalogType === "research_catalog") {
+      formBaseUrl = "https://www.nypl.org/research/research-catalog/search";
       searchUrl = `${formBaseUrl}?q=${input}`;
+    }
+
+    if (catalogType === "vega") {
+      formBaseUrl = "https://nypl.na2.iiivega.com";
+      searchUrl = `${formBaseUrl}?query=${input}`;
     }
 
     window.location.href = searchUrl;

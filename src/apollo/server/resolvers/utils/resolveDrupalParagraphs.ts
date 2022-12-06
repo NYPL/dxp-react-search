@@ -96,7 +96,7 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
-        item.type === "paragraph--research_catalog_form" &&
+        item.type === "paragraph--catalog_search" &&
         typesInQuery.includes("CatalogSearch")
       ) {
         accumulator.push(item);
@@ -406,13 +406,13 @@ export default function resolveDrupalParagraphs(
           otherLevelId: item.field_ts_donation_other_level_id,
         };
         break;
-      case "paragraph--research_catalog_form":
+      case "paragraph--catalog_search":
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
           title: item.field_ts_heading,
           description: item.field_tfls_description?.processed,
-          formBaseUrl: item.field_ls_link.url,
+          catalogType: item.field_lts_catalog,
           formPlaceholder: item.field_ts_placeholder,
           colorway:
             contentType === "section_front"

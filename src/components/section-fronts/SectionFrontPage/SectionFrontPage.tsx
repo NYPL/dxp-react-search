@@ -106,7 +106,7 @@ export const SECTION_FRONT_QUERY = gql`
           type
           title
           description
-          formBaseUrl
+          catalogType
           formPlaceholder
           colorway {
             primary
