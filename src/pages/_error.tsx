@@ -1,6 +1,6 @@
 import * as React from "react";
-import { NextPageContext } from "next";
-import { ApolloError } from "@apollo/client/errors";
+// import { NextPageContext } from "next";
+// import { ApolloError } from "@apollo/client/errors";
 import {
   Button,
   Box,
@@ -18,11 +18,11 @@ type ErrorProps = {
   statusCode: number;
 };
 
-type NextError = { statusCode?: number | undefined };
+// type NextError = { statusCode?: number | undefined };
 
-type ErrorContext = Omit<NextPageContext, "err"> & {
-  err: ApolloError | NextError;
-};
+// type ErrorContext = Omit<NextPageContext, "err"> & {
+//   err: ApolloError | NextError;
+// };
 
 function Error({ statusCode }: ErrorProps) {
   let title = "We're Sorry ...";
@@ -105,20 +105,20 @@ function Error({ statusCode }: ErrorProps) {
 }
 
 // Only gets called if app throws an error either on client or server side.
-Error.getInitialProps = async ({ res, err }: ErrorContext) => {
-  let statusCode;
-  if (err.hasOwnProperty("graphQLErrors")) {
-    statusCode = (err as any).graphQLErrors[0].extensions?.response?.status;
-  } else {
-    statusCode = (err as NextError).statusCode;
-  }
+// Error.getInitialProps = async ({ res, err }: ErrorContext) => {
+//   let statusCode;
+//   if (err.hasOwnProperty("graphQLErrors")) {
+//     statusCode = (err as any).graphQLErrors[0].extensions?.response?.status;
+//   } else {
+//     statusCode = (err as NextError).statusCode;
+//   }
 
-  // Set the response headers to the correct status code.
-  if (res) {
-    res.statusCode = statusCode;
-  }
-  // Pass the statusCode prop to the component.
-  return { statusCode: statusCode };
-};
+//   // Set the response headers to the correct status code.
+//   if (res) {
+//     res.statusCode = statusCode;
+//   }
+//   // Pass the statusCode prop to the component.
+//   return { statusCode: statusCode };
+// };
 
 export default Error;
