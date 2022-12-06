@@ -30,12 +30,9 @@ const pressReleaseResolver = {
         args.sort,
         pagination
       );
-
       const response = await dataSources.drupalJsonApi.getCollectionResource(
         apiPath
       );
-
-      // @TODO Move this to a utils function.
       return {
         items: response.data,
         pageInfo: {

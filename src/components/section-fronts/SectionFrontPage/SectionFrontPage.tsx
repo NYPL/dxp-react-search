@@ -4,7 +4,6 @@ import * as React from "react";
 import { gql, useQuery } from "@apollo/client";
 // Components
 import PageContainer from "../../shared/layouts/PageContainer";
-import Error from "../../../pages/_error";
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 import Donation from "../Donation";
 import Components from "./../../shared/ContentComponents/getReactComponent";
@@ -138,12 +137,6 @@ export default function SectionFrontPage({
       }),
     },
   });
-
-  // If uuid returns null from useDecoupledRouter, there was no router
-  // path match in Drupal, so we return 404 status error component.
-  if (!data && uuid === null) {
-    return <Error statusCode={404} />;
-  }
 
   // Error state.
   if (error) {
