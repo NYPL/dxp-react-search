@@ -36,8 +36,8 @@ export default function CatalogSearch({
   function handleSubmit(event: React.SyntheticEvent): void {
     event.preventDefault();
 
-    let searchUrl = "www.nypl.org/research/research-catalog/search";
-    let formBaseUrl = "https://www.nypl.org/research/research-catalog/search";
+    let searchUrl = "";
+    let formBaseUrl = "";
 
     if (catalogType === "research_catalog") {
       formBaseUrl = "https://www.nypl.org/research/research-catalog/search";
@@ -45,7 +45,7 @@ export default function CatalogSearch({
     }
 
     if (catalogType === "vega") {
-      formBaseUrl = "https://nypl.na2.iiivega.com";
+      formBaseUrl = "https://nypl.na2.iiivega.com/search";
       searchUrl = `${formBaseUrl}?query=${input}`;
     }
 
