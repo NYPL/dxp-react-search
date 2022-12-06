@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
 // Apollo
 import { gql, useApolloClient } from "@apollo/client";
-// @ts-ignore
-import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
 // Components
 import { Box, Button, Heading } from "@nypl/design-system-react-components";
 import LibraryFormField from "./FormFields/LibraryFormField";
@@ -20,6 +18,36 @@ import {
   checkValidation,
   runValidation,
 } from "./../../../utils/formValidation";
+
+export const LOCATION_BY_INTERNAL_SLUG = gql`
+  query LocationByInternalSlugQuery(
+    $contentType: String
+    $limit: Int
+    $pageNumber: Int
+    $filter: LocationFilter
+    $sort: Sort
+  ) {
+    allLocations(
+      contentType: $contentType
+      limit: $limit
+      pageNumber: $pageNumber
+      filter: $filter
+      sort: $sort
+    ) {
+      items {
+        id
+        name
+        internalSlug
+        email
+        url
+      }
+      pageInfo {
+        limit
+        totalItems
+      }
+    }
+  }
+`;
 
 const SEND_EMAIL_MUTATION = gql`
   mutation ($emailTo: String!, $emailCc: String, $emailBody: String) {
