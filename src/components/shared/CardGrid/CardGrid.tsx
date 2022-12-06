@@ -1,9 +1,11 @@
 import * as React from "react";
-import { Box, Grid, LayoutTypes } from "@nypl/design-system-react-components";
+import { Box, Grid } from "@nypl/design-system-react-components";
 import Image from "./../../shared/Image";
 import { ImageType } from "../Image/ImageTypes";
 import CardGridHeader from "./CardGridHeader";
 import Card from "./Card";
+
+export type CardGridLayoutTypes = "row" | "column" | "column_4" | "column_2_4";
 
 export interface CardGridCommonProps {
   id: string;
@@ -20,7 +22,7 @@ export interface CardGridCommonProps {
 type CardGridConditionalProps =
   | {
       items?: CardItem[];
-      layout?: LayoutTypes;
+      layout?: CardGridLayoutTypes;
       children?: never;
     }
   | {
@@ -53,7 +55,19 @@ export default function CardGrid({
   items,
   children,
 }: CardGridProps) {
+  // Set a final layout value for the DS card.
+  const finalLayout = layout === "row" ? "row" : "column";
+
+  // Logic for template columns based on layout.
   let templateColumns = "repeat(auto-fit, minmax(300px, 1fr))";
+  if (layout === "column_4") {
+    templateColumns = "repeat(auto-fit, minmax(294px, 1fr))";
+  }
+  if (layout === "column_2_4") {
+    templateColumns = "repeat(12, 1fr)";
+  }
+
+  // Logic for template row based on layout.
   let isBorderedFinal = isBordered;
   let isCenteredFinal = isCentered;
   if (layout === "row") {
@@ -78,40 +92,48 @@ export default function CardGrid({
         <Grid
           as="ul"
           listStyleType="none"
-          templateColumns={templateColumns}
+          templateColumns={{ lg: templateColumns }}
           gap="m"
         >
-          {items.map((item: CardItem) => (
-            <li key={item.id}>
-              <Card
-                id={item.id}
-                heading={item.title}
-                description={item.description}
-                href={item.link}
-                layout={layout}
-                isBordered={isBorderedFinal}
-                isCentered={isCenteredFinal}
-                {...(item.image && {
-                  image: (
-                    <Image
-                      id={item.image.id}
-                      alt={item.image.alt}
-                      uri={item.image.uri}
-                      useTransformation={true}
-                      transformations={item.image.transformations}
-                      transformationLabel={"2_1_960"}
-                      layout="responsive"
-                      // width={item.image.width}
-                      // height={item.image.height}
-                      width={900}
-                      height={450}
-                      quality={90}
-                    />
-                  ),
-                })}
-              />
-            </li>
-          ))}
+          {items.map((item: CardItem, index) => {
+            let gridColumnSpan;
+            // @TODO maybe add a check for 5 or 6 items and then only add this?
+            if (layout === "column_2_4") {
+              gridColumnSpan = index > 1 ? "span 3" : "span 6";
+            }
+
+            return (
+              <Box as="li" key={item.id} gridColumn={{ lg: gridColumnSpan }}>
+                <Card
+                  id={item.id}
+                  heading={item.title}
+                  description={item.description}
+                  href={item.link}
+                  layout={finalLayout}
+                  isBordered={isBorderedFinal}
+                  isCentered={isCenteredFinal}
+                  {...(item.image && {
+                    image: (
+                      <Image
+                        id={item.image.id}
+                        alt={item.image.alt}
+                        uri={item.image.uri}
+                        useTransformation={true}
+                        transformations={item.image.transformations}
+                        transformationLabel={"2_1_960"}
+                        layout="responsive"
+                        // width={item.image.width}
+                        // height={item.image.height}
+                        width={900}
+                        height={450}
+                        quality={90}
+                      />
+                    ),
+                  })}
+                />
+              </Box>
+            );
+          })}
         </Grid>
       )}
       {!items && children && <div>{children}</div>}
