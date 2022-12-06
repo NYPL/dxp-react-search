@@ -4,8 +4,9 @@ import type { AppProps } from "next/app";
 const { NEXT_PUBLIC_GA_TRACKING_ID } = process.env;
 import "./../styles/main.scss";
 import AppLayout from "./../components/shared/layouts/AppLayout";
+import Error from "./_error";
 
-function SearchApp({ Component, pageProps }: AppProps) {
+export default function ScoutApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   // When next js routes change, send data to GA.
   useEffect(() => {
@@ -22,6 +23,15 @@ function SearchApp({ Component, pageProps }: AppProps) {
     };
   }, [router.events]);
 
+  // Handle errors.
+  if (pageProps.errorCode) {
+    return (
+      <AppLayout>
+        <Error statusCode={pageProps.errorCode} />
+      </AppLayout>
+    );
+  }
+
   return (
     <AppLayout>
       {/* @ts-ignore */}
@@ -29,5 +39,3 @@ function SearchApp({ Component, pageProps }: AppProps) {
     </AppLayout>
   );
 }
-
-export default SearchApp;
