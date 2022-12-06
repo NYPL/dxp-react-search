@@ -1,3 +1,5 @@
+const { DRUPAL_API } = process.env;
+
 const decoupledRouterResolver = {
   Query: {
     decoupledRouter: async (parent, args, { dataSources }) => {
