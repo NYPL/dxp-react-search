@@ -1,4 +1,4 @@
-import { DecoupledRouterQuery as DECOUPLED_ROUTER_QUERY } from "./queries/DecoupledRouter.gql";
+import { DECOUPLED_ROUTER_QUERY } from "./../../hooks/useDecoupledRouter";
 
 async function decoupledRouterRedirect(ctx) {
   return await ctx.apolloClient
