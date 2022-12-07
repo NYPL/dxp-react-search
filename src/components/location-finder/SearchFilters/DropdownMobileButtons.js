@@ -56,6 +56,7 @@ function DropdownMobileButtons(props) {
         sx={{
           display: "block",
           width: "fit-content",
+          paddingLeft: "0px",
         }}
       >
         <Icon name="arrow" align="left" iconRotation="rotate90" size="small" />

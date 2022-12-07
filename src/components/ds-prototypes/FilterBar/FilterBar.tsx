@@ -71,6 +71,7 @@ function FilterBar({
                   sx={{
                     display: "block",
                     width: "fit-content",
+                    paddingLeft: "0px",
                   }}
                 >
                   <Icon

@@ -138,7 +138,13 @@ function Location({
         <Button
           id={`button-view-on-map-${id}`}
           buttonType="text"
+          size="large"
           onClick={onClickViewOnMap}
+          // additionalStyles
+          sx={{
+            paddingLeft: "0px",
+            paddingRight: "0px",
+          }}
         >
           View on Map
         </Button>
