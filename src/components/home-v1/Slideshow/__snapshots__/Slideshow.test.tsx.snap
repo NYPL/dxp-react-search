@@ -47,6 +47,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-1"
                 id="slideshow-card-test-id-1"
               >
                 <div
@@ -212,6 +213,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-2"
                 id="slideshow-card-test-id-2"
               >
                 <div
@@ -377,6 +379,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-3"
                 id="slideshow-card-test-id-3"
               >
                 <div
@@ -542,6 +545,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-4"
                 id="slideshow-card-test-id-4"
               >
                 <div
@@ -763,6 +767,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-1"
         id="slideshow-card-test-id-1"
       >
         <div
@@ -928,6 +933,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-2"
         id="slideshow-card-test-id-2"
       >
         <div
@@ -1093,6 +1099,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-3"
         id="slideshow-card-test-id-3"
       >
         <div
@@ -1258,6 +1265,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-4"
         id="slideshow-card-test-id-4"
       >
         <div

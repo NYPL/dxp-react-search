@@ -25,11 +25,6 @@ function Slideshow({ id, title, link, items, seeMore }: SlideshowProps) {
   React.useEffect(() => {
     if (windowSize) {
       setIsMobileOrTablet(windowSize <= 820);
-    }
-  }, [windowSize]);
-
-  React.useEffect(() => {
-    if (windowSize) {
       setIsLargerThanMobile(windowSize > 600);
     }
   }, [windowSize]);
