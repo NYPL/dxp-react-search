@@ -78,8 +78,8 @@ export const getStaticProps = withDrupalRouter(async function (
       }),
       initialApolloState: apolloClient.cache.extract(),
     },
-    // Set revalidate to 1 min.
-    revalidate: 60,
+    // Turn off request based revalidation.
+    revalidate: false,
   };
 });
 
