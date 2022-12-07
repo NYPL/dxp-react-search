@@ -137,7 +137,7 @@ function Location({
       <HStack>
         <Button
           id={`button-view-on-map-${id}`}
-          buttonType="link"
+          buttonType="text"
           onClick={onClickViewOnMap}
         >
           View on Map

@@ -64,7 +64,7 @@ function FilterBar({
               <div className={s.ctaButtonsContainerMobile}>
                 <Button
                   id="multiselect-button-goback"
-                  buttonType="link"
+                  buttonType="text"
                   mouseDown={false}
                   onClick={onClickGoBack}
                   // additionalStyles
@@ -101,7 +101,7 @@ function FilterBar({
                 {Object.keys(selectedItems).length > 0 && (
                   <Button
                     id="mobile-clear-all-button"
-                    buttonType="link"
+                    buttonType="text"
                     className={s.clearAllFiltersButton}
                     mouseDown={false}
                     onClick={onClearSelectedItems}

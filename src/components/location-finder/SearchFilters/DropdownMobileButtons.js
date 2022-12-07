@@ -49,7 +49,7 @@ function DropdownMobileButtons(props) {
     <div className="dropdown__content-buttons">
       <Button
         id="button-clear-all"
-        buttonType="link"
+        buttonType="text"
         mouseDown={false}
         onClick={(e) => onClearAllFilters(e)}
         // additionalStyles
