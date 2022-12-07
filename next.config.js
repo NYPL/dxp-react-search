@@ -26,19 +26,7 @@ const nextConfig = {
     return [];
   },
   webpack(config, options) {
-    const { dir, isServer } = options;
-
-    // Allows import of .gql files inside components
-    config.module.rules.push({
-      test: /\.(graphql|gql)$/,
-      include: [dir],
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: "graphql-tag/loader",
-        },
-      ],
-    });
+    const { isServer } = options;
 
     // Fixes bug in SendGridApi datasource, error: "Module not found: Can't resolve 'fs' in"
     if (!isServer) {
