@@ -5,14 +5,21 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setAutoSuggestInputValue } from "./../../../redux/actions";
 // Apollo
-import { useApolloClient } from "@apollo/client";
-import { AutoSuggestQuery as AUTO_SUGGEST_QUERY } from "./AutoSuggest.gql";
+import { gql, useApolloClient } from "@apollo/client";
 // Utils
 import filterBySearchInput from "./../../../utils/filterBySearchInput";
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
 // Components
 import { default as SharedSearchForm } from "./../../shared/SearchForm";
 import { default as SharedFilterBar } from "./../../shared/FilterBar";
+
+export const AUTO_SUGGEST_QUERY = gql`
+  query AutoSuggestQuery {
+    allAutoSuggestions {
+      name
+    }
+  }
+`;
 
 function SearchForm() {
   const router = useRouter();
@@ -34,17 +41,17 @@ function SearchForm() {
         setAutoSuggestItems(response.data.allAutoSuggestions);
       },
       (error) => {
-        //console.error(error);
+        console.error(error);
       }
     );
-  }, [autoSuggestItems]);
+  }, [autoSuggestItems, client]);
 
   // @TODO Bad idea? sync the router state to redux?
   useEffect(() => {
     if (router.query.q) {
       dispatch(setAutoSuggestInputValue(router.query.q));
     }
-  }, [router.query.q]);
+  }, [dispatch, router.query.q]);
 
   function getSuggestions(autoSuggestItems, value) {
     if (autoSuggestItems) {
