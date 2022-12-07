@@ -48,6 +48,7 @@ async function handleUrl(url) {
   );
 }
 
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   /**
    *
@@ -176,5 +177,5 @@ export default {
     }
 
     return handleUrl(url);
-  }
+  },
 };

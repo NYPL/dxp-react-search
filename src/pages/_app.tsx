@@ -24,9 +24,11 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   // Handle errors.
+  // @ts-ignore
   if (pageProps.errorCode) {
     return (
       <AppLayout>
+        {/* @ts-ignore */}
         <Error statusCode={pageProps.errorCode} />
       </AppLayout>
     );

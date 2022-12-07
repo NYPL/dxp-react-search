@@ -1,7 +1,6 @@
 import * as React from "react";
 // Next
 import { useRouter } from "next/router";
-import Error from "./../_error";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 import withApollo from "./../../apollo/withApollo";
@@ -15,7 +14,6 @@ import useDecoupledRouter from "./../../hooks/useDecoupledRouter";
 // HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
-  // NextDataFetchingFunctionContext,
 } from "../../apollo/with-drupal-router";
 
 const BLOG_POST_QUERY = gql`
@@ -41,12 +39,6 @@ function BlogPostPage() {
       }),
     },
   });
-
-  // If uuid returns null from useDecoupledRouter, there was no router
-  // path match in Drupal, so we return 404 status error component.
-  if (!data && uuid === null) {
-    return <Error statusCode={404} />;
-  }
 
   // Error state.
   if (error) {

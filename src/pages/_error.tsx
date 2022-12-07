@@ -61,7 +61,7 @@ function Error({ statusCode }: ErrorProps) {
         },
       ]}
       breadcrumbsColor="whatsOn"
-      wrapperClass="nypl--404"
+      wrapperClass={`scout-error__${statusCode}`}
       contentHeader={null}
       contentPrimary={
         <Flex direction={{ sm: "column", md: "row" }} alignItems="center">
@@ -113,12 +113,12 @@ Error.getInitialProps = async ({ res, err }: ErrorContext) => {
     statusCode = (err as NextError).statusCode;
   }
 
-  // Set the response headers to the correct status code.
   if (res) {
+    // Set the response headers to the correct status code.
     res.statusCode = statusCode;
+    // Pass the statusCode prop to the component.
+    return { statusCode: statusCode };
   }
-  // Pass the statusCode prop to the component.
-  return { statusCode: statusCode };
 };
 
 export default Error;
