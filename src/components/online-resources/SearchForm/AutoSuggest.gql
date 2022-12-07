@@ -1,5 +1,0 @@
-query AutoSuggestQuery {
-  allAutoSuggestions {
-    name
-  }
-}

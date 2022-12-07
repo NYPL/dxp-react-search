@@ -3,10 +3,9 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 // Apollo
-import { useQuery } from "@apollo/client";
-// @TODO move this to a shared query?
-import { AutoSuggestQuery as AUTO_SUGGEST_QUERY } from "./../SearchForm/AutoSuggest.gql";
+import { gql, useQuery } from "@apollo/client";
 // Components
+import { AUTO_SUGGEST_QUERY } from "./../SearchForm/SearchForm";
 import { Heading } from "@nypl/design-system-react-components";
 import s from "./AlphabetNav.module.css";
 // Utils
