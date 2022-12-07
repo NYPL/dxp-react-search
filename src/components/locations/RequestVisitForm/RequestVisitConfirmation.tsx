@@ -2,7 +2,7 @@ import * as React from "react";
 // Apollo
 import { useQuery } from "@apollo/client";
 // @ts-ignore
-import { LocationByInternalSlugQuery as LOCATION_BY_INTERNAL_SLUG } from "./../../../apollo/client/queries/LocationByInternalSlug.gql";
+import { LOCATION_BY_INTERNAL_SLUG } from "./RequestVisitForm";
 // Next
 import { useRouter } from "next/router";
 // Components
