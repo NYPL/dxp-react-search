@@ -8,6 +8,7 @@ import Error from "../../../pages/_error";
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 import Donation from "../Donation";
 import Components from "./../../shared/ContentComponents/getReactComponent";
+import EmailSubscription from "../../shared/EmailSubscription";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
@@ -204,6 +205,15 @@ export default function SectionFrontPage({
       }
       contentPrimary={
         <Box>
+          <EmailSubscription
+            id={`email-subscription-${sectionFront.id}`}
+            title="Sign Up for Our Newsletter"
+            description="Have the latest research news from NYPL delivered to your inbox. Stay up to date with information about our research collections, services, and programs."
+            formPlaceholder="Your email address"
+            formHelperText="* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+            headingColor="ui.white"
+            formBaseUrl="http://google.com"
+          />
           {sectionFront.mainContent &&
             sectionFront.mainContent.map(
               (contentComponent: { [key: string]: any }) =>
