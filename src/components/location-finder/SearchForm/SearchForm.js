@@ -9,8 +9,7 @@ import {
   setAutoSuggestInputValue,
 } from "./../../../redux/actions";
 // Apollo
-import { useApolloClient } from "@apollo/client";
-import { LocationsQuery as LOCATIONS_QUERY } from "./SearchForm.gql";
+import { gql, useApolloClient } from "@apollo/client";
 // Utils
 import filterBySearchInput from "./../../../utils/filterBySearchInput";
 // Geocode
@@ -24,6 +23,22 @@ Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 import { Box, Checkbox } from "@nypl/design-system-react-components";
 import { default as SharedSearchForm } from "./../../shared/SearchForm";
 import SearchFilters from "./../SearchFilters";
+
+export const LOCATIONS_QUERY = gql`
+  query LocationsQuery {
+    refineryAllLocations {
+      locations {
+        id
+        name
+        address_line1
+        address_line2
+        locality
+        administrative_area
+        postal_code
+      }
+    }
+  }
+`;
 
 function SearchForm() {
   // Local state
