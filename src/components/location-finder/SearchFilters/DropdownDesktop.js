@@ -106,7 +106,7 @@ function DropdownDesktop(props) {
       <div className="dropdown__content-buttons" id={vocab.id}>
         <Button
           id={`button-clear-${vocab.id}`}
-          buttonType="link"
+          buttonType="text"
           mouseDown={false}
           type="button"
           onClick={(e) => onClickClear(vocab.id, e)}

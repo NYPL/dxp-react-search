@@ -243,7 +243,7 @@ function MultiSelect({
           {isOpen && showCtaButtons && (
             <div className={s.ctaButtonsContainer}>
               <Button
-                buttonType="link"
+                buttonType="text"
                 id={`multiselect-button-clear-${id}`}
                 className={s.ctaButtonsDesktopClear}
                 mouseDown={false}
