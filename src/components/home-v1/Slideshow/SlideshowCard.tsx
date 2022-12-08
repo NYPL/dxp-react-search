@@ -37,6 +37,7 @@ function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
   return (
     <Grid
       id={`slideshow-card-${item.id}`}
+      data-testid={`slideshow-card-${item.id}`}
       templateRows={{ base: "1fr", md: "min-content" }}
       templateColumns={{ base: "5fr 9fr", md: "1fr" }}
       sx={styles}

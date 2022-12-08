@@ -31,12 +31,14 @@ function SlideshowContainer({
       prevSlide();
     }
   };
-  // @TODO Swap useWindowSize for useNYPLBreakpoints
+
   const onTouchSlideChange = (e: React.PointerEvent) => {
     if (isMobileOrTablet) {
+      // Set the value to 4 to delay slide change
       if (e.movementX > 4) {
         prevSlide();
       }
+      // Set the value to -4 to delay slide change
       if (e.movementX < -4) {
         nextSlide();
       }
