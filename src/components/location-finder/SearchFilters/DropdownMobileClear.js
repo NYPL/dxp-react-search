@@ -34,7 +34,7 @@ function DropdownMobileClear() {
       {Object.keys(checkedTerms).length > 0 && (
         <Button
           id="mobile-clear-all-button"
-          buttonType="link"
+          buttonType="text"
           iconName={null}
           iconPosition={null}
           mouseDown={false}

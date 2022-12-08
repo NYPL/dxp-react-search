@@ -43,8 +43,6 @@ function Card({
       {...(image && {
         imageProps: {
           component: image,
-          // Workaround to suppress console.warn message for component and aspect ratio.
-          aspectRatio: "square",
         },
       })}
       isCentered={isCentered}

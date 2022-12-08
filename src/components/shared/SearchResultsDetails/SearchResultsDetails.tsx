@@ -34,7 +34,7 @@ function SearchResultsDetails({
       {message}
       <Button
         id="search-results-details__button"
-        buttonType="link"
+        buttonType="text"
         type="submit"
         mouseDown={false}
         onClick={onClick}
