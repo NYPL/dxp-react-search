@@ -49,13 +49,14 @@ function DropdownMobileButtons(props) {
     <div className="dropdown__content-buttons">
       <Button
         id="button-clear-all"
-        buttonType="link"
+        buttonType="text"
         mouseDown={false}
         onClick={(e) => onClearAllFilters(e)}
         // additionalStyles
         sx={{
           display: "block",
           width: "fit-content",
+          paddingLeft: "0px",
         }}
       >
         <Icon name="arrow" align="left" iconRotation="rotate90" size="small" />
