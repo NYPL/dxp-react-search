@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Copy pre-built .next to the shared cache location during deployment.
-cp -Rpf /tmp/.next /app/.next
+cp -Rpf /tmp/.next /app
 # Remove temporary files, if necessary
 # rm -rf /tmp/.next
 # Start the app
