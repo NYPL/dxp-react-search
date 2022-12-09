@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Copy pre-built .next to the shared cache location during deployment.
+cp -Rpf /tmp/.next /app/.next
+# Remove temporary files, if necessary
+# rm -rf /tmp/.next
+# Start the app
+npm start
