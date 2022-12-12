@@ -2,6 +2,18 @@
 
 ---
 
+### v0.9.2 [?] ?
+
+---
+
+- Update Global Header for Vega Change: [#350](https://github.com/NYPL/dxp-react-search/pull/350)
+- Remove .gql files: [#360](https://github.com/NYPL/dxp-react-search/pull/360)
+- Update Scout to Use DS AlphabetFilter Component and DS 1.2: [#345](https://github.com/NYPL/dxp-react-search/pull/345)
+- Setup Additional AWS environments: [#356](https://github.com/NYPL/dxp-react-search/pull/356)
+- Add new maintenace page and improved error handling: [#343](https://github.com/NYPL/dxp-react-search/pull/343)
+
+---
+
 ### v0.9.1 [2022-11-07] Home page events bug fix
 
 ---
