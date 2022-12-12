@@ -6,12 +6,18 @@ import "./../styles/main.scss";
 import AppLayout from "./../components/shared/layouts/AppLayout";
 import Error from "./_error";
 
-export default function ScoutApp({ Component, pageProps }: AppProps) {
+interface ScoutAppProps {
+  errorCode?: number;
+}
+
+export default function ScoutApp({
+  Component,
+  pageProps,
+}: AppProps<ScoutAppProps>) {
   const router = useRouter();
   // When next js routes change, send data to GA.
   useEffect(() => {
-    // @ts-ignore
-    const handleRouteChange = (url) => {
+    const handleRouteChange = (url: string) => {
       // @ts-ignore
       window.gtag("config", NEXT_PUBLIC_GA_TRACKING_ID, {
         page_path: url,
@@ -24,11 +30,9 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   // Handle errors.
-  // @ts-ignore
   if (pageProps.errorCode) {
     return (
       <AppLayout>
-        {/* @ts-ignore */}
         <Error statusCode={pageProps.errorCode} />
       </AppLayout>
     );
@@ -36,7 +40,6 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
 
   return (
     <AppLayout>
-      {/* @ts-ignore */}
       <Component {...pageProps} />
     </AppLayout>
   );
