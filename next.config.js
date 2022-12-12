@@ -1,5 +1,4 @@
 const { ASSET_PREFIX } = process.env;
-const withPlugins = require("next-compose-plugins");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -69,4 +68,9 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([[withBundleAnalyzer]], nextConfig);
+// Replaces next-compose-plugins which is not compatiable with Next 12.3+.
+// @see https://github.com/cyrilwanner/next-compose-plugins/issues/59
+module.exports = () => {
+  const plugins = [withBundleAnalyzer];
+  return plugins.reduce((config, plugin) => plugin(config), nextConfig);
+};
