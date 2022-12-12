@@ -40,27 +40,13 @@ export default function Card({
   isCentered,
   isBordered = false,
 }: CardProps) {
-  let imagePropsFinal = {};
-
-  if (layout === "row") {
-    imagePropsFinal = {
-      // Workaround to suppress console.warn message for component and aspect ratio.
-      aspectRatio: "square",
-      size: "large",
-    };
-  } else {
-    imagePropsFinal = {
-      aspectRatio: "square",
-    };
-  }
-
   return (
     <DsCard
       id={id}
       {...(image && {
         imageProps: {
           component: image,
-          ...imagePropsFinal,
+          size: layout === "row" ? "large" : undefined,
         },
       })}
       isCentered={isCentered}

@@ -137,8 +137,14 @@ function Location({
       <HStack>
         <Button
           id={`button-view-on-map-${id}`}
-          buttonType="link"
+          buttonType="text"
+          size="large"
           onClick={onClickViewOnMap}
+          // additionalStyles
+          sx={{
+            paddingLeft: "0px",
+            paddingRight: "0px",
+          }}
         >
           View on Map
         </Button>
