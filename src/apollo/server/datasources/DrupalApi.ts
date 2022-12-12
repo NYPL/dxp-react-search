@@ -1,5 +1,4 @@
-import { /*HTTPCache,*/ RESTDataSource } from "@apollo/datasource-rest";
-// import { toApolloError } from "apollo-server-errors";
+import { RESTDataSource } from "@apollo/datasource-rest";
 import toApolloError from "./../../../utils/to-apollo-error";
 const { DRUPAL_API } = process.env;
 
@@ -7,23 +6,28 @@ class DrupalApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = DRUPAL_API;
-    // this.initialize({} as DataSourceConfig<any>);
-    // Disables cache @see https://github.com/apollographql/datasource-rest#memoizegetrequests
-    // @see https://github.com/apollographql/apollo-server/issues/1562
-    // Defaults to true
-    //this.memoizeGetRequests = false;
-  }
 
-  /**
-   * Fixes 304 not modified issue when Drupal's page cache is enabled.
-   * This essentially disables the RESTDataSource cacheing of remote
-   * api endpoints responses, which is not really necessary anyway, since
-   * Apollo client cache (in memory) is already doing the heavy lifting.
-   */
-  // initialize({ context }) {
-  //   this.context = context;
-  //   this.httpCache = new HTTPCache();
-  // }
+    /**
+     * Disables all GET request caching.
+     *
+     * Fixes 304 not modified issue when Drupal's page cache is enabled.
+     * This essentially disables the RESTDataSource cacheing of remote
+     * api endpoints responses, which is not really necessary anyway, since
+     * Apollo client cache (in memory) is already doing the heavy lifting.
+     *
+     * This is the Apollo datasource-rest v4 version of doing this in v3:
+     *
+     * initialize({ context }) {
+     *   this.context = context;
+     *   this.httpCache = new HTTPCache();
+     * }
+     *
+     * Original github thread on this @see https://github.com/apollographql/apollo-server/issues/1562
+     *
+     * This might be changing in a future version, @see https://github.com/apollographql/datasource-rest/pull/100
+     */
+    this.memoizeGetRequests = false;
+  }
 
   // D8 api is a json api, which datasource-rest does not handle by default.
   parseBody(response: any) {
