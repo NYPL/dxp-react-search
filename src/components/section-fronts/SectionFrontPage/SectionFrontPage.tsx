@@ -210,7 +210,8 @@ export default function SectionFrontPage({
             formPlaceholder="Your email address"
             formHelperText="* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
             headingColor="ui.white"
-            formBaseUrl="http://google.com"
+            formBaseUrl="/api/salesforce?email"
+            subscriptionListId={5094732}
           />
           {sectionFront.mainContent &&
             sectionFront.mainContent.map(
