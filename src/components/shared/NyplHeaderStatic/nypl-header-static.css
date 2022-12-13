@@ -146,7 +146,6 @@
 [class^="nypl-icon-"],
 [class*=" nypl-icon-"] {
   font-family: "nypl-moon";
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -3583,71 +3582,28 @@ Copyright (c) 2015 Daniel Eden
   padding: 0;
   margin: 0;
 }
-.header-mobile-searchForm-desktopControls {
-  color: white;
-  font-size: 20px;
-  margin: 0 40px 20px;
-}
-.header-mobile-searchForm-desktopControls > div {
-  margin-bottom: 12px;
-}
-@media only screen and (min-width: 600px) {
-  .header-mobile-searchForm-desktopControls > div {
-    display: inline-block;
-    margin-right: 20px;
-  }
-}
-.header-mobile-searchForm-desktopControls input {
-  margin-right: 8px;
-}
-@media only screen and (min-width: 600px) {
-  .header-mobile-searchForm-desktopControls {
-    margin: 0 20px 20px;
-  }
-}
 .header-mobile-searchForm-inputBox {
   margin: 20px 15px;
   display: block;
   overflow: hidden;
   position: relative;
 }
-.header-mobile-searchForm-inputBox label {
-  color: #fff;
-  display: inline-block;
-  font-size: 22px;
-  margin: 0 0 10px 0;
-  padding: 0 !important;
-  line-height: normal;
-}
-.header-mobile-searchForm-inputBox > div {
-  display: flex;
-  gap: 10px;
-}
-.header-mobile-searchForm-inputBox > div > input {
+.header-mobile-searchForm-inputBox > input {
+  width: 100%;
   height: 66px;
   padding: 0 0 0 25px;
-  flex: 1;
   font-size: 18px;
   font-style: normal;
   line-height: normal !important;
   font-family: "system-ui", "Segoe UI", Tahoma, "Helvetica", "arial";
   font-weight: 300;
 }
-.header-mobile-searchForm-inputBox > div > input::placeholder {
-  font-size: 17px;
-}
-.header-mobile-searchForm-inputBox button {
-  -webkit-border-radius: 50% !important;
-  border-radius: 50% !important;
-  background-clip: padding-box;
-  background-color: transparent;
-  background: transparent;
-  border: 2px solid #fff;
-  height: 72px;
-  line-height: normal;
-  padding: 18px;
-  margin: 0 10px 0 0;
-  width: 72px;
+.header-mobile-searchForm-inputBox svg {
+  fill: #1da1d4;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  top: 24px;
 }
 .header-mobile-searchForm-mobileControls {
   border-top-style: solid;
@@ -4492,7 +4448,7 @@ Copyright (c) 2015 Daniel Eden
 .header-mobile-navMenu-desktopSearchBox .desktopSearch-form-inputBox label {
   color: #fff;
   display: inline-block;
-  font-size: 22px;
+  font-size: 18px;
   margin: 0 0 10px 0;
   padding: 0 !important;
   line-height: normal;
@@ -4543,11 +4499,6 @@ Copyright (c) 2015 Daniel Eden
 }
 .header-mobile-navMenu-desktopSearchBox
   .desktopSearch-form-desktopControls
-  > div {
-  display: inline-block;
-}
-.header-mobile-navMenu-desktopSearchBox
-  .desktopSearch-form-desktopControls
   label {
   position: relative;
   display: inline-block;
@@ -4558,8 +4509,48 @@ Copyright (c) 2015 Daniel Eden
 }
 .header-mobile-navMenu-desktopSearchBox
   .desktopSearch-form-desktopControls
+  label:before {
+  background-color: #ffffff;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-clip: padding-box;
+  content: "";
+  display: inline-block;
+  height: 10px;
+  left: 0;
+  margin-right: 10px;
+  position: relative;
+  width: 10px;
+  top: 1px;
+  text-align: center;
+}
+.header-mobile-navMenu-desktopSearchBox
+  .desktopSearch-form-desktopControls
   input[type="radio"] {
-  margin-right: 15px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.header-mobile-navMenu-desktopSearchBox
+  .desktopSearch-form-desktopControls
+  input[type="radio"]:checked
+  + label:before {
+  content: "\2022";
+  color: #000000;
+  font-size: 18px;
+  line-height: 11px;
+}
+.header-mobile-navMenu-desktopSearchBox
+  .desktopSearch-form-desktopControls
+  input[type="radio"]:focus
+  + label {
+  box-shadow: 1px 1px 1px 1px #135772;
+  -webkit-outline-color: #135772;
+  -moz-outline-color: #135772;
+  -ms-outline-color: #135772;
+  -o-outline-color: #135772;
+  outline-color: #135772;
+  outline-style: solid;
+  outline-width: 0.1875em;
 }
 .header-mobile-navMenu-desktopSearchBox
   .desktopSearch-form-desktopControls
@@ -4841,7 +4832,7 @@ Copyright (c) 2015 Daniel Eden
 .header-navMenu-desktopSearchBox .desktopSearch-form-inputBox label {
   color: #fff;
   display: inline-block;
-  font-size: 22px;
+  font-size: 18px;
   margin: 0 0 10px 0;
   padding: 0 !important;
   line-height: normal;
@@ -4886,9 +4877,6 @@ Copyright (c) 2015 Daniel Eden
     margin-left: 140px;
   }
 }
-.header-navMenu-desktopSearchBox .desktopSearch-form-desktopControls > div {
-  display: inline-block;
-}
 .header-navMenu-desktopSearchBox .desktopSearch-form-desktopControls label {
   position: relative;
   display: inline-block;
@@ -4899,8 +4887,48 @@ Copyright (c) 2015 Daniel Eden
 }
 .header-navMenu-desktopSearchBox
   .desktopSearch-form-desktopControls
+  label:before {
+  background-color: #ffffff;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-clip: padding-box;
+  content: "";
+  display: inline-block;
+  height: 10px;
+  left: 0;
+  margin-right: 10px;
+  position: relative;
+  width: 10px;
+  top: 1px;
+  text-align: center;
+}
+.header-navMenu-desktopSearchBox
+  .desktopSearch-form-desktopControls
   input[type="radio"] {
-  margin-right: 15px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.header-navMenu-desktopSearchBox
+  .desktopSearch-form-desktopControls
+  input[type="radio"]:checked
+  + label:before {
+  content: "\2022";
+  color: #000000;
+  font-size: 18px;
+  line-height: 11px;
+}
+.header-navMenu-desktopSearchBox
+  .desktopSearch-form-desktopControls
+  input[type="radio"]:focus
+  + label {
+  box-shadow: 1px 1px 1px 1px #135772;
+  -webkit-outline-color: #135772;
+  -moz-outline-color: #135772;
+  -ms-outline-color: #135772;
+  -o-outline-color: #135772;
+  outline-color: #135772;
+  outline-style: solid;
+  outline-width: 0.1875em;
 }
 .header-navMenu-desktopSearchBox
   .desktopSearch-form-desktopControls
