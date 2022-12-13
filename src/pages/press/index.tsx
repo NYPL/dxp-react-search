@@ -1,11 +1,8 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+// import { GetServerSidePropsContext } from "next";
 // Apollo
 import withApollo from "./../../apollo/withApollo";
-import {
-  initializeApollo,
-  ApolloPageProps,
-} from "./../../apollo/withApollo/apollo";
+import { initializeApollo } from "./../../apollo/withApollo/apollo";
 // Components
 import { Heading, Box } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/press-releases/layouts/PageContainer";
@@ -51,9 +48,7 @@ function PressMainPage() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<
-  ApolloPageProps
-> = async () => {
+export const getServerSideProps = async () => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({

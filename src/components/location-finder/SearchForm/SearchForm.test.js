@@ -1,14 +1,14 @@
-import { MockedProvider } from '@apollo/client/testing';
+import { MockedProvider } from "@apollo/client/testing";
 import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
-import { render } from './../../../../testHelper/customRtlRender';
-import '@testing-library/jest-dom/extend-expect';
-import { LocationsQuery as LOCATIONS_QUERY } from './SearchForm.gql';
+import { render } from "./../../../../testHelper/customRtlRender";
+import "@testing-library/jest-dom/extend-expect";
+import { LOCATIONS_QUERY } from "./SearchForm";
 // Mock data
-import allLocations from './../../../../testHelper/__mocks/allLocations';
+import allLocations from "./../../../../testHelper/__mocks/allLocations";
 // Component
-import SearchForm from './SearchForm';
+import SearchForm from "./SearchForm";
 // Axe
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe, toHaveNoViolations } from "jest-axe";
 expect.extend(toHaveNoViolations);
 
 const mocks = [
@@ -24,14 +24,14 @@ const mocks = [
         pageNumber: 1,
       },
     },
-    result: allLocations
+    result: allLocations,
   },
 ];
 
 afterEach(cleanup);
 
-describe('Search Form', () => {
-  it('renders form with input, submit button, and open now checkbox', async () => {
+describe("Search Form", () => {
+  it("renders form with input, submit button, and open now checkbox", async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchForm />
@@ -40,7 +40,7 @@ describe('Search Form', () => {
 
     // Wait for content
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
-    
+
     // Search input
     const searchInput = container.querySelector('input[name="search"]');
     expect(searchInput).toBeInTheDocument();
@@ -52,10 +52,10 @@ describe('Search Form', () => {
     // Open now checkbox
     const openNowCheckbox = container.querySelector('input[name="isOpenNow"]');
     expect(openNowCheckbox).toBeInTheDocument();
-    expect(screen.getByLabelText('Open now')).toBeInTheDocument();
+    expect(screen.getByLabelText("Open now")).toBeInTheDocument();
   });
-   
-  it('open now checkbox can be toggled checked/unchecked', async () => {
+
+  it("open now checkbox can be toggled checked/unchecked", async () => {
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SearchForm />

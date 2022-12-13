@@ -190,7 +190,7 @@ export const typeDefs = gql`
     type: String!
     title: String
     description: String
-    formBaseUrl: String
+    catalogType: String
     formPlaceholder: String
     colorway: Colorway
   }
