@@ -2,7 +2,7 @@
 
 ---
 
-### v0.9.2 [?] ?
+### v0.9.2 - General Maintenance & Improvements
 
 ---
 
@@ -11,6 +11,7 @@
 - Update Scout to Use DS AlphabetFilter Component and DS 1.2: [#345](https://github.com/NYPL/dxp-react-search/pull/345)
 - Setup Additional AWS environments: [#356](https://github.com/NYPL/dxp-react-search/pull/356)
 - Add new maintenace page and improved error handling: [#343](https://github.com/NYPL/dxp-react-search/pull/343)
+- Revert Global Header for Vega Change: [#368](https://github.com/NYPL/dxp-react-search/pull/368)
 
 ---
 
