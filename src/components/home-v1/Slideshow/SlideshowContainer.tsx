@@ -32,17 +32,17 @@ function SlideshowContainer({
     }
   };
 
-  const onTouchSlideChange = (e: React.PointerEvent) => {
-    if (isMobileOrTablet) {
-      // Set the value to 4 to delay slide change
-      if (e.movementX > 4) {
+  let prevScreenX: number;
+  const handleTouchSlideChange = (e: React.PointerEvent) => {
+    if (isMobileOrTablet && prevScreenX) {
+      if (e.screenX - prevScreenX > 4) {
         prevSlide();
       }
-      // Set the value to -4 to delay slide change
-      if (e.movementX < -4) {
+      if (e.screenX - prevScreenX < -4) {
         nextSlide();
       }
     }
+    prevScreenX = e.screenX;
   };
 
   return (
@@ -65,7 +65,7 @@ function SlideshowContainer({
                 key={item.id}
                 h="full"
                 onFocus={() => changeSlide(i)}
-                onPointerMove={(e) => onTouchSlideChange(e)}
+                onPointerMove={(e) => handleTouchSlideChange(e)}
               >
                 <SlideshowCard
                   item={item}
