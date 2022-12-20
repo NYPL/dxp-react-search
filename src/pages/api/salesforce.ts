@@ -50,8 +50,6 @@ export default async function handler(
           ],
         });
 
-        console.log(soapCreate.Results[0].Object);
-
         response.status(200).json({
           statusCode: "SUCCESS",
           statusMessage: soapCreate.Results[0].StatusMessage,
@@ -65,6 +63,8 @@ export default async function handler(
           const soapUpdate = await sfmc.soap.update("Subscriber", {
             SubscriberKey: request.query.email,
             EmailAddress: request.query.email,
+            // Make sure that if a subscriber was previously "Unsubscribed" the account gets activated
+            Status: "Active",
             Attributes: [
               {
                 Name: "Source Code",
@@ -79,8 +79,6 @@ export default async function handler(
               },
             ],
           });
-
-          console.log(soapUpdate.Results[0].Object);
 
           response.status(200).json({
             statusCode: "SUCCESS",
