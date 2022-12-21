@@ -13,7 +13,11 @@ export const typeDefs = gql`
 
   union SectionFrontFeaturedContent = Donation
 
-  union SectionFrontMainContent = CardGrid | Donation | CatalogSearch
+  union SectionFrontMainContent =
+      CardGrid
+    | Donation
+    | CatalogSearch
+    | EmailSubscription
 
   type SectionFrontConnection {
     items: [SectionFront]

@@ -18,23 +18,28 @@ type ApiResponse = {
 };
 interface EmailSubscriptionProps {
   id?: string;
-  title?: string;
+  heading?: string;
   description?: string;
   headingColor: string;
+  bgColor?: string;
   formBaseUrl?: string;
   formHelperText?: string;
   formPlaceholder?: string;
-  subscriptionListId?: number;
+  salesforceListId?: number;
 }
 const EmailSubscription = ({
   id,
-  title,
+  heading,
   description,
-  headingColor,
-  formBaseUrl,
-  formHelperText,
+  headingColor = "ui.white",
+  // @TODO bg will have to change dynamically
+  bgColor = "section.research.primary",
+  // @TODO should this even be a prop? I imagine this will be the same for all newsletters?
+  formBaseUrl = "/api/salesforce?email",
+  // @TODO formHelperText might be hardcoded for all Subscriptions
+  formHelperText = "* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
   formPlaceholder,
-  subscriptionListId,
+  salesforceListId,
 }: EmailSubscriptionProps): JSX.Element => {
   const [input, setInput] = React.useState("");
   const [apiResponse, setApiResponse] = React.useState<ApiResponse | null>(
@@ -44,7 +49,7 @@ const EmailSubscription = ({
     e.preventDefault();
     if (formBaseUrl !== undefined) {
       // API endpoint where we send form data.
-      const endpoint = `${formBaseUrl}=${e.target.email.value}&list_id=${subscriptionListId}`;
+      const endpoint = `${formBaseUrl}=${e.target.email.value}&list_id=${salesforceListId}`;
 
       // Form the request for sending data to the server.
       const options = {
@@ -81,7 +86,7 @@ const EmailSubscription = ({
 
   return (
     <Box
-      id={id}
+      id={`email-subscription-${id}`}
       display="flex"
       flexDir="column"
       justifyContent="center"
@@ -89,12 +94,12 @@ const EmailSubscription = ({
       width="full"
       // height="360px"
       padding="l"
-      bgColor="section.research.primary"
+      bgColor={bgColor}
       color={headingColor}
       textAlign="center"
       marginY="m"
     >
-      <Heading text={title} w={{ base: "90%", md: "70%" }} />
+      <Heading text={heading} w={{ base: "90%", md: "70%" }} />
       {apiResponse?.statusCode ? (
         getApiResponse(apiResponse)
       ) : (
@@ -116,7 +121,7 @@ const EmailSubscription = ({
                 <TextInput
                   id={`email-input-${id}`}
                   labelText="Email subscription"
-                  showHelperInvalidText={false}
+                  // showHelperInvalidText={false}
                   value={input}
                   type="email"
                   name="email"

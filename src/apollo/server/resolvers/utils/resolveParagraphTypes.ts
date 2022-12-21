@@ -68,6 +68,9 @@ export default function resolveParagraphTypes(
       case "link_card_list":
         resolvedObjectType = "CardGrid";
         break;
+      case "email_subscription":
+        resolvedObjectType = "EmailSubscription";
+        break;
     }
   }
 

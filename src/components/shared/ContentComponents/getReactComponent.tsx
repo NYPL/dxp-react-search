@@ -10,6 +10,7 @@ import ImageComponent from "./ImageComponent";
 import CardList from "./CardList";
 import CardGrid from "./../CardGrid";
 import CatalogSearch from "./CatalogSearch";
+import EmailSubscription from "../EmailSubscription";
 
 // @TODO add a type for use in consuming components.
 // @SEE https://stackoverflow.com/questions/12787781/type-definition-in-object-literal-in-typescript
@@ -29,6 +30,7 @@ const Components: any = {
   CardList: CardList,
   CardGrid: CardGrid,
   CatalogSearch: CatalogSearch,
+  EmailSubscription: EmailSubscription,
 };
 
 export interface ContentComponentObject {

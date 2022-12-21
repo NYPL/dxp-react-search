@@ -96,6 +96,13 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
+        item.type === "paragraph--email_subscription" &&
+        typesInQuery.includes("EmailSubscription")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
         item.type === "paragraph--catalog_search" &&
         typesInQuery.includes("CatalogSearch")
       ) {
@@ -404,6 +411,16 @@ export default function resolveDrupalParagraphs(
           formBaseUrl: item.field_ls_link.url,
           defaultAmount: item.field_fs_donation_default_amount,
           otherLevelId: item.field_ts_donation_other_level_id,
+        };
+        break;
+      case "paragraph--email_subscription":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          formPlaceholder: item.field_ts_placeholder,
+          salesforceListId: item.field_ts_salesforce_list_id,
         };
         break;
       case "paragraph--catalog_search":
