@@ -32,8 +32,8 @@ const EmailSubscription = ({
   heading,
   description,
   headingColor = "ui.white",
-  // @TODO bg will have to change dynamically
-  bgColor = "section.research.primary",
+  // @TODO bg will have to change dynamically, "section.research.primary" is used on figma
+  bgColor = "brand.primary",
   // @TODO should this even be a prop? I imagine this will be the same for all newsletters?
   formBaseUrl = "/api/salesforce?email",
   // @TODO formHelperText might be hardcoded for all Subscriptions
@@ -121,11 +121,11 @@ const EmailSubscription = ({
                 <TextInput
                   id={`email-input-${id}`}
                   labelText="Email subscription"
-                  // showHelperInvalidText={false}
                   value={input}
                   type="email"
                   name="email"
                   color="black"
+                  sx={{ div: { color: "ui.white" } }}
                   placeholder={formPlaceholder}
                   showLabel={false}
                   onChange={(e) => {
