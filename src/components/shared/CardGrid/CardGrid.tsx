@@ -10,7 +10,7 @@ export type CardGridLayoutTypes = "row" | "column" | "column_4" | "column_2_4";
 export interface CardGridCommonProps {
   id: string;
   type: string;
-  title: string;
+  title?: string;
   headingColor?: string;
   description?: string;
   link?: string;

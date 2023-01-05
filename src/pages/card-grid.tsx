@@ -119,12 +119,11 @@ export default function CardGridPage() {
         },
       ]}
       wrapperClass="nypl--card-grid-example"
-      // contentHeader={<h1>Card Grid Page</h1>}
       contentPrimary={
         <>
           <Box mb="xl">
             <Heading level="one">Setting: "Row"</Heading>
-            <p>This layout is the same regardless of card number.</p>
+            <p>This layout is the same regardless of the number of cards.</p>
             <CardGrid
               id="card-setting-row"
               type="card-setting-row"
@@ -279,18 +278,40 @@ export default function CardGridPage() {
             />
           </Box>
 
-          {/* 
-          {mockCardGrid.map((cardGrid: any) => {
-            return (
-              <CardGrid
-                id={cardGrid.id}
-                type={cardGrid.type}
-                title={cardGrid.title}
-                layout={cardGrid.layout}
-                items={cardGrid.items}
-              />
-            );
-          })} */}
+          <Box mb="xl">
+            <Heading level="one">Alternative Layouts</Heading>
+            <p>
+              These are combinations of 2 Card Grids that present a unified
+              layout. The 2nd card grid doesn't have a heading/title.
+            </p>
+            <CardGrid
+              id="card-setting-alt-1"
+              type="card-setting-alt-1"
+              title="Row: 1 card + Column - 4: 4 cards"
+              layout="row"
+              items={cardGridItems.slice(0, 1)}
+            />
+            <CardGrid
+              id="card-setting-alt-1"
+              type="card-setting-alt-1"
+              layout="column_4"
+              items={cardGridItems.slice(0, 4)}
+            />
+
+            <CardGrid
+              id="card-setting-alt-2"
+              type="card-setting-alt-2"
+              title="Row: 1 card + Column: 3 cards"
+              layout="row"
+              items={cardGridItems.slice(0, 1)}
+            />
+            <CardGrid
+              id="card-setting-alt-2"
+              type="card-setting-alt-2"
+              layout="column"
+              items={cardGridItems.slice(0, 3)}
+            />
+          </Box>
         </>
       }
     />
