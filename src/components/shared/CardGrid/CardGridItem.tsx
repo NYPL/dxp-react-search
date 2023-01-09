@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Box } from "@nypl/design-system-react-components";
 import Image from "./../../shared/Image";
+import { ImageType } from "../Image/ImageTypes";
 import Card from "./Card";
-import { CardItem } from "./CardGrid";
 
 export interface CardGridItemProps {
   item: CardItem;
@@ -10,6 +10,14 @@ export interface CardGridItemProps {
   gridColumn?: string;
   isBordered?: boolean;
   isCentered?: boolean;
+}
+
+export interface CardItem {
+  id: string;
+  title: string;
+  description: string;
+  image?: ImageType;
+  link: string;
 }
 
 export default function CardGridItem({

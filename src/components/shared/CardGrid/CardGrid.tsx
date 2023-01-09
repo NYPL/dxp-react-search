@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Box, Grid } from "@nypl/design-system-react-components";
-import { ImageType } from "../Image/ImageTypes";
 import CardGridHeader from "./CardGridHeader";
-import CardGridItem from "./CardGridItem";
+import CardGridItem, { CardItem } from "./CardGridItem";
 
 export type CardGridLayoutTypes =
   | "row"
@@ -35,14 +34,6 @@ type CardGridConditionalProps =
     };
 
 type CardGridProps = CardGridCommonProps & CardGridConditionalProps;
-
-export interface CardItem {
-  id: string;
-  title: string;
-  description: string;
-  image?: ImageType;
-  link: string;
-}
 
 export default function CardGrid({
   id,
@@ -205,12 +196,12 @@ export default function CardGrid({
             />
           )}
           {description && <p>{description}</p>}
-          <Grid as="ul" listStyleType="none" gap="m">
+          <Grid as="ul" listStyleType="none" gap="m" marginBottom="m">
             <CardGridItem
               item={featuredCard}
               cardLayout="row"
               isBordered={isBorderedFinal}
-              isCentered={isCenteredFinal}
+              isCentered={true}
             />
           </Grid>
           {otherItems && (
