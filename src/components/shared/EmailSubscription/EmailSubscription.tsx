@@ -7,12 +7,14 @@ import {
   FormRow,
   Heading,
   Icon,
+  IconNames,
   Text,
   TextInput,
 } from "@nypl/design-system-react-components";
+type StatusCode = "SUCCESS" | "ERROR" | "TEST_MODE";
 
 type ApiResponse = {
-  statusCode: string;
+  statusCode: StatusCode;
   formData?: Record<any, any>;
   statusMessage?: string;
 };
@@ -27,13 +29,18 @@ interface EmailSubscriptionProps {
   formPlaceholder?: string;
   salesforceListId?: number;
 }
+const iconTable: Record<StatusCode, IconNames> = {
+  SUCCESS: "check",
+  TEST_MODE: "speakerNotes",
+  ERROR: "errorOutline",
+};
 const EmailSubscription = ({
   id,
   heading,
   description,
   headingColor = "ui.white",
-  // @TODO bg will have to change dynamically, "section.research.primary" is used on figma
-  bgColor = "brand.primary",
+  // @TODO confirm with UX what the default color should be
+  bgColor = "section.research.primary",
   // @TODO should this even be a prop? I imagine this will be the same for all newsletters?
   formBaseUrl = "/api/salesforce?email",
   // @TODO formHelperText might be hardcoded for all Subscriptions
@@ -50,7 +57,6 @@ const EmailSubscription = ({
     if (formBaseUrl !== undefined) {
       // API endpoint where we send form data.
       const endpoint = `${formBaseUrl}=${e.target.email.value}&list_id=${salesforceListId}`;
-
       // Form the request for sending data to the server.
       const options = {
         method: "POST",
@@ -75,7 +81,7 @@ const EmailSubscription = ({
       <Icon
         decorative
         size="xlarge"
-        name={statusCode === "SUCCESS" ? "check" : "errorOutline"}
+        name={iconTable[statusCode]}
         color={headingColor}
       />
       <Text alignSelf="center" textAlign="center" marginStart="s" mb="0">
@@ -92,7 +98,6 @@ const EmailSubscription = ({
       justifyContent="center"
       alignItems="center"
       width="full"
-      // height="360px"
       padding="l"
       bgColor={bgColor}
       color={headingColor}

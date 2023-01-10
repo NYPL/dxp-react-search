@@ -124,6 +124,9 @@ export const SECTION_FRONT_QUERY = gql`
           description
           formPlaceholder
           salesforceListId
+          colorway {
+            primary
+          }
         }
       }
     }

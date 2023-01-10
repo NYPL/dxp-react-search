@@ -10,8 +10,11 @@ type ResolvedParagraph = {
 export default function resolveDrupalParagraphs(
   paragraphResourceObjects: JsonApiResourceObject[],
   typesInQuery: string[],
-  contentType?: string
+  apiResponse?: any
 ): ResolvedParagraph[] {
+  // Define variables used to determine the colorway prop on Section Front pages
+  const contentType = apiResponse?.type.replace("node--", "");
+  const slug = apiResponse?.path?.alias;
   // Drupal json:api will return all paragraphs for the field.
   // So we first reduce this array of objects only to those paragraphs
   // that we're requested by the gql query.
@@ -421,6 +424,7 @@ export default function resolveDrupalParagraphs(
           description: item.field_tfls_description?.processed,
           formPlaceholder: item.field_ts_placeholder,
           salesforceListId: item.field_ts_salesforce_list_id,
+          colorway: slug ? getColorway(slug) : null,
         };
         break;
       case "paragraph--catalog_search":
