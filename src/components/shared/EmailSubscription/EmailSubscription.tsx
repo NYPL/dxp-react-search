@@ -80,9 +80,11 @@ const EmailSubscription = ({
     <Box w="full">
       <Icon
         decorative
-        size="xlarge"
+        size="large"
         name={iconTable[statusCode]}
-        color={headingColor}
+        color={bgColor}
+        bgColor={headingColor}
+        borderRadius="50%"
       />
       <Text alignSelf="center" textAlign="center" marginStart="s" mb="0">
         {`${statusMessage} ${formData?.email}`}
