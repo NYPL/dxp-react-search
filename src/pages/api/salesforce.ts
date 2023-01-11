@@ -38,8 +38,7 @@ export default async function handler(
           Attributes: [
             {
               Name: "Source Code",
-              // @TODO this should be a dynamic value, and be passed as a query param?
-              Value: "Scout Test Local",
+              Value: request.query.source_code,
             },
           ],
           Lists: [
@@ -69,7 +68,7 @@ export default async function handler(
               {
                 Name: "Source Code",
                 // @TODO this should be a dynamic value, and be passed as a query param?
-                Value: "Scout Test Local",
+                Value: request.query.source_code,
               },
             ],
             Lists: [
