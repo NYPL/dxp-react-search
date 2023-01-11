@@ -11,13 +11,9 @@ import {
   Text,
   TextInput,
 } from "@nypl/design-system-react-components";
+
 type StatusCode = "SUCCESS" | "ERROR" | "TEST_MODE";
 
-type ApiResponse = {
-  statusCode: StatusCode;
-  formData?: Record<any, any>;
-  statusMessage?: string;
-};
 interface EmailSubscriptionProps {
   id?: string;
   heading?: string;
@@ -29,12 +25,14 @@ interface EmailSubscriptionProps {
   formPlaceholder?: string;
   salesforceListId?: number;
 }
+
 const iconTable: Record<StatusCode, IconNames> = {
   SUCCESS: "check",
   TEST_MODE: "speakerNotes",
   ERROR: "errorOutline",
 };
-const EmailSubscription = ({
+
+export default function EmailSubscription({
   id,
   heading,
   description,
@@ -44,14 +42,14 @@ const EmailSubscription = ({
   // @TODO should this even be a prop? I imagine this will be the same for all newsletters?
   formBaseUrl = "/api/salesforce?email",
   // @TODO formHelperText might be hardcoded for all Subscriptions
-  formHelperText = "* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+  formHelperText = "*To learn more about how the Library uses information you provide, please read our privacy and policy",
   formPlaceholder,
   salesforceListId,
-}: EmailSubscriptionProps): JSX.Element => {
+}: EmailSubscriptionProps): JSX.Element {
   const [input, setInput] = React.useState("");
-  const [apiResponse, setApiResponse] = React.useState<ApiResponse | null>(
-    null
-  );
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [status, setStatus] = React.useState<StatusCode>();
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (formBaseUrl !== undefined) {
@@ -66,31 +64,29 @@ const EmailSubscription = ({
       };
 
       // Send the form and await response.
-      const response = await fetch(endpoint, options);
-      const result = await response.json();
-      setApiResponse(result);
-      console.log("submit", result);
+      try {
+        const response = await fetch(endpoint, options);
+        const result = await response.json();
+        setStatus(result.statusCode);
+        setIsSubmitted(true);
+      } catch (error) {
+        setStatus("ERROR");
+        setIsSubmitted(true);
+      }
     }
   };
-  const getApiResponse = ({
-    statusCode,
-    statusMessage,
-    formData,
-  }: ApiResponse) => (
-    <Box w="full">
-      <Icon
-        decorative
-        size="large"
-        name={iconTable[statusCode]}
-        color={bgColor}
-        bgColor={headingColor}
-        borderRadius="50%"
-      />
-      <Text alignSelf="center" textAlign="center" marginStart="s" mb="0">
-        {`${statusMessage} ${formData?.email}`}
-      </Text>
-    </Box>
-  );
+
+  function getStatusMessage(status: StatusCode) {
+    if (status === "SUCCESS") {
+      return "Success message to go here Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt consectetur adipiscing elit";
+    }
+    if (status === "ERROR") {
+      return "Error message to go here Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt consectetur adipiscing elit";
+    }
+    if (status === "TEST_MODE") {
+      return "Test mode ....";
+    }
+  }
 
   return (
     <Box
@@ -107,8 +103,20 @@ const EmailSubscription = ({
       marginY="m"
     >
       <Heading text={heading} w={{ base: "90%", md: "70%" }} />
-      {apiResponse?.statusCode ? (
-        getApiResponse(apiResponse)
+      {isSubmitted && status ? (
+        <Box w="full">
+          <Icon
+            decorative
+            size="large"
+            name={iconTable[status]}
+            color={bgColor}
+            bgColor={headingColor}
+            borderRadius="50%"
+          />
+          <Text alignSelf="center" textAlign="center" marginStart="s" mb="0">
+            {getStatusMessage(status)}
+          </Text>
+        </Box>
       ) : (
         <>
           <Text fontSize="1" w={{ base: "100%", lg: "85%" }}>
@@ -154,6 +162,4 @@ const EmailSubscription = ({
       )}
     </Box>
   );
-};
-
-export default EmailSubscription;
+}
