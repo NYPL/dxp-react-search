@@ -19,45 +19,6 @@ function getMockImage(id: string) {
   return image;
 }
 
-// const mockCardGrid = [
-//   {
-//     id: "card-grid-1",
-//     type: "card-grid-1-type",
-//     title: "Column",
-//     layout: "column",
-//     items: [
-//       {
-//         id: "item-1",
-//         title: "Item 1",
-//         description: "Item 1 desc",
-//         link: "https://google.com",
-//         image: getMockImage("one"),
-//       },
-//       {
-//         id: "item-2",
-//         title: "Item 2",
-//         description: "Item 2 desc",
-//         link: "https://google.com",
-//         image: getMockImage("two"),
-//       },
-//       {
-//         id: "item-3",
-//         title: "Item 3",
-//         description: "Item 3 desc",
-//         link: "https://google.com",
-//         image: getMockImage("three"),
-//       },
-//       {
-//         id: "item-4",
-//         title: "Item 4",
-//         description: "Item 4 desc",
-//         link: "https://google.com",
-//         image: getMockImage("four"),
-//       },
-//     ],
-//   },
-// ];
-
 const cardGridItems = [
   {
     id: "item-1",
@@ -231,146 +192,6 @@ export default function CardGridPage() {
           </Box>
 
           <Box mb="xl">
-            <Heading level="one">Setting: "Column - One Featured"</Heading>
-            <CardGrid
-              id="card-setting-column1featured_6"
-              type="card-setting-column1featured_6"
-              title="Column - One Featured: 6 cards (1 5) (Not Recommended)"
-              layout="column_one_featured"
-              items={cardGridItems.slice(0, 6)}
-            />
-            <CardGrid
-              id="card-setting-column1featured_5"
-              type="card-setting-column1featured_5"
-              title="Column - One Featured: 5 cards (1 4)"
-              layout="column_one_featured"
-              items={cardGridItems.slice(0, 5)}
-            />
-            <CardGrid
-              id="card-setting-column1featured_4"
-              type="card-setting-column1featured_4"
-              title="Column - One Featured: 4 cards (1 3)"
-              layout="column_one_featured"
-              items={cardGridItems.slice(0, 4)}
-            />
-            <CardGrid
-              id="card-setting-column1featured_3"
-              type="card-setting-column1featured_3"
-              title="Column - One Featured: 3 cards (1 2) (Not Recommended)"
-              layout="column_one_featured"
-              items={cardGridItems.slice(0, 3)}
-            />
-            <CardGrid
-              id="card-setting-column1featured_2"
-              type="card-setting-column1featured_2"
-              title="Column - One Featured: 2 cards (Not Recommended)"
-              layout="column_one_featured"
-              items={cardGridItems.slice(0, 2)}
-            />
-            <CardGrid
-              id="card-setting-column1featured_1"
-              type="card-setting-column1featured_1"
-              title="Column - One Featured: 1 card (Not Recommended)"
-              layout="column_one_featured"
-              items={cardGridItems.slice(0, 1)}
-            />
-          </Box>
-
-          {/* <Box mb="xl">
-            <Heading level="one">Setting: "Column - 4"</Heading>
-
-            <CardGrid
-              id="card-setting-column4_6"
-              type="card-setting-column4_6"
-              title="Column - 4: 6 cards"
-              layout="column_4"
-              items={cardGridItems.slice(0, 6)}
-            />
-            <CardGrid
-              id="card-setting-column4_5"
-              type="card-setting-column4_5"
-              title="Column - 4: 5 cards (Edge Case)"
-              layout="column_4"
-              items={cardGridItems.slice(0, 5)}
-            />
-            <CardGrid
-              id="card-setting-column4_4"
-              type="card-setting-column4_4"
-              title="Column - 4: 4 cards"
-              layout="column_4"
-              items={cardGridItems.slice(0, 4)}
-            />
-            <CardGrid
-              id="card-setting-column4_3"
-              type="card-setting-column4_3"
-              title="Column - 4: 3 cards (Edge Case)"
-              layout="column_4"
-              items={cardGridItems.slice(0, 3)}
-            />
-            <CardGrid
-              id="card-setting-column4_2"
-              type="card-setting-column4_2"
-              title="Column - 4: 2 cards (Edge Case)"
-              layout="column_4"
-              items={cardGridItems.slice(0, 2)}
-            />
-            <CardGrid
-              id="card-setting-column4_1"
-              type="card-setting-column4_1"
-              title="Column - 4: 1 card (Edge Case)"
-              layout="column_4"
-              items={cardGridItems.slice(0, 1)}
-            />
-          </Box> */}
-
-          {/* <Box mb="xl">
-            <Heading level="one">Setting: "Column - 2 4"</Heading>
-            <CardGrid
-              id="card-setting-column24_6"
-              type="card-setting-column24_6"
-              title="Column - 2 4: 6 cards"
-              layout="column_2_4"
-              items={cardGridItems.slice(0, 6)}
-            />
-            <CardGrid
-              id="card-setting-column24_5"
-              type="card-setting-column24_5"
-              title="Column - 2 4: 5 cards"
-              layout="column_2_4"
-              items={cardGridItems.slice(0, 5)}
-            />
-            <CardGrid
-              id="card-setting-column24_4"
-              type="card-setting-column24_4"
-              title="Column - 2 4: 4 cards (Edge Case)"
-              layout="column_2_4"
-              items={cardGridItems.slice(0, 4)}
-            />
-            <CardGrid
-              id="card-setting-column24_3"
-              type="card-setting-column24_3"
-              title="Column - 2 4: 3 cards (Edge Case)"
-              layout="column_2_4"
-              items={cardGridItems.slice(0, 3)}
-            />
-            <CardGrid
-              id="card-setting-column24_2"
-              type="card-setting-column24_2"
-              title="Column - 2 4: 2 cards (Edge Case)"
-              layout="column_2_4"
-              items={cardGridItems.slice(0, 2)}
-            />
-
-            <CardGrid
-              id="card-setting-column24_1"
-              type="card-setting-column24_1"
-              title="Column - 2 4: 1 card (Edge Case)"
-              layout="column_2_4"
-              items={cardGridItems.slice(0, 1)}
-            />
-          </Box> */}
-
-          {/* <Box mb="xl">
             <Heading level="one">Alternative Layouts</Heading>
             <p>
               These are combinations of 2 Card Grids that present a unified
@@ -386,7 +207,7 @@ export default function CardGridPage() {
             <CardGrid
               id="card-setting-alt-1"
               type="card-setting-alt-1"
-              layout="column_4"
+              layout="column"
               items={cardGridItems.slice(0, 4)}
             />
 
@@ -403,7 +224,7 @@ export default function CardGridPage() {
               layout="column"
               items={cardGridItems.slice(0, 3)}
             />
-          </Box> */}
+          </Box>
         </>
       }
     />

@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Box, Grid } from "@nypl/design-system-react-components";
 import CardGridHeader from "./CardGridHeader";
-import CardGridItem, { CardItem } from "./CardGridItem";
+import Card from "./Card";
+import Image from "./../../shared/Image";
+import { ImageType } from "../Image/ImageTypes";
 
 export type CardGridLayoutTypes =
   | "row"
@@ -34,6 +36,14 @@ type CardGridConditionalProps =
     };
 
 type CardGridProps = CardGridCommonProps & CardGridConditionalProps;
+
+export interface CardItem {
+  id: string;
+  title: string;
+  description: string;
+  image?: ImageType;
+  link: string;
+}
 
 export default function CardGrid({
   id,
@@ -118,91 +128,63 @@ export default function CardGrid({
     return gridColumn;
   }
 
-  if (items) {
-    if (layout !== "column_one_featured") {
-      return (
-        <Box id={`${type}-${id}`} mb="2em">
-          {title && (
-            <CardGridHeader
-              id={id}
-              title={title}
-              headingColor={headingColor}
-              link={link}
-              hrefText={hrefText}
-            />
-          )}
-          {description && <p>{description}</p>}
-          <Grid
-            as="ul"
-            listStyleType="none"
-            templateColumns={{ lg: templateColumns }}
-            gap="m"
-          >
-            {items.map((item: CardItem, index) => {
-              return (
-                <CardGridItem
-                  item={item}
-                  gridColumn={getGridColumn(items.length, layout, index)}
-                  cardLayout={layout === "row" ? "row" : "column"}
+  return (
+    <Box id={`${type}-${id}`} mb="2em">
+      {title && (
+        <CardGridHeader
+          id={id}
+          title={title}
+          headingColor={headingColor}
+          link={link}
+          hrefText={hrefText}
+        />
+      )}
+      {description && <p>{description}</p>}
+      <Grid
+        as="ul"
+        listStyleType="none"
+        templateColumns={{ lg: templateColumns }}
+        gap="m"
+      >
+        {items &&
+          items.map((item: CardItem, index) => {
+            const { id, title, description, link, image } = item;
+            return (
+              <Box
+                as="li"
+                key={id}
+                gridColumn={getGridColumn(items.length, layout, index)}
+              >
+                <Card
+                  id={id}
+                  heading={title}
+                  description={description}
+                  href={link}
+                  layout={layout === "row" ? "row" : "column"}
                   isBordered={isBorderedFinal}
                   isCentered={isCenteredFinal}
+                  {...(image && {
+                    image: (
+                      <Image
+                        id={image.id}
+                        alt={image.alt}
+                        uri={image.uri}
+                        useTransformation={true}
+                        transformations={image.transformations}
+                        transformationLabel={"2_1_960"}
+                        layout="responsive"
+                        width={900}
+                        height={450}
+                        quality={90}
+                      />
+                    ),
+                  })}
                 />
-              );
-            })}
-          </Grid>
-        </Box>
-      );
-    }
-    // Column one featured requires 2 grids, the first is a row, second is a column.
-    else if (layout === "column_one_featured") {
-      const firstItem = items.slice(0, 1);
-      const featuredCard = firstItem[0];
-      const otherItems = items.slice(1, 6);
-
-      return (
-        <Box id={`${type}-${id}`} mb="2em">
-          {title && (
-            <CardGridHeader
-              id={id}
-              title={title}
-              headingColor={headingColor}
-              link={link}
-              hrefText={hrefText}
-            />
-          )}
-          {description && <p>{description}</p>}
-          <Grid as="ul" listStyleType="none" gap="m" marginBottom="m">
-            <CardGridItem
-              item={featuredCard}
-              cardLayout="row"
-              isBordered={isBorderedFinal}
-              isCentered={true}
-            />
-          </Grid>
-          {otherItems && (
-            <Grid
-              as="ul"
-              listStyleType="none"
-              templateColumns={{ lg: templateColumns }}
-              gap="m"
-            >
-              {otherItems.map((item: CardItem, index) => {
-                return (
-                  <CardGridItem
-                    item={item}
-                    cardLayout="column"
-                    gridColumn={getGridColumn(otherItems.length, layout, index)}
-                    isBordered={isBorderedFinal}
-                    isCentered={isCenteredFinal}
-                  />
-                );
-              })}
-            </Grid>
-          )}
-        </Box>
-      );
-    }
-  }
-
-  return null;
+              </Box>
+            );
+          })}
+      </Grid>
+      {!items && children && <>{children}</>}
+    </Box>
+  );
 }
