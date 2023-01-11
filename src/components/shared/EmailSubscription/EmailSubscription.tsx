@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Spinner } from "@chakra-ui/react";
 
-import EmailSubscriptionWrapper from "./EmaiSubscriptionWrapper";
+import EmailSubscriptionWrapper from "./EmailSubscriptionWrapper";
 import EmailSubscriptionForm from "./EmailSubscriptionForm";
 import EmailSubscriptionConfirmation, {
   StatusCode,
