@@ -87,55 +87,30 @@ export default function CardGrid({
     // Logic for grid column of each grid item.
     // Default for 3 cards across, 4 + 4 + 4 = 12.
     let gridColumn = "auto / span 4";
-
     // Default logic for items count and adjusting the grid-column value based on number of cards.
-    // 2 cards.
-    if (itemsCount && itemsCount === 2) {
-      // 2 cards, 2
-      gridColumn = "auto / span 6";
+    // 5 cards.
+    if (itemsCount === 5 && index !== undefined) {
+      // 5 cards, 2 3
+      gridColumn = index < 2 ? "auto / span 6" : "auto / span 4";
     }
     // 4 cards.
-    if (itemsCount && itemsCount === 4) {
+    if (itemsCount === 4) {
       // 4 cards, 4
       gridColumn = "auto / span 3";
     }
-
-    // Column
-    if (layout === "column" && index !== undefined) {
-      // 5 cards, 2 3 layout
-      if (itemsCount === 5) {
-        gridColumn = index < 2 ? "auto / span 6" : "auto / span 4";
-      }
+    // 2 cards.
+    if (itemsCount === 2) {
+      // 2 cards, 2
+      gridColumn = "auto / span 6";
     }
-
     // Column: two featured.
     if (layout === "column_two_featured" && index !== undefined) {
       if (itemsCount === 6) {
         // 6 cards, 2 4
         gridColumn = index < 2 ? "auto / span 6" : "auto / span 3";
       }
-      if (itemsCount === 5) {
-        // 5 cards, 2 3
-        gridColumn = index < 2 ? "auto / span 6" : "auto / span 4";
-      }
       if (itemsCount === 4) {
         // 4 cards, 2 2
-        gridColumn = "auto / span 6";
-      }
-    }
-
-    // Column: one featured.
-    if (layout === "column_one_featured" && index !== undefined) {
-      if (itemsCount === 4) {
-        // 4 cards, 4
-        gridColumn = "auto / span 3";
-      }
-      if (itemsCount === 3) {
-        // 3 cards, 3
-        gridColumn = "auto / span 4";
-      }
-      if (itemsCount === 2) {
-        // 2 cards, 2
         gridColumn = "auto / span 6";
       }
     }
