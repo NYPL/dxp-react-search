@@ -5,11 +5,7 @@ import Card from "./Card";
 import Image from "./../../shared/Image";
 import { ImageType } from "../Image/ImageTypes";
 
-export type CardGridLayoutTypes =
-  | "row"
-  | "column"
-  | "column_one_featured"
-  | "column_two_featured";
+export type CardGridLayoutTypes = "row" | "column" | "column_two_featured";
 
 export interface CardGridCommonProps {
   id: string;
@@ -59,25 +55,6 @@ export default function CardGrid({
   items,
   children,
 }: CardGridProps) {
-  // CardGrid can be used without passing an items array, and instead, a custom grid can be passed as children.
-  if (!items && children) {
-    return (
-      <Box id={`${type}-${id}`} mb="2em">
-        {title && (
-          <CardGridHeader
-            id={id}
-            title={title}
-            headingColor={headingColor}
-            link={link}
-            hrefText={hrefText}
-          />
-        )}
-        {description && <p>{description}</p>}
-        {children}
-      </Box>
-    );
-  }
-
   // Logic for template columns based on layout.
   let templateColumns = "repeat(12, 1fr)";
   // Logic for template row based on layout.
