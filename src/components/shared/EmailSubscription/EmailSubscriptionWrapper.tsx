@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Heading } from "@nypl/design-system-react-components";
 
 interface EmailSubscriptionWrapperProps {
-  id?: string;
+  id: string;
   bgColor?: string;
   heading?: string;
   headingColor?: string;

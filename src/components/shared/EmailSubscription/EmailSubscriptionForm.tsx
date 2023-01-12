@@ -10,7 +10,7 @@ import {
 } from "@nypl/design-system-react-components";
 
 interface EmailSubscriptionFormProps {
-  id?: string;
+  id: string;
   description?: string;
   onSubmit: (e: React.FormEvent) => void;
   onChange: (e: string) => void;

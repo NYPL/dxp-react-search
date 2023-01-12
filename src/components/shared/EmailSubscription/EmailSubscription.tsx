@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Spinner } from "@chakra-ui/react";
-
 import EmailSubscriptionWrapper from "./EmailSubscriptionWrapper";
 import EmailSubscriptionForm from "./EmailSubscriptionForm";
 import EmailSubscriptionConfirmation, {
@@ -8,7 +7,7 @@ import EmailSubscriptionConfirmation, {
 } from "./EmailSubscriptionConfirmation";
 
 interface EmailSubscriptionProps {
-  id?: string;
+  id: string;
   heading?: string;
   description?: string;
   headingColor: string;
@@ -82,23 +81,6 @@ export default function EmailSubscription({
     );
   }
 
-  if (isSubmitted && status) {
-    return (
-      <EmailSubscriptionWrapper
-        id={id}
-        bgColor={bgColor}
-        heading={heading}
-        headingColor={headingColor}
-      >
-        <EmailSubscriptionConfirmation
-          status={status}
-          bgColor={bgColor}
-          headingColor={headingColor}
-        ></EmailSubscriptionConfirmation>
-      </EmailSubscriptionWrapper>
-    );
-  }
-
   return (
     <EmailSubscriptionWrapper
       id={id}
@@ -106,15 +88,24 @@ export default function EmailSubscription({
       heading={heading}
       headingColor={headingColor}
     >
-      <EmailSubscriptionForm
-        id={id}
-        description={description}
-        onSubmit={handleSubmit}
-        onChange={setInput}
-        formInput={input}
-        formPlaceholder={formPlaceholder}
-        formHelperText={formHelperText}
-      ></EmailSubscriptionForm>
+      {isSubmitted && status ? (
+        <EmailSubscriptionConfirmation
+          id={id}
+          status={status}
+          bgColor={bgColor}
+          headingColor={headingColor}
+        />
+      ) : (
+        <EmailSubscriptionForm
+          id={id}
+          description={description}
+          onSubmit={handleSubmit}
+          onChange={setInput}
+          formInput={input}
+          formPlaceholder={formPlaceholder}
+          formHelperText={formHelperText}
+        />
+      )}
     </EmailSubscriptionWrapper>
   );
 }

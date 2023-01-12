@@ -15,12 +15,14 @@ const iconTable: Record<StatusCode, IconNames> = {
 };
 
 interface EmailSubscriptionConfirmationProps {
+  id: string;
   status: StatusCode;
   bgColor?: string;
   headingColor?: string;
 }
 
 export default function EmailSubscriptionConfirmation({
+  id,
   bgColor,
   headingColor,
   status,
@@ -38,7 +40,7 @@ export default function EmailSubscriptionConfirmation({
   }
 
   return (
-    <Box w="full">
+    <Box id={`email-subscription-confirmation-${id}`} w="full">
       <Icon
         decorative
         size="large"
