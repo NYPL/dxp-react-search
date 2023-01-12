@@ -116,6 +116,18 @@ export const SECTION_FRONT_QUERY = gql`
             primary
           }
         }
+        ... on EmailSubscription {
+          __typename
+          id
+          type
+          heading
+          description
+          formPlaceholder
+          salesforceListId
+          colorway {
+            primary
+          }
+        }
       }
     }
   }

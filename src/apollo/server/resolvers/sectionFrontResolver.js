@@ -62,7 +62,7 @@ const sectionFrontResolver = {
           : resolveDrupalParagraphs(
               sectionFront.field_main_content,
               typesInQuery,
-              "section_front"
+              sectionFront
             );
       return mainContent;
     },

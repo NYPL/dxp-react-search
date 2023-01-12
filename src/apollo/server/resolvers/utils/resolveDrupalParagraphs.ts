@@ -10,8 +10,11 @@ type ResolvedParagraph = {
 export default function resolveDrupalParagraphs(
   paragraphResourceObjects: JsonApiResourceObject[],
   typesInQuery: string[],
-  contentType?: string
+  apiResponse?: any
 ): ResolvedParagraph[] {
+  // Define variables used to determine the colorway prop on Section Front pages
+  const contentType = apiResponse?.type.replace("node--", "");
+  const slug = apiResponse?.path?.alias;
   // Drupal json:api will return all paragraphs for the field.
   // So we first reduce this array of objects only to those paragraphs
   // that we're requested by the gql query.
@@ -91,6 +94,13 @@ export default function resolveDrupalParagraphs(
       if (
         item.type === "paragraph--donation" &&
         typesInQuery.includes("Donation")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--email_subscription" &&
+        typesInQuery.includes("EmailSubscription")
       ) {
         accumulator.push(item);
       }
@@ -404,6 +414,17 @@ export default function resolveDrupalParagraphs(
           formBaseUrl: item.field_ls_link.url,
           defaultAmount: item.field_fs_donation_default_amount,
           otherLevelId: item.field_ts_donation_other_level_id,
+        };
+        break;
+      case "paragraph--email_subscription":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          formPlaceholder: item.field_ts_placeholder,
+          salesforceListId: item.field_ts_salesforce_list_id,
+          colorway: slug ? getColorway(slug) : null,
         };
         break;
       case "paragraph--catalog_search":

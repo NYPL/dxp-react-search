@@ -10,6 +10,7 @@ import ImageComponent from "./ImageComponent";
 import CardList from "./CardList";
 import CardGrid from "./../CardGrid";
 import CatalogSearch from "./CatalogSearch";
+import EmailSubscription from "../EmailSubscription";
 
 // @TODO add a type for use in consuming components.
 // @SEE https://stackoverflow.com/questions/12787781/type-definition-in-object-literal-in-typescript
@@ -29,6 +30,7 @@ const Components: any = {
   CardList: CardList,
   CardGrid: CardGrid,
   CatalogSearch: CatalogSearch,
+  EmailSubscription: EmailSubscription,
 };
 
 export interface ContentComponentObject {
@@ -41,10 +43,16 @@ export default function mapContentComponentToReactComponent(
   if (typeof Components[contentComponent["__typename"]] !== "undefined") {
     return React.createElement(Components[contentComponent["__typename"]], {
       key: contentComponent.id,
-      // Add colorway values if passed.
-      ...(contentComponent.colorway && {
-        headingColor: contentComponent.colorway.primary,
-      }),
+      // If the component is EmailSubscription add colorway vaues as bgColor.
+      ...(contentComponent["__typename"] === "EmailSubscription" &&
+      contentComponent.colorway
+        ? {
+            bgColor: contentComponent.colorway.primary,
+          }
+        : // Else add colorway values as headingColor.
+        contentComponent.colorway
+        ? { headingColor: contentComponent.colorway.primary }
+        : null),
       // Add the props.
       ...contentComponent,
     });

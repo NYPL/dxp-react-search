@@ -221,4 +221,14 @@ export const typeDefs = gql`
   type Query {
     _empty: String
   }
+
+  type EmailSubscription {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    formPlaceholder: String
+    salesforceListId: String
+    colorway: Colorway
+  }
 `;

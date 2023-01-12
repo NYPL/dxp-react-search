@@ -30,16 +30,15 @@ export default async function handler(
     });
 
     try {
-      const soapCreate = await sfmc.soap.create(
-        "Subscriber",
-        {
+      try {
+        // Try to add a new Subscriber
+        const soapCreate = await sfmc.soap.create("Subscriber", {
           SubscriberKey: request.query.email,
           EmailAddress: request.query.email,
           Attributes: [
             {
               Name: "Source Code",
-              // @TODO this should be a dynamic value, and be passed as a query param?
-              Value: "Scout Test Local",
+              Value: request.query.source_code,
             },
           ],
           Lists: [
@@ -48,24 +47,47 @@ export default async function handler(
               Status: "Active",
             },
           ],
-        },
-        {
-          options: {
-            SaveOptions: { SaveAction: "UpdateAdd" },
+        });
+
+        response.status(200).json({
+          statusCode: "SUCCESS",
+          statusMessage: soapCreate.Results[0].StatusMessage,
+          formData: {
+            email: request.query.email,
           },
+        });
+      } catch (e: any) {
+        // If the Subscriber already exists, update the Subscriber
+        if (e.json.Results[0].ErrorCode === 12014) {
+          const soapUpdate = await sfmc.soap.update("Subscriber", {
+            SubscriberKey: request.query.email,
+            EmailAddress: request.query.email,
+            // Make sure that if a subscriber was previously "Unsubscribed" the account gets activated
+            Status: "Active",
+            Attributes: [
+              {
+                Name: "Source Code",
+                // @TODO this should be a dynamic value, and be passed as a query param?
+                Value: request.query.source_code,
+              },
+            ],
+            Lists: [
+              {
+                ID: request.query.list_id,
+                Status: "Active",
+              },
+            ],
+          });
+
+          response.status(200).json({
+            statusCode: "SUCCESS",
+            statusMessage: soapUpdate.Results[0].StatusMessage,
+            formData: {
+              email: request.query.email,
+            },
+          });
         }
-      );
-
-      console.log(soapCreate.Results[0].Object);
-
-      response.status(200).json({
-        statusCode: "SUCCESS",
-        // statusMessage: soapCreate.Results[0].Object.StatusMessage,
-        statusMessage: "Subscriber was added to the list!",
-        formData: {
-          email: request.query.email,
-        },
-      });
+      }
     } catch (e: any) {
       console.log(e.json.Results[0]);
 
