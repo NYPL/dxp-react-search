@@ -104,13 +104,13 @@ export const SECTION_FRONT_QUERY = gql`
             }
           }
         }
-        ... on CatalogSearch {
+        ... on ExternalSearch {
           __typename
           id
           type
           title
           description
-          catalogType
+          searchType
           formPlaceholder
           colorway {
             primary

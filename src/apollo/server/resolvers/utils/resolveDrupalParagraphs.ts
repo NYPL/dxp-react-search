@@ -106,8 +106,8 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
-        item.type === "paragraph--catalog_search" &&
-        typesInQuery.includes("CatalogSearch")
+        item.type === "paragraph--external_search" &&
+        typesInQuery.includes("ExternalSearch")
       ) {
         accumulator.push(item);
       }
@@ -427,13 +427,13 @@ export default function resolveDrupalParagraphs(
           colorway: slug ? getColorway(slug) : null,
         };
         break;
-      case "paragraph--catalog_search":
+      case "paragraph--external_search":
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
           title: item.field_ts_heading,
           description: item.field_tfls_description?.processed,
-          catalogType: item.field_lts_catalog,
+          searchType: item.field_lts_search_type,
           formPlaceholder: item.field_ts_placeholder,
           colorway:
             contentType === "section_front"

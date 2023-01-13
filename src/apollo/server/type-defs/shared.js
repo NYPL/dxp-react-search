@@ -185,12 +185,12 @@ export const typeDefs = gql`
     defaultAmount: String
   }
 
-  type CatalogSearch {
+  type ExternalSearch {
     id: ID!
     type: String!
     title: String
     description: String
-    catalogType: String
+    searchType: String
     formPlaceholder: String
     colorway: Colorway
   }

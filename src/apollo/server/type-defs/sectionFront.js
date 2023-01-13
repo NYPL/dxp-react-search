@@ -16,7 +16,7 @@ export const typeDefs = gql`
   union SectionFrontMainContent =
       CardGrid
     | Donation
-    | CatalogSearch
+    | ExternalSearch
     | EmailSubscription
 
   type SectionFrontConnection {

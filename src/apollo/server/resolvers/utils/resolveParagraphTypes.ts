@@ -38,8 +38,8 @@ export default function resolveParagraphTypes(
     case "donation":
       resolvedObjectType = "Donation";
       break;
-    case "catalog_search":
-      resolvedObjectType = "CatalogSearch";
+    case "external_search":
+      resolvedObjectType = "ExternalSearch";
       break;
     // Home page.
     case "hp_hero":

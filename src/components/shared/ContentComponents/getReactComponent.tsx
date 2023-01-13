@@ -9,7 +9,7 @@ import GoogleMapEmbed from "./GoogleMapEmbed";
 import ImageComponent from "./ImageComponent";
 import CardList from "./CardList";
 import CardGrid from "./../CardGrid";
-import CatalogSearch from "./CatalogSearch";
+import ExternalSearch from "./ExternalSearch";
 import EmailSubscription from "../EmailSubscription";
 
 // @TODO add a type for use in consuming components.
@@ -29,7 +29,7 @@ const Components: any = {
   ImageComponent: ImageComponent,
   CardList: CardList,
   CardGrid: CardGrid,
-  CatalogSearch: CatalogSearch,
+  ExternalSearch: ExternalSearch,
   EmailSubscription: EmailSubscription,
 };
 
