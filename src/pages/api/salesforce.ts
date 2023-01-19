@@ -21,6 +21,10 @@ export default async function handler(
     return response.status(401).json({ message: "No list id provided." });
   }
 
+  if (!request.body.source_code) {
+    return response.status(401).json({ message: "No source code provided." });
+  }
+
   if (SALESFORCE_ENABLE === "true") {
     const sfmc = new SDK({
       client_id: SALESFORCE_CLIENT_ID,

@@ -16,7 +16,7 @@ interface EmailSubscriptionProps {
   formHelperText?: string;
   formPlaceholder?: string;
   salesforceListId?: number;
-  sourceCode?: string;
+  salesforceSourceCode?: string;
 }
 
 export default function EmailSubscription({
@@ -31,8 +31,7 @@ export default function EmailSubscription({
   // @TODO formHelperText might be hardcoded for all Subscriptions
   formHelperText = "*To learn more about how the Library uses information you provide, please read our <a target='_blank' rel='noopener noreferrer' href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>privacy and policy</a>",
   formPlaceholder,
-  // @TODO should there be a fall back value?
-  sourceCode,
+  salesforceSourceCode,
   salesforceListId,
 }: EmailSubscriptionProps): JSX.Element {
   const [input, setInput] = React.useState("");
@@ -56,7 +55,7 @@ export default function EmailSubscription({
         body: JSON.stringify({
           email: e.target.email.value,
           list_id: salesforceListId,
-          source_code: sourceCode,
+          source_code: salesforceSourceCode,
         }),
       };
 
