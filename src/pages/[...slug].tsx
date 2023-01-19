@@ -31,6 +31,7 @@ function CatchAllRoutesPage({
     return (
       <SectionFrontPage
         uuid={uuid}
+        slug={slug}
         isPreview={isPreview}
         revisionId={revisionId}
       />

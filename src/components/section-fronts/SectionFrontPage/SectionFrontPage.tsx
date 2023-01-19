@@ -31,6 +31,13 @@ sectionFrontsSlugs.forEach((slug) => {
 
 export const sectionFrontsPaths = slugsArray;
 
+const breadcrumbsTextTable: Record<string, string> = {
+  give: "Give",
+  research: "Research",
+  support: "Support and Services",
+  collections: "Collections",
+};
+
 export const SECTION_FRONT_QUERY = gql`
   query SectionFrontQuery($id: String, $revisionId: String, $preview: Boolean) {
     sectionFront(id: $id, revisionId: $revisionId, preview: $preview) {
@@ -135,12 +142,14 @@ export const SECTION_FRONT_QUERY = gql`
 
 interface SectionFrontPageProps {
   uuid: string;
+  slug: string;
   isPreview?: boolean;
   revisionId?: string;
 }
 
 export default function SectionFrontPage({
   uuid,
+  slug,
   isPreview,
   revisionId,
 }: SectionFrontPageProps) {
@@ -153,6 +162,20 @@ export default function SectionFrontPage({
         revisionId: revisionId,
       }),
     },
+  });
+
+  const breadcrumbsArray = slug.replace(/^\//, "").split("/");
+  const breadcrumbsTrail = breadcrumbsArray.map((item, index) => {
+    let url = `${NEXT_PUBLIC_NYPL_DOMAIN}`;
+    let i = 0;
+    while (i <= index) {
+      url = url + `/${breadcrumbsArray[i]}`;
+      i++;
+    }
+    return {
+      text: breadcrumbsTextTable[item],
+      url: `${url}`,
+    };
   });
 
   // Error state.
@@ -182,10 +205,7 @@ export default function SectionFrontPage({
           text: "Home",
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
         },
-        {
-          text: sectionFront.title,
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
-        },
+        ...breadcrumbsTrail,
       ]}
       breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
