@@ -29,7 +29,7 @@ export default function EmailSubscription({
   // @TODO should this even be a prop? I imagine this will be the same for all newsletters?
   formBaseUrl = "/api/salesforce",
   // @TODO formHelperText might be hardcoded for all Subscriptions
-  formHelperText = "*To learn more about how the Library uses information you provide, please read our privacy and policy",
+  formHelperText = "*To learn more about how the Library uses information you provide, please read our <a target='_blank' rel='noopener noreferrer' href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>privacy and policy</a>",
   formPlaceholder,
   // @TODO should there be a fall back value?
   sourceCode,
