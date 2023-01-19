@@ -16,6 +16,7 @@ interface EmailSubscriptionProps {
   formHelperText?: string;
   formPlaceholder?: string;
   salesforceListId?: number;
+  sourceCode?: string;
 }
 
 export default function EmailSubscription({
@@ -30,6 +31,8 @@ export default function EmailSubscription({
   // @TODO formHelperText might be hardcoded for all Subscriptions
   formHelperText = "*To learn more about how the Library uses information you provide, please read our privacy and policy",
   formPlaceholder,
+  // @TODO should there be a fall back value?
+  sourceCode,
   salesforceListId,
 }: EmailSubscriptionProps): JSX.Element {
   const [input, setInput] = React.useState("");
@@ -37,8 +40,6 @@ export default function EmailSubscription({
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const [status, setStatus] = React.useState<StatusCode>();
-  // @TDOD Replace this hard coded string with a dynamic value TBD
-  const sourceCode = "Scout Test Source Code";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
