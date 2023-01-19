@@ -13,11 +13,11 @@ export default async function handler(
     SALESFORCE_ENABLE,
   } = process.env;
 
-  if (!request.query.email) {
+  if (!request.body.email) {
     return response.status(401).json({ message: "No email provided." });
   }
 
-  if (!request.query.list_id) {
+  if (!request.body.list_id) {
     return response.status(401).json({ message: "No list id provided." });
   }
 
@@ -33,17 +33,17 @@ export default async function handler(
       try {
         // Try to add a new Subscriber
         const soapCreate = await sfmc.soap.create("Subscriber", {
-          SubscriberKey: request.query.email,
-          EmailAddress: request.query.email,
+          SubscriberKey: request.body.email,
+          EmailAddress: request.body.email,
           Attributes: [
             {
               Name: "Source Code",
-              Value: request.query.source_code,
+              Value: request.body.source_code,
             },
           ],
           Lists: [
             {
-              ID: request.query.list_id,
+              ID: request.body.list_id,
               Status: "Active",
             },
           ],
@@ -53,27 +53,27 @@ export default async function handler(
           statusCode: "SUCCESS",
           statusMessage: soapCreate.Results[0].StatusMessage,
           formData: {
-            email: request.query.email,
+            email: request.body.email,
           },
         });
       } catch (e: any) {
         // If the Subscriber already exists, update the Subscriber
         if (e.json.Results[0].ErrorCode === 12014) {
           const soapUpdate = await sfmc.soap.update("Subscriber", {
-            SubscriberKey: request.query.email,
-            EmailAddress: request.query.email,
+            SubscriberKey: request.body.email,
+            EmailAddress: request.body.email,
             // Make sure that if a subscriber was previously "Unsubscribed" the account gets activated
             Status: "Active",
             Attributes: [
               {
                 Name: "Source Code",
-                // @TODO this should be a dynamic value, and be passed as a query param?
-                Value: request.query.source_code,
+                // @TODO this should be a dynamic value, and be passed as a body param?
+                Value: request.body.source_code,
               },
             ],
             Lists: [
               {
-                ID: request.query.list_id,
+                ID: request.body.list_id,
                 Status: "Active",
               },
             ],
@@ -83,7 +83,7 @@ export default async function handler(
             statusCode: "SUCCESS",
             statusMessage: soapUpdate.Results[0].StatusMessage,
             formData: {
-              email: request.query.email,
+              email: request.body.email,
             },
           });
         }
@@ -104,7 +104,7 @@ export default async function handler(
       statusCode: "TEST_MODE",
       statusMessage: "Api is in test mode. No data was sent to salesforce.",
       formData: {
-        email: request.query.email,
+        email: request.body.email,
       },
     });
   }

@@ -27,7 +27,7 @@ export default function EmailSubscription({
   // @TODO confirm with UX what the default color should be
   bgColor = "section.research.primary",
   // @TODO should this even be a prop? I imagine this will be the same for all newsletters?
-  formBaseUrl = "/api/salesforce?email",
+  formBaseUrl = "/api/salesforce",
   // @TODO formHelperText might be hardcoded for all Subscriptions
   formHelperText = "*To learn more about how the Library uses information you provide, please read our privacy and policy",
   formPlaceholder,
@@ -46,13 +46,18 @@ export default function EmailSubscription({
     setIsSubmitting(true);
     if (formBaseUrl !== undefined) {
       // API endpoint where we send form data.
-      const endpoint = `${formBaseUrl}=${e.target.email.value}&list_id=${salesforceListId}&source_code=${sourceCode}`;
+      const endpoint = `${formBaseUrl}`;
       // Form the request for sending data to the server.
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          email: e.target.email.value,
+          list_id: salesforceListId,
+          source_code: sourceCode,
+        }),
       };
 
       // Send the form and await response.
