@@ -46,6 +46,7 @@ export default function EmailSubscriptionForm({
         <FormRow gridTemplateColumns={{ base: "repeat(1fr)", md: "2fr auto" }}>
           <FormField>
             <TextInput
+              isRequired
               id={`email-input-${id}`}
               labelText="Email subscription"
               value={formInput}
