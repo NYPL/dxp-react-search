@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRouter } from "next/router";
 import { Spinner } from "@chakra-ui/react";
 import EmailSubscriptionWrapper from "./EmailSubscriptionWrapper";
 import EmailSubscriptionForm from "./EmailSubscriptionForm";
@@ -16,7 +17,7 @@ interface EmailSubscriptionProps {
   formHelperText?: string;
   formPlaceholder?: string;
   salesforceListId?: number;
-  salesforceSourceCode?: string;
+  salesforceSourceCode: string;
 }
 
 export default function EmailSubscription({
@@ -39,8 +40,26 @@ export default function EmailSubscription({
 
   const [status, setStatus] = React.useState<StatusCode>();
 
+  //Create dynamic Google Analytics values
+  const gaEventCategory = "Email Subscription Forms";
+  const { asPath } = useRouter();
+  const gaEventActionName = `Subscribe - ${asPath}`; // example: Subscribe - /research
+  const gaEventLabel = `Success ${salesforceSourceCode.replace(
+    /(\b[a-z](?!\s))/g,
+    function (firstLetter) {
+      return firstLetter.toUpperCase();
+    }
+  )}`;
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    // @ts-ignore
+    window.gtag("event", gaEventActionName, {
+      event_category: gaEventCategory,
+      event_label: gaEventLabel,
+    });
+
     setIsSubmitting(true);
     if (formBaseUrl !== undefined) {
       // API endpoint where we send form data.
