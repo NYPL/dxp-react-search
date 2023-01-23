@@ -229,6 +229,7 @@ export const typeDefs = gql`
     description: String
     formPlaceholder: String
     salesforceListId: String
+    salesforceSourceCode: String
     colorway: Colorway
   }
 `;
