@@ -167,11 +167,13 @@ export default function SectionFrontPage({
   const breadcrumbsArray = slug.replace(/^\//, "").split("/");
   const breadcrumbsTrail = breadcrumbsArray.map((item, index) => {
     let url = `${NEXT_PUBLIC_NYPL_DOMAIN}`;
-    let i = 0;
-    while (i <= index) {
-      url = url + `/${breadcrumbsArray[i]}`;
-      i++;
-    }
+
+    breadcrumbsArray.forEach((breadcrumb, i) => {
+      if (i <= index) {
+        url = url + `/${breadcrumbsArray[i]}`;
+      }
+    });
+
     return {
       text: breadcrumbsTextTable[item],
       url: `${url}`,
