@@ -16,6 +16,7 @@ interface EmailSubscriptionProps {
   formHelperText?: string;
   formPlaceholder?: string;
   salesforceListId?: number;
+  salesforceSourceCode?: string;
 }
 
 export default function EmailSubscription({
@@ -26,9 +27,10 @@ export default function EmailSubscription({
   // @TODO confirm with UX what the default color should be
   bgColor = "section.research.primary",
   // @TODO should this even be a prop? I imagine this will be the same for all newsletters?
-  formBaseUrl = "/api/salesforce?email",
+  formBaseUrl = "/api/salesforce",
   formHelperText = "*You will receive email updates from the Library, and you will be able to unsubscribe at any time. To learn more about how the Library uses information you provide, please read our <a target='_blank' rel='noopener noreferrer' href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>privacy policy</a>.",
   formPlaceholder,
+  salesforceSourceCode,
   salesforceListId,
 }: EmailSubscriptionProps): JSX.Element {
   const [input, setInput] = React.useState("");
@@ -36,21 +38,24 @@ export default function EmailSubscription({
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const [status, setStatus] = React.useState<StatusCode>();
-  // @TDOD Replace this hard coded string with a dynamic value TBD
-  const sourceCode = "Scout Test Source Code";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsSubmitting(true);
     if (formBaseUrl !== undefined) {
       // API endpoint where we send form data.
-      const endpoint = `${formBaseUrl}=${e.target.email.value}&list_id=${salesforceListId}&source_code=${sourceCode}`;
+      const endpoint = `${formBaseUrl}`;
       // Form the request for sending data to the server.
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          email: e.target.email.value,
+          list_id: salesforceListId,
+          source_code: salesforceSourceCode,
+        }),
       };
 
       // Send the form and await response.

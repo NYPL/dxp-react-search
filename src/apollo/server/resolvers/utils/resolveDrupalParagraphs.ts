@@ -424,6 +424,7 @@ export default function resolveDrupalParagraphs(
           description: item.field_tfls_description?.processed,
           formPlaceholder: item.field_ts_placeholder,
           salesforceListId: item.field_ts_salesforce_list_id,
+          salesforceSourceCode: item.field_ts_salesforce_source_code,
           colorway: slug ? getColorway(slug) : null,
         };
         break;
