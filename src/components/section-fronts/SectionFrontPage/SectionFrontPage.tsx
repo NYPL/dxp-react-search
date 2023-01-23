@@ -168,7 +168,7 @@ export default function SectionFrontPage({
   const breadcrumbsTrail = breadcrumbsArray.map((item, index) => {
     let url = `${NEXT_PUBLIC_NYPL_DOMAIN}`;
 
-    breadcrumbsArray.forEach((breadcrumb, i) => {
+    breadcrumbsArray.forEach((__, i) => {
       if (i <= index) {
         url = url + `/${breadcrumbsArray[i]}`;
       }
