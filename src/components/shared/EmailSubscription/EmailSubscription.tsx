@@ -39,26 +39,20 @@ export default function EmailSubscription({
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const [status, setStatus] = React.useState<StatusCode>();
-
-  //Create dynamic Google Analytics values
-  const gaEventCategory = "Email Subscription Forms";
   const { asPath } = useRouter();
-  const gaEventActionName = `Subscribe - ${asPath}`; // example: Subscribe - /research
-  const gaEventLabel = `Success ${salesforceSourceCode.replace(
-    /(\b[a-z](?!\s))/g,
-    function (firstLetter) {
-      return firstLetter.toUpperCase();
-    }
-  )}`;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    // @ts-ignore
-    window.gtag("event", gaEventActionName, {
-      event_category: gaEventCategory,
-      event_label: gaEventLabel,
-    });
+    //Create dynamic Google Analytics values
+    const gaEventCategory = "Email Subscription Forms";
+    const gaEventActionName = `Subscribe - ${asPath}`; // example: Subscribe - /research
+    const gaEventLabel = `Success ${salesforceSourceCode.replace(
+      /(\b[a-z](?!\s))/g,
+      function (firstLetter) {
+        return firstLetter.toUpperCase();
+      }
+    )}`;
 
     setIsSubmitting(true);
     if (formBaseUrl !== undefined) {
@@ -81,6 +75,13 @@ export default function EmailSubscription({
       try {
         const response = await fetch(endpoint, options);
         const result = await response.json();
+
+        // @ts-ignore
+        window.gtag("event", gaEventActionName, {
+          event_category: gaEventCategory,
+          event_label: gaEventLabel,
+        });
+
         setStatus(result.statusCode);
         setIsSubmitted(true);
       } catch (error) {
