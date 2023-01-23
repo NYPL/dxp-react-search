@@ -46,6 +46,7 @@ export default function EmailSubscriptionForm({
         <FormRow gridTemplateColumns={{ base: "repeat(1fr)", md: "2fr auto" }}>
           <FormField>
             <TextInput
+              isRequired
               id={`email-input-${id}`}
               labelText="Email subscription"
               value={formInput}
@@ -70,12 +71,11 @@ export default function EmailSubscriptionForm({
         </FormRow>
       </Form>
       <Box
-        as="p"
-        fontStyle="italic"
+        textDecoration="italic"
         mt="1rem"
         fontSize="-1"
-        sx={{ a: { color: "ui.white", textDecoration: "underline" } }}
         dangerouslySetInnerHTML={{ __html: formHelperText }}
+        sx={{ a: { color: "ui.white", textDecoration: "underline" } }}
       />
     </>
   );

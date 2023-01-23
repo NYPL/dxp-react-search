@@ -29,7 +29,7 @@ export default function EmailSubscriptionConfirmation({
 }: EmailSubscriptionConfirmationProps) {
   function getStatusMessage(status: StatusCode) {
     if (status === "SUCCESS") {
-      return "Success message to go here Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt consectetur adipiscing elit";
+      return "Thank you! You have successfully subscribed to our email updates! You can update your email subscription preferences at any time using the links at the bottom of the email.";
     }
     if (status === "ERROR") {
       return "Error message to go here Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt consectetur adipiscing elit";
