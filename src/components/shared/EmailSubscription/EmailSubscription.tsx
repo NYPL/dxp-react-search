@@ -47,12 +47,7 @@ export default function EmailSubscription({
     //Create dynamic Google Analytics values
     const gaEventCategory = "Email Subscription Forms";
     const gaEventActionName = `Subscribe - ${asPath}`; // example: Subscribe - /research
-    const gaEventLabel = `Success ${salesforceSourceCode.replace(
-      /(\b[a-z](?!\s))/g,
-      function (firstLetter) {
-        return firstLetter.toUpperCase();
-      }
-    )}`;
+    const gaEventLabel = `Success ${salesforceSourceCode}`; // example: Success research
 
     setIsSubmitting(true);
     if (formBaseUrl !== undefined) {
@@ -87,6 +82,8 @@ export default function EmailSubscription({
       } catch (error) {
         setStatus("ERROR");
         setIsSubmitted(true);
+        /* @TODO maybe it would be usful to submit a 
+        GA event with label "Error - ${salesforceSourceCode}"?*/
       }
       setIsSubmitting(false);
     }
