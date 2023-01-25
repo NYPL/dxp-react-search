@@ -88,8 +88,7 @@ export default function withDrupalRouter<
         context as GetServerSidePropsContext;
 
       slug = resolvedUrl;
-      console.log("resolvedUrl!");
-      console.log(slug);
+
       // Preview modes.
       if (isNextPreview) {
         // NextJS preview mode.

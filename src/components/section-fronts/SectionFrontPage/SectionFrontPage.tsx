@@ -1,5 +1,4 @@
 import * as React from "react";
-// import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
