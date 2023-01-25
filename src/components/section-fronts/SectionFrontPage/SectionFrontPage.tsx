@@ -153,6 +153,27 @@ export default function SectionFrontPage({
   isPreview,
   revisionId,
 }: SectionFrontPageProps) {
+  // Create the breadcrumbs off the page slug
+  const getBreadcrumbsTrail = (slug: string) => {
+    const breadcrumbsArray = slug.replace(/^\//, "").split("/");
+    const breadcrumbsTrail = breadcrumbsArray.map((item, index) => {
+      let url = `${NEXT_PUBLIC_NYPL_DOMAIN}`;
+
+      breadcrumbsArray.forEach((__, i) => {
+        if (i <= index) {
+          url = url + `/${breadcrumbsArray[i]}`;
+        }
+      });
+
+      return {
+        text: breadcrumbsTextTable[item],
+        url: `${url}`,
+      };
+    });
+
+    return breadcrumbsTrail;
+  };
+
   const { loading, error, data } = useQuery(SECTION_FRONT_QUERY, {
     skip: !uuid,
     variables: {
@@ -162,22 +183,6 @@ export default function SectionFrontPage({
         revisionId: revisionId,
       }),
     },
-  });
-
-  const breadcrumbsArray = slug.replace(/^\//, "").split("/");
-  const breadcrumbsTrail = breadcrumbsArray.map((item, index) => {
-    let url = `${NEXT_PUBLIC_NYPL_DOMAIN}`;
-
-    breadcrumbsArray.forEach((__, i) => {
-      if (i <= index) {
-        url = url + `/${breadcrumbsArray[i]}`;
-      }
-    });
-
-    return {
-      text: breadcrumbsTextTable[item],
-      url: `${url}`,
-    };
   });
 
   // Error state.
@@ -207,7 +212,7 @@ export default function SectionFrontPage({
           text: "Home",
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
         },
-        ...breadcrumbsTrail,
+        ...getBreadcrumbsTrail(slug),
       ]}
       breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
