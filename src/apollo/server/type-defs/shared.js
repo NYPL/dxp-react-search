@@ -185,6 +185,16 @@ export const typeDefs = gql`
     defaultAmount: String
   }
 
+  type ExternalSearch {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    searchType: String
+    formPlaceholder: String
+    colorway: Colorway
+  }
+
   type CardGrid {
     id: ID!
     type: String!
@@ -192,6 +202,7 @@ export const typeDefs = gql`
     description: String
     layout: String
     items: [CardGridItem]!
+    colorway: Colorway
   }
 
   type CardGridItem {
@@ -202,7 +213,23 @@ export const typeDefs = gql`
     link: String
   }
 
+  type Colorway {
+    primary: String
+    secondary: String
+  }
+
   type Query {
     _empty: String
+  }
+
+  type EmailSubscription {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    formPlaceholder: String
+    salesforceListId: String
+    salesforceSourceCode: String
+    colorway: Colorway
   }
 `;

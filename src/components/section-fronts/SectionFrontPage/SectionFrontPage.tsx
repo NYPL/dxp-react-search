@@ -11,7 +11,12 @@ import PreviewModeNotification from "../../shared/PreviewModeNotification";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 // Used in the catch all page template to determine component to render.
-export const sectionFrontsSlugs = ["/give", "/research"];
+export const sectionFrontsSlugs = [
+  "/give",
+  "/research",
+  "/research/collections",
+  "/research/support",
+];
 
 // Generate the static paths for getStaticPaths
 type GetStaticPropsParamsType = {
@@ -31,6 +36,10 @@ export const SECTION_FRONT_QUERY = gql`
       id
       title
       description
+      colorway {
+        primary
+        secondary
+      }
       image {
         id
         uri
@@ -72,6 +81,9 @@ export const SECTION_FRONT_QUERY = gql`
           type
           title
           layout
+          colorway {
+            primary
+          }
           items {
             id
             title
@@ -89,6 +101,31 @@ export const SECTION_FRONT_QUERY = gql`
                 uri
               }
             }
+          }
+        }
+        ... on ExternalSearch {
+          __typename
+          id
+          type
+          title
+          description
+          searchType
+          formPlaceholder
+          colorway {
+            primary
+          }
+        }
+        ... on EmailSubscription {
+          __typename
+          id
+          type
+          heading
+          description
+          formPlaceholder
+          salesforceListId
+          salesforceSourceCode
+          colorway {
+            primary
           }
         }
       }
@@ -150,7 +187,7 @@ export default function SectionFrontPage({
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
         },
       ]}
-      breadcrumbsColor="booksAndMore"
+      breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
       contentHeader={
         <>
@@ -159,7 +196,7 @@ export default function SectionFrontPage({
             heroType="tertiary"
             heading={<Heading level="one" text={sectionFront.title} />}
             subHeaderText={sectionFront.description}
-            backgroundColor="brand.primary"
+            backgroundColor={sectionFront.colorway.primary}
             foregroundColor="ui.white"
           />
           {featuredContent && (

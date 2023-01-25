@@ -38,6 +38,9 @@ export default function resolveParagraphTypes(
     case "donation":
       resolvedObjectType = "Donation";
       break;
+    case "external_search":
+      resolvedObjectType = "ExternalSearch";
+      break;
     // Home page.
     case "hp_hero":
       resolvedObjectType = "HomePageHeroComponent";
@@ -64,6 +67,9 @@ export default function resolveParagraphTypes(
     switch (objectType) {
       case "link_card_list":
         resolvedObjectType = "CardGrid";
+        break;
+      case "email_subscription":
+        resolvedObjectType = "EmailSubscription";
         break;
     }
   }

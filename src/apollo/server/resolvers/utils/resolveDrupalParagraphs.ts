@@ -1,6 +1,7 @@
 import { JsonApiResourceObject } from "./types";
 import { resolveImage } from "./resolveImage";
 import fetchOembedApi from "./fetchOembedApi";
+import getColorway from "./../../../../utils/get-colorway";
 
 type ResolvedParagraph = {
   [index: string]: string | number | boolean | object | undefined | null;
@@ -8,8 +9,12 @@ type ResolvedParagraph = {
 
 export default function resolveDrupalParagraphs(
   paragraphResourceObjects: JsonApiResourceObject[],
-  typesInQuery: string[]
+  typesInQuery: string[],
+  apiResponse?: any
 ): ResolvedParagraph[] {
+  // Define variables used to determine the colorway prop on Section Front pages
+  const contentType = apiResponse?.type.replace("node--", "");
+  const slug = apiResponse?.path?.alias;
   // Drupal json:api will return all paragraphs for the field.
   // So we first reduce this array of objects only to those paragraphs
   // that we're requested by the gql query.
@@ -89,6 +94,20 @@ export default function resolveDrupalParagraphs(
       if (
         item.type === "paragraph--donation" &&
         typesInQuery.includes("Donation")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--email_subscription" &&
+        typesInQuery.includes("EmailSubscription")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--external_search" &&
+        typesInQuery.includes("ExternalSearch")
       ) {
         accumulator.push(item);
       }
@@ -348,6 +367,10 @@ export default function resolveDrupalParagraphs(
           description: item.field_tfls_description?.processed,
           layout: item.field_lts_card_grid_layout,
           items: cardItems,
+          colorway:
+            contentType === "section_front"
+              ? getColorway("section_front")
+              : null,
         };
         break;
       // @TODO Add back later.
@@ -393,6 +416,33 @@ export default function resolveDrupalParagraphs(
           otherLevelId: item.field_ts_donation_other_level_id,
         };
         break;
+      case "paragraph--email_subscription":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          formPlaceholder: item.field_ts_placeholder,
+          salesforceListId: item.field_ts_salesforce_list_id,
+          salesforceSourceCode: item.field_ts_salesforce_source_code,
+          colorway: slug ? getColorway(slug) : null,
+        };
+        break;
+      case "paragraph--external_search":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          title: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          searchType: item.field_lts_search_type,
+          formPlaceholder: item.field_ts_placeholder,
+          colorway:
+            contentType === "section_front"
+              ? getColorway("section_front")
+              : null,
+        };
+        break;
+
       // Home page.
       case "paragraph--hp_hero":
         paragraphComponent = {
