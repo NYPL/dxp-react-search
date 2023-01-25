@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  Box,
-  Icon,
-  IconNames,
-  Text,
-} from "@nypl/design-system-react-components";
+import { Box, Icon, IconNames } from "@nypl/design-system-react-components";
 
 export type StatusCode = "SUCCESS" | "ERROR" | "TEST_MODE";
 
@@ -27,15 +22,17 @@ export default function EmailSubscriptionConfirmation({
   headingColor,
   status,
 }: EmailSubscriptionConfirmationProps) {
-  function getStatusMessage(status: StatusCode) {
+  function getStatusMessage(status: StatusCode): string {
     if (status === "SUCCESS") {
       return "Thank you! You have successfully subscribed to our email updates! You can update your email subscription preferences at any time using the links at the bottom of the email.";
     }
     if (status === "ERROR") {
-      return "Error message to go here Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt consectetur adipiscing elit";
+      return "An error has occurred while attempting to save your information. Please refresh this page and try again. If this error persists, <a href='mailto:enews@nypl.org?subject=Please re-activate my e-mail address'>contact our e-mail team</a>.";
     }
     if (status === "TEST_MODE") {
       return "Test mode ....";
+    } else {
+      return "UNKNOWN STATUS";
     }
   }
 
@@ -49,9 +46,14 @@ export default function EmailSubscriptionConfirmation({
         bgColor={headingColor}
         borderRadius="50%"
       />
-      <Text alignSelf="center" textAlign="center" marginStart="s" mb="0">
-        {getStatusMessage(status)}
-      </Text>
+      <Box
+        alignSelf="center"
+        textAlign="center"
+        marginStart="s"
+        mb="0"
+        sx={{ a: { color: "ui.white", textDecoration: "underline" } }}
+        dangerouslySetInnerHTML={{ __html: getStatusMessage(status) }}
+      />
     </Box>
   );
 }
