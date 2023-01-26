@@ -24,7 +24,7 @@ export default function EmailSubscriptionWrapper({
       justifyContent="center"
       alignItems="center"
       width="full"
-      minH="300px"
+      minH="350px"
       padding="l"
       bgColor={bgColor}
       color={headingColor}
