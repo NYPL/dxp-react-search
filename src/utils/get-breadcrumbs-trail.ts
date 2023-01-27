@@ -1,37 +1,27 @@
-// Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-// Type
 import { BreadcrumbsItem } from "./../components/shared/layouts/PageContainer";
 
+// This converts a slug part string to the text value of the breadcrumb item.
 const breadcrumbsTextTable: Record<string, string> = {
   give: "Give",
   research: "Research",
   support: "Support and Services",
   collections: "Collections",
+  // For testing purposes now, replace with an actual 3rd level item when knwown.
+  "level-3": "Level 3",
 };
 
-export default function getBreadcrumbsTrail(
-  slug: string | undefined | null
-): BreadcrumbsItem[] {
-  // Early return if the slug is empty in any way
-  if (slug === "" || slug === undefined || slug === null) return [];
-  // Clean slug from any extra slashes and parammeters
+export default function getBreadcrumbsTrail(slug: string): BreadcrumbsItem[] {
+  // Convert the slug from a string to an array, and any extra slashes.
   const breadcrumbsArray = slug
     .replace(/^\//, "")
     .replace(/\?.*/, "")
     .split("/");
-  //If there is only one
-  if (breadcrumbsArray.length === 1) {
-    return [
-      {
-        text: breadcrumbsTextTable[breadcrumbsArray[0]],
-        url: `${NEXT_PUBLIC_NYPL_DOMAIN}/${breadcrumbsArray[0]}`,
-      },
-    ];
-  }
-  const breadcrumbsTrail = breadcrumbsArray.map((item, index) => {
-    let url = `${NEXT_PUBLIC_NYPL_DOMAIN}`;
 
+  const breadcrumbsTrail = breadcrumbsArray.map((_, index) => {
+    // @TODO add commen on what this block of code does and why.
+    // [ 'research', 'support' ] -> "/research" or "/research/support"
+    let url = `${NEXT_PUBLIC_NYPL_DOMAIN}`;
     breadcrumbsArray.forEach((__, i) => {
       if (i <= index) {
         url = url + `/${breadcrumbsArray[i]}`;
@@ -39,7 +29,7 @@ export default function getBreadcrumbsTrail(
     });
 
     return {
-      text: breadcrumbsTextTable[item],
+      text: breadcrumbsTextTable[breadcrumbsArray[index]],
       url: `${url}`,
     };
   });

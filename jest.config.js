@@ -2,6 +2,7 @@ module.exports = {
   collectCoverageFrom: ["**/*.{js,jsx,tsx}", "!**/node_modules/**"],
   setupFiles: ["<rootDir>/jest.setupFiles.js"],
   setupFilesAfterEnv: [
+    "<rootDir>/testHelper/set-env-vars.js",
     "<rootDir>/testHelper/browser.js",
     "<rootDir>/jest.setupFiles.js",
     "react-intersection-observer/test-utils",
