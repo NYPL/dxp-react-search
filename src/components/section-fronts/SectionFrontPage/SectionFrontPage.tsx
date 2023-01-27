@@ -7,6 +7,7 @@ import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 import Donation from "../Donation";
 import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
+import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
@@ -135,15 +136,19 @@ export const SECTION_FRONT_QUERY = gql`
 
 interface SectionFrontPageProps {
   uuid: string;
+  slug: string;
   isPreview?: boolean;
   revisionId?: string;
 }
 
 export default function SectionFrontPage({
   uuid,
+  slug,
   isPreview,
   revisionId,
 }: SectionFrontPageProps) {
+  // Create the breadcrumbs off the page slug
+
   const { loading, error, data } = useQuery(SECTION_FRONT_QUERY, {
     skip: !uuid,
     variables: {
@@ -182,10 +187,7 @@ export default function SectionFrontPage({
           text: "Home",
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
         },
-        {
-          text: sectionFront.title,
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
-        },
+        ...getBreadcrumbsTrail(slug),
       ]}
       breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
