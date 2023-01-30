@@ -109,14 +109,14 @@ export default function EmailSubscription({
       heading={heading}
       headingColor={headingColor}
     >
-      {isSubmitted && status ? (
-        <EmailSubscriptionConfirmation
-          id={id}
-          status={status}
-          bgColor={bgColor}
-          headingColor={headingColor}
-        />
-      ) : (
+      <EmailSubscriptionConfirmation
+        id={id}
+        status={status}
+        isSubmitted={isSubmitted}
+        bgColor={bgColor}
+        headingColor={headingColor}
+      />
+      {!isSubmitted && !status && (
         <EmailSubscriptionForm
           id={id}
           description={description}

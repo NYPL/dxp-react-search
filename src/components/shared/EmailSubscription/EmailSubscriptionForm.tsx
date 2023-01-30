@@ -48,7 +48,7 @@ export default function EmailSubscriptionForm({
             <TextInput
               isRequired
               id={`email-input-${id}`}
-              labelText="Email subscription"
+              labelText="Signup for our newsletter by entering your email address."
               value={formInput}
               type="email"
               name="email"

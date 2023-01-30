@@ -6,7 +6,7 @@ interface EmailSubscriptionWrapperProps {
   bgColor?: string;
   heading?: string;
   headingColor?: string;
-  children?: React.ReactElement;
+  children?: React.ReactNode;
 }
 
 export default function EmailSubscriptionWrapper({

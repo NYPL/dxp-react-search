@@ -11,16 +11,18 @@ const iconTable: Record<StatusCode, IconNames> = {
 
 interface EmailSubscriptionConfirmationProps {
   id: string;
-  status: StatusCode;
+  status?: StatusCode;
+  isSubmitted: boolean;
   bgColor?: string;
   headingColor?: string;
 }
 
 export default function EmailSubscriptionConfirmation({
   id,
+  status,
+  isSubmitted,
   bgColor,
   headingColor,
-  status,
 }: EmailSubscriptionConfirmationProps) {
   function getStatusMessage(status: StatusCode): string {
     if (status === "SUCCESS") {
@@ -30,30 +32,41 @@ export default function EmailSubscriptionConfirmation({
       return "An error has occurred while attempting to save your information. Please refresh this page and try again. If this error persists, <a href='mailto:enews@nypl.org?subject=Please re-activate my e-mail address'>contact our e-mail team</a>.";
     }
     if (status === "TEST_MODE") {
-      return "Test mode ....";
+      return "Thank you! You are currently in test mode, but the form submitted correctly.";
     } else {
       return "UNKNOWN STATUS";
     }
   }
 
   return (
-    <Box id={`email-subscription-confirmation-${id}`} w="full">
-      <Icon
-        decorative
-        size="large"
-        name={iconTable[status]}
-        color={bgColor}
-        bgColor={headingColor}
-        borderRadius="50%"
-      />
-      <Box
-        alignSelf="center"
-        textAlign="center"
-        marginStart="s"
-        mb="0"
-        sx={{ a: { color: "ui.white", textDecoration: "underline" } }}
-        dangerouslySetInnerHTML={{ __html: getStatusMessage(status) }}
-      />
+    <Box
+      id={`email-subscription-confirmation-${id}`}
+      w="full"
+      role="log"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-relevant="additions"
+    >
+      {isSubmitted && status && (
+        <>
+          <Icon
+            decorative
+            size="large"
+            name={iconTable[status]}
+            color={bgColor}
+            bgColor={headingColor}
+            borderRadius="50%"
+          />
+          <Box
+            alignSelf="center"
+            textAlign="center"
+            marginStart="s"
+            mb="0"
+            sx={{ a: { color: "ui.white", textDecoration: "underline" } }}
+            dangerouslySetInnerHTML={{ __html: getStatusMessage(status) }}
+          />
+        </>
+      )}
     </Box>
   );
 }
