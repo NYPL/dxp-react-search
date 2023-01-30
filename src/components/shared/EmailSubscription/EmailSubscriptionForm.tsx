@@ -7,7 +7,6 @@ import {
   FormRow,
   Text,
   TextInput,
-  useNYPLBreakpoints,
 } from "@nypl/design-system-react-components";
 
 interface EmailSubscriptionFormProps {
@@ -29,8 +28,6 @@ export default function EmailSubscriptionForm({
   formPlaceholder,
   formHelperText,
 }: EmailSubscriptionFormProps): React.ReactElement {
-  const { isLargerThanMobile } = useNYPLBreakpoints();
-
   return (
     <>
       <Text fontSize="1">{description}</Text>
@@ -50,7 +47,7 @@ export default function EmailSubscriptionForm({
               value={formInput}
               type="email"
               name="email"
-              showHelperInvalidText={isLargerThanMobile}
+              showHelperInvalidText={false}
               textAlign="start"
               sx={{ div: { color: "ui.white" } }}
               placeholder={formPlaceholder}
@@ -59,7 +56,7 @@ export default function EmailSubscriptionForm({
               }}
             />
           </FormField>
-          <FormField alignItems="end" pb={{ base: 0, md: "28%" }}>
+          <FormField alignItems="flex-end">
             <Button
               id={`email-submit-button-${id}`}
               type="submit"
@@ -67,6 +64,7 @@ export default function EmailSubscriptionForm({
               color="ui.white"
               border="1px solid"
               bg="transparent"
+              sx={{ _hover: { bg: "initial" } }}
             >
               Submit
             </Button>
