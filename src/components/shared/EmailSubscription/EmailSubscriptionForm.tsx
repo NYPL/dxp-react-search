@@ -33,38 +33,41 @@ export default function EmailSubscriptionForm({
 
   return (
     <>
-      <Text fontSize="1" w={{ base: "100%", lg: "85%" }}>
-        {description}
-      </Text>
+      <Text fontSize="1">{description}</Text>
       <Form
         id="email-subscription-form"
         onSubmit={(e) => onSubmit(e)}
         gap="grid.s"
         maxW="415px"
-        w={{ base: "full", md: "60%", lg: "40%" }}
+        w={{ base: "full" }}
       >
         <FormRow gridTemplateColumns={{ base: "repeat(1fr)", md: "2fr auto" }}>
           <FormField>
             <TextInput
               isRequired
               id={`email-input-${id}`}
-              labelText="Email subscription"
+              labelText="Email Address"
               value={formInput}
               type="email"
               name="email"
-              color="black"
               showHelperInvalidText={isLargerThanMobile}
               textAlign="start"
               sx={{ div: { color: "ui.white" } }}
               placeholder={formPlaceholder}
-              showLabel={false}
               onChange={(e) => {
                 onChange(e.target.value);
               }}
             />
           </FormField>
-          <FormField>
-            <Button id={`email-submit-button-${id}`} type="submit">
+          <FormField alignItems="end" pb={{ base: 0, md: "28%" }}>
+            <Button
+              id={`email-submit-button-${id}`}
+              type="submit"
+              borderColor="ui.white"
+              color="ui.white"
+              border="1px solid"
+              bg="transparent"
+            >
               Submit
             </Button>
           </FormField>
