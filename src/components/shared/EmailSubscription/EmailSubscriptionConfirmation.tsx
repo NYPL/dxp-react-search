@@ -22,6 +22,12 @@ export default function EmailSubscriptionConfirmation({
   headingColor,
   status,
 }: EmailSubscriptionConfirmationProps) {
+  // Manage focus to ensure accessibility when cofirmation message is rendered
+  const confirmationMessageRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    confirmationMessageRef.current?.focus();
+  }, []);
+
   function getStatusMessage(status: StatusCode): string {
     if (status === "SUCCESS") {
       return "Thank you! You have successfully subscribed to our email updates! You can update your email subscription preferences at any time using the links at the bottom of the email.";
@@ -47,6 +53,8 @@ export default function EmailSubscriptionConfirmation({
         borderRadius="50%"
       />
       <Box
+        ref={confirmationMessageRef}
+        tabIndex={-1}
         alignSelf="center"
         textAlign="center"
         marginStart="s"
