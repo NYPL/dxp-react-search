@@ -31,8 +31,16 @@ export default function EmailSubscriptionWrapper({
       textAlign="center"
       marginY="m"
     >
-      <Heading text={heading} w={{ base: "90%", md: "70%" }} />
-      {children}
+      <Box
+        display="flex"
+        flexDir="column"
+        justifyContent="center"
+        alignItems="center"
+        w={{ base: "100%", lg: "85%" }}
+      >
+        <Heading text={heading} w={{ base: "90%", md: "70%" }} />
+        {children}
+      </Box>
     </Box>
   );
 }
