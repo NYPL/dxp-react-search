@@ -49,7 +49,7 @@ export default function EmailSubscriptionForm({
               name="email"
               showHelperInvalidText={false}
               textAlign="start"
-              sx={{ div: { color: "ui.white" } }}
+              sx={{ input: { color: "ui.black" } }}
               placeholder={formPlaceholder}
               onChange={(e) => {
                 onChange(e.target.value);
