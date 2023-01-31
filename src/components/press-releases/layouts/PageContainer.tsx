@@ -14,7 +14,7 @@ import { PRESS_BASE_PATH } from "./../../../utils/config";
 
 type PressPageContainerProps = Omit<
   PageContainerProps,
-  "breadcrumbsColor" | "wrapperClass" | "breadcrumbs"
+  "breadcrumbsType" | "wrapperClass" | "breadcrumbs"
 > & {
   showContentHeader: boolean;
   breadcrumbs?: BreadcrumbsItem[];
@@ -61,7 +61,7 @@ function PageContainer({
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor="blogs"
+      breadcrumbsType="blogs"
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"

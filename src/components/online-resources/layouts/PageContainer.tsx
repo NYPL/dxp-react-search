@@ -72,7 +72,7 @@ function PageContainer({
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor="research"
+      breadcrumbsType="research"
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"
