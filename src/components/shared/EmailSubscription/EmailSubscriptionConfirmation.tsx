@@ -25,10 +25,8 @@ export default function EmailSubscriptionConfirmation({
   // Manage focus to ensure accessibility when cofirmation message is rendered
   const confirmationMessageRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
-    if (confirmationMessageRef.current) {
-      confirmationMessageRef.current.focus();
-    }
-  });
+    confirmationMessageRef.current?.focus();
+  }, []);
 
   function getStatusMessage(status: StatusCode): string {
     if (status === "SUCCESS") {
