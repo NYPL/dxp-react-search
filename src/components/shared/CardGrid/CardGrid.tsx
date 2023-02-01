@@ -106,7 +106,7 @@ export default function CardGrid({
   }
 
   return (
-    <Box id={`${type}-${id}`} mb="2em">
+    <Box id={`${type}-${id}`} mb="xl">
       {title && (
         <CardGridHeader
           id={id}

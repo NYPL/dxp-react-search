@@ -63,7 +63,7 @@ export default function ExternalSearch({
   }
 
   return (
-    <Box id={`external-search-${id}`} mb="l">
+    <Box id={`external-search-${id}`} mb="xl">
       <Heading level="two" color={headingColor}>
         {title}
       </Heading>
