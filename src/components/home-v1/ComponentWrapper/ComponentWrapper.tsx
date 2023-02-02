@@ -49,6 +49,7 @@ function ComponentWrapper({
     borderStyle: "solid",
     textTransform: "uppercase",
   };
+
   return (
     <Box
       bg={bg ? bg : ""}
