@@ -730,11 +730,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
     </div>
     <div
       className="css-1ktje31"
-    >
-      <div
-        className="css-i2lecr"
-      />
-    </div>
+    />
   </div>
 </div>
 `;
