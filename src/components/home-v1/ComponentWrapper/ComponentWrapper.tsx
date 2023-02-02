@@ -39,6 +39,8 @@ function ComponentWrapper({
   gap,
   children,
 }: ComponentWrapperProps) {
+  // Check if button text is passed
+  const hasSeeMoreText = !!seeMore?.text;
   // @TODO fix for styling of seeMore button
   const seeMoreStyle = {
     color: textColor,
@@ -47,7 +49,6 @@ function ComponentWrapper({
     borderStyle: "solid",
     textTransform: "uppercase",
   };
-
   return (
     <Box
       bg={bg ? bg : ""}
@@ -113,13 +114,13 @@ function ComponentWrapper({
           {children}
         </GridItem>
         <GridItem gridColumn={{ md: 2 }} gridRow={{ md: 3 }} maxW="6xl">
-          <Box
-            maxWidth={{ base: "90vw", md: "75vw", lg: "90vw", xl: "85vw" }}
-            textAlign="center"
-            mt={{ base: 6 }}
-            mb={{ base: 7, md: 10, lg: 8 }}
-          >
-            {seeMore && (
+          {hasSeeMoreText && (
+            <Box
+              maxWidth={{ base: "90vw", md: "75vw", lg: "90vw", xl: "85vw" }}
+              textAlign="center"
+              mt={{ base: 6 }}
+              mb={{ base: 7, md: 10, lg: 8 }}
+            >
               <HomePageLink
                 id={`component-wrapper-seeMore-link-${id}`}
                 aria-label={`see more of ${title}`}
@@ -134,8 +135,8 @@ function ComponentWrapper({
               >
                 {seeMore.text}
               </HomePageLink>
-            )}
-          </Box>
+            </Box>
+          )}
         </GridItem>
       </Grid>
     </Box>
