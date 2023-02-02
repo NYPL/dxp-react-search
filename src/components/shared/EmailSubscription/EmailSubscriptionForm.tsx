@@ -72,7 +72,7 @@ export default function EmailSubscriptionForm({
         </FormRow>
       </Form>
       <Box
-        textDecoration="italic"
+        fontStyle="italic"
         mt="1rem"
         fontSize="-1"
         dangerouslySetInnerHTML={{ __html: formHelperText }}
