@@ -8,11 +8,16 @@ export const typeDefs = gql`
     image: Image
     featuredContent: [SectionFrontFeaturedContent]
     mainContent: [SectionFrontMainContent]
+    colorway: Colorway
   }
 
   union SectionFrontFeaturedContent = Donation
 
-  union SectionFrontMainContent = CardGrid | Donation
+  union SectionFrontMainContent =
+      CardGrid
+    | Donation
+    | ExternalSearch
+    | EmailSubscription
 
   type SectionFrontConnection {
     items: [SectionFront]

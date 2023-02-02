@@ -10,7 +10,8 @@ import s from "./PageContainer.module.css";
 export interface PageContainerProps {
   metaTags?: MetaTags;
   breadcrumbs: BreadcrumbsItem[];
-  breadcrumbsColor: BreadcrumbsTypes;
+  breadcrumbsType?: BreadcrumbsTypes;
+  breadcrumbsColor?: string;
   wrapperClass: string;
   contentHeader?: React.ReactNode;
   contentPrimary: React.ReactNode;
@@ -34,6 +35,7 @@ export type MetaTags = {
 function PageContainer({
   metaTags,
   breadcrumbs,
+  breadcrumbsType = "whatsOn",
   breadcrumbsColor,
   wrapperClass,
   contentHeader,
@@ -65,7 +67,10 @@ function PageContainer({
         <DSProvider>
           <Breadcrumbs
             breadcrumbsData={breadcrumbs}
-            breadcrumbsType={breadcrumbsColor}
+            breadcrumbsType={breadcrumbsType}
+            {...(breadcrumbsColor && {
+              backgroundColor: breadcrumbsColor,
+            })}
           />
           <main id="main-content">
             {contentHeader && <div>{contentHeader}</div>}

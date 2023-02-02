@@ -40,7 +40,7 @@ function PageContainer({
             url: `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/request-visit`,
           },
         ]}
-        breadcrumbsColor="locations"
+        breadcrumbsType="locations"
         wrapperClass="nypl--locations"
         {...(showContentHeader && {
           contentHeader: contentHeader,
