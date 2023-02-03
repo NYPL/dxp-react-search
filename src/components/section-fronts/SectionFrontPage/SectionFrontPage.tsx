@@ -4,12 +4,14 @@ import { gql, useQuery } from "@apollo/client";
 // Components
 import PageContainer from "../../shared/layouts/PageContainer";
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
-import Donation from "../Donation";
+// import Donation from "../Donation";
 import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
 import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
+// Mock Education Content
+import educationFeaturedContent from "../../../__content/educationFeaturedContent";
 
 // Used in the catch all page template to determine component to render.
 export const sectionFrontsSlugs = [
@@ -201,17 +203,15 @@ export default function SectionFrontPage({
             backgroundColor={sectionFront.colorway.primary}
             foregroundColor="ui.white"
           />
-          {featuredContent && (
-            <Donation
-              id={featuredContent.id}
-              title={featuredContent.title}
-              description={featuredContent.description}
-              image={featuredContent.image}
-              donationFormBaseUrl={featuredContent.formBaseUrl}
-              defaultAmount={featuredContent.defaultAmount}
-              donationOtherLevelId={featuredContent.otherLevelId}
-            />
-          )}
+          {/* Renders the Donation component */}
+          {/* {featuredContent && Components(featuredContent)} */}
+          {/* Renders a Education Jumboton with mock data */}
+          {featuredContent &&
+            Components({
+              ...educationFeaturedContent,
+              image: featuredContent.image,
+              jumbotronImg: "https://placekitten.com/444/222",
+            })}
         </>
       }
       contentPrimary={
