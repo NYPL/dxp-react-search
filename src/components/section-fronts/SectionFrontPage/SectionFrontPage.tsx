@@ -11,7 +11,7 @@ import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 // Mock Education Content
-import educationFeaturedContent from "../../../__content/educationFeaturedContent";
+// import educationFeaturedContent from "../../../__content/educationFeaturedContent";
 
 // Used in the catch all page template to determine component to render.
 export const sectionFrontsSlugs = [
@@ -204,14 +204,14 @@ export default function SectionFrontPage({
             foregroundColor="ui.white"
           />
           {/* Renders the Donation component */}
-          {/* {featuredContent && Components(featuredContent)} */}
+          {featuredContent && Components(featuredContent)}
           {/* Renders a Education Jumboton with mock data */}
-          {featuredContent &&
+          {/* {featuredContent &&
             Components({
               ...educationFeaturedContent,
               image: featuredContent.image,
               jumbotronImg: "https://placekitten.com/444/222",
-            })}
+            })} */}
         </>
       }
       contentPrimary={
