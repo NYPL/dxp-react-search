@@ -113,6 +113,13 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
+        item.type === "paragraph--featured_card" &&
+        typesInQuery.includes("LandingPageFeaturedCard")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
         item.type === "paragraph--hp_hero" &&
         typesInQuery.includes("HomePageHeroComponent")
       ) {
@@ -439,6 +446,31 @@ export default function resolveDrupalParagraphs(
             contentType === "section_front"
               ? getColorway("section_front")
               : null,
+        };
+        break;
+      // This resolves the data from json:api into the shapre of the LandingPageFeaturedCard GQL type.
+      case "paragraph--featured_card":
+        // Alter the color scheme value from Drupal.
+        let bgColor = item.field_field_lts_color_scheme;
+        if (item.field_field_lts_color_scheme === "primary_alt") {
+          bgColor = "primaryAlt";
+        } else if (item.field_field_lts_color_scheme === "primary_gray") {
+          bgColor = "primaryGray";
+        }
+
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          image:
+            item.field_ers_media_item.data === null
+              ? null
+              : resolveImage(item.field_ers_media_item),
+          imageDirection: item.field_lts_image_direction.replace("image_", ""),
+          bgColor: bgColor,
+          link: item.field_lns_see_all?.url,
+          linkText: item.field_lns_see_all?.title,
         };
         break;
 

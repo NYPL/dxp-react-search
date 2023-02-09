@@ -41,6 +41,10 @@ export default function resolveParagraphTypes(
     case "external_search":
       resolvedObjectType = "ExternalSearch";
       break;
+    // Maps the drupal paragraph machine name to the GQL type name.
+    case "featured_card":
+      resolvedObjectType = "LandingPageFeaturedCard";
+      break;
     // Home page.
     case "hp_hero":
       resolvedObjectType = "HomePageHeroComponent";
