@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Button,
+  Box,
   Form,
   FormField,
   FormRow,
@@ -16,7 +17,7 @@ interface EmailSubscriptionFormProps {
   onChange: (e: string) => void;
   formInput?: string;
   formPlaceholder?: string;
-  formHelperText?: string;
+  formHelperText: string;
 }
 
 export default function EmailSubscriptionForm({
@@ -45,6 +46,7 @@ export default function EmailSubscriptionForm({
         <FormRow gridTemplateColumns={{ base: "repeat(1fr)", md: "2fr auto" }}>
           <FormField>
             <TextInput
+              isRequired
               id={`email-input-${id}`}
               labelText="Email subscription"
               value={formInput}
@@ -68,9 +70,13 @@ export default function EmailSubscriptionForm({
           </FormField>
         </FormRow>
       </Form>
-      <Text isItalic mt="1rem" fontSize="-1">
-        {formHelperText}
-      </Text>
+      <Box
+        textDecoration="italic"
+        mt="1rem"
+        fontSize="-1"
+        dangerouslySetInnerHTML={{ __html: formHelperText }}
+        sx={{ a: { color: "ui.white", textDecoration: "underline" } }}
+      />
     </>
   );
 }

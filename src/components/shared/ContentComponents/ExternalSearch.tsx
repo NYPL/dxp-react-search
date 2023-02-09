@@ -49,6 +49,7 @@ export default function ExternalSearch({
       searchLabel = "Search the website";
       formBaseUrl = "https://www.nypl.org";
       searchUrl = `${formBaseUrl}/search/${finalInput}`;
+      break;
     case "vega":
       searchLabel = "Search the catalog";
       formBaseUrl = "https://nypl.na2.iiivega.com/search";
