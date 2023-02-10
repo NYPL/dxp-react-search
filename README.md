@@ -1,4 +1,4 @@
-# DXP Scout [ D10 Runway Vercel Env ]
+# DXP Scout
 
 React app build for www.nypl.org. Pages currently in repo:
 
