@@ -2,6 +2,19 @@
 
 ---
 
+### v0.9.3 - Section Front Research Release
+
+---
+
+- Adds External Search component: [#358](https://github.com/NYPL/dxp-react-search/pull/358)
+- Adds Email Subscription component: [#358](https://github.com/NYPL/dxp-react-search/pull/358)
+- Adds Salesforce API route: [#358](https://github.com/NYPL/dxp-react-search/pull/358)
+- Updates AWS deploy script with Salesforce env variables: [#384](https://github.com/NYPL/dxp-react-search/pull/384)
+- Updates Card Grid component with additional layout variants: [#371](https://github.com/NYPL/dxp-react-search/pull/371)
+- Adds get-colorway util for dynamically setting section front colors: [#353](https://github.com/NYPL/dxp-react-search/pull/353)
+
+---
+
 ### v0.9.2 - General Maintenance & Improvements
 
 ---
