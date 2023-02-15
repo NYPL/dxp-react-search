@@ -32,22 +32,8 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
       className="css-1y2jlch"
     >
       <div
-        className="css-14ix2g8"
+        className="css-nx94xp"
       >
-        <div
-          className="css-0"
-          id="slideshow-prev-button-container"
-        >
-          <button
-            className="chakra-button css-kk119v"
-            id="slideshow-prev-button"
-            onClick={[Function]}
-            tabIndex={-1}
-            type="button"
-          >
-            &lt;
-          </button>
-        </div>
         <div
           className="css-1ric1bm"
         >
@@ -57,9 +43,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             <li
               className="css-1fzgmij"
               onFocus={[Function]}
+              onPointerMove={[Function]}
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-1"
                 id="slideshow-card-test-id-1"
               >
                 <div
@@ -221,9 +209,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             <li
               className="css-1fzgmij"
               onFocus={[Function]}
+              onPointerMove={[Function]}
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-2"
                 id="slideshow-card-test-id-2"
               >
                 <div
@@ -385,9 +375,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             <li
               className="css-1fzgmij"
               onFocus={[Function]}
+              onPointerMove={[Function]}
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-3"
                 id="slideshow-card-test-id-3"
               >
                 <div
@@ -549,9 +541,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             <li
               className="css-1fzgmij"
               onFocus={[Function]}
+              onPointerMove={[Function]}
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-4"
                 id="slideshow-card-test-id-4"
               >
                 <div
@@ -712,20 +706,6 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             </li>
           </ul>
         </div>
-        <div
-          className="css-0"
-          id="slideshow-next-button-container"
-        >
-          <button
-            className="chakra-button css-r8n6x3"
-            id="slideshow-next-button"
-            onClick={[Function]}
-            tabIndex={-1}
-            type="button"
-          >
-            &gt;
-          </button>
-        </div>
       </div>
     </div>
     <div
@@ -779,9 +759,11 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     <li
       className="css-1fzgmij"
       onFocus={[Function]}
+      onPointerMove={[Function]}
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-1"
         id="slideshow-card-test-id-1"
       >
         <div
@@ -943,9 +925,11 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     <li
       className="css-1fzgmij"
       onFocus={[Function]}
+      onPointerMove={[Function]}
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-2"
         id="slideshow-card-test-id-2"
       >
         <div
@@ -1107,9 +1091,11 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     <li
       className="css-1fzgmij"
       onFocus={[Function]}
+      onPointerMove={[Function]}
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-3"
         id="slideshow-card-test-id-3"
       >
         <div
@@ -1271,9 +1257,11 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     <li
       className="css-1fzgmij"
       onFocus={[Function]}
+      onPointerMove={[Function]}
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-4"
         id="slideshow-card-test-id-4"
       >
         <div
