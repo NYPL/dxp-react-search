@@ -92,6 +92,7 @@ const items = [
     url: "https://www.nypl.org/",
   },
 ];
+const seeMore = { text: "see More", link: "https://www.nypl.org/" };
 
 describe("Card tests", () => {
   it("should pass axe accessibility tests", async () => {
@@ -131,6 +132,7 @@ describe("CardGrid tests", () => {
         title="Test title"
         link="https://nypl.com"
         items={items}
+        seeMore={seeMore}
       />
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -142,12 +144,24 @@ describe("CardGrid tests", () => {
         title="Test title"
         link="https://nypl.com"
         items={items}
+        seeMore={seeMore}
       />
     );
     expect(screen.getAllByRole("listitem")).toHaveLength(4);
   });
   it("should render the UI snapshot correctly", () => {
-    const cardGrid = renderer
+    const cardGridWithSeeMore = renderer
+      .create(
+        <CardGrid
+          id={"card-grid-test-id"}
+          title="Test title"
+          link="https://nypl.com"
+          items={items}
+          seeMore={seeMore}
+        />
+      )
+      .toJSON();
+    const cardGridWithoutSeeMore = renderer
       .create(
         <CardGrid
           id={"card-grid-test-id"}
@@ -157,6 +171,7 @@ describe("CardGrid tests", () => {
         />
       )
       .toJSON();
-    expect(cardGrid).toMatchSnapshot();
+    expect(cardGridWithSeeMore).toMatchSnapshot();
+    expect(cardGridWithoutSeeMore).toMatchSnapshot();
   });
 });

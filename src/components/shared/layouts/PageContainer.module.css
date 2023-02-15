@@ -20,7 +20,7 @@
 
 @media (min-width: 600px) {
   .grid {
-    padding: var(--nypl-space-l) var(--nypl-space-s);
+    padding: var(--nypl-space-xl) var(--nypl-space-s);
   }
 }
 
@@ -28,7 +28,7 @@
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: var(--nypl-space-m) var(--nypl-space-s);
+  padding: var(--nypl-space-xl) var(--nypl-space-s);
 
   display: grid;
   grid-gap: 2rem;
