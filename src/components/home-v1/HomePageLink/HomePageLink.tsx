@@ -33,11 +33,16 @@ const HomePageLink = React.forwardRef<
     event.preventDefault;
     const gaEventCategory = "Homepage";
 
-    // @ts-ignore
-    window.gtag("event", gaEventActionName, {
-      event_category: gaEventCategory,
-      event_label: href,
-    });
+    if (window !== undefined) {
+      // @ts-ignore
+      if (typeof window.gtag === "function") {
+        // @ts-ignore
+        window.gtag("event", gaEventActionName, {
+          event_category: gaEventCategory,
+          event_label: href,
+        });
+      }
+    }
   };
 
   return (

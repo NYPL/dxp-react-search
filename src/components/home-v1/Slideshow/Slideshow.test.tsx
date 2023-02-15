@@ -2,6 +2,7 @@ import * as React from "react";
 import { jest } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 import { renderHook, act } from "@testing-library/react-hooks";
+import { act as utilAct } from "react-dom/test-utils";
 import userEvent from "@testing-library/user-event";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
@@ -13,6 +14,7 @@ import SlideshowButton from "./SlideshowButton";
 import SlideshowContainer from "./SlideshowContainer";
 import useSlideshowStyles from "./useSlideshow";
 
+// Items rendered for Slideshow comonent tests
 const items = [
   {
     id: "test-id-1",
@@ -91,6 +93,22 @@ const items = [
     url: "https://www.nypl.org/",
   },
 ];
+
+// Util function to resize viewport
+const resizeWindow = (x: number) => {
+  window.innerWidth = x;
+  utilAct(() => {
+    window.dispatchEvent(new Event("resize"));
+  });
+};
+
+// Setup function for userEvent tests with component
+function setup(jsx: React.ReactElement) {
+  return {
+    user: userEvent.setup(),
+    ...render(jsx),
+  };
+}
 
 describe("useSlideshow tests", () => {
   it("returns two functions, the currentSlide number and a CSS style object", () => {
@@ -178,45 +196,43 @@ describe("SlideshowButton tests", () => {
     rerender(<SlideshowButton buttonDirection="prev" />);
     expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
   });
-  it("should call the nextSlide function when the next button is clicked", () => {
-    const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
-    let spyNextSlide = jest.spyOn(result.current, "nextSlide");
-    let spyPrevSlide = jest.spyOn(result.current, "prevSlide");
+  it("should call the nextSlide function when the next button is clicked", async () => {
+    const user = userEvent.setup();
+    let prevSlide = jest.fn();
+    let nextSlide = jest.fn();
 
     render(
       <SlideshowButton
         buttonDirection="next"
-        nextSlide={spyNextSlide}
-        prevSlide={spyPrevSlide}
+        nextSlide={nextSlide}
+        prevSlide={prevSlide}
       />
     );
-    act(() => userEvent.click(screen.getByRole("button", { name: />/i })));
-    expect(spyNextSlide).toBeCalledTimes(1);
-    expect(spyPrevSlide).not.toBeCalled();
+    await user.click(screen.getByRole("button", { name: />/i }));
+    expect(nextSlide).toBeCalledTimes(1);
+    expect(prevSlide).not.toBeCalled();
   });
-  it("should call the prevSlide function when the previous button is clicked", () => {
-    const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
-    let spyNextSlide = jest.spyOn(result.current, "nextSlide");
-    let spyPrevSlide = jest.spyOn(result.current, "prevSlide");
+  it("should call the prevSlide function when the previous button is clicked", async () => {
+    const user = userEvent.setup();
+    let prevSlide = jest.fn();
+    let nextSlide = jest.fn();
 
     render(
       <SlideshowButton
         buttonDirection="prev"
-        nextSlide={spyNextSlide}
-        prevSlide={spyPrevSlide}
+        nextSlide={nextSlide}
+        prevSlide={prevSlide}
       />
     );
-    act(() => userEvent.click(screen.getByRole("button", { name: /</i })));
-    expect(spyPrevSlide).toBeCalledTimes(1);
-    expect(spyNextSlide).not.toBeCalled();
+    await user.click(screen.getByRole("button", { name: /</i }));
+    expect(prevSlide).toBeCalledTimes(1);
+    expect(nextSlide).not.toBeCalled();
   });
   it("should render the UI snapshot correctly", () => {
     // Mock passe in functions
     let prevSlide = jest.fn();
     let nextSlide = jest.fn();
-    // Alternative option to mock hook
-    // const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
-    // const { prevSlide, nextSlide } = result.current;
+
     const nextButton = renderer
       .create(<SlideshowButton buttonDirection="next" nextSlide={nextSlide} />)
       .toJSON();
@@ -231,7 +247,10 @@ describe("SlideshowButton tests", () => {
 describe("SlideshowContainer tests", () => {
   // Call useSlideshow hook to get props for SlideshowContainer component
   const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
-  const { currentSlide, prevSlide, nextSlide, slideshowStyle } = result.current;
+  const { currentSlide, slideshowStyle } = result.current;
+  let prevSlide = jest.fn();
+  let nextSlide = jest.fn();
+
   it("should pass axe accessibility test", async () => {
     const { container } = render(
       <SlideshowContainer
@@ -276,6 +295,9 @@ describe("SlideshowContainer tests", () => {
 });
 
 describe("Slideshow tests", () => {
+  beforeEach(() => {
+    resizeWindow(1024);
+  });
   it("shold pass axe accessibility test", async () => {
     const { container } = render(
       <Slideshow
@@ -287,7 +309,7 @@ describe("Slideshow tests", () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
-  it("should not show the prev button upon rendering", () => {
+  it("should show only the next button upon rendering", () => {
     render(
       <Slideshow
         id="slideshow-test-id"
@@ -296,12 +318,13 @@ describe("Slideshow tests", () => {
         items={items}
       />
     );
+    expect(screen.queryByRole("button", { name: />/i })).toBeInTheDocument();
     expect(
       screen.queryByRole("button", { name: /</i })
     ).not.toBeInTheDocument();
   });
-  it("should show the prev button ones the next button has been clicked", () => {
-    render(
+  it("should show the prev button ones the next button has been clicked", async () => {
+    const { user } = setup(
       <Slideshow
         id="slideshow-test-id"
         title="Test"
@@ -309,11 +332,11 @@ describe("Slideshow tests", () => {
         items={items}
       />
     );
-    userEvent.click(screen.getByRole("button", { name: />/i }));
+    await user.click(screen.getByRole("button", { name: />/i }));
     expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
   });
-  it("should hide the next button when the end of the list is reached", () => {
-    render(
+  it("should hide the next button when the end of the list is reached", async () => {
+    const { user } = setup(
       <Slideshow
         id="slideshow-test-id"
         title="Test"
@@ -321,9 +344,9 @@ describe("Slideshow tests", () => {
         items={items}
       />
     );
-    userEvent.click(screen.getByRole("button", { name: />/i }));
-    userEvent.click(screen.getByRole("button", { name: />/i }));
-    userEvent.click(screen.getByRole("button", { name: />/i }));
+    await user.click(screen.getByRole("button", { name: />/i }));
+    await user.click(screen.getByRole("button", { name: />/i }));
+    await user.click(screen.getByRole("button", { name: />/i }));
     //renders prev button
     expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
     //does not render next button
@@ -331,8 +354,8 @@ describe("Slideshow tests", () => {
       screen.queryByRole("button", { name: />/i })
     ).not.toBeInTheDocument();
   });
-  it("should support keyboard naviagtion", () => {
-    render(
+  it("should support keyboard naviagtion", async () => {
+    const { user } = setup(
       <Slideshow
         id="slideshow-test-id"
         title="Test"
@@ -341,31 +364,146 @@ describe("Slideshow tests", () => {
       />
     );
 
-    userEvent.tab();
+    await user.tab();
     expect(screen.getByRole("link", { name: "Test" })).toHaveFocus();
     // To slide #one
-    userEvent.tab();
+    await user.tab();
 
     expect(screen.getByRole("link", { name: "Test 1" })).toHaveFocus();
     // To slide #two
-    userEvent.tab();
+    await user.tab();
 
     expect(screen.getByRole("link", { name: "Test 2" })).toHaveFocus();
     // Back to slide #one
-    userEvent.tab({ shift: true });
+    await user.tab({ shift: true });
 
     expect(screen.getByRole("link", { name: "Test 1" })).toHaveFocus();
-    // userEvent.tab();
-    // userEvent.tab();
-    // userEvent.tab();
-    // // Last slide
-    // expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
-    // userEvent.tab();
-    // // Can not pass last slide
-    // expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
+    //   user.tab();
+    //   user.tab();
+    //   user.tab();
+    //   // Last slide
+    //   expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
+    //   user.tab();
+    //   // Can not pass last slide
+    //   expect(screen.getByRole("link", { name: "Test 4" })).toHaveFocus();
   });
-  it("should render the UI snapshot correctly", async () => {
-    const basicView = renderer
+  it("should render buttons on tablet", async () => {
+    const { user } = setup(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
+    resizeWindow(800);
+
+    expect(screen.queryByRole("button", { name: />/i })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /</i })
+    ).not.toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: />/i }));
+    expect(screen.queryByRole("button", { name: /</i })).toBeInTheDocument();
+  });
+  it("should allow the user to swipe throught the slideshow on tablet", async () => {
+    const { user } = setup(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
+    // Move slides to left
+    await user.pointer([
+      // touch the screen at element1
+      {
+        keys: "[TouchA>]",
+        target: screen.getByTestId(/slideshow-card-test-id-2/i),
+      },
+      // move the touch pointer to element2
+      {
+        pointerName: "TouchA",
+        target: screen.getByTestId(/slideshow-card-test-id-1/i),
+      },
+      // release the touch pointer at the last position (element2)
+      { keys: "[/TouchA]" },
+    ]);
+    // Move sides to the right
+    await user.pointer([
+      // touch the screen at element1
+      {
+        keys: "[TouchA>]",
+        target: screen.getByTestId(/slideshow-card-test-id-2/i),
+      },
+      // move the touch pointer to element2
+      {
+        pointerName: "TouchA",
+        target: screen.getByTestId(/slideshow-card-test-id-3/i),
+      },
+      // release the touch pointer at the last position (element2)
+      { keys: "[/TouchA]" },
+    ]);
+  });
+  it("should render no buttons on mobile", () => {
+    render(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
+    resizeWindow(600);
+    expect(
+      screen.queryByRole("button", { name: />/i })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /</i })
+    ).not.toBeInTheDocument();
+  });
+  it("should allow the user to swipe throught the slideshow on mobile", async () => {
+    const { user } = setup(
+      <Slideshow
+        id="slideshow-test-id"
+        title="Test"
+        link="https://nypl.com"
+        items={items}
+      />
+    );
+    // Move slides to the left
+    await user.pointer([
+      // touch the screen at element1
+      {
+        keys: "[TouchA>]",
+        target: screen.getByTestId(/slideshow-card-test-id-2/i),
+      },
+      // move the touch pointer to element2
+      {
+        pointerName: "TouchA",
+        target: screen.getByTestId(/slideshow-card-test-id-1/i),
+      },
+      // release the touch pointer at the last position (element2)
+      { keys: "[/TouchA]" },
+    ]);
+    // Move sides to the right
+    await user.pointer([
+      // touch the screen at element1
+      {
+        keys: "[TouchA>]",
+        target: screen.getByTestId(/slideshow-card-test-id-2/i),
+      },
+      // move the touch pointer to element2
+      {
+        pointerName: "TouchA",
+        target: screen.getByTestId(/slideshow-card-test-id-3/i),
+      },
+      // release the touch pointer at the last position (element2)
+      { keys: "[/TouchA]" },
+    ]);
+  });
+  it("should render the UI snapshot correctly", () => {
+    const desktopSlideshow = renderer
       .create(
         <Slideshow
           id="slideshow-test-id"
@@ -375,6 +513,6 @@ describe("Slideshow tests", () => {
         />
       )
       .toJSON();
-    expect(basicView).toMatchSnapshot();
+    expect(desktopSlideshow).toMatchSnapshot();
   });
 });
