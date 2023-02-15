@@ -19,6 +19,7 @@ export default function EmailSubscriptionWrapper({
   return (
     <Box
       id={`email-subscription-wrapper-${id}`}
+      className="email-subscription"
       display="flex"
       flexDir="column"
       justifyContent="center"
