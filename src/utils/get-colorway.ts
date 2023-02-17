@@ -7,7 +7,7 @@ export type ColorwayMap = {
   [name: string]: Colorway;
 };
 
-type SlugOrSection = "/give" | "/research" | "section_front";
+type SlugOrSection = "/give" | "/research" | "/education" | "section_front";
 
 export default function getColorway(slugOrSection: SlugOrSection): Colorway {
   const colorwayMap: ColorwayMap = {
@@ -23,13 +23,13 @@ export default function getColorway(slugOrSection: SlugOrSection): Colorway {
       primary: "section.research.primary",
       secondary: "section.research.secondary",
     },
-    "/research/collections": {
-      primary: "section.research.primary",
-      secondary: "section.research.secondary",
-    },
     "/research/support": {
       primary: "section.research.primary",
       secondary: "section.research.secondary",
+    },
+    "/education": {
+      primary: "#2540A4",
+      secondary: "#1D62E6",
     },
     section_front: {
       primary: "brand.primary",

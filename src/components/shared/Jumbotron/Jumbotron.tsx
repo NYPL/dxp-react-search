@@ -9,17 +9,17 @@ interface JumbotronProps {
   overlay?: React.ReactNode;
 }
 export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
-  //Background images.
+  // Background images.
   const backgroundImageSrcLg = image.transformations
     ? getImageTransformation(
-        "donation_background_focal_point_1280x464",
+        "jumbotron_background_focal_point_1280x464",
         image.transformations
       )
     : image.uri;
 
   const backgroundImageSrc2Xl = image.transformations
     ? getImageTransformation(
-        "donation_background_focal_point_1920x464",
+        "jumbotron_background_focal_point_1920x464",
         image.transformations
       )
     : image.uri;
@@ -44,7 +44,7 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
             uri={image.uri}
             useTransformation={true}
             transformations={image.transformations}
-            transformationLabel={"donation_background_focal_point_1280x464"}
+            transformationLabel={"jumbotron_background_focal_point_1280x464"}
             layout="responsive"
             width={image.width}
             height={image.height}

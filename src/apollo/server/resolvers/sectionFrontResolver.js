@@ -13,6 +13,8 @@ const sectionFrontResolver = {
         "field_ers_media_image.field_media_image",
         "field_ers_featured",
         "field_ers_featured.field_ers_image.field_media_image",
+        // Secondary image
+        "field_ers_featured.field_ers_secondary_image.field_media_image",
         // Link Card List
         "field_main_content.field_erm_link_cards",
         "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",

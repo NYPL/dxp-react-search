@@ -2,9 +2,8 @@ import * as React from "react";
 import { Box, Heading, Flex } from "@nypl/design-system-react-components";
 import DonationAmountInput from "./DonationAmountInput";
 import DonationLinkButton from "./DonationLinkButton";
-import Jumbotron from "../Jumbotron";
+import Jumbotron from "./../../shared/Jumbotron";
 import { ImageType } from "../../shared/Image";
-// import { getImageTransformation } from "../../shared/Image/imageUtils";
 
 export interface DonationProps {
   /** The id of the donation component. */

@@ -10,8 +10,6 @@ import PreviewModeNotification from "../../shared/PreviewModeNotification";
 import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-// Mock Education Content
-// import educationFeaturedContent from "../../../__content/educationFeaturedContent";
 
 // Used in the catch all page template to determine component to render.
 export const sectionFrontsSlugs = [
@@ -19,6 +17,7 @@ export const sectionFrontsSlugs = [
   "/research",
   "/research/collections",
   "/research/support",
+  "/education",
 ];
 
 // Generate the static paths for getStaticPaths
@@ -75,6 +74,37 @@ export const SECTION_FRONT_QUERY = gql`
           formBaseUrl
           defaultAmount
           otherLevelId
+        }
+        ... on Jumbotron {
+          __typename
+          id
+          type
+          title
+          description
+          image {
+            id
+            uri
+            alt
+            width
+            height
+            transformations {
+              id
+              label
+              uri
+            }
+          }
+          secondaryImage {
+            id
+            uri
+            alt
+            width
+            height
+            transformations {
+              id
+              label
+              uri
+            }
+          }
         }
       }
       mainContent {
@@ -174,9 +204,6 @@ export default function SectionFrontPage({
 
   const sectionFront = data.sectionFront;
 
-  // @TODO This might not always be the donation component?
-  const featuredContent = sectionFront.featuredContent[0];
-
   return (
     <PageContainer
       metaTags={{
@@ -203,15 +230,11 @@ export default function SectionFrontPage({
             backgroundColor={sectionFront.colorway.primary}
             foregroundColor="ui.white"
           />
-          {/* Renders the Donation component */}
-          {featuredContent && Components(featuredContent)}
-          {/* Renders a Education Jumboton with mock data */}
-          {/* {featuredContent &&
-            Components({
-              ...educationFeaturedContent,
-              image: featuredContent.image,
-              jumbotronImg: "https://placekitten.com/444/222",
-            })} */}
+          {sectionFront.featuredContent &&
+            sectionFront.featuredContent.map(
+              (contentComponent: { [key: string]: any }) =>
+                Components(contentComponent)
+            )}
         </>
       }
       contentPrimary={

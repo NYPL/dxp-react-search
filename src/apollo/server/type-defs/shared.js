@@ -213,6 +213,15 @@ export const typeDefs = gql`
     link: String
   }
 
+  type Jumbotron {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    image: Image
+    secondaryImage: Image
+  }
+
   type Colorway {
     primary: String
     secondary: String

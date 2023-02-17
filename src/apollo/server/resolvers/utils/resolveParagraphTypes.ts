@@ -41,6 +41,9 @@ export default function resolveParagraphTypes(
     case "external_search":
       resolvedObjectType = "ExternalSearch";
       break;
+    case "jumbotron":
+      resolvedObjectType = "Jumbotron";
+      break;
     // Home page.
     case "hp_hero":
       resolvedObjectType = "HomePageHeroComponent";

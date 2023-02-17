@@ -113,6 +113,14 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
+        item.type === "paragraph--jumbotron" &&
+        typesInQuery.includes("Jumbotron")
+      ) {
+        accumulator.push(item);
+      }
+
+      // Start homepage specific paragraphs.
+      if (
         item.type === "paragraph--hp_hero" &&
         typesInQuery.includes("HomePageHeroComponent")
       ) {
@@ -440,6 +448,22 @@ export default function resolveDrupalParagraphs(
             contentType === "section_front"
               ? getColorway("section_front")
               : null,
+        };
+        break;
+      case "paragraph--jumbotron":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          title: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          image:
+            item.field_ers_image.data === null
+              ? null
+              : resolveImage(item.field_ers_image),
+          secondaryImage:
+            item.field_ers_secondary_image.data === null
+              ? null
+              : resolveImage(item.field_ers_secondary_image),
         };
         break;
 
