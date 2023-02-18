@@ -464,6 +464,11 @@ export default function resolveDrupalParagraphs(
             item.field_ers_secondary_image.data === null
               ? null
               : resolveImage(item.field_ers_secondary_image),
+          link: {
+            title: item.field_ls_link.title,
+            uri: item.field_ls_link.uri,
+            url: item.field_ls_link.url,
+          },
         };
         break;
 

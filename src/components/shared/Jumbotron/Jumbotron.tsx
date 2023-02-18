@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Flex, Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 import Image, { ImageType } from "../../shared/Image";
 import { getImageTransformation } from "../../shared/Image/imageUtils";
 
@@ -8,6 +8,7 @@ interface JumbotronProps {
   image: ImageType;
   overlay?: React.ReactNode;
 }
+
 export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
   // Background images.
   const backgroundImageSrcLg = image.transformations
@@ -61,36 +62,7 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
           top={{ lg: "444px", xl: "425px" }}
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         >
-          {overlay ? (
-            overlay
-          ) : (
-            <Flex
-              id="jumbotron-overlay"
-              flexFlow={{ base: "column", lg: "row" }}
-            >
-              <Box
-                id="jumbotron-left4-side"
-                flex={{ lg: "1 0 66%" }}
-                paddingRight={{ md: "s" }}
-              >
-                <Heading level="two" color="brand.primary">
-                  Our Mission
-                </Heading>
-                <Box as="p" fontWeight="500">
-                  The Center for Educators and Schools uses The New York Public
-                  Library's resources and collections to ignite curiosity, joy,
-                  and a passion for learning within educators, students, and
-                  school communities.
-                </Box>
-              </Box>
-              <Box
-                id="jumbotron-right-side"
-                flex={{ lg: "1 0 33%" }}
-                bgColor="brand.primary"
-                padding="s"
-              ></Box>
-            </Flex>
-          )}
+          {overlay}
         </Box>
       </Box>
     </Box>

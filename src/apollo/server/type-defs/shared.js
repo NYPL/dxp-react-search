@@ -220,6 +220,13 @@ export const typeDefs = gql`
     description: String
     image: Image
     secondaryImage: Image
+    link: Link
+  }
+
+  type Link {
+    title: String
+    uri: String
+    url: String!
   }
 
   type Colorway {

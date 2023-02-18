@@ -4,7 +4,6 @@ import { gql, useQuery } from "@apollo/client";
 // Components
 import PageContainer from "../../shared/layouts/PageContainer";
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
-// import Donation from "../Donation";
 import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
 import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
@@ -18,6 +17,7 @@ export const sectionFrontsSlugs = [
   "/research/collections",
   "/research/support",
   "/education",
+  "/education/educators",
 ];
 
 // Generate the static paths for getStaticPaths
@@ -104,6 +104,11 @@ export const SECTION_FRONT_QUERY = gql`
               label
               uri
             }
+          }
+          link {
+            title
+            uri
+            url
           }
         }
       }

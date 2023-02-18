@@ -4,8 +4,7 @@ import {
   Card as DsCard,
   CardHeading,
   CardContent,
-  // Heading,
-  // Flex,
+  Link,
 } from "@nypl/design-system-react-components";
 import { default as SharedJumbotron } from "./../Jumbotron";
 import Image, { ImageType } from "../../shared/Image";
@@ -21,6 +20,8 @@ export interface JumbotronProps {
   image: ImageType;
   /** The optional secondary image of the jumbotron component. */
   secondaryImage?: ImageType;
+  /** The link of the jumbotron component. */
+  link: { title: string; url: string; uri: string };
 }
 
 export default function Jumbotron({
@@ -29,6 +30,7 @@ export default function Jumbotron({
   description,
   image,
   secondaryImage,
+  link,
 }: JumbotronProps) {
   return (
     <SharedJumbotron
@@ -65,43 +67,28 @@ export default function Jumbotron({
           </CardHeading>
           <CardContent>
             {description && (
-              <Box
-                as="p"
-                fontWeight="500"
-                dangerouslySetInnerHTML={{
-                  __html: description,
-                }}
-              ></Box>
+              <>
+                <Box
+                  as="p"
+                  fontWeight="500"
+                  mb="l"
+                  dangerouslySetInnerHTML={{
+                    __html: description,
+                  }}
+                />
+                <Link
+                  id="nypl-link"
+                  href={link.url}
+                  // @TODO this will have to be updated to "buttonPrimary" after upgrading to DS 1.4.x.
+                  type="button"
+                  width="fit-content"
+                >
+                  {link.title}
+                </Link>
+              </>
             )}
           </CardContent>
         </DsCard>
-
-        // <Flex flexFlow={{ base: "column", lg: "row" }}>
-        //   <Box flex={{ lg: "1 0 50%" }} paddingRight={{ md: "s" }}>
-        //     <Heading level="two" color="brand.primary">
-        //       {title}
-        //     </Heading>
-        //     <Box
-        //       as="p"
-        //       fontWeight="500"
-        //       dangerouslySetInnerHTML={{ __html: description }}
-        //     />
-        //     {secondaryImage && (
-        //       <Image
-        //         id={secondaryImage.id}
-        //         alt={secondaryImage.alt}
-        //         uri={secondaryImage.uri}
-        //         useTransformation={true}
-        //         transformations={secondaryImage.transformations}
-        //         transformationLabel={"2_1_960"}
-        //         layout="responsive"
-        //         width={900}
-        //         height={450}
-        //         quality={90}
-        //       />
-        //     )}
-        //   </Box>
-        // </Flex>
       }
     />
   );

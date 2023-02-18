@@ -7,6 +7,9 @@ export type ColorwayMap = {
   [name: string]: Colorway;
 };
 
+// @TODO come up with better solution or naming convention. Section front parent sections share colors,
+// and currently its not possible to set a color once, you have to do it for each "parent" group
+// route, which is not ideal.
 type SlugOrSection = "/give" | "/research" | "/education" | "section_front";
 
 export default function getColorway(slugOrSection: SlugOrSection): Colorway {
@@ -28,6 +31,10 @@ export default function getColorway(slugOrSection: SlugOrSection): Colorway {
       secondary: "section.research.secondary",
     },
     "/education": {
+      primary: "#2540A4",
+      secondary: "#1D62E6",
+    },
+    "/education/educators": {
       primary: "#2540A4",
       secondary: "#1D62E6",
     },
