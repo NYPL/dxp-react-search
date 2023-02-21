@@ -10,28 +10,6 @@ import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
-// Used in the catch all page template to determine component to render.
-export const sectionFrontsSlugs = [
-  "/give",
-  "/research",
-  "/research/collections",
-  "/research/support",
-  "/education",
-  "/education/educators",
-];
-
-// Generate the static paths for getStaticPaths
-type GetStaticPropsParamsType = {
-  params: { slug: string[] };
-};
-
-let slugsArray: GetStaticPropsParamsType[] = [];
-sectionFrontsSlugs.forEach((slug) => {
-  slugsArray.push({ params: { slug: [slug.replace("/", "")] } });
-});
-
-export const sectionFrontsPaths = slugsArray;
-
 export const SECTION_FRONT_QUERY = gql`
   query SectionFrontQuery($id: String, $revisionId: String, $preview: Boolean) {
     sectionFront(id: $id, revisionId: $revisionId, preview: $preview) {
@@ -184,8 +162,6 @@ export default function SectionFrontPage({
   isPreview,
   revisionId,
 }: SectionFrontPageProps) {
-  // Create the breadcrumbs off the page slug
-
   const { loading, error, data } = useQuery(SECTION_FRONT_QUERY, {
     skip: !uuid,
     variables: {
