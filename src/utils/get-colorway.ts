@@ -7,38 +7,34 @@ export type ColorwayMap = {
   [name: string]: Colorway;
 };
 
-// @TODO come up with better solution or naming convention. Section front parent sections share colors,
-// and currently its not possible to set a color once, you have to do it for each "parent" group
-// route, which is not ideal.
-// type SlugOrSection = "/give" | "/research" | "/education" | "section_front";
-
+// colorLabel can be any of the following:
 // slug - specific url
 // bundle - specific content type or other.
 // group - group of pages within a content type, mainly used for section_front
 
 export default function getColorway(colorwayLabel: string): Colorway {
+  let finalColorwayLabel: string;
+
+  // Sanatize passed slugs
+  if (colorwayLabel[0] === "/") {
+    finalColorwayLabel = colorwayLabel.replace(/^\//, "").split("/")[0];
+  } else {
+    finalColorwayLabel = colorwayLabel;
+  }
   const colorwayMap: ColorwayMap = {
     default: {
       primary: "brand.primary",
       secondary: "brand.secondary",
     },
-    "/give": {
+    give: {
       primary: "brand.primary",
       secondary: "brand.secondary",
     },
-    "/research": {
+    research: {
       primary: "section.research.primary",
       secondary: "section.research.secondary",
     },
-    "/research/support": {
-      primary: "section.research.primary",
-      secondary: "section.research.secondary",
-    },
-    "/education": {
-      primary: "#2540A4",
-      secondary: "#1D62E6",
-    },
-    "/education/educators": {
+    education: {
       primary: "#2540A4",
       secondary: "#1D62E6",
     },
@@ -48,5 +44,5 @@ export default function getColorway(colorwayLabel: string): Colorway {
     },
   };
 
-  return colorwayMap[colorwayLabel] || colorwayMap.default;
+  return colorwayMap[finalColorwayLabel] || colorwayMap.default;
 }
