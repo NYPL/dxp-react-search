@@ -15,7 +15,7 @@ export type ColorwayMap = {
 export default function getColorway(colorwayLabel: string): Colorway {
   let finalColorwayLabel: string;
 
-  // Sanatize passed slugs
+  // Sanitize passed slugs
   if (colorwayLabel[0] === "/") {
     finalColorwayLabel = colorwayLabel.replace(/^\//, "").split("/")[0];
   } else {
