@@ -35,8 +35,8 @@ export default function getColorway(colorwayLabel: string): Colorway {
       secondary: "section.research.secondary",
     },
     education: {
-      primary: "#2540A4",
-      secondary: "#1D62E6",
+      primary: "#1D62E6",
+      secondary: "#2540A4",
     },
     section_front: {
       primary: "brand.primary",
