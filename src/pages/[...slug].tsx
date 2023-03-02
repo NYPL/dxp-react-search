@@ -27,10 +27,11 @@ function CatchAllRoutesPage({
   revisionId,
 }: CatchAllRoutesPageProps) {
   // Determine which page template to use by current slug.
-  if (sectionFrontsSlugs.includes(`/${slug}`)) {
+  if (sectionFrontsSlugs.includes(slug)) {
     return (
       <SectionFrontPage
         uuid={uuid}
+        slug={slug}
         isPreview={isPreview}
         revisionId={revisionId}
       />

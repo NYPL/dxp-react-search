@@ -7,11 +7,17 @@ import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 import Donation from "../Donation";
 import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
+import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
 // Content + config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 // Used in the catch all page template to determine component to render.
-export const sectionFrontsSlugs = ["/give", "/research"];
+export const sectionFrontsSlugs = [
+  "/give",
+  "/research",
+  "/research/collections",
+  "/research/support",
+];
 
 // Generate the static paths for getStaticPaths
 type GetStaticPropsParamsType = {
@@ -31,6 +37,10 @@ export const SECTION_FRONT_QUERY = gql`
       id
       title
       description
+      colorway {
+        primary
+        secondary
+      }
       image {
         id
         uri
@@ -72,6 +82,9 @@ export const SECTION_FRONT_QUERY = gql`
           type
           title
           layout
+          colorway {
+            primary
+          }
           items {
             id
             title
@@ -91,6 +104,31 @@ export const SECTION_FRONT_QUERY = gql`
             }
           }
         }
+        ... on ExternalSearch {
+          __typename
+          id
+          type
+          title
+          description
+          searchType
+          formPlaceholder
+          colorway {
+            primary
+          }
+        }
+        ... on EmailSubscription {
+          __typename
+          id
+          type
+          heading
+          description
+          formPlaceholder
+          salesforceListId
+          salesforceSourceCode
+          colorway {
+            primary
+          }
+        }
       }
     }
   }
@@ -98,15 +136,19 @@ export const SECTION_FRONT_QUERY = gql`
 
 interface SectionFrontPageProps {
   uuid: string;
+  slug: string;
   isPreview?: boolean;
   revisionId?: string;
 }
 
 export default function SectionFrontPage({
   uuid,
+  slug,
   isPreview,
   revisionId,
 }: SectionFrontPageProps) {
+  // Create the breadcrumbs off the page slug
+
   const { loading, error, data } = useQuery(SECTION_FRONT_QUERY, {
     skip: !uuid,
     variables: {
@@ -145,12 +187,9 @@ export default function SectionFrontPage({
           text: "Home",
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
         },
-        {
-          text: sectionFront.title,
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
-        },
+        ...getBreadcrumbsTrail(slug),
       ]}
-      breadcrumbsColor="booksAndMore"
+      breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
       contentHeader={
         <>
@@ -159,7 +198,7 @@ export default function SectionFrontPage({
             heroType="tertiary"
             heading={<Heading level="one" text={sectionFront.title} />}
             subHeaderText={sectionFront.description}
-            backgroundColor="brand.primary"
+            backgroundColor={sectionFront.colorway.primary}
             foregroundColor="ui.white"
           />
           {featuredContent && (

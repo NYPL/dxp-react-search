@@ -2,17 +2,15 @@ import * as React from "react";
 import { NextPageContext } from "next";
 import { ApolloError } from "@apollo/client/errors";
 import {
-  Button,
   Box,
   Flex,
   Heading,
+  Link,
   Logo,
   Text,
 } from "@nypl/design-system-react-components";
 import PageContainer from "../components/shared/layouts/PageContainer";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
-// Next
-import { useRouter } from "next/router";
 
 type ErrorProps = {
   statusCode: number;
@@ -37,12 +35,6 @@ function Error({ statusCode }: ErrorProps) {
       "The New York Public Library is currently under maintenance. We should be back shortly. Thank you for your patience.";
   }
 
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push(NEXT_PUBLIC_NYPL_DOMAIN as string);
-  };
-
   return (
     <PageContainer
       metaTags={{
@@ -60,13 +52,23 @@ function Error({ statusCode }: ErrorProps) {
           url: NEXT_PUBLIC_NYPL_DOMAIN as string,
         },
       ]}
-      breadcrumbsColor="whatsOn"
+      breadcrumbsType="whatsOn"
       wrapperClass="nypl--404"
       contentHeader={null}
       contentPrimary={
-        <Flex direction={{ sm: "column", md: "row" }} alignItems="center">
-          <Box overflow="hidden" width={{ base: "60%", md: "50%", lg: "40%" }}>
-            <Box ml={{ base: 0, md: "-60px" }}>
+        <Flex
+          direction={{ sm: "column", md: "row" }}
+          align="center"
+          justify="space-between"
+        >
+          <Box overflow="hidden" width={{ base: "60%", lg: "50%" }}>
+            <Box
+              transform={{
+                base: "none",
+                md: "translateX(-8%)",
+                xl: "translateX(0)",
+              }}
+            >
               <Logo
                 decorative
                 id="nypl-lion-logo"
@@ -77,7 +79,8 @@ function Error({ statusCode }: ErrorProps) {
             </Box>
           </Box>
           <Box
-            pl={{ base: "0", md: "100px" }}
+            pl={{ base: 0, md: "10px", lg: "30px", xl: "50px" }}
+            pr={{ base: 0, md: "10px", lg: "30px", xl: "50px" }}
             textAlign={{ base: "center", md: "left" }}
           >
             <Heading
@@ -88,14 +91,14 @@ function Error({ statusCode }: ErrorProps) {
               {title}
             </Heading>
             <Text mb={{ base: "m", md: "xl" }}>{description}</Text>
-            <Button
-              buttonType="primary"
-              id="large-primary"
-              m={{ base: "0 auto", md: "0" }}
-              onClick={handleClick}
+            <Link
+              width="auto"
+              display="inline-block"
+              type="button"
+              href={NEXT_PUBLIC_NYPL_DOMAIN as string}
             >
-              Back to Home
-            </Button>
+              Back to home
+            </Link>
           </Box>
         </Flex>
       }
