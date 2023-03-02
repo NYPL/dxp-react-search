@@ -2,11 +2,12 @@ import * as React from "react";
 import {
   Box,
   Card as DsCard,
-  CardHeading,
   CardContent,
+  Heading,
   Link,
 } from "@nypl/design-system-react-components";
 import { default as SharedJumbotron } from "./../Jumbotron";
+import TextFormatted from "../TextFormatted";
 import Image, { ImageType } from "../../shared/Image";
 
 export interface JumbotronProps {
@@ -37,58 +38,55 @@ export default function Jumbotron({
       id={id}
       image={image}
       overlay={
-        <DsCard
-          id={id}
-          layout="row"
-          {...(secondaryImage && {
-            imageProps: {
-              component: (
-                <Image
-                  id={secondaryImage.id}
-                  alt={secondaryImage.alt}
-                  uri={secondaryImage.uri}
-                  useTransformation={true}
-                  transformations={secondaryImage.transformations}
-                  transformationLabel={"2_1_960"}
-                  layout="responsive"
-                  width={900}
-                  height={450}
-                  quality={90}
-                />
-              ),
-              size: "large",
-              // Positions the image to the right of the text.
-              isAtEnd: true,
-            },
-          })}
-        >
-          <CardHeading level="two" color="brand.primary">
+        <>
+          <Heading level="two" color="brand.primary">
             {title}
-          </CardHeading>
-          <CardContent>
-            {description && (
-              <>
-                <Box
-                  as="p"
-                  fontWeight="500"
-                  mb="l"
-                  dangerouslySetInnerHTML={{
-                    __html: description,
-                  }}
-                />
-                <Link
-                  id="nypl-link"
-                  href={link.url}
-                  // @TODO this will have to be updated to "buttonPrimary" after upgrading to DS 1.4.x.
-                  type="button"
-                  width="fit-content"
-                >
-                  {link.title}
-                </Link>
-              </>
-            )}
-          </CardContent>
-        </DsCard>
+          </Heading>
+          <DsCard
+            id={id}
+            layout="row"
+            {...(secondaryImage && {
+              imageProps: {
+                component: (
+                  <Image
+                    id={secondaryImage.id}
+                    alt={secondaryImage.alt}
+                    uri={secondaryImage.uri}
+                    useTransformation={true}
+                    transformations={secondaryImage.transformations}
+                    transformationLabel={"2_1_960"}
+                    layout="responsive"
+                    width={900}
+                    height={450}
+                    quality={90}
+                  />
+                ),
+                size: "large",
+                // Positions the image to the right of the text.
+                isAtEnd: true,
+              },
+            })}
+          >
+            <CardContent>
+              {description && (
+                <>
+                  <Box mt="s" mb="l">
+                    <TextFormatted html={description} />
+                  </Box>
+                  <Link
+                    id="nypl-link"
+                    href={link.url}
+                    // @TODO this will have to be updated to "buttonPrimary" after upgrading to DS 1.4.x.
+                    type="button"
+                    width="fit-content"
+                  >
+                    {link.title}
+                  </Link>
+                </>
+              )}
+            </CardContent>
+          </DsCard>
+        </>
       }
     />
   );
