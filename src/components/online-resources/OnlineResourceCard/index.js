@@ -1,1 +1,1 @@
-export { default } from './OnlineResourceCard';
+export { default } from "./OnlineResourceCard";

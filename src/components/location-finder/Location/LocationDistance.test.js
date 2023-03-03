@@ -1,31 +1,30 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
-import { axe, toHaveNoViolations } from 'jest-axe';
-import '@testing-library/jest-dom/extend-expect';
-import * as redux from 'react-redux';
-import { render } from './../../../../testHelper/customRtlRender';
-import LocationDistance from './LocationDistance';
+import React from "react";
+import { screen } from "@testing-library/react";
+import { axe, toHaveNoViolations } from "jest-axe";
+import "@testing-library/jest-dom/extend-expect";
+import * as redux from "react-redux";
+import { render } from "./../../../../testHelper/customRtlRender";
+import LocationDistance from "./LocationDistance";
 
 expect.extend(toHaveNoViolations);
 
 // Mock search geocordinates
 const search = {
   searchQueryGeoLat: 40.7534168,
-  searchQueryGeoLng: -73.9819148
-}
+  searchQueryGeoLng: -73.9819148,
+};
 
 // Mock location geocordinates
 const locationPoint = {
   lat: 40.7534168,
-  lng: -73.9819148
-}
+  lng: -73.9819148,
+};
 
-describe('LocationDistance', () => {
-  test('renders LocationDistance component', () => {
-    render(
-      <LocationDistance locationPoint={locationPoint} />,
-      { initialState: { search } }
-    );
+describe("LocationDistance", () => {
+  test("renders LocationDistance component", () => {
+    render(<LocationDistance locationPoint={locationPoint} />, {
+      initialState: { search },
+    });
   });
 });
 
@@ -37,17 +36,16 @@ describe('LocationDistance', () => {
 // Location point.
 const grandCentralPoint = {
   lat: 40.7539,
-  lng: -73.974
-}
+  lng: -73.974,
+};
 
-describe('LocationDistance', () => {
-  test('location distance should be 0.4 miles', () => {
-    render(
-      <LocationDistance locationPoint={grandCentralPoint} />,
-      { initialState: { search } }
-    );
+describe("LocationDistance", () => {
+  test("location distance should be 0.4 miles", () => {
+    render(<LocationDistance locationPoint={grandCentralPoint} />, {
+      initialState: { search },
+    });
 
-    expect(screen.getByText('0.4 miles')).toBeInTheDocument();
+    expect(screen.getByText("0.4 miles")).toBeInTheDocument();
   });
 });
 
@@ -59,22 +57,21 @@ describe('LocationDistance', () => {
 // Location point.
 const sasbPoint = {
   lat: 40.7532,
-  lng: -73.9822
-}
+  lng: -73.9822,
+};
 
-describe('LocationDistance', () => {
-  test('location distance should be 0.0 miles', () => {
-    render(
-      <LocationDistance locationPoint={sasbPoint} />,
-      { initialState: { search } }
-    );
+describe("LocationDistance", () => {
+  test("location distance should be 0.0 miles", () => {
+    render(<LocationDistance locationPoint={sasbPoint} />, {
+      initialState: { search },
+    });
 
-    expect(screen.getByText('0.0 miles')).toBeInTheDocument();
+    expect(screen.getByText("0.0 miles")).toBeInTheDocument();
   });
 });
 
 // Accessbiility tests.
-it('should not have basic accessibility issues', async () => {
+it("should not have basic accessibility issues", async () => {
   const { container } = render(
     <LocationDistance locationPoint={locationPoint} />,
     { initialState: { search } }

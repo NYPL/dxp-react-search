@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function HeroImage() {
   return (
@@ -30,6 +30,6 @@ function HeroImage() {
       </g>
     </svg>
   );
-};
+}
 
 export default HeroImage;
