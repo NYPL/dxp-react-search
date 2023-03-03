@@ -26,7 +26,7 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
     : image.uri;
 
   return (
-    <Box id={id} minHeight={{ lg: "700px" }}>
+    <Box id={id} marginBottom="l">
       <Box
         backgroundImage={{
           md: "none",
@@ -35,7 +35,7 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
         }}
         backgroundSize={{ sm: "100%", md: "cover" }}
         backgroundPosition={{ md: "center" }}
-        minHeight={{ md: "464px" }}
+        minHeight={{ lg: "464px" }}
         marginBottom={{ sm: "m", md: "initial" }}
       >
         <Box display={{ lg: "none" }}>
@@ -52,18 +52,17 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
             quality={90}
           />
         </Box>
-        <Box
-          id="overlay"
-          padding={{ sm: "s", md: "xl" }}
-          maxWidth="1240px"
-          margin="0 auto"
-          backgroundColor="white"
-          position="relative"
-          top={{ lg: "444px", xl: "425px" }}
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        >
-          {overlay}
-        </Box>
+      </Box>
+      <Box
+        id="jumbotron-overlay"
+        backgroundColor="white"
+        maxWidth="1240px"
+        margin="0 auto"
+        padding={{ sm: "s", md: "xl" }}
+        marginTop={{ lg: "-40px" }}
+        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+      >
+        {overlay}
       </Box>
     </Box>
   );
