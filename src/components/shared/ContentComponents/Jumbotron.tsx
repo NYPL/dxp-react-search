@@ -33,6 +33,7 @@ export default function Jumbotron({
   secondaryImage,
   link,
 }: JumbotronProps) {
+  console.log("description", description);
   return (
     <SharedJumbotron
       id={id}
