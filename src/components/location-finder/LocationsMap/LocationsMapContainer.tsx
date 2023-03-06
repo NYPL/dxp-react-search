@@ -92,8 +92,8 @@ const LocationsMapContainer = (props: LocationsMapContainerProps) => {
   // is visible by default. So we move all parent libraries to end of the locations array so
   // they are visible on default render of the map.
   // @TODO Need to fix this when actual types are added for the location data.
-  let keep: Location[] = [];
-  let move: Location[] = [];
+  const keep: Location[] = [];
+  const move: Location[] = [];
   const slugs = ["schwarzman", "snfl", "schomburg", "lpa"];
   data.refineryAllLocations.locations.forEach((item: Location) => {
     if (!slugs.includes(item.slug)) {

@@ -66,7 +66,7 @@ function ChannelsCards({
   sort,
   featured,
 }: ChannelsCardsProps) {
-  let queryFilters: any = {};
+  const queryFilters: any = {};
   if (featured) {
     queryFilters["featured"] = {
       fieldName: "field_bs_featured",

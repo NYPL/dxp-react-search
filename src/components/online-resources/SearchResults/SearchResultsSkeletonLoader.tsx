@@ -18,7 +18,7 @@ export function SearchResultsDetailsSkeletonLoader() {
 }
 
 export function SearchResultsSkeletonLoader() {
-  let skeletonLoaders = [];
+  const skeletonLoaders = [];
   const itemsCount = 6;
   for (var i = 0; i < itemsCount; i++) {
     skeletonLoaders.push(<SearchResultsCardSkeletonLoader key={i} />);

@@ -12,7 +12,7 @@ const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 function RequestVisitConfirmation() {
   const router = useRouter();
 
-  let internalSlugArray = [];
+  const internalSlugArray = [];
   internalSlugArray.push(router.query.id);
 
   const { loading, error, data } = useQuery(LOCATION_BY_INTERNAL_SLUG, {

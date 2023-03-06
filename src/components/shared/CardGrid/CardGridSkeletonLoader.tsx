@@ -67,7 +67,7 @@ export default function CardGridSkeletonLoader({
   cardLayout = "column",
   showImage = true,
 }: CardGridSkeletonLoaderProps) {
-  let skeletonLoaders = [];
+  const skeletonLoaders = [];
   for (var i = 0; i < itemsCount; i++) {
     skeletonLoaders.push(
       <li key={i}>

@@ -24,7 +24,7 @@ type GetStaticPropsParamsType = {
   params: { slug: string[] };
 };
 
-let slugsArray: GetStaticPropsParamsType[] = [];
+const slugsArray: GetStaticPropsParamsType[] = [];
 sectionFrontsSlugs.forEach((slug) => {
   slugsArray.push({ params: { slug: [slug.replace("/", "")] } });
 });

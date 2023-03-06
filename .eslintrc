@@ -53,7 +53,6 @@
         ],
         // @TODO Remove this
         "@typescript-eslint/ban-ts-comment": "off",
-        "prefer-const": "off",
         "react/no-unescaped-entities": "off",
         "react-hooks/exhaustive-deps": "off",
         "no-var": "off",
