@@ -3,6 +3,7 @@ import { Box, Grid } from "@nypl/design-system-react-components";
 import CardGridHeader from "./CardGridHeader";
 import Card from "./Card";
 import Image from "./../../shared/Image";
+import TextFormatted from "../TextFormatted";
 import { ImageType } from "../Image/ImageTypes";
 
 export type CardGridLayoutTypes = "row" | "column" | "column_two_featured";
@@ -116,7 +117,7 @@ export default function CardGrid({
           hrefText={hrefText}
         />
       )}
-      {description && <p>{description}</p>}
+      {description && <TextFormatted html={description} />}
       <Grid
         as="ul"
         listStyleType="none"
