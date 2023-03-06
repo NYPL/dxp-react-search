@@ -135,7 +135,7 @@ function Locations() {
 
   // Error state.
   if (error) {
-    return <div>'error while loading locations'</div>;
+    return <div>Error while loading locations.</div>;
   }
 
   // Loading state,

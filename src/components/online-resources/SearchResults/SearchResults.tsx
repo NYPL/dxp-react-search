@@ -201,7 +201,7 @@ function SearchResults({
 
   // Error state.
   if (error) {
-    return <div>'error while loading search'</div>;
+    return <div>Error while loading search.</div>;
   }
 
   // Loading state,

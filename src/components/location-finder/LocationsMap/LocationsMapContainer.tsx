@@ -84,7 +84,7 @@ const LocationsMapContainer = (props: LocationsMapContainerProps) => {
   }
 
   if (error) {
-    return <Box>'error while loading locations'</Box>;
+    return <Box>Error while loading locations.</Box>;
   }
 
   // Locations that use a parent library will have the same geo-cordinates as parent library.
