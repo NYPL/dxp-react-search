@@ -39,6 +39,7 @@ function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
       {ageGroupItems.map((ageGroupItem) => (
         <Checkbox
           id={ageGroupItem.id}
+          key={ageGroupItem.id}
           labelText={ageGroupItem.label}
           name={ageGroupItem.id}
           isChecked={values.ageGroup.includes(ageGroupItem.id)}

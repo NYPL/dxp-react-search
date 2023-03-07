@@ -37,7 +37,6 @@
       "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
       "rules": {
         "@typescript-eslint/no-unused-vars": "error",
-        "no-unused-vars": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "no-use-before-define": [0],
@@ -53,12 +52,7 @@
         ],
         // @TODO Remove this
         "@typescript-eslint/ban-ts-comment": "off",
-        "react-hooks/exhaustive-deps": "off",
-        "react-hooks/rules-of-hooks": "off",
-        "@typescript-eslint/no-inferrable-types": "off",
-        "react/jsx-key": "off",
-        "@next/next/no-sync-scripts": "off",
-        "import/no-anonymous-default-export": "off"
+        "react-hooks/exhaustive-deps": "off"
       }
     }
   ]

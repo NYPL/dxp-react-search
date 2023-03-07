@@ -79,7 +79,9 @@ function LibraryFormField({ handleChange }: FormFieldProps) {
       isInvalid={errors.library ? true : false}
     >
       {data.allLocations.items.map((location: any) => (
-        <option value={location.internalSlug}>{location.name}</option>
+        <option value={location.internalSlug} key={location.id}>
+          {location.name}
+        </option>
       ))}
     </Select>
   );
