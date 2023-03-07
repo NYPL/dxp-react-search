@@ -1,8 +1,6 @@
 import * as React from "react";
 import {
   Box,
-  // Button,
-  // ButtonGroup,
   Flex,
   Heading,
   Link,
@@ -10,22 +8,27 @@ import {
   IconNames,
 } from "@nypl/design-system-react-components";
 
-type SocialMediaChannel = {
-  title: string;
-  link: string;
-  icon: IconNames;
+type ButtonLinkItem = {
+  id: string;
+  link: { title: string; url: string; uri: string };
+  icon: string;
 };
 
-interface SocialMediaBlockProps {
+interface ButtonLinksProps {
   id: string;
-  title: string;
-  channels: SocialMediaChannel[];
+  heading: string;
+  description?: any;
+  items: ButtonLinkItem[];
 }
-export default function SocialMediaBlock({
-  id,
-  title,
-  channels,
-}: SocialMediaBlockProps) {
+
+const IconTable: Record<string, IconNames> = {
+  facebook: "legacySocialFacebook",
+  instagram: "socialInstagram",
+  twitter: "socialTwitter",
+  file_type_doc: "fileTypeDoc",
+};
+
+export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
   return (
     <Box
       bg="ui.bg.default"
@@ -35,11 +38,7 @@ export default function SocialMediaBlock({
       py="xl"
     >
       <Box w="full" px="s" margin="auto">
-        <Heading
-          level="two"
-          text={title}
-          textAlign={{ sm: "left", md: "center" }}
-        />
+        <Heading level="two" text={heading} textAlign="center" />
         <Flex
           as="ul"
           direction={{ sm: "column", md: "row" }}
@@ -48,21 +47,23 @@ export default function SocialMediaBlock({
           m="auto"
           w={{ sm: "fit-content", md: "full" }}
         >
-          {channels &&
-            channels.map((channel: SocialMediaChannel) => (
+          {items &&
+            items.map((item: ButtonLinkItem) => (
               <Box
                 as="li"
                 listStyleType="none"
                 w={{ sm: "full", md: "fit-content" }}
               >
+                {/* @TODO once we are updating the DS version,
+                replace custome style with type="buttonSecondary"*/}
                 <Link
                   bg="transparent"
                   borderStyle="solid"
                   borderWidth="1px"
                   borderColor="ui.link.primary"
                   color="ui.link.primary"
-                  href={channel.link}
-                  id={`channel-button-${id}`}
+                  href={item.link.url}
+                  id={`item-button-${id}`}
                   p="8px 16px"
                   textDecor="none"
                   type="action"
@@ -77,11 +78,11 @@ export default function SocialMediaBlock({
                   <Icon
                     align="left"
                     color="ui.link.primary"
-                    name={channel.icon}
+                    name={IconTable[item.icon]}
                     my="auto"
                     size="small"
                   />
-                  {channel.title}
+                  {item.link.title}
                 </Link>
               </Box>
             ))}

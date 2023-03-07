@@ -248,4 +248,18 @@ export const typeDefs = gql`
     salesforceSourceCode: String
     colorway: Colorway
   }
+
+  type ButtonLink {
+    id: ID!
+    icon: String
+    link: Link
+  }
+
+  type ButtonLinks {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    items: [ButtonLink]
+  }
 `;

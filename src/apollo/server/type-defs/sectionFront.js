@@ -18,6 +18,7 @@ export const typeDefs = gql`
     | Donation
     | ExternalSearch
     | EmailSubscription
+    | ButtonLinks
 
   type SectionFrontConnection {
     items: [SectionFront]
