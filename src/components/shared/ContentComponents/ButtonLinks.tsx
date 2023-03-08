@@ -17,7 +17,7 @@ type ButtonLinkItem = {
 interface ButtonLinksProps {
   id: string;
   heading: string;
-  description?: any;
+  description?: string;
   items: ButtonLinkItem[];
 }
 
@@ -35,6 +35,7 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
       id={`social-media-block-${id}`}
       py="xl"
       mb="m"
+      // This forces the component background to go full width, edge to edge.
       mx={{ sm: "-s", lg: "-25rem" }}
       bg="ui.bg.default"
     >
@@ -43,7 +44,7 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
         <Flex
           as="ul"
           direction={{ sm: "column", md: "row" }}
-          gap="20px"
+          gap="s"
           justify="center"
           m="auto"
           w={{ sm: "fit-content", md: "full" }}
@@ -64,7 +65,8 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
                   href={item.link.url}
                   type="action"
                   w="full"
-                  p="8px 16px"
+                  py="xs"
+                  px="s"
                   textDecor="none"
                   color="ui.link.primary"
                   bg="transparent"
