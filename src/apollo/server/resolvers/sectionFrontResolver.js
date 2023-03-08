@@ -18,6 +18,8 @@ const sectionFrontResolver = {
         // Link Card List
         "field_main_content.field_erm_link_cards",
         "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+        // Button Links
+        "field_main_content.field_erm_button_links",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(

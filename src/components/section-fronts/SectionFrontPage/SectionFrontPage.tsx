@@ -145,6 +145,22 @@ export const SECTION_FRONT_QUERY = gql`
             primary
           }
         }
+        ... on ButtonLinks {
+          __typename
+          id
+          type
+          heading
+          description
+          items {
+            id
+            icon
+            link {
+              title
+              uri
+              url
+            }
+          }
+        }
       }
     }
   }
