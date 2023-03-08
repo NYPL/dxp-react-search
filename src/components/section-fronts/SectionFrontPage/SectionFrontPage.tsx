@@ -96,6 +96,7 @@ export const SECTION_FRONT_QUERY = gql`
           id
           type
           title
+          description
           layout
           colorway {
             primary

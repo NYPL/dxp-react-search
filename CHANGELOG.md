@@ -2,6 +2,18 @@
 
 ---
 
+### v0.9.4 - Drupal 10 Runway Support & Misc Release
+
+---
+
+- Add swipe functionality to homepage Slideshow component: [#355](https://github.com/NYPL/dxp-react-search/pull/355)
+- Hide see more button if no link text: [#385](https://github.com/NYPL/dxp-react-search/pull/385)
+- Remove old Apollo HOC: [#372](https://github.com/NYPL/dxp-react-search/pull/372)
+- Adds cypress tests for section front pages: [#388](https://github.com/NYPL/dxp-react-search/pull/388)
+- Updates image style format for json:api image styles module api change: [#389](https://github.com/NYPL/dxp-react-search/pull/389)
+
+---
+
 ### v0.9.3 - Section Front Research Release
 
 ---
