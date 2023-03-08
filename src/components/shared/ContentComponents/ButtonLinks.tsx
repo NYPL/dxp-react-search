@@ -21,6 +21,7 @@ interface ButtonLinksProps {
   items: ButtonLinkItem[];
 }
 
+// Lookup table to match drupal strings to the corresponding DS IconNames
 const IconTable: Record<string, IconNames> = {
   facebook: "legacySocialFacebook",
   instagram: "socialInstagram",
@@ -31,11 +32,11 @@ const IconTable: Record<string, IconNames> = {
 export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
   return (
     <Box
-      bg="ui.bg.default"
       id={`social-media-block-${id}`}
+      py="xl"
       mb="m"
       mx={{ sm: "-s", lg: "-25rem" }}
-      py="xl"
+      bg="ui.bg.default"
     >
       <Box w="full" px="s" margin="auto">
         <Heading level="two" text={heading} textAlign="center" />
@@ -50,6 +51,8 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
           {items &&
             items.map((item: ButtonLinkItem) => (
               <Box
+                id={`button-link-${item.id}`}
+                key={item.id}
                 as="li"
                 listStyleType="none"
                 w={{ sm: "full", md: "fit-content" }}
@@ -57,30 +60,32 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
                 {/* @TODO once we are updating the DS version,
                 replace custome style with type="buttonSecondary"*/}
                 <Link
+                  id={`link-${id}`}
+                  href={item.link.url}
+                  type="action"
+                  w="full"
+                  p="8px 16px"
+                  textDecor="none"
+                  color="ui.link.primary"
                   bg="transparent"
                   borderStyle="solid"
                   borderWidth="1px"
                   borderColor="ui.link.primary"
-                  color="ui.link.primary"
-                  href={item.link.url}
-                  id={`item-button-${id}`}
-                  p="8px 16px"
-                  textDecor="none"
-                  type="action"
-                  w="full"
                   _hover={{
                     bg: "rgb(5, 118, 211,0.05 )",
                     borderColor: "ui.link.secondary",
                     color: "ui.link.secondary",
                     textDecor: "none",
+                    svg: {
+                      color: "ui.link.secondary",
+                    },
                   }}
                 >
                   <Icon
+                    name={IconTable[item.icon]}
+                    size="small"
                     align="left"
                     color="ui.link.primary"
-                    name={IconTable[item.icon]}
-                    my="auto"
-                    size="small"
                   />
                   {item.link.title}
                 </Link>
