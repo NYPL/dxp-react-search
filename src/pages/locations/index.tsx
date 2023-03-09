@@ -86,7 +86,6 @@ function LocationFinder() {
                   headingLevel="three"
                   headingColor={"#0576d3"}
                   title={menu.title}
-                  // @ts-ignore
                   items={menu.items}
                   menuItemDecoration={false}
                   orientation={"horizontal"}
