@@ -42,8 +42,7 @@ function FilterBar({
   // Set the isMobile state based on screen width.
   const windowSize = useWindowSize();
   useEffect(() => {
-    // @ts-ignore
-    if (windowSize >= 600) {
+    if (windowSize && windowSize >= 600) {
       setIsMobile(false);
     } else {
       setIsMobile(true);
@@ -57,11 +56,11 @@ function FilterBar({
   // @TODO fix this, only works on search pg, div not on main pg!
   const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
-    if (isMobile && prevModalState !== isModalOpen) {
-      // @ts-ignore
-      document
-        .getElementById("page-container--content-primary")
-        .scrollIntoView();
+    if (isMobile && !isModalOpen && prevModalState !== isModalOpen) {
+      const pageContainer = document.getElementById(
+        "page-container--content-primary"
+      );
+      pageContainer?.scrollIntoView();
     }
   }, [isModalOpen]);
 

@@ -1,8 +1,7 @@
-import { NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function exit(
-  // @ts-ignore
-  _,
+  _: NextApiRequest,
   response: NextApiResponse
 ) {
   response.clearPreviewData();

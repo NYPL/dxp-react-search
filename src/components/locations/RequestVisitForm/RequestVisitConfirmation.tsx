@@ -1,7 +1,6 @@
 import * as React from "react";
 // Apollo
 import { useQuery } from "@apollo/client";
-// @ts-ignore
 import { LOCATION_BY_INTERNAL_SLUG } from "./RequestVisitForm";
 // Next
 import { useRouter } from "next/router";

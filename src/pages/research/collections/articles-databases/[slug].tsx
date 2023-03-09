@@ -157,8 +157,7 @@ function OnlineResourceSlug() {
 }
 
 export const getServerSideProps = withDrupalRouter(
-  // @ts-ignore -- temp fix for context unused but declared.
-  async (context, props: WithDrupalRouterReturnProps) => {
+  async (_context, props: WithDrupalRouterReturnProps) => {
     const { uuid, revisionId, isPreview, apolloClient } = props;
 
     await apolloClient.query({

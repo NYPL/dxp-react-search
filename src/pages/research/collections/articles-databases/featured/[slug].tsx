@@ -115,8 +115,7 @@ function FeaturedResourceTopicSlug() {
 }
 
 export const getServerSideProps = withDrupalRouter(
-  // @ts-ignore
-  async (context, props: WithDrupalRouterReturnProps) => {
+  async (_context, props: WithDrupalRouterReturnProps) => {
     const { uuid, revisionId, isPreview, apolloClient } = props;
 
     const ResourceTopicData = await apolloClient.query({

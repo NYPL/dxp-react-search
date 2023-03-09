@@ -52,8 +52,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = withDrupalRouter(async function (
-  // @ts-ignore
-  context: GetStaticPropsContext,
+  _context: GetStaticPropsContext,
   props: WithDrupalRouterReturnProps
 ) {
   const { uuid, revisionId, slug, isPreview, apolloClient } = props;

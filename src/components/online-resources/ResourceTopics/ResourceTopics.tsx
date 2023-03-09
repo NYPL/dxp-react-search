@@ -14,7 +14,7 @@ interface ResourceTopicsProps {
   id: string;
   title: string;
   limit?: number;
-  sort?: string;
+  sort?: { field?: string; direction?: string };
   featured?: boolean;
 }
 

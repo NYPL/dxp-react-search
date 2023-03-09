@@ -195,8 +195,8 @@ function SearchResults({
         }),
       },
     });
-    // @ts-ignore
-    document.getElementById("main-content").scrollIntoView();
+    const mainContent = document.getElementById("main-content");
+    mainContent?.scrollIntoView();
   }
 
   // Error state.
