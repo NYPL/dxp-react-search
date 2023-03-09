@@ -5,7 +5,18 @@ import { Checkbox, CheckboxGroup } from "@nypl/design-system-react-components";
 import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
-const ageGroupItems = [
+export type FormCheckboxGroupType = "ageGroup";
+export type FormCheckboxValueType =
+  | "age-children"
+  | "age-teenagers"
+  | "age-adults";
+
+interface AgeGroupItem {
+  id: FormCheckboxValueType;
+  label: string;
+}
+
+const ageGroupItems: AgeGroupItem[] = [
   {
     id: "age-children",
     label: "Kids",
@@ -21,7 +32,6 @@ const ageGroupItems = [
 ];
 
 function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
-  // @ts-ignore
   const [state] = useContext(FormContext);
   const { values, errors } = state;
 
@@ -33,20 +43,20 @@ function AgeGroupFormField({ handleChangeCheckboxGroup }: FormFieldProps) {
       showLabel
       showRequiredLabel={false}
       isRequired
-      isInvalid={errors.ageGroup ? true : false}
-      invalidText={errors.ageGroup}
+      isInvalid={errors?.ageGroup ? true : false}
+      invalidText={errors?.ageGroup}
     >
       {ageGroupItems.map((ageGroupItem) => (
         <Checkbox
           id={ageGroupItem.id}
           labelText={ageGroupItem.label}
           name={ageGroupItem.id}
-          isChecked={values.ageGroup.includes(ageGroupItem.id)}
+          isChecked={values.ageGroup?.includes(ageGroupItem.id)}
           showLabel
           onChange={() =>
             handleChangeCheckboxGroup("ageGroup", ageGroupItem.id)
           }
-          isInvalid={errors.ageGroup ? true : false}
+          isInvalid={errors?.ageGroup ? true : false}
         />
       ))}
     </CheckboxGroup>
