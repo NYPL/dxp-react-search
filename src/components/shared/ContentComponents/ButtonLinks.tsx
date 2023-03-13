@@ -36,7 +36,7 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
       py="xl"
       mb="m"
       // This forces the component background to go full width, edge to edge.
-      mx={{ sm: "-s", lg: "-25rem" }}
+      mx={{ sm: "-s", lg: "-50rem" }}
       bg="ui.bg.default"
     >
       <Box w="full" px="s" margin="auto">
