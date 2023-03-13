@@ -1,4 +1,4 @@
-var xss = require("xss");
+const xss = require("xss");
 
 function formatRequestVisitEmail(formValues: any) {
   // School or Organization
