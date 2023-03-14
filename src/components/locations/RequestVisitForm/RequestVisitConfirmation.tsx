@@ -11,7 +11,7 @@ const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 function RequestVisitConfirmation() {
   const router = useRouter();
 
-  let internalSlugArray = [];
+  const internalSlugArray = [];
   internalSlugArray.push(router.query.id);
 
   const { loading, error, data } = useQuery(LOCATION_BY_INTERNAL_SLUG, {
@@ -33,7 +33,7 @@ function RequestVisitConfirmation() {
   const locationUrl = `${NEXT_PUBLIC_NYPL_DOMAIN}${data?.allLocations?.items[0]?.url}`;
 
   if (error) {
-    return <div>'error while loading locations'</div>;
+    return <div>Error while loading locations.</div>;
   }
 
   if (loading || !data) {
@@ -48,7 +48,8 @@ function RequestVisitConfirmation() {
         text="Thank You!"
       />
       <p>
-        We've received your request and will get back to you within 48 hours.
+        We&apos;ve received your request and will get back to you within 48
+        hours.
       </p>
       <Link type="action" href={locationUrl}>
         Back to {locationName}

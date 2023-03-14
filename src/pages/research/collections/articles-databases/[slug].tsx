@@ -181,5 +181,5 @@ export const getServerSideProps = withDrupalRouter(
   },
   { customPreview: true }
 );
-// @ts-ignore
+
 export default withApollo(withRedux(OnlineResourceSlug));

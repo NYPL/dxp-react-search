@@ -87,7 +87,7 @@ function BlogCollection({
     ? parseInt(router.query.page as string, 10)
     : 1;
   // Build query filters.
-  let queryFilters: any = {};
+  const queryFilters: any = {};
   const queryFiltersArray = [
     {
       queryName: "channel",

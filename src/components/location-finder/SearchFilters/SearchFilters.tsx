@@ -61,7 +61,7 @@ function SearchFilters() {
 
   // Error state.
   if (error) {
-    return <div>'error while loading filters'</div>;
+    return <div>Error while loading filters.</div>;
   }
 
   // Loading state,

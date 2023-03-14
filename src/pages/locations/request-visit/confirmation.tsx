@@ -24,5 +24,4 @@ function LocationsRequestVisitConfirmationPage() {
     />
   );
 }
-// @ts-ignore
 export default withApollo(withRedux(LocationsRequestVisitConfirmationPage));

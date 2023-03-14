@@ -53,7 +53,7 @@ function LocationHours({
       {open ? (
         <HStack mb="xxs" align="center">
           <Icon name="clock" size="large" />
-          <Box>Today's Hours:</Box>
+          <Box>Today&apos;s Hours:</Box>
           <Box fontWeight="bold">
             {formatHours(todayHoursStart, todayHoursEnd, appointmentOnly)}
           </Box>

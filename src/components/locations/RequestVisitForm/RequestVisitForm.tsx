@@ -151,12 +151,12 @@ function RequestVisitForm() {
     parentId: FormCheckboxGroupType,
     itemId: FormCheckboxValueType
   ) {
-    let itemExists = values[parentId]?.includes(itemId) || false;
+    const itemExists = values[parentId]?.includes(itemId) || false;
     // Make a copy of the existing array.
     let items = values[parentId]?.slice() || [];
     // If item exists, remove it from the array.
     if (itemExists) {
-      items = items.filter((id) => id != itemId);
+      items = items.filter((id: string) => id != itemId);
     } else {
       // Add it to the array, but modify the copy, not the original.
       items.push(itemId);
@@ -191,7 +191,7 @@ function RequestVisitForm() {
     // Form submit handling.
     if (checkValidation(schemaErrors)) {
       // Run query to get the location's email address.
-      let internalSlugArray = [];
+      const internalSlugArray = [];
       internalSlugArray.push(values.library);
       const { data: locationEmailData } = await client.query({
         query: LOCATION_BY_INTERNAL_SLUG,

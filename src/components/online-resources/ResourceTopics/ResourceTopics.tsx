@@ -47,7 +47,7 @@ function ResourceTopics({
   sort,
   featured,
 }: ResourceTopicsProps) {
-  let queryFilters: any = {};
+  const queryFilters: any = {};
   if (featured) {
     queryFilters["featured"] = {
       fieldName: "field_bs_featured",

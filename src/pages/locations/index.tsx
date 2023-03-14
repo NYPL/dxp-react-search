@@ -131,5 +131,4 @@ export const getServerSideProps = async () => {
   };
 };
 
-// @ts-ignore
 export default withApollo(withRedux(LocationFinder));

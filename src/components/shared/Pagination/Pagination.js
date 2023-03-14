@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { setPagination } from './../../../redux/actions';
+import { useDispatch, useSelector } from "react-redux";
+import { setPagination } from "./../../../redux/actions";
 // Components
-import { Pagination as DsPagination } from '@nypl/design-system-react-components';
+import { Pagination as DsPagination } from "@nypl/design-system-react-components";
 
 function Pagination({ limit }) {
   // Redux
@@ -12,16 +12,18 @@ function Pagination({ limit }) {
     pageCount,
     pageNumber,
     //resultsCount
-  } = useSelector(state => state.search);
+  } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
   function onPageChange(pageIndex) {
     // Redux
-    dispatch(setPagination({
-      pageNumber: pageIndex,
-      offset: limit * (pageIndex - 1),
-      pageCount
-    }));
+    dispatch(
+      setPagination({
+        pageNumber: pageIndex,
+        offset: limit * (pageIndex - 1),
+        pageCount,
+      })
+    );
   }
 
   if (pageCount > 1) {
@@ -33,8 +35,8 @@ function Pagination({ limit }) {
       />
     );
   } else {
-    return (null);
+    return null;
   }
-};
+}
 
 export default Pagination;

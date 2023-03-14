@@ -24,7 +24,7 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant, size });
   // Generate describedBy string (used by Blog Card)
-  let describedByIdsArray = [];
+  const describedByIdsArray = [];
   const omitItems = ["id", "title", "image", "url", "__typename"];
   for (const propName in item) {
     if (!omitItems.includes(propName)) {

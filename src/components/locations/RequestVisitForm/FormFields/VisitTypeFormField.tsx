@@ -97,7 +97,7 @@ function VisitTypeFormField({
             legendText="What services would you like to include in your virtual visit?"
           >
             {virtualServicesItems.map((virtualServiceItem) => (
-              <Box mb="s">
+              <Box mb="s" key={virtualServiceItem.id}>
                 <Checkbox
                   id={virtualServiceItem.id}
                   labelText={virtualServiceItem.label}
@@ -143,7 +143,7 @@ function VisitTypeFormField({
             legendText="What would you like to request?"
           >
             {inPersonItems.map((inPersonItem) => (
-              <Box mb="s">
+              <Box mb="s" key={inPersonItem.id}>
                 <Radio
                   id="inPersonServices"
                   name="inPersonServices"
