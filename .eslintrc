@@ -36,7 +36,11 @@
       "plugins": ["@typescript-eslint/eslint-plugin", "react-hooks"],
       "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
       "rules": {
-        "@typescript-eslint/no-unused-vars": "error",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          { "varsIgnorePattern": "omit" }
+        ],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "no-use-before-define": [0],

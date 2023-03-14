@@ -3,12 +3,12 @@ import { Box, Button } from "@nypl/design-system-react-components";
 // Redux
 import { batch, useDispatch, useSelector } from "react-redux";
 import { resetSearch, resetMap } from "./../../../redux/actions";
+import { RootState } from "../../../redux/store";
 
 function SearchResultsDetails() {
   // Redux
   const { searchQuery, resultsCount, openNow, searchFilters } = useSelector(
-    // @ts-ignore
-    (state) => state.search
+    (state: RootState) => state.search
   );
 
   const dispatch = useDispatch();

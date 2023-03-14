@@ -91,5 +91,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-// @ts-ignore
 export default withApollo(withRedux(OnlineResourcesPage));

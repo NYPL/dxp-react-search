@@ -19,6 +19,7 @@ import useWindowSize from "../../../hooks/useWindowSize";
 import setTermsFilter from "../../../utils/setTermsFilter";
 // Type
 import { LocationProps as Location } from "../Location/Location";
+import { RootState } from "../../../redux/store";
 
 interface LocationsMapContainerProps {
   onClick: (location: Location) => void;
@@ -42,9 +43,9 @@ const LocationsMapContainer = (props: LocationsMapContainerProps) => {
     offset,
     pageNumber,
     searchFilters,
-  } = useSelector((state: any) => state.search);
+  } = useSelector((state: RootState) => state.search);
   const { mapCenter, mapZoom, infoWindowId, infoWindowIsVisible } = useSelector(
-    (state: any) => state.map
+    (state: RootState) => state.map
   );
 
   // Special handling for pagination on desktop
