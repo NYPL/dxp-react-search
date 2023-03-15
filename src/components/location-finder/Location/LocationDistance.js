@@ -16,16 +16,17 @@ function LocationDistance({ locationPoint }) {
   // Calculate distance between points.
   function haversineDistance(searchQueryPoint, locationPoint) {
     // Radius of the Earth in miles
-    var R = 3958.8;
+    const R = 3958.8;
     // Convert degrees to radians
-    var rlat1 = searchQueryPoint.lat * (Math.PI / 180);
+    const rlat1 = searchQueryPoint.lat * (Math.PI / 180);
     // Convert degrees to radians
-    var rlat2 = locationPoint.lat * (Math.PI / 180);
+    const rlat2 = locationPoint.lat * (Math.PI / 180);
     // Radian difference (latitudes)
-    var difflat = rlat2 - rlat1;
+    const difflat = rlat2 - rlat1;
     // Radian difference (longitudes)
-    var difflon = (locationPoint.lng - searchQueryPoint.lng) * (Math.PI / 180);
-    var d =
+    const difflon =
+      (locationPoint.lng - searchQueryPoint.lng) * (Math.PI / 180);
+    const d =
       2 *
       R *
       Math.asin(

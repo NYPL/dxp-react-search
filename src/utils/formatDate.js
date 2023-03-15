@@ -1,10 +1,10 @@
 // DayJS
 const dayjs = require("dayjs");
 // DayJS timezone
-var utc = require("dayjs/plugin/utc");
-var timezone = require("dayjs/plugin/timezone");
-dayjs.extend(utc);
-dayjs.extend(timezone);
+const utcPlugin = require("dayjs/plugin/utc");
+const timezonePlugin = require("dayjs/plugin/timezone");
+dayjs.extend(utcPlugin);
+dayjs.extend(timezonePlugin);
 
 function formatDate(date) {
   const dateFormat = "MMMM D, YYYY";

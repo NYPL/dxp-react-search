@@ -1,15 +1,15 @@
 // DayJS
-const dayjs = require('dayjs');
+const dayjs = require("dayjs");
 // DayJS timezone
-var utc = require('dayjs/plugin/utc');
-var timezone = require('dayjs/plugin/timezone');
-dayjs.extend(utc);
-dayjs.extend(timezone);
+const utcPlugin = require("dayjs/plugin/utc");
+const timezonePlugin = require("dayjs/plugin/timezone");
+dayjs.extend(utcPlugin);
+dayjs.extend(timezonePlugin);
 // isBetween
-var isBetween = require('dayjs/plugin/isBetween');
+const isBetween = require("dayjs/plugin/isBetween");
 dayjs.extend(isBetween);
 // Utils
-import naturalSort from './naturalSort';
+import naturalSort from "./naturalSort";
 
 /**
  * Set today's hours using regular hours or modified hours using alerts closings.
@@ -21,15 +21,21 @@ import naturalSort from './naturalSort';
  * @param {boolean} isExtendedClosing - whether or not its an extended closing.
  * @return {object} todaysHours - an object of start and end hours for today.
  */
-function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedClosing) {
+function setTodaysHours(
+  now,
+  regularHours,
+  alerts,
+  hasActiveClosing,
+  isExtendedClosing
+) {
   // Today hours
-  const weekDayKeys = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
+  const weekDayKeys = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."];
 
   let todayHoursStart;
   let todayHoursEnd;
 
   // Get todays regular hours.
-  regularHours.map(item => {
+  regularHours.map((item) => {
     if (weekDayKeys[now.day()] === item.day) {
       todayHoursStart = item.open;
       todayHoursEnd = item.close;
@@ -38,7 +44,7 @@ function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedC
 
   let todaysHours = {
     start: todayHoursStart,
-    end: todayHoursEnd
+    end: todayHoursEnd,
   };
 
   // Active closing, not extended closing
@@ -49,36 +55,47 @@ function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedC
     const endTimes = [todayHoursEnd];
 
     // We have alerts, so map over them.
-    alerts.forEach(alert => {
+    alerts.forEach((alert) => {
       // Check if closed_for key exists
-      if ('closed_for' in alert) {
+      if ("closed_for" in alert) {
         // Check for start and end values
         if (alert.applies.start && alert.applies.end) {
           // Closing hours
-          const closingStartHours = dayjs(alert.applies.start).tz('America/New_York').format('HH:mm');
-          const closingEndHours = dayjs(alert.applies.end).tz('America/New_York').format('HH:mm');
+          const closingStartHours = dayjs(alert.applies.start)
+            .tz("America/New_York")
+            .format("HH:mm");
+          const closingEndHours = dayjs(alert.applies.end)
+            .tz("America/New_York")
+            .format("HH:mm");
 
-          const today = now.format('YYYY-MM-DD');
-          const closingStartsThisDay = dayjs(alert.applies.start).tz('America/New_York').format('YYYY-MM-DD') === today;
-          const closingEndsThisDay = dayjs(alert.applies.end).tz('America/New_York').format('YYYY-MM-DD') === today;
+          const today = now.format("YYYY-MM-DD");
+          const closingStartsThisDay =
+            dayjs(alert.applies.start)
+              .tz("America/New_York")
+              .format("YYYY-MM-DD") === today;
+          const closingEndsThisDay =
+            dayjs(alert.applies.end)
+              .tz("America/New_York")
+              .format("YYYY-MM-DD") === today;
 
           // Return as "Closed"
           if (
             // Closing spans this entire day, so return NULL for closed.
-            !closingStartsThisDay && !closingEndsThisDay
+            (!closingStartsThisDay && !closingEndsThisDay) ||
             // Closing starts before today, but ends after regular hours this day.
-            || !closingStartsThisDay && closingEndHours >= todayHoursEnd
+            (!closingStartsThisDay && closingEndHours >= todayHoursEnd) ||
             // Closing ends after today, but starts before regular hours this day.
-            || !closingEndsThisDay && closingStartHours <= todayHoursStart
+            (!closingEndsThisDay && closingStartHours <= todayHoursStart) ||
             // Closing spans regular hours, so return NULL for closed.
-            || closingStartHours <= todayHoursStart && closingEndHours >= todayHoursEnd
+            (closingStartHours <= todayHoursStart &&
+              closingEndHours >= todayHoursEnd)
           ) {
             todaysHours = {
               start: null,
-              end: null
+              end: null,
             };
           } else {
-          // Return regular hours modified.
+            // Return regular hours modified.
             if (closingStartHours > todayHoursStart) {
               endTimes.push(closingStartHours);
             }
@@ -98,7 +115,7 @@ function setTodaysHours(now, regularHours, alerts, hasActiveClosing, isExtendedC
             if (startTime < endTime) {
               todaysHours = {
                 start: startTime,
-                end: endTime
+                end: endTime,
               };
             }
           }
