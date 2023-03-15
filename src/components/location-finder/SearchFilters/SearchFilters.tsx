@@ -51,8 +51,8 @@ function SearchFilters() {
   const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
     if (isMobile && prevModalState !== isModalOpen) {
-      // @ts-ignore
-      document.getElementById("locations-list").scrollIntoView();
+      const locationsList = document.getElementById("locations-list");
+      locationsList?.scrollIntoView();
     }
   }, [isModalOpen]);
 

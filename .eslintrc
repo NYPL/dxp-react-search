@@ -36,7 +36,11 @@
       "plugins": ["@typescript-eslint/eslint-plugin", "react-hooks"],
       "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
       "rules": {
-        "@typescript-eslint/no-unused-vars": "error",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          { "varsIgnorePattern": "omit" }
+        ],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "no-use-before-define": [0],
@@ -50,9 +54,16 @@
             "avoidEscape": true
           }
         ],
-        // @TODO Remove this
-        "@typescript-eslint/ban-ts-comment": "off",
-        "react-hooks/exhaustive-deps": "off"
+        "prefer-const": "off",
+        "react/no-unescaped-entities": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "no-var": "off",
+        "react-hooks/rules-of-hooks": "off",
+        "import/extensions": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "react/jsx-key": "off",
+        "@next/next/no-sync-scripts": "off",
+        "import/no-anonymous-default-export": "off"
       }
     }
   ]

@@ -68,7 +68,6 @@ function VisitTypeFormField({
   handleChange,
   handleChangeCheckboxGroup,
 }: FormFieldProps) {
-  // @ts-ignore
   const [state] = useContext(FormContext);
   const { values, errors } = state;
 
@@ -82,8 +81,8 @@ function VisitTypeFormField({
         value={values.visitType}
         isRequired
         showLabel
-        invalidText={errors.visitType}
-        isInvalid={errors.visitType !== undefined}
+        invalidText={errors?.visitType}
+        isInvalid={errors?.visitType !== undefined}
       >
         <option value="" disabled selected>
           -- Select visit type --
@@ -113,7 +112,7 @@ function VisitTypeFormField({
                     virtualServiceItem.id
                   )}
                   showLabel
-                  isInvalid={errors.virtualVisitServices ? true : false}
+                  isInvalid={errors?.virtualVisitServices ? true : false}
                 />
                 {virtualServiceItem.id === "services-other" && (
                   <Box mt="s">
@@ -127,8 +126,8 @@ function VisitTypeFormField({
                       isDisabled={
                         !values.virtualVisitServices.includes("services-other")
                       }
-                      isInvalid={errors.virtualVisitServices ? true : false}
-                      invalidText={errors.virtualVisitServices}
+                      isInvalid={errors?.virtualVisitServices ? true : false}
+                      invalidText={errors?.virtualVisitServices}
                     />
                   </Box>
                 )}
@@ -154,7 +153,7 @@ function VisitTypeFormField({
                   showLabel
                   isChecked={values.inPersonServices === inPersonItem.id}
                   onChange={(e) => handleChange(e)}
-                  isInvalid={errors.inPersonServices ? true : false}
+                  isInvalid={errors?.inPersonServices ? true : false}
                 />
                 {inPersonItem.id === "in-person-other" && (
                   <Box mt="s">
@@ -166,8 +165,8 @@ function VisitTypeFormField({
                       onChange={handleChange}
                       value={values.inPersonServicesOther}
                       isDisabled={values.inPersonServices !== "in-person-other"}
-                      isInvalid={errors.inPersonServices ? true : false}
-                      invalidText={errors.inPersonServices}
+                      isInvalid={errors?.inPersonServices ? true : false}
+                      invalidText={errors?.inPersonServices}
                     />
                   </Box>
                 )}

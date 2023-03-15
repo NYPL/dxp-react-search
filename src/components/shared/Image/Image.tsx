@@ -18,17 +18,23 @@ function Image({
   transformations,
   uri,
 }: ImageProps) {
+  let imageSrc = uri;
+  if (useTransformation && transformations) {
+    const transformationUri = getImageTransformation(
+      transformationLabel,
+      transformations
+    );
+    if (transformationUri !== null) {
+      imageSrc = transformationUri;
+    }
+  }
+
   return (
     <div id={`nextjsImage-${id}`} className="scout-nextjs-image">
       <NextImage
         // id={`nextjsImage-${id}`}
         alt={alt}
-        // @ts-ignore
-        src={
-          useTransformation && transformations
-            ? getImageTransformation(transformationLabel, transformations)
-            : uri
-        }
+        src={imageSrc}
         layout={layout}
         {...(width && {
           width: width,

@@ -64,7 +64,7 @@ interface BlogCollectionProps {
   description?: string;
   slug?: string;
   slugLabel?: string;
-  limit?: number;
+  limit: number;
   pageNumber?: number;
   sort?: any;
   featured?: boolean;
@@ -214,7 +214,6 @@ function BlogCollection({
           <FilterBarDetails
             currentPage={currentPage}
             itemsOnPage={data.allBlogs.items.length}
-            // @ts-ignore
             limit={limit}
             totalItems={data.allBlogs.pageInfo.totalItems}
           />

@@ -1,3 +1,7 @@
+import { MenuProps as MenuType } from "./../components/ds-prototypes/Menu/Menu";
+/**
+ * @type {MenuType[]} railMenuContent
+ */
 export const railMenuContent = [
   {
     id: "more-at-nypl",

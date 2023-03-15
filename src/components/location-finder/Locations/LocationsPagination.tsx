@@ -2,14 +2,14 @@ import React from "react";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "../../../redux/actions";
+import { RootState } from "../../../redux/store";
 // Components
 import { Pagination } from "@nypl/design-system-react-components";
 
 function LocationsPagination({ limit }: { limit: number }) {
   // Redux
   const { pageCount, pageNumber } = useSelector(
-    // @ts-ignore
-    (state) => state.search
+    (state: RootState) => state.search
   );
   const dispatch = useDispatch();
 

@@ -85,9 +85,8 @@ function PageContainer({
                 key={menu.id}
                 headingLevel="two"
                 headingColor={"#00838A"}
-                headingDecoration={"underline"}
+                headingDecoration={true}
                 title={menu.title}
-                // @ts-ignore
                 items={menu.items}
                 orientation={"vertical"}
               />
@@ -111,7 +110,6 @@ function PageContainer({
                 headingLevel="three"
                 headingColor={"#00838A"}
                 title={menu.title}
-                // @ts-ignore
                 items={menu.items}
                 menuItemDecoration={false}
                 orientation={"horizontal"}

@@ -71,7 +71,6 @@ export default function EmailSubscription({
         const response = await fetch(endpoint, options);
         const result = await response.json();
 
-        // @ts-ignore
         window.gtag("event", gaEventActionName, {
           event_category: gaEventCategory,
           event_label: gaEventLabel,

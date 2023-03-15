@@ -18,7 +18,7 @@ interface ChannelsCardsProps {
   id: string;
   title: string;
   description: string;
-  slug: string;
+  slug?: string;
   slugLabel?: string;
   limit?: number;
   sort?: any;
@@ -30,6 +30,8 @@ interface ChannelCardItem {
   tid: string;
   title: string;
   description: string;
+  // @TODO If am not sure if this is necessary. Right now the slug is not even passed to the Card component
+  // The Card component is not using ...rest to catch a slug prop, nor is it acception a slug prop.
   slug: string;
   image: ImageType;
 }
@@ -114,7 +116,7 @@ function ChannelsCards({
     <CardSet
       id={id}
       title={title}
-      slug={slug}
+      {...(slug && { slug: slug })}
       slugLabel={slugLabel}
       description={description}
     >

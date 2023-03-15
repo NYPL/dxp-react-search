@@ -32,8 +32,6 @@ function BlogsChannelsPage() {
           id="explore-by-channel"
           title={explore_by_channel.heading}
           description={explore_by_channel.description}
-          // @ts-ignore
-          slug={null}
           limit={30}
           sort={{ field: "weight", direction: "ASC" }}
         />

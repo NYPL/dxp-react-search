@@ -2,8 +2,9 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Donation from "./Donation";
+import { ImageType } from "../../shared/Image";
 
-const mockNextJsImage = {
+const mockNextJsImage: ImageType = {
   id: "test-id-1",
   alt: "image-1-alt-text",
   layout: "responsive",

@@ -6,12 +6,18 @@ import { Box, Button, Heading } from "@nypl/design-system-react-components";
 import LibraryFormField from "./FormFields/LibraryFormField";
 import VisitTypeFormField from "./FormFields/VisitTypeFormField";
 import OrgFormField from "./FormFields/OrgFormField";
-import AgeGroupFormField from "./FormFields/AgeGroupFormField";
+import AgeGroupFormField, {
+  FormCheckboxGroupType,
+  FormCheckboxValueType,
+} from "./FormFields/AgeGroupFormField";
 import ContactInfoFormField from "./FormFields/ContactInfoFormField";
 import HoneypotFormField from "./FormFields/HoneypotFormField";
 import formatRequestVisitEmail from "./../../../utils/formatRequestVisitEmail";
 import { useRouter } from "next/router";
-import { FormContext } from "./../../../context/FormContext";
+import {
+  FormContext,
+  FormContextActionType,
+} from "./../../../context/FormContext";
 // Form validation
 import * as yup from "yup";
 import {
@@ -103,7 +109,6 @@ const schema = yup.object().shape({
 });
 
 function RequestVisitForm() {
-  // @ts-ignore
   const [state, dispatch] = useContext(FormContext);
   const { values } = state;
   // Apollo.
@@ -114,7 +119,7 @@ function RequestVisitForm() {
   useEffect(() => {
     if (router.query.id) {
       dispatch({
-        type: "SET_FORM_STATE",
+        type: FormContextActionType.SET_FORM_STATE,
         payload: {
           values: { ...state.values, library: router.query.id as string },
         },
@@ -134,7 +139,7 @@ function RequestVisitForm() {
     }
 
     dispatch({
-      type: "SET_FORM_STATE",
+      type: FormContextActionType.SET_FORM_STATE,
       payload: {
         values: { ...state.values, [name]: value },
         touched: { ...state.touched, [name]: true },
@@ -142,11 +147,13 @@ function RequestVisitForm() {
     });
   }
 
-  async function handleChangeCheckboxGroup(parentId: string, itemId: string) {
-    let items = [];
-    const itemExists = values[parentId].includes(itemId);
+  async function handleChangeCheckboxGroup(
+    parentId: FormCheckboxGroupType,
+    itemId: FormCheckboxValueType
+  ) {
+    const itemExists = values[parentId]?.includes(itemId) || false;
     // Make a copy of the existing array.
-    items = values[parentId].slice();
+    let items = values[parentId]?.slice() || [];
     // If item exists, remove it from the array.
     if (itemExists) {
       items = items.filter((id: string) => id != itemId);
@@ -156,7 +163,7 @@ function RequestVisitForm() {
     }
 
     dispatch({
-      type: "SET_FORM_STATE",
+      type: FormContextActionType.SET_FORM_STATE,
       payload: {
         values: { ...state.values, [parentId]: items },
         touched: { ...state.touched },
@@ -172,7 +179,7 @@ function RequestVisitForm() {
     });
     // Set the form state.
     dispatch({
-      type: "SET_FORM_STATE",
+      type: FormContextActionType.SET_FORM_STATE,
       payload: {
         errors: schemaErrors,
         values: { ...state.values },
@@ -246,7 +253,7 @@ function RequestVisitForm() {
       } else {
         // Server error, so update the form state to show the server level errors in notification component.
         dispatch({
-          type: "SET_FORM_STATE",
+          type: FormContextActionType.SET_FORM_STATE,
           payload: {
             errors: schemaErrors,
             values: { ...state.values },

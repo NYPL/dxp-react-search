@@ -58,7 +58,6 @@ function PageContainer({
                   headingLevel="three"
                   headingColor={"#c60917"}
                   title={menu.title}
-                  // @ts-ignore
                   items={menu.items}
                   menuItemDecoration={false}
                   orientation={"vertical"}

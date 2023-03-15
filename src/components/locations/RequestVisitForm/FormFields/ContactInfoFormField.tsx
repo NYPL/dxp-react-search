@@ -4,7 +4,6 @@ import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
 function ContactInfoFormField({ handleChange }: FormFieldProps) {
-  // @ts-ignore
   const [state] = useContext(FormContext);
   const { values, errors } = state;
 
@@ -29,7 +28,7 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
           placeholder="Enter your name"
           isRequired={true}
           invalidText={errors?.contactName}
-          isInvalid={errors.contactName ? true : false}
+          isInvalid={errors?.contactName ? true : false}
           onChange={handleChange}
           value={values.contactName}
         />
@@ -41,9 +40,9 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         placeholder="Enter your email"
         isRequired={true}
         invalidText={errors?.contactEmail}
-        isInvalid={errors.contactEmail ? true : false}
+        isInvalid={errors?.contactEmail ? true : false}
         onChange={handleChange}
-        value={values.contactEmai}
+        value={values.contactEmail}
       />
     </Box>
   );
