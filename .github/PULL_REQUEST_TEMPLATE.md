@@ -1,11 +1,17 @@
-[Jira Ticket](https://jira.nypl.org/browse/RENO-XXX)
-[Metronome](http://themetronome.co/components/XXX/?fresh=true)
+[Jira Ticket](https://jira.nypl.org/browse/RENO-XXXX)
+[Figma Design](https://www.figma.com/file/XXX)
 
-**This PR does the following:**
+## **This PR does the following:**
+
 -
 
 ### Review Steps:
-- [ ] Example step one
+
+- [ ] Pull in branch `git fetch origin RENO-****/branch-name`
+- [ ] Switch to relevant brach `git checkout RENO-****/branch-name`
+- [ ] Start a local build `npm run build && npm start`
+- [ ] Confirm tests are passing `npm test`
 
 ### Front End Review Steps:
+
 - [ ] View [Example](http://localhost:3000/)
