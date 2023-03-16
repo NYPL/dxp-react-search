@@ -4,6 +4,12 @@ const {
   NEXT_PUBLIC_SERVER_ENV,
 } = process.env;
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
+
+/** Using the <Script/> tag from Nextjs to optimize third-party scripts. According to the Docs Overview (https://nextjs.org/docs/basic-features/script#overview)
+ * async is not a necessary attribute. You can add an optional strategy prop (https://nextjs.org/docs/api-reference/next/script#strategy)
+ * to conrtol the laoding behavior. If no strategy prop is passed, it's default is 'afterInteractive'. This means it 'will load after some (or all) hydration occurs on the page.'
+ */
 
 class ScoutDocument extends Document {
   render() {
@@ -20,11 +26,11 @@ class ScoutDocument extends Document {
       <Html lang="en">
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
-          <script
-            async
+          <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`}
           />
-          <script
+          <Script
+            id="google-tag-data-layer"
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
@@ -40,12 +46,12 @@ class ScoutDocument extends Document {
             }}
           />
           {/* NYPL Header */}
-          <script async src={nyplHeaderScript} />
+          <Script src={nyplHeaderScript} strategy="beforeInteractive" />
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script async src="https://assets.nypl.org/js/advocacy.js"></script>
+          <Script src="https://assets.nypl.org/js/advocacy.js" />
         </body>
       </Html>
     );
