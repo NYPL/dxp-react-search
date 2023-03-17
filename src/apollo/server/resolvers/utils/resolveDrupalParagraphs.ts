@@ -113,6 +113,21 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
+        item.type === "paragraph--jumbotron" &&
+        typesInQuery.includes("Jumbotron")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--button_links" &&
+        typesInQuery.includes("ButtonLinks")
+      ) {
+        accumulator.push(item);
+      }
+
+      // Start homepage specific paragraphs.
+      if (
         item.type === "paragraph--hp_hero" &&
         typesInQuery.includes("HomePageHeroComponent")
       ) {
@@ -440,6 +455,49 @@ export default function resolveDrupalParagraphs(
             contentType === "section_front"
               ? getColorway("section_front")
               : null,
+        };
+        break;
+      case "paragraph--jumbotron":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          title: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          image:
+            item.field_ers_image.data === null
+              ? null
+              : resolveImage(item.field_ers_image),
+          secondaryImage:
+            item.field_ers_secondary_image.data === null
+              ? null
+              : resolveImage(item.field_ers_secondary_image),
+          link: {
+            title: item.field_ls_link.title,
+            uri: item.field_ls_link.uri,
+            url: item.field_ls_link.url,
+          },
+        };
+        break;
+      case "paragraph--button_links":
+        const buttonLinkItems: ResolvedParagraph[] = [];
+        Array.isArray(item.field_erm_button_links) &&
+          item.field_erm_button_links.map((buttonLinkItem: any) => {
+            buttonLinkItems.push({
+              id: buttonLinkItem.id,
+              icon: buttonLinkItem.field_lts_icon,
+              link: {
+                title: buttonLinkItem.field_ls_link.title,
+                uri: buttonLinkItem.field_ls_link.uri,
+                url: buttonLinkItem.field_ls_link.url,
+              },
+            });
+          });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          items: buttonLinkItems,
         };
         break;
 

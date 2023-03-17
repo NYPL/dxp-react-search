@@ -213,6 +213,22 @@ export const typeDefs = gql`
     link: String
   }
 
+  type Jumbotron {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    image: Image
+    secondaryImage: Image
+    link: Link
+  }
+
+  type Link {
+    title: String
+    uri: String
+    url: String!
+  }
+
   type Colorway {
     primary: String
     secondary: String
@@ -231,5 +247,19 @@ export const typeDefs = gql`
     salesforceListId: String
     salesforceSourceCode: String
     colorway: Colorway
+  }
+
+  type ButtonLink {
+    id: ID!
+    icon: String
+    link: Link
+  }
+
+  type ButtonLinks {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    items: [ButtonLink]
   }
 `;
