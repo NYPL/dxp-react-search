@@ -19,6 +19,7 @@ export const typeDefs = gql`
     | ExternalSearch
     | EmailSubscription
     | ButtonLinks
+    | Text
 
   type SectionFrontConnection {
     items: [SectionFront]

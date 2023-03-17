@@ -129,7 +129,7 @@ export const typeDefs = gql`
   type Text {
     id: ID!
     type: String!
-    text: String!
+    text: String
     heading: String
   }
 
