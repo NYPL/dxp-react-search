@@ -5,6 +5,7 @@ import {
   CardContent,
   Heading,
   Link,
+  useNYPLBreakpoints,
 } from "@nypl/design-system-react-components";
 import { default as SharedJumbotron } from "./../Jumbotron";
 import TextFormatted from "../TextFormatted";
@@ -33,6 +34,7 @@ export default function Jumbotron({
   secondaryImage,
   link,
 }: JumbotronProps) {
+  const { isLargerThanMedium } = useNYPLBreakpoints();
   return (
     <SharedJumbotron
       id={id}
@@ -62,8 +64,8 @@ export default function Jumbotron({
                   />
                 ),
                 size: "large",
-                // Positions the image to the right of the text.
-                isAtEnd: true,
+                // Positions the image to the right of the text (tablet/desktop) or on top of text (mobile).
+                isAtEnd: isLargerThanMedium,
               },
             })}
           >

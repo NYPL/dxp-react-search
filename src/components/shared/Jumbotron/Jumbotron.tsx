@@ -29,16 +29,17 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
     <Box id={id} marginBottom="l">
       <Box
         backgroundImage={{
-          md: "none",
-          lg: backgroundImageSrcLg,
+          sm: "none",
+          //@TODO Should there be a transition for tablet?
+          md: backgroundImageSrcLg,
           "2xl": backgroundImageSrc2Xl,
         }}
         backgroundSize={{ sm: "100%", md: "cover" }}
         backgroundPosition={{ md: "center" }}
-        minHeight={{ lg: "464px" }}
-        marginBottom={{ sm: "m", md: "initial" }}
+        minHeight={{ md: "305px", lg: "464px" }}
+        marginBottom={{ sm: "s", md: "initial" }}
       >
-        <Box display={{ lg: "none" }}>
+        <Box display={{ md: "none" }}>
           <Image
             id={image.id}
             alt={image.alt}
@@ -59,8 +60,11 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
         maxWidth="1240px"
         margin="0 auto"
         padding={{ sm: "s", md: "xl" }}
-        marginTop={{ lg: "-40px" }}
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        marginTop={{ md: "-40px" }}
+        boxShadow={{ md: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+        borderWidth={{ sm: "1px", md: "none" }}
+        borderColor="ui.gray.medium"
+        mx={{ sm: "s", xl: "auto" }}
       >
         {overlay}
       </Box>
