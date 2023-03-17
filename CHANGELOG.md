@@ -11,6 +11,7 @@
 - Add ButtonLinks Component: [#396](https://github.com/NYPL/dxp-react-search/pull/396)
 - Add Bundle to DecoupledRouter: [#390](https://github.com/NYPL/dxp-react-search/pull/390)
 - Add Sharp Package: [#399](https://github.com/NYPL/dxp-react-search/pull/399)
+- Add Text component to section front template: [#401](https://github.com/NYPL/dxp-react-search/pull/401)
 
 ---
 
