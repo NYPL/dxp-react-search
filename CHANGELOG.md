@@ -2,6 +2,18 @@
 
 ---
 
+### v0.9.5 - Section Front: Educator & Misc Release
+
+---
+
+- Add String Sanitization To GetColorway: [#391](https://github.com/NYPL/dxp-react-search/pull/391)
+- Add Jumbotron component: [#387](https://github.com/NYPL/dxp-react-search/pull/387)
+- Add ButtonLinks Component: [#396](https://github.com/NYPL/dxp-react-search/pull/396)
+- Add Bundle to DecoupledRouter: [#390](https://github.com/NYPL/dxp-react-search/pull/390)
+- Add Sharp Package: [#399](https://github.com/NYPL/dxp-react-search/pull/399)
+
+---
+
 ### v0.9.4 - Drupal 10 Runway Support & Misc Release
 
 ---
