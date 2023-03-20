@@ -1,9 +1,9 @@
 // Sets the dropdown label name with appended filter count.
 function setDropdownLabel(vocab, searchFilters) {
-  let filterCount = '';
+  let filterCount = "";
   if (
-    searchFilters[vocab.id] !== undefined 
-    && searchFilters[vocab.id].terms.length > 0
+    searchFilters[vocab.id] !== undefined &&
+    searchFilters[vocab.id].terms.length > 0
   ) {
     filterCount = `(${searchFilters[vocab.id].terms.length})`;
   }
@@ -12,7 +12,10 @@ function setDropdownLabel(vocab, searchFilters) {
 
 function setDropdownCheckedProp(vocabId, dropdownIds) {
   let dropdownChecked = false;
-  if (dropdownIds !== undefined && dropdownIds.indexOf(`dropdown-${vocabId}`) > -1) {
+  if (
+    dropdownIds !== undefined &&
+    dropdownIds.indexOf(`dropdown-${vocabId}`) > -1
+  ) {
     dropdownChecked = true;
   }
   return dropdownChecked;
@@ -22,8 +25,8 @@ function setDropdownCheckedProp(vocabId, dropdownIds) {
 function hasSelectedItems(vocab, searchFilters) {
   let hasSelectedItems = false;
   if (
-    searchFilters[vocab.id] !== undefined 
-    && searchFilters[vocab.id].terms.length > 0
+    searchFilters[vocab.id] !== undefined &&
+    searchFilters[vocab.id].terms.length > 0
   ) {
     hasSelectedItems = true;
   }

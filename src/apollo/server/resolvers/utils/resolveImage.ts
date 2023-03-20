@@ -15,7 +15,7 @@ export function resolveImage(image: any): ResolvedParagraph | null {
       return null;
     }
 
-    let imageUri: string = "";
+    let imageUri = "";
     if (image.type === "media--digital_collections_image") {
       imageUri = `https://images.nypl.org/index.php?id=${image.field_media_dc_id}&t=w`;
     }
@@ -36,7 +36,7 @@ export function resolveImage(image: any): ResolvedParagraph | null {
       alt: image.field_media_alt_text,
       uri: imageUri,
       transformations: () => {
-        let transformations: ImageTransformation[] = [];
+        const transformations: ImageTransformation[] = [];
         imageStyles.forEach((imageStyle) => {
           transformations.push({
             id: `${image.id}__${imageStyle}`,
@@ -60,7 +60,7 @@ export function resolveImage(image: any): ResolvedParagraph | null {
     // so we add the domain here from the .env variable.
     uri: `${DRUPAL_API}${mediaImage.uri.url}`,
     transformations: () => {
-      let transformations: ImageTransformation[] = [];
+      const transformations: ImageTransformation[] = [];
       const imageStyle = mediaImage.image_style_uri as object;
       for (const [label, uri] of Object.entries(imageStyle)) {
         transformations.push({

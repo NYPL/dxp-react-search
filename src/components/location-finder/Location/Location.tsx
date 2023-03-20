@@ -98,10 +98,9 @@ function Location({
       })
     );
 
-    // @ts-ignore
-    if (windowSize < 600) {
-      // @ts-ignore
-      document.getElementById("locations-gmap").scrollIntoView();
+    if (windowSize && windowSize < 600) {
+      const locationsGmap = document.getElementById("locations-gmap");
+      locationsGmap?.scrollIntoView();
     }
   }
 

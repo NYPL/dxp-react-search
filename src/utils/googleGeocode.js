@@ -48,7 +48,7 @@ async function handleUrl(url) {
   );
 }
 
-export default {
+const Geocode = {
   /**
    *
    *
@@ -176,5 +176,7 @@ export default {
     }
 
     return handleUrl(url);
-  }
+  },
 };
+
+export default Geocode;

@@ -9,22 +9,22 @@ import { MenuItemType } from "./MenuTypes";
 // Styles
 import s from "./Menu.module.css";
 
-interface MenuProps {
+export interface MenuProps {
   /** The id for the menu */
   id: string;
   headingLevel: HeadingLevels;
-  headingDecoration: string;
+  headingDecoration?: boolean;
   headingColor?: string;
   title: string;
   items: MenuItemType[];
-  menuItemDecoration: boolean;
+  menuItemDecoration?: boolean;
   orientation: string;
 }
 
 function Menu({
   id,
   headingLevel,
-  headingDecoration,
+  headingDecoration = false,
   headingColor,
   title,
   items,
@@ -42,7 +42,7 @@ function Menu({
     >
       <span style={headingColor ? { color: headingColor } : { color: "black" }}>
         <Heading
-          className={headingDecoration === "underline" ? s.underline : ""}
+          className={headingDecoration ? s.underline : ""}
           id={headingId}
           level={headingLevel}
           text={title}

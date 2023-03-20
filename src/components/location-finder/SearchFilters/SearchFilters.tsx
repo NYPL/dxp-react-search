@@ -51,8 +51,8 @@ function SearchFilters() {
   const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
     if (isMobile && prevModalState !== isModalOpen) {
-      // @ts-ignore
-      document.getElementById("locations-list").scrollIntoView();
+      const locationsList = document.getElementById("locations-list");
+      locationsList?.scrollIntoView();
     }
   }, [isModalOpen]);
 
@@ -61,7 +61,7 @@ function SearchFilters() {
 
   // Error state.
   if (error) {
-    return <div>'error while loading filters'</div>;
+    return <div>Error while loading filters.</div>;
   }
 
   // Loading state,

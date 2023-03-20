@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 // Components
-import Dropdown from '../../shared/Dropdown';
-import CheckboxList from './CheckboxList';
+import Dropdown from "../../shared/Dropdown";
+import CheckboxList from "./CheckboxList";
 // Context
-import { SearchFiltersContext, useSearchFilters } from './SearchFiltersContext';
+import { SearchFiltersContext, useSearchFilters } from "./SearchFiltersContext";
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 // Utils
-import { 
-  setDropdownLabel, 
-  setDropdownCheckedProp, 
-  hasSelectedItems 
-} from './SearchFiltersUtils';
+import {
+  setDropdownLabel,
+  setDropdownCheckedProp,
+  hasSelectedItems,
+} from "./SearchFiltersUtils";
 
 function DropdownMobile(props) {
   // Context
@@ -20,17 +20,17 @@ function DropdownMobile(props) {
   // Props
   const { vocab } = props;
   // Redux
-  const { searchFilters } = useSelector(state => state.search);
+  const { searchFilters } = useSelector((state) => state.search);
 
   function onChangeDropdown(vocabId, event) {
     const dropdownIdChecked = event.target.id;
 
     dispatch({
-      type: 'SET_SELECTED_DROPDOWNS',
-      payload: { 
+      type: "SET_SELECTED_DROPDOWNS",
+      payload: {
         dropdownIdChecked: dropdownIdChecked,
-        mode: 'mobile'
-      }
+        mode: "mobile",
+      },
     });
   }
 
