@@ -261,7 +261,7 @@ export default function resolveDrupalParagraphs(
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
-          text: item.field_tfls_summary_descrip.processed,
+          text: item.field_tfls_summary_descrip?.processed,
           heading: item.field_ts_heading ? item.field_ts_heading : null,
         };
         break;

@@ -161,6 +161,13 @@ export const SECTION_FRONT_QUERY = gql`
             }
           }
         }
+        ... on Text {
+          __typename
+          id
+          type
+          heading
+          text
+        }
       }
     }
   }

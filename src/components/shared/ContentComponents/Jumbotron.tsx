@@ -68,6 +68,7 @@ export default function Jumbotron({
                   />
                 ),
                 size: "large",
+                // Positions the image to the right of the text.
                 isAtEnd: true,
               },
             })}
