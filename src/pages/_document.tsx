@@ -28,22 +28,24 @@ class ScoutDocument extends Document {
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`}
+            strategy="beforeInteractive"
           />
           <Script
             id="google-tag-data-layer"
             dangerouslySetInnerHTML={{
               __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
-                gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
-                  page_path: window.location.pathname,
-                  'groups':'default',
-                  'anonymize_ip':true
-                });
-              `,
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
+                    gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
+                      page_path: window.location.pathname,
+                      'groups':'default',
+                      'anonymize_ip':true
+                    });
+                  `,
             }}
+            strategy="beforeInteractive"
           />
           {/* NYPL Header */}
           <Script src={nyplHeaderScript} strategy="beforeInteractive" />
