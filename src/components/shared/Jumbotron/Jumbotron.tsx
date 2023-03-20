@@ -34,10 +34,10 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
           md: backgroundImageSrcLg,
           "2xl": backgroundImageSrc2Xl,
         }}
-        backgroundSize={{ sm: "100%", md: "cover" }}
+        backgroundSize={{ base: "100%", md: "cover" }}
         backgroundPosition={{ md: "center" }}
         minHeight={{ md: "305px", lg: "464px" }}
-        marginBottom={{ sm: "s", md: "initial" }}
+        marginBottom={{ base: "s", md: "initial" }}
       >
         <Box display={{ md: "none" }}>
           <Image
@@ -59,12 +59,12 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
         backgroundColor="white"
         maxWidth="1240px"
         margin="0 auto"
-        padding={{ sm: "s", md: "xl" }}
+        padding={{ base: "s", md: "xl" }}
         marginTop={{ md: "-40px" }}
         boxShadow={{ md: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-        borderWidth={{ sm: "1px", md: "none" }}
+        borderWidth={{ base: "1px", md: "none" }}
         borderColor="ui.gray.medium"
-        mx={{ sm: "s", xl: "auto" }}
+        marginX={{ base: "s", xl: "auto" }}
       >
         {overlay}
       </Box>
