@@ -2,6 +2,31 @@
 
 ---
 
+### v0.9.5 - Section Front: Educator & Misc Release
+
+---
+
+- Add String Sanitization To GetColorway: [#391](https://github.com/NYPL/dxp-react-search/pull/391)
+- Add Jumbotron component: [#387](https://github.com/NYPL/dxp-react-search/pull/387)
+- Add ButtonLinks Component: [#396](https://github.com/NYPL/dxp-react-search/pull/396)
+- Add Bundle to DecoupledRouter: [#390](https://github.com/NYPL/dxp-react-search/pull/390)
+- Add Sharp Package: [#399](https://github.com/NYPL/dxp-react-search/pull/399)
+- Add Text component to section front template: [#401](https://github.com/NYPL/dxp-react-search/pull/401)
+
+---
+
+### v0.9.4 - Drupal 10 Runway Support & Misc Release
+
+---
+
+- Add swipe functionality to homepage Slideshow component: [#355](https://github.com/NYPL/dxp-react-search/pull/355)
+- Hide see more button if no link text: [#385](https://github.com/NYPL/dxp-react-search/pull/385)
+- Remove old Apollo HOC: [#372](https://github.com/NYPL/dxp-react-search/pull/372)
+- Adds cypress tests for section front pages: [#388](https://github.com/NYPL/dxp-react-search/pull/388)
+- Updates image style format for json:api image styles module api change: [#389](https://github.com/NYPL/dxp-react-search/pull/389)
+
+---
+
 ### v0.9.3 - Section Front Research Release
 
 ---

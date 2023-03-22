@@ -31,6 +31,7 @@ const decoupledRouterResolver = {
         return router.redirect[0];
       }
     },
+    bundle: (router) => (router.entity?.bundle ? router.entity.bundle : null),
   },
 };
 

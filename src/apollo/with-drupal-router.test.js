@@ -37,6 +37,7 @@ describe("with-drupal-router success states.", () => {
       id: "test-success-id",
       uuid: "test-success-uuid",
       redirect: null,
+      bundle: "test-success",
     };
 
     requestHandler.mockResolvedValueOnce({
@@ -70,6 +71,7 @@ describe("with-drupal-router success states.", () => {
         to: "/new-slug",
         status: "301",
       },
+      bundle: "test-redirect",
     };
 
     requestHandler.mockResolvedValueOnce({

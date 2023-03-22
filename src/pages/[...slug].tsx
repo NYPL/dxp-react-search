@@ -5,7 +5,6 @@ import { GetStaticPropsContext } from "next";
 import withApollo from "../apollo/withApollo";
 // Section front
 import SectionFrontPage, {
-  sectionFrontsSlugs,
   SECTION_FRONT_QUERY,
 } from "../components/section-fronts/SectionFrontPage/SectionFrontPage";
 // HOC
@@ -18,6 +17,7 @@ type CatchAllRoutesPageProps = {
   uuid: string;
   isPreview: boolean;
   revisionId: string;
+  bundle?: string;
 };
 
 function CatchAllRoutesPage({
@@ -25,9 +25,10 @@ function CatchAllRoutesPage({
   uuid,
   isPreview,
   revisionId,
+  bundle,
 }: CatchAllRoutesPageProps) {
-  // Determine which page template to use by current slug.
-  if (sectionFrontsSlugs.includes(slug)) {
+  // Determine which page template to use by bundle.
+  if (bundle === "section_front") {
     return (
       <SectionFrontPage
         uuid={uuid}
@@ -56,10 +57,16 @@ export const getStaticProps = withDrupalRouter(async function (
   context: GetStaticPropsContext,
   props: WithDrupalRouterReturnProps
 ) {
-  const { uuid, revisionId, slug, isPreview, apolloClient } = props;
+  const { uuid, revisionId, slug, isPreview, bundle, apolloClient } = props;
+
+  let GQL_QUERY = SECTION_FRONT_QUERY;
+  // Future example for handling additional content types, would look like this:
+  // if (bundle === "page") {
+  //   QUERY = PAGE_QUERY;
+  // }
 
   await apolloClient.query({
-    query: SECTION_FRONT_QUERY,
+    query: GQL_QUERY,
     variables: {
       id: uuid,
       ...(isPreview && {
@@ -77,6 +84,7 @@ export const getStaticProps = withDrupalRouter(async function (
       ...(revisionId && {
         revisionId: revisionId,
       }),
+      bundle: bundle,
       initialApolloState: apolloClient.cache.extract(),
     },
     // Turn off request based revalidation.

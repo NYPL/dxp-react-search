@@ -12,6 +12,7 @@ export const DECOUPLED_ROUTER_QUERY = gql`
         to
         status
       }
+      bundle
     }
   }
 `;

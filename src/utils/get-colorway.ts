@@ -7,29 +7,36 @@ export type ColorwayMap = {
   [name: string]: Colorway;
 };
 
-type SlugOrSection = "/give" | "/research" | "section_front";
+// colorLabel can be any of the following:
+// slug - specific url
+// bundle - specific content type or other.
+// group - group of pages within a content type, mainly used for section_front
 
-export default function getColorway(slugOrSection: SlugOrSection): Colorway {
+export default function getColorway(colorwayLabel: string): Colorway {
+  let finalColorwayLabel: string;
+
+  // Sanitize passed slugs
+  if (colorwayLabel[0] === "/") {
+    finalColorwayLabel = colorwayLabel.replace(/^\//, "").split("/")[0];
+  } else {
+    finalColorwayLabel = colorwayLabel;
+  }
   const colorwayMap: ColorwayMap = {
     default: {
       primary: "brand.primary",
       secondary: "brand.secondary",
     },
-    "/give": {
+    give: {
       primary: "brand.primary",
       secondary: "brand.secondary",
     },
-    "/research": {
+    research: {
       primary: "section.research.primary",
       secondary: "section.research.secondary",
     },
-    "/research/collections": {
-      primary: "section.research.primary",
-      secondary: "section.research.secondary",
-    },
-    "/research/support": {
-      primary: "section.research.primary",
-      secondary: "section.research.secondary",
+    education: {
+      primary: "#1D62E6",
+      secondary: "#2540A4",
     },
     section_front: {
       primary: "brand.primary",
@@ -37,5 +44,5 @@ export default function getColorway(slugOrSection: SlugOrSection): Colorway {
     },
   };
 
-  return colorwayMap[slugOrSection] || colorwayMap.default;
+  return colorwayMap[finalColorwayLabel] || colorwayMap.default;
 }
