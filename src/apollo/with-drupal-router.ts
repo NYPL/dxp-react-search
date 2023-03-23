@@ -73,10 +73,10 @@ export default function withDrupalRouter<
         slug = `/${context.params?.slug}`;
       }
 
-      const { previewData } = context as GetStaticPropsContext;
+      const { previewData, preview } = context as GetStaticPropsContext;
 
       // Preview mode. If getStaticProps, only NextJS preview mode works.
-      isPreview = context.preview ? context.preview : false;
+      isPreview = preview ? preview : false;
 
       // Set the uuid for preview mode.
       if (isPreview) {
@@ -122,34 +122,32 @@ export default function withDrupalRouter<
     }
 
     // Shared code.
-    // Not preview mode, so run the rest of the routing logic.
-    if (!isPreview) {
-      // Get decoupled router data.
-      const decoupledRouterData = await apolloClient.query({
-        query: DECOUPLED_ROUTER_QUERY,
-        variables: {
-          path: slug,
+    // Get decoupled router data.
+    const decoupledRouterData = await apolloClient.query({
+      query: DECOUPLED_ROUTER_QUERY,
+      variables: {
+        path: slug,
+        isPreview: isPreview,
+      },
+    });
+
+    bundle = await decoupledRouterData?.data?.decoupledRouter?.bundle;
+
+    uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+
+    // Handle the redirect if it exists.
+    const redirect = await decoupledRouterData?.data?.decoupledRouter?.redirect;
+
+    if (redirect) {
+      return {
+        redirect: {
+          statusCode: 301,
+          destination: redirect.to,
         },
-      });
-
-      bundle = await decoupledRouterData?.data?.decoupledRouter?.bundle;
-
-      uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
-
-      // Handle the redirect if it exists.
-      const redirect = await decoupledRouterData?.data?.decoupledRouter
-        ?.redirect;
-
-      if (redirect) {
-        return {
-          redirect: {
-            statusCode: 301,
-            destination: redirect.to,
-          },
-          props: {},
-        };
-      }
+        props: {},
+      };
     }
+    // }
 
     const returnProps: WithDrupalRouterReturnProps = {
       uuid,
