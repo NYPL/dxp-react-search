@@ -131,9 +131,12 @@ export default function withDrupalRouter<
       },
     });
 
-    bundle = await decoupledRouterData?.data?.decoupledRouter?.bundle;
+    // Set the UUID for published pages
+    if (!isPreview) {
+      uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+    }
 
-    uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+    bundle = await decoupledRouterData?.data?.decoupledRouter?.bundle;
 
     // Handle the redirect if it exists.
     const redirect = await decoupledRouterData?.data?.decoupledRouter?.redirect;
