@@ -147,7 +147,6 @@ export default function withDrupalRouter<
         props: {},
       };
     }
-    // }
 
     const returnProps: WithDrupalRouterReturnProps = {
       uuid,
