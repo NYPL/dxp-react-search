@@ -11,13 +11,15 @@ export const typeDefs = gql`
     colorway: Colorway
   }
 
-  union SectionFrontFeaturedContent = Donation
+  union SectionFrontFeaturedContent = Donation | Jumbotron
 
   union SectionFrontMainContent =
       CardGrid
     | Donation
     | ExternalSearch
     | EmailSubscription
+    | ButtonLinks
+    | Text
 
   type SectionFrontConnection {
     items: [SectionFront]

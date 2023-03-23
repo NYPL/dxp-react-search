@@ -11,6 +11,9 @@ import CardList from "./CardList";
 import CardGrid from "./../CardGrid";
 import ExternalSearch from "./ExternalSearch";
 import EmailSubscription from "../EmailSubscription";
+import Donation from "../../section-fronts/Donation";
+import Jumbotron from "./Jumbotron";
+import ButtonLinks from "./ButtonLinks";
 
 // @TODO add a type for use in consuming components.
 // @SEE https://stackoverflow.com/questions/12787781/type-definition-in-object-literal-in-typescript
@@ -31,6 +34,9 @@ const Components: any = {
   CardGrid: CardGrid,
   ExternalSearch: ExternalSearch,
   EmailSubscription: EmailSubscription,
+  Donation: Donation,
+  Jumbotron: Jumbotron,
+  ButtonLinks: ButtonLinks,
 };
 
 export interface ContentComponentObject {

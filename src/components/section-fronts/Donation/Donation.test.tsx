@@ -24,9 +24,9 @@ describe("Donation component tests", () => {
         title="Donate to NYPL"
         description="Donation description"
         image={mockNextJsImage}
-        donationFormBaseUrl="https://test.com?id=1"
+        formBaseUrl="https://test.com?id=1"
         defaultAmount="145"
-        donationOtherLevelId="1234"
+        otherLevelId="1234"
       />
     );
   });
