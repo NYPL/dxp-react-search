@@ -2,6 +2,14 @@
 
 ---
 
+### v0.9.6 - Press bug fix
+
+---
+
+- Fixes pagination bug: [#404](https://github.com/NYPL/dxp-react-search/pull/404)
+
+---
+
 ### v0.9.5 - Section Front: Educator & Misc Release
 
 ---
