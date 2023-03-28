@@ -1,7 +1,6 @@
 import React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-import { PRESS_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/pressFields";
 // Components
 import { Box, Grid, Pagination } from "@nypl/design-system-react-components";
 import CardGridSkeletonLoader from "../../shared/Card/CardGridSkeletonLoader";
@@ -12,7 +11,6 @@ import { PressReleaseItem } from "./PressReleaseCardType";
 import { useRouter } from "next/router";
 
 export const ALL_PRESS_RELEASES_QUERY = gql`
-  ${PRESS_FIELDS_FRAGMENT}
   query AllPressReleases(
     $limit: Int
     $pageNumber: Int
@@ -26,7 +24,12 @@ export const ALL_PRESS_RELEASES_QUERY = gql`
       filter: $filter
     ) {
       items {
-        ...PressFields
+        id
+        title
+        subTitle
+        description
+        slug
+        date
       }
       pageInfo {
         totalItems
