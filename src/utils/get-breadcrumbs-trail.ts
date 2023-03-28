@@ -7,6 +7,8 @@ const breadcrumbsTextTable: Record<string, string> = {
   research: "Research",
   support: "Support and Services",
   collections: "Collections",
+  education: "Education",
+  educators: "Educators",
   // For testing purposes now, replace with an actual 3rd level item when knwown.
   "level-3": "Level 3",
 };

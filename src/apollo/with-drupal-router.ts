@@ -18,6 +18,8 @@ export type WithDrupalRouterReturnProps = {
   slug: string | undefined;
   /** If true, preview mode is activated. */
   isPreview: boolean;
+  /** The bundle of the entity. */
+  bundle?: string;
   /** The ApolloClient instance defined inside the with-drupal-router function. */
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
@@ -57,6 +59,7 @@ export default function withDrupalRouter<
     let revisionId;
     let slug;
     let isPreview = false;
+    let bundle;
 
     // Handle different types of preview mode.
     const isNextPreview = !options?.customPreview;
@@ -129,6 +132,8 @@ export default function withDrupalRouter<
         },
       });
 
+      bundle = await decoupledRouterData?.data?.decoupledRouter?.bundle;
+
       uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
 
       // Handle the redirect if it exists.
@@ -151,6 +156,7 @@ export default function withDrupalRouter<
       revisionId,
       slug,
       isPreview,
+      bundle,
       apolloClient,
     };
 
