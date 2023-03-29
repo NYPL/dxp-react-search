@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const typeDefs = gql`
   interface SearchDocument {
@@ -48,8 +48,8 @@ export const typeDefs = gql`
   }
 
   input SearchDocumentFilter {
-    q: String,
-    tid: String,
+    q: String
+    tid: String
     alpha: String
     subjects: [String]
     audience_by_age: [String]
@@ -58,11 +58,11 @@ export const typeDefs = gql`
 
   extend type Query {
     allSearchDocuments(
-      limit: Int,
-      offset: Int,
-      pageNumber: Int,
+      limit: Int
+      offset: Int
+      pageNumber: Int
       filter: SearchDocumentFilter
     ): SearchConnection
     searchDocument(id: String): SearchDocument
-  }  
+  }
 `;

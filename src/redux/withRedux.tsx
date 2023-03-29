@@ -44,9 +44,7 @@ export const withRedux = (
 
   // Set the correct displayName in development
   if (process.env.NODE_ENV !== "production") {
-    const displayName =
-      //@ts-ignores
-      PageComponent.displayName || PageComponent.name || "Component";
+    const displayName = PageComponent.name || "Component";
 
     WithRedux.displayName = `withRedux(${displayName})`;
   }

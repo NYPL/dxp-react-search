@@ -1,40 +1,33 @@
 import setTermsFilter, {
   BOROUGHS_UUID,
   ACCESSIBILITY_UUID,
-  SUBJECTS_UUID
-} from './setTermsFilter';
+  SUBJECTS_UUID,
+} from "./setTermsFilter";
 
 const originalStateObject = {
   [BOROUGHS_UUID]: {
-    terms: [
-      'bronx',
-      'statenisland'
-    ]
+    terms: ["bronx", "statenisland"],
   },
   [ACCESSIBILITY_UUID]: {
-    terms: [
-      'partialaccess'
-    ]
-  }
-}
+    terms: ["partialaccess"],
+  },
+};
 
 const expected = [
   {
     id: BOROUGHS_UUID,
-    terms: ['bronx', 'statenisland'],
-    operator: 'OR'
+    terms: ["bronx", "statenisland"],
+    operator: "OR",
   },
   {
     id: ACCESSIBILITY_UUID,
-    terms: ['partialaccess'],
-    operator: 'OR'
-  }
+    terms: ["partialaccess"],
+    operator: "OR",
+  },
 ];
 
-describe('setTermsFilter', () => {
-  test('State object of objects should be converted to an array of objects.', () => {
-    expect(
-      setTermsFilter(originalStateObject)
-    ).toMatchObject(expected);
+describe("setTermsFilter", () => {
+  test("State object of objects should be converted to an array of objects.", () => {
+    expect(setTermsFilter(originalStateObject)).toMatchObject(expected);
   });
 });

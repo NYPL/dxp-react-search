@@ -175,10 +175,10 @@ export default function resolveDrupalParagraphs(
   );
 
   // Build an array of paragraph objects mapping to the specific components.
-  let items: JsonApiResourceObject[] = [];
+  const items: ResolvedParagraph[] = [];
   requestedParagraphs.map((item: any) => {
     let paragraphComponent: ResolvedParagraph | undefined = undefined;
-    let paragraphTypeName = (item.type as string).replace("paragraph--", "");
+    const paragraphTypeName = (item.type as string).replace("paragraph--", "");
 
     switch (item.type) {
       case "paragraph--text_with_image":
@@ -637,8 +637,9 @@ export default function resolveDrupalParagraphs(
         };
         break;
     }
-    // @ts-ignore
-    items.push(paragraphComponent);
+    if (paragraphComponent !== undefined) {
+      items.push(paragraphComponent);
+    }
   });
   return items;
 }

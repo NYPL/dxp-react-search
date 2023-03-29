@@ -33,6 +33,9 @@ function useDecoupledRouter(nextRouter: NextRouter) {
   }
   // Not preview mode, so run the query to resolve a uuid from a slug.
   const slug = nextRouter.asPath;
+  // @TODO decide the order of execution, had to unable the rule because the query is running conditionally
+  // not on every render
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: decoupledRouterData } = useQuery(DECOUPLED_ROUTER_QUERY, {
     variables: {
       path: slug,

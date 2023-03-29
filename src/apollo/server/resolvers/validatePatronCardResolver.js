@@ -6,10 +6,10 @@ const validatePatronCardResolver = {
     },
   },
   PatronCard: {
-    id: patronCard => patronCard.id,
-    valid: patronCard => patronCard.valid,
-    message: patronCard => patronCard.message
-  }
-}
+    id: (patronCard) => patronCard.id,
+    valid: (patronCard) => patronCard.valid,
+    message: (patronCard) => patronCard.message,
+  },
+};
 
 export default validatePatronCardResolver;

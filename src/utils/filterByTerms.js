@@ -18,35 +18,35 @@ function filterByTerms(locations, filterGroups) {
       });
       // Build the locationTerms object.
       locationTerms[vocab.uuid] = {
-        terms: locationTerm
+        terms: locationTerm,
       };
     });
-    
+
     // Handle the filters selected on the search form.
     let allGroupsStatuses = [];
     let orGroupStatus = false;
     let andGroupStatus = false;
-    
+
     filterGroups.forEach((filterGroup) => {
-      if (filterGroup.operator === 'OR') {
+      if (filterGroup.operator === "OR") {
         if (
-          locationTerms[filterGroup.id] 
-          && locationTerms[filterGroup.id].terms.length 
-          && filterGroup 
-          && filterGroup.terms.length
+          locationTerms[filterGroup.id] &&
+          locationTerms[filterGroup.id].terms.length &&
+          filterGroup &&
+          filterGroup.terms.length
         ) {
           orGroupStatus = filterGroup.terms.some((tid) =>
             locationTerms[filterGroup.id].terms.includes(tid)
           );
           allGroupsStatuses.push(orGroupStatus);
-        } 
-      } 
-      if (filterGroup.operator === 'AND') {
+        }
+      }
+      if (filterGroup.operator === "AND") {
         if (
-          locationTerms[filterGroup.id] 
-          && locationTerms[filterGroup.id].terms.length 
-          && filterGroup 
-          && filterGroup.terms.length
+          locationTerms[filterGroup.id] &&
+          locationTerms[filterGroup.id].terms.length &&
+          filterGroup &&
+          filterGroup.terms.length
         ) {
           andGroupStatus = filterGroup.terms.every((tid) =>
             locationTerms[filterGroup.id].terms.includes(tid)
@@ -58,7 +58,7 @@ function filterByTerms(locations, filterGroups) {
         }
       }
     });
-    
+
     // Check if all allGroupsStatuses return true.
     if (allGroupsStatuses.length && allGroupsStatuses.every(Boolean)) {
       accumulator.push(location);
