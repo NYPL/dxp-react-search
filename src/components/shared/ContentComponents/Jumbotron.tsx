@@ -39,12 +39,18 @@ export default function Jumbotron({
       image={image}
       overlay={
         <>
-          <Heading level="two" color="brand.primary">
+          <Heading
+            level="two"
+            color="brand.primary"
+            mb={{ base: `${secondaryImage ? "-xs" : "s"}`, md: "s" }}
+          >
             {title}
           </Heading>
           <DsCard
             id={id}
             layout="row"
+            isCentered
+            flexDirection={{ base: "column-reverse", md: "unset" }}
             {...(secondaryImage && {
               imageProps: {
                 component: (
@@ -70,7 +76,7 @@ export default function Jumbotron({
             <CardContent>
               {description && (
                 <>
-                  <Box mt="s" mb="l">
+                  <Box mt={{ base: "s", md: "unset" }} mb="l">
                     <TextFormatted html={description} />
                   </Box>
                   <Link

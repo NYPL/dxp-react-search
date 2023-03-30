@@ -15,6 +15,6 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    decoupledRouter(path: String): DecoupledRouter
+    decoupledRouter(path: String, isPreview: Boolean): DecoupledRouter
   }
 `;
