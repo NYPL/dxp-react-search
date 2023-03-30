@@ -1,5 +1,6 @@
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 import { toApolloError } from "apollo-server-errors";
+import getAccessToken from "../../../utils/getAccessToken";
 const { DRUPAL_API } = process.env;
 
 class DrupalApi extends RESTDataSource {
@@ -126,13 +127,27 @@ class DrupalApi extends RESTDataSource {
   }
 
   /* ---------- DECOUPLED DRUPAL ---------- */
-  async getDecoupledRouter(args) {
-    let apiPath = `/router/translate-path?path=${args.path}`;
-    try {
-      const response = await this.get(apiPath);
-      return response;
-    } catch (error) {
-      throw toApolloError(error);
+  async getDecoupledRouter({ path, isPreview = false } = args) {
+    let apiPath = `/router/translate-path?path=${path}`;
+    if (isPreview) {
+      try {
+        const accessToken = await getAccessToken();
+        const response = await this.get(apiPath, undefined, {
+          headers: {
+            Authorization: `Bearer ${accessToken?.access_token}`,
+          },
+        });
+        return response;
+      } catch (error) {
+        throw toApolloError(error);
+      }
+    } else {
+      try {
+        const response = await this.get(apiPath);
+        return response;
+      } catch (error) {
+        throw toApolloError(error);
+      }
     }
   }
 
