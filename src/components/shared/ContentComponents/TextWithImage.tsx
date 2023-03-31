@@ -23,6 +23,17 @@ function TextWithImage({
   credit,
   image,
 }: TextWithImageProps) {
+  let imageSrc: string = image?.uri;
+  if (image?.transformations) {
+    const transformationUri = getImageTransformation(
+      "max_width_960",
+      image.transformations
+    );
+    if (transformationUri !== null) {
+      imageSrc = transformationUri;
+    }
+  }
+
   return (
     <Box id={`${type}-${id}`} mb="l">
       {heading && <Heading level="two" text={heading} />}
@@ -37,10 +48,7 @@ function TextWithImage({
           <Image
             id={image.id}
             alt={image.alt}
-            src={
-              image.transformations &&
-              getImageTransformation("max_width_960", image.transformations)
-            }
+            src={imageSrc}
             layout="responsive"
             width={image.width}
             height={image.height}

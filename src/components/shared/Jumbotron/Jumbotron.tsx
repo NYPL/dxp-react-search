@@ -11,19 +11,27 @@ interface JumbotronProps {
 
 export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
   // Background images.
-  const backgroundImageSrcLg = image.transformations
-    ? getImageTransformation(
-        "jumbotron_background_focal_point_1280x464",
-        image.transformations
-      )
-    : image.uri;
+  let backgroundImageSrcLg = image.uri;
+  if (image.transformations) {
+    const lgTransformationUri = getImageTransformation(
+      "donation_background_focal_point_1280x464",
+      image.transformations
+    );
+    if (lgTransformationUri !== null) {
+      backgroundImageSrcLg = lgTransformationUri;
+    }
+  }
 
-  const backgroundImageSrc2Xl = image.transformations
-    ? getImageTransformation(
-        "jumbotron_background_focal_point_1920x464",
-        image.transformations
-      )
-    : image.uri;
+  let backgroundImageSrc2Xl = image.uri;
+  if (image.transformations) {
+    const xlTransformationUri = getImageTransformation(
+      "donation_background_focal_point_1920x464",
+      image.transformations
+    );
+    if (xlTransformationUri !== null) {
+      backgroundImageSrc2Xl = xlTransformationUri;
+    }
+  }
 
   return (
     <Box id={id} marginBottom="l">

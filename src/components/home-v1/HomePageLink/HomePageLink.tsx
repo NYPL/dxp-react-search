@@ -34,9 +34,7 @@ const HomePageLink = React.forwardRef<
     const gaEventCategory = "Homepage";
 
     if (window !== undefined) {
-      // @ts-ignore
       if (typeof window.gtag === "function") {
-        // @ts-ignore
         window.gtag("event", gaEventActionName, {
           event_category: gaEventCategory,
           event_label: href,

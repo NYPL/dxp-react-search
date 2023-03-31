@@ -1,11 +1,11 @@
 // Utils
-import { 
+import {
   ONLINE_RESOURCES_ALL_BRANCH_UUID,
   ONLINE_RESOURCES_ALL_RESEARCH_UUID,
   ONLINE_RESOURCES_OFFSITE_UUID,
-  ONLINE_RESOURCES_ONSITE_UUID
-} from './../../../utils/config';
-import getRequestIp from './../../../utils/getRequestIp';
+  ONLINE_RESOURCES_ONSITE_UUID,
+} from "./../../../utils/config";
+import getRequestIp from "./../../../utils/getRequestIp";
 
 const ipAccessCheckResolver = {
   Query: {
@@ -21,9 +21,9 @@ const ipAccessCheckResolver = {
         itemsArray.push(locationItem);
       }
       // Check for matches.
-      itemsArray.map(item => {
+      itemsArray.map((item) => {
         if (item.match) {
-          matches.push(item)
+          matches.push(item);
         }
       });
 
@@ -38,38 +38,38 @@ const ipAccessCheckResolver = {
       if (response.isOnsite) {
         matches.push({
           uuid: ONLINE_RESOURCES_ONSITE_UUID,
-          name: 'Generic On Site',
-          mapping_uuid: 'generic-onsite-mapping-id'
-        })
+          name: "Generic On Site",
+          mapping_uuid: "generic-onsite-mapping-id",
+        });
       }
       if (response.isBranch) {
         matches.push({
           uuid: ONLINE_RESOURCES_ALL_BRANCH_UUID,
-          name: 'All Branch Libraries',
-          mapping_uuid: 'all-branch-libs-mapping-id'
-        })
+          name: "All Branch Libraries",
+          mapping_uuid: "all-branch-libs-mapping-id",
+        });
       }
       if (response.isResearch) {
         matches.push({
           uuid: ONLINE_RESOURCES_ALL_RESEARCH_UUID,
-          name: 'All Research Libraries',
-          mapping_uuid: 'all-research-libs-mapping-id'
-        })
+          name: "All Research Libraries",
+          mapping_uuid: "all-research-libs-mapping-id",
+        });
       }
 
       return {
         items: matches,
         pageInfo: {
-          clientIp: clientIp
-        }
-      }
-    }
+          clientIp: clientIp,
+        },
+      };
+    },
   },
   LocationMatch: {
-    id: locationMatch => locationMatch.mapping_uuid,
-    name: locationMatch => locationMatch.name,
-    locationId: locationMatch => locationMatch.uuid,
-  }
-}
+    id: (locationMatch) => locationMatch.mapping_uuid,
+    name: (locationMatch) => locationMatch.name,
+    locationId: (locationMatch) => locationMatch.uuid,
+  },
+};
 
 export default ipAccessCheckResolver;

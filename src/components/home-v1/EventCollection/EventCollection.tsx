@@ -129,7 +129,7 @@ export default function EventCollection({
     );
 
   // Sort events by weight for each category.
-  for (let category in eventsGroupedByCategory) {
+  for (const category in eventsGroupedByCategory) {
     eventsGroupedByCategory[category].sort(function (a, b) {
       return a.weight - b.weight;
     });

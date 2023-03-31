@@ -25,7 +25,7 @@ function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant: "slide-show-card" });
   // Generate describedBy string
-  let describedByIdsArray = [];
+  const describedByIdsArray = [];
   const omitItems = ["id", "title", "image", "url", "__typename"];
   for (const propName in item) {
     if (!omitItems.includes(propName)) {

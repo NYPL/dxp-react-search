@@ -195,13 +195,13 @@ function SearchResults({
         }),
       },
     });
-    // @ts-ignore
-    document.getElementById("main-content").scrollIntoView();
+    const mainContent = document.getElementById("main-content");
+    mainContent?.scrollIntoView();
   }
 
   // Error state.
   if (error) {
-    return <div>'error while loading search'</div>;
+    return <div>Error while loading search.</div>;
   }
 
   // Loading state,

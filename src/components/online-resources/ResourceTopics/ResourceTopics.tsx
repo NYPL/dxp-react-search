@@ -14,7 +14,7 @@ interface ResourceTopicsProps {
   id: string;
   title: string;
   limit?: number;
-  sort?: string;
+  sort?: { field?: string; direction?: string };
   featured?: boolean;
 }
 
@@ -47,7 +47,7 @@ function ResourceTopics({
   sort,
   featured,
 }: ResourceTopicsProps) {
-  let queryFilters: any = {};
+  const queryFilters: any = {};
   if (featured) {
     queryFilters["featured"] = {
       fieldName: "field_bs_featured",

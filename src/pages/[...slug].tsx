@@ -53,13 +53,12 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = withDrupalRouter(async function (
-  // @ts-ignore
-  context: GetStaticPropsContext,
+  _context: GetStaticPropsContext,
   props: WithDrupalRouterReturnProps
 ) {
   const { uuid, revisionId, slug, isPreview, bundle, apolloClient } = props;
 
-  let GQL_QUERY = SECTION_FRONT_QUERY;
+  const GQL_QUERY = SECTION_FRONT_QUERY;
   // Future example for handling additional content types, would look like this:
   // if (bundle === "page") {
   //   QUERY = PAGE_QUERY;

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { FormState } from "./../components/locations/RequestVisitForm/types";
 
-enum FormContextActionType {
+export enum FormContextActionType {
   SET_FORM_STATE = "SET_FORM_STATE",
 }
 
@@ -9,6 +9,8 @@ export interface FormContextAction {
   type: FormContextActionType;
   payload: FormState;
 }
+
+type FormContextType = [FormState, React.Dispatch<FormContextAction>];
 
 const initialState = {
   values: {
@@ -46,9 +48,7 @@ function reducer(state: FormState, action: FormContextAction) {
     }
   }
 }
-
-// @ts-ignore
-const FormContext = createContext();
+const FormContext = createContext<FormContextType>([initialState, () => null]);
 
 function useFormContext() {
   const context = useContext(FormContext);

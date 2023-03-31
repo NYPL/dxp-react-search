@@ -112,7 +112,7 @@ function VerifyForm() {
         </Button>
       </form>
       <p>
-        Don't have a library card?&nbsp;
+        Don&apos;t have a library card?&nbsp;
         <a href="https://www.nypl.org/library-card/new">Apply for a new one.</a>
       </p>
     </div>

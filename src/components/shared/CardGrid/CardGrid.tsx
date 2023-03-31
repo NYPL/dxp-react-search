@@ -59,7 +59,7 @@ export default function CardGrid({
   // Logic for template columns based on layout.
   let templateColumns = "repeat(12, 1fr)";
   // Logic for template row based on layout.
-  let isBorderedFinal = isBordered;
+  const isBorderedFinal = isBordered;
   let isCenteredFinal = isCentered;
   if (layout === "row") {
     templateColumns = "repeat(1, 1fr)";
