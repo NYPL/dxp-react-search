@@ -177,7 +177,7 @@ export default function resolveDrupalParagraphs(
   // Build an array of paragraph objects mapping to the specific components.
   const items: ResolvedParagraph[] = [];
   requestedParagraphs.map((item: any) => {
-    let paragraphComponent: ResolvedParagraph | undefined = undefined;
+    let paragraphComponent: ResolvedParagraph | null = null;
     const paragraphTypeName = (item.type as string).replace("paragraph--", "");
 
     switch (item.type) {
@@ -637,7 +637,8 @@ export default function resolveDrupalParagraphs(
         };
         break;
     }
-    if (paragraphComponent !== undefined) {
+
+    if (paragraphComponent) {
       items.push(paragraphComponent);
     }
   });
