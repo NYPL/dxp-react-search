@@ -3,8 +3,8 @@ import { NextRouter } from "next/router";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
 export const DECOUPLED_ROUTER_QUERY = gql`
-  query DecoupledRouterQuery($path: String) {
-    decoupledRouter(path: $path) {
+  query DecoupledRouterQuery($path: String, $isPreview: Boolean) {
+    decoupledRouter(path: $path, isPreview: $isPreview) {
       id
       uuid
       redirect {
@@ -42,7 +42,6 @@ function useDecoupledRouter(nextRouter: NextRouter) {
     },
   });
   const uuid = decoupledRouterData?.decoupledRouter?.uuid;
-
   return {
     uuid: uuid,
     isPreview: isPreview,
