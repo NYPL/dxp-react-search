@@ -4,7 +4,6 @@ import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
 function OrgFormField({ handleChange }: FormFieldProps) {
-  // @ts-ignore
   const [state] = useContext(FormContext);
   const { values, errors } = state;
 
@@ -22,8 +21,8 @@ function OrgFormField({ handleChange }: FormFieldProps) {
           showLabel
           placeholder="Enter school or organization name"
           showRequiredLabel={!values.noSchoolOrOrg}
-          invalidText={errors.organization}
-          isInvalid={errors.organization ? true : false}
+          invalidText={errors?.organization}
+          isInvalid={errors?.organization ? true : false}
         />
       </Box>
       <Checkbox
@@ -33,7 +32,7 @@ function OrgFormField({ handleChange }: FormFieldProps) {
         name="noSchoolOrOrg"
         onChange={handleChange}
         showLabel
-        isInvalid={errors.organization ? true : false}
+        isInvalid={errors?.organization ? true : false}
       />
     </>
   );

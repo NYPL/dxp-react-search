@@ -3,9 +3,8 @@ import { Notification } from "@nypl/design-system-react-components";
 import { FormContext } from "./../../../context/FormContext";
 
 function RequestVisitFormError() {
-  // @ts-ignore
   const [state] = useContext(FormContext);
-  const { isSubmitted, serverError } = state;
+  const { isSubmitted, serverError, errors = {} } = state;
 
   let message =
     "There was a problem with your submissions. Errors have been highlighted below.";
@@ -17,7 +16,7 @@ function RequestVisitFormError() {
 
   if (
     serverError ||
-    (isSubmitted && !state.isValid && Object.keys(state.errors).length > 0)
+    (isSubmitted && !state.isValid && Object.keys(errors).length > 0)
   ) {
     return (
       <div

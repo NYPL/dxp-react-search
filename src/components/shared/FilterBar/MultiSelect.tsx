@@ -71,7 +71,7 @@ function MultiSelect({
   includeChildren = true,
   customData = false,
 }: MutliSelectProps) {
-  let variables = {
+  const variables = {
     id: id,
     type: type,
     limit: 200,

@@ -51,6 +51,17 @@ function CardList({ id, type, title, description, items }: CardListProps) {
         templateColumns="repeat(1, 1fr)"
       >
         {items.map((item: CardItem) => {
+          let imageSrc: string = item.image?.uri;
+          if (item.image?.transformations) {
+            const transformationUri = getImageTransformation(
+              "max_width_960",
+              item.image.transformations
+            );
+            if (transformationUri !== null) {
+              imageSrc = transformationUri;
+            }
+          }
+
           return (
             <li key={item.id}>
               <Box
@@ -76,13 +87,7 @@ function CardList({ id, type, title, description, items }: CardListProps) {
                         <Image
                           id={item.image.id}
                           alt={item.image.alt}
-                          src={
-                            item.image.transformations &&
-                            getImageTransformation(
-                              "max_width_960",
-                              item.image.transformations
-                            )
-                          }
+                          src={imageSrc}
                           layout="intrinsic"
                           objectFit="contain"
                           {...calculateAspectRatioFit(

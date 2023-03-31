@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
-import { FormContext } from "../../../../context/FormContext";
+import {
+  FormContext,
+  FormContextActionType,
+} from "../../../../context/FormContext";
 
 function HoneypotFormField() {
-  // @ts-ignore
   const [state, dispatch] = useContext(FormContext);
   const { values } = state;
   const id = "notHoom";
@@ -20,7 +22,7 @@ function HoneypotFormField() {
           }}
           onChange={(e) => {
             dispatch({
-              type: "SET_FORM_STATE",
+              type: FormContextActionType.SET_FORM_STATE,
               payload: {
                 values: { ...state.values, [e.target.name]: e.target.value },
                 touched: { ...state.touched, [e.target.name]: true },

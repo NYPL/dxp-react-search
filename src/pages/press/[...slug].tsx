@@ -83,8 +83,7 @@ function PressReleasePage() {
 }
 
 export const getServerSideProps = withDrupalRouter(
-  // @ts-ignore -- temp fix for context unused but declared.
-  async function (context, props: WithDrupalRouterReturnProps) {
+  async function (_context, props: WithDrupalRouterReturnProps) {
     const { uuid, revisionId, isPreview, apolloClient } = props;
 
     await apolloClient.query({

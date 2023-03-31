@@ -1,5 +1,5 @@
-const dayjs = require('dayjs');
-var isBetween = require('dayjs/plugin/isBetween');
+const dayjs = require("dayjs");
+const isBetween = require("dayjs/plugin/isBetween");
 dayjs.extend(isBetween);
 
 /**
@@ -16,16 +16,23 @@ function hasActiveClosing(today, alerts, unit) {
   // Check for any alerts.
   if (alerts !== undefined && alerts.length > 0) {
     // We have alerts, so map over them.
-    alerts.forEach(alert => {
+    alerts.forEach((alert) => {
       // Check if closed_for key exists
-      if ('closed_for' in alert) {
+      if ("closed_for" in alert) {
         // Check for start and end values
         if (alert.applies.start && alert.applies.end) {
           // Compare alert.applies.start + alert.applies.end to today.
           // 4th parameter: '[]' includes start and end date in comparison.
           // By default, this paramer is '()' which excludes.
           // @see https://day.js.org/docs/en/plugin/is-between
-          if (dayjs(today).isBetween(alert.applies.start, alert.applies.end, unit, '[]')) {
+          if (
+            dayjs(today).isBetween(
+              alert.applies.start,
+              alert.applies.end,
+              unit,
+              "[]"
+            )
+          ) {
             activeClosing = true;
           }
         }

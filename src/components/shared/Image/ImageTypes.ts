@@ -4,15 +4,16 @@
  * @see https://github.com/vercel/next.js/blob/canary/packages/next/client/image.tsx#L92
  */
 
+import { ImageProps as NextImageTypes } from "next/image";
+
 export type ImageType = {
   id: string;
   alt: string;
-  // @TODO add correct type.
-  layout: any;
-  // @TODO check if number is correct type.
+  layout: NextImageTypes["layout"];
+  // @TODO in next width and height can be number or string.
   width?: number;
   height?: number;
-  objectFit?: string;
+  objectFit?: NextImageTypes["objectFit"];
   quality: number;
   uri: string;
   useTransformation: boolean;

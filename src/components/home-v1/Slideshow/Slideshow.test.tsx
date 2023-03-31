@@ -198,8 +198,8 @@ describe("SlideshowButton tests", () => {
   });
   it("should call the nextSlide function when the next button is clicked", async () => {
     const user = userEvent.setup();
-    let prevSlide = jest.fn();
-    let nextSlide = jest.fn();
+    const prevSlide = jest.fn();
+    const nextSlide = jest.fn();
 
     render(
       <SlideshowButton
@@ -214,8 +214,8 @@ describe("SlideshowButton tests", () => {
   });
   it("should call the prevSlide function when the previous button is clicked", async () => {
     const user = userEvent.setup();
-    let prevSlide = jest.fn();
-    let nextSlide = jest.fn();
+    const prevSlide = jest.fn();
+    const nextSlide = jest.fn();
 
     render(
       <SlideshowButton
@@ -230,8 +230,8 @@ describe("SlideshowButton tests", () => {
   });
   it("should render the UI snapshot correctly", () => {
     // Mock passe in functions
-    let prevSlide = jest.fn();
-    let nextSlide = jest.fn();
+    const prevSlide = jest.fn();
+    const nextSlide = jest.fn();
 
     const nextButton = renderer
       .create(<SlideshowButton buttonDirection="next" nextSlide={nextSlide} />)
@@ -245,11 +245,12 @@ describe("SlideshowButton tests", () => {
 });
 
 describe("SlideshowContainer tests", () => {
+  const prevSlide = jest.fn();
+  const nextSlide = jest.fn();
+
   // Call useSlideshow hook to get props for SlideshowContainer component
   const { result } = renderHook(() => useSlideshowStyles(items.length, 11));
   const { currentSlide, slideshowStyle } = result.current;
-  let prevSlide = jest.fn();
-  let nextSlide = jest.fn();
 
   it("should pass axe accessibility test", async () => {
     const { container } = render(

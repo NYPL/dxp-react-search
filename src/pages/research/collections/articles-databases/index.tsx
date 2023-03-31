@@ -34,7 +34,6 @@ function OnlineResourcesPage() {
             id="featured-resources"
             title="Featured Resources"
             limit={30}
-            // @ts-ignore
             sort={{ field: "weight", direction: "ASC" }}
           />
           <MostPopularResources id="most-popular" title="Most Popular" />
@@ -91,5 +90,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-// @ts-ignore
 export default withApollo(withRedux(OnlineResourcesPage));

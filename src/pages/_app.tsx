@@ -10,9 +10,7 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   // When next js routes change, send data to GA.
   useEffect(() => {
-    // @ts-ignore
-    const handleRouteChange = (url) => {
-      // @ts-ignore
+    const handleRouteChange = (url: string) => {
       window.gtag("config", NEXT_PUBLIC_GA_TRACKING_ID, {
         page_path: url,
       });
@@ -34,7 +32,6 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
 
   return (
     <AppLayout>
-      {/* @ts-ignore */}
       <Component {...pageProps} />
     </AppLayout>
   );
