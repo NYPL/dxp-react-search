@@ -637,6 +637,9 @@ export default function resolveDrupalParagraphs(
         };
         break;
     }
+    if (paragraphComponent) {
+      paragraphComponent.status = item.status ? item.status : false;
+    }
     // @ts-ignore
     items.push(paragraphComponent);
   });
