@@ -24,7 +24,7 @@ function TextWithImage({
   image,
 }: TextWithImageProps) {
   let imageSrc: string = image?.uri;
-  if (image.transformations) {
+  if (image?.transformations) {
     const transformationUri = getImageTransformation(
       "max_width_960",
       image.transformations
