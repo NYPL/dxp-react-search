@@ -12,7 +12,7 @@ export function search(term: string, options: SearchOptions) {
   let typedString = term;
   if (autoSuggest && autoSuggestDownArrowCount) {
     let downArrowsString = "";
-    for (var i = 0; i < autoSuggestDownArrowCount; i++) {
+    for (let i = 0; i < autoSuggestDownArrowCount; i++) {
       downArrowsString += "{downarrow}";
     }
 

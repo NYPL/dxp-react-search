@@ -9,7 +9,7 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
     className="textBox css-0"
   >
     <h3
-      aria-describedby="card-location-test-id-1"
+      aria-describedby="card-description-test-id-1"
       className="chakra-heading css-0"
     >
       <a
@@ -22,7 +22,14 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
     </h3>
     <div
       className="details css-0"
-    />
+    >
+      <p
+        className="chakra-text css-0"
+        id="card-description-test-id-1"
+      >
+        Test description
+      </p>
+    </div>
   </div>
   <div
     className="css-ys3583"

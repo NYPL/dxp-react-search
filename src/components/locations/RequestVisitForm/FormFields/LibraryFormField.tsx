@@ -35,7 +35,6 @@ export const LOCATIONS_QUERY = gql`
 `;
 
 function LibraryFormField({ handleChange }: FormFieldProps) {
-  // @ts-ignore
   const [state] = useContext(FormContext);
   const { values, errors } = state;
 
@@ -75,11 +74,13 @@ function LibraryFormField({ handleChange }: FormFieldProps) {
       value={values.library}
       isRequired
       showLabel
-      invalidText={errors.library}
-      isInvalid={errors.library ? true : false}
+      invalidText={errors?.library}
+      isInvalid={errors?.library ? true : false}
     >
       {data.allLocations.items.map((location: any) => (
-        <option value={location.internalSlug}>{location.name}</option>
+        <option value={location.internalSlug} key={location.id}>
+          {location.name}
+        </option>
       ))}
     </Select>
   );

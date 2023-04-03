@@ -1,10 +1,12 @@
 export interface FormState {
   values: FormValues;
-  errors: FormErrors;
-  touched: { [key: string]: boolean };
-  isValid: boolean;
+  errors?: FormErrors;
+  touched?: { [key: string]: boolean };
+  isValid?: boolean;
   isSubmitted?: boolean;
+  serverError?: boolean;
 }
+import { FormCheckboxValueType } from "./FormFields/AgeGroupFormField";
 
 export interface FormFieldProps {
   handleChange?: any;
@@ -16,7 +18,8 @@ export interface FormValues {
   visitType: string;
   organization: string;
   noSchoolOrOrg: boolean;
-  ageGroup: string[] | null;
+  notHoom: boolean;
+  ageGroup: FormCheckboxValueType[] | null;
   contactName: string;
   contactEmail: string;
   virtualVisitServices: string[];

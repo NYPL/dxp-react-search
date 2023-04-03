@@ -4,6 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "./../../../redux/actions";
+import { RootState } from "../../../redux/store";
 // Components
 import { Box, Icon, Link } from "@nypl/design-system-react-components";
 import Location from "./../Location";
@@ -91,8 +92,7 @@ function Locations() {
     searchFilters,
     offset,
     pageNumber,
-    // @ts-ignore
-  } = useSelector((state) => state.search);
+  } = useSelector((state: RootState) => state.search);
 
   const dispatch = useDispatch();
 
@@ -135,7 +135,7 @@ function Locations() {
 
   // Error state.
   if (error) {
-    return <div>'error while loading locations'</div>;
+    return <div>Error while loading locations.</div>;
   }
 
   // Loading state,

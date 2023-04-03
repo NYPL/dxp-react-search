@@ -2,6 +2,16 @@
 
 ---
 
+### v0.9.7 - General Maintenance & Improvements
+
+---
+
+- Updates eslint rules: [#397](https://github.com/NYPL/dxp-react-search/pull/397)
+- Updated jumbotron and donation with new tablet and mobile ux: [#400](https://github.com/NYPL/dxp-react-search/pull/400)
+- Adds ability to use decoupled router with authenticated requests: [#403](https://github.com/NYPL/dxp-react-search/pull/403)
+
+---
+
 ### v0.9.6 - Press bug fix
 
 ---

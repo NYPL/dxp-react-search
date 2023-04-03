@@ -51,8 +51,12 @@ export default function Donation({
       id={id}
       image={image}
       overlay={
-        <Flex flexFlow={{ base: "column", lg: "row" }}>
-          <Box flex={{ lg: "1 0 50%" }} paddingRight={{ md: "s" }}>
+        <Flex flexFlow={{ base: "column", md: "row" }}>
+          <Box
+            flex={{ md: "1 0 50%" }}
+            paddingRight={{ md: "s" }}
+            textAlign={{ base: "center", md: "left" }}
+          >
             <Heading level="two" color="brand.primary">
               {title}
             </Heading>
@@ -64,9 +68,10 @@ export default function Donation({
           </Box>
           <Box
             id="donation-form"
-            flex={{ lg: "1 0 50%" }}
+            flex={{ md: "1 0 50%" }}
             bgColor="brand.primary"
             padding="s"
+            margin="auto"
           >
             <Box position="relative" marginBottom="s">
               <DonationAmountInput

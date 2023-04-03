@@ -27,8 +27,10 @@ function LocationsMap() {
     // Scroll to location on list when map marker is clicked for desktop only.
     if (windowSize && windowSize >= 600) {
       // Set focus
-      // @ts-ignore
-      document.querySelector(`#lid-${location.id} a`).focus();
+      const locationElem: HTMLAnchorElement | null = document.querySelector(
+        `#lid-${location.id} a`
+      );
+      locationElem?.focus();
       // Scroll into view.
       document.getElementById(`lid-${location.id}`)?.scrollIntoView({
         behavior: "smooth",

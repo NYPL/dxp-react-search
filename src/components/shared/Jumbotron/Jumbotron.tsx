@@ -11,34 +11,43 @@ interface JumbotronProps {
 
 export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
   // Background images.
-  const backgroundImageSrcLg = image.transformations
-    ? getImageTransformation(
-        "jumbotron_background_focal_point_1280x464",
-        image.transformations
-      )
-    : image.uri;
+  let backgroundImageSrcLg = image.uri;
+  if (image.transformations) {
+    const lgTransformationUri = getImageTransformation(
+      "donation_background_focal_point_1280x464",
+      image.transformations
+    );
+    if (lgTransformationUri !== null) {
+      backgroundImageSrcLg = lgTransformationUri;
+    }
+  }
 
-  const backgroundImageSrc2Xl = image.transformations
-    ? getImageTransformation(
-        "jumbotron_background_focal_point_1920x464",
-        image.transformations
-      )
-    : image.uri;
+  let backgroundImageSrc2Xl = image.uri;
+  if (image.transformations) {
+    const xlTransformationUri = getImageTransformation(
+      "donation_background_focal_point_1920x464",
+      image.transformations
+    );
+    if (xlTransformationUri !== null) {
+      backgroundImageSrc2Xl = xlTransformationUri;
+    }
+  }
 
   return (
     <Box id={id} marginBottom="l">
       <Box
         backgroundImage={{
-          md: "none",
-          lg: backgroundImageSrcLg,
+          sm: "none",
+          //@TODO Should there be a transition for tablet?
+          md: backgroundImageSrcLg,
           "2xl": backgroundImageSrc2Xl,
         }}
-        backgroundSize={{ sm: "100%", md: "cover" }}
+        backgroundSize={{ base: "100%", md: "cover" }}
         backgroundPosition={{ md: "center" }}
-        minHeight={{ lg: "464px" }}
-        marginBottom={{ sm: "m", md: "initial" }}
+        minHeight={{ md: "305px", lg: "464px" }}
+        marginBottom={{ base: "s", md: "initial" }}
       >
-        <Box display={{ lg: "none" }}>
+        <Box display={{ md: "none" }}>
           <Image
             id={image.id}
             alt={image.alt}
@@ -58,9 +67,12 @@ export default function Jumbotron({ id, image, overlay }: JumbotronProps) {
         backgroundColor="white"
         maxWidth="1240px"
         margin="0 auto"
-        padding={{ sm: "s", md: "xl" }}
-        marginTop={{ lg: "-40px" }}
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        padding={{ base: "s", md: "xl" }}
+        marginTop={{ md: "-40px" }}
+        boxShadow={{ md: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+        borderWidth={{ base: "1px", md: "none" }}
+        borderColor="ui.gray.medium"
+        marginX={{ base: "s", xl: "auto" }}
       >
         {overlay}
       </Box>

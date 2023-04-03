@@ -1,36 +1,29 @@
-import getActiveLetters from './getActiveLetters';
+import getActiveLetters from "./getActiveLetters";
 
-describe('getActiveLetters', () => {
+describe("getActiveLetters", () => {
   const items = [
     {
-      name: 'Alaska'
+      name: "Alaska",
     },
     {
-      name: 'Buffalo'
+      name: "Buffalo",
     },
     {
-      name: 'Florida'
+      name: "Florida",
     },
     {
-      name: ' New York   '
+      name: " New York   ",
     },
     {
-      name: ' New Jersey '
-    }
+      name: " New Jersey ",
+    },
   ];
 
-  const expectedItems = [
-    'A', 
-    'B',
-    'F',
-    'N'
-  ];
+  const expectedItems = ["A", "B", "F", "N"];
 
-  test('Letters array is built correctly', () => {
-    const activeLetters = getActiveLetters(items, 'name');
+  test("Letters array is built correctly", () => {
+    const activeLetters = getActiveLetters(items, "name");
 
-    expect(activeLetters).toEqual(
-      expect.arrayContaining(expectedItems),
-    );
+    expect(activeLetters).toEqual(expect.arrayContaining(expectedItems));
   });
 });
