@@ -637,6 +637,9 @@ export default function resolveDrupalParagraphs(
         };
         break;
     }
+
+    //Add published status to paragraphs
+    //Used in getReactComponent to avoid layout bug related to unpublished paragraphs
     if (paragraphComponent) {
       paragraphComponent.status = item.status ? item.status : false;
       items.push(paragraphComponent);

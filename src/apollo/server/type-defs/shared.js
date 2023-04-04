@@ -136,7 +136,7 @@ export const typeDefs = gql`
     id: ID!
     status: Boolean
     type: String!
-    text: String
+    text: String!
     heading: String
   }
 

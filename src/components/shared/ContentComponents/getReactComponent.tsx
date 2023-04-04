@@ -47,7 +47,7 @@ export default function mapContentComponentToReactComponent(
   contentComponent: ContentComponentObject
 ) {
   if (typeof Components[contentComponent["__typename"]] !== "undefined") {
-    if (contentComponent.status === false) return <></>;
+    if (contentComponent.status === false) return null;
     return React.createElement(Components[contentComponent["__typename"]], {
       key: contentComponent.id,
       // If the component is EmailSubscription add colorway vaues as bgColor.
