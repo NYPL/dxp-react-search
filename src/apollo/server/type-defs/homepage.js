@@ -29,7 +29,6 @@ export const typeDefs = gql`
   # Home page content components (Drupal paragraphs).
   type HomePageHeroComponent {
     id: ID!
-    status: Boolean
     type: String
     heading: String
     description: String
@@ -40,7 +39,6 @@ export const typeDefs = gql`
 
   type HomePageEventsComponent {
     id: ID!
-    status: Boolean
     type: String
     heading: String
     link: String
@@ -49,7 +47,6 @@ export const typeDefs = gql`
 
   type HomePageSpotlightComponent {
     id: ID!
-    status: Boolean
     type: String
     heading: String
     link: String
@@ -59,7 +56,6 @@ export const typeDefs = gql`
 
   type HomePageStaffPicksComponent {
     id: ID!
-    status: Boolean
     type: String
     heading: String
     link: String
@@ -69,7 +65,6 @@ export const typeDefs = gql`
 
   type HomePageSlideshowComponent {
     id: ID!
-    status: Boolean
     type: String
     heading: String
     link: String
@@ -79,7 +74,6 @@ export const typeDefs = gql`
 
   type HomePageCardGridComponent {
     id: ID!
-    status: Boolean
     type: String
     heading: String
     link: String
