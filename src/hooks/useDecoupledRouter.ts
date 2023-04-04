@@ -39,6 +39,7 @@ function useDecoupledRouter(nextRouter: NextRouter) {
   const { data: decoupledRouterData } = useQuery(DECOUPLED_ROUTER_QUERY, {
     variables: {
       path: slug,
+      isPreview: isPreview,
     },
   });
   const uuid = decoupledRouterData?.decoupledRouter?.uuid;

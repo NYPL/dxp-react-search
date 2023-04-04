@@ -11,7 +11,11 @@ interface LinkProps {
 // @TODO Replace Box with DS Link eventually.
 function NextDsLink({ children, href, prefetch = true }: LinkProps) {
   return (
-    <NextLink href={href} prefetch={prefetch} passHref>
+    <NextLink
+      href={href}
+      {...(prefetch === false && { prefetch: prefetch })}
+      passHref
+    >
       <Box
         as="a"
         sx={{
