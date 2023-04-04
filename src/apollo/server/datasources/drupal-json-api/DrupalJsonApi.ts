@@ -33,7 +33,7 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
       return response.text();
     }
   }
-  
+
   async getCollectionResource(
     apiPath: string,
     isPreview: boolean
