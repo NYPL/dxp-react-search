@@ -638,7 +638,12 @@ export default function resolveDrupalParagraphs(
         break;
     }
 
+    // Add published status for paragraph entities, if not set, set to false.
+    // We can assume that if the status property is missing from the object,
+    // then the paragraph is unpublished, and an unautheticated requested was made,
+    // which causes the status property to be omitted from the response.
     if (paragraphComponent) {
+      paragraphComponent.status = item.status ? item.status : false;
       items.push(paragraphComponent);
     }
   });

@@ -59,7 +59,6 @@ export default function withDrupalRouter<
     let revisionId;
     let slug;
     let isPreview = false;
-    let bundle;
 
     // Handle different types of preview mode.
     const isNextPreview = !options?.customPreview;
@@ -136,7 +135,7 @@ export default function withDrupalRouter<
       uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
     }
 
-    bundle = await decoupledRouterData?.data?.decoupledRouter?.bundle;
+    const bundle = await decoupledRouterData?.data?.decoupledRouter?.bundle;
 
     // Handle the redirect if it exists.
     const redirect = await decoupledRouterData?.data?.decoupledRouter?.redirect;
