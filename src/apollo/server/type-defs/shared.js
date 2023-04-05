@@ -76,6 +76,7 @@ export const typeDefs = gql`
 
   type TextWithImage {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     text: String!
@@ -86,6 +87,7 @@ export const typeDefs = gql`
 
   type Video {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -96,6 +98,7 @@ export const typeDefs = gql`
 
   type AudioEmbed {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -107,12 +110,14 @@ export const typeDefs = gql`
 
   type SocialEmbed {
     id: ID!
+    status: Boolean!
     type: String!
     embedCode: String!
   }
 
   type GoogleMapEmbed {
     id: ID!
+    status: Boolean!
     type: String!
     embedCode: String!
     accessibleDescription: String!
@@ -120,6 +125,7 @@ export const typeDefs = gql`
 
   type Slideshow {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -128,13 +134,15 @@ export const typeDefs = gql`
 
   type Text {
     id: ID!
+    status: Boolean!
     type: String!
-    text: String
+    text: String!
     heading: String
   }
 
   type ImageComponent {
     id: ID!
+    status: Boolean!
     type: String!
     image: Image
     caption: String
@@ -144,6 +152,7 @@ export const typeDefs = gql`
 
   type CardList {
     id: ID!
+    status: Boolean!
     type: String!
     title: String
     description: String
@@ -160,6 +169,7 @@ export const typeDefs = gql`
 
   type CatalogList {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -176,6 +186,7 @@ export const typeDefs = gql`
 
   type Donation {
     id: ID!
+    status: Boolean!
     type: String!
     title: String
     description: String
@@ -187,6 +198,7 @@ export const typeDefs = gql`
 
   type ExternalSearch {
     id: ID!
+    status: Boolean!
     type: String!
     title: String
     description: String
@@ -197,6 +209,7 @@ export const typeDefs = gql`
 
   type CardGrid {
     id: ID!
+    status: Boolean!
     type: String!
     title: String
     description: String
@@ -215,6 +228,7 @@ export const typeDefs = gql`
 
   type Jumbotron {
     id: ID!
+    status: Boolean!
     type: String!
     title: String
     description: String
@@ -240,6 +254,7 @@ export const typeDefs = gql`
 
   type EmailSubscription {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -257,6 +272,7 @@ export const typeDefs = gql`
 
   type ButtonLinks {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String

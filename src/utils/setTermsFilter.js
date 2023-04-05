@@ -1,9 +1,9 @@
 //
-export const BOROUGHS_UUID = 'filter-borough';
-export const ACCESSIBILITY_UUID = 'filter-accessibility';
-export const AMENITIES_UUID = 'fa817186-d735-4a05-8b72-388d3b6c7a14';
-export const SUBJECTS_UUID = '9597730e-da47-4a4e-9f2d-5a4fc7b7fd41';
-export const MEDIA_UUID = '4805f571-ec30-4901-912e-e88b41fb158e';
+export const BOROUGHS_UUID = "filter-borough";
+export const ACCESSIBILITY_UUID = "filter-accessibility";
+export const AMENITIES_UUID = "fa817186-d735-4a05-8b72-388d3b6c7a14";
+export const SUBJECTS_UUID = "9597730e-da47-4a4e-9f2d-5a4fc7b7fd41";
+export const MEDIA_UUID = "4805f571-ec30-4901-912e-e88b41fb158e";
 
 /**
  * Converts a redux state object to the gql format, and adds operator.
@@ -19,19 +19,19 @@ function setTermsFilter(stateObject) {
     switch (key) {
       case BOROUGHS_UUID:
       case ACCESSIBILITY_UUID:
-        operator = 'OR';
+        operator = "OR";
         break;
       case AMENITIES_UUID:
       case SUBJECTS_UUID:
       case MEDIA_UUID:
-        operator = 'AND';
+        operator = "AND";
         break;
     }
     // Build the filter object.
     const filter = {
       id: key,
       terms: value.terms,
-      operator: operator
+      operator: operator,
     };
     termIds.push(filter);
   }

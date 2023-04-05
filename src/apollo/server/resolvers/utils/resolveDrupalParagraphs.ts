@@ -175,10 +175,10 @@ export default function resolveDrupalParagraphs(
   );
 
   // Build an array of paragraph objects mapping to the specific components.
-  let items: JsonApiResourceObject[] = [];
+  const items: ResolvedParagraph[] = [];
   requestedParagraphs.map((item: any) => {
-    let paragraphComponent: ResolvedParagraph | undefined = undefined;
-    let paragraphTypeName = (item.type as string).replace("paragraph--", "");
+    let paragraphComponent: ResolvedParagraph | null = null;
+    const paragraphTypeName = (item.type as string).replace("paragraph--", "");
 
     switch (item.type) {
       case "paragraph--text_with_image":
@@ -637,8 +637,15 @@ export default function resolveDrupalParagraphs(
         };
         break;
     }
-    // @ts-ignore
-    items.push(paragraphComponent);
+
+    // Add published status for paragraph entities, if not set, set to false.
+    // We can assume that if the status property is missing from the object,
+    // then the paragraph is unpublished, and an unautheticated requested was made,
+    // which causes the status property to be omitted from the response.
+    if (paragraphComponent) {
+      paragraphComponent.status = item.status ? item.status : false;
+      items.push(paragraphComponent);
+    }
   });
   return items;
 }
