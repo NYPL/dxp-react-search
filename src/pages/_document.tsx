@@ -27,7 +27,7 @@ export default function Document() {
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`}
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
         <Script
           id="google-tag-data-layer"
@@ -44,7 +44,7 @@ export default function Document() {
                     });
                   `,
           }}
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
         {/* NYPL Header */}
         <Script src={nyplHeaderScript} strategy="beforeInteractive" />
