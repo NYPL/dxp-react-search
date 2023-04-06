@@ -35,6 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
     query: DECOUPLED_ROUTER_QUERY,
     variables: {
       path: slug,
+      isPreview: false,
     },
   });
 
