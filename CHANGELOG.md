@@ -8,6 +8,7 @@
 
 - Updates eslint rules: [#397](https://github.com/NYPL/dxp-react-search/pull/397)
 - Updated jumbotron and donation with new tablet and mobile ux: [#400](https://github.com/NYPL/dxp-react-search/pull/400)
+- Updated "\_document" to use typescript and nextjs script component: [#402](https://github.com/NYPL/dxp-react-search/pull/402)
 - Adds ability to use decoupled router with authenticated requests: [#403](https://github.com/NYPL/dxp-react-search/pull/403)
 - Add published status field for Paragraphs integration: [#406](https://github.com/NYPL/dxp-react-search/pull/406)
 
