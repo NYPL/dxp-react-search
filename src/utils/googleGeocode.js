@@ -12,6 +12,7 @@ let LANGUAGE = "en";
 let REGION = null;
 let BOUNDS = null;
 const GOOGLE_API = "https://maps.google.com/maps/api/geocode/json";
+const NEWGOOGLE_API = "https://maps.googleapis.com/maps/api/geocode/json";
 
 function log(message, warn = false) {
   if (DEBUG) {
@@ -112,7 +113,7 @@ const Geocode = {
     }
 
     const latLng = `${lat},${lng}`;
-    let url = `${GOOGLE_API}?latlng=${encodeURIComponent(latLng)}`;
+    let url = `${NEWGOOGLE_API}?latlng=${encodeURIComponent(latLng)}`;
 
     if (apiKey || API_KEY) {
       API_KEY = apiKey || API_KEY;
@@ -153,7 +154,7 @@ const Geocode = {
       return Promise.reject(new Error("Provided address is invalid"));
     }
 
-    let url = `${GOOGLE_API}?address=${encodeURIComponent(address)}`;
+    let url = `${NEWGOOGLE_API}?address=${encodeURIComponent(address)}`;
 
     if (apiKey || API_KEY) {
       API_KEY = apiKey || API_KEY;

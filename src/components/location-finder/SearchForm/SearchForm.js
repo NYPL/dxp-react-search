@@ -127,8 +127,19 @@ function SearchForm() {
           // the latter.....
           const location = matchLocation[0];
           searchValue = `${location.address_line1} ${location.locality} ${location.administrative_area} ${location.postal_code}`;
+          // if (
+          //   location.name ===
+          //   "The New York Public Library for the Performing Arts"
+          // ) {
+          searchValue = searchValue.replace(/(\(.*\))/g, "");
+          // }
+          if (autoSuggestInputValue === "Countee Cullen Library") {
+            searchValue = autoSuggestInputValue;
+          }
+          if (searchValue === "455 Fifth Avenue New York NY 10016") {
+            searchValue = "Stavros Niarchos Foundation Library (SNFL)";
+          }
         }
-
         // Get latitude & longitude from search value.
         Geocode.fromAddress(searchValue).then(
           (response) => {
