@@ -35,6 +35,7 @@ export const LOCATIONS_QUERY = gql`
         locality
         administrative_area
         postal_code
+        synonyms
       }
     }
   }
@@ -84,6 +85,7 @@ function SearchForm() {
     setSuggestions(getSuggestions(autoSuggestItems, value));
   }
 
+  // @TODO remove this, it's not needed anymore, since we dispatch this event in the form submit.
   function onSuggestionSelected(event, { suggestion }) {
     dispatch(
       setMapInfoWindow({
@@ -108,13 +110,16 @@ function SearchForm() {
     // Query to get the list of locations
     client.query({ query: LOCATIONS_QUERY }).then(
       (response) => {
+        // Set the default search value to the input value from the "autosuggest" search box.
         let searchValue = autoSuggestInputValue;
-        // @TODO see if you actually still need this.
-        // Try to find a location match.
+        // Try to find a location match, if so set the search value to a string with the location's name and address.
+        // We do this to get more accurate results from the Google GeoCode API.
+        // locationMatches.
         const matchLocation = filterBySearchInput(
           response.data.refineryAllLocations.locations,
           autoSuggestInputValue
         );
+
         if (matchLocation[0]) {
           // @TODO Searching directly for "Business Center at SNFL" or "snfl" returns a location in Spain
           // This is what google returns for this text:
@@ -130,10 +135,19 @@ function SearchForm() {
           // Strip out the parenthetical text that sometimes gets added to Location street address fields.
           searchValue = searchValue.replace(/(\(.*\))/g, "");
         }
+
+        console.log(searchValue);
+
         // Get latitude & longitude from search value.
         Geocode.fromAddress(searchValue).then(
           (response) => {
             const { lat, lng } = response.results[0].geometry.location;
+
+            const infoWindowIdFinal = matchLocation[0]
+              ? matchLocation[0].id
+              : infoWindowId;
+
+            const infoWindowIsVisibleFinal = matchLocation[0] ? true : false;
 
             batch(() => {
               // Dispatch search query
@@ -156,8 +170,8 @@ function SearchForm() {
               // Dispatch for map info window.
               dispatch(
                 setMapInfoWindow({
-                  infoWindowId,
-                  infoWindowIsVisible: true,
+                  infoWindowId: infoWindowIdFinal,
+                  infoWindowIsVisible: infoWindowIsVisibleFinal,
                 })
               );
             });

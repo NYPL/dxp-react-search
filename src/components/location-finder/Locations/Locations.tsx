@@ -65,6 +65,7 @@ export const LOCATIONS_QUERY = gql`
         }
         appointmentOnly
         open
+        synonyms
       }
       pageInfo {
         totalItems
