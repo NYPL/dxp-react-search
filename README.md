@@ -16,10 +16,10 @@ React app build for www.nypl.org. Pages currently in repo:
 
 ## Requirements
 
-- NodeJS to install visit [NodeJS](https://nodejs.org/en)
+- NodeJS to install visit [NodeJS](https://nodejs.org/en) ( node: v16.15.0, npm: 8.5.5 )
 - NVM to install go to [NVM github page](https://github.com/nvm-sh/nvm)
 - Git to install go to [Git Page](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- Code Editor ([VSCode](https://code.visualstudio.com/download))
+- Code Editor [VSCode](https://code.visualstudio.com/download)
 
 ## Installation Scout (Local)
 
@@ -38,6 +38,20 @@ cd dxp-react-search
 ```
 
 2. Install all the node dependencies
+
+Check your node version and npm version first
+
+```sh
+node -v
+```
+
+v16.x.x
+
+```sh
+npm -v
+```
+
+8.x.x
 
 ```sh
 npm install
@@ -67,23 +81,26 @@ npm run build && npm start
 
 ## Code Editor Setup
 
-To keep our code practices consistent we use the VSCode extesions ESLINT and Prettier.
+VS Code editor is the recommended IDE for React development. These are recommended VS Code extensions that will help with dev work.
 
 - Prettier
 - ESLint
 - ES7 + React/Redux
-- Auto Import (optional)
-- DotENV (optional)
+- Auto Import
+- DotENV
+- GraphQL
+- MDX
+- Project Manager
 
 ## App Testing
 
-Run unit tests
+- Run Unit tests
 
 ```sh
 npm test
 ```
 
-Run Cypress tests (E2E)
+- Run Cypress tests (E2E)
 
 ```sh
 npm run build && npm start
