@@ -126,19 +126,9 @@ function SearchForm() {
           // "Stavros Niarchos Foundation Library (SNFL)" before "Business Center at SNFL" when searching for
           // the latter.....
           const location = matchLocation[0];
-          searchValue = `${location.address_line1} ${location.locality} ${location.administrative_area} ${location.postal_code}`;
-          // if (
-          //   location.name ===
-          //   "The New York Public Library for the Performing Arts"
-          // ) {
+          searchValue = `${location.name}, ${location.address_line1} ${location.locality} ${location.administrative_area} ${location.postal_code}`;
+          // Strip out the parenthetical text that sometimes gets added to Location street address fields.
           searchValue = searchValue.replace(/(\(.*\))/g, "");
-          // }
-          if (autoSuggestInputValue === "Countee Cullen Library") {
-            searchValue = autoSuggestInputValue;
-          }
-          if (searchValue === "455 Fifth Avenue New York NY 10016") {
-            searchValue = "Stavros Niarchos Foundation Library (SNFL)";
-          }
         }
         // Get latitude & longitude from search value.
         Geocode.fromAddress(searchValue).then(
