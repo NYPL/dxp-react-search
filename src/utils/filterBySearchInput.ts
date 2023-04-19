@@ -1,43 +1,39 @@
-// @see https://github.com/NYPL/locations-app/blob/936bd5566631fa159135bd0966129527bad2506a/public/scripts/directives/nypl_directives.js
+// @see https://github.com/NYPL/items-app/blob/936bd5566631fa159135bd0966129527bad2506a/public/scripts/directives/nypl_directives.js
 
-type Location = {
+type Item = {
+  id: string;
   name: string;
-  slug: string;
-  synonyms: string[];
+  synonyms?: string[];
 };
 
-// Helper function to clean text
-function cleanText(text: string) {
+// Helper function to sanitize a string, and remove all special characters.
+function sanitizeText(text: string) {
   return text
     .replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g, "")
     .toLowerCase();
 }
 
-// Filter locations by search term.
-// @TODO filter-locations-by-search-term.ts
+// Filter items by search term.
+// @TODO filter-items-by-search-term.ts
+
+/*
+ * Filter function to return items that match the search query.
+ */
 export default function filterBySearchInput(
-  locations: Location[],
-  searchTerm: string
+  items: Item[],
+  searchQuery: string
 ) {
-  return locations.filter((location) => {
-    // return locations.filter(function (location) {
-    if (
-      // Check for string match on location name.
-      cleanText(location.name).indexOf(cleanText(searchTerm)) >= 0 ||
-      // Check for synonyms match.
-      location.synonyms.includes(cleanText(searchTerm))
-    ) {
+  const searchQueryFinal = sanitizeText(searchQuery);
+
+  return items.filter((item) => {
+    // Check for string match on item name.
+    if (sanitizeText(item.name).indexOf(searchQueryFinal) >= 0) {
       return true;
     }
-
-    // return (
-    //   cleanText(location.name).indexOf(cleanText(searchTerm)) >= 0
-    //   // @TODO add this back in for location finder!
-    //   /*|| cleanText(location.locality).indexOf(cleanText(searchTerm)) >= 0
-    //   || cleanText(location.postal_code).indexOf(cleanText(searchTerm)) >= 0
-    //   */
-    // );
-
+    // Check for synonyms match, only used for location finder.
+    if (item.synonyms && item.synonyms.includes(searchQueryFinal)) {
+      return true;
+    }
     return false;
   });
 }
