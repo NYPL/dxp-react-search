@@ -1,6 +1,6 @@
-import filterBySearchInput from "./filterBySearchInput";
+import filterBySearchQuery from "./filter-by-search-query";
 
-describe("filterBySearchInput", () => {
+describe("filter-by-search-query tests.", () => {
   const locations = [
     {
       id: "125th-street",
@@ -45,25 +45,25 @@ describe("filterBySearchInput", () => {
 
   it("should return Stephen A. Schwarzman Building if 'sasb' is the search query.", () => {
     const searchQuery = "sasb";
-    const result = filterBySearchInput(locations, searchQuery);
+    const result = filterBySearchQuery(locations, searchQuery);
     expect(result[0].id).toEqual("sasb");
   });
 
   it("should return Stephen A. Schwarzman Building if 'Schwarzman' is the search query.", () => {
     const searchQuery = "Schwarzman";
-    const result = filterBySearchInput(locations, searchQuery);
+    const result = filterBySearchQuery(locations, searchQuery);
     expect(result[0].id).toEqual("sasb");
   });
 
   it("should return no results, if no synomym match is found.", () => {
     const searchQuery = "no match";
-    const result = filterBySearchInput(locations, searchQuery);
+    const result = filterBySearchQuery(locations, searchQuery);
     expect(result).toHaveLength(0);
   });
 
   it("should return correct first item, even if no synonyms array is in source data.", () => {
     const searchQuery = "Four";
-    const result = filterBySearchInput(mockItems, searchQuery);
+    const result = filterBySearchQuery(mockItems, searchQuery);
     expect(result[0].id).toEqual("item-four");
   });
 });

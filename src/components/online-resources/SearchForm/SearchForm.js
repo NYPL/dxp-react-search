@@ -7,7 +7,7 @@ import { setAutoSuggestInputValue } from "./../../../redux/actions";
 // Apollo
 import { gql, useApolloClient } from "@apollo/client";
 // Utils
-import filterBySearchInput from "./../../../utils/filterBySearchInput";
+import filterBySearchQuery from "../../../utils/filter-by-search-query";
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
 // Components
 import { default as SharedSearchForm } from "./../../shared/SearchForm";
@@ -55,7 +55,7 @@ function SearchForm() {
 
   function getSuggestions(autoSuggestItems, value) {
     if (autoSuggestItems) {
-      return filterBySearchInput(autoSuggestItems, value);
+      return filterBySearchQuery(autoSuggestItems, value);
     } else {
       console.log("data is false");
       return [];

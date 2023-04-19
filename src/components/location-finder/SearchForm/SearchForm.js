@@ -11,7 +11,7 @@ import {
 // Apollo
 import { gql, useApolloClient } from "@apollo/client";
 // Utils
-import filterBySearchInput from "./../../../utils/filterBySearchInput";
+import filterBySearchQuery from "../../../utils/filter-by-search-query";
 // Geocode
 import Geocode from "./../../../utils/googleGeocode";
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
@@ -73,7 +73,7 @@ function SearchForm() {
 
   function getSuggestions(autoSuggestItems, value) {
     if (autoSuggestItems) {
-      return filterBySearchInput(autoSuggestItems, value);
+      return filterBySearchQuery(autoSuggestItems, value);
     } else {
       console.log("data is false");
       return [];
@@ -115,7 +115,7 @@ function SearchForm() {
         // Try to find a location match, if so set the search value to a string with the location's name and address.
         // We do this to get more accurate results from the Google GeoCode API.
         // locationMatches.
-        const matchLocation = filterBySearchInput(
+        const matchLocation = filterBySearchQuery(
           response.data.refineryAllLocations.locations,
           autoSuggestInputValue
         );

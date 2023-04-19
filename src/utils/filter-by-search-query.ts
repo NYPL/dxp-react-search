@@ -13,13 +13,10 @@ function sanitizeText(text: string) {
     .toLowerCase();
 }
 
-// Filter items by search term.
-// @TODO filter-items-by-search-term.ts
-
 /*
  * Filter function to return items that match the search query.
  */
-export default function filterBySearchInput(
+export default function filterBySearchQuery(
   items: Item[],
   searchQuery: string
 ) {
