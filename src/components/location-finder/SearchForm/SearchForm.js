@@ -107,47 +107,38 @@ function SearchForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    // Query to get the list of locations
+    // Query to get all locations.
     client.query({ query: LOCATIONS_QUERY }).then(
       (response) => {
         // Set the default search value to the input value from the "autosuggest" search box.
-        let searchValue = autoSuggestInputValue;
+        let searchQuery = autoSuggestInputValue;
+
         // Try to find a location match, if so set the search value to a string with the location's name and address.
         // We do this to get more accurate results from the Google GeoCode API.
-        // locationMatches.
-        const matchLocation = filterBySearchQuery(
+        const locationsFiltered = filterBySearchQuery(
           response.data.refineryAllLocations.locations,
           autoSuggestInputValue
         );
+        const locationMatch = locationsFiltered[0];
 
-        if (matchLocation[0]) {
-          // @TODO Searching directly for "Business Center at SNFL" or "snfl" returns a location in Spain
-          // This is what google returns for this text:
-          // https://www.google.com/maps/search/Business+Center+at+SNFL/@38.020501,-1.1476233,13z/data=!3m1!4b1
-          //
-          //searchValue = matchLocation[0].name;
-
-          // Using a name + address, might work, but returns
-          // "Stavros Niarchos Foundation Library (SNFL)" before "Business Center at SNFL" when searching for
-          // the latter.....
-          const location = matchLocation[0];
-          searchValue = `${location.name}, ${location.address_line1} ${location.locality} ${location.administrative_area} ${location.postal_code}`;
+        if (locationMatch) {
+          // Genereate a string with the location's name and address, this returns more accurate results from the Google GeoCode API.
+          const locationMatchAddress = `${locationMatch.name}, ${locationMatch.address_line1} ${locationMatch.locality} ${locationMatch.administrative_area} ${locationMatch.postal_code}`;
           // Strip out the parenthetical text that sometimes gets added to Location street address fields.
-          searchValue = searchValue.replace(/(\(.*\))/g, "");
+          searchQuery = locationMatchAddress.replace(/(\(.*\))/g, "");
         }
 
-        console.log(searchValue);
+        console.log(searchQuery);
 
         // Get latitude & longitude from search value.
-        Geocode.fromAddress(searchValue).then(
+        Geocode.fromAddress(searchQuery).then(
           (response) => {
-            const { lat, lng } = response.results[0].geometry.location;
-
-            const infoWindowIdFinal = matchLocation[0]
-              ? matchLocation[0].id
+            const infoWindowIdFinal = locationMatch
+              ? locationMatch.id
               : infoWindowId;
+            const infoWindowIsVisibleFinal = locationMatch ? true : false;
 
-            const infoWindowIsVisibleFinal = matchLocation[0] ? true : false;
+            console.log(response.results[0].geometry.location);
 
             batch(() => {
               // Dispatch search query
@@ -158,7 +149,6 @@ function SearchForm() {
                   lng: response.results[0].geometry.location.lng,
                 })
               );
-
               // Dispatch for map zoom and center
               dispatch(
                 setMapPosition({
@@ -166,7 +156,6 @@ function SearchForm() {
                   mapZoom: 14,
                 })
               );
-
               // Dispatch for map info window.
               dispatch(
                 setMapInfoWindow({
