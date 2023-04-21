@@ -54,7 +54,7 @@ export default function mapContentComponentToReactComponent(
 
     return React.createElement(Components[contentComponent["__typename"]], {
       key: contentComponent.id,
-      // If the component is EmailSubscription add colorway vaues as bgColor.
+      // If the component is EmailSubscription add colorway values as bgColor.
       ...(contentComponent["__typename"] === "EmailSubscription" &&
       contentComponent.colorway
         ? {

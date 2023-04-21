@@ -257,7 +257,12 @@ export default function SectionFrontPage({
               (contentComponent: { [key: string]: any }) =>
                 Components(contentComponent)
             )}
-          <DonorCredit id="myDonorCredit" />
+          <DonorCredit
+            id="donorCredit"
+            showBorder={true}
+            heading="Our Donors"
+            description="This work is part of the Library’s overall commitment to our branch patrons and education programs, led by the Merryl H. and James S. Tisch Director of The New York Public Library. Major support for educational programming is provided by Merryl H. and James S. Tisch."
+          />
         </Box>
       }
     />
