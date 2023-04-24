@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 // Redux
 import { batch, useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
@@ -52,9 +52,9 @@ export const LOCATIONS_QUERY = gql`
 export default function SearchForm() {
   // Local state
   // Filtered items based on search input.
-  const [suggestions, setSuggestions] = useState<LocationType[]>([]);
+  const [suggestions, setSuggestions] = React.useState<LocationType[]>([]);
   // All possible items from datasource.
-  const [autoSuggestItems, setAutoSuggestItems] = useState([]);
+  const [autoSuggestItems, setAutoSuggestItems] = React.useState([]);
 
   // Redux
   const { autoSuggestInputValue, openNow } = useSelector(
@@ -67,7 +67,7 @@ export default function SearchForm() {
   const client = useApolloClient();
 
   // When component mounts, prefetch the items for autosuggest.
-  useEffect(() => {
+  React.useEffect(() => {
     /* eslint-disable react-hooks/exhaustive-deps */
     client.query({ query: LOCATIONS_QUERY }).then(
       (response) => {
