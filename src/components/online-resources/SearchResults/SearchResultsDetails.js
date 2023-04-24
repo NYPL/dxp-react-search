@@ -23,7 +23,7 @@ function SearchResultsDetails({ label, details }) {
       shallow: true,
     });
 
-    dispatch(setAutoSuggestInputValue(""));
+    dispatch(setAutoSuggestInputValue({ autoSuggestInputValue: value }));
   }
 
   function renderMessage(details) {

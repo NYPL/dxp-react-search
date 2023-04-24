@@ -49,7 +49,9 @@ function SearchForm() {
   // @TODO Bad idea? sync the router state to redux?
   useEffect(() => {
     if (router.query.q) {
-      dispatch(setAutoSuggestInputValue(router.query.q));
+      dispatch(
+        setAutoSuggestInputValue({ autoSuggestInputValue: router.query.q })
+      );
     }
   }, [dispatch, router.query.q]);
 
@@ -63,7 +65,7 @@ function SearchForm() {
   }
 
   function onSuggestionsFetchRequested(value) {
-    dispatch(setAutoSuggestInputValue(value));
+    dispatch(setAutoSuggestInputValue({ autoSuggestInputValue: value }));
     setSuggestions(getSuggestions(autoSuggestItems, value));
   }
 
@@ -72,7 +74,7 @@ function SearchForm() {
   }
 
   function inputOnChange(newValue) {
-    dispatch(setAutoSuggestInputValue(newValue));
+    dispatch(setAutoSuggestInputValue({ autoSuggestInputValue: newValue }));
   }
 
   function onSuggestionsClearRequested() {

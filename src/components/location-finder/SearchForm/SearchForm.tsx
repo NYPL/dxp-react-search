@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 // Redux
 import { batch, useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 import {
   setSearchQuery,
   setMapPosition,
@@ -11,11 +12,13 @@ import {
 // Apollo
 import { gql, useApolloClient } from "@apollo/client";
 // Utils
-import filterBySearchQuery from "../../../utils/filter-by-search-query";
+import filterBySearchQuery, {
+  FilterableItem,
+} from "../../../utils/filter-by-search-query";
 // Geocode
 import Geocode from "./../../../utils/googleGeocode";
 const { NEXT_PUBLIC_GOOGLE_MAPS_API } = process.env;
-Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API);
+Geocode.setApiKey(NEXT_PUBLIC_GOOGLE_MAPS_API as string);
 const southWestBound = "40.49, -74.26";
 const northEastBound = "40.91, -73.77";
 Geocode.setBounds(`${southWestBound}|${northEastBound}`);
@@ -23,6 +26,11 @@ Geocode.setBounds(`${southWestBound}|${northEastBound}`);
 import { Box, Checkbox } from "@nypl/design-system-react-components";
 import { default as SharedSearchForm } from "./../../shared/SearchForm";
 import SearchFilters from "./../SearchFilters";
+// Types
+import { LocationProps } from "./../Location/Location";
+
+// Combined the FilterableItem type from filter-by-search-query to add Location specific props.
+type LocationType = FilterableItem & LocationProps;
 
 export const LOCATIONS_QUERY = gql`
   query LocationsQuery {
@@ -41,18 +49,18 @@ export const LOCATIONS_QUERY = gql`
   }
 `;
 
-function SearchForm() {
+export default function SearchForm() {
   // Local state
   // Filtered items based on search input.
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState<LocationType[]>([]);
   // All possible items from datasource.
-  const [autoSuggestItems, setAutoSuggestItems] = useState();
+  const [autoSuggestItems, setAutoSuggestItems] = useState([]);
 
   // Redux
   const { autoSuggestInputValue, openNow } = useSelector(
-    (state) => state.search
+    (state: RootState) => state.search
   );
-  const { infoWindowId } = useSelector((state) => state.map);
+  const { infoWindowId } = useSelector((state: RootState) => state.map);
   const dispatch = useDispatch();
 
   // Apollo
@@ -66,58 +74,41 @@ function SearchForm() {
         setAutoSuggestItems(response.data.refineryAllLocations.locations);
       },
       (error) => {
-        //console.error(error);
+        console.error(error);
       }
     );
   }, [autoSuggestItems]);
 
-  function getSuggestions(autoSuggestItems, value) {
+  // Helper function to get suggestions for the autosuggest.
+  function getSuggestions(autoSuggestItems: LocationType[], value: string) {
     if (autoSuggestItems) {
       return filterBySearchQuery(autoSuggestItems, value);
-    } else {
-      console.log("data is false");
-      return [];
     }
+    return [];
   }
 
-  function onSuggestionsFetchRequested(value) {
-    dispatch(setAutoSuggestInputValue(value));
-    setSuggestions(getSuggestions(autoSuggestItems, value));
+  function handleSuggestionsFetchRequested(value: string) {
+    // Dispatch the redux action to set the autosuggest input value state.
+    dispatch(setAutoSuggestInputValue({ autoSuggestInputValue: value }));
+    const suggestions = getSuggestions(autoSuggestItems, value);
+    // Set the suggestions to the local state.
+    setSuggestions(suggestions as LocationType[]);
   }
 
-  // @TODO remove this, it's not needed anymore, since we dispatch this event in the form submit.
-  function onSuggestionSelected(event, { suggestion }) {
-    dispatch(
-      setMapInfoWindow({
-        infoWindowId: suggestion.id,
-        infoWindowIsVisible: false,
-      })
-    );
-  }
-
-  function inputOnChange(newValue) {
-    dispatch(setAutoSuggestInputValue(newValue));
-  }
-
-  function onSuggestionsClearRequested() {
-    setSuggestions([]);
-  }
-
-  // FORM SUBMIT
-  function handleSubmit(event) {
+  function handleSubmit(event: React.SyntheticEvent): void {
     event.preventDefault();
 
     // Query to get all locations.
     client.query({ query: LOCATIONS_QUERY }).then(
       (response) => {
         // Set the default search value to the input value from the "autosuggest" search box.
-        let searchQuery = autoSuggestInputValue;
+        let searchQuery: string = autoSuggestInputValue;
 
         // Try to find a location match, if so set the search value to a string with the location's name and address.
         // We do this to get more accurate results from the Google GeoCode API.
         const locationsFiltered = filterBySearchQuery(
-          response.data.refineryAllLocations.locations,
-          autoSuggestInputValue
+          response.data.refineryAllLocations.locations as LocationType[],
+          searchQuery
         );
         const locationMatch = locationsFiltered[0];
 
@@ -128,8 +119,6 @@ function SearchForm() {
           searchQuery = locationMatchAddress.replace(/(\(.*\))/g, "");
         }
 
-        console.log(searchQuery);
-
         // Get latitude & longitude from search value.
         Geocode.fromAddress(searchQuery).then(
           (response) => {
@@ -137,8 +126,6 @@ function SearchForm() {
               ? locationMatch.id
               : infoWindowId;
             const infoWindowIsVisibleFinal = locationMatch ? true : false;
-
-            console.log(response.results[0].geometry.location);
 
             batch(() => {
               // Dispatch search query
@@ -176,15 +163,6 @@ function SearchForm() {
     );
   }
 
-  function onChangeOpenNow(event) {
-    dispatch(
-      setOpenNow({
-        searchQuery: "",
-        openNow: event.target.checked,
-      })
-    );
-  }
-
   return (
     <SharedSearchForm
       id="search-form"
@@ -196,11 +174,12 @@ function SearchForm() {
       autoSuggestInputId={"search-form__search-input"}
       autoSuggestAriaLabel={"Search locations"}
       suggestions={suggestions}
-      onSuggestionSelected={onSuggestionSelected}
-      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-      onSuggestionsClearRequested={onSuggestionsClearRequested}
+      onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
+      onSuggestionsClearRequested={() => setSuggestions([])}
       autoSuggestInputValue={autoSuggestInputValue}
-      inputOnChange={inputOnChange}
+      inputOnChange={(newValue: Record<string, any>) => {
+        dispatch(setAutoSuggestInputValue({ autoSuggestInputValue: newValue }));
+      }}
       suggestionContainerMsg={"Search for locations near:"}
       searchButtonId={"search-form__submit"}
     >
@@ -220,7 +199,14 @@ function SearchForm() {
             showLabel={true}
             aria-label="Checking this box will update the results"
             isChecked={openNow}
-            onChange={onChangeOpenNow}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              dispatch(
+                setOpenNow({
+                  searchQuery: "",
+                  openNow: event.target.checked,
+                })
+              );
+            }}
           />
         </Box>
         <SearchFilters />
@@ -228,5 +214,3 @@ function SearchForm() {
     </SharedSearchForm>
   );
 }
-
-export default SearchForm;

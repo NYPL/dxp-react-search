@@ -22,6 +22,9 @@ const initialState = {
   pageCount: 0,
   pageNumber: 1,
   searchFilters: [],
+  searchQuery: "",
+  searchQueryGeoLat: null,
+  searchQueryGeoLng: null,
 };
 
 export default function search(state = initialState, action: ActionType) {
@@ -37,7 +40,7 @@ export default function search(state = initialState, action: ActionType) {
     case SET_AUTO_SUGGEST_INPUT_VALUE:
       return {
         ...state,
-        autoSuggestInputValue: action.payload,
+        autoSuggestInputValue: action.payload.autoSuggestInputValue,
       };
 
     case SET_OPEN_NOW:

@@ -1,6 +1,6 @@
 // @see https://github.com/NYPL/items-app/blob/936bd5566631fa159135bd0966129527bad2506a/public/scripts/directives/nypl_directives.js
 
-type Item = {
+export type FilterableItem = {
   id: string;
   name: string;
   synonyms?: string[];
@@ -17,9 +17,9 @@ function sanitizeText(text: string) {
  * Filter function to return items that match the search query.
  */
 export default function filterBySearchQuery(
-  items: Item[],
+  items: FilterableItem[],
   searchQuery: string
-) {
+): Record<string, any>[] {
   const searchQueryFinal = sanitizeText(searchQuery);
 
   return items.filter((item) => {
