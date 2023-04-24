@@ -278,4 +278,13 @@ export const typeDefs = gql`
     description: String
     items: [ButtonLink]
   }
+
+  type DonorCredit {
+    id: ID!
+    status: Boolean!
+    type: String!
+    heading: String
+    description: String!
+    showBorder: Boolean!
+  }
 `;

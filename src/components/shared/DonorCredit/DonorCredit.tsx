@@ -23,7 +23,13 @@ function DonorCredit({
     <Box id={id} display="flex" flexDirection="column">
       {showBorder && <HorizontalRule marginBottom="xl" marginTop="0" />}
       {heading && <Heading level="three" text={heading} marginBottom="l" />}
-      <Text isItalic maxW="850px" alignSelf="center" marginBottom="0">
+      <Text
+        isItalic
+        maxW={{ xl: "850px" }}
+        px={{ sm: "s", md: "l", xl: "0" }}
+        alignSelf="center"
+        marginBottom="0"
+      >
         {description}
       </Text>
     </Box>

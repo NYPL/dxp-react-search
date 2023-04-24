@@ -8,6 +8,7 @@ export const typeDefs = gql`
     image: Image
     featuredContent: [SectionFrontFeaturedContent]
     mainContent: [SectionFrontMainContent]
+    donorCredit: DonorCredit
     colorway: Colorway
   }
 

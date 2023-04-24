@@ -20,6 +20,8 @@ const sectionFrontResolver = {
         "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
         // Button Links
         "field_main_content.field_erm_button_links",
+        // Donor Credit
+        "field_ers_donor_credit",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
