@@ -4,8 +4,8 @@ import { gql, useQuery } from "@apollo/client";
 // Components
 import PageContainer from "../../shared/layouts/PageContainer";
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
+import DonorCredit from "../../shared/DonorCredit";
 import Components from "./../../shared/ContentComponents/getReactComponent";
-import DonorCredit from "./../../shared/DonorCredit";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
 import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
 // Content + config
@@ -177,6 +177,14 @@ export const SECTION_FRONT_QUERY = gql`
           text
         }
       }
+      donorCredit {
+        __typename
+        id
+        type
+        heading
+        description
+        showBorder
+      }
     }
   }
 `;
@@ -257,13 +265,17 @@ export default function SectionFrontPage({
               (contentComponent: { [key: string]: any }) =>
                 Components(contentComponent)
             )}
-          <DonorCredit
-            id="donorCredit"
-            showBorder={true}
-            heading="Our Donors"
-            description="This work is part of the Library’s overall commitment to our branch patrons and education programs, led by the Merryl H. and James S. Tisch Director of The New York Public Library. Major support for educational programming is provided by Merryl H. and James S. Tisch."
-          />
         </Box>
+      }
+      contentBottom={
+        sectionFront.donorCredit && (
+          <DonorCredit
+            id={sectionFront.donorCredit.id}
+            showBorder={sectionFront.donorCredit.showBorder}
+            heading={sectionFront.donorCredit.heading}
+            description={sectionFront.donorCredit.description}
+          />
+        )
       }
     />
   );

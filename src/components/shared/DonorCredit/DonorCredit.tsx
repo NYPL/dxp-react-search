@@ -1,9 +1,9 @@
 import * as React from "react";
 import {
-  Heading,
-  Text,
-  HorizontalRule,
   Box,
+  Flex,
+  Heading,
+  HorizontalRule,
 } from "@nypl/design-system-react-components";
 
 interface DonorCreditProps {
@@ -13,21 +13,24 @@ interface DonorCreditProps {
   description: string;
 }
 
-function DonorCredit({
+export default function DonorCredit({
   id,
   showBorder,
   heading,
   description,
 }: DonorCreditProps) {
   return (
-    <Box id={id} display="flex" flexDirection="column">
-      {showBorder && <HorizontalRule marginBottom="xl" marginTop="0" />}
-      {heading && <Heading level="three" text={heading} marginBottom="l" />}
-      <Text isItalic maxW="850px" alignSelf="center" marginBottom="0">
-        {description}
-      </Text>
-    </Box>
+    <Flex id={id} flexDir="column">
+      {showBorder && <HorizontalRule marginTop={0} marginBottom="xl" />}
+      {heading && <Heading level="three" marginBottom="l" text={heading} />}
+      <Box
+        as="p"
+        maxW={{ xl: "850px" }}
+        fontStyle="italic"
+        alignSelf="center"
+        px={{ sm: "s", md: "l", xl: 0 }}
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
+    </Flex>
   );
 }
-
-export default DonorCredit;

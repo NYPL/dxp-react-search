@@ -9,6 +9,7 @@ export const typeDefs = gql`
     featuredContent: [SectionFrontFeaturedContent]
     mainContent: [SectionFrontMainContent]
     colorway: Colorway
+    donorCredit: DonorCredit
   }
 
   union SectionFrontFeaturedContent = Donation | Jumbotron
