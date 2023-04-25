@@ -35,6 +35,9 @@ const sectionFrontResolver = {
         apiPath,
         isPreview
       );
+
+      // console.log(response);
+
       return response;
     },
   },
@@ -72,6 +75,21 @@ const sectionFrontResolver = {
             );
       return mainContent;
     },
+    donorCredit: (sectionFront, _, __, info) => {
+      const resolveInfo = parseResolveInfo(info);
+
+      console.log(resolveInfo);
+
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const donorCredit =
+        sectionFront.field_ers_donor_credit.data === null
+          ? null
+          : resolveDrupalParagraphs(
+              [sectionFront.field_ers_donor_credit],
+              typesInQuery
+            );
+      return donorCredit;
+    },
     colorway: (sectionFront) => {
       const slug = sectionFront.path?.alias;
       return getColorway(slug);
@@ -85,6 +103,11 @@ const sectionFrontResolver = {
   SectionFrontMainContent: {
     __resolveType: (object, _, __) => {
       return resolveParagraphTypes(object.type, "section_front");
+    },
+  },
+  DonorCredit: {
+    __resolveType: (object, _, __) => {
+      return resolveParagraphTypes(object.type);
     },
   },
 };

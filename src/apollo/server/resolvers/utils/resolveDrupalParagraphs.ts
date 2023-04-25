@@ -12,6 +12,13 @@ export default function resolveDrupalParagraphs(
   typesInQuery: string[],
   apiResponse?: any
 ): ResolvedParagraph[] {
+  // console.log(typesInQuery);
+
+  if (typesInQuery.includes("DonorCredit")) {
+    // console.log(paragraphResourceObjects);
+    // console.log(typesInQuery);
+  }
+
   // Define variables used to determine the colorway prop on Section Front pages
   const contentType = apiResponse?.type.replace("node--", "");
   const slug = apiResponse?.path?.alias;

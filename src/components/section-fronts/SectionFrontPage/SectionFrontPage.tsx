@@ -177,6 +177,13 @@ export const SECTION_FRONT_QUERY = gql`
           text
         }
       }
+      #donorCredit {
+      #  __typename
+      #  id
+      #  heading
+      # description
+      #  showBorder
+      # }
     }
   }
 `;
