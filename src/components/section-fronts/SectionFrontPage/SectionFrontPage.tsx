@@ -5,7 +5,6 @@ import { gql, useQuery } from "@apollo/client";
 import PageContainer from "../../shared/layouts/PageContainer";
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 import Components from "./../../shared/ContentComponents/getReactComponent";
-import DonorCredit from "./../../shared/DonorCredit";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
 import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
 // Content + config
@@ -264,12 +263,7 @@ export default function SectionFrontPage({
               (contentComponent: { [key: string]: any }) =>
                 Components(contentComponent)
             )}
-          <DonorCredit
-            id={sectionFront.donorCredit.id}
-            showBorder={sectionFront.donorCredit.showBorder}
-            heading={sectionFront.donorCredit.heading}
-            description={sectionFront.donorCredit.description}
-          />
+          {sectionFront.donorCredit && Components(sectionFront.donorCredit)}
         </Box>
       }
     />

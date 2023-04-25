@@ -20,13 +20,14 @@ function DonorCredit({
   description,
 }: DonorCreditProps) {
   return (
-    <Flex id={`donor-credit-${id}`} flexDirection="column">
+    <Flex id={`donor-credit-${id}`} marginY="xl" flexDirection="column">
       {showBorder && <HorizontalRule marginBottom="xl" marginTop="0" />}
       {heading && <Heading level="three" text={heading} marginBottom="l" />}
       <Box
         fontStyle="italic"
         maxW={{ xl: "850px" }}
         px={{ sm: "s", md: "l", xl: "0" }}
+        sx={{ a: { textDecoration: "underline" } }}
         alignSelf="center"
         marginBottom="0"
         dangerouslySetInnerHTML={{ __html: description }}
