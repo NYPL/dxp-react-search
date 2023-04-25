@@ -177,13 +177,13 @@ export const SECTION_FRONT_QUERY = gql`
           text
         }
       }
-      #donorCredit {
-      #  __typename
-      #  id
-      #  heading
-      # description
-      #  showBorder
-      # }
+      donorCredit {
+        __typename
+        id
+        heading
+        description
+        showBorder
+      }
     }
   }
 `;
@@ -265,10 +265,10 @@ export default function SectionFrontPage({
                 Components(contentComponent)
             )}
           <DonorCredit
-            id="donorCredit"
-            showBorder={true}
-            heading="Our Donors"
-            description="This work is part of the Library’s overall commitment to our branch patrons and education programs, led by the Merryl H. and James S. Tisch Director of The New York Public Library. Major support for educational programming is provided by Merryl H. and James S. Tisch."
+            id={sectionFront.donorCredit.id}
+            showBorder={sectionFront.donorCredit.showBorder}
+            heading={sectionFront.donorCredit.heading}
+            description={sectionFront.donorCredit.description}
           />
         </Box>
       }

@@ -12,13 +12,6 @@ export default function resolveDrupalParagraphs(
   typesInQuery: string[],
   apiResponse?: any
 ): ResolvedParagraph[] {
-  // console.log(typesInQuery);
-
-  if (typesInQuery.includes("DonorCredit")) {
-    // console.log(paragraphResourceObjects);
-    // console.log(typesInQuery);
-  }
-
   // Define variables used to determine the colorway prop on Section Front pages
   const contentType = apiResponse?.type.replace("node--", "");
   const slug = apiResponse?.path?.alias;
@@ -129,6 +122,13 @@ export default function resolveDrupalParagraphs(
       if (
         item.type === "paragraph--button_links" &&
         typesInQuery.includes("ButtonLinks")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--donor_credit" &&
+        typesInQuery.includes("DonorCredit")
       ) {
         accumulator.push(item);
       }
@@ -505,6 +505,16 @@ export default function resolveDrupalParagraphs(
           heading: item.field_ts_heading,
           description: item.field_tfls_description?.processed,
           items: buttonLinkItems,
+        };
+        break;
+
+      case "paragraph--donor_credit":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_donor_credit_heading,
+          description: item.field_tfls_description.processed,
+          showBorder: item.field_bs_show_border,
         };
         break;
 
