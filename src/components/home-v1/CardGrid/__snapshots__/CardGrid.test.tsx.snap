@@ -49,7 +49,7 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
       >
         <span
           style={
-            Object {
+            {
               "background": "none",
               "border": 0,
               "boxSizing": "border-box",
@@ -66,7 +66,7 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
         >
           <span
             style={
-              Object {
+              {
                 "background": "none",
                 "border": 0,
                 "boxSizing": "border-box",
@@ -88,7 +88,7 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
             onLoad={[Function]}
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             style={
-              Object {
+              {
                 "border": "none",
                 "bottom": 0,
                 "boxSizing": "border-box",
@@ -120,7 +120,7 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
               src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
               srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
               style={
-                Object {
+                {
                   "border": "none",
                   "bottom": 0,
                   "boxSizing": "border-box",
@@ -228,7 +228,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                 >
                   <span
                     style={
-                      Object {
+                      {
                         "background": "none",
                         "border": 0,
                         "boxSizing": "border-box",
@@ -245,7 +245,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                   >
                     <span
                       style={
-                        Object {
+                        {
                           "background": "none",
                           "border": 0,
                           "boxSizing": "border-box",
@@ -267,7 +267,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                       onLoad={[Function]}
                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                       style={
-                        Object {
+                        {
                           "border": "none",
                           "bottom": 0,
                           "boxSizing": "border-box",
@@ -299,7 +299,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                         src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                         srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                         style={
-                          Object {
+                          {
                             "border": "none",
                             "bottom": 0,
                             "boxSizing": "border-box",
@@ -372,7 +372,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                 >
                   <span
                     style={
-                      Object {
+                      {
                         "background": "none",
                         "border": 0,
                         "boxSizing": "border-box",
@@ -389,7 +389,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                   >
                     <span
                       style={
-                        Object {
+                        {
                           "background": "none",
                           "border": 0,
                           "boxSizing": "border-box",
@@ -411,7 +411,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                       onLoad={[Function]}
                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                       style={
-                        Object {
+                        {
                           "border": "none",
                           "bottom": 0,
                           "boxSizing": "border-box",
@@ -443,7 +443,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                         src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                         srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                         style={
-                          Object {
+                          {
                             "border": "none",
                             "bottom": 0,
                             "boxSizing": "border-box",
@@ -516,7 +516,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                 >
                   <span
                     style={
-                      Object {
+                      {
                         "background": "none",
                         "border": 0,
                         "boxSizing": "border-box",
@@ -533,7 +533,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                   >
                     <span
                       style={
-                        Object {
+                        {
                           "background": "none",
                           "border": 0,
                           "boxSizing": "border-box",
@@ -555,7 +555,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                       onLoad={[Function]}
                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                       style={
-                        Object {
+                        {
                           "border": "none",
                           "bottom": 0,
                           "boxSizing": "border-box",
@@ -587,7 +587,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                         src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                         srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                         style={
-                          Object {
+                          {
                             "border": "none",
                             "bottom": 0,
                             "boxSizing": "border-box",
@@ -660,7 +660,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                 >
                   <span
                     style={
-                      Object {
+                      {
                         "background": "none",
                         "border": 0,
                         "boxSizing": "border-box",
@@ -677,7 +677,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                   >
                     <span
                       style={
-                        Object {
+                        {
                           "background": "none",
                           "border": 0,
                           "boxSizing": "border-box",
@@ -699,7 +699,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                       onLoad={[Function]}
                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                       style={
-                        Object {
+                        {
                           "border": "none",
                           "bottom": 0,
                           "boxSizing": "border-box",
@@ -731,7 +731,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                         src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                         srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                         style={
-                          Object {
+                          {
                             "border": "none",
                             "bottom": 0,
                             "boxSizing": "border-box",
@@ -861,7 +861,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                 >
                   <span
                     style={
-                      Object {
+                      {
                         "background": "none",
                         "border": 0,
                         "boxSizing": "border-box",
@@ -878,7 +878,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                   >
                     <span
                       style={
-                        Object {
+                        {
                           "background": "none",
                           "border": 0,
                           "boxSizing": "border-box",
@@ -900,7 +900,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                       onLoad={[Function]}
                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                       style={
-                        Object {
+                        {
                           "border": "none",
                           "bottom": 0,
                           "boxSizing": "border-box",
@@ -932,7 +932,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                         src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                         srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                         style={
-                          Object {
+                          {
                             "border": "none",
                             "bottom": 0,
                             "boxSizing": "border-box",
@@ -1005,7 +1005,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                 >
                   <span
                     style={
-                      Object {
+                      {
                         "background": "none",
                         "border": 0,
                         "boxSizing": "border-box",
@@ -1022,7 +1022,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                   >
                     <span
                       style={
-                        Object {
+                        {
                           "background": "none",
                           "border": 0,
                           "boxSizing": "border-box",
@@ -1044,7 +1044,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                       onLoad={[Function]}
                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                       style={
-                        Object {
+                        {
                           "border": "none",
                           "bottom": 0,
                           "boxSizing": "border-box",
@@ -1076,7 +1076,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                         src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                         srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                         style={
-                          Object {
+                          {
                             "border": "none",
                             "bottom": 0,
                             "boxSizing": "border-box",
@@ -1149,7 +1149,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                 >
                   <span
                     style={
-                      Object {
+                      {
                         "background": "none",
                         "border": 0,
                         "boxSizing": "border-box",
@@ -1166,7 +1166,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                   >
                     <span
                       style={
-                        Object {
+                        {
                           "background": "none",
                           "border": 0,
                           "boxSizing": "border-box",
@@ -1188,7 +1188,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                       onLoad={[Function]}
                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                       style={
-                        Object {
+                        {
                           "border": "none",
                           "bottom": 0,
                           "boxSizing": "border-box",
@@ -1220,7 +1220,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                         src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                         srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                         style={
-                          Object {
+                          {
                             "border": "none",
                             "bottom": 0,
                             "boxSizing": "border-box",
@@ -1293,7 +1293,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                 >
                   <span
                     style={
-                      Object {
+                      {
                         "background": "none",
                         "border": 0,
                         "boxSizing": "border-box",
@@ -1310,7 +1310,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                   >
                     <span
                       style={
-                        Object {
+                        {
                           "background": "none",
                           "border": 0,
                           "boxSizing": "border-box",
@@ -1332,7 +1332,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                       onLoad={[Function]}
                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                       style={
-                        Object {
+                        {
                           "border": "none",
                           "bottom": 0,
                           "boxSizing": "border-box",
@@ -1364,7 +1364,7 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                         src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                         srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                         style={
-                          Object {
+                          {
                             "border": "none",
                             "bottom": 0,
                             "boxSizing": "border-box",
