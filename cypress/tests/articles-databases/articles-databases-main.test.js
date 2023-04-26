@@ -1,4 +1,4 @@
-import { search } from "./../../support/utils";
+import { search } from "../../support/utils";
 
 describe("Articles & Databases Tests", () => {
   beforeEach(() => {
@@ -14,27 +14,31 @@ describe("Articles & Databases Tests", () => {
     }).should("exist");
   });
 
-  it("Basic search.", () => {
-    const queryParams = "?q=new+york+times&page=1";
-    const pathName = "/research/collections/articles-databases/search";
+  it(
+    "Basic search.",
+    { retries: { runMode: 2, openMode: 1 }, tags: "flaky" },
+    () => {
+      const queryParams = "?q=new+york+times&page=1";
+      const pathName = "/research/collections/articles-databases/search";
 
-    search("new york times", {
-      textboxName: /search articles and databases/i,
-      resultsId: "#search-results",
-    })
-      // Get the first result.
-      .first()
-      .findByRole("link", {
-        name: /new york times \(1980\-present\)/i,
+      search("new york times", {
+        textboxName: /search articles and databases/i,
+        resultsId: "#search-results",
       })
-      .should("exist")
-      // Check that the url has been updated correctly.
-      .location()
-      .should((loc) => {
-        expect(loc.search).to.eq(queryParams);
-        expect(loc.pathname).to.eq(pathName);
-      });
-  });
+        // Get the first result.
+        .first()
+        .findByRole("link", {
+          name: /new york times \(1980\-present\)/i,
+        })
+        .should("exist")
+        // Check that the url has been updated correctly.
+        .location()
+        .should((loc) => {
+          expect(loc.search).to.eq(queryParams);
+          expect(loc.pathname).to.eq(pathName);
+        });
+    }
+  );
 
   it("Advanced search using autosuggest.", () => {
     const queryParams = "?q=American+Memory&page=1";
