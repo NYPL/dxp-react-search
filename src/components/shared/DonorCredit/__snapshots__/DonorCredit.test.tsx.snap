@@ -16,7 +16,7 @@ exports[`DonorCredit tests should render the UI snapshot correctly 1`] = `
   <div
     className="css-1vbjidi"
     dangerouslySetInnerHTML={
-      Object {
+      {
         "__html": "Test Description",
       }
     }
@@ -37,7 +37,7 @@ exports[`DonorCredit tests should render the UI snapshot correctly 2`] = `
   <div
     className="css-1vbjidi"
     dangerouslySetInnerHTML={
-      Object {
+      {
         "__html": "Test Description",
       }
     }
@@ -53,7 +53,7 @@ exports[`DonorCredit tests should render the UI snapshot correctly 3`] = `
   <div
     className="css-1vbjidi"
     dangerouslySetInnerHTML={
-      Object {
+      {
         "__html": "Test Description",
       }
     }
