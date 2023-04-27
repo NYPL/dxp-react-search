@@ -28,8 +28,8 @@ function DonorCredit({
       )}
       <Box
         fontStyle="italic"
-        maxW={{ xl: "850px" }}
-        px={{ sm: "s", md: "l", xl: "0" }}
+        maxW={{ lg: "850px" }}
+        px={{ sm: "s", md: "l", lg: "0" }}
         sx={{ a: { textDecoration: "underline" } }}
         alignSelf="center"
         marginBottom="0"

@@ -84,8 +84,9 @@ const sectionFrontResolver = {
         sectionFront.field_erm_bottom_content.data === null
           ? null
           : resolveDrupalParagraphs(
-              [sectionFront.field_erm_bottom_content],
-              typesInQuery
+              sectionFront.field_erm_bottom_content,
+              typesInQuery,
+              sectionFront
             );
       return bottomContent;
     },
