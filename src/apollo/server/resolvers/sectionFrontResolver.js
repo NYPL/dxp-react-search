@@ -20,8 +20,8 @@ const sectionFrontResolver = {
         "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
         // Button Links
         "field_main_content.field_erm_button_links",
-        // Donor Credit
-        "field_ers_donor_credit",
+        // Bottom Content
+        "field_erm_bottom_content",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
@@ -35,8 +35,6 @@ const sectionFrontResolver = {
         apiPath,
         isPreview
       );
-
-      // console.log(response);
 
       return response;
     },
@@ -79,17 +77,17 @@ const sectionFrontResolver = {
       const slug = sectionFront.path?.alias;
       return getColorway(slug);
     },
-    donorCredit: (sectionFront, _, __, info) => {
+    bottomContent: (sectionFront, _, __, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      const donorCredit =
-        sectionFront.field_ers_donor_credit.data === null
+      const bottomContent =
+        sectionFront.field_erm_bottom_content.data === null
           ? null
           : resolveDrupalParagraphs(
-              [sectionFront.field_ers_donor_credit],
+              [sectionFront.field_erm_bottom_content],
               typesInQuery
             );
-      return donorCredit[0];
+      return bottomContent;
     },
   },
   SectionFrontFeaturedContent: {
@@ -102,7 +100,7 @@ const sectionFrontResolver = {
       return resolveParagraphTypes(object.type, "section_front");
     },
   },
-  DonorCredit: {
+  SectionFrontBottomContent: {
     __resolveType: (object, _, __) => {
       return resolveParagraphTypes(object.type);
     },

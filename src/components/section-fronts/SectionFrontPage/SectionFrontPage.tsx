@@ -176,12 +176,15 @@ export const SECTION_FRONT_QUERY = gql`
           text
         }
       }
-      donorCredit {
-        __typename
-        id
-        heading
-        description
-        showBorder
+
+      bottomContent {
+        ... on DonorCredit {
+          __typename
+          id
+          heading
+          description
+          showBorder
+        }
       }
     }
   }
@@ -263,7 +266,15 @@ export default function SectionFrontPage({
               (contentComponent: { [key: string]: any }) =>
                 Components(contentComponent)
             )}
-          {sectionFront.donorCredit && Components(sectionFront.donorCredit)}
+        </Box>
+      }
+      contentBottom={
+        <Box>
+          {sectionFront.bottomContent &&
+            sectionFront.bottomContent.map(
+              (contentComponent: { [key: string]: any }) =>
+                Components(contentComponent)
+            )}
         </Box>
       }
     />

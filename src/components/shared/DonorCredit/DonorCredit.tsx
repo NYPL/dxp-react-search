@@ -21,7 +21,7 @@ function DonorCredit({
 }: DonorCreditProps) {
   const finalHeading = heading?.trim() ? heading : null;
   return (
-    <Flex id={`donor-credit-${id}`} marginY="xl" flexDirection="column">
+    <Flex id={`donor-credit-${id}`} marginBottom="xl" flexDirection="column">
       {showBorder && <HorizontalRule marginBottom="xl" marginTop="0" />}
       {finalHeading && (
         <Heading level="three" text={finalHeading} marginBottom="l" />
