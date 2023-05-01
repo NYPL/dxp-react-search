@@ -278,4 +278,10 @@ export const typeDefs = gql`
     description: String
     items: [ButtonLink]
   }
+
+  type BreadcrumbsItem {
+    id: ID!
+    title: String!
+    url: String!
+  }
 `;

@@ -45,6 +45,7 @@ const sectionFrontResolver = {
       sectionFront.field_ers_media_image.data !== null
         ? resolveImage(sectionFront.field_ers_media_image)
         : null,
+    breadcrumbs: (sectionFront) => sectionFront.breadcrumbs,
     featuredContent: (sectionFront, _, __, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
