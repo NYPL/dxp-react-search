@@ -13,7 +13,7 @@ interface DonorCreditProps {
   description: string;
 }
 
-function DonorCredit({
+export default function DonorCredit({
   id,
   showBorder,
   heading,
@@ -38,5 +38,3 @@ function DonorCredit({
     </Flex>
   );
 }
-
-export default DonorCredit;
