@@ -18,3 +18,9 @@ import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// This package is used for burning tests
+// See this article for more information https://glebbahmutov.com/blog/burning-tests/
+// The docs you find here: https://github.com/cypress-io/cypress/tree/develop/npm/grep#readme
+const registerCypressGrep = require("cypress-grep");
+registerCypressGrep();
