@@ -31,11 +31,9 @@ export const SECTION_FRONT_QUERY = gql`
         }
       }
       breadcrumbs {
-        ... on BreadcrumbsItem {
-          id
-          title
-          url
-        }
+        id
+        title
+        url
       }
       featuredContent {
         ... on Donation {
@@ -229,11 +227,21 @@ export default function SectionFrontPage({
         description: sectionFront.description,
         imageUrl: sectionFront.image?.uri,
       }}
-      breadcrumbs={sectionFront.breadcrumbs.map(
-        (breadcrumbsItem: any): BreadcrumbsItem => {
-          return { text: breadcrumbsItem.title, url: breadcrumbsItem.url };
-        }
-      )}
+      breadcrumbs={
+        sectionFront.breadcrumbs &&
+        sectionFront.breadcrumbs.map(
+          (breadcrumbsItem: {
+            id: string;
+            title: string;
+            url: string;
+          }): BreadcrumbsItem => {
+            return {
+              text: breadcrumbsItem.title,
+              url: breadcrumbsItem.url,
+            };
+          }
+        )
+      }
       breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
       contentHeader={
