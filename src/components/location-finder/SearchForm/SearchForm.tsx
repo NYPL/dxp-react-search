@@ -38,6 +38,8 @@ export const LOCATIONS_QUERY = gql`
       locations {
         id
         name
+        contentType
+        parentLibraryName
         address_line1
         address_line2
         locality
@@ -112,12 +114,19 @@ export default function SearchForm() {
         );
         const locationMatch = locationsFiltered[0];
 
-        if (locationMatch) {
-          // Genereate a string with the location's name and address, this returns more accurate results from the Google GeoCode API.
-          const locationMatchAddress = `${locationMatch.name}, ${locationMatch.address_line1} ${locationMatch.locality} ${locationMatch.administrative_area} ${locationMatch.postal_code}`;
-          // Strip out the parenthetical text that sometimes gets added to Location street address fields.
-          searchQuery = locationMatchAddress.replace(/(\(.*\))/g, "");
+        let locationName = locationMatch.name;
+        // Use parent branch name for centers ande divisions
+        if (
+          locationMatch.contentType === "center" ||
+          locationMatch.contentType === "division"
+        ) {
+          locationName = locationMatch.parentLibraryName;
         }
+        // Genereate a string with the location's name and address, this returns more accurate results from the Google GeoCode API.
+        const locationMatchAddress = `${locationName}, ${locationMatch.address_line1} ${locationMatch.locality}
+        ${locationMatch.administrative_area} ${locationMatch.postal_code}`;
+        // Strip out the parenthetical text that sometimes gets added to Location street address fields.
+        searchQuery = locationMatchAddress.replace(/(\(.*\))/g, "");
 
         // Get latitude & longitude from search value.
         Geocode.fromAddress(searchQuery).then(
