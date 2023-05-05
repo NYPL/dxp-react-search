@@ -40,7 +40,7 @@ function LocationFinder() {
           url: `${NEXT_PUBLIC_NYPL_DOMAIN}${LOCATIONS_BASE_PATH}`,
         },
       ]}
-      breadcrumbsColor="locations"
+      breadcrumbsType="locations"
       wrapperClass="nypl--locations"
       contentHeader={
         <>
@@ -86,7 +86,6 @@ function LocationFinder() {
                   headingLevel="three"
                   headingColor={"#0576d3"}
                   title={menu.title}
-                  // @ts-ignore
                   items={menu.items}
                   menuItemDecoration={false}
                   orientation={"horizontal"}
@@ -132,5 +131,4 @@ export const getServerSideProps = async () => {
   };
 };
 
-// @ts-ignore
 export default withApollo(withRedux(LocationFinder));

@@ -3,8 +3,8 @@ import { NextRouter } from "next/router";
 const { NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET } = process.env;
 
 export const DECOUPLED_ROUTER_QUERY = gql`
-  query DecoupledRouterQuery($path: String) {
-    decoupledRouter(path: $path) {
+  query DecoupledRouterQuery($path: String, $isPreview: Boolean) {
+    decoupledRouter(path: $path, isPreview: $isPreview) {
       id
       uuid
       redirect {
@@ -12,17 +12,18 @@ export const DECOUPLED_ROUTER_QUERY = gql`
         to
         status
       }
+      bundle
     }
   }
 `;
 
-function useDecoupledRouter(nextRouter: NextRouter) {
-  // Preview mode.
+export default function useDecoupledRouter(nextRouter: NextRouter) {
   const isPreview =
     nextRouter.query.preview_secret === NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET &&
     nextRouter.query.uuid
       ? true
       : false;
+
   // Set the uuid for preview mode.
   if (isPreview) {
     return {
@@ -30,13 +31,19 @@ function useDecoupledRouter(nextRouter: NextRouter) {
       uuid: nextRouter.query.uuid,
     };
   }
+
   // Not preview mode, so run the query to resolve a uuid from a slug.
   const slug = nextRouter.asPath;
+  // @TODO decide the order of execution, had to disable eslint rule because the query is
+  // running conditionally not on every render.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: decoupledRouterData } = useQuery(DECOUPLED_ROUTER_QUERY, {
     variables: {
       path: slug,
+      isPreview: isPreview,
     },
   });
+
   const uuid = decoupledRouterData?.decoupledRouter?.uuid;
 
   return {
@@ -44,5 +51,3 @@ function useDecoupledRouter(nextRouter: NextRouter) {
     isPreview: isPreview,
   };
 }
-
-export default useDecoupledRouter;

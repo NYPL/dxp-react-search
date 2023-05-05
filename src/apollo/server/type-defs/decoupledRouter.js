@@ -5,6 +5,7 @@ export const typeDefs = gql`
     id: ID!
     uuid: String
     redirect: Redirect
+    bundle: String
   }
 
   type Redirect {
@@ -14,6 +15,6 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    decoupledRouter(path: String): DecoupledRouter
+    decoupledRouter(path: String, isPreview: Boolean): DecoupledRouter
   }
 `;

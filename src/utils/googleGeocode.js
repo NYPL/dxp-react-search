@@ -48,8 +48,7 @@ async function handleUrl(url) {
   );
 }
 
-/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
-export default {
+const Geocode = {
   /**
    *
    *
@@ -179,3 +178,5 @@ export default {
     return handleUrl(url);
   },
 };
+
+export default Geocode;

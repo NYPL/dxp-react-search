@@ -121,7 +121,6 @@ function MultiSelect({
       return (
         <Radio
           id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${item.id}`}
-          // @ts-ignore
           labelText={<>{item.name}</>}
           showLabel={true}
           name={item.name}
@@ -133,7 +132,6 @@ function MultiSelect({
       return (
         <Checkbox
           id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${item.id}`}
-          // @ts-ignore
           labelText={<>{item.name}</>}
           showLabel={true}
           name={item.name}
@@ -172,13 +170,7 @@ function MultiSelect({
           onClick={onMenuClick}
         >
           <span>{getButtonLabel(id)}</span>
-          <Icon
-            decorative={true}
-            // @ts-ignore
-            name={iconType}
-            // @ts-ignore
-            size="small"
-          />
+          <Icon decorative={true} name={iconType} size="small" />
         </button>
         <div className={`${s.menu} ${isOpen && s.active}`}>
           <ul className={s.menuInner} role="dialog">
@@ -196,7 +188,6 @@ function MultiSelect({
                         id={`${item.name.replace(/\s+/g, "-").toLowerCase()}__${
                           item.id
                         }`}
-                        // @ts-ignore
                         labelText={<>{item.name}</>}
                         showLabel={true}
                         name={item.name}
@@ -219,7 +210,6 @@ function MultiSelect({
                                 id={`${childItem.name
                                   .replace(/\s+/g, "-")
                                   .toLowerCase()}__${childItem.id}`}
-                                // @ts-ignore
                                 labelText={<>{childItem.name}</>}
                                 showLabel={true}
                                 name={childItem.name}

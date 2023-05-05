@@ -1,6 +1,6 @@
 import React from "react";
 // Apollo
-import { withApollo } from "../../../apollo/client/withApollo";
+import withApollo from "./../../../apollo/withApollo";
 // Redux
 import { withRedux } from "../../../redux/withRedux";
 // Components
@@ -24,8 +24,4 @@ function LocationsRequestVisitConfirmationPage() {
     />
   );
 }
-
-export default withApollo(withRedux(LocationsRequestVisitConfirmationPage), {
-  ssr: true,
-  redirects: false,
-});
+export default withApollo(withRedux(LocationsRequestVisitConfirmationPage));

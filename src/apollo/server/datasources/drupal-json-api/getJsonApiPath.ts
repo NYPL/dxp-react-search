@@ -29,7 +29,7 @@ export function getCollectionResourceJsonApiPath(
   pagination?: PaginationInfo,
   addFields?: string[]
 ): string {
-  let apiParams = new DrupalJsonApiParams();
+  const apiParams = new DrupalJsonApiParams();
   // Add jsonapi include, to simplify json output.
   apiParams.addCustomParam({ jsonapi_include: 1 });
 
@@ -188,7 +188,7 @@ export function getIndividualResourceJsonApiPath(
   revisionId?: string,
   addFields?: string[]
 ): string {
-  let apiParams = new DrupalJsonApiParams();
+  const apiParams = new DrupalJsonApiParams();
   // @TODO swap out for jsona, handle in Node?
   apiParams.addCustomParam({ jsonapi_include: 1 });
 

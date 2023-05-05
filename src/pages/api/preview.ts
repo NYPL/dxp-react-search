@@ -32,7 +32,7 @@ export default async function handler(
   });
 
   // Redirect to the path from the fetched route.
-  const previewUrl = `/${request?.query?.slug}?uuid=${request.query.uuid}&revision_id=${request.query.revision_id}`;
+  const previewUrl = `${request?.query?.slug}?uuid=${request.query.uuid}&revision_id=${request.query.revision_id}`;
   response.writeHead(307, { Location: previewUrl ?? "/" });
 
   return response.end();

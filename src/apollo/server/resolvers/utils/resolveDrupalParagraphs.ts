@@ -1,6 +1,7 @@
 import { JsonApiResourceObject } from "./types";
 import { resolveImage } from "./resolveImage";
 import fetchOembedApi from "./fetchOembedApi";
+import getColorway from "./../../../../utils/get-colorway";
 
 type ResolvedParagraph = {
   [index: string]: string | number | boolean | object | undefined | null;
@@ -8,8 +9,12 @@ type ResolvedParagraph = {
 
 export default function resolveDrupalParagraphs(
   paragraphResourceObjects: JsonApiResourceObject[],
-  typesInQuery: string[]
+  typesInQuery: string[],
+  apiResponse?: any
 ): ResolvedParagraph[] {
+  // Define variables used to determine the colorway prop on Section Front pages
+  const contentType = apiResponse?.type.replace("node--", "");
+  const slug = apiResponse?.path?.alias;
   // Drupal json:api will return all paragraphs for the field.
   // So we first reduce this array of objects only to those paragraphs
   // that we're requested by the gql query.
@@ -94,6 +99,35 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
+        item.type === "paragraph--email_subscription" &&
+        typesInQuery.includes("EmailSubscription")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--external_search" &&
+        typesInQuery.includes("ExternalSearch")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--jumbotron" &&
+        typesInQuery.includes("Jumbotron")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--button_links" &&
+        typesInQuery.includes("ButtonLinks")
+      ) {
+        accumulator.push(item);
+      }
+
+      // Start homepage specific paragraphs.
+      if (
         item.type === "paragraph--hp_hero" &&
         typesInQuery.includes("HomePageHeroComponent")
       ) {
@@ -141,10 +175,10 @@ export default function resolveDrupalParagraphs(
   );
 
   // Build an array of paragraph objects mapping to the specific components.
-  let items: JsonApiResourceObject[] = [];
+  const items: ResolvedParagraph[] = [];
   requestedParagraphs.map((item: any) => {
-    let paragraphComponent: ResolvedParagraph | undefined = undefined;
-    let paragraphTypeName = (item.type as string).replace("paragraph--", "");
+    let paragraphComponent: ResolvedParagraph | null = null;
+    const paragraphTypeName = (item.type as string).replace("paragraph--", "");
 
     switch (item.type) {
       case "paragraph--text_with_image":
@@ -227,7 +261,7 @@ export default function resolveDrupalParagraphs(
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
-          text: item.field_tfls_summary_descrip.processed,
+          text: item.field_tfls_summary_descrip?.processed,
           heading: item.field_ts_heading ? item.field_ts_heading : null,
         };
         break;
@@ -348,6 +382,10 @@ export default function resolveDrupalParagraphs(
           description: item.field_tfls_description?.processed,
           layout: item.field_lts_card_grid_layout,
           items: cardItems,
+          colorway:
+            contentType === "section_front"
+              ? getColorway("section_front")
+              : null,
         };
         break;
       // @TODO Add back later.
@@ -393,6 +431,76 @@ export default function resolveDrupalParagraphs(
           otherLevelId: item.field_ts_donation_other_level_id,
         };
         break;
+      case "paragraph--email_subscription":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          formPlaceholder: item.field_ts_placeholder,
+          salesforceListId: item.field_ts_salesforce_list_id,
+          salesforceSourceCode: item.field_ts_salesforce_source_code,
+          colorway: slug ? getColorway(slug) : null,
+        };
+        break;
+      case "paragraph--external_search":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          title: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          searchType: item.field_lts_search_type,
+          formPlaceholder: item.field_ts_placeholder,
+          colorway:
+            contentType === "section_front"
+              ? getColorway("section_front")
+              : null,
+        };
+        break;
+      case "paragraph--jumbotron":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          title: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          image:
+            item.field_ers_image.data === null
+              ? null
+              : resolveImage(item.field_ers_image),
+          secondaryImage:
+            item.field_ers_secondary_image.data === null
+              ? null
+              : resolveImage(item.field_ers_secondary_image),
+          link: {
+            title: item.field_ls_link.title,
+            uri: item.field_ls_link.uri,
+            url: item.field_ls_link.url,
+          },
+        };
+        break;
+      case "paragraph--button_links":
+        const buttonLinkItems: ResolvedParagraph[] = [];
+        Array.isArray(item.field_erm_button_links) &&
+          item.field_erm_button_links.map((buttonLinkItem: any) => {
+            buttonLinkItems.push({
+              id: buttonLinkItem.id,
+              icon: buttonLinkItem.field_lts_icon,
+              link: {
+                title: buttonLinkItem.field_ls_link.title,
+                uri: buttonLinkItem.field_ls_link.uri,
+                url: buttonLinkItem.field_ls_link.url,
+              },
+            });
+          });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          items: buttonLinkItems,
+        };
+        break;
+
       // Home page.
       case "paragraph--hp_hero":
         paragraphComponent = {
@@ -529,8 +637,15 @@ export default function resolveDrupalParagraphs(
         };
         break;
     }
-    // @ts-ignore
-    items.push(paragraphComponent);
+
+    // Add published status for paragraph entities, if not set, set to false.
+    // We can assume that if the status property is missing from the object,
+    // then the paragraph is unpublished, and an unautheticated requested was made,
+    // which causes the status property to be omitted from the response.
+    if (paragraphComponent) {
+      paragraphComponent.status = item.status ? item.status : false;
+      items.push(paragraphComponent);
+    }
   });
   return items;
 }

@@ -136,7 +136,7 @@ class DrupalApi extends RESTDataSource {
 
   /* ---------- DECOUPLED DRUPAL ---------- */
   async getDecoupledRouter(args: any) {
-    let apiPath = `/router/translate-path?path=${args.path}`;
+    const apiPath = `/router/translate-path?path=${args.path}`;
     try {
       const response = await this.get(apiPath);
       return response;

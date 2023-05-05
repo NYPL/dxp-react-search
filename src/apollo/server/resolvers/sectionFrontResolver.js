@@ -3,6 +3,7 @@ import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
 import { getIndividualResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
+import getColorway from "../../../utils/get-colorway";
 
 const sectionFrontResolver = {
   Query: {
@@ -11,9 +12,13 @@ const sectionFrontResolver = {
         "field_ers_media_image.field_media_image",
         "field_ers_featured",
         "field_ers_featured.field_ers_image.field_media_image",
+        // Secondary image
+        "field_ers_featured.field_ers_secondary_image.field_media_image",
         // Link Card List
         "field_main_content.field_erm_link_cards",
         "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+        // Button Links
+        "field_main_content.field_erm_button_links",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
@@ -61,9 +66,14 @@ const sectionFrontResolver = {
           ? null
           : resolveDrupalParagraphs(
               sectionFront.field_main_content,
-              typesInQuery
+              typesInQuery,
+              sectionFront
             );
       return mainContent;
+    },
+    colorway: (sectionFront) => {
+      const slug = sectionFront.path?.alias;
+      return getColorway(slug);
     },
   },
   SectionFrontFeaturedContent: {

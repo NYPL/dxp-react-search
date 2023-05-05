@@ -16,7 +16,7 @@ import { BLOGS_BASE_PATH } from "./../../../utils/config";
 
 type BlogPageContainerProps = Omit<
   PageContainerProps,
-  "breadcrumbsColor" | "wrapperClass" | "breadcrumbs"
+  "breadcrumbsType" | "wrapperClass" | "breadcrumbs"
 > & {
   showFilterBar?: boolean;
   showContentHeader: boolean;
@@ -115,7 +115,7 @@ function PageContainer({
         contentHeader: ContentHeader,
       })}
       breadcrumbs={newBreadcrumbs}
-      breadcrumbsColor="blogs"
+      breadcrumbsType="blogs"
       contentPrimary={contentPrimary}
       showSidebar={true}
       sidebarSide="right"
@@ -129,7 +129,6 @@ function PageContainer({
                 headingLevel="three"
                 headingColor={"#000"}
                 title={menu.title}
-                // @ts-ignore
                 items={menu.items}
                 menuItemDecoration={false}
                 orientation={"vertical"}

@@ -1,1 +1,1 @@
-export { default } from './AutoSuggest';
+export { default } from "./AutoSuggest";

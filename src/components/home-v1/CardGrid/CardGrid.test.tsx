@@ -5,12 +5,13 @@ import "@testing-library/jest-dom/extend-expect";
 expect.extend(toHaveNoViolations);
 import renderer from "react-test-renderer";
 // Component
-import Card from "./Card";
+import Card, { CardItem } from "./Card";
 import CardGrid from "./CardGrid";
 
-const item = {
+const item: CardItem = {
   id: "test-id-1",
   title: "Test",
+  description: "Test description",
   image: {
     id: "test-id-1",
     alt: "image-1-alt-text",
@@ -23,10 +24,9 @@ const item = {
     transformationLabel: "2_1_960",
   },
   url: "https://www.nypl.org/",
-  location: "Stephen A. Schwarzman Building",
 };
 
-const items = [
+const items: CardItem[] = [
   {
     id: "test-id-1",
     title: "Test",
@@ -92,6 +92,7 @@ const items = [
     url: "https://www.nypl.org/",
   },
 ];
+const seeMore = { text: "see More", link: "https://www.nypl.org/" };
 
 describe("Card tests", () => {
   it("should pass axe accessibility tests", async () => {
@@ -112,7 +113,7 @@ describe("Card tests", () => {
     render(<Card item={item} gaEventActionName={"cardTest"} />);
     expect(screen.getByRole("heading", { name: /Test/i })).toHaveAttribute(
       "aria-describedby",
-      "card-location-test-id-1"
+      "card-description-test-id-1"
     );
   });
   it("should render the UI snapshot correctly", () => {
@@ -131,6 +132,7 @@ describe("CardGrid tests", () => {
         title="Test title"
         link="https://nypl.com"
         items={items}
+        seeMore={seeMore}
       />
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -142,12 +144,24 @@ describe("CardGrid tests", () => {
         title="Test title"
         link="https://nypl.com"
         items={items}
+        seeMore={seeMore}
       />
     );
     expect(screen.getAllByRole("listitem")).toHaveLength(4);
   });
   it("should render the UI snapshot correctly", () => {
-    const cardGrid = renderer
+    const cardGridWithSeeMore = renderer
+      .create(
+        <CardGrid
+          id={"card-grid-test-id"}
+          title="Test title"
+          link="https://nypl.com"
+          items={items}
+          seeMore={seeMore}
+        />
+      )
+      .toJSON();
+    const cardGridWithoutSeeMore = renderer
       .create(
         <CardGrid
           id={"card-grid-test-id"}
@@ -157,6 +171,7 @@ describe("CardGrid tests", () => {
         />
       )
       .toJSON();
-    expect(cardGrid).toMatchSnapshot();
+    expect(cardGridWithSeeMore).toMatchSnapshot();
+    expect(cardGridWithoutSeeMore).toMatchSnapshot();
   });
 });

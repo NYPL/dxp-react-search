@@ -92,7 +92,7 @@ describe("Apollo states test", () => {
     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
     // Check for error message
     expect(
-      screen.getByText(/error while loading locations/)
+      screen.getByText(/Error while loading locations./)
     ).toBeInTheDocument();
   });
 

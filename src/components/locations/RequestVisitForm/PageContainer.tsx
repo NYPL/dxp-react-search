@@ -40,7 +40,7 @@ function PageContainer({
             url: `${NEXT_PUBLIC_NYPL_DOMAIN}/locations/request-visit`,
           },
         ]}
-        breadcrumbsColor="locations"
+        breadcrumbsType="locations"
         wrapperClass="nypl--locations"
         {...(showContentHeader && {
           contentHeader: contentHeader,
@@ -58,7 +58,6 @@ function PageContainer({
                   headingLevel="three"
                   headingColor={"#c60917"}
                   title={menu.title}
-                  // @ts-ignore
                   items={menu.items}
                   menuItemDecoration={false}
                   orientation={"vertical"}

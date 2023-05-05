@@ -1,10 +1,11 @@
 import { LinkTypes } from "@nypl/design-system-react-components";
 
 export type MenuItemType = {
-  id: string;
+  // @TODO This id is only passed to MenuItem component but never used in the component itself
+  id?: string;
   title: string;
   description?: string;
   link?: string;
   linkType?: LinkTypes;
-  menuItemDecoration: boolean;
+  menuItemDecoration?: boolean;
 };

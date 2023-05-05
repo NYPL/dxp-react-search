@@ -37,6 +37,7 @@ describe("with-drupal-router success states.", () => {
       id: "test-success-id",
       uuid: "test-success-uuid",
       redirect: null,
+      bundle: "test-success",
     };
 
     requestHandler.mockResolvedValueOnce({
@@ -70,6 +71,7 @@ describe("with-drupal-router success states.", () => {
         to: "/new-slug",
         status: "301",
       },
+      bundle: "test-redirect",
     };
 
     requestHandler.mockResolvedValueOnce({
@@ -100,20 +102,37 @@ describe("with-drupal-router success states.", () => {
       },
       preview: true,
       previewData: {
-        uuid: "slug-preview-uuid",
-        revisionId: "slug-preview-revision-id",
+        uuid: "test-preview-uuid",
+        revisionId: "test-preview-revision-id",
       },
+      bundle: "test-preview",
     };
 
-    const getStaticPropsMock = withDrupalRouter(async (context, props) => {
+    const decoupledRouterDataMock = {
+      id: "test-preview-id",
+      uuid: "test-preview-uuid",
+      preview: true,
+      previewData: {
+        uuid: "test-preview-uuid",
+        revisionId: "test-preview-revision-id",
+      },
+      redirect: null,
+      bundle: "test-preview",
+    };
+
+    requestHandler.mockResolvedValueOnce({
+      data: { decoupledRouter: decoupledRouterDataMock },
+    });
+
+    const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
       return props;
     });
 
     const result = await getStaticPropsMock(contextMock);
 
     expect(result.isPreview).toEqual(true);
-    expect(result.uuid).toEqual("slug-preview-uuid");
-    expect(result.revisionId).toEqual("slug-preview-revision-id");
+    expect(result.uuid).toEqual("test-preview-uuid");
+    expect(result.revisionId).toEqual("test-preview-revision-id");
   });
 });
 

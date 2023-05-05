@@ -32,22 +32,8 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
       className="css-1y2jlch"
     >
       <div
-        className="css-14ix2g8"
+        className="css-nx94xp"
       >
-        <div
-          className="css-0"
-          id="slideshow-prev-button-container"
-        >
-          <button
-            className="chakra-button css-kk119v"
-            id="slideshow-prev-button"
-            onClick={[Function]}
-            tabIndex={-1}
-            type="button"
-          >
-            &lt;
-          </button>
-        </div>
         <div
           className="css-1ric1bm"
         >
@@ -57,9 +43,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             <li
               className="css-1fzgmij"
               onFocus={[Function]}
+              onPointerMove={[Function]}
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-1"
                 id="slideshow-card-test-id-1"
               >
                 <div
@@ -118,7 +106,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     >
                       <span
                         style={
-                          Object {
+                          {
                             "background": "none",
                             "border": 0,
                             "boxSizing": "border-box",
@@ -135,7 +123,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                       >
                         <span
                           style={
-                            Object {
+                            {
                               "background": "none",
                               "border": 0,
                               "boxSizing": "border-box",
@@ -157,7 +145,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                           onLoad={[Function]}
                           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                           style={
-                            Object {
+                            {
                               "border": "none",
                               "bottom": 0,
                               "boxSizing": "border-box",
@@ -189,7 +177,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                             srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                             style={
-                              Object {
+                              {
                                 "border": "none",
                                 "bottom": 0,
                                 "boxSizing": "border-box",
@@ -221,9 +209,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             <li
               className="css-1fzgmij"
               onFocus={[Function]}
+              onPointerMove={[Function]}
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-2"
                 id="slideshow-card-test-id-2"
               >
                 <div
@@ -282,7 +272,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     >
                       <span
                         style={
-                          Object {
+                          {
                             "background": "none",
                             "border": 0,
                             "boxSizing": "border-box",
@@ -299,7 +289,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                       >
                         <span
                           style={
-                            Object {
+                            {
                               "background": "none",
                               "border": 0,
                               "boxSizing": "border-box",
@@ -321,7 +311,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                           onLoad={[Function]}
                           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                           style={
-                            Object {
+                            {
                               "border": "none",
                               "bottom": 0,
                               "boxSizing": "border-box",
@@ -353,7 +343,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                             srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                             style={
-                              Object {
+                              {
                                 "border": "none",
                                 "bottom": 0,
                                 "boxSizing": "border-box",
@@ -385,9 +375,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             <li
               className="css-1fzgmij"
               onFocus={[Function]}
+              onPointerMove={[Function]}
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-3"
                 id="slideshow-card-test-id-3"
               >
                 <div
@@ -446,7 +438,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     >
                       <span
                         style={
-                          Object {
+                          {
                             "background": "none",
                             "border": 0,
                             "boxSizing": "border-box",
@@ -463,7 +455,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                       >
                         <span
                           style={
-                            Object {
+                            {
                               "background": "none",
                               "border": 0,
                               "boxSizing": "border-box",
@@ -485,7 +477,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                           onLoad={[Function]}
                           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                           style={
-                            Object {
+                            {
                               "border": "none",
                               "bottom": 0,
                               "boxSizing": "border-box",
@@ -517,7 +509,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                             srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                             style={
-                              Object {
+                              {
                                 "border": "none",
                                 "bottom": 0,
                                 "boxSizing": "border-box",
@@ -549,9 +541,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             <li
               className="css-1fzgmij"
               onFocus={[Function]}
+              onPointerMove={[Function]}
             >
               <div
                 className="css-pgu20y"
+                data-testid="slideshow-card-test-id-4"
                 id="slideshow-card-test-id-4"
               >
                 <div
@@ -610,7 +604,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                     >
                       <span
                         style={
-                          Object {
+                          {
                             "background": "none",
                             "border": 0,
                             "boxSizing": "border-box",
@@ -627,7 +621,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                       >
                         <span
                           style={
-                            Object {
+                            {
                               "background": "none",
                               "border": 0,
                               "boxSizing": "border-box",
@@ -649,7 +643,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                           onLoad={[Function]}
                           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                           style={
-                            Object {
+                            {
                               "border": "none",
                               "bottom": 0,
                               "boxSizing": "border-box",
@@ -681,7 +675,7 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
                             src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                             srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                             style={
-                              Object {
+                              {
                                 "border": "none",
                                 "bottom": 0,
                                 "boxSizing": "border-box",
@@ -712,29 +706,11 @@ exports[`Slideshow tests should render the UI snapshot correctly 1`] = `
             </li>
           </ul>
         </div>
-        <div
-          className="css-0"
-          id="slideshow-next-button-container"
-        >
-          <button
-            className="chakra-button css-r8n6x3"
-            id="slideshow-next-button"
-            onClick={[Function]}
-            tabIndex={-1}
-            type="button"
-          >
-            &gt;
-          </button>
-        </div>
       </div>
     </div>
     <div
       className="css-1ktje31"
-    >
-      <div
-        className="css-i2lecr"
-      />
-    </div>
+    />
   </div>
 </div>
 `;
@@ -783,9 +759,11 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     <li
       className="css-1fzgmij"
       onFocus={[Function]}
+      onPointerMove={[Function]}
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-1"
         id="slideshow-card-test-id-1"
       >
         <div
@@ -844,7 +822,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             >
               <span
                 style={
-                  Object {
+                  {
                     "background": "none",
                     "border": 0,
                     "boxSizing": "border-box",
@@ -861,7 +839,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
               >
                 <span
                   style={
-                    Object {
+                    {
                       "background": "none",
                       "border": 0,
                       "boxSizing": "border-box",
@@ -883,7 +861,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                   onLoad={[Function]}
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style={
-                    Object {
+                    {
                       "border": "none",
                       "bottom": 0,
                       "boxSizing": "border-box",
@@ -915,7 +893,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                     srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                     style={
-                      Object {
+                      {
                         "border": "none",
                         "bottom": 0,
                         "boxSizing": "border-box",
@@ -947,9 +925,11 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     <li
       className="css-1fzgmij"
       onFocus={[Function]}
+      onPointerMove={[Function]}
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-2"
         id="slideshow-card-test-id-2"
       >
         <div
@@ -1008,7 +988,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             >
               <span
                 style={
-                  Object {
+                  {
                     "background": "none",
                     "border": 0,
                     "boxSizing": "border-box",
@@ -1025,7 +1005,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
               >
                 <span
                   style={
-                    Object {
+                    {
                       "background": "none",
                       "border": 0,
                       "boxSizing": "border-box",
@@ -1047,7 +1027,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                   onLoad={[Function]}
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style={
-                    Object {
+                    {
                       "border": "none",
                       "bottom": 0,
                       "boxSizing": "border-box",
@@ -1079,7 +1059,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                     srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                     style={
-                      Object {
+                      {
                         "border": "none",
                         "bottom": 0,
                         "boxSizing": "border-box",
@@ -1111,9 +1091,11 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     <li
       className="css-1fzgmij"
       onFocus={[Function]}
+      onPointerMove={[Function]}
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-3"
         id="slideshow-card-test-id-3"
       >
         <div
@@ -1172,7 +1154,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             >
               <span
                 style={
-                  Object {
+                  {
                     "background": "none",
                     "border": 0,
                     "boxSizing": "border-box",
@@ -1189,7 +1171,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
               >
                 <span
                   style={
-                    Object {
+                    {
                       "background": "none",
                       "border": 0,
                       "boxSizing": "border-box",
@@ -1211,7 +1193,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                   onLoad={[Function]}
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style={
-                    Object {
+                    {
                       "border": "none",
                       "bottom": 0,
                       "boxSizing": "border-box",
@@ -1243,7 +1225,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                     srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                     style={
-                      Object {
+                      {
                         "border": "none",
                         "bottom": 0,
                         "boxSizing": "border-box",
@@ -1275,9 +1257,11 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
     <li
       className="css-1fzgmij"
       onFocus={[Function]}
+      onPointerMove={[Function]}
     >
       <div
         className="css-pgu20y"
+        data-testid="slideshow-card-test-id-4"
         id="slideshow-card-test-id-4"
       >
         <div
@@ -1336,7 +1320,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
             >
               <span
                 style={
-                  Object {
+                  {
                     "background": "none",
                     "border": 0,
                     "boxSizing": "border-box",
@@ -1353,7 +1337,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
               >
                 <span
                   style={
-                    Object {
+                    {
                       "background": "none",
                       "border": 0,
                       "boxSizing": "border-box",
@@ -1375,7 +1359,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                   onLoad={[Function]}
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style={
-                    Object {
+                    {
                       "border": "none",
                       "bottom": 0,
                       "boxSizing": "border-box",
@@ -1407,7 +1391,7 @@ exports[`SlideshowContainer tests should render the UI snapshot correctly 1`] = 
                     src="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90"
                     srcSet="/_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fplaceimg.com%2F400%2F200%2Farch&w=3840&q=90 3840w"
                     style={
-                      Object {
+                      {
                         "border": "none",
                         "bottom": 0,
                         "boxSizing": "border-box",

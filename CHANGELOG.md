@@ -2,6 +2,64 @@
 
 ---
 
+### v0.9.7 - General Maintenance & Improvements
+
+---
+
+- Updates eslint rules: [#397](https://github.com/NYPL/dxp-react-search/pull/397)
+- Updated jumbotron and donation with new tablet and mobile ux: [#400](https://github.com/NYPL/dxp-react-search/pull/400)
+- Updated "\_document" to use typescript and nextjs script component: [#402](https://github.com/NYPL/dxp-react-search/pull/402)
+- Adds ability to use decoupled router with authenticated requests: [#403](https://github.com/NYPL/dxp-react-search/pull/403)
+- Add published status field for Paragraphs integration: [#406](https://github.com/NYPL/dxp-react-search/pull/406)
+
+---
+
+### v0.9.6 - Press bug fix
+
+---
+
+- Fixes pagination bug: [#404](https://github.com/NYPL/dxp-react-search/pull/404)
+
+---
+
+### v0.9.5 - Section Front: Educator & Misc Release
+
+---
+
+- Add String Sanitization To GetColorway: [#391](https://github.com/NYPL/dxp-react-search/pull/391)
+- Add Jumbotron component: [#387](https://github.com/NYPL/dxp-react-search/pull/387)
+- Add ButtonLinks Component: [#396](https://github.com/NYPL/dxp-react-search/pull/396)
+- Add Bundle to DecoupledRouter: [#390](https://github.com/NYPL/dxp-react-search/pull/390)
+- Add Sharp Package: [#399](https://github.com/NYPL/dxp-react-search/pull/399)
+- Add Text component to section front template: [#401](https://github.com/NYPL/dxp-react-search/pull/401)
+
+---
+
+### v0.9.4 - Drupal 10 Runway Support & Misc Release
+
+---
+
+- Add swipe functionality to homepage Slideshow component: [#355](https://github.com/NYPL/dxp-react-search/pull/355)
+- Hide see more button if no link text: [#385](https://github.com/NYPL/dxp-react-search/pull/385)
+- Remove old Apollo HOC: [#372](https://github.com/NYPL/dxp-react-search/pull/372)
+- Adds cypress tests for section front pages: [#388](https://github.com/NYPL/dxp-react-search/pull/388)
+- Updates image style format for json:api image styles module api change: [#389](https://github.com/NYPL/dxp-react-search/pull/389)
+
+---
+
+### v0.9.3 - Section Front Research Release
+
+---
+
+- Adds External Search component: [#358](https://github.com/NYPL/dxp-react-search/pull/358)
+- Adds Email Subscription component: [#358](https://github.com/NYPL/dxp-react-search/pull/358)
+- Adds Salesforce API route: [#358](https://github.com/NYPL/dxp-react-search/pull/358)
+- Updates AWS deploy script with Salesforce env variables: [#384](https://github.com/NYPL/dxp-react-search/pull/384)
+- Updates Card Grid component with additional layout variants: [#371](https://github.com/NYPL/dxp-react-search/pull/371)
+- Adds get-colorway util for dynamically setting section front colors: [#353](https://github.com/NYPL/dxp-react-search/pull/353)
+
+---
+
 ### v0.9.2 - General Maintenance & Improvements
 
 ---

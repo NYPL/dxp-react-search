@@ -42,8 +42,7 @@ function FilterBar({
   // Set the isMobile state based on screen width.
   const windowSize = useWindowSize();
   useEffect(() => {
-    // @ts-ignore
-    if (windowSize >= 600) {
+    if (windowSize && windowSize >= 600) {
       setIsMobile(false);
     } else {
       setIsMobile(true);
@@ -57,18 +56,18 @@ function FilterBar({
   // @TODO fix this, only works on search pg, div not on main pg!
   const prevModalState = usePrevious(isModalOpen);
   useEffect(() => {
-    if (isMobile && prevModalState !== isModalOpen) {
-      // @ts-ignore
-      document
-        .getElementById("page-container--content-primary")
-        .scrollIntoView();
+    if (isMobile && !isModalOpen && prevModalState !== isModalOpen) {
+      const pageContainer = document.getElementById(
+        "page-container--content-primary"
+      );
+      pageContainer?.scrollIntoView();
     }
   }, [isModalOpen]);
 
   // Sync the url state with the local react state when query params change.
   useEffect(() => {
     let urlState = {};
-    for (let [groupId] of Object.entries(router.query)) {
+    for (const [groupId] of Object.entries(router.query)) {
       if (groupId !== "page" && groupId !== "q") {
         urlState = {
           ...urlState,
@@ -85,6 +84,7 @@ function FilterBar({
   function onMenuClick(groupId: string) {
     const mode = "desktop";
     let selectedGroupIdsCopy: string[] = [];
+    let groupIdExists: boolean;
 
     // const nextState = (object: SelectedItemsMap, property: string) => {
     //   let { [property]: omit, ...rest } = object;
@@ -92,7 +92,7 @@ function FilterBar({
     // };
 
     if (selectedGroupIds !== undefined) {
-      let groupIdExists = selectedGroupIds.indexOf(groupId) > -1;
+      groupIdExists = selectedGroupIds.indexOf(groupId) > -1;
       // Make a copy of the existing array.
       selectedGroupIdsCopy = selectedGroupIds.slice();
       // If groupIdExists exists, remove it from the array.
@@ -127,14 +127,14 @@ function FilterBar({
     //   return rest;
     // };
 
-    let itemIds;
+    let itemIds, itemIdExists: boolean;
     // Check if the tid already exists in the state
     if (
       selectedItems[groupId] !== undefined &&
       // @TODO Temporary hack to make availability multiselect use radios.
       groupId !== "availability"
     ) {
-      let itemIdExists = selectedItems[groupId].items.indexOf(itemId) > -1;
+      itemIdExists = selectedItems[groupId].items.indexOf(itemId) > -1;
       // Make a copy of the existing array.
       itemIds = selectedItems[groupId].items.slice();
       // If termId exists, remove it from the array.
@@ -206,8 +206,8 @@ function FilterBar({
 
   function onClearMultiSelect(groupId: string) {
     // Run through query param state and remove
-    let queryStateToKeep = {} as any;
-    for (let [key] of Object.entries(router.query)) {
+    const queryStateToKeep = {} as any;
+    for (const [key] of Object.entries(router.query)) {
       if (groupId !== key) {
         queryStateToKeep[key] = router.query[key];
       }

@@ -1,8 +1,4 @@
-import {
-  JsonApiResourceObject,
-  ImageTransformation,
-  ResolvedParagraph,
-} from "./types";
+import { ImageTransformation, ResolvedParagraph } from "./types";
 const { DRUPAL_API } = process.env;
 
 export function resolveImage(image: any): ResolvedParagraph | null {
@@ -19,7 +15,7 @@ export function resolveImage(image: any): ResolvedParagraph | null {
       return null;
     }
 
-    let imageUri: string = "";
+    let imageUri = "";
     if (image.type === "media--digital_collections_image") {
       imageUri = `https://images.nypl.org/index.php?id=${image.field_media_dc_id}&t=w`;
     }
@@ -40,7 +36,7 @@ export function resolveImage(image: any): ResolvedParagraph | null {
       alt: image.field_media_alt_text,
       uri: imageUri,
       transformations: () => {
-        let transformations: ImageTransformation[] = [];
+        const transformations: ImageTransformation[] = [];
         imageStyles.forEach((imageStyle) => {
           transformations.push({
             id: `${image.id}__${imageStyle}`,
@@ -64,30 +60,15 @@ export function resolveImage(image: any): ResolvedParagraph | null {
     // so we add the domain here from the .env variable.
     uri: `${DRUPAL_API}${mediaImage.uri.url}`,
     transformations: () => {
-      let transformations: ImageTransformation[] = [];
-      mediaImage.image_style_uri.forEach(
-        (imageStyle: JsonApiResourceObject) => {
-          for (const [label, uri] of Object.entries(imageStyle)) {
-            const transformedImageUri = uri as string;
-            // @TODO Figure out if we're locking down dev and qa with basic auth.
-            // Drupal json:api will return an absolute path, but for "locked"
-            // pantheon enviornemnts, we'll need to modify the url.
-            // If the NEXT_PUBLIC_SERVER_ENV is development or qa, append basic
-            // auth username and password to url for pantheon envs that are locked.
-            // if (NEXT_PUBLIC_SERVER_ENV !== "production") {
-            //   transformedImageUri = (uri as string).replace(
-            //     "https://",
-            //     "https://nypl1:nypl1@"
-            //   );
-            // }
-            transformations.push({
-              id: `${mediaImage.id}__${label}`,
-              label: label,
-              uri: transformedImageUri,
-            });
-          }
-        }
-      );
+      const transformations: ImageTransformation[] = [];
+      const imageStyle = mediaImage.image_style_uri as object;
+      for (const [label, uri] of Object.entries(imageStyle)) {
+        transformations.push({
+          id: `${mediaImage.id}__${label}`,
+          label: label,
+          uri: uri,
+        });
+      }
       return transformations;
     },
     ...(mediaImage.meta.width && { width: mediaImage.meta.width }),

@@ -76,6 +76,7 @@ export const typeDefs = gql`
 
   type TextWithImage {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     text: String!
@@ -86,6 +87,7 @@ export const typeDefs = gql`
 
   type Video {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -96,6 +98,7 @@ export const typeDefs = gql`
 
   type AudioEmbed {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -107,12 +110,14 @@ export const typeDefs = gql`
 
   type SocialEmbed {
     id: ID!
+    status: Boolean!
     type: String!
     embedCode: String!
   }
 
   type GoogleMapEmbed {
     id: ID!
+    status: Boolean!
     type: String!
     embedCode: String!
     accessibleDescription: String!
@@ -120,6 +125,7 @@ export const typeDefs = gql`
 
   type Slideshow {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -128,6 +134,7 @@ export const typeDefs = gql`
 
   type Text {
     id: ID!
+    status: Boolean!
     type: String!
     text: String!
     heading: String
@@ -135,6 +142,7 @@ export const typeDefs = gql`
 
   type ImageComponent {
     id: ID!
+    status: Boolean!
     type: String!
     image: Image
     caption: String
@@ -144,6 +152,7 @@ export const typeDefs = gql`
 
   type CardList {
     id: ID!
+    status: Boolean!
     type: String!
     title: String
     description: String
@@ -160,6 +169,7 @@ export const typeDefs = gql`
 
   type CatalogList {
     id: ID!
+    status: Boolean!
     type: String!
     heading: String
     description: String
@@ -176,6 +186,7 @@ export const typeDefs = gql`
 
   type Donation {
     id: ID!
+    status: Boolean!
     type: String!
     title: String
     description: String
@@ -185,13 +196,26 @@ export const typeDefs = gql`
     defaultAmount: String
   }
 
+  type ExternalSearch {
+    id: ID!
+    status: Boolean!
+    type: String!
+    title: String
+    description: String
+    searchType: String
+    formPlaceholder: String
+    colorway: Colorway
+  }
+
   type CardGrid {
     id: ID!
+    status: Boolean!
     type: String!
     title: String
     description: String
     layout: String
     items: [CardGridItem]!
+    colorway: Colorway
   }
 
   type CardGridItem {
@@ -202,7 +226,56 @@ export const typeDefs = gql`
     link: String
   }
 
+  type Jumbotron {
+    id: ID!
+    status: Boolean!
+    type: String!
+    title: String
+    description: String
+    image: Image
+    secondaryImage: Image
+    link: Link
+  }
+
+  type Link {
+    title: String
+    uri: String
+    url: String!
+  }
+
+  type Colorway {
+    primary: String
+    secondary: String
+  }
+
   type Query {
     _empty: String
+  }
+
+  type EmailSubscription {
+    id: ID!
+    status: Boolean!
+    type: String!
+    heading: String
+    description: String
+    formPlaceholder: String
+    salesforceListId: String
+    salesforceSourceCode: String
+    colorway: Colorway
+  }
+
+  type ButtonLink {
+    id: ID!
+    icon: String
+    link: Link
+  }
+
+  type ButtonLinks {
+    id: ID!
+    status: Boolean!
+    type: String!
+    heading: String
+    description: String
+    items: [ButtonLink]
   }
 `;

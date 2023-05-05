@@ -35,7 +35,7 @@ function FilterBarDetails({
     let startItem;
     if (currentPage > 1) {
       if (itemsOnPage < limit) {
-        startItem = startItem = totalItems - itemsOnPage + 1;
+        startItem = totalItems - itemsOnPage + 1;
       } else {
         startItem = (currentPage - 1) * itemsOnPage + 1;
       }

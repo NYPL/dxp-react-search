@@ -58,7 +58,7 @@ export default function OnlineResourcesFindJournalsTitlePage() {
           </p>
           <br />
           <p>
-            *During the temporary closure of The New York Public Library's
+            *During the temporary closure of The New York Public Library&apos;s
             locations, we are offering remote access to additional databases,
             which are not regularly available from Home. Please checkout this
             page for more details. Please note that the links on this page will

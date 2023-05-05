@@ -18,6 +18,8 @@ export type WithDrupalRouterReturnProps = {
   slug: string | undefined;
   /** If true, preview mode is activated. */
   isPreview: boolean;
+  /** The bundle of the entity. */
+  bundle?: string;
   /** The ApolloClient instance defined inside the with-drupal-router function. */
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
@@ -62,14 +64,18 @@ export default function withDrupalRouter<
     const isNextPreview = !options?.customPreview;
 
     if (isGetStaticPropsFunction) {
-      slug = Array.isArray(context.params?.slug)
-        ? context.params?.slug[0]
-        : context.params?.slug;
+      // The slug value can be ["research"] or ["research", "support"],
+      // So we convert the array into a url slug path, i.e., /research/support
+      if (Array.isArray(context.params?.slug)) {
+        slug = `/${context.params?.slug.join(",").replace(",", "/")}`;
+      } else {
+        slug = `/${context.params?.slug}`;
+      }
 
-      const { previewData } = context as GetStaticPropsContext;
+      const { previewData, preview } = context as GetStaticPropsContext;
 
       // Preview mode. If getStaticProps, only NextJS preview mode works.
-      isPreview = context.preview ? context.preview : false;
+      isPreview = preview ? preview : false;
 
       // Set the uuid for preview mode.
       if (isPreview) {
@@ -84,6 +90,7 @@ export default function withDrupalRouter<
         context as GetServerSidePropsContext;
 
       slug = resolvedUrl;
+
       // Preview modes.
       if (isNextPreview) {
         // NextJS preview mode.
@@ -114,31 +121,33 @@ export default function withDrupalRouter<
     }
 
     // Shared code.
-    // Not preview mode, so run the rest of the routing logic.
+    // Get decoupled router data.
+    const decoupledRouterData = await apolloClient.query({
+      query: DECOUPLED_ROUTER_QUERY,
+      variables: {
+        path: slug,
+        isPreview: isPreview,
+      },
+    });
+
+    // Set the UUID for published pages
     if (!isPreview) {
-      // Get decoupled router data.
-      const decoupledRouterData = await apolloClient.query({
-        query: DECOUPLED_ROUTER_QUERY,
-        variables: {
-          path: slug,
-        },
-      });
-
       uuid = await decoupledRouterData?.data?.decoupledRouter?.uuid;
+    }
 
-      // Handle the redirect if it exists.
-      const redirect = await decoupledRouterData?.data?.decoupledRouter
-        ?.redirect;
+    const bundle = await decoupledRouterData?.data?.decoupledRouter?.bundle;
 
-      if (redirect) {
-        return {
-          redirect: {
-            statusCode: 301,
-            destination: redirect.to,
-          },
-          props: {},
-        };
-      }
+    // Handle the redirect if it exists.
+    const redirect = await decoupledRouterData?.data?.decoupledRouter?.redirect;
+
+    if (redirect) {
+      return {
+        redirect: {
+          statusCode: 301,
+          destination: redirect.to,
+        },
+        props: {},
+      };
     }
 
     const returnProps: WithDrupalRouterReturnProps = {
@@ -146,6 +155,7 @@ export default function withDrupalRouter<
       revisionId,
       slug,
       isPreview,
+      bundle,
       apolloClient,
     };
 

@@ -12,6 +12,7 @@ interface SlideshowContainerProps {
   nextSlide: () => void;
   prevSlide: () => void;
   sectionTitle: string;
+  isMobileOrTablet?: boolean;
 }
 function SlideshowContainer({
   items,
@@ -20,6 +21,7 @@ function SlideshowContainer({
   nextSlide,
   prevSlide,
   sectionTitle,
+  isMobileOrTablet,
 }: SlideshowContainerProps) {
   const changeSlide = (i: number) => {
     if (currentSlide === 0 && i === 0) return;
@@ -28,6 +30,19 @@ function SlideshowContainer({
     } else {
       prevSlide();
     }
+  };
+
+  let prevScreenX: number;
+  const handleTouchSlideChange = (e: React.PointerEvent) => {
+    if (isMobileOrTablet && prevScreenX) {
+      if (e.screenX - prevScreenX > 4) {
+        prevSlide();
+      }
+      if (e.screenX - prevScreenX < -4) {
+        nextSlide();
+      }
+    }
+    prevScreenX = e.screenX;
   };
 
   return (
@@ -50,6 +65,7 @@ function SlideshowContainer({
                 key={item.id}
                 h="full"
                 onFocus={() => changeSlide(i)}
+                onPointerMove={(e) => handleTouchSlideChange(e)}
               >
                 <SlideshowCard
                   item={item}

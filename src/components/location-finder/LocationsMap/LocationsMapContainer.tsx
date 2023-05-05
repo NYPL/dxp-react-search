@@ -19,6 +19,7 @@ import useWindowSize from "../../../hooks/useWindowSize";
 import setTermsFilter from "../../../utils/setTermsFilter";
 // Type
 import { LocationProps as Location } from "../Location/Location";
+import { RootState } from "../../../redux/store";
 
 interface LocationsMapContainerProps {
   onClick: (location: Location) => void;
@@ -42,9 +43,9 @@ const LocationsMapContainer = (props: LocationsMapContainerProps) => {
     offset,
     pageNumber,
     searchFilters,
-  } = useSelector((state: any) => state.search);
+  } = useSelector((state: RootState) => state.search);
   const { mapCenter, mapZoom, infoWindowId, infoWindowIsVisible } = useSelector(
-    (state: any) => state.map
+    (state: RootState) => state.map
   );
 
   // Special handling for pagination on desktop
@@ -84,7 +85,7 @@ const LocationsMapContainer = (props: LocationsMapContainerProps) => {
   }
 
   if (error) {
-    return <Box>'error while loading locations'</Box>;
+    return <Box>Error while loading locations.</Box>;
   }
 
   // Locations that use a parent library will have the same geo-cordinates as parent library.
@@ -92,8 +93,8 @@ const LocationsMapContainer = (props: LocationsMapContainerProps) => {
   // is visible by default. So we move all parent libraries to end of the locations array so
   // they are visible on default render of the map.
   // @TODO Need to fix this when actual types are added for the location data.
-  let keep: Location[] = [];
-  let move: Location[] = [];
+  const keep: Location[] = [];
+  const move: Location[] = [];
   const slugs = ["schwarzman", "snfl", "schomburg", "lpa"];
   data.refineryAllLocations.locations.forEach((item: Location) => {
     if (!slugs.includes(item.slug)) {
