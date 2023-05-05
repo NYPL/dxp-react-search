@@ -28,7 +28,7 @@ class SendGridApi extends RESTDataSource {
       };
 
       try {
-        let response = await sgMail.send(message);
+        const response = await sgMail.send(message);
         statusCode = response[0].statusCode;
         responseMessage = "Email sent.";
       } catch (error: any) {
