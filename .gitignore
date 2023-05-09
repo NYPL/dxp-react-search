@@ -37,3 +37,6 @@ yarn-error.log*
 # cypress
 /cypress/videos
 /cypress/screenshots
+
+# php storm
+.idea
