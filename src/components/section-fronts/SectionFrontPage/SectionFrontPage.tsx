@@ -176,6 +176,16 @@ export const SECTION_FRONT_QUERY = gql`
           text
         }
       }
+
+      bottomContent {
+        ... on DonorCredit {
+          __typename
+          id
+          heading
+          description
+          showBorder
+        }
+      }
     }
   }
 `;
@@ -253,6 +263,15 @@ export default function SectionFrontPage({
         <Box>
           {sectionFront.mainContent &&
             sectionFront.mainContent.map(
+              (contentComponent: { [key: string]: any }) =>
+                Components(contentComponent)
+            )}
+        </Box>
+      }
+      contentBottom={
+        <Box>
+          {sectionFront.bottomContent &&
+            sectionFront.bottomContent.map(
               (contentComponent: { [key: string]: any }) =>
                 Components(contentComponent)
             )}

@@ -9,6 +9,7 @@ export const typeDefs = gql`
     featuredContent: [SectionFrontFeaturedContent]
     mainContent: [SectionFrontMainContent]
     colorway: Colorway
+    bottomContent: [SectionFrontBottomContent]
   }
 
   union SectionFrontFeaturedContent = Donation | Jumbotron
@@ -20,6 +21,8 @@ export const typeDefs = gql`
     | EmailSubscription
     | ButtonLinks
     | Text
+
+  union SectionFrontBottomContent = DonorCredit
 
   type SectionFrontConnection {
     items: [SectionFront]

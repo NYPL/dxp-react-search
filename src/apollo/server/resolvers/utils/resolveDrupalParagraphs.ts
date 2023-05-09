@@ -126,6 +126,13 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
+      if (
+        item.type === "paragraph--donor_credit" &&
+        typesInQuery.includes("DonorCredit")
+      ) {
+        accumulator.push(item);
+      }
+
       // Start homepage specific paragraphs.
       if (
         item.type === "paragraph--hp_hero" &&
@@ -498,6 +505,16 @@ export default function resolveDrupalParagraphs(
           heading: item.field_ts_heading,
           description: item.field_tfls_description?.processed,
           items: buttonLinkItems,
+        };
+        break;
+
+      case "paragraph--donor_credit":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_donor_credit_heading,
+          description: item.field_tfls_description.processed,
+          showBorder: item.field_bs_show_border,
         };
         break;
 
