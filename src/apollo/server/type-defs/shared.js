@@ -284,4 +284,13 @@ export const typeDefs = gql`
     title: String!
     url: String!
   }
+
+  type DonorCredit {
+    id: ID!
+    status: Boolean!
+    type: String!
+    heading: String
+    description: String!
+    showBorder: Boolean!
+  }
 `;

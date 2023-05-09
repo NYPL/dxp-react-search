@@ -50,6 +50,9 @@ export default function resolveParagraphTypes(
     case "button_links":
       resolvedObjectType = "ButtonLinks";
       break;
+    case "donor_credit":
+      resolvedObjectType = "DonorCredit";
+      break;
 
     // Home page.
     case "hp_hero":
