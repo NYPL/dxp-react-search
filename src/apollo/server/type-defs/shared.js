@@ -278,4 +278,19 @@ export const typeDefs = gql`
     description: String
     items: [ButtonLink]
   }
+
+  type BreadcrumbsItem {
+    id: ID!
+    title: String!
+    url: String!
+  }
+
+  type DonorCredit {
+    id: ID!
+    status: Boolean!
+    type: String!
+    heading: String
+    description: String!
+    showBorder: Boolean!
+  }
 `;

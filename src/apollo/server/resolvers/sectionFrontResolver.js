@@ -20,6 +20,8 @@ const sectionFrontResolver = {
         "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
         // Button Links
         "field_main_content.field_erm_button_links",
+        // Bottom Content
+        "field_erm_bottom_content",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
@@ -33,6 +35,7 @@ const sectionFrontResolver = {
         apiPath,
         isPreview
       );
+
       return response;
     },
   },
@@ -45,6 +48,7 @@ const sectionFrontResolver = {
       sectionFront.field_ers_media_image.data !== null
         ? resolveImage(sectionFront.field_ers_media_image)
         : null,
+    breadcrumbs: (sectionFront) => sectionFront.breadcrumbs,
     featuredContent: (sectionFront, _, __, info) => {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
@@ -74,6 +78,19 @@ const sectionFrontResolver = {
       const slug = sectionFront.path?.alias;
       return getColorway(slug);
     },
+    bottomContent: (sectionFront, _, __, info) => {
+      const resolveInfo = parseResolveInfo(info);
+      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
+      const bottomContent =
+        sectionFront.field_erm_bottom_content.data === null
+          ? null
+          : resolveDrupalParagraphs(
+              sectionFront.field_erm_bottom_content,
+              typesInQuery,
+              sectionFront
+            );
+      return bottomContent;
+    },
   },
   SectionFrontFeaturedContent: {
     __resolveType: (object, _, __) => {
@@ -83,6 +100,11 @@ const sectionFrontResolver = {
   SectionFrontMainContent: {
     __resolveType: (object, _, __) => {
       return resolveParagraphTypes(object.type, "section_front");
+    },
+  },
+  SectionFrontBottomContent: {
+    __resolveType: (object, _, __) => {
+      return resolveParagraphTypes(object.type);
     },
   },
 };
