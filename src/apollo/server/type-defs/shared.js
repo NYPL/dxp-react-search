@@ -243,15 +243,6 @@ export const typeDefs = gql`
     url: String!
   }
 
-  type Colorway {
-    primary: String
-    secondary: String
-  }
-
-  type Query {
-    _empty: String
-  }
-
   type EmailSubscription {
     id: ID!
     status: Boolean!
@@ -279,12 +270,6 @@ export const typeDefs = gql`
     items: [ButtonLink]
   }
 
-  type BreadcrumbsItem {
-    id: ID!
-    title: String!
-    url: String!
-  }
-
   type DonorCredit {
     id: ID!
     status: Boolean!
@@ -292,5 +277,20 @@ export const typeDefs = gql`
     heading: String
     description: String!
     showBorder: Boolean!
+  }
+
+  type BreadcrumbsItem {
+    id: ID!
+    title: String!
+    url: String!
+  }
+
+  type Colorway {
+    primary: String
+    secondary: String
+  }
+
+  type Query {
+    _empty: String
   }
 `;

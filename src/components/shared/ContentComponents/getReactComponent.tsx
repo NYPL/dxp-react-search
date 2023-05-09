@@ -49,11 +49,6 @@ export default function mapContentComponentToReactComponent(
   contentComponent: ContentComponentObject
 ) {
   if (typeof Components[contentComponent["__typename"]] !== "undefined") {
-    // If the status field is false, don't render the component at all.
-    if (contentComponent.status === false) {
-      return null;
-    }
-
     return React.createElement(Components[contentComponent["__typename"]], {
       key: contentComponent.id,
       // If the component is EmailSubscription add colorway values as bgColor.
