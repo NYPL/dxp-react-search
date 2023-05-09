@@ -279,6 +279,12 @@ export const typeDefs = gql`
     items: [ButtonLink]
   }
 
+  type BreadcrumbsItem {
+    id: ID!
+    title: String!
+    url: String!
+  }
+
   type DonorCredit {
     id: ID!
     status: Boolean!

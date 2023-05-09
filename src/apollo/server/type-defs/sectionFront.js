@@ -6,6 +6,7 @@ export const typeDefs = gql`
     title: String!
     description: String
     image: Image
+    breadcrumbs: [BreadcrumbsItem]
     featuredContent: [SectionFrontFeaturedContent]
     mainContent: [SectionFrontMainContent]
     colorway: Colorway
