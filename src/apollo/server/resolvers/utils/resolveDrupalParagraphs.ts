@@ -126,6 +126,13 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
+      if (
+        item.type === "paragraph--donor_credit" &&
+        typesInQuery.includes("DonorCredit")
+      ) {
+        accumulator.push(item);
+      }
+
       // Start homepage specific paragraphs.
       if (
         item.type === "paragraph--hp_hero" &&
@@ -501,6 +508,16 @@ export default function resolveDrupalParagraphs(
         };
         break;
 
+      case "paragraph--donor_credit":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_donor_credit_heading,
+          description: item.field_tfls_description.processed,
+          showBorder: item.field_bs_show_border,
+        };
+        break;
+
       // Home page.
       case "paragraph--hp_hero":
         paragraphComponent = {
@@ -638,13 +655,13 @@ export default function resolveDrupalParagraphs(
         break;
     }
 
-    // Add published status for paragraph entities, if not set, set to false.
-    // We can assume that if the status property is missing from the object,
-    // then the paragraph is unpublished, and an unautheticated requested was made,
-    // which causes the status property to be omitted from the response.
     if (paragraphComponent) {
-      paragraphComponent.status = item.status ? item.status : false;
-      items.push(paragraphComponent);
+      // Unpublished paragraphs will not have a status property for unauthorized api requests.
+      const paragraphComponentStatus = item.status ? item.status : false;
+      // Only add the paragraph component to the array of items if it is published.
+      if (paragraphComponentStatus) {
+        items.push(paragraphComponent);
+      }
     }
   });
   return items;
