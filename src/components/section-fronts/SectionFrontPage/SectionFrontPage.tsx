@@ -39,7 +39,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on Donation {
           __typename
           id
-          status
           type
           title
           description
@@ -62,7 +61,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on Jumbotron {
           __typename
           id
-          status
           type
           title
           description
@@ -101,7 +99,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on CardGrid {
           __typename
           id
-          status
           type
           title
           description
@@ -131,7 +128,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on ExternalSearch {
           __typename
           id
-          status
           type
           title
           description
@@ -144,7 +140,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on EmailSubscription {
           __typename
           id
-          status
           type
           heading
           description
@@ -158,7 +153,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on ButtonLinks {
           __typename
           id
-          status
           type
           heading
           description
@@ -175,7 +169,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on Text {
           __typename
           id
-          status
           type
           heading
           text

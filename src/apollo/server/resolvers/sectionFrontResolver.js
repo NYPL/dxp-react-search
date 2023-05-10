@@ -82,7 +82,7 @@ const sectionFrontResolver = {
       const resolveInfo = parseResolveInfo(info);
       const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
       const bottomContent =
-        sectionFront.field_erm_bottom_content.data === null
+        sectionFront.field_erm_bottom_content.data?.length === 0
           ? null
           : resolveDrupalParagraphs(
               sectionFront.field_erm_bottom_content,
