@@ -2,13 +2,13 @@ import * as React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
-import PageContainer from "../../shared/layouts/PageContainer";
+import PageContainer, {
+  BreadcrumbsItem,
+} from "../../shared/layouts/PageContainer";
+
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
-import getBreadcrumbsTrail from "../../../utils/get-breadcrumbs-trail";
-// Content + config
-const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 export const SECTION_FRONT_QUERY = gql`
   query SectionFrontQuery($id: String, $revisionId: String, $preview: Boolean) {
@@ -30,11 +30,15 @@ export const SECTION_FRONT_QUERY = gql`
           uri
         }
       }
+      breadcrumbs {
+        id
+        title
+        url
+      }
       featuredContent {
         ... on Donation {
           __typename
           id
-          status
           type
           title
           description
@@ -57,7 +61,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on Jumbotron {
           __typename
           id
-          status
           type
           title
           description
@@ -96,7 +99,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on CardGrid {
           __typename
           id
-          status
           type
           title
           description
@@ -126,7 +128,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on ExternalSearch {
           __typename
           id
-          status
           type
           title
           description
@@ -139,7 +140,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on EmailSubscription {
           __typename
           id
-          status
           type
           heading
           description
@@ -153,7 +153,6 @@ export const SECTION_FRONT_QUERY = gql`
         ... on ButtonLinks {
           __typename
           id
-          status
           type
           heading
           description
@@ -170,10 +169,19 @@ export const SECTION_FRONT_QUERY = gql`
         ... on Text {
           __typename
           id
-          status
           type
           heading
           text
+        }
+      }
+
+      bottomContent {
+        ... on DonorCredit {
+          __typename
+          id
+          heading
+          description
+          showBorder
         }
       }
     }
@@ -189,7 +197,6 @@ interface SectionFrontPageProps {
 
 export default function SectionFrontPage({
   uuid,
-  slug,
   isPreview,
   revisionId,
 }: SectionFrontPageProps) {
@@ -223,13 +230,21 @@ export default function SectionFrontPage({
         description: sectionFront.description,
         imageUrl: sectionFront.image?.uri,
       }}
-      breadcrumbs={[
-        {
-          text: "Home",
-          url: `${NEXT_PUBLIC_NYPL_DOMAIN}`,
-        },
-        ...getBreadcrumbsTrail(slug),
-      ]}
+      breadcrumbs={
+        sectionFront.breadcrumbs &&
+        sectionFront.breadcrumbs.map(
+          (breadcrumbsItem: {
+            id: string;
+            title: string;
+            url: string;
+          }): BreadcrumbsItem => {
+            return {
+              text: breadcrumbsItem.title,
+              url: breadcrumbsItem.url,
+            };
+          }
+        )
+      }
       breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--section-fronts"
       contentHeader={
@@ -253,6 +268,15 @@ export default function SectionFrontPage({
         <Box>
           {sectionFront.mainContent &&
             sectionFront.mainContent.map(
+              (contentComponent: { [key: string]: any }) =>
+                Components(contentComponent)
+            )}
+        </Box>
+      }
+      contentBottom={
+        <Box>
+          {sectionFront.bottomContent &&
+            sectionFront.bottomContent.map(
               (contentComponent: { [key: string]: any }) =>
                 Components(contentComponent)
             )}
