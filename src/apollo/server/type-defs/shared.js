@@ -262,6 +262,15 @@ export const typeDefs = gql`
     showBorder: Boolean!
   }
 
+  type BlogFeed {
+    id: ID!
+    type: String!
+    title: String!
+    description: String
+    channelId: String!
+    colorway: Colorway
+  }
+
   type BreadcrumbsItem {
     id: ID!
     title: String!

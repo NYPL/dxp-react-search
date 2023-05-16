@@ -4,6 +4,7 @@ import {
   Grid,
   SkeletonLoader,
 } from "@nypl/design-system-react-components";
+import { getGridColumn } from "./CardGrid";
 
 interface CardGridSkeletonLoaderProps {
   templateColumns: string;
@@ -11,19 +12,23 @@ interface CardGridSkeletonLoaderProps {
   itemsCount: number;
   cardLayout?: "column" | "row" | undefined;
   showImage?: boolean;
+  contentSize?: number;
 }
 
 type CardSkeletonLoaderProps = Pick<
   CardGridSkeletonLoaderProps,
-  "cardLayout" | "showImage"
+  "cardLayout" | "showImage" | "contentSize"
 >;
 
 function CardSkeletonLoader({
   cardLayout,
   showImage = true,
+  contentSize,
 }: CardSkeletonLoaderProps) {
   if (cardLayout === "column") {
-    return <SkeletonLoader imageAspectRatio="landscape" />;
+    return (
+      <SkeletonLoader imageAspectRatio="landscape" contentSize={contentSize} />
+    );
   } else if (cardLayout === "row") {
     return (
       <Box display={{ lg: "flex" }}>
@@ -42,6 +47,7 @@ function CardSkeletonLoader({
                 showHeading={false}
                 showContent={false}
                 width="100%"
+                contentSize={contentSize}
               />
             </Box>
           </Box>
@@ -50,7 +56,7 @@ function CardSkeletonLoader({
           <SkeletonLoader
             showHeading={true}
             showImage={false}
-            contentSize={4}
+            contentSize={contentSize}
           />
         </Box>
       </Box>
@@ -66,13 +72,21 @@ export default function CardGridSkeletonLoader({
   itemsCount,
   cardLayout = "column",
   showImage = true,
+  contentSize = 4,
 }: CardGridSkeletonLoaderProps) {
   const skeletonLoaders = [];
+
   for (let i = 0; i < itemsCount; i++) {
+    const gridColumns = getGridColumn(itemsCount, cardLayout, i);
+
     skeletonLoaders.push(
-      <li key={i}>
-        <CardSkeletonLoader cardLayout={cardLayout} showImage={showImage} />
-      </li>
+      <Box as="li" key={i} gridColumn={{ md: gridColumns }}>
+        <CardSkeletonLoader
+          cardLayout={cardLayout}
+          showImage={showImage}
+          contentSize={contentSize}
+        />
+      </Box>
     );
   }
 

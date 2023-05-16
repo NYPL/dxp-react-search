@@ -15,7 +15,7 @@ export interface CardGridCommonProps {
   headingColor?: string;
   description?: string;
   link?: string;
-  hrefText?: string;
+  linkTitle?: string;
   isBordered?: boolean;
   isCentered?: boolean;
 }
@@ -42,6 +42,46 @@ export interface CardItem {
   link: string;
 }
 
+// Helper function to get the grid column value based on layout and index.
+export function getGridColumn(
+  itemsCount: number,
+  layout: CardGridLayoutTypes,
+  index?: number
+) {
+  // Logic for grid column of each grid item.
+  // Default for 3 cards across, 4 + 4 + 4 = 12.
+  let gridColumn = "auto / span 4";
+  // Default logic for items count and adjusting the grid-column value based on number of cards.
+  // 5 cards.
+  if (itemsCount === 5 && index !== undefined) {
+    // 5 cards, 2 3
+    gridColumn = index < 2 ? "auto / span 6" : "auto / span 4";
+  }
+  // 4 cards.
+  if (itemsCount === 4) {
+    // 4 cards, 4
+    gridColumn = "auto / span 3";
+  }
+  // 2 cards.
+  if (itemsCount === 2) {
+    // 2 cards, 2
+    gridColumn = "auto / span 6";
+  }
+  // Column: two featured.
+  if (layout === "column_two_featured" && index !== undefined) {
+    if (itemsCount === 6) {
+      // 6 cards, 2 4
+      gridColumn = index < 2 ? "auto / span 6" : "auto / span 3";
+    }
+    if (itemsCount === 4) {
+      // 4 cards, 2 2
+      gridColumn = "auto / span 6";
+    }
+  }
+
+  return gridColumn;
+}
+
 export default function CardGrid({
   id,
   type,
@@ -49,7 +89,7 @@ export default function CardGrid({
   headingColor,
   description,
   link,
-  hrefText,
+  linkTitle,
   layout = "column",
   isBordered = false,
   isCentered = false,
@@ -66,46 +106,6 @@ export default function CardGrid({
     isCenteredFinal = true;
   }
 
-  // Helper function to get the grid column value based on layout and index.
-  function getGridColumn(
-    itemsCount: number,
-    layout: CardGridLayoutTypes,
-    index?: number
-  ) {
-    // Logic for grid column of each grid item.
-    // Default for 3 cards across, 4 + 4 + 4 = 12.
-    let gridColumn = "auto / span 4";
-    // Default logic for items count and adjusting the grid-column value based on number of cards.
-    // 5 cards.
-    if (itemsCount === 5 && index !== undefined) {
-      // 5 cards, 2 3
-      gridColumn = index < 2 ? "auto / span 6" : "auto / span 4";
-    }
-    // 4 cards.
-    if (itemsCount === 4) {
-      // 4 cards, 4
-      gridColumn = "auto / span 3";
-    }
-    // 2 cards.
-    if (itemsCount === 2) {
-      // 2 cards, 2
-      gridColumn = "auto / span 6";
-    }
-    // Column: two featured.
-    if (layout === "column_two_featured" && index !== undefined) {
-      if (itemsCount === 6) {
-        // 6 cards, 2 4
-        gridColumn = index < 2 ? "auto / span 6" : "auto / span 3";
-      }
-      if (itemsCount === 4) {
-        // 4 cards, 2 2
-        gridColumn = "auto / span 6";
-      }
-    }
-
-    return gridColumn;
-  }
-
   return (
     <Box id={`${type}-${id}`} mb="xl">
       {title && (
@@ -114,10 +114,14 @@ export default function CardGrid({
           title={title}
           headingColor={headingColor}
           link={link}
-          hrefText={hrefText}
+          linkTitle={linkTitle}
         />
       )}
-      {description && <TextFormatted html={description} />}
+      {description && (
+        <Box mb="s">
+          <TextFormatted html={description} />
+        </Box>
+      )}
       <Grid
         as="ul"
         listStyleType="none"

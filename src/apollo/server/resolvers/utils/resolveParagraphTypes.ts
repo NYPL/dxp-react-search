@@ -53,6 +53,9 @@ export default function resolveParagraphTypes(
     case "donor_credit":
       resolvedObjectType = "DonorCredit";
       break;
+    case "blog_feed":
+      resolvedObjectType = "BlogFeed";
+      break;
 
     // Home page.
     case "hp_hero":

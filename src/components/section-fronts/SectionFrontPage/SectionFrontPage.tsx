@@ -173,6 +173,18 @@ export const SECTION_FRONT_QUERY = gql`
           heading
           text
         }
+        ... on BlogFeed {
+          __typename
+          id
+          type
+          title
+          description
+          channelId
+          colorway {
+            primary
+            secondary
+          }
+        }
       }
 
       bottomContent {
