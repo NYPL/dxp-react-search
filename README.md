@@ -7,10 +7,21 @@ React app build for www.nypl.org. Pages currently in repo:
 - Blog - https://www.nypl.org/blog
 - Homepage - https://www.nypl.org
 - Press Releases - https://www.nypl.org/press
-- Section Fronts: Give - https://www.nypl.org/give
+- Section Fronts:
+  - Give - https://www.nypl.org/give
+  - Research - https://www.nypl.org/research
+  - Support - https://www.nypl.org/research/support
+  - Educators - https://www.nypl.org/education/educators
 - Section Fronts, Events, and more (coming soon)
 
-## Installation (Local)
+## Requirements
+
+- NodeJS to install visit [NodeJS](https://nodejs.org/en) ( node: v16.15.0, npm: 8.5.5 )
+- NVM to install go to [NVM github page](https://github.com/nvm-sh/nvm)
+- Git to install go to [Git Page](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- Code Editor [VSCode](https://code.visualstudio.com/download)
+
+## Installation Scout (Local)
 
 Follow these steps to setup a local installation of the project:
 
@@ -20,7 +31,27 @@ Follow these steps to setup a local installation of the project:
 git clone git@github.com:NYPL/dxp-react-search.git
 ```
 
+Then open the folder
+
+```sh
+cd dxp-react-search
+```
+
 2. Install all the node dependencies
+
+Check your node version and npm version first
+
+```sh
+node -v
+```
+
+v16.x.x
+
+```sh
+npm -v
+```
+
+8.x.x
 
 ```sh
 npm install
@@ -32,7 +63,9 @@ npm install
 cp .env.example .env
 ```
 
-4. Update the value for `NEXT_PUBLIC_GOOGLE_MAPS_API` to the NYPL Google Maps/Geocode API Key
+4. Update values in `.env`
+
+   example: `NEXT_PUBLIC_GOOGLE_MAPS_API` with the NYPL Google Maps/Geocode API Key
 
 5. Start development server
 
@@ -44,6 +77,39 @@ npm run dev
 
 ```sh
 npm run build && npm start
+```
+
+## Code Editor Setup
+
+VS Code editor is the recommended IDE for React development. These are recommended VS Code extensions that will help with dev work.
+
+- Prettier
+- ESLint
+- ES7 + React/Redux
+- Auto Import
+- DotENV
+- GraphQL
+- MDX
+- Project Manager
+
+## App Testing
+
+- Run Unit tests
+
+```sh
+npm test
+```
+
+- Run Cypress tests (E2E)
+
+```sh
+npm run build && npm start
+```
+
+Open new Terminal to start tests
+
+```sh
+npm run cypress
 ```
 
 ## Deployment

@@ -2,6 +2,18 @@
 
 ---
 
+### v0.9.8 - General Maintenance & Improvements, Section Front Extensions
+
+---
+
+- Remove .babelrc and useswc babel compiler: [#412](https://github.com/NYPL/dxp-react-search/pull/412)
+- Add donor credit component: [#413](https://github.com/NYPL/dxp-react-search/pull/413)
+- Fix flaky cypress tests: [#414](https://github.com/NYPL/dxp-react-search/pull/414)
+- Add dynamic breadcrumbs via json api: [#415](https://github.com/NYPL/dxp-react-search/pull/415)
+- Remove status field from gql type defs and code: [#416](https://github.com/NYPL/dxp-react-search/pull/416)
+
+---
+
 ### v0.9.7 - General Maintenance & Improvements
 
 ---
