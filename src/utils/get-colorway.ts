@@ -22,22 +22,22 @@ export default function getColorway(colorwayLabel: string): Colorway {
     finalColorwayLabel = colorwayLabel;
   }
   const colorwayMap: ColorwayMap = {
-    default: {
+    // Red: primary: "#C60917",secondary: "#760000"
+    "books-music-movies": {
       primary: "brand.primary",
       secondary: "brand.secondary",
     },
-    "books-music-movies": {
-      primary: "#C60917",
-      secondary: "#760000",
-    },
+    // Gray
     connect: {
       primary: "#737373",
       secondary: "#565656",
     },
+    // Blue: primary: "#1D62E6",secondary: "#2540A4"
     education: {
       primary: "section.education.primary",
       secondary: "section.education.secondary",
     },
+    // Black: primary: "#242424",secondary: "#000"
     events: {
       primary: "section.whats-on.primary",
       secondary: "section.whats-on.secondary",
@@ -46,15 +46,21 @@ export default function getColorway(colorwayLabel: string): Colorway {
       primary: "brand.primary",
       secondary: "brand.secondary",
     },
+    // Gray
     "get-help": {
       primary: "#737373",
       secondary: "#565656",
     },
+    // Blue-Green: primary: "#00838A",secondary: "#006166"
     research: {
       primary: "section.research.primary",
       secondary: "section.research.secondary",
     },
     section_front: {
+      primary: "brand.primary",
+      secondary: "brand.secondary",
+    },
+    default: {
       primary: "brand.primary",
       secondary: "brand.secondary",
     },
