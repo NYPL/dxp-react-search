@@ -40,6 +40,7 @@ export interface CardItem {
   description: string;
   image?: ImageType;
   link: string;
+  buttonLinks?: any;
 }
 
 export default function CardGrid({
@@ -126,7 +127,7 @@ export default function CardGrid({
       >
         {items &&
           items.map((item: CardItem, index) => {
-            const { id, title, description, link, image } = item;
+            const { id, title, description, link, image, buttonLinks } = item;
             return (
               <Box
                 as="li"
@@ -157,6 +158,7 @@ export default function CardGrid({
                       />
                     ),
                   })}
+                  buttonLinks={buttonLinks}
                 />
               </Box>
             );

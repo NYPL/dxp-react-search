@@ -369,6 +369,23 @@ export default function resolveDrupalParagraphs(
         const cardItems: ResolvedParagraph[] = [];
         Array.isArray(item.field_erm_link_cards) &&
           item.field_erm_link_cards.map((cardItem: any) => {
+            // Get the button links.
+            const buttonLinks: ResolvedParagraph[] = [];
+
+            cardItem.field_erm_button_links.data !== null &&
+              Array.isArray(cardItem.field_erm_button_links) &&
+              cardItem.field_erm_button_links.map((buttonLink: any) => {
+                buttonLinks.push({
+                  id: buttonLink.id,
+                  icon: buttonLink.field_lts_icon,
+                  link: {
+                    title: buttonLink.field_ls_link.title,
+                    uri: buttonLink.field_ls_link.uri,
+                    url: buttonLink.field_ls_link.url,
+                  },
+                });
+              });
+
             cardItems.push({
               id: cardItem.id,
               title: cardItem.field_ts_heading,
@@ -380,8 +397,10 @@ export default function resolveDrupalParagraphs(
                 cardItem.field_ers_image.data === null
                   ? null
                   : resolveImage(cardItem.field_ers_image),
+              buttonLinks: buttonLinks,
             });
           });
+
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
