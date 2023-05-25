@@ -52,7 +52,10 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <Script src="https://assets.nypl.org/js/advocacy.js" />
+        <Script
+          src="https://assets.nypl.org/js/advocacy.js"
+          strategy="afterInteractive"
+        />
       </body>
     </Html>
   );
