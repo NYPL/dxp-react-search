@@ -25,7 +25,7 @@ export interface CardProps {
   /** An optional image component that can be passed to the card. */
   image?: JSX.Element;
   /** An optional set of button links. */
-  buttonLinks?: any;
+  buttonLinks?: ButtonLinkType[];
   /** Optional value to render the layout in a row or column. */
   layout?: LayoutTypes;
   /** Optional value to control the alignment of the text and elements. */
@@ -41,7 +41,7 @@ export default function Card({
   description,
   href,
   image,
-  buttonLinks = null,
+  buttonLinks,
   layout,
   isCentered,
   isBordered = false,

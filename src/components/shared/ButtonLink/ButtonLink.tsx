@@ -22,7 +22,10 @@ const IconTable: Record<string, IconNames> = {
 };
 
 export default function ButtonLink({ id, link, icon }: ButtonLinkProps) {
-  if (icon === "apple_app_store" || icon === "google_play") {
+  const isAppStoreIcon =
+    icon === "apple_app_store" || icon === "google_play" ? true : false;
+
+  if (isAppStoreIcon) {
     const iconName =
       icon === "apple_app_store" ? "appleAppStoreBlack" : "googlePlayBlack";
 
@@ -33,6 +36,7 @@ export default function ButtonLink({ id, link, icon }: ButtonLinkProps) {
           id="logo-id"
           name={iconName}
           size="small"
+          // Google play logo is not the same height as apple app store logo.
           {...(icon === "google_play" && {
             sx: {
               maxWidth: "185px",

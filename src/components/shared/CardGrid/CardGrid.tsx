@@ -5,6 +5,7 @@ import Card from "./Card";
 import Image from "./../../shared/Image";
 import TextFormatted from "../TextFormatted";
 import { ImageType } from "../Image/ImageTypes";
+import { ButtonLinkProps as ButtonLinkType } from "./../ButtonLink/ButtonLink";
 
 export type CardGridLayoutTypes = "row" | "column" | "column_two_featured";
 
@@ -40,7 +41,7 @@ export interface CardItem {
   description: string;
   image?: ImageType;
   link: string;
-  buttonLinks?: any;
+  buttonLinks?: ButtonLinkType[];
 }
 
 export default function CardGrid({
