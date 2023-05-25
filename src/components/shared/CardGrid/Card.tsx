@@ -58,6 +58,10 @@ export default function Card({
       isCentered={isCentered}
       layout={layout}
       isBordered={isBordered}
+      sx={{
+        // Override the card-body width to 100% to allow for proper centering of buttons.
+        ".card-body": { width: "100%" },
+      }}
     >
       <CardHeading level="three">
         {href && <Link href={href}>{heading}</Link>}
