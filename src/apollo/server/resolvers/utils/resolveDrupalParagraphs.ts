@@ -372,9 +372,9 @@ export default function resolveDrupalParagraphs(
             // Get the button links.
             const buttonLinks: ResolvedParagraph[] = [];
 
-            cardItem.field_erm_button_links.data !== null &&
-              Array.isArray(cardItem.field_erm_button_links) &&
-              cardItem.field_erm_button_links.map((buttonLink: any) => {
+            cardItem.field_erm_card_button_links.data !== null &&
+              Array.isArray(cardItem.field_erm_card_button_links) &&
+              cardItem.field_erm_card_button_links.map((buttonLink: any) => {
                 buttonLinks.push({
                   id: buttonLink.id,
                   icon: buttonLink.field_lts_icon,
