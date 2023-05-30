@@ -33,6 +33,10 @@ const HomePageLink = React.forwardRef<
     event.preventDefault;
     const gaEventCategory = "Homepage";
 
+    let ctaText = undefined;
+    if (typeof children === "string") {
+      ctaText = children;
+    }
     if (window !== undefined) {
       if (typeof window.gtag === "function") {
         window.gtag("event", gaEventActionName, {
@@ -40,6 +44,22 @@ const HomePageLink = React.forwardRef<
           event_label: href,
         });
       }
+      //First clear the data layer of previous values
+      window.adobeDataLayer.push({
+        event_data: null,
+      });
+      //then push the new values
+      window.adobeDataLayer.push({
+        event: "send_event",
+        event_data: {
+          name: "cta_click",
+          cta_section: "Homepage",
+          cta_subsection: gaEventActionName,
+          cta_text: ctaText,
+          cta_position: undefined,
+          destination_url: href || "no value passed",
+        },
+      });
     }
   };
 

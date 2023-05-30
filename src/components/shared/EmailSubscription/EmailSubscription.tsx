@@ -75,6 +75,20 @@ export default function EmailSubscription({
           event_category: gaEventCategory,
           event_label: gaEventLabel,
         });
+        // Adobe Analytics
+        window.adobeDataLayer.push({ event_data: null });
+
+        window.adobeDataLayer.push({
+          event: "send_event",
+          event_data: {
+            name: "email_signup",
+            data_list: [salesforceListId],
+          },
+        });
+        window.gtag("event", gaEventActionName, {
+          event_category: gaEventCategory,
+          event_label: gaEventLabel,
+        });
 
         setStatus(result.statusCode);
         setIsSubmitted(true);
