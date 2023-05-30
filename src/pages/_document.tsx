@@ -2,7 +2,7 @@ const {
   NEXT_PUBLIC_GTM_TRACKING_ID,
   NEXT_PUBLIC_GA_TRACKING_ID,
   NEXT_PUBLIC_SERVER_ENV,
-  ADOBE_LAUNCH_URL,
+  NEXT_PUBLIC_ADOBE_LAUNCH_URL,
 } = process.env;
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
@@ -48,7 +48,7 @@ export default function Document() {
           strategy="afterInteractive"
         />
 
-        {/* <!-- Initial Data Layer Definition --> */}
+        {/* Adobe Analytics: Initial data layer definition. */}
         <Script
           id="adobe-analytics-data-layer"
           strategy="afterInteractive"
@@ -65,8 +65,11 @@ export default function Document() {
             });`,
           }}
         />
-        {/* <!-- Tag Manager Library Script --> */}
-        <Script src={`${ADOBE_LAUNCH_URL}`} strategy="afterInteractive" />
+        {/* Adobe Analytics: Add launch tag manager script. */}
+        <Script
+          src={NEXT_PUBLIC_ADOBE_LAUNCH_URL}
+          strategy="afterInteractive"
+        />
         {/* NYPL Header */}
         <Script src={nyplHeaderScript} strategy="beforeInteractive" />
       </Head>
