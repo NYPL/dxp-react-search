@@ -34,16 +34,16 @@ export default function Document() {
           id="google-tag-data-layer"
           dangerouslySetInnerHTML={{
             __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
-                    gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
-                      page_path: window.location.pathname,
-                      'groups':'default',
-                      'anonymize_ip':true
-                    });
-                  `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
+              gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+                'groups':'default',
+                'anonymize_ip':true
+              });
+            `,
           }}
           strategy="afterInteractive"
         />
@@ -54,15 +54,16 @@ export default function Document() {
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-            window.adobeDataLayer = [];
-            let pageName = document.title.split("|")[0];
-            if(window.location.pathname === "/"){
-              pageName = "Home"
-            }
-            window.adobeDataLayer.push({
-              page_name: pageName,
-              site_section: undefined,
-            });`,
+              window.adobeDataLayer = [];
+              let pageName = document.title.split("|")[0];
+              if (window.location.pathname === "/") {
+                pageName = "Home"
+              }
+              window.adobeDataLayer.push({
+                page_name: pageName,
+                site_section: undefined,
+              });
+            `,
           }}
         />
         {/* Adobe Analytics: Add launch tag manager script. */}

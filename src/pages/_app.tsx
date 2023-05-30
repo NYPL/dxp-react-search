@@ -11,9 +11,11 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
   // When next js routes change, send data to GA.
   useEffect(() => {
     const handleRouteChange = (url: string) => {
+      // Google Analytics: Virtual page view.
       window.gtag("config", NEXT_PUBLIC_GA_TRACKING_ID, {
         page_path: url,
       });
+      // Adobe Analytics: Virtual page view.
       window.adobeDataLayer.push({
         page_name: null,
         site_section: null,
