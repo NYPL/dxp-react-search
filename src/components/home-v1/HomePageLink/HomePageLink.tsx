@@ -31,24 +31,30 @@ const HomePageLink = React.forwardRef<
     event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement, MouseEvent>
   ) => {
     event.preventDefault;
-    const gaEventCategory = "Homepage";
 
-    let ctaText = undefined;
-    if (typeof children === "string") {
-      ctaText = children;
-    }
+    // Google Analytics: Event CTA datalayer.
     if (window !== undefined) {
+      const gaEventCategory = "Homepage";
+
       if (typeof window.gtag === "function") {
         window.gtag("event", gaEventActionName, {
           event_category: gaEventCategory,
           event_label: href,
         });
       }
-      //First clear the data layer of previous values
-      window.adobeDataLayer.push({
-        event_data: null,
-      });
-      //then push the new values
+    }
+
+    // Adobe analytics: Event CTA data layer.
+    if (window !== undefined) {
+      let ctaText = undefined;
+      if (typeof children === "string") {
+        ctaText = children;
+      }
+
+      // Clear the data layer of previous values.
+      window.adobeDataLayer.push({ event_data: null });
+
+      // Push the new values from the click event.
       window.adobeDataLayer.push({
         event: "send_event",
         event_data: {

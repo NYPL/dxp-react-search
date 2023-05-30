@@ -44,7 +44,7 @@ export default function EmailSubscription({
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    //Create dynamic Google Analytics values
+    // Create dynamic Google Analytics values.
     const gaEventCategory = "Email Subscription Forms";
     const gaEventActionName = `Subscribe - ${asPath}`; // example: Subscribe - /research
     const gaEventLabel = `Success ${salesforceSourceCode}`; // example: Success research
@@ -71,13 +71,22 @@ export default function EmailSubscription({
         const response = await fetch(endpoint, options);
         const result = await response.json();
 
+        // Google Analytics.
         window.gtag("event", gaEventActionName, {
           event_category: gaEventCategory,
           event_label: gaEventLabel,
         });
-        // Adobe Analytics
+
+        window.gtag("event", gaEventActionName, {
+          event_category: gaEventCategory,
+          event_label: gaEventLabel,
+        });
+
+        // Adobe Analytics.
+        // Clear the data layer of previous values.
         window.adobeDataLayer.push({ event_data: null });
 
+        // Push the new values from the click event.
         window.adobeDataLayer.push({
           event: "send_event",
           event_data: {
@@ -85,17 +94,13 @@ export default function EmailSubscription({
             data_list: [salesforceListId],
           },
         });
-        window.gtag("event", gaEventActionName, {
-          event_category: gaEventCategory,
-          event_label: gaEventLabel,
-        });
 
         setStatus(result.statusCode);
         setIsSubmitted(true);
       } catch (error) {
         setStatus("ERROR");
         setIsSubmitted(true);
-        /* @TODO maybe it would be usful to submit a 
+        /* @TODO maybe it would be usful to submit a
         GA event with label "Error - ${salesforceSourceCode}"?*/
       }
       setIsSubmitting(false);
