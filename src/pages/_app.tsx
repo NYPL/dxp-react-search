@@ -24,7 +24,7 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
       window.adobeDataLayer.push({
         event: "virtual_page_view",
         page_name: pageName,
-        site_section: undefined,
+        site_section: null,
       });
     };
     router.events.on("routeChangeComplete", handleRouteChange);
