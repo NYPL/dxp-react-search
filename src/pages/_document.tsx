@@ -61,7 +61,7 @@ export default function Document() {
               }
               window.adobeDataLayer.push({
                 page_name: pageName,
-                site_section: undefined,
+                site_section: null,
               });
             `,
           }}
