@@ -2,6 +2,16 @@
 
 ---
 
+### v0.9.9 - General Maintenance & Improvements, Section Front: Colorways and Card Button Links
+
+---
+
+- Add remaining colorways: [#420](https://github.com/NYPL/dxp-react-search/pull/420)
+- Add button links to Card component: [#422](https://github.com/NYPL/dxp-react-search/pull/422)
+- Fix for advocacy script not loading: [#423](https://github.com/NYPL/dxp-react-search/pull/423)
+
+---
+
 ### v0.9.8 - General Maintenance & Improvements, Section Front Extensions
 
 ---
