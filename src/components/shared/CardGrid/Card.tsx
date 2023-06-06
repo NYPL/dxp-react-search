@@ -46,6 +46,8 @@ export default function Card({
   isCentered,
   isBordered = false,
 }: CardProps) {
+  const isButtonLinkCard = buttonLinks && buttonLinks.length > 0 ? true : false;
+
   return (
     <DsCard
       id={id}
@@ -60,16 +62,21 @@ export default function Card({
       isBordered={isBordered}
       // Override the card-body width for column layout with button links.
       {...(layout === "column" &&
-        buttonLinks && {
+        isButtonLinkCard && {
           sx: {
             // Override the card-body width to 100% to allow for proper centering of buttons.
             ".card-body": { width: "100%" },
           },
         })}
     >
-      <CardHeading level="three">
-        {href && <Link href={href}>{heading}</Link>}
-      </CardHeading>
+      {/* If the card has button links, don't render a link inside the heading. */}
+      {isButtonLinkCard ? (
+        <CardHeading level="three">{heading}</CardHeading>
+      ) : (
+        <CardHeading level="three">
+          {href && <Link href={href}>{heading}</Link>}
+        </CardHeading>
+      )}
       <CardContent>
         {subHeading && subHeading}
         {description && (
@@ -79,7 +86,7 @@ export default function Card({
             }}
           />
         )}
-        {buttonLinks && (
+        {buttonLinks && buttonLinks.length > 0 && (
           <Flex
             as="ul"
             direction={{ sm: "column", md: "row" }}
