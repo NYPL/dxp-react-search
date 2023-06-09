@@ -2,6 +2,14 @@
 
 ---
 
+### v0.9.10 - Section Front: App Buttons Height Change
+
+---
+
+- Set app buttons to 48px height: [#425](https://github.com/NYPL/dxp-react-search/pull/425)
+
+---
+
 ### v0.9.9 - General Maintenance & Improvements, Section Front: Colorways and Card Button Links
 
 ---
