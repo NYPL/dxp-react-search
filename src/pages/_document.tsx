@@ -56,12 +56,14 @@ export default function Document() {
             __html: `
               window.adobeDataLayer = [];
               let pageName = document.title.split("|")[0];
+              let siteSection = null;
               if (window.location.pathname === "/") {
                 pageName = "Home"
+                siteSection = "Homepage"
               }
               window.adobeDataLayer.push({
                 page_name: pageName,
-                site_section: null,
+                site_section: siteSection,
               });
             `,
           }}
