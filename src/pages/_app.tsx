@@ -5,27 +5,55 @@ const { NEXT_PUBLIC_GA_TRACKING_ID } = process.env;
 import "./../styles/main.scss";
 import AppLayout from "./../components/shared/layouts/AppLayout";
 import Error from "./_error";
+import getSiteSection from "../utils/getSiteSection";
 
 export default function ScoutApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  // When next js routes change, send data to GA.
+
+  const submitAdobePageView = (
+    title: string,
+    pathname: string,
+    bundle: string
+  ) => {
+    window.adobeDataLayer.push({
+      page_name: null,
+      site_section: null,
+    });
+
+    const pageName =
+      title === "The New York Public Library" ? "Home" : title.split("|")[0];
+
+    const siteSection = getSiteSection(pathname, bundle);
+
+    window.adobeDataLayer.push({
+      event: "virtual_page_view",
+      page_name: pageName,
+      site_section: siteSection,
+    });
+  };
+
+  // Adobe Analytics: Virtual page view.
+  useEffect(() => {
+    submitAdobePageView(
+      document.title,
+      window.location.pathname,
+      pageProps.bundle
+    );
+  }, []);
+
+  // When next js routes change, send data to GA/ AA.
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       // Google Analytics: Virtual page view.
       window.gtag("config", NEXT_PUBLIC_GA_TRACKING_ID, {
         page_path: url,
       });
-      // Adobe Analytics: Virtual page view.
-      window.adobeDataLayer.push({
-        page_name: null,
-        site_section: null,
-      });
-      const pageName = document.title.split("|")[0];
-      window.adobeDataLayer.push({
-        event: "virtual_page_view",
-        page_name: pageName,
-        site_section: null,
-      });
+
+      submitAdobePageView(
+        document.title,
+        window.location.pathname,
+        pageProps.bundle
+      );
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
