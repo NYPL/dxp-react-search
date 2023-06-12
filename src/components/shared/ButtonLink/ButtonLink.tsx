@@ -36,12 +36,7 @@ export default function ButtonLink({ id, link, icon }: ButtonLinkProps) {
           id="logo-id"
           name={iconName}
           size="small"
-          // Google play logo is not the same height as apple app store logo.
-          {...(icon === "google_play" && {
-            sx: {
-              maxWidth: "185px",
-            },
-          })}
+          maxHeight="48px"
         />
       </Link>
     );
