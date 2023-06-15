@@ -91,6 +91,8 @@ export default function EmailSubscription({
           event: "send_event",
           event_data: {
             name: "email_signup",
+            serialization_id: "serialization id",
+            platform: salesforceSourceCode,
             data_list: [salesforceListId],
           },
         });
