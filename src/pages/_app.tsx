@@ -20,7 +20,7 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
         page_name: null,
         site_section: null,
       });
-      const pageName = document.title.split("|")[0];
+      const pageName = document.title.split("|")[0].trim();
       window.adobeDataLayer.push({
         event: "virtual_page_view",
         page_name: pageName,

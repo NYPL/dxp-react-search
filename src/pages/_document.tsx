@@ -55,15 +55,13 @@ export default function Document() {
           dangerouslySetInnerHTML={{
             __html: `
               window.adobeDataLayer = [];
-              let pageName = document.title.split("|")[0];
-              let siteSection = null;
+              let pageName = document.title.split("|")[0].trim();
               if (window.location.pathname === "/") {
                 pageName = "Home"
-                siteSection = "Homepage"
               }
               window.adobeDataLayer.push({
                 page_name: pageName,
-                site_section: siteSection,
+                site_section: null,
               });
             `,
           }}
