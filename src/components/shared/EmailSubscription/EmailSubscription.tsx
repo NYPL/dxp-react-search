@@ -77,11 +77,6 @@ export default function EmailSubscription({
           event_label: gaEventLabel,
         });
 
-        window.gtag("event", gaEventActionName, {
-          event_category: gaEventCategory,
-          event_label: gaEventLabel,
-        });
-
         // Adobe Analytics.
         // Clear the data layer of previous values.
         window.adobeDataLayer.push({ event_data: null });
