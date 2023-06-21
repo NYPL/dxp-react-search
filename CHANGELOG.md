@@ -2,6 +2,14 @@
 
 ---
 
+### v0.9.11 - Adobe analytics setup
+
+---
+
+- Adds adobe analytics integration: [#424](https://github.com/NYPL/dxp-react-search/pull/424)
+
+---
+
 ### v0.9.10 - Section Front: App Buttons Height Change
 
 ---
