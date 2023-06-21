@@ -2,6 +2,7 @@ const {
   NEXT_PUBLIC_GTM_TRACKING_ID,
   NEXT_PUBLIC_GA_TRACKING_ID,
   NEXT_PUBLIC_SERVER_ENV,
+  NEXT_PUBLIC_ADOBE_LAUNCH_URL,
 } = process.env;
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
@@ -33,17 +34,41 @@ export default function Document() {
           id="google-tag-data-layer"
           dangerouslySetInnerHTML={{
             __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
-                    gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
-                      page_path: window.location.pathname,
-                      'groups':'default',
-                      'anonymize_ip':true
-                    });
-                  `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
+              gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+                'groups':'default',
+                'anonymize_ip':true
+              });
+            `,
           }}
+          strategy="afterInteractive"
+        />
+
+        {/* Adobe Analytics: Initial data layer definition. */}
+        <Script
+          id="adobe-analytics-data-layer"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.adobeDataLayer = [];
+              let pageName = document.title.split("|")[0].trim();
+              if (window.location.pathname === "/") {
+                pageName = "Home"
+              }
+              window.adobeDataLayer.push({
+                page_name: pageName,
+                site_section: null,
+              });
+            `,
+          }}
+        />
+        {/* Adobe Analytics: Add launch tag manager script. */}
+        <Script
+          src={NEXT_PUBLIC_ADOBE_LAUNCH_URL}
           strategy="afterInteractive"
         />
         {/* NYPL Header */}

@@ -31,15 +31,41 @@ const HomePageLink = React.forwardRef<
     event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement, MouseEvent>
   ) => {
     event.preventDefault;
-    const gaEventCategory = "Homepage";
 
+    // Google Analytics: Event CTA datalayer.
     if (window !== undefined) {
+      const gaEventCategory = "Homepage";
+
       if (typeof window.gtag === "function") {
         window.gtag("event", gaEventActionName, {
           event_category: gaEventCategory,
           event_label: href,
         });
       }
+    }
+
+    // Adobe analytics: Event CTA data layer.
+    if (window !== undefined) {
+      let ctaText = undefined;
+      if (typeof children === "string") {
+        ctaText = children;
+      }
+
+      // Clear the data layer of previous values.
+      window.adobeDataLayer.push({ event_data: null });
+
+      // Push the new values from the click event.
+      window.adobeDataLayer.push({
+        event: "send_event",
+        event_data: {
+          name: "cta_click",
+          cta_section: "Homepage",
+          cta_subsection: gaEventActionName,
+          cta_text: ctaText,
+          cta_position: undefined,
+          destination_url: href || "no value passed",
+        },
+      });
     }
   };
 
