@@ -14,7 +14,10 @@ export const typeDefs = gql`
     mainContent: [LandingPageMainContent]
   }
 
-  union LandingPageMainContent = Text | LandingPageFeaturedCard
+  union LandingPageMainContent =
+      Text
+    | LandingPageFeaturedCard
+    | LandingPageCardGrid
 
   # Resolves to the featured_card paragraph type in Drupal.
   type LandingPageFeaturedCard {
@@ -27,6 +30,12 @@ export const typeDefs = gql`
     link: String
     linkText: String
     bgColor: String
+  }
+
+  type LandingPageCardGrid {
+    id: ID!
+    type: String!
+    items: [LandingPageFeaturedCard]!
   }
 
   type LandingPageConnection {

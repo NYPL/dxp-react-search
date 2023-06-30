@@ -15,8 +15,11 @@ const landingPageResolver = {
       const includedFields = [
         "field_ers_media_image.field_media_image",
         "field_main_content",
-        // For the featured_card image fiel
+        // For the featured_card image field
         "field_main_content.field_ers_media_item.field_media_image",
+        // Campaign Card Grid
+        "field_main_content.field_ern_cards",
+        "field_main_content.field_ern_cards.field_ers_media_item.field_media_image",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(

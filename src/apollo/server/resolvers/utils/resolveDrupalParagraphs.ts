@@ -85,6 +85,20 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
+        item.type === "paragraph--featured_card" &&
+        typesInQuery.includes("LandingPageFeaturedCard")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
+        item.type === "paragraph--card_grid" &&
+        typesInQuery.includes("LandingPageCardGrid")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
         item.type === "paragraph--google_map" &&
         typesInQuery.includes("GoogleMapEmbed")
       ) {
@@ -108,13 +122,6 @@ export default function resolveDrupalParagraphs(
       if (
         item.type === "paragraph--external_search" &&
         typesInQuery.includes("ExternalSearch")
-      ) {
-        accumulator.push(item);
-      }
-
-      if (
-        item.type === "paragraph--featured_card" &&
-        typesInQuery.includes("LandingPageFeaturedCard")
       ) {
         accumulator.push(item);
       }
@@ -449,6 +456,67 @@ export default function resolveDrupalParagraphs(
         };
         break;
         */
+      case "paragraph--featured_card":
+        // Alter the color scheme value from Drupal.
+        let bgColor = item.field_field_lts_color_scheme;
+        if (item.field_field_lts_color_scheme === "primary_alt") {
+          bgColor = "primaryAlt";
+        } else if (item.field_field_lts_color_scheme === "primary_gray") {
+          bgColor = "primaryGray";
+        }
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          heading: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          image:
+            item.field_ers_media_item.data === null
+              ? null
+              : resolveImage(item.field_ers_media_item),
+          imageDirection: item.field_lts_image_direction.replace("image_", ""),
+          bgColor: bgColor,
+          link: item.field_lns_see_all?.url,
+          linkText: item.field_lns_see_all?.title,
+        };
+        break;
+      case "paragraph--card_grid":
+        const cardGridItems: ResolvedParagraph[] = [];
+        Array.isArray(item.field_ern_cards) &&
+          item.field_ern_cards.map((cardItem: any) => {
+            let bgColor = cardItem.field_field_lts_color_scheme;
+            if (cardItem.field_field_lts_color_scheme === "primary_alt") {
+              bgColor = "primaryAlt";
+            } else if (
+              cardItem.field_field_lts_color_scheme === "primary_gray"
+            ) {
+              bgColor = "primaryGray";
+            }
+            cardGridItems.push({
+              id: cardItem.id,
+              heading: cardItem.field_ts_heading,
+              description: cardItem.field_tfls_summary_description
+                ? cardItem.field_tfls_summary_description.processed
+                : null,
+              image:
+                cardItem.field_ers_media_item.data === null
+                  ? null
+                  : resolveImage(cardItem.field_ers_media_item),
+              imageDirection: cardItem.field_lts_image_direction.replace(
+                "image_",
+                ""
+              ),
+              bgColor: bgColor,
+              link: cardItem.field_lns_see_all?.url,
+              linkText: cardItem.field_lns_see_all?.title,
+            });
+          });
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          items: cardGridItems,
+        };
+        break;
+
       case "paragraph--donation":
         paragraphComponent = {
           id: item.id,
@@ -490,30 +558,6 @@ export default function resolveDrupalParagraphs(
               : null,
         };
         break;
-      case "paragraph--featured_card":
-        // Alter the color scheme value from Drupal.
-        let bgColor = item.field_field_lts_color_scheme;
-        if (item.field_field_lts_color_scheme === "primary_alt") {
-          bgColor = "primaryAlt";
-        } else if (item.field_field_lts_color_scheme === "primary_gray") {
-          bgColor = "primaryGray";
-        }
-        paragraphComponent = {
-          id: item.id,
-          type: paragraphTypeName,
-          heading: item.field_ts_heading,
-          description: item.field_tfls_description?.processed,
-          image:
-            item.field_ers_media_item.data === null
-              ? null
-              : resolveImage(item.field_ers_media_item),
-          imageDirection: item.field_lts_image_direction.replace("image_", ""),
-          bgColor: bgColor,
-          link: item.field_lns_see_all?.url,
-          linkText: item.field_lns_see_all?.title,
-        };
-        break;
-
       case "paragraph--jumbotron":
         paragraphComponent = {
           id: item.id,
