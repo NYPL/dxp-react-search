@@ -113,6 +113,13 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
+        item.type === "paragraph--featured_card" &&
+        typesInQuery.includes("LandingPageFeaturedCard")
+      ) {
+        accumulator.push(item);
+      }
+
+      if (
         item.type === "paragraph--jumbotron" &&
         typesInQuery.includes("Jumbotron")
       ) {

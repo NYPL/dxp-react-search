@@ -41,6 +41,9 @@ export default function resolveParagraphTypes(
     case "external_search":
       resolvedObjectType = "ExternalSearch";
       break;
+    case "featured_card":
+      resolvedObjectType = "LandingPageFeaturedCard";
+      break;
     case "email_subscription":
       resolvedObjectType = "EmailSubscription";
       break;

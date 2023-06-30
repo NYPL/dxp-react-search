@@ -18,6 +18,7 @@ import { typeDefs as LocationTypes } from "./type-defs/location";
 import { typeDefs as PressReleaseTypes } from "./type-defs/press";
 import { typeDefs as HomePageTypes } from "./type-defs/homepage";
 import { typeDefs as SectionFrontTypes } from "./type-defs/sectionFront";
+import { typeDefs as LandingPageTypes } from "./type-defs/landingPage";
 // Mutations
 import { typeDefs as SendEmailTypes } from "./type-defs/sendEmail";
 
@@ -39,6 +40,7 @@ export const schema = makeExecutableSchema({
     PressReleaseTypes,
     HomePageTypes,
     SectionFrontTypes,
+    LandingPageTypes,
     SendEmailTypes,
   ],
   resolvers,

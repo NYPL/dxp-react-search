@@ -15,6 +15,7 @@ import locationResolver from "./locationResolver";
 import pressReleaseResolver from "./pressReleaseResolver";
 import homePageResolver from "./homePageResolver";
 import sectionFrontResolver from "./sectionFrontResolver";
+import landingPageResesolver from "./landingPageResolver";
 // Mutations
 import sendEmailResolver from "./sendEmailResolver";
 
@@ -26,6 +27,7 @@ export const resolvers = mergeResolvers([
   pressReleaseResolver,
   homePageResolver,
   sectionFrontResolver,
+  landingPageResesolver,
   termResolver,
   onlineResourceResolver,
   searchResolver,
