@@ -201,6 +201,11 @@ export default function EventCollection({
                     {...featuredEvent}
                     id={`featured-${featuredEvent.id}-mobile`}
                     variant="event-card"
+                    analyticsEventActions={{
+                      cta_subsection: `${title} - ${eventCategory}`,
+                      cta_text: featuredEvent.title,
+                      cta_position: "1",
+                    }}
                     gaEventActionName={`${title} - ${eventCategory} - ${featuredEvent.title} - mobile`}
                   />
                 </Box>
