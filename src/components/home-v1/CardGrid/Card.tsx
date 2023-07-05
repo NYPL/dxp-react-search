@@ -4,6 +4,7 @@ import { useStyleConfig } from "@chakra-ui/system";
 import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import Image, { ImageType } from "./../../shared/Image";
 import HomePageLink, { AnalyticsEventActions } from "../HomePageLink";
+
 export interface CardItem {
   id: string;
   title: string;
