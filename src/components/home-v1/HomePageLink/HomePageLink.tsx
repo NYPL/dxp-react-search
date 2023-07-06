@@ -8,8 +8,6 @@ export interface HomePageLinkProps {
   children?: React.ReactNode;
   /** The `href` attribute for the anchor element. */
   href?: string;
-  /** The value that will appear as the event action in Google Analytics Event reports. */
-  gaEventActionName?: string;
   /** Infroms styling of links in ComponentWrapper */
   variant?: string;
   /** */
@@ -20,8 +18,7 @@ const HomePageLink = React.forwardRef<
   HTMLDivElement & HTMLAnchorElement,
   HomePageLinkProps
 >((props, ref?) => {
-  const { id, children, href, gaEventActionName, variant, tabIndex, ...rest } =
-    props;
+  const { id, children, href, variant, tabIndex, ...rest } = props;
 
   const hoverStyle = useStyleConfig("Link", {
     variant,
@@ -31,18 +28,6 @@ const HomePageLink = React.forwardRef<
     event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement, MouseEvent>
   ) => {
     event.preventDefault;
-
-    // Google Analytics: Event CTA datalayer.
-    if (window !== undefined) {
-      const gaEventCategory = "Homepage";
-
-      if (typeof window.gtag === "function") {
-        window.gtag("event", gaEventActionName, {
-          event_category: gaEventCategory,
-          event_label: href,
-        });
-      }
-    }
 
     // Adobe analytics: Event CTA data layer.
     if (window !== undefined) {
@@ -60,7 +45,8 @@ const HomePageLink = React.forwardRef<
         event_data: {
           name: "cta_click",
           cta_section: "Homepage",
-          cta_subsection: gaEventActionName,
+          // Subsection will be fixed with PR 427: https://github.com/NYPL/dxp-react-search/pull/427
+          // cta_subsection: gaEventActionName,
           cta_text: ctaText,
           cta_position: undefined,
           destination_url: href || "no value passed",

@@ -76,7 +76,6 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
             id={`hero-heading-link-${id}`}
             href={url}
             aria-label={`${tag}, link to ${title}, ${description}`}
-            gaEventActionName={"Hero"}
           />
           <Heading as="h1">{title}</Heading>
           <Text>{description}</Text>
@@ -85,7 +84,6 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
               aria-label={title}
               id={`hero-button-link-${id}`}
               href={url}
-              gaEventActionName={"Hero button"}
               tabIndex={-1}
             >
               <Box className="svg-wrapper">

@@ -17,10 +17,9 @@ interface CardProps {
   item: CardItem;
   variant?: "blog-card" | "updates-card";
   size?: any;
-  gaEventActionName: string;
 }
 
-function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
+function Card({ item, variant, size = "md" }: CardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant, size });
   // Generate describedBy string (used by Blog Card)
@@ -47,9 +46,7 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
             "aria-describedby": describedByIdsString,
           })}
         >
-          <HomePageLink href={item.url} gaEventActionName={gaEventActionName}>
-            {item.title}
-          </HomePageLink>
+          <HomePageLink href={item.url}>{item.title}</HomePageLink>
         </Heading>
         <Box className="details">
           {item.description && (
@@ -62,7 +59,6 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
           id={`card-image-link-${item.id}`}
           href={item.url}
           aria-label={`${item.title}-image`}
-          gaEventActionName={gaEventActionName}
           tabIndex={-1}
         >
           {/* 

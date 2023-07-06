@@ -16,7 +16,6 @@ export interface EventCardProps {
   weight: number;
   variant: string;
   size?: string;
-  gaEventActionName: string;
 }
 
 export default function EventCard({
@@ -28,7 +27,6 @@ export default function EventCard({
   location,
   variant,
   size,
-  gaEventActionName,
 }: EventCardProps) {
   const styles: any = useStyleConfig("Event", { variant, size });
 
@@ -36,11 +34,7 @@ export default function EventCard({
     <Grid id={`event-card-${id}`} sx={styles}>
       <GridItem className="textBox">
         <Heading as="h3">
-          <HomePageLink
-            id={`event-card-heading-link-${id}`}
-            href={link}
-            gaEventActionName={gaEventActionName}
-          >
+          <HomePageLink id={`event-card-heading-link-${id}`} href={link}>
             {title}
           </HomePageLink>
         </Heading>
@@ -55,7 +49,6 @@ export default function EventCard({
           href={link}
           aria-label={`${title}-image`}
           tabIndex={-1}
-          gaEventActionName={gaEventActionName}
         >
           {image && (
             <Image

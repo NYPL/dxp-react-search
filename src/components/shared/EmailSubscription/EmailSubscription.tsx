@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useRouter } from "next/router";
 import { Spinner } from "@chakra-ui/react";
 import EmailSubscriptionWrapper from "./EmailSubscriptionWrapper";
 import EmailSubscriptionForm from "./EmailSubscriptionForm";
@@ -39,15 +38,9 @@ export default function EmailSubscription({
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const [status, setStatus] = React.useState<StatusCode>();
-  const { asPath } = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    // Create dynamic Google Analytics values.
-    const gaEventCategory = "Email Subscription Forms";
-    const gaEventActionName = `Subscribe - ${asPath}`; // example: Subscribe - /research
-    const gaEventLabel = `Success ${salesforceSourceCode}`; // example: Success research
 
     setIsSubmitting(true);
     if (formBaseUrl !== undefined) {
@@ -71,12 +64,6 @@ export default function EmailSubscription({
         const response = await fetch(endpoint, options);
         const result = await response.json();
 
-        // Google Analytics.
-        window.gtag("event", gaEventActionName, {
-          event_category: gaEventCategory,
-          event_label: gaEventLabel,
-        });
-
         // Adobe Analytics.
         // Clear the data layer of previous values.
         window.adobeDataLayer.push({ event_data: null });
@@ -97,8 +84,7 @@ export default function EmailSubscription({
       } catch (error) {
         setStatus("ERROR");
         setIsSubmitted(true);
-        /* @TODO maybe it would be usful to submit a
-        GA event with label "Error - ${salesforceSourceCode}"?*/
+        /* @TODO maybe it would be usful to submit a "Error - ${salesforceSourceCode}"?*/
       }
       setIsSubmitting(false);
     }

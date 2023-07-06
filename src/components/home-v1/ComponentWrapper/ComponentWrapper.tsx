@@ -95,7 +95,6 @@ function ComponentWrapper({
               <HomePageLink
                 id={`component-wrapper-heading-link-${id}`}
                 href={link}
-                gaEventActionName="Heading"
                 variant={
                   hoverStyle === true
                     ? "link-hover-style"
@@ -126,7 +125,6 @@ function ComponentWrapper({
                 id={`component-wrapper-seeMore-link-${id}`}
                 aria-label={`see more of ${title}`}
                 href={seeMore.link}
-                gaEventActionName="See More"
                 variant={
                   hoverStyle === true
                     ? "see-more-hover-style"

@@ -55,7 +55,6 @@ function CardGrid({
                 item={item}
                 size={size || { base: "sm", md: "lg" }}
                 variant={cardVariant}
-                gaEventActionName={`${title} - ${item.title} - ${i + 1}`}
               />
             </GridItem>
           ))}

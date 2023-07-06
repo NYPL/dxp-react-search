@@ -18,10 +18,9 @@ export interface SlideshowCardItem {
 
 interface SlideshowCardProps {
   item: SlideshowCardItem;
-  gaEventActionName: string;
 }
 
-function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
+function SlideshowCard({ item }: SlideshowCardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant: "slide-show-card" });
   // Generate describedBy string
@@ -52,7 +51,6 @@ function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
           <HomePageLink
             id={`slideshow-card-heading-link-${item.id}`}
             href={item.url}
-            gaEventActionName={gaEventActionName}
           >
             {item.title}
           </HomePageLink>
@@ -71,7 +69,6 @@ function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
         <HomePageLink
           id={`slideshow-card-image-link-${item.id}`}
           href={item.url}
-          gaEventActionName={gaEventActionName}
           aria-label={`${item.title}-image`}
           tabIndex={-1}
         >

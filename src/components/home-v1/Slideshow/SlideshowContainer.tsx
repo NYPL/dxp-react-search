@@ -20,7 +20,8 @@ function SlideshowContainer({
   currentSlide,
   nextSlide,
   prevSlide,
-  sectionTitle,
+  // sectionTitle will be used to AA cta_events in PR 427: https://github.com/NYPL/dxp-react-search/pull/427
+  // sectionTitle,
   isMobileOrTablet,
 }: SlideshowContainerProps) {
   const changeSlide = (i: number) => {
@@ -67,12 +68,7 @@ function SlideshowContainer({
                 onFocus={() => changeSlide(i)}
                 onPointerMove={(e) => handleTouchSlideChange(e)}
               >
-                <SlideshowCard
-                  item={item}
-                  gaEventActionName={`${sectionTitle} - ${item.title} - ${
-                    i + 1
-                  }`}
-                />
+                <SlideshowCard item={item} />
               </GridItem>
             );
           })}

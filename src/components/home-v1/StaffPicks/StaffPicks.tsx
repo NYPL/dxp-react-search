@@ -39,11 +39,7 @@ function StaffPicks({ id, title, link, items, seeMore }: StaffPicksProps) {
       >
         {items &&
           items.map((item: StaffPicksItem, i) => (
-            <StaffPick
-              item={item}
-              key={`staff-pick-item-key-${i}`}
-              gaEventActionName={`${title} - ${i + 1}`}
-            />
+            <StaffPick item={item} key={`staff-pick-item-key-${i}`} />
           ))}
       </Grid>
     </ComponentWrapper>

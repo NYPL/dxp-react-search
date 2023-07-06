@@ -201,7 +201,6 @@ export default function EventCollection({
                     {...featuredEvent}
                     id={`featured-${featuredEvent.id}-mobile`}
                     variant="event-card"
-                    gaEventActionName={`${title} - ${eventCategory} - ${featuredEvent.title} - mobile`}
                   />
                 </Box>
               );

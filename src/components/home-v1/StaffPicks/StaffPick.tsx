@@ -14,10 +14,9 @@ const QuoteBg = () => {
 
 interface StaffPickProps {
   item: StaffPicksItem;
-  gaEventActionName: string;
 }
 
-function StaffPick({ item, gaEventActionName }: StaffPickProps) {
+function StaffPick({ item }: StaffPickProps) {
   const { id, quote, image, url, staffName, staffLocation } = item;
 
   // @TODO fix style for StaffPick link
@@ -38,12 +37,7 @@ function StaffPick({ item, gaEventActionName }: StaffPickProps) {
         position="relative"
       >
         <QuoteBg />
-        <HomePageLink
-          id={`staff-pick-card-link-${id}`}
-          href={url}
-          gaEventActionName={gaEventActionName}
-          {...style}
-        >
+        <HomePageLink id={`staff-pick-card-link-${id}`} href={url} {...style}>
           <Box
             display="flex"
             position="absolute"

@@ -13,8 +13,9 @@ interface EventCollectionTabPanelContentProps {
 export default function EventCollectionTabPanelContent({
   id,
   events,
-  sectionTitle,
-}: EventCollectionTabPanelContentProps) {
+}: // sectionTitle wil be used for the AA cta-event updated in PR 427: https://github.com/NYPL/dxp-react-search/pull/427
+// sectionTitle,
+EventCollectionTabPanelContentProps) {
   // Get only first 4 events.
   // Create a new array.
 
@@ -50,7 +51,6 @@ export default function EventCollectionTabPanelContent({
             id={`featured-${featuredEvent.id}`}
             variant="event-card-feaured"
             size="xl"
-            gaEventActionName={`${sectionTitle} - ${featuredEvent.title} - 1`}
           />
         )}
       </GridItem>
@@ -64,13 +64,7 @@ export default function EventCollectionTabPanelContent({
               display={{ base: "none", lg: "block" }}
               colStart={2}
             >
-              <EventCard
-                {...event}
-                variant="event-card"
-                gaEventActionName={`${sectionTitle} - ${event.title} - ${
-                  i + 2
-                }`}
-              />
+              <EventCard {...event} variant="event-card" />
             </GridItem>
           );
         })}
@@ -87,9 +81,6 @@ export default function EventCollectionTabPanelContent({
                 {...event}
                 id={`${event.id}-tablet`}
                 variant="event-card"
-                gaEventActionName={`${sectionTitle} - ${event.title} - ${
-                  i + 1
-                }`}
               />
             </GridItem>
           );

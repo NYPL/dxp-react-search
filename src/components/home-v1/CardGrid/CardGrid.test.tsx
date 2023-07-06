@@ -96,13 +96,11 @@ const seeMore = { text: "see More", link: "https://www.nypl.org/" };
 
 describe("Card tests", () => {
   it("should pass axe accessibility tests", async () => {
-    const { container } = render(
-      <Card item={item} gaEventActionName={"cardTest"} />
-    );
+    const { container } = render(<Card item={item} />);
     expect(await axe(container)).toHaveNoViolations();
   });
   it("should render a h3 with the title", () => {
-    render(<Card item={item} gaEventActionName={"cardTest"} />);
+    render(<Card item={item} />);
     expect(
       screen.getByRole("heading", { name: /Test/i, level: 3 })
     ).toBeInTheDocument();
@@ -110,16 +108,14 @@ describe("Card tests", () => {
   // Image should have alt text or have role="none"/"presentatio"
   // it("should render an image", () => {});
   it("should add a aria-describedby with additional information", () => {
-    render(<Card item={item} gaEventActionName={"cardTest"} />);
+    render(<Card item={item} />);
     expect(screen.getByRole("heading", { name: /Test/i })).toHaveAttribute(
       "aria-describedby",
       "card-description-test-id-1"
     );
   });
   it("should render the UI snapshot correctly", () => {
-    const basicCard = renderer
-      .create(<Card item={item} gaEventActionName={"cardTest"} />)
-      .toJSON();
+    const basicCard = renderer.create(<Card item={item} />).toJSON();
     expect(basicCard).toMatchSnapshot();
   });
 });
