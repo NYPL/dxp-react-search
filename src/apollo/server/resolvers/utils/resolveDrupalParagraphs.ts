@@ -92,7 +92,8 @@ export default function resolveDrupalParagraphs(
       }
 
       if (
-        item.type === "paragraph--card_grid" &&
+        (item.type === "paragraph--card_grid" ||
+          item.type === "paragraph--card_grid_secondary") &&
         typesInQuery.includes("LandingPageCardGrid")
       ) {
         accumulator.push(item);
@@ -480,6 +481,7 @@ export default function resolveDrupalParagraphs(
         };
         break;
       case "paragraph--card_grid":
+      case "paragraph--card_grid_secondary":
         const cardGridItems: ResolvedParagraph[] = [];
         Array.isArray(item.field_ern_cards) &&
           item.field_ern_cards.map((cardItem: any) => {

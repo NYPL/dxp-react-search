@@ -45,6 +45,7 @@ export default function resolveParagraphTypes(
       resolvedObjectType = "LandingPageFeaturedCard";
       break;
     case "card_grid":
+    case "card_grid_secondary":
       resolvedObjectType = "LandingPageCardGrid";
       break;
     case "email_subscription":
