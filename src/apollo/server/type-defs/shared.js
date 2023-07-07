@@ -164,6 +164,7 @@ export const typeDefs = gql`
     heading: String
     description: String
     items: [CatalogListItem]!
+    secondaryItems: [CatalogListItem]
   }
 
   type CatalogListItem {
@@ -172,6 +173,8 @@ export const typeDefs = gql`
     description: String
     isbn: String
     bNumber: String
+    eBookbNumber: String
+    author: String
   }
 
   type Donation {
