@@ -277,7 +277,9 @@ export default function resolveDrupalParagraphs(
           id: item.id,
           type: paragraphTypeName,
           heading: item.field_ts_heading,
-          description: item.field_tfls_summary_description,
+          description: item.field_tfls_summary_description
+            ? item.field_tfls_summary_description.processed
+            : null,
           images: slideshowImages,
         };
         break;
@@ -431,8 +433,7 @@ export default function resolveDrupalParagraphs(
               : null,
         };
         break;
-      // @TODO Add back later.
-      /*case "paragraph--catalog_list":
+      case "paragraph--catalog_list":
         const catalogItems: ResolvedParagraph[] = [];
         Array.isArray(item.field_erm_remote_items) &&
           item.field_erm_remote_items.map((catalogItem: any) => {
@@ -443,11 +444,24 @@ export default function resolveDrupalParagraphs(
                 ? catalogItem.field_tfls_summary_description.processed
                 : null,
               isbn: catalogItem.field_field_ts_isbn,
-              bNumber: catalogItem.field_ts_id
-                ? catalogItem.field_ts_id
-                : catalogItem.field_ts_ebook_id,
+              bNumber: catalogItem.field_ts_id,
+              eBookbNumber: catalogItem.field_ts_ebook_id,
+              author: catalogItem.field_ts_author_name,
             });
           });
+        const secondaryCatalogItems: ResolvedParagraph[] = [];
+        const secondaryItem = item.field_ers_remote_item;
+        secondaryCatalogItems.push({
+          id: secondaryItem.id,
+          title: secondaryItem.title,
+          description: secondaryItem.field_tfls_summary_description
+            ? secondaryItem.field_tfls_summary_description.processed
+            : null,
+          isbn: secondaryItem.field_field_ts_isbn,
+          bNumber: secondaryItem.field_ts_id,
+          eBookbNumber: secondaryItem.field_ts_ebook_id,
+          author: secondaryItem.field_ts_author_name,
+        });
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
@@ -456,9 +470,9 @@ export default function resolveDrupalParagraphs(
             ? item.field_tfls_summary_description.processed
             : null,
           items: catalogItems,
+          secondaryItems: secondaryCatalogItems,
         };
         break;
-        */
       case "paragraph--featured_card":
         // Alter the color scheme value from Drupal.
         let bgColor = item.field_field_lts_color_scheme;

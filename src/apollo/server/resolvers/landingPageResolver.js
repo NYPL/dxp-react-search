@@ -23,6 +23,9 @@ const landingPageResolver = {
         // Slideshow
         "field_main_content.field_erm_media_items",
         "field_main_content.field_erm_media_items.field_media_image",
+        // Catalog List
+        "field_main_content.field_erm_remote_items",
+        "field_main_content.field_ers_remote_item",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(
