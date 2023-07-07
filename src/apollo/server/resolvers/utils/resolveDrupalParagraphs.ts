@@ -270,12 +270,14 @@ export default function resolveDrupalParagraphs(
       case "paragraph--slideshow":
         const slideshowImages: any = [];
         item.field_erm_media_items.map((imageItem: any) => {
-          slideshowImages.push(imageItem);
+          const image = resolveImage(imageItem);
+          slideshowImages.push(image);
         });
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
           heading: item.field_ts_heading,
+          description: item.field_tfls_summary_description,
           images: slideshowImages,
         };
         break;

@@ -20,6 +20,9 @@ const landingPageResolver = {
         // Campaign Card Grid
         "field_main_content.field_ern_cards",
         "field_main_content.field_ern_cards.field_ers_media_item.field_media_image",
+        // Slideshow
+        "field_main_content.field_erm_media_items",
+        "field_main_content.field_erm_media_items.field_media_image",
       ];
       const isPreview = args.preview ? true : false;
       const apiPath = getIndividualResourceJsonApiPath(

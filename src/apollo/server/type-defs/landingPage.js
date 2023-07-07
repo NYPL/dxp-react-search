@@ -18,6 +18,7 @@ export const typeDefs = gql`
       Text
     | LandingPageFeaturedCard
     | LandingPageCardGrid
+    | Slideshow
 
   # Resolves to the featured_card paragraph type in Drupal.
   type LandingPageFeaturedCard {
