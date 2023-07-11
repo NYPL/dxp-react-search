@@ -2,8 +2,7 @@ const {
   NEXT_PUBLIC_GTM_TRACKING_ID,
   NEXT_PUBLIC_GA_TRACKING_ID,
   NEXT_PUBLIC_ADOBE_LAUNCH_URL,
-  DS_GLOBAL_HEADER,
-  DS_GLOBAL_FOOTER,
+  NEXT_PUBLIC_SERVER_ENV,
 } = process.env;
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
@@ -14,6 +13,19 @@ import Script from "next/script";
  */
 
 export default function Document() {
+  // Set PROD or QA version of the remote header embed script.
+  // This will generate enviornment aware links in the header logins.
+  let nyplHeaderScript =
+    "https://ds-header.nypl.org/header.min.js?containerId=nypl-header";
+  let nyplFooterScript =
+    "https://ds-header.nypl.org/footer.min.js?containerId=nypl-footer";
+  if (NEXT_PUBLIC_SERVER_ENV !== "production") {
+    nyplHeaderScript =
+      "https://qa-ds-header.nypl.org/header.min.js?containerId=nypl-header";
+    nyplFooterScript =
+      "https://qa-ds-header.nypl.org/footer.min.js?containerId=nypl-footer";
+  }
+
   return (
     <Html lang="en">
       <Head>
@@ -65,18 +77,12 @@ export default function Document() {
         />
       </Head>
       <body>
-        <div id="nypl-header"></div>
-        <Script src={DS_GLOBAL_HEADER} strategy="afterInteractive" />
+        <Script src={nyplHeaderScript} strategy="afterInteractive" />
+        <Script src={nyplFooterScript} strategy="afterInteractive" />
         <Main />
         <NextScript />
         <Script
           src="https://assets.nypl.org/js/advocacy.js"
-          strategy="afterInteractive"
-        />
-        <div id="nypl-footer"></div>
-        <Script
-          type="module"
-          src={DS_GLOBAL_FOOTER}
           strategy="afterInteractive"
         />
       </body>
