@@ -2,6 +2,14 @@
 
 ---
 
+### v0.10.0 - New Global Header & Footer
+
+---
+
+- Adds new global header and footer scripts: [#428](https://github.com/NYPL/dxp-react-search/pull/428)
+
+---
+
 ### v0.9.11 - Adobe analytics setup
 
 ---
