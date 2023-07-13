@@ -1,6 +1,6 @@
 const {
-  NEXT_PUBLIC_GTM_TRACKING_ID,
-  NEXT_PUBLIC_GA_TRACKING_ID,
+  // NEXT_PUBLIC_GTM_TRACKING_ID,
+  // NEXT_PUBLIC_GA_TRACKING_ID,
   NEXT_PUBLIC_ADOBE_LAUNCH_URL,
   NEXT_PUBLIC_SERVER_ENV,
 } = process.env;
@@ -13,6 +13,7 @@ import Script from "next/script";
  */
 
 export default function Document() {
+  const NEXT_PUBLIC_GA_MEASUREMENT_ID = "GTM-RKWC";
   // Set PROD or QA version of the remote header embed script.
   // This will generate enviornment aware links in the header logins.
   let nyplHeaderScript =
@@ -31,7 +32,7 @@ export default function Document() {
       <Head>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
         <Script
@@ -41,8 +42,8 @@ export default function Document() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
-              gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
+              gtag('require', '${NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+              gtag('config', '${NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
                 page_path: window.location.pathname,
                 'groups':'default',
                 'anonymize_ip':true
