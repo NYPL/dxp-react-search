@@ -7,7 +7,7 @@ import AppLayout from "./../components/shared/layouts/AppLayout";
 import Error from "./_error";
 
 export default function ScoutApp({ Component, pageProps }: AppProps) {
-  const GA_MEASUREMENT_ID = "GTM-RKWC";
+  const GA_MEASUREMENT_ID = "G-VEXBPRSL67";
 
   const router = useRouter();
   // When next js routes change, send data to GA.

@@ -13,7 +13,7 @@ import Script from "next/script";
  */
 
 export default function Document() {
-  const GA_MEASUREMENT_ID = "GTM-RKWC";
+  const GA_MEASUREMENT_ID = "G-VEXBPRSL67";
   // Set PROD or QA version of the remote header embed script.
   // This will generate enviornment aware links in the header logins.
   let nyplHeaderScript =
@@ -42,11 +42,8 @@ export default function Document() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('require', '${GA_MEASUREMENT_ID}');
               gtag('config', '${GA_MEASUREMENT_ID}', {
                 page_path: window.location.pathname,
-                'groups':'default',
-                'anonymize_ip':true
               });
             `,
           }}
