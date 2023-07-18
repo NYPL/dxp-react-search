@@ -14,6 +14,7 @@ SENDGRID_EMAIL_ENABLE=true
 NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
 DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
 SALESFORCE_ENABLE=true
+NEXT_PUBLIC_ADOBE_LAUNCH_URL=https://assets.adobedtm.com/1a9376472d37/8519dfce636d/launch-672b7e7f98ee.min.js
 
 # Some of these env vars depend on QA instances for now, since on Pantheon there is technically no dedicated "sandbox" instance.
 if [ "$TRAVIS_BRANCH" == "sandbox" ]; then
@@ -27,6 +28,7 @@ if [ "$TRAVIS_BRANCH" == "sandbox" ]; then
   SENDGRID_EMAIL_ENABLE=true
   NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
   DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
+  NEXT_PUBLIC_ADOBE_LAUNCH_URL=https://assets.adobedtm.com/1a9376472d37/8519dfce636d/launch-bf8436264b01-development.min.js
 fi
 
 if [ "$TRAVIS_BRANCH" == "development" ]; then
@@ -40,6 +42,7 @@ if [ "$TRAVIS_BRANCH" == "development" ]; then
   SENDGRID_EMAIL_ENABLE=true
   NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
   DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
+  NEXT_PUBLIC_ADOBE_LAUNCH_URL=https://assets.adobedtm.com/1a9376472d37/8519dfce636d/launch-bf8436264b01-development.min.js
 fi
 
 if [ "$TRAVIS_BRANCH" == "qa" ]; then
@@ -53,6 +56,7 @@ if [ "$TRAVIS_BRANCH" == "qa" ]; then
   SENDGRID_EMAIL_ENABLE=true
   NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
   DRUPAL_CONSUMER_UUID=0dbf647e-972b-4235-890b-0a23a3201b4e
+  NEXT_PUBLIC_ADOBE_LAUNCH_URL=https://assets.adobedtm.com/1a9376472d37/8519dfce636d/launch-bf8436264b01-development.min.js
 fi
 
 echo -e "\nNEXT_PUBLIC_SERVER_ENV=$NEXT_PUBLIC_SERVER_ENV" >> .env
@@ -77,3 +81,5 @@ echo -e "\nSALESFORCE_CLIENT_SECRET=$SALESFORCE_CLIENT_SECRET" >> .env
 echo -e "\nSALESFORCE_AUTH_URL=$SALESFORCE_AUTH_URL" >> .env
 echo -e "\nSALESFORCE_ACCOUNT_ID=$SALESFORCE_ACCOUNT_ID" >> .env
 echo -e "\nSALESFORCE_ENABLE=$SALESFORCE_ENABLE" >> .env
+# Adobe analytics
+echo -e "\nNEXT_PUBLIC_ADOBE_LAUNCH_URL=$NEXT_PUBLIC_ADOBE_LAUNCH_URL" >> .env
