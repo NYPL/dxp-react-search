@@ -20,7 +20,7 @@ if [ "$TRAVIS_BRANCH" == "sandbox" ]; then
   NEXT_PUBLIC_SERVER_ENV=sandbox
   NEXT_PUBLIC_NYPL_DOMAIN=https://sandbox-scout.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
-  DRUPAL_API=https://qa-drupal.nypl.org
+  DRUPAL_API=https://pr1022-nypl1.pantheonsite.io
   GRAPHQL_API_URL=https://sandbox-scout.nypl.org/api/graphql
   NEXT_PUBLIC_GA_MEASUREMENT_ID=G-VEXBPRSL67
   ALLOWED_ORIGIN=https://sandbox-scout.nypl.org
