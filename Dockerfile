@@ -27,4 +27,4 @@ RUN cp -Rpf /app/.next /tmp/.next
 # Explicitly set port 3000 as open to requests.
 EXPOSE 3000
 
-CMD [ "sh", "provisioning/ecs-start" ]
+CMD [ "sh", "provisioning/app-start" ]
