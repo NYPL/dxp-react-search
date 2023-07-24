@@ -67,6 +67,11 @@ const nextConfig = {
       "ic.od-cdn.com",
     ],
   },
+  experimental: {
+    // Defaults to 50MB, disables the isr cache?
+    // @see https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#self-hosting-isr
+    isrMemoryCacheSize: 0,
+  },
 };
 
 module.exports = withPlugins([[withBundleAnalyzer]], nextConfig);
