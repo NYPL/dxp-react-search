@@ -5,10 +5,21 @@ const { NEXT_PUBLIC_GA_TRACKING_ID } = process.env;
 import "./../styles/main.scss";
 import AppLayout from "./../components/shared/layouts/AppLayout";
 import Error from "./_error";
+import submitAdobePageView from "../utils/submit-adobe-page-view";
 
 export default function ScoutApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  // When next js routes change, send data to GA.
+
+  // Adobe Analytics: trigger an initial virtual page view.
+  useEffect(() => {
+    submitAdobePageView(
+      document.title,
+      window.location.pathname,
+      pageProps.bundle
+    );
+  }, []);
+
+  // When next js routes change, send data to GA/ AA.
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       // Google Analytics: Virtual page view.
@@ -17,16 +28,11 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
       });
 
       // Adobe Analytics: Virtual page view.
-      window.adobeDataLayer.push({
-        page_name: null,
-        site_section: null,
-      });
-      const pageName = document.title.split("|")[0].trim();
-      window.adobeDataLayer.push({
-        event: "virtual_page_view",
-        page_name: pageName,
-        site_section: null,
-      });
+      submitAdobePageView(
+        document.title,
+        window.location.pathname,
+        pageProps.bundle
+      );
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
