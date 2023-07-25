@@ -68,7 +68,7 @@ const nextConfig = {
     ],
   },
   experimental: {
-    // Defaults to 50MB, disables the isr cache?
+    // Disable the isr memory cache, to avoid mismatched .next files.
     // @see https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#self-hosting-isr
     isrMemoryCacheSize: 0,
   },
