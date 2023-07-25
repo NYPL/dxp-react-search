@@ -1,5 +1,14 @@
 ## CHANGES
 
+### v0.10.2 - Analytics Add-Ons
+
+---
+
+- Update GA code to GA4: [#430](https://github.com/NYPL/dxp-react-search/pull/430)
+- Allow line breaks in DonorCredit component: [#433](https://github.com/NYPL/dxp-react-search/pull/433)
+
+---
+
 ### v0.10.1 - .next AWS Shared Cache
 
 ---
