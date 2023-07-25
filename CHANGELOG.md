@@ -1,5 +1,45 @@
 ## CHANGES
 
+### v0.10.1 - .next AWS Shared Cache
+
+---
+
+- Changes for supporting AWS shared cache for .next dir: [#395](https://github.com/NYPL/dxp-react-search/pull/395)
+
+---
+
+### v0.10.0 - New Global Header & Footer
+
+---
+
+- Adds new global header and footer scripts: [#428](https://github.com/NYPL/dxp-react-search/pull/428)
+
+---
+
+### v0.9.11 - Adobe analytics setup
+
+---
+
+- Adds adobe analytics integration: [#424](https://github.com/NYPL/dxp-react-search/pull/424)
+
+---
+
+### v0.9.10 - Section Front: App Buttons Height Change
+
+---
+
+- Set app buttons to 48px height: [#425](https://github.com/NYPL/dxp-react-search/pull/425)
+
+---
+
+### v0.9.9 - General Maintenance & Improvements, Section Front: Colorways and Card Button Links
+
+---
+
+- Add remaining colorways: [#420](https://github.com/NYPL/dxp-react-search/pull/420)
+- Add button links to Card component: [#422](https://github.com/NYPL/dxp-react-search/pull/422)
+- Fix for advocacy script not loading: [#423](https://github.com/NYPL/dxp-react-search/pull/423)
+
 ---
 
 ### v0.9.8 - General Maintenance & Improvements, Section Front Extensions
