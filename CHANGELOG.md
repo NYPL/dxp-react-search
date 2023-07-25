@@ -1,5 +1,11 @@
 ## CHANGES
 
+### v0.10.1 - .next AWS Shared Cache
+
+---
+
+- Changes for supporting AWS shared cache for .next dir: [#395](https://github.com/NYPL/dxp-react-search/pull/395)
+
 ---
 
 ### v0.10.0 - New Global Header & Footer
