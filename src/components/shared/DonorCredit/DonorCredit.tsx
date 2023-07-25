@@ -5,6 +5,7 @@ import {
   HorizontalRule,
   Flex,
 } from "@nypl/design-system-react-components";
+import TextFormatted from "./../TextFormatted";
 
 interface DonorCreditProps {
   id: string;
@@ -19,22 +20,22 @@ export default function DonorCredit({
   heading,
   description,
 }: DonorCreditProps) {
-  const finalHeading = heading?.trim() ? heading : null;
   return (
     <Flex id={`donor-credit-${id}`} marginBottom="xl" flexDirection="column">
       {showBorder && <HorizontalRule marginBottom="xl" marginTop="0" />}
-      {finalHeading && (
-        <Heading level="three" text={finalHeading} marginBottom="l" />
-      )}
+      {heading && <Heading level="three" text={heading} marginBottom="l" />}
       <Box
-        fontStyle="italic"
         maxW={{ lg: "850px" }}
+        margin="0 auto"
         px={{ sm: "s", md: "l", lg: "0" }}
-        sx={{ a: { textDecoration: "underline" } }}
-        alignSelf="center"
-        marginBottom="0"
-        dangerouslySetInnerHTML={{ __html: description }}
-      />
+        sx={{
+          "& p": {
+            fontStyle: "italic",
+          },
+        }}
+      >
+        <TextFormatted html={description} />
+      </Box>
     </Flex>
   );
 }
