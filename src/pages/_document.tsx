@@ -1,6 +1,5 @@
 const {
-  NEXT_PUBLIC_GTM_TRACKING_ID,
-  NEXT_PUBLIC_GA_TRACKING_ID,
+  NEXT_PUBLIC_GA_MEASUREMENT_ID,
   NEXT_PUBLIC_ADOBE_LAUNCH_URL,
   NEXT_PUBLIC_SERVER_ENV,
 } = process.env;
@@ -31,7 +30,7 @@ export default function Document() {
       <Head>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
         <Script
@@ -41,11 +40,8 @@ export default function Document() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
-              gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
+              gtag('config', '${NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
                 page_path: window.location.pathname,
-                'groups':'default',
-                'anonymize_ip':true
               });
             `,
           }}
