@@ -67,7 +67,7 @@ export default function withDrupalRouter<
       // The slug value can be ["research"] or ["research", "support"],
       // So we convert the array into a url slug path, i.e., /research/support
       if (Array.isArray(context.params?.slug)) {
-        slug = `/${context.params?.slug.join(",").replace(/,/g, "/")}`;
+        slug = `/${context.params?.slug.join("/")}`;
       } else {
         slug = `/${context.params?.slug}`;
       }
