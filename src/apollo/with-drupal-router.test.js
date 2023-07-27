@@ -28,7 +28,7 @@ describe("with-drupal-router success states.", () => {
   it("should not return a redirect if successful route is resolved.", async () => {
     const contextMock = {
       params: {
-        slug: ["/slug-200"],
+        slug: ["slug-200"],
       },
     };
 
@@ -53,12 +53,13 @@ describe("with-drupal-router success states.", () => {
     expect(result.redirect).toEqual(undefined);
     expect(result.isPreview).toEqual(false);
     expect(result.revisionId).toEqual(undefined);
+    expect(result.slug).toEqual("/slug-200");
   });
 
   it("should return nextjs redirect object is redirect data is returned from decoupled router.", async () => {
     const contextMock = {
       params: {
-        slug: ["/slug-redirect"],
+        slug: ["slug-redirect"],
       },
     };
 
@@ -98,7 +99,7 @@ describe("with-drupal-router success states.", () => {
   it("should return uuid, revisionId, and isPreview if previewData is passed in context.", async () => {
     const contextMock = {
       params: {
-        slug: ["/slug-preview"],
+        slug: ["slug-preview"],
       },
       preview: true,
       previewData: {
@@ -133,7 +134,72 @@ describe("with-drupal-router success states.", () => {
     expect(result.isPreview).toEqual(true);
     expect(result.uuid).toEqual("test-preview-uuid");
     expect(result.revisionId).toEqual("test-preview-revision-id");
+    expect(result.slug).toEqual("/slug-preview");
   });
+});
+
+it("should return correct slug for single level path.", async () => {
+  const contextMock = {
+    params: {
+      slug: ["slug"],
+    },
+    bundle: "test-slug",
+  };
+
+  const decoupledRouterDataMock = {
+    id: "test-slug-id",
+    uuid: "test-slug-uuid",
+    preview: true,
+    previewData: {
+      uuid: "test-slug-uuid",
+      revisionId: "test-slug-revision-id",
+    },
+    redirect: null,
+    bundle: "test-slug",
+  };
+
+  requestHandler.mockResolvedValueOnce({
+    data: { decoupledRouter: decoupledRouterDataMock },
+  });
+
+  const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
+    return props;
+  });
+
+  const result = await getStaticPropsMock(contextMock);
+  expect(result.slug).toEqual("/slug");
+});
+
+it("should return correct slug for multilevel paths.", async () => {
+  const contextMock = {
+    params: {
+      slug: ["slug", "level-2", "level-3"],
+    },
+    bundle: "test-multilevel-slug",
+  };
+
+  const decoupledRouterDataMock = {
+    id: "test-multilevel-slug-id",
+    uuid: "test-multilevel-slug-uuid",
+    preview: true,
+    previewData: {
+      uuid: "test-multilevel-slug-uuid",
+      revisionId: "test-multilevel-slug-revision-id",
+    },
+    redirect: null,
+    bundle: "test-multilevel-slug",
+  };
+
+  requestHandler.mockResolvedValueOnce({
+    data: { decoupledRouter: decoupledRouterDataMock },
+  });
+
+  const getStaticPropsMock = withDrupalRouter(async (contextMock, props) => {
+    return props;
+  });
+
+  const result = await getStaticPropsMock(contextMock);
+  expect(result.slug).toEqual("/slug/level-2/level-3");
 });
 
 // describe("with-drupal-router getServerSideProps success states.", () => {
@@ -169,7 +235,7 @@ describe("with-drupal-router error states.", () => {
     const contextMock = {
       id: "test",
       params: {
-        slug: ["/slug-404"],
+        slug: ["slug-404"],
       },
     };
 
@@ -192,7 +258,7 @@ describe("with-drupal-router error states.", () => {
 
     const contextMock = {
       params: {
-        slug: ["/slug-503"],
+        slug: ["slug-503"],
       },
     };
 
@@ -217,7 +283,7 @@ describe("with-drupal-router error states.", () => {
 
     const contextMock = {
       params: {
-        slug: ["/slug-500"],
+        slug: ["slug-500"],
       },
     };
 
@@ -236,4 +302,5 @@ describe("with-drupal-router error states.", () => {
     );
   });
 });
+
 // @TODO Add specific tests for getServerSideProps and getStaticProps.
