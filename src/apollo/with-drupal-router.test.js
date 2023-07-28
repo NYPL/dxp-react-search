@@ -149,11 +149,6 @@ it("should return correct slug for single level path.", async () => {
   const decoupledRouterDataMock = {
     id: "test-slug-id",
     uuid: "test-slug-uuid",
-    preview: true,
-    previewData: {
-      uuid: "test-slug-uuid",
-      revisionId: "test-slug-revision-id",
-    },
     redirect: null,
     bundle: "test-slug",
   };
@@ -181,11 +176,6 @@ it("should return correct slug for multilevel paths.", async () => {
   const decoupledRouterDataMock = {
     id: "test-multilevel-slug-id",
     uuid: "test-multilevel-slug-uuid",
-    preview: true,
-    previewData: {
-      uuid: "test-multilevel-slug-uuid",
-      revisionId: "test-multilevel-slug-revision-id",
-    },
     redirect: null,
     bundle: "test-multilevel-slug",
   };

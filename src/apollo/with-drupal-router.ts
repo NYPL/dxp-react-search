@@ -64,11 +64,13 @@ export default function withDrupalRouter<
     const isNextPreview = !options?.customPreview;
 
     if (isGetStaticPropsFunction) {
-      // The slug value can be ["research"] or ["research", "support"],
+      // If catch all pattern is used for filename, i.e., [...slug].tsx, the slug value will be an array.
+      // Examples: ["research"] or ["research", "support"]
       // So we convert the array into a url slug path, i.e., /research/support
       if (Array.isArray(context.params?.slug)) {
         slug = `/${context.params?.slug.join("/")}`;
       } else {
+        // Non catch all pattern, i.e. [slug].tsx will not return an array, but just a string.
         slug = `/${context.params?.slug}`;
       }
 
