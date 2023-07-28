@@ -6,6 +6,7 @@
 
 - Update GA code to GA4: [#430](https://github.com/NYPL/dxp-react-search/pull/430)
 - Allow line breaks in DonorCredit component: [#433](https://github.com/NYPL/dxp-react-search/pull/433)
+- Fix for with-drupal-router multilevel slugs: [#435](https://github.com/NYPL/dxp-react-search/pull/435)
 
 ---
 
