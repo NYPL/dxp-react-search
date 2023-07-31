@@ -1,5 +1,12 @@
 ## CHANGES
 
+### v0.10.3 - Analytics Updates
+
+---
+
+- Migrate site_section logic from Tag Manager to repo: [#434](https://github.com/NYPL/dxp-react-search/pull/434)
+- Add CTA event prop object in preparation of GA deletion: [#427](https://github.com/NYPL/dxp-react-search/pull/427)
+
 ### v0.10.2 - Analytics Add-Ons
 
 ---
