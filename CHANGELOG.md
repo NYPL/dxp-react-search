@@ -1,11 +1,19 @@
 ## CHANGES
 
+### v0.10.3 - Analytics Updates
+
+---
+
+- Migrate site_section logic from Tag Manager to repo: [#434](https://github.com/NYPL/dxp-react-search/pull/434)
+- Add CTA event prop object in preparation of GA deletion: [#427](https://github.com/NYPL/dxp-react-search/pull/427)
+
 ### v0.10.2 - Analytics Add-Ons
 
 ---
 
 - Update GA code to GA4: [#430](https://github.com/NYPL/dxp-react-search/pull/430)
 - Allow line breaks in DonorCredit component: [#433](https://github.com/NYPL/dxp-react-search/pull/433)
+- Fix for with-drupal-router multilevel slugs: [#435](https://github.com/NYPL/dxp-react-search/pull/435)
 
 ---
 
