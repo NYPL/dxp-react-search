@@ -6,8 +6,7 @@ NEXT_PUBLIC_NYPL_DOMAIN=https://www.nypl.org
 REFINERY_API=https://refinery.nypl.org/api/nypl
 DRUPAL_API=https://drupal.nypl.org
 GRAPHQL_API_URL=https://scout.nypl.org/api/graphql
-GA_TRACKING_ID=UA-1420324-3
-GTM_TRACKING_ID=GTM-537Q6Q4
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-P03CNT7C31
 ALLOWED_ORIGIN=https://www.nypl.org
 ASSET_PREFIX=/scout
 SENDGRID_EMAIL_ENABLE=true
@@ -21,9 +20,9 @@ if [ "$TRAVIS_BRANCH" == "sandbox" ]; then
   NEXT_PUBLIC_SERVER_ENV=sandbox
   NEXT_PUBLIC_NYPL_DOMAIN=https://sandbox-scout.nypl.org
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
-  DRUPAL_API=https://qa-drupal.nypl.org
+  DRUPAL_API=https://pr1022-nypl1.pantheonsite.io
   GRAPHQL_API_URL=https://sandbox-scout.nypl.org/api/graphql
-  GA_TRACKING_ID=UA-1420324-122
+  NEXT_PUBLIC_GA_MEASUREMENT_ID=G-VEXBPRSL67
   ALLOWED_ORIGIN=https://sandbox-scout.nypl.org
   SENDGRID_EMAIL_ENABLE=true
   NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
@@ -37,7 +36,7 @@ if [ "$TRAVIS_BRANCH" == "development" ]; then
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
   DRUPAL_API=https://dev-drupal.nypl.org
   GRAPHQL_API_URL=https://dev-scout.nypl.org/api/graphql
-  GA_TRACKING_ID=UA-1420324-122
+  NEXT_PUBLIC_GA_MEASUREMENT_ID=G-VEXBPRSL67
   ALLOWED_ORIGIN=https://dev-www.nypl.org
   SENDGRID_EMAIL_ENABLE=true
   NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
@@ -51,7 +50,7 @@ if [ "$TRAVIS_BRANCH" == "qa" ]; then
   REFINERY_API=https://qa-refinery.nypl.org/api/nypl
   DRUPAL_API=https://qa-drupal.nypl.org
   GRAPHQL_API_URL=https://qa-scout.nypl.org/api/graphql
-  GA_TRACKING_ID=UA-1420324-122
+  NEXT_PUBLIC_GA_MEASUREMENT_ID=G-VEXBPRSL67
   ALLOWED_ORIGIN=https://qa-www.nypl.org
   SENDGRID_EMAIL_ENABLE=true
   NEXT_PUBLIC_DRUPAL_PREVIEW_SECRET=o934Ysf3Hpu3irVXFBYvGCAyHjU3F
@@ -65,10 +64,11 @@ echo -e "\nREFINERY_API=$REFINERY_API" >> .env
 echo -e "\nDRUPAL_API=$DRUPAL_API" >> .env
 echo -e "\nNEXT_PUBLIC_GRAPHQL_API=$GRAPHQL_API_URL" >> .env
 echo -e "\nNEXT_PUBLIC_GOOGLE_MAPS_API=$NEXT_PUBLIC_GOOGLE_MAPS_API" >> .env
-echo -e "\nNEXT_PUBLIC_GA_TRACKING_ID=$GA_TRACKING_ID" >> .env
-echo -e "\nNEXT_PUBLIC_GTM_TRACKING_ID=$GTM_TRACKING_ID" >> .env
 echo -e "\nNEXT_PUBLIC_ALLOWED_ORIGIN=$ALLOWED_ORIGIN" >> .env
 echo -e "\nASSET_PREFIX=$ASSET_PREFIX" >> .env
+# GA4
+echo -e "\nNEXT_PUBLIC_GA_MEASUREMENT_ID=$NEXT_PUBLIC_GA_MEASUREMENT_ID" >> .env
+# Sendgrid
 echo -e "\nSENDGRID_API_KEY=$SENDGRID_API_KEY" >> .env
 echo -e "\nSENDGRID_EMAIL_ENABLE=$SENDGRID_EMAIL_ENABLE" >> .env
 # Preview mode

@@ -66,6 +66,11 @@ const nextConfig = {
       "ic.od-cdn.com",
     ],
   },
+  experimental: {
+    // Disable the isr memory cache, to avoid mismatched .next files.
+    // @see https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#self-hosting-isr
+    isrMemoryCacheSize: 0,
+  },
 };
 
 // Replaces next-compose-plugins which is not compatiable with Next 12.3+.
