@@ -211,6 +211,7 @@ export const typeDefs = gql`
     description: String
     image: Image
     link: String
+    buttonLinks: [ButtonLink]
   }
 
   type Jumbotron {

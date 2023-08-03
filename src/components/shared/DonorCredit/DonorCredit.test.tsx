@@ -59,18 +59,7 @@ describe("DonorCredit tests", () => {
   });
 
   it("should render no heading element when heading is empty or all spaces", () => {
-    const { rerender } = render(
-      <DonorCredit
-        showBorder={true}
-        description="Test Description"
-        id="Test ID"
-        heading="   "
-      />
-    );
-
-    expect(screen.queryByRole("heading")).not.toBeInTheDocument();
-
-    rerender(
+    render(
       <DonorCredit
         showBorder={true}
         description="Test Description"

@@ -23,8 +23,8 @@ describe("getColorway", () => {
 
   it("should return the correct colorway when a slug starting with '/education' or the string 'education' was passed.", () => {
     const mockColorway = {
-      primary: "#1D62E6",
-      secondary: "#2540A4",
+      primary: "section.education.primary",
+      secondary: "section.education.secondary",
     };
     expect(getColorway("/education")).toEqual(mockColorway);
     expect(getColorway("/education/educators")).toEqual(mockColorway);

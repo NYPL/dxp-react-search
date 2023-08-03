@@ -1,13 +1,10 @@
-import NyplHeaderStatic from "./../NyplHeaderStatic";
-import Footer from "@nypl/dgx-react-footer";
-
 function AppLayout({ children }) {
   return (
-    <div className="layout-container">
-      <NyplHeaderStatic />
-      {children}
-      <Footer id="footer" className="footer" />
-    </div>
+    <>
+      <div id="nypl-header" />
+      <div className="layout-container">{children}</div>
+      <div id="nypl-footer" />
+    </>
   );
 }
 

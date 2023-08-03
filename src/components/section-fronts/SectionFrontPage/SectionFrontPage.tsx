@@ -123,6 +123,15 @@ export const SECTION_FRONT_QUERY = gql`
                 uri
               }
             }
+            buttonLinks {
+              id
+              icon
+              link {
+                title
+                uri
+                url
+              }
+            }
           }
         }
         ... on ExternalSearch {

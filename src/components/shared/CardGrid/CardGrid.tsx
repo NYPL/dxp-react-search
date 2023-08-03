@@ -5,6 +5,7 @@ import Card from "./Card";
 import Image from "./../../shared/Image";
 import TextFormatted from "../TextFormatted";
 import { ImageType } from "../Image/ImageTypes";
+import { ButtonLinkProps as ButtonLinkType } from "./../ButtonLink/ButtonLink";
 
 export type CardGridLayoutTypes = "row" | "column" | "column_two_featured";
 
@@ -40,6 +41,7 @@ export interface CardItem {
   description: string;
   image?: ImageType;
   link: string;
+  buttonLinks?: ButtonLinkType[];
 }
 
 // Helper function to get the grid column value based on layout and index.
@@ -130,7 +132,7 @@ export default function CardGrid({
       >
         {items &&
           items.map((item: CardItem, index) => {
-            const { id, title, description, link, image } = item;
+            const { id, title, description, link, image, buttonLinks } = item;
             return (
               <Box
                 as="li"
@@ -161,6 +163,7 @@ export default function CardGrid({
                       />
                     ),
                   })}
+                  buttonLinks={buttonLinks}
                 />
               </Box>
             );
