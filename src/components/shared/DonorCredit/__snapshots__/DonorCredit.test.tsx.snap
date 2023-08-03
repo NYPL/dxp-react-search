@@ -14,13 +14,17 @@ exports[`DonorCredit tests should render the UI snapshot correctly 1`] = `
     Test Heading
   </h3>
   <div
-    className="css-d5kjjj"
-    dangerouslySetInnerHTML={
-      {
-        "__html": "Test Description",
+    className="css-144igvy"
+  >
+    <div
+      className="css-15ok9kq"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "Test Description",
+        }
       }
-    }
-  />
+    />
+  </div>
 </div>
 `;
 
@@ -35,13 +39,17 @@ exports[`DonorCredit tests should render the UI snapshot correctly 2`] = `
     Test Heading
   </h3>
   <div
-    className="css-d5kjjj"
-    dangerouslySetInnerHTML={
-      {
-        "__html": "Test Description",
+    className="css-144igvy"
+  >
+    <div
+      className="css-15ok9kq"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "Test Description",
+        }
       }
-    }
-  />
+    />
+  </div>
 </div>
 `;
 
@@ -51,12 +59,16 @@ exports[`DonorCredit tests should render the UI snapshot correctly 3`] = `
   id="donor-credit-Test ID"
 >
   <div
-    className="css-d5kjjj"
-    dangerouslySetInnerHTML={
-      {
-        "__html": "Test Description",
+    className="css-144igvy"
+  >
+    <div
+      className="css-15ok9kq"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "Test Description",
+        }
       }
-    }
-  />
+    />
+  </div>
 </div>
 `;
