@@ -76,6 +76,11 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
             id={`hero-heading-link-${id}`}
             href={url}
             aria-label={`${tag}, link to ${title}, ${description}`}
+            analyticsEventActions={{
+              cta_subsection: "Hero",
+              cta_text: null,
+              cta_position: null,
+            }}
             gaEventActionName={"Hero"}
           />
           <Heading as="h1">{title}</Heading>
@@ -85,6 +90,11 @@ function Hero({ id, title, description, tag, image, url }: HeroProps) {
               aria-label={title}
               id={`hero-button-link-${id}`}
               href={url}
+              analyticsEventActions={{
+                cta_subsection: "Hero button",
+                cta_text: null,
+                cta_position: null,
+              }}
               gaEventActionName={"Hero button"}
               tabIndex={-1}
             >
