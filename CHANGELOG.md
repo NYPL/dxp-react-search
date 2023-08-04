@@ -1,5 +1,29 @@
 ## CHANGES
 
+### v0.10.2 - Analytics Add-Ons
+
+---
+
+- Update GA code to GA4: [#430](https://github.com/NYPL/dxp-react-search/pull/430)
+- Allow line breaks in DonorCredit component: [#433](https://github.com/NYPL/dxp-react-search/pull/433)
+- Fix for with-drupal-router multilevel slugs: [#435](https://github.com/NYPL/dxp-react-search/pull/435)
+
+---
+
+### v0.10.1 - .next AWS Shared Cache
+
+---
+
+- Changes for supporting AWS shared cache for .next dir: [#395](https://github.com/NYPL/dxp-react-search/pull/395)
+
+---
+
+### v0.10.0 - New Global Header & Footer
+
+---
+
+- Adds new global header and footer scripts: [#428](https://github.com/NYPL/dxp-react-search/pull/428)
+
 ---
 
 ### v0.9.11 - Adobe analytics setup

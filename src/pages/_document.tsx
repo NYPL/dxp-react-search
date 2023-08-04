@@ -1,8 +1,7 @@
 const {
-  NEXT_PUBLIC_GTM_TRACKING_ID,
-  NEXT_PUBLIC_GA_TRACKING_ID,
-  NEXT_PUBLIC_SERVER_ENV,
+  NEXT_PUBLIC_GA_MEASUREMENT_ID,
   NEXT_PUBLIC_ADOBE_LAUNCH_URL,
+  NEXT_PUBLIC_SERVER_ENV,
 } = process.env;
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
@@ -16,10 +15,14 @@ export default function Document() {
   // Set PROD or QA version of the remote header embed script.
   // This will generate enviornment aware links in the header logins.
   let nyplHeaderScript =
-    "https://header.nypl.org/dgx-header.min.js?skipNav=main-content&urls=absolute";
+    "https://ds-header.nypl.org/header.min.js?containerId=nypl-header";
+  let nyplFooterScript =
+    "https://ds-header.nypl.org/footer.min.js?containerId=nypl-footer";
   if (NEXT_PUBLIC_SERVER_ENV !== "production") {
     nyplHeaderScript =
-      "https://qa-header.nypl.org/dgx-header.min.js?skipNav=main-content&urls=absolute";
+      "https://qa-ds-header.nypl.org/header.min.js?containerId=nypl-header";
+    nyplFooterScript =
+      "https://qa-ds-header.nypl.org/footer.min.js?containerId=nypl-footer";
   }
 
   return (
@@ -27,7 +30,7 @@ export default function Document() {
       <Head>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
         <Script
@@ -37,11 +40,8 @@ export default function Document() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('require', '${NEXT_PUBLIC_GTM_TRACKING_ID}');
-              gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
+              gtag('config', '${NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
                 page_path: window.location.pathname,
-                'groups':'default',
-                'anonymize_ip':true
               });
             `,
           }}
@@ -71,10 +71,10 @@ export default function Document() {
           src={NEXT_PUBLIC_ADOBE_LAUNCH_URL}
           strategy="afterInteractive"
         />
-        {/* NYPL Header */}
-        <Script src={nyplHeaderScript} strategy="beforeInteractive" />
       </Head>
       <body>
+        <Script src={nyplHeaderScript} strategy="afterInteractive" />
+        <Script src={nyplFooterScript} strategy="afterInteractive" />
         <Main />
         <NextScript />
         <Script

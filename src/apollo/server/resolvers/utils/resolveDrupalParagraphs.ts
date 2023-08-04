@@ -328,14 +328,14 @@ export default function resolveDrupalParagraphs(
           audioOembedUrl = "https://open.spotify.com/oembed?url";
         }
         // Libsyn
-        // Ex: https://d8.nypl.org/api/oembed-libsyn?url=https://html5-player.libsyn.com/embed/episode/id/20880053
+        // Ex: https://drupal.nypl.org/api/oembed-libsyn?url=https://html5-player.libsyn.com/embed/episode/id/20880053
         if (
           item.field_ers_media_item.field_media_oembed_remote_audio.includes(
             "libsyn"
           )
         ) {
           audioProvider = "libsyn";
-          audioOembedUrl = "https://d8.nypl.org/api/oembed-libsyn?url";
+          audioOembedUrl = "https://drupal.nypl.org/api/oembed-libsyn?url";
         }
 
         const audioEmbedCode =
