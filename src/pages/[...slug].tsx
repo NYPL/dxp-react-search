@@ -7,6 +7,9 @@ import withApollo from "../apollo/withApollo";
 import SectionFrontPage, {
   SECTION_FRONT_QUERY,
 } from "../components/section-fronts/SectionFrontPage/SectionFrontPage";
+import LandingPage, {
+  LANDING_PAGE_QUERY,
+} from "../components/landing-pages/LandingPage/LandingPage";
 // HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
@@ -39,6 +42,17 @@ function CatchAllRoutesPage({
     );
   }
 
+  if (bundle === "landing_page") {
+    return (
+      <LandingPage
+        uuid={uuid}
+        slug={slug}
+        isPreview={isPreview}
+        revisionId={revisionId}
+      />
+    );
+  }
+
   // @TODO shouldnt this return <Error statusCode={404} /> instead?
   return null;
 }
@@ -58,11 +72,10 @@ export const getStaticProps = withDrupalRouter(async function (
 ) {
   const { uuid, revisionId, slug, isPreview, bundle, apolloClient } = props;
 
-  const GQL_QUERY = SECTION_FRONT_QUERY;
-  // Future example for handling additional content types, would look like this:
-  // if (bundle === "page") {
-  //   QUERY = PAGE_QUERY;
-  // }
+  let GQL_QUERY = SECTION_FRONT_QUERY;
+  if (bundle === "landing_page") {
+    GQL_QUERY = LANDING_PAGE_QUERY;
+  }
 
   await apolloClient.query({
     query: GQL_QUERY,
