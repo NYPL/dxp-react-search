@@ -15,6 +15,17 @@ export const LANDING_PAGE_QUERY = gql`
       slug
       title
       description
+      sectionTitle
+      foregroundImage {
+        id
+        alt
+        uri
+        width
+        height
+        transformations {
+          id
+        }
+      }
       mainContent {
         __typename
         ... on LandingPageFeaturedCard {
@@ -155,12 +166,13 @@ export default function LandingPage({
           url: "http://www.nypl.org",
         },
       ]}
-      //breadcrumbsColor={landingPage.colorway.secondary}
       wrapperClass="nypl--landing-page"
       contentHeader={<>{isPreview && <PreviewModeNotification />}</>}
       contentPrimary={
         <Box>
           <p>{landingPage.title}</p>
+          <p>{landingPage.foregroundImage.uri}</p>
+          {landingPage.description}
         </Box>
       }
     />
