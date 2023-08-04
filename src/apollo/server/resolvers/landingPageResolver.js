@@ -13,6 +13,7 @@ const landingPageResolver = {
       // such as media, paragraphs, etc. We can have the full data for these entities returned,
       // by adding included fields here.
       const includedFields = [
+        "field_ers_hero_image.field_media_image",
         "field_ers_media_image.field_media_image",
         "field_main_content",
         // For the featured_card image field
@@ -50,7 +51,7 @@ const landingPageResolver = {
       landingPage.field_tfls_summary_description.processed,
     contentType: (landingPage) => landingPage.type,
     sectionTitle: (landingPage) => landingPage.field_ts_section_title,
-    backgroundimage: (landingPage) =>
+    backgroundImage: (landingPage) =>
       landingPage.field_ers_hero_image.data !== null
         ? resolveImage(landingPage.field_ers_hero_image)
         : null,

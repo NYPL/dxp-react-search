@@ -9,7 +9,7 @@ export const typeDefs = gql`
     description: String
     contentType: String
     sectionTitle: String
-    backgroundimage: Image
+    backgroundImage: Image
     foregroundImage: Image
     mainContent: [LandingPageMainContent]
   }

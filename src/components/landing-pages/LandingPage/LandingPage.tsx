@@ -16,6 +16,16 @@ export const LANDING_PAGE_QUERY = gql`
       title
       description
       sectionTitle
+      backgroundImage {
+        id
+        alt
+        uri
+        width
+        height
+        transformations {
+          id
+        }
+      }
       foregroundImage {
         id
         alt
@@ -171,6 +181,7 @@ export default function LandingPage({
       contentPrimary={
         <Box>
           <p>{landingPage.title}</p>
+          <p>{landingPage.backgroundImage.uri}</p>
           <p>{landingPage.foregroundImage.uri}</p>
           {landingPage.description}
         </Box>
