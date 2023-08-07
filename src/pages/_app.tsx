@@ -12,11 +12,7 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
 
   // Adobe Analytics: trigger an initial virtual page view.
   useEffect(() => {
-    submitAdobePageView(
-      document.title,
-      window.location.pathname,
-      pageProps.bundle
-    );
+    submitAdobePageView(router.asPath, pageProps.bundle);
   }, []);
 
   // When next js routes change, send data to GA/ AA.
@@ -28,17 +24,13 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
       });
 
       // Adobe Analytics: Virtual page view.
-      submitAdobePageView(
-        document.title,
-        window.location.pathname,
-        pageProps.bundle
-      );
+      submitAdobePageView(router.asPath, pageProps.bundle);
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, [router.events]);
+  }, [router]);
 
   // Handle errors.
   if (pageProps.errorCode) {

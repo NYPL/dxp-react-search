@@ -20,6 +20,11 @@ const mappingTable: MappingTableItem[] = [
     method: "exactMatch",
   },
   {
+    input: "/home",
+    siteSection: "Home",
+    method: "exactMatch",
+  },
+  {
     input: "/blog",
     siteSection: "Blog",
     method: "startsWith",
