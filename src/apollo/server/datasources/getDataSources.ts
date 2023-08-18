@@ -3,6 +3,7 @@ import DrupalApi from "./DrupalApi";
 import DrupalJsonApi from "./drupal-json-api/DrupalJsonApi";
 import PlatformApi from "./PlatformApi";
 import SendGridApi from "./SendGridApi";
+import LocalistApi from "./LocalistApi";
 
 export default function getDataSources() {
   return {
@@ -11,5 +12,6 @@ export default function getDataSources() {
     drupalJsonApi: new DrupalJsonApi(),
     platformApi: new PlatformApi(),
     sendGridApi: new SendGridApi(),
+    localistApi: new LocalistApi(),
   };
 }
