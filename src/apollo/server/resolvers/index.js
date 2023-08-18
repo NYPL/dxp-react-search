@@ -15,6 +15,7 @@ import locationResolver from "./locationResolver";
 import pressReleaseResolver from "./pressReleaseResolver";
 import homePageResolver from "./homePageResolver";
 import sectionFrontResolver from "./sectionFrontResolver";
+import localistEventsResolver from "./localistEventsResolver";
 // Mutations
 import sendEmailResolver from "./sendEmailResolver";
 
@@ -36,4 +37,5 @@ export const resolvers = mergeResolvers([
   filterResolver,
   ipAccessCheckResolver,
   sendEmailResolver,
+  localistEventsResolver,
 ]);
