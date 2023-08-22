@@ -4,15 +4,19 @@ export const typeDefs = gql`
   type Event {
     id: ID!
     title: String!
+    slug: String
     description: String
     location: String
     locationDetail: String
-    date: String
+    locationId: Int
+    address: String
     image: Image
     tags: [String]
-    localistUrl: String
+    date: String
+    needsRegistration: Boolean
+    experience: String
     ticketPrice: String
-    isFree: Boolean
+    localistUrl: String
   }
 
   input EventFilter {
@@ -27,5 +31,6 @@ export const typeDefs = gql`
 
   extend type Query {
     allEvents(limit: Int, pageNumber: Int, filter: EventFilter): EventConnection
+    event(id: String): Event
   }
 `;

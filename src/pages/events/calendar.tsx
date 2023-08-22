@@ -15,7 +15,7 @@ function EventsMainPage() {
       breadcrumbs={[
         { text: "Home", url: "/" },
         {
-          text: "All Events",
+          text: "Events Calendar",
           url: "",
         },
       ]}

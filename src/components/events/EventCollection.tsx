@@ -2,6 +2,8 @@ import React, { ReactElement } from "react";
 import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
+// Next
+// import Link from "next/link";
 // Components
 import {
   Box,
@@ -13,14 +15,16 @@ import {
   StatusBadge,
 } from "@nypl/design-system-react-components";
 import CardGridSkeletonLoader from "../shared/Card/CardGridSkeletonLoader";
-import { NextChakraLink as Link } from "../shared/Link/NextChakraLink";
+import { NextChakraLink } from "../shared/Link/NextChakraLink";
 
 type EventImageType = {
   id: string;
   uri: string;
 };
 
-interface EventCardItem {
+export type ExperienceType = "inperson" | "hyprid" | "virtual";
+
+export interface EventItem {
   id: string;
   title: string;
   image: EventImageType;
@@ -31,7 +35,8 @@ interface EventCardItem {
   tags: string[];
   localistUrl: string;
   ticketPrice: string;
-  isFree: boolean;
+  needsRegistration: boolean;
+  slug: string;
 }
 
 export const EVENT_COLLECTION_QUERY = gql`
@@ -44,6 +49,7 @@ export const EVENT_COLLECTION_QUERY = gql`
         location
         locationDetail
         date
+        experience
         image {
           id
           uri
@@ -51,7 +57,8 @@ export const EVENT_COLLECTION_QUERY = gql`
         tags
         localistUrl
         ticketPrice
-        isFree
+        needsRegistration
+        slug
       }
       pageInfo {
         limit
@@ -114,7 +121,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
         listStyleType="none"
         data-testid="event-collection"
       >
-        {data.allEvents.items.map((item: EventCardItem, i: number) => (
+        {data.allEvents.items.map((item: EventItem, i: number) => (
           <li key={`event-item-${item.id}-${i}`}>
             <Card
               imageProps={{
@@ -126,9 +133,20 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
               layout="row"
             >
               <CardHeading level="three" id="row4-heading1">
-                <Link href={`${item.localistUrl}#tickets=1`} target="_blank">
+                {/* {item.slug ? (
+                  <Link
+                    href={{
+                      pathname: `/events/${item.slug}`,
+                      query: { id: item.id },
+                    }}
+                  >
+                    {item.title}
+                  </Link>
+                ) : ( */}
+                <NextChakraLink href={`${item.localistUrl}`} target="_blank">
                   {item.title}
-                </Link>
+                </NextChakraLink>
+                {/* )} */}
               </CardHeading>
               <CardContent>
                 <Box display="block" pb="s" as="b">
