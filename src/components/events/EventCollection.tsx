@@ -31,6 +31,7 @@ export interface EventItem {
   location: string;
   locationDetail: string;
   date: string;
+  experience: ExperienceType;
   description: string;
   tags: string[];
   localistUrl: string;
