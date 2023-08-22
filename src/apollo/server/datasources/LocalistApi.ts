@@ -55,7 +55,7 @@ class LocalistApi extends RESTDataSource {
   async getAllEvents(args: any): Promise<LocalistEventCollectionResponse> {
     // Remove hadrcoded start and end and build api with args.filter params
     const response = await this.get(
-      `/api/2/events?start=2023-05-01&end=2023-11-01&pp=${args.limit}&page=${args.pageNumber}&`,
+      `/api/2/events?days=370&pp=${args.limit}&page=${args.pageNumber}&`,
       {
         headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
       }
