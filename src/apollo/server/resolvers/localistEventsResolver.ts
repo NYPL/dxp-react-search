@@ -1,4 +1,5 @@
 import formatDate from "../../../utils/formatDate";
+import formatTime from "../../../utils/formatTime";
 import { QueryArguments, DataSources } from "./utils/types";
 import { EventDataType } from "../datasources/LocalistApi";
 
@@ -25,7 +26,8 @@ const localistEventsResolver = {
     },
   },
   Event: {
-    id: ({ event }: Record<"event", EventDataType>) => event.id,
+    id: ({ event }: Record<"event", EventDataType>) =>
+      event.event_instances[0].event_instance.id,
     title: ({ event }: Record<"event", EventDataType>) => event.title,
     slug: ({ event }: Record<"event", EventDataType>) => event.urlname,
     eventType: ({ event }: Record<"event", EventDataType>) =>
@@ -39,7 +41,9 @@ const localistEventsResolver = {
     locationId: ({ event }: Record<"event", EventDataType>) => event.venue_id,
     address: ({ event }: Record<"event", EventDataType>) => event.address,
     date: ({ event }: Record<"event", EventDataType>) =>
-      formatDate(event.first_date),
+      formatDate(event.event_instances[0].event_instance.start),
+    time: ({ event }: Record<"event", EventDataType>) =>
+      formatTime(event.event_instances[0].event_instance.start),
     image: ({ event }: Record<"event", EventDataType>) =>
       event.photo_url
         ? { id: `image-${event.id}`, uri: event.photo_url }

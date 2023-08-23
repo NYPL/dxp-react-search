@@ -14,6 +14,7 @@ export const typeDefs = gql`
     image: Image
     tags: [String]
     date: String
+    time: String
     needsRegistration: Boolean
     experience: String
     ticketPrice: String

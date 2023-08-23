@@ -16,7 +16,6 @@ import {
 } from "@nypl/design-system-react-components";
 import CardGridSkeletonLoader from "../shared/Card/CardGridSkeletonLoader";
 import { NextChakraLink } from "../shared/Link/NextChakraLink";
-import sortByDate from "../../utils/sortByDate";
 
 type EventImageType = {
   id: string;
@@ -33,6 +32,7 @@ export interface EventItem {
   location: string;
   locationDetail: string;
   date: string;
+  time: string;
   experience: ExperienceType;
   description: string;
   tags: string[];
@@ -55,6 +55,7 @@ export const EVENT_COLLECTION_QUERY = gql`
         description
         location
         date
+        time
         experience
         image {
           id
@@ -127,7 +128,6 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
 
     return truncatedText.substring(0, lastIndex) + "...";
   }
-  const sortedEvents = sortByDate(data.allEvents.items);
   return (
     <>
       <Grid
@@ -137,7 +137,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
         listStyleType="none"
         data-testid="event-collection"
       >
-        {sortedEvents.map((item: EventItem, i: number) => (
+        {data.allEvents.items.map((item: EventItem, i: number) => (
           <li key={`event-item-${item.id}-${i}`}>
             <Card
               imageProps={{
@@ -166,7 +166,9 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
               </CardHeading>
               <CardContent>
                 <Box display="block" pb="s" as="b">
-                  <Box>{item.date}</Box>
+                  <Box>
+                    {item.date} @ {item.time}
+                  </Box>
                   <Box>{item.location}</Box>
                 </Box>
                 <Box mb="s">
