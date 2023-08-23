@@ -5,6 +5,7 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     slug: String
+    eventType: EventType
     description: String
     location: String
     locationDetail: String
@@ -19,9 +20,15 @@ export const typeDefs = gql`
     localistUrl: String
   }
 
+  type EventType {
+    id: ID!
+    name: String
+  }
+
   input EventFilter {
     start: QueryFilterItemString
     end: QueryFilterItemString
+    days: QueryFilterItemString
   }
 
   type EventConnection {

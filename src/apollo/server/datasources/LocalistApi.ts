@@ -22,6 +22,7 @@ export type EventDataType = {
   first_date: string;
   last_date: string;
   localist_url: string;
+  filters?: EventTypes | null;
 };
 
 type PageDataType = {
@@ -34,6 +35,16 @@ type DateDataType = {
   first: string;
   last: string;
 };
+
+type EventTypes = Record<
+  "event_types",
+  [
+    {
+      id: number;
+      name: string;
+    }
+  ]
+>;
 
 interface LocalistEventCollectionResponse {
   status: string;
@@ -55,7 +66,7 @@ class LocalistApi extends RESTDataSource {
   async getAllEvents(args: any): Promise<LocalistEventCollectionResponse> {
     // Remove hadrcoded start and end and build api with args.filter params
     const response = await this.get(
-      `/api/2/events?days=370&pp=${args.limit}&page=${args.pageNumber}&`,
+      `/api/2/events?start=2023-08-01&end=2023-11-01&all_custom_fields=true&pp=${args.limit}&page=${args.pageNumber}&`,
       {
         headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
       }
@@ -63,9 +74,12 @@ class LocalistApi extends RESTDataSource {
     return response;
   }
   async getEvent(args: any): Promise<LocalistEventResponse> {
-    const response = await this.get(`/api/2/events/${args.id}`, {
-      headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
-    });
+    const response = await this.get(
+      `/api/2/events/${args.id}?all_custom_fields=true`,
+      {
+        headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
+      }
+    );
     return response;
   }
 }

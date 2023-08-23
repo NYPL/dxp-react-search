@@ -28,6 +28,8 @@ const localistEventsResolver = {
     id: ({ event }: Record<"event", EventDataType>) => event.id,
     title: ({ event }: Record<"event", EventDataType>) => event.title,
     slug: ({ event }: Record<"event", EventDataType>) => event.urlname,
+    eventType: ({ event }: Record<"event", EventDataType>) =>
+      event.filters?.event_types ? event.filters.event_types[0] : null,
     description: ({ event }: Record<"event", EventDataType>) =>
       event.description,
     location: ({ event }: Record<"event", EventDataType>) =>

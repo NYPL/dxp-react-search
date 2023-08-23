@@ -16,6 +16,7 @@ import {
 } from "@nypl/design-system-react-components";
 import CardGridSkeletonLoader from "../shared/Card/CardGridSkeletonLoader";
 import { NextChakraLink } from "../shared/Link/NextChakraLink";
+import sortByDate from "../../utils/sortByDate";
 
 type EventImageType = {
   id: string;
@@ -27,6 +28,7 @@ export type ExperienceType = "inperson" | "hyprid" | "virtual";
 export interface EventItem {
   id: string;
   title: string;
+  eventType: Record<string, string | number>;
   image: EventImageType;
   location: string;
   locationDetail: string;
@@ -46,9 +48,12 @@ export const EVENT_COLLECTION_QUERY = gql`
       items {
         id
         title
+        eventType {
+          id
+          name
+        }
         description
         location
-        locationDetail
         date
         experience
         image {
@@ -113,6 +118,16 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
     );
   }
 
+  function truncateText(text: string) {
+    if (text.length <= 230) {
+      return text;
+    }
+    const truncatedText = text.slice(0, 200);
+    const lastIndex = truncatedText.lastIndexOf(" ");
+
+    return truncatedText.substring(0, lastIndex) + "...";
+  }
+  const sortedEvents = sortByDate(data.allEvents.items);
   return (
     <>
       <Grid
@@ -122,7 +137,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
         listStyleType="none"
         data-testid="event-collection"
       >
-        {data.allEvents.items.map((item: EventItem, i: number) => (
+        {sortedEvents.map((item: EventItem, i: number) => (
           <li key={`event-item-${item.id}-${i}`}>
             <Card
               imageProps={{
@@ -152,11 +167,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
               <CardContent>
                 <Box display="block" pb="s" as="b">
                   <Box>{item.date}</Box>
-                  <Box>
-                    {item.locationDetail
-                      ? `${item.location}, ${item.locationDetail}`
-                      : item.location}
-                  </Box>
+                  <Box>{item.location}</Box>
                 </Box>
                 <Box mb="s">
                   {item.tags &&
@@ -172,7 +183,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
                 </Box>
                 <Box
                   dangerouslySetInnerHTML={{
-                    __html: item.description,
+                    __html: truncateText(item.description),
                   }}
                 />
               </CardContent>
