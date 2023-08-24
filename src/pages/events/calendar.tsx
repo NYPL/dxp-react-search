@@ -44,7 +44,7 @@ export async function getStaticProps() {
   await apolloClient.query({
     query: EVENT_COLLECTION_QUERY,
     variables: {
-      limit: 10,
+      limit: 12,
       pageNumber: 1,
     },
   });
