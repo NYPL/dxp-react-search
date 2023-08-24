@@ -96,15 +96,13 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
   }
   if (loading || !data) {
     return (
-      <CardGrid id={id} type="eventLoader">
-        <CardGridSkeletonLoader
-          templateColumns="repeat(1, 1fr)"
-          gap="l"
-          cardLayout="row"
-          showImage={true}
-          itemsCount={5}
-        />
-      </CardGrid>
+      <CardGridSkeletonLoader
+        templateColumns="repeat(3, 1fr)"
+        gap="l"
+        cardLayout="column"
+        showImage={true}
+        itemsCount={6}
+      />
     );
   }
 
