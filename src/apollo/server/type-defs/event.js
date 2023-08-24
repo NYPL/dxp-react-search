@@ -26,19 +26,13 @@ export const typeDefs = gql`
     name: String
   }
 
-  input EventFilter {
-    start: QueryFilterItemString
-    end: QueryFilterItemString
-    days: QueryFilterItemString
-  }
-
   type EventConnection {
     items: [Event]
     pageInfo: PageInfo
   }
 
   extend type Query {
-    allEvents(limit: Int, pageNumber: Int, filter: EventFilter): EventConnection
+    allEvents(limit: Int, pageNumber: Int): EventConnection
     event(id: String): Event
   }
 `;

@@ -26,6 +26,8 @@ export interface CardProps {
   image?: JSX.Element;
   /** An optional set of button links. */
   buttonLinks?: ButtonLinkType[];
+  /** For optional content in the cardContent section. */
+  cardContent?: JSX.Element;
   /** Optional value to render the layout in a row or column. */
   layout?: LayoutTypes;
   /** Optional value to control the alignment of the text and elements. */
@@ -42,6 +44,7 @@ export default function Card({
   href,
   image,
   buttonLinks,
+  cardContent,
   layout,
   isCentered,
   isBordered = false,
@@ -79,6 +82,7 @@ export default function Card({
       )}
       <CardContent>
         {subHeading && subHeading}
+        {cardContent && cardContent}
         {description && (
           <Box
             dangerouslySetInnerHTML={{

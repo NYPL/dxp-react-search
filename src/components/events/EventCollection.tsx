@@ -2,20 +2,16 @@ import React, { ReactElement } from "react";
 import { useRouter } from "next/router";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
-// Next
-// import Link from "next/link";
 // Components
 import {
   Box,
-  Grid,
   Pagination,
-  Card,
-  CardHeading,
-  CardContent,
   StatusBadge,
 } from "@nypl/design-system-react-components";
 import CardGridSkeletonLoader from "../shared/Card/CardGridSkeletonLoader";
-import { NextChakraLink } from "../shared/Link/NextChakraLink";
+import CardGrid from "../shared/CardGrid";
+import Card from "../shared/CardGrid/Card";
+import Image from "../shared/Image";
 
 type EventImageType = {
   id: string;
@@ -86,7 +82,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
     : 1;
   const { loading, error, data } = useQuery(EVENT_COLLECTION_QUERY, {
     variables: {
-      limit: 10,
+      limit: 12,
       pageNumber: currentPage ? currentPage : 1,
     },
   });
@@ -100,14 +96,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
   }
   if (loading || !data) {
     return (
-      <Grid
-        id={id}
-        as="ul"
-        gap="l"
-        templateColumns="repeat(1, 1fr)"
-        listStyleType="none"
-        data-testid="event-collection"
-      >
+      <CardGrid id={id} type="eventLoader">
         <CardGridSkeletonLoader
           templateColumns="repeat(1, 1fr)"
           gap="l"
@@ -115,7 +104,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
           showImage={true}
           itemsCount={5}
         />
-      </Grid>
+      </CardGrid>
     );
   }
 
@@ -130,69 +119,61 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
   }
   return (
     <>
-      <Grid
-        as="ul"
-        gap="l"
-        templateColumns="repeat(1, 1fr)"
-        listStyleType="none"
-        data-testid="event-collection"
-      >
-        {data.allEvents.items.map((item: EventItem, i: number) => (
-          <li key={`event-item-${item.id}-${i}`}>
-            <Card
-              imageProps={{
-                alt: "Alt text",
-                aspectRatio: "twoByOne",
-                size: "large",
-                src: item.image.uri,
-              }}
-              layout="row"
+      <CardGrid id={id} type="event">
+        {data.allEvents.items.map(
+          (item: EventItem): React.ReactNode => (
+            <Box
+              as="li"
+              key={id}
+              listStyleType="none"
+              gridColumn="auto / span 4"
             >
-              <CardHeading level="three" id="row4-heading1">
-                {/* {item.slug ? (
-                  <Link
-                    href={{
-                      pathname: `/events/${item.slug}`,
-                      query: { id: item.id },
-                    }}
-                  >
-                    {item.title}
-                  </Link>
-                ) : ( */}
-                <NextChakraLink href={`${item.localistUrl}`} target="_blank">
-                  {item.title}
-                </NextChakraLink>
-                {/* )} */}
-              </CardHeading>
-              <CardContent>
-                <Box display="block" pb="s" as="b">
-                  <Box>
-                    {item.date} @ {item.time}
-                  </Box>
-                  <Box>{item.location}</Box>
-                </Box>
-                <Box mb="s">
-                  {item.tags &&
-                    item.tags.map((tag: string) => (
-                      <StatusBadge
-                        key={`${tag}-key`}
-                        display="inline-block"
-                        marginInlineEnd={"s"}
-                      >
-                        {tag}
-                      </StatusBadge>
-                    ))}
-                </Box>
-                <Box
-                  dangerouslySetInnerHTML={{
-                    __html: truncateText(item.description),
-                  }}
-                />
-              </CardContent>
-            </Card>
-          </li>
-        ))}
-      </Grid>
+              <Card
+                id={item.id}
+                heading={item.title}
+                href={item.localistUrl}
+                image={
+                  <Image
+                    id={item.image.id}
+                    alt="alt text"
+                    uri={item.image.uri}
+                    useTransformation={false}
+                    transformationLabel={"2_1_960"}
+                    layout="responsive"
+                    width={900}
+                    height={450}
+                    quality={90}
+                  />
+                }
+                description={truncateText(item.description)}
+                cardContent={
+                  <>
+                    <Box display="block" pb="s" as="b">
+                      <Box>
+                        {item.date} @ {item.time}
+                      </Box>
+                      <Box>{item.location}</Box>
+                    </Box>
+                    {item.tags && (
+                      <Box mb="s">
+                        {item.tags.map((tag: string) => (
+                          <StatusBadge
+                            key={`${tag}-key`}
+                            display="inline-block"
+                            marginInlineEnd={"s"}
+                          >
+                            {tag}
+                          </StatusBadge>
+                        ))}
+                      </Box>
+                    )}
+                  </>
+                }
+              />
+            </Box>
+          )
+        )}
+      </CardGrid>
       <Box
         sx={{
           // Centers the pagination component.

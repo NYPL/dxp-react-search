@@ -3,11 +3,12 @@ import React from "react";
 import withApollo from "../../apollo/withApollo";
 import { initializeApollo } from "../../apollo/withApollo/apollo";
 // Component
-import { Box } from "@nypl/design-system-react-components";
+import { Box, Hero, Heading } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/shared/layouts/PageContainer";
 import EventCollection, {
   EVENT_COLLECTION_QUERY,
 } from "../../components/events/EventCollection";
+import eventContent from "../../__content/event";
 
 function EventsMainPage() {
   return (
@@ -20,6 +21,15 @@ function EventsMainPage() {
         },
       ]}
       wrapperClass="nypl--event"
+      contentHeader={
+        <Hero
+          heroType="tertiary"
+          heading={<Heading level="one" text={eventContent.meta.title} />}
+          subHeaderText={eventContent.meta.description}
+          backgroundColor={"section.whats-on.primary"}
+          foregroundColor="ui.white"
+        />
+      }
       contentPrimary={
         <Box>
           <EventCollection id="all-events" />

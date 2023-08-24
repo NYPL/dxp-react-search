@@ -65,6 +65,7 @@ const nextConfig = {
       "contentcafecloud.baker-taylor.com",
       "img1.od-cdn.com",
       "ic.od-cdn.com",
+      "localist-images.azureedge.net",
     ],
   },
   experimental: {

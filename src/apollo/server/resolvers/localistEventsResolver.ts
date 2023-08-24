@@ -48,7 +48,8 @@ const localistEventsResolver = {
       event.photo_url
         ? { id: `image-${event.id}`, uri: event.photo_url }
         : null,
-    tags: ({ event }: Record<"event", EventDataType>) => event.tags,
+    tags: ({ event }: Record<"event", EventDataType>) =>
+      event.tags.length > 0 ? event.tags : null,
     localistUrl: ({ event }: Record<"event", EventDataType>) =>
       event.localist_url,
     needsRegistration: ({ event }: Record<"event", EventDataType>) =>

@@ -164,8 +164,8 @@ export default function CardGrid({
               </Box>
             );
           })}
+        {!items && children && <>{children}</>}
       </Grid>
-      {!items && children && <>{children}</>}
     </Box>
   );
 }
