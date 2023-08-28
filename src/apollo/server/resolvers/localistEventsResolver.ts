@@ -26,8 +26,10 @@ const localistEventsResolver = {
     },
   },
   Event: {
+    // Temporary solution to the date issue with reoccurring events
+    // Remaining issue: if event is reocurring, the instance id is not queryble
     id: ({ event }: Record<"event", EventDataType>) =>
-      event.event_instances[0].event_instance.id,
+      event.recurring ? event.event_instances[0].event_instance.id : event.id,
     title: ({ event }: Record<"event", EventDataType>) => event.title,
     slug: ({ event }: Record<"event", EventDataType>) => event.urlname,
     eventType: ({ event }: Record<"event", EventDataType>) =>

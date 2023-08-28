@@ -16,6 +16,7 @@ export type EventDataType = {
   photo_id: number;
   tags: [string];
   free: boolean;
+  recurring: boolean;
   experience: string;
   ticket_cost: string;
   date?: string;
@@ -67,9 +68,10 @@ class LocalistApi extends RESTDataSource {
   }
 
   async getAllEvents(args: any): Promise<LocalistEventCollectionResponse> {
-    // Remove hadrcoded start and end and build api with args.filter params
+    // Choose max num of days to get all events
+    // The start date will be autobamtically set to the current day
     const response = await this.get(
-      `/api/2/events?start=2023-08-01&end=2023-11-01&pp=${args.limit}&page=${args.pageNumber}&`,
+      `/api/2/events?days=370&pp=${args.limit}&page=${args.pageNumber}&`,
       {
         headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
       }
