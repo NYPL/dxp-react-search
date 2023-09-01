@@ -112,7 +112,9 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     // Page will revalidate every min. So every minute the first user to view pg
     // will get an SSR version, all requests after will get SSG.
-    revalidate: 60,
+    // revalidate: 60,
+    // Turn off request based revalidation.
+    revalidate: false,
   };
 };
 
