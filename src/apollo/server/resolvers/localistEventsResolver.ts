@@ -24,6 +24,47 @@ const localistEventsResolver = {
       const response = await dataSources.localistApi.getEvent(args);
       return { event: response.event };
     },
+    localistAllTerms: async (
+      _: any,
+      args: any,
+      { dataSources }: DataSources
+    ) => {
+      const allTerms = [];
+      const response = await dataSources.localistApi.getLocalistAllTerms(args);
+      if ("places" in response) {
+        allTerms.push({
+          id: "location",
+          label: "Locations",
+          items: response.places,
+        });
+      }
+      if ("event_types" in response) {
+        allTerms.push({
+          id: "event_type",
+          label: "Event Types",
+          items: response.event_types,
+        });
+      }
+      if ("event_series" in response) {
+        allTerms.push({
+          id: "event_series",
+          label: "Event Series",
+          items: response.event_series,
+        });
+      }
+      return allTerms;
+    },
+    eventSearch: async (_: any, args: any, { dataSources }: DataSources) => {
+      const response = await dataSources.localistApi.searchAllEvents(args);
+      return {
+        items: response.events,
+        pageInfo: {
+          limit: args.limit ? args.limit : null,
+          pageCount: response.page.total ? response.page.total : null,
+          pageNumer: args.pageNumber ? args.pageNumber : 1,
+        },
+      };
+    },
   },
   Event: {
     // Temporary solution to the date issue with reoccurring events
@@ -59,6 +100,10 @@ const localistEventsResolver = {
     experience: ({ event }: Record<"event", EventDataType>) => event.experience,
     ticketPrice: ({ event }: Record<"event", EventDataType>) =>
       event.free === true ? null : event.ticket_cost,
+  },
+  EventFilterItem: {
+    id: (item: any) => (item.place ? item.place.id : item.id),
+    name: (item: any) => (item.place ? item.place.name : item.name),
   },
 };
 

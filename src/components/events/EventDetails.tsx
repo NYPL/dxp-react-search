@@ -4,11 +4,10 @@ import { gql } from "@apollo/client";
 import {
   Heading,
   Box,
-  Image,
   Text,
   StatusBadge,
-  HStack,
 } from "@nypl/design-system-react-components";
+import Image from "../shared/Image";
 import {
   EventItem as EventDetailsProps,
   ExperienceType,
@@ -43,6 +42,7 @@ function EventDetails({
   description,
   location,
   locationDetail,
+  address,
   image,
   date,
   // needsRegistration,
@@ -68,24 +68,34 @@ function EventDetails({
 
   return (
     <Box id={`event-${id}`}>
-      <Heading level="one">{title}</Heading>
+      <Box display="flex" alignItems="center">
+        <Heading level="one" display="inline-block" paddingEnd="s">
+          {title}
+        </Heading>
+        {experienceLabel && (
+          <StatusBadge level="low" marginBottom="s" h="fit-content">
+            {experienceLabel}
+          </StatusBadge>
+        )}
+      </Box>
       <Box display="flex" flexDir="row-reverse" justifyContent="left" pb="m">
         <Box w="full" px="m">
           <Text>{date}</Text>
           <Text>{finalLocation}</Text>
-          <HStack>
-            {experienceLabel && (
-              <StatusBadge level="low">{experienceLabel}</StatusBadge>
-            )}
-          </HStack>
+          <Text>{address}</Text>
         </Box>
-        <Box>
+        <Box w="400px" h="auto">
           {image.uri && (
             <Image
-              src={image.uri}
-              aspectRatio="original"
-              size="medium"
+              id={image.id}
+              uri={image.uri}
               alt="Alt text"
+              useTransformation={false}
+              transformationLabel={"2_1_960"}
+              layout="responsive"
+              width={900}
+              height={450}
+              quality={90}
             />
           )}
         </Box>

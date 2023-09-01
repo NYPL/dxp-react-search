@@ -19,4 +19,5 @@ export interface FilterBarGroupItem {
   includeChildren?: boolean;
   /** Escape hatch for use cases where the filter data does not come from api request, but hard coded. */
   customData?: boolean;
+  items?: any[];
 }

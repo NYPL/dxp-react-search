@@ -6,6 +6,8 @@ import usePrevious from "../../../hooks/usePrevious";
 import { FilterBarGroupItem, SelectedItemsMap } from "./types";
 // Components
 import { default as DsFilterBar } from "./../../ds-prototypes/FilterBar/FilterBar";
+import { default as DsMultiSelect } from "../../ds-prototypes/MultiSelect/MultiSelect";
+
 import MultiSelect from "./MultiSelect";
 // Next
 import { useRouter } from "next/router";
@@ -277,16 +279,37 @@ function FilterBar({
       onSaveSelectedItems={onSaveMultiSelect}
     >
       {groups.map((group: FilterBarGroupItem) => {
-        return (
+        return group.items ? (
+          <DsMultiSelect
+            key={group.id}
+            id={group.id}
+            label={group.label}
+            items={group.items}
+            handleOnSelectedItemChange={(
+              e: React.MouseEvent<HTMLButtonElement>
+            ) => {
+              return onSelectedItemChange(e.currentTarget.id, group.id);
+            }}
+            selectedItems={selectedItems}
+            onClearMultiSelect={() => onClearMultiSelect(group.id)}
+            onSaveMultiSelect={onSaveMultiSelect}
+            onMenuClick={() => onMenuClick(group.id)}
+            selectedGroupIds={selectedGroupIds}
+            showCtaButtons={isMobile ? false : true}
+            handleChangeMixedStateCheckbox={(childItems: string[]) => {
+              handleChangeMixedStateCheckbox(group.id, childItems);
+            }}
+          />
+        ) : (
           <MultiSelect
             key={group.id}
             id={group.id}
             type={group.type}
             limiter={group.limiter}
             label={group.label}
-            onSelectedItemChange={(e: React.MouseEvent<HTMLButtonElement>) =>
-              onSelectedItemChange(e.currentTarget.id, group.id)
-            }
+            onSelectedItemChange={(e: React.MouseEvent<HTMLButtonElement>) => {
+              return onSelectedItemChange(e.currentTarget.id, group.id);
+            }}
             selectedItems={selectedItems}
             onClearMultiSelect={() => onClearMultiSelect(group.id)}
             onSaveMultiSelect={onSaveMultiSelect}

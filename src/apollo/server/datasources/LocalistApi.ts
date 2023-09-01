@@ -23,20 +23,11 @@ export type EventDataType = {
   first_date: string;
   last_date: string;
   localist_url: string;
-  filters?: EventTypes | null;
-  event_instances: EventIstancesType;
+  filters?: any;
+  event_instances: EventInstancesType;
 };
 
-type EventTypes = Record<
-  "event_types",
-  [
-    {
-      id: number;
-      name: string;
-    }
-  ]
->;
-type EventIstancesType = [
+type EventInstancesType = [
   Record<"event_instance", { id: string; start: string; end: string }>
 ];
 type PageDataType = {
@@ -60,6 +51,20 @@ interface LocalistEventResponse {
   status: string;
   event: EventDataType;
 }
+
+type FilterItemType = {
+  id: number;
+  name: string;
+};
+
+interface LocalistFilterResponse {
+  places: [Record<"place", FilterItemType>];
+  page: PageDataType;
+  event_types: [Record<"event_types", FilterItemType>];
+  event_topics: [Record<"event_topics", FilterItemType>];
+  event_series: [Record<"event_series", FilterItemType>];
+}
+
 class LocalistApi extends RESTDataSource {
   constructor() {
     super();
@@ -68,10 +73,11 @@ class LocalistApi extends RESTDataSource {
   }
 
   async getAllEvents(args: any): Promise<LocalistEventCollectionResponse> {
+    const path = "/api/2/events?days=370";
     // Choose max num of days to get all events
     // The start date will be autobamtically set to the current day
     const response = await this.get(
-      `/api/2/events?days=370&pp=${args.limit}&page=${args.pageNumber}&`,
+      `${path}&pp=${args.limit}&page=${args.pageNumber}&`,
       {
         headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
       }
@@ -81,6 +87,48 @@ class LocalistApi extends RESTDataSource {
   async getEvent(args: any): Promise<LocalistEventResponse> {
     const response = await this.get(
       `/api/2/events/${args.id}?all_custom_fields=true`,
+      {
+        headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
+      }
+    );
+    return response;
+  }
+  async getLocalistAllTerms(
+    args: any
+  ): Promise<LocalistFilterResponse | Record<string, unknown>> {
+    const locations = await this.get(
+      `/api/2/places?pp=${args.limit}&page=${args.pageNumber}`,
+      {
+        headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
+      }
+    );
+    const filters = await this.get(
+      `/api/2/events/filters?pp=${args.limit}&page=${args.pageNumber}`,
+      {
+        headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
+      }
+    );
+
+    return { ...filters, ...locations };
+  }
+  async searchAllEvents(args: any): Promise<any> {
+    const path = "/api/2/events";
+    console.log("args -->", args);
+    let filterQuery = args.filter.q ? "" : "?";
+    if (args.filter.q) {
+      filterQuery += `/search?search=${args.filter.q}&`;
+    }
+    if (args.filter) {
+      for (const term of Object.keys(args.filter)) {
+        args.filter[term].value?.length &&
+          args.filter[term].value.forEach(
+            (id: string) =>
+              (filterQuery += `${args.filter[term].fieldName}[]=${id}&`)
+          );
+      }
+    }
+    const response = await this.get(
+      `${path}${filterQuery}pp=${args.limit}&page=${args.pageNumber}&days=370`,
       {
         headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
       }

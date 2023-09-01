@@ -5,7 +5,7 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     slug: String
-    eventType: EventType
+    eventType: EventFilterItem
     description: String
     location: String
     locationDetail: String
@@ -21,18 +21,38 @@ export const typeDefs = gql`
     localistUrl: String
   }
 
-  type EventType {
-    id: ID!
-    name: String
-  }
-
   type EventConnection {
     items: [Event]
     pageInfo: PageInfo
   }
 
+  type EventFilterTerm {
+    id: ID!
+    label: String
+    items: [EventFilterItem]
+  }
+
+  type EventFilterItem {
+    id: ID!
+    name: String
+  }
+
+  input EventFilter {
+    event_type: QueryFilterItemArray
+    event_series: QueryFilterItemArray
+    location: QueryFilterItemArray
+    keyword: QueryFilterItemArray
+    q: String
+  }
+
   extend type Query {
     allEvents(limit: Int, pageNumber: Int): EventConnection
     event(id: String): Event
+    localistAllTerms(limit: Int, pageNumber: Int): [EventFilterTerm]
+    eventSearch(
+      limit: Int
+      pageNumber: Int
+      filter: EventFilter
+    ): EventConnection
   }
 `;

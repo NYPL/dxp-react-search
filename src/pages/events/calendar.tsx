@@ -3,36 +3,19 @@ import React from "react";
 import withApollo from "../../apollo/withApollo";
 import { initializeApollo } from "../../apollo/withApollo/apollo";
 // Component
-import { Box, Hero, Heading } from "@nypl/design-system-react-components";
-import PageContainer from "../../components/shared/layouts/PageContainer";
+import { Box } from "@nypl/design-system-react-components";
+import PageContainer from "../../components/events/layout/PageContainer";
 import EventCollection, {
   EVENT_COLLECTION_QUERY,
 } from "../../components/events/EventCollection";
-import eventContent from "../../__content/event";
+import { FILTERS_QUERY } from "../../components/events";
 
 function EventsMainPage() {
   return (
     <PageContainer
-      breadcrumbs={[
-        { text: "Home", url: "/" },
-        {
-          text: "Events Calendar",
-          url: "",
-        },
-      ]}
-      wrapperClass="nypl--event"
-      contentHeader={
-        <Hero
-          heroType="tertiary"
-          heading={<Heading level="one" text={eventContent.meta.title} />}
-          subHeaderText={eventContent.meta.description}
-          backgroundColor={"section.whats-on.primary"}
-          foregroundColor="ui.white"
-        />
-      }
       contentPrimary={
         <Box>
-          <EventCollection id="all-events" />
+          <EventCollection id="localist-events" />
         </Box>
       }
     />
@@ -48,6 +31,16 @@ export async function getStaticProps() {
       pageNumber: 1,
     },
   });
+
+  // Filters.
+  await apolloClient.query({
+    query: FILTERS_QUERY,
+    variables: {
+      limit: 200,
+      pageNumber: 1,
+    },
+  });
+
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
