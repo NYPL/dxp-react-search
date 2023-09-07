@@ -27,6 +27,7 @@ export interface EventItem {
   image: EventImageType;
   location: string;
   locationDetail: string;
+  address?: string;
   date: string;
   time: string;
   experience: ExperienceType;
@@ -122,7 +123,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
           (item: EventItem): React.ReactNode => (
             <Box
               as="li"
-              key={id}
+              key={`item-container-${item.id}`}
               listStyleType="none"
               gridColumn="auto / span 4"
             >

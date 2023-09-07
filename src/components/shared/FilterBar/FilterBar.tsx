@@ -23,6 +23,10 @@ interface FilterBarProps {
   routerPathname: string;
   /** Optional boolean to control the q parameter, used for text search. */
   searchQuery?: boolean;
+  onSubmit?: (
+    event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+  ) => void;
+  onSelectedMultiSelectChange?: (items: any) => void;
 }
 
 function FilterBar({
@@ -31,6 +35,8 @@ function FilterBar({
   groups,
   routerPathname,
   searchQuery,
+  onSubmit,
+  onSelectedMultiSelectChange,
 }: FilterBarProps) {
   // Local state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -80,6 +86,7 @@ function FilterBar({
       }
     }
     setSelectedItems(urlState);
+    onSelectedMultiSelectChange && onSelectedMultiSelectChange(urlState);
   }, [router.query]);
 
   //
@@ -156,6 +163,13 @@ function FilterBar({
         items: itemIds,
       },
     });
+    onSelectedMultiSelectChange &&
+      onSelectedMultiSelectChange({
+        ...selectedItems,
+        [groupId]: {
+          items: itemIds,
+        },
+      });
   }
 
   //
@@ -264,6 +278,13 @@ function FilterBar({
         items: newItems,
       },
     });
+    onSelectedMultiSelectChange &&
+      onSelectedMultiSelectChange({
+        ...selectedItems,
+        [groupId]: {
+          items: newItems,
+        },
+      });
   }
 
   return (
@@ -292,7 +313,14 @@ function FilterBar({
             }}
             selectedItems={selectedItems}
             onClearMultiSelect={() => onClearMultiSelect(group.id)}
-            onSaveMultiSelect={onSaveMultiSelect}
+            onSaveMultiSelect={(e) => {
+              if (onSubmit) {
+                onSubmit(e);
+                setSelectedGroupIds([]);
+              } else {
+                onSaveMultiSelect;
+              }
+            }}
             onMenuClick={() => onMenuClick(group.id)}
             selectedGroupIds={selectedGroupIds}
             showCtaButtons={isMobile ? false : true}

@@ -17,7 +17,7 @@ interface MultiSelectProps {
   items: any;
   handleOnSelectedItemChange: any;
   selectedItems: any;
-  onSaveMultiSelect: () => void;
+  onSaveMultiSelect: OnSubmit | OnSave;
   onClearMultiSelect: () => void;
   onMenuClick: () => void;
   selectedGroupIds: string[];
@@ -35,6 +35,11 @@ interface MsItem {
     }
   ];
 }
+
+type OnSave = () => void;
+type OnSubmit = (
+  event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+) => void;
 
 function MultiSelect({
   id,

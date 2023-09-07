@@ -29,7 +29,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ...getFiltersFromQueryParams(context.query),
     q: context.query.q,
   };
-  console.log("filter --->", filter);
   // Filters.
   await apolloClient.query({
     query: FILTERS_QUERY,

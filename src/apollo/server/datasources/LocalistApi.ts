@@ -113,7 +113,6 @@ class LocalistApi extends RESTDataSource {
   }
   async searchAllEvents(args: any): Promise<any> {
     const path = "/api/2/events";
-    console.log("args -->", args);
     let filterQuery = args.filter.q ? "" : "?";
     if (args.filter.q) {
       filterQuery += `/search?search=${args.filter.q}&`;
