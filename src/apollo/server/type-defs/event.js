@@ -5,7 +5,8 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     slug: String
-    eventType: EventFilterItem
+    eventTypes: [EventFilterItem]
+    eventSeries: [EventFilterItem]
     description: String
     location: String
     locationDetail: String
@@ -18,7 +19,7 @@ export const typeDefs = gql`
     needsRegistration: Boolean
     experience: String
     ticketPrice: String
-    localistUrl: String
+    localistEventUrl: String
   }
 
   type EventConnection {
@@ -41,7 +42,6 @@ export const typeDefs = gql`
     event_type: QueryFilterItemArray
     event_series: QueryFilterItemArray
     location: QueryFilterItemArray
-    keyword: QueryFilterItemArray
     q: String
   }
 

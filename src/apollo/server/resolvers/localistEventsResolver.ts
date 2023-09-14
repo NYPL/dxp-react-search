@@ -1,7 +1,7 @@
 import formatDate from "../../../utils/formatDate";
 import formatTime from "../../../utils/formatTime";
 import { QueryArguments, DataSources } from "./utils/types";
-import { EventDataType } from "../datasources/LocalistApi";
+import { EventDataType, FilterItem } from "../datasources/LocalistApi";
 
 const localistEventsResolver = {
   Query: {
@@ -73,8 +73,10 @@ const localistEventsResolver = {
       event.recurring ? event.event_instances[0].event_instance.id : event.id,
     title: ({ event }: Record<"event", EventDataType>) => event.title,
     slug: ({ event }: Record<"event", EventDataType>) => event.urlname,
-    eventType: ({ event }: Record<"event", EventDataType>) =>
-      event.filters?.event_types ? event.filters.event_types[0] : null,
+    eventTypes: ({ event }: Record<"event", EventDataType>) =>
+      event.filters?.event_types ? event.filters.event_types : null,
+    eventSeries: ({ event }: Record<"event", EventDataType>) =>
+      event.filters?.event_types ? event.filters.event_series : null,
     description: ({ event }: Record<"event", EventDataType>) =>
       event.description,
     location: ({ event }: Record<"event", EventDataType>) =>
@@ -93,7 +95,7 @@ const localistEventsResolver = {
         : null,
     tags: ({ event }: Record<"event", EventDataType>) =>
       event.tags.length > 0 ? event.tags : null,
-    localistUrl: ({ event }: Record<"event", EventDataType>) =>
+    localistEventUrl: ({ event }: Record<"event", EventDataType>) =>
       event.localist_url,
     needsRegistration: ({ event }: Record<"event", EventDataType>) =>
       event.free,
@@ -102,8 +104,10 @@ const localistEventsResolver = {
       event.free === true ? null : event.ticket_cost,
   },
   EventFilterItem: {
-    id: (item: any) => (item.place ? item.place.id : item.id),
-    name: (item: any) => (item.place ? item.place.name : item.name),
+    id: (item: FilterItem | Record<"place", FilterItem>) =>
+      "place" in item ? item.place.id : item.id,
+    name: (item: FilterItem | Record<"place", FilterItem>) =>
+      "place" in item ? item.place.name : item.name,
   },
 };
 

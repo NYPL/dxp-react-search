@@ -23,7 +23,8 @@ export type ExperienceType = "inperson" | "hyprid" | "virtual";
 export interface EventItem {
   id: string;
   title: string;
-  eventType: Record<string, string | number>;
+  eventTypes: Record<string, string | number>;
+  eventSeries: Record<string, string | number>;
   image: EventImageType;
   location: string;
   locationDetail: string;
@@ -33,7 +34,7 @@ export interface EventItem {
   experience: ExperienceType;
   description: string;
   tags: string[];
-  localistUrl: string;
+  localistEventUrl: string;
   ticketPrice: string;
   needsRegistration: boolean;
   slug: string;
@@ -45,7 +46,11 @@ export const EVENT_COLLECTION_QUERY = gql`
       items {
         id
         title
-        eventType {
+        eventTypes {
+          id
+          name
+        }
+        eventSeries {
           id
           name
         }
@@ -59,7 +64,7 @@ export const EVENT_COLLECTION_QUERY = gql`
           uri
         }
         tags
-        localistUrl
+        localistEventUrl
         ticketPrice
         needsRegistration
         slug
@@ -74,16 +79,17 @@ export const EVENT_COLLECTION_QUERY = gql`
 
 interface EventCollectionProps {
   id: string;
+  limit: number;
 }
 
-function EventCollection({ id }: EventCollectionProps): ReactElement {
+function EventCollection({ id, limit }: EventCollectionProps): ReactElement {
   const router = useRouter();
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
     : 1;
   const { loading, error, data } = useQuery(EVENT_COLLECTION_QUERY, {
     variables: {
-      limit: 12,
+      limit: limit,
       pageNumber: currentPage ? currentPage : 1,
     },
   });
@@ -130,7 +136,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
               <Card
                 id={item.id}
                 heading={item.title}
-                href={item.localistUrl}
+                href={item.localistEventUrl}
                 image={
                   <Image
                     id={item.image.id}

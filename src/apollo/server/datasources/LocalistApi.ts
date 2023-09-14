@@ -23,7 +23,7 @@ export type EventDataType = {
   first_date: string;
   last_date: string;
   localist_url: string;
-  filters?: any;
+  filters?: FilterType;
   event_instances: EventInstancesType;
 };
 
@@ -41,6 +41,13 @@ type DateDataType = {
   last: string;
 };
 
+export type FilterItem = {
+  id: number;
+  name: string;
+};
+
+type FilterType = Record<string, [FilterItem]>;
+
 interface LocalistEventCollectionResponse {
   status: string;
   events: [EventDataType];
@@ -52,17 +59,12 @@ interface LocalistEventResponse {
   event: EventDataType;
 }
 
-type FilterItemType = {
-  id: number;
-  name: string;
-};
-
 interface LocalistFilterResponse {
-  places: [Record<"place", FilterItemType>];
+  places: Record<"places", [Record<"place", FilterItem>]>;
   page: PageDataType;
-  event_types: [Record<"event_types", FilterItemType>];
-  event_topics: [Record<"event_topics", FilterItemType>];
-  event_series: [Record<"event_series", FilterItemType>];
+  event_types: Record<"event_types", [FilterItem]>;
+  event_topics: Record<"event_topics", [FilterItem]>;
+  event_series: Record<"event_series", [FilterItem]>;
 }
 
 class LocalistApi extends RESTDataSource {
@@ -111,7 +113,7 @@ class LocalistApi extends RESTDataSource {
 
     return { ...filters, ...locations };
   }
-  async searchAllEvents(args: any): Promise<any> {
+  async searchAllEvents(args: any): Promise<LocalistEventCollectionResponse> {
     const path = "/api/2/events";
     let filterQuery = args.filter.q ? "" : "?";
     if (args.filter.q) {

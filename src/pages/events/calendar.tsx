@@ -8,14 +8,19 @@ import PageContainer from "../../components/events/layout/PageContainer";
 import EventCollection, {
   EVENT_COLLECTION_QUERY,
 } from "../../components/events/EventCollection";
-import { FILTERS_QUERY } from "../../components/events";
+// import { FILTERS_QUERY } from "../../components/events";
+// Content
+import eventContent from "../../__content/event";
 
 function EventsMainPage() {
+  const { meta } = eventContent;
+
   return (
     <PageContainer
+      metaTags={meta}
       contentPrimary={
         <Box>
-          <EventCollection id="localist-events" />
+          <EventCollection id="localist-events" limit={12} />
         </Box>
       }
     />
@@ -33,13 +38,13 @@ export async function getStaticProps() {
   });
 
   // Filters.
-  await apolloClient.query({
-    query: FILTERS_QUERY,
-    variables: {
-      limit: 200,
-      pageNumber: 1,
-    },
-  });
+  // await apolloClient.query({
+  //   query: FILTERS_QUERY,
+  //   variables: {
+  //     limit: 200,
+  //     pageNumber: 1,
+  //   },
+  // });
 
   return {
     props: {

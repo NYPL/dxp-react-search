@@ -10,6 +10,8 @@ import {
 import CardGrid from "../shared/CardGrid";
 import Card from "../shared/CardGrid/Card";
 import Image from "../shared/Image";
+// Type
+import { EventItem } from "./EventCollection";
 
 export const EVENT_SEARCH_QUERY = gql`
   query EventSearchQuery($limit: Int, $pageNumber: Int, $filter: EventFilter) {
@@ -17,7 +19,11 @@ export const EVENT_SEARCH_QUERY = gql`
       items {
         id
         title
-        eventType {
+        eventTypes {
+          id
+          name
+        }
+        eventSeries {
           id
           name
         }
@@ -31,7 +37,7 @@ export const EVENT_SEARCH_QUERY = gql`
           uri
         }
         tags
-        localistUrl
+        localistEventUrl
         ticketPrice
         needsRegistration
         slug
@@ -77,7 +83,14 @@ export const getFiltersFromQueryParams = (queryParams: Record<string, any>) => {
   }
   return queryFilters;
 };
-export default function EventSearchResult({ id }: Record<string, any>) {
+interface EventSearchResultsProps {
+  id: string;
+  limit: number;
+}
+export default function EventSearchResult({
+  id,
+  limit,
+}: EventSearchResultsProps) {
   const router = useRouter();
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
@@ -93,8 +106,8 @@ export default function EventSearchResult({ id }: Record<string, any>) {
   const { data, loading, error } = useQuery(EVENT_SEARCH_QUERY, {
     variables: {
       filter: queryFilters,
-      limit: 12,
-      pageNumber: 1,
+      limit: limit,
+      pageNumber: currentPage ? currentPage : 1,
     },
   });
 
@@ -106,10 +119,10 @@ export default function EventSearchResult({ id }: Record<string, any>) {
     return <div>loading...</div>;
   }
   return (
-    <>
-      <CardGrid id={id} type="event">
+    <Box id={id}>
+      <CardGrid id="event-search-results" type="event">
         {data.eventSearch.items.map(
-          (item: any, i: number): React.ReactNode => (
+          (item: EventItem, i: number): React.ReactNode => (
             <Box
               as="li"
               key={`item-container-${item.id}-${i}`}
@@ -119,7 +132,7 @@ export default function EventSearchResult({ id }: Record<string, any>) {
               <Card
                 id={item.id}
                 heading={item.title}
-                href={item.localistUrl}
+                href={item.localistEventUrl}
                 image={
                   <Image
                     id={item.image.id}
@@ -177,6 +190,6 @@ export default function EventSearchResult({ id }: Record<string, any>) {
           onPageChange={onPageChange}
         />
       </Box>
-    </>
+    </Box>
   );
 }

@@ -1,12 +1,23 @@
 import React from "react";
 // Component
 import { Hero, Heading } from "@nypl/design-system-react-components";
-import { default as SharedPageContainer } from "./../../shared/layouts/PageContainer";
-
+import {
+  default as SharedPageContainer,
+  PageContainerProps,
+} from "./../../shared/layouts/PageContainer";
 import { EventSearchForm } from "../../../components/events";
+// Content
 import eventContent from "../../../__content/event";
 
-export default function PageContainer({ contentPrimary }: any) {
+type EventPageContainerProps = Omit<
+  PageContainerProps,
+  "wrapperClass" | "breadcrumbs"
+>;
+
+export default function PageContainer({
+  metaTags,
+  contentPrimary,
+}: EventPageContainerProps) {
   return (
     <SharedPageContainer
       breadcrumbs={[
@@ -17,6 +28,7 @@ export default function PageContainer({ contentPrimary }: any) {
         },
       ]}
       wrapperClass="nypl--event"
+      metaTags={metaTags}
       contentHeader={
         <>
           <Hero

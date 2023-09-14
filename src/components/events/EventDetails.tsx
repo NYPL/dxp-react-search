@@ -31,7 +31,6 @@ export const EVENT_QUERY = gql`
       needsRegistration
       experience
       ticketPrice
-      localistUrl
     }
   }
 `;
