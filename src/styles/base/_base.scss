@@ -2,12 +2,16 @@ html {
   box-sizing: border-box;
 }
 
+// Header placeholder styles.
 #nypl-header {
-  min-height: 70px;
-}
-@media screen and (min-width: 1024px) {
-  #nypl-header {
-    min-height: 207px;
+  min-height: 62px;
+
+  @media screen and (min-width: 832px) {
+    min-height: 112px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    min-height: 130px;
   }
 }
 
