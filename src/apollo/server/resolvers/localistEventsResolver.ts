@@ -5,12 +5,12 @@ import { EventDataType, FilterItem } from "../datasources/LocalistApi";
 
 const localistEventsResolver = {
   Query: {
-    allEvents: async (
+    eventCollection: async (
       _: any,
       args: QueryArguments,
       { dataSources }: DataSources
     ) => {
-      const response = await dataSources.localistApi.getAllEvents(args);
+      const response = await dataSources.localistApi.getEventCollection(args);
       return {
         items: response.events,
         pageInfo: {
@@ -54,8 +54,14 @@ const localistEventsResolver = {
       }
       return allTerms;
     },
-    eventSearch: async (_: any, args: any, { dataSources }: DataSources) => {
-      const response = await dataSources.localistApi.searchAllEvents(args);
+    eventCollectionSearch: async (
+      _: any,
+      args: any,
+      { dataSources }: DataSources
+    ) => {
+      const response = await dataSources.localistApi.getEventCollectionSearch(
+        args
+      );
       return {
         items: response.events,
         pageInfo: {

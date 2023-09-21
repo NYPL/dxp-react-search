@@ -74,7 +74,9 @@ class LocalistApi extends RESTDataSource {
     this.httpCache = new HTTPCache();
   }
 
-  async getAllEvents(args: any): Promise<LocalistEventCollectionResponse> {
+  async getEventCollection(
+    args: any
+  ): Promise<LocalistEventCollectionResponse> {
     const path = "/api/2/events?days=370";
     // Choose max num of days to get all events
     // The start date will be autobamtically set to the current day
@@ -116,7 +118,9 @@ class LocalistApi extends RESTDataSource {
     return { ...filters, ...locations };
   }
 
-  async searchAllEvents(args: any): Promise<LocalistEventCollectionResponse> {
+  async getEventCollectionSearch(
+    args: any
+  ): Promise<LocalistEventCollectionResponse> {
     const path = "/api/2/events";
     let filterQuery = args.filter.q ? "" : "?";
 

@@ -5,7 +5,7 @@ import { initializeApollo } from "../../../apollo/withApollo/apollo";
 // Component
 import PageContainer from "../../../components/events/layout/PageContainer";
 import EventSearchResult, {
-  EVENT_SEARCH_QUERY,
+  EVENT_COLLECTION_SEARCH_QUERY,
 } from "../../../components/events/EventSearchResult";
 // import { FILTERS_QUERY } from "../../../components/events";
 import { getFiltersFromQueryParams } from "../../../components/events/EventSearchResult";
@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // });
   // Events.
   await apolloClient.query({
-    query: EVENT_SEARCH_QUERY,
+    query: EVENT_COLLECTION_SEARCH_QUERY,
     variables: {
       filter: filter,
       limit: 12,

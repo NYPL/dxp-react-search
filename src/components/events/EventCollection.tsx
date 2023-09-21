@@ -42,7 +42,7 @@ export interface EventItem {
 
 export const EVENT_COLLECTION_QUERY = gql`
   query EventsQuery($limit: Int, $pageNumber: Int) {
-    allEvents(limit: $limit, pageNumber: $pageNumber) {
+    eventCollection(limit: $limit, pageNumber: $pageNumber) {
       items {
         id
         title
@@ -125,7 +125,7 @@ function EventCollection({ id, limit }: EventCollectionProps): ReactElement {
   return (
     <>
       <CardGrid id={id} type="event">
-        {data.allEvents.items.map(
+        {data.eventCollection.items.map(
           (item: EventItem): React.ReactNode => (
             <Box
               as="li"
@@ -190,7 +190,7 @@ function EventCollection({ id, limit }: EventCollectionProps): ReactElement {
       >
         <Pagination
           initialPage={currentPage}
-          pageCount={data.allEvents.pageInfo.pageCount}
+          pageCount={data.eventCollection.pageInfo.pageCount}
           onPageChange={onPageChange}
         />
       </Box>

@@ -7,7 +7,7 @@ import { initializeApollo } from "../../apollo/withApollo/apollo";
 import { Box } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/events/layout/PageContainer";
 import EventSearchResult, {
-  EVENT_SEARCH_QUERY,
+  EVENT_COLLECTION_SEARCH_QUERY,
 } from "../../components/events/EventSearchResult";
 // import { FILTERS_QUERY } from "../../components/events";
 // Content
@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    query: EVENT_SEARCH_QUERY,
+    query: EVENT_COLLECTION_SEARCH_QUERY,
     variables: {
       limit: 12,
       pageNumber: 1,

@@ -46,10 +46,10 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    allEvents(limit: Int, pageNumber: Int): EventConnection
+    eventCollection(limit: Int, pageNumber: Int): EventConnection
     event(id: String): Event
     localistAllTerms(limit: Int, pageNumber: Int): [EventFilterTerm]
-    eventSearch(
+    eventCollectionSearch(
       limit: Int
       pageNumber: Int
       filter: EventFilter

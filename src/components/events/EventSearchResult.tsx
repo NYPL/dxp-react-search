@@ -13,9 +13,17 @@ import Image from "../shared/Image";
 // Type
 import { EventItem } from "./EventCollection";
 
-export const EVENT_SEARCH_QUERY = gql`
-  query EventSearchQuery($limit: Int, $pageNumber: Int, $filter: EventFilter) {
-    eventSearch(limit: $limit, pageNumber: $pageNumber, filter: $filter) {
+export const EVENT_COLLECTION_SEARCH_QUERY = gql`
+  query EventCollectionSearchQuery(
+    $limit: Int
+    $pageNumber: Int
+    $filter: EventFilter
+  ) {
+    eventCollectionSearch(
+      limit: $limit
+      pageNumber: $pageNumber
+      filter: $filter
+    ) {
       items {
         id
         title
@@ -111,7 +119,7 @@ export default function EventSearchResult({
     q: router.query.q,
   };
 
-  const { data, loading, error } = useQuery(EVENT_SEARCH_QUERY, {
+  const { data, loading, error } = useQuery(EVENT_COLLECTION_SEARCH_QUERY, {
     variables: {
       filter: queryFilters,
       limit: limit,
@@ -130,7 +138,7 @@ export default function EventSearchResult({
   return (
     <Box id={id}>
       <CardGrid id="event-search-results" type="event">
-        {data.eventSearch.items.map(
+        {data.eventCollectionSearch.items.map(
           (item: EventItem, i: number): React.ReactNode => (
             <Box
               as="li"
@@ -195,7 +203,7 @@ export default function EventSearchResult({
       >
         <Pagination
           initialPage={currentPage}
-          pageCount={data.eventSearch.pageInfo.pageCount}
+          pageCount={data.eventCollectionSearch.pageInfo.pageCount}
           onPageChange={onPageChange}
         />
       </Box>
