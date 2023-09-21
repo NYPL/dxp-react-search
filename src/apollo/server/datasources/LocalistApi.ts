@@ -86,6 +86,7 @@ class LocalistApi extends RESTDataSource {
     );
     return response;
   }
+
   async getEvent(args: any): Promise<LocalistEventResponse> {
     const response = await this.get(
       `/api/2/events/${args.id}?all_custom_fields=true`,
@@ -95,6 +96,7 @@ class LocalistApi extends RESTDataSource {
     );
     return response;
   }
+
   async getLocalistAllTerms(
     args: any
   ): Promise<LocalistFilterResponse | Record<string, unknown>> {
@@ -113,12 +115,15 @@ class LocalistApi extends RESTDataSource {
 
     return { ...filters, ...locations };
   }
+
   async searchAllEvents(args: any): Promise<LocalistEventCollectionResponse> {
     const path = "/api/2/events";
     let filterQuery = args.filter.q ? "" : "?";
+
     if (args.filter.q) {
       filterQuery += `/search?search=${args.filter.q}&`;
     }
+
     if (args.filter) {
       for (const term of Object.keys(args.filter)) {
         args.filter[term].value?.length &&
@@ -128,6 +133,7 @@ class LocalistApi extends RESTDataSource {
           );
       }
     }
+
     const response = await this.get(
       `${path}${filterQuery}pp=${args.limit}&page=${args.pageNumber}&days=370`,
       {

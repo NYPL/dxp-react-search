@@ -1,13 +1,14 @@
 import React from "react";
+import { GetServerSideProps } from "next";
 // Apollo
 import withApollo from "../../apollo/withApollo";
 import { initializeApollo } from "../../apollo/withApollo/apollo";
-// Component
+// Components
 import { Box } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/events/layout/PageContainer";
-import EventCollection, {
-  EVENT_COLLECTION_QUERY,
-} from "../../components/events/EventCollection";
+import EventSearchResult, {
+  EVENT_SEARCH_QUERY,
+} from "../../components/events/EventSearchResult";
 // import { FILTERS_QUERY } from "../../components/events";
 // Content
 import eventContent from "../../__content/event";
@@ -20,20 +21,21 @@ function EventsMainPage() {
       metaTags={meta}
       contentPrimary={
         <Box>
-          <EventCollection id="localist-events" limit={12} />
+          <EventSearchResult id="localist-events" limit={12} />
         </Box>
       }
     />
   );
 }
-export async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    query: EVENT_COLLECTION_QUERY,
+    query: EVENT_SEARCH_QUERY,
     variables: {
       limit: 12,
       pageNumber: 1,
+      filter: {},
     },
   });
 
@@ -50,7 +52,7 @@ export async function getStaticProps() {
     props: {
       initialApolloState: apolloClient.cache.extract(),
     },
-    revalidate: 120,
   };
-}
+};
+
 export default withApollo(EventsMainPage);

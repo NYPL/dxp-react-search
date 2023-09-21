@@ -49,6 +49,7 @@ export const EVENT_SEARCH_QUERY = gql`
     }
   }
 `;
+
 export const getFiltersFromQueryParams = (queryParams: Record<string, any>) => {
   let queryFilters = {};
   if (queryParams["location"]) {
@@ -61,6 +62,7 @@ export const getFiltersFromQueryParams = (queryParams: Record<string, any>) => {
       },
     };
   }
+
   if (queryParams["event_type"]) {
     queryFilters = {
       ...queryFilters,
@@ -71,6 +73,7 @@ export const getFiltersFromQueryParams = (queryParams: Record<string, any>) => {
       },
     };
   }
+
   if (queryParams["event_series"]) {
     queryFilters = {
       ...queryFilters,
@@ -81,12 +84,15 @@ export const getFiltersFromQueryParams = (queryParams: Record<string, any>) => {
       },
     };
   }
+
   return queryFilters;
 };
+
 interface EventSearchResultsProps {
   id: string;
   limit: number;
 }
+
 export default function EventSearchResult({
   id,
   limit,
@@ -95,9 +101,11 @@ export default function EventSearchResult({
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
     : 1;
+
   function onPageChange(pageIndex: number) {
     router.push({ query: { page: pageIndex } });
   }
+
   const queryFilters = {
     ...getFiltersFromQueryParams(router.query),
     q: router.query.q,
@@ -118,6 +126,7 @@ export default function EventSearchResult({
   if (loading) {
     return <div>loading...</div>;
   }
+
   return (
     <Box id={id}>
       <CardGrid id="event-search-results" type="event">
@@ -146,7 +155,7 @@ export default function EventSearchResult({
                     quality={90}
                   />
                 }
-                description={item.description}
+                // description={item.description}
                 cardContent={
                   <>
                     <Box display="block" pb="s" as="b">

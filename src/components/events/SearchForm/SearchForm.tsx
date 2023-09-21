@@ -55,7 +55,7 @@ export default function SearchFrom({ id, ariaLabel }: SearchFormProps) {
     const queryParamsToAdd = convertSelectedMultiSelect(selectedMultiSelect);
 
     router.push({
-      pathname: `${EVENTS_BASE_PATH}/search`,
+      pathname: `${EVENTS_BASE_PATH}`,
       query: {
         ...(searchVal.length && {
           q: searchVal,
@@ -81,6 +81,7 @@ export default function SearchFrom({ id, ariaLabel }: SearchFormProps) {
   if (error) {
     return <div>Error while loading events.</div>;
   }
+
   if (loading || !data) {
     return <div>...loading</div>;
   }
@@ -111,7 +112,7 @@ export default function SearchFrom({ id, ariaLabel }: SearchFormProps) {
             id="events-calendar-filter-bar"
             label="Filter By"
             searchQuery={true}
-            routerPathname={`${EVENTS_BASE_PATH}/search`}
+            routerPathname={`${EVENTS_BASE_PATH}`}
             groups={data.localistAllTerms}
             onSubmit={handleSubmit}
             onSelectedMultiSelectChange={setSelectedMultiSelect}
