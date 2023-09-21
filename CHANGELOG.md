@@ -1,5 +1,13 @@
 ## CHANGES
 
+### v0.10.3 - Global Header Misc
+
+---
+
+- Update Global header placeholder height: [#444](https://github.com/NYPL/dxp-react-search/pull/444)
+
+---
+
 ### v0.10.2 - Analytics Add-Ons
 
 ---
