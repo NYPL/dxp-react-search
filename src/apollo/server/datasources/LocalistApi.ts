@@ -99,7 +99,7 @@ class LocalistApi extends RESTDataSource {
     return response;
   }
 
-  async getLocalistAllTerms(
+  async getEventFilterCollection(
     args: any
   ): Promise<LocalistFilterResponse | Record<string, unknown>> {
     const locations = await this.get(

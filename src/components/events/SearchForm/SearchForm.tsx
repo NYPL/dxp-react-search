@@ -9,9 +9,9 @@ import { EVENTS_BASE_PATH } from "../../../utils/config";
 // Type
 import { SelectedItemsMap } from "../../shared/FilterBar/types";
 
-export const FILTERS_QUERY = gql`
-  query FiltersQuery($limit: Int, $pageNumber: Int) {
-    localistAllTerms(limit: $limit, pageNumber: $pageNumber) {
+export const EVENT_FILTER_COLLECTION_QUERY = gql`
+  query EventFilterCollectionQuery($limit: Int, $pageNumber: Int) {
+    eventFilterCollection(limit: $limit, pageNumber: $pageNumber) {
       id
       label
       items {
@@ -71,7 +71,7 @@ export default function SearchFrom({ id, ariaLabel }: SearchFormProps) {
     }
   }, []);
 
-  const { loading, error, data } = useQuery(FILTERS_QUERY, {
+  const { loading, error, data } = useQuery(EVENT_FILTER_COLLECTION_QUERY, {
     variables: {
       limit: 200,
       pageNumber: 1,
@@ -113,7 +113,7 @@ export default function SearchFrom({ id, ariaLabel }: SearchFormProps) {
             label="Filter By"
             searchQuery={true}
             routerPathname={`${EVENTS_BASE_PATH}`}
-            groups={data.localistAllTerms}
+            groups={data.eventFilterCollection}
             onSubmit={handleSubmit}
             onSelectedMultiSelectChange={setSelectedMultiSelect}
           />

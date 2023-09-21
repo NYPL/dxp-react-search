@@ -24,13 +24,15 @@ const localistEventsResolver = {
       const response = await dataSources.localistApi.getEvent(args);
       return { event: response.event };
     },
-    localistAllTerms: async (
+    eventFilterCollection: async (
       _: any,
       args: any,
       { dataSources }: DataSources
     ) => {
       const allTerms = [];
-      const response = await dataSources.localistApi.getLocalistAllTerms(args);
+      const response = await dataSources.localistApi.getEventFilterCollection(
+        args
+      );
       if ("places" in response) {
         allTerms.push({
           id: "location",
