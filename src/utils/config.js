@@ -11,3 +11,5 @@ export const LOCATIONS_BASE_PATH = "/locations";
 export const BLOGS_BASE_PATH = "/blog";
 // Press
 export const PRESS_BASE_PATH = "/press";
+// Events
+export const EVENTS_BASE_PATH = "/events/calendar";

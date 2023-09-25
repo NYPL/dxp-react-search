@@ -23,16 +23,18 @@ export type ExperienceType = "inperson" | "hyprid" | "virtual";
 export interface EventItem {
   id: string;
   title: string;
-  eventType: Record<string, string | number>;
+  eventTypes: Record<string, string | number>;
+  eventSeries: Record<string, string | number>;
   image: EventImageType;
   location: string;
   locationDetail: string;
+  address?: string;
   date: string;
   time: string;
   experience: ExperienceType;
   description: string;
   tags: string[];
-  localistUrl: string;
+  localistEventUrl: string;
   ticketPrice: string;
   needsRegistration: boolean;
   slug: string;
@@ -40,11 +42,15 @@ export interface EventItem {
 
 export const EVENT_COLLECTION_QUERY = gql`
   query EventsQuery($limit: Int, $pageNumber: Int) {
-    allEvents(limit: $limit, pageNumber: $pageNumber) {
+    eventCollection(limit: $limit, pageNumber: $pageNumber) {
       items {
         id
         title
-        eventType {
+        eventTypes {
+          id
+          name
+        }
+        eventSeries {
           id
           name
         }
@@ -58,7 +64,7 @@ export const EVENT_COLLECTION_QUERY = gql`
           uri
         }
         tags
-        localistUrl
+        localistEventUrl
         ticketPrice
         needsRegistration
         slug
@@ -73,16 +79,17 @@ export const EVENT_COLLECTION_QUERY = gql`
 
 interface EventCollectionProps {
   id: string;
+  limit: number;
 }
 
-function EventCollection({ id }: EventCollectionProps): ReactElement {
+function EventCollection({ id, limit }: EventCollectionProps): ReactElement {
   const router = useRouter();
   const currentPage = router.query.page
     ? parseInt(router.query.page as string, 10)
     : 1;
   const { loading, error, data } = useQuery(EVENT_COLLECTION_QUERY, {
     variables: {
-      limit: 12,
+      limit: limit,
       pageNumber: currentPage ? currentPage : 1,
     },
   });
@@ -118,18 +125,18 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
   return (
     <>
       <CardGrid id={id} type="event">
-        {data.allEvents.items.map(
+        {data.eventCollection.items.map(
           (item: EventItem): React.ReactNode => (
             <Box
               as="li"
-              key={id}
+              key={`item-container-${item.id}`}
               listStyleType="none"
               gridColumn="auto / span 4"
             >
               <Card
                 id={item.id}
                 heading={item.title}
-                href={item.localistUrl}
+                href={item.localistEventUrl}
                 image={
                   <Image
                     id={item.image.id}
@@ -183,7 +190,7 @@ function EventCollection({ id }: EventCollectionProps): ReactElement {
       >
         <Pagination
           initialPage={currentPage}
-          pageCount={data.allEvents.pageInfo.pageCount}
+          pageCount={data.eventCollection.pageInfo.pageCount}
           onPageChange={onPageChange}
         />
       </Box>

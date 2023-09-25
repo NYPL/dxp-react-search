@@ -5,7 +5,8 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     slug: String
-    eventType: EventType
+    eventTypes: [EventFilterItem]
+    eventSeries: [EventFilterItem]
     description: String
     location: String
     locationDetail: String
@@ -18,12 +19,7 @@ export const typeDefs = gql`
     needsRegistration: Boolean
     experience: String
     ticketPrice: String
-    localistUrl: String
-  }
-
-  type EventType {
-    id: ID!
-    name: String
+    localistEventUrl: String
   }
 
   type EventConnection {
@@ -31,8 +27,40 @@ export const typeDefs = gql`
     pageInfo: PageInfo
   }
 
+  type EventFilterTerm {
+    id: ID!
+    label: String
+    items: [EventFilterItem]
+  }
+
+  type EventFilterItem {
+    id: ID!
+    name: String
+  }
+
+  # Filters
+  type LocalistFilterItem {
+    id: ID!
+    name: String!
+  }
+
+  input EventFilter {
+    event_type: QueryFilterItemArray
+    event_series: QueryFilterItemArray
+    location: QueryFilterItemArray
+    q: String
+  }
+
   extend type Query {
-    allEvents(limit: Int, pageNumber: Int): EventConnection
+    eventCollection(limit: Int, pageNumber: Int): EventConnection
     event(id: String): Event
+    eventFilterCollection(limit: Int, pageNumber: Int): [EventFilterTerm]
+    eventCollectionSearch(
+      limit: Int
+      pageNumber: Int
+      filter: EventFilter
+    ): EventConnection
+    #
+    localistFilterCollection(id: String!, type: String!): [LocalistFilterItem]
   }
 `;

@@ -9,8 +9,9 @@ import Error from "../_error";
 import { GetServerSideProps } from "next";
 // Component
 import { EventDetails, EVENT_QUERY } from "../../components/events";
-import { Box } from "@nypl/design-system-react-components";
+import { Box, Hero, Heading } from "@nypl/design-system-react-components";
 import PageContainer from "../../components/shared/layouts/PageContainer";
+import eventContent from "../../__content/event";
 
 function EventDetailPage(props: any) {
   const { id } = props;
@@ -40,6 +41,15 @@ function EventDetailPage(props: any) {
         },
       ]}
       wrapperClass="nypl--event"
+      contentHeader={
+        <Hero
+          heroType="tertiary"
+          heading={<Heading level="one" text={eventContent.meta.title} />}
+          subHeaderText={eventContent.meta.description}
+          backgroundColor={"section.whats-on.primary"}
+          foregroundColor="ui.white"
+        />
+      }
       contentPrimary={
         <Box>
           <EventDetails {...data.event} />
