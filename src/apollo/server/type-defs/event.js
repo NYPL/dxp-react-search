@@ -38,6 +38,12 @@ export const typeDefs = gql`
     name: String
   }
 
+  # Filters
+  type LocalistFilterItem {
+    id: ID!
+    name: String!
+  }
+
   input EventFilter {
     event_type: QueryFilterItemArray
     event_series: QueryFilterItemArray
@@ -54,5 +60,7 @@ export const typeDefs = gql`
       pageNumber: Int
       filter: EventFilter
     ): EventConnection
+    #
+    localistFilterCollection(id: String!, type: String!): [LocalistFilterItem]
   }
 `;

@@ -101,26 +101,32 @@ class LocalistApi extends RESTDataSource {
 
   async getEventFilterCollection(
     args: any
-  ): Promise<LocalistFilterResponse | Record<string, unknown>> {
-    const locations = await this.get(
-      `/api/2/places?pp=${args.limit}&page=${args.pageNumber}`,
-      {
-        headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
-      }
-    );
-    const filters = await this.get(
-      `/api/2/events/filters?pp=${args.limit}&page=${args.pageNumber}`,
-      {
-        headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
-      }
-    );
+  ): Promise<LocalistFilterResponse | Record<string, unknown> | any> {
+    // Special handling for Localist "place".
+    if (args.type === "localist_place") {
+      // Places API only returns 100 items per page, and this can't be modfied.
+      // So we make 2 calls wrapped in a Promise to get all locations.
+      const [placesResponsePageOne, placesResponsePageTwo] = await Promise.all([
+        this.get("/api/2/places?pp=100&page=1&sort=name&direction=asc"),
+        this.get("/api/2/places?pp=100&page=2&sort=name&direction=asc"),
+      ]);
 
-    return { ...filters, ...locations };
+      return [...placesResponsePageOne.places, ...placesResponsePageTwo.places];
+    }
+
+    const filters = await this.get("/api/2/events/filters", {
+      headers: { Authorization: `Bearer ${LOCALIST_ACCESS_TOKEN}` },
+    });
+
+    return filters[args.id].sort((a: any, b: any) =>
+      a.name.localeCompare(b.name)
+    );
   }
 
   async getEventCollectionSearch(
     args: any
   ): Promise<LocalistEventCollectionResponse> {
+    // @TODO Localist events search api does not return all results, you appear to have to provide a search query.
     const path = "/api/2/events";
     let filterQuery = args.filter.q ? "" : "?";
 

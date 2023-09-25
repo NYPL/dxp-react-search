@@ -27,7 +27,7 @@
   "dependencies": {
     "@apollo/client": "3.6.9",
     "@chakra-ui/react": "1.8.8",
-    "@nypl/design-system-react-components": "1.2.0",
+    "@nypl/design-system-react-components": "1.7.3",
     "@nypl/dgx-react-footer": "^0.5.8",
     "@react-google-maps/api": "^2.12.0",
     "@reduxjs/toolkit": "^1.9.3",

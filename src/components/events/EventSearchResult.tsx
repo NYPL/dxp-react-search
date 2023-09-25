@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 // Components
 import {
   Box,
+  Button,
   Pagination,
   StatusBadge,
 } from "@nypl/design-system-react-components";
@@ -71,13 +72,13 @@ export const getFiltersFromQueryParams = (queryParams: Record<string, any>) => {
     };
   }
 
-  if (queryParams["event_type"]) {
+  if (queryParams["event_types"]) {
     queryFilters = {
       ...queryFilters,
       event_type: {
         fieldName: "type",
         operator: "=",
-        value: String(queryParams.event_type).split(" "),
+        value: String(queryParams.event_types).split(" "),
       },
     };
   }
@@ -92,6 +93,17 @@ export const getFiltersFromQueryParams = (queryParams: Record<string, any>) => {
       },
     };
   }
+
+  // if (queryParams["event_topics"]) {
+  //   queryFilters = {
+  //     ...queryFilters,
+  //     event_topics: {
+  //       fieldName: "type",
+  //       operator: "=",
+  //       value: String(queryParams.event_topics).split(" "),
+  //     },
+  //   };
+  // }
 
   return queryFilters;
 };
@@ -135,8 +147,33 @@ export default function EventSearchResult({
     return <div>loading...</div>;
   }
 
+  const showClearSearchTerms = [
+    "location",
+    "event_type",
+    "event_series",
+    "q",
+  ].some((item) => router.query.hasOwnProperty(item));
+
   return (
     <Box id={id}>
+      {showClearSearchTerms && (
+        <Box mb="l">
+          {data.eventCollectionSearch.items.length === 0 && (
+            <div>No results.</div>
+          )}
+          <Button
+            id="event-search-clear-all"
+            buttonType="link"
+            onClick={() => {
+              router.replace("/events/calendar", undefined, {
+                shallow: true,
+              });
+            }}
+          >
+            Clear all search terms.
+          </Button>
+        </Box>
+      )}
       <CardGrid id="event-search-results" type="event">
         {data.eventCollectionSearch.items.map(
           (item: EventItem, i: number): React.ReactNode => (
