@@ -84,7 +84,11 @@ const localistEventsResolver = {
     eventTypes: ({ event }: Record<"event", EventDataType>) =>
       event.filters?.event_types ? event.filters.event_types : null,
     eventSeries: ({ event }: Record<"event", EventDataType>) =>
-      event.filters?.event_types ? event.filters.event_series : null,
+      event.filters?.event_series ? event.filters.event_series : null,
+    eventTopics: ({ event }: Record<"event", EventDataType>) =>
+      event.filters?.event_topics ? event.filters.event_topics : null,
+    eventAudience: ({ event }: Record<"event", EventDataType>) =>
+      event.filters?.event_audience ? event.filters.event_audience[0] : null,
     description: ({ event }: Record<"event", EventDataType>) =>
       event.description,
     location: ({ event }: Record<"event", EventDataType>) =>

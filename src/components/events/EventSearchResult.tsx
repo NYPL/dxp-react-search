@@ -5,8 +5,10 @@ import { useRouter } from "next/router";
 import {
   Box,
   Button,
+  CardHeading,
   Pagination,
   StatusBadge,
+  Text,
 } from "@nypl/design-system-react-components";
 import CardGrid from "../shared/CardGrid";
 import Card from "../shared/CardGrid/Card";
@@ -32,10 +34,6 @@ export const EVENT_COLLECTION_SEARCH_QUERY = gql`
           id
           name
         }
-        eventSeries {
-          id
-          name
-        }
         description
         location
         date
@@ -44,6 +42,18 @@ export const EVENT_COLLECTION_SEARCH_QUERY = gql`
         image {
           id
           uri
+        }
+        eventSeries {
+          id
+          name
+        }
+        eventTopics {
+          id
+          name
+        }
+        eventAudience {
+          id
+          name
         }
         tags
         localistEventUrl
@@ -94,16 +104,27 @@ export const getFiltersFromQueryParams = (queryParams: Record<string, any>) => {
     };
   }
 
-  // if (queryParams["event_topics"]) {
-  //   queryFilters = {
-  //     ...queryFilters,
-  //     event_topics: {
-  //       fieldName: "type",
-  //       operator: "=",
-  //       value: String(queryParams.event_topics).split(" "),
-  //     },
-  //   };
-  // }
+  if (queryParams["event_audience"]) {
+    queryFilters = {
+      ...queryFilters,
+      event_audience: {
+        fieldName: "type",
+        operator: "=",
+        value: String(queryParams.event_audience).split(" "),
+      },
+    };
+  }
+
+  if (queryParams["event_topics"]) {
+    queryFilters = {
+      ...queryFilters,
+      event_topics: {
+        fieldName: "type",
+        operator: "=",
+        value: String(queryParams.event_topics).split(" "),
+      },
+    };
+  }
 
   return queryFilters;
 };
@@ -140,6 +161,7 @@ export default function EventSearchResult({
   });
 
   if (error) {
+    console.error(error);
     return <div>Error</div>;
   }
 
@@ -174,19 +196,18 @@ export default function EventSearchResult({
           </Button>
         </Box>
       )}
-      <CardGrid id="event-search-results" type="event">
+      <CardGrid id="event-search-results" type="event" layout="row">
         {data.eventCollectionSearch.items.map(
           (item: EventItem, i: number): React.ReactNode => (
             <Box
               as="li"
               key={`item-container-${item.id}-${i}`}
               listStyleType="none"
-              gridColumn="auto / span 4"
             >
               <Card
                 id={item.id}
-                heading={item.title}
                 href={item.localistEventUrl}
+                layout="row"
                 image={
                   <Image
                     id={item.image.id}
@@ -204,24 +225,66 @@ export default function EventSearchResult({
                 cardContent={
                   <>
                     <Box display="block" pb="s" as="b">
+                      <Text size="overline1" mb="xxs">
+                        {item.eventAudience?.name || ""}
+                      </Text>
+                      <CardHeading
+                        level="three"
+                        text={item.title}
+                        url={item.localistEventUrl}
+                      />
                       <Box>
                         {item.date} @ {item.time}
                       </Box>
                       <Box>{item.location}</Box>
                     </Box>
-                    {item.tags && (
-                      <Box mb="s">
-                        {item.tags.map((tag: string) => (
-                          <StatusBadge
-                            key={`${tag}-key`}
-                            display="inline-block"
-                            marginInlineEnd={"s"}
-                          >
-                            {tag}
-                          </StatusBadge>
-                        ))}
-                      </Box>
-                    )}
+                    <Box display="flex">
+                      {item.eventTypes && (
+                        <Box mb="s">
+                          {item.eventTypes.map(
+                            (type: Record<string, string | number>) => (
+                              <StatusBadge
+                                key={`${type.name}-key`}
+                                display="inline-block"
+                                marginInlineEnd={"s"}
+                              >
+                                {type.name}
+                              </StatusBadge>
+                            )
+                          )}
+                        </Box>
+                      )}
+                      {item.eventSeries && (
+                        <Box mb="s">
+                          {item.eventSeries.map(
+                            (type: Record<string, string | number>) => (
+                              <StatusBadge
+                                key={`${type.name}-key`}
+                                display="inline-block"
+                                marginInlineEnd={"s"}
+                              >
+                                {type.name}
+                              </StatusBadge>
+                            )
+                          )}
+                        </Box>
+                      )}{" "}
+                      {item.eventTopics && (
+                        <Box mb="s">
+                          {item.eventTopics.map(
+                            (type: Record<string, string | number>) => (
+                              <StatusBadge
+                                key={`${type.name}-key`}
+                                display="inline-block"
+                                marginInlineEnd={"s"}
+                              >
+                                {type.name}
+                              </StatusBadge>
+                            )
+                          )}
+                        </Box>
+                      )}
+                    </Box>
                   </>
                 }
               />

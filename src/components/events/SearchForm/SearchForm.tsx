@@ -70,7 +70,7 @@ export default function SearchFrom({ id, ariaLabel }: SearchFormProps) {
               },
               {
                 id: "event_series",
-                label: "Series",
+                label: "Event Series",
                 type: "localist_filter",
               },
               {
@@ -81,6 +81,11 @@ export default function SearchFrom({ id, ariaLabel }: SearchFormProps) {
               {
                 id: "event_topics",
                 label: "Event Topics",
+                type: "localist_filter",
+              },
+              {
+                id: "event_audience",
+                label: "Event Audience",
                 type: "localist_filter",
               },
             ]}

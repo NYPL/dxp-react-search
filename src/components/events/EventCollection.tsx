@@ -23,8 +23,10 @@ export type ExperienceType = "inperson" | "hyprid" | "virtual";
 export interface EventItem {
   id: string;
   title: string;
-  eventTypes: Record<string, string | number>;
-  eventSeries: Record<string, string | number>;
+  eventTypes: Record<string, string | number>[];
+  eventSeries: Record<string, string | number>[];
+  eventTopics: Record<string, string | number>[];
+  eventAudience: Record<string, string | number>;
   image: EventImageType;
   location: string;
   locationDetail: string;
@@ -51,6 +53,10 @@ export const EVENT_COLLECTION_QUERY = gql`
           name
         }
         eventSeries {
+          id
+          name
+        }
+        eventTopics {
           id
           name
         }
