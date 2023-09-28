@@ -6,6 +6,7 @@ export type AnalyticsEventActions = {
   cta_text: string | null;
   cta_position: string | null;
 };
+
 export interface HomePageLinkProps {
   /** ID used for accessibility purposes. */
   id?: string;
