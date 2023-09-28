@@ -1,6 +1,9 @@
 import getSiteSection from "./get-site-section";
 
-export default function submitAdobePageView(path: string, bundle: string) {
+export default function trackAdobeVirtualPageView(
+  path: string,
+  bundle: string
+) {
   // Initialize empty data layer object.
   window.adobeDataLayer.push({
     page_name: null,
