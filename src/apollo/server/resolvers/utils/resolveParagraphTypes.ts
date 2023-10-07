@@ -42,11 +42,11 @@ export default function resolveParagraphTypes(
       resolvedObjectType = "ExternalSearch";
       break;
     case "featured_card":
-      resolvedObjectType = "LandingPageFeaturedCard";
+      resolvedObjectType = "FeaturedCard";
       break;
     case "card_grid":
     case "card_grid_secondary":
-      resolvedObjectType = "LandingPageCardGrid";
+      resolvedObjectType = "FeaturedCardGrid";
       break;
     case "email_subscription":
       resolvedObjectType = "EmailSubscription";

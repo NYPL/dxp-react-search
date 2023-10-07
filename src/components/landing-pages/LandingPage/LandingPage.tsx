@@ -5,7 +5,8 @@ import { gql, useQuery } from "@apollo/client";
 import PageContainer from "../../shared/layouts/PageContainer";
 
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
-//import Components from "./../../shared/ContentComponents/getReactComponent";
+import TextFormatted from "../../shared/TextFormatted";
+import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
 
 export const LANDING_PAGE_QUERY = gql`
@@ -38,7 +39,7 @@ export const LANDING_PAGE_QUERY = gql`
       }
       mainContent {
         __typename
-        ... on LandingPageFeaturedCard {
+        ... on FeaturedCard {
           id
           type
           heading
@@ -101,7 +102,7 @@ export const LANDING_PAGE_QUERY = gql`
             author
           }
         }
-        ... on LandingPageCardGrid {
+        ... on FeaturedCardGrid {
           id
           type
           items {
@@ -123,6 +124,15 @@ export const LANDING_PAGE_QUERY = gql`
             link
             linkText
           }
+        }
+        ... on Video {
+          id
+          type
+          heading
+          description
+          provider
+          embedCode
+          oembedUrl
         }
       }
     }
@@ -184,7 +194,7 @@ export default function LandingPage({
           <Hero
             heroType="campaign"
             heading={<Heading id="1" level="one" text={landingPage.title} />}
-            subHeaderText={landingPage.description}
+            subHeaderText={<TextFormatted html={landingPage.description} />}
             backgroundImageSrc={landingPage.backgroundImage.uri}
             imageProps={{
               alt: "Image example",
@@ -195,7 +205,11 @@ export default function LandingPage({
       }
       contentPrimary={
         <Box>
-          <p>Content Primary</p>
+          {landingPage.mainContent &&
+            landingPage.mainContent.map(
+              (contentComponent: { [key: string]: any }) =>
+                Components(contentComponent)
+            )}
         </Box>
       }
     />

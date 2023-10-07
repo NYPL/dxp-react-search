@@ -86,7 +86,7 @@ export default function resolveDrupalParagraphs(
 
       if (
         item.type === "paragraph--featured_card" &&
-        typesInQuery.includes("LandingPageFeaturedCard")
+        typesInQuery.includes("FeaturedCard")
       ) {
         accumulator.push(item);
       }
@@ -94,7 +94,7 @@ export default function resolveDrupalParagraphs(
       if (
         (item.type === "paragraph--card_grid" ||
           item.type === "paragraph--card_grid_secondary") &&
-        typesInQuery.includes("LandingPageCardGrid")
+        typesInQuery.includes("FeaturedCardGrid")
       ) {
         accumulator.push(item);
       }
