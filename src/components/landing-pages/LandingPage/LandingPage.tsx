@@ -4,7 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 // Components
 import PageContainer from "../../shared/layouts/PageContainer";
 
-import { Box } from "@nypl/design-system-react-components";
+import { Box, Heading, Hero } from "@nypl/design-system-react-components";
 //import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
 
@@ -176,14 +176,26 @@ export default function LandingPage({
           url: "http://www.nypl.org",
         },
       ]}
+      //breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--landing-page"
-      contentHeader={<>{isPreview && <PreviewModeNotification />}</>}
+      contentHeader={
+        <>
+          {isPreview && <PreviewModeNotification />}
+          <Hero
+            heroType="campaign"
+            heading={<Heading id="1" level="one" text={landingPage.title} />}
+            subHeaderText={landingPage.description}
+            backgroundImageSrc={landingPage.backgroundImage.uri}
+            imageProps={{
+              alt: "Image example",
+              src: landingPage.foregroundImage.uri,
+            }}
+          />
+        </>
+      }
       contentPrimary={
         <Box>
-          <p>{landingPage.title}</p>
-          <p>{landingPage.backgroundImage.uri}</p>
-          <p>{landingPage.foregroundImage.uri}</p>
-          {landingPage.description}
+          <p>Content Primary</p>
         </Box>
       }
     />
