@@ -49,6 +49,7 @@ const nextConfig = {
       "localhost",
       "nypl-d8.lndo.site",
       "nypl-pantheon.ddev.site",
+      "nypl-pantheon-d10.ddev.site",
       DRUPAL_API_DOMAIN_ONLY,
       // QA
       "qa-cdn-d8-2.nypl.org",

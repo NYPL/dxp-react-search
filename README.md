@@ -1,4 +1,4 @@
-# DXP Scout
+# DXP Scout [ Drupal 10 Upgrade ]
 
 React app build for www.nypl.org. Pages currently in repo:
 
