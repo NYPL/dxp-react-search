@@ -96,6 +96,11 @@ function ComponentWrapper({
                 id={`component-wrapper-heading-link-${id}`}
                 href={link}
                 gaEventActionName="Heading"
+                analyticsEventActions={{
+                  cta_subsection: "Heading",
+                  cta_text: title,
+                  cta_position: null,
+                }}
                 variant={
                   hoverStyle === true
                     ? "link-hover-style"
@@ -127,6 +132,12 @@ function ComponentWrapper({
                 aria-label={`see more of ${title}`}
                 href={seeMore.link}
                 gaEventActionName="See More"
+                // @question shold the section be added (e.g Spotlight) as positio, see more text as text
+                analyticsEventActions={{
+                  cta_subsection: "See More",
+                  cta_text: null,
+                  cta_position: null,
+                }}
                 variant={
                   hoverStyle === true
                     ? "see-more-hover-style"

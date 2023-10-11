@@ -93,16 +93,31 @@ const items: CardItem[] = [
   },
 ];
 const seeMore = { text: "see More", link: "https://www.nypl.org/" };
+const analyticsEventActions = {
+  cta_subsection: "testSubsection",
+  cta_text: "testTitle",
+  cta_position: "testPosition",
+};
 
 describe("Card tests", () => {
   it("should pass axe accessibility tests", async () => {
     const { container } = render(
-      <Card item={item} gaEventActionName={"cardTest"} />
+      <Card
+        item={item}
+        analyticsEventActions={analyticsEventActions}
+        gaEventActionName={"cardTest"}
+      />
     );
     expect(await axe(container)).toHaveNoViolations();
   });
   it("should render a h3 with the title", () => {
-    render(<Card item={item} gaEventActionName={"cardTest"} />);
+    render(
+      <Card
+        item={item}
+        analyticsEventActions={analyticsEventActions}
+        gaEventActionName={"cardTest"}
+      />
+    );
     expect(
       screen.getByRole("heading", { name: /Test/i, level: 3 })
     ).toBeInTheDocument();
@@ -110,7 +125,13 @@ describe("Card tests", () => {
   // Image should have alt text or have role="none"/"presentatio"
   // it("should render an image", () => {});
   it("should add a aria-describedby with additional information", () => {
-    render(<Card item={item} gaEventActionName={"cardTest"} />);
+    render(
+      <Card
+        item={item}
+        analyticsEventActions={analyticsEventActions}
+        gaEventActionName={"cardTest"}
+      />
+    );
     expect(screen.getByRole("heading", { name: /Test/i })).toHaveAttribute(
       "aria-describedby",
       "card-description-test-id-1"
@@ -118,7 +139,13 @@ describe("Card tests", () => {
   });
   it("should render the UI snapshot correctly", () => {
     const basicCard = renderer
-      .create(<Card item={item} gaEventActionName={"cardTest"} />)
+      .create(
+        <Card
+          item={item}
+          analyticsEventActions={analyticsEventActions}
+          gaEventActionName={"cardTest"}
+        />
+      )
       .toJSON();
     expect(basicCard).toMatchSnapshot();
   });

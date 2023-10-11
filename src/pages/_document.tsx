@@ -54,15 +54,10 @@ export default function Document() {
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              window.adobeDataLayer = [];
-              let pageName = document.title.split("|")[0].trim();
-              if (window.location.pathname === "/") {
-                pageName = "Home"
-              }
-              window.adobeDataLayer.push({
-                page_name: pageName,
-                site_section: null,
-              });
+            window.adobeDataLayer = window.adobeDataLayer || [];
+            window.adobeDataLayer.push({
+             disable_page_view: true
+            });
             `,
           }}
         />
