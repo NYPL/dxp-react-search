@@ -1,5 +1,13 @@
 ## CHANGES
 
+### v0.10.5 - Blog Bug Fixes
+
+---
+
+- Add additional content cafe domain to allowed image domains: [#447](https://github.com/NYPL/dxp-react-search/pull/447)
+
+---
+
 ### v0.10.4 - Analytics Updates
 
 ---
