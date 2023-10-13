@@ -142,22 +142,6 @@ export const typeDefs = gql`
     link: String
   }
 
-  type CardList {
-    id: ID!
-    type: String!
-    title: String
-    description: String
-    items: [CardItem]!
-  }
-
-  type CardItem {
-    id: ID!
-    title: String
-    description: String
-    image: Image
-    link: String
-  }
-
   type CatalogList {
     id: ID!
     type: String!

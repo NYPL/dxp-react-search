@@ -2,6 +2,7 @@ import * as React from "react";
 import { Box, Flex, Heading } from "@nypl/design-system-react-components";
 import ButtonLink from "./../ButtonLink";
 import { ButtonLinkProps as ButtonLinkItem } from "./../ButtonLink/ButtonLink";
+import TextFormatted from "./../../shared/TextFormatted";
 
 interface ButtonLinksProps {
   id: string;
@@ -10,7 +11,12 @@ interface ButtonLinksProps {
   items: ButtonLinkItem[];
 }
 
-export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
+export default function ButtonLinks({
+  id,
+  heading,
+  description,
+  items,
+}: ButtonLinksProps) {
   return (
     <Box
       id={`social-media-block-${id}`}
@@ -22,6 +28,11 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
     >
       <Box w="full" px="s" margin="auto">
         <Heading level="two" text={heading} textAlign="center" />
+        {description && (
+          <Box textAlign="center" pb="l">
+            <TextFormatted html={description} />
+          </Box>
+        )}
         <Flex
           as="ul"
           direction={{ sm: "column", md: "row" }}

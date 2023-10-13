@@ -3,10 +3,11 @@ import * as React from "react";
 import { GetStaticPropsContext } from "next";
 // Apollo
 import withApollo from "../apollo/withApollo";
-// Section front
+// Page Templates
 import SectionFrontPage, {
   SECTION_FRONT_QUERY,
 } from "../components/section-fronts/SectionFrontPage/SectionFrontPage";
+import PagePage, { PAGE_QUERY } from "../components/pages/Page";
 // HOC
 import withDrupalRouter, {
   WithDrupalRouterReturnProps,
@@ -17,7 +18,18 @@ type CatchAllRoutesPageProps = {
   uuid: string;
   isPreview: boolean;
   revisionId: string;
-  bundle?: string;
+  bundle: string;
+};
+
+const BundleMap: any = {
+  page: {
+    query: PAGE_QUERY,
+    component: PagePage,
+  },
+  section_front: {
+    query: SECTION_FRONT_QUERY,
+    component: SectionFrontPage,
+  },
 };
 
 function CatchAllRoutesPage({
@@ -27,20 +39,14 @@ function CatchAllRoutesPage({
   revisionId,
   bundle,
 }: CatchAllRoutesPageProps) {
-  // Determine which page template to use by bundle.
-  if (bundle === "section_front") {
-    return (
-      <SectionFrontPage
-        uuid={uuid}
-        slug={slug}
-        isPreview={isPreview}
-        revisionId={revisionId}
-      />
-    );
-  }
+  const pageComponent = BundleMap[bundle].component;
 
-  // @TODO shouldnt this return <Error statusCode={404} /> instead?
-  return null;
+  return React.createElement(pageComponent, {
+    uuid: uuid,
+    slug: slug,
+    isPreview: isPreview,
+    revisionId: revisionId,
+  });
 }
 
 export async function getStaticPaths() {
@@ -58,11 +64,7 @@ export const getStaticProps = withDrupalRouter(async function (
 ) {
   const { uuid, revisionId, slug, isPreview, bundle, apolloClient } = props;
 
-  const GQL_QUERY = SECTION_FRONT_QUERY;
-  // Future example for handling additional content types, would look like this:
-  // if (bundle === "page") {
-  //   QUERY = PAGE_QUERY;
-  // }
+  const GQL_QUERY = BundleMap[bundle].query;
 
   await apolloClient.query({
     query: GQL_QUERY,

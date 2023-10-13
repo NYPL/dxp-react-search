@@ -4,10 +4,17 @@ import formatDate from "../../../utils/formatDate";
 import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
+import { drupalParagraphsMap } from "./drupal-paragraphs";
 import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
 } from "./../datasources/drupal-json-api/getJsonApiPath";
+
+export const pressDrupalParagraphsMap = {
+  "paragraph--image": "ImageComponent",
+  "paragraph--text": "Text",
+  "paragraph--text_with_image": "TextWithImage",
+};
 
 const includedFields = [
   "field_ers_media_image.field_media_image",
@@ -75,23 +82,10 @@ const pressReleaseResolver = {
         : null,
     mediaContacts: (pressRelease) =>
       pressRelease.field_tfls_media_contacts?.processed,
-    mainContent: (pressRelease, _, __, info) => {
-      const resolveInfo = parseResolveInfo(info);
-      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      const mainContent =
-        pressRelease.field_main_content.data?.length === 0
-          ? null
-          : resolveDrupalParagraphs(
-              pressRelease.field_main_content,
-              typesInQuery
-            );
-      return mainContent;
-    },
+    mainContent: (pressRelease) => pressRelease.field_main_content,
   },
   PressReleaseMainContent: {
-    __resolveType: (object, _, __) => {
-      return resolveParagraphTypes(object.type);
-    },
+    __resolveType: (object) => pressDrupalParagraphsMap[object.type] || null,
   },
 };
 

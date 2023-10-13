@@ -14,16 +14,14 @@ export const typeDefs = gql`
   }
 
   union BlogMainContent =
-      TextWithImage
-    | Video
-    | Slideshow
-    | Text
-    | SocialEmbed
-    | AudioEmbed
+      AudioEmbed
+    | BlogCardGrid
     | GoogleMapEmbed
     | ImageComponent
-    | CardList
-    | CatalogList
+    | SocialEmbed
+    | Text
+    | TextWithImage
+    | Video
 
   type BlogConnection {
     items: [Blog]
@@ -36,6 +34,22 @@ export const typeDefs = gql`
     contentType: String!
     drupalInternalId: String!
     slug: String!
+  }
+
+  type BlogCardGrid {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    items: [BlogCardGridItem]!
+  }
+
+  type BlogCardGridItem {
+    id: ID!
+    title: String
+    description: String
+    image: Image
+    link: String
   }
 
   input BlogFilter {

@@ -7,7 +7,6 @@ import SocialEmbed from "./SocialEmbed";
 import AudioEmbed from "./AudioEmbed";
 import GoogleMapEmbed from "./GoogleMapEmbed";
 import ImageComponent from "./ImageComponent";
-import CardList from "./CardList";
 import CardGrid from "./../CardGrid";
 import ExternalSearch from "./ExternalSearch";
 import EmailSubscription from "../EmailSubscription";
@@ -31,7 +30,6 @@ const Components: any = {
   GoogleMapEmbed: GoogleMapEmbed,
   AudioEmbed: AudioEmbed,
   ImageComponent: ImageComponent,
-  CardList: CardList,
   CardGrid: CardGrid,
   ExternalSearch: ExternalSearch,
   EmailSubscription: EmailSubscription,

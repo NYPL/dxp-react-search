@@ -15,17 +15,22 @@ import locationResolver from "./locationResolver";
 import pressReleaseResolver from "./pressReleaseResolver";
 import homePageResolver from "./homePageResolver";
 import sectionFrontResolver from "./sectionFrontResolver";
+import { pageResolver } from "./page-resolver";
+// Drupal paragraphs
+import { drupalParagraphsResolvers } from "./drupal-paragraphs";
 // Mutations
 import sendEmailResolver from "./sendEmailResolver";
 
 export const resolvers = mergeResolvers([
   refineryLocationResolver,
   refineryTermResolver,
+  drupalParagraphsResolvers,
   blogResolver,
   locationResolver,
   pressReleaseResolver,
   homePageResolver,
   sectionFrontResolver,
+  pageResolver,
   termResolver,
   onlineResourceResolver,
   searchResolver,

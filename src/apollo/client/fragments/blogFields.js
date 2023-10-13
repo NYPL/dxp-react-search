@@ -106,7 +106,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
           }
         }
       }
-      ... on CardList {
+      ... on BlogCardGrid {
         id
         type
         title

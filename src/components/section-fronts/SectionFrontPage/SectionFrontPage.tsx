@@ -5,10 +5,18 @@ import { gql, useQuery } from "@apollo/client";
 import PageContainer, {
   BreadcrumbsItem,
 } from "../../shared/layouts/PageContainer";
-
 import { Box, Heading, Hero } from "@nypl/design-system-react-components";
-import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
+// Drupal Paragraphs.
+import DrupalParagraphs from "../../shared/DrupalParagraphs";
+import ButtonLinks from "../../shared/ContentComponents/ButtonLinks";
+import CardGrid from "./../../shared/CardGrid";
+import Donation from "../Donation";
+import DonorCredit from "../../shared/DonorCredit";
+import EmailSubscription from "../../shared/EmailSubscription";
+import ExternalSearch from "../../shared/ContentComponents/ExternalSearch";
+import Jumbotron from "../../shared/ContentComponents/Jumbotron";
+import Text from "../../shared/ContentComponents/Text";
 
 export const SECTION_FRONT_QUERY = gql`
   query SectionFrontQuery($id: String, $revisionId: String, $preview: Boolean) {
@@ -266,30 +274,36 @@ export default function SectionFrontPage({
             backgroundColor={sectionFront.colorway.primary}
             foregroundColor="ui.white"
           />
-          {sectionFront.featuredContent &&
-            sectionFront.featuredContent.map(
-              (contentComponent: { [key: string]: any }) =>
-                Components(contentComponent)
-            )}
+          <DrupalParagraphs
+            content={sectionFront.featuredContent}
+            components={{
+              Donation: Donation,
+              Jumbotron: Jumbotron,
+            }}
+          />
         </>
       }
       contentPrimary={
         <Box>
-          {sectionFront.mainContent &&
-            sectionFront.mainContent.map(
-              (contentComponent: { [key: string]: any }) =>
-                Components(contentComponent)
-            )}
+          <DrupalParagraphs
+            content={sectionFront.mainContent}
+            components={{
+              ButtonLinks: ButtonLinks,
+              CardGrid: CardGrid,
+              EmailSubscription: EmailSubscription,
+              ExternalSearch: ExternalSearch,
+              Text: Text,
+            }}
+          />
         </Box>
       }
       contentBottom={
-        <Box>
-          {sectionFront.bottomContent &&
-            sectionFront.bottomContent.map(
-              (contentComponent: { [key: string]: any }) =>
-                Components(contentComponent)
-            )}
-        </Box>
+        <DrupalParagraphs
+          content={sectionFront.bottomContent}
+          components={{
+            DonorCredit: DonorCredit,
+          }}
+        />
       }
     />
   );

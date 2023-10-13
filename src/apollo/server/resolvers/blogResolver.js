@@ -1,13 +1,24 @@
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
-import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
 import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
 } from "./../datasources/drupal-json-api/getJsonApiPath";
+
+export const blogDrupalParagraphsMap = {
+  "paragraph--audio": "AudioEmbed",
+  "paragraph--google_map": "GoogleMapEmbed",
+  "paragraph--image": "ImageComponent",
+  // For legacy reasons, we use a different type and component for Blog post's "link card list".
+  "paragraph--link_card_list": "BlogCardGrid",
+  "paragraph--social": "SocialEmbed",
+  "paragraph--text": "Text",
+  "paragraph--text_with_image": "TextWithImage",
+  "paragraph--video": "Video",
+};
 
 const blogResolver = {
   Query: {
@@ -99,20 +110,10 @@ const blogResolver = {
       blog.field_erm_location.data?.length === 0
         ? null
         : blog.field_erm_location,
-    mainContent: (blog, _, __, info) => {
-      const resolveInfo = parseResolveInfo(info);
-      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      const mainContent =
-        blog.field_main_content.data?.length === 0
-          ? null
-          : resolveDrupalParagraphs(blog.field_main_content, typesInQuery);
-      return mainContent;
-    },
+    mainContent: (blog) => blog.field_main_content,
   },
   BlogMainContent: {
-    __resolveType: (object, _, __) => {
-      return resolveParagraphTypes(object.type);
-    },
+    __resolveType: (object) => blogDrupalParagraphsMap[object.type] || null,
   },
   BlogLocation: {
     id: (location) => location.id,

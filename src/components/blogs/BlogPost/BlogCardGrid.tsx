@@ -1,19 +1,19 @@
 import * as React from "react";
 import { Box, Heading, Grid, Link } from "@nypl/design-system-react-components";
-import TextFormatted from "./../TextFormatted";
+import TextFormatted from "./../../shared/TextFormatted";
 import Image from "next/image";
 import useWindowSize from "../../../hooks/useWindowSize";
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
 
-interface CardListProps {
+interface BlogCardGridProps {
   id: string;
   type: string;
   title?: string;
   description?: string;
-  items: CardItem[];
+  items: BlogCardGridItem[];
 }
 
-interface CardItem {
+interface BlogCardGridItem {
   id: string;
   title: string;
   description: string;
@@ -21,7 +21,13 @@ interface CardItem {
   link: string;
 }
 
-function CardList({ id, type, title, description, items }: CardListProps) {
+export default function BlogCardGrid({
+  id,
+  type,
+  title,
+  description,
+  items,
+}: BlogCardGridProps) {
   const [isMobile, setIsMobile] = React.useState<boolean>();
   const windowSize = useWindowSize();
 
@@ -50,7 +56,7 @@ function CardList({ id, type, title, description, items }: CardListProps) {
         gap="l"
         templateColumns="repeat(1, 1fr)"
       >
-        {items.map((item: CardItem) => {
+        {items.map((item: BlogCardGridItem) => {
           let imageSrc: string = item.image?.uri;
           if (item.image?.transformations) {
             const transformationUri = getImageTransformation(
@@ -113,5 +119,3 @@ function CardList({ id, type, title, description, items }: CardListProps) {
     </Box>
   );
 }
-
-export default CardList;

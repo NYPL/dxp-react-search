@@ -63,12 +63,6 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
-      if (
-        item.type === "paragraph--link_card_list" &&
-        typesInQuery.includes("CardList")
-      ) {
-        accumulator.push(item);
-      }
       // Section front
       if (
         item.type === "paragraph--link_card_list" &&

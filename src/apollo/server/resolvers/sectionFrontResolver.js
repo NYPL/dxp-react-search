@@ -6,6 +6,26 @@ import { resolveImage } from "./utils/resolveImage";
 import { getIndividualResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
 import getColorway from "../../../utils/get-colorway";
 
+export const sectionFrontFeaturedContentDrupalParagraphsMap = {
+  "paragraph--donation": "Donation",
+  "paragraph--jumbotron": "Jumbotron",
+};
+
+// If the object is in the json:api response for a paragraphs field, it must have a __resolveType in GQL
+// This means that Paragraphs types allowed on a content type must always be in sync with the Scout GQL code.
+// Otherwise you will get a `Abstract type "SectionFrontMainContent" must resolve to an Object type at runtime for field "SectionFront.mainContent".`
+export const sectionFrontMainContentDrupalParagraphsMap = {
+  "paragraph--button_links": "ButtonLinks",
+  "paragraph--email_subscription": "EmailSubscription",
+  "paragraph--external_search": "ExternalSearch",
+  "paragraph--link_card_list": "CardGrid",
+  "paragraph--text": "Text",
+};
+
+export const sectionFrontBottomContentDrupalParagraphsMap = {
+  "paragraph--donor_credit": "DonorCredit",
+};
+
 const sectionFrontResolver = {
   Query: {
     sectionFront: async (_, args, { dataSources }) => {
@@ -50,62 +70,43 @@ const sectionFrontResolver = {
         ? resolveImage(sectionFront.field_ers_media_image)
         : null,
     breadcrumbs: (sectionFront) => sectionFront.breadcrumbs,
-    featuredContent: (sectionFront, _, __, info) => {
-      const resolveInfo = parseResolveInfo(info);
-      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      const featuredContent =
-        sectionFront.field_ers_featured.data?.length === 0
-          ? null
-          : resolveDrupalParagraphs(
-              [sectionFront.field_ers_featured],
-              typesInQuery
-            );
-      return featuredContent;
-    },
-    mainContent: (sectionFront, _, __, info) => {
-      const resolveInfo = parseResolveInfo(info);
-      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      const mainContent =
-        sectionFront.field_main_content.data?.length === 0
-          ? null
-          : resolveDrupalParagraphs(
-              sectionFront.field_main_content,
-              typesInQuery,
-              sectionFront
-            );
-      return mainContent;
-    },
+    featuredContent: (sectionFront) =>
+      sectionFront.field_ers_featured.data === null
+        ? null
+        : [
+            // @TODO Filter out any paragraphs that are not published.
+            sectionFront.field_ers_featured,
+          ],
+    mainContent: (sectionFront) =>
+      // Filter out any paragraphs that are not published.
+      sectionFront.field_main_content.filter((paragraphItem) =>
+        paragraphItem.hasOwnProperty("status")
+      ),
     colorway: (sectionFront) => {
       const slug = sectionFront.path?.alias;
       return getColorway(slug);
     },
-    bottomContent: (sectionFront, _, __, info) => {
-      const resolveInfo = parseResolveInfo(info);
-      const typesInQuery = Object.keys(resolveInfo.fieldsByTypeName);
-      const bottomContent =
-        sectionFront.field_erm_bottom_content.data?.length === 0
-          ? null
-          : resolveDrupalParagraphs(
-              sectionFront.field_erm_bottom_content,
-              typesInQuery,
-              sectionFront
-            );
-      return bottomContent;
-    },
+    bottomContent: (sectionFront) =>
+      sectionFront.field_erm_bottom_content.data?.length === 0
+        ? null
+        : // Filter out any paragraphs that are not published.
+          sectionFront.field_erm_bottom_content.filter((paragraphItem) =>
+            paragraphItem.hasOwnProperty("status")
+          ),
   },
   SectionFrontFeaturedContent: {
-    __resolveType: (object, _, __) => {
-      return resolveParagraphTypes(object.type);
+    __resolveType: (object) => {
+      return sectionFrontFeaturedContentDrupalParagraphsMap[object.type];
     },
   },
   SectionFrontMainContent: {
-    __resolveType: (object, _, __) => {
-      return resolveParagraphTypes(object.type, "section_front");
+    __resolveType: (object) => {
+      return sectionFrontMainContentDrupalParagraphsMap[object.type] || null;
     },
   },
   SectionFrontBottomContent: {
-    __resolveType: (object, _, __) => {
-      return resolveParagraphTypes(object.type);
+    __resolveType: (object) => {
+      return sectionFrontBottomContentDrupalParagraphsMap[object.type];
     },
   },
 };

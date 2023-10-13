@@ -29,9 +29,6 @@ export default function resolveParagraphTypes(
     case "image":
       resolvedObjectType = "ImageComponent";
       break;
-    case "link_card_list":
-      resolvedObjectType = "CardList";
-      break;
     case "catalog_list":
       resolvedObjectType = "CatalogList";
       break;

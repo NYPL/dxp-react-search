@@ -16,11 +16,10 @@ export const typeDefs = gql`
   union SectionFrontFeaturedContent = Donation | Jumbotron
 
   union SectionFrontMainContent =
-      CardGrid
-    | Donation
-    | ExternalSearch
+      ButtonLinks
+    | CardGrid
     | EmailSubscription
-    | ButtonLinks
+    | ExternalSearch
     | Text
 
   union SectionFrontBottomContent = DonorCredit
