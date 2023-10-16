@@ -5,6 +5,7 @@ import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
 import { getIndividualResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
 import getColorway from "../../../utils/get-colorway";
+import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
 
 export const sectionFrontFeaturedContentDrupalParagraphsMap = {
   "paragraph--donation": "Donation",
@@ -71,28 +72,15 @@ const sectionFrontResolver = {
         : null,
     breadcrumbs: (sectionFront) => sectionFront.breadcrumbs,
     featuredContent: (sectionFront) =>
-      sectionFront.field_ers_featured.data === null
-        ? null
-        : [
-            // @TODO Filter out any paragraphs that are not published.
-            sectionFront.field_ers_featured,
-          ],
+      getDrupalParagraphsField(sectionFront.field_ers_featured),
     mainContent: (sectionFront) =>
-      // Filter out any paragraphs that are not published.
-      sectionFront.field_main_content.filter((paragraphItem) =>
-        paragraphItem.hasOwnProperty("status")
-      ),
+      getDrupalParagraphsField(sectionFront.field_main_content),
+    bottomContent: (sectionFront) =>
+      getDrupalParagraphsField(sectionFront.field_erm_bottom_content),
     colorway: (sectionFront) => {
       const slug = sectionFront.path?.alias;
       return getColorway(slug);
     },
-    bottomContent: (sectionFront) =>
-      sectionFront.field_erm_bottom_content.data?.length === 0
-        ? null
-        : // Filter out any paragraphs that are not published.
-          sectionFront.field_erm_bottom_content.filter((paragraphItem) =>
-            paragraphItem.hasOwnProperty("status")
-          ),
   },
   SectionFrontFeaturedContent: {
     __resolveType: (object) => {

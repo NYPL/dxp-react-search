@@ -7,10 +7,10 @@ export const typeDefs = gql`
     description: String
     image: Image
     breadcrumbs: [BreadcrumbsItem]
-    featuredContent: [SectionFrontFeaturedContent]
+    featuredContent: SectionFrontFeaturedContent
     mainContent: [SectionFrontMainContent]
-    colorway: Colorway
     bottomContent: [SectionFrontBottomContent]
+    colorway: Colorway
   }
 
   union SectionFrontFeaturedContent = Donation | Jumbotron

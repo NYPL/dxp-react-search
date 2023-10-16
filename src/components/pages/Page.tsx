@@ -3,6 +3,7 @@ import * as React from "react";
 import { gql, useQuery } from "@apollo/client";
 // Components
 import PageContainer from "../shared/layouts/PageContainer";
+import Hero from "./../shared/Hero";
 import DrupalParagraphs from "../shared/DrupalParagraphs";
 import ImageComponent from "../shared/ContentComponents/ImageComponent";
 import Text from "../shared/ContentComponents/Text";
@@ -11,12 +12,57 @@ import TextWithImage from "../shared/ContentComponents/TextWithImage";
 import ButtonLinks from "../shared/ContentComponents/ButtonLinks";
 import PreviewModeNotification from "../shared/PreviewModeNotification";
 
+import { Box, Heading } from "@nypl/design-system-react-components";
+
 export const PAGE_QUERY = gql`
   query PageQuery($id: String, $revisionId: String, $preview: Boolean) {
     page(id: $id, revisionId: $revisionId, preview: $preview) {
       id
       title
       description
+      image {
+        id
+        uri
+        alt
+        transformations {
+          id
+          label
+          uri
+        }
+      }
+      featuredContent {
+        ... on Hero {
+          id
+          type
+          heroType
+          title
+          description
+          backgroundImage {
+            id
+            uri
+            alt
+            width
+            height
+            transformations {
+              id
+              label
+              uri
+            }
+          }
+          foregroundImage {
+            id
+            uri
+            alt
+            width
+            height
+            transformations {
+              id
+              label
+              uri
+            }
+          }
+        }
+      }
       mainContent {
         ... on Text {
           id
@@ -130,6 +176,23 @@ export default function PagePage({
 
   console.log(page);
 
+  // const image = page.image;
+
+  // const backgroundImage = getImageTransformation(
+  //   "jumbotron_background_focal_point_1920x464",
+  //   image.transformations
+  // );
+
+  // const foregroundImage = getImageTransformation(
+  //   "max_width_960",
+  //   image.transformations
+  // );
+
+  // console.log(image.transformations);
+  // console.log(backgroundImage);
+
+  const showHero = page.featuredContent === null ? false : true;
+
   return (
     <PageContainer
       metaTags={{
@@ -160,7 +223,18 @@ export default function PagePage({
       // }
       // breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--page"
-      contentHeader={<>{isPreview && <PreviewModeNotification />}</>}
+      contentHeader={
+        <>
+          {isPreview && <PreviewModeNotification />}
+          {showHero ? (
+            <Hero {...page.featuredContent} />
+          ) : (
+            <Box maxWidth="1280px" margin="0 auto" my="l" px="s">
+              <Heading level="one">{page.title}</Heading>
+            </Box>
+          )}
+        </>
+      }
       contentPrimary={
         <DrupalParagraphs
           content={page.mainContent}

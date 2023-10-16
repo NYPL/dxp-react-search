@@ -5,15 +5,25 @@ import {
   DrupalJsonApiMediaImageResource,
 } from "./drupal-types";
 import { resolveImage } from "./utils/resolveImage";
+// Utils
+import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
 
 export interface PageJsonApiResource {
   id: string;
   title: string;
   field_tfls_summary_description: DrupalJsonApiTextField;
   field_ers_media_image: DrupalJsonApiMediaImageResource;
+  field_lts_hero_type: string;
   // @TODO Need a generic drupal paragraphs type.
   field_main_content: any;
+  field_ers_featured: any;
 }
+
+export const pageFeaturedContentDrupalParagraphsMap: {
+  [name: string]: string;
+} = {
+  "paragraph--hero": "Hero",
+};
 
 export const pageDrupalParagraphsMap: { [name: string]: string } = {
   "paragraph--link_card_list": "CardGrid",
@@ -34,6 +44,11 @@ export const pageResolver = {
     ) => {
       const includedFields = [
         "field_ers_media_image.field_media_image",
+        "field_ers_featured",
+        // Featured content: Hero: Background Image
+        "field_ers_featured.field_ers_background_image.field_media_image",
+        // Featured content: Hero: Foreground Image
+        "field_ers_featured.field_ers_image.field_media_image",
         // Main content: Image
         "field_main_content.field_ers_media_item.field_media_image",
         // Main content: Video
@@ -70,11 +85,14 @@ export const pageResolver = {
       page.field_ers_media_image.data !== null
         ? resolveImage(page.field_ers_media_image)
         : null,
+    featuredContent: (page: PageJsonApiResource) =>
+      getDrupalParagraphsField(page.field_ers_featured),
     mainContent: (page: PageJsonApiResource) =>
-      page.field_main_content.filter(
-        (paragraphItem: DrupalJsonApiEntityResource) =>
-          paragraphItem.hasOwnProperty("status")
-      ),
+      getDrupalParagraphsField(page.field_main_content),
+  },
+  PageFeaturedContent: {
+    __resolveType: (object: DrupalJsonApiEntityResource) =>
+      pageFeaturedContentDrupalParagraphsMap[object.type] || null,
   },
   PageMainContent: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>

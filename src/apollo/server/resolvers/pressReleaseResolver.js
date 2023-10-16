@@ -4,7 +4,7 @@ import formatDate from "../../../utils/formatDate";
 import resolveDrupalParagraphs from "./utils/resolveDrupalParagraphs";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
-import { drupalParagraphsMap } from "./drupal-paragraphs";
+import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
 import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
@@ -82,7 +82,8 @@ const pressReleaseResolver = {
         : null,
     mediaContacts: (pressRelease) =>
       pressRelease.field_tfls_media_contacts?.processed,
-    mainContent: (pressRelease) => pressRelease.field_main_content,
+    mainContent: (pressRelease) =>
+      getDrupalParagraphsField(pressRelease.field_main_content),
   },
   PressReleaseMainContent: {
     __resolveType: (object) => pressDrupalParagraphsMap[object.type] || null,

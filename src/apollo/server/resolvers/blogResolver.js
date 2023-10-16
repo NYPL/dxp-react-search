@@ -3,6 +3,7 @@ import { parseResolveInfo } from "graphql-parse-resolve-info";
 import formatDate from "../../../utils/formatDate";
 import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
+import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
 import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
@@ -110,7 +111,7 @@ const blogResolver = {
       blog.field_erm_location.data?.length === 0
         ? null
         : blog.field_erm_location,
-    mainContent: (blog) => blog.field_main_content,
+    mainContent: (blog) => getDrupalParagraphsField(blog.field_main_content),
   },
   BlogMainContent: {
     __resolveType: (object) => blogDrupalParagraphsMap[object.type] || null,

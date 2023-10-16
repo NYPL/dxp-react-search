@@ -1,6 +1,6 @@
 import { DrupalJsonApiTextField } from "./../drupal-types";
 
-type DrupalJsonApiEmailSubscriptionParagraph = {
+type EmailSubscriptionParagraphDrupalJsonApi = {
   id: string;
   field_ts_heading: string;
   field_tfls_description: DrupalJsonApiTextField;
@@ -11,17 +11,17 @@ type DrupalJsonApiEmailSubscriptionParagraph = {
 
 export const EmailSubscriptionResolver = {
   EmailSubscription: {
-    id: (parent: DrupalJsonApiEmailSubscriptionParagraph) => parent.id,
+    id: (parent: EmailSubscriptionParagraphDrupalJsonApi) => parent.id,
     type: () => "email_subscription",
-    heading: (parent: DrupalJsonApiEmailSubscriptionParagraph) =>
+    heading: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_ts_heading ? parent.field_ts_heading : null,
-    description: (parent: DrupalJsonApiEmailSubscriptionParagraph) =>
+    description: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_tfls_description?.processed,
-    formPlaceholder: (parent: DrupalJsonApiEmailSubscriptionParagraph) =>
+    formPlaceholder: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_ts_placeholder,
-    salesforceListId: (parent: DrupalJsonApiEmailSubscriptionParagraph) =>
+    salesforceListId: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_ts_salesforce_list_id,
-    salesforceSourceCode: (parent: DrupalJsonApiEmailSubscriptionParagraph) =>
+    salesforceSourceCode: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_ts_salesforce_source_code,
     // colorway
   },

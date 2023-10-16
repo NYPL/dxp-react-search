@@ -7,8 +7,11 @@ export const PageTypeDefs = gql`
     description: String
     image: Image
     # breadcrumbs: [BreadcrumbsItem]
+    featuredContent: PageFeaturedContent
     mainContent: [PageMainContent]
   }
+
+  union PageFeaturedContent = Hero
 
   union PageMainContent =
       CardGrid
@@ -21,6 +24,16 @@ export const PageTypeDefs = gql`
   type PageConnection {
     items: [Page]
     pageInfo: PageInfo
+  }
+
+  type Hero {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    heroType: String
+    backgroundImage: Image
+    foregroundImage: Image
   }
 
   extend type Query {

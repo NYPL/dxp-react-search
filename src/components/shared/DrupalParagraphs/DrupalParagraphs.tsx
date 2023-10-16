@@ -18,6 +18,7 @@ export default function DrupalParagraphs<T extends Record<string, any>>({
 }: DrupalParagraphs<T>) {
   return (
     <>
+      {/* @TODO This should also be able to handle a single value paragraphs field */}
       {content &&
         content.map((item: DrupalParagraphsItem) => {
           if (typeof components[item["__typename"]] !== "undefined") {
