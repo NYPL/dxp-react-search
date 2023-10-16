@@ -1,5 +1,15 @@
 ## CHANGES
 
+### v0.10.6 - Upgrade to Node 18.18.1
+
+---
+
+- Locks Dockerfile to use Node 18.18.1
+- Locks Travis CI to use Node 18.18.1
+- Updates README.md Node and NPM versions
+
+---
+
 ### v0.10.5 - Blog Bug Fixes
 
 ---
