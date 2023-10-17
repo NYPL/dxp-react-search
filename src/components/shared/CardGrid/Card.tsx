@@ -110,6 +110,7 @@ export default function Card({
                   id={buttonLink.id}
                   link={buttonLink.link}
                   icon={buttonLink.icon}
+                  buttonType="buttonPrimary"
                 />
               </Box>
             ))}
