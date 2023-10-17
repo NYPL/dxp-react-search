@@ -8,6 +8,11 @@ interface ButtonLinksProps {
   id: string;
   heading: string;
   description?: string;
+  buttonType:
+    | "buttonPrimary"
+    | "buttonSecondary"
+    | "buttonPill"
+    | "buttonCallout";
   items: ButtonLinkItem[];
 }
 
@@ -15,6 +20,7 @@ export default function ButtonLinks({
   id,
   heading,
   description,
+  buttonType,
   items,
 }: ButtonLinksProps) {
   return (
@@ -50,7 +56,12 @@ export default function ButtonLinks({
                 listStyleType="none"
                 w={{ sm: "full", md: "fit-content" }}
               >
-                <ButtonLink id={item.id} link={item.link} icon={item.icon} />
+                <ButtonLink
+                  id={item.id}
+                  link={item.link}
+                  icon={item.icon}
+                  buttonType={buttonType}
+                />
               </Box>
             ))}
         </Flex>

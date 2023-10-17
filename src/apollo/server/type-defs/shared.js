@@ -236,6 +236,7 @@ export const typeDefs = gql`
     type: String!
     heading: String
     description: String
+    buttonType: String
     items: [ButtonLink]
   }
 

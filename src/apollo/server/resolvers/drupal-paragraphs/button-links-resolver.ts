@@ -4,6 +4,11 @@ type DrupalJsonApiButtonLinksParagraph = {
   id: string;
   field_ts_heading: string;
   field_tfls_description: DrupalJsonApiTextField;
+  field_lts_button_type:
+    | "button_primary"
+    | "button_secondary"
+    | "button_pill"
+    | "button_callout";
   field_erm_button_links: DrupalJsonApiButtonLinkParagraph[];
 };
 
@@ -21,6 +26,16 @@ export const ButtonLinksResolver = {
       parent.field_ts_heading,
     description: (parent: DrupalJsonApiButtonLinksParagraph) =>
       parent.field_tfls_description?.processed,
+    buttonType: (parent: DrupalJsonApiButtonLinksParagraph) => {
+      const buttonTypeMap = {
+        button_primary: "buttonPrimary",
+        button_secondary: "buttonSecondary",
+        button_pill: "buttonPill",
+        button_callout: "buttonCallout",
+      };
+
+      return buttonTypeMap[parent.field_lts_button_type];
+    },
     items: (parent: DrupalJsonApiButtonLinksParagraph) =>
       parent.field_erm_button_links,
   },

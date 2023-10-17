@@ -124,6 +124,7 @@ export const PAGE_QUERY = gql`
           type
           heading
           description
+          buttonType
           items {
             id
             icon
