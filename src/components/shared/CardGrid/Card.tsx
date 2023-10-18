@@ -21,7 +21,7 @@ export interface CardProps {
   /** The description for the card. */
   description?: string;
   /** The url for the card. */
-  href: string;
+  href?: string;
   /** An optional image component that can be passed to the card. */
   image?: JSX.Element;
   /** An optional set of button links. */
@@ -69,13 +69,12 @@ export default function Card({
           },
         })}
     >
-      {/* If the card has button links, don't render a link inside the heading. */}
-      {isButtonLinkCard ? (
-        <CardHeading level="three">{heading}</CardHeading>
-      ) : (
+      {href ? (
         <CardHeading level="three">
           {href && <Link href={href}>{heading}</Link>}
         </CardHeading>
+      ) : (
+        <CardHeading level="three">{heading}</CardHeading>
       )}
       <CardContent>
         {subHeading && subHeading}

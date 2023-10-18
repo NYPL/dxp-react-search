@@ -44,7 +44,7 @@ export const CardGridResolver = {
       parent.field_tfls_description
         ? parent.field_tfls_description.processed
         : null,
-    link: (parent: DrupalJsonApiLinkCardParagraph) => parent.field_ls_link.url,
+    link: (parent: DrupalJsonApiLinkCardParagraph) => parent.field_ls_link?.url,
     image: (parent: DrupalJsonApiLinkCardParagraph) =>
       parent.field_ers_image.data === null
         ? null
