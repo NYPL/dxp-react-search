@@ -18,7 +18,7 @@ interface BlogCardGridItem {
   title: string;
   description: string;
   image?: any;
-  link: string;
+  link?: string;
 }
 
 export default function BlogCardGrid({
@@ -81,7 +81,12 @@ export default function BlogCardGrid({
                     mr={{ lg: "l" }}
                     mb={{ base: "s", lg: 0 }}
                   >
-                    <a href={item.link}>
+                    <Box
+                      as={item.link ? "a" : "span"}
+                      {...(item.link && {
+                        href: item.link,
+                      })}
+                    >
                       <Box
                         alignItems="center"
                         backgroundColor="ui.gray.light-warm"
@@ -102,13 +107,17 @@ export default function BlogCardGrid({
                           )}
                         />
                       </Box>
-                    </a>
+                    </Box>
                   </Box>
                 )}
                 <Box>
-                  <Heading level="three">
-                    <Link href={item.link}>{item.title}</Link>
-                  </Heading>
+                  {item.link ? (
+                    <Heading level="three">
+                      {item.link && <Link href={item.link}>{item.title}</Link>}
+                    </Heading>
+                  ) : (
+                    <Heading level="three">{item.title}</Heading>
+                  )}
                   <TextFormatted html={item.description} />
                 </Box>
               </Box>
