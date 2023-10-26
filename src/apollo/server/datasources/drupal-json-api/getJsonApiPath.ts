@@ -1,11 +1,11 @@
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import filterMultiValueEntityRef from "./utils/filterMultiValueEntityRef";
 
-type FilterItem = {
+export type FilterItem = {
   [key: string]: { [key: string]: any };
 };
 
-type Sort = {
+export type Sort = {
   field: string;
   direction: SortDirections;
 };

@@ -2,7 +2,10 @@ import {
   DrupalJsonApiEntityResource,
   DrupalJsonApiLinkResource,
 } from "./drupal-types";
-
+import {
+  FilterItem,
+  Sort,
+} from "../datasources/drupal-json-api/getJsonApiPath";
 import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
 import {
   getIndividualResourceJsonApiPath,
@@ -40,11 +43,20 @@ export interface HomePageJsonApiResource {
   field_hp_section_8: HomePageSection;
 }
 
+interface QueryArgs {
+  id: string;
+  revisionId: string;
+  limit: number;
+  sort: Sort;
+  preview: boolean;
+  filter: FilterItem;
+}
+
 export const homePageResolver = {
   Query: {
     homePage: async (
       _parent: HomePageJsonApiResource,
-      args: any,
+      args: QueryArgs,
       { dataSources }: any
     ) => {
       const includedFields = [
@@ -79,7 +91,7 @@ export const homePageResolver = {
     },
     homePageEventCollection: async (
       _parent: any,
-      args: any,
+      args: QueryArgs,
       { dataSources }: any
     ) => {
       const includedFields = ["field_ers_media_image.field_media_image"];
@@ -116,7 +128,7 @@ export const homePageResolver = {
     },
     homePageSpotlightCollection: async (
       _parent: any,
-      args: any,
+      args: QueryArgs,
       { dataSources }: any
     ) => {
       const includedFields = ["field_ers_media_image.field_media_image"];
@@ -153,7 +165,7 @@ export const homePageResolver = {
     },
     homePageHeroCollection: async (
       _parent: any,
-      args: any,
+      args: QueryArgs,
       { dataSources }: any
     ) => {
       const includedFields = ["field_ers_media_image.field_media_image"];
@@ -206,6 +218,10 @@ export const homePageResolver = {
       getDrupalParagraphsField(parent.field_hp_section_7),
     sectionEight: (parent: HomePageJsonApiResource) =>
       getDrupalParagraphsField(parent.field_hp_section_8),
+  },
+  SectionTwo: {
+    __resolveType: (object: DrupalJsonApiEntityResource) =>
+      homePageDrupalParagraphsMap[object.type],
   },
   SectionThree: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
