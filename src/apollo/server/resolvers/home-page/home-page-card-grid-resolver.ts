@@ -1,40 +1,37 @@
 import { DrupalJsonApiLinkResource } from "../drupal-types";
 import { resolveImage } from "../utils/resolveImage";
 
-type DrupalJsonApiHomePageCardGridComponentResolverParagraph = {
+type DrupalJsonApiHomePageCardGridResolverParagraph = {
   id: string;
   type: string;
   // status: boolean;
   field_lns_see_all: DrupalJsonApiLinkResource;
   field_ls_link: DrupalJsonApiLinkResource;
   field_ts_heading: string;
-  field_erm_hp_cards: any;
   field_lts_hp_card_grid_variant: "column-grid" | "row" | "updates";
+  field_erm_hp_cards: any;
 };
 
-export const HomePageCardGridComponentResolver = {
+export const HomePageCardGridResolver = {
   HomePageCardGridComponent: {
-    id: (parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph) =>
-      parent.id,
-    type: (parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph) =>
+    id: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) => parent.id,
+    type: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) =>
       parent.type,
-    // status: (parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph) =>
+    // status: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) =>
     //   parent.status,
     seeMore: {
-      link: (parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph) =>
+      link: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) =>
         parent.field_lns_see_all?.url || null,
-      text: (parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph) =>
+      text: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) =>
         parent.field_lns_see_all?.title || null,
     },
-    link: (parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph) =>
+    link: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) =>
       parent.field_ls_link.url,
-    heading: (
-      parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph
-    ) => parent.field_ts_heading,
-    gridVariant: (
-      parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph
-    ) => parent.field_lts_hp_card_grid_variant,
-    items: (parent: DrupalJsonApiHomePageCardGridComponentResolverParagraph) =>
+    heading: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) =>
+      parent.field_ts_heading,
+    gridVariant: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) =>
+      parent.field_lts_hp_card_grid_variant,
+    items: (parent: DrupalJsonApiHomePageCardGridResolverParagraph) =>
       parent.field_erm_hp_cards.map((hpCardItem: any) => {
         return {
           id: hpCardItem.id,

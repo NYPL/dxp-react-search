@@ -18,12 +18,15 @@ import sectionFrontResolver from "./sectionFrontResolver";
 import { pageResolver } from "./page-resolver";
 // Drupal paragraphs
 import { drupalParagraphsResolvers } from "./drupal-paragraphs";
+// HomePage
+import { drupalHomePageResolvers } from "./home-page";
 // Mutations
 import sendEmailResolver from "./sendEmailResolver";
 
 export const resolvers = mergeResolvers([
   refineryLocationResolver,
   refineryTermResolver,
+  drupalHomePageResolvers,
   drupalParagraphsResolvers,
   blogResolver,
   locationResolver,

@@ -1,38 +1,34 @@
 import { DrupalJsonApiLinkResource } from "../drupal-types";
 import { resolveImage } from "../utils/resolveImage";
 
-type DrupalJsonApiHomePageSlideshowComponentResolverParagraph = {
+type DrupalJsonApiHomePageSlideshowResolverParagraph = {
   id: string;
   type: string;
   // status: boolean;
   field_lns_see_all: DrupalJsonApiLinkResource;
   field_ls_link: DrupalJsonApiLinkResource;
   field_ts_heading: string;
-  field_erm_hp_slideshow_items: any;
+  field_erm_hp_slideshow_items: any[];
 };
-export const HomePageSlideshowComponentResolver = {
+export const HomePageSlideshowResolver = {
   HomePageSlideshowComponent: {
-    id: (parent: DrupalJsonApiHomePageSlideshowComponentResolverParagraph) =>
-      parent.id,
-    type: (parent: DrupalJsonApiHomePageSlideshowComponentResolverParagraph) =>
+    id: (parent: DrupalJsonApiHomePageSlideshowResolverParagraph) => parent.id,
+    type: (parent: DrupalJsonApiHomePageSlideshowResolverParagraph) =>
       parent.type,
     // status: (
-    //   parent: DrupalJsonApiHomePageSlideshowComponentResolverParagraph
+    //   parent: DrupalJsonApiHomePageSlideshowResolverParagraph
     // ) => parent.status,
     seeMore: {
-      link: (
-        parent: DrupalJsonApiHomePageSlideshowComponentResolverParagraph
-      ) => parent.field_lns_see_all?.url || null,
-      text: (
-        parent: DrupalJsonApiHomePageSlideshowComponentResolverParagraph
-      ) => parent.field_lns_see_all?.title || null,
+      link: (parent: DrupalJsonApiHomePageSlideshowResolverParagraph) =>
+        parent.field_lns_see_all?.url || null,
+      text: (parent: DrupalJsonApiHomePageSlideshowResolverParagraph) =>
+        parent.field_lns_see_all?.title || null,
     },
-    link: (parent: DrupalJsonApiHomePageSlideshowComponentResolverParagraph) =>
+    link: (parent: DrupalJsonApiHomePageSlideshowResolverParagraph) =>
       parent.field_ls_link.url,
-    heading: (
-      parent: DrupalJsonApiHomePageSlideshowComponentResolverParagraph
-    ) => parent.field_ts_heading,
-    items: (parent: DrupalJsonApiHomePageSlideshowComponentResolverParagraph) =>
+    heading: (parent: DrupalJsonApiHomePageSlideshowResolverParagraph) =>
+      parent.field_ts_heading,
+    items: (parent: DrupalJsonApiHomePageSlideshowResolverParagraph) =>
       parent.field_erm_hp_slideshow_items.map((slideshowItem: any) => {
         return {
           id: slideshowItem.id,

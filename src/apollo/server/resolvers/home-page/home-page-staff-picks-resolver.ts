@@ -1,7 +1,7 @@
 import { DrupalJsonApiLinkResource } from "../drupal-types";
 import { resolveImage } from "../utils/resolveImage";
 
-type DrupalJsonApiHomePageStaffPicksComponentResolverParagraph = {
+type DrupalJsonApiHomePageStaffPicksResolverParagraph = {
   id: string;
   type: string;
   // status: boolean;
@@ -11,31 +11,25 @@ type DrupalJsonApiHomePageStaffPicksComponentResolverParagraph = {
   field_erm_hp_staffpicks: any;
 };
 
-export const HomePageStaffPicksComponentResolver = {
+export const HomePageStaffPicksResolver = {
   HomePageStaffPicksComponent: {
-    id: (parent: DrupalJsonApiHomePageStaffPicksComponentResolverParagraph) =>
-      parent.id,
-    type: (parent: DrupalJsonApiHomePageStaffPicksComponentResolverParagraph) =>
+    id: (parent: DrupalJsonApiHomePageStaffPicksResolverParagraph) => parent.id,
+    type: (parent: DrupalJsonApiHomePageStaffPicksResolverParagraph) =>
       parent.type,
     // status: (
-    //   parent: DrupalJsonApiHomePageStaffPicksComponentResolverParagraph
+    //   parent: DrupalJsonApiHomePageStaffPicksResolverParagraph
     // ) => parent.status,
     seeMore: {
-      link: (
-        parent: DrupalJsonApiHomePageStaffPicksComponentResolverParagraph
-      ) => parent.field_lns_see_all?.url || null,
-      text: (
-        parent: DrupalJsonApiHomePageStaffPicksComponentResolverParagraph
-      ) => parent.field_lns_see_all?.title || null,
+      link: (parent: DrupalJsonApiHomePageStaffPicksResolverParagraph) =>
+        parent.field_lns_see_all?.url || null,
+      text: (parent: DrupalJsonApiHomePageStaffPicksResolverParagraph) =>
+        parent.field_lns_see_all?.title || null,
     },
-    link: (parent: DrupalJsonApiHomePageStaffPicksComponentResolverParagraph) =>
+    link: (parent: DrupalJsonApiHomePageStaffPicksResolverParagraph) =>
       parent.field_ls_link.url,
-    heading: (
-      parent: DrupalJsonApiHomePageStaffPicksComponentResolverParagraph
-    ) => parent.field_ts_heading,
-    items: (
-      parent: DrupalJsonApiHomePageStaffPicksComponentResolverParagraph
-    ) =>
+    heading: (parent: DrupalJsonApiHomePageStaffPicksResolverParagraph) =>
+      parent.field_ts_heading,
+    items: (parent: DrupalJsonApiHomePageStaffPicksResolverParagraph) =>
       parent.field_erm_hp_staffpicks.map((staffpicksItem: any) => {
         return {
           id: staffpicksItem.id,

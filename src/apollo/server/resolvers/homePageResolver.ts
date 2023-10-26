@@ -1,18 +1,15 @@
 import {
   DrupalJsonApiEntityResource,
-  DrupalJsonApiTextField,
-  DrupalJsonApiMediaImageResource,
   DrupalJsonApiLinkResource,
 } from "./drupal-types";
 
 import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
-import { resolveImage } from "./utils/resolveImage";
 import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
 } from "../datasources/drupal-json-api/getJsonApiPath";
 
-export const homePageSectionDrupalParagraphsMap: { [name: string]: string } = {
+export const homePageDrupalParagraphsMap: { [name: string]: string } = {
   "paragraph--hp_spotlight": "HomePageSpotlightComponent",
   "paragraph--hp_events": "HomePageEventsComponent",
   "paragraph--hp_card_grid": "HomePageCardGridComponent",
@@ -20,12 +17,7 @@ export const homePageSectionDrupalParagraphsMap: { [name: string]: string } = {
   "paragraph--hp_staff_picks": "HomePageStaffPicksComponent",
 };
 
-export const homePageHeroDrupalNodeMap: { [name: string]: string } = {
-  "node--home_page_hero": "HomePageHeroComponent",
-  "node--home_page_spotlight_item": "HomePageSpotlightItem",
-  "node--home_page_event": "HomePageEvent",
-};
-const Sections = Object.keys(homePageSectionDrupalParagraphsMap);
+const Sections = Object.keys(homePageDrupalParagraphsMap);
 
 export interface HomePageSection {
   id: string;
@@ -39,7 +31,6 @@ export interface HomePageSection {
 export interface HomePageJsonApiResource {
   id: string;
   title: string;
-  // field_hp_section_1: HomePageSection;
   field_hp_section_2: HomePageSection;
   field_hp_section_3: HomePageSection;
   field_hp_section_4: HomePageSection;
@@ -48,39 +39,6 @@ export interface HomePageJsonApiResource {
   field_hp_section_7: HomePageSection;
   field_hp_section_8: HomePageSection;
 }
-
-type HomePageSpotlightItemJsonApiResource = {
-  id: string;
-  field_ts_heading: string;
-  field_ers_media_image: DrupalJsonApiMediaImageResource;
-  field_lns_link: DrupalJsonApiLinkResource;
-};
-
-type HomePageEventJsonApiResource = {
-  id: string;
-  field_ts_heading: string;
-  field_ers_media_image: DrupalJsonApiMediaImageResource;
-  field_lns_link: DrupalJsonApiLinkResource;
-  field_lts_event_category: any;
-  field_ts_display_location: string;
-  field_ts_date: string;
-  publish_on: string;
-  unpublish_on: string;
-  status: boolean;
-  field_is_weight: number;
-};
-
-type HomePageHeroJsonApiResource = {
-  id: string;
-  field_ts_heading: string;
-  field_ts_hp_hero_tag: string;
-  field_tfls_summary_description: DrupalJsonApiTextField;
-  field_ers_media_image: DrupalJsonApiMediaImageResource;
-  field_lns_link: DrupalJsonApiLinkResource;
-  publish_on: string;
-  unpublish_on: string;
-  status: boolean;
-};
 
 export const homePageResolver = {
   Query: {
@@ -234,8 +192,6 @@ export const homePageResolver = {
   HomePage: {
     id: (parent: HomePageJsonApiResource) => parent.id,
     title: (parent: HomePageJsonApiResource) => parent.title,
-    // sectionOne: (parent: HomePageJsonApiResource) =>
-    //   getDrupalParagraphsField(parent.field_hp_section_1),
     sectionTwo: (parent: HomePageJsonApiResource) =>
       getDrupalParagraphsField(parent.field_hp_section_2),
     sectionThree: (parent: HomePageJsonApiResource) =>
@@ -251,92 +207,42 @@ export const homePageResolver = {
     sectionEight: (parent: HomePageJsonApiResource) =>
       getDrupalParagraphsField(parent.field_hp_section_8),
   },
-  // SectionOne: {
-  //   __resolveType: (object: DrupalJsonApiEntityResource) =>
-  //     homePageSectionDrupalParagraphsMap[object.type],
-  // },
-  SectionTwo: {
-    __resolveType: (object: DrupalJsonApiEntityResource) =>
-      homePageSectionDrupalParagraphsMap[object.type],
-  },
   SectionThree: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
-      homePageSectionDrupalParagraphsMap[object.type],
+      homePageDrupalParagraphsMap[object.type],
   },
   SectionFour: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
-      homePageSectionDrupalParagraphsMap[object.type],
+      homePageDrupalParagraphsMap[object.type],
   },
   SectionFive: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
-      homePageSectionDrupalParagraphsMap[object.type],
+      homePageDrupalParagraphsMap[object.type],
   },
   SectionSix: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
-      homePageSectionDrupalParagraphsMap[object.type],
+      homePageDrupalParagraphsMap[object.type],
   },
   SectionSeven: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
-      homePageSectionDrupalParagraphsMap[object.type],
+      homePageDrupalParagraphsMap[object.type],
   },
   SectionEight: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
-      homePageSectionDrupalParagraphsMap[object.type],
+      homePageDrupalParagraphsMap[object.type],
   },
   HomePageHero: {
-    id: (parent: HomePageHeroJsonApiResource) => parent.id,
-    heading: (parent: HomePageHeroJsonApiResource) => parent.field_ts_heading,
-    tag: (parent: HomePageHeroJsonApiResource) => parent.field_ts_hp_hero_tag,
-    description: (parent: HomePageHeroJsonApiResource) =>
-      parent.field_tfls_summary_description === null
-        ? null
-        : parent.field_tfls_summary_description.processed,
-    image: (parent: HomePageHeroJsonApiResource) => {
-      const image =
-        parent.field_ers_media_image.data === null
-          ? null
-          : resolveImage(parent.field_ers_media_image);
-      return image;
-    },
-    link: (parent: HomePageHeroJsonApiResource) => parent.field_lns_link?.url,
-    publishOn: (parent: HomePageHeroJsonApiResource) => parent.publish_on,
-    unpublishOn: (parent: HomePageHeroJsonApiResource) => parent.unpublish_on,
-    published: (parent: HomePageHeroJsonApiResource) => parent.status,
+    ...(parent: DrupalJsonApiEntityResource) =>
+      getDrupalParagraphsField(parent),
   },
   HomePageEvent: {
-    id: (parent: HomePageEventJsonApiResource) => parent.id,
-    title: (parent: HomePageEventJsonApiResource) => parent.field_ts_heading,
-    image: (parent: HomePageEventJsonApiResource) => {
-      const image =
-        parent.field_ers_media_image.data === null
-          ? null
-          : resolveImage(parent.field_ers_media_image);
-      return image;
-    },
-    link: (parent: HomePageEventJsonApiResource) => parent.field_lns_link?.url,
-    category: (parent: HomePageEventJsonApiResource) =>
-      parent.field_lts_event_category,
-    location: (parent: HomePageEventJsonApiResource) =>
-      parent.field_ts_display_location,
-    displayDate: (parent: HomePageEventJsonApiResource) => parent.field_ts_date,
-    publishOn: (parent: HomePageEventJsonApiResource) => parent.publish_on,
-    unpublishOn: (parent: HomePageEventJsonApiResource) => parent.unpublish_on,
-    published: (parent: HomePageEventJsonApiResource) => parent.status,
-    weight: (parent: HomePageEventJsonApiResource) => parent.field_is_weight,
+    ...(parent: DrupalJsonApiEntityResource) =>
+      getDrupalParagraphsField(parent),
   },
   HomePageSpotlightItem: {
-    id: (parent: HomePageSpotlightItemJsonApiResource) => parent.id,
-    title: (parent: HomePageSpotlightItemJsonApiResource) =>
-      parent.field_ts_heading,
-    image: (parent: HomePageSpotlightItemJsonApiResource) => {
-      const image =
-        parent.field_ers_media_image.data === null
-          ? null
-          : resolveImage(parent.field_ers_media_image);
-      return image;
+    ...(parent: HomePageJsonApiResource) => {
+      getDrupalParagraphsField(parent);
     },
-    url: (parent: HomePageSpotlightItemJsonApiResource) =>
-      parent.field_lns_link?.url,
   },
 };
 

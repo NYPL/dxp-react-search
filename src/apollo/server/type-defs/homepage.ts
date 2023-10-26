@@ -7,7 +7,6 @@ export const typeDefs = gql`
     description: String
     publishDate: String
     unpublishDate: String
-    # sectionOne: SectionOne
     sectionTwo: SectionTwo
     sectionThree: SectionThree
     sectionFour: SectionFour
@@ -17,7 +16,6 @@ export const typeDefs = gql`
     sectionEight: SectionEight
   }
 
-  # union SectionOne = HomePageHeroComponent
   union SectionTwo = HomePageSpotlightComponent | HomePageCardGridComponent
   union SectionThree = HomePageEventsComponent | HomePageCardGridComponent
   union SectionFour = HomePageCardGridComponent | HomePageEventsComponent
