@@ -4,7 +4,7 @@ import {
 } from "./../drupal-types";
 import { resolveImage } from "../utils/resolveImage";
 
-type HomePageSpotlightItemJsonApiResource = {
+type DrupalJsonApiHomePageSpotlightItemResource = {
   id: string;
   field_ts_heading: string;
   field_ers_media_image: DrupalJsonApiMediaImageResource;
@@ -13,17 +13,17 @@ type HomePageSpotlightItemJsonApiResource = {
 
 export const HomePageSpotlightItemResolver = {
   HomePageSpotlightItem: {
-    id: (parent: HomePageSpotlightItemJsonApiResource) => parent.id,
-    title: (parent: HomePageSpotlightItemJsonApiResource) =>
+    id: (parent: DrupalJsonApiHomePageSpotlightItemResource) => parent.id,
+    title: (parent: DrupalJsonApiHomePageSpotlightItemResource) =>
       parent.field_ts_heading,
-    image: (parent: HomePageSpotlightItemJsonApiResource) => {
+    image: (parent: DrupalJsonApiHomePageSpotlightItemResource) => {
       const image =
         parent.field_ers_media_image.data === null
           ? null
           : resolveImage(parent.field_ers_media_image);
       return image;
     },
-    url: (parent: HomePageSpotlightItemJsonApiResource) =>
+    url: (parent: DrupalJsonApiHomePageSpotlightItemResource) =>
       parent.field_lns_link?.url,
   },
 };

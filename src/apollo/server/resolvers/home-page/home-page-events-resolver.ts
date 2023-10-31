@@ -1,9 +1,8 @@
 import { DrupalJsonApiLinkResource } from "../drupal-types";
 
-type DrupalJsonApiHomePageEventsResolverParagraph = {
+type DrupalJsonApiHomePageEventsParagraph = {
   id: string;
   type: string;
-  // status: boolean;
   field_lns_see_all: DrupalJsonApiLinkResource;
   field_ls_link: DrupalJsonApiLinkResource;
   field_ts_heading: string;
@@ -11,19 +10,17 @@ type DrupalJsonApiHomePageEventsResolverParagraph = {
 
 export const HomePageEventsResolver = {
   HomePageEventsComponent: {
-    id: (parent: DrupalJsonApiHomePageEventsResolverParagraph) => parent.id,
-    type: (parent: DrupalJsonApiHomePageEventsResolverParagraph) => parent.type,
-    // status: (parent: DrupalJsonApiHomePageEventsResolverParagraph) =>
-    //   parent.status,
+    id: (parent: DrupalJsonApiHomePageEventsParagraph) => parent.id,
+    type: (parent: DrupalJsonApiHomePageEventsParagraph) => parent.type,
     seeMore: {
-      link: (parent: DrupalJsonApiHomePageEventsResolverParagraph) =>
+      link: (parent: DrupalJsonApiHomePageEventsParagraph) =>
         parent.field_lns_see_all?.url || null,
-      text: (parent: DrupalJsonApiHomePageEventsResolverParagraph) =>
+      text: (parent: DrupalJsonApiHomePageEventsParagraph) =>
         parent.field_lns_see_all?.title || null,
     },
-    link: (parent: DrupalJsonApiHomePageEventsResolverParagraph) =>
+    link: (parent: DrupalJsonApiHomePageEventsParagraph) =>
       parent.field_ls_link.url,
-    heading: (parent: DrupalJsonApiHomePageEventsResolverParagraph) =>
+    heading: (parent: DrupalJsonApiHomePageEventsParagraph) =>
       parent.field_ts_heading,
   },
 };
