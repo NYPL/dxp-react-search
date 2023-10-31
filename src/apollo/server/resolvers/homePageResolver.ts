@@ -6,7 +6,11 @@ import {
   FilterItem,
   Sort,
 } from "../datasources/drupal-json-api/getJsonApiPath";
-import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
+import { DataSource } from "../datasources/getDataSources";
+import {
+  getDrupalParagraphsField,
+  DrupalJsonApiField,
+} from "./drupal-paragraphs/get-drupal-paragraphs-field";
 import {
   getIndividualResourceJsonApiPath,
   getCollectionResourceJsonApiPath,
@@ -21,10 +25,10 @@ export const homePageDrupalParagraphsMap: { [name: string]: string } = {
 };
 
 const Sections = Object.keys(homePageDrupalParagraphsMap);
-
-export interface HomePageSection {
+const SectionType = [...Sections] as const;
+export interface HomePageSection extends DrupalJsonApiField {
   id: string;
-  type: typeof Sections;
+  type: (typeof SectionType)[number];
   status: boolean;
   field_lns_see_all: DrupalJsonApiLinkResource;
   field_ls_link: DrupalJsonApiLinkResource;
@@ -52,12 +56,17 @@ interface QueryArgs {
   filter: FilterItem;
 }
 
+interface ContextValue {
+  dataSources: DataSource;
+  [key: string]: any;
+}
+
 export const homePageResolver = {
   Query: {
     homePage: async (
       _parent: HomePageJsonApiResource,
       args: QueryArgs,
-      { dataSources }: any
+      { dataSources }: ContextValue
     ) => {
       const includedFields = [
         // "field_hp_section_2.field_erm_hp_cards",
@@ -92,7 +101,7 @@ export const homePageResolver = {
     homePageEventCollection: async (
       _parent: any,
       args: QueryArgs,
-      { dataSources }: any
+      { dataSources }: ContextValue
     ) => {
       const includedFields = ["field_ers_media_image.field_media_image"];
       const pagination = {
@@ -129,7 +138,7 @@ export const homePageResolver = {
     homePageSpotlightCollection: async (
       _parent: any,
       args: QueryArgs,
-      { dataSources }: any
+      { dataSources }: ContextValue
     ) => {
       const includedFields = ["field_ers_media_image.field_media_image"];
       const pagination = {
@@ -166,7 +175,7 @@ export const homePageResolver = {
     homePageHeroCollection: async (
       _parent: any,
       args: QueryArgs,
-      { dataSources }: any
+      { dataSources }: ContextValue
     ) => {
       const includedFields = ["field_ers_media_image.field_media_image"];
       const pagination = {
@@ -246,19 +255,6 @@ export const homePageResolver = {
   SectionEight: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
       homePageDrupalParagraphsMap[object.type],
-  },
-  HomePageHero: {
-    ...(parent: DrupalJsonApiEntityResource) =>
-      getDrupalParagraphsField(parent),
-  },
-  HomePageEvent: {
-    ...(parent: DrupalJsonApiEntityResource) =>
-      getDrupalParagraphsField(parent),
-  },
-  HomePageSpotlightItem: {
-    ...(parent: HomePageJsonApiResource) => {
-      getDrupalParagraphsField(parent);
-    },
   },
 };
 
