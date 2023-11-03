@@ -2,7 +2,7 @@ import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 //Component
 import { GridItem, Box, Text } from "@chakra-ui/react";
-import HomePageLink from "../HomePageLink";
+import HomePageLink, { AnalyticsEventActions } from "../HomePageLink";
 import Image from "../../shared/Image";
 // Type
 import { StaffPicksItem } from "./StaffPicksTypes";
@@ -14,10 +14,15 @@ const QuoteBg = () => {
 
 interface StaffPickProps {
   item: StaffPicksItem;
+  analyticsEventActions: AnalyticsEventActions;
   gaEventActionName: string;
 }
 
-function StaffPick({ item, gaEventActionName }: StaffPickProps) {
+function StaffPick({
+  item,
+  analyticsEventActions,
+  gaEventActionName,
+}: StaffPickProps) {
   const { id, quote, image, url, staffName, staffLocation } = item;
 
   // @TODO fix style for StaffPick link
@@ -41,6 +46,7 @@ function StaffPick({ item, gaEventActionName }: StaffPickProps) {
         <HomePageLink
           id={`staff-pick-card-link-${id}`}
           href={url}
+          analyticsEventActions={analyticsEventActions}
           gaEventActionName={gaEventActionName}
           {...style}
         >
