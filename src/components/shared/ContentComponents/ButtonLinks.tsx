@@ -49,20 +49,13 @@ export default function ButtonLinks({
         >
           {items &&
             items.map((item: ButtonLinkItem) => (
-              <Box
-                id={`button-link-${item.id}`}
+              <ButtonLink
+                id={item.id}
                 key={item.id}
-                as="li"
-                listStyleType="none"
-                w={{ sm: "full", md: "fit-content" }}
-              >
-                <ButtonLink
-                  id={item.id}
-                  link={item.link}
-                  icon={item.icon}
-                  buttonType={buttonType}
-                />
-              </Box>
+                link={item.link}
+                icon={item.icon}
+                buttonType={buttonType}
+              />
             ))}
         </Flex>
       </Box>

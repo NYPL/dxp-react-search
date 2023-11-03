@@ -3,14 +3,20 @@ import * as React from "react";
 import { gql, useQuery } from "@apollo/client";
 // Components
 import PageContainer from "../shared/layouts/PageContainer";
-import Hero from "./../shared/Hero";
-import DrupalParagraphs from "../shared/DrupalParagraphs";
-import ImageComponent from "../shared/ContentComponents/ImageComponent";
-import Text from "../shared/ContentComponents/Text";
-import Video from "./../shared/ContentComponents/Video";
-import TextWithImage from "../shared/ContentComponents/TextWithImage";
-import ButtonLinks from "../shared/ContentComponents/ButtonLinks";
 import PreviewModeNotification from "../shared/PreviewModeNotification";
+import Hero from "./../shared/Hero";
+import CardGrid from "./../shared/CardGrid";
+import EmailSubscription from "../shared/EmailSubscription";
+import GoogleMapEmbed from "../shared/ContentComponents/GoogleMapEmbed";
+import DrupalParagraphs from "../shared/DrupalParagraphs";
+import AudioEmbed from "../shared/ContentComponents/AudioEmbed";
+import ButtonLinks from "../shared/ContentComponents/ButtonLinks";
+import ImageComponent from "../shared/ContentComponents/ImageComponent";
+import Slideshow from "../shared/ContentComponents/Slideshow";
+import SocialEmbed from "../shared/ContentComponents/SocialEmbed";
+import Text from "../shared/ContentComponents/Text";
+import TextWithImage from "../shared/ContentComponents/TextWithImage";
+import Video from "./../shared/ContentComponents/Video";
 
 import { Box, Heading } from "@nypl/design-system-react-components";
 
@@ -64,13 +70,7 @@ export const PAGE_QUERY = gql`
         }
       }
       mainContent {
-        ... on Text {
-          id
-          type
-          heading
-          text
-        }
-        ... on Video {
+        ... on AudioEmbed {
           id
           type
           heading
@@ -78,6 +78,66 @@ export const PAGE_QUERY = gql`
           provider
           embedCode
           oembedUrl
+          html
+        }
+        ... on CardGrid {
+          __typename
+          id
+          type
+          title
+          description
+          layout
+          items {
+            id
+            title
+            description
+            link
+            buttonLinks
+            image {
+              id
+              alt
+              uri
+              width
+              height
+              transformations {
+                id
+                label
+                uri
+              }
+            }
+          }
+        }
+        ... on ButtonLinks {
+          __typename
+          id
+          type
+          heading
+          description
+          buttonType
+          items {
+            id
+            icon
+            link {
+              title
+              uri
+              url
+            }
+          }
+        }
+        ... on EmailSubscription {
+          id
+          type
+          heading
+          description
+          formPlaceholder
+          salesforceListId
+          salesforceSourceCode
+        }
+        ... on GoogleMapEmbed {
+          id
+          type
+          embedCode
+          accessibleDescription
         }
         ... on ImageComponent {
           id
@@ -97,6 +157,35 @@ export const PAGE_QUERY = gql`
               uri
             }
           }
+        }
+        ... on Slideshow {
+          id
+          type
+          heading
+          description
+          images {
+            id
+            uri
+            alt
+            width
+            height
+            transformations {
+              id
+              label
+              uri
+            }
+          }
+        }
+        ... on SocialEmbed {
+          id
+          type
+          embedCode
+        }
+        ... on Text {
+          id
+          type
+          heading
+          text
         }
         ... on TextWithImage {
           id
@@ -118,22 +207,14 @@ export const PAGE_QUERY = gql`
             }
           }
         }
-        ... on ButtonLinks {
-          __typename
+        ... on Video {
           id
           type
           heading
           description
-          buttonType
-          items {
-            id
-            icon
-            link {
-              title
-              uri
-              url
-            }
-          }
+          provider
+          embedCode
+          oembedUrl
         }
       }
     }
@@ -174,8 +255,6 @@ export default function PagePage({
   }
 
   const page = data.page;
-
-  console.log(page);
 
   // const image = page.image;
 
@@ -240,11 +319,17 @@ export default function PagePage({
         <DrupalParagraphs
           content={page.mainContent}
           components={{
+            AudioEmbed: AudioEmbed,
             ButtonLinks: ButtonLinks,
+            CardGrid: CardGrid,
+            EmailSubscription: EmailSubscription,
+            GoogleMapEmbed: GoogleMapEmbed,
             ImageComponent: ImageComponent,
+            Slideshow: Slideshow,
+            SocialEmbed: SocialEmbed,
             Text: Text,
-            Video: Video,
             TextWithImage: TextWithImage,
+            Video: Video,
           }}
         />
       }

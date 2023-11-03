@@ -26,12 +26,17 @@ export const pageFeaturedContentDrupalParagraphsMap: {
 };
 
 export const pageDrupalParagraphsMap: { [name: string]: string } = {
+  "paragraph--audio": "AudioEmbed",
+  "paragraph--button_links": "ButtonLinks",
   "paragraph--link_card_list": "CardGrid",
+  "paragraph--email_subscription": "EmailSubscription",
+  "paragraph--google_map": "GoogleMapEmbed",
   "paragraph--image": "ImageComponent",
+  "paragraph--slideshow": "Slideshow",
+  "paragraph--social": "SocialEmbed",
   "paragraph--text": "Text",
   "paragraph--text_with_image": "TextWithImage",
   "paragraph--video": "Video",
-  "paragraph--button_links": "ButtonLinks",
 };
 
 export const pageResolver = {
@@ -53,8 +58,13 @@ export const pageResolver = {
         "field_main_content.field_ers_media_item.field_media_image",
         // Main content: Video
         "field_main_content.field_ers_media_item",
-        // Button Links
+        // Main content: Button Links
         "field_main_content.field_erm_button_links",
+        // Main content: Slideshow
+        "field_main_content.field_erm_media_items.field_media_image",
+        // Main content: Link Card List
+        "field_main_content.field_erm_link_cards",
+        "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
       ];
 
       const isPreview = args.preview ? true : false;
