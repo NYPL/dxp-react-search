@@ -165,7 +165,7 @@ export default function EventCollection({
       textColor="red.200"
       borderColor="red.200"
       paddingTop={true}
-      alignSectionHeading="46px"
+      alignSectionHeading="50px"
       hoverStyle={true}
       seeMore={seeMore}
     >
@@ -188,7 +188,6 @@ export default function EventCollection({
                 >
                   <Heading
                     as="h3"
-                    fontFamily="Kievit-Medium"
                     fontSize="xs"
                     fontWeight="bold"
                     textTransform="uppercase"
@@ -227,8 +226,8 @@ export default function EventCollection({
                   px={5}
                   w={{ lg: "15.5%", xl: "12%" }}
                   textTransform="uppercase"
-                  fontSize="xs"
-                  lineHeight="none"
+                  fontSize="10px"
+                  lineHeight="14px"
                   _selected={{
                     color: "red.200",
                     borderRadius: "none",

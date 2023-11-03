@@ -79,13 +79,7 @@ function StaffPick({ item, gaEventActionName }: StaffPickProps) {
           </Text>
         </HomePageLink>
       </Box>
-      <Box
-        color="brand.100"
-        mt={{ base: 4, xl: 5 }}
-        fontWeight="bold"
-        fontFamily="Kievit-Book"
-        display="flex"
-      >
+      <Box color="brand.100" mt={{ base: 4, xl: 5 }} display="flex">
         <Box pt={{ base: 3, xl: 6 }} pr={2.5}>
           <svg
             id={`staff-pick-${id}-nyplLionLogo-icon`}

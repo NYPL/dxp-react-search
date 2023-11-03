@@ -11,47 +11,79 @@ import Event from "./event";
 const Fonts = () => (
   <Global
     styles={`
-      /* latin */
-      @font-face {
-        font-family: 'Kievit-Medium';
-        font-style: normal;
-        font-weight: 700;
-        font-display: swap;
-        src: url('https://ux-static.nypl.org/ff_kievit_web/KievitWeb-Medi.woff') format('woff2')
-      }
-      @font-face {
-        font-family: 'Kievit-Book';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url('https://ux-static.nypl.org/ff_kievit_web/KievitWeb-Book.woff') format('woff2')
-      }
-      @font-face {
-        font-family: 'Milo-Regular';
-        font-style: normal;
-        font-weight: 700;
-        font-display: swap;
-        src: url('https://d2znry4lg8s0tq.cloudfront.net/milo-web/milo-slab-pro-regular/MiloSlabWebPro.woff') format('woff2')
-      }
-      @font-face {
-        font-family: 'Milo-Light';
-        font-style: normal;
-        font-weight: 700;
-        src: url('https://d2znry4lg8s0tq.cloudfront.net/milo-web/milo-slab-pro-light/MiloSlabWebPro.woff') format('woff2')
-      }
+    @font-face {
+      font-family: system-ui;
+      font-style: normal;
+      font-weight: 300;
+      src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"),
+        local(".LucidaGrandeUI"), local("Segoe UI Light"), local("Ubuntu Light"),
+        local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+    }
+    @font-face {
+      font-family: system-ui;
+      font-style: italic;
+      font-weight: 300;
+      src: local(".SFNSText-LightItalic"),
+        local(".HelveticaNeueDeskInterface-Italic"), local(".LucidaGrandeUI"),
+        local("Segoe UI Light Italic"), local("Ubuntu Light Italic"),
+        local("Roboto-LightItalic"), local("DroidSans"), local("Tahoma");
+    }
+    @font-face {
+      font-family: system-ui;
+      font-style: normal;
+      font-weight: 400;
+      src: local(".SFNSText-Regular"), local(".HelveticaNeueDeskInterface-Regular"),
+        local(".LucidaGrandeUI"), local("Segoe UI"), local("Ubuntu"),
+        local("Roboto-Regular"), local("DroidSans"), local("Tahoma");
+    }
+    @font-face {
+      font-family: system-ui;
+      font-style: italic;
+      font-weight: 400;
+      src: local(".SFNSText-Italic"), local(".HelveticaNeueDeskInterface-Italic"),
+        local(".LucidaGrandeUI"), local("Segoe UI Italic"), local("Ubuntu Italic"),
+        local("Roboto-Italic"), local("DroidSans"), local("Tahoma");
+    }
+    @font-face {
+      font-family: system-ui;
+      font-style: normal;
+      font-weight: 500;
+      src: local(".SFNSText-Medium"), local(".HelveticaNeueDeskInterface-MediumP4"),
+        local(".LucidaGrandeUI"), local("Segoe UI Semibold"), local("Ubuntu Medium"),
+        local("Roboto-Medium"), local("DroidSans-Bold"), local("Tahoma Bold");
+    }
+    @font-face {
+      font-family: system-ui;
+      font-style: italic;
+      font-weight: 500;
+      src: local(".SFNSText-MediumItalic"),
+        local(".HelveticaNeueDeskInterface-MediumItalicP4"),
+        local(".LucidaGrandeUI"), local("Segoe UI Semibold Italic"),
+        local("Ubuntu Medium Italic"), local("Roboto-MediumItalic"),
+        local("DroidSans-Bold"), local("Tahoma Bold");
+    }
+    @font-face {
+      font-family: system-ui;
+      font-style: normal;
+      font-weight: 700;
+      src: local(".SFNSText-Bold"), local(".HelveticaNeueDeskInterface-Bold"),
+        local(".LucidaGrandeUI"), local("Segoe UI Bold"), local("Ubuntu Bold"),
+        local("Roboto-Bold"), local("DroidSans-Bold"), local("Tahoma Bold");
+    }
+    @font-face {
+      font-family: system-ui;
+      font-style: italic;
+      font-weight: 700;
+      src: local(".SFNSText-BoldItalic"),
+        local(".HelveticaNeueDeskInterface-BoldItalic"), local(".LucidaGrandeUI"),
+        local("Segoe UI Bold Italic"), local("Ubuntu Bold Italic"),
+        local("Roboto-BoldItalic"), local("DroidSans-Bold"), local("Tahoma Bold");
+    }
       @font-face {
         font-family: 'Milo-Light-Italic';
         font-style: normal;
         font-weight: 700;
         src: url('https://ux-static.nypl.org/milo-web/milo-slab-pro-light-italic/MiloSlabWebPro-LightItalic.woff") format('woff2')
-      }
-      /* does not work */
-      @font-face {
-        font-family: 'nypl-moon';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url('https://d2znry4lg8s0tq.cloudfront.net/nypl-moon/nypl-moon.woff2?viik85') format('woff2')
       }
       `}
   />
@@ -61,8 +93,8 @@ const theme = extendTheme({
   // Dependent on static Header approach @see https://github.com/NYPL/dxp-react-search/pull/282/
   styles: { global: { svg: { display: "inline" } } },
   fonts: {
-    heading: "Milo-Regular",
-    body: "Kievit-Medium",
+    heading: "system-ui, sans-serif",
+    body: "system-ui, sans-serif",
   },
   fontSizes: {
     //xs: "0.75rem", -> 12px
@@ -109,8 +141,7 @@ const theme = extendTheme({
     Heading: {
       variants: {
         "section-title": {
-          fontWeight: "bold",
-          fontFamily: "fonts.body",
+          fontWeight: "500",
           textAlign: { base: "left", md: "right" },
           borderTop: "2px solid",
         },
@@ -119,6 +150,7 @@ const theme = extendTheme({
     Link: {
       variants: {
         "see-more-hover-style": {
+          fontWeight: 500,
           pt: 3.5,
           pb: 3,
           px: 5,
@@ -131,6 +163,7 @@ const theme = extendTheme({
           },
         },
         "see-more-hover-no-style": {
+          fontWeight: 500,
           pt: 3.5,
           pb: 3,
           px: 5,
@@ -179,8 +212,7 @@ const theme = extendTheme({
           border: "2px",
           borderColor: "brand.100",
           borderRadius: "full",
-          // fontFamily: "nypl-moon",
-          fontSize: "3xl",
+          fontSize: "lg",
           bg: "transparent",
           h: 9,
           w: 9,

@@ -14,7 +14,6 @@ const Card: ComponentStyleConfig = {
     },
     // Title
     h3: {
-      fontFamily: "Kievit-Book",
       fontSize: { base: "lg", md: "xl" },
       fontWeight: "normal",
       lineHeight: "none",
@@ -63,10 +62,8 @@ const Card: ComponentStyleConfig = {
       },
       gridGap: 0,
       color: "brand.100",
-      fontFamily: "Kievit-Book",
       w: { base: "167px", md: "150px", lg: "190px", xl: "212px" },
       h3: {
-        fontFamily: "Kievit-Book",
         color: "brand.100",
         pt: 4,
         fontSize: {
@@ -107,10 +104,8 @@ const Card: ComponentStyleConfig = {
       },
       gridGap: { base: 9, md: 0 },
       h3: {
-        fontFamily: "Milo-Regular",
         lineHeight: { base: "21px", md: "28px" },
         fontSize: { base: "lg", md: "2xl" },
-        fontWeight: "bold",
       },
       p: {
         display: { base: "none", lg: "block" },
@@ -122,7 +117,6 @@ const Card: ComponentStyleConfig = {
     "updates-card": {
       gridTemplateColumns: { base: "4fr 9fr", md: "7fr 3fr", lg: "15fr 16fr" },
       gridGap: { base: 9, md: 7, lg: 12 },
-      fontFamily: "Kievit-Book",
       mb: { lg: 3 },
       h3: { mt: 1.5, mb: 4 },
       p: {
