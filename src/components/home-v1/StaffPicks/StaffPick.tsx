@@ -76,9 +76,10 @@ function StaffPick({
             pr={{ base: "120px", lg: "157px", xl: "220px" }}
             position="absolute"
             bottom="13%"
-            fontFamily="Milo-Light-Italic"
-            lineHeight="none"
-            fontSize={{ base: "xl", lg: "2.5xl", xl: "4xl" }}
+            fontFamily="Trebuchet MS"
+            fontStyle="italic"
+            lineHeight="normal"
+            fontSize={{ base: "17px", lg: "3xl" }}
             textAlign="left"
           >
             {quote}

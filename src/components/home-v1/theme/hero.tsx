@@ -39,7 +39,7 @@ const Hero: ComponentStyleConfig = {
     },
     h1: {
       fontSize: { base: "27px", xl: "4xl" },
-      fontWeight: 400,
+      fontWeight: 300,
       lineHeight: "normal",
       w: { base: "70%", md: "full" },
     },
