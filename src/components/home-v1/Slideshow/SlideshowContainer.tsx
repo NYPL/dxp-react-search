@@ -69,6 +69,11 @@ function SlideshowContainer({
               >
                 <SlideshowCard
                   item={item}
+                  analyticsEventActions={{
+                    cta_subsection: sectionTitle,
+                    cta_text: item.title,
+                    cta_position: `${i + 1}`,
+                  }}
                   gaEventActionName={`${sectionTitle} - ${item.title} - ${
                     i + 1
                   }`}

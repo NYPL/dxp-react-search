@@ -8,7 +8,7 @@ interface SocialEmbedProps {
 }
 function SocialEmbed({ id, type, embedCode }: SocialEmbedProps) {
   return (
-    <Box id={`${type}-${id}`} w="100%" mb="l">
+    <Box id={`${type}-${id}`} w="100%" mb="l" suppressHydrationWarning={true}>
       <Box
         sx={{
           "& iframe": {
@@ -16,7 +16,9 @@ function SocialEmbed({ id, type, embedCode }: SocialEmbedProps) {
             maxWidth: "100%",
           },
         }}
-        dangerouslySetInnerHTML={{ __html: embedCode }}
+        dangerouslySetInnerHTML={{
+          __html: embedCode,
+        }}
       />
     </Box>
   );

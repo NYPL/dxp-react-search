@@ -11,6 +11,7 @@ import { GoogleMapEmbedResolver } from "./google-map-embed-resolver";
 import { HeroResolver } from "./hero-resolver";
 import { ImageResolver } from "./image-resolver";
 import { JumbotronResolver } from "./jumbotron-resolver";
+import { SlideshowResolver } from "./slideshow-resolver";
 import { SocialEmbedResolver } from "./social-embed-resolver";
 import { TextResolver } from "./text-resolver";
 import { TextWithImageResolver } from "./text-with-image-resolver";
@@ -29,6 +30,7 @@ export const drupalParagraphsResolvers = mergeResolvers([
   HeroResolver,
   ImageResolver,
   JumbotronResolver,
+  SlideshowResolver,
   SocialEmbedResolver,
   TextResolver,
   TextWithImageResolver,

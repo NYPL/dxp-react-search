@@ -6,7 +6,6 @@ import {
   HStack,
   Link,
 } from "@nypl/design-system-react-components";
-import NextDsLink from "../../shared/Link/NextDsLink";
 import Image from "../../shared/Image";
 // Types
 import { BlogCardItem, BlogLocation } from "./BlogCardTypes";
@@ -39,7 +38,7 @@ function BlogCard({ item }: BlogCardProps) {
       </Box>
       <Box flexFlow={{ lg: "row nowrap" }}>
         <Heading level="three">
-          {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
+          {slug && <Link href={slug}>{title}</Link>}
         </Heading>
         <Box pb={5}>
           <Box>
