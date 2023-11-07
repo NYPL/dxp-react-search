@@ -79,7 +79,7 @@ function StaffPick({
             fontFamily="Trebuchet MS"
             fontStyle="italic"
             lineHeight="normal"
-            fontSize={{ base: "17px", lg: "3xl" }}
+            fontSize={{ base: "17px", lg: "2.5xl", xl: "3xl" }}
             textAlign="left"
           >
             {quote}
