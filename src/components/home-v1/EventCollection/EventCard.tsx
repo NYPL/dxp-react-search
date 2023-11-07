@@ -2,7 +2,7 @@ import * as React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Box, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
-import HomePageLink from "../HomePageLink";
+import HomePageLink, { AnalyticsEventActions } from "../HomePageLink";
 import Image, { ImageType } from "./../../shared/Image";
 
 export interface EventCardProps {
@@ -16,6 +16,7 @@ export interface EventCardProps {
   weight: number;
   variant: string;
   size?: string;
+  analyticsEventActions: AnalyticsEventActions;
   gaEventActionName: string;
 }
 
@@ -28,6 +29,7 @@ export default function EventCard({
   location,
   variant,
   size,
+  analyticsEventActions,
   gaEventActionName,
 }: EventCardProps) {
   const styles: any = useStyleConfig("Event", { variant, size });
@@ -39,6 +41,7 @@ export default function EventCard({
           <HomePageLink
             id={`event-card-heading-link-${id}`}
             href={link}
+            analyticsEventActions={analyticsEventActions}
             gaEventActionName={gaEventActionName}
           >
             {title}
@@ -55,6 +58,7 @@ export default function EventCard({
           href={link}
           aria-label={`${title}-image`}
           tabIndex={-1}
+          analyticsEventActions={analyticsEventActions}
           gaEventActionName={gaEventActionName}
         >
           {image && (

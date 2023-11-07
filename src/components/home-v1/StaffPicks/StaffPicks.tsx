@@ -42,6 +42,11 @@ function StaffPicks({ id, title, link, items, seeMore }: StaffPicksProps) {
             <StaffPick
               item={item}
               key={`staff-pick-item-key-${i}`}
+              analyticsEventActions={{
+                cta_subsection: title,
+                cta_text: null,
+                cta_position: `${i + 1}`,
+              }}
               gaEventActionName={`${title} - ${i + 1}`}
             />
           ))}
