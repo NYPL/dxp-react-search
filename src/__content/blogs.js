@@ -13,7 +13,7 @@ const blogsContent = {
   explore_by_channel: {
     heading: "Explore By Channel",
     description:
-      "The NYPL blog channels can help you discover more posts around the topics you care about. From Black Culture to Women's History and Romance to Horror–there is something for everyone.",
+      "Explore your interests or discover something new. Find book lists in your favorite genres, amazing materials from our world-renowned collections, and much more.",
     slug: "/blog/channels",
     slugLabel: "View all channels",
   },
