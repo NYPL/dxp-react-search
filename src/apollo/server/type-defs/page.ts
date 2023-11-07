@@ -14,12 +14,17 @@ export const PageTypeDefs = gql`
   union PageFeaturedContent = Hero
 
   union PageMainContent =
-      CardGrid
-    | Text
-    | Video
-    | ImageComponent
-    | TextWithImage
+      AudioEmbed
     | ButtonLinks
+    | CardGrid
+    | EmailSubscription
+    | GoogleMapEmbed
+    | ImageComponent
+    | Slideshow
+    | SocialEmbed
+    | Text
+    | TextWithImage
+    | Video
 
   type PageConnection {
     items: [Page]
