@@ -2,7 +2,6 @@ import * as React from "react";
 import { Box, Flex, Heading, Link } from "@nypl/design-system-react-components";
 import TextFormatted from "../../shared/TextFormatted";
 import Image, { ImageType } from "../../shared/Image";
-// import { getImageTransformation } from "../../shared/Image/imageUtils";
 
 interface FeaturedCardProps {
   id: string;
@@ -25,7 +24,6 @@ export default function FeaturedCard({
   linkText,
   bgColor,
 }: FeaturedCardProps) {
-  console.log(image);
   return (
     <Flex
       id={id}
