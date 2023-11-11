@@ -477,9 +477,11 @@ export default function resolveDrupalParagraphs(
         // Alter the color scheme value from Drupal.
         let bgColor = item.field_field_lts_color_scheme;
         if (item.field_field_lts_color_scheme === "primary_alt") {
-          bgColor = "primaryAlt";
+          bgColor = "#b0e3e4";
         } else if (item.field_field_lts_color_scheme === "primary_gray") {
-          bgColor = "primaryGray";
+          bgColor = "#f5f5f5";
+        } else {
+          bgColor = "#f9e08e";
         }
         paragraphComponent = {
           id: item.id,
