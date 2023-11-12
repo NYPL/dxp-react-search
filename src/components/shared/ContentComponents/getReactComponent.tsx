@@ -16,6 +16,7 @@ import Jumbotron from "./Jumbotron";
 import ButtonLinks from "./ButtonLinks";
 import DonorCredit from "./../DonorCredit";
 import FeaturedCard from "./../FeaturedCard";
+import FeaturedText from "./../FeaturedText";
 
 // @TODO add a type for use in consuming components.
 // @SEE https://stackoverflow.com/questions/12787781/type-definition-in-object-literal-in-typescript
@@ -41,6 +42,7 @@ const Components: any = {
   ButtonLinks: ButtonLinks,
   DonorCredit: DonorCredit,
   FeaturedCard: FeaturedCard,
+  FeaturedText: FeaturedText,
 };
 
 export interface ContentComponentObject {

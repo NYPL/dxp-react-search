@@ -59,11 +59,12 @@ export const LANDING_PAGE_QUERY = gql`
           link
           linkText
         }
-        ... on Text {
+        ... on FeaturedText {
           id
           type
           heading
           text
+          bg
         }
         ... on Slideshow {
           id
@@ -197,7 +198,7 @@ export default function LandingPage({
             subHeaderText={<TextFormatted html={landingPage.description} />}
             backgroundImageSrc={landingPage.backgroundImage.uri}
             imageProps={{
-              alt: "Image example",
+              alt: landingPage.foregroundImage.alt,
               src: landingPage.foregroundImage.uri,
             }}
           />

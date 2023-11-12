@@ -15,7 +15,7 @@ export const typeDefs = gql`
   }
 
   union LandingPageMainContent =
-      Text
+      FeaturedText
     | FeaturedCard
     | FeaturedCardGrid
     | Slideshow

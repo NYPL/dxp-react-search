@@ -74,7 +74,7 @@ const landingPageResolver = {
   },
   LandingPageMainContent: {
     __resolveType: (object, _, __) => {
-      return resolveParagraphTypes(object.type);
+      return resolveParagraphTypes(object.type, "landing_page");
     },
   },
 };

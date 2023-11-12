@@ -42,6 +42,14 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
+      // Landing Page
+      if (
+        item.type === "paragraph--text" &&
+        typesInQuery.includes("FeaturedText")
+      ) {
+        accumulator.push(item);
+      }
+
       if (
         item.type === "paragraph--social" &&
         typesInQuery.includes("SocialEmbed")
@@ -289,6 +297,9 @@ export default function resolveDrupalParagraphs(
           type: paragraphTypeName,
           text: item.field_tfls_summary_descrip?.processed,
           heading: item.field_ts_heading ? item.field_ts_heading : null,
+          bg: item.field_bs_color_background
+            ? item.field_bs_color_background
+            : null,
         };
         break;
       case "paragraph--social":

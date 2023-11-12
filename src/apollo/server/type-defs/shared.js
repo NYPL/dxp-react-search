@@ -266,6 +266,14 @@ export const typeDefs = gql`
     showBorder: Boolean!
   }
 
+  type FeaturedText {
+    id: ID!
+    type: String!
+    text: String!
+    heading: String
+    bg: Boolean
+  }
+
   type BreadcrumbsItem {
     id: ID!
     title: String!

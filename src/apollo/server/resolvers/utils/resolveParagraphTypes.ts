@@ -91,5 +91,13 @@ export default function resolveParagraphTypes(
     }
   }
 
+  if (contentType === "landing_page") {
+    switch (objectType) {
+      case "text":
+        resolvedObjectType = "FeaturedText";
+        break;
+    }
+  }
+
   return resolvedObjectType;
 }
