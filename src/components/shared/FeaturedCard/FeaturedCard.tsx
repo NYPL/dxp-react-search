@@ -57,6 +57,7 @@ export default function FeaturedCard({
         </Link>
       </Box>
       <Box
+        w="100%"
         flexGrow={{ lg: 1 }}
         flexShrink={{ lg: 1 }}
         flexBasis={{ lg: "50%" }}
