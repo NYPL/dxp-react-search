@@ -274,6 +274,24 @@ export const typeDefs = gql`
     bg: Boolean
   }
 
+  type FeaturedCard {
+    id: ID!
+    type: String!
+    heading: String
+    description: String
+    image: Image
+    imageDirection: String
+    link: String
+    linkText: String
+    bgColor: String
+  }
+
+  type FeaturedCardGrid {
+    id: ID!
+    type: String!
+    items: [FeaturedCard]!
+  }
+
   type BreadcrumbsItem {
     id: ID!
     title: String!
