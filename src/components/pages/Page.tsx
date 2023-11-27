@@ -2,7 +2,9 @@ import * as React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
-import PageContainer from "../shared/layouts/PageContainer";
+import PageContainer, {
+  BreadcrumbsItem,
+} from "../shared/layouts/PageContainer";
 import PreviewModeNotification from "../shared/PreviewModeNotification";
 import Hero from "./../shared/Hero";
 import CardGrid from "./../shared/CardGrid";
@@ -25,6 +27,11 @@ export const PAGE_QUERY = gql`
     page(id: $id, revisionId: $revisionId, preview: $preview) {
       id
       title
+      breadcrumbs {
+        id
+        title
+        url
+      }
       description
       image {
         id
@@ -280,27 +287,21 @@ export default function PagePage({
         description: page.description,
         imageUrl: page.image?.uri,
       }}
-      breadcrumbs={[
-        {
-          text: "Hello",
-          url: "/whatever",
-        },
-      ]}
-      // breadcrumbs={
-      //   sectionFront.breadcrumbs &&
-      //   sectionFront.breadcrumbs.map(
-      //     (breadcrumbsItem: {
-      //       id: string;
-      //       title: string;
-      //       url: string;
-      //     }): BreadcrumbsItem => {
-      //       return {
-      //         text: breadcrumbsItem.title,
-      //         url: breadcrumbsItem.url,
-      //       };
-      //     }
-      //   )
-      // }
+      breadcrumbs={
+        page.breadcrumbs &&
+        page.breadcrumbs.map(
+          (breadcrumbsItem: {
+            id: string;
+            title: string;
+            url: string;
+          }): BreadcrumbsItem => {
+            return {
+              text: breadcrumbsItem.title,
+              url: breadcrumbsItem.url,
+            };
+          }
+        )
+      }
       // breadcrumbsColor={sectionFront.colorway.secondary}
       wrapperClass="nypl--page"
       contentHeader={

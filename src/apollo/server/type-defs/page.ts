@@ -4,6 +4,7 @@ export const PageTypeDefs = gql`
   type Page {
     id: ID!
     title: String!
+    breadcrumbs: [BreadcrumbsItem]
     description: String
     image: Image
     # breadcrumbs: [BreadcrumbsItem]
