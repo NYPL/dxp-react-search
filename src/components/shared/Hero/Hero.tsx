@@ -6,6 +6,7 @@ import {
 } from "@nypl/design-system-react-components";
 import { getImageTransformation } from "./../Image/imageUtils";
 import { ImageType } from "./../Image/ImageTypes";
+import TextFormatted from "./../TextFormatted";
 
 type HeroProps = {
   id: string;
@@ -44,11 +45,11 @@ export default function Hero({
   const overlayTextColor = "ui.white";
 
   return (
-    <Box id={`${type}__${id}`}>
+    <Box id={`${type}-${heroType}__${id}`}>
       <DsHero
         heroType={heroType}
-        heading={<Heading level="one" text={`${heroType}: ${title}`} />}
-        subHeaderText={description}
+        heading={<Heading level="one" text={title} />}
+        subHeaderText={<TextFormatted html={description} />}
         backdropBackgroundColor={backgroundColor}
         backgroundColor={overlayBackgroundColor}
         foregroundColor={overlayTextColor}
