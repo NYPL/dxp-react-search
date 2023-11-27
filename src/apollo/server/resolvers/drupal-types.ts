@@ -18,6 +18,12 @@ export interface DrupalJsonApiTextField {
   processed: string;
 }
 
+export interface DrupalJsonApiBreadcrumbItem {
+  id: string;
+  title: string;
+  url: string;
+}
+
 export interface DrupalJsonApiMediaImageResource {
   type:
     | "media--image"

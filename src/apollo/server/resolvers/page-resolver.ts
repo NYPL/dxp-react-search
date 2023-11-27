@@ -1,5 +1,6 @@
 import { getIndividualResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
 import {
+  DrupalJsonApiBreadcrumbItem,
   DrupalJsonApiEntityResource,
   DrupalJsonApiTextField,
   DrupalJsonApiMediaImageResource,
@@ -11,6 +12,7 @@ import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragra
 export interface PageJsonApiResource {
   id: string;
   title: string;
+  breadcrumbs: DrupalJsonApiBreadcrumbItem[];
   field_tfls_summary_description: DrupalJsonApiTextField;
   field_ers_media_image: DrupalJsonApiMediaImageResource;
   field_lts_hero_type: string;
@@ -91,6 +93,7 @@ export const pageResolver = {
     title: (page: PageJsonApiResource) => page.title,
     description: (page: PageJsonApiResource) =>
       page.field_tfls_summary_description.processed,
+    breadcrumbs: (page: PageJsonApiResource) => page.breadcrumbs,
     image: (page: PageJsonApiResource) =>
       page.field_ers_media_image.data !== null
         ? resolveImage(page.field_ers_media_image)
