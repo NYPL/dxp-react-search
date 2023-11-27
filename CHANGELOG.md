@@ -4,6 +4,7 @@
 
 ---
 
+- Update blog channel description: [#451](https://github.com/NYPL/dxp-react-search/pull/451)
 - Update to Node 18.12.0: [#448](https://github.com/NYPL/dxp-react-search/pull/448)
 
 ---
