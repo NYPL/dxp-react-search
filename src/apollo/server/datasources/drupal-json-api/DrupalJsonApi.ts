@@ -6,18 +6,7 @@ const { DRUPAL_API } = process.env;
 
 // @TODO Change to use JsonApiResourceObject
 type JsonApiResource = { [key: string]: any };
-type JsonApiIndividualResource = {
-  jsonapi: any;
-  data: JsonApiResource;
-  meta: any;
-  links: any;
-};
-type JsonApiCollectionResource = {
-  jsonapi: any;
-  data: JsonApiResource[];
-  meta: any;
-  links: any;
-};
+
 class DrupalJsonApi<TContext = any> extends RESTDataSource {
   constructor() {
     super();
@@ -48,7 +37,7 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
   async getCollectionResource(
     apiPath: string,
     isPreview: boolean
-  ): Promise<JsonApiCollectionResource> {
+  ): Promise<JsonApiResource[]> {
     if (isPreview) {
       try {
         const accessToken = await getAccessToken();
@@ -74,7 +63,7 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
   async getIndividualResource(
     apiPath: string,
     isPreview: boolean
-  ): Promise<JsonApiIndividualResource> {
+  ): Promise<JsonApiResource> {
     if (isPreview) {
       try {
         const accessToken = await getAccessToken();
