@@ -13,7 +13,7 @@ import validatePatronCardResolver from "./validatePatronCardResolver";
 import blogResolver from "./blogResolver";
 import locationResolver from "./locationResolver";
 import pressReleaseResolver from "./pressReleaseResolver";
-import homePageResolver from "./homePageResolver";
+import { homePageResolver } from "./home-page-resolver";
 import sectionFrontResolver from "./sectionFrontResolver";
 import { pageResolver } from "./page-resolver";
 // Drupal paragraphs

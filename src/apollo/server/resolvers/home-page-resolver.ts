@@ -25,7 +25,9 @@ export const homePageDrupalParagraphsMap: { [name: string]: string } = {
 };
 
 const Sections = Object.keys(homePageDrupalParagraphsMap);
+
 const SectionType = [...Sections] as const;
+
 export interface HomePageSection extends DrupalJsonApiField {
   id: string;
   type: (typeof SectionType)[number];

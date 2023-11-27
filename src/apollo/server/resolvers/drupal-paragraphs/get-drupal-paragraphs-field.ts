@@ -4,6 +4,7 @@ export interface DrupalJsonApiField extends DrupalJsonApiEntityResource {
   data?: null | [];
   [key: string]: any;
 }
+
 /*
  * Handles no content and also filtering unpublished paragraphs for single and multivalue fields.
  */
@@ -16,7 +17,6 @@ export function getDrupalParagraphsField<
     if (field.data?.length === 0) {
       return null;
     }
-
     // Single value fields will return null, `null` if no paragraph is added.
     if (field.data === null) {
       return null;
