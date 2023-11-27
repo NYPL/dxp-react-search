@@ -39,21 +39,22 @@ export const HomePageSlideshowResolver = {
     heading: (parent: DrupalJsonApiHomePageSlideshowParagraph) =>
       parent.field_ts_heading,
     items: (parent: DrupalJsonApiHomePageSlideshowParagraph) =>
-      parent.field_erm_hp_slideshow_items.map(
-        (slideshowItem: DrupalJsonApiSlideshowItem) => {
-          return {
-            id: slideshowItem.id,
-            url: slideshowItem.field_ls_link.url,
-            title: slideshowItem.field_ts_heading,
-            audience: slideshowItem.field_ts_audience,
-            genre: slideshowItem.field_ts_genre,
-            author: slideshowItem.field_ts_author,
-            image:
-              slideshowItem.field_ers_image.data === null
-                ? null
-                : resolveImage(slideshowItem.field_ers_image),
-          };
-        }
-      ),
+      Array.isArray(parent.field_erm_hp_slideshow_items) &&
+      parent.field_erm_hp_slideshow_items,
+  },
+  HomePageSlideshowItem: {
+    id: (parent: DrupalJsonApiSlideshowItem) => parent.id,
+    url: (parent: DrupalJsonApiSlideshowItem) => parent.field_ls_link.url,
+    title: (parent: DrupalJsonApiSlideshowItem) => parent.field_ts_heading,
+    audience: (parent: DrupalJsonApiSlideshowItem) => parent.field_ts_audience,
+    genre: (parent: DrupalJsonApiSlideshowItem) => parent.field_ts_genre,
+    author: (parent: DrupalJsonApiSlideshowItem) => parent.field_ts_author,
+    image: (parent: DrupalJsonApiSlideshowItem) => {
+      const image =
+        parent.field_ers_image.data === null
+          ? null
+          : resolveImage(parent.field_ers_image);
+      return image;
+    },
   },
 };

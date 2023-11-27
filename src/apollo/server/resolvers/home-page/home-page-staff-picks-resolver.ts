@@ -38,20 +38,23 @@ export const HomePageStaffPicksResolver = {
     heading: (parent: DrupalJsonApiHomePageStaffPicksParagraph) =>
       parent.field_ts_heading,
     items: (parent: DrupalJsonApiHomePageStaffPicksParagraph) =>
-      parent.field_erm_hp_staffpicks.map(
-        (staffpicksItem: DrupalJsonApiStaffPicksItem) => {
-          return {
-            id: staffpicksItem.id,
-            url: staffpicksItem.field_ls_link.url,
-            quote: staffpicksItem.field_ts_quote,
-            staffName: staffpicksItem.field_ts_staff_name,
-            staffLocation: staffpicksItem.field_ts_staff_location,
-            image:
-              staffpicksItem.field_ers_image.data === null
-                ? null
-                : resolveImage(staffpicksItem.field_ers_image),
-          };
-        }
-      ),
+      Array.isArray(parent.field_erm_hp_staffpicks) &&
+      parent.field_erm_hp_staffpicks,
+  },
+  HomePageStaffPicksItemComponent: {
+    id: (parent: DrupalJsonApiStaffPicksItem) => parent.id,
+    url: (parent: DrupalJsonApiStaffPicksItem) => parent.field_ls_link.url,
+    quote: (parent: DrupalJsonApiStaffPicksItem) => parent.field_ts_quote,
+    staffName: (parent: DrupalJsonApiStaffPicksItem) =>
+      parent.field_ts_staff_name,
+    staffLocation: (parent: DrupalJsonApiStaffPicksItem) =>
+      parent.field_ts_staff_location,
+    image: (parent: DrupalJsonApiStaffPicksItem) => {
+      const image =
+        parent.field_ers_image.data === null
+          ? null
+          : resolveImage(parent.field_ers_image);
+      return image;
+    },
   },
 };

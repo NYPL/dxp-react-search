@@ -1,4 +1,8 @@
-import { DrupalJsonApiLinkField } from "../drupal-types";
+import {
+  DrupalJsonApiLinkField,
+  DrupalJsonApiMediaImageResource,
+} from "../drupal-types";
+import { resolveImage } from "../utils/resolveImage";
 
 type DrupalJsonApiHomePageSpotlightParagraph = {
   id: string;
@@ -7,6 +11,13 @@ type DrupalJsonApiHomePageSpotlightParagraph = {
   field_ls_link: DrupalJsonApiLinkField;
   field_ts_heading: string;
   field_lts_hp_card_grid_variant: "column-grid" | "row" | "updates";
+};
+
+type DrupalJsonApiHomePageSpotlightItemResource = {
+  id: string;
+  field_ts_heading: string;
+  field_ers_media_image: DrupalJsonApiMediaImageResource;
+  field_lns_link: DrupalJsonApiLinkField;
 };
 
 export const HomePageSpotlightResolver = {
@@ -25,5 +36,19 @@ export const HomePageSpotlightResolver = {
       parent.field_ts_heading,
     gridVariant: (parent: DrupalJsonApiHomePageSpotlightParagraph) =>
       parent.field_lts_hp_card_grid_variant,
+  },
+  HomePageSpotlightItem: {
+    id: (parent: DrupalJsonApiHomePageSpotlightItemResource) => parent.id,
+    title: (parent: DrupalJsonApiHomePageSpotlightItemResource) =>
+      parent.field_ts_heading,
+    image: (parent: DrupalJsonApiHomePageSpotlightItemResource) => {
+      const image =
+        parent.field_ers_media_image.data === null
+          ? null
+          : resolveImage(parent.field_ers_media_image);
+      return image;
+    },
+    url: (parent: DrupalJsonApiHomePageSpotlightItemResource) =>
+      parent.field_lns_link?.url,
   },
 };

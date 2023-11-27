@@ -41,20 +41,25 @@ export const HomePageCardGridResolver = {
     gridVariant: (parent: DrupalJsonApiHomePageCardGridParagraph) =>
       parent.field_lts_hp_card_grid_variant,
     items: (parent: DrupalJsonApiHomePageCardGridParagraph) =>
-      parent.field_erm_hp_cards.map((hpCardItem: DrupalJsonApiHomePageCard) => {
-        return {
-          id: hpCardItem.id,
-          title: hpCardItem.field_ts_heading,
-          url: hpCardItem.field_ls_link.url,
-          image:
-            hpCardItem.field_ers_image.data === null
-              ? null
-              : resolveImage(hpCardItem.field_ers_image),
-          description:
-            hpCardItem.field_tfls_description === null
-              ? null
-              : hpCardItem.field_tfls_description.processed,
-        };
-      }),
+      Array.isArray(parent.field_erm_hp_cards) && parent.field_erm_hp_cards,
+  },
+  HomePageCardComponent: {
+    id: (parent: DrupalJsonApiHomePageCard) => parent.id,
+    title: (parent: DrupalJsonApiHomePageCard) => parent.field_ts_heading,
+    description: (parent: DrupalJsonApiHomePageCard) => {
+      const description =
+        parent.field_tfls_description === null
+          ? null
+          : parent.field_tfls_description.processed;
+      return description;
+    },
+    url: (parent: DrupalJsonApiHomePageCard) => parent.field_ls_link.url,
+    image: (parent: DrupalJsonApiHomePageCard) => {
+      const image =
+        parent.field_ers_image.data === null
+          ? null
+          : resolveImage(parent.field_ers_image);
+      return image;
+    },
   },
 };
