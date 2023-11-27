@@ -1,5 +1,5 @@
 import {
-  DrupalJsonApiLinkResource,
+  DrupalJsonApiLinkField,
   DrupalJsonApiMediaImageResource,
 } from "./../drupal-types";
 import { resolveImage } from "../utils/resolveImage";
@@ -8,7 +8,7 @@ type DrupalJsonApiHomePageSpotlightItemResource = {
   id: string;
   field_ts_heading: string;
   field_ers_media_image: DrupalJsonApiMediaImageResource;
-  field_lns_link: DrupalJsonApiLinkResource;
+  field_lns_link: DrupalJsonApiLinkField;
 };
 
 export const HomePageSpotlightItemResolver = {

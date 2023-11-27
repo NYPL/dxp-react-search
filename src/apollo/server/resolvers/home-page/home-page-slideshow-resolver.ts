@@ -1,5 +1,5 @@
 import {
-  DrupalJsonApiLinkResource,
+  DrupalJsonApiLinkField,
   DrupalJsonApiMediaImageResource,
 } from "../drupal-types";
 import { resolveImage } from "../utils/resolveImage";
@@ -7,8 +7,8 @@ import { resolveImage } from "../utils/resolveImage";
 type DrupalJsonApiHomePageSlideshowParagraph = {
   id: string;
   type: string;
-  field_lns_see_all: DrupalJsonApiLinkResource;
-  field_ls_link: DrupalJsonApiLinkResource;
+  field_lns_see_all: DrupalJsonApiLinkField;
+  field_ls_link: DrupalJsonApiLinkField;
   field_ts_heading: string;
   field_erm_hp_slideshow_items: DrupalJsonApiSlideshowItem[];
 };
@@ -16,7 +16,7 @@ type DrupalJsonApiHomePageSlideshowParagraph = {
 type DrupalJsonApiSlideshowItem = {
   id: string;
   type: "paragraph--hp_slideshow_item";
-  field_ls_link: DrupalJsonApiLinkResource;
+  field_ls_link: DrupalJsonApiLinkField;
   field_ts_audience: string;
   field_ts_author: string;
   field_ts_genre: string;

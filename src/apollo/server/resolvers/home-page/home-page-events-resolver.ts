@@ -1,10 +1,10 @@
-import { DrupalJsonApiLinkResource } from "../drupal-types";
+import { DrupalJsonApiLinkField } from "../drupal-types";
 
 type DrupalJsonApiHomePageEventsParagraph = {
   id: string;
   type: string;
-  field_lns_see_all: DrupalJsonApiLinkResource;
-  field_ls_link: DrupalJsonApiLinkResource;
+  field_lns_see_all: DrupalJsonApiLinkField;
+  field_ls_link: DrupalJsonApiLinkField;
   field_ts_heading: string;
 };
 

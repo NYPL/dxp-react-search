@@ -1,10 +1,10 @@
-import { DrupalJsonApiLinkResource } from "../drupal-types";
+import { DrupalJsonApiLinkField } from "../drupal-types";
 
 type DrupalJsonApiHomePageSpotlightParagraph = {
   id: string;
   type: string;
-  field_lns_see_all: DrupalJsonApiLinkResource;
-  field_ls_link: DrupalJsonApiLinkResource;
+  field_lns_see_all: DrupalJsonApiLinkField;
+  field_ls_link: DrupalJsonApiLinkField;
   field_ts_heading: string;
   field_lts_hp_card_grid_variant: "column-grid" | "row" | "updates";
 };

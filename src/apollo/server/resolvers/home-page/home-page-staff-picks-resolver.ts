@@ -1,5 +1,5 @@
 import {
-  DrupalJsonApiLinkResource,
+  DrupalJsonApiLinkField,
   DrupalJsonApiMediaImageResource,
 } from "../drupal-types";
 import { resolveImage } from "../utils/resolveImage";
@@ -7,8 +7,8 @@ import { resolveImage } from "../utils/resolveImage";
 type DrupalJsonApiHomePageStaffPicksParagraph = {
   id: string;
   type: string;
-  field_lns_see_all: DrupalJsonApiLinkResource;
-  field_ls_link: DrupalJsonApiLinkResource;
+  field_lns_see_all: DrupalJsonApiLinkField;
+  field_ls_link: DrupalJsonApiLinkField;
   field_ts_heading: string;
   field_erm_hp_staffpicks: DrupalJsonApiStaffPicksItem[];
 };
@@ -18,7 +18,7 @@ type DrupalJsonApiStaffPicksItem = {
   type: "paragraph--hp_staff_picks_item";
   field_ts_quote: string;
   field_ers_image: DrupalJsonApiMediaImageResource;
-  field_ls_link: DrupalJsonApiLinkResource;
+  field_ls_link: DrupalJsonApiLinkField;
   field_ts_staff_name: string;
   field_ts_staff_location: string;
 };

@@ -1,6 +1,6 @@
 import {
   DrupalJsonApiMediaImageResource,
-  DrupalJsonApiLinkResource,
+  DrupalJsonApiLinkField,
 } from "../drupal-types";
 import { resolveImage } from "../utils/resolveImage";
 
@@ -8,7 +8,7 @@ type DrupalJsonApiHomePageEventResource = {
   id: string;
   field_ts_heading: string;
   field_ers_media_image: DrupalJsonApiMediaImageResource;
-  field_lns_link: DrupalJsonApiLinkResource;
+  field_lns_link: DrupalJsonApiLinkField;
   field_lts_event_category: any;
   field_ts_display_location: string;
   field_ts_date: string;

@@ -1,6 +1,6 @@
 import {
   DrupalJsonApiEntityResource,
-  DrupalJsonApiLinkResource,
+  DrupalJsonApiLinkField,
 } from "./drupal-types";
 import {
   FilterItem,
@@ -30,8 +30,8 @@ export interface HomePageSection extends DrupalJsonApiField {
   id: string;
   type: (typeof SectionType)[number];
   status: boolean;
-  field_lns_see_all: DrupalJsonApiLinkResource;
-  field_ls_link: DrupalJsonApiLinkResource;
+  field_lns_see_all: DrupalJsonApiLinkField;
+  field_ls_link: DrupalJsonApiLinkField;
   field_ts_heading: string;
 }
 

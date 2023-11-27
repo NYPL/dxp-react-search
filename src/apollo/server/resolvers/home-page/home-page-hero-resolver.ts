@@ -1,5 +1,5 @@
 import {
-  DrupalJsonApiLinkResource,
+  DrupalJsonApiLinkField,
   DrupalJsonApiTextField,
   DrupalJsonApiMediaImageResource,
 } from "./../drupal-types";
@@ -11,7 +11,7 @@ type DrupalJsonApiHomePageHeroResource = {
   field_ts_hp_hero_tag: string;
   field_tfls_summary_description: DrupalJsonApiTextField;
   field_ers_media_image: DrupalJsonApiMediaImageResource;
-  field_lns_link: DrupalJsonApiLinkResource;
+  field_lns_link: DrupalJsonApiLinkField;
   publish_on: string;
   unpublish_on: string;
   status: boolean;
