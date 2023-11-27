@@ -118,20 +118,17 @@ export const homePageResolver = {
         args.sort,
         pagination
       );
-      const response = await dataSources.drupalJsonApi.getCollectionResource(
-        apiPath,
-        isPreview
-      );
+      const response: any =
+        await dataSources.drupalJsonApi.getCollectionResource(
+          apiPath,
+          isPreview
+        );
       // @TODO Move this to a utils function.
       return {
         items: response.data,
         pageInfo: {
           totalItems: response.meta ? response.meta.count : 0,
           limit: args.limit ? args.limit : null,
-          // pageCount: response.meta
-          //   ? Math.ceil(response.meta.count / args.limit)
-          //   : 120,
-          // pageNumber: args.pageNumber ? args.pageNumber : 1,
         },
       };
     },
@@ -155,10 +152,11 @@ export const homePageResolver = {
         args.sort,
         pagination
       );
-      const response = await dataSources.drupalJsonApi.getCollectionResource(
-        apiPath,
-        isPreview
-      );
+      const response: any =
+        await dataSources.drupalJsonApi.getCollectionResource(
+          apiPath,
+          isPreview
+        );
       // @TODO Move this to a utils function.
       return {
         items: response.data,
@@ -192,10 +190,11 @@ export const homePageResolver = {
         undefined,
         pagination
       );
-      const response = await dataSources.drupalJsonApi.getCollectionResource(
-        apiPath,
-        isPreview
-      );
+      const response: any =
+        await dataSources.drupalJsonApi.getCollectionResource(
+          apiPath,
+          isPreview
+        );
       // @TODO Move this to a utils function.
       return {
         items: response.data,
