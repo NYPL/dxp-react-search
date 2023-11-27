@@ -1,5 +1,13 @@
 ## CHANGES
 
+### v0.10.6 - Misc
+
+---
+
+- Update to Node 18.12.0: [#448](https://github.com/NYPL/dxp-react-search/pull/448)
+
+---
+
 ### v0.10.5 - Blog Bug Fixes
 
 ---
