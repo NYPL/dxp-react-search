@@ -4,6 +4,14 @@ import DrupalJsonApi from "./drupal-json-api/DrupalJsonApi";
 import PlatformApi from "./PlatformApi";
 import SendGridApi from "./SendGridApi";
 
+export interface DataSource {
+  refineryApi: RefineryApi;
+  drupalApi: DrupalApi;
+  drupalJsonApi: DrupalJsonApi;
+  platformApi: PlatformApi;
+  sendGridApi: SendGridApi;
+}
+
 export default function getDataSources() {
   return {
     refineryApi: new RefineryApi(),

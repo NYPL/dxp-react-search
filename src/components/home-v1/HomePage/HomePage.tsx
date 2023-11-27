@@ -248,13 +248,13 @@ export default function HomePage({ uuid, isPreview = false }: HomePageProps) {
     return <div>Loading...</div>;
   }
 
-  const homePageDataSectionTwo = data.homePage.sectionTwo[0];
-  const homePageDataSectionThree = data.homePage.sectionThree[0];
-  const homePageDataSectionFour = data.homePage.sectionFour[0];
-  const homePageDataSectionFive = data.homePage.sectionFive[0];
-  const homePageDataSectionSix = data.homePage.sectionSix[0];
-  const homePageDataSectionSeven = data.homePage.sectionSeven[0];
-  const homePageDataSectionEight = data.homePage.sectionEight[0];
+  const homePageDataSectionTwo = data.homePage.sectionTwo;
+  const homePageDataSectionThree = data.homePage.sectionThree;
+  const homePageDataSectionFour = data.homePage.sectionFour;
+  const homePageDataSectionFive = data.homePage.sectionFive;
+  const homePageDataSectionSix = data.homePage.sectionSix;
+  const homePageDataSectionSeven = data.homePage.sectionSeven;
+  const homePageDataSectionEight = data.homePage.sectionEight;
 
   const { meta } = homePageContent;
 

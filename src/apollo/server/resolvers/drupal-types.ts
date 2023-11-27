@@ -40,3 +40,9 @@ export interface DrupalJsonApiMediaRemoteVideoOembedResource {
   data?: null;
   field_media_oembed_video: string;
 }
+
+export type DrupalJsonApiLinkField = {
+  uri: string;
+  url: string;
+  title: string;
+};

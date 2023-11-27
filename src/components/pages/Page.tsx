@@ -263,21 +263,6 @@ export default function PagePage({
 
   const page = data.page;
 
-  // const image = page.image;
-
-  // const backgroundImage = getImageTransformation(
-  //   "jumbotron_background_focal_point_1920x464",
-  //   image.transformations
-  // );
-
-  // const foregroundImage = getImageTransformation(
-  //   "max_width_960",
-  //   image.transformations
-  // );
-
-  // console.log(image.transformations);
-  // console.log(backgroundImage);
-
   const showHero = page.featuredContent === null ? false : true;
 
   return (
