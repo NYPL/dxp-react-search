@@ -1,12 +1,10 @@
 ## CHANGES
 
-### v0.10.6 - Upgrade to Node 18.18.1
+### v0.10.6 - Misc
 
 ---
 
-- Locks Dockerfile to use Node 18.18.1
-- Locks Travis CI to use Node 18.18.1
-- Updates README.md Node and NPM versions
+- Update to Node 18.12.0: [#448](https://github.com/NYPL/dxp-react-search/pull/448)
 
 ---
 

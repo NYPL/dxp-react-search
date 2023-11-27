@@ -16,7 +16,7 @@ React app build for www.nypl.org. Pages currently in repo:
 
 ## Requirements
 
-- NodeJS to install visit [NodeJS](https://nodejs.org/en) ( node: v18.18.1, npm: 9.8.1 )
+- NodeJS to install visit [NodeJS](https://nodejs.org/en) ( node: v18.12.0, npm: 9.8.1 )
 - NVM to install go to [NVM github page](https://github.com/nvm-sh/nvm)
 - Git to install go to [Git Page](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Code Editor [VSCode](https://code.visualstudio.com/download)
