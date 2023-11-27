@@ -1,4 +1,4 @@
-FROM node:16.15.0 AS production
+FROM node:18.12.0 AS production
 
 RUN apt-get update
 RUN apt-get upgrade -y
