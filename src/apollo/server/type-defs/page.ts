@@ -7,7 +7,6 @@ export const PageTypeDefs = gql`
     breadcrumbs: [BreadcrumbsItem]
     description: String
     image: Image
-    # breadcrumbs: [BreadcrumbsItem]
     featuredContent: PageFeaturedContent
     mainContent: [PageMainContent]
   }

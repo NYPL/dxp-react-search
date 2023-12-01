@@ -213,6 +213,7 @@ export const PAGE_QUERY = gql`
               uri
             }
           }
+          imageAlignment
         }
         ... on Video {
           id
