@@ -16,6 +16,7 @@ import Jumbotron from "./Jumbotron";
 import ButtonLinks from "./ButtonLinks";
 import DonorCredit from "./../DonorCredit";
 import FeaturedCard from "./../FeaturedCard";
+import FeaturedCardGrid from "./../FeaturedCardGrid";
 import FeaturedText from "./../FeaturedText";
 
 // @TODO add a type for use in consuming components.
@@ -42,6 +43,7 @@ const Components: any = {
   ButtonLinks: ButtonLinks,
   DonorCredit: DonorCredit,
   FeaturedCard: FeaturedCard,
+  FeaturedCardGrid: FeaturedCardGrid,
   FeaturedText: FeaturedText,
 };
 

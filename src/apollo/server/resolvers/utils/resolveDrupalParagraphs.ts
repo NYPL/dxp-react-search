@@ -511,22 +511,31 @@ export default function resolveDrupalParagraphs(
         break;
       case "paragraph--card_grid":
       case "paragraph--card_grid_secondary":
+        console.log(paragraphTypeName);
         const cardGridItems: ResolvedParagraph[] = [];
         Array.isArray(item.field_ern_cards) &&
           item.field_ern_cards.map((cardItem: any) => {
             let bgColor = cardItem.field_field_lts_color_scheme;
-            if (cardItem.field_field_lts_color_scheme === "primary_alt") {
-              bgColor = "primaryAlt";
-            } else if (
-              cardItem.field_field_lts_color_scheme === "primary_gray"
-            ) {
-              bgColor = "primaryGray";
+            if (paragraphTypeName === "card_grid") {
+              if (cardItem.field_field_lts_color_scheme === "primary_alt") {
+                bgColor = "#b0e3e4";
+              } else if (
+                cardItem.field_field_lts_color_scheme === "primary_gray"
+              ) {
+                bgColor = "#f5f5f5";
+              } else {
+                bgColor = "#f9e08e";
+              }
+            } else {
+              bgColor = "#fff";
             }
             cardGridItems.push({
               id: cardItem.id,
               heading: cardItem.field_ts_heading,
               description: cardItem.field_tfls_summary_description
                 ? cardItem.field_tfls_summary_description.processed
+                : cardItem.field_tfls_description?.processed
+                ? cardItem.field_tfls_description?.processed
                 : null,
               image:
                 cardItem.field_ers_media_item.data === null
