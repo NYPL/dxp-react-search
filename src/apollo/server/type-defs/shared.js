@@ -140,7 +140,7 @@ export const typeDefs = gql`
     caption: String
     credit: String
     link: String
-    imageSize: String
+    imageSize: String!
   }
 
   type CatalogList {

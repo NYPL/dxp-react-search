@@ -9,7 +9,7 @@ interface ImageComponentProps {
   caption?: string;
   credit?: string;
   link?: string;
-  imageSize?: ImageSize;
+  imageSize: ImageSize;
 }
 
 export type ImageSize = "small" | "medium" | "large";
@@ -34,7 +34,7 @@ function ImageComponent({
   caption,
   credit,
   link,
-  imageSize = "large",
+  imageSize,
 }: ImageComponentProps) {
   // Return null for component if image is null, most likely caused by bad data, or missing width and height.
   if (image === null) {
