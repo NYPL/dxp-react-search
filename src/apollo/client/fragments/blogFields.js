@@ -105,6 +105,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
             uri
           }
         }
+        imageSize
       }
       ... on BlogCardGrid {
         id

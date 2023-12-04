@@ -9,7 +9,10 @@ interface ImageComponentProps {
   caption?: string;
   credit?: string;
   link?: string;
+  imageSize?: ImageSize;
 }
+
+export type ImageSize = "small" | "medium" | "large";
 
 interface WithLinkProps {
   link?: string;
@@ -31,14 +34,21 @@ function ImageComponent({
   caption,
   credit,
   link,
+  imageSize = "large",
 }: ImageComponentProps) {
   // Return null for component if image is null, most likely caused by bad data, or missing width and height.
   if (image === null) {
     return null;
   }
 
+  function getWidth(size: ImageSize): string {
+    if (size === "medium") return "50%";
+    if (size === "small") return "33%";
+    return "full";
+  }
+
   return (
-    <Box id={`${type}-${id}`} mb="l">
+    <Box id={`${type}-${id}`} mb="l" width={getWidth(imageSize)}>
       <WithLink link={link}>
         <Image
           id={image.id}
