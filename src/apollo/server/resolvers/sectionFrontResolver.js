@@ -29,7 +29,7 @@ export const sectionFrontBottomContentDrupalParagraphsMap = {
 
 const sectionFrontResolver = {
   Query: {
-    sectionFront: async (_, args, { dataSources }) => {
+    sectionFront: async (_parent, args, contextValue) => {
       const includedFields = [
         "field_ers_media_image.field_media_image",
         "field_ers_featured",
@@ -53,10 +53,39 @@ const sectionFrontResolver = {
         args.id,
         args.revisionId
       );
-      const response = await dataSources.drupalJsonApi.getIndividualResource(
-        apiPath,
-        isPreview
-      );
+      const response =
+        await contextValue.dataSources.drupalJsonApi.getIndividualResource(
+          apiPath,
+          isPreview
+        );
+
+      // This will pass the entire grandparent to each resolver to use as needed.
+      // @example
+      // {
+      //   type: 'node--section_front',
+      //   id: '92e424aa-8349-4f44-8297-66b4e02921bc',
+      //   revision_log: null,
+      //   status: true,
+      //   title: 'Research',
+      //   created: '2023-02-01T02:15:25+00:00',
+      //   changed: '2023-10-18T18:43:18+00:00',
+      //   promote: false,
+      //   sticky: false,
+      //   default_langcode: true,
+      //   revision_translation_affected: true,
+      //   moderation_state: null,
+      //   metatag: null,
+      //   path: { alias: '/research', pid: 9128, langcode: 'en' },
+      // }
+      //
+      // @todo other possible names: apiResponse
+      // @todo consider just return what you actually need ? this is a giant object and will consume memory ?
+      // contextValue.fullResource = response;
+
+      contextValue.colorway = {
+        slug: response.path?.alias,
+        contentType: "section_front",
+      };
 
       return response;
     },
@@ -73,8 +102,10 @@ const sectionFrontResolver = {
     breadcrumbs: (sectionFront) => sectionFront.breadcrumbs,
     featuredContent: (sectionFront) =>
       getDrupalParagraphsField(sectionFront.field_ers_featured),
-    mainContent: (sectionFront) =>
-      getDrupalParagraphsField(sectionFront.field_main_content),
+    mainContent: (sectionFront, _args, contextValue) => {
+      // contextValue.whatever = "yolo";
+      return getDrupalParagraphsField(sectionFront.field_main_content);
+    },
     bottomContent: (sectionFront) =>
       getDrupalParagraphsField(sectionFront.field_erm_bottom_content),
     colorway: (sectionFront) => {

@@ -1,4 +1,5 @@
 import { DrupalJsonApiTextField } from "./../drupal-types";
+import getColorway from "./../../../../utils/get-colorway";
 
 type DrupalJsonApiExternalSearchParagraph = {
   id: string;
@@ -20,6 +21,13 @@ export const ExternalSearchResolver = {
       parent.field_lts_search_type,
     formPlaceholder: (parent: DrupalJsonApiExternalSearchParagraph) =>
       parent.field_ts_placeholder,
-    // colorway
+    colorway: (
+      _parent: DrupalJsonApiExternalSearchParagraph,
+      _args: any,
+      contextValue: { colorway: { contentType: string; slug: string } }
+    ) =>
+      contextValue.colorway.contentType === "section_front"
+        ? getColorway("section_front")
+        : null,
   },
 };

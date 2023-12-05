@@ -13,12 +13,13 @@ export interface CardGridCommonProps {
   id: string;
   type: string;
   title?: string;
-  headingColor?: string;
+  // headingColor?: string;
   description?: string;
   link?: string;
   hrefText?: string;
   isBordered?: boolean;
   isCentered?: boolean;
+  colorway?: { primary: string; secondary: string } | null;
 }
 
 type CardGridConditionalProps =
@@ -48,7 +49,8 @@ export default function CardGrid({
   id,
   type,
   title,
-  headingColor,
+  colorway = null,
+  // headingColor,
   description,
   link,
   hrefText,
@@ -114,7 +116,7 @@ export default function CardGrid({
         <CardGridHeader
           id={id}
           title={title}
-          headingColor={headingColor}
+          headingColor={colorway?.primary}
           link={link}
           hrefText={hrefText}
         />
