@@ -48,7 +48,7 @@ function ImageComponent({
   }
 
   return (
-    <Box id={`${type}-${id}`} mb="l" width={getWidth(imageSize)}>
+    <Box id={`${type}-${id}`} mb="l" maxWidth={getWidth(imageSize)}>
       <WithLink link={link}>
         <Image
           id={image.id}
