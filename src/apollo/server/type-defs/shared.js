@@ -82,6 +82,7 @@ export const typeDefs = gql`
     image: Image
     caption: String
     credit: String
+    imageAlignment: String
   }
 
   type Video {

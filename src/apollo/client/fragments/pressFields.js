@@ -45,6 +45,7 @@ export const PRESS_FIELDS_FRAGMENT = gql`
             uri
           }
         }
+        imageAlignment
       }
       ... on ImageComponent {
         id
