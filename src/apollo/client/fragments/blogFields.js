@@ -50,6 +50,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
             uri
           }
         }
+        imageAlignment
       }
       ... on Text {
         id

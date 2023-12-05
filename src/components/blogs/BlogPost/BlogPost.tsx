@@ -7,6 +7,7 @@ import GoogleMapEmbed from "../../shared/ContentComponents/GoogleMapEmbed";
 import ImageComponent from "../../shared/ContentComponents/ImageComponent";
 import SocialEmbed from "../../shared/ContentComponents/SocialEmbed";
 import Text from "../../shared/ContentComponents/Text";
+import TextWithImage from "../../shared/ContentComponents/TextWithImage";
 import Video from "../../shared/ContentComponents/Video";
 
 import {
@@ -21,8 +22,6 @@ interface BlogPostProps {
 }
 
 export default function BlogPost({ blog }: BlogPostProps) {
-  console.log(blog);
-
   return (
     <Box as="article" w="100%" maxW="866px">
       <Box as="header" pb={10}>
@@ -52,6 +51,7 @@ export default function BlogPost({ blog }: BlogPostProps) {
           ImageComponent: ImageComponent,
           SocialEmbed: SocialEmbed,
           Text: Text,
+          TextWithImage: TextWithImage,
           Video: Video,
         }}
       />
