@@ -3,6 +3,7 @@ import {
   DrupalJsonApiTextField,
   DrupalJsonApiMediaImageResource,
 } from "./../drupal-types";
+import { getImageLink } from "./image-resolver";
 
 type DrupalJsonApiTextWithImageParagraph = {
   id: string;
@@ -28,6 +29,8 @@ export const TextWithImageResolver = {
       parent.field_ers_media_item.field_media_image_credit_html
         ? parent.field_ers_media_item.field_media_image_credit_html.processed
         : null,
+    link: (parent: DrupalJsonApiTextWithImageParagraph) =>
+      getImageLink(parent.field_ers_media_item),
     image: (parent: DrupalJsonApiTextWithImageParagraph) =>
       parent.field_ers_media_item.data === null
         ? null
