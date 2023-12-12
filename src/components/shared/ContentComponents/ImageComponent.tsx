@@ -17,7 +17,7 @@ interface WithLinkProps {
 }
 
 // Wrapper function to add a Link parent component.
-function WithLink({ link, children }: WithLinkProps) {
+export function WithLink({ link, children }: WithLinkProps) {
   if (link) {
     return <a href={link}>{children}</a>;
   }
