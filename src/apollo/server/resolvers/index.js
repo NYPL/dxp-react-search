@@ -20,6 +20,8 @@ import { pageResolver } from "./page-resolver";
 import { drupalParagraphsResolvers } from "./drupal-paragraphs";
 // HomePage
 import { drupalHomePageResolvers } from "./home-page";
+// Menu
+import { menuResolver } from "./menu-resolver";
 // Mutations
 import sendEmailResolver from "./sendEmailResolver";
 
@@ -43,5 +45,6 @@ export const resolvers = mergeResolvers([
   validatePatronCardResolver,
   filterResolver,
   ipAccessCheckResolver,
+  menuResolver,
   sendEmailResolver,
 ]);

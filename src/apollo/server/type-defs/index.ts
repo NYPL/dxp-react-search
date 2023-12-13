@@ -19,6 +19,7 @@ import { typeDefs as PressReleaseTypes } from "./press";
 import { typeDefs as HomePageTypes } from "./homepage";
 import { typeDefs as SectionFrontTypes } from "./sectionFront";
 import { PageTypeDefs } from "./page";
+import { MenuTypeDefs } from "./menu";
 // Mutations
 import { typeDefs as SendEmailTypes } from "./sendEmail";
 
@@ -40,5 +41,6 @@ export const typeDefs = mergeTypeDefs([
   HomePageTypes,
   SectionFrontTypes,
   PageTypeDefs,
+  MenuTypeDefs,
   SendEmailTypes,
 ]);
