@@ -65,6 +65,7 @@ const nextConfig = {
       "contentcafe11.btol.com",
       "contentcafecloud.baker-taylor.com",
       "contentcafe11.btol.com",
+      "contentcafe12.btol.com",
       "img1.od-cdn.com",
       "ic.od-cdn.com",
     ],
