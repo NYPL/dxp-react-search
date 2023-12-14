@@ -37,7 +37,9 @@ function BlogCard({ item }: BlogCardProps) {
         />
       </Box>
       <Box flexFlow={{ lg: "row nowrap" }}>
-        <Heading level="h3">{slug && <Link href={slug}>{title}</Link>}</Heading>
+        <Heading level="h3" size="heading5">
+          {slug && <Link href={slug}>{title}</Link>}
+        </Heading>
         <Box pb={5}>
           <Box>
             By {byline} | {date}

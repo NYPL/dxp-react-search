@@ -51,7 +51,7 @@ function PageContainer({
     <>
       <Hero
         heroType="tertiary"
-        heading={<Heading level="h1" text={meta.title} color="#000000" />}
+        heading={<Heading level="h1" size="heading2" text={meta.title} />}
         subHeaderText={meta.description}
         backgroundColor="#E0E0E0"
         foregroundColor="#000000"
@@ -127,6 +127,7 @@ function PageContainer({
                 id={menu.id}
                 key={menu.id}
                 headingLevel="h3"
+                headingSize="heading5"
                 headingColor={"#000"}
                 title={menu.title}
                 items={menu.items}
