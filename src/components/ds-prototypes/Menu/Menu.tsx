@@ -40,14 +40,15 @@ function Menu({
       aria-labelledby={headingId}
       className={orientation === "vertical" ? s.vertical : s.horizontal}
     >
-      <span style={headingColor ? { color: headingColor } : { color: "black" }}>
-        <Heading
-          className={headingDecoration ? s.underline : ""}
-          id={headingId}
-          level={headingLevel}
-          text={title}
-        />
-      </span>
+      {/* <span style={headingColor ? { color: headingColor } : { color: "black" }}> */}
+      <Heading
+        className={headingDecoration ? s.underline : ""}
+        id={headingId}
+        level={headingLevel}
+        text={title}
+        color={headingColor}
+      />
+      {/* </span> */}
       <List noStyling type="ul">
         {items.map((item: MenuItemType) => {
           return (

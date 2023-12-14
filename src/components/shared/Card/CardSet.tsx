@@ -24,7 +24,7 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
     return (
       <div style={{ marginBottom: ".75em" }}>
         <HStack alignItems="baseline">
-          <Heading id={id} level="two" text={title} />
+          <Heading id={id} level="h2" text={title} />
           <Link href={slug}>
             <a
               style={{
@@ -55,7 +55,7 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
       </div>
     );
   } else if (title) {
-    return <Heading id={id} level="two" text={title} />;
+    return <Heading id={id} level="h2" text={title} />;
   } else {
     return null;
   }
