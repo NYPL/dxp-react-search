@@ -201,6 +201,7 @@ export const PAGE_QUERY = gql`
           text
           caption
           credit
+          link
           image {
             id
             alt
