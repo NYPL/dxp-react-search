@@ -6,7 +6,7 @@ type DrupalJsonApiImageParagraph = {
   field_ers_media_item: DrupalJsonApiMediaImageResource;
 };
 
-function getImageLink(mediaResource: DrupalJsonApiMediaImageResource) {
+export function getImageLink(mediaResource: DrupalJsonApiMediaImageResource) {
   let imageLink = null;
   // Media DC image.
   if (
