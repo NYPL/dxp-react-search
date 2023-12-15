@@ -83,7 +83,6 @@ export const typeDefs = gql`
     link: String
     caption: String
     credit: String
-    link: String
     imageAlignment: String
   }
 
