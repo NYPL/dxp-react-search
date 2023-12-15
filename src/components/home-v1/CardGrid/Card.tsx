@@ -64,11 +64,10 @@ function Card({
         </Heading>
         <Box
           className="details"
-          as="p"
           {...(item.description && {
             dangerouslySetInnerHTML: { ...{ __html: item.description } },
           })}
-        ></Box>
+        />
       </GridItem>
       <GridItem id={`card-image-${item.id}`} colStart={1} rowStart={1}>
         <HomePageLink
