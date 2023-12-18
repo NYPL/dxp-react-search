@@ -9,7 +9,7 @@ type DrupalJsonApiImageParagraph = {
 
 type DrupalJsonApiImageSizeField = "small" | "medium" | "large";
 
-function getImageLink(mediaResource: DrupalJsonApiMediaImageResource) {
+export function getImageLink(mediaResource: DrupalJsonApiMediaImageResource) {
   let imageLink = null;
   // Media DC image.
   if (
