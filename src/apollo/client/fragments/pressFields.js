@@ -33,6 +33,7 @@ export const PRESS_FIELDS_FRAGMENT = gql`
         text
         caption
         credit
+        link
         image {
           id
           alt
@@ -45,6 +46,7 @@ export const PRESS_FIELDS_FRAGMENT = gql`
             uri
           }
         }
+        imageAlignment
       }
       ... on ImageComponent {
         id

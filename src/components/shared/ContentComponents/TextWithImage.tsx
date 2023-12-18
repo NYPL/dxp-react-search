@@ -3,6 +3,7 @@ import { Box, Heading } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
 import Image from "next/image";
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
+import { WithLink } from "./ImageComponent";
 
 interface TextWithImageProps {
   id: string;
@@ -11,7 +12,9 @@ interface TextWithImageProps {
   text: string;
   caption?: string;
   credit?: string;
+  link?: string;
   image?: any;
+  imageAlignment: "left" | "right";
 }
 
 function TextWithImage({
@@ -21,7 +24,9 @@ function TextWithImage({
   text,
   caption,
   credit,
+  link,
   image,
+  imageAlignment = "left",
 }: TextWithImageProps) {
   let imageSrc: string = image?.uri;
   if (image?.transformations) {
@@ -41,18 +46,22 @@ function TextWithImage({
         <Box
           width="100%"
           maxWidth={{ base: "auto", md: "25%", lg: "40%" }}
-          float={{ md: "left" }}
-          mr={{ md: "l" }}
+          float={{ md: `${imageAlignment}` }}
+          {...(imageAlignment === "right"
+            ? { ml: { ...{ md: "l" } } }
+            : { mr: { ...{ md: "l" } } })}
           mb="s"
         >
-          <Image
-            id={image.id}
-            alt={image.alt}
-            src={imageSrc}
-            layout="responsive"
-            width={image.width}
-            height={image.height}
-          />
+          <WithLink link={link}>
+            <Image
+              id={image.id}
+              alt={image.alt}
+              src={imageSrc}
+              layout="responsive"
+              width={image.width}
+              height={image.height}
+            />
+          </WithLink>
           {caption && (
             <Box fontSize="-1" fontWeight="regular">
               {caption}
