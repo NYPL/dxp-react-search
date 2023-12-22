@@ -62,12 +62,13 @@ function Card({
             {item.title}
           </HomePageLink>
         </Heading>
-        <Box
-          className="details"
-          {...(item.description && {
-            dangerouslySetInnerHTML: { ...{ __html: item.description } },
-          })}
-        />
+        {item.description && (
+          <Box
+            className="details"
+            as="p"
+            dangerouslySetInnerHTML={{ __html: item.description }}
+          />
+        )}
       </GridItem>
       <GridItem id={`card-image-${item.id}`} colStart={1} rowStart={1}>
         <HomePageLink

@@ -20,7 +20,7 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
         Test
       </a>
     </h3>
-    <div
+    <p
       className="details css-0"
       dangerouslySetInnerHTML={
         {
@@ -204,9 +204,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                   Test
                 </a>
               </h3>
-              <div
-                className="details css-0"
-              />
             </div>
             <div
               className="css-ys3583"
@@ -348,9 +345,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                   Test
                 </a>
               </h3>
-              <div
-                className="details css-0"
-              />
             </div>
             <div
               className="css-ys3583"
@@ -492,9 +486,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                   Test
                 </a>
               </h3>
-              <div
-                className="details css-0"
-              />
             </div>
             <div
               className="css-ys3583"
@@ -636,9 +627,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 1`] = `
                   Test
                 </a>
               </h3>
-              <div
-                className="details css-0"
-              />
             </div>
             <div
               className="css-ys3583"
@@ -837,9 +825,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                   Test
                 </a>
               </h3>
-              <div
-                className="details css-0"
-              />
             </div>
             <div
               className="css-ys3583"
@@ -981,9 +966,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                   Test
                 </a>
               </h3>
-              <div
-                className="details css-0"
-              />
             </div>
             <div
               className="css-ys3583"
@@ -1125,9 +1107,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                   Test
                 </a>
               </h3>
-              <div
-                className="details css-0"
-              />
             </div>
             <div
               className="css-ys3583"
@@ -1269,9 +1248,6 @@ exports[`CardGrid tests should render the UI snapshot correctly 2`] = `
                   Test
                 </a>
               </h3>
-              <div
-                className="details css-0"
-              />
             </div>
             <div
               className="css-ys3583"
