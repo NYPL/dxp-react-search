@@ -83,7 +83,7 @@ function PageContainer({
                   {contentPrimary}
                 </div>
               )}
-              {contentSecondary && showSidebar && sidebarSide === "right" && (
+              {contentSecondary && showSidebar && (
                 <div
                   id="page-container--content-secondary"
                   className={s.contentSecondary}
