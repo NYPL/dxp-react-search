@@ -1,7 +1,6 @@
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import formatDate from "../../../utils/formatDate";
-import resolveParagraphTypes from "./utils/resolveParagraphTypes";
 import { resolveImage } from "./utils/resolveImage";
 import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
 import {
