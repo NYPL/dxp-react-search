@@ -5,6 +5,7 @@ export const MenuTypeDefs = gql`
     id: ID!
     title: String!
     url: String!
+    parentId: String
     children: [MenuItem]
   }
 
@@ -13,7 +14,18 @@ export const MenuTypeDefs = gql`
     # pageInfo: PageInfo
   }
 
+  input MenuFilter {
+    maxDepth: QueryFilterItemString
+    parent: QueryFilterItemString
+    # Added for testing purposes - might not be useful in the end
+    title: QueryFilterItemString
+  }
   extend type Query {
-    menuCollection(id: String, limit: Int, sort: Sort): MenuItemsConnection!
+    menuCollection(
+      id: String
+      filter: MenuFilter
+      # @TODO remove sort if porven it does not work
+      sort: Sort
+    ): MenuItemsConnection
   }
 `;
