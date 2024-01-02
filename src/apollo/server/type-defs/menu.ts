@@ -24,7 +24,7 @@ export const MenuTypeDefs = gql`
     menuCollection(
       id: String
       filter: MenuFilter
-      # @TODO remove sort if porven it does not work
+      # @TODO remove sort if we agree that it does not work.
       sort: Sort
     ): MenuItemsConnection
   }

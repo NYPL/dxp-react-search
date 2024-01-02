@@ -1,32 +1,22 @@
 import * as React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
+import { MENU_FIELDS_FRAGMENT } from "./../../apollo/client/fragments/menuFields";
 // Component
 import { Box, Link, Heading } from "@nypl/design-system-react-components";
 
 export const MENU_QUERY = gql`
+  ${MENU_FIELDS_FRAGMENT}
   query MenuQuery($id: String, $filter: MenuFilter, $sort: Sort) {
     menuCollection(id: $id, filter: $filter, sort: $sort) {
       items {
-        id
-        title
-        url
-        parentId
+        ...MenuFields
         children {
-          id
-          title
-          url
-          parentId
+          ...MenuFields
           children {
-            id
-            title
-            url
-            parentId
+            ...MenuFields
             children {
-              id
-              title
-              url
-              parentId
+              ...MenuFields
             }
           }
         }
@@ -43,7 +33,7 @@ interface MenuItem {
   children?: [MenuItem];
 }
 
-interface MenuProps {
+interface SecondaryMenuProps {
   id: string;
 }
 
@@ -74,7 +64,7 @@ const MenuItem = ({ item }: MenuItemProps) => {
   );
 };
 
-function SecondaryMenu({ id }: MenuProps) {
+function SecondaryMenu({ id }: SecondaryMenuProps) {
   const { loading, error, data } = useQuery(MENU_QUERY, {
     skip: !id,
     variables: {
@@ -86,11 +76,21 @@ function SecondaryMenu({ id }: MenuProps) {
       // },
       filter: {
         maxDepth: { fieldName: "max_depth", operator: "=", value: "4" },
+        /** Parent filter will query all menu items that are children of the passed value menuItemId
+         * and its child items. This filter works in combination with max_depth */
+        // Example with highest menu item id passed (Home)
         // parent: {
         //   fieldName: "parent",
         //   operator: "=",
         //   value: "standard.front_page",
         // },
+        // Example with Education item id passed
+        // parent: {
+        //   fieldName: "parent",
+        //   operator: "=",
+        //   value: "menu_link_content:29ed02a2-2729-4d56-bc4e-b420f04dde9a",
+        // },
+        // Title filter will only bring up the one item matching, no children
         // title: {
         //   fieldName: "conditions][title][value",
         //   operator: "=",
