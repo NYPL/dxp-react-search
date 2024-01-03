@@ -1,7 +1,7 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
-import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
+import { Heading, Grid, GridItem, Box } from "@chakra-ui/react";
 import Image, { ImageType } from "./../../shared/Image";
 import HomePageLink, { AnalyticsEventActions } from "../HomePageLink";
 
@@ -62,11 +62,12 @@ function Card({
             {item.title}
           </HomePageLink>
         </Heading>
-        <Box className="details">
-          {item.description && (
-            <Text id={`card-description-${item.id}`}>{item.description}</Text>
-          )}
-        </Box>
+        <Box
+          className="details"
+          {...(item.description && {
+            dangerouslySetInnerHTML: { ...{ __html: item.description } },
+          })}
+        />
       </GridItem>
       <GridItem id={`card-image-${item.id}`} colStart={1} rowStart={1}>
         <HomePageLink
