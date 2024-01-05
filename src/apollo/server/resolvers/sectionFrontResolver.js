@@ -27,7 +27,7 @@ export const sectionFrontBottomContentDrupalParagraphsMap = {
 
 const sectionFrontResolver = {
   Query: {
-    sectionFront: async (_parent, args, contextValue) => {
+    sectionFront: async (_, args, { dataSources }) => {
       const includedFields = [
         "field_ers_media_image.field_media_image",
         "field_ers_featured",
@@ -51,11 +51,12 @@ const sectionFrontResolver = {
         args.id,
         args.revisionId
       );
-      const response =
-        await contextValue.dataSources.drupalJsonApi.getIndividualResource(
-          apiPath,
-          isPreview
-        );
+
+      const response = await dataSources.drupalJsonApi.getIndividualResource(
+        apiPath,
+        isPreview
+      );
+
       return response;
     },
   },
