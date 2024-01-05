@@ -65,7 +65,6 @@ function Card({
         {item.description && (
           <Box
             className="details"
-            as="p"
             dangerouslySetInnerHTML={{ __html: item.description }}
           />
         )}

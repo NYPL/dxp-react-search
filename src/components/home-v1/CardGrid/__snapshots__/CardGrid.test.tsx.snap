@@ -20,7 +20,7 @@ exports[`Card tests should render the UI snapshot correctly 1`] = `
         Test
       </a>
     </h3>
-    <p
+    <div
       className="details css-0"
       dangerouslySetInnerHTML={
         {
