@@ -31,11 +31,14 @@ const Card: ComponentStyleConfig = {
     span: {
       fontSize: "sm",
       lineHeight: "none",
-      px: { base: 0, md: "5%" },
       textTransform: "uppercase",
     },
     // Description | Location
-    p: { fontSize: "sm", lineHeight: "none", px: { base: 0, md: "5%" } },
+    ".details": {
+      fontSize: "sm",
+      lineHeight: "none",
+      px: { base: 0, md: "5%" },
+    },
     img: { w: "full" },
   },
   // Heading sizes
@@ -107,7 +110,7 @@ const Card: ComponentStyleConfig = {
         lineHeight: { base: "21px", md: "28px" },
         fontSize: { base: "lg", md: "2xl" },
       },
-      p: {
+      ".details": {
         display: { base: "none", lg: "block" },
         fontSize: "md",
         pt: 2.5,
@@ -119,7 +122,7 @@ const Card: ComponentStyleConfig = {
       gridGap: { base: 9, md: 7, lg: 12 },
       mb: { lg: 3 },
       h3: { mt: 1.5, mb: 4 },
-      p: {
+      ".details": {
         display: { base: "none", lg: "block" },
         fontSize: "sm",
         lineHeight: "19px",
