@@ -4,20 +4,18 @@ export interface MenuItem extends MenuJsonApiResource {
   children?: MenuItem[];
 }
 
-export function resolveMenuLevels(
-  menuCollection: MenuJsonApiResource[]
-): MenuItem[] {
-  const menuItems: MenuItem[] = [];
+export function getMenuTree(menuItems: MenuJsonApiResource[]): MenuItem[] {
+  const menuTree: MenuItem[] = [];
 
   // Create a mapping of id to its corresponding menuItem object
   const idToMenuItemMap: Record<string, MenuItem> = {};
-  menuCollection.forEach((item: MenuJsonApiResource) => {
+  menuItems.forEach((item: MenuJsonApiResource) => {
     const { id, ...rest } = item;
     idToMenuItemMap[id] = { id, ...rest };
   });
 
   // Build the hierarchical structure
-  menuCollection.forEach((item: MenuJsonApiResource) => {
+  menuItems.forEach((item: MenuJsonApiResource) => {
     const { id, parent } = item;
     const menuItem = idToMenuItemMap[id];
     const parentMenuItem = idToMenuItemMap[parent];
@@ -27,9 +25,9 @@ export function resolveMenuLevels(
         ? parentMenuItem.children.push(menuItem)
         : (parentMenuItem.children = [menuItem]);
     } else {
-      menuItems.push(menuItem);
+      menuTree.push(menuItem);
     }
   });
 
-  return menuItems;
+  return menuTree;
 }

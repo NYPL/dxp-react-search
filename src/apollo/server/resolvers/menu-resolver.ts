@@ -1,5 +1,5 @@
 import { getCollectionResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
-import { MenuItem, resolveMenuLevels } from "./utils/resolveMenuLevels";
+import { MenuItem, getMenuTree } from "./utils/getMenuTree";
 
 export interface MenuJsonApiResource {
   id: string;
@@ -10,7 +10,7 @@ export interface MenuJsonApiResource {
 
 export const menuResolver = {
   Query: {
-    menuCollection: async (
+    menu: async (
       _parent: MenuJsonApiResource,
       args: any,
       contextValue: any
@@ -37,10 +37,10 @@ export const menuResolver = {
           apiPath
         );
 
-      const resolvedMenu: MenuItem[] = resolveMenuLevels(response.data);
+      const menuTree: MenuItem[] = getMenuTree(response.data);
 
       return {
-        items: resolvedMenu,
+        items: menuTree,
         // pageInfo: {
         //   totalItems: response.meta ? response.meta.count : 0,
         //   limit: args.limit ? args.limit : null,

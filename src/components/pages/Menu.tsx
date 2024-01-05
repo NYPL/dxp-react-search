@@ -8,7 +8,7 @@ import { Box, Link, Heading } from "@nypl/design-system-react-components";
 export const MENU_QUERY = gql`
   ${MENU_FIELDS_FRAGMENT}
   query MenuQuery($id: String, $filter: MenuFilter, $sort: Sort) {
-    menuCollection(id: $id, filter: $filter, sort: $sort) {
+    menu(id: $id, filter: $filter, sort: $sort) {
       items {
         ...MenuFields
         children {
@@ -110,7 +110,7 @@ function SecondaryMenu({ id }: SecondaryMenuProps) {
     return <div>Loading...</div>;
   }
 
-  const menu = data.menuCollection.items;
+  const menu = data.menu.items;
 
   return (
     <Box>

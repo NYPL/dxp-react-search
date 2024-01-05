@@ -21,7 +21,7 @@ export const MenuTypeDefs = gql`
     title: QueryFilterItemString
   }
   extend type Query {
-    menuCollection(
+    menu(
       id: String
       filter: MenuFilter
       # @TODO remove sort if we agree that it does not work.
