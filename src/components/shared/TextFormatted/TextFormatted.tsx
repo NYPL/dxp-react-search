@@ -3,13 +3,12 @@ import { Box } from "@nypl/design-system-react-components";
 
 interface TextFormattedProps {
   html: string;
-  isBlog?: boolean;
 }
 
-function TextFormatted({ html, isBlog }: TextFormattedProps) {
+function TextFormatted({ html }: TextFormattedProps) {
+  console.log("formattedText used!");
   return (
     <Box
-      {...(isBlog && { marginBottom: "l" })}
       sx={{
         "& ul": {
           paddingLeft: "s",
