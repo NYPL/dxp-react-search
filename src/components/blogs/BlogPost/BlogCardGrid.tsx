@@ -49,7 +49,11 @@ export default function BlogCardGrid({
   return (
     <Box id={`${type}-${id}`} mb="xl">
       {title && <Heading level="two" text={title} />}
-      {description && <TextFormatted html={description} />}
+      {description && (
+        <Box mb="l">
+          <TextFormatted html={description} />
+        </Box>
+      )}
       <Grid
         as="ul"
         listStyleType="none"
