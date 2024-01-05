@@ -51,7 +51,6 @@ const sectionFrontResolver = {
         args.id,
         args.revisionId
       );
-
       const response = await dataSources.drupalJsonApi.getIndividualResource(
         apiPath,
         isPreview
