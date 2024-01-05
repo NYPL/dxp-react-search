@@ -6,7 +6,6 @@ interface TextFormattedProps {
 }
 
 function TextFormatted({ html }: TextFormattedProps) {
-  console.log("formattedText used!");
   return (
     <Box
       sx={{
