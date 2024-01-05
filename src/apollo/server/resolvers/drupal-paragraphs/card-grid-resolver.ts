@@ -13,6 +13,7 @@ export type DrupalJsonApiLinkCardListParagraph = {
   field_ls_link: { url: string };
   field_erm_link_cards: DrupalJsonApiLinkCardParagraph[];
   field_lts_card_grid_layout: string;
+  parent_node: { id: string; uuid: string; bundle: string; slug: string };
 };
 
 export type DrupalJsonApiLinkCardParagraph = {
@@ -36,12 +37,8 @@ export const CardGridResolver = {
       parent.field_lts_card_grid_layout,
     items: (parent: DrupalJsonApiLinkCardListParagraph) =>
       parent.field_erm_link_cards,
-    colorway: (
-      _parent: DrupalJsonApiLinkCardListParagraph,
-      _args: any,
-      contextValue: { colorway: { contentType: string; slug: string } }
-    ) =>
-      contextValue.colorway.contentType === "section_front"
+    colorway: (parent: DrupalJsonApiLinkCardListParagraph) =>
+      parent.parent_node.bundle === "section_front"
         ? getColorway("section_front")
         : null,
   },

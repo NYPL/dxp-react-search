@@ -14,7 +14,7 @@ export interface ExternalSearchProps {
   /** The heading of the external search component. */
   title: string;
   /** The heading color of the external search component. */
-  colorway?: any;
+  colorway: { primary: string; secondary: string };
   /** The description of the external search component. */
   description: string;
   /** The search type of the form, to be used for the generating the url. */

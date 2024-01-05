@@ -8,6 +8,7 @@ type EmailSubscriptionParagraphDrupalJsonApi = {
   field_ts_placeholder: string;
   field_ts_salesforce_list_id: string;
   field_ts_salesforce_source_code: string;
+  parent_node: { id: string; uuid: string; bundle: string; slug: string };
 };
 
 export const EmailSubscriptionResolver = {
@@ -24,24 +25,9 @@ export const EmailSubscriptionResolver = {
       parent.field_ts_salesforce_list_id,
     salesforceSourceCode: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_ts_salesforce_source_code,
-    // colorway: (
-    //   _parent: EmailSubscriptionParagraphDrupalJsonApi,
-    //   args: { colorwayLabel: string }
-    // ) => {
-    //   const colorway = args.colorwayLabel
-    //     ? getColorway(args.colorwayLabel)
-    //     : null;
-
-    //   console.log(colorway);
-    //   return colorway;
-    // },
-    colorway: (
-      _parent: EmailSubscriptionParagraphDrupalJsonApi,
-      _args: any,
-      contextValue: { colorway: { contentType: string; slug: string } }
-    ) =>
-      contextValue.colorway.contentType === "section_front"
-        ? getColorway(contextValue.colorway.slug)
+    colorway: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
+      parent.parent_node.bundle === "section_front"
+        ? getColorway(parent.parent_node.slug)
         : null,
   },
 };
