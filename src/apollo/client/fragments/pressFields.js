@@ -66,6 +66,7 @@ export const PRESS_FIELDS_FRAGMENT = gql`
             uri
           }
         }
+        imageSize
       }
     }
     mediaContacts

@@ -164,6 +164,7 @@ export const PAGE_QUERY = gql`
               uri
             }
           }
+          imageSize
         }
         ... on Slideshow {
           id

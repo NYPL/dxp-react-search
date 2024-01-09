@@ -4,7 +4,10 @@ import { resolveImage } from "../utils/resolveImage";
 type DrupalJsonApiImageParagraph = {
   id: string;
   field_ers_media_item: DrupalJsonApiMediaImageResource;
+  field_lts_image_size: DrupalJsonApiImageSizeField;
 };
+
+type DrupalJsonApiImageSizeField = "small" | "medium" | "large";
 
 export function getImageLink(mediaResource: DrupalJsonApiMediaImageResource) {
   let imageLink = null;
@@ -41,5 +44,9 @@ export const ImageResolver = {
         : null,
     image: (parent: DrupalJsonApiImageParagraph) =>
       resolveImage(parent.field_ers_media_item),
+    imageSize: (parent: DrupalJsonApiImageParagraph) =>
+      parent.field_lts_image_size === null
+        ? "large"
+        : parent.field_lts_image_size,
   },
 };
