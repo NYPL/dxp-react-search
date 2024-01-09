@@ -1,4 +1,5 @@
 import { DrupalJsonApiTextField } from "./../drupal-types";
+import getColorway from "./../../../../utils/get-colorway";
 
 type DrupalJsonApiExternalSearchParagraph = {
   id: string;
@@ -6,6 +7,7 @@ type DrupalJsonApiExternalSearchParagraph = {
   field_tfls_description: DrupalJsonApiTextField;
   field_lts_search_type: "catalog" | "research_catalog" | "website" | "vega";
   field_ts_placeholder: string;
+  parent_node: { id: string; uuid: string; bundle: string; slug: string };
 };
 
 export const ExternalSearchResolver = {
@@ -20,6 +22,9 @@ export const ExternalSearchResolver = {
       parent.field_lts_search_type,
     formPlaceholder: (parent: DrupalJsonApiExternalSearchParagraph) =>
       parent.field_ts_placeholder,
-    // colorway
+    colorway: (parent: DrupalJsonApiExternalSearchParagraph) =>
+      parent.parent_node.bundle === "section_front"
+        ? getColorway("section_front")
+        : null,
   },
 };

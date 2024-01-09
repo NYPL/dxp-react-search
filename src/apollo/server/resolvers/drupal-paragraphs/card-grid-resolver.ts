@@ -4,6 +4,7 @@ import {
   DrupalJsonApiMediaImageResource,
 } from "./../drupal-types";
 import { DrupalJsonApiButtonLinkParagraph } from "./button-links-resolver";
+import getColorway from "./../../../../utils/get-colorway";
 
 export type DrupalJsonApiLinkCardListParagraph = {
   id: string;
@@ -12,6 +13,7 @@ export type DrupalJsonApiLinkCardListParagraph = {
   field_ls_link: { url: string };
   field_erm_link_cards: DrupalJsonApiLinkCardParagraph[];
   field_lts_card_grid_layout: string;
+  parent_node: { id: string; uuid: string; bundle: string; slug: string };
 };
 
 export type DrupalJsonApiLinkCardParagraph = {
@@ -35,7 +37,10 @@ export const CardGridResolver = {
       parent.field_lts_card_grid_layout,
     items: (parent: DrupalJsonApiLinkCardListParagraph) =>
       parent.field_erm_link_cards,
-    // colorway: (parent: any) =>
+    colorway: (parent: DrupalJsonApiLinkCardListParagraph) =>
+      parent.parent_node.bundle === "section_front"
+        ? getColorway("section_front")
+        : null,
   },
   CardGridItem: {
     id: (parent: DrupalJsonApiLinkCardParagraph) => parent.id,

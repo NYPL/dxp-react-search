@@ -14,7 +14,7 @@ export interface ExternalSearchProps {
   /** The heading of the external search component. */
   title: string;
   /** The heading color of the external search component. */
-  headingColor?: string;
+  colorway: { primary: string; secondary: string };
   /** The description of the external search component. */
   description: string;
   /** The search type of the form, to be used for the generating the url. */
@@ -26,7 +26,7 @@ export interface ExternalSearchProps {
 export default function ExternalSearch({
   id,
   title,
-  headingColor,
+  colorway,
   description,
   searchType = "catalog",
   formPlaceholder,
@@ -64,7 +64,7 @@ export default function ExternalSearch({
 
   return (
     <Box id={`external-search-${id}`} mb="xl">
-      <Heading level="two" color={headingColor}>
+      <Heading level="two" color={colorway.primary}>
         {title}
       </Heading>
       <Box as="p" dangerouslySetInnerHTML={{ __html: description }} />
