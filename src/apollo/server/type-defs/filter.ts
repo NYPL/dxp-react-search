@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const filterTypeDefs = gql`
   type FilterItem {
     id: ID!
     name: String!

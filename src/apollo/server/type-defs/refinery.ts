@@ -1,6 +1,24 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const refineryTypeDefs = gql`
+  type RefineryVocab {
+    id: ID!
+    name: String!
+    terms: [RefineryTerm]
+  }
+
+  type RefineryTerm {
+    id: ID!
+    name: String!
+    children: [RefineryTerm]
+  }
+
+  input RefineryTermsFilter {
+    id: String!
+    terms: [String]!
+    operator: String!
+  }
+
   type RefineryLocation {
     id: ID!
     name: String!
@@ -66,5 +84,9 @@ export const typeDefs = gql`
       filter: RefineryFilter
       sortByDistance: RefinerySortByDistance
     ): RefineryLocationsConnection
+  }
+
+  extend type Query {
+    refineryAllTerms(filter: RefineryTermsFilter): [RefineryVocab]!
   }
 `;

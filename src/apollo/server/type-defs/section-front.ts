@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const sectionFronttypeDefs = gql`
   type SectionFront {
     id: ID!
     title: String!

@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const onlineResourceTypeDefs = gql`
   type OnlineResource {
     id: ID!
     name: String!

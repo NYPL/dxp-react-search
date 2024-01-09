@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const searchTypeDefs = gql`
   interface SearchDocument {
     id: ID!
     slug: String!

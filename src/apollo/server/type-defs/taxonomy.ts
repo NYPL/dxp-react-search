@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const taxonomyTypeDefs = gql`
   type Term {
     id: ID!
     tid: String!

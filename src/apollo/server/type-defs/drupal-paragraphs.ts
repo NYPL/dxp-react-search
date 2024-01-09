@@ -1,79 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
-  type PageInfo {
-    totalItems: Int
-    limit: Int
-    pageNumber: Int
-    pageCount: Int
-    timestamp: String
-    clientIp: String
-  }
-
-  input Sort {
-    field: String
-    direction: String
-  }
-
-  input QueryFilterItemReference {
-    fieldName: String!
-    operator: String!
-    conjunction: String!
-    value: [String]!
-  }
-
-  input QueryFilterItemBoolean {
-    fieldName: String!
-    operator: String!
-    value: Boolean
-  }
-
-  input QueryFilterItemString {
-    fieldName: String!
-    operator: String!
-    value: String
-  }
-
-  input QueryFilterItemArray {
-    fieldName: String!
-    operator: String!
-    value: [String]!
-  }
-
-  # New QueryFilters pattern.
-  input QueryFilter {
-    experimental: Boolean
-    conjunction: String
-    groups: [QueryFilterGroup]
-    conditions: [QueryFilterCondition]
-  }
-
-  input QueryFilterGroup {
-    conjunction: String
-    conditions: [QueryFilterCondition]
-  }
-
-  input QueryFilterCondition {
-    field: String
-    operator: String
-    value: String
-  }
-
-  type Image {
-    id: ID!
-    alt: String
-    uri: String!
-    transformations: [ImageTransformation]
-    width: Int
-    height: Int
-  }
-
-  type ImageTransformation {
-    id: ID!
-    label: String!
-    uri: String!
-  }
-
+export const drupalParagraphsTypeDefs = gql`
   type TextWithImage {
     id: ID!
     type: String!
@@ -248,20 +175,5 @@ export const typeDefs = gql`
     heading: String
     description: String!
     showBorder: Boolean!
-  }
-
-  type BreadcrumbsItem {
-    id: ID!
-    title: String!
-    url: String!
-  }
-
-  type Colorway {
-    primary: String
-    secondary: String
-  }
-
-  type Query {
-    _empty: String
   }
 `;

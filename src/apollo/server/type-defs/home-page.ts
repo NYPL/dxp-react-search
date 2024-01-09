@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const homePageTypeDefs = gql`
   type HomePage {
     id: ID!
     title: String!

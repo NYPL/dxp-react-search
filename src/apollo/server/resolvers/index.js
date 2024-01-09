@@ -15,7 +15,7 @@ import locationResolver from "./locationResolver";
 import pressReleaseResolver from "./pressReleaseResolver";
 import { homePageResolver } from "./home-page-resolver";
 import sectionFrontResolver from "./sectionFrontResolver";
-import { pageResolver } from "./page-resolver";
+import { pageResolver } from "./page";
 // Drupal paragraphs
 import { drupalParagraphsResolvers } from "./drupal-paragraphs";
 // HomePage

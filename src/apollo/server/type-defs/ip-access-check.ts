@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const ipAccessCheckTypeDefs = gql`
   type LocationMatch {
     id: ID!
     name: String

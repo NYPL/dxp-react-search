@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const sendEmailTypeDefs = gql`
   input SendEmailInput {
     emailTo: String!
     emailCc: String

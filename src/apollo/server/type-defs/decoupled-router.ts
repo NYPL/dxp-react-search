@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const decoupledRouterTypeDefs = gql`
   type DecoupledRouter {
     id: ID!
     uuid: String

@@ -1,4 +1,4 @@
-import { getIndividualResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
+import { getIndividualResourceJsonApiPath } from "../datasources/drupal-json-api/getJsonApiPath";
 import {
   DrupalJsonApiBreadcrumbItem,
   DrupalJsonApiEntityResource,

@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
+export const validatePatronCardTypeDefs = gql`
   type PatronCard {
     id: ID!
     valid: Boolean
