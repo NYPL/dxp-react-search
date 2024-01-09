@@ -1,11 +1,6 @@
 import * as React from "react";
-import {
-  Box,
-  Heading,
-  HStack,
-  Icon,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Box, HStack, Icon, Link } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 
 export interface CardGridHeaderProps {
   id: string;
@@ -26,7 +21,9 @@ export default function CardGridHeader({
     return (
       <Box mb=".75em">
         <HStack alignItems="baseline">
-          <Heading id={id} level="two" text={title} color={headingColor} />
+          <Heading id={id} level="h2" color={headingColor}>
+            {title}
+          </Heading>
           <Link href={link}>
             <a
               style={{
@@ -57,7 +54,11 @@ export default function CardGridHeader({
       </Box>
     );
   } else if (title) {
-    return <Heading id={id} level="two" text={title} color={headingColor} />;
+    return (
+      <Heading id={id} level="h2" color={headingColor}>
+        {title}
+      </Heading>
+    );
   } else {
     return null;
   }
