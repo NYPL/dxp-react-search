@@ -12,12 +12,12 @@ interface EmailSubscriptionProps {
   heading?: string;
   description?: string;
   headingColor: string;
-  bgColor?: string;
   formBaseUrl?: string;
   formHelperText?: string;
   formPlaceholder?: string;
   salesforceListId?: number;
   salesforceSourceCode: string;
+  colorway: { primary: string; secondary: string };
 }
 
 export default function EmailSubscription({
@@ -25,14 +25,13 @@ export default function EmailSubscription({
   heading,
   description,
   headingColor = "ui.white",
-  // @TODO confirm with UX what the default color should be
-  bgColor = "section.research.primary",
   // @TODO should this even be a prop? I imagine this will be the same for all newsletters?
   formBaseUrl = "/api/salesforce",
   formHelperText = "*You will receive email updates from the Library, and you will be able to unsubscribe at any time. To learn more about how the Library uses information you provide, please read our <a target='_blank' rel='noopener noreferrer' href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>privacy policy</a>.",
   formPlaceholder,
   salesforceSourceCode,
   salesforceListId,
+  colorway,
 }: EmailSubscriptionProps): JSX.Element {
   const [input, setInput] = React.useState("");
   const [isSubmitted, setIsSubmitted] = React.useState(false);
@@ -103,6 +102,10 @@ export default function EmailSubscription({
       setIsSubmitting(false);
     }
   };
+
+  const bgColor = colorway.primary
+    ? colorway.primary
+    : "section.research.primary";
 
   if (isSubmitting) {
     return (

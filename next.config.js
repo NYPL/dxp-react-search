@@ -49,6 +49,7 @@ const nextConfig = {
       "localhost",
       "nypl-d8.lndo.site",
       "nypl-pantheon.ddev.site",
+      "nypl-pantheon-basic-pgs.ddev.site",
       DRUPAL_API_DOMAIN_ONLY,
       // QA
       "qa-cdn-d8-2.nypl.org",
@@ -62,7 +63,6 @@ const nextConfig = {
       "images.btol.com",
       "imagesa.btol.com",
       "imagesb.btol.com",
-      "contentcafe11.btol.com",
       "contentcafecloud.baker-taylor.com",
       "contentcafe11.btol.com",
       "contentcafe12.btol.com",
