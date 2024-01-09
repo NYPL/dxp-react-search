@@ -13,7 +13,6 @@ export interface CardGridCommonProps {
   id: string;
   type: string;
   title?: string;
-  // headingColor?: string;
   description?: string;
   link?: string;
   hrefText?: string;
@@ -50,7 +49,6 @@ export default function CardGrid({
   type,
   title,
   colorway = null,
-  // headingColor,
   description,
   link,
   hrefText,
