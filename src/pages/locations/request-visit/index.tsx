@@ -4,7 +4,7 @@ import withApollo from "./../../../apollo/withApollo";
 import { initializeApollo } from "./../../../apollo/withApollo/apollo";
 import { LOCATIONS_QUERY } from "./../../../components/locations/RequestVisitForm/FormFields/LibraryFormField";
 // Components
-import { Heading } from "@nypl/design-system-react-components";
+import Heading from "../../../components/shared/Heading";
 import PageContainer from "./../../../components/locations/RequestVisitForm/PageContainer";
 import RequestVisitForm from "../../../components/locations/RequestVisitForm/RequestVisitForm";
 import RequestVisitFormError from "../../../components/locations/RequestVisitForm/RequestVisitFormError";
@@ -16,11 +16,9 @@ function LocationsRequestVisitPage() {
       contentHeader={<RequestVisitFormError />}
       contentPrimary={
         <>
-          <Heading
-            className="request-visit__header"
-            level="one"
-            text="Request a Class Visit or Group Tour"
-          />
+          <Heading className="request-visit__header" level="h1">
+            Request a Class Visit or Group Tour
+          </Heading>
           <p className="request-visit__description">
             Discover the Library’s wide array of free resources, classes,
             events, and more! Join us at your local branch to learn more about
