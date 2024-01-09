@@ -3,10 +3,10 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
   Icon,
   TextInput,
 } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 
 export interface ExternalSearchProps {
   /** The id of the external search component. */
@@ -64,7 +64,7 @@ export default function ExternalSearch({
 
   return (
     <Box id={`external-search-${id}`} mb="xl">
-      <Heading level="two" color={headingColor}>
+      <Heading level="h2" color={headingColor}>
         {title}
       </Heading>
       <Box as="p" dangerouslySetInnerHTML={{ __html: description }} />
