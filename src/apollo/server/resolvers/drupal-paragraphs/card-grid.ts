@@ -4,7 +4,7 @@ import {
   DrupalJsonApiMediaImageResource,
 } from "../drupal-types";
 import { DrupalJsonApiButtonLinkParagraph } from "./button-links";
-import getColorway from "../../../../utils/get-colorway";
+import getColorway from "../utils/get-colorway";
 
 export type DrupalJsonApiLinkCardListParagraph = {
   id: string;

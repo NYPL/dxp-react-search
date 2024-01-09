@@ -2,7 +2,7 @@ import { parseResolveInfo } from "graphql-parse-resolve-info";
 // Utils
 import { resolveImage } from "./utils/resolveImage";
 import { getIndividualResourceJsonApiPath } from "./../datasources/drupal-json-api/getJsonApiPath";
-import getColorway from "../../../utils/get-colorway";
+import getColorway from "./utils/get-colorway";
 import { getDrupalParagraphsField } from "./drupal-paragraphs/get-drupal-paragraphs-field";
 
 export const sectionFrontFeaturedContentDrupalParagraphsMap = {

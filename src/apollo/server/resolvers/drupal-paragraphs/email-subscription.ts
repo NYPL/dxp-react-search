@@ -1,5 +1,5 @@
 import { DrupalJsonApiTextField } from "./../drupal-types";
-import getColorway from "./../../../../utils/get-colorway";
+import getColorway from "../utils/get-colorway";
 
 type EmailSubscriptionParagraphDrupalJsonApi = {
   id: string;
