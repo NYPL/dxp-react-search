@@ -1,5 +1,5 @@
 import { DrupalJsonApiTextField } from "./../drupal-types";
-import getColorway from "./../../../../utils/get-colorway";
+import getColorway from "../utils/get-colorway";
 
 type DrupalJsonApiExternalSearchParagraph = {
   id: string;
@@ -10,7 +10,7 @@ type DrupalJsonApiExternalSearchParagraph = {
   parent_node: { id: string; uuid: string; bundle: string; slug: string };
 };
 
-export const ExternalSearchResolver = {
+export const externalSearchResolver = {
   ExternalSearch: {
     id: (parent: DrupalJsonApiExternalSearchParagraph) => parent.id,
     type: () => "external_search",

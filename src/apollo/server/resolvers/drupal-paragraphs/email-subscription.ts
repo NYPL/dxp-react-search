@@ -1,5 +1,5 @@
 import { DrupalJsonApiTextField } from "./../drupal-types";
-import getColorway from "./../../../../utils/get-colorway";
+import getColorway from "../utils/get-colorway";
 
 type EmailSubscriptionParagraphDrupalJsonApi = {
   id: string;
@@ -11,7 +11,7 @@ type EmailSubscriptionParagraphDrupalJsonApi = {
   parent_node: { id: string; uuid: string; bundle: string; slug: string };
 };
 
-export const EmailSubscriptionResolver = {
+export const emailSubscriptionResolver = {
   EmailSubscription: {
     id: (parent: EmailSubscriptionParagraphDrupalJsonApi) => parent.id,
     type: () => "email_subscription",

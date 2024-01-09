@@ -1,47 +1,44 @@
 import { mergeResolvers } from "@graphql-tools/merge";
-import refineryLocationResolver from "./refineryLocationResolver";
-import refineryTermResolver from "./refineryTermResolver";
-import termResolver from "./termResolver";
-import onlineResourceResolver from "./onlineResourceResolver";
-import searchResolver from "./searchResolver";
-import decoupledRouterResolver from "./decoupledRouterResolver";
-import autoSuggestionsResolver from "./autoSuggestionsResolver";
-import filterResolver from "./filterResolver";
-import ipAccessCheckResolver from "./ipAccessCheckResolver";
-import validatePatronCardResolver from "./validatePatronCardResolver";
+import { refineryLocationResolver } from "./refinery-location";
+import { refineryTermResolver } from "./refinery-term";
+import { autoSuggestionsResolver } from "./auto-suggestions";
+import { decoupledRouterResolver } from "./decoupled-router";
+import { filterResolver } from "./filter";
+import { ipAccessCheckResolver } from "./ip-access-check";
+import { searchResolver } from "./search";
+import { termResolver } from "./taxonomy";
+import { validatePatronCardResolver } from "./validate-patron-card";
 // Content types
-import blogResolver from "./blogResolver";
-import locationResolver from "./locationResolver";
-import pressReleaseResolver from "./pressReleaseResolver";
-import { homePageResolver } from "./home-page-resolver";
-import sectionFrontResolver from "./sectionFrontResolver";
-import { pageResolver } from "./page-resolver";
+import { blogResolver } from "./blog";
+import { homePageResolvers } from "./home-page";
+import { locationResolver } from "./location";
+import { onlineResourceResolver } from "./online-resource";
+import { pageResolver } from "./page";
+import { pressReleaseResolver } from "./press-release";
+import { sectionFrontResolver } from "./section-front";
 // Drupal paragraphs
 import { drupalParagraphsResolvers } from "./drupal-paragraphs";
-// HomePage
-import { drupalHomePageResolvers } from "./home-page";
 // Mutations
-import sendEmailResolver from "./sendEmailResolver";
+import { sendEmailResolver } from "./send-email";
 
 export const resolvers = mergeResolvers([
+  autoSuggestionsResolver,
+  blogResolver,
+  decoupledRouterResolver,
+  drupalParagraphsResolvers,
+  filterResolver,
+  homePageResolvers,
+  ipAccessCheckResolver,
+  ipAccessCheckResolver,
+  locationResolver,
+  onlineResourceResolver,
+  pageResolver,
+  pressReleaseResolver,
   refineryLocationResolver,
   refineryTermResolver,
-  drupalHomePageResolvers,
-  drupalParagraphsResolvers,
-  blogResolver,
-  locationResolver,
-  pressReleaseResolver,
-  homePageResolver,
-  sectionFrontResolver,
-  pageResolver,
-  termResolver,
-  onlineResourceResolver,
   searchResolver,
-  decoupledRouterResolver,
-  autoSuggestionsResolver,
-  ipAccessCheckResolver,
-  validatePatronCardResolver,
-  filterResolver,
-  ipAccessCheckResolver,
+  sectionFrontResolver,
   sendEmailResolver,
+  termResolver,
+  validatePatronCardResolver,
 ]);
