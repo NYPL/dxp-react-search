@@ -80,7 +80,7 @@ function BottomPromo() {
             level="two"
             text={promo_right.title}
           />
-          <Text size="caption">{promo_right.description}</Text>
+          <Text size="body2">{promo_right.description}</Text>
           <Flex justify={{ md: "space-between" }}>
             {promo_right.image.map((promoRightImage) => {
               return (
