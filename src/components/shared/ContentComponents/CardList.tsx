@@ -44,7 +44,11 @@ function CardList({ id, type, title, description, items }: CardListProps) {
   return (
     <Box id={`${type}-${id}`} mb="xl">
       {title && <Heading level="h2">{title}</Heading>}
-      {description && <TextFormatted html={description} />}
+      {description && (
+        <Box mb="l">
+          <TextFormatted html={description} />
+        </Box>
+      )}
       <Grid
         as="ul"
         listStyleType="none"
