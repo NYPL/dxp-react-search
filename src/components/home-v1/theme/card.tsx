@@ -32,11 +32,14 @@ const Card: ComponentStyleConfig = {
     span: {
       fontSize: "sm",
       lineHeight: "none",
-      px: { base: 0, md: "5%" },
       textTransform: "uppercase",
     },
     // Description | Location
-    p: { fontSize: "sm", lineHeight: "none", px: { base: 0, md: "5%" } },
+    ".details": {
+      fontSize: "sm",
+      lineHeight: "none",
+      px: { base: 0, md: "5%" },
+    },
     img: { w: "full" },
   },
   // Heading sizes
@@ -112,7 +115,7 @@ const Card: ComponentStyleConfig = {
         fontSize: { base: "lg", md: "2xl" },
         fontWeight: "bold",
       },
-      p: {
+      ".details": {
         display: { base: "none", lg: "block" },
         fontSize: "md",
         pt: 2.5,
@@ -125,7 +128,7 @@ const Card: ComponentStyleConfig = {
       fontFamily: "Kievit-Book",
       mb: { lg: 3 },
       h3: { mt: 1.5, mb: 4 },
-      p: {
+      ".details": {
         display: { base: "none", lg: "block" },
         fontSize: "sm",
         lineHeight: "19px",
