@@ -3,6 +3,7 @@ import { Box, Heading } from "@nypl/design-system-react-components";
 import TextFormatted from "./../TextFormatted";
 import Image from "next/image";
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
+import { WithLink } from "./ImageComponent";
 
 interface TextWithImageProps {
   id: string;
@@ -11,6 +12,7 @@ interface TextWithImageProps {
   text: string;
   caption?: string;
   credit?: string;
+  link?: string;
   image?: any;
 }
 
@@ -21,6 +23,7 @@ function TextWithImage({
   text,
   caption,
   credit,
+  link,
   image,
 }: TextWithImageProps) {
   let imageSrc: string = image?.uri;
@@ -45,14 +48,16 @@ function TextWithImage({
           mr={{ md: "l" }}
           mb="s"
         >
-          <Image
-            id={image.id}
-            alt={image.alt}
-            src={imageSrc}
-            layout="responsive"
-            width={image.width}
-            height={image.height}
-          />
+          <WithLink link={link}>
+            <Image
+              id={image.id}
+              alt={image.alt}
+              src={imageSrc}
+              layout="responsive"
+              width={image.width}
+              height={image.height}
+            />
+          </WithLink>
           {caption && (
             <Box fontSize="-1" fontWeight="regular">
               {caption}

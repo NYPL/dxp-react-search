@@ -2,7 +2,7 @@ import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
 import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
-import HomePageLink from "../HomePageLink";
+import HomePageLink, { AnalyticsEventActions } from "../HomePageLink";
 import Image from "./../../shared/Image";
 import { ImageType } from "../../shared/Image";
 
@@ -18,10 +18,15 @@ export interface SlideshowCardItem {
 
 interface SlideshowCardProps {
   item: SlideshowCardItem;
+  analyticsEventActions: AnalyticsEventActions;
   gaEventActionName: string;
 }
 
-function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
+function SlideshowCard({
+  item,
+  analyticsEventActions,
+  gaEventActionName,
+}: SlideshowCardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant: "slide-show-card" });
   // Generate describedBy string
@@ -52,6 +57,7 @@ function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
           <HomePageLink
             id={`slideshow-card-heading-link-${item.id}`}
             href={item.url}
+            analyticsEventActions={analyticsEventActions}
             gaEventActionName={gaEventActionName}
           >
             {item.title}
@@ -71,6 +77,7 @@ function SlideshowCard({ item, gaEventActionName }: SlideshowCardProps) {
         <HomePageLink
           id={`slideshow-card-image-link-${item.id}`}
           href={item.url}
+          analyticsEventActions={analyticsEventActions}
           gaEventActionName={gaEventActionName}
           aria-label={`${item.title}-image`}
           tabIndex={-1}

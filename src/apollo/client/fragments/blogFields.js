@@ -38,6 +38,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
         text
         caption
         credit
+        link
         image {
           id
           alt
