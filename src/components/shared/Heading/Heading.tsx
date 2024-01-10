@@ -8,7 +8,7 @@ import { ReactElement, ComponentPropsWithoutRef } from "react";
 const headingSizeMap: Record<string, HeadingSizes> = {
   h1: "heading2",
   h2: "heading3",
-  h3: "heading5",
+  h3: "heading4",
 };
 
 interface HeadingProps extends ComponentPropsWithoutRef<typeof DsHeading> {
@@ -24,7 +24,7 @@ export default function Heading({
   level,
   size,
   children,
-  color = "black",
+  color = "ui.black",
   ...rest
 }: HeadingProps): ReactElement {
   const finalSize = size ? size : headingSizeMap[level];
