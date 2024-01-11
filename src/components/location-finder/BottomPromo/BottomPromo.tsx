@@ -3,7 +3,6 @@ import React from "react";
 import BottomPromoContent from "../../../__content/locationFinder";
 // Components
 import {
-  Heading,
   Image,
   Link,
   Logo,
@@ -14,6 +13,7 @@ import {
   Box,
   Text,
 } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 
 function BottomPromo() {
   const { promo_left, promo_right } = BottomPromoContent;
@@ -33,11 +33,9 @@ function BottomPromo() {
           p={"var(--nypl-space-s)"}
           pl={{ sm: "var(--nypl-space-s)", xl: "0px" }}
         >
-          <Heading
-            id="promo-left-section-title"
-            level="two"
-            text={promo_left.title}
-          />
+          <Heading id="promo-left-section-title" level="h2">
+            {promo_left.title}
+          </Heading>
           <Grid
             templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
             columnGap={{ md: 8 }}
@@ -70,11 +68,9 @@ function BottomPromo() {
           p={"var(--nypl-space-s)"}
           ml={{ sm: "calc(-50vw + 50%)", xl: "0px" }}
         >
-          <Heading
-            id="promo-right-section-title"
-            level="two"
-            text={promo_right.title}
-          />
+          <Heading id="promo-right-section-title" level="h2">
+            {promo_right.title}
+          </Heading>
           <Text size="body2">{promo_right.description}</Text>
           <Flex
             direction={{ sm: "column", md: "row" }}

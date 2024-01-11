@@ -3,7 +3,8 @@ import React from "react";
 import Components, {
   ContentComponentObject,
 } from "./../../shared/ContentComponents/getReactComponent";
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 // Config/Utils
 import pressContent from "./../../../__content/press";
 
@@ -24,7 +25,7 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
   return (
     <Box as="article" w="100%" maxW="844px">
       <Box as="header" mb="l">
-        <Heading level="one" size="secondary">
+        <Heading level="h1" size="heading3">
           {pressRelease.title}
         </Heading>
         {subTitle !== null && (
@@ -50,7 +51,7 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
           )}
       </Box>
       {/* <Box mb="l">
-        <Heading level="two">{about.title}</Heading>
+        <Heading level="h2">{about.title}</Heading>
         <Box
           sx={{
             "& a": {
@@ -63,7 +64,7 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
       </Box> */}
       {pressRelease.mediaContacts && (
         <Box>
-          <Heading level="two">{mediaContacts.heading}</Heading>
+          <Heading level="h2">{mediaContacts.heading}</Heading>
           <Box
             sx={{
               "& a": {

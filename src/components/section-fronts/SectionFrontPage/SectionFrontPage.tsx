@@ -6,7 +6,8 @@ import PageContainer, {
   BreadcrumbsItem,
 } from "../../shared/layouts/PageContainer";
 
-import { Box, Heading, Hero } from "@nypl/design-system-react-components";
+import { Box, Hero } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 import Components from "./../../shared/ContentComponents/getReactComponent";
 import PreviewModeNotification from "../../shared/PreviewModeNotification";
 
@@ -261,7 +262,11 @@ export default function SectionFrontPage({
           {isPreview && <PreviewModeNotification />}
           <Hero
             heroType="tertiary"
-            heading={<Heading level="one" text={sectionFront.title} />}
+            heading={
+              <Heading level="h1" color="ui.white">
+                {sectionFront.title}
+              </Heading>
+            }
             subHeaderText={sectionFront.description}
             backgroundColor={sectionFront.colorway.primary}
             foregroundColor="ui.white"

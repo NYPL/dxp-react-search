@@ -3,10 +3,10 @@ import React from "react";
 import {
   Box,
   Button,
-  Heading,
   HStack,
   Link,
 } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 // Redux
 import { useDispatch } from "react-redux";
 import { setMapInfoWindow, setMapPosition } from "../../../redux/actions";
@@ -106,7 +106,7 @@ function Location({
 
   return (
     <Box marginBottom="m">
-      <Heading id={`lid-${id}`} level="two" size="tertiary">
+      <Heading id={`lid-${id}`} level="h2" size="heading5">
         <Link href={url}>{name}</Link>
       </Heading>
       {parentLibraryName && (

@@ -2,11 +2,8 @@ import React, { useState } from "react";
 // Next
 import { useRouter } from "next/router";
 // Components
-import {
-  Heading,
-  TextInput,
-  Button,
-} from "@nypl/design-system-react-components";
+import { TextInput, Button } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 // Apollo
 import { gql, useApolloClient, useQuery } from "@apollo/client";
 import { ONLINE_RESOURCE_BY_ID_QUERY } from "./../../../pages/research/collections/articles-databases/[slug]";
@@ -85,7 +82,9 @@ function VerifyForm() {
 
   return (
     <div className={s.verify}>
-      <Heading id="heading2" level="two" text="Login to use this database" />
+      <Heading id="heading2" level="h2">
+        Login to use this database
+      </Heading>
       <form
         id="online-resources-verify-form"
         role="search"

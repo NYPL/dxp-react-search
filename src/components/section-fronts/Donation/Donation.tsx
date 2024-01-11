@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Box, Heading, Flex } from "@nypl/design-system-react-components";
+import { Box, Flex } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 import DonationAmountInput from "./DonationAmountInput";
 import DonationLinkButton from "./DonationLinkButton";
 import Jumbotron from "./../../shared/Jumbotron";
@@ -57,7 +58,7 @@ export default function Donation({
             paddingRight={{ md: "s" }}
             textAlign={{ base: "center", md: "left" }}
           >
-            <Heading level="two" color="brand.primary">
+            <Heading level="h2" color="brand.primary">
               {title}
             </Heading>
             <Box

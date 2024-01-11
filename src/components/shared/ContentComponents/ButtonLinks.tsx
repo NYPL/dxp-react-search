@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Box, Flex, Heading } from "@nypl/design-system-react-components";
+import { Box, Flex } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import ButtonLink from "./../ButtonLink";
 import { ButtonLinkProps as ButtonLinkItem } from "./../ButtonLink/ButtonLink";
 
@@ -21,7 +22,9 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
       bg="ui.bg.default"
     >
       <Box w="full" px="s" margin="auto">
-        <Heading level="two" text={heading} textAlign="center" />
+        <Heading level="h2" size="heading3" textAlign="center">
+          {heading}
+        </Heading>
         <Flex
           as="ul"
           direction={{ sm: "column", md: "row" }}

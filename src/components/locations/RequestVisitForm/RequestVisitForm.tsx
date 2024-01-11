@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from "react";
 // Apollo
 import { gql, useApolloClient } from "@apollo/client";
 // Components
-import { Box, Button, Heading } from "@nypl/design-system-react-components";
+import { Box, Button } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 import LibraryFormField from "./FormFields/LibraryFormField";
 import VisitTypeFormField from "./FormFields/VisitTypeFormField";
 import OrgFormField from "./FormFields/OrgFormField";
@@ -284,7 +285,9 @@ function RequestVisitForm() {
             },
           }}
         >
-          <Heading id="your-visit" level="two" text="Your Visit" />
+          <Heading id="your-visit" level="h2">
+            Your Visit
+          </Heading>
         </Box>
         <Box my="m">
           <LibraryFormField handleChange={handleChange} />
