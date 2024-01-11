@@ -41,7 +41,7 @@ export default function EmailSubscriptionWrapper({
         w={{ base: "100%", lg: "85%" }}
       >
         {heading && (
-          <Heading level="h2" w={{ base: "90%", md: "70%" }}>
+          <Heading level="h2" color="ui.white" w={{ base: "90%", md: "70%" }}>
             {heading}
           </Heading>
         )}
