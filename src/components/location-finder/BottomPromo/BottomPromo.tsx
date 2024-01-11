@@ -8,6 +8,8 @@ import {
   Logo,
   LogoNames,
   Flex,
+  Grid,
+  GridItem,
   Box,
   Text,
 } from "@nypl/design-system-react-components";
@@ -34,21 +36,14 @@ function BottomPromo() {
           <Heading id="promo-left-section-title" level="h2">
             {promo_left.title}
           </Heading>
-          <Flex direction={{ sm: "column", md: "row" }}>
-            {promo_left.image.map((promoImageLeft, index) => {
+          <Grid
+            templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            columnGap={{ md: 8 }}
+            rowGap={{ sm: 8, md: 0 }}
+          >
+            {promo_left.image.map((promoImageLeft) => {
               return (
-                <Box
-                  key={promoImageLeft.link}
-                  mr={{
-                    sm: "20%",
-                    // Omit margin right on second/last item
-                    ...(index === promo_left.image.length - 1 && {
-                      md: "0px",
-                    }),
-                  }}
-                  mb={{ sm: "var(--nypl-space-l)", md: "0px" }}
-                  w={{ sm: "65%", md: "100%" }}
-                >
+                <GridItem key={promoImageLeft.link}>
                   <Link
                     href={promoImageLeft.link}
                     sx={{
@@ -62,10 +57,10 @@ function BottomPromo() {
                       src={promoImageLeft.url}
                     />
                   </Link>
-                </Box>
+                </GridItem>
               );
             })}
-          </Flex>
+          </Grid>
         </Box>
         <Box
           bg="ui.gray.x-light-cool"
@@ -76,11 +71,19 @@ function BottomPromo() {
           <Heading id="promo-right-section-title" level="h2">
             {promo_right.title}
           </Heading>
-          <Text size="caption">{promo_right.description}</Text>
-          <Flex justify={{ md: "space-between" }}>
-            {promo_right.image.map((promoRightImage) => {
+          <Text size="body2">{promo_right.description}</Text>
+          <Flex
+            direction={{ sm: "column", md: "row" }}
+            alignItems={{ sm: "center", md: undefined }}
+            justify={{ md: "space-between", xl: "flex-start" }}
+          >
+            {promo_right.image.map((promoRightImage, index) => {
               return (
-                <Box key={promoRightImage.link} w={{ sm: "50%", md: "40%" }}>
+                <Box
+                  key={promoRightImage.link}
+                  {...(index === 0 && { mr: { ...{ xl: 16 } } })}
+                  {...(index === 0 && { mb: { ...{ sm: 8, md: 0 } } })}
+                >
                   <Link type="default">
                     <a
                       aria-label={promoRightImage.logo_alt}
