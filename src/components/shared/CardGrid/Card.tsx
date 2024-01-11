@@ -71,11 +71,11 @@ export default function Card({
     >
       {/* If the card has button links, don't render a link inside the heading. */}
       {isButtonLinkCard ? (
-        <CardHeading level="h3" size="heading4">
+        <CardHeading level="h3" size="heading5">
           {heading}
         </CardHeading>
       ) : (
-        <CardHeading level="h3" size="heading4">
+        <CardHeading level="h3" size="heading5">
           {href && <Link href={href}>{heading}</Link>}
         </CardHeading>
       )}

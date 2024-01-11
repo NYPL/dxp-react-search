@@ -120,7 +120,7 @@ function FilterBar({
             id="search-filters--heading"
             // className={s.filterBarHeading}
             level="h2"
-            size="heading4"
+            size="heading5"
           >
             {label}
           </Heading>

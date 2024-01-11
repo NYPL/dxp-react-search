@@ -106,7 +106,7 @@ function Location({
 
   return (
     <Box marginBottom="m">
-      <Heading id={`lid-${id}`} level="h2" size="heading4">
+      <Heading id={`lid-${id}`} level="h2" size="heading5">
         <Link href={url}>{name}</Link>
       </Heading>
       {parentLibraryName && (
