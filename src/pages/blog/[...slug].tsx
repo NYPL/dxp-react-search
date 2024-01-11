@@ -17,6 +17,8 @@ import withDrupalRouter, {
   WithDrupalRouterReturnProps,
   // NextDataFetchingFunctionContext,
 } from "../../apollo/with-drupal-router";
+// Adobe
+import trackAdobeVirtualPageView from "../../utils/track-adobe-virtual-page-view";
 
 const BLOG_POST_QUERY = gql`
   ${BLOG_FIELDS_FRAGMENT}
@@ -29,6 +31,7 @@ const BLOG_POST_QUERY = gql`
 
 function BlogPostPage() {
   const router = useRouter();
+
   const { isPreview, uuid } = useDecoupledRouter(router);
 
   const { loading, error, data } = useQuery(BLOG_POST_QUERY, {
@@ -41,6 +44,45 @@ function BlogPostPage() {
       }),
     },
   });
+
+  // Adobe Analytics: trigger an initial virtual page view on initial render.
+  React.useEffect(() => {
+    console.log("blog slug initial render");
+    console.log(data);
+
+    trackAdobeVirtualPageView({
+      path: router.asPath,
+      bundle: "blog",
+      ...(data?.blog.locations && {
+        customParams: {
+          location: data.blog.locations[0].locationCode,
+        },
+      }),
+    });
+  }, []);
+
+  // When next js routes change, send data to GA4 and Adobe Analytics.
+  React.useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      console.log("blog slug handleRouteChange");
+      console.log(url);
+      console.log(data);
+
+      trackAdobeVirtualPageView({
+        path: router.asPath,
+        bundle: "blog",
+        ...(data?.blog.locations && {
+          customParams: {
+            location: data.blog.locations[0].locationCode,
+          },
+        }),
+      });
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router, data]);
 
   // If uuid returns null from useDecoupledRouter, there was no router
   // path match in Drupal, so we return 404 status error component.
@@ -84,7 +126,7 @@ function BlogPostPage() {
 
 export const getServerSideProps = withDrupalRouter(
   async (_context, props: WithDrupalRouterReturnProps) => {
-    const { uuid, isPreview, apolloClient, revisionId } = props;
+    const { apolloClient, uuid, bundle, isPreview, revisionId } = props;
 
     await apolloClient.query({
       query: BLOG_POST_QUERY,
@@ -99,6 +141,7 @@ export const getServerSideProps = withDrupalRouter(
 
     return {
       props: {
+        bundle: bundle,
         initialApolloState: apolloClient.cache.extract(),
       },
     };

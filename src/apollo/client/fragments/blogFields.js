@@ -23,6 +23,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
       drupalInternalId
       name
       slug
+      locationCode
     }
     mainContent {
       __typename

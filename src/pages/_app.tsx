@@ -13,7 +13,15 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
 
   // Adobe Analytics: trigger an initial virtual page view on initial render.
   React.useEffect(() => {
-    trackAdobeVirtualPageView(router.asPath, pageProps.bundle);
+    // Skip blog, because it's handled inside the slug page template.
+    if (pageProps.bundle !== "blog") {
+      console.log("_app initial render hook!");
+
+      trackAdobeVirtualPageView({
+        path: router.asPath,
+        bundle: pageProps.bundle,
+      });
+    }
   }, []);
 
   // When next js routes change, send data to GA4 and Adobe Analytics.
@@ -24,8 +32,16 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
         page_path: url,
       });
 
-      // Adobe Analytics: Virtual page view.
-      trackAdobeVirtualPageView(router.asPath, pageProps.bundle);
+      // Skip blog, because it's handled inside the slug page template.
+      if (pageProps.bundle !== "blog") {
+        console.log("_app handleRouteChange hook!");
+
+        // Adobe Analytics: Virtual page view.
+        trackAdobeVirtualPageView({
+          path: router.asPath,
+          bundle: pageProps.bundle,
+        });
+      }
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
