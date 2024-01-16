@@ -197,6 +197,22 @@ export default function resolveDrupalParagraphs(
     switch (item.type) {
       case "paragraph--text_with_image":
         const textWithImageMedia: any = item.field_ers_media_item;
+        let mediaItemLink = null;
+        // Media DC image.
+        if (
+          textWithImageMedia.type === "media--digital_collections_image" &&
+          textWithImageMedia.field_media_dc_link !== null
+        ) {
+          mediaItemLink = textWithImageMedia.field_media_dc_link.url;
+        }
+        // Media image & remote catalog image.
+        if (
+          textWithImageMedia.type === "media--image" ||
+          textWithImageMedia.type === "media--remote_catalog_image"
+        ) {
+          mediaItemLink =
+            textWithImageMedia.field_media_image_link_url_only?.url;
+        }
         paragraphComponent = {
           id: item.id,
           type: paragraphTypeName,
@@ -208,6 +224,7 @@ export default function resolveDrupalParagraphs(
           credit: textWithImageMedia.field_media_image_credit_html
             ? textWithImageMedia.field_media_image_credit_html.processed
             : null,
+          link: mediaItemLink,
           image:
             item.field_ers_media_item.data === null
               ? null

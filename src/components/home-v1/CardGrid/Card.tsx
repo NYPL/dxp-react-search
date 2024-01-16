@@ -1,9 +1,9 @@
 import React from "react";
 import { useStyleConfig } from "@chakra-ui/system";
 // Components
-import { Heading, Text, Grid, GridItem, Box } from "@chakra-ui/react";
+import { Heading, Grid, GridItem, Box } from "@chakra-ui/react";
 import Image, { ImageType } from "./../../shared/Image";
-import HomePageLink from "../HomePageLink";
+import HomePageLink, { AnalyticsEventActions } from "../HomePageLink";
 
 export interface CardItem {
   id: string;
@@ -17,10 +17,17 @@ interface CardProps {
   item: CardItem;
   variant?: "blog-card" | "updates-card";
   size?: any;
+  analyticsEventActions: AnalyticsEventActions;
   gaEventActionName: string;
 }
 
-function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
+function Card({
+  item,
+  variant,
+  size = "md",
+  analyticsEventActions,
+  gaEventActionName,
+}: CardProps) {
   // Get Card theme styles
   const styles = useStyleConfig("Card", { variant, size });
   // Generate describedBy string (used by Blog Card)
@@ -47,21 +54,27 @@ function Card({ item, variant, size = "md", gaEventActionName }: CardProps) {
             "aria-describedby": describedByIdsString,
           })}
         >
-          <HomePageLink href={item.url} gaEventActionName={gaEventActionName}>
+          <HomePageLink
+            href={item.url}
+            analyticsEventActions={analyticsEventActions}
+            gaEventActionName={gaEventActionName}
+          >
             {item.title}
           </HomePageLink>
         </Heading>
-        <Box className="details">
-          {item.description && (
-            <Text id={`card-description-${item.id}`}>{item.description}</Text>
-          )}
-        </Box>
+        {item.description && (
+          <Box
+            className="details"
+            dangerouslySetInnerHTML={{ __html: item.description }}
+          />
+        )}
       </GridItem>
       <GridItem id={`card-image-${item.id}`} colStart={1} rowStart={1}>
         <HomePageLink
           id={`card-image-link-${item.id}`}
           href={item.url}
           aria-label={`${item.title}-image`}
+          analyticsEventActions={analyticsEventActions}
           gaEventActionName={gaEventActionName}
           tabIndex={-1}
         >

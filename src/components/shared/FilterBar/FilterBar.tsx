@@ -78,7 +78,7 @@ function FilterBar({
       }
     }
     setSelectedItems(urlState);
-  }, [router.query]);
+  }, [router]);
 
   //
   function onMenuClick(groupId: string) {
