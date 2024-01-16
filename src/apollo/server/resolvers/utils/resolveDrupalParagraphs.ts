@@ -133,6 +133,13 @@ export default function resolveDrupalParagraphs(
         accumulator.push(item);
       }
 
+      if (
+        item.type === "paragraph--blog_feed" &&
+        typesInQuery.includes("BlogFeed")
+      ) {
+        accumulator.push(item);
+      }
+
       // Start homepage specific paragraphs.
       if (
         item.type === "paragraph--hp_hero" &&
@@ -551,6 +558,20 @@ export default function resolveDrupalParagraphs(
           heading: item.field_ts_donor_credit_heading,
           description: item.field_tfls_description.processed,
           showBorder: item.field_bs_show_border,
+        };
+        break;
+
+      case "paragraph--blog_feed":
+        paragraphComponent = {
+          id: item.id,
+          type: paragraphTypeName,
+          title: item.field_ts_heading,
+          description: item.field_tfls_description?.processed,
+          channelId: item.field_ers_channel?.meta?.drupal_internal__target_id,
+          colorway:
+            contentType === "section_front"
+              ? getColorway("section_front")
+              : null,
         };
         break;
 

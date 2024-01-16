@@ -9,10 +9,10 @@ import {
 
 export interface CardGridHeaderProps {
   id: string;
-  title?: string;
+  title: string;
   headingColor?: string;
   link?: string;
-  hrefText?: string;
+  linkTitle?: string;
 }
 
 export default function CardGridHeader({
@@ -20,45 +20,42 @@ export default function CardGridHeader({
   title,
   headingColor = "brand.primary",
   link,
-  hrefText,
+  linkTitle,
 }: CardGridHeaderProps) {
-  if (link && hrefText && title) {
-    return (
-      <Box mb=".75em">
+  // @TODO cleanup the styling here, and use chakra/DS.
+  return (
+    <>
+      {link && linkTitle ? (
         <HStack alignItems="baseline">
           <Heading id={id} level="two" text={title} color={headingColor} />
-          <Link href={link}>
-            <a
-              style={{
-                display: "inline-flex",
-                flexFlow: "row nowrap",
-                lineHeight: "1",
-                fontSize: ".875rem",
-                fontWeight: 600,
-                letterSpacing: ".04em",
-                color: "#c60917",
-                marginLeft: "10px",
-                textDecoration: "none",
-              }}
-            >
-              {hrefText}
-              <span style={{ marginLeft: "5px" }}>
-                <Icon
-                  size="small"
-                  name="arrow"
-                  decorative={true}
-                  iconRotation="rotate270"
-                  color="brand.primary"
-                />
-              </span>
-            </a>
+          <Link
+            href={link}
+            fontSize="small"
+            fontWeight="700"
+            color="brand.primary"
+            textDecoration="none"
+            paddingLeft="xs"
+            _hover={{
+              color: "brand.primary",
+            }}
+          >
+            {linkTitle}
+            <Box as="span" ml="xxs">
+              <Icon
+                size="small"
+                name="arrow"
+                decorative={true}
+                iconRotation="rotate270"
+                color="brand.primary"
+              />
+            </Box>
           </Link>
         </HStack>
-      </Box>
-    );
-  } else if (title) {
-    return <Heading id={id} level="two" text={title} color={headingColor} />;
-  } else {
-    return null;
-  }
+      ) : (
+        <Heading id={id} level="two" color={headingColor}>
+          {title}
+        </Heading>
+      )}
+    </>
+  );
 }

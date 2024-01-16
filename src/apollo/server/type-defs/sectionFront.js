@@ -22,6 +22,7 @@ export const typeDefs = gql`
     | EmailSubscription
     | ButtonLinks
     | Text
+    | BlogFeed
 
   union SectionFrontBottomContent = DonorCredit
 
