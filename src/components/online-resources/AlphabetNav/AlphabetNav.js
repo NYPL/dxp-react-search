@@ -7,7 +7,7 @@ import { gql, useQuery } from "@apollo/client";
 import { AUTO_SUGGEST_QUERY } from "./../SearchForm/SearchForm";
 // Components
 import { AlphabetFilter, Box } from "@nypl/design-system-react-components";
-import { Heading } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
 import getActiveLetters from "./../../../utils/getActiveLetters";
@@ -46,7 +46,7 @@ function AlphabetNav({ className, title, description }) {
           className={`${className ? className : ""}`}
           currentLetter={selectedLetter}
           descriptionText={description}
-          headingText={title}
+          headingText={<Heading level="h2">{title}</Heading>}
           id="alphabet-filter-id"
           onClick={(e) => handleClick(e)}
         />

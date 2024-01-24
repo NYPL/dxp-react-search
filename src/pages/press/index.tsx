@@ -4,7 +4,8 @@ import React from "react";
 import withApollo from "./../../apollo/withApollo";
 import { initializeApollo } from "./../../apollo/withApollo/apollo";
 // Components
-import { Heading, Box } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
+import Heading from "../../components/shared/Heading";
 import PageContainer from "../../components/press-releases/layouts/PageContainer";
 import PressReleaseCollection, {
   ALL_PRESS_RELEASES_QUERY,
@@ -24,7 +25,7 @@ function PressMainPage() {
       showContentHeader={true}
       contentPrimary={
         <>
-          <Heading level="two">{mediaInquiries.heading}</Heading>
+          <Heading level="h2">{mediaInquiries.heading}</Heading>
           <Box
             marginBottom="s"
             sx={{

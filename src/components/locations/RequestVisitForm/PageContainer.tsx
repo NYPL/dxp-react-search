@@ -55,7 +55,7 @@ function PageContainer({
                 <Menu
                   id={menu.id}
                   key={menu.id}
-                  headingLevel="three"
+                  headingLevel="h3"
                   headingColor={"#c60917"}
                   title={menu.title}
                   items={menu.items}

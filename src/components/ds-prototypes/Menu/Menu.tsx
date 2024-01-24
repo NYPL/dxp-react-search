@@ -1,10 +1,7 @@
 import React from "react";
-import {
-  Heading,
-  HeadingLevels,
-  List,
-} from "@nypl/design-system-react-components";
+import { HeadingLevels, List } from "@nypl/design-system-react-components";
 import MenuItem from "./MenuItem";
+import Heading from "../../shared/Heading";
 import { MenuItemType } from "./MenuTypes";
 // Styles
 import s from "./Menu.module.css";
@@ -40,14 +37,14 @@ function Menu({
       aria-labelledby={headingId}
       className={orientation === "vertical" ? s.vertical : s.horizontal}
     >
-      <span style={headingColor ? { color: headingColor } : { color: "black" }}>
-        <Heading
-          className={headingDecoration ? s.underline : ""}
-          id={headingId}
-          level={headingLevel}
-          text={title}
-        />
-      </span>
+      <Heading
+        className={headingDecoration ? s.underline : ""}
+        id={headingId}
+        level={headingLevel}
+        color={headingColor}
+      >
+        {title}
+      </Heading>
       <List noStyling type="ul">
         {items.map((item: MenuItemType) => {
           return (

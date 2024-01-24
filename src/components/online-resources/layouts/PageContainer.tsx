@@ -83,7 +83,7 @@ function PageContainer({
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel="two"
+                headingLevel="h2"
                 headingColor={"#00838A"}
                 headingDecoration={true}
                 title={menu.title}
@@ -107,7 +107,7 @@ function PageContainer({
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel="three"
+                headingLevel="h3"
                 headingColor={"#00838A"}
                 title={menu.title}
                 items={menu.items}

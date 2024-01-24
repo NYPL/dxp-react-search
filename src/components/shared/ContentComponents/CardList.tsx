@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Box, Heading, Grid, Link } from "@nypl/design-system-react-components";
+import { Box, Grid, Link } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import TextFormatted from "./../TextFormatted";
 import Image from "next/image";
 import useWindowSize from "../../../hooks/useWindowSize";
@@ -42,7 +43,7 @@ function CardList({ id, type, title, description, items }: CardListProps) {
 
   return (
     <Box id={`${type}-${id}`} mb="xl">
-      {title && <Heading level="two" text={title} />}
+      {title && <Heading level="h2">{title}</Heading>}
       {description && (
         <Box mb="l">
           <TextFormatted html={description} />
@@ -104,7 +105,7 @@ function CardList({ id, type, title, description, items }: CardListProps) {
                   </Box>
                 )}
                 <Box>
-                  <Heading level="three">
+                  <Heading level="h3">
                     <Link href={item.link}>{item.title}</Link>
                   </Heading>
                   <TextFormatted html={item.description} />

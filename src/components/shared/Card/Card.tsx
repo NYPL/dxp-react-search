@@ -48,7 +48,7 @@ function Card({
       isCentered={isCentered}
       layout={layout}
     >
-      <CardHeading level="three">
+      <CardHeading level="h3" size="heading5">
         {url && <NextDsLink href={url}>{title}</NextDsLink>}
       </CardHeading>
       <CardContent>

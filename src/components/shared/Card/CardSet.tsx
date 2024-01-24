@@ -1,6 +1,7 @@
 import React from "react";
 // Components
-import { Heading, HStack, Icon } from "@nypl/design-system-react-components";
+import { HStack, Icon } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import Link from "next/link";
 
 interface CardSetProps {
@@ -24,7 +25,9 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
     return (
       <div style={{ marginBottom: ".75em" }}>
         <HStack alignItems="baseline">
-          <Heading id={id} level="two" text={title} />
+          <Heading id={id} level="h2">
+            {title}
+          </Heading>
           <Link href={slug}>
             <a
               style={{
@@ -55,7 +58,11 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
       </div>
     );
   } else if (title) {
-    return <Heading id={id} level="two" text={title} />;
+    return (
+      <Heading id={id} level="h2">
+        {title}
+      </Heading>
+    );
   } else {
     return null;
   }
