@@ -1,46 +1,48 @@
 import { mergeTypeDefs } from "@graphql-tools/merge";
 // Types
-// @TODO rename these to newer format, i.e, PageTypeDefs, BlogTypeDefs, etc.
-import { typeDefs as RefineryLocationTypes } from "./refineryLocation";
-import { typeDefs as RefineryFilterTypes } from "./refineryFilter";
-import { typeDefs as OnlineResourceTypes } from "./onlineResource";
-import { typeDefs as TaxonomyTypes } from "./taxonomy";
-import { typeDefs as SearchTypes } from "./search";
-import { typeDefs as SharedTypes } from "./shared";
-import { typeDefs as DecoupledRouterTypes } from "./decoupledRouter";
-import { typeDefs as AutoSuggestionsTypes } from "./autoSuggestions";
-import { typeDefs as IpAccessCheckTypes } from "./ipAccessCheck";
-import { typeDefs as ValidatePatronCardTypes } from "./validatePatronCard";
-import { typeDefs as FilterTypes } from "./filter";
+import { autoSuggestionsTypeDefs } from "./auto-suggestions";
+import { decoupledRouterTypeDefs } from "./decoupled-router";
+import { drupalParagraphsTypeDefs } from "./drupal-paragraphs";
+import { filterTypeDefs } from "./filter";
+import { ipAccessCheckTypeDefs } from "./ip-access-check";
+import { queryTypeDefs } from "./query";
+import { refineryTypeDefs } from "./refinery";
+import { searchTypeDefs } from "./search";
+import { sharedTypeDefs } from "./shared";
+import { taxonomyTypeDefs } from "./taxonomy";
+import { validatePatronCardTypeDefs } from "./validate-patron-card";
 // Content types
-import { typeDefs as BlogTypes } from "./blog";
-import { typeDefs as LocationTypes } from "./location";
-import { typeDefs as PressReleaseTypes } from "./press";
-import { typeDefs as HomePageTypes } from "./homepage";
-import { typeDefs as SectionFrontTypes } from "./sectionFront";
-import { PageTypeDefs } from "./page";
-import { MenuTypeDefs } from "./menu";
+import { blogTypeDefs } from "./blog";
+import { homePageTypeDefs } from "./home-page";
+import { locationTypeDefs } from "./location";
+import { onlineResourceTypeDefs } from "./online-resource";
+import { pageTypeDefs } from "./page";
+import { pressReleaseTypeDefs } from "./press-release";
+import { sectionFronttypeDefs } from "./section-front";
+// Menu
+import { menuTypeDefs } from "./menu";
 // Mutations
-import { typeDefs as SendEmailTypes } from "./sendEmail";
+import { sendEmailTypeDefs } from "./send-email";
 
 export const typeDefs = mergeTypeDefs([
-  SharedTypes,
-  SearchTypes,
-  RefineryLocationTypes,
-  RefineryFilterTypes,
-  OnlineResourceTypes,
-  TaxonomyTypes,
-  DecoupledRouterTypes,
-  AutoSuggestionsTypes,
-  IpAccessCheckTypes,
-  ValidatePatronCardTypes,
-  FilterTypes,
-  BlogTypes,
-  LocationTypes,
-  PressReleaseTypes,
-  HomePageTypes,
-  SectionFrontTypes,
-  PageTypeDefs,
-  MenuTypeDefs,
-  SendEmailTypes,
+  autoSuggestionsTypeDefs,
+  blogTypeDefs,
+  decoupledRouterTypeDefs,
+  drupalParagraphsTypeDefs,
+  filterTypeDefs,
+  homePageTypeDefs,
+  ipAccessCheckTypeDefs,
+  locationTypeDefs,
+  onlineResourceTypeDefs,
+  pageTypeDefs,
+  menuTypeDefs,
+  pressReleaseTypeDefs,
+  queryTypeDefs,
+  refineryTypeDefs,
+  searchTypeDefs,
+  sectionFronttypeDefs,
+  sendEmailTypeDefs,
+  sharedTypeDefs,
+  taxonomyTypeDefs,
+  validatePatronCardTypeDefs,
 ]);

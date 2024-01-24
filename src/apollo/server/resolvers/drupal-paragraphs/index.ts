@@ -1,38 +1,38 @@
 import { mergeResolvers } from "@graphql-tools/merge";
-import { AudioEmbedResolver } from "./audio-embed-resolver";
-import { BlogCardGridResolver } from "./blog-card-grid-resolver";
-import { ButtonLinksResolver } from "./button-links-resolver";
-import { CardGridResolver } from "./card-grid-resolver";
-import { DonationResolver } from "./donation-resolver";
-import { DonorCreditResolver } from "./donor-credit";
-import { EmailSubscriptionResolver } from "./email-subscription";
-import { ExternalSearchResolver } from "./external-search";
-import { GoogleMapEmbedResolver } from "./google-map-embed-resolver";
-import { HeroResolver } from "./hero-resolver";
-import { ImageResolver } from "./image-resolver";
-import { JumbotronResolver } from "./jumbotron-resolver";
-import { SlideshowResolver } from "./slideshow-resolver";
-import { SocialEmbedResolver } from "./social-embed-resolver";
-import { TextResolver } from "./text-resolver";
-import { TextWithImageResolver } from "./text-with-image-resolver";
-import { VideoResolver } from "./video-resolver";
+import { audioEmbedResolver } from "./audio-embed";
+import { blogCardGridResolver } from "./blog-card-grid";
+import { buttonLinksResolver } from "./button-links";
+import { cardGridResolver } from "./card-grid";
+import { donationResolver } from "./donation";
+import { donorCreditResolver } from "./donor-credit";
+import { emailSubscriptionResolver } from "./email-subscription";
+import { externalSearchResolver } from "./external-search";
+import { googleMapEmbedResolver } from "./google-map-embed";
+import { heroResolver } from "./hero";
+import { imageResolver } from "./image";
+import { jumbotronResolver } from "./jumbotron";
+import { slideshowResolver } from "./slideshow";
+import { socialEmbedResolver } from "./social-embed";
+import { textResolver } from "./text";
+import { textWithImageResolver } from "./text-with-image";
+import { videoResolver } from "./video";
 
 export const drupalParagraphsResolvers = mergeResolvers([
-  AudioEmbedResolver,
-  BlogCardGridResolver,
-  ButtonLinksResolver,
-  CardGridResolver,
-  DonationResolver,
-  DonorCreditResolver,
-  EmailSubscriptionResolver,
-  ExternalSearchResolver,
-  GoogleMapEmbedResolver,
-  HeroResolver,
-  ImageResolver,
-  JumbotronResolver,
-  SlideshowResolver,
-  SocialEmbedResolver,
-  TextResolver,
-  TextWithImageResolver,
-  VideoResolver,
+  audioEmbedResolver,
+  blogCardGridResolver,
+  buttonLinksResolver,
+  cardGridResolver,
+  donationResolver,
+  donorCreditResolver,
+  emailSubscriptionResolver,
+  externalSearchResolver,
+  googleMapEmbedResolver,
+  heroResolver,
+  imageResolver,
+  jumbotronResolver,
+  slideshowResolver,
+  socialEmbedResolver,
+  textResolver,
+  textWithImageResolver,
+  videoResolver,
 ]);

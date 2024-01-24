@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const PageTypeDefs = gql`
+export const pageTypeDefs = gql`
   type Page {
     id: ID!
     title: String!
