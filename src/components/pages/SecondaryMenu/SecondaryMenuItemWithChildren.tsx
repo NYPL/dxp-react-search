@@ -38,6 +38,8 @@ export default function MenuItemWithChildren({
         <HorizontalRule m="0" bg="var(--nypl-colors-ui-border-default)" />
       )}
       <Box
+        display="flex"
+        justifyContent="space-between"
         paddingY="8px"
         paddingEnd="16px"
         paddingStart={`${menuLevel * 10 + 16}px`}
@@ -71,11 +73,8 @@ export default function MenuItemWithChildren({
         </Link>
         <button
           id={`button-${item.id}`}
-          aria-expanded="false"
+          aria-expanded={isExpanded}
           onClick={toggleMenu}
-          style={{
-            float: "right",
-          }}
         >
           <Icon
             name="arrow"
