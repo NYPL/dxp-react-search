@@ -11,9 +11,6 @@ export default function trackAdobeVirtualPageView({
   bundle,
   customParams,
 }: TrackAdobeVirtualPageViewOptions) {
-  console.log("trackAdobeVirtualPageView() customParams!");
-  console.log(customParams);
-
   // Initialize empty data layer object.
   window.adobeDataLayer.push({
     page_name: null,

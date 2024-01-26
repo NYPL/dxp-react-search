@@ -47,9 +47,6 @@ function BlogPostPage() {
 
   // Adobe Analytics: trigger an initial virtual page view on initial render.
   React.useEffect(() => {
-    console.log("blog slug initial render");
-    console.log(data);
-
     trackAdobeVirtualPageView({
       path: router.asPath,
       bundle: "blog",
@@ -60,29 +57,6 @@ function BlogPostPage() {
       }),
     });
   }, []);
-
-  // When next js routes change, send data to GA4 and Adobe Analytics.
-  React.useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      console.log("blog slug handleRouteChange");
-      console.log(url);
-      console.log(data);
-
-      trackAdobeVirtualPageView({
-        path: router.asPath,
-        bundle: "blog",
-        ...(data?.blog.locations && {
-          customParams: {
-            location: data.blog.locations[0].locationCode,
-          },
-        }),
-      });
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router, data]);
 
   // If uuid returns null from useDecoupledRouter, there was no router
   // path match in Drupal, so we return 404 status error component.

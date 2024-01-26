@@ -15,8 +15,6 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
     // Skip blog, because it's handled inside the slug page template.
     if (pageProps.bundle !== "blog") {
-      console.log("_app initial render hook!");
-
       trackAdobeVirtualPageView({
         path: router.asPath,
         bundle: pageProps.bundle,
@@ -34,8 +32,6 @@ export default function ScoutApp({ Component, pageProps }: AppProps) {
 
       // Skip blog, because it's handled inside the slug page template.
       if (pageProps.bundle !== "blog") {
-        console.log("_app handleRouteChange hook!");
-
         // Adobe Analytics: Virtual page view.
         trackAdobeVirtualPageView({
           path: router.asPath,
