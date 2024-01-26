@@ -1,6 +1,12 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import { Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  NewsletterSignup,
+  NewsletterSignupViewType,
+} from "@nypl/design-system-react-components";
 import EmailSubscriptionWrapper from "./EmailSubscriptionWrapper";
 import EmailSubscriptionForm from "./EmailSubscriptionForm";
 import EmailSubscriptionConfirmation, {
@@ -35,8 +41,8 @@ export default function EmailSubscription({
   salesforceListId,
 }: EmailSubscriptionProps): JSX.Element {
   const [input, setInput] = React.useState("");
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [formState, setFormState] =
+    React.useState<NewsletterSignupViewType>("confirmation");
 
   const [status, setStatus] = React.useState<StatusCode>();
   const { asPath } = useRouter();
@@ -49,7 +55,7 @@ export default function EmailSubscription({
     const gaEventActionName = `Subscribe - ${asPath}`; // example: Subscribe - /research
     const gaEventLabel = `Success ${salesforceSourceCode}`; // example: Success research
 
-    setIsSubmitting(true);
+    setFormState("submitting");
     if (formBaseUrl !== undefined) {
       // API endpoint where we send form data.
       const endpoint = `${formBaseUrl}`;
@@ -93,18 +99,17 @@ export default function EmailSubscription({
         });
 
         setStatus(result.statusCode);
-        setIsSubmitted(true);
+        setFormState("confirmation");
       } catch (error) {
         setStatus("ERROR");
-        setIsSubmitted(true);
+        setFormState("error");
         /* @TODO maybe it would be usful to submit a
         GA event with label "Error - ${salesforceSourceCode}"?*/
       }
-      setIsSubmitting(false);
     }
   };
 
-  if (isSubmitting) {
+  if (formState === "submitting") {
     return (
       <EmailSubscriptionWrapper
         id={id}
@@ -118,30 +123,66 @@ export default function EmailSubscription({
   }
 
   return (
-    <EmailSubscriptionWrapper
-      id={id}
-      bgColor={bgColor}
-      heading={heading}
-      headingColor={headingColor}
-    >
-      {isSubmitted && status ? (
-        <EmailSubscriptionConfirmation
-          id={id}
-          status={status}
-          bgColor={bgColor}
-          headingColor={headingColor}
-        />
-      ) : (
-        <EmailSubscriptionForm
-          id={id}
-          description={description}
-          onSubmit={handleSubmit}
-          onChange={setInput}
-          formInput={input}
-          formPlaceholder={formPlaceholder}
-          formHelperText={formHelperText}
-        />
-      )}
-    </EmailSubscriptionWrapper>
+    <>
+      <NewsletterSignup
+        // id is not passed to the Newsletters outest div (aka Stack)
+        // className also does not seem to be passed in any place
+        id={id}
+        // I as trying to overwrite the border color but does not work
+        sx={{
+          "div.chakra-stack::nth-child(2)": {
+            borderLeftColor: "var(--nypl-colors-section-research-primary)",
+          },
+        }}
+        confirmationHeading="Thank you!"
+        confirmationText="You have successfully subscribed to our email updates! You can update your email subscription preferences at any time using the links at the bottom of the email."
+        descriptionText={description}
+        errorText={
+          <Box
+            dangerouslySetInnerHTML={{
+              __html:
+                "An error has occurred while attempting to save your information. Please refresh this page and try again. If this error persists, <a href='mailto:enews@nypl.org?subject=Please re-activate my e-mail address'>contact our e-mail team</a>.",
+            }}
+          />
+        }
+        formHelperText={
+          <Box dangerouslySetInnerHTML={{ __html: formHelperText }} />
+        }
+        onChange={(e) => setInput(e.target.value)}
+        onSubmit={handleSubmit}
+        /** The placeholder is not editable but that might not be too bad
+         * placeContent={formPlaceholder}
+         */
+        {...(heading && { title: <Heading level="h2">{heading}</Heading> })}
+        valueEmail={input}
+        // For now the "submitting" view is never shown since we have a check on line 112
+        view={formState}
+      />
+      <EmailSubscriptionWrapper
+        id={id}
+        bgColor={bgColor}
+        heading={heading}
+        headingColor={headingColor}
+      >
+        {status ? (
+          <EmailSubscriptionConfirmation
+            id={id}
+            status={status}
+            bgColor={bgColor}
+            headingColor={headingColor}
+          />
+        ) : (
+          <EmailSubscriptionForm
+            id={id}
+            description={description}
+            onSubmit={handleSubmit}
+            onChange={setInput}
+            formInput={input}
+            formPlaceholder={formPlaceholder}
+            formHelperText={formHelperText}
+          />
+        )}
+      </EmailSubscriptionWrapper>
+    </>
   );
 }
