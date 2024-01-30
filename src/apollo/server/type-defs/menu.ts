@@ -23,7 +23,7 @@ export const menuTypeDefs = gql`
   extend type Query {
     menu(
       id: String
-      filter: MenuFilter
+      filter: QueryFilter
       # @TODO remove sort if we agree that it does not work.
       sort: Sort
     ): MenuItemsConnection

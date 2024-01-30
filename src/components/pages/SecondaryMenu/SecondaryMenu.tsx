@@ -14,7 +14,7 @@ import { MenuItem as MenuItemType } from "./Types";
 
 export const MENU_QUERY = gql`
   ${MENU_FIELDS_FRAGMENT}
-  query MenuQuery($id: String, $filter: MenuFilter, $sort: Sort) {
+  query MenuQuery($id: String, $filter: QueryFilter, $sort: Sort) {
     menu(id: $id, filter: $filter, sort: $sort) {
       items {
         ...MenuFields
@@ -54,15 +54,37 @@ function SecondaryMenu({ id, parentId }: SecondaryMenuProps) {
       //   direction: "ASC",
       // },
       filter: {
-        maxDepth: { fieldName: "max_depth", operator: "=", value: "4" },
+        experimental: true,
+        conditions: [
+          {
+            field: "parent",
+            operator: "=",
+            value: parentId,
+          },
+          // {
+          //   field: "exclude_root",
+          //   operator: "=",
+          //   value: "true",
+          // },
+          // {
+          //   field: "min_depth",
+          //   operator: "=",
+          //   value: "3",
+          // },
+          // {
+          //   field: "max_depth",
+          //   operator: "=",
+          //   value: "3",
+          // },
+        ],
         /** Parent filter will query all menu items that are children of the passed value menuItemId
          * and its child items. This filter works in combination with max_depth */
         // Example with highest menu item id passed (Home)
-        parent: {
-          fieldName: "parent",
-          operator: "=",
-          value: `${parentId ? parentId : "standard.front_page"}`,
-        },
+        // parent: {
+        //   fieldName: "parent",
+        //   operator: "=",
+        //   value: `${parentId ? parentId : "standard.front_page"}`,
+        // },
         // Example with Education item id passed
         // parent: {
         //   fieldName: "parent",

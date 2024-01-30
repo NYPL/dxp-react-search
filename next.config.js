@@ -51,6 +51,7 @@ const nextConfig = {
       "nypl-pantheon.ddev.site",
       "nypl-pantheon-basic-pgs.ddev.site",
       DRUPAL_API_DOMAIN_ONLY,
+      "nypl-pantheon-basic-pgs.ddev.site",
       // QA
       "qa-cdn-d8-2.nypl.org",
       "qa-d8.nypl.org",
