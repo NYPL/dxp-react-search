@@ -1,9 +1,14 @@
 ## CHANGES
 
-### v0.10.6 - Misc
+### v0.10.6 - Node 18 Upgrade, Misc Bug Fixes
 
 ---
 
+- Fix blog link card description padding: [#470](https://github.com/NYPL/dxp-react-search/pull/470)
+- Fix homepage card layout bug: [#471](https://github.com/NYPL/dxp-react-search/pull/471)
+- Update homepage card to allow some text formatting: [#464](https://github.com/NYPL/dxp-react-search/pull/464)
+- Enable links for DC images in Text with Image component: [#465](https://github.com/NYPL/dxp-react-search/pull/465)
+- Allow contentcafe12.btol.com as nextjs image source: [#466](https://github.com/NYPL/dxp-react-search/pull/466)
 - Update blog channel description: [#451](https://github.com/NYPL/dxp-react-search/pull/451)
 - Update to Node 18.12.0: [#448](https://github.com/NYPL/dxp-react-search/pull/448)
 

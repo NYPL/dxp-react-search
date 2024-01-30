@@ -21,7 +21,7 @@ import TextWithImage from "../shared/ContentComponents/TextWithImage";
 import Video from "./../shared/ContentComponents/Video";
 
 import { Box, Heading } from "@nypl/design-system-react-components";
-import SecondaryMenu from "./Menu";
+import SecondaryMenu from "./SecondaryMenu";
 
 export const PAGE_QUERY = gql`
   query PageQuery($id: String, $revisionId: String, $preview: Boolean) {
@@ -351,7 +351,9 @@ export default function PagePage({
       }
       showSidebar={true}
       sidebarSide="left"
-      contentSecondary={<SecondaryMenu id="main" parentId={parentId} />}
+      contentSecondary={
+        <SecondaryMenu id="secondary-menu" parentId={parentId} />
+      }
     />
   );
 }

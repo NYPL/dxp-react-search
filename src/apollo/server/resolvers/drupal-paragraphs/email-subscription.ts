@@ -1,4 +1,5 @@
 import { DrupalJsonApiTextField } from "./../drupal-types";
+import getColorway from "../utils/get-colorway";
 
 type EmailSubscriptionParagraphDrupalJsonApi = {
   id: string;
@@ -7,9 +8,10 @@ type EmailSubscriptionParagraphDrupalJsonApi = {
   field_ts_placeholder: string;
   field_ts_salesforce_list_id: string;
   field_ts_salesforce_source_code: string;
+  parent_node: { id: string; uuid: string; bundle: string; slug: string };
 };
 
-export const EmailSubscriptionResolver = {
+export const emailSubscriptionResolver = {
   EmailSubscription: {
     id: (parent: EmailSubscriptionParagraphDrupalJsonApi) => parent.id,
     type: () => "email_subscription",
@@ -23,6 +25,9 @@ export const EmailSubscriptionResolver = {
       parent.field_ts_salesforce_list_id,
     salesforceSourceCode: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_ts_salesforce_source_code,
-    // colorway
+    colorway: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
+      parent.parent_node.bundle === "section_front"
+        ? getColorway(parent.parent_node.slug)
+        : null,
   },
 };

@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const MenuTypeDefs = gql`
+export const menuTypeDefs = gql`
   type MenuItem {
     id: ID!
     title: String!

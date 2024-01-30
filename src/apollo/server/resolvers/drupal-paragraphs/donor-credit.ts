@@ -7,7 +7,7 @@ type DrupalJsonApiDonorCreditParagraph = {
   field_bs_show_border: boolean;
 };
 
-export const DonorCreditResolver = {
+export const donorCreditResolver = {
   DonorCredit: {
     id: (parent: DrupalJsonApiDonorCreditParagraph) => parent.id,
     type: () => "donor_credit",
