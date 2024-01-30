@@ -24,7 +24,7 @@ export const menuResolver = {
       const includedFields = undefined;
 
       const apiPath = getCollectionResourceJsonApiPath(
-        "menu_items",
+        "menu",
         args.id,
         includedFields,
         args.filter,
@@ -38,6 +38,8 @@ export const menuResolver = {
         );
 
       const menuTree: MenuItem[] = getMenuTree(response.data);
+
+      // console.log(menuTree);
 
       return {
         items: menuTree,

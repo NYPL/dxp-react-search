@@ -33,6 +33,14 @@ export const PAGE_QUERY = gql`
         title
         url
       }
+      activeTrail {
+        items {
+          id
+          title
+          parent
+          activeLink
+        }
+      }
       description
       image {
         id
@@ -268,6 +276,25 @@ export default function PagePage({
 
   const showHero = page.featuredContent === null ? false : true;
 
+  // console.log(page.activeTrail);
+
+  // const activeLinkParentId = page.activeTrail.forEach((item: any => {
+  //   if {item.activeLink) {
+  //     return item.parent;
+  //   }
+  // })
+  // let parentId;
+  // page.activeTrail?.items.forEach((item: any) => {
+  //   if (item.activeLink === true) {
+  //     parentId = item.parent;
+  //   }
+  // });
+
+  console.log(page.activeTrail);
+
+  // Fixed parent, always the level 2 menu item.
+  const parentId = page.activeTrail?.items[1].id;
+
   return (
     <PageContainer
       metaTags={{
@@ -324,7 +351,7 @@ export default function PagePage({
       }
       showSidebar={true}
       sidebarSide="left"
-      contentSecondary={<SecondaryMenu id="main" />}
+      contentSecondary={<SecondaryMenu id="main" parentId={parentId} />}
     />
   );
 }

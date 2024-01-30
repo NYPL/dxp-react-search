@@ -7,7 +7,7 @@ import { Box, Link, Heading } from "@nypl/design-system-react-components";
 
 export const MENU_QUERY = gql`
   ${MENU_FIELDS_FRAGMENT}
-  query MenuQuery($id: String, $filter: MenuFilter, $sort: Sort) {
+  query MenuQuery($id: String, $filter: QueryFilter, $sort: Sort) {
     menu(id: $id, filter: $filter, sort: $sort) {
       items {
         ...MenuFields
@@ -27,7 +27,7 @@ export const MENU_QUERY = gql`
 
 interface MenuItem {
   id: string;
-  parentId: string;
+  parentId?: string;
   title: string;
   url: string;
   children?: [MenuItem];
@@ -35,6 +35,7 @@ interface MenuItem {
 
 interface SecondaryMenuProps {
   id: string;
+  parentId?: string | null;
 }
 
 interface MenuItemProps {
@@ -47,9 +48,9 @@ interface MenuItemProps {
 const MenuItem = ({ item }: MenuItemProps) => {
   if (item.children) {
     return (
-      <li style={{ listStyle: "none" }} className="has-submenu">
+      <li className="has-submenu">
         <Link href={item.url}>{item.title}</Link>
-        <ul style={{ paddingLeft: "10px" }}>
+        <ul style={{ paddingLeft: "20px" }}>
           {item.children.map((child: any) => (
             <MenuItem key={child.id} item={child} />
           ))}
@@ -58,13 +59,15 @@ const MenuItem = ({ item }: MenuItemProps) => {
     );
   }
   return (
-    <li id={item.id} style={{ listStyle: "none" }}>
-      <Link href={item.url}>{item.title}</Link>
+    <li id={item.id}>
+      <Link color="black" href={item.url}>
+        {item.title}
+      </Link>
     </li>
   );
 };
 
-function SecondaryMenu({ id }: SecondaryMenuProps) {
+function SecondaryMenu({ id, parentId = null }: SecondaryMenuProps) {
   const { loading, error, data } = useQuery(MENU_QUERY, {
     skip: !id,
     variables: {
@@ -75,7 +78,29 @@ function SecondaryMenu({ id }: SecondaryMenuProps) {
       //   direction: "ASC",
       // },
       filter: {
-        maxDepth: { fieldName: "max_depth", operator: "=", value: "4" },
+        experimental: true,
+        conditions: [
+          {
+            field: "parent",
+            operator: "=",
+            value: parentId,
+          },
+          // {
+          //   field: "exclude_root",
+          //   operator: "=",
+          //   value: "true",
+          // },
+          // {
+          //   field: "min_depth",
+          //   operator: "=",
+          //   value: "3",
+          // },
+          // {
+          //   field: "max_depth",
+          //   operator: "=",
+          //   value: "3",
+          // },
+        ],
         /** Parent filter will query all menu items that are children of the passed value menuItemId
          * and its child items. This filter works in combination with max_depth */
         // Example with highest menu item id passed (Home)
