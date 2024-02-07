@@ -19,14 +19,16 @@ function TextFormatted({ html }: TextFormattedProps) {
         },
         "& a": {
           color: "var(--nypl-colors-ui-link-primary) !important",
-          textDecoration: "underline",
+          textDecoration: "underline dotted",
+          textUnderlineOffset: "2px",
+          textDecorationThickness: "1px",
           _hover: {
             color: "var(--nypl-colors-ui-link-secondary) !important",
           },
         },
         "& h3": {
-          fontWeight: "heading.tertiary",
-          fontSize: "heading.tertiary",
+          fontWeight: "var(--nypl-fontWeights-heading-heading4)",
+          fontSize: "var(--nypl-fontSizes-desktop-heading-heading4)",
           lineHeight: "1.25",
           marginTop: "0",
           marginLeft: "0",
@@ -34,8 +36,8 @@ function TextFormatted({ html }: TextFormattedProps) {
           marginBottom: "s",
         },
         "& h4": {
-          fontWeight: "heading.callout",
-          fontSize: "heading.callout",
+          fontWeight: "var(--nypl-fontWeights-heading-heading5)",
+          fontSize: "var(--nypl-fontSizes-desktop-heading-heading5)",
           lineHeight: "1.15",
           marginTop: "0",
           marginLeft: "0",
