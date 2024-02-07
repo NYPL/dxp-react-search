@@ -9,7 +9,7 @@ exports[`DonorCredit tests should render the UI snapshot correctly 1`] = `
     className="css-1auw00o"
   />
   <h3
-    className="chakra-heading css-1garatr"
+    className="chakra-heading css-18jbohr"
   >
     Test Heading
   </h3>
@@ -34,7 +34,7 @@ exports[`DonorCredit tests should render the UI snapshot correctly 2`] = `
   id="donor-credit-Test ID"
 >
   <h3
-    className="chakra-heading css-1garatr"
+    className="chakra-heading css-18jbohr"
   >
     Test Heading
   </h3>
