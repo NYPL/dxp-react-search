@@ -50,6 +50,11 @@ export default function EventCollectionTabPanelContent({
             id={`featured-${featuredEvent.id}`}
             variant="event-card-feaured"
             size="xl"
+            analyticsEventActions={{
+              cta_subsection: sectionTitle,
+              cta_text: featuredEvent.title,
+              cta_position: "1",
+            }}
             gaEventActionName={`${sectionTitle} - ${featuredEvent.title} - 1`}
           />
         )}
@@ -67,6 +72,11 @@ export default function EventCollectionTabPanelContent({
               <EventCard
                 {...event}
                 variant="event-card"
+                analyticsEventActions={{
+                  cta_subsection: sectionTitle,
+                  cta_text: event.title,
+                  cta_position: `${i + 2}`,
+                }}
                 gaEventActionName={`${sectionTitle} - ${event.title} - ${
                   i + 2
                 }`}
@@ -87,6 +97,11 @@ export default function EventCollectionTabPanelContent({
                 {...event}
                 id={`${event.id}-tablet`}
                 variant="event-card"
+                analyticsEventActions={{
+                  cta_subsection: sectionTitle,
+                  cta_text: event.title,
+                  cta_position: `${i + 1}`,
+                }}
                 gaEventActionName={`${sectionTitle} - ${event.title} - ${
                   i + 1
                 }`}

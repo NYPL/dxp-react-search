@@ -201,6 +201,13 @@ export default function EventCollection({
                     {...featuredEvent}
                     id={`featured-${featuredEvent.id}-mobile`}
                     variant="event-card"
+                    analyticsEventActions={{
+                      cta_subsection: `${title} - ${eventCategoryLabel(
+                        eventCategory
+                      )}`,
+                      cta_text: featuredEvent.title,
+                      cta_position: "1",
+                    }}
                     gaEventActionName={`${title} - ${eventCategory} - ${featuredEvent.title} - mobile`}
                   />
                 </Box>
@@ -252,7 +259,9 @@ export default function EventCollection({
                   <EventCollectionTabPanelContent
                     id={`event-tab-panel-${eventCategory}`}
                     events={eventsGroupedByCategory[eventCategory]}
-                    sectionTitle={`${title} - ${eventCategory}`}
+                    sectionTitle={`${title} - ${eventCategoryLabel(
+                      eventCategory
+                    )}`}
                   />
                 </TabPanel>
               );

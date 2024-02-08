@@ -1,6 +1,12 @@
 import * as React from "react";
 import { Box, useStyleConfig } from "@chakra-ui/react";
 
+export type AnalyticsEventActions = {
+  cta_subsection: string;
+  cta_text: string | null;
+  cta_position: string | null;
+};
+
 export interface HomePageLinkProps {
   /** ID used for accessibility purposes. */
   id?: string;
@@ -8,6 +14,8 @@ export interface HomePageLinkProps {
   children?: React.ReactNode;
   /** The `href` attribute for the anchor element. */
   href?: string;
+  /** The values send to Adobe Analytics CTA Event */
+  analyticsEventActions: AnalyticsEventActions;
   /** The value that will appear as the event action in Google Analytics Event reports. */
   gaEventActionName?: string;
   /** Infroms styling of links in ComponentWrapper */
@@ -20,8 +28,16 @@ const HomePageLink = React.forwardRef<
   HTMLDivElement & HTMLAnchorElement,
   HomePageLinkProps
 >((props, ref?) => {
-  const { id, children, href, gaEventActionName, variant, tabIndex, ...rest } =
-    props;
+  const {
+    id,
+    children,
+    href,
+    analyticsEventActions,
+    gaEventActionName,
+    variant,
+    tabIndex,
+    ...rest
+  } = props;
 
   const hoverStyle = useStyleConfig("Link", {
     variant,
@@ -42,15 +58,6 @@ const HomePageLink = React.forwardRef<
           event_label: href,
         });
       }
-    }
-
-    // Adobe analytics: Event CTA data layer.
-    if (window !== undefined) {
-      let ctaText = undefined;
-      if (typeof children === "string") {
-        ctaText = children;
-      }
-
       // Clear the data layer of previous values.
       window.adobeDataLayer.push({ event_data: null });
 
@@ -60,9 +67,7 @@ const HomePageLink = React.forwardRef<
         event_data: {
           name: "cta_click",
           cta_section: "Homepage",
-          cta_subsection: gaEventActionName,
-          cta_text: ctaText,
-          cta_position: undefined,
+          ...analyticsEventActions,
           destination_url: href || "no value passed",
         },
       });

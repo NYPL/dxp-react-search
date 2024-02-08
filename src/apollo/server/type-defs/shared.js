@@ -80,6 +80,7 @@ export const typeDefs = gql`
     heading: String
     text: String!
     image: Image
+    link: String
     caption: String
     credit: String
   }
