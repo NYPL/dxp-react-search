@@ -511,7 +511,6 @@ export default function resolveDrupalParagraphs(
         break;
       case "paragraph--card_grid":
       case "paragraph--card_grid_secondary":
-        console.log(paragraphTypeName);
         const cardGridItems: ResolvedParagraph[] = [];
         Array.isArray(item.field_ern_cards) &&
           item.field_ern_cards.map((cardItem: any) => {

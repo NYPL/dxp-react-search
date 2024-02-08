@@ -23,7 +23,7 @@ export default function FeaturedCard({
     <>
       <Box order={1} padding="l" height="100%">
         <Heading level="two">
-          <Link href={link}>{heading}</Link>
+          {link ? <Link href={link}>{heading}</Link> : heading}
         </Heading>
         {<TextFormatted html={description} />}
         {linkText && (

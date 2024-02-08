@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex } from "@nypl/design-system-react-components";
 import FeaturedCard from "./FeaturedCard";
-import { ImageType } from "../../shared/Image";
+import { ImageType } from "../Image";
 
 export interface FeaturedCard {
   id: string;
@@ -26,7 +26,10 @@ function FeaturedCardGrid({ id, type, items }: FeaturedCardGridProps) {
       id={`${type}-${id}`}
       mb="l"
       // This forces the component background to go full width, edge to edge.
-      marginTop={type === "card_grid_secondary" ? "calc(-1 * 6rem)" : undefined}
+      /* marginTop={{
+        base: type === "card_grid_secondary" ? "calc(-1 * 4rem)" : undefined,
+        lg: type === "card_grid_secondary" ? "calc(-1 * 6rem)" : undefined,
+      }} */
       marginX={
         type === "card_grid_secondary"
           ? "calc(.5rem + calc(-50vw + 50%))"
@@ -44,14 +47,21 @@ function FeaturedCardGrid({ id, type, items }: FeaturedCardGridProps) {
         listStyleType="none"
         gap="l"
         flexDirection={{ base: "column", lg: "row" }}
+        flexFlow="wrap"
         maxWidth={type === "card_grid_secondary" ? "1280px" : undefined}
+        width="100%"
         margin={type === "card_grid_secondary" ? "0 auto" : undefined}
-        paddingY={type === "card_grid_secondary" ? "4rem" : undefined}
-        paddingX={
-          type === "card_grid_secondary"
-            ? "calc(1rem + calc(-50vw + calc(1280px / 2)))"
-            : undefined
-        }
+        paddingY={{
+          base: "1rem",
+          lg: type === "card_grid_secondary" ? "4rem" : undefined,
+        }}
+        paddingX={{
+          base: "1rem",
+          xl:
+            type === "card_grid_secondary"
+              ? "calc(1rem + calc(-50vw + calc(1280px / 2)))"
+              : undefined,
+        }}
       >
         {items &&
           items.map((item: FeaturedCard) => {
@@ -60,7 +70,7 @@ function FeaturedCardGrid({ id, type, items }: FeaturedCardGridProps) {
                 as="li"
                 key={item.id}
                 flexDirection={{ base: "column" }}
-                marginBottom="l"
+                marginBottom={{ base: "l", lg: "0" }}
                 paddingX={{ base: "m" }}
                 bgGradient={{
                   base: `linear-gradient(to bottom, transparent 0, transparent 1.5rem, ${item.bgColor} 0)`,

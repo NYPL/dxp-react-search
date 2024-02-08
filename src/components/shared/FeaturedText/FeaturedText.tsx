@@ -19,7 +19,12 @@ function FeaturedText({ id, type, heading, text, bg }: FeaturedTextProps) {
       mx={{ sm: "-s", lg: "-50rem" }}
       bg={bg ? "ui.bg.default" : undefined}
     >
-      <Box maxW="800px" px="s" py={{ sm: "s", lg: "xxl" }} margin="auto">
+      <Box
+        maxW="800px"
+        px="s"
+        py={{ sm: bg ? "s" : undefined, lg: bg ? "xxl" : undefined }}
+        margin="auto"
+      >
         {heading && <Heading level="two" text={heading} />}
         <TextFormatted html={text} />
       </Box>
