@@ -17,7 +17,7 @@ exports[`DonorCredit tests should render the UI snapshot correctly 1`] = `
     className="css-144igvy"
   >
     <div
-      className="css-1v98naj"
+      className="css-2u079o"
       dangerouslySetInnerHTML={
         {
           "__html": "Test Description",
@@ -42,7 +42,7 @@ exports[`DonorCredit tests should render the UI snapshot correctly 2`] = `
     className="css-144igvy"
   >
     <div
-      className="css-1v98naj"
+      className="css-2u079o"
       dangerouslySetInnerHTML={
         {
           "__html": "Test Description",
@@ -62,7 +62,7 @@ exports[`DonorCredit tests should render the UI snapshot correctly 3`] = `
     className="css-144igvy"
   >
     <div
-      className="css-1v98naj"
+      className="css-2u079o"
       dangerouslySetInnerHTML={
         {
           "__html": "Test Description",

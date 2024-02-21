@@ -13,7 +13,7 @@ function BlogPost({ blog }: BlogPostProps) {
   return (
     <Box as="article" w="100%" maxW="866px">
       <Box as="header" pb={10}>
-        <Heading id={blog.id} level="h1">
+        <Heading id={blog.id} level="h1" size="heading2">
           {blog.title}
         </Heading>
         <Box fontSize="1" fontWeight="regular">

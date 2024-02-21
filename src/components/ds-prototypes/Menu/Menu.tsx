@@ -1,5 +1,9 @@
 import React from "react";
-import { HeadingLevels, List } from "@nypl/design-system-react-components";
+import {
+  HeadingLevels,
+  HeadingSizes,
+  List,
+} from "@nypl/design-system-react-components";
 import MenuItem from "./MenuItem";
 import Heading from "../../shared/Heading";
 import { MenuItemType } from "./MenuTypes";
@@ -10,6 +14,7 @@ export interface MenuProps {
   /** The id for the menu */
   id: string;
   headingLevel: HeadingLevels;
+  headingSize?: HeadingSizes;
   headingDecoration?: boolean;
   headingColor?: string;
   title: string;
@@ -21,6 +26,7 @@ export interface MenuProps {
 function Menu({
   id,
   headingLevel,
+  headingSize,
   headingDecoration = false,
   headingColor,
   title,
@@ -41,6 +47,7 @@ function Menu({
         className={headingDecoration ? s.underline : ""}
         id={headingId}
         level={headingLevel}
+        size={headingSize}
         color={headingColor}
       >
         {title}

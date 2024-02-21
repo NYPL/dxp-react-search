@@ -61,11 +61,7 @@ export default function Donation({
             <Heading level="h2" color="brand.primary">
               {title}
             </Heading>
-            <Box
-              as="p"
-              fontWeight="500"
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
+            <Box as="p" dangerouslySetInnerHTML={{ __html: description }} />
           </Box>
           <Box
             id="donation-form"

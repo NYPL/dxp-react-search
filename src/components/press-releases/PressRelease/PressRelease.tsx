@@ -19,49 +19,26 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
     ? pressRelease.subTitle.replace(/\n/g, "<br/>")
     : null;
 
-  //const { about } = pressContent;
   const { mediaContacts } = pressContent;
 
   return (
     <Box as="article" w="100%" maxW="844px">
       <Box as="header" mb="l">
-        <Heading level="h1" size="heading3">
+        <Heading
+          level="h1"
+          size="heading2"
+          {...(subTitle !== null && {
+            subtitle: <Box dangerouslySetInnerHTML={{ __html: subTitle }} />,
+          })}
+        >
           {pressRelease.title}
         </Heading>
-        {subTitle !== null && (
-          <Box
-            as="i"
-            mb="s"
-            fontSize={"1"}
-            dangerouslySetInnerHTML={{ __html: subTitle }}
-          />
+      </Box>
+      {pressRelease.mainContent &&
+        pressRelease.mainContent.map(
+          (contentComponent: ContentComponentObject) =>
+            Components(contentComponent)
         )}
-      </Box>
-      <Box
-        sx={{
-          "& a": {
-            textDecor: "underline",
-          },
-        }}
-      >
-        {pressRelease.mainContent &&
-          pressRelease.mainContent.map(
-            (contentComponent: ContentComponentObject) =>
-              Components(contentComponent)
-          )}
-      </Box>
-      {/* <Box mb="l">
-        <Heading level="h2">{about.title}</Heading>
-        <Box
-          sx={{
-            "& a": {
-              color: "var(--nypl-colors-ui-black)",
-              textDecor: "underline",
-            },
-          }}
-          dangerouslySetInnerHTML={{ __html: about.description }}
-        />
-      </Box> */}
       {pressRelease.mediaContacts && (
         <Box>
           <Heading level="h2">{mediaContacts.heading}</Heading>
@@ -69,7 +46,9 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
             sx={{
               "& a": {
                 color: "var(--nypl-colors-ui-black)",
-                textDecor: "underline",
+                textDecor: "underline dotted",
+                textUnderlineOffset: "2px",
+                textDecorationThickness: "1px",
               },
             }}
             dangerouslySetInnerHTML={{ __html: pressRelease.mediaContacts }}
