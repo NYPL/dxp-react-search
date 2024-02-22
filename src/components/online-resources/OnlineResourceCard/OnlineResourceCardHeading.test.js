@@ -22,6 +22,9 @@ describe("OnlineResourceCardHeading Component", () => {
           },
         ]}
         resourceUrl={"https://gooogle.com"}
+        resourceUrls={{
+          main: "https://gooogle.com",
+        }}
         slug={"/slug"}
         allLocationMatches={null}
       />
@@ -46,6 +49,10 @@ describe("OnlineResourceCardHeading Component", () => {
           },
         ]}
         resourceUrl={"https://gooogle.com"}
+        resourceUrls={{
+          main: "https://nypl.org",
+          onsite: "https://onsiteurl.com",
+        }}
         slug={"/slug"}
         allLocationMatches={{
           items: [
@@ -62,7 +69,7 @@ describe("OnlineResourceCardHeading Component", () => {
     expect(screen.getByText("Test Card Title")).toBeInTheDocument();
     expect(screen.getByText("Test Card Title").closest("a")).toHaveAttribute(
       "href",
-      "https://gooogle.com"
+      "https://onsiteurl.com"
     );
   });
 
@@ -80,6 +87,11 @@ describe("OnlineResourceCardHeading Component", () => {
           },
         ]}
         resourceUrl={"https://gooogle.com"}
+        resourceUrls={{
+          main: "https://mainurl.com",
+          onsite: "https://onsiteurl.com",
+          offsite: "https://offsiteurl.com",
+        }}
         slug={"/slug"}
         allLocationMatches={null}
       />
@@ -88,7 +100,7 @@ describe("OnlineResourceCardHeading Component", () => {
     expect(screen.getByText("Test Card Title")).toBeInTheDocument();
     expect(screen.getByText("Test Card Title").closest("a")).toHaveAttribute(
       "href",
-      "https://gooogle.com"
+      "https://offsiteurl.com"
     );
   });
 });
@@ -112,6 +124,11 @@ it("should not have basic accessibility issues", async () => {
         },
       ]}
       resourceUrl={"https://gooogle.com"}
+      resourceUrls={{
+        main: "https://mainurl.com",
+        onsite: "https://onsiteurl.com",
+        offsite: "https://offsiteurl.com",
+      }}
       slug={"/slug"}
       allLocationMatches={null}
     />
