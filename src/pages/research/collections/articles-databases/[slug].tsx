@@ -46,6 +46,11 @@ export const ONLINE_RESOURCE_BY_ID_QUERY = gql`
         }
         accessibleFrom
         resourceUrl
+        resourceUrls {
+          main
+          onsite
+          offsite
+        }
         notes
         language
         availabilityStatus

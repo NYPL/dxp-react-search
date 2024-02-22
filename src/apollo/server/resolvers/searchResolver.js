@@ -95,6 +95,15 @@ const searchResolver = {
       }
       return resourceUrl;
     },
+    resourceUrls: (parent) => {
+      return {
+        main: parent["main-url"]?.url,
+        onsite: parent["onsite-branch-url"]?.url
+          ? parent["onsite-branch-url"]?.url
+          : null,
+        offsite: parent["offsite-url"]?.url ? parent["offsite-url"].url : null,
+      };
+    },
     isCoreResource: (parent, args, context, info) => {
       const subjectsFromQueryParams = info.variableValues.subjects;
       const recommendedSubjects = parent["recommended-subjects"];
