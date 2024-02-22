@@ -33,7 +33,19 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
             {title}
           </Heading>
           <Link href={slug} passHref>
-            <DsLink type="standalone" color="#c60917">
+            <DsLink
+              type="standalone"
+              sx={{
+                color: "brand.primary",
+                _hover: {
+                  color: "brand.secondary",
+                },
+                _visited: {
+                  color: "brand.primary",
+                  svg: { fill: "brand.primary" },
+                },
+              }}
+            >
               {slugLabel}
             </DsLink>
           </Link>
