@@ -62,8 +62,6 @@ export const pageResolver = {
         "field_main_content.field_ers_media_item",
         // Main content: Button Links
         "field_main_content.field_erm_button_links",
-        // Main content: Slideshow
-        "field_main_content.field_erm_media_items.field_media_image",
         // Main content: Link Card List
         "field_main_content.field_erm_link_cards",
         "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
