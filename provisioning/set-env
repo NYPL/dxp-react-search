@@ -3,6 +3,7 @@
 # Set production values
 NEXT_PUBLIC_SERVER_ENV=production
 NEXT_PUBLIC_NYPL_DOMAIN=https://www.nypl.org
+NEXT_TELEMETRY_DISABLED=1
 REFINERY_API=https://refinery.nypl.org/api/nypl
 DRUPAL_API=https://drupal.nypl.org
 GRAPHQL_API_URL=https://scout.nypl.org/api/graphql
