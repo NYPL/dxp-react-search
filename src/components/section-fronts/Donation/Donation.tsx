@@ -61,7 +61,7 @@ export default function Donation({
               {title}
             </Heading>
             <Box
-              as="p"
+              as="span"
               fontWeight="500"
               dangerouslySetInnerHTML={{ __html: description }}
             />
