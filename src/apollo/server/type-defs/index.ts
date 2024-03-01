@@ -19,6 +19,8 @@ import { onlineResourceTypeDefs } from "./online-resource";
 import { pageTypeDefs } from "./page";
 import { pressReleaseTypeDefs } from "./press-release";
 import { sectionFronttypeDefs } from "./section-front";
+// Menu
+import { menuTypeDefs } from "./menu";
 // Mutations
 import { sendEmailTypeDefs } from "./send-email";
 
@@ -33,6 +35,7 @@ export const typeDefs = mergeTypeDefs([
   locationTypeDefs,
   onlineResourceTypeDefs,
   pageTypeDefs,
+  menuTypeDefs,
   pressReleaseTypeDefs,
   queryTypeDefs,
   refineryTypeDefs,
