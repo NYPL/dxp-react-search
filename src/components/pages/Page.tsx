@@ -2,9 +2,8 @@ import * as React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
-import PageContainer, {
-  BreadcrumbsItem,
-} from "../shared/layouts/PageContainer";
+import { BreadcrumbsItem } from "../shared/layouts/PageContainer";
+import PageContainer from "./layout/PageContainer";
 import PreviewModeNotification from "../shared/PreviewModeNotification";
 import Hero from "./../shared/Hero";
 import CardGrid from "./../shared/CardGrid";
@@ -21,6 +20,7 @@ import TextWithImage from "../shared/ContentComponents/TextWithImage";
 import Video from "./../shared/ContentComponents/Video";
 
 import { Box, Heading } from "@nypl/design-system-react-components";
+import { SecondaryNav } from "./secondaryNav";
 
 export const PAGE_QUERY = gql`
   query PageQuery($id: String, $revisionId: String, $preview: Boolean) {
@@ -31,6 +31,14 @@ export const PAGE_QUERY = gql`
         id
         title
         url
+      }
+      activeTrail {
+        items {
+          id
+          title
+          parent
+          activeLink
+        }
       }
       description
       image {
@@ -267,6 +275,9 @@ export default function PagePage({
 
   const showHero = page.featuredContent === null ? false : true;
 
+  // Fixed parent, always the level 2 menu item.
+  const parentId = page.activeTrail?.items[1].id;
+
   return (
     <PageContainer
       metaTags={{
@@ -294,31 +305,41 @@ export default function PagePage({
       contentHeader={
         <>
           {isPreview && <PreviewModeNotification />}
-          {showHero ? (
-            <Hero {...page.featuredContent} />
-          ) : (
-            <Box maxWidth="1280px" margin="0 auto" my="l" px="s">
-              <Heading level="one">{page.title}</Heading>
-            </Box>
-          )}
+          {showHero && <Hero {...page.featuredContent} />}
         </>
       }
       contentPrimary={
-        <DrupalParagraphs
-          content={page.mainContent}
-          components={{
-            AudioEmbed: AudioEmbed,
-            ButtonLinks: ButtonLinks,
-            CardGrid: CardGrid,
-            EmailSubscription: EmailSubscription,
-            GoogleMapEmbed: GoogleMapEmbed,
-            ImageComponent: ImageComponent,
-            Slideshow: Slideshow,
-            SocialEmbed: SocialEmbed,
-            Text: Text,
-            TextWithImage: TextWithImage,
-            Video: Video,
-          }}
+        <>
+          {!showHero && (
+            <Box maxWidth="1280px" margin="0 auto" my="l">
+              <Heading level="one">{page.title}</Heading>
+            </Box>
+          )}
+          <DrupalParagraphs
+            content={page.mainContent}
+            components={{
+              AudioEmbed: AudioEmbed,
+              ButtonLinks: ButtonLinks,
+              CardGrid: CardGrid,
+              EmailSubscription: EmailSubscription,
+              GoogleMapEmbed: GoogleMapEmbed,
+              ImageComponent: ImageComponent,
+              Slideshow: Slideshow,
+              SocialEmbed: SocialEmbed,
+              Text: Text,
+              TextWithImage: TextWithImage,
+              Video: Video,
+            }}
+          />
+        </>
+      }
+      showSidebar={true}
+      sidebarSide="left"
+      contentSecondary={
+        <SecondaryNav
+          id="secondary-menu"
+          parentId={parentId}
+          activeTrail={page.activeTrail.items}
         />
       }
     />

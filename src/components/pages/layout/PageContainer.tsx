@@ -1,5 +1,5 @@
 import React from "react";
-import Meta from "../Meta";
+import Meta from "../../shared/Meta";
 import {
   Breadcrumbs,
   BreadcrumbsTypes,
@@ -75,14 +75,6 @@ function PageContainer({
           <main id="mainContent">
             {contentHeader && <div>{contentHeader}</div>}
             <div className={s[contentPrimaryClass]}>
-              {contentPrimary && (
-                <div
-                  id="page-container--content-primary"
-                  className={s.contentPrimary}
-                >
-                  {contentPrimary}
-                </div>
-              )}
               {contentSecondary && showSidebar && (
                 <div
                   id="page-container--content-secondary"
@@ -91,6 +83,15 @@ function PageContainer({
                   {contentSecondary}
                 </div>
               )}
+              {contentPrimary && (
+                <div
+                  id="page-container--content-primary"
+                  className={s.contentPrimary}
+                >
+                  {contentPrimary}
+                </div>
+              )}
+
               {contentBottom && (
                 <div className={s.contentBottom}>{contentBottom}</div>
               )}
