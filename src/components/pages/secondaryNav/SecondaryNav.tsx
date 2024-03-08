@@ -116,6 +116,9 @@ const SecondaryNav = ({
   const menuParent = data.menu.items[0];
   const menuItems = data.menu.items[0].children;
 
+  // If there are no nested pages - don't render a Secondary Nav
+  if (!menuItems) return <></>;
+
   return (
     <Box
       as="nav"
