@@ -25,9 +25,10 @@ export const homePageHeroResolver = {
     tag: (parent: DrupalJsonApiHomePageHeroResource) =>
       parent.field_ts_hp_hero_tag,
     description: (parent: DrupalJsonApiHomePageHeroResource) =>
-      parent.field_tfls_summary_description === null
-        ? null
-        : parent.field_tfls_summary_description.processed,
+      parent.field_tfls_summary_description.processed.replace(
+        /(<([^>]+)>)/gi,
+        ""
+      ),
     image: (parent: DrupalJsonApiHomePageHeroResource) => {
       const image =
         parent.field_ers_media_image.data === null
