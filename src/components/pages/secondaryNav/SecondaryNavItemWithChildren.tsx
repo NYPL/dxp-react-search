@@ -179,17 +179,6 @@ const SecondaryNavItemWithChildren = ({
               ? "solid 1px var(--nypl-colors-ui-border-default)"
               : "unset"
           }`,
-          // "li:hover": {
-          //   bgColor: "ui.bg.default",
-          //   a: {
-          //     textDecor: "none",
-          //     color: "ui.black",
-          //   },
-          //   "li:hover svg": {
-          //     color: "ui.gray.x-dark",
-          //     fill: "ui.gray.x-dark",
-          //   },
-          // },
           "#activeItem": {
             backgroundColor: "var(--nypl-colors-dark-ui-bg-page)",
             a: {
