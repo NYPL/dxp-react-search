@@ -8,7 +8,7 @@ export interface MetaProps {
   imageUrl?: string;
 }
 
-function Meta({ title, description, imageUrl }: MetaProps) {
+export default function Meta({ title, description, imageUrl }: MetaProps) {
   // Get the current path from next router.
   const { asPath } = useRouter();
   // @TODO See if you can also get the domain from useRouter, even with RP?
@@ -55,5 +55,3 @@ function Meta({ title, description, imageUrl }: MetaProps) {
     </Head>
   );
 }
-
-export default Meta;

@@ -1,5 +1,6 @@
 import React from "react";
 import Meta from "../Meta";
+import { MetaProps as MetaTags } from "./../Meta/Meta";
 import {
   Breadcrumbs,
   BreadcrumbsTypes,
@@ -24,12 +25,6 @@ export interface PageContainerProps {
 export type BreadcrumbsItem = {
   url: string;
   text: string | React.ReactNode;
-};
-
-export type MetaTags = {
-  title: string;
-  description: string;
-  imageUrl?: string;
 };
 
 function PageContainer({
