@@ -7,24 +7,19 @@ import SecondaryNavItem, { NavItem, ActiveTrailItem } from "./SecondaryNavItem";
 interface SecondaryNavProps {
   id: string;
   menuItems: NavItem[];
-  menuParentLabel: string;
   activeTrail: ActiveTrailItem[];
-  activeItem: ActiveTrailItem;
 }
 
 const MobileSecondaryNav = ({
   id,
   menuItems,
-  // menuParentLabel,
   activeTrail,
-  activeItem,
 }: SecondaryNavProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const onToggle = () => {
     setIsExpanded((prevProp) => !prevProp);
   };
-  // const onKeyboardToggle = ()
-  const currentPageLabel = activeTrail.slice(-1)[0].title;
+
   return (
     <FocusTrap
       focusTrapOptions={{
@@ -38,7 +33,6 @@ const MobileSecondaryNav = ({
           id={id}
           buttonType="secondary"
           aria-expanded={isExpanded}
-          aria-label={`menu, current page: ${currentPageLabel}`}
           width="full"
           onClick={onToggle}
           justifyContent="space-between"
@@ -77,26 +71,22 @@ const MobileSecondaryNav = ({
             listStyle: "none",
             "#activeItem": {
               backgroundColor: "var(--nypl-colors-dark-ui-bg-page)",
-              "#activeItem a": {
+              a: {
                 fontWeight: "500",
                 color: "var(--nypl-colors-ui-white)",
               },
-              "#activeItem svg": {
+              svg: {
                 color: "var(--nypl-colors-ui-white)",
               },
             },
           }}
         >
           {menuItems.map((menuItem) => (
-            <li
-              key={menuItem.id}
-              {...(activeItem !== null &&
-                activeItem.title === menuItem.label && { id: "activeItem" })}
-            >
+            <li key={menuItem.id}>
               <SecondaryNavItem
+                menuLevel={0}
                 item={menuItem}
                 activeTrail={activeTrail}
-                menuLevel={0}
                 isOpen={isExpanded}
               />
             </li>

@@ -12,20 +12,20 @@ interface SecondaryNavItemWithChildrenProps {
   item: ItemWithChildren;
   menuLevel: number;
   activeTrail: ActiveTrailItem[];
-  isOpen?: boolean;
   isActiveTrail?: boolean;
+  isOpen?: boolean;
 }
 
 const SecondaryNavItemWithChildren = ({
   item,
   menuLevel,
   activeTrail,
-  isOpen,
   isActiveTrail = false,
+  isOpen = false,
 }: SecondaryNavItemWithChildrenProps): JSX.Element => {
   const itemRef: React.RefObject<any> = React.useRef(null);
   const { id, label, url, children } = item;
-  const activeItem = activeTrail ? activeTrail[activeTrail.length - 1] : null;
+  const activeItem = activeTrail[activeTrail.length - 1];
 
   const [isExpanded, setIsExpanded] = React.useState(isActiveTrail);
   const toggleList = () => {
@@ -46,15 +46,10 @@ const SecondaryNavItemWithChildren = ({
     "var(--nypl-colors-ui-bg-default)",
   ];
 
-  if (activeItem?.title === item.label && isOpen) {
-    itemRef?.current?.focus();
-  }
-
   return (
     <>
       <Box
-        {...(activeItem !== null &&
-          activeItem.title === item.label && { id: "activeItem" })}
+        {...(activeItem.title === item.label && { id: "activeItem" })}
         display="flex"
         justifyContent="space-between"
         alignItems="center"
@@ -99,8 +94,7 @@ const SecondaryNavItemWithChildren = ({
       >
         <Link
           href={url}
-          {...(activeItem !== null &&
-            activeItem.title === item.label && { "aria-current": "page" })}
+          {...(activeItem.title === item.label && { "aria-current": "page" })}
           ref={itemRef}
           color="ui.gray.x-dark"
           fontWeight={{

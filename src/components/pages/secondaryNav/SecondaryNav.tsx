@@ -49,7 +49,6 @@ const SecondaryNav = ({
       setIsMobile(true);
     }
   }, [windowSize]);
-  const activeItem = activeTrail[activeTrail.length - 1];
 
   const { loading, error, data } = useQuery(MENU_QUERY, {
     skip: !id,
@@ -172,10 +171,8 @@ const SecondaryNav = ({
         // Tablet/Mobile Menu
         <MobileSecondaryNav
           id="secondary-menu"
-          activeTrail={activeTrail}
-          activeItem={activeItem}
           menuItems={menuItems}
-          menuParentLabel={menuParent.label}
+          activeTrail={activeTrail}
         />
       ) : (
         // Desktop Menu
@@ -186,18 +183,9 @@ const SecondaryNav = ({
             backgroundColor: "var(--nypl-colors-ui-bg-default)",
             "#activeItem": {
               backgroundColor: "var(--nypl-colors-dark-ui-bg-page)",
-              "#activeItem a": {
+              a: {
                 fontWeight: "500",
                 color: "var(--nypl-colors-ui-white)",
-              },
-              "#activeItem svg": {
-                color: "var(--nypl-colors-ui-white)",
-              },
-              a: {
-                lg: {
-                  fontWeight: "500",
-                  color: "var(--nypl-colors-ui-white)",
-                },
               },
               svg: {
                 color: "var(--nypl-colors-ui-white)",
