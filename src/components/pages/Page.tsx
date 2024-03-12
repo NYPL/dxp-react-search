@@ -275,6 +275,19 @@ export default function PagePage({
 
   const showHero = page.featuredContent === null ? false : true;
 
+  // const activeLinkParentId = page.activeTrail.forEach((item: any => {
+  //   if {item.activeLink) {
+  //     return item.parent;
+  //   }
+  // })
+  // let parentId;
+  // page.activeTrail?.items.forEach((item: any) => {
+  //   if (item.activeLink === true) {
+  //     parentId = item.parent;
+  //   }
+  // });
+  // console.log(page.activeTrail);
+
   // Fixed parent, always the level 2 menu item.
   const parentId = page.activeTrail?.items[1].id;
 
