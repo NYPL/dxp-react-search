@@ -18,7 +18,7 @@ export const emailSubscriptionResolver = {
     heading: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_ts_heading ? parent.field_ts_heading : null,
     description: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
-      parent.field_tfls_description?.processed,
+      parent.field_tfls_description?.processed.replace(/(<([^>]+)>)/gi, ""),
     formPlaceholder: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
       parent.field_ts_placeholder,
     salesforceListId: (parent: EmailSubscriptionParagraphDrupalJsonApi) =>
