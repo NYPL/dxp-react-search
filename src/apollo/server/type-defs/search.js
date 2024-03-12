@@ -21,12 +21,19 @@ export const typeDefs = gql`
     language: String
     accessibleFrom: [String]
     resourceUrl: String
+    resourceUrls: OnlineResourceUrl
     accessLocations: [AccessLocation]
     subjects: [Subject]
     authenticationType: String
     isCoreResource: Boolean
     isFreeResource: Boolean
     availabilityStatus: String
+  }
+
+  type OnlineResourceUrl {
+    main: String
+    onsite: String
+    offsite: String
   }
 
   type AccessLocation {

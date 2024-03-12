@@ -1,29 +1,30 @@
 import React from "react";
 import { Heading, Link } from "@nypl/design-system-react-components";
-import NextDsLink from "./../../shared/Link/NextDsLink";
+import NextDsLink from "../../shared/Link/NextDsLink";
 // Utils
-import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
+import { ONLINE_RESOURCES_BASE_PATH } from "../../../utils/config";
 
-function OnlineResourceCardHeading(props) {
+function OnlineResourceCardHeading(props: any) {
   const {
     id,
     name,
     accessibleFrom,
     accessLocations,
     resourceUrl,
+    resourceUrls,
     slug,
     allLocationMatches,
     authenticationType,
   } = props;
 
-  function linkAccessCheck() {
-    let locationMatchesArray = [];
-    allLocationMatches?.items.map((locationMatch) => {
+  function isUserOnSite() {
+    const locationMatchesArray: string[] = [];
+    allLocationMatches?.items.map((locationMatch: any) => {
       locationMatchesArray.push(locationMatch.locationId);
     });
 
-    let accessLocationsArray = [];
-    accessLocations?.map((accessLocation) => {
+    const accessLocationsArray: string[] = [];
+    accessLocations?.map((accessLocation: any) => {
       accessLocationsArray.push(accessLocation.id);
     });
 
@@ -33,7 +34,25 @@ function OnlineResourceCardHeading(props) {
     return linkAccess.length;
   }
 
-  if (linkAccessCheck() || accessibleFrom?.includes("offsite")) {
+  function getResourceUrl(resourceUrls: any) {
+    // console.log(resourceUrls);
+    let resourceUrl = resourceUrls.main;
+
+    // Onsite
+    if (isUserOnSite() && resourceUrls.onsite !== null) {
+      resourceUrl = resourceUrls.onsite;
+    } else if (resourceUrls.offsite !== null) {
+      resourceUrl = resourceUrls.offsite;
+    }
+
+    return resourceUrl;
+  }
+
+  const test = getResourceUrl(resourceUrls);
+  console.log(test);
+
+  // User is onsite OR the resource is accessible from "offsite", display as a link.
+  if (isUserOnSite() || accessibleFrom?.includes("offsite")) {
     if (authenticationType === "nypl") {
       return (
         <Heading id={id} level="three">
@@ -46,7 +65,7 @@ function OnlineResourceCardHeading(props) {
     if (resourceUrl) {
       return (
         <Heading id={id} level="three">
-          <Link href={resourceUrl}>{name}</Link>
+          <Link href={test}>{name}</Link>
         </Heading>
       );
     } else {

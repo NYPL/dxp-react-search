@@ -60,6 +60,11 @@ export const SEARCH_RESULTS_QUERY = gql`
           }
           accessibleFrom
           resourceUrl
+          resourceUrls {
+            main
+            onsite
+            offsite
+          }
           notes
           language
           authenticationType
