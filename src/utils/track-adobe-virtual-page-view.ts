@@ -1,13 +1,21 @@
 import getSiteSection from "./get-site-section";
 
-export default function trackAdobeVirtualPageView(
-  path: string,
-  bundle: string
-) {
+type TrackAdobeVirtualPageViewOptions = {
+  path: string;
+  bundle: string;
+  customParams?: Record<string, string>[];
+};
+
+export default function trackAdobeVirtualPageView({
+  path,
+  bundle,
+  customParams,
+}: TrackAdobeVirtualPageViewOptions) {
   // Initialize empty data layer object.
   window.adobeDataLayer.push({
     page_name: null,
     site_section: null,
+    ...customParams,
   });
 
   // Prefix path with `nypl|` and convert / to | in url path, i.e, /blog/post-1 -> nypl|blog|post-1.
@@ -22,5 +30,6 @@ export default function trackAdobeVirtualPageView(
     event: "virtual_page_view",
     page_name: pageName,
     site_section: siteSection,
+    ...customParams,
   });
 }

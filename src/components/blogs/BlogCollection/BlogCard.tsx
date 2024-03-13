@@ -6,6 +6,7 @@ import {
   HStack,
   Link,
 } from "@nypl/design-system-react-components";
+import NextDsLink from "../../shared/Link/NextDsLink";
 import Image from "../../shared/Image";
 // Types
 import { BlogCardItem, BlogLocation } from "./BlogCardTypes";
@@ -38,7 +39,8 @@ function BlogCard({ item }: BlogCardProps) {
       </Box>
       <Box flexFlow={{ lg: "row nowrap" }}>
         <Heading level="three">
-          {slug && <Link href={slug}>{title}</Link>}
+          {/* Change this back to Link before merging, only did this to test handleRouteChange() in blog slug */}
+          {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
         </Heading>
         <Box pb={5}>
           <Box>

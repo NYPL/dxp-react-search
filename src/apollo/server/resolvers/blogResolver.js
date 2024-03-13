@@ -120,6 +120,7 @@ const blogResolver = {
     name: (location) => location.title,
     contentType: (location) => location.type,
     slug: (location) => location.path.alias,
+    locationCode: (location) => location.field_ts_location_code,
   },
 };
 
