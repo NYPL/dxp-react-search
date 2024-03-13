@@ -287,7 +287,10 @@ const homePageResolver = {
     heading: (homePageHero) => homePageHero.field_ts_heading,
     tag: (homePageHero) => homePageHero.field_ts_hp_hero_tag,
     description: (homePageHero) =>
-      homePageHero.field_tfls_summary_description.processed,
+      homePageHero.field_tfls_summary_description.processed.replace(
+        /(<([^>]+)>)/gi,
+        ""
+      ),
     image: (homePageHero) => {
       const image =
         homePageHero.field_ers_media_image.data === null
