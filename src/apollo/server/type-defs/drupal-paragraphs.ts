@@ -176,4 +176,21 @@ export const drupalParagraphsTypeDefs = gql`
     description: String!
     showBorder: Boolean!
   }
+
+  type RelatedContent {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    items: [RelatedContentItem]!
+  }
+
+  type RelatedContentItem {
+    id: ID!
+    type: String!
+    title: String
+    description: String
+    image: Image
+    link: String
+  }
 `;

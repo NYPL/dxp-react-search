@@ -297,14 +297,16 @@ export default function SectionFrontPage({
           />
         </Box>
       }
-      contentBottom={
-        <DrupalParagraphs
-          content={sectionFront.bottomContent}
-          components={{
-            DonorCredit: DonorCredit,
-          }}
-        />
-      }
+      {...(sectionFront.bottomContent && {
+        contentBottom: (
+          <DrupalParagraphs
+            content={sectionFront.bottomContent}
+            components={{
+              DonorCredit: DonorCredit,
+            }}
+          />
+        ),
+      })}
     />
   );
 }

@@ -19,6 +19,7 @@ export interface PageJsonApiResource {
   // @TODO Need a generic drupal paragraphs type.
   field_main_content: any;
   field_ers_featured: any;
+  field_erm_bottom_content: any;
 }
 
 export const pageFeaturedContentDrupalParagraphsMap: {
@@ -39,6 +40,12 @@ export const pageDrupalParagraphsMap: { [name: string]: string } = {
   "paragraph--text": "Text",
   "paragraph--text_with_image": "TextWithImage",
   "paragraph--video": "Video",
+};
+
+export const pageBottomContentDrupalParagraphsMap: {
+  [name: string]: string;
+} = {
+  "paragraph--related_content": "RelatedContent",
 };
 
 export const pageResolver = {
@@ -65,6 +72,9 @@ export const pageResolver = {
         // Main content: Link Card List
         "field_main_content.field_erm_link_cards",
         "field_main_content.field_erm_link_cards.field_ers_image.field_media_image",
+        // Bottom content
+        "field_erm_bottom_content.field_erm_related_items",
+        "field_erm_bottom_content.field_erm_related_items.field_ers_image.field_media_image",
       ];
 
       const isPreview = args.preview ? true : false;
@@ -100,6 +110,8 @@ export const pageResolver = {
       getDrupalParagraphsField(page.field_ers_featured),
     mainContent: (page: PageJsonApiResource) =>
       getDrupalParagraphsField(page.field_main_content),
+    bottomContent: (page: PageJsonApiResource) =>
+      getDrupalParagraphsField(page.field_erm_bottom_content),
   },
   PageFeaturedContent: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
@@ -108,5 +120,9 @@ export const pageResolver = {
   PageMainContent: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
       pageDrupalParagraphsMap[object.type] || null,
+  },
+  PageBottomContent: {
+    __resolveType: (object: DrupalJsonApiEntityResource) =>
+      pageBottomContentDrupalParagraphsMap[object.type] || null,
   },
 };

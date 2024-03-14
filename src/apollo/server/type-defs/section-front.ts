@@ -9,7 +9,7 @@ export const sectionFronttypeDefs = gql`
     breadcrumbs: [BreadcrumbsItem]
     featuredContent: SectionFrontFeaturedContent
     mainContent: [SectionFrontMainContent]
-    bottomContent: [SectionFrontBottomContent]
+    bottomContent: SectionFrontBottomContent
     colorway: Colorway
   }
 
