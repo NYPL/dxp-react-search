@@ -44,7 +44,10 @@ const sectionFrontResolver = {
     id: (sectionFront) => sectionFront.id,
     title: (sectionFront) => sectionFront.title,
     description: (sectionFront) =>
-      sectionFront.field_tfls_summary_description.processed,
+      sectionFront.field_tfls_summary_description.processed.replace(
+        /(<([^>]+)>)/gi,
+        ""
+      ),
     image: (sectionFront) =>
       sectionFront.field_ers_media_image.data !== null
         ? resolveImage(sectionFront.field_ers_media_image)
