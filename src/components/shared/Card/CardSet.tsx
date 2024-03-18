@@ -1,6 +1,11 @@
 import React from "react";
 // Components
-import { Heading, HStack, Icon } from "@nypl/design-system-react-components";
+import {
+  HStack,
+  // Icon,
+  Link as DsLink,
+} from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import Link from "next/link";
 
 interface CardSetProps {
@@ -24,38 +29,35 @@ function CardSetHeading({ id, title, slug, slugLabel }: CardSetHeadingProps) {
     return (
       <div style={{ marginBottom: ".75em" }}>
         <HStack alignItems="baseline">
-          <Heading id={id} level="two" text={title} />
-          <Link href={slug}>
-            <a
-              style={{
-                display: "inline-flex",
-                flexFlow: "row nowrap",
-                lineHeight: "1",
-                fontSize: ".875rem",
-                fontWeight: 600,
-                letterSpacing: ".04em",
-                color: "#c60917",
-                marginLeft: "10px",
-                textDecoration: "none",
+          <Heading id={id} level="h2">
+            {title}
+          </Heading>
+          <Link href={slug} passHref>
+            <DsLink
+              type="standalone"
+              sx={{
+                color: "brand.primary",
+                _hover: {
+                  color: "brand.secondary",
+                },
+                _visited: {
+                  color: "brand.primary",
+                  svg: { fill: "brand.primary" },
+                },
               }}
             >
               {slugLabel}
-              <span style={{ marginLeft: "5px" }}>
-                <Icon
-                  size="small"
-                  name="arrow"
-                  decorative={true}
-                  iconRotation="rotate270"
-                  color="brand.primary"
-                />
-              </span>
-            </a>
+            </DsLink>
           </Link>
         </HStack>
       </div>
     );
   } else if (title) {
-    return <Heading id={id} level="two" text={title} />;
+    return (
+      <Heading id={id} level="h2">
+        {title}
+      </Heading>
+    );
   } else {
     return null;
   }

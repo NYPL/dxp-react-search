@@ -727,7 +727,19 @@ exports[`SlideshowButton tests should render the UI snapshot correctly 1`] = `
     tabIndex={-1}
     type="button"
   >
-    &gt;
+    <svg
+      aria-label="Chevron Right"
+      className="chakra-icon css-onkibi"
+      focusable={false}
+      viewBox="0 0 10 17"
+    >
+      <path
+        d="M1.3999 15.425L8.39723 8.70752C8.66746 8.4481 8.66746 8.00194 8.39723 7.74252L1.3999 1.02502"
+        fill="none"
+        stroke="white"
+        strokeWidth="2"
+      />
+    </svg>
   </button>
 </div>
 `;
@@ -744,7 +756,19 @@ exports[`SlideshowButton tests should render the UI snapshot correctly 2`] = `
     tabIndex={-1}
     type="button"
   >
-    &lt;
+    <svg
+      aria-label="Chevron Left"
+      className="chakra-icon css-onkibi"
+      focusable={false}
+      viewBox="0 0 10 17"
+    >
+      <path
+        d="M8.6001 1.02499L1.60277 7.74249C1.33254 8.00191 1.33254 8.44807 1.60277 8.70749L8.6001 15.425"
+        fill="none"
+        stroke="white"
+        strokeWidth="2"
+      />
+    </svg>
   </button>
 </div>
 `;

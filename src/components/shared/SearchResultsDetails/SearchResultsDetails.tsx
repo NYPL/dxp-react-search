@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Button, Heading } from "@nypl/design-system-react-components";
+import { Box, Button } from "@nypl/design-system-react-components";
+import Heading from "./../Heading";
 
 interface SearchResultsDetailsProps {
   /** The label used in the component's heading. */
@@ -25,11 +26,9 @@ function SearchResultsDetails({
   return (
     <Box id="search-results-details" role="alert">
       {label && (
-        <Heading
-          id="search-results-details__heading"
-          level="two"
-          text={label}
-        />
+        <Heading id="search-results-details__heading" level="h2">
+          {label}
+        </Heading>
       )}
       {message}
       <Button

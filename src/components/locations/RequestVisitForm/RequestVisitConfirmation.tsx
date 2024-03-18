@@ -5,7 +5,8 @@ import { LOCATION_BY_INTERNAL_SLUG } from "./RequestVisitForm";
 // Next
 import { useRouter } from "next/router";
 // Components
-import { Heading, Link } from "@nypl/design-system-react-components";
+import { Link } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 
 function RequestVisitConfirmation() {
@@ -42,11 +43,9 @@ function RequestVisitConfirmation() {
 
   return (
     <div>
-      <Heading
-        className="request-visit__header"
-        level="two"
-        text="Thank You!"
-      />
+      <Heading className="request-visit__header" level="h2">
+        Thank You!
+      </Heading>
       <p>
         We&apos;ve received your request and will get back to you within 48
         hours.

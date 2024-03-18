@@ -1,6 +1,7 @@
 import React from "react";
 // Components
-import { Heading, Link } from "@nypl/design-system-react-components";
+import { Link } from "@nypl/design-system-react-components";
+import Heading from "../../../../components/shared/Heading";
 import PageContainer from "../../../../components/online-resources/layouts/PageContainer";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "../../../../utils/config";
@@ -24,7 +25,7 @@ export default function OnlineResourcesFindJournalsTitlePage() {
       showContentHeader={false}
       contentPrimary={
         <div>
-          <Heading level="one">
+          <Heading level="h1">
             Find E-Journals and Scholarly E-books by Title in Databases
           </Heading>
           <p>

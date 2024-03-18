@@ -5,7 +5,7 @@ import withApollo from "./../../../apollo/withApollo";
 import { withRedux } from "../../../redux/withRedux";
 // Components
 import PageContainer from "./../../../components/locations/RequestVisitForm/PageContainer";
-import { Heading } from "@nypl/design-system-react-components";
+import Heading from "./../../../components/shared/Heading";
 import RequestVisitConfirmation from "../../../components/locations/RequestVisitForm/RequestVisitConfirmation";
 
 function LocationsRequestVisitConfirmationPage() {
@@ -13,11 +13,9 @@ function LocationsRequestVisitConfirmationPage() {
     <PageContainer
       contentPrimary={
         <>
-          <Heading
-            className="request-visit__header"
-            level="one"
-            text="Request a Class Visit or Group Tour"
-          />
+          <Heading className="request-visit__header" level="h1">
+            Request a Class Visit or Group Tour
+          </Heading>
           <RequestVisitConfirmation />
         </>
       }

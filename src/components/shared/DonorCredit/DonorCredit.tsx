@@ -1,10 +1,10 @@
 import * as React from "react";
 import {
-  Heading,
   Box,
   HorizontalRule,
   Flex,
 } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import TextFormatted from "./../TextFormatted";
 
 interface DonorCreditProps {
@@ -23,7 +23,11 @@ export default function DonorCredit({
   return (
     <Flex id={`donor-credit-${id}`} marginBottom="xl" flexDirection="column">
       {showBorder && <HorizontalRule marginBottom="xl" marginTop="0" />}
-      {heading && <Heading level="three" text={heading} marginBottom="l" />}
+      {heading && (
+        <Heading level="h3" marginBottom="l">
+          {heading}
+        </Heading>
+      )}
       <Box
         maxW={{ lg: "850px" }}
         margin="0 auto"

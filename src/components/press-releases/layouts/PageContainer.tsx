@@ -6,7 +6,8 @@ import {
   BreadcrumbsItem,
 } from "./../../shared/layouts/PageContainer";
 import Menu from "./../../ds-prototypes/Menu";
-import { Heading, Hero } from "@nypl/design-system-react-components";
+import { Hero } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 // Config/Utils
 import { railMenuContent } from "../../../__content/menus";
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
@@ -46,7 +47,7 @@ function PageContainer({
     <>
       <Hero
         heroType="tertiary"
-        heading={<Heading level="one" text="Press Releases" />}
+        heading={<Heading level="h1">Press Releases</Heading>}
         backgroundColor="var(--nypl-colors-ui-gray-light-cool)"
         foregroundColor="var(--nypl-colors-ui-black)"
       />
@@ -72,8 +73,7 @@ function PageContainer({
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel="three"
-                headingColor="#000"
+                headingLevel="h3"
                 title={menu.title}
                 items={menu.items}
                 menuItemDecoration={false}

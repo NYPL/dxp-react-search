@@ -6,7 +6,8 @@ import {
   BreadcrumbsItem,
 } from "./../../shared/layouts/PageContainer";
 import Menu from "./../../ds-prototypes/Menu";
-import { Heading, Hero } from "@nypl/design-system-react-components";
+import { Hero } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 import FilterBar from "./../../shared/FilterBar";
 // Config/Utils
 import blogsContent from "./../../../__content/blogs";
@@ -51,7 +52,7 @@ function PageContainer({
     <>
       <Hero
         heroType="tertiary"
-        heading={<Heading level="one" text={meta.title} />}
+        heading={<Heading level="h1">{meta.title}</Heading>}
         subHeaderText={meta.description}
         backgroundColor="#E0E0E0"
         foregroundColor="#000000"
@@ -126,8 +127,7 @@ function PageContainer({
               <Menu
                 id={menu.id}
                 key={menu.id}
-                headingLevel="three"
-                headingColor={"#000"}
+                headingLevel="h3"
                 title={menu.title}
                 items={menu.items}
                 menuItemDecoration={false}
