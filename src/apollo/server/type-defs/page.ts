@@ -14,6 +14,7 @@ export const pageTypeDefs = gql`
 
   type ActiveTrail {
     items: [ActiveTrailItem]
+    ids: [String]
   }
   type ActiveTrailItem {
     id: String

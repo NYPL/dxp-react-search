@@ -4,8 +4,9 @@ import { gql, useQuery } from "@apollo/client";
 import { MENU_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/menuFields";
 // @Todo: after ds upgrade replace HEading with Scout Heading
 import { Box, Heading, Link } from "@nypl/design-system-react-components";
-import SecondaryNavItem, { NavItem, ActiveTrailItem } from "./SecondaryNavItem";
+import SecondaryNavItem, { NavItem } from "./SecondaryNavItem";
 import MobileSecondaryNav from "./MobileSecondaryNav";
+// Hook
 import useWindowSize from "../../../hooks/useWindowSize";
 
 export const MENU_QUERY = gql`
@@ -28,16 +29,18 @@ export const MENU_QUERY = gql`
   }
 `;
 
-interface SecondaryNavProps {
+export interface SecondaryNavProps {
   id: string;
   parentId: string;
-  activeTrail: ActiveTrailItem[];
+  activeTrailIds: string[];
+  currentPath: string;
 }
 
 const SecondaryNav = ({
   id,
   parentId,
-  activeTrail,
+  activeTrailIds,
+  currentPath,
 }: SecondaryNavProps): JSX.Element => {
   const [isMobile, setIsMobile] = React.useState<boolean>();
   const windowSize = useWindowSize();
@@ -172,7 +175,8 @@ const SecondaryNav = ({
         <MobileSecondaryNav
           id="secondary-menu"
           menuItems={menuItems}
-          activeTrail={activeTrail}
+          activeTrailIds={activeTrailIds}
+          currentPath={currentPath}
         />
       ) : (
         // Desktop Menu
@@ -198,7 +202,12 @@ const SecondaryNav = ({
               <SecondaryNavItem
                 item={item}
                 menuLevel={0}
-                activeTrail={activeTrail}
+                currentPath={currentPath}
+                {...(activeTrailIds?.some(
+                  (activeTrailId) => activeTrailId === item.id
+                ) && {
+                  activeTrailIds: activeTrailIds,
+                })}
               />
             </li>
           ))}

@@ -39,6 +39,7 @@ export const PAGE_QUERY = gql`
           parent
           activeLink
         }
+        ids
       }
       description
       image {
@@ -247,6 +248,7 @@ interface PagePageProps {
 
 export default function PagePage({
   uuid,
+  slug,
   isPreview,
   revisionId,
 }: PagePageProps) {
@@ -352,7 +354,8 @@ export default function PagePage({
         <SecondaryNav
           id="secondary-menu"
           parentId={parentId}
-          activeTrail={page.activeTrail.items}
+          currentPath={slug}
+          activeTrailIds={page.activeTrail.ids}
         />
       }
     />

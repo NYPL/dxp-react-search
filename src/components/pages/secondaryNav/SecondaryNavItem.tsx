@@ -3,8 +3,6 @@ import { Box, Link } from "@nypl/design-system-react-components";
 import SecondaryNavItemWithChildren, {
   ItemWithChildren,
 } from "./SecondaryNavItemWithChildren";
-//Hook
-import useSetFocus from "./useSetFocus";
 
 export interface NavItem {
   id: string;
@@ -14,49 +12,37 @@ export interface NavItem {
   children?: NavItem[];
 }
 
-export type ActiveTrailItem = {
-  id: string;
-  title: string;
-  parent: string;
-  activeLink: boolean;
-};
-
-interface SecondaryNavItemProps {
+export interface SecondaryNavItemProps {
   menuLevel: number;
   item: NavItem;
-  activeTrail: ActiveTrailItem[];
-  isOpen?: boolean;
+  activeTrailIds?: string[];
+  currentPath: string;
 }
 
 const SecondaryNavItem = ({
   menuLevel,
   item,
-  activeTrail,
-  isOpen,
+  activeTrailIds,
+  currentPath,
 }: SecondaryNavItemProps): JSX.Element => {
-  const itemRef: React.RefObject<any> = React.useRef(null);
-  const activeItem = activeTrail[activeTrail.length - 1];
-  const isActiveTrail = activeTrail.some(
-    (activeItem) => activeItem.title === item.label && !activeItem.activeLink
-  );
-
-  useSetFocus(itemRef, item.label, activeItem?.title, isOpen);
-
-  if (item.children && activeTrail) {
+  const isCurrenMenutItem = currentPath === item.url;
+  if (item.children) {
     return (
       <SecondaryNavItemWithChildren
         menuLevel={menuLevel}
         item={item as ItemWithChildren}
-        activeTrail={activeTrail}
-        isActiveTrail={isActiveTrail}
-        isOpen={isOpen}
+        {...(activeTrailIds?.some((id) => id === item.id) && {
+          activeTrailIds: activeTrailIds,
+          isActiveTrail: true,
+        })}
+        currentPath={currentPath}
       />
     );
   }
 
   return (
     <Box
-      {...(activeItem.title === item.label && { id: "activeItem" })}
+      {...(isCurrenMenutItem && { id: "activeItem" })}
       paddingY="8px"
       paddingEnd="16px"
       paddingStart={`${menuLevel * 10 + 16}px`}
@@ -64,11 +50,7 @@ const SecondaryNavItem = ({
       sx={{
         _hover: {
           bgColor: {
-            lg: `${
-              menuLevel === 0
-                ? "var(--nypl-colors-ui-bg-hover)"
-                : "var(--nypl-colors-ui-bg-default)"
-            }`,
+            lg: "ui.gray.medium",
           },
           a: {
             textDecor: "none",
@@ -82,9 +64,8 @@ const SecondaryNavItem = ({
       }}
     >
       <Link
-        {...(activeItem.title === item.label && { "aria-current": "page" })}
+        {...(isCurrenMenutItem && { "aria-current": "page" })}
         href={item.url}
-        ref={itemRef}
         color="ui.gray.x-dark"
         sx={{
           _visited: { color: "ui.gray.x-dark" },

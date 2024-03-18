@@ -112,6 +112,7 @@ export const pageResolver = {
   },
   ActiveTrail: {
     items: (parent: any[]) => parent,
+    ids: (parent: any[]) => parent.map((item) => item.id),
   },
   ActiveTrailItem: {
     id: (parent: any) => parent.id,

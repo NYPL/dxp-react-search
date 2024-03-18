@@ -1,38 +1,33 @@
 import * as React from "react";
 import { Button, Box, Link, Icon } from "@nypl/design-system-react-components";
-import SecondaryNavItem, { NavItem, ActiveTrailItem } from "./SecondaryNavItem";
-// Hook
-import useSetFocus from "./useSetFocus";
+import SecondaryNavItem, {
+  NavItem,
+  SecondaryNavItemProps,
+} from "./SecondaryNavItem";
 
 export interface ItemWithChildren extends NavItem {
   children: NavItem[];
 }
 
-interface SecondaryNavItemWithChildrenProps {
+interface SecondaryNavItemWithChildrenProps extends SecondaryNavItemProps {
   item: ItemWithChildren;
-  menuLevel: number;
-  activeTrail: ActiveTrailItem[];
   isActiveTrail?: boolean;
-  isOpen?: boolean;
 }
 
 const SecondaryNavItemWithChildren = ({
   item,
   menuLevel,
-  activeTrail,
+  activeTrailIds,
+  currentPath,
   isActiveTrail = false,
-  isOpen = false,
 }: SecondaryNavItemWithChildrenProps): JSX.Element => {
-  const itemRef: React.RefObject<any> = React.useRef(null);
   const { id, label, url, children } = item;
-  const activeItem = activeTrail[activeTrail.length - 1];
-
-  const [isExpanded, setIsExpanded] = React.useState(isActiveTrail);
+  const isCurrenMenutItem = currentPath === item.url;
+  const isOpen = (!isCurrenMenutItem && isActiveTrail) || false;
+  const [isExpanded, setIsExpanded] = React.useState(isOpen);
   const toggleList = () => {
     setIsExpanded((prevProp) => !prevProp);
   };
-
-  useSetFocus(itemRef, item.label, activeItem?.title, isOpen);
 
   const childMenuLevel = menuLevel + 1;
   const backgroundByLevel = [
@@ -49,7 +44,7 @@ const SecondaryNavItemWithChildren = ({
   return (
     <>
       <Box
-        {...(activeItem.title === item.label && { id: "activeItem" })}
+        {...(isCurrenMenutItem && { id: "activeItem" })}
         display="flex"
         justifyContent="space-between"
         alignItems="center"
@@ -79,23 +74,18 @@ const SecondaryNavItemWithChildren = ({
         sx={{
           _hover: {
             bgColor: {
-              lg: `${
-                !isExpanded && menuLevel === 0
-                  ? "var(--nypl-colors-ui-bg-hover)"
-                  : "var(--nypl-colors-ui-bg-default)"
-              }`,
+              lg: "ui.gray.medium",
             },
             a: {
               textDecor: "none",
-              color: "ui.gray.x-dark",
+              color: "ui.black",
             },
           },
         }}
       >
         <Link
           href={url}
-          {...(activeItem.title === item.label && { "aria-current": "page" })}
-          ref={itemRef}
+          {...(isCurrenMenutItem && { "aria-current": "page" })}
           color="ui.gray.x-dark"
           fontWeight={{
             base: `${isExpanded && "500"}`,
@@ -190,8 +180,11 @@ const SecondaryNavItemWithChildren = ({
             <SecondaryNavItem
               item={child}
               menuLevel={childMenuLevel}
-              activeTrail={activeTrail}
-              isOpen={isOpen && isExpanded}
+              {...(activeTrailIds?.some((id) => id === item.id) && {
+                isActiveTrail: true,
+                activeTrailIds: activeTrailIds,
+              })}
+              currentPath={currentPath}
             />
           </li>
         ))}
