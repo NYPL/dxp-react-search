@@ -1,5 +1,11 @@
 ## CHANGES
 
+### v0.10.7 - Hot Fix for HTML Tags Rendered in Descriptions
+
+---
+
+- Fix to strip HTML from homepage hero, donation, email subscription, and sf description fields.
+
 ### v0.10.6 - Node 18 Upgrade, Misc Bug Fixes
 
 ---
