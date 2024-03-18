@@ -1,5 +1,6 @@
 import React from "react";
-import { Heading, Link } from "@nypl/design-system-react-components";
+import { Link } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 import NextDsLink from "./../../shared/Link/NextDsLink";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
@@ -36,7 +37,7 @@ function OnlineResourceCardHeading(props) {
   if (linkAccessCheck() || accessibleFrom?.includes("offsite")) {
     if (authenticationType === "nypl") {
       return (
-        <Heading id={id} level="three">
+        <Heading id={id} level="h3">
           <NextDsLink href={`${ONLINE_RESOURCES_BASE_PATH}/verify?uuid=${id}`}>
             {name}
           </NextDsLink>
@@ -45,20 +46,20 @@ function OnlineResourceCardHeading(props) {
     }
     if (resourceUrl) {
       return (
-        <Heading id={id} level="three">
+        <Heading id={id} level="h3">
           <Link href={resourceUrl}>{name}</Link>
         </Heading>
       );
     } else {
       return (
-        <Heading id={id} level="three">
+        <Heading id={id} level="h3">
           <NextDsLink href={slug}>{name}</NextDsLink>
         </Heading>
       );
     }
   } else {
     return (
-      <Heading id={id} level="three">
+      <Heading id={id} level="h3">
         {name}
       </Heading>
     );

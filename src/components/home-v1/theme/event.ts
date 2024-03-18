@@ -15,7 +15,6 @@ const Event: ComponentStyleConfig = {
     },
     // Title
     h3: {
-      fontFamily: "Kievit-Medium",
       fontSize: { base: "lg", lg: "xl" },
       fontWeight: "normal",
       lineHeight: "none",

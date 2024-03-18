@@ -1,6 +1,7 @@
 import React from "react";
 // Components
-import { Button, Heading, Icon } from "@nypl/design-system-react-components";
+import { Button, Icon } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 import Modal from "./Modal";
 // Styles
 import s from "./FilterBar.module.css";
@@ -93,11 +94,9 @@ function FilterBar({
                 </Button>
               </div>
               <div className={s.multiSelectsContainerMobile}>
-                <Heading
-                  id="search-filters__mobile-heading"
-                  level="three"
-                  text="Filters"
-                />
+                <Heading id="search-filters__mobile-heading" level="h3">
+                  Filters
+                </Heading>
                 {children}
                 {Object.keys(selectedItems).length > 0 && (
                   <Button
@@ -119,11 +118,12 @@ function FilterBar({
         <div className={s.desktopContainer}>
           <Heading
             id="search-filters--heading"
-            //className={s.filterBarHeading}
-            level="two"
-            size="tertiary"
-            text={label}
-          />
+            // className={s.filterBarHeading}
+            level="h2"
+            size="heading5"
+          >
+            {label}
+          </Heading>
           <div className={s.multiSelectsContainerDesktop}>{children}</div>
         </div>
       )}

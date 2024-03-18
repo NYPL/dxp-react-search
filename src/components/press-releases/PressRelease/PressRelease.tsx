@@ -1,6 +1,8 @@
 import * as React from "react";
 // Components
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
+// Paragraphs
 import DrupalParagraphs from "../../shared/DrupalParagraphs";
 import ImageComponent from "../../shared/ContentComponents/ImageComponent";
 import Text from "../../shared/ContentComponents/Text";
@@ -19,60 +21,39 @@ export default function PressRelease({ pressRelease }: PressReleaseProps) {
     ? pressRelease.subTitle.replace(/\n/g, "<br/>")
     : null;
 
-  //const { about } = pressContent;
   const { mediaContacts } = pressContent;
 
   return (
     <Box as="article" w="100%" maxW="844px">
       <Box as="header" mb="l">
-        <Heading level="one" size="secondary">
+        <Heading
+          level="h1"
+          size="heading2"
+          {...(subTitle !== null && {
+            subtitle: <Box dangerouslySetInnerHTML={{ __html: subTitle }} />,
+          })}
+        >
           {pressRelease.title}
         </Heading>
-        {subTitle !== null && (
-          <Box
-            as="i"
-            mb="s"
-            fontSize={"1"}
-            dangerouslySetInnerHTML={{ __html: subTitle }}
-          />
-        )}
       </Box>
-      <Box
-        sx={{
-          "& a": {
-            textDecor: "underline",
-          },
+      <DrupalParagraphs
+        content={pressRelease.mainContent}
+        components={{
+          ImageComponent: ImageComponent,
+          Text: Text,
+          TextWithImage: TextWithImage,
         }}
-      >
-        <DrupalParagraphs
-          content={pressRelease.mainContent}
-          components={{
-            ImageComponent: ImageComponent,
-            Text: Text,
-            TextWithImage: TextWithImage,
-          }}
-        />
-      </Box>
-      {/* <Box mb="l">
-        <Heading level="two">{about.title}</Heading>
-        <Box
-          sx={{
-            "& a": {
-              color: "var(--nypl-colors-ui-black)",
-              textDecor: "underline",
-            },
-          }}
-          dangerouslySetInnerHTML={{ __html: about.description }}
-        />
-      </Box> */}
+      />
       {pressRelease.mediaContacts && (
         <Box>
-          <Heading level="two">{mediaContacts.heading}</Heading>
+          <Heading level="h2">{mediaContacts.heading}</Heading>
           <Box
             sx={{
               "& a": {
                 color: "var(--nypl-colors-ui-black)",
-                textDecor: "underline",
+                textDecor: "underline dotted",
+                textUnderlineOffset: "2px",
+                textDecorationThickness: "1px",
               },
             }}
             dangerouslySetInnerHTML={{ __html: pressRelease.mediaContacts }}
