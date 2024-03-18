@@ -31,7 +31,9 @@ function PressMainPage() {
             sx={{
               "& a": {
                 color: "var(--nypl-colors-ui-black)",
-                textDecor: "underline",
+                textDecor: "underline dotted",
+                textUnderlineOffset: "2px",
+                textDecorationThickness: "1px",
               },
             }}
             dangerouslySetInnerHTML={{ __html: mediaInquiries.description }}

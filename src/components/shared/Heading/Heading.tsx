@@ -6,7 +6,6 @@ import {
 import { ReactElement, ComponentPropsWithoutRef } from "react";
 
 const headingSizeMap: Record<string, HeadingSizes> = {
-  h1: "heading2",
   h2: "heading3",
   h3: "heading5",
 };

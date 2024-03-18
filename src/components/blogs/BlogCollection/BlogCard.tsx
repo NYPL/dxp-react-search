@@ -33,11 +33,10 @@ function BlogCard({ item }: BlogCardProps) {
         />
       </Box>
       <Box flexFlow={{ lg: "row nowrap" }}>
-        <Heading level="h3">{slug && <Link href={slug}>{title}</Link>}</Heading>
-        <Box pb={5}>
-          <Box>
-            By {byline} | {date}
-          </Box>
+        <Heading level="h3" url={slug} subtitle={`By ${byline} | ${date}`}>
+          {title}
+        </Heading>
+        <Box>
           {locations && (
             <HStack wrap="wrap" spacing="0" align="left">
               {locations.map((location: BlogLocation) => {

@@ -84,6 +84,7 @@ function PageContainer({
                 id={menu.id}
                 key={menu.id}
                 headingLevel="h2"
+                headingSize="heading5"
                 headingColor={"#00838A"}
                 headingDecoration={true}
                 title={menu.title}
@@ -108,6 +109,7 @@ function PageContainer({
                 id={menu.id}
                 key={menu.id}
                 headingLevel="h3"
+                headingSize="heading5"
                 headingColor={"#00838A"}
                 title={menu.title}
                 items={menu.items}

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box } from "@nypl/design-system-react-components";
+import { Box, Text } from "@nypl/design-system-react-components";
 import Heading from "../Heading";
 import TextFormatted from "./../TextFormatted";
 import Image from "next/image";
@@ -60,9 +60,9 @@ function TextWithImage({
             />
           </WithLink>
           {caption && (
-            <Box fontSize="-1" fontWeight="regular">
+            <Text size="caption" fontStyle="italic">
               {caption}
-            </Box>
+            </Text>
           )}
           {credit && (
             <Box
