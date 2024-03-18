@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { Box, Heading, TextInput } from "@nypl/design-system-react-components";
+import { Box, TextInput } from "@nypl/design-system-react-components";
+import Heading from "../../../shared/Heading";
 import { FormFieldProps } from "../types";
 import { FormContext } from "./../../../../context/FormContext";
 
@@ -19,7 +20,9 @@ function ContactInfoFormField({ handleChange }: FormFieldProps) {
         },
       }}
     >
-      <Heading id="contact-info" level="two" text="Your Contact Information" />
+      <Heading id="contact-info" level="h2">
+        Your Contact Information
+      </Heading>
       <Box mb="s">
         <TextInput
           id="contactName"

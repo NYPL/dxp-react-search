@@ -1,11 +1,12 @@
 import React from "react";
 import { Box } from "@nypl/design-system-react-components";
+import { ChakraStyledOptions } from "@chakra-ui/react";
 
-interface TextFormattedProps {
+interface TextFormattedProps extends ChakraStyledOptions {
   html: string;
 }
 
-function TextFormatted({ html }: TextFormattedProps) {
+function TextFormatted({ html, ...rest }: TextFormattedProps) {
   return (
     <Box
       sx={{
@@ -19,14 +20,16 @@ function TextFormatted({ html }: TextFormattedProps) {
         },
         "& a": {
           color: "var(--nypl-colors-ui-link-primary) !important",
-          textDecoration: "underline",
+          textDecoration: "underline dotted",
+          textUnderlineOffset: "2px",
+          textDecorationThickness: "1px",
           _hover: {
             color: "var(--nypl-colors-ui-link-secondary) !important",
           },
         },
         "& h3": {
-          fontWeight: "heading.tertiary",
-          fontSize: "heading.tertiary",
+          fontWeight: "var(--nypl-fontWeights-heading-heading5)",
+          fontSize: "var(--nypl-fontSizes-desktop-heading-heading5)",
           lineHeight: "1.25",
           marginTop: "0",
           marginLeft: "0",
@@ -34,8 +37,8 @@ function TextFormatted({ html }: TextFormattedProps) {
           marginBottom: "s",
         },
         "& h4": {
-          fontWeight: "heading.callout",
-          fontSize: "heading.callout",
+          fontWeight: "var(--nypl-fontWeights-heading-heading6)",
+          fontSize: "var(--nypl-fontSizes-desktop-heading-heading6)",
           lineHeight: "1.15",
           marginTop: "0",
           marginLeft: "0",
@@ -53,6 +56,7 @@ function TextFormatted({ html }: TextFormattedProps) {
         },
       }}
       dangerouslySetInnerHTML={{ __html: html }}
+      {...rest}
     />
   );
 }

@@ -6,7 +6,6 @@ import {
   CardHeading,
   Flex,
   LayoutTypes,
-  Link,
 } from "@nypl/design-system-react-components";
 import ButtonLink from "./../ButtonLink";
 import { ButtonLinkProps as ButtonLinkType } from "./../ButtonLink/ButtonLink";
@@ -69,14 +68,9 @@ export default function Card({
           },
         })}
     >
-      {/* If the card has button links, don't render a link inside the heading. */}
-      {isButtonLinkCard ? (
-        <CardHeading level="three">{heading}</CardHeading>
-      ) : (
-        <CardHeading level="three">
-          {href && <Link href={href}>{heading}</Link>}
-        </CardHeading>
-      )}
+      <CardHeading level="h3" size="heading5" url={href}>
+        {heading}
+      </CardHeading>
       <CardContent>
         {subHeading && subHeading}
         {description && (

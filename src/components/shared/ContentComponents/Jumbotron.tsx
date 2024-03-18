@@ -3,9 +3,9 @@ import {
   Box,
   Card as DsCard,
   CardContent,
-  Heading,
   Link,
 } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import { default as SharedJumbotron } from "./../Jumbotron";
 import TextFormatted from "../TextFormatted";
 import Image, { ImageType } from "../../shared/Image";
@@ -40,7 +40,7 @@ export default function Jumbotron({
       overlay={
         <>
           <Heading
-            level="two"
+            level="h2"
             color="brand.primary"
             mb={{ base: `${secondaryImage ? "-xs" : "s"}`, md: "s" }}
           >

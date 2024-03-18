@@ -1,5 +1,14 @@
 ## CHANGES
 
+### v0.11.0 - DS V2 Typography Updates
+
+---
+
+- Update homepage fonts, remove Kievit: [#456](https://github.com/NYPL/dxp-react-search/pull/456)
+- Upgrade to DS 2.1.6, Typography changes: [#468](https://github.com/NYPL/dxp-react-search/pull/468)
+
+---
+
 ### v0.10.7 - Hot Fix for HTML Tags Rendered in Descriptions
 
 ---

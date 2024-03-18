@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 // Components
-import { Heading } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 import Modal from "../../ds-prototypes/FilterBar/Modal";
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
@@ -77,11 +77,9 @@ function SearchFilters() {
           {isModalOpen && (
             <Modal>
               <DropdownMobileButtons setIsModalOpen={setIsModalOpen} />
-              <Heading
-                id="search-filters__mobile-heading"
-                level="three"
-                text="Filters"
-              />
+              <Heading id="search-filters__mobile-heading" level="h3">
+                Filters
+              </Heading>
               {data.refineryAllTerms.map((vocab: any) => {
                 return <DropdownMobile key={vocab.id} vocab={vocab} />;
               })}
@@ -95,9 +93,10 @@ function SearchFilters() {
             <Heading
               className="search-filters-group__heading"
               id="search-filters-group1__heading"
-              level="three"
-              text="Filters"
-            />
+              level="h3"
+            >
+              Filters
+            </Heading>
             <div className="search-filters__dropdowns">
               {data.refineryAllTerms.slice(0, 3).map((vocab: any) => {
                 return <DropdownDesktop key={vocab.id} vocab={vocab} />;
@@ -108,9 +107,10 @@ function SearchFilters() {
             <Heading
               className="search-filters-group__heading"
               id="search-filters-group2__heading"
-              level="three"
-              text="Research Filters"
-            />
+              level="h3"
+            >
+              Research Filters
+            </Heading>
             <div className="search-filters__dropdowns">
               {data.refineryAllTerms.slice(3, 5).map((vocab: any) => {
                 return <DropdownDesktop key={vocab.id} vocab={vocab} />;

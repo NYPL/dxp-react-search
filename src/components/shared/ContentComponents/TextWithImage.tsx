@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Box, Text } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import TextFormatted from "./../TextFormatted";
 import Image from "next/image";
 import { getImageTransformation } from "./../../shared/Image/imageUtils";
@@ -39,7 +40,7 @@ function TextWithImage({
 
   return (
     <Box id={`${type}-${id}`} mb="l">
-      {heading && <Heading level="two" text={heading} />}
+      {heading && <Heading level="h2">{heading}</Heading>}
       {image && (
         <Box
           width="100%"
@@ -59,9 +60,9 @@ function TextWithImage({
             />
           </WithLink>
           {caption && (
-            <Box fontSize="-1" fontWeight="regular">
+            <Text size="caption" fontStyle="italic">
               {caption}
-            </Box>
+            </Text>
           )}
           {credit && (
             <Box

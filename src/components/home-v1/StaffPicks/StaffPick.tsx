@@ -76,22 +76,17 @@ function StaffPick({
             pr={{ base: "120px", lg: "157px", xl: "220px" }}
             position="absolute"
             bottom="13%"
-            fontFamily="Milo-Light-Italic"
-            lineHeight="none"
-            fontSize={{ base: "xl", lg: "2.5xl", xl: "4xl" }}
+            fontFamily="Trebuchet MS"
+            fontStyle="italic"
+            lineHeight="normal"
+            fontSize={{ base: "17px", lg: "2.5xl", xl: "3xl" }}
             textAlign="left"
           >
             {quote}
           </Text>
         </HomePageLink>
       </Box>
-      <Box
-        color="brand.100"
-        mt={{ base: 4, xl: 5 }}
-        fontWeight="bold"
-        fontFamily="Kievit-Book"
-        display="flex"
-      >
+      <Box color="brand.100" mt={{ base: 4, xl: 5 }} display="flex">
         <Box pt={{ base: 3, xl: 6 }} pr={2.5}>
           <svg
             id={`staff-pick-${id}-nyplLionLogo-icon`}
