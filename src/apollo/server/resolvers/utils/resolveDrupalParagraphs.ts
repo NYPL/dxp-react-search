@@ -479,7 +479,10 @@ export default function resolveDrupalParagraphs(
           id: item.id,
           type: paragraphTypeName,
           heading: item.field_ts_heading,
-          description: item.field_tfls_description?.processed,
+          description: item.field_tfls_description?.processed.replace(
+            /(<([^>]+)>)/gi,
+            ""
+          ),
           formPlaceholder: item.field_ts_placeholder,
           salesforceListId: item.field_ts_salesforce_list_id,
           salesforceSourceCode: item.field_ts_salesforce_source_code,
