@@ -13,9 +13,11 @@ import Slideshow from "./Slideshow";
 import SlideshowButton from "./SlideshowButton";
 import SlideshowContainer from "./SlideshowContainer";
 import useSlideshowStyles from "./useSlideshow";
+// Type
+import { SlideshowItem } from "./SlideshowTypes";
 
 // Items rendered for Slideshow comonent tests
-const items = [
+const items: SlideshowItem[] = [
   {
     id: "test-id-1",
     title: "Test 1",
@@ -191,10 +193,14 @@ describe("SlideshowButton tests", () => {
   it("should render correct button according to direction prop", () => {
     // Render button with direction set to next should render the next button
     const { rerender } = render(<SlideshowButton buttonDirection="next" />);
-    expect(screen.getByRole("button", { name: />/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Chevron Right" })
+    ).toBeInTheDocument();
     // Render button with direction set to prev should render the next button
     rerender(<SlideshowButton buttonDirection="prev" />);
-    expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Chevron Left" })
+    ).toBeInTheDocument();
   });
   it("should call the nextSlide function when the next button is clicked", async () => {
     const user = userEvent.setup();
@@ -208,7 +214,7 @@ describe("SlideshowButton tests", () => {
         prevSlide={prevSlide}
       />
     );
-    await user.click(screen.getByRole("button", { name: />/i }));
+    await user.click(screen.getByRole("button", { name: "Chevron Right" }));
     expect(nextSlide).toBeCalledTimes(1);
     expect(prevSlide).not.toBeCalled();
   });
@@ -224,7 +230,7 @@ describe("SlideshowButton tests", () => {
         prevSlide={prevSlide}
       />
     );
-    await user.click(screen.getByRole("button", { name: /</i }));
+    await user.click(screen.getByRole("button", { name: "Chevron Left" }));
     expect(prevSlide).toBeCalledTimes(1);
     expect(nextSlide).not.toBeCalled();
   });
@@ -319,9 +325,11 @@ describe("Slideshow tests", () => {
         items={items}
       />
     );
-    expect(screen.queryByRole("button", { name: />/i })).toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: /</i })
+      screen.queryByRole("button", { name: "Chevron Right" })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Chevron Left" })
     ).not.toBeInTheDocument();
   });
   it("should show the prev button ones the next button has been clicked", async () => {
@@ -333,8 +341,10 @@ describe("Slideshow tests", () => {
         items={items}
       />
     );
-    await user.click(screen.getByRole("button", { name: />/i }));
-    expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Chevron Right" }));
+    expect(
+      screen.getByRole("button", { name: "Chevron Left" })
+    ).toBeInTheDocument();
   });
   it("should hide the next button when the end of the list is reached", async () => {
     const { user } = setup(
@@ -345,14 +355,16 @@ describe("Slideshow tests", () => {
         items={items}
       />
     );
-    await user.click(screen.getByRole("button", { name: />/i }));
-    await user.click(screen.getByRole("button", { name: />/i }));
-    await user.click(screen.getByRole("button", { name: />/i }));
+    await user.click(screen.getByRole("button", { name: "Chevron Right" }));
+    await user.click(screen.getByRole("button", { name: "Chevron Right" }));
+    await user.click(screen.getByRole("button", { name: "Chevron Right" }));
     //renders prev button
-    expect(screen.getByRole("button", { name: /</i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Chevron Left" })
+    ).toBeInTheDocument();
     //does not render next button
     expect(
-      screen.queryByRole("button", { name: />/i })
+      screen.queryByRole("button", { name: "Chevron Right" })
     ).not.toBeInTheDocument();
   });
   it("should support keyboard naviagtion", async () => {
@@ -399,12 +411,16 @@ describe("Slideshow tests", () => {
     );
     resizeWindow(800);
 
-    expect(screen.queryByRole("button", { name: />/i })).toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: /</i })
+      screen.queryByRole("button", { name: "Chevron Right" })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Chevron Left" })
     ).not.toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: />/i }));
-    expect(screen.queryByRole("button", { name: /</i })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Chevron Right" }));
+    expect(
+      screen.queryByRole("button", { name: "Chevron Left" })
+    ).toBeInTheDocument();
   });
   it("should allow the user to swipe throught the slideshow on tablet", async () => {
     const { user } = setup(
@@ -457,10 +473,10 @@ describe("Slideshow tests", () => {
     );
     resizeWindow(600);
     expect(
-      screen.queryByRole("button", { name: />/i })
+      screen.queryByRole("button", { name: "Chevron Right" })
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: /</i })
+      screen.queryByRole("button", { name: "Chevron Left" })
     ).not.toBeInTheDocument();
   });
   it("should allow the user to swipe throught the slideshow on mobile", async () => {
