@@ -1,5 +1,6 @@
 import React from "react";
 import { Box } from "@nypl/design-system-react-components";
+import Heading from "./../Heading";
 interface SlideshowProps {
   id: string;
   type: string;
@@ -10,7 +11,7 @@ interface SlideshowProps {
 function Slideshow({ id, type }: SlideshowProps) {
   return (
     <Box id={`${type}-${id}`} mb="l">
-      <h3>{type}</h3>
+      <Heading level="h2">{type}</Heading>
       {id}
     </Box>
   );

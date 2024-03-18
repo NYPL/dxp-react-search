@@ -1,13 +1,13 @@
 import React from "react";
 import {
   Box,
-  Heading,
   Card,
   CardContent,
   CardHeading,
   Grid,
   Link,
 } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import { default as NextImage } from "next/image";
 
 interface CatalogListProps {
@@ -41,7 +41,7 @@ function CatalogList({
 
   return (
     <Box id={`${type}-${id}`} mb="l">
-      {heading && <Heading level="two" text={heading} />}
+      {heading && <Heading level="h2">{heading}</Heading>}
       {description && <Box dangerouslySetInnerHTML={{ __html: description }} />}
       <Grid
         as="ul"

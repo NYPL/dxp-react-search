@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@nypl/design-system-react-components";
+import { Box, Text } from "@nypl/design-system-react-components";
 import Image from "../../shared/Image";
 
 interface ImageComponentProps {
@@ -54,9 +54,9 @@ function ImageComponent({
         />
       </WithLink>
       {caption && (
-        <Box fontSize="-1" fontWeight="regular">
+        <Text size="caption" fontStyle="italic">
           {caption}
-        </Box>
+        </Text>
       )}
       {credit && (
         <Box

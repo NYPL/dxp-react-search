@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Box, Heading, Grid, Link } from "@nypl/design-system-react-components";
+import { Box, Grid, Link } from "@nypl/design-system-react-components";
+import Heading from "./../../shared/Heading";
 import TextFormatted from "./../../shared/TextFormatted";
 import Image from "next/image";
 import useWindowSize from "../../../hooks/useWindowSize";
@@ -48,7 +49,7 @@ export default function BlogCardGrid({
 
   return (
     <Box id={`${type}-${id}`} mb="xl">
-      {title && <Heading level="two" text={title} />}
+      {title && <Heading level="h2">{title}</Heading>}
       {description && (
         <Box mb="l">
           <TextFormatted html={description} />
@@ -116,13 +117,22 @@ export default function BlogCardGrid({
                 )}
                 <Box>
                   {item.link ? (
-                    <Heading level="three">
+                    <Heading level="h3" size="heading4">
                       {item.link && <Link href={item.link}>{item.title}</Link>}
                     </Heading>
                   ) : (
-                    <Heading level="three">{item.title}</Heading>
+                    <Heading level="h3" size="heading4">
+                      {item.title}
+                    </Heading>
                   )}
-                  <TextFormatted html={item.description} />
+                  <TextFormatted
+                    html={item.description}
+                    sx={{
+                      "& p:first-child": {
+                        fontWeight: "var(--nypl-fontWeights-medium)",
+                      },
+                    }}
+                  />
                 </Box>
               </Box>
             </li>

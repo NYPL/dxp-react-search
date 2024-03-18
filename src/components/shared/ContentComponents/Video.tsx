@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
+import Heading from "../Heading";
 import TextFormatted from "./../TextFormatted";
 import useOembedApi from "./../../../hooks/useOembedApi";
 
@@ -26,7 +27,7 @@ function Video({
 
   return (
     <Box id={`${type}-${provider}-${id}`} mb="l">
-      {heading && <Heading level="two" text={heading} />}
+      {heading && <Heading level="h2">{heading}</Heading>}
       {description && <TextFormatted html={description} />}
       {html && (
         <Box
