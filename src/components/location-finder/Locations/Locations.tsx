@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "./../../../redux/actions";
 import { RootState } from "../../../redux/store";
 // Components
-import { Box, Icon, Link } from "@nypl/design-system-react-components";
+import { Box, Link } from "@nypl/design-system-react-components";
 import Location from "./../Location";
 import LocationsSkeletonLoader from "./LocationsSkeletonLoader";
 import LocationsPagination from "./LocationsPagination";
@@ -153,22 +153,19 @@ function Locations() {
   return (
     <Box>
       <Link
+        type="standalone"
         // additionalStyles
         sx={{
           display: ["block", "block", "none"],
           marginTop: "xs",
           marginBottom: "m",
+          svg: {
+            transform: "rotate(1deg)",
+          },
         }}
         href="#locations-gmap"
       >
         Skip to Map
-        <Icon
-          name="arrow"
-          align="right"
-          iconRotation="rotate0"
-          color="ui.black"
-          size="small"
-        />
       </Link>
       <ul style={{ listStyleType: "none", padding: "0" }}>
         {data.refineryAllLocations.locations.map((location: LocationProps) => (

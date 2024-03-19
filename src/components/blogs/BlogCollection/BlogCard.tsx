@@ -1,12 +1,8 @@
 import React from "react";
 // Components
-import {
-  Box,
-  Heading,
-  HStack,
-  Link,
-} from "@nypl/design-system-react-components";
+import { Box, HStack, Link } from "@nypl/design-system-react-components";
 import Image from "../../shared/Image";
+import Heading from "../../shared/Heading";
 // Types
 import { BlogCardItem, BlogLocation } from "./BlogCardTypes";
 
@@ -37,13 +33,10 @@ function BlogCard({ item }: BlogCardProps) {
         />
       </Box>
       <Box flexFlow={{ lg: "row nowrap" }}>
-        <Heading level="three">
-          {slug && <Link href={slug}>{title}</Link>}
+        <Heading level="h3" url={slug} subtitle={`By ${byline} | ${date}`}>
+          {title}
         </Heading>
-        <Box pb={5}>
-          <Box>
-            By {byline} | {date}
-          </Box>
+        <Box>
           {locations && (
             <HStack wrap="wrap" spacing="0" align="left">
               {locations.map((location: BlogLocation) => {

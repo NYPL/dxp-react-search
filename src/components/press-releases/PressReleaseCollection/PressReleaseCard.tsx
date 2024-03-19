@@ -1,10 +1,11 @@
 import React from "react";
 // Components
 import {
-  Heading,
   HorizontalRule,
   Box,
+  Text,
 } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 import NextDsLink from "../../shared/Link/NextDsLink";
 // Type
 import { PressReleaseItem } from "./PressReleaseCardType";
@@ -18,10 +19,12 @@ function PressReleaseCard({ item }: PressReleaseCardProps) {
   return (
     <Box>
       <Box py={"s"} pr={"s"} id={`pressRelease-card-${id}`}>
-        <Heading level="three" sx={{ my: "xxs" }}>
+        <Heading level="h3" sx={{ my: "xxs", a: { textDecor: "none" } }}>
           {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
         </Heading>
-        <Box>{date}</Box>
+        <Text size="subtitle2" noSpace>
+          {date}
+        </Text>
       </Box>
       <HorizontalRule />
     </Box>

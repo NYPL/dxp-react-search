@@ -9,13 +9,9 @@ import SocialEmbed from "../../shared/ContentComponents/SocialEmbed";
 import Text from "../../shared/ContentComponents/Text";
 import TextWithImage from "../../shared/ContentComponents/TextWithImage";
 import Video from "../../shared/ContentComponents/Video";
-
-import {
-  Box,
-  Heading,
-  Link,
-  HStack,
-} from "@nypl/design-system-react-components";
+//
+import { Box, Link, HStack } from "@nypl/design-system-react-components";
+import Heading from "../../shared/Heading";
 
 interface BlogPostProps {
   blog: any;
@@ -25,7 +21,9 @@ export default function BlogPost({ blog }: BlogPostProps) {
   return (
     <Box as="article" w="100%" maxW="866px">
       <Box as="header" pb={10}>
-        <Heading id={blog.id} level="one" text={blog.title} />
+        <Heading id={blog.id} level="h1" size="heading2">
+          {blog.title}
+        </Heading>
         <Box fontSize="1" fontWeight="regular">
           By {blog.byline}
         </Box>

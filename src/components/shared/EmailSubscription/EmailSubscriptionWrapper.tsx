@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
+import Heading from "./../Heading";
 
 interface EmailSubscriptionWrapperProps {
   id: string;
@@ -39,7 +40,11 @@ export default function EmailSubscriptionWrapper({
         alignItems="center"
         w={{ base: "100%", lg: "85%" }}
       >
-        <Heading text={heading} w={{ base: "90%", md: "70%" }} />
+        {heading && (
+          <Heading level="h2" color="ui.white" w={{ base: "90%", md: "70%" }}>
+            {heading}
+          </Heading>
+        )}
         {children}
       </Box>
     </Box>
