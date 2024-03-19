@@ -2,10 +2,10 @@ import * as React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 import { MENU_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/menuFields";
-// @Todo: after ds upgrade replace HEading with Scout Heading
-import { Box, Heading, Link } from "@nypl/design-system-react-components";
+import SecondaryNavWrapper from "./SecondaryNavWrapper";
+import SecondaryNavListWrapper from "./SecondaryNavListWrapper";
 import SecondaryNavItem, { NavItem } from "./SecondaryNavItem";
-import MobileSecondaryNav from "./MobileSecondaryNav";
+import SecondaryNavModal from "./SecondaryNavModal";
 // Hook
 import useWindowSize from "../../../hooks/useWindowSize";
 
@@ -116,104 +116,40 @@ const SecondaryNav = ({
   }
 
   const menuParent = data.menu.items[0];
-  const menuItems = data.menu.items[0].children;
+  const menuItems: NavItem[] = data.menu.items[0].children;
 
   // If there are no nested pages - don't render a Secondary Nav
   if (!menuItems) return <></>;
 
   return (
-    <Box
-      as="nav"
-      id={id}
-      aria-labelledby={`heading-${id}`}
-      padding={{ base: "0px", lg: "0px 12px 0pc 12px" }}
-      width={{ base: "unset", md: "348px", lg: "unset" }}
-      float={{ base: "unset", md: "right", lg: "unset" }}
-    >
-      <Heading
-        id={`heading-${id}`}
-        level="h2"
-        sx={{
-          fontSize: "0.75rem !important",
-          fontWeight: "semibold",
-        }}
-        textAlign={{ base: "center", lg: "start" }}
-      >
-        {menuParent.label}
-      </Heading>
-      <Link
-        id="skip-secondary-nav"
-        href="#page-container--content-primary"
-        sx={{
-          position: "absolute",
-          left: "-10000px",
-          width: "1px",
-          height: "1px",
-          overflow: "hidden",
-          _focus: {
-            position: "static",
-            left: "0",
-            width: "auto",
-            height: "auto",
-            overflow: "visible",
-            textDecoration: "underline",
-          },
-          _active: {
-            position: "static",
-            left: "0",
-            width: "auto",
-            height: "auto",
-            overflow: "visible",
-            textDecoration: "underline",
-          },
-        }}
-      >
-        Skip to Page Content
-      </Link>
+    <SecondaryNavWrapper id={id} label={menuParent.label}>
       {isMobile ? (
         // Tablet/Mobile Menu
-        <MobileSecondaryNav
+        <SecondaryNavModal
           id="secondary-menu"
           menuItems={menuItems}
           activeTrailIds={activeTrailIds}
           currentPath={currentPath}
         />
       ) : (
-        // Desktop Menu
-        <Box
-          as="ul"
-          sx={{
-            listStyle: "none",
-            backgroundColor: "var(--nypl-colors-ui-bg-default)",
-            "#activeItem": {
-              backgroundColor: "var(--nypl-colors-dark-ui-bg-page)",
-              a: {
-                fontWeight: "500",
-                color: "var(--nypl-colors-ui-white)",
-              },
-              svg: {
-                color: "var(--nypl-colors-ui-white)",
-              },
-            },
-          }}
-        >
-          {menuItems.map((item: NavItem) => (
-            <li key={item.id}>
+        <SecondaryNavListWrapper menuLevel={0}>
+          {menuItems.map((menuItem: NavItem) => (
+            <li key={menuItem.id}>
               <SecondaryNavItem
-                item={item}
+                item={menuItem}
                 menuLevel={0}
                 currentPath={currentPath}
                 {...(activeTrailIds?.some(
-                  (activeTrailId) => activeTrailId === item.id
+                  (activeTrailId) => activeTrailId === menuItem.id
                 ) && {
                   activeTrailIds: activeTrailIds,
                 })}
               />
             </li>
           ))}
-        </Box>
+        </SecondaryNavListWrapper>
       )}
-    </Box>
+    </SecondaryNavWrapper>
   );
 };
 

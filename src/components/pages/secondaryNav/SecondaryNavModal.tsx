@@ -4,20 +4,22 @@ const FocusTrap = require("focus-trap-react");
 import { Button, Box, Icon } from "@nypl/design-system-react-components";
 import { SecondaryNavProps } from "./SecondaryNav";
 import SecondaryNavItem, { NavItem } from "./SecondaryNavItem";
+import SecondaryNavListWrapper from "./SecondaryNavListWrapper";
 
-interface MobileSecondaryNavProps
+interface SecondaryNavModalProps
   extends Partial<Omit<SecondaryNavProps, "parentId">> {
   id: string;
   menuItems: NavItem[];
+  activeTrailIds: string[];
   currentPath: string;
 }
 
-const MobileSecondaryNav = ({
+export default function SecondaryNavModal({
   id,
   menuItems,
   activeTrailIds,
   currentPath,
-}: MobileSecondaryNavProps) => {
+}: SecondaryNavModalProps) {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const onToggle = () => {
     setIsExpanded((prevProp) => !prevProp);
@@ -53,51 +55,28 @@ const MobileSecondaryNav = ({
             color="ui.gray.x-dark"
           />
         </Button>
-        <Box
-          as="ul"
-          display={`${isExpanded ? "block" : "none"}`}
-          width={{ base: "unset", md: "348px" }}
-          position="absolute"
-          zIndex={1}
-          bgColor="ui.white"
-          right="16px"
-          left={{ base: "16px", md: "unset" }}
-          overflow="auto"
-          border="solid 1px var(--nypl-colors-ui-border-default)"
+        <SecondaryNavListWrapper
+          isExpanded={isExpanded}
+          menuLevel={0}
+          isMobile
           onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
             if (e.key === "Escape") {
               onToggle();
             }
           }}
-          marginTop="8px"
-          sx={{
-            listStyle: "none",
-            "#activeItem": {
-              backgroundColor: "var(--nypl-colors-dark-ui-bg-page)",
-              a: {
-                fontWeight: "500",
-                color: "var(--nypl-colors-ui-white)",
-              },
-              svg: {
-                color: "var(--nypl-colors-ui-white)",
-              },
-            },
-          }}
         >
-          {menuItems.map((menuItem) => (
+          {menuItems.map((menuItem: NavItem) => (
             <li key={menuItem.id}>
               <SecondaryNavItem
-                menuLevel={0}
                 item={menuItem}
-                activeTrailIds={activeTrailIds}
+                menuLevel={0}
                 currentPath={currentPath}
+                activeTrailIds={activeTrailIds}
               />
             </li>
           ))}
-        </Box>
+        </SecondaryNavListWrapper>
       </Box>
     </FocusTrap>
   );
-};
-
-export default MobileSecondaryNav;
+}
