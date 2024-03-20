@@ -1,5 +1,13 @@
 ## CHANGES
 
+### v0.11.1 - Blog CardList Fix
+
+---
+
+- Revert the CardList component description font-weight styling: [#495](https://github.com/NYPL/dxp-react-search/pull/495)
+
+---
+
 ### v0.11.0 - DS V2 Typography Updates
 
 ---
@@ -14,6 +22,8 @@
 ---
 
 - Fix to strip HTML from homepage hero, donation, email subscription, and sf description fields.
+
+---
 
 ### v0.10.6 - Node 18 Upgrade, Misc Bug Fixes
 

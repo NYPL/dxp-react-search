@@ -113,14 +113,7 @@ function CardList({ id, type, title, description, items }: CardListProps) {
                   >
                     {item.title}
                   </Heading>
-                  <TextFormatted
-                    html={item.description}
-                    sx={{
-                      "& p:first-child": {
-                        fontWeight: "var(--nypl-fontWeights-medium)",
-                      },
-                    }}
-                  />
+                  <TextFormatted html={item.description} />
                 </Box>
               </Box>
             </li>
