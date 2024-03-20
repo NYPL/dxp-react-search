@@ -4,7 +4,8 @@
 
 ---
 
-- Revert the CardList component description font-weight styling: [#495](https://github.com/NYPL/dxp-react-search/pull/495)
+- Revert the Blog CardList component description font-weight styling: [#495](https://github.com/NYPL/dxp-react-search/pull/495)
+- Revert the Blog CardList component Heading and Link: [#496](https://github.com/NYPL/dxp-react-search/pull/496)
 
 ---
 
