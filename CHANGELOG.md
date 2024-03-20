@@ -1,5 +1,11 @@
 ## CHANGES
 
+### v0.11.1 - Blog CardList Fix
+
+---
+
+- Revert the CardList component description font-weight styling.
+
 ### v0.11.0 - DS V2 Typography Updates
 
 ---
