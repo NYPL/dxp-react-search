@@ -233,6 +233,7 @@ const refineryLocationResolver = {
         );
       return tids;
     },
+    synonyms: (location) => location.synonyms,
   },
 };
 

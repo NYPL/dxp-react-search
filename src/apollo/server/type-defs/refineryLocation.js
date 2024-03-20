@@ -22,6 +22,7 @@ export const typeDefs = gql`
     appointmentOnly: Boolean
     open: Boolean
     terms: [String]
+    synonyms: [String]
   }
 
   type RefineryAddress {

@@ -118,6 +118,7 @@ export const getServerSideProps = async () => {
       offset: 0,
       openNow: false,
       pageNumber: 1,
+      searchQuery: "",
       searchGeoLat: null,
       searchGeoLng: null,
       termIds: [],

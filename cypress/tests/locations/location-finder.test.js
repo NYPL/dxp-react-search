@@ -22,7 +22,7 @@ describe("Location Finder", () => {
       .should("exist");
   });
 
-  it("Advanced search using autosuggestion as search term.", () => {
+  it("Advanced search using autosuggestion as search term using example of SNFL.", () => {
     search("snfl", {
       textboxName: /search locations/i,
       resultsId: "#locations-list ul",
@@ -82,5 +82,97 @@ describe("Location Finder", () => {
     cy.get("#locations-list")
       .findByRole("alert")
       .should("include.text", "Showing 10 results.");
+  });
+
+  it("should return The New York Public Library for the Performing Arts as the first result, if The New York Public Library for the Performing Arts is selected from the autosuggest dropdown.", () => {
+    search("performing", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+      autoSuggest: true,
+      autoSuggestDownArrowCount: 1,
+    })
+      .first()
+      .findByRole("heading", {
+        name: /The New York Public Library for the Performing Arts/i,
+      })
+      .should("exist");
+  });
+
+  it("should return The New York Public Library for the Performing Arts as the first result, if a synonym is used as search term.", () => {
+    search("LPA", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+    })
+      .first()
+      .findByRole("heading", {
+        name: /The New York Public Library for the Performing Arts/i,
+      })
+      .should("exist");
+  });
+
+  it("should return Countee Cullen Library as the first result, if Countee Cullen Library is selected from the autosuggest dropdown.", () => {
+    search("countee", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+      autoSuggest: true,
+      autoSuggestDownArrowCount: 1,
+    })
+      .first()
+      .findByRole("heading", {
+        name: /Countee Cullen Library/i,
+      })
+      .should("exist");
+  });
+
+  it("should return Children's Center as the first result, if Children's Center is selected from the autosuggest dropdown.", () => {
+    search("Children's center", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+      autoSuggest: true,
+      autoSuggestDownArrowCount: 1,
+    })
+      .first()
+      .findByRole("heading", {
+        name: /Children's Center/i,
+      })
+      .should("exist");
+  });
+
+  it("should return Stephen A. Schwarzman Building as the first result, if a synonym is used as search term.", () => {
+    search("sasb", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+    })
+      .first()
+      .findByRole("heading", {
+        name: /Stephen A. Schwarzman Building/i,
+      })
+      .should("exist");
+  });
+
+  it("should return Schomburg Center for Research in Black Culture as the first result, if Schomburg Center for Research in Black Culture is selected from the autosuggest dropdown.", () => {
+    search("schomburg", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+      autoSuggest: true,
+      autoSuggestDownArrowCount: 1,
+    })
+      .first()
+      .findByRole("heading", {
+        name: /Schomburg Center for Research in Black Culture/i,
+      })
+      .should("exist");
+  });
+
+  it("should return Schomburg Center for Research in Black Culture as the first result, if a synonym is used as search term.", () => {
+    search("schomburg", {
+      textboxName: /search locations/i,
+      resultsId: "#locations-list ul",
+    })
+      .first()
+      .findByRole("heading", {
+        name: /Schomburg Center for Research in Black Culture/i,
+      })
+      .should("exist");
   });
 });

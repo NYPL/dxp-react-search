@@ -24,6 +24,7 @@ export enum MapActionType {
   SET_MAP_INFO_WINDOW = "SET_MAP_INFO_WINDOW",
   RESET_MAP = "RESET_MAP",
 }
+
 type PayloadType = Record<string, any>;
 
 export function setSearchQuery(payload: PayloadType) {
