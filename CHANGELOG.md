@@ -4,7 +4,7 @@
 
 ---
 
-- Revert the CardList component description font-weight styling.
+- Revert the CardList component description font-weight styling: [#495](https://github.com/NYPL/dxp-react-search/pull/495)
 
 ---
 
