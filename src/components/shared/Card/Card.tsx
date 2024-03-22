@@ -5,8 +5,9 @@ import {
   CardContent,
   CardHeading,
   LayoutTypes,
+  Link,
 } from "@nypl/design-system-react-components";
-import NextDsLink from "./../Link/NextDsLink";
+// import NextDsLink from "./../Link/NextDsLink";
 
 interface CardProps {
   /** The id for the card. */
@@ -49,7 +50,7 @@ function Card({
       layout={layout}
     >
       <CardHeading level="h3" size="heading5" sx={{ a: { textDecor: "none" } }}>
-        {url && <NextDsLink href={url}>{title}</NextDsLink>}
+        {url && <Link href={url}>{title}</Link>}
       </CardHeading>
       <CardContent>
         {subHeading && subHeading}
