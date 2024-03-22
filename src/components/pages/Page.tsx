@@ -41,6 +41,7 @@ export const PAGE_QUERY = gql`
         }
         ids
       }
+      enableSidebar
       description
       image {
         id
@@ -276,6 +277,7 @@ export default function PagePage({
   const page = data.page;
 
   const showHero = page.featuredContent === null ? false : true;
+  const showSidebar = page.enableSidebar;
 
   // const activeLinkParentId = page.activeTrail.forEach((item: any => {
   //   if {item.activeLink) {
@@ -323,6 +325,18 @@ export default function PagePage({
           {showHero && <Hero {...page.featuredContent} />}
         </>
       }
+      showSidebar={showSidebar}
+      sidebarSide="left"
+      {...(showSidebar && {
+        contentSecondary: (
+          <SecondaryNav
+            id="secondary-menu"
+            parentId={parentId}
+            currentPath={slug}
+            activeTrailIds={page.activeTrail.ids}
+          />
+        ),
+      })}
       contentPrimary={
         <>
           {!showHero && (
@@ -347,16 +361,6 @@ export default function PagePage({
             }}
           />
         </>
-      }
-      showSidebar={true}
-      sidebarSide="left"
-      contentSecondary={
-        <SecondaryNav
-          id="secondary-menu"
-          parentId={parentId}
-          currentPath={slug}
-          activeTrailIds={page.activeTrail.ids}
-        />
       }
     />
   );

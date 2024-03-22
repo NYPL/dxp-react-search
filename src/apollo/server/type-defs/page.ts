@@ -5,6 +5,7 @@ export const pageTypeDefs = gql`
     id: ID!
     title: String!
     breadcrumbs: [BreadcrumbsItem]
+    enableSidebar: Boolean
     description: String
     image: Image
     featuredContent: PageFeaturedContent
