@@ -1,10 +1,10 @@
 import React from "react";
 import Meta from "../Meta";
 import {
-  Breadcrumbs,
   BreadcrumbsTypes,
   DSProvider,
 } from "@nypl/design-system-react-components";
+import Breadcrumbs from "./Breadcrumbs";
 import s from "./PageContainer.module.css";
 
 export interface PageContainerProps {
@@ -35,7 +35,6 @@ export type MetaTags = {
 function PageContainer({
   metaTags,
   breadcrumbs,
-  breadcrumbsType = "whatsOn",
   breadcrumbsColor,
   wrapperClass,
   contentHeader,
@@ -66,11 +65,11 @@ function PageContainer({
       <div className={`${wrapperClass} nypl-ds`}>
         <DSProvider>
           <Breadcrumbs
-            breadcrumbsData={breadcrumbs}
-            breadcrumbsType={breadcrumbsType}
+            items={breadcrumbs}
             {...(breadcrumbsColor && {
-              backgroundColor: breadcrumbsColor,
+              color: breadcrumbsColor,
             })}
+            pageTitle={metaTags?.title}
           />
           <main id="main-content">
             {contentHeader && <div>{contentHeader}</div>}
