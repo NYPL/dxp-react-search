@@ -91,6 +91,7 @@ export default function SecondaryNavList({
         right: "16px",
         left: { base: "16px", md: "unset" },
         border: "solid 1px var(--nypl-colors-ui-border-default) !important",
+        zIndex: 1,
       })}
       onKeyDown={onKeyDown}
     >

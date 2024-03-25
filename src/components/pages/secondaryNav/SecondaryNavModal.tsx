@@ -1,5 +1,5 @@
 import * as React from "react";
-const FocusTrap = require("focus-trap-react");
+import { FocusLock } from "@chakra-ui/focus-lock";
 import { Button, Box, Icon } from "@nypl/design-system-react-components";
 import { SecondaryNavProps } from "./SecondaryNav";
 import SecondaryNavList, { NavItem } from "./SecondaryNavList";
@@ -24,13 +24,7 @@ export default function SecondaryNavModal({
   };
 
   return (
-    <FocusTrap
-      focusTrapOptions={{
-        clickOutsideDeactivates: true,
-        returnFocusOnDeactivate: false,
-      }}
-      active={isExpanded}
-    >
+    <FocusLock isDisabled={!isExpanded} restoreFocus={true}>
       <Box>
         <Button
           id={id}
@@ -70,6 +64,6 @@ export default function SecondaryNavModal({
           }}
         />
       </Box>
-    </FocusTrap>
+    </FocusLock>
   );
 }
