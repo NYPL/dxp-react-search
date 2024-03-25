@@ -19,6 +19,7 @@ import SocialEmbed from "../shared/ContentComponents/SocialEmbed";
 import Text from "../shared/ContentComponents/Text";
 import TextWithImage from "../shared/ContentComponents/TextWithImage";
 import Video from "./../shared/ContentComponents/Video";
+import RelatedContent from "../shared/RelatedContent";
 
 import { Box, Heading } from "@nypl/design-system-react-components";
 
@@ -227,6 +228,31 @@ export const PAGE_QUERY = gql`
           oembedUrl
         }
       }
+      bottomContent {
+        ... on RelatedContent {
+          id
+          type
+          title
+          items {
+            id
+            title
+            description
+            link
+            image {
+              id
+              alt
+              uri
+              width
+              height
+              transformations {
+                id
+                label
+                uri
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -333,6 +359,16 @@ export default function PagePage({
           }}
         />
       }
+      {...(page.bottomContent && {
+        contentBottom: (
+          <DrupalParagraphs
+            content={page.bottomContent}
+            components={{
+              RelatedContent: RelatedContent,
+            }}
+          />
+        ),
+      })}
     />
   );
 }

@@ -10,6 +10,7 @@ export const pageTypeDefs = gql`
     image: Image
     featuredContent: PageFeaturedContent
     mainContent: [PageMainContent]
+    bottomContent: PageBottomContent
   }
 
   union PageFeaturedContent = Hero
@@ -26,6 +27,8 @@ export const pageTypeDefs = gql`
     | Text
     | TextWithImage
     | Video
+
+  union PageBottomContent = RelatedContent
 
   type PageConnection {
     items: [Page]
