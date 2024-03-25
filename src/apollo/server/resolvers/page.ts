@@ -13,6 +13,7 @@ export interface PageJsonApiResource {
   id: string;
   title: string;
   breadcrumbs: DrupalJsonApiBreadcrumbItem[];
+  field_bs_enable_sidebar: boolean;
   field_tfls_summary_description: DrupalJsonApiTextField;
   field_ers_media_image: DrupalJsonApiMediaImageResource;
   field_lts_hero_type: string;
@@ -102,6 +103,7 @@ export const pageResolver = {
     description: (page: PageJsonApiResource) =>
       page.field_tfls_summary_description.processed,
     breadcrumbs: (page: PageJsonApiResource) => page.breadcrumbs,
+    enableSidebar: (page: PageJsonApiResource) => page.field_bs_enable_sidebar,
     image: (page: PageJsonApiResource) =>
       page.field_ers_media_image.data !== null
         ? resolveImage(page.field_ers_media_image)

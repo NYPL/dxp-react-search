@@ -116,23 +116,12 @@ export default function BlogCardGrid({
                   </Box>
                 )}
                 <Box>
-                  {item.link ? (
+                  {item.title && (
                     <Heading level="h3" size="heading4">
-                      {item.link && <Link href={item.link}>{item.title}</Link>}
-                    </Heading>
-                  ) : (
-                    <Heading level="h3" size="heading4">
-                      {item.title}
+                      <Link href={item.link}>{item.title}</Link>
                     </Heading>
                   )}
-                  <TextFormatted
-                    html={item.description}
-                    sx={{
-                      "& p:first-child": {
-                        fontWeight: "var(--nypl-fontWeights-medium)",
-                      },
-                    }}
-                  />
+                  <TextFormatted html={item.description} />
                 </Box>
               </Box>
             </li>

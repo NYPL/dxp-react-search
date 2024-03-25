@@ -33,6 +33,7 @@ export const PAGE_QUERY = gql`
         title
         url
       }
+      enableSidebar
       description
       image {
         id
@@ -292,6 +293,7 @@ export default function PagePage({
   const page = data.page;
 
   const showHero = page.featuredContent === null ? false : true;
+  const showSidebar = page.enableSidebar;
 
   return (
     <PageContainer
@@ -329,6 +331,16 @@ export default function PagePage({
           )}
         </>
       }
+      showSidebar={showSidebar}
+      sidebarSide="left"
+      {...(showSidebar && {
+        contentSecondary: (
+          <>
+            <h4>Placeholder</h4>
+            <p>Sidebar Left</p>
+          </>
+        ),
+      })}
       contentPrimary={
         <DrupalParagraphs
           content={page.mainContent}
