@@ -1,10 +1,8 @@
 import * as React from "react";
 const FocusTrap = require("focus-trap-react");
-// @Todo: after ds upgrade replace Heading with Scout Heading
 import { Button, Box, Icon } from "@nypl/design-system-react-components";
 import { SecondaryNavProps } from "./SecondaryNav";
-import SecondaryNavItem, { NavItem } from "./SecondaryNavItem";
-import SecondaryNavListWrapper from "./SecondaryNavListWrapper";
+import SecondaryNavList, { NavItem } from "./SecondaryNavList";
 
 interface SecondaryNavModalProps
   extends Partial<Omit<SecondaryNavProps, "parentId">> {
@@ -19,7 +17,7 @@ export default function SecondaryNavModal({
   menuItems,
   activeTrailIds,
   currentPath,
-}: SecondaryNavModalProps) {
+}: SecondaryNavModalProps): React.ReactElement<SecondaryNavModalProps> {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const onToggle = () => {
     setIsExpanded((prevProp) => !prevProp);
@@ -38,12 +36,15 @@ export default function SecondaryNavModal({
           id={id}
           buttonType="secondary"
           aria-expanded={isExpanded}
-          width="full"
           onClick={onToggle}
-          justifyContent="space-between"
-          bg="unset !important"
-          borderColor="var(--nypl-colors-ui-border-default) !important"
-          borderWidth="1px"
+          sx={{
+            justifyContent: "space-between",
+            width: "full",
+            bg: "unset !important",
+            borderColor: "var(--nypl-colors-ui-border-default) !important",
+            borderWidth: "1px",
+            marginBottom: "16px",
+          }}
         >
           <Box width="full" color="ui.gray.x-dark" textAlign="center">
             Menu
@@ -55,27 +56,19 @@ export default function SecondaryNavModal({
             color="ui.gray.x-dark"
           />
         </Button>
-        <SecondaryNavListWrapper
-          isExpanded={isExpanded}
+        <SecondaryNavList
+          menuItems={menuItems}
           menuLevel={0}
+          activeTrailIds={activeTrailIds}
+          currentPath={currentPath}
+          isExpanded={isExpanded}
           isMobile
           onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
             if (e.key === "Escape") {
               onToggle();
             }
           }}
-        >
-          {menuItems.map((menuItem: NavItem) => (
-            <li key={menuItem.id}>
-              <SecondaryNavItem
-                item={menuItem}
-                menuLevel={0}
-                currentPath={currentPath}
-                activeTrailIds={activeTrailIds}
-              />
-            </li>
-          ))}
-        </SecondaryNavListWrapper>
+        />
       </Box>
     </FocusTrap>
   );

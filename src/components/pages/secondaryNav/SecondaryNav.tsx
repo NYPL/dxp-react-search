@@ -2,9 +2,8 @@ import * as React from "react";
 // Apollo
 import { gql, useQuery } from "@apollo/client";
 import { MENU_FIELDS_FRAGMENT } from "../../../apollo/client/fragments/menuFields";
-import SecondaryNavWrapper from "./SecondaryNavWrapper";
-import SecondaryNavListWrapper from "./SecondaryNavListWrapper";
-import SecondaryNavItem, { NavItem } from "./SecondaryNavItem";
+import { Box, Link, Heading } from "@nypl/design-system-react-components";
+import SecondaryNavList, { NavItem } from "./SecondaryNavList";
 import SecondaryNavModal from "./SecondaryNavModal";
 // Hook
 import useWindowSize from "../../../hooks/useWindowSize";
@@ -36,12 +35,12 @@ export interface SecondaryNavProps {
   currentPath: string;
 }
 
-const SecondaryNav = ({
+export default function SecondaryNav({
   id,
   parentId,
   activeTrailIds,
   currentPath,
-}: SecondaryNavProps): JSX.Element => {
+}: SecondaryNavProps): React.ReactElement<SecondaryNavProps> {
   const [isMobile, setIsMobile] = React.useState<boolean>();
   const windowSize = useWindowSize();
 
@@ -115,42 +114,80 @@ const SecondaryNav = ({
     return <div>Loading...</div>;
   }
 
-  const menuParent = data.menu.items[0];
+  const menuParent: NavItem = data.menu.items[0];
   const menuItems: NavItem[] = data.menu.items[0].children;
 
   // If there are no nested pages - don't render a Secondary Nav
   if (!menuItems) return <></>;
 
   return (
-    <SecondaryNavWrapper id={id} label={menuParent.label}>
+    <Box
+      as="nav"
+      id={id}
+      aria-labelledby={`heading-${id}`}
+      sx={{
+        padding: { base: "0px", lg: "0px 12px 0pc 12px" },
+        width: { base: "unset", md: "348px", lg: "unset" },
+        float: { base: "unset", md: "right", lg: "unset" },
+      }}
+    >
+      <Heading
+        id={`heading-${id}`}
+        level="h2"
+        sx={{
+          fontSize: "0.75rem !important",
+          fontWeight: "semibold",
+          textAlign: { base: "center", lg: "start" },
+        }}
+      >
+        {menuParent.label}
+      </Heading>
+      <Link
+        id="skip-secondary-nav"
+        href="#page-container--content-primary"
+        sx={{
+          position: "absolute",
+          left: "-10000px",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
+          _focus: {
+            position: "static",
+            left: "0",
+            width: "auto",
+            height: "auto",
+            overflow: "visible",
+            textDecoration: "underline",
+          },
+          _active: {
+            position: "static",
+            left: "0",
+            width: "auto",
+            height: "auto",
+            overflow: "visible",
+            textDecoration: "underline",
+          },
+        }}
+      >
+        Skip to Page Content
+      </Link>
       {isMobile ? (
         // Tablet/Mobile Menu
         <SecondaryNavModal
-          id="secondary-menu"
+          id="secondary-menu-modal"
           menuItems={menuItems}
           activeTrailIds={activeTrailIds}
           currentPath={currentPath}
         />
       ) : (
-        <SecondaryNavListWrapper menuLevel={0}>
-          {menuItems.map((menuItem: NavItem) => (
-            <li key={menuItem.id}>
-              <SecondaryNavItem
-                item={menuItem}
-                menuLevel={0}
-                currentPath={currentPath}
-                {...(activeTrailIds?.some(
-                  (activeTrailId) => activeTrailId === menuItem.id
-                ) && {
-                  activeTrailIds: activeTrailIds,
-                })}
-              />
-            </li>
-          ))}
-        </SecondaryNavListWrapper>
+        <SecondaryNavList
+          id="secondary-menu-list"
+          menuItems={menuItems}
+          activeTrailIds={activeTrailIds}
+          currentPath={currentPath}
+          menuLevel={0}
+        />
       )}
-    </SecondaryNavWrapper>
+    </Box>
   );
-};
-
-export default SecondaryNav;
+}
