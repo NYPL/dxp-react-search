@@ -2,7 +2,6 @@ import React from "react";
 // Components
 import {
   default as SharedPageContainer,
-  MetaTags,
   BreadcrumbsItem,
 } from "./../../shared/layouts/PageContainer";
 import Hero from "./../Hero";
@@ -10,6 +9,9 @@ import SearchHeader from "./../../shared/SearchHeader";
 import SearchForm from "./../SearchForm";
 import Menu from "./../../ds-prototypes/Menu";
 import { Box } from "@nypl/design-system-react-components";
+// Types
+import { MetaProps as MetaTags } from "./../../shared/Meta/Meta";
+
 // Config
 const { NEXT_PUBLIC_NYPL_DOMAIN } = process.env;
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";

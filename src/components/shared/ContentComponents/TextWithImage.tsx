@@ -15,6 +15,7 @@ interface TextWithImageProps {
   credit?: string;
   link?: string;
   image?: any;
+  imageAlignment: "left" | "right";
 }
 
 function TextWithImage({
@@ -26,6 +27,7 @@ function TextWithImage({
   credit,
   link,
   image,
+  imageAlignment = "left",
 }: TextWithImageProps) {
   let imageSrc: string = image?.uri;
   if (image?.transformations) {
@@ -45,8 +47,10 @@ function TextWithImage({
         <Box
           width="100%"
           maxWidth={{ base: "auto", md: "25%", lg: "40%" }}
-          float={{ md: "left" }}
-          mr={{ md: "l" }}
+          float={{ md: `${imageAlignment}` }}
+          {...(imageAlignment === "right"
+            ? { ml: { ...{ md: "l" } } }
+            : { mr: { ...{ md: "l" } } })}
           mb="s"
         >
           <WithLink link={link}>

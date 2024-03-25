@@ -19,7 +19,7 @@ export type WithDrupalRouterReturnProps = {
   /** If true, preview mode is activated. */
   isPreview: boolean;
   /** The bundle of the entity. */
-  bundle?: string;
+  bundle: string;
   /** The ApolloClient instance defined inside the with-drupal-router function. */
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };

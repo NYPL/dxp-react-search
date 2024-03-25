@@ -1,7 +1,15 @@
-import React from "react";
-import Components, {
-  ContentComponentObject,
-} from "./../../shared/ContentComponents/getReactComponent";
+import * as React from "react";
+// Drupal paragraphs.
+import DrupalParagraphs from "../../shared/DrupalParagraphs";
+import AudioEmbed from "../../shared/ContentComponents/AudioEmbed";
+import BlogCardGrid from "./BlogCardGrid";
+import GoogleMapEmbed from "../../shared/ContentComponents/GoogleMapEmbed";
+import ImageComponent from "../../shared/ContentComponents/ImageComponent";
+import SocialEmbed from "../../shared/ContentComponents/SocialEmbed";
+import Text from "../../shared/ContentComponents/Text";
+import TextWithImage from "../../shared/ContentComponents/TextWithImage";
+import Video from "../../shared/ContentComponents/Video";
+//
 import { Box, Link, HStack } from "@nypl/design-system-react-components";
 import Heading from "../../shared/Heading";
 
@@ -9,7 +17,7 @@ interface BlogPostProps {
   blog: any;
 }
 
-function BlogPost({ blog }: BlogPostProps) {
+export default function BlogPost({ blog }: BlogPostProps) {
   return (
     <Box as="article" w="100%" maxW="866px">
       <Box as="header" pb={10}>
@@ -32,12 +40,19 @@ function BlogPost({ blog }: BlogPostProps) {
           </HStack>
         )}
       </Box>
-      {blog.mainContent &&
-        blog.mainContent.map((contentComponent: ContentComponentObject) =>
-          Components(contentComponent)
-        )}
+      <DrupalParagraphs
+        content={blog.mainContent}
+        components={{
+          AudioEmbed: AudioEmbed,
+          BlogCardGrid: BlogCardGrid,
+          GoogleMapEmbed: GoogleMapEmbed,
+          ImageComponent: ImageComponent,
+          SocialEmbed: SocialEmbed,
+          Text: Text,
+          TextWithImage: TextWithImage,
+          Video: Video,
+        }}
+      />
     </Box>
   );
 }
-
-export default BlogPost;

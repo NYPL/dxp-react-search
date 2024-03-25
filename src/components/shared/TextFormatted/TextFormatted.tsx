@@ -54,6 +54,15 @@ function TextFormatted({ html, ...rest }: TextFormattedProps) {
           marginRight: "0",
           marginBottom: "s",
         },
+        "& hr": {
+          bg: "ui.bg.hover",
+          border: "0",
+          height: "2px",
+          marginBottom: "s",
+          marginTop: "s",
+          marginStart: 0,
+          marginEnd: 0,
+        },
       }}
       dangerouslySetInnerHTML={{ __html: html }}
       {...rest}

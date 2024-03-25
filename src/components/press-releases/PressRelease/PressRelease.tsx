@@ -1,10 +1,12 @@
-import React from "react";
+import * as React from "react";
 // Components
-import Components, {
-  ContentComponentObject,
-} from "./../../shared/ContentComponents/getReactComponent";
 import { Box } from "@nypl/design-system-react-components";
 import Heading from "../../shared/Heading";
+// Paragraphs
+import DrupalParagraphs from "../../shared/DrupalParagraphs";
+import ImageComponent from "../../shared/ContentComponents/ImageComponent";
+import Text from "../../shared/ContentComponents/Text";
+import TextWithImage from "../../shared/ContentComponents/TextWithImage";
 // Config/Utils
 import pressContent from "./../../../__content/press";
 
@@ -12,7 +14,7 @@ interface PressReleaseProps {
   pressRelease: any;
 }
 
-function PressRelease({ pressRelease }: PressReleaseProps) {
+export default function PressRelease({ pressRelease }: PressReleaseProps) {
   // Ensure line breaks from Drupal are respected.
   // @TODO: Determine if this is still needed for subTitle values.
   const subTitle = pressRelease.subTitle
@@ -34,11 +36,14 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
           {pressRelease.title}
         </Heading>
       </Box>
-      {pressRelease.mainContent &&
-        pressRelease.mainContent.map(
-          (contentComponent: ContentComponentObject) =>
-            Components(contentComponent)
-        )}
+      <DrupalParagraphs
+        content={pressRelease.mainContent}
+        components={{
+          ImageComponent: ImageComponent,
+          Text: Text,
+          TextWithImage: TextWithImage,
+        }}
+      />
       {pressRelease.mediaContacts && (
         <Box>
           <Heading level="h2">{mediaContacts.heading}</Heading>
@@ -58,5 +63,3 @@ function PressRelease({ pressRelease }: PressReleaseProps) {
     </Box>
   );
 }
-
-export default PressRelease;

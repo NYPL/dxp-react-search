@@ -10,6 +10,11 @@ import {
 export type ButtonLinkProps = {
   id: string;
   link: { title: string; url: string; uri: string };
+  buttonType:
+    | "buttonPrimary"
+    | "buttonSecondary"
+    | "buttonPill"
+    | "buttonCallout";
   icon: string;
 };
 
@@ -21,7 +26,12 @@ const IconTable: Record<string, IconNames> = {
   file_type_doc: "fileTypeDoc",
 };
 
-export default function ButtonLink({ id, link, icon }: ButtonLinkProps) {
+export default function ButtonLink({
+  id,
+  link,
+  buttonType,
+  icon,
+}: ButtonLinkProps) {
   const isAppStoreIcon =
     icon === "apple_app_store" || icon === "google_play" ? true : false;
 
@@ -42,6 +52,12 @@ export default function ButtonLink({ id, link, icon }: ButtonLinkProps) {
     );
   }
 
+  // Set the icon color based on buttonType.
+  const buttonLinkIconColor =
+    buttonType === "buttonPrimary" || buttonType === "buttonCallout"
+      ? "ui.white"
+      : "ui.link.primary";
+
   return (
     <Box
       id={`button-link-${id}`}
@@ -50,38 +66,15 @@ export default function ButtonLink({ id, link, icon }: ButtonLinkProps) {
       listStyleType="none"
       w={{ sm: "full", md: "fit-content" }}
     >
-      {/* @TODO once we are updating the DS version,
-        replace custome style with type="buttonSecondary"
-      */}
-      <Link
-        id={`link-${id}`}
-        href={link.url}
-        type="action"
-        w="full"
-        py="xs"
-        px="s"
-        textDecor="none"
-        color="ui.link.primary"
-        bg="transparent"
-        borderStyle="solid"
-        borderWidth="1px"
-        borderColor="ui.link.primary"
-        _hover={{
-          bg: "rgb(5, 118, 211,0.05 )",
-          borderColor: "ui.link.secondary",
-          color: "ui.link.secondary",
-          textDecor: "none",
-          svg: {
-            color: "ui.link.secondary",
-          },
-        }}
-      >
-        <Icon
-          name={IconTable[icon]}
-          size="small"
-          align="left"
-          color="ui.link.primary"
-        />
+      <Link id={`link-${id}`} href={link.url} type={buttonType}>
+        {IconTable[icon] && (
+          <Icon
+            name={IconTable[icon]}
+            size="small"
+            align="left"
+            color={buttonLinkIconColor}
+          />
+        )}
         {link.title}
       </Link>
     </Box>

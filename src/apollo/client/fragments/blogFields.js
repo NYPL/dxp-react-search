@@ -51,6 +51,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
             uri
           }
         }
+        imageAlignment
       }
       ... on Text {
         id
@@ -107,7 +108,7 @@ export const BLOG_FIELDS_FRAGMENT = gql`
           }
         }
       }
-      ... on CardList {
+      ... on BlogCardGrid {
         id
         type
         title

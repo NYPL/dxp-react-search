@@ -37,7 +37,7 @@ class DrupalJsonApi<TContext = any> extends RESTDataSource {
   async getCollectionResource(
     apiPath: string,
     isPreview: boolean
-  ): Promise<JsonApiResource[]> {
+  ): Promise<JsonApiResource[] | null> {
     if (isPreview) {
       try {
         const accessToken = await getAccessToken();

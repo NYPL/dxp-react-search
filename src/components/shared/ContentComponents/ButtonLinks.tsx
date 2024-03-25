@@ -1,17 +1,29 @@
 import * as React from "react";
 import { Box, Flex } from "@nypl/design-system-react-components";
-import Heading from "../Heading";
+import Heading from "./../Heading";
 import ButtonLink from "./../ButtonLink";
 import { ButtonLinkProps as ButtonLinkItem } from "./../ButtonLink/ButtonLink";
+import TextFormatted from "./../../shared/TextFormatted";
 
 interface ButtonLinksProps {
   id: string;
   heading: string;
   description?: string;
+  buttonType:
+    | "buttonPrimary"
+    | "buttonSecondary"
+    | "buttonPill"
+    | "buttonCallout";
   items: ButtonLinkItem[];
 }
 
-export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
+export default function ButtonLinks({
+  id,
+  heading,
+  description,
+  buttonType,
+  items,
+}: ButtonLinksProps) {
   return (
     <Box
       id={`social-media-block-${id}`}
@@ -25,6 +37,11 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
         <Heading level="h2" size="heading3" textAlign="center">
           {heading}
         </Heading>
+        {description && (
+          <Box textAlign="center" pb="l">
+            <TextFormatted html={description} />
+          </Box>
+        )}
         <Flex
           as="ul"
           direction={{ sm: "column", md: "row" }}
@@ -35,15 +52,13 @@ export default function ButtonLinks({ id, heading, items }: ButtonLinksProps) {
         >
           {items &&
             items.map((item: ButtonLinkItem) => (
-              <Box
-                id={`button-link-${item.id}`}
+              <ButtonLink
+                id={item.id}
                 key={item.id}
-                as="li"
-                listStyleType="none"
-                w={{ sm: "full", md: "fit-content" }}
-              >
-                <ButtonLink id={item.id} link={item.link} icon={item.icon} />
-              </Box>
+                link={item.link}
+                icon={item.icon}
+                buttonType={buttonType}
+              />
             ))}
         </Flex>
       </Box>

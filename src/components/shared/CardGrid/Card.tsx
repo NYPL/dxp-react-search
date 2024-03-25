@@ -20,7 +20,7 @@ export interface CardProps {
   /** The description for the card. */
   description?: string;
   /** The url for the card. */
-  href: string;
+  href?: string;
   /** An optional image component that can be passed to the card. */
   image?: JSX.Element;
   /** An optional set of button links. */
@@ -104,6 +104,7 @@ export default function Card({
                   id={buttonLink.id}
                   link={buttonLink.link}
                   icon={buttonLink.icon}
+                  buttonType="buttonPrimary"
                 />
               </Box>
             ))}
