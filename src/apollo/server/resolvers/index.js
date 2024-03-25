@@ -18,6 +18,8 @@ import { pressReleaseResolver } from "./press-release";
 import { sectionFrontResolver } from "./section-front";
 // Drupal paragraphs
 import { drupalParagraphsResolvers } from "./drupal-paragraphs";
+// Menu
+import { menuResolver } from "./menu";
 // Mutations
 import { sendEmailResolver } from "./send-email";
 
@@ -37,6 +39,7 @@ export const resolvers = mergeResolvers([
   refineryLocationResolver,
   refineryTermResolver,
   searchResolver,
+  menuResolver,
   sectionFrontResolver,
   sendEmailResolver,
   termResolver,

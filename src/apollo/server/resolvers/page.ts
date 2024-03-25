@@ -93,6 +93,7 @@ export const pageResolver = {
     description: (page: PageJsonApiResource) =>
       page.field_tfls_summary_description.processed,
     breadcrumbs: (page: PageJsonApiResource) => page.breadcrumbs,
+    activeTrail: (page: any) => page.active_trail,
     enableSidebar: (page: PageJsonApiResource) => page.field_bs_enable_sidebar,
     image: (page: PageJsonApiResource) =>
       page.field_ers_media_image.data !== null
@@ -110,5 +111,15 @@ export const pageResolver = {
   PageMainContent: {
     __resolveType: (object: DrupalJsonApiEntityResource) =>
       pageDrupalParagraphsMap[object.type] || null,
+  },
+  ActiveTrail: {
+    items: (parent: any[]) => parent,
+    ids: (parent: any[]) => parent.map((item) => item.id),
+  },
+  ActiveTrailItem: {
+    id: (parent: any) => parent.id,
+    title: (parent: any) => parent.title,
+    parent: (parent: any) => parent.parent,
+    activeLink: (parent: any) => parent.active_link,
   },
 };

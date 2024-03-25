@@ -10,6 +10,18 @@ export const pageTypeDefs = gql`
     image: Image
     featuredContent: PageFeaturedContent
     mainContent: [PageMainContent]
+    activeTrail: ActiveTrail
+  }
+
+  type ActiveTrail {
+    items: [ActiveTrailItem]
+    ids: [String]
+  }
+  type ActiveTrailItem {
+    id: String
+    title: String
+    parent: String
+    activeLink: Boolean
   }
 
   union PageFeaturedContent = Hero
