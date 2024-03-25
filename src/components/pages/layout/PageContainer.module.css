@@ -62,7 +62,7 @@
     "contentBottom";
 }
 
-@media (min-width: 769px) {
+@media (min-width: 960px) {
   .gridWithLeftSidebar {
     padding: var(--nypl-space-xl) var(--nypl-space-s);
     grid-template-columns: 250px auto;

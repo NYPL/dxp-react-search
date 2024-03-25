@@ -62,7 +62,7 @@ export default function SecondaryNavModal({
           activeTrailIds={activeTrailIds}
           currentPath={currentPath}
           isExpanded={isExpanded}
-          isMobile
+          isModalView
           onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
             if (e.key === "Escape") {
               onToggle();

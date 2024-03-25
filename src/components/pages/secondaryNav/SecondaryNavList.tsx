@@ -28,7 +28,7 @@ interface SecondaryNavListProps {
   activeTrailIds?: string[];
   currentPath: string;
   isExpanded?: boolean;
-  isMobile?: boolean;
+  isModalView?: boolean;
   onKeyDown?: (e: React.KeyboardEvent<HTMLElement>) => void;
 }
 export default function SecondaryNavList({
@@ -38,7 +38,7 @@ export default function SecondaryNavList({
   activeTrailIds,
   currentPath,
   isExpanded = false,
-  isMobile = false,
+  isModalView = false,
   onKeyDown,
 }: SecondaryNavListProps): React.ReactElement<typeof HTMLUListElement> {
   const secondaryNavListCommonStyles = {
@@ -78,16 +78,6 @@ export default function SecondaryNavList({
         color: "ui.white",
       },
     },
-    // width: { base: "unset", md: "348px", lg: "full" },
-    // position: { base: "absolute", lg: "relative" },
-    // right: { base: "16px", lg: "unset" },
-    // left: { base: "16px", lg: "unset" },
-    // overflow: { base: "auto" },
-    // border: {
-    //   base: "solid 1px var(--nypl-colors-ui-border-default)",
-    //   lg: "unset",
-    // },
-    // zIndex: { base: 1, lg: 0 },
   };
 
   return (
@@ -95,14 +85,12 @@ export default function SecondaryNavList({
       id={id}
       as="ul"
       sx={secondaryNavListCommonStyles}
-      {...(isMobile && {
+      {...(isModalView && {
         width: { base: "unset", md: "348px" },
         position: "absolute",
         right: "16px",
         left: { base: "16px", md: "unset" },
-        overflow: "auto",
         border: "solid 1px var(--nypl-colors-ui-border-default) !important",
-        zIndex: 1,
       })}
       onKeyDown={onKeyDown}
     >

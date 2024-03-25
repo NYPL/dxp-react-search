@@ -41,17 +41,17 @@ export default function SecondaryNav({
   activeTrailIds,
   currentPath,
 }: SecondaryNavProps): React.ReactElement<SecondaryNavProps> {
-  const [isMobile, setIsMobile] = React.useState<boolean>();
+  const [isModalView, setIsModalView] = React.useState<boolean>();
   const windowSize = useWindowSize();
 
   React.useEffect(() => {
-    if (windowSize && windowSize >= 769) {
-      setIsMobile(false);
+    if (windowSize && windowSize >= 960) {
+      setIsModalView(false);
     } else {
-      setIsMobile(true);
+      setIsModalView(true);
     }
   }, [windowSize]);
-
+  console.log(isModalView);
   const { loading, error, data } = useQuery(MENU_QUERY, {
     skip: !id,
     variables: {
@@ -126,7 +126,7 @@ export default function SecondaryNav({
       id={id}
       aria-labelledby={`heading-${id}`}
       sx={{
-        padding: { base: "0px", lg: "0px 12px 0pc 12px" },
+        padding: { base: "0px", lg: "0px 12px 0px 12px" },
         width: { base: "unset", md: "348px", lg: "unset" },
         float: { base: "unset", md: "right", lg: "unset" },
       }}
@@ -171,7 +171,7 @@ export default function SecondaryNav({
       >
         Skip to Page Content
       </Link>
-      {isMobile ? (
+      {isModalView ? (
         // Tablet/Mobile Menu
         <SecondaryNavModal
           id="secondary-menu-modal"
