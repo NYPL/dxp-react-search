@@ -19,7 +19,7 @@ export default function SecondaryNavModal({
   currentPath,
 }: SecondaryNavModalProps): React.ReactElement<SecondaryNavModalProps> {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const onToggle = () => {
+  const handleToggle = () => {
     setIsExpanded((prevProp) => !prevProp);
   };
 
@@ -36,7 +36,7 @@ export default function SecondaryNavModal({
           id={id}
           buttonType="secondary"
           aria-expanded={isExpanded}
-          onClick={onToggle}
+          onClick={handleToggle}
           sx={{
             justifyContent: "space-between",
             width: "full",
@@ -65,7 +65,7 @@ export default function SecondaryNavModal({
           isModalView
           onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
             if (e.key === "Escape") {
-              onToggle();
+              handleToggle();
             }
           }}
         />
