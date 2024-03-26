@@ -51,7 +51,7 @@ export default function SecondaryNav({
       setIsModalView(true);
     }
   }, [windowSize]);
-  console.log(isModalView);
+
   const { loading, error, data } = useQuery(MENU_QUERY, {
     skip: !id,
     variables: {
