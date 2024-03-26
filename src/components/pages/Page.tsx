@@ -3,7 +3,7 @@ import * as React from "react";
 import { gql, useQuery } from "@apollo/client";
 // Components
 import { BreadcrumbsItem } from "../shared/layouts/PageContainer";
-import PageContainer from "./layout/PageContainer";
+import PageContainer from "../shared/layouts/PageContainer";
 import PreviewModeNotification from "../shared/PreviewModeNotification";
 import Hero from "./../shared/Hero";
 import CardGrid from "./../shared/CardGrid";
@@ -340,7 +340,7 @@ export default function PagePage({
       contentPrimary={
         <>
           {!showHero && (
-            <Box maxWidth="1280px" margin="0 auto" my="l">
+            <Box maxWidth="1280px" margin="0 auto">
               <Heading level="one">{page.title}</Heading>
             </Box>
           )}
