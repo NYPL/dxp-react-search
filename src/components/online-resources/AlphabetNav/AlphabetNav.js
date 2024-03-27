@@ -30,11 +30,13 @@ function AlphabetNav({ className, title, description }) {
 
   const handleClick = (link) => {
     if (link === "showAll") {
-      router.push(`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`);
+      // router.push(`${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`);
+      window.location.href = `${ONLINE_RESOURCES_BASE_PATH}/search?alpha=all`;
     } else {
-      router.push(
-        `${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${link.toUpperCase()}`
-      );
+      // router.push(
+      //   `${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${link.toUpperCase()}`
+      // );
+      window.location.href = `${ONLINE_RESOURCES_BASE_PATH}/search?alpha=${link.toUpperCase()}`;
     }
   };
 
