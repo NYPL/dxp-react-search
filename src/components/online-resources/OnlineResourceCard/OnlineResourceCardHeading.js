@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "@nypl/design-system-react-components";
 import Heading from "../../shared/Heading";
-import NextDsLink from "./../../shared/Link/NextDsLink";
 // Utils
 import { ONLINE_RESOURCES_BASE_PATH } from "./../../../utils/config";
 
@@ -38,9 +37,9 @@ function OnlineResourceCardHeading(props) {
     if (authenticationType === "nypl") {
       return (
         <Heading id={id} level="h3">
-          <NextDsLink href={`${ONLINE_RESOURCES_BASE_PATH}/verify?uuid=${id}`}>
+          <Link href={`${ONLINE_RESOURCES_BASE_PATH}/verify?uuid=${id}`}>
             {name}
-          </NextDsLink>
+          </Link>
         </Heading>
       );
     }
@@ -53,7 +52,7 @@ function OnlineResourceCardHeading(props) {
     } else {
       return (
         <Heading id={id} level="h3">
-          <NextDsLink href={slug}>{name}</NextDsLink>
+          <Link href={slug}>{name}</Link>
         </Heading>
       );
     }
