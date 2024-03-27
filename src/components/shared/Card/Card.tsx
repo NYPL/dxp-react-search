@@ -5,8 +5,8 @@ import {
   CardContent,
   CardHeading,
   LayoutTypes,
+  Link,
 } from "@nypl/design-system-react-components";
-import NextDsLink from "./../Link/NextDsLink";
 
 interface CardProps {
   /** The id for the card. */
@@ -49,7 +49,9 @@ function Card({
       layout={layout}
     >
       <CardHeading level="h3" size="heading5" sx={{ a: { textDecor: "none" } }}>
-        {url && <NextDsLink href={url}>{title}</NextDsLink>}
+        {/* @note This is a temporary fix until the imperva WAF is more stable
+          and stops blocking nextjs client side routing. */}
+        {url && <Link href={url}>{title}</Link>}
       </CardHeading>
       <CardContent>
         {subHeading && subHeading}

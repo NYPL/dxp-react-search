@@ -8,7 +8,6 @@ import {
   Link,
 } from "@nypl/design-system-react-components";
 import OnlineResourceCardHeading from "./OnlineResourceCardHeading";
-import NextDsLink from "../../shared/Link/NextDsLink";
 //
 import s from "./OnlineResourceCard.module.css";
 
@@ -115,7 +114,9 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       ></div>
       {slug && collapsible && (
         <div className={s.shareDatabase}>
-          <NextDsLink href={slug}>Share this Database</NextDsLink>
+          {/* @note This is a temporary fix until the imperva WAF is more stable
+          and stops blocking nextjs client side routing. */}
+          <DsLink href={slug}>Share this Database</DsLink>
         </div>
       )}
       <div className={s.links}>

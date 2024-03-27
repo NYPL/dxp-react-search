@@ -1,12 +1,12 @@
 import React from "react";
 // Components
 import {
-  HorizontalRule,
   Box,
+  HorizontalRule,
+  Link,
   Text,
 } from "@nypl/design-system-react-components";
 import Heading from "../../shared/Heading";
-import NextDsLink from "../../shared/Link/NextDsLink";
 // Type
 import { PressReleaseItem } from "./PressReleaseCardType";
 
@@ -20,7 +20,9 @@ function PressReleaseCard({ item }: PressReleaseCardProps) {
     <Box>
       <Box py={"s"} pr={"s"} id={`pressRelease-card-${id}`}>
         <Heading level="h3" sx={{ my: "xxs", a: { textDecor: "none" } }}>
-          {slug && <NextDsLink href={slug}>{title}</NextDsLink>}
+          {/* @note This is a temporary fix until the imperva WAF is more stable
+          and stops blocking nextjs client side routing. */}
+          {slug && <Link href={slug}>{title}</Link>}
         </Heading>
         <Text size="subtitle2" noSpace>
           {date}
