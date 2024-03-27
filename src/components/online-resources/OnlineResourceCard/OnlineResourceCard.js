@@ -114,6 +114,8 @@ function OnlineResourceCard({ item, collapsible, ipInfo }) {
       ></div>
       {slug && collapsible && (
         <div className={s.shareDatabase}>
+          {/* @note This is a temporary fix until the imperva WAF is more stable
+          and stops blocking nextjs client side routing. */}
           <DsLink href={slug}>Share this Database</DsLink>
         </div>
       )}

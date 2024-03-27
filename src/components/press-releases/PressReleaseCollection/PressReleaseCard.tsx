@@ -20,6 +20,8 @@ function PressReleaseCard({ item }: PressReleaseCardProps) {
     <Box>
       <Box py={"s"} pr={"s"} id={`pressRelease-card-${id}`}>
         <Heading level="h3" sx={{ my: "xxs", a: { textDecor: "none" } }}>
+          {/* @note This is a temporary fix until the imperva WAF is more stable
+          and stops blocking nextjs client side routing. */}
           {slug && <Link href={slug}>{title}</Link>}
         </Heading>
         <Text size="subtitle2" noSpace>
