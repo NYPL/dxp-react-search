@@ -1,5 +1,11 @@
 ## CHANGES
 
+### v0.11.2 - Imperva WAF Workarounds
+
+---
+
+- Temporarily Remove Next Link & Router Push from Press Releases, A&D: [#498](https://github.com/NYPL/dxp-react-search/pull/498)
+
 ### v0.11.1 - Blog CardList Fix
 
 ---
