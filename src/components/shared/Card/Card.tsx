@@ -7,7 +7,6 @@ import {
   LayoutTypes,
   Link,
 } from "@nypl/design-system-react-components";
-// import NextDsLink from "./../Link/NextDsLink";
 
 interface CardProps {
   /** The id for the card. */
